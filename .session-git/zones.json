@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "comment": "Project overlay after vault/engine split. Hidden product: .cfo and .harness.",
+  "updated_at": "2026-09-19T23:45:00Z",
+  "updated_by": "bootstrap-stamp-vault-reorg",
+  "defaults": {
+    "inventory_is_acl": false,
+    "unclassified_policy": "report_and_refuse_bulk",
+    "bootstrap_required_without_overlay": true
+  },
+  "never_commit_globs": [
+    "**/.env",
+    "**/.env.local",
+    "**/*.pem",
+    "**/*.key",
+    "**/node_modules/**",
+    "**/__pycache__/**",
+    "**/.venv/**",
+    "**/.obsidian/**",
+    "**/.DS_Store",
+    "**/inbox.jsonl.lock",
+    "**/*.jsonl.tmp.*"
+  ],
+  "classify_priority": ["E", "H", "F", "C", "K", "B", "A", "I", "J", "D", "G"],
+  "zones": [
+    {
+      "id": "A",
+      "name": "product",
+      "roots": [
+        { "path": ".cfo", "optional": false },
+        { "path": ".harness", "optional": false }
+      ],
+      "include_files": [
+        "main.py",
+        "accrue.py",
+        "close.py",
+        "demo_month_end_close.py",
+        "pytest.ini",
+        "requirements.txt"
+      ],
+      "include_globs": [],
+      "hard_excludes": ["**/node_modules/**", "**/__pycache__/**", "**/.pi/**"],
+      "agent_may_write": true,
+      "commit_prefixes": ["feat", "fix", "refactor", "test", "chore"],
+      "default_author": "agent"
+    },
+    {
+      "id": "B",
+      "name": "product-docs",
+      "roots": [
+        { "path": "docs", "optional": false }
+      ],
+      "include_files": ["README.md"],
+      "include_globs": [],
+      "agent_may_write": true,
+      "commit_prefixes": ["docs"],
+      "default_author": "agent"
+    },
+    {
+      "id": "C",
+      "name": "human-notes",
+      "roots": [
+        { "path": "Operator-workspace", "optional": false }
+      ],
+      "agent_may_write": false,
+      "commit_prefixes": ["notes"],
+      "default_author": "operator",
+      "track_policy": "intentional",
+      "half_tracked_policy": "adopt_on_intentional"
+    },
+    {
+      "id": "D",
+      "name": "design-prep",
+      "roots": [
+        { "path": "design-workshop", "optional": false },
+        { "path": "GROK-WORKSHOP", "optional": false }
+      ],
+      "agent_may_write": true,
+      "commit_prefixes": ["docs", "chore"],
+      "default_author": "agent"
+    },
+    {
+      "id": "F",
+      "name": "ide-noise",
+      "roots": [
+        { "path": ".obsidian", "optional": false }
+      ],
+      "never_commit": true,
+      "agent_may_write": false
+    },
+    {
+      "id": "H",
+      "name": "vendored-noise",
+      "roots": [
+        { "path": "node_modules", "optional": true },
+        { "path": ".venv", "optional": true },
+        { "path": "harness-impl", "optional": true }
+      ],
+      "never_commit": true,
+      "agent_may_write": false
+    },
+    {
+      "id": "I",
+      "name": "project-config",
+      "roots": [
+        { "path": ".cursor", "optional": false }
+      ],
+      "include_files": [".gitignore"],
+      "agent_may_write": true,
+      "commit_prefixes": ["chore", "feat", "fix"],
+      "default_author": "agent"
+    },
+    {
+      "id": "J",
+      "name": "repo-root-docs",
+      "include_files": ["README.md"],
+      "roots": [],
+      "agent_may_write": true,
+      "commit_prefixes": ["docs", "chore"],
+      "default_author": "agent"
+    },
+    {
+      "id": "K",
+      "name": "session-git-overlay",
+      "roots": [
+        { "path": ".session-git", "optional": false }
+      ],
+      "agent_may_write": true,
+      "commit_prefixes": ["chore", "docs"],
+      "default_author": "agent"
+    }
+  ],
+  "active_subtrees": [".cfo", ".harness/Harness-v2"],
+  "branch": {
+    "main": "main",
+    "forbid_force_push_main": true,
+    "notes_commit_on_any_branch": true
+  },
+  "harness": {
+    "roots_denied": ["~/.grok/worktrees/**"],
+    "refuse_message": "CWD under denied harness worktree root — use primary checkout."
+  },
+  "stash": {
+    "keep_until_notes_verified": true
+  }
+}

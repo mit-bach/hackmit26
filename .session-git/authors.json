@@ -1,0 +1,19 @@
+{
+  "operator": {
+    "name": "Dominik Bach",
+    "email": "bachdominik06@icloud.com",
+    "env_name": "SESSION_GIT_OPERATOR_NAME",
+    "env_email": "SESSION_GIT_OPERATOR_EMAIL",
+    "also_accept_global_user_email": true
+  },
+  "agent": {
+    "name": "Session Git Agent",
+    "email": "session-git-agent@local"
+  },
+  "notes_author_emails_allowed": [
+    "bachdominik06@icloud.com",
+    "256869428+rohan9314@users.noreply.github.com"
+  ],
+  "notes_author_policy": "email_in_allowlist_OR (also_accept_global_user_email AND email == git config user.email)",
+  "history_note": "Authorship separation applies to new scripted commits only. Do not rewrite history. Partner: Rohan (rohan9314)."
+}
