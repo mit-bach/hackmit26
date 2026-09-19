@@ -1,1 +1,0 @@
-"""Named finance provider adapters."""

@@ -1,8 +1,0 @@
-{
-  "deposit_id": "BANK-STRIPE-97420",
-  "payout_id": "po_1HackMIT97420",
-  "amount": 97420.0,
-  "currency": "USD",
-  "description": "STRIPE PAYOUT",
-  "posted_on": "2026-09-19"
-}

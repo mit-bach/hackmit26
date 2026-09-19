@@ -1,9 +1,0 @@
-{
-  "as_of_date": "2026-09-19",
-  "bank_balance": 250000,
-  "minimum_cash_reserve": 100000,
-  "expected_receipts_next_7_days": 75000,
-  "payroll_next_7_days": 90000,
-  "other_committed_outflows": 20000,
-  "payment_horizon_days": 7
-}
