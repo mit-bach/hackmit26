@@ -1,159 +1,260 @@
 #!/usr/bin/env python3
-"""Review a single accounts-payable invoice.
+"""Run the autonomous Office-of-the-CFO workflows.
 
 Usage:
     python main.py INV-001
-    python main.py INV-017 --correct APPROVE --note "Same vendor, name variant only"
-    python main.py --list-memory
+    python main.py schedule
+    python main.py schedule --seed-demo
+    python main.py accrue 2026-09
+    python main.py ingest 2026-09
+    python main.py skills
+    python main.py skills --agent accrual
 """
 
 from __future__ import annotations
 
-import argparse
 import os
 import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
 
-from models import APDecision
-from tools import DataFileError, load_invoice, python_checks
+from models import DecisionTrace, ScheduleTrace
+from tools import DataFileError, load_invoice
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
-VALID_DECISIONS = ("APPROVE", "HOLD", "HUMAN_REVIEW")
 
-
-def format_currency(amount: float | None) -> str:
-    if amount is None:
-        return "n/a"
-    return f"${amount:,.2f}"
-
-
-def format_decision(decision: APDecision) -> str:
-    reasons = "\n".join(f"- {reason}" for reason in decision.reasons) or "- (none)"
-    evidence = "\n".join(f"- {item}" for item in decision.evidence_used) or "- (none)"
-    duplicate = "yes" if decision.duplicate_detected else "no"
-    receipt = decision.receipt_status.upper() if decision.receipt_status else "UNKNOWN"
+def format_trace(trace: DecisionTrace) -> str:
+    final = trace.final
+    preparer_reason = trace.preparer.reasons[0] if trace.preparer.reasons else ""
+    investigator_block = "Investigator:\n(skipped — straightforward case)"
+    if trace.investigation:
+        finding = (
+            trace.investigation.findings[0]
+            if trace.investigation.findings
+            else trace.investigation.recommendation
+        )
+        investigator_block = (
+            f"Investigator:\n{trace.investigation.recommendation}\n{finding}"
+        )
+    reviewer_reason = trace.reviewer.reasons[0] if trace.reviewer.reasons else ""
+    approver_reason = trace.approver.reasons[0] if trace.approver.reasons else ""
+    audit_line = "PASS" if trace.audit.passed else "FAIL"
+    if trace.audit.findings:
+        audit_line = f"{audit_line} — {trace.audit.findings[0]}"
+    evidence = "\n".join(f"- {item}" for item in final.evidence_used) or "- (none)"
+    reconsideration = (
+        "\nReconsideration: yes\n" if final.reconsideration_performed else "\n"
+    )
+    skill_lines = []
+    for item in trace.agents:
+        names = ", ".join(skill.name for skill in item.skills) or "(none)"
+        skill_lines.append(f"- {item.role}: {names}")
+        skill_lines.extend(f"  ERROR: {error}" for error in item.load_errors)
+    skills_block = ""
+    if skill_lines:
+        skills_block = "\n\nSkills\n" + "\n".join(skill_lines)
     return (
-        f"Invoice: {decision.invoice_id}\n"
-        f"Decision: {decision.decision}\n"
-        f"Confidence: {decision.confidence:.2f}\n"
-        f"Amount difference: {format_currency(decision.amount_difference)}\n"
-        f"Duplicate detected: {duplicate}\n"
-        f"Receipt status: {receipt}\n"
+        f"Invoice: {final.invoice_id}\n"
         f"\n"
-        f"Reasons:\n"
-        f"{reasons}\n"
+        f"Preparer:\n"
+        f"{trace.preparer.recommendation}\n"
+        f"{preparer_reason}\n"
+        f"\n"
+        f"{investigator_block}\n"
+        f"\n"
+        f"Reviewer:\n"
+        f"{trace.reviewer.recommendation}\n"
+        f"Confidence: {trace.reviewer.confidence:.2f}\n"
+        f"{reviewer_reason}\n"
+        f"\n"
+        f"Approver:\n"
+        f"{trace.approver.decision}\n"
+        f"Confidence: {trace.approver.confidence:.2f}\n"
+        f"{approver_reason}\n"
+        f"\n"
+        f"Audit:\n"
+        f"{audit_line}"
+        f"{reconsideration}"
+        f"FINAL DECISION: {final.decision}\n"
+        f"Confidence: {final.confidence:.2f}\n"
         f"\n"
         f"Evidence:\n"
         f"{evidence}"
+        f"{skills_block}"
     )
 
 
-def require_api_key() -> bool:
+def format_schedule(trace: ScheduleTrace) -> str:
+    by_id = {item.invoice_id: item for item in trace.candidates}
+    pay_lines = []
+    for row in trace.plan.pay_this_week:
+        item = by_id.get(row.invoice_id)
+        vendor = item.vendor if item else ""
+        tag = "discount" if row.capture_discount else "pay"
+        pay_lines.append(f"- {row.invoice_id}  {vendor}  ${row.amount:,.2f}  [{tag}]  {row.reason}")
+    defer_lines = []
+    for row in trace.plan.defer:
+        item = by_id.get(row.invoice_id)
+        vendor = item.vendor if item else ""
+        amount = f"${item.amount:,.2f}" if item else ""
+        defer_lines.append(f"- {row.invoice_id}  {vendor}  {amount}  {row.reason}")
+    metrics = trace.metrics
+    audit_line = "PASS" if trace.audit.passed else "FAIL"
+    if trace.audit.findings:
+        audit_line = f"{audit_line} — {trace.audit.findings[0]}"
+    text = (
+        f"Payment plan as of {trace.as_of_date}\n"
+        f"Spendable cash: ${trace.spendable_cash:,.2f}\n"
+        f"\n"
+        f"PAY THIS WEEK (${trace.plan.total_payout:,.2f})\n"
+        f"{chr(10).join(pay_lines) or '- (none)'}\n"
+        f"\n"
+        f"DEFER\n"
+        f"{chr(10).join(defer_lines) or '- (none)'}\n"
+        f"\n"
+        f"Cash after payments: ${trace.plan.cash_after_payments:,.2f}\n"
+        f"Reserve OK: {'yes' if trace.plan.reserve_ok else 'NO'}\n"
+        f"\n"
+        f"Metrics\n"
+        f"- On-time: {metrics.due_invoices_paid_on_time}/{metrics.invoices_due_this_horizon} "
+        f"({metrics.on_time_percent}%)\n"
+        f"- Discounts captured: ${metrics.discounts_captured:,.2f} / "
+        f"${metrics.discounts_available:,.2f}\n"
+        f"- Late fees avoided: ${metrics.late_fees_avoided:,.2f}\n"
+        f"- Unnecessary early payments: {metrics.unnecessary_early_payments}\n"
+        f"- Reserve violation: {'yes' if metrics.reserve_violation else 'no'}\n"
+        f"- Cash retained: ${metrics.total_cash_retained:,.2f}\n"
+        f"\n"
+        f"Audit: {audit_line}"
+    )
+    if trace.agents:
+        skill_lines = []
+        for item in trace.agents:
+            names = ", ".join(skill.name for skill in item.skills) or "(none)"
+            skill_lines.append(f"- {item.role}: {names}")
+            skill_lines.extend(f"  ERROR: {error}" for error in item.load_errors)
+        text += "\n\nSkills\n" + "\n".join(skill_lines)
+    return text
+
+
+def _usage() -> int:
+    print("Usage: python main.py INV-001")
+    print("       python main.py schedule [--seed-demo]")
+    print("       python main.py accrue 2026-09")
+    print("       python main.py ingest [period] [--no-ap] [--llm] [--replay-check]")
+    print("       python main.py skills [--agent NAME]")
+    return 1
+
+
+def _require_api_key(example: str) -> int | None:
     if os.environ.get("OPENAI_API_KEY"):
-        return True
+        return None
     print(
         "OPENAI_API_KEY is not set.\n"
-        "Copy .env.example to .env and add your key, or run:\n"
-        "  export OPENAI_API_KEY=sk-...\n"
-        "Then rerun: python main.py INV-001"
+        "Copy .env.example to .env and add your key, then rerun:\n"
+        f"  {example}"
     )
-    return False
+    return 1
 
 
-def review(invoice_id: str) -> int:
+def run_schedule_cli(argv: list[str]) -> int:
+    seed_demo = "--seed-demo" in argv
+    from_traces = "--from-traces" in argv
+    unknown = [item for item in argv if item not in {"--seed-demo", "--from-traces"}]
+    if unknown:
+        print(f"Unknown schedule option: {unknown[0]}")
+        return _usage()
+
+    from scheduling.pool import seed_demo_pool, seed_from_traces
+    from scheduling.workflow import RUNS_DIR, run_schedule_workflow
+
+    if seed_demo:
+        added = seed_demo_pool()
+        print(f"Seeded approved pool with {len(added)} policy-eligible invoices.")
+    elif from_traces:
+        added = seed_from_traces(RUNS_DIR)
+        print(f"Loaded {len(added)} APPROVE traces into the approved pool.")
+
+    missing = _require_api_key("python main.py schedule")
+    if missing is not None:
+        return missing
+
     try:
-        from agent import review_invoice
-
-        decision = review_invoice(invoice_id)
+        trace = run_schedule_workflow()
+    except ValueError as exc:
+        print(str(exc))
+        return 1
     except DataFileError as exc:
         print(f"Could not read AP data files: {exc}")
         return 1
     except Exception as exc:
-        print(f"The AP agent failed: {exc}")
+        print(f"The payment scheduler failed: {exc}")
         return 1
 
-    print(format_decision(decision))
+    print(format_schedule(trace))
+    if trace.trace_path:
+        print(f"\nTrace saved to {trace.trace_path}")
     return 0
 
 
-def list_memory() -> int:
-    from memory import load_precedents
-
-    items = load_precedents()
-    if not items:
-        print("No human corrections stored yet.")
-        print('Save one with: python main.py INV-017 --correct APPROVE --note "..."')
-        return 0
-
-    print(f"{len(items)} stored correction(s):\n")
-    for item in items:
-        issues = ", ".join(item.situation.get("issue_types") or [])
-        print(f"{item.id}  {item.invoice_id}  ->  {item.corrected_decision}")
-        print(f"  issues: {issues or '(none)'}")
-        print(f"  note: {item.note}")
-        print(f"  saved: {item.created_at}")
-        print()
-    return 0
-
-
-def save_and_rereview(invoice_id: str, corrected_decision: str, note: str) -> int:
-    from memory import save_correction
-
+def run_skills_cli(argv: list[str]) -> int:
+    agent_query = None
+    index = 0
+    while index < len(argv):
+        option = argv[index]
+        if option in {"--agent", "-a"}:
+            if index + 1 >= len(argv):
+                print("Usage: python main.py skills --agent <name>")
+                return 1
+            agent_query = argv[index + 1]
+            index += 2
+            continue
+        print(f"Unknown skills option: {option}")
+        return _usage()
     try:
-        checks = python_checks(invoice_id)
-    except DataFileError as exc:
-        print(f"Could not read AP data files: {exc}")
+        from skills.validate import validate_skill_system
+
+        validate_skill_system()
+        if agent_query:
+            from skills.inspect import format_agent_skills
+
+            print(format_agent_skills(agent_query), end="")
+        else:
+            from skills.inspect import format_skills_index
+
+            print(format_skills_index(), end="")
+        return 0
+    except KeyError as exc:
+        print(exc)
         return 1
-
-    record = save_correction(invoice_id, corrected_decision, note, checks)
-    issues = ", ".join(record.situation.get("issue_types") or [])
-    print(f"Saved {record.id} for {invoice_id} -> {record.corrected_decision}")
-    print(f"Issues: {issues or '(none)'}")
-    print(f"Note: {record.note}")
-    print()
-    print("Re-running the agent with this precedent in memory...\n")
-    return review(invoice_id)
-
-
-def parse_args(argv: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Review an accounts-payable invoice or store a human correction."
-    )
-    parser.add_argument("invoice_id", nargs="?", help="Invoice ID such as INV-001")
-    parser.add_argument(
-        "--correct",
-        choices=VALID_DECISIONS,
-        help="Store a reviewer correction and re-run the agent",
-    )
-    parser.add_argument(
-        "--note",
-        default="",
-        help="Why the reviewer overrode the agent",
-    )
-    parser.add_argument(
-        "--list-memory",
-        action="store_true",
-        help="Show stored human corrections",
-    )
-    return parser.parse_args(argv)
+    except Exception as exc:
+        print(f"Skill inspection failed: {exc}")
+        return 1
 
 
 def main() -> int:
-    args = parse_args(sys.argv[1:])
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "skills":
+        return run_skills_cli(sys.argv[2:])
 
-    if args.list_memory:
-        return list_memory()
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"accrue", "accrual"}:
+        from accrue import main as accrue_main
 
-    if not args.invoice_id:
-        print("Usage: python main.py INV-001")
-        print('       python main.py INV-017 --correct APPROVE --note "Same vendor"')
-        print("       python main.py --list-memory")
-        return 1
+        return accrue_main(sys.argv[2:])
 
-    invoice_id = args.invoice_id.strip().upper()
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "schedule":
+        return run_schedule_cli(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "ingest":
+        from invoice_ingestion.demo import run_demo
+
+        return run_demo(sys.argv[2:])
+
+    if len(sys.argv) != 2:
+        return _usage()
+
+    invoice_id = sys.argv[1].strip().upper()
 
     try:
         invoice = load_invoice(invoice_id)
@@ -166,21 +267,25 @@ def main() -> int:
         print("Check data/invoices.json for a valid ID such as INV-001.")
         return 1
 
-    if args.correct:
-        if not args.note.strip():
-            print("Please include --note explaining the correction.")
-            print(
-                'Example: python main.py INV-017 --correct APPROVE --note '
-                '"Acme Supply Co. is the same vendor as Acme Supplies"'
-            )
-            return 1
-        if not require_api_key():
-            return 1
-        return save_and_rereview(invoice_id, args.correct, args.note)
+    missing = _require_api_key("python main.py INV-001")
+    if missing is not None:
+        return missing
 
-    if not require_api_key():
+    try:
+        from workflow import run_ap_workflow
+
+        trace = run_ap_workflow(invoice_id)
+    except DataFileError as exc:
+        print(f"Could not read AP data files: {exc}")
         return 1
-    return review(invoice_id)
+    except Exception as exc:
+        print(f"The AP workflow failed: {exc}")
+        return 1
+
+    print(format_trace(trace))
+    if trace.trace_path:
+        print(f"\nTrace saved to {trace.trace_path}")
+    return 0
 
 
 if __name__ == "__main__":

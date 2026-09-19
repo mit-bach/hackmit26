@@ -196,5 +196,27 @@
     "currency": "USD",
     "approval_limit": 10000,
     "approver": "Sam Okonkwo"
+  },
+  {
+    "po_id": "PO-201",
+    "vendor": "Helios Hardware",
+    "authorized_amount": 6200,
+    "description": "Four 42U server racks for the Cambridge colo cage",
+    "status": "approved",
+    "created_date": "2026-09-18",
+    "currency": "USD",
+    "approval_limit": 15000,
+    "approver": "Priya Nair"
+  },
+  {
+    "po_id": "PO-202",
+    "vendor": "NewForge Consulting",
+    "authorized_amount": 4000,
+    "description": "Exploratory advisory — scope not confirmed, no work accepted",
+    "status": "draft",
+    "created_date": "2026-09-28",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Jordan Hale"
   }
 ]

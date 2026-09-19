@@ -151,5 +151,14 @@
     "amount_received": 36000,
     "quantity_ordered": 40,
     "quantity_received": 40
+  },
+  {
+    "receipt_id": "GR-201",
+    "po_id": "PO-201",
+    "received": true,
+    "received_date": "2026-09-22",
+    "amount_received": 6200,
+    "quantity_ordered": 4,
+    "quantity_received": 4
   }
 ]

@@ -1,3 +1,5 @@
 openai-agents
 pydantic
 python-dotenv
+pytest
+pytest

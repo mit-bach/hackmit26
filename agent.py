@@ -5,18 +5,46 @@ import json
 from agents import Agent, RunHooks, Runner
 from agents.tool_context import ToolContext
 
-from models import APDecision
+from models import (
+    ApproverDecision,
+    AuditResult,
+    InvestigationReport,
+    PreparerRecommendation,
+    ReviewerDecision,
+)
+from skills import compose_instructions, skills_for
 from tools import (
     find_duplicate_invoices,
-    find_precedents,
+    find_relevant_policies,
+    get_case_evidence,
+    get_company_policies,
     get_goods_receipt,
     get_invoice,
+    get_prior_cases,
     get_purchase_order,
 )
 
+MAX_AGENT_TURNS = 8
+
+RECORD_TOOLS = [
+    get_invoice,
+    get_purchase_order,
+    get_goods_receipt,
+    find_duplicate_invoices,
+    get_case_evidence,
+]
+POLICY_TOOLS = [
+    get_company_policies,
+    find_relevant_policies,
+    get_prior_cases,
+]
+
 
 class ToolCallPrinter(RunHooks):
-    """Print each tool call so you can watch the inspect loop."""
+    """Print agent and tool activity for the demo."""
+
+    async def on_agent_start(self, context, agent) -> None:
+        print(f"[{agent.name}]", flush=True)
 
     async def on_tool_start(self, context, agent, tool) -> None:
         args = ""
@@ -27,101 +55,137 @@ class ToolCallPrinter(RunHooks):
                 args = ", ".join(f"{key}={value!r}" for key, value in parsed.items())
             except (TypeError, ValueError, json.JSONDecodeError):
                 args = str(raw)
-        print(f"→ {tool.name}({args})", flush=True)
+        print(f"  → {tool.name}({args})", flush=True)
 
-INSTRUCTIONS = """
-You are the Accounts Payable Agent for a software company.
 
-Your job is to review one invoice at a time and return an APDecision.
-
-How to inspect:
-1. Always call get_invoice first.
-2. If the invoice has a po_id, call get_purchase_order with that po_id.
-3. If a purchase order exists, call get_goods_receipt with the same po_id.
-4. Always call find_duplicate_invoices.
-5. Always call find_precedents to check whether a reviewer already corrected
-   a similar case.
-6. If a tool returns found=false, treat that as missing data. Never invent a
-   record, amount, vendor, date, or receipt.
-
-Python already computed match facts on get_invoice.python_checks and on the
-other tools. Use those values for arithmetic, exact vendor equality, PO
-existence, PO approval, receipt completeness, and duplicate detection.
-Do not recalculate amounts yourself.
-
-Then make a judgment. Do not treat the python_checks as an automatic decision.
-They are evidence. You choose APPROVE, HOLD, or HUMAN_REVIEW.
-
-Human memory:
-- find_precedents returns similar reviewer corrections, including the human's
-  note and corrected_decision.
-- If a similar precedent exists, treat it as policy for that exception type.
-  Example: a reviewer approved "Acme Supply Co." vs "Acme Supplies" before, so
-  a later invoice with the same vendor-name pattern can APPROVE instead of
-  HUMAN_REVIEW.
-- Only apply a precedent to the exception it covers. If the current invoice
-  also has a different blocking problem (duplicate, missing receipt, unapproved
-  PO), still HOLD or HUMAN_REVIEW for that other problem.
-- Cite precedent IDs such as PRE-001 in reasons and evidence_used.
-
-APPROVE only when the case is clearly safe:
-- an approved PO exists
-- invoice and PO amounts match
-- vendor names match exactly
-- goods were fully received
-- no duplicate was detected
-
-HOLD when there is a clear blocking problem:
-- a duplicate invoice was detected
-- the PO exists and is explicitly not approved
-- goods were clearly not received, or a PO exists and the receipt is missing
-- a large or obvious unauthorized amount mismatch
-
-HUMAN_REVIEW when the case is ambiguous or needs a person:
-- no PO
-- small amount discrepancy
-- partial receipt
-- vendor-name mismatch, even if the names look similar
-- unusual or uncertain scenario
-- conflicting evidence
-- anything you cannot confidently APPROVE or HOLD
-
-Return structured APDecision fields:
-- amount_difference from python_checks (null if there is no PO)
-- duplicate_detected from the duplicate tool / python_checks
-- receipt_status from the receipt tool / python_checks
-- reasons: short sentences that cite real record IDs, vendors, amounts,
-  quantities, and dates from the tools
-- evidence_used: the IDs you actually inspected, such as INV-001, PO-101,
-  GR-101, and any duplicate invoice IDs
-- confidence: high for clear approve/hold cases; lower when judgment is needed
-- state any uncertainty in the reasons
+SAFETY = """
+Safety rules:
+- Never invent missing invoices, POs, receipts, amounts, vendors, policies, or prior cases.
+- Never invent an approval threshold or tolerance. Use only published policy values.
+- Explicit company policy takes precedence over historical precedent.
+- Prior cases are evidence, not absolute rules, and cannot override a must_hold policy.
+- If evidence cannot justify payment, HOLD.
+- There is no human reviewer. Do not ask a person to decide. Investigate, then APPROVE or HOLD.
+- Use Python facts from get_case_evidence. Do not recalculate arithmetic.
 """.strip()
 
-ap_agent = Agent(
-    name="Accounts Payable Agent",
-    instructions=INSTRUCTIONS,
-    tools=[
-        get_invoice,
-        get_purchase_order,
-        get_goods_receipt,
-        find_duplicate_invoices,
-        find_precedents,
-    ],
-    output_type=APDecision,
+preparer_agent = Agent(
+    name="AP Preparer",
+    instructions=compose_instructions(
+        """
+You prepare an accounts-payable case. You do not make the final payment decision.
+
+Inspect the invoice, PO, goods receipt, duplicates, and get_case_evidence.
+Identify every exception and produce a preliminary recommendation.
+
+Return PreparerRecommendation. Cite record IDs in evidence_used.
+Copy exception_types from get_case_evidence. Do not invent exceptions.
+""".strip(),
+        skills=skills_for("AP Preparer"),
+        safety=SAFETY,
+    ),
+    tools=RECORD_TOOLS,
+    output_type=PreparerRecommendation,
+)
+
+investigator_agent = Agent(
+    name="Exception Investigator",
+    instructions=compose_instructions(
+        """
+You investigate AP exceptions. You do not make the final payment decision.
+
+Inspect records, get_case_evidence, find_relevant_policies, and get_prior_cases.
+Explain each exception, then recommend APPROVE or HOLD.
+
+Return InvestigationReport with findings, relevant policy IDs, prior case IDs,
+unresolved risks, and APPROVE or HOLD.
+""".strip(),
+        skills=skills_for("Exception Investigator"),
+        safety=SAFETY,
+    ),
+    tools=RECORD_TOOLS + POLICY_TOOLS,
+    output_type=InvestigationReport,
+)
+
+reviewer_agent = Agent(
+    name="AP Reviewer",
+    instructions=compose_instructions(
+        """
+You independently review AP case files. Do not rubber-stamp the Preparer.
+
+Read the deterministic evidence, the Preparer recommendation, and the
+Investigator report when one exists. Challenge weak assumptions.
+Verify that Python facts and published policies support the recommendation.
+
+Recommend only APPROVE or HOLD. There is no human review path.
+If the Investigator left unresolved risk, HOLD unless a policy clearly
+permits payment anyway.
+
+Return ReviewerDecision with objections even if you still recommend APPROVE.
+""".strip(),
+        skills=skills_for("AP Reviewer"),
+        safety=SAFETY,
+    ),
+    tools=[get_case_evidence, get_company_policies, find_relevant_policies, get_prior_cases],
+    output_type=ReviewerDecision,
+)
+
+approver_agent = Agent(
+    name="AP Approver",
+    instructions=compose_instructions(
+        """
+You are the final autonomous payment authority for this invoice.
+There is no human approver after you.
+
+Review Preparer evidence, Investigator findings when present, Reviewer
+critique, Python facts, and published policies. Then decide APPROVE or HOLD.
+
+Every APPROVE must be supported by evidence and policy.
+If evidence is missing or policy requires a hold, HOLD.
+State which evidence IDs and policy IDs you used.
+
+Return ApproverDecision.
+""".strip(),
+        skills=skills_for("AP Approver"),
+        safety=SAFETY,
+    ),
+    tools=[get_case_evidence, get_company_policies, find_relevant_policies, get_prior_cases],
+    output_type=ApproverDecision,
+)
+
+audit_agent = Agent(
+    name="AP Audit",
+    instructions=compose_instructions(
+        """
+You audit an autonomous AP decision before it is finalized.
+
+Re-read get_case_evidence and company policies. Confirm the Approver decision
+is supported. Flag unsupported assumptions and policy violations.
+
+Set passed=true only if the decision is consistent with Python facts and
+published policy.
+If the decision is APPROVE and you find a material problem, set
+requires_reconsideration=true and passed=false.
+If the decision is HOLD and that hold is supported, passed=true.
+
+Never pause the workflow. Return AuditResult.
+""".strip(),
+        skills=skills_for("AP Audit"),
+        safety=SAFETY,
+    ),
+    tools=[get_case_evidence, get_company_policies, find_relevant_policies],
+    output_type=AuditResult,
 )
 
 
-def review_invoice(invoice_id: str) -> APDecision:
-    """Review one invoice and return a structured AP decision."""
-    print(f"Review {invoice_id}\n", flush=True)
+def run_agent(agent: Agent, prompt: str, max_turns: int = MAX_AGENT_TURNS, hooks=None):
     result = Runner.run_sync(
-        ap_agent,
-        (
-            f"Review invoice {invoice_id}. Inspect the invoice, related purchase "
-            "order, goods receipt, and duplicates, then return an APDecision."
-        ),
-        hooks=ToolCallPrinter(),
+        agent,
+        prompt,
+        max_turns=max_turns,
+        hooks=ToolCallPrinter() if hooks is None else hooks,
     )
     print(flush=True)
+    if result.final_output is None:
+        raise RuntimeError(f"{agent.name} did not return structured output")
     return result.final_output

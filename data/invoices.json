@@ -7,7 +7,12 @@
     "invoice_date": "2026-09-08",
     "due_date": "2026-09-30",
     "vendor_invoice_number": "ACM-2026-4410",
-    "description": "Standing desks, monitors, and office peripherals for the Cambridge workspace"
+    "description": "Standing desks, monitors, and office peripherals for the Cambridge workspace",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-18",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-002",
@@ -15,9 +20,14 @@
     "po_id": "PO-102",
     "amount": 8320,
     "invoice_date": "2026-09-05",
-    "due_date": "2026-10-05",
+    "due_date": "2026-09-22",
     "vendor_invoice_number": "AWS-3844-2910",
-    "description": "September 2026 compute, storage, and data-transfer usage"
+    "description": "September 2026 compute, storage, and data-transfer usage",
+    "payment_terms": "net 30",
+    "early_payment_discount_percent": 0,
+    "early_payment_discount_deadline": null,
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-003",
@@ -27,7 +37,12 @@
     "invoice_date": "2026-09-03",
     "due_date": "2026-10-03",
     "vendor_invoice_number": "DD-INV-90211",
-    "description": "Pro monitoring platform — annual subscription, 50 hosts"
+    "description": "Pro monitoring platform \u2014 annual subscription, 50 hosts",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-13",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-004",
@@ -37,7 +52,12 @@
     "invoice_date": "2026-09-10",
     "due_date": "2026-10-10",
     "vendor_invoice_number": "OD-99128473",
-    "description": "Eight ergonomic task chairs for the product team"
+    "description": "Eight ergonomic task chairs for the product team",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-20",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-005",
@@ -47,7 +67,12 @@
     "invoice_date": "2026-09-04",
     "due_date": "2026-10-04",
     "vendor_invoice_number": "SLK-BUS-50-0926",
-    "description": "Business+ plan, 50 users, annual billing"
+    "description": "Business+ plan, 50 users, annual billing",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-14",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-006",
@@ -55,9 +80,14 @@
     "po_id": "PO-106",
     "amount": 9180,
     "invoice_date": "2026-09-06",
-    "due_date": "2026-10-06",
+    "due_date": "2026-09-18",
     "vendor_invoice_number": "GCP-2026-09-11882",
-    "description": "September 2026 GCP usage — BigQuery, GKE, and Cloud Storage"
+    "description": "September 2026 GCP usage \u2014 BigQuery, GKE, and Cloud Storage",
+    "payment_terms": "net 30",
+    "early_payment_discount_percent": 0,
+    "early_payment_discount_deadline": null,
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-007",
@@ -67,7 +97,12 @@
     "invoice_date": "2026-09-09",
     "due_date": "2026-10-09",
     "vendor_invoice_number": "FIG-ORG-16-4481",
-    "description": "Organization plan, 16 editor seats, annual"
+    "description": "Organization plan, 16 editor seats, annual",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-19",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-008",
@@ -77,7 +112,12 @@
     "invoice_date": "2026-09-07",
     "due_date": "2026-10-07",
     "vendor_invoice_number": "ZM-WB-2026-7712",
-    "description": "Webinar add-on, 500-attendee capacity, annual"
+    "description": "Webinar add-on, 500-attendee capacity, annual",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-17",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-009",
@@ -87,7 +127,12 @@
     "invoice_date": "2026-09-02",
     "due_date": "2026-10-02",
     "vendor_invoice_number": "GHES-2026-33091",
-    "description": "GitHub Enterprise Cloud — 100 seats, annual"
+    "description": "GitHub Enterprise Cloud \u2014 100 seats, annual",
+    "payment_terms": "net 30",
+    "early_payment_discount_percent": 0,
+    "early_payment_discount_deadline": null,
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-010",
@@ -97,7 +142,12 @@
     "invoice_date": "2026-09-11",
     "due_date": "2026-10-11",
     "vendor_invoice_number": "NL-INV-088421",
-    "description": "Notion Plus, 20 members, annual workspace subscription"
+    "description": "Notion Plus, 20 members, annual workspace subscription",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-21",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-011",
@@ -107,7 +157,12 @@
     "invoice_date": "2026-09-12",
     "due_date": "2026-10-12",
     "vendor_invoice_number": "ST-BILL-10044",
-    "description": "Billing infrastructure professional services — billed amount includes a 2.5% platform surcharge not on the PO"
+    "description": "Billing infrastructure professional services \u2014 billed amount includes a 2.5% platform surcharge not on the PO",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-22",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-012",
@@ -117,7 +172,12 @@
     "invoice_date": "2026-09-14",
     "due_date": "2026-10-14",
     "vendor_invoice_number": "SNOW-CR-2026-5519",
-    "description": "On-demand compute credits for Q3 analytics workloads — invoiced slightly under the authorized PO"
+    "description": "On-demand compute credits for Q3 analytics workloads \u2014 invoiced slightly under the authorized PO",
+    "payment_terms": "net 30",
+    "early_payment_discount_percent": 0,
+    "early_payment_discount_deadline": null,
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-013",
@@ -127,7 +187,12 @@
     "invoice_date": "2026-09-08",
     "due_date": "2026-10-08",
     "vendor_invoice_number": "MS-M365-E3-9026",
-    "description": "Microsoft 365 E3 licenses, 20 users — invoice includes estimated sales tax above the pretax PO"
+    "description": "Microsoft 365 E3 licenses, 20 users \u2014 invoice includes estimated sales tax above the pretax PO",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-18",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-014",
@@ -137,7 +202,12 @@
     "invoice_date": "2026-09-15",
     "due_date": "2026-10-15",
     "vendor_invoice_number": "DD-INV-90780",
-    "description": "Additional APM and log-ingestion hosts — 20 extra hosts, annual"
+    "description": "Additional APM and log-ingestion hosts \u2014 20 extra hosts, annual",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-25",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-015",
@@ -147,7 +217,12 @@
     "invoice_date": "2026-09-16",
     "due_date": "2026-10-16",
     "vendor_invoice_number": "OD-99130102",
-    "description": "Eight electric standing desks for the new engineering bay"
+    "description": "Eight electric standing desks for the new engineering bay",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-26",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-016",
@@ -157,7 +232,12 @@
     "invoice_date": "2026-09-18",
     "due_date": "2026-10-18",
     "vendor_invoice_number": "AWS-OVERAGE-SEP26",
-    "description": "Unplanned September data-transfer overage — no purchase order was opened"
+    "description": "Unplanned September data-transfer overage \u2014 no purchase order was opened",
+    "payment_terms": "net 30",
+    "early_payment_discount_percent": 0,
+    "early_payment_discount_deadline": null,
+    "late_fee_percent": 1.5,
+    "vendor_priority": "high"
   },
   {
     "invoice_id": "INV-017",
@@ -167,7 +247,12 @@
     "invoice_date": "2026-09-13",
     "due_date": "2026-10-13",
     "vendor_invoice_number": "ACM-2026-4588",
-    "description": "Printer toner, paper, and break-room supplies for HQ"
+    "description": "Printer toner, paper, and break-room supplies for HQ",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-23",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-018",
@@ -177,7 +262,12 @@
     "invoice_date": "2026-09-11",
     "due_date": "2026-10-11",
     "vendor_invoice_number": "NL-INV-088421",
-    "description": "Notion Plus, 20 members, annual workspace subscription"
+    "description": "Notion Plus, 20 members, annual workspace subscription",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-21",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-019",
@@ -187,7 +277,12 @@
     "invoice_date": "2026-09-17",
     "due_date": "2026-10-17",
     "vendor_invoice_number": "OD-99131844",
-    "description": "Ten 27-inch 4K monitors for the design studio"
+    "description": "Ten 27-inch 4K monitors for the design studio",
+    "payment_terms": "2/10 net 30",
+    "early_payment_discount_percent": 2,
+    "early_payment_discount_deadline": "2026-09-27",
+    "late_fee_percent": 1.5,
+    "vendor_priority": "normal"
   },
   {
     "invoice_id": "INV-020",
@@ -197,6 +292,11 @@
     "invoice_date": "2026-09-04",
     "due_date": "2026-09-19",
     "vendor_invoice_number": "SFDC-ENT-2026-0144",
-    "description": "Sales Cloud Enterprise, 40 seats, billed annually in advance — invoice arrived before the PO was fully approved"
+    "description": "Sales Cloud Enterprise, 40 seats, billed annually in advance \u2014 invoice arrived before the PO was fully approved",
+    "payment_terms": "net 30",
+    "early_payment_discount_percent": 0,
+    "early_payment_discount_deadline": null,
+    "late_fee_percent": 1.5,
+    "vendor_priority": "critical"
   }
 ]

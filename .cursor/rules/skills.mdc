@@ -1,0 +1,31 @@
+---
+description: Maintain reusable agent skills separately from tools, Python enforcement, and agent role prompts.
+globs: skills/**,agent.py,**/agent.py,**/agents.py,README.md
+alwaysApply: false
+---
+
+# Agent skills
+
+Canonical registry: `skills/README.md`. Assignments: `skills/assignments.py`. Do not create a second source of truth.
+
+Whenever a new agent capability is implemented:
+
+1. Inspect `skills/README.md` before adding agent instructions.
+2. Reuse an existing skill when it already covers the capability.
+3. Extend an existing skill if the new behavior belongs to the same reusable capability.
+4. Create a new skill only for meaningful reusable reasoning or procedure.
+5. Update `skills/README.md`.
+6. Update `skills/assignments.py` if assignments change.
+7. Add or update tests in `tests/test_skills.py`.
+8. Keep deterministic logic in Python. Do not turn calculations, hashes, parsing, or hard policy enforcement into model skills.
+
+Do not create a new skill for one-off implementation details, simple tool wrappers, or hardcoded policy enforcement.
+
+Keep this split:
+
+- **Agents** — role, scope, objective, tools, assigned skills, escalation boundaries
+- **Tools** — data access and actions
+- **Skills** — reusable specialized reasoning in `skills/<name>/SKILL.md`
+- **Python** — arithmetic, validation, hashes, parsing, and hard constraints
+
+Do not load every skill into every agent. Wire skills through `skills_for(agent_name)` / `compose_instructions`. Adding a skill does not grant new external permissions.
