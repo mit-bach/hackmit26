@@ -1,0 +1,403 @@
+import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
+import { URL } from "node:url";
+
+import { listApprovals, readApproval, resolveApproval } from "../approvals.ts";
+import { awaitTurn } from "../await.ts";
+import { initComputer } from "../computer.ts";
+import { findHandle, listHandles } from "../handle.ts";
+import { listInbox, pendingCount } from "../inbox.ts";
+import { liveStatus, readLane } from "../lane-state.ts";
+import { readMemoryFile } from "../memory.ts";
+import { readProtocol, searchProtocol } from "../protocol-log.ts";
+import { findBot, loadRoster } from "../roster.ts";
+import { readRoomLog, roomPost } from "../rooms.ts";
+import { fireRoutine, listReceipts } from "../routines.ts";
+import { searchAgents } from "../search.ts";
+import { sendPrompt } from "../send.ts";
+import { sleep } from "../sleep.ts";
+import { startFakeWorkers } from "../worker.ts";
+import { transcriptTail } from "../transcript-tail.ts";
+import { startSupervisor, type Supervisor } from "./supervisor.ts";
+
+export interface ServeOptions {
+  readonly computerRoot: string;
+  readonly host?: string;
+  readonly port?: number;
+  readonly workers?: boolean;
+  readonly lazyWorkers?: boolean;
+  readonly fakeWorkers?: boolean;
+}
+
+interface RequestContext {
+  readonly computerRoot: string;
+  readonly fakeWorkers: boolean;
+}
+
+function actualPort(server: Server, fallback: number): number {
+  const addr = server.address();
+  if (typeof addr === "object" && addr) {
+    return addr.port;
+  }
+  return fallback;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+async function readBody(req: IncomingMessage): Promise<unknown> {
+  const chunks: Buffer[] = [];
+  for await (const chunk of req) {
+    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+  }
+  const raw = Buffer.concat(chunks).toString("utf8");
+  if (raw.trim().length === 0) {
+    return {};
+  }
+  return JSON.parse(raw) as unknown;
+}
+
+function sendJson(res: ServerResponse, status: number, body: unknown): void {
+  const data = `${JSON.stringify(body, null, 2)}\n`;
+  res.writeHead(status, {
+    "content-type": "application/json; charset=utf-8",
+    "access-control-allow-origin": "*",
+  });
+  res.end(data);
+}
+
+function notFound(res: ServerResponse): void {
+  sendJson(res, 404, { error: "not found" });
+}
+
+export async function startServer(options: ServeOptions): Promise<{
+  readonly server: Server;
+  readonly url: string;
+  readonly supervisor: Supervisor | undefined;
+  stop: () => Promise<void>;
+}> {
+  const computerRoot = options.computerRoot;
+  const roster = initComputer(computerRoot);
+  const host = options.host ?? "127.0.0.1";
+  const port = options.port ?? 8787;
+  const fake =
+    options.fakeWorkers === true
+      ? startFakeWorkers(computerRoot, roster.bots.map((bot) => bot.slug), async (slug, item) => ({
+          text: `[${slug}] ${item.prompt}`.slice(0, 500),
+          paths: item.paths,
+        }))
+      : undefined;
+  const supervisor =
+    options.workers === false || fake !== undefined
+      ? undefined
+      : await startSupervisor({
+          computerRoot,
+          lazy: options.lazyWorkers ?? false,
+        });
+
+  const server = createServer((req, res) => {
+    void handleRequest(req, res, { computerRoot, fakeWorkers: fake !== undefined });
+  });
+
+  await new Promise<void>((resolve, reject) => {
+    server.listen(port, host, () => {
+      resolve();
+    });
+    server.on("error", reject);
+  });
+
+  const url = `http://${host}:${actualPort(server, port)}`;
+  return {
+    server,
+    url,
+    supervisor,
+    stop: async (): Promise<void> => {
+      fake?.stop();
+      await supervisor?.stop();
+      await new Promise<void>((resolve, reject) => {
+        server.close((err) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          resolve();
+        });
+      });
+    },
+  };
+}
+
+async function handleRequest(
+  req: IncomingMessage,
+  res: ServerResponse,
+  ctx: RequestContext,
+): Promise<void> {
+  const computerRoot = ctx.computerRoot;
+  try {
+    if (req.method === "OPTIONS") {
+      res.writeHead(204, {
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET,POST,OPTIONS",
+        "access-control-allow-headers": "content-type",
+      });
+      res.end();
+      return;
+    }
+    const url = new URL(req.url ?? "/", "http://127.0.0.1");
+    const path = url.pathname;
+    const method = req.method ?? "GET";
+
+    if (method === "GET" && (path === "/health" || path === "/v1/health")) {
+      const live = loadRoster(computerRoot);
+      sendJson(res, 200, {
+        ok: true,
+        system: live.system,
+        bots: live.bots.length,
+        fakeWorkers: ctx.fakeWorkers,
+      });
+      return;
+    }
+
+    if (method === "GET" && path === "/v1/roster") {
+      const roster = loadRoster(computerRoot);
+      sendJson(res, 200, {
+        ...roster,
+        bots: roster.bots.map((bot) => ({
+          ...bot,
+          status: liveStatus(computerRoot, bot.id),
+          pending: pendingCount(computerRoot, bot.id),
+        })),
+      });
+      return;
+    }
+
+    if (method === "GET" && path === "/v1/bots") {
+      const query = url.searchParams.get("query") ?? "";
+      const status = url.searchParams.get("status") ?? undefined;
+      sendJson(
+        res,
+        200,
+        searchAgents(
+          computerRoot,
+          query,
+          status === "offline" || status === "idle" || status === "running" || status === "blocked"
+            ? status
+            : undefined,
+        ),
+      );
+      return;
+    }
+
+    const botMatch = /^\/v1\/bots\/([^/]+)(\/.*)?$/.exec(path);
+    if (botMatch) {
+      const slug = decodeURIComponent(botMatch[1] ?? "");
+      const rest = botMatch[2] ?? "";
+      const roster = loadRoster(computerRoot);
+      const bot = findBot(roster, slug);
+      if (!bot) {
+        sendJson(res, 404, { error: "unknown" });
+        return;
+      }
+      if (method === "GET" && rest === "") {
+        sendJson(res, 200, {
+          ...bot,
+          status: liveStatus(computerRoot, bot.id),
+          lane: readLane(computerRoot, bot.id),
+          handles: listHandles(computerRoot, bot.id),
+        });
+        return;
+      }
+      if (method === "GET" && rest === "/transcript") {
+        const limit = Number(url.searchParams.get("limit") ?? "20");
+        const before = url.searchParams.get("before");
+        sendJson(
+          res,
+          200,
+          transcriptTail(
+            computerRoot,
+            bot.id,
+            Number.isFinite(limit) ? limit : 20,
+            before ? Number(before) : undefined,
+          ),
+        );
+        return;
+      }
+      if (method === "GET" && rest === "/inbox") {
+        sendJson(res, 200, listInbox(computerRoot, bot.id));
+        return;
+      }
+      if (method === "POST" && rest === "/prompt") {
+        const body = await readBody(req);
+        const text = isRecord(body) && typeof body.text === "string" ? body.text : "";
+        if (text.length === 0) {
+          sendJson(res, 400, { error: "text required" });
+          return;
+        }
+        sendJson(
+          res,
+          200,
+          sendPrompt({
+            computerRoot,
+            from: "operator",
+            to: bot.id,
+            prompt: text,
+            kind: "user_dm",
+          }),
+        );
+        return;
+      }
+      if (method === "POST" && rest === "/stop") {
+        sendJson(
+          res,
+          200,
+          sendPrompt({
+            computerRoot,
+            from: "operator",
+            to: bot.id,
+            prompt: "Stop now",
+            kind: "user_stop",
+            onBusy: "supersede",
+          }),
+        );
+        return;
+      }
+    }
+
+    if (method === "GET" && path === "/v1/handles") {
+      const roster = loadRoster(computerRoot);
+      const slug = url.searchParams.get("bot");
+      const bots = slug ? [findBot(roster, slug)].filter((bot): bot is NonNullable<typeof bot> => bot !== undefined) : [...roster.bots];
+      sendJson(
+        res,
+        200,
+        bots.flatMap((bot) => listHandles(computerRoot, bot.id)),
+      );
+      return;
+    }
+
+    const handleMatch = /^\/v1\/handles\/([^/]+)(\/await)?$/.exec(path);
+    if (handleMatch) {
+      const handleId = decodeURIComponent(handleMatch[1] ?? "");
+      if (method === "GET" && !handleMatch[2]) {
+        const handle = findHandle(computerRoot, handleId);
+        if (!handle) {
+          sendJson(res, 404, { error: "unknown handle" });
+          return;
+        }
+        sendJson(res, 200, handle);
+        return;
+      }
+      if (method === "POST" && handleMatch[2] === "/await") {
+        const timeoutMs = Number(url.searchParams.get("timeoutMs") ?? "30000");
+        sendJson(res, 200, await awaitTurn(computerRoot, handleId, { timeoutMs }));
+        return;
+      }
+    }
+
+    if (method === "GET" && path === "/v1/protocol") {
+      const after = Number(url.searchParams.get("after") ?? "0");
+      const query = url.searchParams.get("query") ?? "";
+      const events =
+        query.length > 0
+          ? searchProtocol(computerRoot, query)
+          : readProtocol(computerRoot, Number.isFinite(after) ? after : 0);
+      sendJson(res, 200, events);
+      return;
+    }
+
+    if (method === "GET" && path === "/v1/protocol/stream") {
+      res.writeHead(200, {
+        "content-type": "text/event-stream",
+        "cache-control": "no-cache",
+        connection: "keep-alive",
+        "access-control-allow-origin": "*",
+      });
+      let after = Number(url.searchParams.get("after") ?? "0");
+      let open = true;
+      req.on("close", () => {
+        open = false;
+      });
+      while (open) {
+        const events = readProtocol(computerRoot, after);
+        for (const event of events) {
+          res.write(`data: ${JSON.stringify(event)}\n\n`);
+          after = event.seq;
+        }
+        await sleep(400);
+      }
+      return;
+    }
+
+    const roomMatch = /^\/v1\/rooms\/([^/]+)(\/post)?$/.exec(path);
+    if (roomMatch) {
+      const roomId = decodeURIComponent(roomMatch[1] ?? "");
+      if (method === "GET" && !roomMatch[2]) {
+        sendJson(res, 200, readRoomLog(computerRoot, roomId));
+        return;
+      }
+      if (method === "POST" && roomMatch[2] === "/post") {
+        const body = await readBody(req);
+        const text = isRecord(body) && typeof body.text === "string" ? body.text : "";
+        const from =
+          isRecord(body) && typeof body.from === "string" ? body.from : "operator";
+        sendJson(res, 200, await roomPost({ computerRoot, roomId, from, text }));
+        return;
+      }
+    }
+
+    if (method === "GET" && path === "/v1/approvals") {
+      sendJson(res, 200, listApprovals(computerRoot));
+      return;
+    }
+
+    const approvalMatch = /^\/v1\/approvals\/([^/]+)$/.exec(path);
+    if (approvalMatch && method === "POST") {
+      const id = decodeURIComponent(approvalMatch[1] ?? "");
+      const body = await readBody(req);
+      const allowed = isRecord(body) && body.allow === true;
+      sendJson(res, 200, resolveApproval(computerRoot, id, allowed));
+      return;
+    }
+    if (approvalMatch && method === "GET") {
+      const id = decodeURIComponent(approvalMatch[1] ?? "");
+      const row = readApproval(computerRoot, id);
+      if (!row) {
+        sendJson(res, 404, { error: "unknown approval" });
+        return;
+      }
+      sendJson(res, 200, row);
+      return;
+    }
+
+    const routineMatch = /^\/v1\/routines\/([^/]+)\/run$/.exec(path);
+    if (routineMatch && method === "POST") {
+      const name = decodeURIComponent(routineMatch[1] ?? "");
+      sendJson(res, 200, fireRoutine(computerRoot, name));
+      return;
+    }
+
+    if (method === "GET" && path === "/v1/receipts") {
+      sendJson(res, 200, listReceipts(computerRoot));
+      return;
+    }
+
+    const memMatch = /^\/v1\/memory\/([^/]+)$/.exec(path);
+    if (memMatch && method === "GET") {
+      const slug = decodeURIComponent(memMatch[1] ?? "");
+      const roster = loadRoster(computerRoot);
+      const bot = findBot(roster, slug);
+      if (!bot) {
+        sendJson(res, 404, { error: "unknown" });
+        return;
+      }
+      const rel = url.searchParams.get("path") ?? "MEMORY.md";
+      sendJson(res, 200, { path: rel, content: readMemoryFile(computerRoot, bot.id, rel) });
+      return;
+    }
+
+    notFound(res);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    sendJson(res, 500, { error: message });
+  }
+}

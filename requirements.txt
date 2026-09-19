@@ -1,8 +1,1 @@
-openai-agents
-pydantic
-python-dotenv
-pytest
-fastapi
-uvicorn
-httpx
-stripe
+-r .cfo/requirements.txt

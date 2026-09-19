@@ -1,0 +1,12 @@
+[
+  {
+    "asset_id": "FA-DELL-001",
+    "period": "2026-09",
+    "beginning_book_value": 60000.0,
+    "depreciation_amount": 1500.0,
+    "ending_book_value": 58500.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-003",
+    "posted_in_period": "2026-09"
+  }
+]

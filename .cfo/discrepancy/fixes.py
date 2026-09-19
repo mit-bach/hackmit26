@@ -1,0 +1,111 @@
+"""Record of general workflow fixes applied after the initial discrepancy run."""
+
+from __future__ import annotations
+
+from discrepancy.models import FixRecord
+
+FIXES: list[FixRecord] = [
+    FixRecord(
+        discrepancy_id="AP-DISC-005",
+        failing_agent="AP policy / decide_ap",
+        failure_reason="Duplicate detection compared vendor invoice numbers literally, so INV-1048 and INV 1048 were treated as distinct.",
+        files_changed=["tools.py", "skills/three-way-match-analysis/SKILL.md"],
+        behavior_changed="Duplicate invoice detection now normalizes invoice numbers and vendor names before matching.",
+        regression_test="tests/test_discrepancies.py::test_normalized_duplicate_invoice_is_surfaced",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="AP-DISC-006",
+        failing_agent="AP policy / decide_ap",
+        failure_reason="approval_limit_exceeded was detected but was not a blocking approve violation, so decide_ap still APPROVEd.",
+        files_changed=["workflow.py", "scheduling/cash.py"],
+        behavior_changed="Approval-limit exceptions now block AP approval and payment-pool eligibility.",
+        regression_test="tests/test_discrepancies.py::test_approval_threshold_is_held",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="AR-DISC-001",
+        failing_agent="Cash Application Agent",
+        failure_reason="Remittance parser only recognized INV-AR-* tokens, so the named invoice was never matched and the short pay stayed UNAPPLIED.",
+        files_changed=["ar/cash.py", "skills/cash-application/SKILL.md"],
+        behavior_changed="Invoice-reference extraction now accepts live invoice IDs and broader INV/AR-INV tokens; partials keep a remaining balance.",
+        regression_test="tests/test_discrepancies.py::test_ar_partial_payment_is_preserved",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="AR-DISC-002",
+        failing_agent="Cash Application Agent",
+        failure_reason="An overpayment on a named invoice could be auto-applied without surfacing the residual.",
+        files_changed=["ar/cash.py", "skills/cash-application/SKILL.md"],
+        behavior_changed="Named-invoice overpayments route to HUMAN_REVIEW and preserve the residual.",
+        regression_test="tests/test_discrepancies.py::test_ar_overpayment_residual_is_preserved",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="AR-DISC-004",
+        failing_agent="Cash Application Agent",
+        failure_reason="A remittance citing a nonexistent invoice produced UNAPPLIED instead of an invalid-reference review.",
+        files_changed=["ar/cash.py"],
+        behavior_changed="Unknown remittance invoice IDs are missing-reference facts and force HUMAN_REVIEW.",
+        regression_test="tests/test_discrepancies.py::test_invalid_invoice_reference_is_surfaced",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="AR-DISC-005",
+        failing_agent="Cash Application Agent",
+        failure_reason="A tagged customer_id short-circuited identity checks even when the payer name and remittance named someone else.",
+        files_changed=["ar/cash.py"],
+        behavior_changed="Conflicting payer / remittance / tagged-customer evidence routes to HUMAN_REVIEW.",
+        regression_test="tests/test_discrepancies.py::test_customer_identity_conflict_is_surfaced",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="AR-DISC-006",
+        failing_agent="Cash Application Agent",
+        failure_reason="The already-posted short-circuit returned AUTO_APPLY, which looked like a second application.",
+        files_changed=["ar/workflow.py"],
+        behavior_changed="Already-posted payments return UNAPPLIED and do not apply cash again.",
+        regression_test="tests/test_discrepancies.py::test_double_cash_application_is_caught",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="CLOSE-DISC-001",
+        failing_agent="Close AP recon",
+        failure_reason="AP packets set ledger_balance equal to the unpaid inbox, so a planted GL break could not appear.",
+        files_changed=["bs_recon/packets.py", "skills/balance-sheet-reconciliation/SKILL.md"],
+        behavior_changed="AP/AR/prepaid/FA packets compare optional period GL control balances to the subledger and keep unexplained differences open.",
+        regression_test="tests/test_discrepancies.py::test_ap_gl_discrepancy_blocks_close",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="REPORT-DISC-002",
+        failing_agent="Variance Analysis Agent",
+        failure_reason="Gross-margin attribution ignored revenue and accepted a supplier-cost narrative even when it was not the largest driver.",
+        files_changed=["reporting/variance.py", "skills/financial-variance-analysis/SKILL.md"],
+        behavior_changed="GM explanations include revenue transactions and reject a supplier-cost story when a larger verified driver exists.",
+        regression_test="tests/test_discrepancies.py::test_unsupported_variance_narrative_is_rejected",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="CASH-DISC-004",
+        failing_agent="Cash Reconciliation Preparer",
+        failure_reason="Grouped ACH logic only emitted exact-sum matches, so a $5,850 bank item versus $6,000 of same-vendor ledger entries was left unmatched without stating the $150 residual.",
+        files_changed=["cash_recon/candidates.py", "skills/cash-reconciliation-method-selection/SKILL.md"],
+        behavior_changed="Same-vendor groups that do not sum to the bank amount now preserve the residual as an unexplained difference instead of a silent unmatched item or a forced grouped match.",
+        regression_test="tests/test_discrepancies.py::test_grouped_ach_residual_is_detected",
+        final_status="PASS",
+    ),
+    FixRecord(
+        discrepancy_id="FORECAST-DISC-002",
+        failing_agent="Cash Forecast Agent",
+        failure_reason="Submitted draft forecasts were not reviewed for missing approved AP, duplicate outflows, or opening-cash breaks.",
+        files_changed=["reporting/forecast.py", "skills/cash-forecasting/SKILL.md"],
+        behavior_changed="Forecast integrity review flags coverage gaps, duplicate outflows, opening-cash mismatches, and unjustified early AR receipts.",
+        regression_test="tests/test_discrepancies.py::test_forecast_opening_cash_and_duplicates",
+        final_status="PASS",
+    ),
+]
+
+
+def all_fixes() -> list[FixRecord]:
+    return [item.model_copy() for item in FIXES]

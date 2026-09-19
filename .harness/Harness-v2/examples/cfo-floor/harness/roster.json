@@ -1,0 +1,89 @@
+{
+  "system": "cfo-floor",
+  "version": "1",
+  "description": "Minimal Client system shaped like an office of specialists: intake, payables, receivables, cash, close, assurance. The Harness does not know invoices or ledgers. Swap this file to change the office.",
+  "computer": ".",
+  "bots": [
+    {
+      "id": "bot_ingest",
+      "name": "Ingest",
+      "slug": "ingest",
+      "purpose": "owns source files landing on the Computer; writes a path, then hands off",
+      "instructions": "You own intake. Write whatever the next specialist needs as a file. Hand off with bot_send_prompt. Do not invent amounts. Do not treat a Handle as done.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    },
+    {
+      "id": "bot_ap",
+      "name": "Payables",
+      "slug": "ap",
+      "purpose": "owns payables checks on named paths; next owner is cash or close",
+      "instructions": "Read the named path. Write a short result path. Hand off once. A peer Handle is not Operator approval.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    },
+    {
+      "id": "bot_ar",
+      "name": "Receivables",
+      "slug": "ar",
+      "purpose": "owns receivables follow-up on named paths",
+      "instructions": "Read the named path. Write a result path. Do not change another Bot's Memory.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    },
+    {
+      "id": "bot_cash",
+      "name": "Cash",
+      "slug": "cash",
+      "purpose": "owns cash-position notes on named paths; does not pay",
+      "instructions": "Read the named path. Write a cash note path. Paying or publishing requires Operator approval.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    },
+    {
+      "id": "bot_close",
+      "name": "Close",
+      "slug": "close",
+      "purpose": "owns period-close checklist files; parks on the Operator for lock",
+      "instructions": "Read specialist result paths. Write close/status.md. Do not lock a period without ask_user.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "always"
+    },
+    {
+      "id": "bot_audit",
+      "name": "Audit",
+      "slug": "audit",
+      "purpose": "reads protocol and result paths; does not rewrite source files",
+      "instructions": "Read protocol with bot_get_agent_transcript_tail. Write findings to workspace/audit/. Do not edit source files other Bots own.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "floor",
+      "title": "Floor",
+      "members": ["ingest", "ap", "ar", "cash", "close", "audit"]
+    },
+    {
+      "id": "pay",
+      "title": "Pay cycle",
+      "members": ["ingest", "ap", "cash"]
+    }
+  ],
+  "routines": [
+    {
+      "name": "morning-brief",
+      "bot": "close",
+      "cadence": "daily",
+      "prompt": "Write two lines into workspace/close/brief.md naming open paths on the Computer.",
+      "conversation": "operator_dm"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "forecast_id": "CF-DRAFT-HO",
+  "as_of_date": "2026-09-19",
+  "horizon_weeks": 13,
+  "beginning_cash": 2.5,
+  "weeks": [],
+  "lines": [
+    {
+      "line_id": "FL-HO-DUP-1",
+      "source_type": "invoice",
+      "source_id": "INV-HO-FC-DUP",
+      "expected_date": "2026-09-29",
+      "amount": -18800.0,
+      "confidence": 0.9,
+      "rationale": "Approved payable copy A"
+    },
+    {
+      "line_id": "FL-HO-DUP-2",
+      "source_type": "invoice",
+      "source_id": "INV-HO-FC-DUP",
+      "expected_date": "2026-09-29",
+      "amount": -18800.0,
+      "confidence": 0.9,
+      "rationale": "Approved payable copy B"
+    },
+    {
+      "line_id": "FL-HO-EARLY",
+      "source_type": "receivable",
+      "source_id": "INV-HO-FC-AR",
+      "expected_date": "2026-09-24",
+      "amount": 18750.0,
+      "confidence": 0.35,
+      "rationale": "Early collection with no promise",
+      "evidence_refs": [
+        "due:2026-11-12"
+      ]
+    }
+  ]
+}

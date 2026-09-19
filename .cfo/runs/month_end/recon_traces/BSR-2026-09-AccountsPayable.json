@@ -1,0 +1,81 @@
+{
+  "reconciliation_id": "BSR-2026-09-AccountsPayable",
+  "period": "2026-09",
+  "account_id": "Accounts Payable",
+  "packet": {
+    "account_id": "Accounts Payable",
+    "account_name": "Accounts Payable",
+    "period": "2026-09",
+    "ledger_balance": 1034525.0,
+    "evidence_balance": 1034525.0,
+    "ledger_source": "AP inbox unpaid invoices",
+    "evidence_source": "data/invoices.json vendor bills",
+    "evidence_refs": [
+      "data/invoices.json"
+    ],
+    "reconciling_items": [],
+    "stale_evidence": false,
+    "duplicate_support": false,
+    "missing_evidence": false,
+    "calculations": {
+      "unpaid_inbox": 1034525.0
+    }
+  },
+  "preparer": {
+    "account_id": "Accounts Payable",
+    "finding": "exact_match",
+    "status": "MATCHED",
+    "explanation": "Ledger equals independent evidence.",
+    "confidence": 0.95,
+    "escalate": false,
+    "evidence_used": [
+      "data/invoices.json"
+    ]
+  },
+  "reviewer": {
+    "account_id": "Accounts Payable",
+    "decision": "APPROVE",
+    "sign_off": true,
+    "agree_with_preparer": true,
+    "reasons": [
+      "Independent review agrees with the Python-supported finding."
+    ],
+    "evidence_used": [
+      "data/invoices.json"
+    ]
+  },
+  "final": {
+    "reconciliation_id": "BSR-2026-09-AccountsPayable",
+    "period": "2026-09",
+    "account_id": "Accounts Payable",
+    "account_name": "Accounts Payable",
+    "ledger_balance": 1034525.0,
+    "evidence_balance": 1034525.0,
+    "difference": 0.0,
+    "status": "SIGNED_OFF",
+    "preparer": "Balance Sheet Reconciliation Preparer",
+    "reviewer": "Balance Sheet Reconciliation Reviewer",
+    "evidence_refs": [
+      "data/invoices.json"
+    ],
+    "reconciling_items": [],
+    "supporting_source": "data/invoices.json vendor bills",
+    "explanation": "Ledger equals independent evidence.",
+    "finding": "exact_match",
+    "created_at": "2026-09-19T21:29:16Z",
+    "reviewed_at": "2026-09-19T21:29:16Z",
+    "ledger_source": "AP inbox unpaid invoices",
+    "calculations": {
+      "unpaid_inbox": 1034525.0
+    },
+    "review_decision": "APPROVE",
+    "supporting_balance": 1034525.0,
+    "review_status": "APPROVE",
+    "blocking_items": [],
+    "proposed_adjustments": [],
+    "preparer_name": "Balance Sheet Reconciliation Preparer",
+    "reviewer_name": "Balance Sheet Reconciliation Reviewer"
+  },
+  "agents": [],
+  "used_agent": false
+}

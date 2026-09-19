@@ -1,0 +1,223 @@
+{
+  "reconciliation_id": "REC-011",
+  "period": "2026-09",
+  "match_type": "TIMING_DIFFERENCE",
+  "status": "OUTSTANDING_TIMING_ITEM",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-2026-10-001",
+      "date": "2026-10-01",
+      "amount": -2100.0,
+      "currency": "USD",
+      "description": "ACH OUT OFFICE DEPOT DISC",
+      "reference": "",
+      "counterparty": "OFFICE DEPOT",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-10",
+      "amount_minor": -210000,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-AP-HE",
+      "date": "2026-09-30",
+      "amount": -2100.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Office Depot",
+      "reference": "INV-013",
+      "description": "Vendor payment INV-013 booked at month-end",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -210000,
+      "raw_metadata": {}
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-10-001:GL-AP-HE",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-10-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-HE"
+      ],
+      "bank_amount": -2100.0,
+      "ledger_amount": -2100.0,
+      "difference": 0.0,
+      "bank_amount_minor": -210000,
+      "ledger_amount_minor": -210000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.5833333333333333,
+      "evidence": [
+        "amount:-210000",
+        "bank_date:2026-10-01",
+        "ledger_date:2026-09-30",
+        "counterparty_overlap:0.20"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+      "match_type": "TIMING_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-2026-10-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-HE"
+      ],
+      "bank_amount": -2100.0,
+      "ledger_amount": -2100.0,
+      "difference": 0.0,
+      "bank_amount_minor": -210000,
+      "ledger_amount_minor": -210000,
+      "difference_minor": 0,
+      "confidence": 0.9,
+      "score": 1.4,
+      "evidence": [
+        "ledger_period:2026-09",
+        "bank_period:2026-10",
+        "amount:-210000",
+        "ledger_date:2026-09-30",
+        "bank_date:2026-10-01"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -210000,
+    "ledger_amount_minor": -210000,
+    "difference_minor": 0,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+    "selected_candidate_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+    "disposition": "OUTSTANDING_TIMING_ITEM",
+    "confidence": 0.9,
+    "reasons": [
+      "Timing difference: ledger GL-AP-HE vs bank TXN-2026-10-001. Outstanding until the adjacent period clears."
+    ],
+    "evidence_used": [
+      "ledger_period:2026-09",
+      "bank_period:2026-10",
+      "amount:-210000",
+      "ledger_date:2026-09-30",
+      "bank_date:2026-10-01"
+    ],
+    "review_question": null
+  },
+  "investigation": {
+    "case_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+    "issues_investigated": [
+      "TIMING_DIFFERENCE"
+    ],
+    "findings": [
+      "Timing difference: ledger GL-AP-HE vs bank TXN-2026-10-001. Outstanding until the adjacent period clears."
+    ],
+    "supported_explanations": [
+      "TIMING_DIFFERENCE"
+    ],
+    "unsupported_hypotheses": [],
+    "recommendation": "OUTSTANDING_TIMING_ITEM",
+    "confidence": 0.9,
+    "human_review": false,
+    "evidence_used": [
+      "ledger_period:2026-09",
+      "bank_period:2026-10",
+      "amount:-210000",
+      "ledger_date:2026-09-30",
+      "bank_date:2026-10-01"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": false,
+    "reasons": []
+  },
+  "reviewer": {
+    "case_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+    "reviewer_status": "CONFIRMED",
+    "disposition": "OUTSTANDING_TIMING_ITEM",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Python validation passed"
+    ],
+    "arithmetic_ok": true,
+    "human_review": false
+  },
+  "final": {
+    "reconciliation_id": "REC-011",
+    "period": "2026-09",
+    "match_key": "a27008ae44c2b9b9",
+    "bank_transaction_ids": [
+      "TXN-2026-10-001"
+    ],
+    "ledger_entry_ids": [
+      "GL-AP-HE"
+    ],
+    "match_type": "TIMING_DIFFERENCE",
+    "bank_amount": -2100.0,
+    "ledger_amount": -2100.0,
+    "difference": 0.0,
+    "bank_amount_minor": -210000,
+    "ledger_amount_minor": -210000,
+    "difference_minor": 0,
+    "confidence": 0.9,
+    "status": "OUTSTANDING_TIMING_ITEM",
+    "explanation": "Timing difference: ledger GL-AP-HE vs bank TXN-2026-10-001. Outstanding until the adjacent period clears.",
+    "evidence": [
+      "ledger_period:2026-09",
+      "bank_period:2026-10",
+      "amount:-210000",
+      "ledger_date:2026-09-30",
+      "bank_date:2026-10-01"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "CONFIRMED",
+    "human_review": false,
+    "candidate_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -210000,
+      "ledger_amount_minor": -210000,
+      "difference_minor": 0,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": false,
+  "evidence": [
+    "ledger_period:2026-09",
+    "bank_period:2026-10",
+    "amount:-210000",
+    "ledger_date:2026-09-30",
+    "bank_date:2026-10-01"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "trace_path": null
+}

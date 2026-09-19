@@ -1,0 +1,36 @@
+[
+  {
+    "entry_id": "AUD-LED-001",
+    "date": "2026-09-10",
+    "amount": -2500,
+    "counterparty": "Acme Supplies",
+    "reference": "INV-AUD-OK-001",
+    "description": "Vendor payment Acme Supplies INV-AUD-OK-001",
+    "entry_type": "vendor_payment",
+    "period": "2026-09"
+  },
+  {
+    "entry_id": "AUD-LED-002",
+    "date": "2026-09-12",
+    "amount": -1200,
+    "counterparty": "Unknown",
+    "reference": "",
+    "description": "Partial or misposted outflow",
+    "entry_type": "other",
+    "period": "2026-09"
+  },
+  {
+    "entry_id": "AUD-LED-STRIPE",
+    "date": "2026-09-14",
+    "amount": 18420.55,
+    "counterparty": "Stripe",
+    "reference": "po_aud_001",
+    "description": "Stripe payout po_aud_001",
+    "entry_type": "payout",
+    "period": "2026-09",
+    "raw_metadata": {
+      "provider": "stripe",
+      "payout_id": "po_aud_001"
+    }
+  }
+]

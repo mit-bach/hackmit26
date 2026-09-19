@@ -1,0 +1,29 @@
+{
+  "period": "2026-09",
+  "planted_exceptions": [
+    {"object_id": "PAY-AUD-002", "control_id": "AUD-RND-001", "kind": "round_number_suspicious"},
+    {"object_id": "JE-AUD-003", "control_id": "AUD-PCE-001", "kind": "unauthorized_post_close"},
+    {"object_id": "APR-AUD-002", "control_id": "AUD-SOD-001", "kind": "self_approval"},
+    {"object_id": "APR-AUD-005", "control_id": "AUD-SOD-001", "kind": "self_approval"},
+    {"object_id": "AUD-INV-MISS-1", "control_id": "AUD-DUP-INV-001", "kind": "missed_duplicate_invoice"},
+    {"object_id": "AUD-INV-MISS-2", "control_id": "AUD-DUP-INV-001", "kind": "missed_duplicate_invoice"},
+    {"object_id": "VEND-ACME", "control_id": "AUD-DUP-VEND-001", "kind": "duplicate_vendor"},
+    {"object_id": "REC-AUD-DISAGREE", "control_id": "AUD-REPERF-001", "kind": "recon_disagreement"},
+    {"object_id": "REC-AUD-ACCRUAL-DISAGREE", "control_id": "AUD-REPERF-001", "kind": "recon_disagreement"},
+    {"object_id": "REC-AUD-AR-DISAGREE", "control_id": "AUD-REPERF-001", "kind": "recon_disagreement"}
+  ],
+  "expected_pass": [
+    {"object_id": "PAY-AUD-001", "control_id": "AUD-RND-001"},
+    {"object_id": "PAY-AUD-003", "control_id": "AUD-RND-001"},
+    {"object_id": "JE-AUD-001", "control_id": "AUD-PCE-001"},
+    {"object_id": "JE-AUD-002", "control_id": "AUD-PCE-001"},
+    {"object_id": "APR-AUD-001", "control_id": "AUD-SOD-001"},
+    {"object_id": "APR-AUD-004", "control_id": "AUD-SOD-001"},
+    {"object_id": "INV-010", "control_id": "AUD-DUP-INV-001"},
+    {"object_id": "INV-018", "control_id": "AUD-DUP-INV-001"},
+    {"object_id": "REC-AUD-AGREE", "control_id": "AUD-REPERF-001"},
+    {"object_id": "REC-AUD-STRIPE", "control_id": "AUD-REPERF-001"},
+    {"object_id": "REC-AUD-ACCRUAL-AGREE", "control_id": "AUD-REPERF-001"},
+    {"object_id": "REC-AUD-AR-AGREE", "control_id": "AUD-REPERF-001"}
+  ]
+}

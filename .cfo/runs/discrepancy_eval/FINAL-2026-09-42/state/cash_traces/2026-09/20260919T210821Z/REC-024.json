@@ -1,0 +1,171 @@
+{
+  "reconciliation_id": "REC-024",
+  "period": "2026-09",
+  "match_type": "UNMATCHED_LEDGER",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-CASH-STRIPE-FEES",
+      "date": "2026-09-19",
+      "amount": 12610.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Stripe",
+      "reference": "po_1MaximorFees",
+      "description": "stripe payout po_1MaximorFees",
+      "entry_type": "provider_payout",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 1261000,
+      "raw_metadata": {
+        "payout_id": "po_1MaximorFees",
+        "provider": "stripe"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-019A:GL-CASH-STRIPE-FEES",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-019A"
+      ],
+      "ledger_entry_ids": [
+        "GL-CASH-STRIPE-FEES"
+      ],
+      "bank_amount": 12610.0,
+      "ledger_amount": 12610.0,
+      "difference": 0.0,
+      "bank_amount_minor": 1261000,
+      "ledger_amount_minor": 1261000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.85,
+      "evidence": [
+        "amount:1261000",
+        "bank_date:2026-09-19",
+        "ledger_date:2026-09-19",
+        "counterparty_overlap:1.00",
+        "bank_reference:po_1MaximorFees",
+        "ledger_reference:po_1MaximorFees"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": 0,
+    "ledger_amount_minor": 1261000,
+    "difference_minor": -1261000,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNMATCHED_LEDGER:-:GL-CASH-STRIPE-FEES",
+    "selected_candidate_id": "UNMATCHED_LEDGER:-:GL-CASH-STRIPE-FEES",
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "reasons": [
+      "Unmatched ledger activity GL-CASH-STRIPE-FEES $12,610.00."
+    ],
+    "evidence_used": [
+      "ledger:GL-CASH-STRIPE-FEES",
+      "amount:1261000",
+      "description:stripe payout po_1MaximorFees"
+    ],
+    "review_question": "Requires human review"
+  },
+  "investigation": {
+    "case_id": "UNMATCHED_LEDGER:-:GL-CASH-STRIPE-FEES",
+    "issues_investigated": [
+      "UNMATCHED_LEDGER"
+    ],
+    "findings": [
+      "Unmatched ledger activity GL-CASH-STRIPE-FEES $12,610.00."
+    ],
+    "supported_explanations": [],
+    "unsupported_hypotheses": [],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "human_review": true,
+    "evidence_used": [
+      "ledger:GL-CASH-STRIPE-FEES",
+      "amount:1261000",
+      "description:stripe payout po_1MaximorFees"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNMATCHED_LEDGER:-:GL-CASH-STRIPE-FEES",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "requires_human_review"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-024",
+    "period": "2026-09",
+    "match_key": "ac560b7c7145b40b",
+    "bank_transaction_ids": [],
+    "ledger_entry_ids": [
+      "GL-CASH-STRIPE-FEES"
+    ],
+    "match_type": "UNMATCHED_LEDGER",
+    "bank_amount": 0.0,
+    "ledger_amount": 12610.0,
+    "difference": -12610.0,
+    "bank_amount_minor": 0,
+    "ledger_amount_minor": 1261000,
+    "difference_minor": -1261000,
+    "confidence": 0.0,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unmatched ledger activity GL-CASH-STRIPE-FEES $12,610.00.",
+    "evidence": [
+      "ledger:GL-CASH-STRIPE-FEES",
+      "amount:1261000",
+      "description:stripe payout po_1MaximorFees"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNMATCHED_LEDGER:-:GL-CASH-STRIPE-FEES",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": 0,
+      "ledger_amount_minor": 1261000,
+      "difference_minor": -1261000,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "ledger:GL-CASH-STRIPE-FEES",
+    "amount:1261000",
+    "description:stripe payout po_1MaximorFees"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "trace_path": null
+}

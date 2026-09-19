@@ -1,0 +1,13 @@
+[
+  "tests/test_discrepancies.py::test_normalized_duplicate_invoice_is_surfaced",
+  "tests/test_discrepancies.py::test_approval_threshold_is_held",
+  "tests/test_discrepancies.py::test_ar_partial_payment_is_preserved",
+  "tests/test_discrepancies.py::test_ar_overpayment_residual_is_preserved",
+  "tests/test_discrepancies.py::test_invalid_invoice_reference_is_surfaced",
+  "tests/test_discrepancies.py::test_customer_identity_conflict_is_surfaced",
+  "tests/test_discrepancies.py::test_double_cash_application_is_caught",
+  "tests/test_discrepancies.py::test_ap_gl_discrepancy_blocks_close",
+  "tests/test_discrepancies.py::test_unsupported_variance_narrative_is_rejected",
+  "tests/test_discrepancies.py::test_grouped_ach_residual_is_detected",
+  "tests/test_discrepancies.py::test_forecast_opening_cash_and_duplicates"
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "account_id": "4000-Revenue",
+    "name": "Revenue",
+    "account_class": "revenue",
+    "aliases": ["Revenue"]
+  },
+  {
+    "account_id": "5000-COGS",
+    "name": "Cost of Goods Sold",
+    "account_class": "cogs",
+    "aliases": ["COGS"]
+  },
+  {
+    "account_id": "5100-Hosting",
+    "name": "Cloud Hosting",
+    "account_class": "cogs",
+    "aliases": ["Hosting"]
+  },
+  {
+    "account_id": "5200-Supplier",
+    "name": "Supplier COGS",
+    "account_class": "cogs"
+  },
+  {
+    "account_id": "5300-Freight",
+    "name": "Freight",
+    "account_class": "cogs"
+  },
+  {
+    "account_id": "5400-Other-COGS",
+    "name": "Other COGS",
+    "account_class": "cogs"
+  },
+  {
+    "account_id": "6000-Operating",
+    "name": "Operating Expenses",
+    "account_class": "opex",
+    "aliases": ["Operating Expenses"]
+  },
+  {
+    "account_id": "6100-Payroll",
+    "name": "Payroll",
+    "account_class": "opex",
+    "aliases": ["Payroll"]
+  },
+  {
+    "account_id": "1000-Cash",
+    "name": "Cash",
+    "account_class": "cash",
+    "aliases": ["Cash"]
+  },
+  {
+    "account_id": "1100-AR",
+    "name": "Accounts Receivable",
+    "account_class": "ar",
+    "aliases": ["Accounts Receivable", "Unapplied Cash"]
+  },
+  {
+    "account_id": "2000-AP",
+    "name": "Accounts Payable",
+    "account_class": "ap",
+    "aliases": ["Accounts Payable"]
+  }
+]

@@ -1,0 +1,23 @@
+--- page 1 ---
+HELIOS HARDWARE
+SCANNED VENDOR INVOICE
+
+Invoice Number: HEL-INV-6200
+Invoice Date: 2026-09-22
+Due Date: 2026-10-22
+PO Number: PO-201
+Vendor ID: HELIOS-01
+Vendor: Helios Hardware
+
+Four 42U server racks for the Cambridge colo cage
+
+Quantity: 4
+Unit Price: 1,550.00
+Subtotal: 6,200.00
+Tax: 0.00
+Total Due: 6,200.00
+Currency: USD
+
+--- page 2 ---
+Packing list reference GR-201
+Received in full at Cambridge colo cage

@@ -1,0 +1,11 @@
+AMAZON WEB SERVICES
+ACCOUNT STATEMENT — September 2026
+
+This is a summary of your AWS account. It is not an invoice.
+
+Previous balance: 8,320.00
+Payments received: (8,320.00)
+New charges (see invoices): 4,820.00
+Remaining account balance: 4,820.00
+
+Pay invoices separately. Do not treat this statement as a bill.

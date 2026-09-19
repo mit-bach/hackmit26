@@ -1,0 +1,68 @@
+[
+  {
+    "invoice_id": "INV-AE-2026-09",
+    "vendor": "Aether Compute",
+    "amount": 12100,
+    "invoice_date": "2026-10-05",
+    "service_period": "2026-09",
+    "currency": "USD",
+    "expense_account": "Cloud Infrastructure Expense",
+    "vendor_invoice_number": "AE-2026-09-441",
+    "description": "September 2026 compute and storage — actual invoice arrived in October"
+  },
+  {
+    "invoice_id": "INV-CS-2026-09",
+    "vendor": "CleanSpace Facilities",
+    "amount": 2400,
+    "invoice_date": "2026-10-02",
+    "service_period": "2026-09",
+    "currency": "USD",
+    "expense_account": "Facilities Expense",
+    "vendor_invoice_number": "CS-2026-09",
+    "description": "Monthly office cleaning — September"
+  },
+  {
+    "invoice_id": "INV-HE-2026-09",
+    "vendor": "Harbor Electric",
+    "amount": 4780,
+    "invoice_date": "2026-10-04",
+    "service_period": "2026-09",
+    "currency": "USD",
+    "expense_account": "Utilities Expense",
+    "vendor_invoice_number": "HE-2026-09",
+    "description": "September 2026 electricity — post-summer drop, as in prior year"
+  },
+  {
+    "invoice_id": "INV-LR-2026-09",
+    "vendor": "Lindholm & Ruiz LLP",
+    "amount": 8500,
+    "invoice_date": "2026-10-05",
+    "service_period": "2026-09",
+    "currency": "USD",
+    "expense_account": "Legal Expense",
+    "vendor_invoice_number": "LR-RET-2026-09",
+    "description": "Monthly general-counsel retainer — September"
+  },
+  {
+    "invoice_id": "INV-HH-2026-09",
+    "vendor": "Helios Hardware",
+    "amount": 6200,
+    "invoice_date": "2026-10-08",
+    "service_period": "2026-09",
+    "currency": "USD",
+    "expense_account": "IT Hardware Expense",
+    "vendor_invoice_number": "HH-RACK-9921",
+    "description": "Four 42U server racks — invoice after goods receipt"
+  },
+  {
+    "invoice_id": "INV-PR-2026-09",
+    "vendor": "Pulse Recruiting",
+    "amount": 15500,
+    "invoice_date": "2026-10-08",
+    "service_period": "2026-09",
+    "currency": "USD",
+    "expense_account": "Recruiting Expense",
+    "vendor_invoice_number": "PR-Q3-2026",
+    "description": "Q3 2026 retained search fee plus a small sourcing surcharge"
+  }
+]

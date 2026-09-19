@@ -1,0 +1,257 @@
+{
+  "payment_id": "PAY-002",
+  "started_at": "2026-09-19T20:54:34Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-002",
+    "payment_date": "2026-09-29",
+    "amount": 3200.0,
+    "currency": "USD",
+    "payer_name": "Quiet Harbor",
+    "customer_id": "CUST-010",
+    "bank_reference": "ACH-QH-3200",
+    "remittance_text": "September ops",
+    "invoice_reference": null,
+    "source": "ach",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {}
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-002",
+      "payment_date": "2026-09-29",
+      "amount": 3200.0,
+      "currency": "USD",
+      "payer_name": "Quiet Harbor",
+      "customer_id": "CUST-010",
+      "bank_reference": "ACH-QH-3200",
+      "remittance_text": "September ops",
+      "invoice_reference": null,
+      "source": "ach",
+      "unapplied_amount": 3200.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
+    },
+    "identified_customer_id": "CUST-010",
+    "identified_customer_name": "Quiet Harbor",
+    "customer_confidence": 0.99,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-AR-045",
+        "customer_id": "CUST-010",
+        "customer_name": "Quiet Harbor",
+        "invoice_date": "2026-08-28",
+        "due_date": "2026-09-27",
+        "original_amount": 3200.0,
+        "outstanding_amount": 3200.0,
+        "currency": "USD",
+        "status": "PAST_DUE",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Harbor ops September",
+        "created_at": "2026-08-28T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": "2026-09-30",
+        "reminder_count": 1,
+        "collection_status": "REMINDED",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      },
+      {
+        "invoice_id": "INV-AR-059",
+        "customer_id": "CUST-010",
+        "customer_name": "Quiet Harbor",
+        "invoice_date": "2026-09-08",
+        "due_date": "2026-10-08",
+        "original_amount": 4100.0,
+        "outstanding_amount": 4100.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "October prepaid support",
+        "created_at": "2026-09-08T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      },
+      {
+        "invoice_id": "INV-AR-061",
+        "customer_id": "CUST-010",
+        "customer_name": "Quiet Harbor",
+        "invoice_date": "2026-08-30",
+        "due_date": "2026-08-30",
+        "original_amount": 750.0,
+        "outstanding_amount": 750.0,
+        "currency": "USD",
+        "status": "PAST_DUE",
+        "payment_terms": "due on receipt",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Rush change order — 31-day boundary fixture",
+        "created_at": "2026-08-30T18:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": "2026-09-30",
+        "reminder_count": 1,
+        "collection_status": "REMINDED",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-AR-045",
+            "amount": 3200.0
+          }
+        ],
+        "total_applied": 3200.0,
+        "unapplied_amount": 0.0,
+        "match_type": "exact_amount",
+        "score": 0.86,
+        "evidence": [
+          "INV-AR-045 outstanding equals payment 3200.0"
+        ],
+        "ambiguities": []
+      }
+    ],
+    "remittance_invoice_ids": [],
+    "stale_invoice_ids": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-002 3200.0 USD from Quiet Harbor",
+      "Remittance: September ops",
+      "Payment already tagged CUST-010"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-002",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-045",
+        "amount": 3200.0
+      }
+    ],
+    "confidence": 0.91,
+    "reason": "One customer has a unique invoice whose outstanding amount matches the payment.",
+    "evidence_used": [
+      "Payment PAY-002 3200.0 USD from Quiet Harbor",
+      "Remittance: September ops",
+      "Payment already tagged CUST-010",
+      "INV-AR-045 outstanding equals payment 3200.0"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-002",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-045",
+        "amount": 3200.0
+      }
+    ],
+    "confidence": 0.91,
+    "reason": "One customer has a unique invoice whose outstanding amount matches the payment.",
+    "evidence_used": [
+      "Payment PAY-002 3200.0 USD from Quiet Harbor",
+      "Remittance: September ops",
+      "Payment already tagged CUST-010",
+      "INV-AR-045 outstanding equals payment 3200.0"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": true,
+  "record": {
+    "application_id": "AR-APP-001",
+    "payment_id": "PAY-002",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-045",
+        "amount": 3200.0
+      }
+    ],
+    "total_applied": 3200.0,
+    "unapplied_amount": 0.0,
+    "decision": "AUTO_APPLY",
+    "status": "APPLIED",
+    "posted": true,
+    "invoice_changes": [
+      {
+        "invoice_id": "INV-AR-045",
+        "previous_outstanding": 3200.0,
+        "applied_amount": 3200.0,
+        "new_outstanding": 0.0,
+        "previous_status": "PAST_DUE",
+        "new_status": "PAID"
+      }
+    ],
+    "journal_entry_ids": [
+      "AR-JE-001"
+    ],
+    "created_at": "2026-09-19T20:54:34Z",
+    "reason": "One customer has a unique invoice whose outstanding amount matches the payment."
+  },
+  "state_changes": [
+    {
+      "invoice_id": "INV-AR-045",
+      "previous_outstanding": 3200.0,
+      "applied_amount": 3200.0,
+      "new_outstanding": 0.0,
+      "previous_status": "PAST_DUE",
+      "new_status": "PAID"
+    }
+  ],
+  "journal_entries": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Quiet Harbor",
+      "memo": "Apply PAY-002 to INV-AR-045",
+      "debit": {
+        "account": "Cash",
+        "amount": 3200.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 3200.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-002",
+      "related_invoice_ids": [
+        "INV-AR-045"
+      ],
+      "created_at": "2026-09-19T20:54:34Z"
+    }
+  ],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

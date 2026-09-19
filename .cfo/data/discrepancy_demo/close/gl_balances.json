@@ -1,0 +1,32 @@
+[
+  {
+    "account": "Accounts Payable",
+    "balance": 1.0,
+    "period": "2026-09",
+    "source_id": "GL-AP-DISC"
+  },
+  {
+    "account": "Accounts Receivable",
+    "balance": 0.0,
+    "period": "2026-09",
+    "source_id": "GL-AR-DISC"
+  },
+  {
+    "account": "Prepaid Expense",
+    "balance": 10800.0,
+    "period": "2026-09",
+    "source_id": "PRE-SFT-001"
+  },
+  {
+    "account": "Accumulated Depreciation",
+    "balance": 500.0,
+    "period": "2026-09",
+    "source_id": "FA-DELL-001"
+  },
+  {
+    "account": "Suspense",
+    "balance": 2500.0,
+    "period": "2026-09",
+    "source_id": "GL-UNSUP-001"
+  }
+]

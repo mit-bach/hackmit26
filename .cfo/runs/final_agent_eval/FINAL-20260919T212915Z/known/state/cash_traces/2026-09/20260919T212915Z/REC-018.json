@@ -1,0 +1,166 @@
+{
+  "reconciliation_id": "REC-018",
+  "period": "2026-09",
+  "match_type": "UNMATCHED_BANK",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-2026-09-021",
+      "date": "2026-09-21",
+      "amount": -3000.0,
+      "currency": "USD",
+      "description": "ACH OUT CAMBRIDGE OFFICE",
+      "reference": "",
+      "counterparty": "CAMBRIDGE OFFICE",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -300000,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-021:GL-AMB-2",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-021"
+      ],
+      "ledger_entry_ids": [
+        "GL-AMB-2"
+      ],
+      "bank_amount": -3000.0,
+      "ledger_amount": -3000.0,
+      "difference": 0.0,
+      "bank_amount_minor": -300000,
+      "ledger_amount_minor": -300000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.669047619047619,
+      "evidence": [
+        "amount:-300000",
+        "bank_date:2026-09-21",
+        "ledger_date:2026-09-20",
+        "counterparty_overlap:0.29"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -300000,
+    "ledger_amount_minor": 0,
+    "difference_minor": -300000,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNMATCHED_BANK:TXN-2026-09-021:-",
+    "selected_candidate_id": "UNMATCHED_BANK:TXN-2026-09-021:-",
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "reasons": [
+      "Unmatched bank activity TXN-2026-09-021 -$3,000.00."
+    ],
+    "evidence_used": [
+      "bank:TXN-2026-09-021",
+      "amount:-300000",
+      "description:ACH OUT CAMBRIDGE OFFICE"
+    ],
+    "review_question": "Requires human review"
+  },
+  "investigation": {
+    "case_id": "UNMATCHED_BANK:TXN-2026-09-021:-",
+    "issues_investigated": [
+      "UNMATCHED_BANK"
+    ],
+    "findings": [
+      "Unmatched bank activity TXN-2026-09-021 -$3,000.00."
+    ],
+    "supported_explanations": [],
+    "unsupported_hypotheses": [],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "human_review": true,
+    "evidence_used": [
+      "bank:TXN-2026-09-021",
+      "amount:-300000",
+      "description:ACH OUT CAMBRIDGE OFFICE"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNMATCHED_BANK:TXN-2026-09-021:-",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "requires_human_review"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-018",
+    "period": "2026-09",
+    "match_key": "8e251260dfe890d0",
+    "bank_transaction_ids": [
+      "TXN-2026-09-021"
+    ],
+    "ledger_entry_ids": [],
+    "match_type": "UNMATCHED_BANK",
+    "bank_amount": -3000.0,
+    "ledger_amount": 0.0,
+    "difference": -3000.0,
+    "bank_amount_minor": -300000,
+    "ledger_amount_minor": 0,
+    "difference_minor": -300000,
+    "confidence": 0.0,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unmatched bank activity TXN-2026-09-021 -$3,000.00.",
+    "evidence": [
+      "bank:TXN-2026-09-021",
+      "amount:-300000",
+      "description:ACH OUT CAMBRIDGE OFFICE"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNMATCHED_BANK:TXN-2026-09-021:-",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -300000,
+      "ledger_amount_minor": 0,
+      "difference_minor": -300000,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "bank:TXN-2026-09-021",
+    "amount:-300000",
+    "description:ACH OUT CAMBRIDGE OFFICE"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "trace_path": null
+}
