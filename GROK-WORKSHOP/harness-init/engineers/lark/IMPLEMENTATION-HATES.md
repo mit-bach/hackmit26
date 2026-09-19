@@ -34,8 +34,14 @@ One name for one thing. If two labels exist in the sources, this map picks one.
 | Pi | `@earendil-works/pi-coding-agent`. The worker loop |
 | vision export | `/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/Source-material/Grok-Pi Coding Agent GrokBot Extensions Research-20260919-1439.md` |
 | operator prompt | `/Users/dominikbach/olympus/hackmit/hackmit26/Operator-workspace/Prompts/Harness analysis.md` |
+| pike report | `/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/engineers/pike/DRIVE-REPORT.md` |
+| host Pi | pike live TUI `workspace:40` / `surface:41`, agent-room agent id `agent-dhcp-10-31-159-94.dyn.mit.edu-34530` |
+| peer Pi | pike live TUI `workspace:41` / `surface:42`, agent-room agent id `agent-dhcp-10-31-159-94.dyn.mit.edu-37318` |
+| pike-floor | agent-room bus pike created. Not the sample room `Floor` in `aegis.json` |
+| session jsonl | Pi chat log under `~/.pi/agent/sessions/--Users-dominikbach-olympus-hackmit-hackmit26-Harness--/` |
+| room events.jsonl | agent-room bus log `~/.pi/agent/rooms/<room>/events.jsonl` |
 
-A child is not a Bot. A handle is not a receipt. An agent-room agent id is not a Bot slug. `getAgentDir()` is Pi's agent directory (agent-room README names `~/.pi/agent/`).
+A child is not a Bot. A handle is not a receipt. An agent-room agent id is not a Bot slug. `getAgentDir()` is Pi's agent directory (live: `/Users/dominikbach/.pi/agent`). Host Pi and peer Pi are two live Pi processes. They are not Atropos and Clio.
 
 ---
 
@@ -48,8 +54,9 @@ Opened, in order:
 3. The six Foundry extensions, `extensions/lib/manifest.ts`, `skills/foundry/SKILL.md`, `SOURCE.md`, `README.md`, `AGENTS.md`, `package.json`
 4. Sample Foundry output `foundry-output/aegis.json`
 5. Upstream files the wrappers call: agent-room `extensions/agent-room/index.ts` and README, `pi-subagents` RPC and `registerAgent`
+6. Resume: pike report, pike `STOP.md`, then disk paths pike named (handles, receipts, memory, pike-floor events, settings, session jsonl, hephaestus output)
 
-`engineers/pike/DRIVE-REPORT.md` did not exist when this file was written. Live TUI drive is unobserved in this window.
+This file now has three layers: vision prompts, TypeScript, live drive. Pane and disk win when they contradict a TypeScript claim. Live no-op does not erase a TypeScript defect.
 
 `## Response:` blocks in the vision export are not the spec. They are used only to recover a requirement the prompt already stated, or to name a Grok plan the shipped files appear to have followed (or failed to follow).
 
@@ -81,7 +88,7 @@ Latest operator intent for this analysis job, from the operator prompt file:
 
 > "There's a much better way that this can work and should work for clients and the foundry as a whole."
 
-The rest of this file tests those sentences against the TypeScript.
+The rest of this file tests those sentences against the TypeScript and against pike's live drive.
 
 ---
 
@@ -101,6 +108,62 @@ Aircraft-strict refuse list. A later engineer must not treat these as implemente
 10. One directory under `getAgentDir()/foundry/memory` is not per-Bot memory.
 11. Pi's `read` / `bash` / `edit` / `write` in the current cwd is not a tenant computer.
 12. `README.md` and `skills/foundry/SKILL.md` are not the protocol. They describe a protocol the TypeScript does not run.
+13. Two live Pi TUIs on `pike-floor` are not Foundry Bots. Their ids are hostname-plus-pid.
+14. `/foundry-routine` on Pi 0.85.1 is not a wake. It writes a queued receipt, then throws.
+
+---
+
+## Live vs TypeScript vs vision
+
+Pike drove two Pi TUIs in Harness cwd. Report: `engineers/pike/DRIVE-REPORT.md`. This window re-opened the disk paths below. It did not re-drive Pi.
+
+Live environment pike recorded:
+
+- `pi --version` → `0.85.1`
+- `pi list` → `User packages: /Users/dominikbach/olympus/hackmit/hackmit26/Harness`
+- Default model `openai-codex` / `gpt-5.4-mini` failed: `The 'gpt-5.4-mini' model is not supported when using Codex with a ChatGPT account.`
+- Session model `xai` / `grok-4.6` completed turns (`PINGOK`)
+- Boot loaded all six Foundry files plus `dist` (`pi-usage`)
+
+### Operator test: did they communicate
+
+| Kind | Live result | That is Foundry? |
+| --- | --- | --- |
+| agent-room Pi-to-Pi | Yes. Host queued `msg-1789845379482-c8abb38ee911`. Peer replied `PEER-PONG`. Host received `[Agent room message]`. Disk `events.jsonl` has `join` ×2, `enqueue`+`deliver` both ways. | No. Ids are `agent-dhcp-10-31-159-94.dyn.mit.edu-34530` and `...-37318`, not `atropos` / `clio`. Room name is `pike-floor`, not sample `Floor`. |
+| parent to child | Yes. `/run clio`, `/run hermes`, `subagent` `hephaestus` completed. Hephaestus output file is `HEPHAESTUS-OK.` | No. These are children. Not Bot lanes. |
+| handle protocol | No. No `~/.pi/agent/foundry/handles` directory. Host session jsonl has no `toolName` `bot_send_prompt`, `bot_search_agents`, or `bot_await_turn`. | The Foundry send/await path did not run. |
+
+Grok 4.6 printed `{"error":"Tool bot_send_prompt is not enabled"}`. Pike: that line is model speech, not a Pi `toolResult`. Print-mode also returned `toolResults: []` for `bot_search_agents` and `bot_send_prompt` after a real `bot_get_profile` call. Do not treat "not enabled" as a Foundry runtime error. Treat it as: the handle tools were not invoked live. TypeScript still has no writer for `completed|failed|cancelled`.
+
+### Operator test: where chat logs go
+
+Live paths (this window confirmed the files exist, except handles):
+
+| Log | Path | Role |
+| --- | --- | --- |
+| Host session jsonl | `/Users/dominikbach/.pi/agent/sessions/--Users-dominikbach-olympus-hackmit-hackmit26-Harness--/2026-09-19T19-08-52-290Z_01a0bb12-46c1-7612-97ba-c8325878a3dd.jsonl` | Pi chat for host Pi. Room injects `[Agent room message]` as a user message. |
+| Peer session jsonl | `.../2026-09-19T19-13-48-069Z_01a0bb16-ca25-72a9-92a9-d18c3d0b547c.jsonl` | Pi chat for peer Pi. |
+| pike-floor bus | `/Users/dominikbach/.pi/agent/rooms/pike-floor/events.jsonl` | join / enqueue / deliver / leave. This is the Pi-to-Pi log. |
+| Child sessions | under the host session dir, `4dd68ab6-.../run-0/session.jsonl` (clio) and `4664a23b-.../run-0/session.jsonl` (hermes) | Parent-child transcripts. |
+| Subagent artifacts | `.../subagent-artifacts/` `*_clio_output.md`, `*_hermes_output.md`, `*_hephaestus_output.md` | Child result files. |
+| Memory | `/Users/dominikbach/.pi/agent/foundry/memory/` | Shared files `clio-peer.md`, `pike-drive.md`, `secret-test.md`. Not a transcript. |
+| Receipts | `/Users/dominikbach/.pi/agent/foundry/receipts/1789845000302.json` | Still `"status": "queued"`. Not a conversation. |
+| Handles | `/Users/dominikbach/.pi/agent/foundry/handles` | Missing. Never created this drive. |
+
+There is no Foundry transcript. There is no `Floor` room on disk. `~/.pi/agent/rooms/` has `pike-floor`, `default`, and `control`.
+
+### Live verdict per Foundry extension
+
+Aircraft-strict. Pane and disk.
+
+1. `foundry-roster`: `/foundry-roster` printed `Aegis: atropos, clio, hermes, hephaestus`. `bot_get_profile` returned JSON for hermes, clio, atropos. Slash `/create` and `/register` do not exist. `bot_search_agents` never appeared as a `toolResult`.
+2. `foundry-comms` handle layer: no-op this drive. No handle file. No `bot_send_prompt` toolResult. TypeScript still cannot complete a handle.
+3. `foundry-comms` agent-room load: works as a live-process bus after a human `/room` create/connect. Not a Foundry host.
+4. `foundry-subagents`: overlay listed four `[runtime]` slugs. `/run clio`, `/run hermes`, `subagent` hephaestus completed. `/subagents-doctor` still said `builtin 13`. Overlay and doctor disagree.
+5. `foundry-memory`: write/read worked. Secrets redacted on disk. One shared folder. Host and peer both wrote there.
+6. `foundry-routines`: `routine_list` returned Morning floor brief. `/foundry-routine` wrote the receipt, then `Extension "command:foundry-routine" error: ctx.sendUserMessage is not a function`. Bogus name warned `No matching routine.`
+7. `foundry-approvals`: overlay `Foundry approval` / Yes-No. Result `{"allowed":true,...}`. No extra file. Model must call the tool.
+8. `@narumitw/pi-usage`: `/usage` showed xAI SuperGrokPro weekly allowance. Loaded as `dist` at boot.
 
 ---
 
@@ -142,7 +205,7 @@ About 540 lines. Plus `skills/foundry/SKILL.md` (40 lines) and sample `foundry-o
 
 There is no supervisor. There is no tenant boundary. There is no `foundry-computer`. There is no connector facade. There is no transcript tool. There is no test tree. `vendor/` holds `SOURCE.txt` and a license. `vendor/agent-room.ts` is absent. `SOURCE.txt` still says that file is a verbatim copy.
 
-The product the operator runs is the Pi TUI with extra tools and two slash commands: `/foundry-roster` and `/foundry-routine`.
+The product the operator runs is the Pi TUI with extra tools and two slash commands: `/foundry-roster` and `/foundry-routine`. Pike live: those two commands exist. A third Foundry slash does not. `/foundry-routine` throws on Pi 0.85.1.
 
 ### What is missing, fake, or thin
 
@@ -162,17 +225,21 @@ The product the operator runs is the Pi TUI with extra tools and two slash comma
 
 `bot_send_prompt` talks to (2) if RPC answers. Room tools talk to (3) if someone typed `/room connect`. Nothing maps (1) to (3). Manifest `rooms` are a TypeScript type plus sample JSON. No extension reads them except the type.
 
+Live confirms the split. Pike created `pike-floor` by hand. Host id `...-34530`. Peer id `...-37318`. Overlay listed slugs `atropos`, `clio`, `hermes`, `hephaestus`. Room messages used the pid ids. Sample room title `Floor` is not on disk.
+
 **Docs describe a Grok plan that is not in the tree.** Grok's 12:02 PM table (vision export) listed `foundry-computer`, "JSONL protocol under `comms/`", "supervisor tests" for accept-before-run, peer queue, user supersede. Those files are not in the Harness. The published package is thinner than that table.
 
 **Install provenance is mixed.** 12:27 PM required real GitHub packages. `SOURCE.md` is honest that Pi is a peer, that `pi-subagents` and agent-room and `pi-usage` are dependencies, and that messenger-swarm is not loaded. That part is real. The Foundry layer on top is still a shim. `README.md` then calls the result a "GrokBot-class floor."
 
-**`pi-usage` is a path into `node_modules`.** If `pi install` copies the package without that tree, the usage overlay does not load. This window did not observe `pi list` or a live install.
+**`pi-usage` is a path into `node_modules`.** If `pi install` copies the package without that tree, the usage overlay does not load. Pike live: `pi list` showed the Harness path. Boot listed `dist`. `/usage` showed xAI SuperGrokPro. The overlay loaded on this machine. The path is still fragile for a clean `pi install git:...` without `node_modules`.
 
 ### Why it matters for a client Foundry floor
 
 A client floor needs named Bots that keep the job on a machine the client never SSHs into. It needs a handle that means "accepted" and later means "done." It needs logs a human can find. It needs approvals the model cannot talk past. It needs routines that fire when no TUI is open.
 
 This Harness gives a sample JSON of four Greek names, a prompt that tells the model to behave, and tools that write JSON files that never complete. A client system is "a new Foundry manifest" only in `README.md`. The runtime does not consume that manifest as a floor. It prints slugs and hopes.
+
+Live: two humans opened two Pi TUIs, created a room by hand, and spawned children by slug. That is not a client floor. Default Codex model failed until pike switched to `xai/grok-4.6`. Clients who "do not see Pi" still see Pi, model errors, `/room` overlays, and `/subagents`.
 
 ---
 
@@ -210,9 +277,25 @@ This Harness gives a sample JSON of four Greek names, a prompt that tells the mo
 
 This is a JSON file reader plus a prompt prefix plus two lookup tools. It is honest as a lookup. It pretends to be standing identity.
 
+### Live (pike)
+
+`/foundry-roster` printed:
+
+```
+ Aegis: atropos, clio, hermes, hephaestus
+```
+
+`bot_get_profile` returned full JSON for hermes, clio, and atropos (`isError: false` in print-mode for atropos).
+
+Slash filter `/foundry` showed only `foundry-roster`, `foundry-routine`, `skill:foundry`. `/create`: no matching command. `/register`: no matching command. Enter sent `/register` as a user prompt.
+
+`bot_search_agents` never appears as a `toolResult` in the host session jsonl. Print-mode: after `bot_get_profile`, the model emitted text "not enabled" with `toolResults: []`. Unproven as a live tool call. The TypeScript tool exists.
+
+Pike: protocol block string is not stored in session jsonl. Child clio still answered as Clio from `registerAgent` instructions. `before_agent_start` inject is unproven in the jsonl.
+
 ### Why it matters
 
-Without a Bot that survives process death, every other layer has nothing to address. A client who adds a Bot to Foundry output gets a new slug in a toast. They do not get a worker, a memory tree, a lane, or a status. The model is told "Roster (standing identity; not ~/.pi/agent/agents)" while the only persistence is the same JSON the operator dropped in cwd.
+Without a Bot that survives process death, every other layer has nothing to address. A client who adds a Bot to Foundry output gets a new slug in a toast. They do not get a worker, a memory tree, a lane, or a status. Live: there is no TUI to add a fifth Bot. Roster identity is the JSON file. `/run` and `subagent` spawn only slugs that already exist.
 
 ---
 
@@ -296,18 +379,48 @@ The control plane is "please do it yourself." If the model then calls `room_send
 
 **Load order.** `package.json` lists `foundry-comms.ts` before `foundry-subagents.ts`. `spawnViaSubagents` does not wait for `subagents:rpc:v1:ready`. If RPC is late, every send queues.
 
+### Live (pike)
+
+Handle layer: no-op this drive.
+
+1. Directory `/Users/dominikbach/.pi/agent/foundry/handles` does not exist. This window confirmed `ls`: no such file or directory.
+2. Host session jsonl `toolName` set has `ask_user`, `bash`, `bot_get_profile`, `memory_read`, `memory_write`, `read`, `room_list_agents`, `room_send_message`, `room_whoami`, `routine_list`, `subagent`. It does not have `bot_send_prompt`, `bot_search_agents`, or `bot_await_turn`.
+3. Host recap (model speech, not a toolResult): `9. bot_send_prompt clio` then `{"error":"Tool bot_send_prompt is not enabled"}`.
+4. Print-mode: real `bot_get_profile` for atropos. Next turn text claims `bot_search_agents` / `bot_send_prompt` not enabled. `toolResults: []`.
+5. Pike did not prove `bot_send_prompt` `execute()` runs in-process. TypeScript still never writes `completed|failed|cancelled`. Even a live handle would stay `accepted|queued|running`.
+
+agent-room load: works.
+
+Boot loaded `foundry-comms.ts`. `/room` overlay existed. Pike created `pike-floor`. Connect:
+
+```
+ Connected to room 'pike-floor' as agent-dhcp-10-31-159-94.dyn.mit.edu-34530
+```
+
+`/room control on` enabled `room_control_agent`. Footer `room:pike-floor [control]`. Host `room_send_message` queued `msg-1789845379482-c8abb38ee911` (delivery followUp). Peer pane:
+
+```
+ [Agent room message]
+ Room: pike-floor
+ From: agent-dhcp-10-31-159-94.dyn.mit.edu-34530
+ Message ID: msg-1789845379482-c8abb38ee911
+ Pike host ping. Reply with room_send_message containing PEER-PONG and your agent id.
+```
+
+Peer replied `PEER-PONG`. Host received the reply as `[Agent room message]`. Disk `events.jsonl` matches both message ids. Foundry did not auto-connect. Foundry did not host `Floor`. Pike did not call `room_control_agent`, `room_read_agent_history`, or `room_summarize_agent`.
+
 ### Why it matters
 
 This is the test the operator named: can Bots communicate, where do chat logs go, does the protocol function.
 
-As written:
+Live answer:
 
-- Communication is either a child spawn inside one Pi session, or a hope that the model will call a different tool.
-- The handle cannot finish. A Chief of Staff Bot that obeys `SKILL.md` ("Do not tell the operator a teammate finished unless `bot_await_turn` says `done: true`") waits forever.
-- Chat logs are not a Foundry transcript. See the Communication and chat logs section.
-- A client floor cannot hand work Atropos → Clio → Hephaestus as named teammates. It can spawn children named after those slugs, if RPC is up, and then lose the result off the handle.
+- Pi-to-Pi chat works if a human creates a room and uses pid ids.
+- Parent-to-child spawn works by slug.
+- The Foundry handle protocol did not run. There is no handle file to await.
+- A Chief of Staff that obeys `SKILL.md` still cannot get `done: true` from this TypeScript.
 
-Grok's 12:02 PM summary said foundry-comms is "Peer send + room host. JSONL protocol under `comms/`." There is no `comms/` JSONL in this package. There is no room host in this file. That summary is a claim the code cannot keep.
+Grok's 12:02 PM summary said foundry-comms is "Peer send + room host. JSONL protocol under `comms/`." There is no `comms/` JSONL in this package. There is no room host in this file. Live JSONL is agent-room `events.jsonl` under `pike-floor`, created by hand. That summary is a claim the code cannot keep.
 
 ---
 
@@ -347,9 +460,33 @@ On `session_start`, for each Foundry Bot, `registerAgent({ name: bot.slug, defin
 
 **This is a thin config wrapper.** 67 lines. The comment says "CHOOSE (nicobailon/pi-subagents)" and then "children are roster bots, not Pi sessions." That sentence is the design error. Children are still children. They die. They do not own routines. They do not own a lane.
 
+### Live (pike)
+
+`/subagents` overlay:
+
+```
+Select subagent
+→ atropos [runtime] — Chief of Staff — owns the floor, routes work, hosts the room.
+  clio [runtime] — Research — reads files, drafts briefs, never sends as the operator.
+  hephaestus [runtime] — Computer — the only bot that should write the shared workspace.
+  hermes [runtime] — Operations — routines, receipts, standing checks.
+```
+
+Builtin scout/researcher did not appear in this overlay.
+
+`/run clio` and `/run hermes` completed with identity-aligned sentences. `subagent` hephaestus async completed. Artifact `/Users/dominikbach/.pi/agent/sessions/--Users-dominikbach-olympus-hackmit-hackmit26-Harness--/subagent-artifacts/8e60e06a-ab5f-4424-8b38-acc3a6cc1cab_hephaestus_output.md` is `HEPHAESTUS-OK.`
+
+Harness `.pi/settings.json` on disk: `disableBuiltins: true`, `agentScanDirs: []`, exclude dirs as TypeScript wrote.
+
+`/subagents-doctor` still counted `agents: total 13 (builtin 13, package 0, user 0, project 0)`. Overlay hid builtins. Doctor still lists them. `disableBuiltins` is not proven to remove builtins from doctor discovery.
+
+`/subagent-cost` listed parent plus Child 1 (clio) and Child 2 (hermes). Hephaestus run `8e60e06a-...` was not in that cost table.
+
+Pike did not show two children talking to each other without the parent.
+
 ### Why it matters
 
-A client who thinks Atropos is a standing Chief of Staff gets a subagent template. Builtins are off, which is correct. Filesystem markdown agents are excluded, which is correct. The roster is still not a floor. It is a set of child names.
+A client who thinks Atropos is a standing Chief of Staff gets a subagent template. Live spawn by slug works. That is the choose-among-options child pack doing its job. It is still not a Bot network. Doctor vs overlay is a second lie: settings claim builtins are off, doctor still counts 13.
 
 ---
 
@@ -382,9 +519,19 @@ No `before_agent_start` injection. No cap. No per-Bot subdirectory. No daily log
 
 Honest and small: two tools that read and write files, with a weak redact. That is all it is. It is not Bot memory.
 
+### Live (pike)
+
+Tools ran. Disk `/Users/dominikbach/.pi/agent/foundry/memory/`:
+
+- `clio-peer.md` → `Clio peer ready on pike-floor` (peer Pi)
+- `pike-drive.md` → `pike host atropos 2026-09-19` (host Pi)
+- `secret-test.md` → `api_key: «redacted» password: «redacted» token: «redacted»`
+
+Redaction works on the regex cases pike wrote. Host and peer share one folder. There is no per-Bot subdirectory. No `MEMORY.md` injection was observed. This confirms the shared-brain defect. The tools are not a no-op.
+
 ### Why it matters
 
-Clio's research and Hephaestus's computer notes land in the same folder. The next Bot can read them. A second client on the same Unix user shares `getAgentDir()`. 7:37 AM: sharing a disk across consulting clients is a data-leak product. This memory plane is that leak, even for Bots inside one tenant.
+Clio's research and Hephaestus's computer notes land in the same folder. Live they already did: host and peer both wrote the same tree. A second client on the same Unix user shares `getAgentDir()`. 7:37 AM: sharing a disk across consulting clients is a data-leak product. This memory plane is that leak, even for Bots inside one tenant.
 
 ---
 
@@ -424,9 +571,34 @@ That injects the prompt into the **current** Pi session as a follow-up.
 
 47 lines. Slash command plus list tool. Pretends to be standing duty.
 
+### Live (pike)
+
+`routine_list` returned the Morning floor brief JSON.
+
+`/foundry-routine` (match) pane:
+
+```
+ Extension "command:foundry-routine" error: ctx.sendUserMessage is not a function
+```
+
+Receipt still written. This window opened `/Users/dominikbach/.pi/agent/foundry/receipts/1789845000302.json`:
+
+```json
+{
+  "name": "Morning floor brief",
+  "bot": "hermes",
+  "status": "queued",
+  "at": "2026-09-19T19:10:00.302Z"
+}
+```
+
+Wake did not enter the session as a user message. `/foundry-routine does-not-exist` warned `No matching routine.`
+
+TypeScript claimed `ctx.sendUserMessage(..., { deliverAs: "followUp" })`. Live on Pi 0.85.1 that function is missing. Pane and disk win: fire errors. List and receipt write work. The receipt stays `queued`. Hermes's lane was not involved.
+
 ### Why it matters
 
-A client who buys "ops watches the floor every morning" gets a command the operator must type. Hermes does not run it. No receipt proves it ran. Foundry output `cadence: "daily"` is decoration.
+A client who buys "ops watches the floor every morning" gets a command the operator must type. Live the operator typed it and the command died. Hermes did not run. The receipt still says queued. Foundry output `cadence: "daily"` is decoration. SKILL.md "It is not `/loop`" is worse live: it is a broken `/loop`.
 
 ---
 
@@ -458,9 +630,25 @@ No intercept of `bash`, `write`, `edit`, or room send. No permission-gate. No pr
 
 33 lines. Honest as a confirm wrapper. Fake as Foundry approvals.
 
+### Live (pike)
+
+Overlay appeared when the model called the tool:
+
+```
+ Foundry approval
+ test-approval
+ Live harness probe only. Allow this test.
+ → Yes
+   No
+```
+
+After enter: `{"allowed":true,"action":"test-approval","detail":"Live harness probe only. Allow this test."}`
+
+No extra approval file on disk. Confirm works as a TUI dialog. It does not intercept other tools. Hephaestus still completed `HEPHAESTUS-OK.` as a child with no approval card.
+
 ### Why it matters
 
-Hephaestus's instructions say consequential writes must ask the operator. Nothing stops Hephaestus, or a child named `hephaestus`, from `bash rm -rf`. A client floor that can publish or send-as-user without a broker is not safe to hide behind a clean UI (7:37 AM).
+Hephaestus's instructions say consequential writes must ask the operator. Live, a child named `hephaestus` finished without `ask_user`. Nothing stops that child from `bash rm -rf`. A client floor that can publish or send-as-user without a broker is not safe to hide behind a clean UI (7:37 AM).
 
 ---
 
@@ -472,7 +660,7 @@ These are not lazy files. They are absent.
 | --- | --- | --- |
 | Supervisor / process topology | Write it | Absent |
 | Inbox, lanes, user-preempt vs peer-queue | Write it | Comments and prompt bullets only |
-| Room host + goal parking | Write it | agent-room loaded, host not written |
+| Room host + goal parking | Write it | agent-room loaded. Live: human `/room` create `pike-floor`. Host not written. Sample `Floor` absent on disk |
 | Working-folder / computer / memory leases | Write it | Absent. Grok 12:02 listed `foundry-computer`. No file |
 | Recent-work brief | Write it | Absent |
 | Connector facade `search_connected_tools` / `call_connected_tool` | Write it | `connectors` field on Bots is unused |
@@ -489,7 +677,7 @@ These are not lazy files. They are absent.
 
 ## Communication and chat logs
 
-The operator asked to see whether Bots communicate and where chat logs go. Live drive was pike's job. `engineers/pike/DRIVE-REPORT.md` was not on disk. This section is TypeScript-only. Live paths were not observed in this window.
+The operator asked to see whether Bots communicate and where chat logs go. Pike drove that. This section is TypeScript plus live disk. Pane and disk win.
 
 ### What the TypeScript says should happen
 
@@ -499,27 +687,42 @@ The operator asked to see whether Bots communicate and where chat logs go. Live 
 
 **Memory files.** `getAgentDir()/foundry/memory/{path}`. Shared. Not a transcript.
 
-**agent-room logs, if a human connects.** Upstream writes under `getAgentDir()/rooms/`: per-room `agents/`, `inbox/{agent-id}/`, JSONL-style message appends (`appendJsonLine`). Agent ids are `agent-${hostname}-${process.pid}`. Foundry does not auto-connect. Foundry does not create room `Floor` from `aegis.json`. If nobody runs `/room connect`, this tree may not exist.
+**agent-room logs, if a human connects.** Upstream writes under `getAgentDir()/rooms/`: per-room `agents/`, `inbox/{agent-id}/`, JSONL-style message appends. Agent ids are `agent-${hostname}-${process.pid}`. Foundry does not auto-connect. Foundry does not create room `Floor` from `aegis.json`.
 
-**Pi session files.** Pi stores sessions under its own session directory (agent-room README and Pi docs: under the agent dir). Foundry does not index them. Foundry does not page them. There is no `bot_get_agent_transcript_tail`.
+**Pi session files.** Pi stores sessions under the agent dir. Foundry does not index them. There is no `bot_get_agent_transcript_tail`.
 
-**Child artifacts.** If RPC `spawn` works, `pi-subagents` owns async run status and its own artifacts. Foundry stores `runId` on the handle and never reads the child transcript back onto the handle as `result`.
+**Child artifacts.** If RPC `spawn` or `/run` works, `pi-subagents` owns async run status and artifacts. Foundry never copies a child transcript onto a handle as `result`.
 
-**Handoff mirroring.** 7:22 AM required the exchange visible on sender transcript and receiver transcript. Foundry does not append a handoff entry to any Bot transcript. The only "log" of a send is the handle JSON and whatever the current model wrote in the current session.
+**Handoff mirroring.** 7:22 AM required the exchange visible on sender transcript and receiver transcript. Foundry does not append a handoff entry to any Bot transcript.
 
-### What a later engineer should look for on a live drive
+### What actually happened live
 
-Unobserved here. If pike later writes `DRIVE-REPORT.md`, fold these checks:
+Pike's five checks, with disk from this window:
 
-1. After `bot_send_prompt`, open the handle JSON. See whether `status` ever leaves `running` or `queued`.
-2. After `bot_await_turn`, see whether `done` is ever true without hand-editing the file.
-3. List `getAgentDir()/rooms/`. See whether Foundry created a room or only Pi sessions that someone connected by hand.
-4. List Pi session files. See whether Clio has a session, or only the operator TUI plus child runs.
-5. Search for `Floor` on disk. The sample room title should appear if a host exists. The TypeScript never writes that string except inside `aegis.json`.
+1. After `bot_send_prompt`: there was no call. Handle JSON does not exist. Directory `~/.pi/agent/foundry/handles` is missing. Status never left a file because no file was written.
+2. After `bot_await_turn`: no `toolResult`. `done` was never produced by the runtime.
+3. `~/.pi/agent/rooms/` contains `pike-floor`, `default`, and `control`. Foundry did not create a room. Pike created `pike-floor` in the `/room` overlay.
+4. Pi session files exist for host Pi, peer Pi, leftover verify session, and child runs under the host session dir. Clio the Bot has no standing session. Clio the child has `.../4dd68ab6-c316-4a82-b53f-86d66b4a47c0/run-0/session.jsonl`.
+5. Sample room title `Floor` is not a directory. The TypeScript never writes that string except inside `aegis.json`. Live room log is `pike-floor/events.jsonl`.
+
+Room bus log this window opened:
+
+```json
+{"type":"join","room":"pike-floor","agentId":"agent-dhcp-10-31-159-94.dyn.mit.edu-34530",...}
+{"type":"join","room":"pike-floor","agentId":"agent-dhcp-10-31-159-94.dyn.mit.edu-37318",...}
+{"type":"enqueue","id":"msg-1789845379482-c8abb38ee911","from":"...-34530","to":"...-37318","text":"Pike host ping. ... PEER-PONG ..."}
+{"type":"deliver","id":"msg-1789845379482-c8abb38ee911",...}
+{"type":"enqueue","id":"msg-1789845384909-fdf635625f72","from":"...-37318","to":"...-34530","text":"PEER-PONG agent-dhcp-10-31-159-94.dyn.mit.edu-37318"}
+{"type":"deliver","id":"msg-1789845384909-fdf635625f72",...}
+{"type":"leave",...-34530...}
+{"type":"leave",...-37318...}
+```
+
+Session jsonl is the chat log. Roles `user` / `assistant` / `toolResult`. Room injects `[Agent room message]` as a user message. Inbox dirs existed and were empty after deliver.
 
 ### Why the log gap matters
 
-A client cannot be shown "the Bots talked." There is no Foundry transcript to sanitize into an action log (7:37 AM). There is no handle history to bill or debug (7:37 AM list: replay, idempotency, which receipt is missing). The operator's test — where do chat logs go — has this answer from static code: scattered Pi files, optional agent-room files if a human connected, and handle JSON that does not complete. There is no one place.
+A client cannot be shown "the Bots talked" as Foundry Bots. They can be shown two Pi processes with pid ids on `pike-floor`, plus child output files. There is no Foundry transcript to sanitize into an action log (7:37 AM). There is no handle history to bill or debug. The operator's test now has a live answer: logs scatter across session jsonl, room `events.jsonl`, child artifacts, memory files, and a queued receipt. There is no one place. The handle directory is not even one of those places. It was never created.
 
 ---
 
@@ -531,23 +734,23 @@ From `README.md`:
 
 - "turns Pi into a GrokBot-class floor"
 - "handles that accept before they run, rooms, memory, routines, and operator approvals" as a list of things "you get"
-- Handle protocol "on top of agent-room" — the handle tools do not call agent-room
-- `/foundry-routine [name]` "fire a standing wake onto the owning bot's lane"
+- Handle protocol "on top of agent-room" — the handle tools do not call agent-room. Live: agent-room worked. Handle tools did not run. No handle file.
+- `/foundry-routine [name]` "fire a standing wake onto the owning bot's lane" — live throws `ctx.sendUserMessage is not a function`
 
 From `SOURCE.md`:
 
-- "`bot_send_prompt` accepts before run, `bot_await_turn`, ack ≠ complete"
-- "Dispatch of accepted work goes through pi-subagents RPC `spawn` when that bus is up, otherwise the model is told to use the real `subagent` / `room_send_message` tools" — the second half admits the fallback is a model instruction. That is not a control plane.
-- `vendor/agent-room.ts` "is a verbatim copy" — the file is not there
+- "`bot_send_prompt` accepts before run, `bot_await_turn`, ack ≠ complete" — live never produced a handle. TypeScript still cannot mark complete.
+- "Dispatch of accepted work goes through pi-subagents RPC `spawn` when that bus is up, otherwise the model is told to use the real `subagent` / `room_send_message` tools" — the second half admits the fallback is a model instruction. Live, pike used `/run` and `subagent` and `room_send_message` by hand. That is not a control plane.
+- `vendor/agent-room.ts` "is a verbatim copy" — the file is not there. Pike: live load used `node_modules/pi-agents-talk-to-each-other/extensions/agent-room/index.ts`.
 
 From `AGENTS.md` and `skills/foundry/SKILL.md`:
 
 - "The JSON you get back is a handle, not a result" — true as a return shape, false as a lifecycle
-- "Do not tell the operator a teammate finished unless `bot_await_turn` says `done: true`" — `done` never becomes true
-- "User DMs outrank peer wakes. Peer mail queues when the target is busy." — no code
-- "Rooms: the host wakes members in order. Never skip a busy member." — no host
-- "Standing checks are Foundry routines, not `/loop`." — the command is `/loop` behavior
-- "Room presence, inbox, and `room_send_message` come from Timur00Kh `agent-room` (vendored)." — loaded from `node_modules` if install worked, not vendored as `vendor/agent-room.ts`, and not bound to Foundry rooms
+- "Do not tell the operator a teammate finished unless `bot_await_turn` says `done: true`" — `done` never becomes true. Live never called await.
+- "User DMs outrank peer wakes. Peer mail queues when the target is busy." — no code. Live room delivery was `followUp` because pike passed that flag.
+- "Rooms: the host wakes members in order. Never skip a busy member." — no host. Live: two pids on `pike-floor`, not roster members in order.
+- "Standing checks are Foundry routines, not `/loop`." — live the command errors after writing a queued receipt.
+- "Room presence, inbox, and `room_send_message` come from Timur00Kh `agent-room` (vendored)." — live loaded from `node_modules`, not `vendor/agent-room.ts`, and not bound to Foundry rooms
 
 From `protocolBlock()` injected into every turn:
 
@@ -576,8 +779,8 @@ Say this so a later pass does not rip out the few true seams.
 3. Disabling `pi-subagents` builtins and excluding markdown agent dirs is a real settings write. Correct direction. Not sufficient.
 4. `registerAgent()` for each slug is a real upstream call. Wrong abstraction for Bots. Real glue for children.
 5. agent-room default export is actually invoked. The upstream room bus is real. Foundry does not use it as a host.
-6. `pi-usage` is listed as a real package, not rewritten. Fragile path.
-7. `ask_user` really calls `ctx.ui.confirm`. Small and honest. Not a broker.
+6. `pi-usage` is listed as a real package, not rewritten. Fragile path. Live `/usage` worked on this install.
+7. `ask_user` really calls `ctx.ui.confirm`. Small and honest. Not a broker. Live overlay worked when the model called it.
 8. `SOURCE.md` is right that this package does not reimplement Pi, and that messenger-swarm is not included.
 9. Sample `aegis.json` is a clear four-Bot fixture. The names and purposes are usable as test data once a real floor exists.
 10. The 12:27 PM demand to depend on real GitHub packages, not a fake Pi SPI, is partly met at the npm layer. The fake SPI was the earlier browser demo Grok admitted. The remaining fake is the Foundry protocol.
@@ -592,7 +795,7 @@ Not insults. Mapping:
 
 **Lazy.** Wrong abstraction on purpose of convenience: children as Bots, `/loop` as routines, confirm dialog as approvals, shared folder as memory, load agent-room and do not host, write a handle and do not complete it, tell the model to call another tool when RPC misses. Each is the shortest path that still lets `README.md` name the noun.
 
-**Non-functional (from static code).** Handle completion has no writer. Room host has no code. Routine cadence has no clock. Approval has no intercept. Memory has no injection and no Bot scope. Transcript tail does not exist. Tenant computer does not exist. Live function was not observed. The TypeScript already shows the happy path cannot fulfill `bot_await_turn`.
+**Non-functional (live plus TypeScript).** Handle layer no-op this drive. TypeScript still has no completion writer. Room host has no code. Human `/room` is the only bus that talked. `/foundry-routine` throws on Pi 0.85.1. Approval has no intercept. Memory tools work and share one folder. Transcript tail does not exist. Tenant computer does not exist. Default Codex model failed until pike switched to grok-4.6. The TypeScript already shows the happy path cannot fulfill `bot_await_turn`. Live never reached that path.
 
 **Underperforming for clients.** 7:37 AM sold named workers on a machine the client never sees. This Harness is a developer TUI plugin. A second Foundry output JSON does not create a second tenant.
 
@@ -632,7 +835,13 @@ Upstream (to verify wrappers, not as spec):
 - `/Users/dominikbach/olympus/hackmit/hackmit26/Harness/node_modules/pi-subagents/docs/extension-api.md`
 - `/Users/dominikbach/olympus/hackmit/hackmit26/Harness/node_modules/pi-subagents/src/agents/runtime-agent-registry.ts`
 
-Not opened: `engineers/flint/`. Not opened: `Harness design.md` (missing from Source-material). Not observed: live Pi TUI.
+Pike live (this resume):
+
+- `/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/engineers/pike/DRIVE-REPORT.md`
+- `/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/engineers/pike/STOP.md`
+- Disk: `foundry/handles` (missing), `foundry/receipts/1789845000302.json`, `foundry/memory/{clio-peer,pike-drive,secret-test}.md`, `rooms/pike-floor/events.jsonl`, Harness `.pi/settings.json`, hephaestus artifact, host session jsonl
+
+Not opened: `engineers/flint/`. Not opened: `Harness design.md` (missing from Source-material). This resume did not re-drive Pi.
 
 ---
 
@@ -642,8 +851,10 @@ Do not start from the README noun list. Start from the 7:52 AM prompt in the vis
 
 Do not treat a passing `/foundry-roster` toast as a floor.
 
+Do not treat pike-floor ping/pong as Foundry Bot-to-Bot.
+
 Do not add more prompt bullets to `protocolBlock()` and call that a fix.
 
-If you implement one seam first, implement handle completion bound to a real turn end, with a transcript tail. Without that, communication cannot be shown to the operator.
+If you implement one seam first, implement handle completion bound to a real turn end, with a transcript tail. Live communication that can be shown today is agent-room pid chat plus child artifacts. That is not the handle protocol.
 
-This document does not pick the architecture to ship. The gap that must not be renamed: the Harness still needs a control plane. Extensions that wrap npm packages are not that plane.
+This document does not pick the architecture to ship. The gap that must not be renamed: the Harness still needs a control plane. Extensions that wrap npm packages are not that plane. Live proved the wrappers that call upstream (`/room`, `/run`, `memory_*`, `ask_user`, `/usage`) can move. Live proved the Foundry protocol (`bot_send_prompt`, await, routine wake, room host, create-bot) did not.
