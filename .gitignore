@@ -1,3 +1,4 @@
+.obsidian
 .venv/
 __pycache__/
 *.pyc
@@ -16,3 +17,6 @@ runs/reporting/
 runs/forecast/
 traces/accruals/
 traces/cash_recon/
+node_modules/
+Harness/node_modules/
+Harness/.pi/
