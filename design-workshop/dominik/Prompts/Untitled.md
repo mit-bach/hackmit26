@@ -1,0 +1,12 @@
+This is Dominik, the other engineer who is working on this CFO office automation agentic system, and I'm highly disappointed with the work that you've outputted so far. 
+
+
+First thing: looking at the system architecture at a glance, that source data is low-key fucked. I don't know what we're talking about. A lot of that comes from integrations, and we have, I think, various data coming from Stripe and email. There's a lot of different source data, and I don't see that in here. I don't know if this is the wrong diagram and there's a different diagram that's showing directly the agents that are to be made.
+
+The way that everything should work is essentially that you have connections, and all external sources are feeding through a specialized agent who is specialized on that data source. There's going to be a specialized Stripe agent who works in there, and they're going to work specifically in there. They don't send that Stripe data outwards just willy-nilly. They're essentially going to be creating that JSON data structure that we have designed and engineered. They're going to send that to various agents who need that data.
+
+If someone needs to request jobs or work to be done on Stripe, then those same data packets are going to be the way that information is transferred, because that's just apparently how we're doing this shit. I don't see that at all in your system architecture. Maybe that's just because your system architecture is not from an agent point of view, but is a more weird, high-level mixture of agents and processes or some shit, but that's the first red flag.
+
+----
+
+Now, Rohan may have, or my design partner may have, allowed you to do as you please. He gives you a task, and then you give him a solution, and all your various cursor agents are doing things, but I am not going to be anywhere near as lenient. The things that you're making are in no way, shape, or form. As a whole, what has happened with this is that we are vastly overcomplicating. I'm looking at mainly part 50, line 1522 of your design document, where you have the final Mermaid diagram that describes everything and all the agents, I guess, and the full system as a whole. I'm assuming that all of those individual nodes are agents. I don't even know if they are, but this should be pretty clear: this is not an optimal system, and there's a lot of overcomplication here. I want to identify ways that we can consolidate and make this system a lot simpler and more elegant, because that means a lot to me.
