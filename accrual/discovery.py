@@ -114,6 +114,19 @@ def discover_vendor(vendor: str, period: str, run_id: str = "") -> DiscoveryResu
     last_history = max(periods, default="")
     streak = _consecutive_months(periods, _prior_period(period)) if periods else 0
 
+    if len(current) > 1:
+        signals.append(
+            DiscoverySignal(
+                type="multiple_current_invoices",
+                detail=(
+                    f"{len(current)} distinct current-period invoices received "
+                    f"({', '.join(item.invoice_id for item in current)}). "
+                    "The expected period obligation is treated as satisfied."
+                ),
+                confidence=0.99,
+            )
+        )
+
     if cadence == "monthly" and last_history and months_between(last_history, period) <= 2 and streak >= 3:
         signals.append(
             DiscoverySignal(
@@ -237,7 +250,14 @@ def discover_vendor(vendor: str, period: str, run_id: str = "") -> DiscoveryResu
         if strong or cadence in {"monthly", "quarterly"}:
             expense_expected = True
             confidence = max(confidence, 0.9)
-            reason = f"Expected {cadence or 'period'} expense already invoiced ({', '.join(item.invoice_id for item in current)})."
+            invoice_ids = ", ".join(item.invoice_id for item in current)
+            if len(current) > 1:
+                reason = (
+                    f"Expected {cadence or 'period'} expense already invoiced via "
+                    f"{len(current)} distinct bills ({invoice_ids})."
+                )
+            else:
+                reason = f"Expected {cadence or 'period'} expense already invoiced ({invoice_ids})."
     elif missing and unbilled_receipts:
         reason = "Goods received this period and no matching invoice."
     elif missing and contract and contract.billing_cadence != "as_needed":

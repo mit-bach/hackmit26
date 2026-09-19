@@ -5,7 +5,9 @@ from __future__ import annotations
 from accrual.models import (
     AccrualPeriodReport,
     BacktestReport,
+    ComparisonReport,
     DiscoveryReport,
+    LiveEvalReport,
     ReconciliationResult,
     VendorDecisionTrace,
 )
@@ -24,21 +26,6 @@ METHOD_LABELS = {
     "purchase_order": "Purchase order",
     "conservative_minimum": "Conservative minimum",
 }
-
-FEATURED_METHODS = {
-    "Aether Compute": [
-        "last_invoice",
-        "recent_average",
-        "linear_trend",
-        "usage_run_rate",
-    ],
-    "Harbor Electric": [
-        "last_invoice",
-        "recent_average",
-        "seasonal_prior_year",
-    ],
-}
-
 
 def method_label(method: str | None) -> str:
     if not method:
@@ -100,14 +87,11 @@ def _evidence_lines(trace: VendorDecisionTrace) -> list[tuple[str, str]]:
 
 
 def _candidate_rows(trace: VendorDecisionTrace) -> list[tuple[str, str]]:
-    featured = FEATURED_METHODS.get(trace.vendor)
     rows = []
     for item in trace.candidate_estimates:
-        if featured and item.method not in featured:
+        if not item.applicable:
             continue
-        if not item.applicable and not featured:
-            continue
-        rows.append((method_label(item.method), money_text(item.amount) if item.applicable else "n/a"))
+        rows.append((method_label(item.method), money_text(item.amount)))
     if not rows:
         rows = [("No applicable estimate", "—")]
     return rows
@@ -140,6 +124,17 @@ def format_vendor_trace(trace: VendorDecisionTrace) -> str:
             f"  {trace.rationale}",
         ]
     )
+    if trace.policy_method:
+        agreement = (
+            "agree"
+            if trace.policy_agreement is True
+            else "disagree"
+            if trace.policy_agreement is False
+            else "n/a"
+        )
+        lines.append(f"  Policy method: {method_label(trace.policy_method)} ({agreement})")
+    if trace.diagnostic_warnings:
+        lines.append(f"  Diagnostic: {trace.diagnostic_warnings[0]}")
     if trace.safety_rules_triggered:
         lines.append(f"  Safety: {', '.join(trace.safety_rules_triggered)}")
     if trace.journal_entry:
@@ -259,7 +254,14 @@ def format_discovery(report: DiscoveryReport) -> str:
     if received:
         lines.append("ALREADY RECEIVED")
         for item in received:
-            lines.append(f"  {item.vendor}: {', '.join(item.current_invoice_ids)}")
+            ids = ", ".join(item.current_invoice_ids)
+            if len(item.current_invoice_ids) > 1:
+                lines.append(
+                    f"  {item.vendor}: {len(item.current_invoice_ids)} invoices ({ids}) "
+                    "— expected period obligation is satisfied"
+                )
+            else:
+                lines.append(f"  {item.vendor}: {ids}")
     return "\n".join(lines).rstrip()
 
 
@@ -323,6 +325,140 @@ def format_backtest(report: BacktestReport) -> str:
                 "",
             ]
         )
+    analysis = report.recent_average_analysis or {}
+    if analysis:
+        lines.extend(["", "RECENT AVERAGE FAILURES", ""])
+        lines.append(analysis.get("summary", ""))
+        for bucket, count in (analysis.get("counts") or {}).items():
+            lines.append(f"  {bucket}: {count}")
+        if analysis.get("safe_when"):
+            lines.append(f"Safe when: {analysis['safe_when']}")
+        if analysis.get("weak_when"):
+            lines.append(f"Weak when: {analysis['weak_when']}")
+        lines.append("")
+    if report.trace_path:
+        lines.append(f"Details: {report.trace_path}")
+    return "\n".join(lines).rstrip()
+
+
+def format_compare(report: ComparisonReport) -> str:
+    lines = [
+        f"POLICY VS AGENT  {report.period}",
+        "",
+        f"Agreements: {report.agreements}",
+        f"Disagreements: {report.disagreements}",
+        "",
+    ]
+    for item in report.comparisons:
+        agreement = (
+            "Yes" if item.agree is True else "No" if item.agree is False else "n/a"
+        )
+        lines.extend(
+            [
+                item.vendor,
+                "",
+                "Policy selection:",
+                f"  {item.policy_method or '—'}",
+                f"  {money_text(item.policy_amount)}",
+                "",
+                "Agent selection:",
+                f"  {item.agent_method or item.agent_status}",
+                f"  {money_text(item.agent_amount)}",
+                "",
+                f"Agreement:",
+                f"  {agreement}",
+                "",
+            ]
+        )
+        if item.diagnostic_warnings:
+            lines.append(f"Diagnostic: {item.diagnostic_warnings[0]}")
+            lines.append("")
+    if report.trace_path:
+        lines.append(f"Details: {report.trace_path}")
+    return "\n".join(lines).rstrip()
+
+
+def format_decision_quality(report: AccrualPeriodReport) -> str:
+    lines = ["DECISION QUALITY", ""]
+    for trace in report.traces:
+        agree = (
+            "agree"
+            if trace.policy_agreement is True
+            else "disagree"
+            if trace.policy_agreement is False
+            else "n/a"
+        )
+        evidence = "limited"
+        if trace.evidence.usage:
+            evidence = "direct usage + contract rate"
+        elif any(item.method == "goods_receipt" and item.applicable for item in trace.candidate_estimates):
+            evidence = "goods received, invoice missing"
+        elif trace.evidence.contract and (trace.evidence.contract.get("amount") is not None):
+            evidence = "fixed contractual commitment"
+        elif any(item.method == "seasonal_prior_year" and item.applicable for item in trace.candidate_estimates):
+            evidence = "seasonal history"
+        elif trace.invoice_received:
+            evidence = f"{len(trace.evidence.current_invoices)} current-period invoice(s) received"
+        if trace.final_decision == "insufficient_evidence":
+            lines.extend(
+                [
+                    f"{trace.vendor}:",
+                    "  Insufficient evidence",
+                    "  No booking",
+                    "",
+                ]
+            )
+            continue
+        if trace.final_decision == "no_accrual_needed":
+            lines.extend(
+                [
+                    f"{trace.vendor}:",
+                    f"  Invoice already received ({len(trace.evidence.current_invoices)} bill(s))",
+                    "  No accrual",
+                    "",
+                ]
+            )
+            continue
+        extra = ""
+        if (
+            trace.policy_method == "seasonal_prior_year"
+            and trace.final_method == "seasonal_prior_year"
+        ):
+            extra = "\n  Recent-average warning avoided"
+        elif any("REVIEW_FLAG" in item for item in trace.diagnostic_warnings):
+            extra = "\n  " + next(item for item in trace.diagnostic_warnings if "REVIEW_FLAG" in item)
+        hist = "n/a"
+        if trace.final_method == "usage_run_rate" or trace.final_method == "contract_commitment":
+            hist = "low"
+        elif trace.final_method == "goods_receipt":
+            hist = "deterministic GRNI rule"
+        elif trace.final_method == "seasonal_prior_year":
+            hist = "seasonal history preferred"
+        lines.extend(
+            [
+                f"{trace.vendor}:",
+                f"  Agent vs policy: {agree}",
+                f"  Evidence quality: {evidence}",
+                f"  Historical method error: {hist}{extra}",
+                "",
+            ]
+        )
+    return "\n".join(lines).rstrip()
+
+
+def format_live_eval(report: LiveEvalReport) -> str:
+    lines = [
+        "LIVE AGENT CONSISTENCY",
+        "",
+        f"Period: {report.period}",
+        f"Runs: {report.runs}",
+        "",
+    ]
+    for item in report.summaries:
+        lines.append(f"{item.vendor}:")
+        for method, count in sorted(item.method_counts.items(), key=lambda pair: (-pair[1], pair[0])):
+            lines.append(f"  {method}: {count}/{item.trials}")
+        lines.append("")
     if report.trace_path:
         lines.append(f"Details: {report.trace_path}")
     return "\n".join(lines).rstrip()

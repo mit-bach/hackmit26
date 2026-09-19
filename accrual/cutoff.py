@@ -22,6 +22,15 @@ def current_cutoff() -> DataCutoff | None:
 
 
 @contextmanager
+def without_cutoff():
+    token = _CUTOFF.set(None)
+    try:
+        yield
+    finally:
+        _CUTOFF.reset(token)
+
+
+@contextmanager
 def data_cutoff(
     period: str,
     hide_period_invoices: bool = False,

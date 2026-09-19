@@ -195,6 +195,56 @@ class BacktestReport(BaseModel):
     metrics: BacktestMetrics
     periods: list[str] = Field(default_factory=list)
     trace_path: Optional[str] = None
+    recent_average_analysis: Optional[dict] = None
+
+
+class ComparisonRecord(BaseModel):
+    vendor: str
+    period: str
+    policy_method: Optional[str] = None
+    policy_amount: Optional[float] = None
+    agent_method: Optional[str] = None
+    agent_amount: Optional[float] = None
+    agent_status: str = ""
+    agree: Optional[bool] = None
+    diagnostic_warnings: list[str] = Field(default_factory=list)
+    candidate_methods: list[str] = Field(default_factory=list)
+    agent_mape: Optional[float] = None
+    policy_mape: Optional[float] = None
+    discovery_trace_id: str = ""
+    accrual_trace_id: str = ""
+
+
+class ComparisonReport(BaseModel):
+    period: str
+    comparisons: list[ComparisonRecord] = Field(default_factory=list)
+    agreements: int = 0
+    disagreements: int = 0
+    trace_path: Optional[str] = None
+
+
+class LiveEvalTrial(BaseModel):
+    vendor: str
+    run: int
+    status: str
+    method: Optional[str] = None
+    amount: Optional[float] = None
+
+
+class LiveEvalVendorSummary(BaseModel):
+    vendor: str
+    trials: int
+    method_counts: dict[str, int] = Field(default_factory=dict)
+    status_counts: dict[str, int] = Field(default_factory=dict)
+
+
+class LiveEvalReport(BaseModel):
+    period: str
+    runs: int
+    vendors: list[str] = Field(default_factory=list)
+    trials: list[LiveEvalTrial] = Field(default_factory=list)
+    summaries: list[LiveEvalVendorSummary] = Field(default_factory=list)
+    trace_path: Optional[str] = None
 
 
 class OpenAccrual(BaseModel):
@@ -296,6 +346,10 @@ class VendorDecisionTrace(BaseModel):
     expectation_confidence: Optional[float] = None
     estimate_confidence: Optional[float] = None
     agent: Optional[AgentSkillTrace] = None
+    policy_method: Optional[str] = None
+    policy_amount: Optional[float] = None
+    policy_agreement: Optional[bool] = None
+    diagnostic_warnings: list[str] = Field(default_factory=list)
 
 
 class AccrualPeriodReport(BaseModel):

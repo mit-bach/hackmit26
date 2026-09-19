@@ -4,8 +4,10 @@
 Usage:
     python accrue.py discover 2026-09
     python accrue.py 2026-09
+    python accrue.py compare 2026-09
     python accrue.py reconcile 2026-09
     python accrue.py backtest
+    python accrue.py eval-live 2026-09 --runs 5
     python accrue.py demo
     python accrue.py open 2026-09
 """
@@ -22,7 +24,10 @@ from dotenv import load_dotenv
 from accrual.report import (
     format_backtest,
     format_close_summary,
+    format_compare,
+    format_decision_quality,
     format_discovery,
+    format_live_eval,
     format_period_report,
     format_reconciliation,
     format_vendor_trace,
@@ -83,6 +88,33 @@ def main(argv: list[str] | None = None) -> int:
             print(format_backtest(report))
             return 0
 
+        if command == "compare":
+            missing = _require_api_key()
+            if missing:
+                print(missing)
+                return 1
+            period = _period_or_default(argv[1] if len(argv) > 1 else None)
+            from accrual.compare import compare_period
+
+            print(f"Comparing policy vs live agent for {period}\n", flush=True)
+            print(format_compare(compare_period(period)))
+            return 0
+
+        if command == "eval-live":
+            missing = _require_api_key()
+            if missing:
+                print(missing)
+                return 1
+            period = _period_or_default(argv[1] if len(argv) > 1 else None)
+            runs = 5
+            if "--runs" in argv:
+                runs = int(argv[argv.index("--runs") + 1])
+            from accrual.eval_live import run_live_eval
+
+            print(f"Live consistency eval for {period} ({runs} runs)\n", flush=True)
+            print(format_live_eval(run_live_eval(period, runs=runs)))
+            return 0
+
         if command == "reconcile":
             period = _period_or_default(argv[1] if len(argv) > 1 else None)
             from accrual.workflow import run_reconcile_workflow
@@ -138,6 +170,8 @@ def main(argv: list[str] | None = None) -> int:
             print()
             print("STEP 10  Reveal the later Aether invoice and reconcile.\n")
             _print_reconcile(results)
+            print()
+            print(format_decision_quality(report))
             return 0
 
         period = _period_or_default(

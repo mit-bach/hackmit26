@@ -12,8 +12,10 @@ from accrual.policy import preferred_candidate
 @lru_cache(maxsize=1)
 def historical_method_mapes() -> dict[str, float]:
     from accrual.backtest import compute_backtest_metrics, run_backtest_case, select_backtest_invoices
+    from accrual.cutoff import without_cutoff
 
-    records = [run_backtest_case(item) for item in select_backtest_invoices()]
+    with without_cutoff():
+        records = [run_backtest_case(item) for item in select_backtest_invoices()]
     metrics = compute_backtest_metrics(records)
     return {
         item.method: item.mean_absolute_percentage_error

@@ -27,15 +27,19 @@ Use get_estimate_candidates / compute_accrual_estimate. Each candidate includes 
 
 ## Decision Criteria
 
-Typical method choice:
+Prefer stronger evidence types over weaker proxies. Do not key off vendor names.
 
-- Stable recurring amounts → last_invoice, simple_average, or contract_commitment.
-- Growing usage-based spend → usage_run_rate if usage exists, else weighted_recent_average. Do not blindly use last month when usage or a rate change says otherwise. recent_average is the last three invoices.
-- Seasonal spend → seasonal_prior_year when a same-month prior-year invoice exists and naive_recent_average_is_misleading is true.
-- Fixed retainer / subscription → contract_commitment.
-- Goods received, invoice missing → goods_receipt.
-- Invoice already received → no_accrual_needed.
-- No reliable signal that work was incurred → insufficient_evidence.
+1. Current-period usage × contracted rate → usage_run_rate.
+2. Goods received, invoice missing → goods_receipt.
+3. Fixed retainer / subscription due this period → contract_commitment.
+4. Same-month prior-year amount when naive_recent_average_is_misleading is true → seasonal_prior_year.
+5. Stable recurring history → last_invoice or simple_average.
+6. Recent average or trend only when no stronger evidence exists.
+
+Recent average is a fallback, not a default. Do not prefer it merely because it is simple.
+Direct and current-period evidence outranks stale or smoothed history.
+Invoice already received → no_accrual_needed.
+No reliable incurred signal → insufficient_evidence.
 
 Do not invent a new method name. Do not blend two candidate amounts.
 

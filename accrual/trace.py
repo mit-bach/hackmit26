@@ -114,6 +114,21 @@ def build_trace(
     discovery_trace_id: str | None = None,
     expectation_confidence: float | None = None,
 ) -> VendorDecisionTrace:
+    from accrual.diagnostics import method_diagnostics
+    from accrual.policy import preferred_candidate
+
+    policy = preferred_candidate(context)
+    warnings = method_diagnostics(
+        agent_method=final.estimation_method,
+        agent_status=final.status,
+        context=context,
+        policy=policy,
+    )
+    agree = None
+    if final.status == "accrual_required" and policy and policy.method:
+        agree = final.estimation_method == policy.method
+    elif final.status != "accrual_required" and policy is None:
+        agree = True
     return VendorDecisionTrace(
         trace_id=make_trace_id(context.period, run_id, context.vendor),
         vendor=context.vendor,
@@ -136,6 +151,10 @@ def build_trace(
         expectation_confidence=expectation_confidence,
         estimate_confidence=final.confidence,
         agent=usage_from_agent(accrual_agent),
+        policy_method=policy.method if policy else None,
+        policy_amount=policy.amount if policy else None,
+        policy_agreement=agree,
+        diagnostic_warnings=warnings,
     )
 
 

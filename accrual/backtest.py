@@ -132,12 +132,62 @@ def select_backtest_invoices(latest_period: str = LATEST_CLOSE):
     return selected
 
 
+def analyze_recent_average(records: list) -> dict:
+    """Classify recent_average backtest cases using only fixture evidence patterns."""
+    from statistics import mean, pstdev
+
+    from accrual.cutoff import data_cutoff
+    from accrual.estimation import naive_recent_average_is_misleading, recent_amounts
+    from accrual.store import build_estimate_context
+
+    seasonal = 0
+    growing = 0
+    stable = 0
+    other = 0
+    for item in records:
+        if item.selected_method != "recent_average":
+            continue
+        with data_cutoff(item.period, hide_period_invoices=True, allow_later_invoices=False):
+            context = build_estimate_context(item.vendor, item.period)
+        amounts = recent_amounts(context.historical_invoices, window=6)
+        if naive_recent_average_is_misleading(context):
+            seasonal += 1
+        elif len(amounts) >= 3 and amounts[-1] >= amounts[0] * 1.15:
+            growing += 1
+        elif len(amounts) >= 3 and mean(amounts) and pstdev(amounts) / mean(amounts) < 0.08:
+            stable += 1
+        else:
+            other += 1
+    total = seasonal + growing + stable + other
+    return {
+        "observations": total,
+        "counts": {
+            "seasonal_pattern": seasonal,
+            "growing_spend": growing,
+            "stable_recurring": stable,
+            "other": other,
+        },
+        "summary": (
+            f"{total} recent-average estimates in the backtest. "
+            f"{seasonal} sit on a seasonal pattern, {growing} on growing spend, "
+            f"{stable} on stable recurring amounts."
+        ),
+        "safe_when": "history is stable (low variance) and no stronger current-period evidence exists",
+        "weak_when": "same-month seasonality is present, or spend is growing and usage/contract evidence exists",
+    }
+
+
 def run_backtest(latest_period: str = LATEST_CLOSE) -> BacktestReport:
     invoices = select_backtest_invoices(latest_period)
     records = [run_backtest_case(item) for item in invoices]
     metrics = compute_backtest_metrics(records)
     periods = sorted({item.period for item in records})
-    report = BacktestReport(records=records, metrics=metrics, periods=periods)
+    report = BacktestReport(
+        records=records,
+        metrics=metrics,
+        periods=periods,
+        recent_average_analysis=analyze_recent_average(records),
+    )
     run_id = new_run_id()
     directory = TRACES_ROOT / "backtest" / run_id
     directory.mkdir(parents=True, exist_ok=True)

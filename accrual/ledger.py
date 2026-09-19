@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -11,6 +12,22 @@ from accrual.store import LIABILITY_ACCOUNT, expense_account_for
 LEDGER_DIR = Path(__file__).resolve().parent.parent / "runs" / "accruals"
 ACCRUALS_PATH = LEDGER_DIR / "open_accruals.json"
 JOURNALS_PATH = LEDGER_DIR / "journal_entries.json"
+
+
+@contextmanager
+def isolated_ledger(directory: Path):
+    """Point ledger files at a temp directory so compare/eval cannot mutate the close books."""
+    global LEDGER_DIR, ACCRUALS_PATH, JOURNALS_PATH
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    previous = (LEDGER_DIR, ACCRUALS_PATH, JOURNALS_PATH)
+    LEDGER_DIR = directory
+    ACCRUALS_PATH = directory / "open_accruals.json"
+    JOURNALS_PATH = directory / "journal_entries.json"
+    try:
+        yield
+    finally:
+        LEDGER_DIR, ACCRUALS_PATH, JOURNALS_PATH = previous
 
 
 def _now() -> str:

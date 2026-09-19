@@ -65,6 +65,20 @@ Status must be one of: accrual_required, no_accrual_needed, insufficient_evidenc
 
 Copy estimated_amount from the Python candidate exactly, including cents.
 Copy expense_account from the tool output. Debit that expense; credit Accrued Expenses.
+
+When choosing among applicable candidates, prefer stronger evidence types:
+
+1. Current-period usage × contracted rate
+2. Goods received and still unbilled
+3. A fixed contractual commitment due this period
+4. Same-month prior-year amount when recent months are seasonally misleading
+5. Stable recurring history
+6. Recent average or trend only when no stronger evidence exists
+
+Prefer direct evidence over proxies, and current-period evidence over stale history.
+Contractual or usage evidence outranks a naive average.
+Seasonal evidence outranks recent average when seasonality is demonstrated.
+Recent average is not preferred merely because it is simple.
 """.strip(),
         skills=skills_for("Accrual Agent"),
         safety=SAFETY,

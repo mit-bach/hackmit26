@@ -175,13 +175,17 @@ Expectation confidence (“is an expense due?”) stays separate from estimate c
 ```bash
 python accrue.py discover 2026-09
 python accrue.py 2026-09
+python accrue.py compare 2026-09
 python accrue.py reconcile 2026-09
 python accrue.py backtest
+python accrue.py eval-live 2026-09 --runs 5
 python accrue.py demo
 python -m pytest tests/
 ```
 
-`discover` infers expected expenses and missing bills from evidence. The normal close command runs discovery first, then the existing Accrual Agent. `backtest` hides historical invoices, estimates as-of that close, then scores the reveal. `demo` is DISCOVER → ESTIMATE → BOOK → MEASURE → RECONCILE.
+`discover` infers expected expenses and missing bills from evidence. The normal close command runs discovery first, then the existing Accrual Agent. `compare` records live-agent vs evidence-type policy without forcing agreement. `backtest` hides historical invoices, estimates as-of that close, then scores the reveal. `eval-live` is a local multi-run consistency check (not CI). `demo` is DISCOVER → ESTIMATE → BOOK → MEASURE → RECONCILE.
+
+AWS `INV-002` ($8,320 usage on PO-102) and `INV-016` ($2,775 unplanned overage, no PO) are two distinct September charges. Discovery treats the expected AWS obligation as satisfied when any current-period invoice exists, and reports both bills.
 
 Per-vendor traces land in `traces/accruals/2026-09/<run>/` and are not overwritten. Discovery, accrual, and reconciliation IDs stay linked. Backtest details persist under `traces/accruals/backtest/`.
 
