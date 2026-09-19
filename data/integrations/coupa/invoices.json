@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1200,
+    "invoice-number": "COUPA-1200",
+    "status": "approved",
+    "invoice-date": "2026-09-14T00:00:00-07:00",
+    "due-date": "2026-10-14T00:00:00-07:00",
+    "updated-at": "2026-09-14T18:22:00Z",
+    "currency": {"code": "USD"},
+    "gross-total": 3280.0,
+    "net-due": 3280.0,
+    "tax-amount": 0.0,
+    "po-number": "PO-201",
+    "supplier": {"id": 88, "name": "Office Depot"},
+    "receiving": [{"receipt-id": "RCV-201-1"}],
+    "invoice-lines": [
+      {
+        "description": "Office supplies against PO-201",
+        "quantity": 1,
+        "unit_price": 3280.0,
+        "amount": 3280.0
+      }
+    ]
+  }
+]

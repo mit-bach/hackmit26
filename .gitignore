@@ -1,1 +1,15 @@
 .obsidian
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+runs/*.json
+runs/accruals/
+runs/ingestion/
+traces/accruals/
+node_modules/
+Harness/node_modules/
+Harness/.pi/

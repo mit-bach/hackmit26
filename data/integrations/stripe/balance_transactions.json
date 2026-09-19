@@ -1,0 +1,105 @@
+[
+  {
+    "id": "txn_ord_1001",
+    "object": "balance_transaction",
+    "amount": 2500000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-1001",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "ch_ord_1001",
+      "object": "charge",
+      "amount": 2500000,
+      "metadata": {"order_id": "ORD-1001"}
+    }
+  },
+  {
+    "id": "txn_ord_1002",
+    "object": "balance_transaction",
+    "amount": 3100000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-1002",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "ch_ord_1002",
+      "object": "charge",
+      "amount": 3100000,
+      "metadata": {"order_id": "ORD-1002"}
+    }
+  },
+  {
+    "id": "txn_ord_1003",
+    "object": "balance_transaction",
+    "amount": 2800000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-1003",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "ch_ord_1003",
+      "object": "charge",
+      "amount": 2800000,
+      "metadata": {"order_id": "ORD-1003"}
+    }
+  },
+  {
+    "id": "txn_ord_1004",
+    "object": "balance_transaction",
+    "amount": 1800000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-1004",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "ch_ord_1004",
+      "object": "charge",
+      "amount": 1800000,
+      "metadata": {"order_id": "ORD-1004"}
+    }
+  },
+  {
+    "id": "txn_refund_1500",
+    "object": "balance_transaction",
+    "amount": -150000,
+    "currency": "usd",
+    "type": "refund",
+    "description": "Partial refund ORD-1004",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "re_1500",
+      "object": "refund",
+      "amount": 150000,
+      "reason": "requested_by_customer"
+    }
+  },
+  {
+    "id": "txn_dispute_1000",
+    "object": "balance_transaction",
+    "amount": -100000,
+    "currency": "usd",
+    "type": "adjustment",
+    "description": "Chargeback ORD-1003",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "dp_1000",
+      "object": "dispute",
+      "amount": 100000,
+      "reason": "fraudulent"
+    }
+  },
+  {
+    "id": "txn_fee_2080",
+    "object": "balance_transaction",
+    "amount": -208000,
+    "currency": "usd",
+    "type": "stripe_fee",
+    "description": "Stripe processing fees",
+    "payout": "po_1HackMIT97420",
+    "source": {
+      "id": "fee_2080",
+      "object": "fee"
+    }
+  }
+]

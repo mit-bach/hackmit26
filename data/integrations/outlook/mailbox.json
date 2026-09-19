@@ -1,0 +1,44 @@
+{
+  "messages": [
+    {
+      "id": "MSG-OUTLOOK-001",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "billing@helios-hardware.example",
+      "subject": "Helios scanned invoice HEL-INV-6200",
+      "sent_at": "2026-09-16T08:02:00Z",
+      "body": "Please process the attached Helios Hardware invoice.",
+      "thread_uri": "outlook://MSG-OUTLOOK-001",
+      "attachments": [
+        {
+          "attachment_id": "ATT-OUTLOOK-001",
+          "filename": "helios-september.pdf",
+          "path": "files/helios_hel_inv_6200.txt"
+        }
+      ]
+    },
+    {
+      "id": "MSG-OUTLOOK-QUOTE",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "sales@acmesupplies.example",
+      "subject": "Quote Q-8891",
+      "sent_at": "2026-09-09T12:00:00Z",
+      "body": "Quotation attached.",
+      "attachments": [
+        {
+          "attachment_id": "ATT-OUTLOOK-QUOTE",
+          "filename": "Q-8891-quote.pdf",
+          "path": "files/acme_quote.txt"
+        }
+      ]
+    },
+    {
+      "id": "MSG-OUTLOOK-MKT",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "hello@figma.com",
+      "subject": "Figma newsletter — limited time",
+      "sent_at": "2026-09-10T15:00:00Z",
+      "body": "Unsubscribe from this marketing newsletter at any time.",
+      "attachments": []
+    }
+  ]
+}

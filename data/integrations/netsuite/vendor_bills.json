@@ -1,0 +1,15 @@
+[
+  {
+    "id": "8821",
+    "tranId": "NS-8821",
+    "vendorInvoiceNumber": "NS-8821",
+    "tranDate": "2026-09-11",
+    "dueDate": "2026-10-11",
+    "lastModifiedDate": "2026-09-11T16:40:00Z",
+    "total": 12450.0,
+    "currency": {"refName": "USD"},
+    "status": {"refName": "Open"},
+    "entity": {"id": "1722", "refName": "Acme Supplies"},
+    "purchaseOrder": {"id": "201", "refName": "PO-001"}
+  }
+]
