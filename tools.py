@@ -18,10 +18,24 @@ from models import (
 )
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
+_DEFAULT_DATA_DIR = DATA_DIR
 
 
 class DataFileError(Exception):
     """Raised when a data file is missing or not valid JSON."""
+
+
+def configure_data_dir(directory: Path | None = None) -> Path:
+    """Point AP/AR seed loaders at an alternate data root. Tests and the
+    sample-data CLI use this; default remains ``data/``."""
+    global DATA_DIR
+    DATA_DIR = Path(directory) if directory is not None else _DEFAULT_DATA_DIR
+    _file_invoices.cache_clear()
+    _purchase_orders.cache_clear()
+    _goods_receipts.cache_clear()
+    load_policies.cache_clear()
+    load_prior_cases.cache_clear()
+    return DATA_DIR
 
 
 def _read_json(path: Path) -> list:

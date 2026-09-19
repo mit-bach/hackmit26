@@ -25,7 +25,7 @@ def to_candidate(row: dict):
     return from_structured_record(
         {
             "vendor": supplier.get("name") or row.get("supplier-name"),
-            "vendor_id": supplier.get("id") or row.get("supplier-id"),
+            "vendor_id": str(supplier.get("id") or row.get("supplier-id") or "") or None,
             "invoice_number": row.get("invoice-number") or row.get("invoice_number"),
             "invoice_date": (row.get("invoice-date") or row.get("invoice_date") or "")[:10],
             "due_date": (row.get("due-date") or "")[:10] or None,

@@ -33,9 +33,10 @@ def _headers_for(provider: str, raw: bytes) -> dict[str, str]:
 def process_provider(name: str, replay: bool = False) -> list[IntegrationResult]:
     results: list[IntegrationResult] = []
     if name == "stripe":
+        mock = stripe.MockStripeProvider()
         for payload in stripe.demo_payloads():
             raw = _raw(payload)
-            results.append(stripe.process_raw(raw, _headers_for("stripe", raw)))
+            results.append(stripe.process_raw(raw, _headers_for("stripe", raw), provider=mock))
     elif name == "adyen":
         for payload in adyen.demo_payloads():
             raw = _raw(payload)

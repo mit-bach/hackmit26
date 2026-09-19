@@ -8,7 +8,15 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-FIXTURES = ROOT / "data" / "integrations"
+_DEFAULT_FIXTURES = ROOT / "data" / "integrations"
+FIXTURES = _DEFAULT_FIXTURES
+
+
+def configure_fixtures(directory: Path | None = None) -> Path:
+    """Point Stripe/Adyen mock fixtures at an alternate directory."""
+    global FIXTURES
+    FIXTURES = Path(directory) if directory is not None else _DEFAULT_FIXTURES
+    return FIXTURES
 
 
 def live_mode() -> bool:

@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from integrations.models import ProviderPayout, WebhookEvent
+from integrations.models import ProviderPayout, ReconciliationBreakdown, WebhookEvent
 
 ROOT = Path(__file__).resolve().parent.parent
 RUNS_DIR = ROOT / "runs" / "integrations"
@@ -15,6 +15,8 @@ STATE_PATH = RUNS_DIR / "state.json"
 
 _events: dict[tuple[str, str], WebhookEvent] = {}
 _payouts: dict[str, ProviderPayout] = {}
+_reconciliations: dict[str, ReconciliationBreakdown] = {}
+_bank_deposits: dict[str, dict] = {}
 _gmail_history: dict[str, str] = {}
 _outlook_subs: dict[str, dict] = {}
 _sync_cursors: dict[str, str] = {}
@@ -29,6 +31,8 @@ def payload_hash(raw: bytes | str) -> str:
 def reset_integration_state() -> None:
     _events.clear()
     _payouts.clear()
+    _reconciliations.clear()
+    _bank_deposits.clear()
     _gmail_history.clear()
     _outlook_subs.clear()
     _sync_cursors.clear()
@@ -66,10 +70,23 @@ def remember_payout(payout: ProviderPayout) -> ProviderPayout:
     if existing is not None:
         if payout.status:
             existing.status = payout.status
+        if payout.amount:
+            existing.amount = payout.amount
+        if payout.currency:
+            existing.currency = payout.currency
+        if payout.arrival_date:
+            existing.arrival_date = payout.arrival_date
         if payout.lines:
             existing.lines = payout.lines
         existing.source_event_type = payout.source_event_type
         existing.event_id = payout.event_id
+        if payout.bank_deposit_id:
+            existing.bank_deposit_id = payout.bank_deposit_id
+        if payout.bank_deposit_amount is not None:
+            existing.bank_deposit_amount = payout.bank_deposit_amount
+        if payout.bank_deposit_currency:
+            existing.bank_deposit_currency = payout.bank_deposit_currency
+        existing.raw_source_ref = payout.raw_source_ref or existing.raw_source_ref
         _persist()
         return existing
     _payouts[payout.payout_id] = payout
@@ -83,6 +100,40 @@ def get_payout(payout_id: str) -> ProviderPayout | None:
 
 def all_payouts() -> list[ProviderPayout]:
     return list(_payouts.values())
+
+
+def remember_reconciliation(row: ReconciliationBreakdown) -> tuple[ReconciliationBreakdown, bool]:
+    is_new = row.payout_id not in _reconciliations
+    _reconciliations[row.payout_id] = row
+    _persist()
+    return row, is_new
+
+
+def get_reconciliation(payout_id: str) -> ReconciliationBreakdown | None:
+    return _reconciliations.get(payout_id)
+
+
+def all_reconciliations() -> list[ReconciliationBreakdown]:
+    return list(_reconciliations.values())
+
+
+def set_bank_deposit(payout_id: str, *, amount: float, deposit_id: str | None = None, currency: str = "USD") -> None:
+    _bank_deposits[payout_id] = {
+        "deposit_id": deposit_id or f"BANK-{payout_id}",
+        "amount": amount,
+        "currency": currency,
+        "payout_id": payout_id,
+    }
+    existing = _payouts.get(payout_id)
+    if existing is not None:
+        existing.bank_deposit_id = _bank_deposits[payout_id]["deposit_id"]
+        existing.bank_deposit_amount = amount
+        existing.bank_deposit_currency = currency
+    _persist()
+
+
+def get_bank_deposit(payout_id: str) -> dict | None:
+    return _bank_deposits.get(payout_id)
 
 
 def gmail_history_id(mailbox: str) -> str | None:
@@ -121,6 +172,8 @@ def _persist() -> None:
             {
                 "events": [item.model_dump(mode="json") for item in _events.values()],
                 "payouts": [item.model_dump(mode="json") for item in _payouts.values()],
+                "reconciliations": [item.model_dump(mode="json") for item in _reconciliations.values()],
+                "bank_deposits": _bank_deposits,
                 "gmail_history": _gmail_history,
                 "outlook_subscriptions": _outlook_subs,
                 "sync_cursors": _sync_cursors,

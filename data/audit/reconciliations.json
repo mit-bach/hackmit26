@@ -1,0 +1,89 @@
+[
+  {
+    "reconciliation_id": "REC-AUD-AGREE",
+    "period": "2026-09",
+    "recon_type": "bank_ledger",
+    "bank_transaction_ids": ["AUD-BNK-001"],
+    "ledger_entry_ids": ["AUD-LED-001"],
+    "original_match_type": "EXACT_MATCH",
+    "original_status": "MATCHED",
+    "original_bank_amount": -2500,
+    "original_ledger_amount": -2500,
+    "original_difference": 0,
+    "planted_error": false
+  },
+  {
+    "reconciliation_id": "REC-AUD-DISAGREE",
+    "period": "2026-09",
+    "recon_type": "bank_ledger",
+    "bank_transaction_ids": ["AUD-BNK-002"],
+    "ledger_entry_ids": ["AUD-LED-002"],
+    "original_match_type": "EXACT_MATCH",
+    "original_status": "MATCHED",
+    "original_bank_amount": -1234.56,
+    "original_ledger_amount": -1234.56,
+    "original_difference": 0,
+    "planted_error": true
+  },
+  {
+    "reconciliation_id": "REC-AUD-STRIPE",
+    "period": "2026-09",
+    "recon_type": "stripe_payout",
+    "bank_transaction_ids": ["AUD-BNK-STRIPE"],
+    "ledger_entry_ids": ["AUD-LED-STRIPE"],
+    "original_match_type": "EXACT_MATCH",
+    "original_status": "MATCHED",
+    "original_bank_amount": 18420.55,
+    "original_ledger_amount": 18420.55,
+    "original_difference": 0,
+    "planted_error": false
+  },
+  {
+    "reconciliation_id": "REC-AUD-ACCRUAL-AGREE",
+    "period": "2026-09",
+    "recon_type": "accrual",
+    "original_match_type": "ACCRUAL",
+    "original_status": "RECONCILED",
+    "estimated_amount": 11849.9,
+    "actual_amount": 12100,
+    "original_error": 250.1,
+    "invoice_ids": ["INV-AETHER-OCT"],
+    "vendor": "Aether Compute",
+    "planted_error": false
+  },
+  {
+    "reconciliation_id": "REC-AUD-ACCRUAL-DISAGREE",
+    "period": "2026-09",
+    "recon_type": "accrual",
+    "original_match_type": "ACCRUAL",
+    "original_status": "RECONCILED",
+    "estimated_amount": 5000,
+    "actual_amount": 5200,
+    "original_error": 0,
+    "invoice_ids": ["INV-AUD-ACCRUAL-BAD"],
+    "vendor": "Shadow Vendor LLC",
+    "planted_error": true
+  },
+  {
+    "reconciliation_id": "REC-AUD-AR-AGREE",
+    "period": "2026-09",
+    "recon_type": "ar_cash",
+    "original_match_type": "explicit_invoice",
+    "original_status": "AUTO_APPLY",
+    "original_decision": "AUTO_APPLY",
+    "payment_id": "PAY-AR-AUD-001",
+    "invoice_ids": ["INV-AR-AUD-001"],
+    "planted_error": false
+  },
+  {
+    "reconciliation_id": "REC-AUD-AR-DISAGREE",
+    "period": "2026-09",
+    "recon_type": "ar_cash",
+    "original_match_type": "explicit_invoice",
+    "original_status": "AUTO_APPLY",
+    "original_decision": "AUTO_APPLY",
+    "payment_id": "PAY-AR-AUD-002",
+    "invoice_ids": ["INV-AR-AUD-001"],
+    "planted_error": true
+  }
+]

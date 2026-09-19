@@ -30,7 +30,7 @@ def to_candidate(row: dict):
     return from_structured_record(
         {
             "vendor": entity.get("refName") or row.get("vendor"),
-            "vendor_id": entity.get("id"),
+            "vendor_id": str(entity.get("id") or "") or None,
             "invoice_number": row.get("tranId") or row.get("vendorInvoiceNumber"),
             "invoice_date": (row.get("tranDate") or "")[:10],
             "due_date": (row.get("dueDate") or "")[:10] or None,

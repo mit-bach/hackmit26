@@ -1,0 +1,88 @@
+{
+  "period": "2026-09",
+  "matched_bank_ids": [
+    "TXN-2026-09-004",
+    "TXN-2026-09-008",
+    "TXN-2026-09-011",
+    "TXN-2026-09-012A",
+    "TXN-2026-09-018",
+    "TXN-2026-09-019A",
+    "TXN-2026-09-019B",
+    "TXN-2026-09-022"
+  ],
+  "exception_bank_ids": [
+    "TXN-2026-09-012B",
+    "TXN-2026-09-015",
+    "TXN-2026-09-025"
+  ],
+  "labels": {
+    "TXN-2026-09-004": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-AP-1042"]
+    },
+    "TXN-2026-09-008": {
+      "match_type": "GROUPED_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-AP-201", "GL-AP-202", "GL-AP-203"]
+    },
+    "TXN-2026-09-011": {
+      "match_type": "FEE_NETTED",
+      "disposition": "EXPLAINED_EXCEPTION",
+      "ledger_ids": ["GL-AP-WIRE"]
+    },
+    "TXN-2026-09-012A": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-AR-772"]
+    },
+    "TXN-2026-09-012B": {
+      "match_type": "POSSIBLE_DUPLICATE_REFUND",
+      "disposition": "HUMAN_REVIEW",
+      "ledger_ids": []
+    },
+    "TXN-2026-09-015": {
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "disposition": "HUMAN_REVIEW",
+      "ledger_ids": ["GL-AR-NS"],
+      "difference": 12.4
+    },
+    "TXN-2026-09-018": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-AP-OD-1"]
+    },
+    "TXN-2026-09-019A": {
+      "match_type": "PROVIDER_PAYOUT",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-CASH-STRIPE"],
+      "provider": "stripe"
+    },
+    "TXN-2026-09-019B": {
+      "match_type": "PROVIDER_PAYOUT",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-CASH-ADYEN"],
+      "provider": "adyen"
+    },
+    "TXN-2026-09-022": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": ["GL-AR-ATLAS"]
+    },
+    "TXN-2026-09-025": {
+      "match_type": "UNMATCHED_BANK",
+      "disposition": "HUMAN_REVIEW",
+      "ledger_ids": []
+    },
+    "GL-AP-HE": {
+      "match_type": "TIMING_DIFFERENCE",
+      "disposition": "OUTSTANDING_TIMING_ITEM",
+      "bank_ids": ["TXN-2026-10-001"]
+    },
+    "GL-AP-OD-2": {
+      "match_type": "POSSIBLE_DUPLICATE_LEDGER_ENTRY",
+      "disposition": "HUMAN_REVIEW",
+      "bank_ids": []
+    }
+  }
+}

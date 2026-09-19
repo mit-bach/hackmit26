@@ -40,7 +40,10 @@ class WebhookEvent(BaseModel):
 
 
 class PayoutLine(BaseModel):
-    """One funds movement inside a processor payout. Amounts are major units."""
+    """One funds movement inside a processor payout.
+
+    `amount` is major units for display. Prefer `amount_minor` (integer cents) for math.
+    """
 
     line_type: str
     amount: float
@@ -48,6 +51,12 @@ class PayoutLine(BaseModel):
     reference: Optional[str] = None
     description: str = ""
     provider_object_id: Optional[str] = None
+    amount_minor: Optional[int] = None
+    fee_minor: Optional[int] = None
+    net_minor: Optional[int] = None
+    source_object_id: Optional[str] = None
+    created: Optional[str] = None
+    category: Optional[str] = None
 
 
 class ProviderPayout(BaseModel):
@@ -65,6 +74,7 @@ class ProviderPayout(BaseModel):
     lines: list[PayoutLine] = Field(default_factory=list)
     bank_deposit_id: Optional[str] = None
     bank_deposit_amount: Optional[float] = None
+    bank_deposit_currency: Optional[str] = None
 
 
 class ReconciliationBreakdown(BaseModel):
@@ -75,13 +85,19 @@ class ReconciliationBreakdown(BaseModel):
     refunds: float = 0.0
     chargebacks: float = 0.0
     fees: float = 0.0
+    adjustments: float = 0.0
     other: float = 0.0
     expected_payout: float = 0.0
     actual_payout: float = 0.0
     difference: float = 0.0
     bank_deposit_amount: Optional[float] = None
+    bank_deposit_id: Optional[str] = None
     bank_matched: bool = False
     matched: bool = False
+    status: str = "MATCH"
+    exceptions: list[str] = Field(default_factory=list)
+    expected_payout_minor: int = 0
+    actual_payout_minor: int = 0
     lines: list[PayoutLine] = Field(default_factory=list)
 
 

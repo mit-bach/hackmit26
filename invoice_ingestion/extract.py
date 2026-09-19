@@ -4,7 +4,15 @@ import hashlib
 import json
 from pathlib import Path
 
-INGESTION_DIR = Path(__file__).resolve().parent.parent / "data" / "ingestion"
+_DEFAULT_INGESTION_DIR = Path(__file__).resolve().parent.parent / "data" / "ingestion"
+INGESTION_DIR = _DEFAULT_INGESTION_DIR
+
+
+def configure_ingestion_dir(directory: Path | None = None) -> Path:
+    """Point invoice-ingestion source files at an alternate directory."""
+    global INGESTION_DIR
+    INGESTION_DIR = Path(directory) if directory is not None else _DEFAULT_INGESTION_DIR
+    return INGESTION_DIR
 
 
 class DocumentExtractionError(Exception):

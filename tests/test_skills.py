@@ -12,12 +12,38 @@ from agent import (
     preparer_agent,
     reviewer_agent,
 )
+from ar.agents import cash_application_agent, cash_reviewer_agent, collections_agent
 from accrual.agent import accrual_agent
 from accrual.models import AccrualDecision
 from accrual.workflow import finalize_vendor_close
 from invoice_ingestion.agents import AGENTS
 from invoice_ingestion.models import SOURCE_AGENTS
 from invoice_ingestion.sources import run_email_source, run_erp_source
+from cash_recon.agent import (
+    investigator_agent as cash_recon_investigator,
+    preparer_agent as cash_recon_preparer,
+    reviewer_agent as cash_recon_reviewer,
+)
+from prepaid.agent import prepaid_preparer, prepaid_reviewer
+from fixed_assets.agent import fixed_asset_preparer, fixed_asset_reviewer
+from bs_recon.agent import bs_preparer, bs_reviewer
+from close.agents import close_manager, month_end_reviewer
+from audit.agent import audit_report_agent, auditor_agent
+from reporting.agents import (
+    board_reporting_agent,
+    cash_forecast_agent,
+    forecast_reviewer_agent,
+    forecast_variance_agent,
+    reporting_reviewer_agent,
+    variance_analysis_agent,
+)
+from sample_data.agents.sdk import (
+    apar_sample_data_agent,
+    audit_controls_sample_data_agent,
+    cash_recon_sample_data_agent,
+    close_sample_data_agent,
+    reporting_forecasting_sample_data_agent,
+)
 from scheduling.agent import payment_audit_agent, scheduler_agent
 from skills.assignments import AGENT_SKILLS, resolve_agent_name, skills_for
 from skills.inspect import format_agent_skills, format_skills_index
@@ -44,6 +70,33 @@ AGENTS_BY_NAME = {
     accrual_agent.name: accrual_agent,
     scheduler_agent.name: scheduler_agent,
     payment_audit_agent.name: payment_audit_agent,
+    collections_agent.name: collections_agent,
+    cash_application_agent.name: cash_application_agent,
+    cash_reviewer_agent.name: cash_reviewer_agent,
+    cash_recon_preparer.name: cash_recon_preparer,
+    cash_recon_investigator.name: cash_recon_investigator,
+    cash_recon_reviewer.name: cash_recon_reviewer,
+    prepaid_preparer.name: prepaid_preparer,
+    prepaid_reviewer.name: prepaid_reviewer,
+    fixed_asset_preparer.name: fixed_asset_preparer,
+    fixed_asset_reviewer.name: fixed_asset_reviewer,
+    bs_preparer.name: bs_preparer,
+    bs_reviewer.name: bs_reviewer,
+    month_end_reviewer.name: month_end_reviewer,
+    close_manager.name: close_manager,
+    apar_sample_data_agent.name: apar_sample_data_agent,
+    cash_recon_sample_data_agent.name: cash_recon_sample_data_agent,
+    close_sample_data_agent.name: close_sample_data_agent,
+    audit_controls_sample_data_agent.name: audit_controls_sample_data_agent,
+    reporting_forecasting_sample_data_agent.name: reporting_forecasting_sample_data_agent,
+    auditor_agent.name: auditor_agent,
+    audit_report_agent.name: audit_report_agent,
+    variance_analysis_agent.name: variance_analysis_agent,
+    reporting_reviewer_agent.name: reporting_reviewer_agent,
+    board_reporting_agent.name: board_reporting_agent,
+    cash_forecast_agent.name: cash_forecast_agent,
+    forecast_reviewer_agent.name: forecast_reviewer_agent,
+    forecast_variance_agent.name: forecast_variance_agent,
 }
 AGENTS_BY_NAME.update({agent.name: agent for agent in AGENTS.values()})
 
@@ -61,6 +114,12 @@ EXPECTED_ASSIGNMENTS = {
     "Payment Scheduler": (
         "payment-prioritization",
         "early-payment-discount-evaluation",
+    ),
+    "Collections Agent": ("ar-collections-policy",),
+    "Cash Application Agent": ("cash-application",),
+    "Cash Reconciliation Preparer": (
+        "cash-reconciliation-method-selection",
+        "bank-reference-interpretation",
     ),
 }
 

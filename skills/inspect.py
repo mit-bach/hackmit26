@@ -17,6 +17,32 @@ def live_agent_instructions(agent_name: str) -> str:
     from accrual.agent import accrual_agent
     from invoice_ingestion.agents import AGENTS
     from scheduling.agent import payment_audit_agent, scheduler_agent
+    from ar.agents import cash_application_agent, cash_reviewer_agent, collections_agent
+    from cash_recon.agent import (
+        investigator_agent as cash_recon_investigator,
+        preparer_agent as cash_recon_preparer,
+        reviewer_agent as cash_recon_reviewer,
+    )
+    from reporting.agents import (
+        board_reporting_agent,
+        cash_forecast_agent,
+        forecast_reviewer_agent,
+        forecast_variance_agent,
+        reporting_reviewer_agent,
+        variance_analysis_agent,
+    )
+    from prepaid.agent import prepaid_preparer, prepaid_reviewer
+    from fixed_assets.agent import fixed_asset_preparer, fixed_asset_reviewer
+    from bs_recon.agent import bs_preparer, bs_reviewer
+    from close.agents import close_manager, month_end_reviewer
+    from sample_data.agents.sdk import (
+        apar_sample_data_agent,
+        audit_controls_sample_data_agent,
+        cash_recon_sample_data_agent,
+        close_sample_data_agent,
+        reporting_forecasting_sample_data_agent,
+    )
+    from audit.agent import audit_report_agent, auditor_agent
 
     mapping = {
         preparer_agent.name: preparer_agent,
@@ -27,6 +53,33 @@ def live_agent_instructions(agent_name: str) -> str:
         accrual_agent.name: accrual_agent,
         scheduler_agent.name: scheduler_agent,
         payment_audit_agent.name: payment_audit_agent,
+        collections_agent.name: collections_agent,
+        cash_application_agent.name: cash_application_agent,
+        cash_reviewer_agent.name: cash_reviewer_agent,
+        cash_recon_preparer.name: cash_recon_preparer,
+        cash_recon_investigator.name: cash_recon_investigator,
+        cash_recon_reviewer.name: cash_recon_reviewer,
+        prepaid_preparer.name: prepaid_preparer,
+        prepaid_reviewer.name: prepaid_reviewer,
+        fixed_asset_preparer.name: fixed_asset_preparer,
+        fixed_asset_reviewer.name: fixed_asset_reviewer,
+        bs_preparer.name: bs_preparer,
+        bs_reviewer.name: bs_reviewer,
+        month_end_reviewer.name: month_end_reviewer,
+        close_manager.name: close_manager,
+        apar_sample_data_agent.name: apar_sample_data_agent,
+        cash_recon_sample_data_agent.name: cash_recon_sample_data_agent,
+        close_sample_data_agent.name: close_sample_data_agent,
+        audit_controls_sample_data_agent.name: audit_controls_sample_data_agent,
+        reporting_forecasting_sample_data_agent.name: reporting_forecasting_sample_data_agent,
+        auditor_agent.name: auditor_agent,
+        audit_report_agent.name: audit_report_agent,
+        variance_analysis_agent.name: variance_analysis_agent,
+        reporting_reviewer_agent.name: reporting_reviewer_agent,
+        board_reporting_agent.name: board_reporting_agent,
+        cash_forecast_agent.name: cash_forecast_agent,
+        forecast_reviewer_agent.name: forecast_reviewer_agent,
+        forecast_variance_agent.name: forecast_variance_agent,
     }
     mapping.update({agent.name: agent for agent in AGENTS.values()})
     agent = mapping.get(agent_name)
