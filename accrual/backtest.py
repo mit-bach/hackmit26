@@ -149,12 +149,13 @@ def analyze_recent_average(records: list) -> dict:
             continue
         with data_cutoff(item.period, hide_period_invoices=True, allow_later_invoices=False):
             context = build_estimate_context(item.vendor, item.period)
-        amounts = recent_amounts(context.historical_invoices, window=6)
-        if naive_recent_average_is_misleading(context):
+        amounts = recent_amounts(context.historical_invoices, window=12)
+        cv = (pstdev(amounts) / mean(amounts)) if len(amounts) >= 3 and mean(amounts) else None
+        if naive_recent_average_is_misleading(context) or (cv is not None and cv >= 0.20):
             seasonal += 1
         elif len(amounts) >= 3 and amounts[-1] >= amounts[0] * 1.15:
             growing += 1
-        elif len(amounts) >= 3 and mean(amounts) and pstdev(amounts) / mean(amounts) < 0.08:
+        elif cv is not None and cv < 0.08:
             stable += 1
         else:
             other += 1
@@ -162,18 +163,24 @@ def analyze_recent_average(records: list) -> dict:
     return {
         "observations": total,
         "counts": {
-            "seasonal_pattern": seasonal,
+            "high_variance_or_seasonal": seasonal,
             "growing_spend": growing,
             "stable_recurring": stable,
             "other": other,
         },
         "summary": (
             f"{total} recent-average estimates in the backtest. "
-            f"{seasonal} sit on a seasonal pattern, {growing} on growing spend, "
+            f"{seasonal} sit on high-variance/seasonal series, {growing} on growing spend, "
             f"{stable} on stable recurring amounts."
         ),
-        "safe_when": "history is stable (low variance) and no stronger current-period evidence exists",
-        "weak_when": "same-month seasonality is present, or spend is growing and usage/contract evidence exists",
+        "safe_when": (
+            "month-to-month history is stable (low coefficient of variation) "
+            "and no usage, contract, or goods-receipt evidence exists"
+        ),
+        "weak_when": (
+            "the series is high-variance or seasonal (even if a same-month prior-year "
+            "invoice is not yet available), or spend is growing"
+        ),
     }
 
 

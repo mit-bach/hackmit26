@@ -16,9 +16,12 @@ def _patch_ledger(tmp_path, monkeypatch):
 
 
 def test_policy_source_has_no_demo_vendor_names():
-    source = inspect.getsource(preferred_candidate) + inspect.getsource(METHOD_PREFERENCE)
+    from pathlib import Path
+
+    source = Path(inspect.getfile(preferred_candidate)).read_text()
     for name in ("Aether", "Harbor", "Helios", "NewForge", "Lindholm", "Pulse"):
         assert name not in source
+    assert "usage_run_rate" in METHOD_PREFERENCE
 
 
 def test_renamed_metered_vendor_still_prefers_usage():
@@ -137,5 +140,5 @@ def test_ap_workflow_is_unchanged():
     assert invoice.vendor == "Amazon Web Services"
     assert invoice.po_id is None
     evidence = collect_case_evidence("INV-016")
-    assert "missing_po" in evidence.exception_types or evidence.exception_types
+    assert evidence.exception_types == ["missing_po"]
     assert load_invoice("INV-002").po_id == "PO-102"

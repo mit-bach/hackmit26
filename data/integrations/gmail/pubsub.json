@@ -1,0 +1,34 @@
+[
+  {
+    "message": {
+      "data": "eyJlbWFpbEFkZHJlc3MiOiJhcEBoYWNrbWl0LWNmby5leGFtcGxlIiwiaGlzdG9yeUlkIjoiMjAwMCJ9",
+      "messageId": "gmail-pubsub-001",
+      "publishTime": "2026-09-12T09:14:05Z"
+    },
+    "subscription": "projects/hackmit-cfo/subscriptions/gmail-ap"
+  },
+  {
+    "message": {
+      "data": "eyJlbWFpbEFkZHJlc3MiOiJhcEBoYWNrbWl0LWNmby5leGFtcGxlIiwiaGlzdG9yeUlkIjoiMzAwMCJ9",
+      "messageId": "gmail-pubsub-quote",
+      "publishTime": "2026-09-09T11:40:05Z"
+    },
+    "subscription": "projects/hackmit-cfo/subscriptions/gmail-ap"
+  },
+  {
+    "message": {
+      "data": "eyJlbWFpbEFkZHJlc3MiOiJhcEBoYWNrbWl0LWNmby5leGFtcGxlIiwiaGlzdG9yeUlkIjoiNDAwMCJ9",
+      "messageId": "gmail-pubsub-mkt",
+      "publishTime": "2026-09-08T16:02:05Z"
+    },
+    "subscription": "projects/hackmit-cfo/subscriptions/gmail-ap"
+  },
+  {
+    "message": {
+      "data": "eyJlbWFpbEFkZHJlc3MiOiJhcEBoYWNrbWl0LWNmby5leGFtcGxlIiwiaGlzdG9yeUlkIjoiNTAwMCJ9",
+      "messageId": "gmail-pubsub-seen",
+      "publishTime": "2026-09-12T10:00:05Z"
+    },
+    "subscription": "projects/hackmit-cfo/subscriptions/gmail-ap"
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "InvoiceID": "11111111-1111-4111-8111-111111111111",
+    "Type": "ACCPAY",
+    "InvoiceNumber": "XERO-BILL-441",
+    "Date": "2026-09-18",
+    "DueDate": "2026-10-18",
+    "CurrencyCode": "USD",
+    "SubTotal": 4410.0,
+    "TotalTax": 0.0,
+    "Total": 4410.0,
+    "Reference": "PO-441",
+    "Status": "AUTHORISED",
+    "Contact": {
+      "ContactID": "aaaa-helios",
+      "Name": "Helios Hardware"
+    }
+  },
+  {
+    "InvoiceID": "33333333-3333-4333-8333-333333333333",
+    "Type": "ACCREC",
+    "InvoiceNumber": "XERO-SALE-990",
+    "Date": "2026-09-18",
+    "DueDate": "2026-10-02",
+    "CurrencyCode": "USD",
+    "Total": 990.0,
+    "Status": "AUTHORISED",
+    "Contact": {
+      "ContactID": "bbbb-customer",
+      "Name": "Northwind Traders"
+    }
+  }
+]

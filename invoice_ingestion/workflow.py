@@ -181,8 +181,54 @@ def ingest_invoices(
         report.traces.extend(run.traces)
         report.candidates.extend(run.candidates)
 
+    return _finalize_candidates(
+        report,
+        report.candidates,
+        seen_source_ids=seen_source_ids,
+        forward_to_ap=forward_to_ap,
+        run_ap=run_ap,
+    )
+
+
+def ingest_candidates(
+    candidates: list,
+    period: str = "2026-09",
+    *,
+    forward_to_ap: bool = False,
+    run_ap: bool = False,
+    reset_overlay: bool = False,
+    save_trace: bool = True,
+) -> IngestionReport:
+    """Validate, dedupe, and optionally hand off pre-built candidates.
+
+    Used by named provider adapters (Gmail, Outlook, Xero, Coupa, NetSuite)
+    without re-running the eight mock source collectors.
+    """
+    report = IngestionReport(period=period, started_at=_now())
+    if reset_overlay:
+        reset_ingested_invoices()
+    report.candidates = list(candidates)
+    return _finalize_candidates(
+        report,
+        report.candidates,
+        seen_source_ids=set(),
+        forward_to_ap=forward_to_ap,
+        run_ap=run_ap,
+        save_trace=save_trace,
+    )
+
+
+def _finalize_candidates(
+    report: IngestionReport,
+    candidates: list,
+    *,
+    seen_source_ids: set[tuple[str, str]],
+    forward_to_ap: bool,
+    run_ap: bool,
+    save_trace: bool = True,
+) -> IngestionReport:
     valid_candidates = []
-    for candidate in report.candidates:
+    for candidate in candidates:
         result = validate_candidate(candidate, seen_source_ids)
         seen_source_ids.add((candidate.source_type, candidate.source_id))
         for trace in report.traces:
@@ -247,5 +293,6 @@ def ingest_invoices(
 
     report.new_ap_handoffs = sum(1 for item in report.canonical_invoices if item.forwarded_to_ap)
     _annotate_traces(report, prior_sources_by_id)
-    _save_trace(report)
+    if save_trace:
+        _save_trace(report)
     return report

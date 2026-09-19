@@ -1,0 +1,8 @@
+{
+  "deposit_id": "BANK-ADYEN-84210",
+  "transfer_id": "3JZKT2B4N7Q1P8R5S6T0",
+  "amount": 84210.0,
+  "currency": "USD",
+  "description": "ADYEN SETTLEMENT",
+  "posted_on": "2026-09-19"
+}
