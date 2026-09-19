@@ -20,7 +20,7 @@ from ar.models import (
     CustomerPayment,
     HumanCorrection,
 )
-from tools import DATA_DIR, DataFileError
+from tools import DataFileError
 
 STATE_DIR = Path(__file__).resolve().parent.parent / "runs" / "ar"
 STATE_PATH = STATE_DIR / "state.json"
@@ -47,20 +47,26 @@ def _read_json(path: Path) -> list:
     return raw
 
 
+def _data_dir() -> Path:
+    from tools import DATA_DIR
+
+    return DATA_DIR
+
+
 def seed_customers() -> list[Customer]:
-    return [Customer.model_validate(item) for item in _read_json(DATA_DIR / "ar_customers.json")]
+    return [Customer.model_validate(item) for item in _read_json(_data_dir() / "ar_customers.json")]
 
 
 def seed_invoices() -> list[CustomerInvoice]:
-    return [CustomerInvoice.model_validate(item) for item in _read_json(DATA_DIR / "ar_invoices.json")]
+    return [CustomerInvoice.model_validate(item) for item in _read_json(_data_dir() / "ar_invoices.json")]
 
 
 def seed_payments() -> list[CustomerPayment]:
-    return [CustomerPayment.model_validate(item) for item in _read_json(DATA_DIR / "ar_payments.json")]
+    return [CustomerPayment.model_validate(item) for item in _read_json(_data_dir() / "ar_payments.json")]
 
 
 def seed_precedents() -> list[ARPrecedent]:
-    return [ARPrecedent.model_validate(item) for item in _read_json(DATA_DIR / "ar_precedents.json")]
+    return [ARPrecedent.model_validate(item) for item in _read_json(_data_dir() / "ar_precedents.json")]
 
 
 def _seed_state() -> ARState:

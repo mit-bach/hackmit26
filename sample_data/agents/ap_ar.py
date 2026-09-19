@@ -205,6 +205,7 @@ class APARSampleDataAgent(SampleDataAgent):
         _vendor(ctx, "VEND-018", "Shadow Vendor LLC", "2025-06-01")
         _vendor(ctx, "VEND-019", "Freightline Logistics", "2023-08-01")
         _vendor(ctx, "VEND-020", "Lenovo", "2024-01-01")
+        _vendor(ctx, "VEND-021", "Misc Supplies", "2023-01-01")
 
         customers = [
             _customer(
@@ -446,16 +447,40 @@ class APARSampleDataAgent(SampleDataAgent):
             )
             _je(ctx, f"JE-{txn}", period="2026-08", date=day, debit="1100-AR", credit="4000-Revenue", amount_minor=amount_minor, memo=memo, source_document_id=invoice_id, transaction_id=txn, customer=name, product=product, category="revenue", entry_type="ar_invoice")
 
-        cogs_aug = [
-            ("INV-HOST-AUG-001", "Amazon Web Services", "TXN-HOST-AUG-001", 5_000_000, "5100-Hosting", "hosting", 5000.0, 10.0, "AWS August compute"),
-            ("INV-HOST-AUG-002", "Google Cloud", "TXN-HOST-AUG-002", 3_000_000, "5100-Hosting", "hosting", 3000.0, 10.0, "GCP August compute"),
-            ("INV-SUP-AUG-001", "Acme Supplies", "TXN-SUP-AUG-001", 18_000_000, "5200-Supplier", "supplier", 1800.0, 100.0, "Acme components"),
-            ("INV-SUP-AUG-002", "Helios Hardware", "TXN-SUP-AUG-002", 7_000_000, "5200-Supplier", "supplier", 70.0, 1000.0, "Helios hardware"),
-            ("INV-FRT-AUG-001", "Freightline Logistics", "TXN-FRT-AUG-001", 3_000_000, "5300-Freight", "freight", 300.0, 100.0, "August freight"),
-        ]
-        for invoice_id, vendor, txn, amount_minor, account, category, qty, rate, memo in cogs_aug:
-            _ap(ctx, invoice_id=invoice_id, vendor=vendor, po_id=None, amount=dollars(amount_minor), invoice_date="2026-08-28", due_date="2026-09-15", vendor_invoice_number=f"{invoice_id}-VIN", description=memo)
-            _je(ctx, f"JE-{txn}", period="2026-08", date="2026-08-31", debit=account, credit="2000-AP", amount_minor=amount_minor, memo=memo, source_document_id=invoice_id, transaction_id=txn, vendor=vendor, category=category, quantity=qty, rate=rate, product="Components" if category == "supplier" else "", entry_type="ap_invoice")
+        from sample_data.pnl import COGS_FACTS
+
+        for fact in COGS_FACTS:
+            invoice_date = "2026-08-28" if fact.period == "2026-08" else "2026-09-28"
+            due_date = "2026-09-15" if fact.period == "2026-08" else "2026-10-15"
+            _ap(
+                ctx,
+                invoice_id=fact.invoice_id,
+                vendor=fact.vendor,
+                po_id=None,
+                amount=dollars(fact.amount_minor),
+                invoice_date=invoice_date,
+                due_date=due_date,
+                vendor_invoice_number=f"{fact.invoice_id}-VIN",
+                description=fact.memo,
+            )
+            _je(
+                ctx,
+                f"JE-{fact.transaction_id}",
+                period=fact.period,
+                date=fact.date,
+                debit=fact.account,
+                credit="2000-AP",
+                amount_minor=fact.amount_minor,
+                memo=fact.memo,
+                source_document_id=fact.invoice_id,
+                transaction_id=fact.transaction_id,
+                vendor=fact.vendor,
+                category=fact.category,
+                quantity=fact.quantity,
+                rate=fact.rate,
+                product="Components" if fact.category == "supplier" else "",
+                entry_type="ap_invoice",
+            )
 
         # September revenue $1,000,000. Platform discounted $20k vs August; mix shifts to usage.
         revenue_sep = [
@@ -478,17 +503,6 @@ class APARSampleDataAgent(SampleDataAgent):
                 description=memo,
             )
             _je(ctx, f"JE-{txn}", period="2026-09", date=day, debit="1100-AR", credit="4000-Revenue", amount_minor=amount_minor, memo=memo, source_document_id=invoice_id, transaction_id=txn, customer=name, product=product, category="revenue", entry_type="ar_invoice")
-
-        cogs_sep = [
-            ("INV-HOST-SEP-001", "Amazon Web Services", "TXN-HOST-SEP-001", 5_500_000, "5100-Hosting", "hosting", 5000.0, 11.0, "AWS September compute (rate 11)"),
-            ("INV-HOST-SEP-002", "Google Cloud", "TXN-HOST-SEP-002", 3_200_000, "5100-Hosting", "hosting", 3200.0, 10.0, "GCP September compute"),
-            ("INV-SUP-SEP-001", "Acme Supplies", "TXN-SUP-SEP-001", 19_800_000, "5200-Supplier", "supplier", 1800.0, 110.0, "Acme components (rate 110)"),
-            ("INV-SUP-SEP-002", "Helios Hardware", "TXN-SUP-SEP-002", 7_000_000, "5200-Supplier", "supplier", 70.0, 1000.0, "Helios hardware"),
-            ("INV-FRT-SEP-001", "Freightline Logistics", "TXN-FRT-SEP-001", 3_500_000, "5300-Freight", "freight", 350.0, 100.0, "September freight increase"),
-        ]
-        for invoice_id, vendor, txn, amount_minor, account, category, qty, rate, memo in cogs_sep:
-            _ap(ctx, invoice_id=invoice_id, vendor=vendor, po_id=None, amount=dollars(amount_minor), invoice_date="2026-09-28", due_date="2026-10-15", vendor_invoice_number=f"{invoice_id}-VIN", description=memo)
-            _je(ctx, f"JE-{txn}", period="2026-09", date="2026-09-30", debit=account, credit="2000-AP", amount_minor=amount_minor, memo=memo, source_document_id=invoice_id, transaction_id=txn, vendor=vendor, category=category, quantity=qty, rate=rate, product="Components" if category == "supplier" else "", entry_type="ap_invoice")
 
         # Operating expenses (do not change GM).
         _je(ctx, "JE-OPEX-AUG-PAY", period="2026-08", date="2026-08-28", debit="6100-Payroll", credit="1000-Cash", amount_minor=14_000_000, memo="August payroll", source_document_id="PR-2026-08-28", transaction_id="TXN-PAY-AUG", category="payroll", entry_type="payroll")

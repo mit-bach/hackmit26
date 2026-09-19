@@ -83,6 +83,7 @@ class ReportingForecastingSampleDataAgent(SampleDataAgent):
             ChartAccount(account_id="5100-Hosting", name="Cloud Hosting", account_class="cogs", aliases=["Hosting"]),
             ChartAccount(account_id="5200-Supplier", name="Supplier COGS", account_class="cogs"),
             ChartAccount(account_id="5300-Freight", name="Freight", account_class="cogs"),
+            ChartAccount(account_id="5400-Other-COGS", name="Other COGS", account_class="cogs"),
             ChartAccount(account_id="6000-Operating", name="Operating Expenses", account_class="opex"),
             ChartAccount(account_id="6100-Payroll", name="Payroll", account_class="opex", aliases=["Payroll"]),
             ChartAccount(account_id="1000-Cash", name="Cash", account_class="cash", aliases=["Cash"]),

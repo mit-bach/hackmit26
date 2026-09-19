@@ -21,6 +21,9 @@ def configure_root(directory: Path | None = None) -> Path:
 
 def _read(name: str):
     path = ROOT / name
+    from evaluation.isolation import assert_operational_read_allowed
+
+    assert_operational_read_allowed(path)
     return json.loads(path.read_text())
 
 
@@ -61,6 +64,10 @@ def load_demo_dataset() -> tuple[PeriodBalances, list[BankTransaction], list[Led
 
 
 def load_ground_truth() -> dict:
+    from evaluation.isolation import operational_phase
+
+    if operational_phase():
+        return {}
     return _read("ground_truth.json")
 
 

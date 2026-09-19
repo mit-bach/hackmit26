@@ -19,16 +19,39 @@ def _line(**kwargs) -> ReportingLine:
     return ReportingLine.model_validate(kwargs)
 
 
+def _generated_seed_matches_demo(rows: list[ReportingLine]) -> bool:
+    """Reject a generated ledger that mixed operational AP into COGS or bloated opex."""
+    from cash_recon.mathutil import cents
+
+    cogs = {"2026-08": 0, "2026-09": 0}
+    rev = {"2026-08": 0, "2026-09": 0}
+    opex = {"2026-08": 0, "2026-09": 0}
+    for row in rows:
+        amount = cents(row.amount)
+        if row.account_class == "cogs" and row.side == "debit":
+            cogs[row.period] = cogs.get(row.period, 0) + amount
+        if row.account_class == "revenue" and row.side == "credit":
+            rev[row.period] = rev.get(row.period, 0) + amount
+        if row.account_class == "opex" and row.side == "debit":
+            opex[row.period] = opex.get(row.period, 0) + amount
+    return (
+        cogs.get("2026-08") == 36_000_000
+        and cogs.get("2026-09") == 39_000_000
+        and rev.get("2026-08") == 100_000_000
+        and rev.get("2026-09") == 100_000_000
+        and opex.get("2026-08") == 20_000_000
+        and opex.get("2026-09") == 20_000_000
+    )
+
+
 def seed_demo_ledger() -> list[ReportingLine]:
     """August 64% GM / September 61% GM with identifiable COGS transactions."""
     reset_ledger()
     generated = reporting_ledger.DATA_REPORTING / "ledger_seed.json"
     if generated.exists():
         rows = [ReportingLine.model_validate(item) for item in json.loads(generated.read_text())]
-        posted = []
-        for row in rows:
-            posted.append(post_line(row))
-        return posted
+        if _generated_seed_matches_demo(rows):
+            return [post_line(row) for row in rows]
     rows = [
         # August revenue $1,000,000
         _line(

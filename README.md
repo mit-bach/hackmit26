@@ -58,6 +58,7 @@ python main.py integration-demo
 python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo
 python main.py validate-sample-data --data-root data/demo
 python main.py sample-data-summary --data-root data/demo
+python main.py evaluate-cfo --data-root data/demo --seed 42 --all
 ```
 
 Webhook receipt is deterministic. Agents classify messy email/PDF content later; they do not verify signatures or add payout totals.
@@ -461,6 +462,24 @@ Planted cases live in `sample_data/registry.py` (`SCN-AP-001` clean three-way ma
 
 Adapters in `sample_data/adapters.py` convert a canonical object into a consumer schema (AP invoice → audit invoice, Stripe payout → bank deposit, journal → reporting line). They copy identity and amount; they do not invent a second copy.
 
+## CFO evaluation harness
+
+`python main.py evaluate-cfo` runs the **existing** finance workflows against generated operational files, then scores them. The answer key is loaded only after workflows finish. Agents never receive `expected_results.json`, planted labels, or `ground_truth.json`.
+
+```bash
+python main.py evaluate-cfo --data-root data/demo --seed 42 --all
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain ap
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain ar
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain cash
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain close
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain audit
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain reporting
+python main.py evaluate-cfo --data-root data/demo --seed 42 --domain forecasting
+python main.py evaluate-cfo --data-root data/demo --seed 42 --compare-to runs/evaluation/baseline/benchmark.json
+```
+
+Artifacts land in `runs/evaluation/<run_id>/` (`benchmark.json`, `cases.json`, `failures.json`, `summary.md`, `raw_outputs/`). Scoring is deterministic Python. An LLM is not used to grade amounts, matches, or findings.
+
 ## Reporting and 13-week cash forecast
 
 `python main.py demo-reporting` (or `python -m reporting.demo`) builds financial statements from the reporting ledger, explains the September gross-margin move at transaction level, rolls a 13-week cash forecast from the existing AP pool, AR invoices, and payroll schedule, compares that snapshot with later actuals, and writes a board pack with evidence IDs.
@@ -578,6 +597,19 @@ Balance Sheet Reconciliation Preparer / Reviewer
 
 Month-End Close Reviewer
   -> month-end-close-review
+
+Close Manager
+  -> month-end-close-coordination
+  -> cross-ledger-data-consistency
+  -> synthetic-finance-scenario-design
+
+AP/AR Sample Data Agent
+Cash Recon Sample Data Agent
+Close Sample Data Agent
+Audit Controls Sample Data Agent
+Reporting Forecasting Sample Data Agent
+  -> synthetic-finance-scenario-design
+  -> cross-ledger-data-consistency
 ```
 
 Traces record agent role, assigned skill names, file paths, content hashes, and whether each skill was injected into instructions. They do not dump `SKILL.md` bodies.

@@ -39,6 +39,9 @@ def configure_data_dir(directory: Path | None = None) -> Path:
 
 
 def _read_json(path: Path) -> list:
+    from evaluation.isolation import assert_answer_key_blocked
+
+    assert_answer_key_blocked(path)
     try:
         raw = json.loads(path.read_text())
     except FileNotFoundError as exc:

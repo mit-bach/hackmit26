@@ -12,6 +12,7 @@ Usage:
     python close.py prepaid --period 2026-09
     python close.py depreciate --period 2026-09
     python close.py eval-live --deterministic
+    python close.py eval-live --live --repeat 2
 """
 
 from __future__ import annotations

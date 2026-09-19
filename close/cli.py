@@ -139,7 +139,8 @@ def _eval_live(args: argparse.Namespace) -> int:
     from close.eval_live import run_close_eval
 
     live = bool(getattr(args, "live", False)) and bool(os.environ.get("OPENAI_API_KEY")) and not args.deterministic
-    print(run_close_eval(use_agent=live, live=live))
+    repeat = max(1, int(getattr(args, "repeat", 1) or 1))
+    print(run_close_eval(use_agent=live, live=live, repeat=repeat))
     return 0
 
 
@@ -201,6 +202,7 @@ def run_month_end_cli(argv: list[str] | None = None) -> int:
     ev = sub.add_parser("eval-live", help="Judgment evaluation (optional live agents)")
     ev.add_argument("--deterministic", action="store_true")
     ev.add_argument("--live", action="store_true", help="Exercise live agents when an API key is present")
+    ev.add_argument("--repeat", type=int, default=1, help="Repeat isolated eval from the same canonical snapshot")
     ev.set_defaults(func=_eval_live)
 
     args = parser.parse_args(argv)

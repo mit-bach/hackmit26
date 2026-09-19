@@ -10,9 +10,16 @@ from integrations.cash import reconcile_payout
 from tools import exception_types_for, load_invoice
 
 from sample_data.orchestrator import generate_sample_data
-from sample_data.paths import apply_data_root, reset_data_root
+from sample_data.paths import data_root, snapshot_loader_paths
+from sample_data.pnl import (
+    COGS_ACCOUNTS,
+    OPERATIONAL_AP_IDS,
+    cogs_invoice_ids,
+    quantity_rate_amount,
+    validate_fact_arithmetic,
+)
 from sample_data.registry import required_ids
-from sample_data.validators import validate_dataset
+from sample_data.validators import validate_dataset, validate_pnl_integrity
 
 
 def _canonical(ctx):
@@ -56,16 +63,13 @@ def test_id_uniqueness_and_foreign_keys(tmp_path):
 def test_ap_three_way_and_duplicate(tmp_path, monkeypatch):
     output = tmp_path / "demo"
     generate_sample_data(seed=42, period="2026-09", output=output)
-    apply_data_root(output)
-    try:
+    with data_root(output):
         invoice = load_invoice("INV-001")
         assert invoice is not None
         assert exception_types_for("INV-001") == []
         assert "duplicate" in exception_types_for("INV-006")
         assert "duplicate" in exception_types_for("INV-007")
         assert "partial_receipt" in exception_types_for("INV-003")
-    finally:
-        reset_data_root()
 
 
 def test_ar_aging_and_ambiguous_cash():
@@ -129,6 +133,48 @@ def test_audit_round_number_post_close_self_approval():
     assert "ROUND_NUMBER" in codes
 
 
+def test_cogs_quantity_times_rate_equals_line_amount():
+    assert validate_fact_arithmetic() == []
+    ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    checked = 0
+    for entry in ctx.journal_entries.values():
+        if entry.debit_account not in COGS_ACCOUNTS:
+            continue
+        computed = quantity_rate_amount(entry.quantity, entry.rate)
+        if computed is None:
+            continue
+        assert cents(computed) == entry.amount_minor, entry.entry_id
+        checked += 1
+    assert checked >= 10
+
+
+def test_operational_ap_invoices_are_not_posted_to_cogs():
+    ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    for entry in ctx.journal_entries.values():
+        if entry.debit_account in COGS_ACCOUNTS:
+            assert entry.source_document_id not in OPERATIONAL_AP_IDS, entry.entry_id
+            assert entry.source_document_id in cogs_invoice_ids()
+        if entry.source_document_id in {"INV-001", "INV-002", "INV-006", "INV-016", "INV-017"}:
+            assert entry.debit_account not in COGS_ACCOUNTS
+    cogs_sources = [
+        entry.source_document_id
+        for entry in ctx.journal_entries.values()
+        if entry.debit_account in COGS_ACCOUNTS and entry.period == "2026-09"
+    ]
+    assert len(cogs_sources) == len(set(cogs_sources))
+
+
+def test_reporting_cogs_equals_journal_cogs_once():
+    ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    assert validate_pnl_integrity(ctx) == []
+    sep_hosting = sum(
+        entry.amount
+        for entry in ctx.journal_entries.values()
+        if entry.period == "2026-09" and entry.category == "hosting"
+    )
+    assert sep_hosting == 95_000
+
+
 def test_reporting_ties_and_gross_margin():
     ctx = generate_sample_data(seed=42, period="2026-09", output=None)
     rev = {"2026-08": 0, "2026-09": 0}
@@ -160,8 +206,7 @@ def test_forecast_weeks_and_actuals():
 def test_expected_audit_findings_are_discoverable(tmp_path):
     output = tmp_path / "demo"
     ctx = generate_sample_data(seed=42, period="2026-09", output=output)
-    apply_data_root(output)
-    try:
+    with data_root(output):
         from audit.controls import run_duplicate_vendors
         from audit.store import load_operational_decisions, load_vendors
 
@@ -175,8 +220,6 @@ def test_expected_audit_findings_are_discoverable(tmp_path):
         payload = json.loads((output / "expected_results.json").read_text())
         assert payload["audit_findings"]
         assert ctx.expected is not None
-    finally:
-        reset_data_root()
 
 
 def test_all_journals_balance():
@@ -199,3 +242,68 @@ def test_writes_manifest(tmp_path):
 
 def dollars_of(amount_minor: int) -> float:
     return round(amount_minor / 100.0, 2)
+
+
+PLANTED_DISCREPANCY_IDS = {
+    "INV-003",
+    "INV-006",
+    "INV-007",
+    "PAY-004",
+    "TXN-2026-09-011",
+    "TXN-2026-09-015",
+    "JE-POST-CLOSE-001",
+    "PAY-AP-009",
+    "APR-INV-SELF",
+    "VEND-001-DUP",
+}
+
+
+def test_expected_discrepancy_ids_are_present():
+    ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    known = (
+        set(ctx.ap_invoices)
+        | set(ctx.ar_payments)
+        | set(ctx.bank_transactions)
+        | {item.entry_id for item in ctx.audit_journals}
+        | {item.payment_id for item in ctx.audit_payments}
+        | {item.approval_id for item in ctx.audit_approvals}
+        | set(ctx.vendors)
+    )
+    missing = PLANTED_DISCREPANCY_IDS - known
+    assert not missing
+    assert set(required_ids()) <= set(ctx.scenarios)
+    assert ctx.bank_transactions["TXN-2026-09-015"].amount_minor - ctx.ledger_cash["GL-AR-NS"].amount_minor == 1240
+
+
+def test_generator_does_not_leak_state_between_calls():
+    first = generate_sample_data(seed=42, period="2026-09", output=None)
+    first.ap_invoices["INV-001"].amount = 1.0
+    first.scenarios.clear()
+    second = generate_sample_data(seed=42, period="2026-09", output=None)
+    assert second.ap_invoices["INV-001"].amount != 1.0
+    assert set(required_ids()) <= set(second.scenarios)
+    assert _canonical(first) != _canonical(second)
+    assert _canonical(second) == _canonical(generate_sample_data(seed=42, period="2026-09", output=None))
+
+
+def test_apply_data_root_restores_prior_loader_paths(tmp_path):
+    before = snapshot_loader_paths()
+    output = tmp_path / "demo"
+    generate_sample_data(seed=42, period="2026-09", output=output)
+    with data_root(output):
+        from tools import DATA_DIR
+
+        assert Path(DATA_DIR) == output
+        assert snapshot_loader_paths() != before
+    assert snapshot_loader_paths() == before
+
+
+def test_full_suite_order_does_not_affect_generation(tmp_path):
+    dirty = tmp_path / "dirty-demo"
+    generate_sample_data(seed=7, period="2026-09", output=dirty)
+    with data_root(dirty):
+        assert load_invoice("INV-001") is not None
+    ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    validate_dataset(ctx)
+    assert set(required_ids()) <= set(ctx.scenarios)
+    assert ctx.bank_transactions["TXN-2026-09-015"].amount_minor - ctx.ledger_cash["GL-AR-NS"].amount_minor == 1240

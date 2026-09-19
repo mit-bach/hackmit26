@@ -48,6 +48,7 @@ def test_usage_cli():
     assert "python main.py demo-reporting" in result.stdout
     assert "python main.py generate-sample-data" in result.stdout
     assert "python main.py validate-sample-data" in result.stdout
+    assert "python main.py evaluate-cfo" in result.stdout
     assert "python main.py close-month" in result.stdout
     assert "python main.py eval-close" in result.stdout
 

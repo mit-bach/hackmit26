@@ -358,3 +358,10 @@ def payroll_forecast_lines() -> list[ForecastLine]:
             )
         )
     return lines
+
+
+def load_actuals():
+    """Compatibility export — actuals live in reporting.actuals."""
+    from reporting.actuals import load_actuals as _load_actuals
+
+    return _load_actuals()

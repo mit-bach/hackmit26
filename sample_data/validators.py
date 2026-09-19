@@ -9,6 +9,16 @@ from integrations.cash import reconcile_payout
 from prepaid.schedule import generate_schedule
 
 from sample_data.context import CompanyScenarioContext, dollars
+from sample_data.pnl import (
+    COGS_ACCOUNTS,
+    INTENDED_COGS_MINOR,
+    INTENDED_REVENUE_MINOR,
+    OPERATIONAL_AP_IDS,
+    REVENUE_ACCOUNTS,
+    cogs_invoice_ids,
+    quantity_rate_amount,
+    validate_fact_arithmetic,
+)
 from sample_data.registry import required_ids
 
 
@@ -65,16 +75,7 @@ def validate_foreign_keys(ctx: CompanyScenarioContext) -> list[str]:
     vendor_names = {row["name"] for row in ctx.vendors.values()}
     for invoice in ctx.ap_invoices.values():
         if invoice.po_id and invoice.po_id not in ctx.purchase_orders and invoice.invoice_id not in {
-            "INV-HOST-AUG-001",
-            "INV-HOST-AUG-002",
-            "INV-SUP-AUG-001",
-            "INV-SUP-AUG-002",
-            "INV-FRT-AUG-001",
-            "INV-HOST-SEP-001",
-            "INV-HOST-SEP-002",
-            "INV-SUP-SEP-001",
-            "INV-SUP-SEP-002",
-            "INV-FRT-SEP-001",
+            *cogs_invoice_ids(),
             "INV-020",
         }:
             if invoice.po_id:
@@ -131,6 +132,9 @@ def validate_money_representation(ctx: CompanyScenarioContext) -> list[str]:
     for payout in ctx.stripe_payouts:
         if not isinstance(payout.amount, int):
             errors.append(f"stripe {payout.payout_id} amount is not integer cents")
+    for entry in ctx.journal_entries.values():
+        if entry.amount_minor != cents(entry.amount):
+            errors.append(f"journal {entry.entry_id} amount/minor mismatch")
     return errors
 
 
@@ -242,6 +246,78 @@ def validate_forecast_math(ctx: CompanyScenarioContext) -> list[str]:
     return errors
 
 
+def _journal_class_totals(ctx: CompanyScenarioContext, accounts: frozenset[str], *, side: str) -> dict[str, int]:
+    totals: dict[str, int] = {}
+    for entry in ctx.journal_entries.values():
+        account = entry.debit_account if side == "debit" else entry.credit_account
+        if account in accounts:
+            totals[entry.period] = totals.get(entry.period, 0) + entry.amount_minor
+    return totals
+
+
+def validate_pnl_integrity(ctx: CompanyScenarioContext) -> list[str]:
+    """COGS/revenue must come from dedicated P&L facts, once, and tie to reporting."""
+    errors = list(validate_fact_arithmetic())
+    journal_cogs = _journal_class_totals(ctx, COGS_ACCOUNTS, side="debit")
+    journal_rev = _journal_class_totals(ctx, REVENUE_ACCOUNTS, side="credit")
+    for period, expected in INTENDED_COGS_MINOR.items():
+        actual = journal_cogs.get(period, 0)
+        if actual != expected:
+            errors.append(f"journal COGS {period} is {actual} cents, intended {expected}")
+    for period, expected in INTENDED_REVENUE_MINOR.items():
+        actual = journal_rev.get(period, 0)
+        if actual != expected:
+            errors.append(f"journal revenue {period} is {actual} cents, intended {expected}")
+
+    seen_txn: dict[str, str] = {}
+    seen_source: dict[str, str] = {}
+    for entry in ctx.journal_entries.values():
+        if entry.debit_account not in COGS_ACCOUNTS:
+            continue
+        if entry.source_document_id in OPERATIONAL_AP_IDS:
+            errors.append(
+                f"{entry.entry_id} posts operational AP {entry.source_document_id} to COGS"
+            )
+        if entry.transaction_id in seen_txn:
+            errors.append(
+                f"duplicate COGS transaction {entry.transaction_id}: "
+                f"{seen_txn[entry.transaction_id]} and {entry.entry_id}"
+            )
+        seen_txn[entry.transaction_id] = entry.entry_id
+        if entry.source_document_id in seen_source:
+            errors.append(
+                f"duplicate COGS source {entry.source_document_id}: "
+                f"{seen_source[entry.source_document_id]} and {entry.entry_id}"
+            )
+        seen_source[entry.source_document_id] = entry.entry_id
+        computed = quantity_rate_amount(entry.quantity, entry.rate)
+        if computed is not None and cents(computed) != entry.amount_minor:
+            errors.append(
+                f"{entry.entry_id}: quantity {entry.quantity} × rate {entry.rate} "
+                f"!= line amount {entry.amount}"
+            )
+
+    reporting_cogs: dict[str, int] = {}
+    reporting_rev: dict[str, int] = {}
+    for line in ctx.reporting_lines:
+        if line.account_class == "cogs" and line.side == "debit":
+            reporting_cogs[line.period] = reporting_cogs.get(line.period, 0) + cents(line.amount)
+        if line.account_class == "revenue" and line.side == "credit":
+            reporting_rev[line.period] = reporting_rev.get(line.period, 0) + cents(line.amount)
+    for period, expected in INTENDED_COGS_MINOR.items():
+        if reporting_cogs.get(period, 0) != expected:
+            errors.append(f"reporting COGS {period} is {reporting_cogs.get(period, 0)}, intended {expected}")
+        if reporting_cogs.get(period, 0) != journal_cogs.get(period, 0):
+            errors.append(f"reporting COGS {period} does not match journal COGS")
+        if reporting_rev.get(period, 0) != journal_rev.get(period, 0):
+            errors.append(f"reporting revenue {period} does not match journal revenue")
+        gp = journal_rev.get(period, 0) - journal_cogs.get(period, 0)
+        intended_gp = INTENDED_REVENUE_MINOR[period] - expected
+        if gp != intended_gp:
+            errors.append(f"{period} gross profit {gp} != revenue - COGS {intended_gp}")
+    return errors
+
+
 def validate_reporting_ties_to_gl(ctx: CompanyScenarioContext) -> list[str]:
     errors = []
     if not ctx.reporting_lines:
@@ -316,6 +392,7 @@ VALIDATORS = [
     validate_reconciliation_math,
     validate_close_tie_outs,
     validate_forecast_math,
+    validate_pnl_integrity,
     validate_reporting_ties_to_gl,
     validate_audit_population_integrity,
     validate_prepaid_amortization,

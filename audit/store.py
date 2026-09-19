@@ -48,6 +48,9 @@ def isolated_audit(directory: Path):
 
 def _read(name: str, default):
     path = DATA_DIR / name
+    from evaluation.isolation import assert_operational_read_allowed
+
+    assert_operational_read_allowed(path)
     if not path.exists():
         return default
     return json.loads(path.read_text())

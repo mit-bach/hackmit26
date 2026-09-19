@@ -203,6 +203,7 @@ def _usage() -> int:
     print("       python main.py generate-sample-data [--seed 42] [--month 2026-09] [--output data/demo]")
     print("       python main.py validate-sample-data [--data-root data/demo]")
     print("       python main.py sample-data-summary [--data-root data/demo]")
+    print("       python main.py evaluate-cfo [--data-root data/demo] [--seed 42] [--all]")
     return 1
 
 
@@ -372,6 +373,14 @@ def main() -> int:
         from sample_data.cli import run_summary
 
         return run_summary(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "evaluate-cfo",
+        "evaluate_cfo",
+    }:
+        from evaluation.cli import run_evaluate
+
+        return run_evaluate(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "skills":
         return run_skills_cli(sys.argv[2:])

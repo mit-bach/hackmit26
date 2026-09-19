@@ -92,12 +92,26 @@ def isolated_ingestion_overlay():
     from invoice_ingestion.adapter import reset_ingested_invoices
     from invoice_ingestion.store import clear_ingestion_cache
     from integrations.store import reset_integration_state
+    from tools import clear_runtime_invoices
 
     reset_ingested_invoices()
     clear_ingestion_cache()
     reset_integration_state()
+    clear_runtime_invoices()
     yield
     reset_ingested_invoices()
     clear_ingestion_cache()
     reset_integration_state()
+    clear_runtime_invoices()
+
+
+@pytest.fixture(autouse=True)
+def restore_sample_data_loaders():
+    """Undo apply_data_root leaks without forcing persistent runs/month_end."""
+    from sample_data.paths import drain_data_root_stack
+    from tools import configure_data_dir
+
+    yield
+    drain_data_root_stack()
+    configure_data_dir()
 

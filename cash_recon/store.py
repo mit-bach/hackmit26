@@ -17,6 +17,16 @@ _traces: dict[str, MatchTrace] = {}
 _reports: dict[str, CashReconciliationReport] = {}
 
 
+def configure_paths(*, runs_dir: Path | None = None, traces_dir: Path | None = None) -> None:
+    global RUNS_DIR, TRACES_DIR
+    if runs_dir is not None:
+        RUNS_DIR = Path(runs_dir)
+        RUNS_DIR.mkdir(parents=True, exist_ok=True)
+    if traces_dir is not None:
+        TRACES_DIR = Path(traces_dir)
+        TRACES_DIR.mkdir(parents=True, exist_ok=True)
+
+
 def reset_cash_state() -> None:
     _matches.clear()
     _traces.clear()
