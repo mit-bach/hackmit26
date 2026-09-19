@@ -56,6 +56,10 @@ def assign_severity(
         return "MEDIUM", "Round-number payment flagged with contextual risk; not treated as automatic fraud."
     if control_id == "AUD-DUP-VEND-001" and result == "FAIL":
         return "MEDIUM", "Two vendor master records collapse to the same normalized legal-name key."
+    if control_id == "AUD-SUP-001" and result == "FAIL":
+        return "HIGH", "Payment record is marked missing supporting documents."
+    if control_id == "AUD-THR-001" and result == "FAIL":
+        return "HIGH", "Authorized PO amount exceeds the documented approver limit."
     if result == "FAIL" and exposure >= policy.critical_amount:
         return "CRITICAL", "Control failure with exposure at or above the critical-amount threshold."
     if result == "FAIL" and exposure >= policy.material_amount:

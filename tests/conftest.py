@@ -88,20 +88,23 @@ def isolated_reporting(tmp_path):
 
 
 @pytest.fixture(autouse=True)
-def isolated_ingestion_overlay():
+def isolated_ingestion_overlay(tmp_path, monkeypatch):
     from invoice_ingestion.adapter import reset_ingested_invoices
     from invoice_ingestion.store import clear_ingestion_cache
-    from integrations.store import reset_integration_state
+    from integrations import store as integration_store
     from tools import clear_runtime_invoices
 
+    runs = tmp_path / "integrations-runs"
+    monkeypatch.setattr(integration_store, "RUNS_DIR", runs)
+    monkeypatch.setattr(integration_store, "STATE_PATH", runs / "state.json")
     reset_ingested_invoices()
     clear_ingestion_cache()
-    reset_integration_state()
+    integration_store.reset_integration_state()
     clear_runtime_invoices()
     yield
     reset_ingested_invoices()
     clear_ingestion_cache()
-    reset_integration_state()
+    integration_store.reset_integration_state()
     clear_runtime_invoices()
 
 

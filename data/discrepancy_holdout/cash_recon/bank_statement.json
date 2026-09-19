@@ -1,0 +1,426 @@
+[
+  {
+    "transaction_id": "TXN-2026-09-018A",
+    "date": "2026-09-18",
+    "amount": -12450.0,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES 8391",
+    "reference": "8391",
+    "counterparty": "ACME SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -1245000,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-001",
+      "invoice_ids": [
+        "INV-001"
+      ]
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-008",
+    "date": "2026-09-08",
+    "amount": -18500.0,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FAB",
+    "reference": "",
+    "counterparty": "NORTHLINE FAB",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -1850000,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-NORTHLINE",
+      "invoice_ids": [
+        "INV-014",
+        "INV-015",
+        "INV-016"
+      ]
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-011",
+    "date": "2026-09-11",
+    "amount": -10025.0,
+    "currency": "USD",
+    "description": "WIRE TRANSFER INTL REF 729103",
+    "reference": "729103",
+    "counterparty": "HELIOS HARDWARE",
+    "transaction_type": "wire_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -1002500,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-017"
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-020H",
+    "date": "2026-09-20",
+    "amount": -3280.0,
+    "currency": "USD",
+    "description": "ACH OUT OFFICE DEPOT HOLD",
+    "reference": "",
+    "counterparty": "OFFICE DEPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -328000,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-010",
+      "on_hold": true
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-020R",
+    "date": "2026-09-20",
+    "amount": -50000.0,
+    "currency": "USD",
+    "description": "WIRE OUT NORTHWIND PHANTOM",
+    "reference": "",
+    "counterparty": "NORTHWIND PHANTOM LLC",
+    "transaction_type": "wire_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -5000000,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-009"
+    }
+  },
+  {
+    "transaction_id": "BNK-AP-012",
+    "date": "2026-09-23",
+    "amount": -21000.0,
+    "currency": "USD",
+    "description": "ACH OUT GITHUB",
+    "reference": "",
+    "counterparty": "GITHUB",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -2100000,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-012"
+    }
+  },
+  {
+    "transaction_id": "TXN-AR-PAY-001",
+    "date": "2026-09-29",
+    "amount": 12000.0,
+    "currency": "USD",
+    "description": "WIRE IN NORTHWIND LABS INV AR 007",
+    "reference": "WIRE-NW-9921",
+    "counterparty": "NORTHWIND LABS",
+    "transaction_type": "wire_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 1200000,
+    "raw_metadata": {
+      "payment_id": "PAY-001",
+      "invoice_ids": [
+        "INV-AR-007"
+      ]
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-015",
+    "date": "2026-09-15",
+    "amount": 12412.4,
+    "currency": "USD",
+    "description": "CUSTOMER PAYMENT NORTHSTAR LLC",
+    "reference": "",
+    "counterparty": "NORTHSTAR LLC",
+    "transaction_type": "wire_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 1241240,
+    "raw_metadata": {
+      "payment_id": "PAY-006",
+      "invoice_ids": [
+        "INV-AR-013"
+      ]
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-028",
+    "date": "2026-09-28",
+    "amount": 37400.0,
+    "currency": "USD",
+    "description": "WIRE IN ATLAS ROBOTICS",
+    "reference": "WIRE-ATL-374",
+    "counterparty": "ATLAS ROBOTICS",
+    "transaction_type": "wire_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 3740000,
+    "raw_metadata": {
+      "payment_id": "PAY-003"
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-012A",
+    "date": "2026-09-12",
+    "amount": -250.0,
+    "currency": "USD",
+    "description": "REFUND CARD 8892",
+    "reference": "8892",
+    "counterparty": "LUMEN LABS",
+    "transaction_type": "card_refund",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -25000,
+    "raw_metadata": {}
+  },
+  {
+    "transaction_id": "TXN-2026-09-012B",
+    "date": "2026-09-12",
+    "amount": -250.0,
+    "currency": "USD",
+    "description": "REFUND CARD 8892",
+    "reference": "8892",
+    "counterparty": "LUMEN LABS",
+    "transaction_type": "card_refund",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -25000,
+    "raw_metadata": {}
+  },
+  {
+    "transaction_id": "TXN-2026-10-001",
+    "date": "2026-10-01",
+    "amount": -2100.0,
+    "currency": "USD",
+    "description": "ACH OUT OFFICE DEPOT DISC",
+    "reference": "",
+    "counterparty": "OFFICE DEPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-10",
+    "amount_minor": -210000,
+    "raw_metadata": {}
+  },
+  {
+    "transaction_id": "TXN-2026-09-025",
+    "date": "2026-09-25",
+    "amount": -180.0,
+    "currency": "USD",
+    "description": "ACH OUT UNKNOWN COUNTERPARTY",
+    "reference": "",
+    "counterparty": "",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -18000,
+    "raw_metadata": {}
+  },
+  {
+    "transaction_id": "TXN-2026-09-021",
+    "date": "2026-09-21",
+    "amount": -3000.0,
+    "currency": "USD",
+    "description": "ACH OUT CAMBRIDGE",
+    "reference": "",
+    "counterparty": "Cambridge",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -300000,
+    "raw_metadata": {}
+  },
+  {
+    "transaction_id": "BNK-UNX-001",
+    "date": "2026-09-24",
+    "amount": -800.0,
+    "currency": "USD",
+    "description": "MONTHLY ACCOUNT ANALYSIS FEE",
+    "reference": "",
+    "counterparty": "FIRST NATIONAL",
+    "transaction_type": "bank_fee",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -80000,
+    "raw_metadata": {}
+  },
+  {
+    "transaction_id": "BNK-AR-FC-001",
+    "date": "2026-10-09",
+    "amount": 25000.0,
+    "currency": "USD",
+    "description": "WIRE IN QUIET HARBOR",
+    "reference": "",
+    "counterparty": "QUIET HARBOR",
+    "transaction_type": "wire_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-10",
+    "amount_minor": 2500000,
+    "raw_metadata": {
+      "invoice_ids": [
+        "INV-AR-014"
+      ]
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-019A",
+    "date": "2026-09-19",
+    "amount": 12610.0,
+    "currency": "USD",
+    "description": "STRIPE PAYOUT po_1MaximorFees",
+    "reference": "po_1MaximorFees",
+    "counterparty": "STRIPE",
+    "transaction_type": "payout",
+    "source": "operating_account",
+    "provider": "stripe",
+    "period": "2026-09",
+    "amount_minor": 1261000,
+    "raw_metadata": {
+      "payout_id": "po_1MaximorFees",
+      "provider": "stripe"
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-022S",
+    "date": "2026-09-22",
+    "amount": 3380.0,
+    "currency": "USD",
+    "description": "STRIPE PAYOUT po_1MaximorRefunds",
+    "reference": "po_1MaximorRefunds",
+    "counterparty": "STRIPE",
+    "transaction_type": "payout",
+    "source": "operating_account",
+    "provider": "stripe",
+    "period": "2026-09",
+    "amount_minor": 338000,
+    "raw_metadata": {
+      "payout_id": "po_1MaximorRefunds",
+      "provider": "stripe"
+    }
+  },
+  {
+    "transaction_id": "TXN-2026-09-026S",
+    "date": "2026-09-26",
+    "amount": 5070.0,
+    "currency": "USD",
+    "description": "STRIPE PAYOUT po_1MaximorDisputes",
+    "reference": "po_1MaximorDisputes",
+    "counterparty": "STRIPE",
+    "transaction_type": "payout",
+    "source": "operating_account",
+    "provider": "stripe",
+    "period": "2026-09",
+    "amount_minor": 507000,
+    "raw_metadata": {
+      "payout_id": "po_1MaximorDisputes",
+      "provider": "stripe"
+    }
+  },
+  {
+    "transaction_id": "TXN-HO-837",
+    "date": "2026-09-17",
+    "amount": 4810.0,
+    "amount_minor": 481000,
+    "description": "ACH MERIDIAN REMIT",
+    "counterparty": "Meridian Biotech",
+    "period": "2026-09",
+    "source": "bank"
+  },
+  {
+    "transaction_id": "TXN-HO-4125",
+    "date": "2026-09-18",
+    "amount": -8412.5,
+    "amount_minor": -841250,
+    "description": "ACH KESTREL GROUP",
+    "counterparty": "Kestrel Components",
+    "period": "2026-09",
+    "source": "bank"
+  },
+  {
+    "transaction_id": "TXN-HO-7390",
+    "date": "2026-09-19",
+    "amount": 9150.0,
+    "amount_minor": 915000,
+    "description": "WIRE SOLSTICE",
+    "counterparty": "Solstice Media",
+    "period": "2026-09",
+    "source": "bank"
+  },
+  {
+    "transaction_id": "TXN-HO-FEE",
+    "date": "2026-09-20",
+    "amount": -5028.0,
+    "amount_minor": -502800,
+    "description": "WIRE VESPER NET FEE",
+    "counterparty": "Vesper Facilities",
+    "period": "2026-09",
+    "source": "bank"
+  },
+  {
+    "transaction_id": "TXN-HO-DUPREF-A",
+    "date": "2026-09-21",
+    "amount": -640.0,
+    "amount_minor": -64000,
+    "description": "REFUND COPPERFIELD",
+    "counterparty": "Copperfield Logistics",
+    "period": "2026-09",
+    "source": "bank",
+    "transaction_type": "refund"
+  },
+  {
+    "transaction_id": "TXN-HO-DUPREF-B",
+    "date": "2026-09-21",
+    "amount": -640.0,
+    "amount_minor": -64000,
+    "description": "REFUND COPPERFIELD",
+    "counterparty": "Copperfield Logistics",
+    "period": "2026-09",
+    "source": "bank",
+    "transaction_type": "refund"
+  },
+  {
+    "transaction_id": "TXN-HO-BANK",
+    "date": "2026-09-22",
+    "amount": -275.4,
+    "amount_minor": -27540,
+    "description": "UNKNOWN DEBIT CARD",
+    "counterparty": "Unknown",
+    "period": "2026-09",
+    "source": "bank"
+  },
+  {
+    "transaction_id": "TXN-HO-STRIPE",
+    "date": "2026-09-24",
+    "amount": 3920.0,
+    "amount_minor": 392000,
+    "description": "STRIPE PAYOUT po_ho_mismatch",
+    "counterparty": "Stripe",
+    "period": "2026-09",
+    "provider": "stripe",
+    "source": "bank"
+  },
+  {
+    "transaction_id": "TXN-HO-MULTI",
+    "date": "2026-09-25",
+    "amount": 1880.0,
+    "amount_minor": 188000,
+    "description": "ACH REDWOOD",
+    "counterparty": "Redwood Clinics",
+    "period": "2026-09",
+    "source": "bank"
+  }
+]

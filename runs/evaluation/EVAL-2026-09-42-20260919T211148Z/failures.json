@@ -1,0 +1,99 @@
+[
+  {
+    "case_id": "AR-SCN-AR-010",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-010",
+    "status": "FAIL",
+    "expected": "HUMAN_REVIEW",
+    "actual": "UNAPPLIED",
+    "score": 0.0,
+    "reason": "Auto-resolved a human-review case incorrectly",
+    "source_ids": [
+      "PAY-005"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": true,
+    "review_class": "HUMAN_REVIEW_EXPECTED",
+    "latency_ms": null,
+    "error_type": "UNSAFE_AUTO_RESOLUTION",
+    "diagnostics": {
+      "candidates": [],
+      "reason": "No plausible invoice match was found; cash stays unapplied."
+    }
+  },
+  {
+    "case_id": "CASH-SCN-CASH-010",
+    "domain": "cash",
+    "scenario_id": "SCN-CASH-010",
+    "status": "FAIL",
+    "expected": {
+      "match_type": "PROVIDER_PAYOUT",
+      "status": "MATCHED"
+    },
+    "actual": {
+      "match_type": "PROVIDER_PAYOUT",
+      "status": "HUMAN_REVIEW"
+    },
+    "score": 0.0,
+    "reason": "TXN-2026-09-022S: expected PROVIDER_PAYOUT/MATCHED, got PROVIDER_PAYOUT/HUMAN_REVIEW",
+    "source_ids": [
+      "TXN-2026-09-022S"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "CASH-SCN-CASH-011",
+    "domain": "cash",
+    "scenario_id": "SCN-CASH-011",
+    "status": "FAIL",
+    "expected": {
+      "match_type": "PROVIDER_PAYOUT",
+      "status": "MATCHED"
+    },
+    "actual": {
+      "match_type": "PROVIDER_PAYOUT",
+      "status": "HUMAN_REVIEW"
+    },
+    "score": 0.0,
+    "reason": "TXN-2026-09-026S: expected PROVIDER_PAYOUT/MATCHED, got PROVIDER_PAYOUT/HUMAN_REVIEW",
+    "source_ids": [
+      "TXN-2026-09-026S"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "CASH-SCN-CASH-012",
+    "domain": "cash",
+    "scenario_id": "SCN-CASH-012",
+    "status": "FAIL",
+    "expected": {
+      "match_type": null,
+      "status": "HUMAN_REVIEW"
+    },
+    "actual": {
+      "match_type": "EXACT_MATCH",
+      "status": "MATCHED"
+    },
+    "score": 0.0,
+    "reason": "TXN-2026-09-021: expected None/HUMAN_REVIEW, got EXACT_MATCH/MATCHED",
+    "source_ids": [
+      "TXN-2026-09-021"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": true,
+    "review_class": "HUMAN_REVIEW_EXPECTED",
+    "latency_ms": null,
+    "error_type": "MISSED_EXCEPTION",
+    "diagnostics": {}
+  }
+]

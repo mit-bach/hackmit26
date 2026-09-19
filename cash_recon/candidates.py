@@ -24,7 +24,12 @@ GROUP_DATE_WINDOW = 7
 FEE_DATE_WINDOW = 2
 DUPLICATE_DATE_WINDOW = 2
 TIMING_DATE_WINDOW = 5
-NEAR_AMOUNT_WINDOW = 5000  # $50.00 in cents; $12.40 is inside, large gaps are not
+NEAR_AMOUNT_WINDOW = 5000  # floor in cents; actual window also allows 2% of the bank amount
+
+
+def near_amount_window(bank_minor: int) -> int:
+    """Pair residuals by principle, not a demo-sized $12.40 cap."""
+    return max(10000, abs(int(bank_minor)) // 50)
 
 
 def _cid(*parts: str) -> str:
@@ -258,6 +263,7 @@ def fee_candidates(
                 and _date_ok(txn.date, fee.date, FEE_DATE_WINDOW)
                 and (
                     not fee.reference
+                    or fee.reference.lower() == txn.transaction_id.lower()
                     or fee.reference.lower() in combined_text(txn).lower()
                     or (entry.reference and fee.reference.lower() in entry.reference.lower())
                 )
@@ -373,7 +379,7 @@ def near_amount_candidates(
             difference = txn.amount_minor - entry.amount_minor
             if difference == 0:
                 continue
-            if abs(difference) > NEAR_AMOUNT_WINDOW:
+            if abs(difference) > near_amount_window(txn.amount_minor):
                 continue
             if txn.counterparty and entry.counterparty and not counterparties_compatible(txn.counterparty, entry.counterparty):
                 if overlap_score(combined_text(txn), combined_text(entry)) < 0.25:

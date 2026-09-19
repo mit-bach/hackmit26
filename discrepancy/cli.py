@@ -8,7 +8,7 @@ from pathlib import Path
 
 from discrepancy.evaluate import run_discrepancy_benchmark
 from discrepancy.fixes import all_fixes
-from discrepancy.generate import generate_discrepancy_data
+from discrepancy.generate import generate_discrepancy_data, generate_holdout_data
 from discrepancy.report import format_discrepancy_report
 
 
@@ -21,6 +21,18 @@ def run_generate(argv: list[str] | None = None) -> int:
     dest = generate_discrepancy_data(seed=args.seed, period=args.month, output=args.output)
     print(f"Wrote discrepancy dataset to {dest}")
     print(f"Contracts: {dest / 'evaluation' / 'discrepancy_contracts.json'}")
+    return 0
+
+
+def run_generate_holdout(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(prog="generate-holdout-data")
+    parser.add_argument("--seed", type=int, default=77)
+    parser.add_argument("--month", default="2026-09")
+    parser.add_argument("--output", default="data/discrepancy_holdout")
+    args = parser.parse_args(argv)
+    dest = generate_holdout_data(seed=args.seed, period=args.month, output=args.output)
+    print(f"Wrote held-out discrepancy dataset to {dest}")
+    print(f"Contracts: {dest / 'evaluation' / 'holdout_contracts.json'}")
     return 0
 
 

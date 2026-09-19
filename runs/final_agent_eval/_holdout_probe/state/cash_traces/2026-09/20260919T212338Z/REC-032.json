@@ -1,0 +1,163 @@
+{
+  "reconciliation_id": "REC-032",
+  "period": "2026-09",
+  "match_type": "UNMATCHED_LEDGER",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-HO-7390",
+      "date": "2026-09-19",
+      "amount": 9076.1,
+      "currency": "USD",
+      "account": "Cash",
+      "counterparty": "Solstice Media",
+      "reference": "",
+      "description": "Solstice books",
+      "entry_type": "other",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 907610,
+      "raw_metadata": {}
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "UNMATCHED_LEDGER:-:GL-HO-7390",
+      "match_type": "UNMATCHED_LEDGER",
+      "bank_transaction_ids": [],
+      "ledger_entry_ids": [
+        "GL-HO-7390"
+      ],
+      "bank_amount": 0.0,
+      "ledger_amount": 9076.1,
+      "difference": -9076.1,
+      "bank_amount_minor": 0,
+      "ledger_amount_minor": 907610,
+      "difference_minor": -907610,
+      "confidence": 0.0,
+      "score": 0.0,
+      "evidence": [
+        "ledger:GL-HO-7390",
+        "amount:907610",
+        "description:Solstice books"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": 0,
+    "ledger_amount_minor": 907610,
+    "difference_minor": -907610,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNMATCHED_LEDGER:-:GL-HO-7390",
+    "selected_candidate_id": "UNMATCHED_LEDGER:-:GL-HO-7390",
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "reasons": [
+      "Unmatched ledger activity GL-HO-7390 $9,076.10."
+    ],
+    "evidence_used": [
+      "ledger:GL-HO-7390",
+      "amount:907610",
+      "description:Solstice books"
+    ],
+    "review_question": "Requires human review"
+  },
+  "investigation": {
+    "case_id": "UNMATCHED_LEDGER:-:GL-HO-7390",
+    "issues_investigated": [
+      "UNMATCHED_LEDGER"
+    ],
+    "findings": [
+      "Unmatched ledger activity GL-HO-7390 $9,076.10."
+    ],
+    "supported_explanations": [],
+    "unsupported_hypotheses": [],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "human_review": true,
+    "evidence_used": [
+      "ledger:GL-HO-7390",
+      "amount:907610",
+      "description:Solstice books"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNMATCHED_LEDGER:-:GL-HO-7390",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "requires_human_review"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-032",
+    "period": "2026-09",
+    "match_key": "70acdf87807f822b",
+    "bank_transaction_ids": [],
+    "ledger_entry_ids": [
+      "GL-HO-7390"
+    ],
+    "match_type": "UNMATCHED_LEDGER",
+    "bank_amount": 0.0,
+    "ledger_amount": 9076.1,
+    "difference": -9076.1,
+    "bank_amount_minor": 0,
+    "ledger_amount_minor": 907610,
+    "difference_minor": -907610,
+    "confidence": 0.0,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unmatched ledger activity GL-HO-7390 $9,076.10.",
+    "evidence": [
+      "ledger:GL-HO-7390",
+      "amount:907610",
+      "description:Solstice books"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNMATCHED_LEDGER:-:GL-HO-7390",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": 0,
+      "ledger_amount_minor": 907610,
+      "difference_minor": -907610,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "ledger:GL-HO-7390",
+    "amount:907610",
+    "description:Solstice books"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "trace_path": null
+}

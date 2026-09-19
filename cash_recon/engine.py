@@ -109,8 +109,12 @@ def propose_matches(
             continue
         if any(item in used_ledger for item in candidate.ledger_entry_ids):
             continue
-        selected.append(candidate)
-        _consume(candidate, used_bank, used_ledger)
+        if candidate.provider_status == "MATCH" and candidate.ledger_entry_ids:
+            selected.append(candidate)
+            _consume(candidate, used_bank, used_ledger)
+        elif candidate.provider_status and candidate.provider_status != "MATCH":
+            selected.append(candidate)
+            _consume(candidate, used_bank, used_ledger)
 
     period_bank = [item for item in bank if item.period == period]
     period_ledger = [item for item in ledger if item.period == period]
@@ -155,6 +159,10 @@ def propose_matches(
         ]
         counterparts.sort(key=lambda item: item.transaction_id)
         if not counterparts:
+            continue
+        refs = {(item.reference or "").strip().lower() for item in cluster}
+        shared_ref = len(refs) == 1 and bool(next(iter(refs)))
+        if len(cluster) > 1 and len(counterparts) == 1 and not shared_ref:
             continue
         legit_ledger = cluster[0]
         extra_entries = cluster[1:]
@@ -205,7 +213,12 @@ def propose_matches(
     for txn in sorted(open_bank, key=lambda item: item.transaction_id):
         options = [row for row in bank_map.get(txn.transaction_id, []) if row.ledger_entry_ids[0] not in used_ledger]
         unique_ledgers = {tuple(row.ledger_entry_ids) for row in options}
-        if len(unique_ledgers) != 1:
+        same_amount_ledgers = [
+            item.entry_id
+            for item in open_ledger
+            if item.amount_minor == txn.amount_minor and item.entry_id not in used_ledger
+        ]
+        if len(unique_ledgers) != 1 or len(same_amount_ledgers) > 1:
             continue
         best = _unique_best(options)
         if best is None:

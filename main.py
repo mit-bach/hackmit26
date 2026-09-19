@@ -207,7 +207,9 @@ def _usage() -> int:
     print("       python main.py evaluate-cfo [--data-root data/demo] [--seed 42] [--all]")
     print("       python main.py cfo-demo")
     print("       python main.py generate-discrepancy-data [--seed 42] [--month 2026-09] [--output data/discrepancy_demo]")
+    print("       python main.py generate-holdout-data [--seed 77] [--output data/discrepancy_holdout]")
     print("       python main.py evaluate-discrepancies [--data-root data/discrepancy_demo]")
+    print("       python main.py final-eval [--live]")
     return 1
 
 
@@ -390,6 +392,19 @@ def main() -> int:
         from discrepancy.cli import run_generate
 
         return run_generate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "generate-holdout-data",
+        "generate_holdout_data",
+    }:
+        from discrepancy.cli import run_generate_holdout
+
+        return run_generate_holdout(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"final-eval", "final_eval"}:
+        from final_eval.cli import run_final_eval
+
+        return run_final_eval(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
         "evaluate-discrepancies",

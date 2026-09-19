@@ -1,0 +1,283 @@
+{
+  "payment_id": "PAY-DISC-ID",
+  "started_at": "2026-09-19T21:01:27Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-DISC-ID",
+    "payment_date": "2026-09-22",
+    "amount": 8500.0,
+    "currency": "USD",
+    "payer_name": "Helios Analytics",
+    "customer_id": "CUST-003",
+    "bank_reference": "ACH-ID-CONF",
+    "remittance_text": "Northwind Labs INV-AR-001",
+    "invoice_reference": "INV-AR-001",
+    "source": "ach",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {}
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-DISC-ID",
+      "payment_date": "2026-09-22",
+      "amount": 8500.0,
+      "currency": "USD",
+      "payer_name": "Helios Analytics",
+      "customer_id": "CUST-003",
+      "bank_reference": "ACH-ID-CONF",
+      "remittance_text": "Northwind Labs INV-AR-001",
+      "invoice_reference": "INV-AR-001",
+      "source": "ach",
+      "unapplied_amount": 8500.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
+    },
+    "identified_customer_id": "CUST-003",
+    "identified_customer_name": "Acme Industrial",
+    "customer_confidence": 0.99,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-AR-SEP-003",
+        "customer_id": "CUST-003",
+        "customer_name": "Acme Industrial",
+        "invoice_date": "2026-09-28",
+        "due_date": "2026-10-15",
+        "original_amount": 250000.0,
+        "outstanding_amount": 250000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "September professional services",
+        "created_at": "2026-09-28T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      },
+      {
+        "invoice_id": "INV-AR-002",
+        "customer_id": "CUST-003",
+        "customer_name": "Acme Industrial",
+        "invoice_date": "2026-08-11",
+        "due_date": "2026-09-10",
+        "original_amount": 8500.0,
+        "outstanding_amount": 8500.0,
+        "currency": "USD",
+        "status": "PAST_DUE",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "August hardware — 1-30 overdue",
+        "created_at": "2026-08-11T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      },
+      {
+        "invoice_id": "INV-DISC-SETTLE",
+        "customer_id": "CUST-003",
+        "customer_name": "Acme Industrial",
+        "invoice_date": "2026-09-03",
+        "due_date": "2026-10-03",
+        "original_amount": 2200.0,
+        "outstanding_amount": 2200.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "AR still open while GL is settled",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-AR-001",
+            "amount": 8500.0
+          }
+        ],
+        "total_applied": 8500.0,
+        "unapplied_amount": 0.0,
+        "match_type": "explicit_invoice",
+        "score": 0.99,
+        "evidence": [
+          "Remittance names INV-AR-001"
+        ],
+        "ambiguities": [
+          "Competing explanations: C2"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "applications": [
+          {
+            "invoice_id": "INV-AR-002",
+            "amount": 8500.0
+          }
+        ],
+        "total_applied": 8500.0,
+        "unapplied_amount": 0.0,
+        "match_type": "exact_amount",
+        "score": 0.86,
+        "evidence": [
+          "INV-AR-002 outstanding equals payment 8500.0"
+        ],
+        "ambiguities": [
+          "Competing explanations: C1"
+        ]
+      }
+    ],
+    "remittance_invoice_ids": [
+      "INV-AR-001"
+    ],
+    "stale_invoice_ids": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-DISC-ID 8500.0 USD from Helios Analytics",
+      "Remittance: Northwind Labs INV-AR-001",
+      "Payment already tagged CUST-003",
+      "Remittance invoice references: INV-AR-001"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-DISC-ID",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-001",
+        "amount": 8500.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-DISC-ID 8500.0 USD from Helios Analytics",
+      "Remittance: Northwind Labs INV-AR-001",
+      "Payment already tagged CUST-003",
+      "Remittance invoice references: INV-AR-001",
+      "Remittance names INV-AR-001"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-DISC-ID",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-001",
+        "amount": 8500.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-DISC-ID 8500.0 USD from Helios Analytics",
+      "Remittance: Northwind Labs INV-AR-001",
+      "Payment already tagged CUST-003",
+      "Remittance invoice references: INV-AR-001",
+      "Remittance names INV-AR-001"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": true,
+  "record": {
+    "application_id": "AR-APP-001",
+    "payment_id": "PAY-DISC-ID",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-001",
+        "amount": 8500.0
+      }
+    ],
+    "total_applied": 8500.0,
+    "unapplied_amount": 0.0,
+    "decision": "AUTO_APPLY",
+    "status": "APPLIED",
+    "posted": true,
+    "invoice_changes": [
+      {
+        "invoice_id": "INV-AR-001",
+        "previous_outstanding": 12000.0,
+        "applied_amount": 8500.0,
+        "new_outstanding": 3500.0,
+        "previous_status": "OPEN",
+        "new_status": "PARTIALLY_PAID"
+      }
+    ],
+    "journal_entry_ids": [
+      "AR-JE-001"
+    ],
+    "created_at": "2026-09-19T21:01:27Z",
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+  },
+  "state_changes": [
+    {
+      "invoice_id": "INV-AR-001",
+      "previous_outstanding": 12000.0,
+      "applied_amount": 8500.0,
+      "new_outstanding": 3500.0,
+      "previous_status": "OPEN",
+      "new_status": "PARTIALLY_PAID"
+    }
+  ],
+  "journal_entries": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Helios Analytics",
+      "memo": "Apply PAY-DISC-ID to INV-AR-001",
+      "debit": {
+        "account": "Cash",
+        "amount": 8500.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 8500.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-DISC-ID",
+      "related_invoice_ids": [
+        "INV-AR-001"
+      ],
+      "created_at": "2026-09-19T21:01:27Z"
+    }
+  ],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

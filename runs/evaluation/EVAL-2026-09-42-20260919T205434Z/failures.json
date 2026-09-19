@@ -1,0 +1,373 @@
+[
+  {
+    "case_id": "AP-SCN-AP-007",
+    "domain": "ap",
+    "scenario_id": "SCN-AP-007",
+    "status": "FAIL",
+    "expected": "HOLD",
+    "actual": "APPROVE",
+    "score": 0.0,
+    "reason": "INV-009 should have been held; exceptions=('approval_limit_exceeded',)",
+    "source_ids": [
+      "INV-009"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "MISSED_EXCEPTION",
+    "diagnostics": {
+      "expected_positive": true,
+      "predicted_positive": false,
+      "exceptions": [
+        "approval_limit_exceeded"
+      ],
+      "evidence": {
+        "invoice_id": "INV-009",
+        "invoice": {
+          "invoice_id": "INV-009",
+          "vendor": "Northwind Phantom LLC",
+          "po_id": "PO-109",
+          "amount": 50000.0,
+          "invoice_date": "2026-09-19",
+          "due_date": "2026-09-20",
+          "vendor_invoice_number": "NWP-50000",
+          "description": "Round-number new vendor invoice",
+          "payment_terms": "net 30",
+          "early_payment_discount_percent": 0.0,
+          "early_payment_discount_deadline": null,
+          "late_fee_percent": 0.0,
+          "vendor_priority": "normal"
+        },
+        "purchase_order": {
+          "po_id": "PO-109",
+          "vendor": "Northwind Phantom LLC",
+          "authorized_amount": 50000.0,
+          "description": "Manual new-vendor engagement",
+          "status": "approved",
+          "created_date": "2026-09-18",
+          "currency": "USD",
+          "approval_limit": 10000.0,
+          "approver": "USR-PREP-02"
+        },
+        "goods_receipt": {
+          "receipt_id": "GR-109",
+          "po_id": "PO-109",
+          "received": true,
+          "received_date": "2026-09-18",
+          "amount_received": 50000.0,
+          "quantity_ordered": 1,
+          "quantity_received": 1
+        },
+        "amount_difference": 0.0,
+        "percent_difference": 0.0,
+        "amount_matches": true,
+        "within_amount_tolerance": false,
+        "vendor_exact_match": true,
+        "vendors_are_similar": true,
+        "po_exists": true,
+        "po_approved": true,
+        "receipt_status": "full",
+        "duplicate_detected": false,
+        "duplicate_invoice_ids": [],
+        "exception_types": [
+          "approval_limit_exceeded"
+        ],
+        "days_until_due": 1,
+        "invoice_dated_before_po": false
+      }
+    }
+  },
+  {
+    "case_id": "AR-SCN-AR-002",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-002",
+    "status": "FAIL",
+    "expected": "1-30",
+    "actual": "CURRENT",
+    "score": 0.0,
+    "reason": "Actual does not match expected",
+    "source_ids": [
+      "INV-AR-002"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "AR-SCN-AR-003",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-003",
+    "status": "FAIL",
+    "expected": "31-60",
+    "actual": "1-30",
+    "score": 0.0,
+    "reason": "Actual does not match expected",
+    "source_ids": [
+      "INV-AR-003"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "AR-SCN-AR-004",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-004",
+    "status": "FAIL",
+    "expected": "61-90",
+    "actual": "31-60",
+    "score": 0.0,
+    "reason": "Actual does not match expected",
+    "source_ids": [
+      "INV-AR-004"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "AR-SCN-AR-005",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-005",
+    "status": "FAIL",
+    "expected": "90+",
+    "actual": "61-90",
+    "score": 0.0,
+    "reason": "Actual does not match expected",
+    "source_ids": [
+      "INV-AR-005"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "AR-SCN-AR-009",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-009",
+    "status": "FAIL",
+    "expected": "HUMAN_REVIEW",
+    "actual": "AUTO_APPLY",
+    "score": 0.0,
+    "reason": "Auto-resolved a human-review case incorrectly",
+    "source_ids": [
+      "PAY-004"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": true,
+    "review_class": "HUMAN_REVIEW_EXPECTED",
+    "latency_ms": null,
+    "error_type": "UNSAFE_AUTO_RESOLUTION",
+    "diagnostics": {
+      "candidates": [
+        {
+          "candidate_id": "C1",
+          "applications": [
+            {
+              "invoice_id": "INV-AR-025",
+              "amount": 5000.0
+            }
+          ],
+          "total_applied": 5000.0,
+          "unapplied_amount": 0.0,
+          "match_type": "explicit_invoice",
+          "score": 0.99,
+          "evidence": [
+            "Remittance names INV-AR-025"
+          ],
+          "ambiguities": []
+        }
+      ],
+      "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+    }
+  },
+  {
+    "case_id": "AR-SCN-AR-011",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-011",
+    "status": "FAIL",
+    "expected": "HUMAN_REVIEW",
+    "actual": "AUTO_APPLY",
+    "score": 0.0,
+    "reason": "Auto-resolved a human-review case incorrectly",
+    "source_ids": [
+      "INV-AR-010",
+      "INV-AR-011",
+      "PAY-004"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": true,
+    "review_class": "HUMAN_REVIEW_EXPECTED",
+    "latency_ms": null,
+    "error_type": "UNSAFE_AUTO_RESOLUTION",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "CASH-WORKFLOW",
+    "domain": "cash",
+    "scenario_id": "SCN-CASH-001",
+    "status": "ERROR",
+    "expected": null,
+    "actual": null,
+    "score": 0.0,
+    "reason": "Operational workflow attempted to read evaluation-only file data/demo/cash_recon/ground_truth.json",
+    "source_ids": [],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WORKFLOW_ERROR",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "AUDIT-SCN-AUDIT-002",
+    "domain": "audit",
+    "scenario_id": "SCN-AUDIT-002",
+    "status": "FAIL",
+    "expected": "FAIL",
+    "actual": "PASS",
+    "score": 0.0,
+    "reason": "Auditor missed DUPLICATE_INVOICE on INV-006",
+    "source_ids": [
+      "INV-006"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "CONTROL_FAILURE_MISSED",
+    "diagnostics": {
+      "expected_positive": true,
+      "predicted_positive": false
+    }
+  },
+  {
+    "case_id": "AUDIT-FALSE-POSITIVE",
+    "domain": "audit",
+    "scenario_id": "SCN-AUDIT-013",
+    "status": "PARTIAL",
+    "expected": [],
+    "actual": [
+      "APR-INV-SELF",
+      "APR-PAY-009",
+      "APR-PAY-010",
+      "INV-009",
+      "INV-012",
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ],
+    "score": 0.5,
+    "reason": "Unexpected finding objects: ['APR-INV-SELF', 'APR-PAY-009', 'APR-PAY-010', 'INV-009', 'INV-012', 'INV-014', 'INV-015', 'INV-016']",
+    "source_ids": [
+      "APR-INV-SELF",
+      "APR-PAY-009",
+      "APR-PAY-010",
+      "INV-009",
+      "INV-012",
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "FALSE_AUDIT_FINDING",
+    "diagnostics": {
+      "expected_positive": false,
+      "predicted_positive": true
+    }
+  },
+  {
+    "case_id": "REPORTING-WORKFLOW",
+    "domain": "reporting",
+    "scenario_id": "SCN-REPORTING-WORKFLOW",
+    "status": "ERROR",
+    "expected": null,
+    "actual": null,
+    "score": 0.0,
+    "reason": "lines_for() takes 0 positional arguments but 1 was given",
+    "source_ids": [],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WORKFLOW_ERROR",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "E2E-CLEAN-CASH",
+    "domain": "end_to_end",
+    "scenario_id": "STORY-CLEAN",
+    "status": "FAIL",
+    "expected": "MATCHED",
+    "actual": null,
+    "score": 0.0,
+    "reason": "Actual does not match expected",
+    "source_ids": [
+      "TXN-2026-09-018A",
+      "PAY-AP-001"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "E2E-RESOLVED-FEE",
+    "domain": "end_to_end",
+    "scenario_id": "STORY-RESOLVED",
+    "status": "FAIL",
+    "expected": "FEE_NETTED",
+    "actual": null,
+    "score": 0.0,
+    "reason": "Actual does not match expected",
+    "source_ids": [
+      "INV-017",
+      "TXN-2026-09-011",
+      "FEE-729103"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": false,
+    "review_class": "AUTO_RESOLVE_EXPECTED",
+    "latency_ms": null,
+    "error_type": "WRONG_MATCH",
+    "diagnostics": {}
+  },
+  {
+    "case_id": "E2E-UNRESOLVED-CASH",
+    "domain": "end_to_end",
+    "scenario_id": "STORY-UNRESOLVED",
+    "status": "FAIL",
+    "expected": "HUMAN_REVIEW",
+    "actual": null,
+    "score": 0.0,
+    "reason": "Auto-resolved a human-review case incorrectly",
+    "source_ids": [
+      "TXN-2026-09-015",
+      "INV-AR-013"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": true,
+    "review_class": "HUMAN_REVIEW_EXPECTED",
+    "latency_ms": null,
+    "error_type": "UNSAFE_AUTO_RESOLUTION",
+    "diagnostics": {}
+  }
+]

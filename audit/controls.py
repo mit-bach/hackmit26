@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from collections.abc import Callable
+from calendar import monthrange
 from datetime import date
 from typing import Any
 
@@ -220,20 +221,130 @@ def run_round_number_payments(
     return _base(spec, audit_run_id, tested, exceptions, facts={"divisors": policy.round_number.divisors})
 
 
+@register(
+    ControlSpec(
+        control_id="AUD-SUP-001",
+        control_name="Missing payment support",
+        control_description="Flag payments whose source record marks supporting documents as missing.",
+        control_type="detective",
+        population="payments",
+        test_method="deterministic_attribute",
+        policy_reference="AUD-SUP",
+    )
+)
+def run_missing_support_payments(
+    *,
+    payments: list[AuditPayment],
+    audit_run_id: str,
+    sample_ids: list[str] | None = None,
+) -> ControlResult:
+    spec = REGISTRY["AUD-SUP-001"][0]
+    wanted = set(sample_ids) if sample_ids is not None else {item.payment_id for item in payments}
+    exceptions: list[ControlException] = []
+    tested: list[str] = []
+    for payment in payments:
+        if payment.payment_id not in wanted:
+            continue
+        tested.append(payment.payment_id)
+        if not payment.missing_support:
+            continue
+        exceptions.append(
+            ControlException(
+                object_id=payment.payment_id,
+                object_type="payment",
+                result="FAIL",
+                detail=f"{payment.payment_id} is marked missing_support in the payment record.",
+                facts={"payment_id": payment.payment_id, "missing_support": True, "invoice_ids": list(payment.invoice_ids)},
+                evidence_ids=[payment.payment_id, *payment.invoice_ids],
+                related_ids={"payments": [payment.payment_id], "invoices": list(payment.invoice_ids)},
+                monetary_exposure=payment.amount,
+            )
+        )
+    return _base(spec, audit_run_id, tested, exceptions)
+
+
+@register(
+    ControlSpec(
+        control_id="AUD-THR-001",
+        control_name="Approval threshold violation",
+        control_description="Independently re-test whether a PO's authorized amount exceeds the approver's documented limit.",
+        control_type="detective",
+        population="invoices",
+        test_method="deterministic_threshold",
+        policy_reference="AUD-THR",
+    )
+)
+def run_approval_threshold_invoices(
+    *,
+    audit_run_id: str,
+    sample_ids: list[str] | None = None,
+) -> ControlResult:
+    from tools import all_invoices, exception_types_for, load_purchase_order
+
+    spec = REGISTRY["AUD-THR-001"][0]
+    exceptions: list[ControlException] = []
+    tested: list[str] = []
+    invoices = all_invoices()
+    wanted = set(sample_ids) if sample_ids is not None else {item.invoice_id for item in invoices}
+    for invoice in invoices:
+        if invoice.invoice_id not in wanted:
+            continue
+        tested.append(invoice.invoice_id)
+        types = exception_types_for(invoice.invoice_id)
+        if "approval_limit_exceeded" not in types:
+            continue
+        purchase_order = load_purchase_order(invoice.po_id)
+        exceptions.append(
+            ControlException(
+                object_id=invoice.invoice_id,
+                object_type="invoice",
+                result="FAIL",
+                detail=(
+                    f"{invoice.invoice_id} authorized amount exceeds the documented approval limit "
+                    f"{getattr(purchase_order, 'approval_limit', None)}."
+                ),
+                facts={
+                    "invoice_id": invoice.invoice_id,
+                    "po_id": invoice.po_id,
+                    "authorized_amount": getattr(purchase_order, "authorized_amount", None),
+                    "approval_limit": getattr(purchase_order, "approval_limit", None),
+                },
+                evidence_ids=[invoice.invoice_id, invoice.po_id or ""],
+                related_ids={
+                    "invoices": [invoice.invoice_id],
+                    "purchase_orders": [invoice.po_id] if invoice.po_id else [],
+                },
+                monetary_exposure=invoice.amount,
+            )
+        )
+    return _base(spec, audit_run_id, tested, exceptions)
+
+
+def _period_end_stamp(period: str) -> str:
+    year, month = [int(part) for part in period.split("-")[:2]]
+    last = monthrange(year, month)[1]
+    return f"{year:04d}-{month:02d}-{last:02d}T23:59:59Z"
+
+
 def classify_post_close(
     entry: AuditJournalEntry,
     period: AccountingPeriod,
 ) -> str:
-    if period.status != "CLOSED" or not period.close_timestamp:
-        return "HUMAN_REVIEW"
     posted = entry.posting_timestamp or entry.posting_date
     if not posted:
         return "HUMAN_REVIEW"
-    if posted <= period.close_timestamp:
-        return "PASS"
-    if entry.authorized and entry.authorization_id:
-        return "AUTHORIZED_POST_CLOSE_ADJUSTMENT"
-    return "UNAUTHORIZED_POST_CLOSE_ENTRY"
+    period_end = _period_end_stamp(period.period)
+    after_month = posted[:10] > period_end[:10]
+    after_lock = bool(period.close_timestamp) and posted > period.close_timestamp
+    if after_month or after_lock:
+        if entry.authorized and entry.authorization_id:
+            return "AUTHORIZED_POST_CLOSE_ADJUSTMENT"
+        if period.status != "CLOSED" and not period.close_timestamp:
+            return "HUMAN_REVIEW"
+        return "UNAUTHORIZED_POST_CLOSE_ENTRY"
+    if period.status != "CLOSED" or not period.close_timestamp:
+        return "HUMAN_REVIEW"
+    return "PASS"
 
 
 @register(

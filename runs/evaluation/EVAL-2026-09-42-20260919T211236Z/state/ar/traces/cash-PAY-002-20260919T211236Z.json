@@ -1,0 +1,216 @@
+{
+  "payment_id": "PAY-002",
+  "started_at": "2026-09-19T21:12:36Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-002",
+    "payment_date": "2026-09-27",
+    "amount": 4000.0,
+    "currency": "USD",
+    "payer_name": "Pinnacle Retail",
+    "customer_id": "CUST-006",
+    "bank_reference": "ACH-PIN-4K",
+    "remittance_text": "Partial INV-AR-006 store rollout",
+    "invoice_reference": "INV-AR-006",
+    "source": "ach",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {}
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-002",
+      "payment_date": "2026-09-27",
+      "amount": 4000.0,
+      "currency": "USD",
+      "payer_name": "Pinnacle Retail",
+      "customer_id": "CUST-006",
+      "bank_reference": "ACH-PIN-4K",
+      "remittance_text": "Partial INV-AR-006 store rollout",
+      "invoice_reference": "INV-AR-006",
+      "source": "ach",
+      "unapplied_amount": 4000.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
+    },
+    "identified_customer_id": "CUST-006",
+    "identified_customer_name": "Pinnacle Retail",
+    "customer_confidence": 0.99,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-AR-006",
+        "customer_id": "CUST-006",
+        "customer_name": "Pinnacle Retail",
+        "invoice_date": "2026-09-01",
+        "due_date": "2026-10-01",
+        "original_amount": 10000.0,
+        "outstanding_amount": 10000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Store rollout",
+        "created_at": "2026-09-01T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-AR-006",
+            "amount": 4000.0
+          }
+        ],
+        "total_applied": 4000.0,
+        "unapplied_amount": 0.0,
+        "match_type": "explicit_invoice",
+        "score": 0.99,
+        "evidence": [
+          "Remittance names INV-AR-006"
+        ],
+        "ambiguities": []
+      }
+    ],
+    "remittance_invoice_ids": [
+      "INV-AR-006"
+    ],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-002 4000.0 USD from Pinnacle Retail",
+      "Remittance: Partial INV-AR-006 store rollout",
+      "Payment already tagged CUST-006",
+      "Remittance invoice references: INV-AR-006"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-002",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-006",
+        "amount": 4000.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-002 4000.0 USD from Pinnacle Retail",
+      "Remittance: Partial INV-AR-006 store rollout",
+      "Payment already tagged CUST-006",
+      "Remittance invoice references: INV-AR-006",
+      "Remittance names INV-AR-006"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-002",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-006",
+        "amount": 4000.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-002 4000.0 USD from Pinnacle Retail",
+      "Remittance: Partial INV-AR-006 store rollout",
+      "Payment already tagged CUST-006",
+      "Remittance invoice references: INV-AR-006",
+      "Remittance names INV-AR-006"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": true,
+  "record": {
+    "application_id": "AR-APP-001",
+    "payment_id": "PAY-002",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-006",
+        "amount": 4000.0
+      }
+    ],
+    "total_applied": 4000.0,
+    "unapplied_amount": 0.0,
+    "decision": "AUTO_APPLY",
+    "status": "APPLIED",
+    "posted": true,
+    "invoice_changes": [
+      {
+        "invoice_id": "INV-AR-006",
+        "previous_outstanding": 10000.0,
+        "applied_amount": 4000.0,
+        "new_outstanding": 6000.0,
+        "previous_status": "OPEN",
+        "new_status": "PARTIALLY_PAID"
+      }
+    ],
+    "journal_entry_ids": [
+      "AR-JE-001"
+    ],
+    "created_at": "2026-09-19T21:12:36Z",
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+  },
+  "state_changes": [
+    {
+      "invoice_id": "INV-AR-006",
+      "previous_outstanding": 10000.0,
+      "applied_amount": 4000.0,
+      "new_outstanding": 6000.0,
+      "previous_status": "OPEN",
+      "new_status": "PARTIALLY_PAID"
+    }
+  ],
+  "journal_entries": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Pinnacle Retail",
+      "memo": "Apply PAY-002 to INV-AR-006",
+      "debit": {
+        "account": "Cash",
+        "amount": 4000.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 4000.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-002",
+      "related_invoice_ids": [
+        "INV-AR-006"
+      ],
+      "created_at": "2026-09-19T21:12:36Z"
+    }
+  ],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

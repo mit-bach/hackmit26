@@ -1,0 +1,93 @@
+{
+  "reconciliation_id": "BSR-2026-09-PrepaidExpenses",
+  "period": "2026-09",
+  "account_id": "Prepaid Expenses",
+  "packet": {
+    "account_id": "Prepaid Expenses",
+    "account_name": "Prepaid Expenses",
+    "period": "2026-09",
+    "ledger_balance": 11000.0,
+    "evidence_balance": 11000.0,
+    "ledger_source": "remaining prepaid schedules",
+    "evidence_source": "prepaid contracts with source documents",
+    "evidence_refs": [
+      "INV-020",
+      "INV-019"
+    ],
+    "reconciling_items": [],
+    "stale_evidence": false,
+    "duplicate_support": false,
+    "missing_evidence": false,
+    "calculations": {
+      "remaining_by_account": {
+        "Prepaid Software": 0.0,
+        "Prepaid Insurance": 11000.0
+      },
+      "missing_amount": 0.0
+    }
+  },
+  "preparer": {
+    "account_id": "Prepaid Expenses",
+    "finding": "exact_match",
+    "status": "MATCHED",
+    "explanation": "Ledger equals independent evidence.",
+    "confidence": 0.95,
+    "escalate": false,
+    "evidence_used": [
+      "INV-020",
+      "INV-019"
+    ]
+  },
+  "reviewer": {
+    "account_id": "Prepaid Expenses",
+    "decision": "APPROVE",
+    "sign_off": true,
+    "agree_with_preparer": true,
+    "reasons": [
+      "Independent review agrees with the Python-supported finding."
+    ],
+    "evidence_used": [
+      "INV-020",
+      "INV-019"
+    ]
+  },
+  "final": {
+    "reconciliation_id": "BSR-2026-09-PrepaidExpenses",
+    "period": "2026-09",
+    "account_id": "Prepaid Expenses",
+    "account_name": "Prepaid Expenses",
+    "ledger_balance": 11000.0,
+    "evidence_balance": 11000.0,
+    "difference": 0.0,
+    "status": "SIGNED_OFF",
+    "preparer": "Balance Sheet Reconciliation Preparer",
+    "reviewer": "Balance Sheet Reconciliation Reviewer",
+    "evidence_refs": [
+      "INV-020",
+      "INV-019"
+    ],
+    "reconciling_items": [],
+    "supporting_source": "prepaid contracts with source documents",
+    "explanation": "Ledger equals independent evidence.",
+    "finding": "exact_match",
+    "created_at": "2026-09-19T21:29:16Z",
+    "reviewed_at": "2026-09-19T21:29:16Z",
+    "ledger_source": "remaining prepaid schedules",
+    "calculations": {
+      "remaining_by_account": {
+        "Prepaid Software": 0.0,
+        "Prepaid Insurance": 11000.0
+      },
+      "missing_amount": 0.0
+    },
+    "review_decision": "APPROVE",
+    "supporting_balance": 11000.0,
+    "review_status": "APPROVE",
+    "blocking_items": [],
+    "proposed_adjustments": [],
+    "preparer_name": "Balance Sheet Reconciliation Preparer",
+    "reviewer_name": "Balance Sheet Reconciliation Reviewer"
+  },
+  "agents": [],
+  "used_agent": false
+}

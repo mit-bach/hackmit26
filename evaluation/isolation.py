@@ -16,6 +16,7 @@ ANSWER_KEY_NAMES = frozenset(
     {
         "expected_results.json",
         "discrepancy_contracts.json",
+        "holdout_contracts.json",
     }
 )
 EVALUATION_ONLY_NAMES = frozenset(
@@ -23,6 +24,7 @@ EVALUATION_ONLY_NAMES = frozenset(
         "expected_results.json",
         "ground_truth.json",
         "discrepancy_contracts.json",
+        "holdout_contracts.json",
     }
 )
 
