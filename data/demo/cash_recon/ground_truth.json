@@ -1,0 +1,113 @@
+{
+  "period": "2026-09",
+  "matched_bank_ids": [
+    "TXN-2026-09-018A",
+    "TXN-2026-09-008",
+    "TXN-AR-PAY-001",
+    "TXN-2026-09-012A",
+    "TXN-2026-09-019A",
+    "TXN-2026-09-022S",
+    "TXN-2026-09-026S"
+  ],
+  "exception_bank_ids": [
+    "TXN-2026-09-011",
+    "TXN-2026-09-015",
+    "TXN-2026-09-012B",
+    "GL-AP-HE",
+    "TXN-2026-09-025",
+    "GL-AP-ORPHAN"
+  ],
+  "labels": {
+    "TXN-2026-09-018A": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-AP-INV-001"
+      ]
+    },
+    "TXN-2026-09-008": {
+      "match_type": "GROUPED_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-AP-201",
+        "GL-AP-202",
+        "GL-AP-203"
+      ]
+    },
+    "TXN-2026-09-011": {
+      "match_type": "FEE_NETTED",
+      "disposition": "EXPLAINED_EXCEPTION",
+      "ledger_ids": [
+        "GL-AP-WIRE"
+      ]
+    },
+    "TXN-AR-PAY-001": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-AR-PAY-001"
+      ]
+    },
+    "TXN-2026-09-015": {
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "disposition": "HUMAN_REVIEW",
+      "ledger_ids": [
+        "GL-AR-NS"
+      ],
+      "difference": 12.4
+    },
+    "TXN-2026-09-012A": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-AR-772"
+      ]
+    },
+    "TXN-2026-09-012B": {
+      "match_type": "POSSIBLE_DUPLICATE_REFUND",
+      "disposition": "HUMAN_REVIEW",
+      "ledger_ids": []
+    },
+    "GL-AP-HE": {
+      "match_type": "TIMING_DIFFERENCE",
+      "disposition": "OUTSTANDING_TIMING_ITEM",
+      "bank_ids": [
+        "TXN-2026-10-001"
+      ]
+    },
+    "TXN-2026-09-025": {
+      "match_type": "UNMATCHED_BANK",
+      "disposition": "HUMAN_REVIEW",
+      "ledger_ids": []
+    },
+    "GL-AP-ORPHAN": {
+      "match_type": "UNMATCHED_LEDGER",
+      "disposition": "HUMAN_REVIEW",
+      "bank_ids": []
+    },
+    "TXN-2026-09-019A": {
+      "match_type": "PROVIDER_PAYOUT",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CASH-STRIPE-FEES"
+      ],
+      "provider": "stripe"
+    },
+    "TXN-2026-09-022S": {
+      "match_type": "PROVIDER_PAYOUT",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CASH-STRIPE-REF"
+      ],
+      "provider": "stripe"
+    },
+    "TXN-2026-09-026S": {
+      "match_type": "PROVIDER_PAYOUT",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CASH-STRIPE-DP"
+      ],
+      "provider": "stripe"
+    }
+  }
+}

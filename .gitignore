@@ -8,4 +8,11 @@ __pycache__/
 runs/*.json
 runs/accruals/
 runs/ingestion/
+runs/integrations/*.json
+runs/ar/
+runs/cash_recon/
+runs/audit/*.json
+runs/reporting/
+runs/forecast/
 traces/accruals/
+traces/cash_recon/

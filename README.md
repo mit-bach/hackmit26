@@ -26,9 +26,96 @@ python main.py INV-001
 python main.py schedule --seed-demo
 python accrue.py 2026-09
 python main.py ingest 2026-09
+python main.py close 2026-09
+python main.py demo-close
+python main.py close-month --month 2026-09 --seed-demo
+python main.py close-trace --month 2026-09
+python main.py eval-close --month 2026-09
+python close.py run --period 2026-09
+python close.py status --period 2026-09
+python close.py reviews --period 2026-09
+python demo_month_end_close.py --resolve
 python main.py skills
+python main.py ar-aging --as-of 2026-09-30
+python main.py ar-collections --as-of 2026-09-30
+python main.py ar-cash-apply PAY-001
+python main.py ar-review-list
+python main.py ar-review-show PAY-005
+python main.py ar-review-correct PAY-005 --apply INV-AR-101:10000 --apply INV-AR-102:15000 --reason "Customer confirmed both invoices"
+python main.py cash-forecast --as-of 2026-09-30 --weeks 13
+python main.py ar-demo
+python main.py ar-forecast-demo
+python main.py reconcile-cash --month 2026-09 --seed-demo
+python main.py reconcile-trace REC-001
+python main.py eval-cash-reconciliation
+python main.py audit-demo
+python main.py audit --period 2026-09 --seed 26
+python main.py eval-audit
+python main.py demo-reporting
+python -m reporting.demo
 python -m invoice_ingestion.demo
+python main.py integration-demo
+python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo
+python main.py validate-sample-data --data-root data/demo
+python main.py sample-data-summary --data-root data/demo
 ```
+
+Webhook receipt is deterministic. Agents classify messy email/PDF content later; they do not verify signatures or add payout totals.
+
+```
+                         OFFICE OF THE CFO
+
+          AP / INVOICE EVENTS             CASH EVENTS
+
+        Gmail        Outlook             Stripe
+           \           /                    \
+            Email classifier                 \
+                 \                              \
+        Xero ─────┼──► Canonical Invoice       Provider Payout
+        Coupa ────┤           │                /
+        NetSuite ─┘           ▼               /
+                       Existing AP      Adyen
+                           │               │
+                           ▼               ▼
+                       Accruals      Cash Reconciliation
+                           \               /
+                            \             /
+                             Shared overlay / traces
+                                  │
+                                  ▼
+                    python main.py close / demo-close
+```
+
+Gmail and Outlook share `interpret_email`. Stripe and Adyen never become `InvoiceCandidate`. Coupa and NetSuite are official API syncs (no fabricated invoice webhooks). Research notes: [`docs/integrations.md`](docs/integrations.md).
+
+```bash
+python main.py integration-demo
+python main.py stripe-demo
+python main.py webhook-demo stripe
+python main.py sync stripe
+python main.py webhook-server   # POST /webhooks/{stripe,adyen,gmail,outlook,xero}
+```
+
+### Live Stripe (optional)
+
+Stripe is the only live external integration in this repo. Default remains mock (`STRIPE_MODE=mock`); demos and tests need no credentials.
+
+```bash
+# .env
+STRIPE_MODE=live
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+```
+
+```bash
+stripe login
+stripe listen --forward-to localhost:8000/webhooks/stripe
+python main.py webhook-server
+python main.py sync stripe
+python main.py integrations status
+```
+
+Never commit real keys. `integrations status` reports configured/missing, never the secret values. Stripe payouts feed cash reconciliation only; they are not AP invoices.
 
 Each workflow prints the decision, then saves a JSON trace under `runs/`. The ingest demo works without an API key (deterministic extraction). Add `--llm` to run the source agents live.
 
@@ -84,6 +171,120 @@ The agent proposes a plan. Python then strips HOLD invoices, blocks reserve brea
 As of 2026-09-19, spendable cash is $115,000. GitHub `INV-009` ($21,000, due October 2, no discount) is affordable but should be deferred. AWS `INV-002` is due this week. Google Cloud `INV-006` is already late. Office Depot / Figma / Stripe / Acme still have open 2/10 discounts.
 
 Metrics on the plan: on-time percent, discounts captured, late fees avoided, reserve violations, unnecessary early payments, cash retained.
+
+## Accounts receivable
+
+Customer invoices age, collections decide who to chase, and incoming cash is applied to the right invoices — including when the remittance does not say which.
+
+```
+Customer invoices
+  → AR aging engine (Python)
+  → Collections candidates (Python)
+  → Collections Agent
+  → payment arrives
+  → cash-application candidates (Python)
+  → Cash Application Agent / Reviewer
+  → AUTO_APPLY / HUMAN_REVIEW / UNAPPLIED
+  → AR subledger + shared close/audit snapshot
+```
+
+Python owns aging math, match combinations, posting, and hard rules (no chase on paid or disputed invoices, no over-application, no silent rewrite of a bad proposal). Agents judge tone, remittance ambiguity, and escalation. `ar-demo` is deterministic and does not need an API key. Add `--llm` on `ar-collections` or `ar-cash-apply` to use the live agents.
+
+State persists under `runs/ar/`. A posted application changes invoice outstanding balances, so the next aging run, close snapshot, and audit trail all see the same books.
+
+## CFO close
+
+`python main.py close 2026-09` is the original thin orchestrator. It does not merge agents. Sequence: ingest → provider cash events → AP validation → accrual discovery/booking → approved pool → payment schedule → one close packet under `runs/close/`.
+
+`python main.py demo-close` runs that same path and narrates the connected story. `--deterministic` uses the existing AP hard policy and accrual method policy (no API key). Live close only re-runs featured AP cases (`INV-001`, `INV-016`); other invoices use the AP hard policy so stale traces cannot change the pool.
+
+HOLD invoices never enter the scheduler. Accruals never become payables until an invoice arrives. Provider payouts stay off the AP inbox. A bill already received, including Helios via Outlook, is not accrued.
+
+## Month-end close
+
+The Accrual Agent is unchanged. The new month-end layer calls it, then adds the close work that was still missing: prepaid amortization, fixed-asset depreciation, evidence-tied balance-sheet recs, and a real checklist.
+
+```
+Ingest → AP / AR / cash
+      → Accrual Agent (existing)
+      → Prepaid amortization
+      → Depreciation / amortization
+      → Balance-sheet reconciliations
+      → Exception review → final review → mark closed
+```
+
+Dependencies are explicit in `close/checklist.py`. A task is READY only when every dependency is COMPLETE. NEEDS_REVIEW, BLOCKED, or FAILED upstream work blocks dependents. Completed journal keys are idempotent, so a rerun does not repost.
+
+| Workflow | What is new vs existing |
+|---|---|
+| Accruals | Existing Accrual Agent / `accrue.py`. Called, not rewritten. |
+| Prepaids | New. Python builds straight-line or daily-prorated schedules. Agents choose treatment. |
+| Fixed assets | New. Straight-line depreciation, duplicate detection, intangible amortization. |
+| Cash rec | Existing `cash_recon` engine. Wrapped into the cash close task and the Cash BS rec. |
+| BS recs | New. Ledger vs evidence for cash, AR, AP, accruals, prepaids, and fixed assets. |
+| Orchestrator | New checklist with statuses, blockers, and preparer/reviewer separation. |
+
+Deterministic Python owns amounts, schedules, ceilings, and match math. Agents choose among Python candidates and may escalate. They cannot invent arithmetic or silently force a rec to match.
+
+Preparer agents assemble evidence and propose treatment. Reviewer agents inspect those outputs and may approve, reject, request evidence, or escalate.
+
+```bash
+python close.py run --period 2026-09
+python close.py status --period 2026-09
+python close.py reviews --period 2026-09
+python close.py finalize --period 2026-09
+python main.py close run --period 2026-09
+python main.py close reviews --period 2026-09
+python main.py close finalize --period 2026-09
+python demo_month_end_close.py
+python demo_month_end_close.py --resolve
+python close.py eval-live --deterministic
+```
+
+The default September close is BLOCKED: cash $12.40 unexplained, unmatched AR $4,500, and a prepaid missing its Northshore policy. Reviewers resolve those cases by mutating the source objects, then `rerun` and `finalize` move the period to CLOSED. `--clean` remains a hidden fixture, not the successful-close path.
+
+Sample demo output:
+
+```
+[1/8] AP COMPLETE
+[2/8] AR COMPLETE
+[3/8] Cash reconciliation NEEDS_REVIEW
+[4/8] Accruals COMPLETE
+[5/8] Prepaid amortization COMPLETE
+[6/8] Depreciation COMPLETE
+[7/8] Balance-sheet reconciliations BLOCKED
+[8/8] Final review WAITING
+
+SEPTEMBER 2026 CLOSE
+--------------------
+Cash reconciliation          NEEDS_REVIEW
+Balance-sheet reconciliations BLOCKED
+Final review                 NOT_STARTED
+
+3 accounts still require attention:
+- Cash: $12.40 unexplained difference
+- AR: $4,500 customer payment unmatched
+- Prepaids: missing insurance policy evidence
+
+Close status: BLOCKED
+```
+
+The $60,000 Dell server (`INV-021`) starts as an AP capital invoice, becomes a fixed asset, is depreciated, hits the GL, appears in the fixed-asset rec, and is linked on the close checklist.
+
+Limitations: demo books are JSON files, not a production ERP; live agents are optional and not required for tests; cash rec still uses the existing in-memory store; capitalization policy is a simple cost/useful-life rule.
+
+### Tests
+
+```bash
+python -m pytest tests/
+```
+
+Live-agent evaluation is local only and is not part of CI:
+
+```bash
+python close.py eval-live --deterministic
+python accrue.py eval-live 2026-09 --runs 5
+```
 
 ## Best invoices to test
 
@@ -193,6 +394,118 @@ Per-vendor traces land in `traces/accruals/2026-09/<run>/` and are not overwritt
 
 August bill $12,250. Trend $12,767. Recent average $11,583. September usage × committed rate **$11,849.90**. The useful number is usage, not last month. When the October invoice arrives at $12,100, reconciliation shows a **+$250.10** estimation error, then reverses the accrual and books the actual bill.
 
+## Cash and bank reconciliation
+
+`python main.py reconcile-cash --month 2026-09 --seed-demo` matches a month of bank activity to the cash ledger. Python generates candidates and owns every sum. Stripe and Adyen payouts are delegated to the existing adapters; they are not reimplemented.
+
+```
+Bank statement
+  → Python normalization and candidate generation
+  → Cash Reconciliation Preparer
+  → Python validator
+  → Cash Exception Investigator (exceptions only)
+  → Cash Reconciliation Reviewer
+  → monthly report + per-item traces under traces/cash_recon/
+```
+
+Deterministic statuses: `MATCHED`, `EXPLAINED_EXCEPTION`, `OUTSTANDING_TIMING_ITEM`, `HUMAN_REVIEW`. The period may not report `RECONCILED` if the arithmetic does not tie, or if unexplained / duplicate items remain. Proposed bank-fee journals are never auto-posted.
+
+```bash
+python main.py reconcile-cash --month 2026-09 --seed-demo
+python main.py reconcile-trace REC-001
+python main.py eval-cash-reconciliation
+```
+
+The seeded September 2026 statement includes an exact vendor payment, one ACH covering three invoices, a wire net of a $25 bank fee, a duplicate card refund, a $12.40 unexplained deposit difference, a month-end timing item, a duplicate GL posting, Stripe and Adyen payouts, a clean customer receipt, and unmatched miscellaneous activity.
+
+## Shared sample-data generation
+
+Five specialized sample-data agents write **one** internally consistent synthetic company (Maximor Demo Corp) for September 2026. They do not emit five disconnected fixture packs. The same economic event keeps the same identity and amount from AP through GL, bank, cash reconciliation, forecast actuals, month-end close, audit population, and reporting.
+
+```
+                 AP / AR
+                    │
+          ┌─────────┼─────────┐
+          ▼         ▼         ▼
+         GL       Cash     Forecast
+          │         │         │
+          ├─────────┴─────────┤
+          ▼                   ▼
+        Close              Reporting
+          │                   ▼
+          └─────────┬─────────┘
+                    ▼
+                  Audit
+```
+
+Generation order is fixed: shared `CompanyScenarioContext` → AP/AR Sample Data Agent → Cash Recon Sample Data Agent → Close Sample Data Agent → Audit Controls Sample Data Agent → Reporting Forecasting Sample Data Agent → cross-domain validators → `manifest.json`.
+
+Python owns IDs, dates, amounts, aging, balanced journals, forecast roll-forwards, and expected numerical outcomes. Agents may choose approved scenario templates and narrative text. They do not perform arithmetic and they never load the answer key.
+
+```bash
+python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo
+python main.py validate-sample-data --data-root data/demo
+python main.py sample-data-summary --data-root data/demo
+```
+
+`--seed 42` is deterministic. A second run with the same seed produces the same canonical records (generation timestamps are fixed). Output goes to `data/demo/` so the hand-written fixtures under `data/` stay intact. Existing workflows consume the generated files through the same models; `sample_data/paths.py` remaps loaders when a data-root is applied.
+
+| Artifact | Purpose |
+| --- | --- |
+| `data/demo/*.json` and domain subfolders | Operational inputs in the exact schemas already used by AP, AR, cash recon, close, audit, reporting, Stripe, and ingestion |
+| `data/demo/canonical/` | Shared vendor payments, journals, scenario registry, and storylines |
+| `data/demo/manifest.json` | Seed, period, file list, record counts, planted scenario IDs |
+| `data/demo/expected_results.json` | Hidden answer key for tests only. Operational agents must never load it |
+
+Planted cases live in `sample_data/registry.py` (`SCN-AP-001` clean three-way match, `SCN-CASH-005` unexplained $12.40, `SCN-AUDIT-005` self-approval, `SCN-REPORT-001` gross-margin decline, and the rest of the catalog). Three demo storylines follow one transaction across functions: clean (`INV-001`), resolved exception (`INV-017` fee-netted wire), and unresolved review (`INV-AR-013` / `$12.40`).
+
+Adapters in `sample_data/adapters.py` convert a canonical object into a consumer schema (AP invoice → audit invoice, Stripe payout → bank deposit, journal → reporting line). They copy identity and amount; they do not invent a second copy.
+
+## Reporting and 13-week cash forecast
+
+`python main.py demo-reporting` (or `python -m reporting.demo`) builds financial statements from the reporting ledger, explains the September gross-margin move at transaction level, rolls a 13-week cash forecast from the existing AP pool, AR invoices, and payroll schedule, compares that snapshot with later actuals, and writes a board pack with evidence IDs.
+
+Python owns every total. Agents only narrate. Forecast snapshots under `runs/reporting/forecasts/` are immutable. Architecture: [`docs/reporting.md`](docs/reporting.md).
+
+```
+Reporting ledger
+  → statements + variances
+  → Variance Analysis Agent
+  → Reporting Reviewer
+  → Board Reporting Agent
+
+AP + AR + payroll
+  → forecast lines
+  → weekly cash roll-forward
+  → Cash Forecast Agent
+  → Forecast Reviewer
+  → snapshot
+  → actuals
+  → Forecast Variance Agent
+```
+
+The August/September P&L demo is synthetic. AP, AR, and payment IDs are the same canonical records used by the other workflows.
+
+## Independent audit
+
+After AP, AR, cash reconciliation, close, and payment work is recorded, a separate Auditor Agent reviews that work. Python samples the population, reruns existing controls and reconciliation engines, and builds findings. The agent interprets severity and writes report language from those facts. Source invoices, payments, journals, and reconciliations are not rewritten.
+
+```
+Operational AP / AR / cash / close
+  → recorded IDs and traces
+  → Auditor Agent (independent)
+  → deterministic sampling + controls + re-performance
+  → structured findings + report
+```
+
+```bash
+python main.py audit-demo
+python main.py audit --period 2026-09 --seed 26
+python main.py eval-audit
+```
+
+`audit-demo` does not need an API key. Dedicated fixtures live in `data/audit/` so the normal AP and cash-recon datasets stay stable.
+
 ## Agent skills
 
 ```
@@ -218,12 +531,53 @@ Payment Scheduler
   -> payment-prioritization
   -> early-payment-discount-evaluation
 
+Collections Agent
+  -> ar-collections-policy
+
+Cash Application Agent
+  -> cash-application
+
+Variance Analysis Agent
+  -> financial-variance-analysis
+
+Cash Forecast Agent
+  -> cash-forecasting
+  -> ar-cash-forecasting
+
+Board Reporting Agent
+  -> board-financial-reporting
+
+Cash Reconciliation Preparer
+  -> cash-reconciliation-method-selection
+  -> bank-reference-interpretation
+
+Auditor Agent
+  -> audit-sampling-interpretation
+  -> control-testing-interpretation
+  -> reconciliation-reperformance-review
+  -> segregation-of-duties-interpretation
+
+Audit Report Agent
+  -> audit-finding-writing
+
 Email Invoice Agent
   -> invoice-source-identification
   -> invoice-field-interpretation
 
 ERP Invoice Agent
   -> (none)
+
+Prepaid Preparer / Reviewer
+  -> prepaid-expense-accounting
+
+Fixed Asset Preparer / Reviewer
+  -> fixed-asset-depreciation
+
+Balance Sheet Reconciliation Preparer / Reviewer
+  -> balance-sheet-reconciliation
+
+Month-End Close Reviewer
+  -> month-end-close-review
 ```
 
 Traces record agent role, assigned skill names, file paths, content hashes, and whether each skill was injected into instructions. They do not dump `SKILL.md` bodies.

@@ -9,7 +9,7 @@ from typing import Any
 from integrations.cash import major_units, reconcile_payout
 from integrations.models import IntegrationResult, PayoutLine, ProviderPayout, WebhookEvent
 from integrations.providers.base import env, fixture_dir, hmac_sha256_hex_key_b64, load_json
-from integrations.store import payload_hash, remember_event, remember_payout, update_event
+from integrations.store import payload_hash, remember_event, remember_payout, remember_reconciliation, update_event
 
 TRANSFER_TYPES = {
     "balancePlatform.transfer.created",
@@ -153,6 +153,7 @@ def process_event(payload: dict, *, verified: bool, raw: bytes) -> IntegrationRe
     stored.result = "transfer_recorded"
     update_event(stored)
     breakdown = reconcile_payout(payout)
+    remember_reconciliation(breakdown)
     return IntegrationResult(
         provider="adyen",
         action="webhook",

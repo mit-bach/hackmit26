@@ -13,7 +13,7 @@ PROVIDERS = {
 INVOICE_PROVIDERS = ("gmail", "outlook", "xero", "coupa", "netsuite")
 CASH_PROVIDERS = ("stripe", "adyen")
 WEBHOOK_PROVIDERS = ("stripe", "adyen", "gmail", "outlook", "xero")
-SYNC_PROVIDERS = ("coupa", "netsuite")
+SYNC_PROVIDERS = ("coupa", "netsuite", "stripe")
 
 
 def get_provider(name: str):

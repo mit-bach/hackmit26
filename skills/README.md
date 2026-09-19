@@ -53,6 +53,28 @@ Programmatic assignments live in `skills/assignments.py` and must match this tab
 | accrual-method-selection | Select the most defensible Python estimate candidate when an accrual is required | Accrual Agent | `skills/accrual-method-selection/SKILL.md` | Extracted | accrual-evidence-evaluation |
 | payment-prioritization | Rank approved invoices for this week's run using due date, vendor priority, and cash constraints | Payment Scheduler, Payment Audit | `skills/payment-prioritization/SKILL.md` | Extracted | early-payment-discount-evaluation |
 | early-payment-discount-evaluation | Capture open early-payment discounts when cash allows; do not pay closed-discount invoices early | Payment Scheduler, Payment Audit | `skills/early-payment-discount-evaluation/SKILL.md` | Extracted | payment-prioritization |
+| cash-reconciliation-method-selection | Distinguish exact, grouped, fee-netted, timing, duplicate, provider, and unexplained cash matches from Python candidates | Cash Reconciliation Preparer, Cash Reconciliation Reviewer | `skills/cash-reconciliation-method-selection/SKILL.md` | New | reconciliation-exception-investigation |
+| reconciliation-exception-investigation | Investigate unmatched cash activity without inventing explanations | Cash Exception Investigator, Cash Reconciliation Reviewer | `skills/reconciliation-exception-investigation/SKILL.md` | New | cash-reconciliation-method-selection |
+| bank-reference-interpretation | Interpret messy bank descriptions and remittance references without inventing invoice numbers | Cash Reconciliation Preparer, Cash Exception Investigator | `skills/bank-reference-interpretation/SKILL.md` | New | cash-reconciliation-method-selection |
+| ar-collections-policy | Choose the next collections action from Python aging, dispute, promise, and contact facts | Collections Agent | `skills/ar-collections-policy/SKILL.md` | New | cash-application |
+| cash-application | Choose among Python remittance-match candidates; abstain when two explanations are equally good | Cash Application Agent, Cash Application Reviewer | `skills/cash-application/SKILL.md` | New | ar-collections-policy |
+| financial-variance-analysis | Explain period or budget metric movements from Python account and transaction attribution | Variance Analysis Agent, Reporting Reviewer Agent | `skills/financial-variance-analysis/SKILL.md` | New | board-financial-reporting |
+| cash-forecasting | Interpret a Python 13-week cash forecast built from AP, AR, and payroll lines | Cash Forecast Agent, Forecast Reviewer Agent | `skills/cash-forecasting/SKILL.md` | New | ar-cash-forecasting |
+| ar-cash-forecasting | Interpret Python receivable collection dates, promises, and dispute flags inside a cash forecast | Cash Forecast Agent, Forecast Reviewer Agent | `skills/ar-cash-forecasting/SKILL.md` | New | cash-forecasting |
+| forecast-vs-actual-interpretation | Explain a cash forecast miss using Python timing, amount, new, and residual contributors | Forecast Variance Agent, Forecast Reviewer Agent | `skills/forecast-vs-actual-interpretation/SKILL.md` | New | cash-forecasting |
+| board-financial-reporting | Write a compact board narrative from Python statements, variances, and the cash forecast | Board Reporting Agent, Reporting Reviewer Agent | `skills/board-financial-reporting/SKILL.md` | New | financial-variance-analysis |
+| audit-sampling-interpretation | Interpret a Python-selected audit sample without choosing transactions | Auditor Agent | `skills/audit-sampling-interpretation/SKILL.md` | New | control-testing-interpretation |
+| control-testing-interpretation | Interpret deterministic control results without rewriting source records | Auditor Agent | `skills/control-testing-interpretation/SKILL.md` | New | audit-finding-writing |
+| reconciliation-reperformance-review | Compare independent Python re-performance to the original reconciliation | Auditor Agent | `skills/reconciliation-reperformance-review/SKILL.md` | New | control-testing-interpretation |
+| segregation-of-duties-interpretation | Interpret SOD identity conflicts and their business impact | Auditor Agent | `skills/segregation-of-duties-interpretation/SKILL.md` | New | control-testing-interpretation |
+| audit-finding-writing | Write findings and report language from structured Python stats | Audit Report Agent | `skills/audit-finding-writing/SKILL.md` | New | control-testing-interpretation |
+| prepaid-expense-accounting | Choose among Python prepaid treatments using service-period evidence | Prepaid Preparer, Prepaid Reviewer | `skills/prepaid-expense-accounting/SKILL.md` | New | balance-sheet-reconciliation |
+| fixed-asset-depreciation | Distinguish capital assets from expenses and review Python straight-line depreciation | Fixed Asset Preparer, Fixed Asset Reviewer | `skills/fixed-asset-depreciation/SKILL.md` | New | prepaid-expense-accounting |
+| balance-sheet-reconciliation | Classify ledger-versus-evidence differences without forcing a match | Balance Sheet Reconciliation Preparer, Balance Sheet Reconciliation Reviewer | `skills/balance-sheet-reconciliation/SKILL.md` | New | month-end-close-review |
+| month-end-close-review | Decide whether remaining checklist blockers allow the period to close | Month-End Close Reviewer | `skills/month-end-close-review/SKILL.md` | New | month-end-close-coordination |
+| month-end-close-coordination | Coordinate close tasks, blockers, and reviewer routing without inventing balances | Close Manager | `skills/month-end-close-coordination/SKILL.md` | New | month-end-close-review |
+| synthetic-finance-scenario-design | Choose approved scenario templates so one economic event can be instantiated across AP, cash, close, audit, and reporting | Close Manager, AP/AR Sample Data Agent, Cash Recon Sample Data Agent, Close Sample Data Agent, Audit Controls Sample Data Agent, Reporting Forecasting Sample Data Agent | `skills/synthetic-finance-scenario-design/SKILL.md` | New | cross-ledger-data-consistency |
+| cross-ledger-data-consistency | Keep one economic event aligned across AP/AR, GL, bank, forecast, close, audit, and reporting without inventing a second copy | Close Manager, AP/AR Sample Data Agent, Cash Recon Sample Data Agent, Close Sample Data Agent, Audit Controls Sample Data Agent, Reporting Forecasting Sample Data Agent | `skills/cross-ledger-data-consistency/SKILL.md` | New | synthetic-finance-scenario-design |
 
 Status values: **Existing** (already a `SKILL.md` before this cleanup), **Extracted** (moved out of an agent prompt), **New** (created during cleanup because reuse was clearly missing).
 
@@ -71,7 +93,7 @@ These agents keep role/tool instructions only. Their remaining guidance is workf
 2. If none fits, add `skills/<skill-name>/SKILL.md` with the standard sections.
 3. Assign it in `skills/assignments.py` only to the agents that need it.
 4. Add a row to the registry table above.
-5. Keep deterministic logic in Python modules such as `tools.py`, `invoice_ingestion/interpret.py`, `accrual/estimation.py`, and `scheduling/cash.py`.
+5. Keep deterministic logic in Python modules such as `tools.py`, `invoice_ingestion/interpret.py`, `accrual/estimation.py`, `scheduling/cash.py`, `prepaid/schedule.py`, `fixed_assets/schedule.py`, `bs_recon/engine.py`, `reporting/statements.py`, and `reporting/forecast.py`.
 6. Add or update tests in `tests/test_skills.py`.
 
 Traces record skill names, paths, content hashes, and injection flags. They do not store skill bodies. Inspect assignments with `python main.py skills`.

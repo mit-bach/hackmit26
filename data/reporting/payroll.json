@@ -1,0 +1,9 @@
+[
+  {"schedule_id": "PR-2026-09-25", "pay_date": "2026-09-25", "expected_amount": 70000, "description": "Biweekly payroll"},
+  {"schedule_id": "PR-2026-10-02", "pay_date": "2026-10-02", "expected_amount": 70000, "description": "Biweekly payroll"},
+  {"schedule_id": "PR-2026-10-16", "pay_date": "2026-10-16", "expected_amount": 70000, "description": "Biweekly payroll"},
+  {"schedule_id": "PR-2026-10-30", "pay_date": "2026-10-30", "expected_amount": 70000, "description": "Biweekly payroll"},
+  {"schedule_id": "PR-2026-11-13", "pay_date": "2026-11-13", "expected_amount": 70000, "description": "Biweekly payroll"},
+  {"schedule_id": "PR-2026-11-27", "pay_date": "2026-11-27", "expected_amount": 70000, "description": "Biweekly payroll"},
+  {"schedule_id": "PR-2026-12-11", "pay_date": "2026-12-11", "expected_amount": 70000, "description": "Biweekly payroll"}
+]

@@ -11,28 +11,82 @@ Two event families are kept separate:
 
 ## Stripe
 
-**Workflow fed:** cash / payout reconciliation (not AP).
+**Workflow fed:** cash / payout reconciliation (not AP). Stripe customer payments never become invoices.
+
+```
+Stripe
+  → webhook (POST /webhooks/stripe)
+  → verify Stripe-Signature on the raw body
+  → payout (GET /v1/payouts/:id)
+  → balance transactions (GET /v1/balance_transactions?payout=)
+  → expected cash (Python integer minor-unit math)
+  → bank deposit (independent evidence, never fabricated from Stripe)
+  → reconciliation (MATCH / MISMATCH / AWAITING_BANK / NEEDS_REVIEW)
+```
 
 | Topic | Official behavior |
 |---|---|
 | Mechanism | HTTPS webhook endpoint registered in Workbench / `/v2/core/event_destinations`. Snapshot events POST JSON. |
-| Auth | Endpoint signing secret `whsec_...`. Header `Stripe-Signature` (`t=...,v1=...`). Verify with official library `stripe.Webhook.construct_event(raw_body, signature, secret)` on the **unmodified** raw body. |
-| Delivery | Stripe POSTs to a public HTTPS URL. Local: `stripe listen --forward-to http://localhost:8000/webhooks/stripe`. |
-| Relevant events | `payout.created`, `payout.updated`, `payout.paid`, `payout.failed`, `payout.canceled`, `payout.reconciliation_completed`. |
+| Auth | Endpoint signing secret `whsec_...`. Header `Stripe-Signature` (`t=...,v1=...`). Verify with official library `stripe.Webhook.construct_event(payload=raw_body, sig_header=signature, secret=secret)` on the **unmodified** raw body. Invalid or missing signature → HTTP 400, no payout, no reconciliation. |
+| Delivery | Stripe POSTs to a public HTTPS URL. Local: `stripe listen --forward-to localhost:8000/webhooks/stripe`. |
+| Relevant events | Prefer `payout.reconciliation_completed` (balance transactions for an automatic payout are queryable). Also record `payout.created`, `payout.updated`, `payout.paid`, `payout.failed`, `payout.canceled`. Unrelated events such as `payment_intent.created` are acknowledged and ignored. |
 | Payload IDs | Event `id` (`evt_...`). Payout `data.object.id` (`po_...`). |
-| After event | On `payout.reconciliation_completed`, list BalanceTransactions filtered by `payout=po_xxx` (`GET /v1/balance_transactions?payout=`), optionally `expand[]=data.source`. Types include `charge`, `refund`, `stripe_fee`, `adjustment` (disputes), `payout`. Manual payouts cannot be auto-attributed to transactions. |
+| After event | Retrieve the payout (`GET /v1/payouts/:id`). On `payout.reconciliation_completed` or `payout.paid`, list BalanceTransactions filtered by `payout=po_xxx` (`GET /v1/balance_transactions?payout=`), `expand[]=data.source`, paginate with `starting_after` / `auto_paging_iter()`. Types include `charge`, `refund`, `stripe_fee`, `adjustment` (disputes), `payout`. Unknown types are kept as `other`. Manual payouts cannot be auto-attributed to transactions. |
 | Retry | Live: up to three days, exponential backoff. Sandbox: three retries over a few hours. Acknowledge with 2xx quickly. |
-| Duplicates | Same `event.id` may be delivered more than once. Track processed event IDs. Distinct Event objects can also describe the same object; pair `data.object.id` + `event.type`. |
+| Duplicates | Same `event.id` may be delivered more than once. Track processed event IDs. Distinct Event objects can also describe the same payout; one canonical `ProviderPayout` per `po_...`. |
 | Expiration | Webhook endpoints do not expire. No watch renewal. |
-| Sandbox | Stripe sandboxes + Stripe CLI `stripe trigger payout.created`. CLI signing secret differs from Dashboard secret. |
+| Sandbox | Stripe test mode + Stripe CLI. CLI signing secret differs from Dashboard secret. |
 
-**Deviation from prompt:** Stripe payouts are **not** invoices. This implementation never maps them to `InvoiceCandidate`.
+**Mock vs live**
+
+`STRIPE_MODE=mock` (default) uses fixtures under `data/integrations/stripe/`. No Stripe credentials are required. `python main.py integration-demo` and `python main.py stripe-demo` always use the mock provider.
+
+`STRIPE_MODE=live` uses `LiveStripeProvider` and the official Stripe Python SDK (`stripe` 15.x). Requires `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`. Missing live credentials fail cleanly; they do not silently fall back to mock for API/sync calls.
+
+**Bank evidence**
+
+Stripe's payout amount is what Stripe sent. It is not independent bank evidence. If a bank deposit is on file and matches, status is `MATCH`. If no bank record exists, status is `AWAITING_BANK`. A differing bank amount is `MISMATCH` (`bank_amount_differs_from_stripe_payout`). The fixture-backed demo includes `BANK-STRIPE-97420` so the HackMIT example stays `MATCH`.
+
+**Idempotency**
+
+- Same Stripe event twice → one payout, one reconciliation.
+- Different events for the same `po_...` → update the canonical payout, no second cash record.
+- `python main.py sync stripe` after a webhook (and the reverse) does not duplicate payouts.
+
+**Manual sync**
+
+```bash
+python main.py sync stripe
+python main.py sync stripe --payout po_123
+python main.py stripe-sync
+```
+
+Uses the same normalize → cash-math → reconcile path as the webhook.
+
+**Local Stripe CLI**
+
+```bash
+stripe login
+stripe listen --forward-to localhost:8000/webhooks/stripe
+```
+
+Copy the printed `whsec_...` into `.env` as `STRIPE_WEBHOOK_SECRET`. Then:
+
+```bash
+python main.py webhook-server
+```
+
+Trigger a payout-related test event (Dashboard payout, or `stripe trigger payout.created` / `stripe trigger payout.paid`). The handler prefers `payout.reconciliation_completed` for loading balance transactions.
+
+**Deviation from prompt:** Stripe payouts are **not** invoices. This implementation never maps them to `InvoiceCandidate`. Official event `payout.reconciliation_completed` is valid on current Stripe API docs (2026) and is used as-is.
 
 Official URLs:
 
 - https://docs.stripe.com/webhooks
 - https://docs.stripe.com/webhooks/signature
 - https://docs.stripe.com/payouts/reconciliation
+- https://docs.stripe.com/api/payouts
+- https://docs.stripe.com/api/balance_transactions/list
 - https://docs.stripe.com/api/events/types
 - https://docs.stripe.com/cli/webhooks
 
@@ -209,7 +263,7 @@ Official URLs:
 
 | Provider | Documented local path |
 |---|---|
-| Stripe | `stripe listen --forward-to localhost:8000/webhooks/stripe` then `stripe trigger payout.created`. Use the CLI `whsec_`. |
+| Stripe | `stripe listen --forward-to localhost:8000/webhooks/stripe`. Put the CLI `whsec_` in `STRIPE_WEBHOOK_SECRET`. Then `python main.py webhook-server`. Optional: `python main.py sync stripe`. |
 | Adyen | Customer Area test webhooks / library HMAC validator. Public HTTPS URL required. |
 | Gmail | Pub/Sub push to a public HTTPS URL (generic tunnel if needed). Not a hard ngrok dependency. |
 | Outlook | Graph requires HTTPS `notificationUrl`. Handshake must succeed. |
@@ -228,3 +282,9 @@ python main.py webhook-server
 ## Mock vs live
 
 `INTEGRATIONS_MODE=mock` (default) uses fixtures under `data/integrations/`. Live adapters run only when `INTEGRATIONS_MODE=live` **and** the provider secret/token is set. Missing live credentials fall back to mock rather than crashing the HackMIT demo.
+
+Stripe is the exception that has a first-class live path:
+
+- `STRIPE_MODE=mock` (default) — fixtures, no credentials.
+- `STRIPE_MODE=live` — official Stripe SDK. Missing `STRIPE_SECRET_KEY` fails cleanly on sync/API; it does not invent payouts.
+

@@ -5,7 +5,8 @@ import re
 from functools import lru_cache
 from pathlib import Path
 
-from invoice_ingestion.extract import INGESTION_DIR, extract_text, resolve_ingestion_path
+from invoice_ingestion import extract as ingestion_extract
+from invoice_ingestion.extract import extract_text, resolve_ingestion_path
 from tools import DATA_DIR, all_invoices, all_purchase_orders, normalize_vendor
 
 
@@ -26,42 +27,42 @@ def _in_period(row: dict, period: str) -> bool:
 
 @lru_cache(maxsize=1)
 def list_emails_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "emails.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "emails.json")
 
 
 @lru_cache(maxsize=1)
 def list_erp_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "erp.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "erp.json")
 
 
 @lru_cache(maxsize=1)
 def list_procurement_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "procurement.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "procurement.json")
 
 
 @lru_cache(maxsize=1)
 def list_vendor_portals_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "vendor_portals.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "vendor_portals.json")
 
 
 @lru_cache(maxsize=1)
 def list_employee_submissions_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "employee_submissions.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "employee_submissions.json")
 
 
 @lru_cache(maxsize=1)
 def list_documents_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "documents.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "documents.json")
 
 
 @lru_cache(maxsize=1)
 def list_edi_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "edi_documents.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "edi_documents.json")
 
 
 @lru_cache(maxsize=1)
 def list_bank_raw() -> list[dict]:
-    return _read_json(INGESTION_DIR / "bank_transactions.json")
+    return _read_json(ingestion_extract.INGESTION_DIR / "bank_transactions.json")
 
 
 def clear_ingestion_cache() -> None:

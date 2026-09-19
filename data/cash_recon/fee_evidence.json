@@ -1,0 +1,11 @@
+[
+  {
+    "evidence_id": "ADV-729103",
+    "date": "2026-09-11",
+    "amount": 25.0,
+    "fee_type": "wire_correspondent",
+    "reference": "729103",
+    "description": "Correspondent bank fee on outgoing USD wire 729103",
+    "source": "bank_advice"
+  }
+]

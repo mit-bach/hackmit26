@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from datetime import date, timedelta
+from pathlib import Path
 
 from models import (
     CashPosition,
@@ -13,7 +14,9 @@ from models import (
 )
 from tools import DATA_DIR, collect_case_evidence, load_invoice, vendor_alias_established
 
-CASH_PATH = DATA_DIR / "cash_position.json"
+
+def cash_position_path() -> Path:
+    return DATA_DIR / "cash_position.json"
 PRIORITY_RANK = {"critical": 0, "high": 1, "normal": 2, "low": 3}
 BLOCKING_EXCEPTIONS = {
     "duplicate",
@@ -27,7 +30,7 @@ BLOCKING_EXCEPTIONS = {
 
 
 def load_cash_position() -> CashPosition:
-    return CashPosition.model_validate(json.loads(CASH_PATH.read_text()))
+    return CashPosition.model_validate(json.loads(cash_position_path().read_text()))
 
 
 def as_of(cash: CashPosition | None = None) -> date:
@@ -36,7 +39,11 @@ def as_of(cash: CashPosition | None = None) -> date:
 
 
 def spendable_cash(cash: CashPosition | None = None) -> float:
-    """Cash available for AP this week after payroll, other commitments, and the reserve."""
+    """Cash available for AP this week after payroll, other commitments, and the reserve.
+
+    Uses the CashPosition field as passed in (AP scheduling / tests). Forecast and
+    close use canonical_expected_receipts() — live AR — as the source of truth.
+    """
     cash = cash or load_cash_position()
     return (
         cash.bank_balance
@@ -45,6 +52,31 @@ def spendable_cash(cash: CashPosition | None = None) -> float:
         - cash.other_committed_outflows
         - cash.minimum_cash_reserve
     )
+
+
+def canonical_expected_receipts(as_of: str | None = None, horizon_days: int | None = None) -> float:
+    """Live AR expected collections. This is the forecast-facing receipts number."""
+    from ar.context import expected_collections
+
+    cash = load_cash_position()
+    return expected_collections(
+        as_of or cash.as_of_date,
+        horizon_days if horizon_days is not None else cash.payment_horizon_days,
+        bank_as_of=cash.as_of_date,
+    )
+
+
+def receipts_source_of_truth(as_of: str | None = None) -> dict:
+    cash = load_cash_position()
+    live = canonical_expected_receipts(as_of or cash.as_of_date, cash.payment_horizon_days)
+    legacy = cash.expected_receipts_next_7_days
+    return {
+        "legacy_expected_receipts_next_7_days": legacy,
+        "live_ar_expected_collections": live,
+        "source_of_truth": "live_ar",
+        "mismatch": abs(live - legacy) > 0.01,
+        "legacy_is_fallback_only": True,
+    }
 
 
 def policy_eligible_for_pool(invoice_id: str) -> bool:
@@ -57,11 +89,15 @@ def policy_eligible_for_pool(invoice_id: str) -> bool:
     return True
 
 
-def payment_candidate(invoice_id: str, approval_source: str = "ap_workflow") -> PaymentCandidate | None:
+def payment_candidate(
+    invoice_id: str,
+    approval_source: str = "ap_workflow",
+    cash: CashPosition | None = None,
+) -> PaymentCandidate | None:
     invoice = load_invoice(invoice_id)
     if invoice is None:
         return None
-    cash = load_cash_position()
+    cash = cash or load_cash_position()
     today = as_of(cash)
     due = date.fromisoformat(invoice.due_date)
     days = (due - today).days

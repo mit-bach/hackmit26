@@ -253,6 +253,45 @@ def _run_vendor(
     return finalize_vendor_close(vendor, period, decision, run_id, recorder.calls, discovery=discovery)
 
 
+def _run_policy_vendor(
+    vendor: str,
+    period: str,
+    run_id: str,
+    discovery: DiscoveryResult | None = None,
+) -> tuple[AccrualDecision, VendorDecisionTrace]:
+    """Book from the evidence-type policy. Used by tests and deterministic close."""
+    from accrual.policy import preferred_candidate
+
+    context = build_estimate_context(vendor, period)
+    candidate = preferred_candidate(context)
+    if candidate and candidate.amount is not None:
+        raw = AccrualDecision(
+            vendor=vendor,
+            period=period,
+            status="accrual_required",
+            estimated_amount=candidate.amount,
+            confidence=discovery.expectation_confidence if discovery else 0.85,
+            estimation_method=candidate.method,
+            evidence=[candidate.rationale],
+            reasoning_summary=candidate.rationale,
+            discovery_trace_id=discovery.discovery_trace_id if discovery else None,
+        )
+    else:
+        raw = AccrualDecision(
+            vendor=vendor,
+            period=period,
+            status="insufficient_evidence",
+            estimated_amount=None,
+            confidence=discovery.expectation_confidence if discovery else 0,
+            reasoning_summary=(
+                discovery.reason if discovery else "No applicable Python estimate candidate."
+            ),
+            evidence=[signal.detail for signal in discovery.signals] if discovery else [],
+            discovery_trace_id=discovery.discovery_trace_id if discovery else None,
+        )
+    return finalize_vendor_close(vendor, period, raw, run_id, discovery=discovery)
+
+
 def _save_legacy_report(report: AccrualPeriodReport) -> Path:
     RUNS_DIR.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -266,6 +305,7 @@ def run_accrual_workflow(
     reset: bool = True,
     vendors: list[str] | None = None,
     run_id: str | None = None,
+    use_agent: bool = True,
 ) -> AccrualPeriodReport:
     run_id = run_id or new_run_id()
     with data_cutoff(period, hide_period_invoices=False, allow_later_invoices=False):
@@ -319,7 +359,8 @@ def run_accrual_workflow(
 
     for item in missing:
         print(f"Estimating missing bill: {item.vendor}...", flush=True)
-        decision, trace = _run_vendor(item.vendor, period, run_id, discovery=item)
+        runner = _run_vendor if use_agent else _run_policy_vendor
+        decision, trace = runner(item.vendor, period, run_id, discovery=item)
         save_trace(trace, directory)
         decisions.append(decision)
         traces.append(trace)
