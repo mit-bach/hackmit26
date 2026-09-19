@@ -1,0 +1,11 @@
+Okay, you did a pretty bad job using it, but I set you up with Grok 4.6. I just want you to essentially create different bots or whatever and set all that up so you have your individual agents working on different tasks. This is the test: I need to see if they're able to communicate with each other, where their chat logs go, and how all of that functions.
+
+Mainly, I'm looking at all the extensions that we made, because I feel like all of them are just kind of bullshit. They don't really function at all, they're very lightweight, and they're just lazy, so I want to observe all of that. 
+
+After you output or whatever, I want you to create a document that has all of your things that you hate about the implementation of the Harness as a whole. I'll send you all my documents and an export of my Grok chat that I used to create this system, so you can see what the original vision was. Put particular emphasis on the prompts and not as much on the actual output and the responses from Grok. /Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/Source-material/Grok-Pi Coding Agent GrokBot Extensions Research-20260919-1439.md 
+
+As you can see, I'm not happy with it, and I feel like we are vastly underperforming in the way that it needs to function. There's a much better way that this can work and should work for clients and the foundry as a whole. 
+
+I want a separate agent to be spawned to form the output document and do analysis and understanding. I additionally need a new agent to be spawned who's going to specialize in driving the Harness and performing those operations. They need to be very thorough, do a lot of operations, and do a bunch of shit. They should start by understanding and reading all the TypeScript files that describe how the Harness works, so they can know what, at least, we're attempting to create.  
+
+I want you to feed your agents this file directly in addition to whatever prompt you decide to write them for prompt engineering, so that way they know what the operator intends. This is a behavior that should follow through for all future agents. /Users/dominikbach/olympus/hackmit/hackmit26/Operator-workspace/Prompts/Harness analysis.md

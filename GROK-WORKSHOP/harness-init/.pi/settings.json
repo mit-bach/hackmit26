@@ -1,0 +1,13 @@
+{
+  "subagents": {
+    "disableBuiltins": true,
+    "agentScanDirs": [],
+    "agentExcludeDirs": [
+      "/Users/dominikbach/.pi/agent/agents",
+      "/Users/dominikbach/.agents",
+      "/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/.pi/agents",
+      "/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/.agents",
+      "/Users/dominikbach/olympus/hackmit/hackmit26/GROK-WORKSHOP/harness-init/agents"
+    ]
+  }
+}
