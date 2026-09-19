@@ -1,10 +1,18 @@
 # Office of the CFO Agents
 
-Autonomous finance agents for HackMIT: accounts payable matching and period-end expense accruals.
+Autonomous finance agents for HackMIT: a connected Office of the CFO spanning AP, AR, cash reconciliation, month-end close, reporting, forecasting, and audit.
 
-Python computes the facts. Agents decide. There is no human-review step.
+Python computes the facts. Agents decide among those facts. Human review is a first-class state in AR cash application, bank reconciliation, and month-end close. The AP invoice chain itself is autonomous (`APPROVE` or `HOLD` only).
 
 Reusable agent expertise lives in `skills/`. Agents, tools, and Python stay separate: see [`skills/README.md`](skills/README.md).
+
+## System Architecture
+
+For a complete description of the agents, finance workflows, shared state, controls, human-review paths, and end-to-end workflow, see:
+
+`docs/AGENTIC_SYSTEM_WORKFLOW.md`
+
+Do not treat this README as the architecture document.
 
 ## Setup
 
@@ -59,6 +67,7 @@ python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo
 python main.py validate-sample-data --data-root data/demo
 python main.py sample-data-summary --data-root data/demo
 python main.py evaluate-cfo --data-root data/demo --seed 42 --all
+python main.py cfo-demo
 ```
 
 Webhook receipt is deterministic. Agents classify messy email/PDF content later; they do not verify signatures or add payout totals.
@@ -193,17 +202,13 @@ Python owns aging math, match combinations, posting, and hard rules (no chase on
 
 State persists under `runs/ar/`. A posted application changes invoice outstanding balances, so the next aging run, close snapshot, and audit trail all see the same books.
 
-## CFO close
+## Month-end close
 
-`python main.py close 2026-09` is the original thin orchestrator. It does not merge agents. Sequence: ingest → provider cash events → AP validation → accrual discovery/booking → approved pool → payment schedule → one close packet under `runs/close/`.
-
-`python main.py demo-close` runs that same path and narrates the connected story. `--deterministic` uses the existing AP hard policy and accrual method policy (no API key). Live close only re-runs featured AP cases (`INV-001`, `INV-016`); other invoices use the AP hard policy so stale traces cannot change the pool.
+`python main.py close 2026-09` and `python main.py demo-close` are compatibility aliases for the same month-end engine as `close-month`. They do not run a second close state machine.
 
 HOLD invoices never enter the scheduler. Accruals never become payables until an invoice arrives. Provider payouts stay off the AP inbox. A bill already received, including Helios via Outlook, is not accrued.
 
-## Month-end close
-
-The Accrual Agent is unchanged. The new month-end layer calls it, then adds the close work that was still missing: prepaid amortization, fixed-asset depreciation, evidence-tied balance-sheet recs, and a real checklist.
+The Accrual Agent is unchanged. Month-end close calls it, then adds prepaid amortization, fixed-asset depreciation, evidence-tied balance-sheet recs, and a real checklist.
 
 ```
 Ingest → AP / AR / cash
@@ -600,8 +605,6 @@ Month-End Close Reviewer
 
 Close Manager
   -> month-end-close-coordination
-  -> cross-ledger-data-consistency
-  -> synthetic-finance-scenario-design
 
 AP/AR Sample Data Agent
 Cash Recon Sample Data Agent

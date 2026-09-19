@@ -64,6 +64,8 @@ def _blocking_approve_violations(evidence: APCaseEvidence) -> list[str]:
         and not evidence.within_amount_tolerance
     ):
         violations.append("P-009 amount variance exceeds published tolerance")
+    if "approval_limit_exceeded" in evidence.exception_types:
+        violations.append("P-010 purchase order exceeds recorded approval authority")
     return violations
 
 

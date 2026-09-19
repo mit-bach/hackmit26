@@ -239,6 +239,8 @@ class CashApplicationFacts(BaseModel):
     candidates: list[CashMatchCandidate] = Field(default_factory=list)
     remittance_invoice_ids: list[str] = Field(default_factory=list)
     stale_invoice_ids: list[str] = Field(default_factory=list)
+    missing_invoice_ids: list[str] = Field(default_factory=list)
+    identity_conflicts: list[str] = Field(default_factory=list)
     precedents: list[str] = Field(default_factory=list)
     facts: list[str] = Field(default_factory=list)
 

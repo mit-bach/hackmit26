@@ -1,4 +1,10 @@
-"""Coordinate existing finance workflows. Does not reimplement them."""
+"""AP / accrual / payment-schedule packet.
+
+This is not the period-close engine. Month-end close lives in
+``close.month_end`` / ``close.engine``. ``decide_ap`` is reused by the
+canonical close checklist. ``run_cfo_close`` remains for AP/schedule
+invariant tests and does not write period status, reviews, or locks.
+"""
 
 from __future__ import annotations
 

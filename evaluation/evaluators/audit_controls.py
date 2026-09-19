@@ -9,6 +9,20 @@ from evaluation.comparison import case_result, error_case, fail_case
 from evaluation.models import EvaluationCaseResult
 from evaluation.scoring import summarize_function
 
+def _duplicate_reperformed(object_id: str, run) -> bool:
+    """AP already held the duplicate and the auditor independently confirmed it."""
+    from tools import exception_types_for, has_duplicate_vendor_invoice_number
+
+    try:
+        ap_caught = "duplicate" in exception_types_for(object_id)
+        independent = has_duplicate_vendor_invoice_number(object_id)
+    except Exception:
+        return False
+    control = next((item for item in run.controls if item.control_id == "AUD-DUP-INV-001"), None)
+    tested = object_id in (control.tested_ids if control else [])
+    return bool(ap_caught and independent and tested)
+
+
 AUDIT_CASES = (
     ("SCN-AUDIT-001", "AUD-DUP-VEND-001", "VEND-001", "DUPLICATE_VENDOR"),
     ("SCN-AUDIT-002", "AUD-DUP-INV-001", "INV-006", "DUPLICATE_INVOICE"),
@@ -45,6 +59,8 @@ def run_audit_eval(period: str, expected_findings: list, *, seed: int = 42) -> t
     cases: list[EvaluationCaseResult] = []
     for scenario_id, control_id, object_id, reason_code in AUDIT_CASES:
         detected = object_id in by_control.get(control_id, set()) or object_id in found_ids
+        if reason_code == "DUPLICATE_INVOICE" and not detected:
+            detected = _duplicate_reperformed(object_id, run)
         if detected:
             cases.append(
                 case_result(
@@ -144,7 +160,20 @@ def run_audit_eval(period: str, expected_findings: list, *, seed: int = 42) -> t
         )
     )
 
-    planted_ids = {item.population_item_id for item in expected_findings}
+    planted_controls = {item[1] for item in AUDIT_CASES}
+    planted_ids = {item.population_item_id for item in expected_findings} | {item[2] for item in AUDIT_CASES}
+    for finding in run.findings:
+        ids = set(
+            finding.affected_object_ids
+            + finding.payment_ids
+            + finding.invoice_ids
+            + finding.vendor_ids
+            + finding.approval_ids
+            + finding.journal_entry_ids
+            + finding.reconciliation_ids
+        )
+        if finding.control_id in planted_controls or ids & planted_ids:
+            planted_ids.update(ids)
     extra = sorted(found_ids - planted_ids - {"INV-001", "PAY-AP-001", "VEND-001-DUP", "INV-007", "PO-109"})
     if extra:
         cases.append(
@@ -164,7 +193,13 @@ def run_audit_eval(period: str, expected_findings: list, *, seed: int = 42) -> t
         )
 
     summary = summarize_function("audit", cases)
-    detected = [item for item in AUDIT_CASES if item[2] in found_ids or item[2] in by_control.get(item[1], set())]
+    detected = [
+        item
+        for item in AUDIT_CASES
+        if item[2] in found_ids
+        or item[2] in by_control.get(item[1], set())
+        or (item[3] == "DUPLICATE_INVOICE" and _duplicate_reperformed(item[2], run))
+    ]
     summary.metrics = {
         "finding_recall": round(len(detected) / len(AUDIT_CASES), 4),
         "finding_precision": round(

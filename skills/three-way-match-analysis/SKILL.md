@@ -38,7 +38,7 @@ Supporting records may be loaded with get_invoice, get_purchase_order, get_goods
 ## Decision Criteria
 
 - **APPROVE** only when Python facts show a clean three-way match: approved PO, exact amount match, exact vendor match, full receipt, and no duplicate.
-- **HOLD** when a blocking control is already obvious: duplicate vendor invoice number, unapproved PO, missing or not-received goods, or missing PO.
+- **HOLD** when a blocking control is already obvious: duplicate vendor invoice number (including normalized formatting of the same number and vendor), unapproved PO, missing or not-received goods, missing PO, or a purchase that exceeds recorded approval authority.
 - **INVESTIGATE** when there is uncertainty: vendor-name mismatch, amount variance, partial receipt, conflicting records, or anything unusual.
 
 Exact duplicate detection, amount arithmetic, receipt completeness, and tolerance math are Python's job. This skill only interprets those facts.

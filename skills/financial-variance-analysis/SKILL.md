@@ -29,11 +29,12 @@ Do not search the raw ledger and do not recalculate margins or contributor share
 ## Procedure
 
 1. Read the metric, periods, and dollar variance first.
-2. Treat `kind=verified` contributors as established causes. Cite their transaction IDs.
+2. Treat `kind=verified` contributors as established causes. Cite their transaction IDs. Gross-margin explanations must include revenue as well as COGS contributors.
 3. Treat `kind=likely` contributors as possible, not proven.
 4. Leave the residual unexplained. Say that it is unexplained.
 5. If quantity and rate effects exist, describe them as Python computed them.
-6. Flag any narrative impulse that is not backed by a contributor.
+6. Flag any narrative impulse that is not backed by a contributor. Reject a supplier-cost story when a larger verified driver (hosting, freight, or revenue / discounting) exists.
+7. If an initial explanation omits a material contributor so the remaining amounts do not reconcile to the variance, return the case. Do not approve an incomplete attribution.
 
 ## Decision Criteria
 

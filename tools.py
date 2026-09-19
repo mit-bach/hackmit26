@@ -148,15 +148,25 @@ def load_goods_receipt(po_id: str | None) -> GoodsReceipt | None:
     return None
 
 
+def normalize_invoice_number(value: str) -> str:
+    return "".join(ch for ch in (value or "").upper() if ch.isalnum())
+
+
 def load_duplicate_invoices(invoice_id: str) -> list[Invoice]:
     invoice = load_invoice(invoice_id)
     if invoice is None:
         return []
+    wanted = normalize_invoice_number(invoice.vendor_invoice_number)
+    vendor_key = normalize_vendor(invoice.vendor)
     return [
         other
         for other in _invoices()
-        if other.vendor_invoice_number == invoice.vendor_invoice_number
-        and other.invoice_id != invoice.invoice_id
+        if other.invoice_id != invoice.invoice_id
+        and normalize_invoice_number(other.vendor_invoice_number) == wanted
+        and (
+            other.vendor_invoice_number == invoice.vendor_invoice_number
+            or normalize_vendor(other.vendor) == vendor_key
+        )
     ]
 
 

@@ -26,6 +26,7 @@ BLOCKING_EXCEPTIONS = {
     "partial_receipt",
     "material_amount_mismatch",
     "unknown_invoice",
+    "approval_limit_exceeded",
 }
 
 

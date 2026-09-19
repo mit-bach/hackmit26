@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Month-end close checklist.
+"""Canonical month-end close checklist. Same engine as `python main.py close-month`.
 
 Usage:
     python close.py run --period 2026-09

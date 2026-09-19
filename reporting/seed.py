@@ -110,7 +110,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="hosting",
             quantity=5000,
             rate=10,
-            source_document_id="INV-002-AUG",
+            source_document_id="INV-HOST-AUG-001",
         ),
         _line(
             transaction_id="TXN-HOST-AUG-002",
@@ -125,7 +125,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="hosting",
             quantity=3000,
             rate=10,
-            source_document_id="INV-006-AUG",
+            source_document_id="INV-HOST-AUG-002",
         ),
         _line(
             transaction_id="TXN-SUP-AUG-001",
@@ -140,7 +140,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="supplier",
             quantity=1800,
             rate=100,
-            source_document_id="INV-001-AUG",
+            source_document_id="INV-SUP-AUG-001",
         ),
         _line(
             transaction_id="TXN-SUP-AUG-002",
@@ -155,7 +155,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="supplier",
             quantity=700,
             rate=100,
-            source_document_id="INV-HEL-AUG",
+            source_document_id="INV-SUP-AUG-002",
         ),
         _line(
             transaction_id="TXN-FRT-AUG-001",
@@ -168,7 +168,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             memo="Standard inbound freight",
             vendor="FastFreight",
             category="freight",
-            source_document_id="INV-FRT-AUG",
+            source_document_id="INV-FRT-AUG-001",
         ),
         _line(
             transaction_id="TXN-COGS-AUG-MSC",
@@ -181,7 +181,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             memo="Unclassified August COGS",
             vendor="Misc Supplies",
             category="unclassified",
-            source_document_id="INV-MSC-AUG",
+            source_document_id="INV-MSC-AUG-001",
         ),
         # August opex $200,000
         _line(
@@ -221,7 +221,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             customer="Northwind Labs",
             product="Platform",
             category="revenue",
-            source_document_id="INV-AR-001",
+            source_document_id="INV-AR-SEP-001",
         ),
         _line(
             transaction_id="TXN-REV-SEP-002",
@@ -235,7 +235,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             customer="Helios Analytics",
             product="Usage",
             category="revenue",
-            source_document_id="INV-AR-003",
+            source_document_id="INV-AR-SEP-002",
         ),
         _line(
             transaction_id="TXN-REV-SEP-003",
@@ -265,7 +265,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="hosting",
             quantity=5000,
             rate=10,
-            source_document_id="INV-002",
+            source_document_id="INV-HOST-SEP-001",
         ),
         _line(
             transaction_id="TXN-HOST-SEP-002",
@@ -280,7 +280,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="hosting",
             quantity=3000,
             rate=10,
-            source_document_id="INV-006",
+            source_document_id="INV-HOST-SEP-002",
         ),
         _line(
             transaction_id="TXN-HOST-SEP-OVERAGE",
@@ -295,7 +295,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="hosting",
             quantity=1500,
             rate=10,
-            source_document_id="INV-016",
+            source_document_id="INV-HOST-SEP-003",
             source_workflow="ap",
         ),
         _line(
@@ -311,7 +311,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="supplier",
             quantity=1800,
             rate=104,
-            source_document_id="INV-001",
+            source_document_id="INV-SUP-SEP-001",
         ),
         _line(
             transaction_id="TXN-SUP-SEP-002",
@@ -326,7 +326,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             category="supplier",
             quantity=700,
             rate=104,
-            source_document_id="INV-HEL-SEP",
+            source_document_id="INV-SUP-SEP-002",
         ),
         _line(
             transaction_id="TXN-FRT-SEP-001",
@@ -339,7 +339,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             memo="Standard inbound freight",
             vendor="FastFreight",
             category="freight",
-            source_document_id="INV-FRT-SEP",
+            source_document_id="INV-FRT-SEP-001",
         ),
         _line(
             transaction_id="TXN-FRT-SEP-EXPEDITE",
@@ -352,7 +352,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             memo="Expedited freight on late materials",
             vendor="FastFreight",
             category="freight",
-            source_document_id="INV-FRT-EXP",
+            source_document_id="INV-FRT-SEP-002",
         ),
         _line(
             transaction_id="TXN-COGS-SEP-RESIDUAL",
@@ -365,7 +365,7 @@ def seed_demo_ledger() -> list[ReportingLine]:
             memo="Unclassified September COGS",
             vendor="Misc Supplies",
             category="unclassified",
-            source_document_id="INV-MSC-SEP",
+            source_document_id="INV-MSC-SEP-001",
         ),
         # September opex $200,000
         _line(

@@ -7,7 +7,7 @@ import os
 
 
 def _run(args: argparse.Namespace) -> int:
-    from close.month_end import run_month_end
+    from close.engine import run_month_end
     from close.report import format_month_end_status
 
     live = bool(getattr(args, "llm", False)) and bool(os.environ.get("OPENAI_API_KEY"))
@@ -28,7 +28,7 @@ def _run(args: argparse.Namespace) -> int:
 
 
 def _status(args: argparse.Namespace) -> int:
-    from close.month_end import load_state, run_month_end
+    from close.engine import load_state, run_month_end
     from close.report import format_month_end_status
 
     state = load_state(args.period)
@@ -95,7 +95,7 @@ def _review(args: argparse.Namespace) -> int:
 
 def _resolve(args: argparse.Namespace) -> int:
     from close.actions import invalidate_downstream, resolve_review_item
-    from close.month_end import load_state, save_state
+    from close.engine import load_state, save_state
     from close.report import format_resolution
 
     item = resolve_review_item(
@@ -117,7 +117,7 @@ def _resolve(args: argparse.Namespace) -> int:
 
 
 def _rerun(args: argparse.Namespace) -> int:
-    from close.month_end import rerun_affected
+    from close.engine import rerun_affected
     from close.report import format_rerun
 
     state = rerun_affected(args.period, live=False, review_id=args.review_id)
@@ -126,7 +126,7 @@ def _rerun(args: argparse.Namespace) -> int:
 
 
 def _finalize(args: argparse.Namespace) -> int:
-    from close.month_end import finalize_close
+    from close.engine import finalize_close
     from close.report import format_finalize
 
     live = bool(os.environ.get("OPENAI_API_KEY")) and not args.deterministic
@@ -252,7 +252,7 @@ def run_reopen_period_cli(argv: list[str]) -> int:
     parser.add_argument("--month", "--period", dest="period", default="2026-09")
     parser.add_argument("--reason", required=True)
     args = parser.parse_args(argv)
-    from close.month_end import reopen_period
+    from close.engine import reopen_period
 
     state = reopen_period(args.period, args.reason)
     print(f"Period {args.period} REOPENED")
@@ -270,7 +270,7 @@ def run_resolve_review_cli(argv: list[str]) -> int:
     parser.add_argument("--seed-demo", action="store_true")
     args = parser.parse_args(argv)
     from close.actions import ReviewActionError, resolve_review_item
-    from close.month_end import rerun_affected
+    from close.engine import rerun_affected
     from close.report import format_resolution
     from close.resolve import resolve_review
     from close.reviews import get_review, load_reviews
@@ -347,7 +347,7 @@ def run_close_trace_cli(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description="Inspect the close audit trail")
     parser.add_argument("--month", "--period", dest="period", default="2026-09")
     args = parser.parse_args(argv)
-    from close.month_end import load_state, run_month_end
+    from close.engine import load_state, run_month_end
     from close.report import format_close_trace
 
     state = load_state(args.period) or run_month_end(args.period, live=False, reset=False)
@@ -384,7 +384,7 @@ def run_eval_close_cli(argv: list[str]) -> int:
     parser.add_argument("--month", "--period", dest="period", default="2026-09")
     args = parser.parse_args(argv)
     from close.eval import evaluate_close, format_eval
-    from close.month_end import load_state
+    from close.engine import load_state
 
     metrics = evaluate_close(args.period, state=load_state(args.period))
     print(format_eval(metrics))

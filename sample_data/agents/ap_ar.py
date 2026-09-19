@@ -504,9 +504,11 @@ class APARSampleDataAgent(SampleDataAgent):
             )
             _je(ctx, f"JE-{txn}", period="2026-09", date=day, debit="1100-AR", credit="4000-Revenue", amount_minor=amount_minor, memo=memo, source_document_id=invoice_id, transaction_id=txn, customer=name, product=product, category="revenue", entry_type="ar_invoice")
 
-        # Operating expenses (do not change GM).
+        # Operating expenses (do not change GM). $140k payroll + $60k opex = $200k.
         _je(ctx, "JE-OPEX-AUG-PAY", period="2026-08", date="2026-08-28", debit="6100-Payroll", credit="1000-Cash", amount_minor=14_000_000, memo="August payroll", source_document_id="PR-2026-08-28", transaction_id="TXN-PAY-AUG", category="payroll", entry_type="payroll")
         _je(ctx, "JE-OPEX-SEP-PAY", period="2026-09", date="2026-09-25", debit="6100-Payroll", credit="1000-Cash", amount_minor=14_000_000, memo="September payroll", source_document_id="PR-2026-09-25", transaction_id="TXN-PAY-SEP", category="payroll", entry_type="payroll")
+        _je(ctx, "JE-OPEX-AUG-001", period="2026-08", date="2026-08-31", debit="6000-Operating", credit="1000-Cash", amount_minor=6_000_000, memo="August operating expenses", source_document_id="OPEX-AUG", transaction_id="TXN-OPEX-AUG-001", category="operating", entry_type="operating")
+        _je(ctx, "JE-OPEX-SEP-001", period="2026-09", date="2026-09-30", debit="6000-Operating", credit="1000-Cash", amount_minor=6_000_000, memo="September operating expenses", source_document_id="OPEX-SEP", transaction_id="TXN-OPEX-SEP-001", category="operating", entry_type="operating")
 
     def _ar_cases(self, ctx: CompanyScenarioContext) -> None:
         _ar_inv(ctx, invoice_id="INV-AR-001", customer_id="CUST-001", customer_name="Northwind Labs", invoice_date="2026-09-15", due_date="2026-10-15", original_amount=12000.0, outstanding_amount=12000.0, status="OPEN", purchase_order="PO-NW-4401", description="September add-on seats")
@@ -545,7 +547,7 @@ class APARSampleDataAgent(SampleDataAgent):
         ctx.plant("SCN-AR-011", ["INV-AR-010", "INV-AR-011", "PAY-004"])
 
         _ar_inv(ctx, invoice_id="INV-AR-012", customer_id="CUST-010", customer_name="Meridian Health", invoice_date="2026-09-10", due_date="2026-10-10", original_amount=3200.0, outstanding_amount=3200.0, status="OPEN", description="Quiet ops invoice")
-        _pay(ctx, payment_id="PAY-005", payment_date="2026-09-29", amount=3200.0, payer_name="Quiet Harbor", bank_reference="ACH-QH-3200", remittance_text="September ops", source="ach")
+        _pay(ctx, payment_id="PAY-005", payment_date="2026-09-29", amount=3200.0, payer_name="Unknown Remitter", bank_reference="ACH-UNK-3200", remittance_text="September ops", source="ach")
         ctx.plant("SCN-AR-010", ["PAY-005", "INV-AR-012"])
 
         _ar_inv(ctx, invoice_id="INV-AR-013", customer_id="CUST-009", customer_name="Northstar LLC", invoice_date="2026-09-01", due_date="2026-09-30", original_amount=12400.0, outstanding_amount=12400.0, status="OPEN", description="Northstar platform")

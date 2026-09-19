@@ -20,8 +20,8 @@ Use get_reconciliation_packet and list_reconciling_items. The packet already con
 
 ## Procedure
 
-1. Read the Python finding implied by the packet. Do not recompute the difference.
-2. Exact match → MATCHED. Explained timing items that fully bridge the difference → EXPLAINED_DIFFERENCE.
+1. Read the Python finding implied by the packet. Do not recompute the difference. When a period GL control balance is present, compare it to the subledger or register; a difference is an open reconciling item.
+2. Exact match → MATCHED. Explained timing items that fully bridge the difference → EXPLAINED_DIFFERENCE. GL accounts with no supporting evidence stay unsupported.
 3. Missing or stale evidence, duplicate support, or arithmetic inconsistency → do not sign off.
 4. Unexplained remainder → HUMAN_REVIEW. Never relabel it as a match.
 

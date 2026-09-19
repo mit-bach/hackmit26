@@ -53,12 +53,14 @@ def snapshot_loader_paths() -> dict[str, Path]:
 
 def clear_loader_caches() -> None:
     from accrual.store import clear_store_cache
+    from integrations.store import reset_integration_state
     from invoice_ingestion.store import clear_ingestion_cache
     from tools import clear_runtime_invoices
 
     clear_store_cache()
     clear_ingestion_cache()
     clear_runtime_invoices()
+    reset_integration_state()
 
 
 def _rebind_imported_data_dirs(root: Path) -> None:

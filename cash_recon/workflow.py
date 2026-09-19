@@ -383,10 +383,10 @@ def run_cash_reconciliation(
         bank = bank if bank is not None else demo_bank
         ledger = ledger if ledger is not None else demo_ledger
         fees = fees if fees is not None else demo_fees
-        seed_provider_payouts()
     if balances is None or bank is None or ledger is None:
         raise ValueError("Cash reconciliation requires balances, bank activity, and ledger entries.")
     fees = fees or []
+    seed_provider_payouts()
 
     bank = prepare_bank(bank)
     ledger = prepare_ledger(ledger)

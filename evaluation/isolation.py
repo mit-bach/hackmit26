@@ -15,12 +15,14 @@ from pathlib import Path
 ANSWER_KEY_NAMES = frozenset(
     {
         "expected_results.json",
+        "discrepancy_contracts.json",
     }
 )
 EVALUATION_ONLY_NAMES = frozenset(
     {
         "expected_results.json",
         "ground_truth.json",
+        "discrepancy_contracts.json",
     }
 )
 
@@ -90,7 +92,7 @@ def operational_input_files(data_root: Path) -> list[Path]:
         rel = path.relative_to(root).as_posix()
         if path.name in ANSWER_KEY_NAMES or path.name in EVALUATION_ONLY_NAMES:
             continue
-        if rel.startswith("canonical/"):
+        if rel.startswith("canonical/") or rel.startswith("evaluation/"):
             continue
         allowed.append(path)
     return allowed

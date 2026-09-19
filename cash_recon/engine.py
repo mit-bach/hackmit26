@@ -109,9 +109,8 @@ def propose_matches(
             continue
         if any(item in used_ledger for item in candidate.ledger_entry_ids):
             continue
-        if candidate.provider_status == "MATCH" and candidate.ledger_entry_ids:
-            selected.append(candidate)
-            _consume(candidate, used_bank, used_ledger)
+        selected.append(candidate)
+        _consume(candidate, used_bank, used_ledger)
 
     period_bank = [item for item in bank if item.period == period]
     period_ledger = [item for item in ledger if item.period == period]

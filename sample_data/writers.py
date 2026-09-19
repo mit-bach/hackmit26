@@ -170,6 +170,7 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
     save("integrations/stripe/events.json", ctx.stripe_events)
     save("integrations/stripe/balance_transactions.json", ctx.stripe_balance_txns)
     save("integrations/stripe/bank_deposit.json", ctx.stripe_deposits[0] if ctx.stripe_deposits else {})
+    save("integrations/stripe/bank_deposits.json", ctx.stripe_deposits)
     save("integrations/stripe/payouts.json", [item.model_dump(mode="json") for item in ctx.stripe_payouts])
 
     save("ingestion/emails.json", ctx.ingestion_emails)

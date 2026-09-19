@@ -2,9 +2,46 @@
 
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 from close.dates import money, now_iso
 from close.ledger import account_balance, entries_for
 from bs_recon.models import ReconPacket, ReconcilingItem
+
+
+def _gl_control_balance(period: str, account_names: set[str]) -> tuple[float, str] | None:
+    """Optional period GL control balances. Absent on clean packs so packets still tie."""
+    from tools import DATA_DIR
+
+    path = Path(DATA_DIR) / "close" / "gl_balances.json"
+    if not path.exists():
+        return None
+    try:
+        rows = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return None
+    for row in rows:
+        if row.get("period") == period and row.get("account") in account_names:
+            return money(float(row.get("balance") or 0)), str(row.get("source_id") or row.get("account"))
+    return None
+
+
+def _gl_unsupported_accounts(period: str, supported: set[str]) -> list[dict]:
+    from tools import DATA_DIR
+
+    path = Path(DATA_DIR) / "close" / "gl_balances.json"
+    if not path.exists():
+        return []
+    try:
+        rows = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return []
+    return [
+        row
+        for row in rows
+        if row.get("period") == period and row.get("account") not in supported
+    ]
 
 
 def _item(item_id: str, description: str, amount: float, source: str, classification: str, refs: list[str]) -> ReconcilingItem:
@@ -133,13 +170,29 @@ def ar_packet(period: str, *, scenario: str = "demo") -> ReconPacket:
             )
         )
     ledger = money(outstanding + extra)
+    gl = _gl_control_balance(period, {"Accounts Receivable", "AR"})
+    if gl is not None:
+        gl_balance, gl_id = gl
+        delta = money(gl_balance - outstanding)
+        if abs(delta) > 0.01:
+            items.append(
+                _item(
+                    gl_id,
+                    f"AR GL control {gl_balance} does not tie to subledger outstanding {outstanding}",
+                    delta,
+                    "close/gl_balances.json",
+                    "unexplained_difference",
+                    [gl_id],
+                )
+            )
+        ledger = gl_balance
     return ReconPacket(
         account_id="Accounts Receivable",
         account_name="Accounts Receivable",
         period=period,
         ledger_balance=ledger,
         evidence_balance=outstanding,
-        ledger_source="AR control account (subledger plus unapplied cash)",
+        ledger_source="AR GL control" if gl else "AR control account (subledger plus unapplied cash)",
         evidence_source="ar_invoices.json outstanding customer invoices",
         evidence_refs=["data/ar_invoices.json"] + ([target.payment_id] if target else []),
         reconciling_items=items,
@@ -159,16 +212,34 @@ def ap_packet(period: str, ap_results: list | None = None) -> ReconPacket:
     if not results:
         results = [decide_ap(item.invoice_id, live=False, featured=set()) for item in all_invoices()]
     unpaid = money(sum(item.amount for item in results))
+    items: list[ReconcilingItem] = []
+    ledger = unpaid
+    gl = _gl_control_balance(period, {"Accounts Payable", "AP"})
+    if gl is not None:
+        gl_balance, gl_id = gl
+        delta = money(gl_balance - unpaid)
+        if abs(delta) > 0.01:
+            items.append(
+                _item(
+                    gl_id,
+                    f"AP GL control {gl_balance} does not tie to AP subledger {unpaid}",
+                    delta,
+                    "close/gl_balances.json",
+                    "unexplained_difference",
+                    [gl_id],
+                )
+            )
+        ledger = gl_balance
     return ReconPacket(
         account_id="Accounts Payable",
         account_name="Accounts Payable",
         period=period,
-        ledger_balance=unpaid,
+        ledger_balance=ledger,
         evidence_balance=unpaid,
-        ledger_source="AP inbox unpaid invoices",
+        ledger_source="AP GL control" if gl else "AP inbox unpaid invoices",
         evidence_source="data/invoices.json vendor bills",
         evidence_refs=["data/invoices.json"],
-        reconciling_items=[],
+        reconciling_items=items,
         calculations={"unpaid_inbox": unpaid},
     )
 
@@ -251,7 +322,8 @@ def prepaid_packet(period: str, *, scenario: str = "demo") -> ReconPacket:
         elif scenario == "demo":
             missing_amount = money(missing_amount + leftover)
             missing_refs.append(item.prepaid_id)
-    ledger = money(evidenced + missing_amount)
+    schedule_remaining = money(evidenced + missing_amount)
+    ledger = schedule_remaining
     items = []
     if missing_amount:
         items.append(
@@ -264,13 +336,29 @@ def prepaid_packet(period: str, *, scenario: str = "demo") -> ReconPacket:
                 missing_refs,
             )
         )
+    gl = _gl_control_balance(period, {"Prepaid Expense", "Prepaid Expenses", "Prepaid Software", "Prepaid Insurance"})
+    if gl is not None:
+        gl_balance, gl_id = gl
+        delta = money(gl_balance - schedule_remaining)
+        if abs(delta) > 0.01:
+            items.append(
+                _item(
+                    gl_id,
+                    f"Prepaid GL {gl_balance} differs from schedule remaining {schedule_remaining}",
+                    delta,
+                    "close/gl_balances.json",
+                    "unexplained_difference",
+                    [gl_id],
+                )
+            )
+        ledger = gl_balance
     return ReconPacket(
         account_id="Prepaid Expenses",
         account_name="Prepaid Expenses",
         period=period,
         ledger_balance=ledger,
-        evidence_balance=evidenced,
-        ledger_source="remaining prepaid schedules",
+        evidence_balance=evidenced if gl is None else schedule_remaining,
+        ledger_source="GL prepaid control" if gl else "remaining prepaid schedules",
         evidence_source="prepaid contracts with source documents",
         evidence_refs=[item.source_document_id for item in load_items() if item.source_document_id],
         reconciling_items=items,
@@ -325,16 +413,35 @@ def accumulated_depreciation_packet(period: str) -> ReconPacket:
     _cost, accum, _nbv = register_totals()
     roll = accumulated_depreciation_rollforward(period)
     posted = money(sum(line.depreciation_amount for line in load_schedule() if line.status == "posted"))
+    items: list[ReconcilingItem] = []
+    ledger = posted
+    gl = _gl_control_balance(period, {"Accumulated Depreciation"})
+    if gl is not None:
+        gl_balance, gl_id = gl
+        expected = money(roll.ending or posted)
+        delta = money(gl_balance - expected)
+        if abs(delta) > 0.01:
+            items.append(
+                _item(
+                    gl_id,
+                    f"Accumulated depreciation GL {gl_balance} differs from schedule {expected}",
+                    delta,
+                    "close/gl_balances.json",
+                    "unexplained_difference",
+                    [gl_id],
+                )
+            )
+        ledger = gl_balance
     return ReconPacket(
         account_id="Accumulated Depreciation",
         account_name="Accumulated Depreciation",
         period=period,
-        ledger_balance=posted,
+        ledger_balance=ledger,
         evidence_balance=roll.ending,
-        ledger_source="posted depreciation journals",
+        ledger_source="GL accumulated depreciation" if gl else "posted depreciation journals",
         evidence_source="depreciation roll-forward",
         evidence_refs=["fixed_assets.depreciation_schedule"],
-        reconciling_items=[],
+        reconciling_items=items,
         calculations={
             "beginning": roll.beginning,
             "current_depreciation": roll.additions,
@@ -344,8 +451,53 @@ def accumulated_depreciation_packet(period: str) -> ReconPacket:
     )
 
 
+def unsupported_gl_packet(period: str) -> ReconPacket | None:
+    rows = _gl_unsupported_accounts(
+        period,
+        {
+            "Accounts Payable",
+            "AP",
+            "Accounts Receivable",
+            "AR",
+            "Prepaid Expense",
+            "Prepaid Expenses",
+            "Prepaid Software",
+            "Prepaid Insurance",
+            "Accumulated Depreciation",
+            "Cash",
+        },
+    )
+    if not rows:
+        return None
+    items = [
+        _item(
+            str(row.get("source_id") or row.get("account")),
+            f"{row.get('account')} GL balance {row.get('balance')} has no supporting subledger or register",
+            float(row.get("balance") or 0),
+            "close/gl_balances.json",
+            "missing_evidence",
+            [str(row.get("source_id") or row.get("account"))],
+        )
+        for row in rows
+    ]
+    total = money(sum(float(row.get("balance") or 0) for row in rows))
+    return ReconPacket(
+        account_id="Unsupported GL",
+        account_name="Unsupported GL",
+        period=period,
+        ledger_balance=total,
+        evidence_balance=0.0,
+        ledger_source="close/gl_balances.json",
+        evidence_source="none",
+        evidence_refs=[str(row.get("source_id") or "") for row in rows],
+        reconciling_items=items,
+        missing_evidence=True,
+        calculations={"unsupported_accounts": [row.get("account") for row in rows]},
+    )
+
+
 def build_packets(period: str, *, ap_results: list | None = None, scenario: str = "demo") -> list[ReconPacket]:
-    return [
+    packets = [
         cash_packet(period, scenario=scenario),
         ar_packet(period, scenario=scenario),
         ap_packet(period, ap_results),
@@ -354,3 +506,7 @@ def build_packets(period: str, *, ap_results: list | None = None, scenario: str 
         fixed_asset_packet(period),
         accumulated_depreciation_packet(period),
     ]
+    extra = unsupported_gl_packet(period)
+    if extra is not None:
+        packets.append(extra)
+    return packets

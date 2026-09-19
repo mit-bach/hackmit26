@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -259,6 +260,78 @@ def build_forecast(
         immutable=True,
         trace_id=f"TRACE-CF-{stamp}-v{version}",
     )
+
+
+def load_draft_forecast() -> CashForecastSnapshot | None:
+    """Load an operational submitted draft forecast when one exists."""
+    from reporting import ledger as reporting_ledger
+
+    path = reporting_ledger.DATA_REPORTING / "draft_forecast.json"
+    if not path.exists():
+        return None
+    raw = json.loads(path.read_text())
+    return CashForecastSnapshot.model_validate(raw)
+
+
+def review_forecast_integrity(snapshot: CashForecastSnapshot, as_of: str | None = None) -> dict:
+    """Flag coverage gaps, duplicate outflows, opening-cash breaks, and unjustified early AR."""
+    from reporting.ledger import opening_cash
+    from reporting.sources import ap_forecast_lines
+    from tools import load_invoice
+
+    as_of = as_of or snapshot.as_of_date
+    findings: list[str] = []
+    coverage_gaps: list[str] = []
+    duplicates: list[str] = []
+    early_receipts: list[str] = []
+    counts: dict[str, int] = {}
+    for line in snapshot.lines:
+        counts[line.source_id] = counts.get(line.source_id, 0) + 1
+    for source_id, count in counts.items():
+        if count > 1 and any(item.source_id == source_id and item.source_type == "invoice" for item in snapshot.lines):
+            duplicates.append(source_id)
+            findings.append(f"Duplicate forecast outflow for {source_id} appears {count} times")
+    present = {item.source_id for item in snapshot.lines}
+    try:
+        expected_ap = ap_forecast_lines()
+    except Exception:
+        expected_ap = []
+    for line in expected_ap:
+        if line.source_id not in present and not line.hold:
+            invoice = load_invoice(line.source_id)
+            if invoice is None:
+                continue
+            coverage_gaps.append(line.source_id)
+            findings.append(
+                f"Approved payable {line.source_id} is due {line.expected_date} but missing from the forecast"
+            )
+    expected_opening = money(opening_cash(as_of) + posted_ar_receipts(as_of))
+    opening_mismatch = money(snapshot.beginning_cash) != expected_opening
+    if opening_mismatch:
+        findings.append(
+            f"Opening cash {snapshot.beginning_cash} does not equal prior actual ending cash {expected_opening}"
+        )
+    for line in snapshot.lines:
+        if line.source_type != "receivable":
+            continue
+        due_refs = [ref for ref in line.evidence_refs if ref.startswith("due:")]
+        due = due_refs[0].split(":", 1)[1] if due_refs else ""
+        if not due:
+            invoice = load_invoice(line.source_id)
+            due = getattr(invoice, "due_date", "") if invoice else ""
+        if due and line.expected_date < due and "promise" not in " ".join(line.evidence_refs).lower():
+            early_receipts.append(line.source_id)
+            findings.append(
+                f"AR receipt {line.source_id} is forecast on {line.expected_date} before due {due} without early-pay evidence"
+            )
+    return {
+        "findings": findings,
+        "coverage_gaps": coverage_gaps,
+        "duplicates": duplicates,
+        "early_receipts": early_receipts,
+        "opening_mismatch": opening_mismatch,
+        "expected_opening": expected_opening,
+    }
 
 
 def validate_forecast(snapshot: CashForecastSnapshot) -> list[str]:

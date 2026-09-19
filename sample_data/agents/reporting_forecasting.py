@@ -20,6 +20,11 @@ from sample_data.adapters import journal_to_reporting_lines
 from sample_data.agents.base import SampleDataAgent
 from sample_data.context import CompanyScenarioContext, dollars
 from sample_data.models import ScenarioPlan
+from sample_data.pnl import OPERATIONAL_AP_IDS
+
+PNL_LINE_CATEGORIES = frozenset(
+    {"revenue", "hosting", "supplier", "freight", "unclassified", "payroll", "operating"}
+)
 
 
 ACCOUNT_CLASS = {
@@ -94,6 +99,10 @@ class ReportingForecastingSampleDataAgent(SampleDataAgent):
     def _reporting_lines(self, ctx: CompanyScenarioContext) -> None:
         rows: list[ReportingLine] = []
         for entry in ctx.journal_entries.values():
+            if entry.source_document_id in OPERATIONAL_AP_IDS:
+                continue
+            if entry.category not in PNL_LINE_CATEGORIES:
+                continue
             debit_class = ACCOUNT_CLASS.get(entry.debit_account)
             credit_class = ACCOUNT_CLASS.get(entry.credit_account)
             if debit_class in {"revenue", "cogs", "opex"}:

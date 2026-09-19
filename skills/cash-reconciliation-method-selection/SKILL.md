@@ -25,7 +25,7 @@ Apply when preparing or reviewing a bank-to-ledger match for a period, including
 
 1. Ignore any story that does not correspond to a Python candidate.
 2. Prefer a unique EXACT_MATCH when amount, sign, and dates agree and counterparties are compatible.
-3. Prefer GROUPED_MATCH when several ledger entries from the same vendor/customer sum exactly to one bank amount.
+3. Prefer GROUPED_MATCH when several ledger entries from the same vendor/customer sum exactly to one bank amount. Do not group ledger items whose counterparties are incompatible with the bank. If the same-vendor group is close but leaves a residual with no fee or timing evidence, keep UNEXPLAINED_DIFFERENCE. Do not call it a valid grouped match.
 4. Prefer FEE_NETTED only when Python attached fee evidence and a proposed (unposted) bank-fee entry.
 5. Prefer PROVIDER_PAYOUT when the bank description is a Stripe or Adyen settlement and the existing adapter reports MATCH.
 6. Treat TIMING_DIFFERENCE as an outstanding item when the same amount clears in an adjacent period. It is not an accounting error.

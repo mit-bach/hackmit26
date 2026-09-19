@@ -15,7 +15,7 @@ from cash_recon.models import (
     ProposedJournalEntry,
     ProposedJournalLine,
 )
-from cash_recon.normalize import combined_text, counterparties_compatible, looks_like_refund, overlap_score
+from cash_recon.normalize import combined_text, counterparties_compatible, looks_like_refund, overlap_score, tokens
 
 MAX_GROUP_SIZE = 4
 MAX_GROUP_POOL = 12
@@ -79,6 +79,21 @@ def _candidate(
 def _date_ok(left: str, right: str, window: int) -> bool:
     delta = date_diff_days(left, right)
     return delta is not None and delta <= window
+
+
+def _group_fits_bank(txn: BankTransaction, combo: tuple[LedgerEntry, ...] | list[LedgerEntry]) -> bool:
+    """Grouped matches must be one vendor and share a real token with the bank."""
+    vendors = {item.counterparty.lower() for item in combo if item.counterparty}
+    if len(vendors) > 1:
+        return False
+    if not txn.counterparty:
+        return True
+    if any(counterparties_compatible(txn.counterparty, item.counterparty) for item in combo):
+        return True
+    vendor_tokens: set[str] = set()
+    for item in combo:
+        vendor_tokens.update(tokens(item.counterparty))
+    return bool(tokens(txn.counterparty) & vendor_tokens)
 
 
 def _same_sign(left: int, right: int) -> bool:
@@ -154,20 +169,27 @@ def grouped_candidates(
             and abs(entry.amount_minor) < abs(txn.amount_minor)
             and _date_ok(txn.date, entry.date, GROUP_DATE_WINDOW)
         ]
-        if txn.counterparty:
-            preferred = [entry for entry in pool if counterparties_compatible(txn.counterparty, entry.counterparty)]
-            if preferred:
-                pool = preferred
+        preferred = [
+            entry
+            for entry in pool
+            if txn.counterparty and counterparties_compatible(txn.counterparty, entry.counterparty)
+        ]
+        if preferred:
+            pool = preferred
         pool.sort(key=lambda item: (date_gap(txn.date, item.date), abs(item.amount_minor)))
         pool = pool[:MAX_GROUP_POOL]
         if len(pool) < 2:
             continue
         max_size = min(MAX_GROUP_SIZE, len(pool))
+        exact_found = False
         for size in range(2, max_size + 1):
             for combo in combinations(pool, size):
                 total = sum(item.amount_minor for item in combo)
                 if total != txn.amount_minor:
                     continue
+                if not _group_fits_bank(txn, combo):
+                    continue
+                exact_found = True
                 vendors = {item.counterparty.lower() for item in combo if item.counterparty}
                 same_vendor = len(vendors) == 1
                 evidence = [
@@ -185,6 +207,29 @@ def grouped_candidates(
                         evidence=evidence,
                         score=score,
                         confidence=1.0 if same_vendor else 0.85,
+                    )
+                )
+        vendor_group = preferred if len(preferred) >= 2 else []
+        if vendor_group and not exact_found:
+            total = sum(item.amount_minor for item in vendor_group)
+            residual = txn.amount_minor - total
+            residual_limit = max(NEAR_AMOUNT_WINDOW, int(abs(txn.amount_minor) * 0.05))
+            if residual != 0 and abs(residual) <= residual_limit * 4:
+                rows.append(
+                    _candidate(
+                        "UNEXPLAINED_DIFFERENCE",
+                        [txn],
+                        list(vendor_group),
+                        evidence=[
+                            f"group_sum:{total}",
+                            f"bank_amount:{txn.amount_minor}",
+                            f"residual:{residual}",
+                            f"unexplained_group_difference:{dollars(residual)}",
+                            f"members:{','.join(item.entry_id for item in vendor_group)}",
+                        ],
+                        score=1.3,
+                        confidence=0.75,
+                        ambiguities=[f"Grouped ACH residual {dollars(residual)} is unexplained"],
                     )
                 )
     return rows

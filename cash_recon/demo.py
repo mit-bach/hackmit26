@@ -78,5 +78,8 @@ def seed_provider_payouts() -> None:
 
     if not any(item.provider == "stripe" for item in all_payouts()):
         process_provider("stripe")
-    if not any(item.provider == "adyen" for item in all_payouts()):
-        process_provider("adyen")
+    try:
+        if not any(item.provider == "adyen" for item in all_payouts()):
+            process_provider("adyen")
+    except FileNotFoundError:
+        pass

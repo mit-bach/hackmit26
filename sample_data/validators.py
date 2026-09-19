@@ -118,6 +118,7 @@ def _known(ctx: CompanyScenarioContext, ref: str) -> bool:
         or ref.startswith("PR-")
         or ref.startswith("CTR-")
         or ref.startswith("DOC-")
+        or ref.startswith("OPEX-")
     )
 
 

@@ -27,6 +27,7 @@ from ar.store import (
 )
 
 INVOICE_RE = re.compile(r"INV-AR-\d+", re.I)
+INVOICE_TOKEN_RE = re.compile(r"\b(?:AR-INV-\d+|INV-AR-\d+|INV[- ][A-Z0-9]+(?:-[A-Z0-9]+)*)\b", re.I)
 MATERIAL_AMOUNT = 10000.0
 AUTO_APPLY_CONFIDENCE = 0.9
 
@@ -93,14 +94,56 @@ def identify_customer(payment: CustomerPayment, customers: list[Customer] | None
     return best[1], best[0], [best[2]]
 
 
-def extract_invoice_ids(payment: CustomerPayment) -> list[str]:
+def extract_invoice_ids(
+    payment: CustomerPayment,
+    invoices: list[CustomerInvoice] | None = None,
+) -> list[str]:
     found: list[str] = []
-    for raw in (payment.invoice_reference or "", payment.remittance_text or "", payment.bank_reference or ""):
-        for match in INVOICE_RE.findall(raw):
-            key = match.upper()
+    blobs = [payment.invoice_reference or "", payment.remittance_text or "", payment.bank_reference or ""]
+    for raw in blobs:
+        for match in list(INVOICE_RE.findall(raw)) + list(INVOICE_TOKEN_RE.findall(raw)):
+            key = re.sub(r"\s+", "-", match.upper())
             if key not in found:
                 found.append(key)
+    universe = invoices if invoices is not None else all_invoices()
+    haystack = " ".join(blobs).upper()
+    for invoice in universe:
+        token = invoice.invoice_id.upper()
+        if token and token in haystack and invoice.invoice_id not in found and token not in found:
+            found.append(invoice.invoice_id)
     return found
+
+
+def remittance_identity_conflicts(
+    payment: CustomerPayment,
+    customer,
+    named_invoices: list[CustomerInvoice],
+    customers: list[Customer],
+) -> list[str]:
+    conflicts: list[str] = []
+    remittance = payment.remittance_text or ""
+    if payment.customer_id and payment.payer_name:
+        tagged = get_customer(payment.customer_id)
+        aliases = [tagged.customer_name, *(tagged.aliases if tagged else [])] if tagged else []
+        if tagged and not any(names_similar(payment.payer_name, name) for name in aliases if name):
+            conflicts.append(
+                f"Payer {payment.payer_name!r} does not match tagged customer {tagged.customer_name}"
+            )
+    if customer:
+        for invoice in named_invoices:
+            if invoice.customer_id and invoice.customer_id != customer.customer_id:
+                conflicts.append(
+                    f"{invoice.invoice_id} belongs to {invoice.customer_id}, not {customer.customer_id}"
+                )
+        for other in customers:
+            if other.customer_id == customer.customer_id:
+                continue
+            names = [other.customer_name, *other.aliases]
+            if any(name and name.lower() in remittance.lower() for name in names):
+                conflicts.append(
+                    f"Remittance names {other.customer_name} but payment is identified as {customer.customer_name}"
+                )
+    return conflicts
 
 
 def _candidate(
@@ -142,9 +185,11 @@ def generate_cash_candidates(
     customers = customers if customers is not None else all_customers()
     universe = invoices if invoices is not None else all_invoices()
     customer, customer_confidence, customer_evidence = identify_customer(payment, customers)
-    named_ids = extract_invoice_ids(payment)
+    named_ids = extract_invoice_ids(payment, universe)
     named = [get_invoice(item) or next((row for row in universe if row.invoice_id == item), None) for item in named_ids]
     named_found = [item for item in named if item is not None]
+    missing_ids = [item for item, row in zip(named_ids, named) if row is None]
+    identity_conflicts = remittance_identity_conflicts(payment, customer, named_found, customers)
     stale = [item.invoice_id for item in named_found if money(item.outstanding_amount) <= 0]
     open_named = [item for item in named_found if money(item.outstanding_amount) > 0]
     customer_open = [
@@ -170,6 +215,10 @@ def generate_cash_candidates(
     facts.extend(customer_evidence)
     if named_ids:
         facts.append("Remittance invoice references: " + ", ".join(named_ids))
+    if missing_ids:
+        facts.append("Invalid remittance invoice references: " + ", ".join(missing_ids))
+    if identity_conflicts:
+        facts.extend(identity_conflicts)
     if stale:
         facts.append("Stale / already-paid references: " + ", ".join(stale))
     for item in used_precedents:
@@ -303,6 +352,8 @@ def generate_cash_candidates(
         candidates=unique,
         remittance_invoice_ids=named_ids,
         stale_invoice_ids=stale,
+        missing_invoice_ids=missing_ids,
+        identity_conflicts=identity_conflicts,
         precedents=[item.precedent_id for item in used_precedents],
         facts=facts,
     )
@@ -359,6 +410,30 @@ def policy_cash_decision(facts: CashApplicationFacts) -> CashApplicationProposal
             evidence_used=used,
         )
 
+    if facts.identity_conflicts:
+        return CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="HUMAN_REVIEW",
+            reason="Customer identity on the remittance conflicts with the bank sender or tagged customer.",
+            confidence=0.35,
+            evidence_used=used + facts.identity_conflicts,
+            ambiguities=list(facts.identity_conflicts),
+            review_question="Which customer actually sent this payment?",
+        )
+
+    if facts.missing_invoice_ids:
+        return CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="HUMAN_REVIEW",
+            reason="Remittance cites invoice "
+            + ", ".join(facts.missing_invoice_ids)
+            + " which does not exist; invalid reference.",
+            confidence=0.4,
+            evidence_used=used,
+            ambiguities=[f"Invalid references: {', '.join(facts.missing_invoice_ids)}"],
+            review_question="Which live invoice should this invalid reference apply to?",
+        )
+
     explicit = [item for item in candidates if item.match_type in {"explicit_invoice", "explicit_multi"}]
     exact = [item for item in candidates if item.match_type == "exact_amount"]
     combos = [item for item in candidates if item.match_type == "combination"]
@@ -391,6 +466,23 @@ def policy_cash_decision(facts: CashApplicationFacts) -> CashApplicationProposal
         chosen = explicit[0]
         # An explicit invoice plus a competing exact/combo on a different set is still strong if the memo names one invoice.
         if chosen.match_type == "explicit_invoice":
+            named_outstanding = money(sum(row.amount for row in chosen.applications))
+            if money(payment.amount) - named_outstanding > 0.001:
+                return CashApplicationProposal(
+                    payment_id=payment.payment_id,
+                    decision="HUMAN_REVIEW",
+                    applications=chosen.applications,
+                    confidence=0.7,
+                    reason=(
+                        f"Payment {money(payment.amount)} exceeds named invoice outstanding "
+                        f"{named_outstanding}; overpayment residual "
+                        f"{money(payment.amount - named_outstanding)} must not disappear."
+                    ),
+                    evidence_used=used + chosen.evidence,
+                    ambiguities=[f"Overpayment residual {money(payment.amount - named_outstanding)}"],
+                    review_question="How should the overpayment residual be treated?",
+                    precedent_used=facts.precedents,
+                )
             return CashApplicationProposal(
                 payment_id=payment.payment_id,
                 decision="AUTO_APPLY",

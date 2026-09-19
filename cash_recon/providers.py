@@ -82,7 +82,8 @@ def provider_candidates(
             books = [
                 entry
                 for entry in ledger
-                if entry.amount_minor == txn.amount_minor and entry.entry_type == "processor_payout"
+                if entry.amount_minor == txn.amount_minor
+                and entry.entry_type in {"processor_payout", "provider_payout"}
             ]
         if len(books) != 1:
             nearby = [

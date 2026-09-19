@@ -258,6 +258,86 @@ PLANTED_DISCREPANCY_IDS = {
 }
 
 
+def test_workflows_surface_planted_discrepancies(tmp_path):
+    """Planted exceptions must be raised by the live AP/AR/cash/audit/reporting workflows."""
+    output = tmp_path / "demo"
+    generate_sample_data(seed=42, period="2026-09", output=output)
+    with data_root(output):
+        assert exception_types_for("INV-001") == []
+        assert "duplicate" in exception_types_for("INV-006")
+        assert "partial_receipt" in exception_types_for("INV-003")
+
+        from ar.store import reset_state
+        from ar.workflow import run_cash_apply
+
+        reset_state()
+        assert run_cash_apply("PAY-004", live=False, persist=False).final.decision == "HUMAN_REVIEW"
+        assert run_cash_apply("PAY-005", live=False, persist=False).final.decision == "HUMAN_REVIEW"
+
+        from cash_recon.demo import load_demo_dataset, seed_provider_payouts
+        from cash_recon.store import reset_cash_state
+        from cash_recon.workflow import run_cash_reconciliation
+
+        reset_cash_state()
+        seed_provider_payouts()
+        balances, bank, ledger, fees = load_demo_dataset()
+        report = run_cash_reconciliation(
+            "2026-09",
+            seed_demo=False,
+            use_agent=False,
+            reset=True,
+            balances=balances,
+            bank=bank,
+            ledger=ledger,
+            fees=fees,
+        )
+        by_bank = {bank_id: match for match in report.matches for bank_id in match.bank_transaction_ids}
+        assert by_bank["TXN-2026-09-011"].match_type == "FEE_NETTED"
+        assert by_bank["TXN-2026-09-015"].status == "HUMAN_REVIEW"
+        assert by_bank["TXN-2026-09-021"].status == "HUMAN_REVIEW"
+        assert by_bank["TXN-2026-09-019A"].match_type == "PROVIDER_PAYOUT"
+        assert by_bank["TXN-2026-09-022S"].match_type == "PROVIDER_PAYOUT"
+        assert by_bank["TXN-2026-09-026S"].match_type == "PROVIDER_PAYOUT"
+
+        from audit.workflow import run_audit
+        from tools import has_duplicate_vendor_invoice_number
+
+        run = run_audit("2026-09", seed=42, use_agent=False, persist=False)
+        found = set()
+        for finding in run.findings:
+            found.update(
+                finding.affected_object_ids
+                + finding.invoice_ids
+                + finding.payment_ids
+                + finding.approval_ids
+                + finding.journal_entry_ids
+                + finding.vendor_ids
+            )
+        assert found & {"VEND-001", "VEND-001-DUP"}
+        assert "PAY-AP-009" in found
+        assert "JE-POST-CLOSE-001" in found
+        assert "APR-INV-SELF" in found
+        assert has_duplicate_vendor_invoice_number("INV-006")
+
+        from reporting.ledger import reset_ledger
+        from reporting.seed import seed_demo_ledger
+        from reporting.statements import build_income_statement
+        from reporting.variance import analyze_variance
+
+        reset_ledger()
+        seed_demo_ledger()
+        statement = build_income_statement("2026-09")
+        assert abs(statement.cogs - 390_000) < 0.02
+        assert abs(statement.revenue - 1_000_000) < 0.02
+        explanation = analyze_variance("gross_margin_pct", "2026-09", "2026-08")
+        drivers = set()
+        for contributor in explanation.contributors:
+            drivers.update(contributor.source_transaction_ids)
+        assert {"TXN-SUP-SEP-001", "TXN-FRT-SEP-001", "TXN-HOST-SEP-001"} <= drivers
+        assert "INV-001" not in drivers
+        assert "INV-017" not in drivers
+
+
 def test_expected_discrepancy_ids_are_present():
     ctx = generate_sample_data(seed=42, period="2026-09", output=None)
     known = (

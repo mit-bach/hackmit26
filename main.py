@@ -7,6 +7,7 @@ Usage:
     python main.py schedule --seed-demo
     python main.py accrue 2026-09
     python main.py ingest 2026-09
+    python main.py close-month --month 2026-09 --seed-demo
     python main.py close 2026-09
     python main.py demo-close
     python main.py skills
@@ -204,6 +205,9 @@ def _usage() -> int:
     print("       python main.py validate-sample-data [--data-root data/demo]")
     print("       python main.py sample-data-summary [--data-root data/demo]")
     print("       python main.py evaluate-cfo [--data-root data/demo] [--seed 42] [--all]")
+    print("       python main.py cfo-demo")
+    print("       python main.py generate-discrepancy-data [--seed 42] [--month 2026-09] [--output data/discrepancy_demo]")
+    print("       python main.py evaluate-discrepancies [--data-root data/discrepancy_demo]")
     return 1
 
 
@@ -276,26 +280,17 @@ def run_close_cli(argv: list[str]) -> int:
 
         return run_month_end_cli(argv)
 
+    # Compatibility: `python main.py close 2026-09` is close-month.
     period = "2026-09"
-    deterministic = "--deterministic" in argv
-    rest = [item for item in argv if not item.startswith("--")]
-    if rest:
-        period = rest[0]
-    if not deterministic:
-        missing = _require_api_key("python main.py close 2026-09")
-        if missing is not None:
-            return missing
-    try:
-        from close.orchestrator import run_cfo_close
-        from close.report import format_close_run
+    flags = []
+    for item in argv:
+        if item[:1].isdigit() and len(item) == 7:
+            period = item
+        else:
+            flags.append(item)
+    from close.cli import run_close_month_cli
 
-        state = run_cfo_close(period, live=not deterministic)
-        print()
-        print(format_close_run(state))
-        return 0
-    except Exception as exc:
-        print(f"CFO close failed: {exc}")
-        return 1
+    return run_close_month_cli(["--month", period, "--reset", *flags])
 
 
 def run_demo_close_cli(argv: list[str]) -> int:
@@ -304,13 +299,14 @@ def run_demo_close_cli(argv: list[str]) -> int:
     if rest:
         period = rest[0]
     try:
-        from close.orchestrator import run_demo_close
-        from close.report import format_demo_close
+        from close.engine import run_month_end
+        from close.report import format_month_end_demo
 
-        print(format_demo_close(run_demo_close(period)))
+        state = run_month_end(period, scenario="demo", live=False, reset=True, allow_close=False)
+        print(format_month_end_demo(state))
         return 0
     except Exception as exc:
-        print(f"CFO close demo failed: {exc}")
+        print(f"Month-end close demo failed: {exc}")
         return 1
 
 
@@ -381,6 +377,27 @@ def main() -> int:
         from evaluation.cli import run_evaluate
 
         return run_evaluate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"cfo-demo", "cfo_demo"}:
+        from cfo.cli import run_cfo_demo_cli
+
+        return run_cfo_demo_cli(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "generate-discrepancy-data",
+        "generate_discrepancy_data",
+    }:
+        from discrepancy.cli import run_generate
+
+        return run_generate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "evaluate-discrepancies",
+        "evaluate_discrepancies",
+    }:
+        from discrepancy.cli import run_evaluate as run_discrepancy_eval
+
+        return run_discrepancy_eval(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "skills":
         return run_skills_cli(sys.argv[2:])

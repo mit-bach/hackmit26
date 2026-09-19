@@ -237,8 +237,17 @@ class MockStripeProvider(StripeProvider):
             return stored
         path = fixture_dir("stripe") / "bank_deposit.json"
         row = load_json(path)
-        if row.get("payout_id") == payout_id:
+        if isinstance(row, list):
+            match = next((item for item in row if item.get("payout_id") == payout_id), None)
+            if match:
+                return match
+        elif row.get("payout_id") == payout_id:
             return row
+        multi = fixture_dir("stripe") / "bank_deposits.json"
+        if multi.exists():
+            for item in load_json(multi):
+                if item.get("payout_id") == payout_id:
+                    return item
         return None
 
     def ping(self) -> dict[str, str]:

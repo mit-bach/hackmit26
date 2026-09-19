@@ -28,8 +28,8 @@ Do not rebuild the week grid and do not recalculate ending cash.
 
 ## Procedure
 
-1. Confirm Python reports 13 weeks and a clean roll-forward.
-2. Treat held AP invoices as uncommitted. Do not speak as if they will be paid.
+1. Confirm Python reports 13 weeks and a clean roll-forward. Opening cash must equal prior actual ending cash.
+2. Treat held AP invoices as uncommitted. Do not speak as if they will be paid. Flag approved payables that fall inside the horizon but are missing from the forecast, and flag the same payable appearing twice.
 3. Call out AR lines below the low-confidence threshold as assumption risk.
 4. Describe AP timing from scheduled pay dates, not raw invoice due dates, when they differ.
 5. Use payroll lines as written on the payroll schedule.

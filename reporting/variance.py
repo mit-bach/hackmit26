@@ -337,8 +337,6 @@ def analyze_variance(
     tolerance = assumptions.variance_tolerance
     materiality = materiality_threshold if materiality_threshold is not None else assumptions.materiality_abs
     classes = METRIC_CLASSES.get(metric, ("cogs",))
-    if metric in {"gross_margin_pct", "gross_margin", "gross_profit"}:
-        classes = ("cogs",)
     contributors, unexplained = attribute_account_movements(
         period,
         compare_to,
@@ -349,6 +347,26 @@ def analyze_variance(
     if metric in {"gross_margin_pct", "gross_profit"} and fact.dollar_variance is not None:
         dollar = money(fact.dollar_variance)
     # If we attributed only COGS, contributor amounts already invert to GP impact.
+    if metric in {"gross_margin_pct", "gross_margin", "gross_profit"}:
+        revenue_lines = _pnl_lines(period, ("revenue",))
+        if revenue_lines and not any(item.category == "revenue" or item.label.lower() == "revenue" for item in contributors):
+            prior_rev = money(sum(signed_pnl(item) for item in _pnl_lines(compare_to, ("revenue",))))
+            current_rev = money(sum(signed_pnl(item) for item in revenue_lines))
+            contributors.append(
+                VarianceContributor(
+                    label="Revenue",
+                    amount=money(current_rev - prior_rev),
+                    source_transaction_ids=sorted({item.transaction_id for item in revenue_lines}),
+                    ledger_entry_ids=sorted({item.ledger_entry_id or item.entry_id for item in revenue_lines}),
+                    source_document_ids=sorted({item.source_document_id for item in revenue_lines if item.source_document_id}),
+                    account="4000-Revenue",
+                    category="revenue",
+                    confidence="high",
+                    kind="verified",
+                    transactions=[_to_transaction(item) for item in revenue_lines],
+                    evidence_refs=[f"txn:{item.transaction_id}" for item in revenue_lines],
+                )
+            )
     if not reconcile_contributors(contributors, unexplained, dollar, tolerance):
         gap = money(dollar - money(sum(item.amount for item in contributors) + unexplained))
         unexplained = money(unexplained + gap)
@@ -461,6 +479,18 @@ def flag_unsupported_claims(explanation: VarianceExplanation, narrative: str) ->
     for phrase in suspects:
         if phrase in lowered:
             flags.append(f"Unsupported explanation: {phrase}")
+    if "supplier" in lowered and ("cost" in lowered or "price" in lowered):
+        supplier = next((item for item in explanation.contributors if "supplier" in item.label.lower()), None)
+        largest = max(explanation.contributors, key=lambda item: abs(item.amount), default=None)
+        revenue = [item for item in explanation.contributors if item.category == "revenue" or item.label.lower() == "revenue"]
+        if supplier is None:
+            flags.append("Unsupported explanation: supplier cost increases are not a verified contributor.")
+        elif largest is not None and largest is not supplier and abs(largest.amount) > abs(supplier.amount):
+            flags.append(
+                f"Unsupported explanation: supplier cost is not the primary driver; {largest.label} is larger."
+            )
+        elif revenue and abs(sum(item.amount for item in revenue)) > abs(supplier.amount):
+            flags.append("Unsupported explanation: customer revenue / discounting outranks supplier cost.")
     if "because" in lowered:
         for item in explanation.contributors:
             if item.label.lower() in lowered:

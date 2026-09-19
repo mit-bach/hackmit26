@@ -110,10 +110,14 @@ def test_existing_ap_lookup_unchanged():
 
 
 def test_close_cli_is_wired():
+    import inspect
+
     import main
 
     assert "close" in main.__doc__
     assert "demo-close" in main.__doc__
+    assert "close-month" in main.__doc__
+    assert "run_cfo_close" not in inspect.getsource(main.run_close_cli)
 
 
 def test_outlook_helios_invoice_is_not_accrued(tmp_path, monkeypatch):

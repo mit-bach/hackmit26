@@ -256,6 +256,8 @@ class CloseSampleDataAgent(SampleDataAgent):
             {"document_id": "DOC-DELL-R760", "kind": "vendor_invoice", "vendor": "Dell Technologies", "description": "PowerEdge R760 server cluster", "amount": 60000.0, "date": "2026-09-05", "invoice_id": "INV-018"},
             {"document_id": "DOC-HE-USAGE", "kind": "utility_usage", "vendor": "Harbor Electric", "description": "September kWh statement", "amount": 4780.0, "date": "2026-09-30"},
             {"document_id": "DOC-LR-TIMESHEET", "kind": "legal_timesheet", "vendor": "Lindholm & Ruiz LLP", "description": "September counsel time", "amount": 8500.0, "date": "2026-09-30"},
+            {"document_id": "OPEX-AUG", "kind": "operating_expense_batch", "vendor": "Multiple", "description": "August operating expense batch", "amount": 60000.0, "date": "2026-08-31"},
+            {"document_id": "OPEX-SEP", "kind": "operating_expense_batch", "vendor": "Multiple", "description": "September operating expense batch", "amount": 60000.0, "date": "2026-09-30"},
         ]
 
     def _tasks(self, ctx: CompanyScenarioContext) -> None:
