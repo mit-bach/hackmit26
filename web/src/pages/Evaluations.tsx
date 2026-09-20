@@ -1,350 +1,221 @@
 import { useEffect, useState } from "react";
-import { get, statusTone } from "../api";
+import { get } from "../api";
+import { ProcessPanel } from "../components/Demo";
+import {
+  CaseStrip,
+  caseMarkFromUnknown,
+  familyPlainMap,
+  GauntletBoard,
+  pct,
+  readModesComparison,
+  scorecardFromUnknown,
+} from "../components/rest/GauntletBoard";
+import { RestHead } from "../components/rest/RestHead";
+import { asRecord, asRecordList, asUnknownList, readNumber, readString, workflowInner, workflowStages } from "../components/rest/kernel";
+import { friendlyExpected } from "../copy";
 import { useWorkflow } from "../hooks";
-import { Pill, RunBar } from "../layout/Shell";
-import { DemoLayout, OutputHeadline, ProcessPanel } from "../components/Demo";
-import { DevDetails, LineageChain, ResultBlock, TraceIds, WhatsHappening } from "../components/Explain";
-import { formatCapability, formatEvalCase, formatFamily, formatPeriod, formatStatus, friendlyExpected } from "../copy";
+import { ErrorBox, RunBar } from "../layout/Shell";
 
-const FAMILY_ORDER = [
-  "documents",
-  "cash",
-  "anti_hack",
-  "questions",
-  "rubrics",
-  "consistency",
-  "long_horizon",
-  "memory",
-  "recovery",
-];
+const STAKE = "Same workflows, hidden expected outcomes.";
 
-export default function Evaluations() {
-  const [data, setData] = useState<any>(null);
-  const [gauntlet, setGauntlet] = useState<any>(null);
-  const [stories, setStories] = useState<any>({});
-  const [lineage, setLineage] = useState<any>(null);
-  const [open, setOpen] = useState<any>(null);
+const STORY_KEYS = ["trap", "harbor", "stripe", "correction"] as const;
+type StoryKey = (typeof STORY_KEYS)[number];
+
+function storyLabel(id: StoryKey): string {
+  if (id === "trap") {
+    return "Trap";
+  }
+  if (id === "harbor") {
+    return "Harbor";
+  }
+  if (id === "stripe") {
+    return "Stripe";
+  }
+  return "Correction";
+}
+
+function storyLine(id: StoryKey, payload: unknown): string {
+  const rec = asRecord(payload);
+  if (!rec) {
+    return "";
+  }
+  if (id === "trap") {
+    return readString(rec, "detected") || readString(rec, "naive") || "";
+  }
+  if (id === "harbor") {
+    return readString(rec, "explanation") || readString(rec, "september_decision") || "";
+  }
+  if (id === "stripe") {
+    return readString(rec, "explanation") || readString(rec, "received") || "";
+  }
+  const explanation = rec.explanation;
+  if (typeof explanation === "string") {
+    return explanation;
+  }
+  return readString(asRecord(explanation), "narrative") || readString(rec, "october") || "";
+}
+
+function gauntletScorecard(result: unknown, gauntlet: unknown): ReturnType<typeof scorecardFromUnknown> {
+  const workflow = readString(asRecord(result), "workflow");
+  const inner = workflowInner(result);
+  if (workflow === "gauntlet") {
+    const payload = asRecord(inner?.payload) ?? inner;
+    const fromRun = scorecardFromUnknown(payload?.scorecard) ?? scorecardFromUnknown(asRecord(payload)?.scorecard);
+    if (fromRun) {
+      return fromRun;
+    }
+    const nested = scorecardFromUnknown(inner?.scorecard);
+    if (nested) {
+      return nested;
+    }
+  }
+  const latest = asRecord(asRecord(gauntlet)?.latest);
+  return scorecardFromUnknown(latest?.scorecard);
+}
+
+function gauntletCases(result: unknown, gauntlet: unknown, evaluations: unknown): unknown[] {
+  const workflow = readString(asRecord(result), "workflow");
+  const inner = workflowInner(result);
+  if (workflow === "gauntlet") {
+    const payload = asRecord(inner?.payload) ?? inner;
+    const fromPayload = asUnknownList(payload?.cases);
+    if (fromPayload.length) {
+      return fromPayload;
+    }
+  }
+  const fromView = asUnknownList(asRecord(gauntlet)?.cases);
+  if (fromView.length) {
+    return fromView;
+  }
+  return asUnknownList(asRecord(gauntlet)?.catalog).length
+    ? asUnknownList(asRecord(gauntlet)?.catalog)
+    : asUnknownList(asRecord(evaluations)?.catalog);
+}
+
+export default function Evaluations(): JSX.Element {
+  const [data, setData] = useState<unknown>(null);
+  const [gauntlet, setGauntlet] = useState<unknown>(null);
+  const [storyId, setStoryId] = useState<StoryKey | null>(null);
+  const [story, setStory] = useState<unknown>(null);
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
-    get("/api/evaluations").then(setData).catch(() => setData(null));
-    get("/api/gauntlet").then(setGauntlet).catch(() => setGauntlet(null));
-    get("/api/stories/trap").then((row) => setStories((prev: any) => ({ ...prev, trap: row }))).catch(() => undefined);
-    get("/api/stories/harbor").then((row) => setStories((prev: any) => ({ ...prev, harbor: row }))).catch(() => undefined);
-    get("/api/stories/stripe").then((row) => setStories((prev: any) => ({ ...prev, stripe: row }))).catch(() => undefined);
-    get("/api/stories/correction").then((row) => setStories((prev: any) => ({ ...prev, correction: row }))).catch(() => undefined);
-    get("/api/lineage/INV-006")
-      .then(setLineage)
-      .catch(() => setLineage(null));
+    get("/api/evaluations")
+      .then(setData)
+      .catch(() => setData(null));
+    get("/api/gauntlet")
+      .then(setGauntlet)
+      .catch(() => setGauntlet(null));
   }, [result]);
 
-  const gauntletPayload = result?.workflow === "gauntlet" ? result?.result?.payload || result?.result : gauntlet?.latest;
-  const scorecard = gauntletPayload?.scorecard || gauntlet?.latest?.scorecard;
-  const gauntletCases =
-    gauntletPayload?.cases ||
-    gauntlet?.cases ||
-    gauntlet?.catalog ||
-    data?.catalog ||
-    [];
-  const scored = Boolean(scorecard);
-  const cases = latestAgentCases(data, result);
-  const summary = summarize(data?.latest, cases, data?.summary);
-  const selected = open || gauntletCases[0];
-  const selectedCopy = formatEvalCase(selected?.case_id);
-  const modes = gauntlet?.modes || (result?.result?.comparison ? { comparison: result.result.comparison, modes: result.result.payload?.modes } : null);
-  const trap = stories.trap;
-  const harbor = stories.harbor;
-  const stripe = stories.stripe;
-  const correction = stories.correction;
+  useEffect(() => {
+    if (!storyId) {
+      setStory(null);
+      return;
+    }
+    get(`/api/stories/${storyId}`)
+      .then(setStory)
+      .catch(() => setStory(null));
+  }, [storyId]);
+
+  const inner = workflowInner(result);
+  const scorecard = gauntletScorecard(result, gauntlet);
+  const cases = gauntletCases(result, gauntlet, data).flatMap((item) => {
+    const mark = caseMarkFromUnknown(item);
+    return mark ? [mark] : [];
+  });
+  const scored = Boolean(scorecard && scorecard.total_scenarios != null);
+  const stages = workflowStages(result);
+  const modes = readModesComparison(inner) ?? readModesComparison(gauntlet);
+  const mem = asRecord(asRecord(modes)?.memory_on_vs_off);
+  const shared = asRecord(asRecord(modes)?.shared_state_on_vs_off);
+  const evalResult = readString(asRecord(result), "workflow") === "evaluate" ? asRecord(inner?.payload) ?? inner : asRecord(data)?.latest;
+  const evalRec = asRecord(evalResult);
+  const evalPassed = readNumber(evalRec, "passed");
+  const evalTotal = readNumber(evalRec, "total");
 
   return (
-    <DemoLayout
-      eyebrow="Evaluation Lab"
-      title="Can these agents run connected finance work over time?"
-      task="The Finance Gauntlet tests the same Maximor agents used in the live office against finance scenarios with known correct outcomes. Hidden expected outcomes stay off the agent path. A judge should be able to see what Maximor received, what it decided, why, what changed elsewhere, and whether that was correct."
-      happening={
-        <WhatsHappening
-          happening="Maximor is scored on messy documents, bank-to-ledger evidence, multi-step questions, month-after-month accruals, and whether every workflow agrees on the same bill."
-          figureOut="How often did Maximor get the finance treatment right, and did memory or shared books actually change the result?"
-          why="This is how we show that the office is measured, not just narrated."
-        />
-      }
-      error={error}
-      runBar={
-        <RunBar
-            label="Run Finance Gauntlet"
-            running={running}
-            onRun={() => run("/api/workflows/gauntlet")}
-            extra={
-              <>
-                <button className="btn" disabled={running} onClick={() => run("/api/workflows/evaluate")}>
-                  Run the published finance cases
-                </button>
-                <button className="btn" disabled={running} onClick={() => run("/api/workflows/gauntlet", { modes: true })}>
-                  Compare memory on vs off
-                </button>
-              </>
+    <div className="rest-page">
+      <RestHead title="Kernel gauntlet" stake={STAKE} />
+      <GauntletBoard scorecard={scorecard} familyPlain={familyPlainMap(gauntlet)} />
+      <RunBar
+        label="Run Finance Gauntlet"
+        running={running}
+        onRun={() => run("/api/workflows/gauntlet")}
+        extra={
+          <>
+            <button type="button" className="btn" disabled={running} onClick={() => run("/api/workflows/evaluate")}>
+              Run the published finance cases
+            </button>
+            <button type="button" className="btn" disabled={running} onClick={() => run("/api/workflows/gauntlet", { modes: true })}>
+              Compare memory on vs off
+            </button>
+          </>
+        }
+      />
+      <ErrorBox error={error} />
+      {inner ? <ProcessPanel stages={asRecordList(stages)} summary={readString(inner, "summary")} /> : null}
+      <div className="rest-story-strip" aria-label="Related stories">
+        {STORY_KEYS.map((id) => (
+          <button
+            type="button"
+            key={id}
+            className={`rest-chip${storyId === id ? " is-on" : ""}`}
+            aria-pressed={storyId === id}
+            onClick={() => setStoryId(storyId === id ? null : id)}
+          >
+            {storyLabel(id)}
+          </button>
+        ))}
+      </div>
+      {storyId && storyLine(storyId, story) ? <p className="muted rest-story-line">{storyLine(storyId, story)}</p> : null}
+      {evalPassed != null && evalTotal != null ? (
+        <p className="muted">
+          Published cases {evalPassed} / {evalTotal}. Kernel measure, not the office score.
+        </p>
+      ) : null}
+      {modes ? (
+        <details className="rest-evidence">
+          <summary>Memory and shared-state switches</summary>
+          <p>
+            Memory on {pct(readNumber(mem, "on"))} vs off {pct(readNumber(mem, "off"))}. Shared state on {pct(readNumber(shared, "on"))} vs
+            off {pct(readNumber(shared, "off"))}. Kernel measure, not the office score.
+          </p>
+        </details>
+      ) : null}
+      <CaseStrip cases={cases} scored={scored} />
+      {scored ? (
+        <details className="rest-evidence">
+          <summary>Kernel rates</summary>
+          <dl className="kv">
+            <dt>Cross-workflow consistency</dt>
+            <dd>{pct(scorecard?.cross_workflow_consistency_rate ?? scorecard?.cross_workflow_consistency)}</dd>
+            <dt>Error propagation</dt>
+            <dd>{pct(scorecard?.error_propagation_rate)}</dd>
+            <dt>Unsupported claims</dt>
+            <dd>{pct(scorecard?.unsupported_assertion_rate ?? scorecard?.unsupported_action_rate)}</dd>
+            <dt>Recovery</dt>
+            <dd>{pct(scorecard?.recovery_rate ?? scorecard?.error_recovery)}</dd>
+          </dl>
+          <p className="muted">These percentages are a Kernel measure, not the office score.</p>
+        </details>
+      ) : null}
+      {scored ? (
+        <details className="rest-evidence">
+          <summary>Actual vs hidden expected (after run)</summary>
+          {gauntletCases(result, gauntlet, data).map((item, idx) => {
+            const rec = asRecord(item);
+            if (!rec || rec.expected == null) {
+              return null;
             }
-          />
-      }
-      input={
-        <div className="stack">
-          <div className="card">
-            <h2>What Maximor is tested on</h2>
-            <p className="muted">
-              Public documents and questions are what the agents see. The correct answers are kept separate so Maximor cannot read them while it works.
-            </p>
-            <div className="table-scroll">
-              <table className="data">
-                <thead>
-                  <tr>
-                    <th>Scenario</th>
-                    <th>Family</th>
-                    <th>Result</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {gauntletCases.map((item: any) => (
-                    <tr key={item.case_id} className={selected?.case_id === item.case_id ? "selected" : ""} onClick={() => setOpen(item)}>
-                      <td>
-                        <div>{item.title || selectedCopy.title}</div>
-                        <TraceIds ids={[item.case_id]} />
-                      </td>
-                      <td>{familyLabel(item.family, gauntlet)}</td>
-                      <td>
-                        {item.passed === undefined || item.passed === null ? (
-                          <Pill>Not run</Pill>
-                        ) : (
-                          <Pill tone={statusTone(item.passed ? "pass" : "fail")}>{item.passed ? "Passed" : "Failed"}</Pill>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          {trap ? (
-            <div className="card">
-              <h2>The trap</h2>
-              <p>{trap.naive}</p>
-              <div className="doc-paper">
-                <pre>{trap.received}</pre>
-              </div>
-            </div>
-          ) : null}
-        </div>
-      }
-      process={<ProcessPanel stages={result?.result?.stages} summary={result?.result?.summary} />}
-      output={
-        <div className="stack">
-          <div className="card">
-            <OutputHeadline
-              label="Finance Gauntlet"
-              value={scored ? `${scorecard.scenarios_passed} / ${scorecard.total_scenarios} scenarios correct` : "Run the gauntlet to score Maximor"}
-              tone={scored && scorecard.scenarios_failed === 0 ? "ok" : scored ? "warn" : "neutral"}
-            />
-            {scored ? (
-              <>
-                <div className="score-grid">
-                  {FAMILY_ORDER.filter((key) => scorecard.by_family?.[key]).map((key) => {
-                    const row = scorecard.by_family[key];
-                    return (
-                      <div key={key}>
-                        <div className="muted">{familyLabel(key, gauntlet)}</div>
-                        <strong>
-                          {row.passed}/{row.total}
-                        </strong>
-                        <div className="meter">
-                          <span style={{ width: `${Math.round((row.rate || 0) * 100)}%` }} />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <dl className="kv">
-                  <dt>Did every workflow agree?</dt>
-                  <dd>
-                    {pct(scorecard.cross_workflow_consistency_rate ?? scorecard.cross_workflow_consistency)}
-                    <div className="muted">How often payables, cash, close, and reporting treated the same bill the same way.</div>
-                  </dd>
-                  <dt>Did a mistake spread?</dt>
-                  <dd>
-                    {pct(scorecard.error_propagation_rate)}
-                    <div className="muted">How often an error in one step contaminated later finance work.</div>
-                  </dd>
-                  <dt>Unsupported claims</dt>
-                  <dd>
-                    {pct(scorecard.unsupported_assertion_rate ?? scorecard.unsupported_action_rate)}
-                    <div className="muted">How often Maximor claimed something it did not have evidence for.</div>
-                  </dd>
-                  <dt>Recovery after a bad file</dt>
-                  <dd>
-                    {pct(scorecard.recovery_rate ?? scorecard.error_recovery)}
-                    <div className="muted">How often Maximor recovered after a broken document or duplicate event instead of inventing books.</div>
-                  </dd>
-                </dl>
-                {scorecard.long_horizon_by_period ? (
-                  <div>
-                    <h2>Month after month</h2>
-                    {Object.entries(scorecard.long_horizon_by_period).map(([period, row]: any) => (
-                      <p key={period}>
-                        {formatPeriod(period)}: {pct(row.rate)} ({row.passed}/{row.total} cases correct)
-                      </p>
-                    ))}
-                  </div>
-                ) : null}
-              </>
-            ) : (
-              <p className="muted">{gauntlet?.note || "Run the Finance Gauntlet to populate scored results."}</p>
-            )}
-          </div>
-          {modes?.comparison ? (
-            <div className="card">
-              <h2>Did architecture features change the score?</h2>
-              <p>
-                With last month's saved decisions available, Maximor scored {pct(modes.comparison.memory_on_vs_off?.on)} overall and{" "}
-                {pct(modes.comparison.memory_on_vs_off?.long_horizon_on)} on month-after-month cases. Without that memory, it scored{" "}
-                {pct(modes.comparison.memory_on_vs_off?.off)} overall and {pct(modes.comparison.memory_on_vs_off?.long_horizon_off)} on those later-month cases.
+            return (
+              <p key={readString(rec, "case_id") || `exp-${idx}`} className="muted">
+                {readString(rec, "case_id")}: {friendlyExpected(rec.actual)}
               </p>
-              <p>
-                With every agent sharing the same company books, Maximor scored {pct(modes.comparison.shared_state_on_vs_off?.on)}. With a reduced shared picture, it scored{" "}
-                {pct(modes.comparison.shared_state_on_vs_off?.off)}.
-              </p>
-              <p className="muted">These come from real configuration switches, not restated claims. If a feature does not help, the measured result stays visible.</p>
-            </div>
-          ) : null}
-          {lineage?.received || lineage?.decision ? (
-            <div className="card">
-              <h2>Transaction lineage</h2>
-              {lineage.received ? <p>{lineage.received}</p> : null}
-              {lineage.decision ? (
-                <p>
-                  <strong>Decision.</strong> {lineage.decision}
-                </p>
-              ) : null}
-              {lineage.why ? (
-                <p>
-                  <strong>Why.</strong> {lineage.why}
-                </p>
-              ) : null}
-              <LineageChain steps={lineage.steps} />
-              {(lineage.changed || []).map((item: string) => (
-                <p key={item}>{item}</p>
-              ))}
-              {typeof lineage.correct === "boolean" ? (
-                <Pill tone={lineage.correct ? "ok" : "warn"}>{lineage.correct ? "Consistent across workflows" : "Needs review"}</Pill>
-              ) : null}
-            </div>
-          ) : null}
-          {selected ? (
-            <div className="card">
-              <h2>{selected.title || selectedCopy.title}</h2>
-              <ResultBlock
-                found={selected.prompt || selectedCopy.test}
-                why={`This belongs to the “${familyLabel(selected.family, gauntlet)}” tests.`}
-                evidence={
-                  <>
-                    <p>{selected.passed === undefined || selected.passed === null ? "Not scored yet." : selected.reason || selectedCopy.test}</p>
-                    {selected.actual != null ? <p>Maximor returned: {friendlyExpected(selected.actual)}</p> : null}
-                  </>
-                }
-                result={
-                  selected.passed === undefined || selected.passed === null
-                    ? "Not scored yet."
-                    : selected.passed
-                      ? "Passed. Maximor's result matched the hidden expected outcome."
-                      : "Failed. Maximor's result did not match the hidden expected outcome."
-                }
-              />
-              {selected.expected != null ? (
-                <DevDetails raw={{ expected: selected.expected, actual: selected.actual }}>
-                  <p className="muted">Machine-readable expected and actual values stay here so a technical judge can verify the score.</p>
-                </DevDetails>
-              ) : null}
-            </div>
-          ) : null}
-          {trap ? (
-            <div className="card">
-              <h2>What a naive system would do</h2>
-              <p>{trap.naive}</p>
-              <p>
-                <strong>What Maximor detected.</strong> {trap.detected}
-              </p>
-              <p>{(trap.prevented || []).join(" ")}</p>
-              {trap.duplicate?.title ? <p>Related live bill: {trap.duplicate.title}. {trap.duplicate.why}</p> : null}
-            </div>
-          ) : null}
-          {harbor ? (
-            <div className="card">
-              <h2>Long-horizon memory: Harbor Electric</h2>
-              <p>{harbor.august_evidence}</p>
-              <p>{harbor.august_decision}</p>
-              <p>{harbor.september_evidence}</p>
-              <p>{harbor.september_decision}</p>
-              <p>{harbor.explanation}</p>
-            </div>
-          ) : null}
-          {correction ? (
-            <div className="card">
-              <h2>Self-correction when new evidence arrives</h2>
-              <p>{correction.august}</p>
-              <p>{correction.september}</p>
-              <p>{correction.october}</p>
-              <p>{typeof correction.explanation === "string" ? correction.explanation : correction.explanation?.narrative}</p>
-            </div>
-          ) : null}
-          {stripe ? (
-            <div className="card">
-              <h2>Stripe to books</h2>
-              <p>{stripe.received}</p>
-              <p>{stripe.explanation}</p>
-            </div>
-          ) : null}
-          {summary ? (
-            <div className="card">
-              <h2>Existing agent cases</h2>
-              <p>
-                {summary.passed} / {summary.total} previously published finance cases also passed. Ability under test: {formatCapability(cases[0]?.capability)}.
-              </p>
-            </div>
-          ) : null}
-        </div>
-      }
-    />
+            );
+          })}
+        </details>
+      ) : null}
+    </div>
   );
-}
-
-function familyLabel(family: string | undefined, gauntlet: any) {
-  const row = gauntlet?.families?.[family || ""];
-  if (row?.plain) return row.plain;
-  return formatFamily(family || "other");
-}
-
-function pct(value: unknown) {
-  if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
-  return `${Math.round(Number(value) * 1000) / 10}%`;
-}
-
-function latestAgentCases(data: any, result: any) {
-  const latest = result?.result?.payload || data?.latest;
-  const cases = latest?.cases ? mergeCases(data?.catalog || [], latest.cases) : data?.catalog || [];
-  return cases;
-}
-
-function mergeCases(catalog: any[], results: any[]) {
-  const byId = Object.fromEntries(results.map((item) => [item.case_id, item]));
-  if (catalog.length) {
-    return catalog.map((item) => ({ ...item, ...(byId[item.case_id] || {}) }));
-  }
-  return results;
-}
-
-function summarize(latest: any, cases: any[], existing: any) {
-  if (existing && existing.total) return existing;
-  const scored = cases.filter((item) => item.passed !== undefined);
-  if (!scored.length && !latest?.total) return null;
-  const total = latest?.total || scored.length;
-  const passed = latest?.passed ?? scored.filter((item) => item.passed).length;
-  return { total, passed, failed: latest?.failed ?? total - passed, success_rate: total ? passed / total : 0 };
 }

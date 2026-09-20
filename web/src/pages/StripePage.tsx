@@ -1,120 +1,252 @@
 import { useEffect, useState } from "react";
-import { get, usd, statusTone } from "../api";
-import { useWorkflow } from "../hooks";
-import { ErrorBox, Pill, RunBar } from "../layout/Shell";
-import { DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
-import { Definition, ResultBlock, TraceIds, WhatsHappening } from "../components/Explain";
+import { get, statusTone } from "../api";
+import { ProcessPanel, SourceArtifactViewer } from "../components/Demo";
+import { FlowPlay, type FlowEdge, type FlowNode, type FlowStep, type LiveStage } from "../components/FlowPlay";
+import { StripeWaterfall } from "../components/boards/StripeWaterfall";
 import { formatStatus } from "../copy";
+import { useWorkflow } from "../hooks";
+import { ErrorBox, Pill } from "../layout/Shell";
 
-export default function Stripe() {
-  const [data, setData] = useState<any>(null);
+const STAKE = "Gross minus refunds, disputes, and fees should equal the bank deposit.";
+
+const STRIPE_STEPS: readonly FlowStep[] = [
+  { id: "s-stripe", title: "Unpack payout", nodeId: "stripe", manipulations: ["charges", "refunds", "fees"] },
+  { id: "s-cash", title: "Tie to bank", nodeId: "cash", manipulations: ["match deposit"] },
+  { id: "s-apply", title: "Apply to books", nodeId: "apply", manipulations: ["cash apply"] },
+];
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function innerResult(result: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(result)) {
+    return undefined;
+  }
+  if (isRecord(result.result)) {
+    return result.result;
+  }
+  return result;
+}
+
+function readPayouts(result: unknown, data: unknown): readonly unknown[] {
+  const inner = innerResult(result);
+  if (inner && Array.isArray(inner.payouts)) {
+    return inner.payouts;
+  }
+  if (isRecord(data) && Array.isArray(data.payouts)) {
+    return data.payouts;
+  }
+  return [];
+}
+
+function payoutRecord(item: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(item)) {
+    return undefined;
+  }
+  return isRecord(item.payout) ? item.payout : item;
+}
+
+function payoutIdOf(item: unknown): string {
+  const payout = payoutRecord(item);
+  return payout ? String(payout.payout_id || "") : "";
+}
+
+function breakdownOf(item: unknown): unknown {
+  return isRecord(item) ? item.breakdown : undefined;
+}
+
+function finiteOrNull(value: unknown): number | null {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function depositOf(item: unknown, bundle: unknown): number | null {
+  const payout = payoutRecord(item);
+  if (payout && payout.bank_deposit_amount !== undefined && payout.bank_deposit_amount !== null) {
+    return finiteOrNull(payout.bank_deposit_amount);
+  }
+  const bd = isRecord(breakdownOf(item)) ? breakdownOf(item) : undefined;
+  if (isRecord(bd) && bd.bank_deposit_amount !== undefined && bd.bank_deposit_amount !== null) {
+    return finiteOrNull(bd.bank_deposit_amount);
+  }
+  if (isRecord(bundle) && isRecord(bundle.bank_deposit) && isRecord(bundle.bank_deposit.record)) {
+    return finiteOrNull(bundle.bank_deposit.record.amount);
+  }
+  return null;
+}
+
+function isTied(item: unknown): boolean {
+  return isRecord(item) && item.tied === true;
+}
+
+function stripeMode(data: unknown): string {
+  if (isRecord(data) && isRecord(data.mode) && data.mode.mode) {
+    return String(data.mode.mode);
+  }
+  return "simulated";
+}
+
+function asLiveStages(value: unknown): readonly LiveStage[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.filter(isRecord).map((row) => ({
+    id: typeof row.id === "string" ? row.id : undefined,
+    bot: typeof row.bot === "string" ? row.bot : undefined,
+    slug: typeof row.slug === "string" ? row.slug : undefined,
+    label: typeof row.label === "string" ? row.label : undefined,
+    status: typeof row.status === "string" ? row.status : undefined,
+    detail: typeof row.detail === "string" ? row.detail : undefined,
+  }));
+}
+
+function liveStagesOf(result: unknown): readonly LiveStage[] {
+  const inner = innerResult(result);
+  if (inner && Array.isArray(inner.stages)) {
+    return asLiveStages(inner.stages);
+  }
+  if (inner && isRecord(inner.result) && Array.isArray(inner.result.stages)) {
+    return asLiveStages(inner.result.stages);
+  }
+  return [];
+}
+
+function bundleFor(payoutId: string, data: unknown, result: unknown): unknown {
+  if (payoutId && isRecord(data) && isRecord(data.bundles) && data.bundles[payoutId]) {
+    return data.bundles[payoutId];
+  }
+  const inner = innerResult(result);
+  if (inner && isRecord(inner.io)) {
+    return inner.io.inputs;
+  }
+  return undefined;
+}
+
+export default function Stripe(): JSX.Element {
+  const [data, setData] = useState<unknown>(null);
   const [index, setIndex] = useState(0);
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
-    get("/api/stripe").then(setData);
+    get("/api/stripe")
+      .then(setData)
+      .catch(() => undefined);
   }, [result]);
 
-  const payouts = result?.result?.payouts || data?.payouts || [];
-  const current = payouts[index];
-  const payoutId = current?.payout?.payout_id;
-  const bundle = data?.bundles?.[payoutId] || result?.result?.io?.inputs;
-  const bd = current?.breakdown;
-  const inner = result?.result;
-  const expected = bd?.expected_payout ?? bd?.net;
-  const deposit = current?.payout?.bank_deposit_amount ?? bundle?.bank_deposit?.record?.amount;
+  const payouts = readPayouts(result, data);
+  const current = payouts[index] ?? payouts[0];
+  const payoutId = payoutIdOf(current);
+  const bundle = bundleFor(payoutId, data, result);
+  const bd = breakdownOf(current);
+  const deposit = depositOf(current, bundle);
+  const tied = isTied(current);
+  const mode = stripeMode(data);
+  const live = mode === "live";
+  const inner = innerResult(result);
+
+  const nodes: readonly FlowNode[] = [
+    { id: "stripe", label: "Stripe", kind: "source", room: "intake" },
+    { id: "cash", label: "Cash", kind: "operator", room: "cash" },
+    { id: "apply", label: "Apply", kind: "operator", room: "cash" },
+    { id: "ctl-cash", label: "ctl-cash", kind: "verifier", room: "cash" },
+  ];
+  const edges: readonly FlowEdge[] = [
+    { id: "stripe-cash", from: "stripe", to: "cash", label: "payout" },
+    { id: "stripe-apply", from: "stripe", to: "apply", label: "apply" },
+    {
+      id: "cash-ctl",
+      from: "cash",
+      to: "ctl-cash",
+      label: tied ? "tied" : "break",
+      attached: current ? tied : true,
+    },
+  ];
+
+  const exceptions = isRecord(bd) && Array.isArray(bd.exceptions) ? bd.exceptions : [];
+  const balanceTxns =
+    isRecord(bundle) && Array.isArray(bundle.balance_transactions) ? bundle.balance_transactions : [];
 
   return (
-    <DemoLayout
-      eyebrow="Stripe"
-      title="How a Stripe payout became a bank deposit"
-      task="Stripe collects customer card payments, takes fees, handles refunds and chargebacks, then sends a net payout to the bank. Maximor reconstructs that waterfall so the bank deposit can be explained."
-      happening={
-        <WhatsHappening
-          happening="A Stripe payout is not a single customer payment. It is gross charges minus refunds, disputes, and Stripe fees. That net amount should match the bank deposit."
-          figureOut="Does this payout tie out to the bank, and if not, which piece of the waterfall is off?"
-          why="Without this explanation, cash reconciliation would see a bank deposit it cannot match to the books."
-        />
-      }
-      runBar={
-        <>
-          <div className="toolbar">
-            <div className="btn-row">
-              <button className="btn primary" disabled={running} onClick={() => run("/api/workflows/stripe-reconciliation")}>
-                {running ? "Running…" : "Explain this payout"}
+    <div className="cash-desk">
+      <h1>Stripe payout</h1>
+      <p className="cash-stake">{STAKE}</p>
+      <div className="cash-stripe-toolbar">
+        <Pill tone={live ? "warn" : "info"}>Stripe {formatStatus(mode)}</Pill>
+        {current ? (
+          <Pill tone={tied ? "ok" : "bad"}>{tied ? "Tied" : "Does not tie"}</Pill>
+        ) : null}
+      </div>
+      {payouts.length > 0 ? (
+        <div className="cash-payout-strip" aria-label="Payouts">
+          {payouts.map((item, idx) => {
+            const id = payoutIdOf(item) || `payout-${idx}`;
+            return (
+              <button
+                key={id}
+                type="button"
+                className={idx === index ? "cash-payout-id is-selected" : "cash-payout-id"}
+                aria-pressed={idx === index}
+                onClick={() => setIndex(idx)}
+              >
+                <span className="mono">{id}</span>
               </button>
-            </div>
-            <Pill tone={data?.mode?.mode === "live" ? "warn" : "info"}>Stripe {data?.mode?.mode || "simulated"}</Pill>
+            );
+          })}
+        </div>
+      ) : null}
+      <div className="cash-stage cash-stage-waterfall">
+        <StripeWaterfall breakdown={bd} deposit={deposit} tied={tied} />
+      </div>
+      <div className="cash-run">
+        <div className="toolbar">
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn primary"
+              disabled={running}
+              onClick={() => run("/api/workflows/stripe-reconciliation")}
+            >
+              {running ? "Running…" : "Explain this payout"}
+            </button>
           </div>
-          <ErrorBox error={error} />
-        </>
-      }
-      input={
-        <div className="stack">
+        </div>
+        <ErrorBox error={error} />
+      </div>
+      <FlowPlay nodes={nodes} edges={edges} steps={STRIPE_STEPS} mode="live" liveStages={liveStagesOf(result)} />
+      <details className="cash-evidence">
+        <summary>Evidence</summary>
+        {exceptions.map((item) => (
+          <Pill key={String(item)} tone={statusTone(String(item))}>
+            {formatStatus(item)}
+          </Pill>
+        ))}
+        {isRecord(bundle) && bundle.payout ? (
           <div className="card">
-            <h2>The payout Stripe sent</h2>
-            {(payouts || []).map((item: any, idx: number) => (
-              <div key={item.payout?.payout_id} className="card clickable" onClick={() => setIndex(idx)} style={{ marginBottom: 8 }}>
-                <div className="split">
-                  <div>Stripe payout {idx + 1}</div>
-                  <Pill tone={item.tied ? "ok" : "bad"}>{item.tied ? "Tied to the bank deposit" : "Does not tie out"}</Pill>
-                </div>
-                <TraceIds ids={[item.payout?.payout_id]} />
-              </div>
-            ))}
-            <SourceArtifactViewer artifact={bundle?.payout} />
+            <h2>Payout</h2>
+            <SourceArtifactViewer artifact={bundle.payout} />
           </div>
+        ) : null}
+        {balanceTxns.map((item, idx) => (
+          <div className="card" key={isRecord(item) ? String(item.artifact_id || idx) : String(idx)}>
+            <h2>Balance transaction</h2>
+            <SourceArtifactViewer artifact={item} compact />
+          </div>
+        ))}
+        {isRecord(bundle) && bundle.bank_deposit ? (
           <div className="card">
-            <h2>Charges, refunds, fees, and disputes</h2>
-            {(bundle?.balance_transactions || []).map((item: any) => (
-              <SourceArtifactViewer key={item.artifact_id} artifact={item} compact />
-            ))}
             <h2>Bank deposit</h2>
-            <SourceArtifactViewer artifact={bundle?.bank_deposit} />
+            <SourceArtifactViewer artifact={bundle.bank_deposit} />
           </div>
-        </div>
-      }
-      process={<ProcessPanel stages={inner?.stages} handoffs={inner?.handoffs} summary={inner?.summary} />}
-      output={
-        <div className="card">
-          <OutputHeadline label="Tied to the bank deposit?" value={current?.tied ? "Yes" : current ? "Not yet" : "Select a payout"} tone={current?.tied ? "ok" : "bad"} />
-          <Definition term="Chargeback" />
-          {bd ? (
-            <>
-              <ResultBlock
-                found={
-                  current?.tied
-                    ? `Customer charges, refunds, disputes, and Stripe fees add up to an expected payout of ${usd(expected)}, which matches the ${usd(deposit)} bank deposit.`
-                    : `The expected payout of ${usd(expected)} does not match the ${usd(deposit)} bank deposit.`
-                }
-                why="A Stripe payout is not a single customer payment. It is the net of everything Stripe processed before sending money to the bank."
-                result={
-                  current?.tied
-                    ? "Cash reconciliation can treat this bank deposit as explained."
-                    : "Cash reconciliation still needs an explanation for the difference before the deposit can be treated as complete."
-                }
-              />
-              <div className="waterfall-eq">
-                <div>Customer charges {usd(bd.gross_payments)}</div>
-                <div>− refunds {usd(bd.refunds)}</div>
-                <div>− disputes / chargebacks {usd(bd.chargebacks)}</div>
-                <div>− Stripe fees {usd(bd.fees)}</div>
-                <div>= expected payout {usd(expected)}</div>
-                <div>Bank deposit {usd(deposit)}</div>
-                <div>Difference {usd((expected || 0) - (deposit || 0))}</div>
-              </div>
-            </>
-          ) : (
-            <p className="muted">Select a payout. The arithmetic comes from Stripe reconciliation, not a number invented in this page.</p>
-          )}
-          {(bd?.exceptions || []).map((item: string) => (
-            <Pill key={item} tone="bad">
-              {formatStatus(item)}
-            </Pill>
-          ))}
-          <TraceIds ids={[payoutId, current?.payout?.bank_deposit_id]} />
-        </div>
-      }
-    />
+        ) : null}
+        {Array.isArray(inner?.stages) ? (
+          <ProcessPanel
+            stages={inner.stages as Array<{ id?: string; label?: string; status?: string; bot?: string; detail?: string }>}
+            handoffs={Array.isArray(inner.handoffs) ? inner.handoffs : undefined}
+            summary={typeof inner.summary === "string" ? inner.summary : undefined}
+          />
+        ) : null}
+      </details>
+    </div>
   );
 }

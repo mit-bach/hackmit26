@@ -52,16 +52,23 @@ Period lock RPC name is `close.month_end.run_month_end` (`close/month_end`). `cl
 
 ## 3. Harness (bus) + Client extension (Grants)
 
-Headless, fake workers (no Pi, no model). Operator SPA is optional overlay:
+Documented boot is **live Pi workers**, not `--fake`. `harness/client.json` on this Computer already lists the Client extra `-e`, `clientSkills: true`, lazy spawn, and the Kernel sidecar. `serve` writes `harness/extensions.json` and supervisor spawn argv is Harness `-e` plus Client `-e`. Env on that spawn includes `HARNESS_CLIENT_SKILLS=1` and `HARNESS_V2_ROOT`.
+
+From the git repo root:
 
 ```bash
+export HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer"
+export HARNESS_V2_ROOT="$PWD/.harness/Harness-v2"
+export HARNESS_CLIENT_SKILLS=1
 cd .harness/Harness-v2
-npm run serve -- --computer ../../.cfo-v2/office/computer --fake --no-open
+npm run serve -- --computer ../../.cfo-v2/office/computer --no-open
 ```
 
-Loopback: `http://127.0.0.1:8787/`. `--fake` completes Handles without a model. That is a protocol demo, not live Pi.
+Loopback: `http://127.0.0.1:8787/`. Lazy spawn starts a live Pi worker when a Handle lands. Pass `--eager` to bind every Roster slug at boot. Sidecar starts from `client.json` unless `--no-sidecar`.
 
-Bind one Bot with Harness protocol tools **and** the CFO facade:
+Identity files are reachable from Computer cwd: `office/bots/<slug>/BOT.md` and `office/constitution.md` exist under `$HARNESS_COMPUTER`.
+
+Bind one Bot in a pane (same two `-e` flags):
 
 ```bash
 .cfo-v2/office/computer/cfo/bin/pi-bot.sh ap
@@ -73,6 +80,7 @@ Equivalent:
 HARNESS_BOT=ap \
 HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer" \
 HARNESS_V2_ROOT="$PWD/.harness/Harness-v2" \
+HARNESS_CLIENT_SKILLS=1 \
 CFO_EVAL_PHASE=operational \
   pi -e .harness/Harness-v2/extensions/index.ts \
      -e .cfo-v2/office/computer/cfo/extensions/index.ts \
@@ -80,6 +88,15 @@ CFO_EVAL_PHASE=operational \
 ```
 
 Unbound Pi (no `HARNESS_BOT`) is not a finance worker.
+
+### Protocol demo only (`--fake`)
+
+`--fake` echo workers complete Handles without a model and without the Client Grant door. That is a labeled protocol demo. It is not this office's boot.
+
+```bash
+cd .harness/Harness-v2
+npm run serve -- --computer ../../.cfo-v2/office/computer --fake --no-open
+```
 
 ## 4. Routines (owning Bots, not Operator DM)
 

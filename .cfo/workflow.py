@@ -21,6 +21,7 @@ from ap_grants import (
     grants_for,
 )
 from atomic_json import write_json_atomic
+from harness_handles import relative_to_computer, write_peer_handle
 from models import (
     APCaseEvidence,
     DecisionTrace,
@@ -117,9 +118,10 @@ def wake_bot(
     paths: list[str],
     invoice_id: str,
 ) -> PreparerRecommendation | InvestigationReport:
-    """Write a next-wake record sessions 01/02 can execute, then run the bound Profile.
+    """Write a next-wake record, then run the bound Profile.
 
-    Pi Handle completion is not live here. Tests patch ``run_agent``.
+    Tests patch ``run_agent``. Office-live AP uses ``run_ap_kernel`` and
+    Harness Handles. This function is the Kernel test host, not the Bot bus.
     """
     if slug != AP_SLUG:
         raise GrantError(f"AP host cannot wake slug {slug!r}")
@@ -152,6 +154,60 @@ def _packet_path(invoice_id: str) -> Path:
 
 def _handle_path(invoice_id: str) -> Path:
     return Path(RUNS_DIR) / "ap" / "handles" / f"{invoice_id}.json"
+
+
+def _close_handle_path(invoice_id: str) -> Path:
+    return Path(RUNS_DIR) / "ap" / "handles" / f"{invoice_id}-close.json"
+
+
+def is_unreceived_period_work(evidence: APCaseEvidence) -> bool:
+    return evidence.receipt_status in {"missing", "not_received"}
+
+
+def kernel_preparer_recommendation(evidence: APCaseEvidence) -> PreparerRecommendation:
+    """Deterministic prepare. Does not call Runner."""
+    holds = must_hold(evidence)
+    if holds:
+        rec = "HOLD"
+        reasons = [f"Kernel must_hold: {item}" for item in holds]
+    elif evidence.exception_types:
+        rec = "INVESTIGATE"
+        reasons = [f"Kernel exception_types: {', '.join(evidence.exception_types)}"]
+    else:
+        rec = "APPROVE"
+        reasons = ["Kernel three-way facts are clean."]
+    return PreparerRecommendation(
+        invoice_id=evidence.invoice_id,
+        recommendation=rec,
+        confidence=0.9 if rec == "APPROVE" else 0.7,
+        reasons=reasons,
+        evidence_used=[evidence.invoice_id],
+        exception_types=list(evidence.exception_types),
+    )
+
+
+def kernel_investigation(
+    evidence: APCaseEvidence,
+    memory_block: str = "",
+) -> InvestigationReport:
+    """Deterministic investigate. Does not call Runner. Does not pay."""
+    holds = must_hold(evidence)
+    rec = "HOLD" if holds else "APPROVE"
+    findings = [f"Kernel exception_types: {item}" for item in evidence.exception_types]
+    if memory_block:
+        findings.append("Retrieved operational AP memory. Precedent cannot override must_hold.")
+    if holds:
+        findings.extend(f"Kernel must_hold: {item}" for item in holds)
+    return InvestigationReport(
+        invoice_id=evidence.invoice_id,
+        issues_investigated=list(evidence.exception_types),
+        findings=findings or ["No extra vendor-specific facts beyond Kernel types."],
+        relevant_precedents=[],
+        relevant_policies=[],
+        unresolved_risks=list(holds),
+        recommendation=rec,
+        confidence=0.7,
+    )
 
 
 def _write_evidence(invoice_id: str, evidence: APCaseEvidence) -> Path:
@@ -257,7 +313,13 @@ def _write_match_packet(
     return path
 
 
-def _write_ctl_pay_handle(invoice_id: str, packet_path: Path, proposed: str) -> dict | None:
+def _write_ctl_pay_handle(
+    invoice_id: str,
+    packet_path: Path,
+    proposed: str,
+    *,
+    computer_root: Path | None = None,
+) -> dict | None:
     if proposed != "APPROVE":
         return None
     handle_id = f"h_{uuid4()}"
@@ -270,6 +332,7 @@ def _write_ctl_pay_handle(invoice_id: str, packet_path: Path, proposed: str) -> 
     payload = {
         "id": handle_id,
         "from": AP_BOT_ID,
+        "fromSlug": AP_SLUG,
         "to": CTL_PAY_BOT_ID,
         "toSlug": CTL_PAY_SLUG,
         "profile": CTL_PAY_MATCH_PROFILE,
@@ -289,8 +352,93 @@ def _write_ctl_pay_handle(invoice_id: str, packet_path: Path, proposed: str) -> 
         "queue": {"owner": CTL_PAY_SLUG, "profile": CTL_PAY_MATCH_PROFILE},
         "humanQueue": False,
         "done": False,
+        "bus": "harness",
+        "op": "bot_send_prompt",
     }
     write_json_atomic(_handle_path(invoice_id), payload)
+    computer = computer_root
+    if computer is None:
+        env = os.environ.get("HARNESS_COMPUTER")
+        computer = Path(env) if env else None
+    if computer is not None:
+        try:
+            rel_paths = [relative_to_computer(computer, packet_path)]
+            dest, harness = write_peer_handle(
+                computer,
+                from_slug=AP_SLUG,
+                to_slug=CTL_PAY_SLUG,
+                profile=CTL_PAY_MATCH_PROFILE,
+                paths=rel_paths,
+                prompt=prompt,
+                extra={"invoice_id": invoice_id, "verifier_missing": False},
+                handle_id=handle_id,
+            )
+            payload["harness_path"] = str(dest)
+            payload["id"] = harness["id"]
+        except OSError:
+            pass
+    return payload
+
+
+def _write_close_handle(
+    invoice_id: str,
+    packet_path: Path,
+    evidence: APCaseEvidence,
+    *,
+    computer_root: Path | None = None,
+) -> dict | None:
+    if not is_unreceived_period_work(evidence):
+        return None
+    handle_id = f"h_{uuid4()}"
+    rel = packet_path.as_posix()
+    prompt = (
+        f"profile: coordinate\n"
+        f"Unreceived period work on bill {invoice_id}. Packet: {rel}\n"
+        "This Handle is accrual input. It is not approval. Do not pay."
+    )
+    payload = {
+        "id": handle_id,
+        "from": AP_BOT_ID,
+        "fromSlug": AP_SLUG,
+        "to": "bot_close",
+        "toSlug": "close",
+        "profile": "coordinate",
+        "prompt": prompt,
+        "paths": [rel],
+        "kind": "a2a_handoff",
+        "status": "accepted",
+        "done": False,
+        "invoice_id": invoice_id,
+        "approval": False,
+        "createdAt": _now(),
+        "path": str(_close_handle_path(invoice_id)),
+        "queue": {"owner": "close", "profile": "coordinate"},
+        "humanQueue": False,
+        "bus": "harness",
+        "op": "bot_send_prompt",
+    }
+    write_json_atomic(_close_handle_path(invoice_id), payload)
+    computer = computer_root
+    if computer is None:
+        env = os.environ.get("HARNESS_COMPUTER")
+        computer = Path(env) if env else None
+    if computer is not None:
+        try:
+            rel_paths = [relative_to_computer(computer, packet_path)]
+            dest, harness = write_peer_handle(
+                computer,
+                from_slug=AP_SLUG,
+                to_slug="close",
+                profile="coordinate",
+                paths=rel_paths,
+                prompt=prompt,
+                extra={"invoice_id": invoice_id, "approval": False},
+                handle_id=handle_id,
+            )
+            payload["harness_path"] = str(dest)
+            payload["id"] = harness["id"]
+        except OSError:
+            pass
     return payload
 
 
@@ -389,7 +537,12 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
     invoice_date = evidence.invoice.invoice_date if evidence.invoice else started_at[:10]
     period = invoice_date[:7] if invoice_date else started_at[:7]
     from memory.format import format_precedents
-    from memory.hooks import lookup_for_ap, write_ap_memory
+    from memory.hooks import (
+        apply_ap_precedent,
+        lookup_for_ap,
+        write_ap_alias_memory,
+        write_ap_memory,
+    )
 
     memory_lookup = lookup_for_ap(evidence, period)
     memory_block = format_precedents(memory_lookup)
@@ -407,10 +560,12 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
     proposed, reasons, confidence, evidence_used, holds = _propose(
         evidence, preparer, investigation
     )
+    memory_lookup = apply_ap_precedent(evidence, memory_lookup, holds)
     packet_path = _write_match_packet(
         invoice_id, evidence_path, preparer, investigation, proposed, holds
     )
     handle = _write_ctl_pay_handle(invoice_id, packet_path, proposed)
+    close_handle = _write_close_handle(invoice_id, packet_path, evidence)
     pending = handle is not None
     final = _build_final(
         evidence,
@@ -433,10 +588,12 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
         investigation = investigation.model_copy(
             update={"relevant_precedents": list(dict.fromkeys(list(investigation.relevant_precedents) + extra))}
         )
-        memory_lookup.precedent_used = True
-        memory_lookup.current_evidence_checked = True
         memory_lookup.decision = final.decision
     written = write_ap_memory(evidence, final, period=period, trace_id=invoice_id)
+    alias = write_ap_alias_memory(evidence, period=period, trace_id=invoice_id)
+    written_id = written[0].decision_id if written is not None else None
+    if written_id is None and alias is not None:
+        written_id = alias[0].decision_id
     trace = DecisionTrace(
         invoice_id=invoice_id,
         started_at=started_at,
@@ -451,10 +608,11 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
         agents=[usage_from_agent(item) for item in ran],
         packet_path=str(packet_path),
         verifier_handle=handle,
+        close_handle=close_handle,
         kernel_holds=holds,
         posted_to_pool=False,
         memory_lookup=memory_lookup,
-        written_memory_id=written[0].decision_id if written is not None else None,
+        written_memory_id=written_id,
         wakes=[
             {
                 "slug": AP_SLUG,
@@ -473,5 +631,95 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
                 ),
             }
         )
+    _save_trace(trace)
+    return trace
+
+
+def run_ap_kernel(invoice_id: str, *, computer_root: Path | None = None) -> DecisionTrace:
+    """Office-shaped AP host. Kernel facts win. Does not call Runner."""
+    if load_invoice(invoice_id) is None:
+        raise DataFileError(f"Invoice {invoice_id} was not found")
+
+    started_at = _now()
+    evidence = collect_case_evidence(invoice_id)
+    evidence_path = _write_evidence(invoice_id, evidence)
+    invoice_date = evidence.invoice.invoice_date if evidence.invoice else started_at[:10]
+    period = invoice_date[:7] if invoice_date else started_at[:7]
+    from memory.format import format_precedents
+    from memory.hooks import (
+        apply_ap_precedent,
+        lookup_for_ap,
+        write_ap_alias_memory,
+        write_ap_memory,
+    )
+
+    memory_lookup = lookup_for_ap(evidence, period)
+    memory_block = format_precedents(memory_lookup)
+    preparer = kernel_preparer_recommendation(evidence)
+    preparer_note = Path(RUNS_DIR) / "ap" / "packets" / f"{invoice_id}.prepare.json"
+    write_json_atomic(preparer_note, preparer.model_dump(mode="json"))
+    investigation = None
+    if _needs_investigation(evidence, preparer):
+        investigation = kernel_investigation(evidence, memory_block=memory_block)
+    proposed, reasons, confidence, evidence_used, holds = _propose(
+        evidence, preparer, investigation
+    )
+    memory_lookup = apply_ap_precedent(evidence, memory_lookup, holds)
+    packet_path = _write_match_packet(
+        invoice_id, evidence_path, preparer, investigation, proposed, holds
+    )
+    handle = _write_ctl_pay_handle(
+        invoice_id, packet_path, proposed, computer_root=computer_root
+    )
+    close_handle = _write_close_handle(
+        invoice_id, packet_path, evidence, computer_root=computer_root
+    )
+    final = _build_final(
+        evidence,
+        proposed,
+        reasons,
+        confidence,
+        evidence_used,
+        investigation_performed=investigation is not None,
+        pending_verifier=handle is not None,
+    )
+    if investigation is not None and memory_lookup.precedents:
+        extra = [
+            f"{item.decision_id}: {item.reusable_precedent}" for item in memory_lookup.precedents
+        ]
+        investigation = investigation.model_copy(
+            update={
+                "relevant_precedents": list(
+                    dict.fromkeys(list(investigation.relevant_precedents) + extra)
+                )
+            }
+        )
+        memory_lookup.decision = final.decision
+    written = write_ap_memory(evidence, final, period=period, trace_id=invoice_id)
+    alias = write_ap_alias_memory(evidence, period=period, trace_id=invoice_id)
+    written_id = written[0].decision_id if written is not None else None
+    if written_id is None and alias is not None:
+        written_id = alias[0].decision_id
+    trace = DecisionTrace(
+        invoice_id=invoice_id,
+        started_at=started_at,
+        deterministic_evidence=evidence,
+        preparer=preparer,
+        investigation=investigation,
+        reviewer=None,
+        approver=None,
+        audit=None,
+        reconsideration=None,
+        final=final,
+        agents=[],
+        packet_path=str(packet_path),
+        verifier_handle=handle,
+        close_handle=close_handle,
+        kernel_holds=holds,
+        posted_to_pool=False,
+        memory_lookup=memory_lookup,
+        written_memory_id=written_id,
+        wakes=[],
+    )
     _save_trace(trace)
     return trace

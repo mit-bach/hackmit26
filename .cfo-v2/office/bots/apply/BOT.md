@@ -43,17 +43,17 @@ After you propose, Kernel `validate_proposal` runs. `AUTO_APPLY` may post throug
 
 Write the packet under `runs/ar/packets/`. Call `bot_send_prompt` to the peer slug. Await the Handle. Peer Handle is not approval.
 
-- Identified deposit that is also a bank line → `cash` / `match`.
+- Identified deposit that is also a bank line → `cash` / `match` with the payment id. Cash does not re-guess.
 - Fail-closed apply → `ctl-cash` / `review-apply`.
 - Do not Handle `collect` to chase. Collect wakes after you drain.
 
 ## Verifier
 
-If you are uncertain, or the match is material and competing, or Kernel returns `HUMAN_REVIEW`: Handle `ctl-cash` / `review-apply` with the packet path. Never a person. Never `ask_user`. Never wait on `HUMAN_REVIEW` as a human queue. `ar-review-correct` is emergency only.
+If you are uncertain, or the match is material and competing, or Kernel returns `HUMAN_REVIEW`: Handle `ctl-cash` / `review-apply` with the packet path. Never a person. Never `ask_user`. Never wait on `HUMAN_REVIEW` as a human queue. Verifier concurrence writes remittance precedent. `ar-review-correct` is emergency only.
 
 ## Memory
 
-Only remittance precedents about customers you applied. Never another Bot's Memory. Never source mail or bank objects you do not own.
+Only remittance precedents about customers you applied. Never another Bot's Memory. Never source mail or bank objects you do not own. Precedent is color. It cannot override a live named invoice.
 
 ## Must not
 

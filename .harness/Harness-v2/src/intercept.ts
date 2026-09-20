@@ -58,44 +58,23 @@ export function saveIntercept(computerRoot: string, next: InterceptMap): void {
   writeJsonAtomic(interceptPath(computerRoot), next);
 }
 
-const VERIFIER_OWNERS: Readonly<Record<string, string>> = {
-  ap: "ctl-pay",
-  pay: "ctl-pay",
-  apply: "ctl-cash",
-  collect: "ctl-cash",
-  cash: "ctl-cash",
-  close: "ctl-books",
-  books: "ctl-books",
-  story: "ctl-books",
-};
-
 /**
- * If intercept.json still has an empty map and the Roster has verifier Bots,
- * park those drafters on the matching ctl-* Bot instead of the Operator.
+ * Computers own intercept.json. Harness does not invent Client Verifier slugs.
  */
 export function seedVerifierIntercept(computerRoot: string): InterceptMap {
-  const existing = loadIntercept(computerRoot);
-  if (Object.keys(existing.bots).length > 0) {
-    return existing;
-  }
-  const roster = loadRoster(computerRoot);
-  const slugs = new Set(roster.bots.map((bot) => bot.slug));
-  const bots: Record<string, InterceptTarget> = {};
-  for (const [from, to] of Object.entries(VERIFIER_OWNERS)) {
-    if (slugs.has(from) && slugs.has(to)) {
-      bots[from] = { kind: "bot", bot: to };
-    }
-  }
-  if (Object.keys(bots).length === 0) {
-    return existing;
-  }
-  const next: InterceptMap = { default: existing.default, bots };
-  saveIntercept(computerRoot, next);
-  return next;
+  return loadIntercept(computerRoot);
 }
 
 export function resolveIntercept(map: InterceptMap, botKey: string): InterceptTarget {
   return map.bots[botKey] ?? map.default;
+}
+
+export function operatorCompletesIntercept(target: InterceptTarget): target is { readonly kind: "operator" } {
+  return target.kind === "operator";
+}
+
+export function interceptApproverLabel(target: InterceptTarget): string {
+  return target.kind === "bot" ? `Bot ${target.bot}` : "Operator";
 }
 
 export function notifyIntercept(computerRoot: string, approval: ApprovalRecord): void {

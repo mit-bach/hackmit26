@@ -210,7 +210,6 @@ export const AGENT_ALIASES: Record<string, string> = {
   "AP Approver": "ctl-pay",
   "AP Audit": "ctl-pay",
   "Email Invoice Agent": "email",
-  "Counterparty Message Agent": "email",
   "Finance Inbox Agent": "email",
   "Payment Scheduler": "pay",
   "Payment Audit": "ctl-pay",
@@ -526,6 +525,9 @@ export function formatWorkflow(value: unknown): string {
 export function formatAgent(value: unknown): string {
   const key = String(value || "").trim();
   if (!key) return "Agent";
+  if (key === "world" || key === "World") {
+    return "World (simulated mailbox, not on live roster)";
+  }
   if (AGENT_COPY[key]) return AGENT_COPY[key].name;
   const aliased = AGENT_ALIASES[key] || AGENT_ALIASES[key.replace(/_/g, "-")];
   if (aliased && AGENT_COPY[aliased]) return AGENT_COPY[aliased].name;

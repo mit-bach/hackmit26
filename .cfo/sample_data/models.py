@@ -48,6 +48,8 @@ ExpectedBehavior = Literal[
     "HANDOFF",
     "ORCHESTRATE",
     "LEARN",
+    "EXCEPTION_OPEN",
+    "CLOSE_BLOCKED",
 ]
 
 
@@ -62,6 +64,16 @@ class Company(BaseModel):
     fiscal_year_start_month: int = 1
     operating_bank_id: str = "BANK-OPERATING"
     stripe_account_id: str = "acct_maximor_demo"
+    annual_revenue_run_rate: float = 372_400_000.00
+    august_revenue: float = 30_820_000.00
+    september_revenue: float = 31_140_000.00
+    w2_headcount: int = 2_840
+    contractors_1099: int = 412
+    biweekly_payroll_gross: float = 8_437_291.44
+    ap_open: float = 18_420_000.00
+    ar_open: float = 41_260_000.00
+    operating_cash: float = 14_882_410.18
+    active_vendors: int = 340
 
 
 class FiscalCalendar(BaseModel):
@@ -175,6 +187,19 @@ class ExpectedFinding(BaseModel):
     source_ids: list[str] = Field(default_factory=list)
 
 
+class AdversarialHoldoutItem(BaseModel):
+    """Private eval key. Never copy these fields onto operational rows."""
+
+    id: str
+    storyline: str
+    reason_code: str
+    stealth: int
+    magnitude: str
+    record_ids: list[str] = Field(default_factory=list)
+    plant_objects: list[str] = Field(default_factory=list)
+    must_remain_unmatched: list[str] = Field(default_factory=list)
+
+
 class ExpectedResults(BaseModel):
     """Hidden answer key. Operational agents must never load this file."""
 
@@ -187,6 +212,7 @@ class ExpectedResults(BaseModel):
     gross_margin_drivers: list[str] = Field(default_factory=list)
     forecast_miss_drivers: list[str] = Field(default_factory=list)
     storylines: list[str] = Field(default_factory=list)
+    adversarial_holdout: list[AdversarialHoldoutItem] = Field(default_factory=list)
 
 
 class DatasetManifest(BaseModel):

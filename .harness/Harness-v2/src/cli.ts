@@ -254,7 +254,8 @@ The Operator shell is a loopback SPA on the same process as the JSON API.
       );
       process.stdout.write(`    status now: ${liveStatus(computerRoot, bot.id)}\n`);
     }
-    process.stdout.write("Or headless: harness serve --computer <dir> [--fake]\n");
+    process.stdout.write("Or headless: harness serve --computer <dir>\n");
+    process.stdout.write("--fake is a protocol demo (echo workers). It is not live Pi.\n");
     return;
   }
 

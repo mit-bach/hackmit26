@@ -1,15 +1,32 @@
-# Shared laws — Maximor website overhaul
+# Shared laws — Maximor website overhaul (remaining agents)
 
-Every implementing agent reads this file first. Then it reads only its numbered prompt. It does not read the other numbered prompts. It does not invent extra tickets.
+Every remaining implementing agent reads this file first, then `00-TARGET.md`, then only its numbered prompt. It does not read the other numbered prompts. It does not invent extra tickets.
 
 Repo: `/Users/dominikbach/olympus/hackmit/hackmit26`
 Website: `web/`
 Vite: port 5173, proxies `/api` → `http://127.0.0.1:8765` (`python -m demo_web`).
 Canonical capability account: `.cfo-v2/office/final-demo/CAPABILITIES.md`
-Website contract: `docs/demo_website_architecture.md`
-Visual scope (read, do not edit): the canvas `sponsor-website-viz-scope.canvas.tsx` in the Cursor canvases folder, and this directory.
 
-You are implementing a **sponsor walkthrough**, not a marketing landing, not a new finance engine.
+Prompt **01 is already in flight**. `web/src/components/FlowPlay.tsx` exists. Home already has `EventBoard`. Do not edit Prompt 01’s files. Do not fork FlowPlay.
+
+You are implementing a **sponsor walkthrough**, not a marketing landing, not a new finance engine, not a restyle of the Kernel console.
+
+---
+
+## Replace. Do not decorate.
+
+The current site is one layout printed on almost every route: `DemoLayout` → `WhatsHappening` (three essays) → `RunBar` → three columns labeled **What arrived / What the agents did / What changed**. Architecture is the exception, and it is four columns of buttons. Workflow is the other exception, and it is nine essay cards.
+
+If a stranger blurs the titles and your page still looks like that console, **you failed this prompt**.
+
+On every page you own:
+
+1. **Delete** the `DemoLayout` call. Do not wrap it. Do not pass a board in `happening={...}`. Do not keep `io-flow` as the page skeleton.
+2. **Do not render** `WhatsHappening` or `StoryCard` on first paint.
+3. **Do not** keep a `PageHead` lede longer than 18 words. Prefer a one-line title plus the instrument.
+4. The unique **instrument** (graph, match, lanes, waterfall, lock, line, wall, docket) is the first thing in `.main` after a short title. Min-height **380px**.
+5. Kernel GET/POST paths stay. `useWorkflow` stays. `SourceArtifactViewer` may live in a **collapsed** `<details>` inspector. `ProcessPanel` may live under the instrument **after a run**, never as a middle column of the page.
+6. No new npm packages. No D3, no Framer Motion, no chart library. React 18 + SVG + CSS. Keep tokens in `:root` (`--bg`, `--brass`, IBM Plex / Newsreader). You may invent new layout classes in **your** CSS append block.
 
 ---
 
@@ -19,21 +36,11 @@ Maximor Demo Corp (`CO-MAXIMOR`), September 2026. An agentic Office of the CFO: 
 
 ---
 
-## The feeling that must replace the current site
-
-Current site: eighteen routes of prose. Architecture is buttons. How-it-works is five paragraphs. One-invoice is nine cards. Coverage is six cards. Zero SVG. Zero motion. A sponsor cannot see work move.
-
-Target: click a real incoming **event** → watch a token travel to a **Bot** → see **manipulations** (match, hold, apply, refuse, block) → see the **Handle** to the next Bot. Same invoice ID stays lit across AP, bank, close, forecast, audit. End on Northstar **$12.40** still unexplained.
-
-Keep the Maximor console: `--bg #0c1014`, `--brass #c9a24a`, IBM Plex Sans / Newsreader / IBM Plex Mono, doc-paper evidence. The stimulation is the moving work, not decoration. No new npm packages. No D3, no Framer Motion, no chart library. React 18 + SVG + CSS only.
-
----
-
 ## Honesty (non-negotiable)
 
 1. Do not resolve `TXN-2026-09-015` / the **$12.40**. Close stays BLOCKED. No invented fee.
 2. Do not draw collect → World (or any collection email) as a completed send. Live roster omits Bot `world`. Live catalog omits `inbox.tools.send_office_outbound`. If you draw that hop, it is **dashed** and labeled **not attached**.
-3. Do not map Counterparty Message Agent to Bot `email` as if World existed. `copy.ts` currently does that (`AGENT_ALIASES["Counterparty Message Agent"] = "email"`). Prompt 04 owns the fix. Other prompts must not spread the lie.
+3. Do not map Counterparty Message Agent to Bot `email` as if World existed. `copy.ts` currently does that. Prompt **07** owns the fix. Other prompts must not spread the lie.
 4. Do not claim AP self-improvement or vendor bank-change as built. CAPABILITIES.md marks them **Not built**.
 5. Do not treat Kernel gauntlet 42/42 or “97%” as the office score. Caption: Kernel.
 6. Do not add fake video. `/videos` stays honest placeholders unless a real file already exists.
@@ -65,78 +72,92 @@ There is no Bot named `ar`. AR is `apply` + `collect`.
 
 ---
 
-## FlowPlay contract (Prompt 01 ships this)
+## FlowPlay (already shipped — import it)
 
 Path: `web/src/components/FlowPlay.tsx`
 
-Prompts 02–04 import it. If the file is missing when you start, **stop** and say so. Do not invent a second graph engine.
+If the file is missing when you start, **stop** and say so. Do not invent a second graph engine. Do not edit FlowPlay.
+
+The shipped component may include extra optional fields (`column`, `row`, node `status`, wrapped `liveStages`). Use it as it exists. Required usage:
 
 ```ts
-export type FlowMode = "story" | "live";
-export type FlowNodeKind = "event" | "source" | "operator" | "verifier" | "assurance";
-export type FlowNodeStatus = "idle" | "active" | "done" | "blocked" | "not-attached";
-
-export type FlowNode = {
-  id: string;
-  label: string;
-  kind: FlowNodeKind;
-  room?: "intake" | "pay" | "cash" | "books-close";
-};
-
-export type FlowEdge = {
-  id: string;
-  from: string;
-  to: string;
-  label: string;
-  attached?: boolean; // default true. false → dashed, muted, title "not attached"
-};
-
-export type FlowStep = {
-  id: string;
-  title: string;
-  nodeId: string;
-  body?: string;
-  manipulations: string[];
-  handoff?: { to: string; why: string };
-  artifactIds?: string[];
-  status?: FlowNodeStatus;
-};
-
-export function FlowPlay(props: {
-  nodes: readonly FlowNode[];
-  edges: readonly FlowEdge[];
-  steps: readonly FlowStep[];
-  activeStepId?: string;
-  mode?: FlowMode;
-  liveStages?: readonly { id?: string; bot?: string; slug?: string; label?: string; status?: string; detail?: string }[];
-  onStepChange?: (stepId: string) => void;
-  autoplay?: boolean;
-}): JSX.Element;
+import { FlowPlay } from "../components/FlowPlay";
+// nodes, edges, steps as in the shipped types
+// mode="story" with autoplay for planted plots
+// mode="live" with liveStages from useWorkflow() for Kernel runs
 ```
 
-Live mode: map `liveStages[i].bot || liveStages[i].slug` onto `nodes[].id`. Advance `activeStepId` as stages arrive. Verifier slugs use `kind: "verifier"` (brass stroke).
+Live mode: map `liveStages[i].bot || liveStages[i].slug` onto `nodes[].id`. Verifier slugs use `kind: "verifier"` (brass stroke). Not-attached edges: `attached: false`.
+
+Normalize stages: `result?.result?.stages || result?.stages || []`. If the API is down, FlowPlay still shows idle nodes.
 
 ---
 
-## CSS ownership (prevent merge fights)
+## Live desk skeleton (prompts 04, 05, 06, 08)
 
-Single file: `web/src/styles.css`. Each prompt **appends** a named block at the **end**. It does not rewrite `:root`, `.app`, `.topbar`, `.sidebar`, `.demo-page`, `.io-flow`, `.card` unless its prompt explicitly allows a one-line additive change.
+Each live function page uses this **shape**, implemented **inline in the page** (or a file only you own). Do **not** create a shared `LiveDesk.tsx` that other prompts must import — that would serialize the work.
+
+```
+[one-line title]
+[one-line stake, ≤18 words]
+[INSTRUMENT — unique to this function, min-height 380px]
+[compact run controls — same POST paths as today]
+[FlowPlay live — 4–6 nodes for THIS pipe only]
+[<details> Evidence — SourceArtifactViewer, BeforeAfterDiff, ProcessPanel. Default CLOSED]
+```
+
+Prefix your classes so parallel CSS appends do not fight:
+
+| Prompt | Prefix |
+| --- | --- |
+| 04 | `.pay-` |
+| 05 | `.cash-` |
+| 06 | `.month-` |
+| 08 | `.rest-` |
+
+---
+
+## CSS ownership
+
+Single file: `web/src/styles.css`. Each prompt **appends** a named block at the **end**. It does not rewrite `:root`, `.app`, `.topbar`, `.sidebar`, `.demo-page`, `.io-flow`, `.card`, and it does not edit the `/* === 01 flow-play + event-board === */` block.
 
 | Prompt | Append marker |
 | --- | --- |
-| 01 | `/* === 01 flow-play + event-board === */` |
-| 02 | `/* === 02 story-play + capability-matrix === */` |
-| 03 | `/* === 03 live-office-boards === */` |
-| 04 | `/* === 04 arch-graph + shell-nav === */` |
+| 01 (done) | `/* === 01 flow-play + event-board === */` |
+| 02 | `/* === 02 show-path === */` |
+| 03 | `/* === 03 capability-wall === */` |
+| 04 | `/* === 04 pay-desk === */` |
+| 05 | `/* === 05 cash-desk === */` |
+| 06 | `/* === 06 month-desk === */` |
+| 07 | `/* === 07 office-graph + shell-nav === */` |
+| 08 | `/* === 08 remaining-routes === */` |
 
-You may add `@keyframes` only inside your block. First motion in the app is allowed. Keep it to stroke-dashoffset and a 180–240ms fill change. No gradients beyond what `:root` already uses on `.main`.
+You may add `@keyframes` only inside your block. Motion: stroke-dashoffset and 180–240ms fill change. No extra drop shadows. No gradients beyond what `:root` already uses on `.main`.
+
+If two agents append at once, concatenate the markers. Do not rebase by rewriting earlier blocks.
 
 ---
 
 ## Spawn order
 
-1. Run **01** to completion (`FlowPlay.tsx` exists, Home event board plays).
-2. Then run **02**, **03**, **04** in parallel. They must not edit each other’s owned files.
+1. Prompt **01** is already running. Wait until `FlowPlay.tsx` exists (it should).
+2. Spawn **02 through 08 in parallel**. File lists do not overlap except `styles.css` (append-only) and a few **compat exports** listed in each prompt.
+
+`copy.ts`: only Prompt **07** may edit it (`AGENT_ALIASES` / `formatAgent("world")`). Everyone else **imports** formatters.
+
+`App.tsx`: do not delete routes. Only Prompt **07** may edit `Shell.tsx`. Prompt **08** may edit `App.test.tsx` assertions that name `/inbox`, `/agents`, `/evaluations`.
+
+---
+
+## Test landmines (do not ignore)
+
+`web/src/App.test.tsx` currently asserts `/inbox` still shows “What arrived” / “What changed”. That is the old console. Prompt **08** must rewrite that test to match the new Inbox instrument.
+
+The same file asserts `/agents` contains “The finance team” and `/evaluations` contains “connected finance work” / “Evaluation Lab”. Prompt **08** owns those pages and those assertions.
+
+`web/src/data/architecture.test.ts` imports `INVOICE_STORY` and `CAPABILITIES`. Prompt **02** keeps an `INVOICE_STORY` export (CLEAN spine is enough). Prompt **03** keeps a `CAPABILITIES` export with `agents: string[]` on each row.
+
+`test.each(ROUTES)` requires every route to render “Office of the CFO” (the Shell brand) and to omit the string `Invoice approved`. Do not put that string on a page.
 
 ---
 
@@ -145,15 +166,15 @@ You may add `@keyframes` only inside your block. First motion in the app is allo
 - `cd web && npm test` must pass.
 - `npm run build` must pass.
 - Open the changed routes in the browser (Cursor browser tools if available). Story-mode graphs must play **even if the API on 8765 is down**.
-- A single screenshot is not verification. Click the event/story/node. Confirm the active edge and manipulation chips change.
+- A single screenshot is not verification. Click the instrument. Confirm the visual changes.
 - If you change how state is written, visit every route that reads it.
 
 ---
 
 ## Do not
 
-- Do not restyle the whole product.
-- Do not add routes without Prompt 04.
-- Do not expand `WhatsHappening` essays. Collapse or move below the visual.
+- Do not edit Prompt 01 files: `FlowPlay.tsx`, `EventBoard.tsx`, `eventStories.ts`, `Overview.tsx` (except Prompt 07 does not touch Overview either).
+- Do not add routes without Prompt 07, and Prompt 07 should not add routes unless a redirect is required. Keep the existing pathnames.
 - Do not use emoji as UI.
 - Do not commit unless the operator asks.
+- Do not restyle the topbar brand. Maxi**mor** / Office of the CFO stays.

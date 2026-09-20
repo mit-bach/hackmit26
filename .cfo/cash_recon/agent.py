@@ -12,6 +12,7 @@ from cash_recon.tools import (
     get_fee_evidence,
     get_ledger_entry,
     get_match_candidates,
+    get_pipe_identifier,
 )
 from skills import compose_instructions, skills_for
 
@@ -19,10 +20,13 @@ CASH_SAFETY = """
 Safety rules:
 - Never invent bank transactions, ledger entries, fees, FX rates, or amounts.
 - Copy candidate amounts from Python exactly. Do not recalculate sums or differences.
+- Trust get_pipe_identifier. If apply or pay already named the counterparty, copy that identity. Do not re-guess from the memo.
+- If get_pipe_identifier is missing, fail closed. Handle ctl-cash. Do not scrape a customer or vendor from the description.
 - If evidence does not support an explanation, route HUMAN_REVIEW. Do not fabricate one.
 - Duplicate suspicion is never a reason to match both items.
 - Do not post, delete, or silently mutate books. Proposed journal entries stay unposted.
 - A transaction is never MATCHED merely because it looks plausible.
+- Do not relabel an unexplained residual as a fee. Memory of a payout label is not fee evidence.
 """.strip()
 
 CASH_TOOLS = [
@@ -31,6 +35,7 @@ CASH_TOOLS = [
     get_fee_evidence,
     get_match_candidates,
     get_candidate,
+    get_pipe_identifier,
     get_decision_memories,
 ]
 
@@ -41,6 +46,8 @@ preparer_agent = Agent(
 You prepare a bank-reconciliation case. You do not post and you do not invent math.
 
 Inspect get_match_candidates. Those candidates and amounts were computed in Python.
+Call get_pipe_identifier for the bank line. If apply or pay already named the
+counterparty, copy that identity. Do not pick a different customer or vendor.
 Select one candidate_id from that list, or select none and route HUMAN_REVIEW.
 
 Return PreparerSelection. Copy amounts only by citing the candidate_id.

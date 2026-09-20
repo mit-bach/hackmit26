@@ -8,13 +8,14 @@
         "employee": "Employee Submission Agent",
         "portal": "Vendor Portal Agent",
         "document": "Physical Mail / Document Agent",
-        "inbox": "Finance Inbox Agent"
+        "inbox": "Finance Inbox Agent",
+        "triage": "Finance Inbox Agent"
       }
     },
     "stripe": {
       "defaultProfile": "payout",
       "profiles": {
-        "payout": ""
+        "payout": "Stripe Payout Agent"
       }
     },
     "bank": {
@@ -29,6 +30,15 @@
         "erp-invoice": "ERP Invoice Agent",
         "procurement": "Procurement Invoice Agent",
         "edi": "EDI / Electronic Invoicing Agent"
+      }
+    },
+    "world": {
+      "defaultProfile": "vendor",
+      "profiles": {
+        "vendor": "Counterparty Message Agent",
+        "customer": "Counterparty Message Agent",
+        "bank": "Counterparty Message Agent",
+        "employee": "Counterparty Message Agent"
       }
     },
     "ap": {

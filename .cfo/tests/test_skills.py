@@ -127,6 +127,8 @@ EXPECTED_ASSIGNMENTS = {
         "payment-prioritization",
         "early-payment-discount-evaluation",
     ),
+    "Payment Audit": (),
+    "AP Audit": (),
     "Collections Agent": ("ar-collections-policy",),
     "Cash Application Agent": ("cash-application",),
     "Cash Reconciliation Preparer": (
@@ -331,6 +333,8 @@ def test_inspect_index_lists_assignments_without_bodies():
     text = format_skills_index()
     assert "Accrual Agent\n  accrual-evidence-evaluation\n  accrual-method-selection\n  prior-period-precedent" in text
     assert "Payment Scheduler\n  payment-prioritization\n  early-payment-discount-evaluation" in text
+    assert "Payment Audit\n  (none)" in text
+    assert "AP Audit\n  (none)" in text
     assert "ERP Invoice Agent\n  (none)" in text
     assert "## Purpose" not in text
     detail = format_agent_skills("accrual")

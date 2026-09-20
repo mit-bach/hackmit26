@@ -155,8 +155,84 @@ def test_apply_cannot_call_create_accrual_or_pay_run():
     assert "get_approved_pool" not in apply_names
     assert "get_cash_application_facts" not in collect_names
     assert "create_accrual" not in collect_names
+    assert "send_office_outbound" in collect_names
+    assert "send_inbox_message" not in collect_names
     assert cash_application_agent.output_type.__name__ == "CashApplicationProposal"
     assert collections_agent.output_type.__name__ == "CollectionDecision"
+
+
+def test_kernel_allowed_dun_lands_in_mailbox():
+    from inbox.tools import _get_inbox_thread
+    from inbox.transport import get_message, reset_transport
+
+    reset_state()
+    reset_transport()
+    drain_new_deposits(AS_OF, live=False)
+    run = run_collections(AS_OF, live=False)
+    assert run.blocked is False
+    sent = [item for item in run.outbox if item.sent]
+    assert sent, "Kernel-allowed SEND_* must enter simulated transport"
+    assert all(item.sent for item in sent)
+    sample = sent[0]
+    stored = get_message(sample.mailbox_message_id)
+    assert stored is not None
+    assert stored.metadata.get("office_outbound") is True
+    assert stored.sender_address == "collections@hackmit-cfo.example"
+    thread = _get_inbox_thread(sample.thread_id)
+    assert thread["found"] is True
+    assert any(row["message_id"] == sample.mailbox_message_id for row in thread["messages"])
+    assert run.world_handle_paths
+    handle = json.loads(Path(run.world_handle_paths[0]).read_text())
+    assert handle["toSlug"] == "world"
+    assert handle["profile"] == "customer"
+
+
+def test_writeoff_handle_is_ctl_pay_not_ctl_cash():
+    reset_state()
+    drain_new_deposits(AS_OF, live=False)
+    run = run_collections(AS_OF, live=False)
+    writeoffs = [item for item in run.decisions if item.action == "REQUEST_INTERNAL_REVIEW"]
+    if not writeoffs:
+        return
+    assert run.verifier_handle_paths
+    for path in run.verifier_handle_paths:
+        handle = json.loads(Path(path).read_text())
+        assert handle["toSlug"] == "ctl-pay"
+        assert handle["profile"] == "review-pay"
+
+
+def test_verifier_approve_writes_precedent_not_cli():
+    from ar.cash import generate_cash_candidates, policy_cash_decision, validate_proposal
+    from ar.ledger import mark_payment_decision
+    from ar.models import CashApplyTrace
+    from ar.review import approve_review, enqueue_review
+    from ar.store import precedents
+
+    reset_state()
+    payment = get_payment("PAY-001")
+    facts = generate_cash_candidates(payment)
+    preparer = policy_cash_decision(facts)
+    held = preparer.model_copy(
+        update={"decision": "HUMAN_REVIEW", "review_question": "Forced into the review queue for tests."}
+    )
+    mark_payment_decision(payment, held)
+    trace = CashApplyTrace(
+        payment_id=payment.payment_id,
+        started_at="2026-09-30T00:00:00Z",
+        as_of_date=AS_OF,
+        payment=get_payment("PAY-001"),
+        facts=facts,
+        preparer=preparer,
+        validation=validate_proposal(payment, preparer),
+        final=held,
+    )
+    enqueue_review(trace)
+    item = approve_review("PAY-001", reviewer="ctl-cash", reason="Unique named remittance.")
+    assert item.status == "APPROVED"
+    assert item.resolved_by == "ctl-cash"
+    rows = [row for row in precedents("CUST-001") if row.source == "verifier"]
+    assert rows
+    assert rows[0].source_payment_id == "PAY-001"
 
 
 def test_state_json_is_disk_source_of_truth():

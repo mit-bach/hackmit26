@@ -233,14 +233,16 @@ def _learn_precedent(
     *,
     correction_id: str,
     review_id: str = "",
+    source: str = "human",
 ) -> ARPrecedent:
     ids = [item.invoice_id for item in applications]
     kind = "batch_payment" if len(applications) > 1 else "human_correction"
+    actor = "Verifier" if source == "verifier" else "Human"
     summary = (
         f"{payment.payer_name} settled {len(applications)} invoices in one remittance "
         f"({', '.join(ids)}) totaling ${money(sum(item.amount for item in applications)):,.2f}."
         if len(applications) > 1
-        else f"Human applied {payment.payment_id} to {ids[0] if ids else 'invoices'}: {reason}"
+        else f"{actor} applied {payment.payment_id} to {ids[0] if ids else 'invoices'}: {reason}"
     )
     facts = {
         "payment_id": payment.payment_id,
@@ -250,12 +252,13 @@ def _learn_precedent(
         "invoice_ids": ids,
         "pattern": "combination" if len(applications) > 1 else "single",
         "reason": reason,
+        "queue_owner": "ctl-cash" if source == "verifier" else "emergency-cli",
     }
     for existing in precedents(payment.customer_id or ""):
         if (
             existing.customer_id == payment.customer_id
             and existing.kind == kind
-            and existing.source == "human"
+            and existing.source == source
         ):
             updated = existing.model_copy(
                 update={
@@ -274,13 +277,14 @@ def _learn_precedent(
             ]
             save_state()
             return updated
+    prefix = "AR-PREC-V" if source == "verifier" else "AR-PREC-H"
     precedent = ARPrecedent(
-        precedent_id=f"AR-PREC-H-{correction_id}",
+        precedent_id=f"{prefix}-{correction_id}",
         customer_id=payment.customer_id,
         kind=kind,
         summary=summary,
         facts=facts,
-        source="human",
+        source=source,
         support_count=1,
         source_payment_id=payment.payment_id,
         source_review_id=review_id or None,
@@ -336,6 +340,73 @@ def record_human_application(
     record = post_application(payment, proposal)
     save_human_correction(correction.model_copy(update={"posted": True}))
     return record
+
+
+def record_verifier_application(
+    payment_id: str,
+    applications: list[MatchApplication],
+    reason: str,
+    reviewer: str = "ctl-cash",
+    review_id: str = "",
+) -> ARPrecedent | None:
+    """Office path: ctl-cash concurrence writes remittance habit. Not the CLI."""
+    payment = get_payment(payment_id)
+    if payment is None or not payment.customer_id:
+        return None
+    return _learn_precedent(
+        payment,
+        applications,
+        reason,
+        correction_id=review_id or payment.payment_id,
+        review_id=review_id,
+        source="verifier",
+    )
+
+
+def record_collection_contact(
+    customer_id: str,
+    invoice_id: str,
+    action: str,
+    as_of: str,
+) -> ARPrecedent | None:
+    """Collect Memory: this customer was contacted. Color, not an eligibility override."""
+    if not customer_id:
+        return None
+    for existing in precedents(customer_id):
+        if existing.kind == "collection_contact" and existing.source == "collect":
+            updated = existing.model_copy(
+                update={
+                    "support_count": existing.support_count + 1,
+                    "summary": (
+                        f"Last Kernel-allowed contact was {action} on {invoice_id} as of {as_of}."
+                    ),
+                    "facts": {
+                        **existing.facts,
+                        "last_invoice_id": invoice_id,
+                        "last_action": action,
+                        "last_as_of": as_of,
+                    },
+                    "source_payment_id": existing.source_payment_id,
+                }
+            )
+            from ar.store import load_state, save_state
+
+            state = load_state()
+            state.precedents = [
+                updated if item.precedent_id == existing.precedent_id else item for item in state.precedents
+            ]
+            save_state()
+            return updated
+    precedent = ARPrecedent(
+        precedent_id=f"AR-PREC-C-{invoice_id}",
+        customer_id=customer_id,
+        kind="collection_contact",
+        summary=f"Kernel-allowed {action} reached the mailbox for {invoice_id} as of {as_of}.",
+        facts={"invoice_id": invoice_id, "action": action, "as_of": as_of},
+        source="collect",
+        support_count=1,
+    )
+    return add_precedent(precedent)
 
 
 FEE_ACCOUNT = "Stripe Processing Fees"

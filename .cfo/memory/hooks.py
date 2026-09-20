@@ -334,6 +334,102 @@ def lookup_for_ap(evidence, period: str | None = None) -> MemoryLookup:
     return lookup_memories(ap_query(evidence, period))
 
 
+def apply_ap_precedent(evidence, lookup: MemoryLookup, holds: list[str]) -> MemoryLookup:
+    """Color the next similar bill. Live must_hold still wins."""
+    lookup.current_evidence_checked = True
+    if not lookup.memory_enabled or not lookup.precedents:
+        lookup.precedent_used = False
+        return lookup
+    top = lookup.precedents[0]
+    lookup.precedent_relevance = top.reusable_precedent
+    if holds:
+        lookup.precedent_used = False
+        lookup.evidence_supports_precedent = False
+        lookup.deviation = (
+            f"{top.decision_id} cannot override live Kernel must_hold: {'; '.join(holds)}"
+        )
+        return lookup
+    invoice = getattr(evidence, "invoice", None)
+    vendor = (getattr(invoice, "vendor", "") or "").lower()
+    same_vendor = vendor == (top.entity_id or "").lower()
+    if not same_vendor:
+        lookup.precedent_used = False
+        lookup.evidence_supports_precedent = False
+        return lookup
+    lookup.precedent_used = True
+    lookup.evidence_supports_precedent = True
+    return lookup
+
+
+def write_ap_alias_memory(evidence, *, period: str, trace_id: str):
+    """Store a vendor alias after Kernel names the pair as similar.
+
+    The current bill stays HOLD on P-006. The next similar bill may use
+    this store. It still cannot override a live blocking must_hold.
+    Do not treat editing prior_cases.json as the happy path.
+    """
+    invoice = getattr(evidence, "invoice", None)
+    purchase_order = getattr(evidence, "purchase_order", None)
+    if invoice is None or purchase_order is None:
+        return None
+    exceptions = list(getattr(evidence, "exception_types", []) or [])
+    if "vendor_mismatch" not in exceptions:
+        return None
+    other = [item for item in exceptions if item != "vendor_mismatch"]
+    if other:
+        return None
+    if not getattr(evidence, "vendors_are_similar", False):
+        return None
+    if getattr(evidence, "vendor_exact_match", False):
+        return None
+    from tools import normalize_vendor
+
+    invoice_vendor = (invoice.vendor or "").strip()
+    po_vendor = (purchase_order.vendor or "").strip()
+    fingerprint = "|".join(
+        [
+            normalize_vendor(invoice_vendor),
+            normalize_vendor(po_vendor),
+            "vendor_alias",
+        ]
+    )
+    return write_decision(
+        period=period,
+        workflow="accounts_payable",
+        entity_type="vendor",
+        entity_id=invoice_vendor.lower(),
+        situation_type="vendor_invoice_pattern",
+        situation_summary=(
+            f"{invoice_vendor} billed under a name similar to PO vendor {po_vendor}."
+        ),
+        evidence=[
+            MemoryEvidence(kind="invoice_vendor", label=invoice_vendor),
+            MemoryEvidence(kind="po_vendor", label=po_vendor),
+            MemoryEvidence(
+                kind="vendor_pair",
+                label=f"{normalize_vendor(invoice_vendor)}:{normalize_vendor(po_vendor)}",
+            ),
+        ],
+        decision="ALIAS",
+        reasoning_summary=(
+            "Kernel vendors_are_similar is true. Store the pair for a later bill. "
+            "This bill still HOLDs on P-006 until the alias is retrieved."
+        ),
+        accounting_treatment="vendor_alias",
+        outcome="HOLD",
+        reusable_precedent=(
+            f"{invoice_vendor} may be the same legal vendor as {po_vendor}. "
+            "Reuse only when current match facts still show similar names and "
+            "no other must_hold control fires."
+        ),
+        source_trace_ids=[trace_id],
+        tags=["accounts_payable", "vendor_mismatch", "vendor_alias", invoice_vendor.lower()],
+        fingerprint=fingerprint,
+        entity_name=invoice_vendor,
+        accounting_category="ap",
+    )
+
+
 def write_ap_memory(evidence, final, *, period: str, trace_id: str):
     exceptions = list(getattr(evidence, "exception_types", []) or [])
     decision = getattr(final, "decision", "")

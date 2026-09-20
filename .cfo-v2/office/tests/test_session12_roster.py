@@ -13,14 +13,16 @@ SLUG_MAP = REPO / ".cfo-v2" / "office" / "computer" / "cfo" / "slug-map.json"
 GRANTS = REPO / ".cfo-v2" / "office" / "computer" / "cfo" / "grants.json"
 
 
-def test_roster_has_exactly_fifteen_grain_slugs() -> None:
+def test_roster_has_grain_slugs_including_world() -> None:
     roster = json.loads(ROSTER.read_text(encoding="utf-8"))
     slugs = [bot["slug"] for bot in roster["bots"]]
     assert slugs == list(GRAIN_SLUGS)
     assert "ingest" not in slugs
     assert "ar" not in slugs
+    assert "world" in slugs
     ids = [bot["id"] for bot in roster["bots"]]
     assert "bot_ctl_pay" in ids
+    assert "bot_world" in ids
     assert all(bot["approvalLevel"] == "never" for bot in roster["bots"])
     names = {bot["name"] for bot in roster["bots"]}
     assert names.isdisjoint(SAMPLE_DATA_DISPLAY_NAMES)
@@ -29,7 +31,7 @@ def test_roster_has_exactly_fifteen_grain_slugs() -> None:
 def test_rooms_are_partitioned_2_to_6() -> None:
     roster = json.loads(ROSTER.read_text(encoding="utf-8"))
     sizes = {room["id"]: len(room["members"]) for room in roster["rooms"]}
-    assert sizes == {"intake": 4, "pay": 3, "cash": 4, "books-close": 4}
+    assert sizes == {"intake": 5, "pay": 3, "cash": 4, "books-close": 4}
     for room in roster["rooms"]:
         assert 2 <= len(room["members"]) <= 6
         for slug in room["members"]:
@@ -53,7 +55,7 @@ def test_routines_fire_on_owning_bots() -> None:
         assert row["conversation"] == conversation
         assert row["bot"] in slugs
         assert "operator_dm" not in row["conversation"]
-    assert len(roster["bots"]) == 15
+    assert len(roster["bots"]) == 16
 
 
 def test_handle_destinations_are_grain_slugs() -> None:
@@ -61,6 +63,10 @@ def test_handle_destinations_are_grain_slugs() -> None:
     assert destination("ap", "approve") == ("ctl-pay", "review-match")
     assert destination("pay", "release") == ("ctl-pay", "review-pay")
     assert destination("close", "lock") == ("ctl-books", "lock")
+    assert destination("collect", "write-off") == ("ctl-pay", "review-pay")
+    assert destination("collect", "dun") == ("world", "customer")
+    assert destination("email", "outbound") == ("world", "vendor")
+    assert destination("world", "delivered") == ("email", "triage")
     assert all_destination_slugs().issubset(set(GRAIN_SLUGS))
     assert "ingest" not in all_destination_slugs()
 

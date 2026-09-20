@@ -3,30 +3,38 @@ import { ReactNode, useEffect, useState } from "react";
 import { get, post, statusTone } from "../api";
 import { formatAgent, formatExecution, formatPeriod, formatStatus, formatSummary } from "../copy";
 
-const PRIMARY = [
-  ["/", "Home"],
-  ["/architecture", "Architecture"],
-  ["/workflow", "One invoice"],
-  ["/memory", "Memory"],
-  ["/simulations", "Simulations"],
-  ["/videos", "Videos"],
-  ["/coverage", "Coverage"],
-  ["/evaluations", "Evidence"],
+interface NavItem {
+  readonly to: string;
+  readonly label: string;
+}
+
+const PITCH: readonly NavItem[] = [
+  { to: "/", label: "Home" },
+  { to: "/architecture", label: "Office graph" },
+  { to: "/workflow", label: "Three stories" },
+  { to: "/coverage", label: "Capabilities" },
+  { to: "/evaluations", label: "Evidence" },
 ];
 
-const SECONDARY = [
-  ["/inbox", "Inbox"],
-  ["/ap", "Payables"],
-  ["/ar", "Receivables"],
-  ["/cash", "Cash"],
-  ["/stripe", "Stripe"],
-  ["/close", "Close"],
-  ["/forecast", "Forecast"],
-  ["/audit", "Audit"],
-  ["/agents", "Team activity"],
+const LIVE_OFFICE: readonly NavItem[] = [
+  { to: "/inbox", label: "Inbox" },
+  { to: "/ap", label: "Payables" },
+  { to: "/ar", label: "Receivables" },
+  { to: "/cash", label: "Cash" },
+  { to: "/stripe", label: "Stripe" },
+  { to: "/close", label: "Close" },
+  { to: "/forecast", label: "Forecast" },
+  { to: "/audit", label: "Audit" },
+  { to: "/memory", label: "Memory" },
+  { to: "/agents", label: "Team activity" },
 ];
 
-export function Shell({ children }: { children: ReactNode }) {
+const MORE: readonly NavItem[] = [
+  { to: "/simulations", label: "Simulations" },
+  { to: "/videos", label: "Videos" },
+];
+
+export function Shell({ children }: { children: ReactNode }): JSX.Element {
   const [status, setStatus] = useState<any>(null);
   const [resetting, setResetting] = useState(false);
   const location = useLocation();
@@ -35,7 +43,7 @@ export function Shell({ children }: { children: ReactNode }) {
     get("/api/demo/status").then(setStatus).catch(() => setStatus(null));
   }, [location.pathname]);
 
-  async function resetBooks() {
+  async function resetBooks(): Promise<void> {
     setResetting(true);
     try {
       await post("/api/demo/reset");
@@ -72,21 +80,39 @@ export function Shell({ children }: { children: ReactNode }) {
       </header>
       <aside className="sidebar">
         <div>
-          <div className="nav-label">Showcase</div>
-          {PRIMARY.map(([to, label]) => (
-            <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
-              {label}
+          <div className="nav-label">Pitch</div>
+          {PITCH.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
+            >
+              {item.label}
             </NavLink>
           ))}
         </div>
         <div>
           <div className="nav-label">Live office</div>
-          {SECONDARY.map(([to, label]) => (
-            <NavLink key={to} to={to} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
-              {label}
+          {LIVE_OFFICE.map((item) => (
+            <NavLink key={item.to} to={item.to} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
+              {item.label}
             </NavLink>
           ))}
-          <button className="nav-link" style={{ width: "100%", background: "transparent", border: 0, textAlign: "left" }} onClick={resetBooks} disabled={resetting}>
+        </div>
+        <div>
+          <div className="nav-label">More</div>
+          {MORE.map((item) => (
+            <NavLink key={item.to} to={item.to} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
+              {item.label}
+            </NavLink>
+          ))}
+          <button
+            className="nav-link"
+            style={{ width: "100%", background: "transparent", border: 0, textAlign: "left" }}
+            onClick={resetBooks}
+            disabled={resetting}
+          >
             {resetting ? "Resetting…" : "Reset books"}
           </button>
         </div>

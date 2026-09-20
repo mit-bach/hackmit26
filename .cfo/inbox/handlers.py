@@ -250,6 +250,41 @@ def handle_needs_information(
         mutation=False,
         details={"missing_fields": request.missing_fields, "questions": request.questions},
     )
+    if not message.metadata.get("office_outbound"):
+        from inbox.tools import _send_office_outbound
+
+        questions = "\n".join(request.questions) or "Please send the missing invoice fields."
+        outbound = _send_office_outbound(
+            thread_id=message.thread_id,
+            message_id=f"{message.message_id}-OUT",
+            to_name=message.sender_name,
+            to_address=message.sender_address,
+            subject=f"Re: {message.subject}",
+            body_text=questions,
+            from_address="ap@hackmit-cfo.example",
+            from_name="HackMIT AP",
+            in_reply_to=message.message_id,
+            sent_at=message.sent_at,
+        )
+        if outbound.get("found"):
+            from inbox.handles import email_outbound_handle
+
+            handle_path = email_outbound_handle(
+                thread_id=outbound["thread_id"],
+                message_id=outbound["message_id"],
+                to_name=message.sender_name,
+                to_address=message.sender_address,
+            )
+            result = result.model_copy(
+                update={
+                    "details": {
+                        **(result.details or {}),
+                        "outbound_message_id": outbound["message_id"],
+                        "outbound_thread_id": outbound["thread_id"],
+                        "world_handle_path": str(handle_path),
+                    }
+                }
+            )
     return result, request
 
 

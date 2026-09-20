@@ -1,6 +1,6 @@
 ---
 name: ap-exception-investigation
-description: Distinguishes payment-blocking AP exceptions from policy-supported exceptions using published policy and prior cases. Use when an invoice is not a clean three-way match.
+description: Explains how this vendor's mess differs from Kernel exception_types. Use when prepare returned INVESTIGATE or exception_types is non-empty.
 status: extracted
 ---
 
@@ -8,44 +8,33 @@ status: extracted
 
 ## Purpose
 
-Explain each AP exception and decide whether published policy and stored prior cases actually support payment, or whether the invoice must be held.
+Kernel already typed the exception. Your job is this vendor: why the PDF, name, or receipt lag looks like that, and whether stored alias memory still matches live facts.
 
 ## When to Use
 
-Apply when exception_types are non-empty, the Preparer recommended INVESTIGATE, or a reviewer/approver/auditor must test whether an exception is acceptable.
+Bot `ap` Profile `investigate` only. Same Bot as prepare. Replace the Grant set. Do not union with `ctl-pay`.
 
 ## Inputs / Evidence
 
-- Python facts from get_case_evidence
-- published policies from get_company_policies / find_relevant_policies
-- prior autonomous cases from get_prior_cases
-- the Preparer recommendation and any Investigator or Reviewer write-up already in the packet
+Kernel `get_case_evidence`, published policies, operational AP memory, `get_prior_cases` as a seed not as the happy path. Current evidence wins.
 
 ## Procedure
 
-1. Inspect the records and Python facts for each exception type.
-2. Load policies tagged for those exception types. Do not invent company policy.
-3. Search prior cases only as supporting evidence for remaining ambiguity, such as a known vendor alias.
-4. Distinguish acceptable exceptions from payment-blocking problems.
-5. If policy or prior cases do not resolve the ambiguity, HOLD. Do not guess.
+Say what is distinctive about this counterparty's packet. A stored alias applies only when live names still support it. If World or Email must ask for a missing PO or a revised PDF, leave HOLD. Do not silently approve the original bill.
 
 ## Decision Criteria
 
-- Recommend **APPROVE** only when a published policy and/or a matching prior case actually support payment, and no must_hold policy applies.
-- Explicit company policy takes precedence over historical precedent. Prior cases cannot override a must_hold policy.
-- Prior cases are evidence, not absolute rules.
-- Vendor-name mismatch may be payable only when stored evidence already establishes the two names as the same legal entity. Do not invent an alias.
-- Amount variance may be payable only when Python reports it is inside the published P-009 tolerance and other three-way controls still hold.
-- Duplicates, missing POs, unapproved POs, missing/not-received goods, and unpaid-in-full partial receipts remain holds under current policy.
-- If evidence cannot justify payment, HOLD.
+- Precedent is color. It cannot override a live blocking `must_hold`.
+- Recommend APPROVE only when Kernel already allows and current documents still support the story.
+- If the mess is just the Kernel type list with no extra sense, HOLD. Do not invent an alias.
 
 ## Output Expectations
 
-Return findings, relevant policy IDs, prior case IDs, unresolved risks, and APPROVE or HOLD. There is no human reviewer. Do not ask a person to decide.
+`InvestigationReport` with findings about this vendor, policy IDs you actually read, memory ids if retrieved, and APPROVE or HOLD. There is no human reviewer.
 
 ## Boundaries
 
 - Do not invent policies, tolerances, aliases, or missing records.
 - Do not recalculate Python match facts.
-- Do not approve payment if this agent only investigates; Investigators recommend, they do not finalize.
-- Do not treat a prior APPROVE as a blanket waiver of current must_hold controls.
+- Do not freeze exception_type to an English HOLD sentence. Kernel already typed it.
+- Do not pay. Do not concur. Do not wear a second Bot named investigator.

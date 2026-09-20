@@ -17,6 +17,10 @@ SCHEDULER_TOOLS = [
     get_payment_candidates,
     get_treasury_policies,
 ]
+AUDIT_TOOLS = [
+    get_cash_position,
+    get_treasury_policies,
+]
 
 scheduler_agent = Agent(
     name="Payment Scheduler",
@@ -43,18 +47,21 @@ payment_audit_agent = Agent(
     name="Payment Audit",
     instructions=compose_instructions(
         """
-You audit a weekly payment plan.
+Grant source for Bot ctl-pay Profile review-pay. Bot pay does not run you.
 
-Confirm the plan against assigned payment skills and published treasury policy.
-Use the Python candidate facts. Set passed=false if a published treasury
-policy is violated.
+You look for reasons to refuse a payment-run draft. You do not rebuild the plan.
+You may read cash position and treasury policies. You may read the draft packet
+the Handle named. You cannot call get_payment_candidates or get_approved_pool.
+
+Concur only if Kernel reserve_ok is true and the packet is complete.
+Refuse incompleteness. Refuse a reserve breach. Do not execute ACH.
 
 Return PaymentAuditResult.
 """.strip(),
         skills=skills_for("Payment Audit"),
         safety=SAFETY,
     ),
-    tools=SCHEDULER_TOOLS,
+    tools=AUDIT_TOOLS,
     output_type=PaymentAuditResult,
 )
 

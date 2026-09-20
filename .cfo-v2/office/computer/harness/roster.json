@@ -1,7 +1,7 @@
 {
   "system": "cfo-agentic-system",
   "version": "1",
-  "description": "Office of the CFO Client system. Fifteen grain Bots. Verifiers own concurrence. The human Operator is an emergency stop.",
+  "description": "Office of the CFO Client system. Fifteen grain Bots plus World, the simulated mailbox. Verifiers own concurrence. The human Operator is an emergency stop.",
   "computer": "office/computer",
   "bots": [
     {
@@ -9,7 +9,7 @@
       "name": "Email",
       "slug": "email",
       "purpose": "Owns messages and attachments: vendor invoices and customer remittances.",
-      "instructions": "Read office/bots/email/BOT.md and obey office/constitution.md. You land and classify mail. Never ask a human. Do not match, pay, apply, or accrue.",
+      "instructions": "Read office/bots/email/BOT.md and obey office/constitution.md. You land and classify mail. Outbound missing-info uses send_office_outbound then Handle world. Never ask a human. Do not match, pay, apply, or accrue.",
       "skills": [
         "invoice-source-identification",
         "invoice-field-interpretation",
@@ -66,6 +66,24 @@
         "netsuite",
         "coupa",
         "edi"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_world",
+      "name": "World",
+      "slug": "world",
+      "purpose": "Owns simulated counterparty messages: the outside world's mailbox.",
+      "instructions": "Read office/bots/world/BOT.md and obey office/constitution.md. You role-play vendors, customers, banks, and employees. Never ask a human. Do not write AP. Do not dispatch the finance inbox. Simulated mail only.",
+      "skills": [],
+      "connectors": [
+        "inbox.tools.compose_counterparty_message",
+        "inbox.tools.send_inbox_message",
+        "inbox.tools.reply_in_thread",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.list_world_personas"
       ],
       "approvalLevel": "never"
     },
@@ -129,7 +147,7 @@
       "name": "Collect",
       "slug": "collect",
       "purpose": "Owns open invoices still owed after application.",
-      "instructions": "Read office/bots/collect/BOT.md and obey office/constitution.md. You own aging after apply has drained deposits. Never ask a human. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
+      "instructions": "Read office/bots/collect/BOT.md and obey office/constitution.md. You own aging after apply has drained deposits. Never ask a human. Dunning is send_office_outbound then Handle world. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
       "skills": [
         "ar-collections-policy"
       ],
@@ -137,7 +155,8 @@
         "ar.tools.get_collection_candidates",
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
-        "ar.tools.get_ar_precedents"
+        "ar.tools.get_ar_precedents",
+        "inbox.tools.send_office_outbound"
       ],
       "approvalLevel": "never"
     },
@@ -211,10 +230,6 @@
       "purpose": "Owns concurrence for AP match, payment-run release, and bill write-off.",
       "instructions": "Read office/bots/ctl-pay/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
       "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation",
-        "payment-prioritization",
-        "early-payment-discount-evaluation",
         "prior-period-precedent"
       ],
       "connectors": [
@@ -311,7 +326,7 @@
     {
       "id": "intake",
       "title": "Intake",
-      "members": ["email", "stripe", "bank", "books"]
+      "members": ["email", "stripe", "bank", "books", "world"]
     },
     {
       "id": "pay",
@@ -334,14 +349,14 @@
       "name": "weekly-pay-run",
       "bot": "pay",
       "cadence": "weekly",
-      "prompt": "profile: schedule\nRun this week's payment-run draft.\nLoad pool and cash with Catalog ops. Choose among Kernel candidates only.\nStop after you return PaymentPlan invoice IDs. Kernel apply_cash_and_policy_net binds amounts.\nWrite the netted plan path. bot_send_prompt to ctl-pay with profile: review-pay. Await the Handle.\nDo not ask a human. Do not execute ACH. Do not breach the reserve.",
+      "prompt": "profile: schedule\nRun this week's payment-run draft.\nLoad pool and cash with Catalog ops. Choose among Kernel candidates only.\nStop after you return PaymentPlan invoice IDs. Kernel apply_cash_and_policy_net binds amounts.\nWrite the netted plan path. bot_send_prompt to ctl-pay with profile: review-pay. Await the Handle.\nAfter ctl-pay concurs, identified outflows Handle cash with executed false.\nDo not ask a human. Do not execute ACH. Do not breach the reserve.",
       "conversation": "room:pay"
     },
     {
       "name": "daily-aging",
       "bot": "collect",
       "cadence": "daily",
-      "prompt": "profile: chase\nAging Routine. Run only after apply has drained new deposits for this as-of. If Kernel new_deposits is non-empty, Handle apply / apply. Do not chase. Write-off or reserve Handles ctl-pay. Never ask a human.",
+      "prompt": "profile: chase\nAging Routine. Run only after apply has drained new deposits for this as-of. If Kernel new_deposits is non-empty, Handle apply / apply. Do not chase. Kernel-allowed SEND_* uses send_office_outbound then Handle world / customer. Write-off or reserve Handles ctl-pay. Never ask a human.",
       "conversation": "room:cash"
     },
     {

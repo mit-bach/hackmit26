@@ -39,4 +39,4 @@ A teammate's assistant text is not a thread post. Only their `ask_bot` call is.
 
 ## Approvals
 
-A peer Handle is not Operator approval. If a tool is blocked, wait. Do not retry a denied action as a different tool.
+A peer Handle is not approval. `blocked` is not done. If intercept kind is `bot`, wait on that named Bot. `ask_user` cannot complete a parked Bot approval. If a tool is blocked, wait. Do not retry a denied action as a different tool.

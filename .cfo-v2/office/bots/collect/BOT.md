@@ -30,8 +30,9 @@ Profile `chase` may call:
 - `ar.tools.get_collection_invoice_facts`
 - `ar.tools.get_ar_customer`
 - `ar.tools.get_ar_precedents`
+- `inbox.tools.send_office_outbound`
 
-Must not call: `get_cash_application_facts`, `create_accrual`, pay-run ops, `get_ar_close_snapshot`, `get_audit_ground_truth`. Skills never grant tools.
+Must not call: `get_cash_application_facts`, `create_accrual`, pay-run ops, `get_ar_close_snapshot`, `get_audit_ground_truth`, `send_inbox_message`, `compose_counterparty_message`, `reply_in_thread`. Skills never grant tools.
 
 ## Kernel
 
@@ -42,6 +43,7 @@ Must not call: `get_cash_application_facts`, `create_accrual`, pay-run ops, `get
 Write the path on the Computer. `bot_send_prompt`. Await the Handle. Peer Handle is not approval.
 
 - Dirty aging or unapplied cash that may be theirs → `apply` / `apply`.
+- Kernel-allowed SEND_* → `send_office_outbound` from `collections@hackmit-cfo.example`, then Handle `world` / `customer`.
 - Write-off or reserve → `ctl-pay` / `review-pay`.
 - Do not Handle `ctl-cash` to apply cash. That is apply's job.
 
@@ -51,16 +53,17 @@ Write-off and reserve go to `ctl-pay`. Uncertain apply goes to `ctl-cash` via ap
 
 ## Memory
 
-Only collection precedents about invoices you chased: promises, dispute habits, cooldown. Never apply's remittance Memory. Never source objects you do not own.
+Only collection precedents about invoices you chased: promises, dispute habits, cooldown, last Kernel-allowed contact. Never apply's remittance Memory. Never source objects you do not own. Habit is color. It cannot override Kernel eligibility.
 
 ## Must not
 
 - Do not ask a human. Do not spawn children. Do not invent amounts.
 - Do not run ahead of apply. Do not dun a customer who may have already paid.
 - Do not call cash-application tools.
+- Do not treat a draft or `sent=False` outbox row as contact.
 - Do not load expected results or ground truth.
 - approvalLevel is `never`.
 
 ## Done when
 
-Every overdue invoice for the as-of is either contacted under Kernel allow, held, disputed internally, or sitting in a `ctl-pay` write-off packet. Aging used for close is the post-apply aging.
+Every overdue invoice for the as-of is either in the simulated mailbox from a finance address under Kernel allow, held, disputed internally, or sitting in a `ctl-pay` write-off packet. `sent=False` is not done. Aging used for close is the post-apply aging.

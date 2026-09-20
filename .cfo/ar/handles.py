@@ -154,6 +154,90 @@ def collect_writeoff_handle(facts: CollectionFacts, decision: CollectionDecision
     )
 
 
+def collect_dun_handle(
+    facts: CollectionFacts,
+    decision: CollectionDecision,
+    *,
+    thread_id: str,
+    message_id: str,
+) -> Path:
+    packet_path = write_packet(
+        f"collect-dun-{facts.invoice_id}",
+        {
+            "object": "open_invoice",
+            "invoice_id": facts.invoice_id,
+            "customer_id": facts.customer_id,
+            "customer_name": facts.customer_name,
+            "action": decision.action,
+            "thread_id": thread_id,
+            "message_id": message_id,
+            "outstanding_amount": facts.outstanding_amount,
+            "human_queue": False,
+        },
+    )
+    return write_handle(
+        f"collect-{facts.invoice_id}-world",
+        {
+            "from": "collect",
+            "to": "world",
+            "toSlug": "world",
+            "profile": "customer",
+            "kind": "a2a_handoff",
+            "status": "accepted",
+            "prompt": (
+                f"profile: customer\n"
+                f"Finance dunned {facts.customer_name} on {facts.invoice_id} "
+                f"in thread {thread_id}. get_inbox_thread then reply_in_thread "
+                "as that customer. Do not send_office_outbound. Do not dispatch."
+            ),
+            "paths": [str(packet_path)],
+            "queueOwner": "world",
+            "humanQueue": False,
+            "idempotencyKey": f"collect:dun:{facts.invoice_id}:{message_id}",
+            "createdAt": _now(),
+        },
+    )
+
+
+def apply_identified_handle(trace: CashApplyTrace) -> Path:
+    invoice_ids = [row.invoice_id for row in (trace.record.applications if trace.record else [])]
+    packet_path = write_packet(
+        f"apply-identified-{trace.payment_id}",
+        {
+            "object": "identified_deposit",
+            "payment_id": trace.payment_id,
+            "invoice_ids": invoice_ids,
+            "amount": trace.payment.amount,
+            "bank_reference": trace.payment.bank_reference,
+            "customer_id": trace.payment.customer_id,
+            "as_of": trace.as_of_date,
+            "human_queue": False,
+        },
+    )
+    return write_handle(
+        f"apply-{trace.payment_id}-cash",
+        {
+            "from": "apply",
+            "to": "cash",
+            "toSlug": "cash",
+            "profile": "match",
+            "kind": "a2a_handoff",
+            "status": "accepted",
+            "prompt": (
+                f"profile: match\n"
+                f"AR already identified {trace.payment_id} as invoices "
+                f"{', '.join(invoice_ids) or '(none)'}. Tick the bank line. "
+                "Do not re-guess the customer."
+            ),
+            "paths": [str(packet_path)],
+            "queueOwner": "cash",
+            "humanQueue": False,
+            "idempotencyKey": f"apply:identified:{trace.payment_id}",
+            "createdAt": _now(),
+        },
+    )
+
+
 def persist_drain(as_of: str, payment_ids: list[str]) -> Path:
     return _write_json(
         ar_store.DRAIN_PATH,

@@ -24,7 +24,8 @@
         "ar.tools.get_collection_candidates",
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
-        "ar.tools.get_ar_precedents"
+        "ar.tools.get_ar_precedents",
+        "inbox.tools.send_office_outbound"
       ],
       "skills": ["ar-collections-policy"],
       "outputType": "CollectionDecision",
@@ -33,7 +34,8 @@
         "accrual.tools.create_accrual",
         "scheduling.tools.get_approved_pool",
         "ar.tools.get_ar_close_snapshot",
-        "audit.tools.get_audit_ground_truth"
+        "audit.tools.get_audit_ground_truth",
+        "inbox.tools.send_inbox_message"
       ]
     }
   },

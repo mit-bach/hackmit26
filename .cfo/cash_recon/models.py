@@ -263,6 +263,59 @@ class EvaluationMetrics(BaseModel):
     ground_truth_used: bool = False
 
 
+class PipeIdentifier(BaseModel):
+    """Counterparty identity written by apply (deposit) or pay (wire). Cash copies it."""
+
+    source: Literal["apply", "pay"]
+    bank_transaction_id: str = ""
+    bank_reference: str = ""
+    payment_id: str = ""
+    invoice_ids: list[str] = Field(default_factory=list)
+    ledger_entry_ids: list[str] = Field(default_factory=list)
+    customer_id: str = ""
+    vendor: str = ""
+    counterparty: str = ""
+    amount_minor: int = 0
+
+
+class IdentifierTick(BaseModel):
+    """Office decision for one bank line. Cash does not invent the counterparty."""
+
+    bank_transaction_id: str
+    selected_candidate_id: Optional[str] = None
+    identifier_present: bool = False
+    fail_closed: bool = False
+    guessed_counterparty: bool = False
+    reason: str = ""
+    source: Optional[str] = None
+
+
+class RecConcurrence(BaseModel):
+    """ctl-cash / review-rec verdict. Not a post. Not MATCHED over unexplained."""
+
+    decision: Literal["CONCUR", "REFUSE"]
+    match_type: str
+    kernel_status: str
+    reasons: list[str] = Field(default_factory=list)
+    can_mark_matched: bool = False
+    can_mark_reconciled: bool = False
+
+
+class TrustedCash(BaseModel):
+    """Path close can read. Trusted only after ctl-cash concurs and Kernel allows."""
+
+    period: str
+    trusted: bool
+    period_status: PeriodStatus
+    unexplained_difference_minor: int = 0
+    arithmetic_tied: bool = False
+    ctl_cash: str = ""
+    kernel_allow: bool = False
+    close_handle: bool = False
+    reasons: list[str] = Field(default_factory=list)
+    packet_path: str = ""
+
+
 class CashReconciliationReport(BaseModel):
     period: str
     run_id: str

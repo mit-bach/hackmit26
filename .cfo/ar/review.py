@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 from accrual.estimation import money
 from ar.cash import generate_cash_candidates, validate_proposal
-from ar.ledger import post_application, record_human_application
+from ar.ledger import post_application, record_human_application, record_verifier_application
 from ar.models import (
     CashApplicationProposal,
     CashApplyTrace,
@@ -172,6 +172,13 @@ def approve_review(
     if not validation.passed:
         raise ValueError("Approval failed validation: " + "; ".join(validation.errors))
     post_application(payment, proposal)
+    record_verifier_application(
+        payment.payment_id,
+        list(item.proposed_applications),
+        reason,
+        reviewer=reviewer,
+        review_id=item.review_id,
+    )
     return _resolve(
         item,
         status="APPROVED",

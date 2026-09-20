@@ -102,7 +102,7 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 | --- | --- | --- | --- | --- |
 | `ap.three_way_match` | Match invoice to PO and goods receipt. APPROVE or HOLD with exception types. | Kernel-live. AP Bot office-live. ctl-pay concurs. | Quiet near-duplicate vendors and PO splits from the adversarial catalog, after Phase B plant. | `INV-001` clean. `INV-003` qty. `INV-004` price. `INV-005` missing GR. `INV-006` duplicate. `INV-021` August alias precedent. |
 | `ap.payment_scheduling` | Rank the approved pool for this week. Capture 2/10 when cash allows. Skip held bills. | Kernel-live. Pay Bot office-live. ctl-pay concurs release. | — | `SCN-AP-009` eligible. `SCN-AP-010` not due. `SCN-AP-011` discount. |
-| `ap.self_improvement` | Write a new AP decision into prior cases so the next similar bill changes. | **Not built.** `prior_cases.json` is a static seed. | Persist APPROVE/HOLD traces. Do not fake it in the UI. | — |
+| `ap.self_improvement` | Write a vendor alias into operational AP memory so the next similar bill can retrieve it. Precedent cannot override a live `must_hold`. | **Kernel-live.** `prior_cases.json` remains a seed, not the happy path. Not office-live Pi on 8800. | Keep the store on the Computer. Do not make a human edit the seed file. | Runtime alias pair (INV-LEARN class). `INV-021` August seed still exists. |
 | `ap.vendor_bank_change` | Flag a vendor payment-instruction change. | **Not built.** Vendor master now has bank fields. There is no control engine. | Build the control. Adversarial plants need those fields. | Vendor `bank_routing` / `bank_account` exist on 52 vendors. |
 
 ### AR
@@ -111,7 +111,7 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 | --- | --- | --- | --- | --- |
 | `ar.aging_collections` | Age open invoices. Choose the next chase action. Collect Handles World after dunning. | Kernel-live. Collect Bot office-live. World reply path partial (see intake). | Full World round-trip on every dun. | Aging buckets `SCN-AR-001` … `005`. Chase `SCN-AR-012`. Quiet Harbor `INV-AR-014`. |
 | `ar.cash_application` | Apply a remittance. Exact, partial, batch, unlabeled, ambiguous, overpay. | Kernel-live. Apply Bot office-live. Ambiguous → ctl-cash. | Credit-memo / unapplied-cash subledger (partial today). | `PAY-001` exact. `PAY-004` unlabeled $5,000 → exception. `PAY-007` overpay detection. |
-| `memory.self_improvement` | Learn from a structured AR correction. | Kernel-live for AR precedents. **Not** AP. | Keep the claim narrow: AR only. | `SCN-LEARN-001`. |
+| `memory.self_improvement` | Learn from a structured AR correction. | Kernel-live for AR precedents. AP alias memory is `ap.self_improvement` (Kernel-live, not office-live). | Keep the AR claim narrow. | `SCN-LEARN-001`. |
 
 ### Cash
 

@@ -1,156 +1,293 @@
-import { useEffect, useState } from "react";
-import { get, usd, statusTone } from "../api";
+import { useEffect, useMemo, useState } from "react";
+import { get, statusTone } from "../api";
+import { ProcessPanel, SourceArtifactViewer } from "../components/Demo";
+import { FlowPlay, type FlowEdge, type FlowNode, type FlowStep, type LiveStage } from "../components/FlowPlay";
+import {
+  HELIOS_FEE,
+  NORTHSTAR_TXN,
+  PairingLanes,
+  pairsFromCashPayload,
+  type PairRow,
+} from "../components/boards/PairingLanes";
+import { explainCashMatch, formatMatchType, formatStatus } from "../copy";
 import { useWorkflow } from "../hooks";
 import { ErrorBox, Pill, RunBar } from "../layout/Shell";
-import { DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
-import { Definition, ResultBlock, StoryCard, TraceIds, WhatsHappening } from "../components/Explain";
-import { explainCashMatch, formatMatchType, formatStatus } from "../copy";
 
-export default function Cash() {
-  const [data, setData] = useState<any>(null);
-  const [focus, setFocus] = useState<string>("unexplained");
+const STAKE = "Every deposit and withdrawal needs an explanation; this one does not have it.";
+
+const CASH_STEPS: readonly FlowStep[] = [
+  { id: "s-bank", title: "Bank statement", nodeId: "bank", manipulations: ["read deposits and withdrawals"] },
+  { id: "s-cash", title: "Pair bank to books", nodeId: "cash", manipulations: ["match", "investigate"] },
+  { id: "s-ctl", title: "Recheck pairs", nodeId: "ctl-cash", manipulations: ["verify"] },
+  { id: "s-close", title: "Month close", nodeId: "close", manipulations: ["sign-off"], status: "blocked" },
+];
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function innerResult(result: unknown): Record<string, unknown> | undefined {
+  if (!isRecord(result)) {
+    return undefined;
+  }
+  if (isRecord(result.result)) {
+    return result.result;
+  }
+  return result;
+}
+
+function readMatches(result: unknown, data: unknown): readonly unknown[] {
+  const inner = innerResult(result);
+  const report = isRecord(inner?.report)
+    ? inner.report
+    : isRecord(data) && isRecord(data.report)
+      ? data.report
+      : undefined;
+  if (report && Array.isArray(report.matches)) {
+    return report.matches;
+  }
+  const outputs = isRecord(inner?.io) && isRecord(inner.io.outputs) ? inner.io.outputs : undefined;
+  if (outputs && Array.isArray(outputs.matches)) {
+    return outputs.matches;
+  }
+  return [];
+}
+
+function featuredPack(result: unknown, data: unknown): unknown {
+  if (isRecord(data) && data.featured_cases) {
+    return data.featured_cases;
+  }
+  const inner = innerResult(result);
+  if (isRecord(inner?.io) && inner.io.inputs) {
+    return inner.io.inputs;
+  }
+  return undefined;
+}
+
+function artifactId(value: unknown): string {
+  if (!isRecord(value)) {
+    return "";
+  }
+  const record = isRecord(value.record) ? value.record : {};
+  return String(value.artifact_id || record.transaction_id || record.entry_id || record.evidence_id || "");
+}
+
+function caseBundle(pack: unknown, key: string): Record<string, unknown> | undefined {
+  if (!isRecord(pack)) {
+    return undefined;
+  }
+  return isRecord(pack[key]) ? pack[key] : undefined;
+}
+
+function bankArtifactFor(pair: PairRow | undefined, data: unknown, result: unknown): unknown {
+  if (!pair) {
+    return undefined;
+  }
+  const pack = featuredPack(result, data);
+  const bundles = ["unexplained", "fee_netted", "grouped"].map((key) => caseBundle(pack, key));
+  for (const bundle of bundles) {
+    if (artifactId(bundle?.bank) === pair.bank.id) {
+      return bundle?.bank;
+    }
+  }
+  if (isRecord(data) && Array.isArray(data.bank)) {
+    const row = data.bank.find((item) => isRecord(item) && item.transaction_id === pair.bank.id);
+    if (isRecord(row)) {
+      return {
+        artifact_id: pair.bank.id,
+        kind: "bank_transaction",
+        title: row.description || pair.bank.id,
+        record: row,
+      };
+    }
+  }
+  return undefined;
+}
+
+function ledgerArtifactsFor(pair: PairRow | undefined, data: unknown, result: unknown): unknown[] {
+  if (!pair) {
+    return [];
+  }
+  const pack = featuredPack(result, data);
+  const bundles = ["unexplained", "fee_netted", "grouped"].map((key) => caseBundle(pack, key));
+  for (const bundle of bundles) {
+    if (artifactId(bundle?.bank) === pair.bank.id && Array.isArray(bundle?.ledger)) {
+      return bundle.ledger;
+    }
+  }
+  if (isRecord(data) && Array.isArray(data.ledger)) {
+    const found: unknown[] = [];
+    for (const chip of pair.ledger) {
+      const row = data.ledger.find((item) => isRecord(item) && item.entry_id === chip.id);
+      if (isRecord(row)) {
+        found.push({
+          artifact_id: row.entry_id,
+          kind: "ledger_entry",
+          title: row.description || row.entry_id,
+          record: row,
+        });
+      }
+    }
+    return found;
+  }
+  return [];
+}
+
+function feeArtifactsFor(pair: PairRow | undefined, data: unknown, result: unknown): unknown[] {
+  if (!pair || pair.bank.id === NORTHSTAR_TXN || pair.kind === "unexplained") {
+    return [];
+  }
+  const pack = featuredPack(result, data);
+  const bundle = caseBundle(pack, "fee_netted");
+  if (artifactId(bundle?.bank) === pair.bank.id && Array.isArray(bundle?.fees)) {
+    return bundle.fees;
+  }
+  if (isRecord(data) && Array.isArray(data.fees)) {
+    return data.fees.filter((item) => isRecord(item) && pair.feeIds.includes(String(item.evidence_id || "")));
+  }
+  return [];
+}
+
+function asLiveStages(value: unknown): readonly LiveStage[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.filter(isRecord).map((row) => ({
+    id: typeof row.id === "string" ? row.id : undefined,
+    bot: typeof row.bot === "string" ? row.bot : undefined,
+    slug: typeof row.slug === "string" ? row.slug : undefined,
+    label: typeof row.label === "string" ? row.label : undefined,
+    status: typeof row.status === "string" ? row.status : undefined,
+    detail: typeof row.detail === "string" ? row.detail : undefined,
+  }));
+}
+
+function liveStagesOf(result: unknown): readonly LiveStage[] {
+  const inner = innerResult(result);
+  if (inner && Array.isArray(inner.stages)) {
+    return asLiveStages(inner.stages);
+  }
+  if (inner && isRecord(inner.result) && Array.isArray(inner.result.stages)) {
+    return asLiveStages(inner.result.stages);
+  }
+  return [];
+}
+
+export default function Cash(): JSX.Element {
+  const [data, setData] = useState<unknown>(null);
+  const [selectedId, setSelectedId] = useState(NORTHSTAR_TXN);
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
-    get("/api/cash").then(setData).catch(() => undefined);
+    get("/api/cash")
+      .then(setData)
+      .catch(() => undefined);
   }, [result]);
 
-  const report = result?.result?.report || data?.report;
-  const matches = report?.matches || result?.result?.io?.outputs?.matches || [];
-  const inner = result?.result;
-  const featured = data?.featured_cases?.[focus];
-  const featuredMatch = (matches || []).find((item: any) => (item.bank_transaction_ids || []).includes(featured?.bank?.artifact_id));
-  const story = explainCashMatch(featuredMatch || { match_type: focus === "unexplained" ? "UNEXPLAINED_DIFFERENCE" : focus === "grouped" ? "GROUPED_MATCH" : "FEE_NETTED" });
+  const pairs = useMemo(
+    () =>
+      pairsFromCashPayload({
+        matches: readMatches(result, data),
+        featuredCases: featuredPack(result, data),
+      }),
+    [data, result]
+  );
+
+  useEffect(() => {
+    if (!pairs.some((pair) => pair.id === selectedId)) {
+      const northstar = pairs.find((pair) => pair.bank.id === NORTHSTAR_TXN);
+      setSelectedId(northstar?.id ?? pairs[0]?.id ?? NORTHSTAR_TXN);
+    }
+  }, [pairs, selectedId]);
+
+  const selected = pairs.find((pair) => pair.id === selectedId) ?? pairs[0];
+  const unexplained = pairs.some((pair) => pair.kind === "unexplained");
+  const inner = innerResult(result);
+  const story = selected
+    ? explainCashMatch({
+        match_type: selected.matchType,
+        bank_amount: selected.bankAmount,
+        ledger_amount: selected.ledgerAmount,
+        ledger_entry_ids: selected.ledger.map((chip) => chip.id),
+      })
+    : undefined;
+
+  const nodes: readonly FlowNode[] = [
+    { id: "bank", label: "Bank", kind: "source", room: "intake" },
+    { id: "cash", label: "Cash", kind: "operator", room: "cash" },
+    { id: "ctl-cash", label: "ctl-cash", kind: "verifier", room: "cash" },
+    {
+      id: "close",
+      label: "Close",
+      kind: "operator",
+      room: "books-close",
+      status: unexplained ? "blocked" : "idle",
+    },
+  ];
+  const edges: readonly FlowEdge[] = [
+    { id: "bank-cash", from: "bank", to: "cash", label: "statement" },
+    { id: "cash-ctl", from: "cash", to: "ctl-cash", label: "proposal" },
+    { id: "ctl-close", from: "ctl-cash", to: "close", label: unexplained ? "blocked" : "sign-off" },
+  ];
+
+  const bankArtifact = bankArtifactFor(selected, data, result);
+  const ledgerArtifacts = ledgerArtifactsFor(selected, data, result);
+  const feeArtifacts = feeArtifactsFor(selected, data, result);
 
   return (
-    <DemoLayout
-      eyebrow="Cash"
-      title="Does the bank agree with the books?"
-      task="Bank reconciliation checks whether the company's bank activity agrees with its accounting records. Every bank deposit or withdrawal should have a matching explanation in the ledger."
-      happening={
-        <WhatsHappening
-          happening="The bank shows that Northstar paid Maximor $12,412.40. The accounting ledger says Northstar owed and paid $12,400."
-          figureOut="Why is there an extra $12.40 in the bank?"
-          why="Cash reconciliation — and therefore September close — remains incomplete until the $12.40 difference can be explained."
-        />
-      }
-      runBar={
-        <>
-          <RunBar label="Reconcile bank to ledger" running={running} onRun={() => run("/api/workflows/bank-reconciliation")} />
-          <ErrorBox error={error} />
-          <div className="btn-row" style={{ marginBottom: 14 }}>
-            {[
-              ["unexplained", "The $12.40 Northstar difference"],
-              ["fee_netted", "Wire with a bank fee"],
-              ["grouped", "One payment, several bills"],
-            ].map(([id, label]) => (
-              <button key={id} className={`btn ${focus === id ? "primary" : ""}`} onClick={() => setFocus(id)}>
-                {label}
-              </button>
-            ))}
-          </div>
-        </>
-      }
-      input={
-        <div className="stack">
-          <StoryCard title={focus === "unexplained" ? "What the bank and the books show" : "Bank and ledger evidence"}>
-            {focus === "unexplained" ? (
-              <>
-                <p>The bank shows that Northstar paid Maximor $12,412.40.</p>
-                <p>The accounting ledger says Northstar owed and paid $12,400.</p>
-              </>
-            ) : focus === "grouped" ? (
-              <p>One bank withdrawal should correspond to several approved vendor invoices paid together.</p>
-            ) : (
-              <p>A bank wire arrived for less than the ledger amount because a bank fee was taken out.</p>
+    <div className="cash-desk">
+      <h1>Bank vs books</h1>
+      <p className="cash-stake">{STAKE}</p>
+      <PairingLanes pairs={pairs} selectedId={selected?.id ?? NORTHSTAR_TXN} onSelect={setSelectedId} />
+      <div className="cash-run">
+        <RunBar label="Reconcile bank to ledger" running={running} onRun={() => run("/api/workflows/bank-reconciliation")} />
+        <ErrorBox error={error} />
+        {selected ? (
+          <Pill
+            tone={statusTone(
+              selected.kind === "unexplained" ? "unexplained" : selected.kind === "matched" ? "matched" : "review"
             )}
-          </StoryCard>
+          >
+            {formatMatchType(selected.matchType)} · {formatStatus(selected.status || selected.matchType)}
+          </Pill>
+        ) : null}
+      </div>
+      <FlowPlay nodes={nodes} edges={edges} steps={CASH_STEPS} mode="live" liveStages={liveStagesOf(result)} />
+      <details className="cash-evidence">
+        <summary>Evidence</summary>
+        {story ? <p className="muted">{story.body}</p> : null}
+        {selected?.feeIds.includes(HELIOS_FEE) ? (
+          <p className="muted">
+            Fee <span className="mono">{HELIOS_FEE}</span> sits on the Helios pair. It is not evidence for{" "}
+            <span className="mono">{NORTHSTAR_TXN}</span>.
+          </p>
+        ) : null}
+        {bankArtifact ? (
           <div className="card">
             <h2>Bank statement row</h2>
-            <SourceArtifactViewer artifact={featured?.bank} />
+            <SourceArtifactViewer artifact={bankArtifact} />
           </div>
-          <div className="card">
-            <h2>Accounting ledger rows</h2>
-            {(featured?.ledger || []).map((item: any) => (
-              <SourceArtifactViewer key={item.artifact_id} artifact={item} compact />
-            ))}
-            {(featured?.fees || []).map((item: any) => (
-              <SourceArtifactViewer key={item.artifact_id} artifact={item} compact />
-            ))}
+        ) : null}
+        {ledgerArtifacts.map((item, index) => (
+          <div className="card" key={artifactId(item) || String(index)}>
+            <h2>Ledger row</h2>
+            <SourceArtifactViewer artifact={item} compact />
           </div>
-        </div>
-      }
-      process={<ProcessPanel stages={inner?.stages} handoffs={inner?.handoffs} summary={inner?.summary} />}
-      output={
-        <div className="card">
-          <OutputHeadline label="Reconciliation result" value={story.title} tone={statusTone(featuredMatch?.status || report?.period_status)} />
-          <Definition term="Reconciliation" />
-          {featuredMatch ? (
-            <ResultBlock
-              found={story.body}
-              why={
-                featuredMatch.match_type === "UNEXPLAINED_DIFFERENCE"
-                  ? "Maximor searched for a fee, adjustment, invoice difference, or other supporting transaction. It could not find evidence explaining the extra $12.40."
-                  : formatMatchType(featuredMatch.match_type)
-              }
-              result={
-                featuredMatch.match_type === "UNEXPLAINED_DIFFERENCE"
-                  ? "Cash reconciliation remains incomplete until the $12.40 difference can be explained. Maximor does not invent a balancing entry."
-                  : `${formatStatus(featuredMatch.status)}. Bank ${usd(featuredMatch.bank_amount)} versus ledger ${usd(featuredMatch.ledger_amount)}.`
-              }
-              evidence={
-                <dl className="kv">
-                  <dt>Bank amount</dt>
-                  <dd>{usd(featuredMatch.bank_amount)}</dd>
-                  <dt>Ledger amount</dt>
-                  <dd>{usd(featuredMatch.ledger_amount)}</dd>
-                  <dt>Difference</dt>
-                  <dd>{usd((featuredMatch.bank_amount || 0) - (featuredMatch.ledger_amount || 0))}</dd>
-                </dl>
-              }
-            />
-          ) : (
-            <p className="muted">Run reconciliation to persist the match against these exact source rows. Until then, the known story is still the $12.40 Northstar difference.</p>
-          )}
-          <TraceIds ids={[...(featuredMatch?.bank_transaction_ids || []), ...(featuredMatch?.ledger_entry_ids || [])]} />
-          <h2>All matches</h2>
-          {matches.length === 0 ? (
-            <p className="muted">No persisted matches yet.</p>
-          ) : (
-            <div className="table-scroll">
-              <table className="data">
-                <thead>
-                  <tr>
-                    <th>What happened</th>
-                    <th>Result</th>
-                    <th className="right">Bank</th>
-                    <th className="right">Ledger</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {matches.map((item: any) => {
-                    const row = explainCashMatch(item);
-                    return (
-                      <tr key={item.reconciliation_id || item.match_key}>
-                        <td>
-                          <div>{row.title}</div>
-                          <div className="muted">{row.body}</div>
-                          <TraceIds ids={[...(item.bank_transaction_ids || []), ...(item.ledger_entry_ids || [])]} />
-                        </td>
-                        <td>
-                          <Pill tone={statusTone(item.status)}>{formatStatus(item.status)}</Pill>
-                        </td>
-                        <td className="num right">{usd(item.bank_amount)}</td>
-                        <td className="num right">{usd(item.ledger_amount)}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      }
-    />
+        ))}
+        {feeArtifacts.map((item, index) => (
+          <div className="card" key={artifactId(item) || `fee-${index}`}>
+            <h2>Fee evidence</h2>
+            <SourceArtifactViewer artifact={item} compact />
+          </div>
+        ))}
+        {Array.isArray(inner?.stages) ? (
+          <ProcessPanel
+            stages={inner.stages as Array<{ id?: string; label?: string; status?: string; bot?: string; detail?: string }>}
+            handoffs={Array.isArray(inner.handoffs) ? inner.handoffs : undefined}
+            summary={typeof inner.summary === "string" ? inner.summary : undefined}
+          />
+        ) : null}
+      </details>
+    </div>
   );
 }

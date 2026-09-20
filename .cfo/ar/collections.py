@@ -73,6 +73,10 @@ def build_collection_facts(
             facts.append(f"Risk flag: {customer.risk_flag}")
         if customer.strategic:
             facts.append("Strategic customer")
+    for item in precedents(invoice.customer_id):
+        if item.kind == "collection_contact":
+            facts.append(f"Contact habit: {item.summary}")
+            break
 
     if invoice.dispute_status == "OPEN":
         priority = "review"

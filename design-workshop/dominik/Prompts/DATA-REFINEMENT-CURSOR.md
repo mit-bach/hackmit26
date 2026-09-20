@@ -136,7 +136,7 @@ The adversarial catalog **already exists**. Do not invent a second fraud plot.
 
 **Phase A (first):** densify Maximor to the scale table in that markdown (~$372M run-rate, 340 vendors, 12 months of books). Keep surviving plot IDs. Make vendor-master / payroll / bank / GL fields exist so a siphon can hide. A 29-invoice toy cannot hide this catalog.
 
-**Phase B (after A validates, same session or a follow-up with those two files attached):** plant using the markdown section **Handoff to data-refinement agent**. Ordered sequence starts with **SL-ADV-RESIDUAL / ADV-CASH-014** (the $12.40 on `TXN-2026-09-015` is 0.1% of Northstar $12,400; INV-001 and INV-017 stay clean). Hidden findings go in `expected_results.json` section `adversarial_holdout` only. No `fraud`, `HUMAN_REVIEW`, or `unusual=true` on operational rows. Loud Kernel toys (Acme LLC dup, $50k round wire, labeled post-close JE, GM 64%→61%) stay as decoys.
+**Phase B is a separate session.** Do not plant from this prompt. Use `design-workshop/dominik/Prompts/ADVERSARIAL-PLANT-CURSOR.md` with the catalog attached. This file is Phase A history.
 
 ## Capabilities you must not fake
 
@@ -173,4 +173,4 @@ Later, the office will simulate on the order of **two hours** of LM-speed activi
 4. Export files the docs name actually exist.
 5. Stripe sim pack is still the processor plot, with optional DABstep volume behind it.
 6. You wrote a short `DATA-REFINEMENT-NOTES.md` in `.cfo-v2/office/sessions/` listing files changed, record counts before/after, which benchmark files you sampled, and where round-2 adversarial hooks live.
-7. Phase A: dense preexisting books. Phase B: catalog planted per the handoff sequence; `adversarial_holdout` private; INV-001 still matches; INV-017 still FEE_NETTED; TXN-2026-09-015 still $12.40 unmatched.
+7. Phase A only: dense preexisting books and hooks. Do not plant the catalog here. Phase B is `ADVERSARIAL-PLANT-CURSOR.md`.

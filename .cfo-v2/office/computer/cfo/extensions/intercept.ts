@@ -1,12 +1,14 @@
 /**
  * Client intercept for consequential Kernel ops.
  * Harness Operator approval is not the queue. Verifier Bots are.
+ * Unlock reads the same Handle file completeTurn writes.
  */
 
-import {existsSync, mkdirSync, readFileSync, renameSync, writeFileSync} from "node:fs";
+import {existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync} from "node:fs";
 import {dirname, join} from "node:path";
 
 import {isRecord} from "./load.ts";
+import {botIdForSlug} from "./profile.ts";
 import type {BoundProfile, CatalogOp, VerifierRoute} from "./types.ts";
 import {isConsequentialKernelOp, routeVerifier} from "./verifier.ts";
 
@@ -17,6 +19,8 @@ export type ConsequentialGate =
   | {readonly kind: "forbidden"}
   | {readonly kind: "intercept"; readonly route: VerifierRoute};
 
+export type HandleConcurrence = "CONCUR" | "REFUSE" | "none";
+
 function writeJsonAtomic(path: string, value: unknown): void {
   mkdirSync(dirname(path), {recursive: true});
   const tmp = `${path}.tmp.${process.pid}`;
@@ -24,8 +28,74 @@ function writeJsonAtomic(path: string, value: unknown): void {
   renameSync(tmp, path);
 }
 
-export function handleFilePath(computerRoot: string, handleId: string): string {
+/** Same path as Harness `handlePath` / completeTurn. */
+export function harnessHandlePath(computerRoot: string, botId: string, handleId: string): string {
+  return join(computerRoot, "harness", "bots", botId, "handles", `${handleId}.json`);
+}
+
+export function pendingIndexPath(computerRoot: string, handleId: string): string {
+  return join(computerRoot, "workspace", "verifier", "pending", `${handleId}.json`);
+}
+
+/** Legacy Client-only CONCUR store. Not the unlock source of truth. */
+export function clientConcurPath(computerRoot: string, handleId: string): string {
   return join(computerRoot, "workspace", "verifier", "handles", `${handleId}.json`);
+}
+
+export function findHarnessHandlePath(computerRoot: string, handleId: string): string | undefined {
+  const root = join(computerRoot, "harness", "bots");
+  if (!existsSync(root)) {
+    return undefined;
+  }
+  for (const ent of readdirSync(root, {withFileTypes: true})) {
+    if (!ent.isDirectory()) {
+      continue;
+    }
+    const path = harnessHandlePath(computerRoot, ent.name, handleId);
+    if (existsSync(path)) {
+      return path;
+    }
+  }
+  return undefined;
+}
+
+export function handleConcurrence(result: string): HandleConcurrence {
+  const trimmed = result.trim();
+  if (trimmed.length === 0) {
+    return "none";
+  }
+  const firstLine = trimmed.split("\n", 1)[0]?.trim().toUpperCase() ?? "";
+  if (firstLine === "CONCUR" || firstLine.startsWith("CONCUR")) {
+    return "CONCUR";
+  }
+  if (firstLine === "REFUSE" || firstLine.startsWith("REFUSE")) {
+    return "REFUSE";
+  }
+  const hasConcur = /\bCONCUR\b/i.test(trimmed);
+  const hasRefuse = /\bREFUSE\b/i.test(trimmed);
+  if (hasConcur && !hasRefuse) {
+    return "CONCUR";
+  }
+  if (hasRefuse && !hasConcur) {
+    return "REFUSE";
+  }
+  return "none";
+}
+
+function pendingOpMatches(computerRoot: string, handleId: string, opId: string): boolean {
+  const path = pendingIndexPath(computerRoot, handleId);
+  if (!existsSync(path)) {
+    return true;
+  }
+  try {
+    const raw: unknown = JSON.parse(readFileSync(path, "utf8"));
+    if (!isRecord(raw) || typeof raw.op !== "string") {
+      return true;
+    }
+    return raw.op === opId;
+  } catch {
+    return true;
+  }
 }
 
 export function completedHandleAllowsOp(
@@ -36,16 +106,23 @@ export function completedHandleAllowsOp(
   if (!handleId) {
     return false;
   }
-  const path = handleFilePath(computerRoot, handleId);
-  if (!existsSync(path)) {
+  const path = findHarnessHandlePath(computerRoot, handleId);
+  if (!path) {
     return false;
   }
   try {
     const raw: unknown = JSON.parse(readFileSync(path, "utf8"));
-    if (!isRecord(raw)) {
+    if (!isRecord(raw) || raw.status !== "completed") {
       return false;
     }
-    return raw.status === "completed" && raw.decision === "CONCUR" && raw.op === op.id;
+    const result = typeof raw.result === "string" ? raw.result : "";
+    if (handleConcurrence(result) !== "CONCUR") {
+      return false;
+    }
+    if (typeof raw.op === "string" && raw.op !== op.id) {
+      return false;
+    }
+    return pendingOpMatches(computerRoot, handleId, op.id);
   } catch {
     return false;
   }
@@ -81,7 +158,8 @@ export function persistPendingHandle(input: {
   readonly packetPath: string;
   readonly createdAt: string;
 }): void {
-  writeJsonAtomic(handleFilePath(input.computerRoot, input.handleId), {
+  const botId = botIdForSlug(input.route.slug);
+  writeJsonAtomic(pendingIndexPath(input.computerRoot, input.handleId), {
     id: input.handleId,
     status: "accepted",
     done: false,
@@ -90,6 +168,8 @@ export function persistPendingHandle(input: {
     profile: input.route.profile,
     fromSlug: input.fromSlug,
     packetPath: input.packetPath,
+    handleStore: "harness",
+    handlePath: harnessHandlePath(input.computerRoot, botId, input.handleId),
     humanQueue: false,
     createdAt: input.createdAt,
   });

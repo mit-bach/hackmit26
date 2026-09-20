@@ -51,12 +51,12 @@ Fifteen grain Bots in `.cfo-v2/office` consume the same skills through compiled 
 | superseded-document-handling | Keep one live payable when a document is a revision, void, credit memo, or duplicate copy | Email Invoice Agent, Finance Inbox Agent, Vendor Portal Agent, Employee Submission Agent, Physical Mail / Document Agent, AP Preparer, Exception Investigator | `skills/superseded-document-handling/SKILL.md` | New | invoice-source-identification |
 | invoice-field-interpretation | Extract invoice fields from messy documents without inventing values or recomputing totals | Email Invoice Agent, Finance Inbox Agent, Vendor Portal Agent, Employee Submission Agent, Physical Mail / Document Agent | `skills/invoice-field-interpretation/SKILL.md` | Extracted | invoice-source-identification |
 | bank-charge-invoice-discovery | Recover an invoice from a bank/card charge only when supporting invoice documentation exists | Bank/Card Discovery Agent | `skills/bank-charge-invoice-discovery/SKILL.md` | Extracted | invoice-source-identification |
-| three-way-match-analysis | Interpret Python three-way-match facts as clean match, blocking hold, or uncertain exception | AP Preparer, Exception Investigator, AP Reviewer, AP Approver, AP Audit | `skills/three-way-match-analysis/SKILL.md` | Extracted | ap-exception-investigation |
-| ap-exception-investigation | Decide whether published policy and prior cases support paying an exception | Exception Investigator, AP Reviewer, AP Approver, AP Audit | `skills/ap-exception-investigation/SKILL.md` | Extracted | three-way-match-analysis |
+| three-way-match-analysis | Interpret Kernel three-way facts when this vendor's packet is messy or uncertain. Does not restate must_hold | AP Preparer | `skills/three-way-match-analysis/SKILL.md` | Extracted | ap-exception-investigation |
+| ap-exception-investigation | Explain how this vendor's mess differs from Kernel exception_types | Exception Investigator | `skills/ap-exception-investigation/SKILL.md` | Extracted | three-way-match-analysis |
+| payment-prioritization | Choose among Kernel payment candidates for this week's draft | Payment Scheduler | `skills/payment-prioritization/SKILL.md` | Extracted | early-payment-discount-evaluation |
+| early-payment-discount-evaluation | Capture an open 2/10 from Kernel discount facts when cash allows | Payment Scheduler | `skills/early-payment-discount-evaluation/SKILL.md` | Extracted | payment-prioritization |
 | accrual-evidence-evaluation | Decide whether a missing vendor bill should be accrued, skipped, or left as insufficient evidence | Accrual Agent | `skills/accrual-evidence-evaluation/SKILL.md` | Extracted | accrual-method-selection, prior-period-precedent |
 | accrual-method-selection | Select the most defensible Python estimate candidate when an accrual is required | Accrual Agent | `skills/accrual-method-selection/SKILL.md` | Extracted | accrual-evidence-evaluation, prior-period-precedent |
-| payment-prioritization | Rank approved invoices for this week's run using due date, vendor priority, and cash constraints | Payment Scheduler, Payment Audit | `skills/payment-prioritization/SKILL.md` | Extracted | early-payment-discount-evaluation |
-| early-payment-discount-evaluation | Capture open early-payment discounts when cash allows; do not pay closed-discount invoices early | Payment Scheduler, Payment Audit | `skills/early-payment-discount-evaluation/SKILL.md` | Extracted | payment-prioritization |
 | cash-reconciliation-method-selection | Distinguish exact, grouped, fee-netted, timing, duplicate, provider, and unexplained cash matches from Python candidates | Cash Reconciliation Preparer, Cash Reconciliation Reviewer | `skills/cash-reconciliation-method-selection/SKILL.md` | New | reconciliation-exception-investigation, reconciliation-evidence-validation |
 | reconciliation-evidence-validation | Accept a cash match only when entity, date, type, and source evidence support the relationship | Cash Reconciliation Preparer, Cash Exception Investigator, Cash Reconciliation Reviewer | `skills/reconciliation-evidence-validation/SKILL.md` | New | cash-reconciliation-method-selection |
 | reconciliation-exception-investigation | Investigate unmatched cash activity without inventing explanations | Cash Exception Investigator, Cash Reconciliation Reviewer | `skills/reconciliation-exception-investigation/SKILL.md` | New | cash-reconciliation-method-selection |
@@ -93,6 +93,8 @@ These agents keep role/tool instructions only. Their remaining guidance is workf
 | Counterparty Message Agent | Constructs and sends fixture messages; no reusable finance judgment |
 | ERP Invoice Agent | Structured NetSuite/SAP/Oracle/Workday records are mapped in Python |
 | EDI / Electronic Invoicing Agent | Prefer `python_parse`; remap only empty fields. Parsing stays in Python |
+| Payment Audit | Looks for reasons to refuse a Kernel-netted draft. Ranking skills stay on Payment Scheduler |
+| AP Audit | Second Wake of ctl-pay / review-match. Packet plus Kernel evidence. Not a second doer |
 
 ## Adding a skill
 

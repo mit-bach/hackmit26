@@ -213,6 +213,8 @@ class CollectionMessage(BaseModel):
     evidence_used: list[str] = Field(default_factory=list)
     confidence: float = Field(ge=0, le=1)
     human_approval_required: bool = False
+    mailbox_message_id: Optional[str] = None
+    thread_id: Optional[str] = None
     created_at: str
     as_of_date: str
     sent: bool = False
@@ -231,6 +233,7 @@ class CollectionRun(BaseModel):
     block_reason: Optional[str] = None
     apply_handle_path: Optional[str] = None
     verifier_handle_paths: list[str] = Field(default_factory=list)
+    world_handle_paths: list[str] = Field(default_factory=list)
     drained_payment_ids: list[str] = Field(default_factory=list)
 
 
@@ -422,6 +425,7 @@ class CashApplyTrace(BaseModel):
     trace_path: Optional[str] = None
     verifier_handle_path: Optional[str] = None
     packet_path: Optional[str] = None
+    cash_handle_path: Optional[str] = None
 
 
 class ARCloseSnapshot(BaseModel):

@@ -42,7 +42,14 @@ import { liveStatus, touchLane } from "../src/lane-state.ts";
 import { transcriptTail } from "../src/transcript-tail.ts";
 import { acquireLease, releaseLease } from "../src/leases.ts";
 import { harnessPackageRoot } from "../src/pkg.ts";
-import { notifyIntercept } from "../src/intercept.ts";
+import {
+  interceptApproverLabel,
+  loadIntercept,
+  notifyIntercept,
+  operatorCompletesIntercept,
+  resolveIntercept,
+  type InterceptTarget,
+} from "../src/intercept.ts";
 
 interface BoundSession {
   readonly bind: Extract<BindResult, { ok: true }>;
@@ -94,6 +101,10 @@ function toolText(payload: unknown): {
     content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
     details: payload,
   };
+}
+
+function interceptFor(computerRoot: string, slug: string): InterceptTarget {
+  return resolveIntercept(loadIntercept(computerRoot), slug);
 }
 
 function kickWake(session: BoundSession): void {
@@ -317,10 +328,12 @@ export default function harnessExtension(pi: ExtensionAPI): void {
       detail: JSON.stringify(input),
     });
     notifyIntercept(bind.computerRoot, approval);
-    blockTurn(lane, `${event.toolName} requires Operator approval ${approval.id}`);
+    const intercept = interceptFor(bind.computerRoot, bind.bot.slug);
+    const approver = interceptApproverLabel(intercept);
+    blockTurn(lane, `${event.toolName} requires ${approver} ${approval.id}`);
     let allowed = false;
     try {
-      if (ctx.mode === "tui" && ctx.hasUI) {
+      if (operatorCompletesIntercept(intercept) && ctx.mode === "tui" && ctx.hasUI) {
         allowed = await ctx.ui.confirm("Harness approval", `${event.toolName}\n${approval.detail}`);
         resolveApproval(bind.computerRoot, approval.id, allowed);
       } else {
@@ -332,8 +345,8 @@ export default function harnessExtension(pi: ExtensionAPI): void {
       resolveApproval(bind.computerRoot, approval.id, false);
     }
     if (!allowed) {
-      cancelTurn(lane, `denied by Operator (${approval.id})`);
-      return { block: true, reason: `denied by Operator (${approval.id})`, terminate: true };
+      cancelTurn(lane, `denied by ${approver} (${approval.id})`);
+      return { block: true, reason: `denied by ${approver} (${approval.id})`, terminate: true };
     }
     resumeTurn(lane);
     return;
@@ -667,8 +680,8 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
   pi.registerTool({
     name: "bot_resolve_approval",
     label: "Resolve approval",
-    description: "Allow or deny a parked approval. Used by a Verifier Bot named in harness/intercept.json.",
-    promptSnippet: "Allow or deny a parked Operator approval",
+    description: "Allow or deny a parked approval. Used by a Bot named in harness/intercept.json.",
+    promptSnippet: "Allow or deny a parked intercept approval",
     parameters: Type.Object({
       approval_id: Type.String(),
       allowed: Type.Boolean(),
@@ -680,13 +693,15 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
   pi.registerTool({
     name: "ask_user",
     label: "Ask Operator",
-    description: "Ask the Operator. A peer Handle is not approval.",
-    promptSnippet: "Ask the Operator; a peer Handle is not approval",
+    description:
+      "Operator confirm only when intercept kind is operator. When intercept names a Bot, that Bot owns the wait. A peer Handle is not approval. ask_user cannot complete a parked Bot approval.",
+    promptSnippet: "Operator confirm only if intercept kind is operator; otherwise wait on the named Bot",
     parameters: Type.Object({
       action: Type.String(),
       detail: Type.String(),
     }),
     execute: async (_id, params, _signal, _update, ctx: ExtensionContext) => {
+      const intercept = interceptFor(bind.computerRoot, bind.bot.slug);
       const approval = createApproval(bind.computerRoot, {
         botId: bind.bot.id,
         handleId: lane.currentInbox?.handleId,
@@ -694,6 +709,16 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
         detail: `${params.action}: ${params.detail}`,
       });
       notifyIntercept(bind.computerRoot, approval);
+      if (!operatorCompletesIntercept(intercept)) {
+        return toolText({
+          allowed: false,
+          error: "intercept_bot",
+          bot: intercept.kind === "bot" ? intercept.bot : undefined,
+          action: params.action,
+          detail: params.detail,
+          approvalId: approval.id,
+        });
+      }
       blockTurn(lane, params.action);
       let allowed = false;
       try {

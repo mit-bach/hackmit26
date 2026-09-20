@@ -10,7 +10,7 @@ from ar.tools import (
     get_collection_candidates,
     get_collection_invoice_facts,
 )
-from inbox.tools import send_office_outbound
+from inbox.tools import send_office_outbound_tool as send_office_outbound
 from skills import compose_instructions, skills_for
 
 COLLECTION_TOOLS = [
@@ -89,6 +89,7 @@ AUTO_APPLY only when evidence is unique and strong (named invoice, or one
 customer with one exact amount). If two candidates both explain the amount,
 choose HUMAN_REVIEW. That status is fail-closed. The packet goes to
 ctl-cash / review-apply. Do not post. Do not ask a person.
+ar-review-correct is emergency only. It is not how apply finishes.
 
 If the customer cannot be identified, prefer UNAPPLIED or HUMAN_REVIEW.
 

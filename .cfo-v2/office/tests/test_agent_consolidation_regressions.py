@@ -66,7 +66,6 @@ OLD_DISPLAY_NAMES = [
 ]
 
 INTENTIONAL_NON_BOTS = {
-    "Counterparty Message Agent": "fixture sender, not an office worker",
     "Reporting Reviewer Agent": "audit samples the pack; kernel validators remain",
     "Forecast Reviewer Agent": "audit samples the pack; kernel validators remain",
     "AP/AR Sample Data Agent": "eval/sample data, not a grain bot",
@@ -99,10 +98,12 @@ def _display_to_bot() -> dict[str, tuple[str, str]]:
     return mapping
 
 
-def test_office_still_has_exactly_fifteen_bots() -> None:
+def test_office_still_has_grain_bots_including_world() -> None:
     roster = json.loads(ROSTER.read_text(encoding="utf-8"))
     assert [bot["slug"] for bot in roster["bots"]] == list(GRAIN_SLUGS)
-    assert len(roster["bots"]) == 15
+    assert len(roster["bots"]) == 16
+    assert "world" in {bot["slug"] for bot in roster["bots"]}
+    assert "ar" not in {bot["slug"] for bot in roster["bots"]}
 
 
 def test_every_old_display_name_has_an_owner() -> None:
@@ -159,8 +160,9 @@ def test_inbox_and_source_tools_are_granted() -> None:
     assert "inbox.tools.dispatch_inbox_action" not in grants["Counterparty Message Agent"]["ops"]
     assert "invoice_ingestion.tools.get_email" in grants["Email Invoice Agent"]["ops"]
     mapping = _display_to_bot()
-    assert mapping["Finance Inbox Agent"] == ("email", "inbox")
-    assert "Counterparty Message Agent" not in mapping
+    assert mapping["Finance Inbox Agent"][0] == "email"
+    assert mapping["Finance Inbox Agent"][1] in {"inbox", "triage"}
+    assert mapping["Counterparty Message Agent"][0] == "world"
 
 
 def test_ctl_books_profiles_keep_fa_and_bs_tools_without_union() -> None:

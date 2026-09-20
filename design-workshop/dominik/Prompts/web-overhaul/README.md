@@ -1,62 +1,73 @@
-# Website overhaul — four agent prompts
+# Website overhaul — spawn pack
 
-Operator: Billy. These are spawn-ready briefs for **separate** Cursor agents. Do not paste all four into one agent.
+Operator: Billy. These are spawn-ready briefs for **separate** Cursor agents. Do not paste them into one agent.
 
-The current site is a Maximor console of prose: eighteen routes, zero SVG flowcharts, six coverage cards, nine-card “one invoice.” The target is a five-minute sponsor walk where an incoming event lights a Bot, the Bot’s Kernel manipulations, and the next Handle.
+Prompt **01 is already in flight**. Do not respawn it. Do not edit `01-FLOWPLAY-AND-HOME.md`.
 
-## Spawn order
-
-1. Finish **01** first. It ships `web/src/components/FlowPlay.tsx`. 02–04 import it and will **stop** if the file is missing.
-2. Then spawn **02**, **03**, and **04** in parallel. Their file lists do not overlap except `styles.css`, and each appends a **named block at the end** of that file.
-
-Each agent must read `00-SHARED-LAWS.md`, then only its numbered file.
+The first remaining-agent pack asked implementers to keep `DemoLayout` and add a board on top. That was wrong. The current site is one Kernel console printed on almost every route. The remaining prompts **replace those pages**.
 
 ## What to paste
 
-Copy the entire numbered markdown file into a new agent. Tell it: working directory is the repo root `hackmit26`. Then either paste `00-SHARED-LAWS.md` above it, or tell it to read that path first (the numbered prompt already says to).
+New agent. Working directory: repo root `hackmit26`.
 
-Prefer: “Read these two files and implement. Do not implement the other numbered prompts.”
+> Read `design-workshop/dominik/Prompts/web-overhaul/00-SHARED-LAWS.md`, `00-TARGET.md`, and this numbered file. Implement only that prompt. Do not implement the other numbered prompts.
 
-| Order | File | Specialization |
+## Spawn order
+
+1. **01** — already running (FlowPlay + Home event board).
+2. Spawn **02 through 08 in parallel** as soon as `web/src/components/FlowPlay.tsx` exists.
+
+They do not share page files. `styles.css` is append-only with named markers. `copy.ts` is Prompt **07** only.
+
+| File | Specialization | Replaces |
 | --- | --- | --- |
-| laws | [00-SHARED-LAWS.md](00-SHARED-LAWS.md) | Honesty, FlowPlay contract, CSS markers, IDs |
-| 1st | [01-FLOWPLAY-AND-HOME.md](01-FLOWPLAY-AND-HOME.md) | Graph engine + Home event board (six incoming events) |
-| 2nd | [02-THREE-STORIES-AND-COVERAGE.md](02-THREE-STORIES-AND-COVERAGE.md) | CLEAN / RESOLVED / UNRESOLVED + capability matrix |
-| 2nd | [03-LIVE-OFFICE-BOARDS.md](03-LIVE-OFFICE-BOARDS.md) | AP match, AR aging/apply, cash lanes, Stripe waterfall, close gate, forecast line |
-| 2nd | [04-ARCHITECTURE-NAV-HONESTY.md](04-ARCHITECTURE-NAV-HONESTY.md) | Office graph with edges, pitch nav, World not-attached, Counterparty alias fix |
+| [00-SHARED-LAWS.md](00-SHARED-LAWS.md) | Honesty, FlowPlay import, bans, CSS markers | — |
+| [00-TARGET.md](00-TARGET.md) | Why the site fails; whole-site target | — |
+| [01-FLOWPLAY-AND-HOME.md](01-FLOWPLAY-AND-HOME.md) | **In flight.** Engine + Home | `/` hero |
+| [02-SHOW-PATH.md](02-SHOW-PATH.md) | Docket + three playable cases | `/workflow` |
+| [03-CAPABILITY-WALL.md](03-CAPABILITY-WALL.md) | Capability wall vs CAPABILITIES.md | `/coverage` |
+| [04-PAY-DESK.md](04-PAY-DESK.md) | Three-way match + aging/refused apply | `/ap` `/ar` |
+| [05-CASH-DESK.md](05-CASH-DESK.md) | Bank vs ledger lanes + Stripe bars | `/cash` `/stripe` |
+| [06-MONTH-DESK.md](06-MONTH-DESK.md) | Close lock + 13-week line | `/close` `/forecast` |
+| [07-OFFICE-GRAPH-AND-NAV.md](07-OFFICE-GRAPH-AND-NAV.md) | Graph with edges, Pitch nav, World | `/architecture` + sidebar |
+| [08-REMAINING-ROUTES.md](08-REMAINING-ROUTES.md) | Inbox, audit, memory, agents, sims, evals, videos | leftover console |
 
-## File ownership (do not overlap)
+## File ownership
 
-| Path | 01 | 02 | 03 | 04 |
-| --- | --- | --- | --- | --- |
-| `components/FlowPlay.tsx` | **create** | import | import | import |
-| `pages/Overview.tsx` | **edit** | | | |
-| `data/eventStories.ts` | **create** | | | |
-| `pages/Workflow.tsx` | | **edit** | | |
-| `pages/Coverage.tsx` + `CoverageGrid.tsx` + `capabilities.ts` | | **edit** | | |
-| `data/showPath.ts` + `capabilityMatrix.ts` | | **create** | | |
-| `copy.ts` `CAPABILITY_COPY` | | **extend** | | |
-| `pages/AP.tsx` `AR.tsx` `Cash.tsx` `StripePage.tsx` `Close.tsx` `Forecast.tsx` | | | **edit** | |
-| `components/boards/*` | | | **create** | |
-| `pages/Architecture.tsx` + `ArchitectureDiagram.tsx` | | | | **edit** |
-| `layout/Shell.tsx` | | | | **edit** |
-| `copy.ts` `AGENT_ALIASES` / `formatAgent("world")` | | | | **edit** |
-| `data/officeGraph.ts` | | | | **create** |
-| `styles.css` | append `01` block | append `02` block | append `03` block | append `04` block |
-| `.cfo/` `.harness/` roster | none | none | none | none |
+| Path | Owner |
+| --- | --- |
+| `FlowPlay.tsx` `EventBoard.tsx` `eventStories.ts` `Overview.tsx` | 01 (do not touch) |
+| `Workflow.tsx` `workflowStory.ts` `data/showPath.ts` | 02 |
+| `Coverage.tsx` `CoverageGrid.tsx` `capabilities.ts` `capabilityMatrix.ts` | 03 |
+| `AP.tsx` `AR.tsx` `boards/MatchBoard.tsx` `boards/AgingApplyBoard.tsx` | 04 |
+| `Cash.tsx` `StripePage.tsx` `boards/PairingLanes.tsx` `boards/StripeWaterfall.tsx` | 05 |
+| `Close.tsx` `Forecast.tsx` `boards/CloseGate.tsx` `boards/ForecastLine.tsx` | 06 |
+| `Architecture.tsx` `ArchitectureDiagram.tsx` `Shell.tsx` `officeGraph.ts` `copy.ts` (aliases only) | 07 |
+| `Inbox.tsx` `Audit.tsx` `Memory.tsx` `Agents.tsx` `Simulations.tsx` `Evaluations.tsx` `Videos.tsx` `App.test.tsx` | 08 |
+| `styles.css` | each **appends** its marker at the end |
+| `.cfo/` `.harness/` roster | nobody |
 
-If two agents append `styles.css` at the same time, rebase by concatenating the four markers. They must not rewrite `:root`.
+If CSS appends collide, concatenate the `=== 0N` blocks. Do not rewrite `:root` or the `=== 01` block.
 
-## Out of scope for all four
+## Why seven remaining agents (not three)
 
-- Fake videos
-- Resolving $12.40
+The old 02 mixed stories + coverage. The old 03 asked one agent to put boards on six `DemoLayout` pages — that produces six stickers. The old 04 was nav + graph + copy. Leftover routes were declared out of scope, so the site stayed a console.
+
+Now: one agent per instrument family, plus 08 so Inbox/Memory/Evals do not remain the old product.
+
+They **can** run in parallel. If you must cut, cut nothing from 02, 05, and 07 (plot, $12.40 lanes, graph+nav). 08 is what makes the **whole** site change when someone wanders.
+
+## Out of scope for every agent
+
+- Fake videos or a resolved $12.40
 - Drawing a sent collection email as live
 - New npm graph/chart libraries
-- Merging Bot `world` onto the live Harness roster
+- Merging Bot `world` onto the live roster
 - Kernel workflow math
-- Inbox / Audit / Memory / Simulations page redesign (routes stay; 04 only keeps them in nav)
+- Editing Prompt 01’s files
 
-## After all four land — sponsor path
+## After all land — sponsor path
 
-Home (click event) → Three stories (CLEAN, RESOLVED, $12.40) → Capabilities wall → one live board (cash or AP) → Architecture graph. Month still blocked.
+Home (click event) → Three stories (CLEAN, RESOLVED, $12.40) → Capability wall → Cash lanes or AP match → Office graph. Month still blocked.
+
+Pitch nav (07): Home, Office graph, Three stories, Capabilities, Evidence.

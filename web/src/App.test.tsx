@@ -2,8 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App, { ROUTES } from "./App";
 
-const fetchMock = vi.fn(async (input: RequestInfo) => {
-  const url = String(input);
+const fetchMock = vi.fn(async () => {
   const empty = {
     invoices: [],
     samples: [],
@@ -55,33 +54,63 @@ test.each(ROUTES)("renders %s without hardcoded demo success copy", async (route
   expect(screen.queryByText("Invoice approved")).not.toBeInTheDocument();
 });
 
-test("demo layout exposes what arrived and what changed", async () => {
-  render(
+test("inbox classify stage has a sample control and no invoice approved", async () => {
+  const { container } = render(
     <MemoryRouter initialEntries={["/inbox"]}>
       <App />
     </MemoryRouter>
   );
-  expect(screen.getAllByText(/What arrived/i).length).toBeGreaterThan(0);
-  expect(screen.getAllByText(/What changed/i).length).toBeGreaterThan(0);
+  expect(screen.queryByText("Invoice approved")).not.toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /What arrived/i })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: /Identify this document/i })).toBeInTheDocument();
+  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
+  expect(container.querySelector(".io-flow")).toBeNull();
+  expect(screen.queryByText("What changed")).not.toBeInTheDocument();
 });
 
-test("agents page uses finance team framing", async () => {
+test("audit and memory omit the happening essay", async () => {
+  const audit = render(
+    <MemoryRouter initialEntries={["/audit"]}>
+      <App />
+    </MemoryRouter>
+  );
+  expect(screen.getByRole("heading", { name: /Independent tests/i })).toBeInTheDocument();
+  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
+  audit.unmount();
+
+  render(
+    <MemoryRouter initialEntries={["/memory"]}>
+      <App />
+    </MemoryRouter>
+  );
+  expect(screen.getByRole("heading", { name: /August still matters/i })).toBeInTheDocument();
+  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
+});
+
+test("agents page is an activity tape, not a second architecture", async () => {
   render(
     <MemoryRouter initialEntries={["/agents"]}>
       <App />
     </MemoryRouter>
   );
-  expect(await screen.findByText(/The finance team/i)).toBeInTheDocument();
+  expect(await screen.findByRole("heading", { name: /What the Bots just did/i })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: /Open office graph/i })).toHaveAttribute("href", "/architecture");
   expect(screen.queryByText("Fifteen bots")).not.toBeInTheDocument();
   expect(screen.queryByText(/43 autonomous agents/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/Who it works with/i)).not.toBeInTheDocument();
 });
 
-test("evaluations route is the evaluation lab", async () => {
+test("evaluations route is the kernel gauntlet scoreboard", async () => {
   render(
     <MemoryRouter initialEntries={["/evaluations"]}>
       <App />
     </MemoryRouter>
   );
-  expect(await screen.findByText(/connected finance work/i)).toBeInTheDocument();
-  expect(screen.getAllByText(/Evaluation Lab/i).length).toBeGreaterThan(0);
+  expect(await screen.findByRole("heading", { name: /Kernel gauntlet/i })).toBeInTheDocument();
+  expect(screen.queryByText(/connected finance work/i)).not.toBeInTheDocument();
+  expect(screen.queryByText(/Evaluation Lab/i)).not.toBeInTheDocument();
+  const text = document.body.textContent || "";
+  if (/42|97/.test(text)) {
+    expect(text).toMatch(/Kernel/);
+  }
 });

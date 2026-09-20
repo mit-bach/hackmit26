@@ -78,6 +78,10 @@ def all_messages() -> list[MessageEnvelope]:
     return list(_mailbox.values())
 
 
+def all_thread_ids() -> list[str]:
+    return list(_threads.keys())
+
+
 def remember_outcome(message_id: str, result: InboxHandoffResult) -> InboxHandoffResult:
     _outcomes[message_id] = result
     return result

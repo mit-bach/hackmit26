@@ -35,6 +35,14 @@ def invoice_text(
 
 
 CLEAN_INVOICE = invoice_text("Acme Supplies", "ACM-INBOX-1001", "12,450.00", po="PO-101")
+ACME_INV001_INVOICE = invoice_text(
+    "Acme Supplies",
+    "ACM-2026-4410",
+    "12,450.00",
+    po="PO-101",
+    date="2026-09-08",
+    due="2026-09-30",
+)
 BODY_INVOICE = invoice_text("Figma", "FIG-INBOX-2002", "2,448.00", po="PO-107")
 MISMATCH_INVOICE = invoice_text("Office Depot", "OD-INBOX-3003", "5,000.00", po="PO-104")
 NO_PO_INVOICE = invoice_text("Datadog", "DD-INBOX-4004", "1,800.00")
@@ -144,6 +152,25 @@ def spec_clean_attachment() -> MessageSpec:
                 filename="ACM-INBOX-1001.pdf",
                 mime_type="application/pdf",
                 content=CLEAN_INVOICE,
+            )
+        ],
+    )
+
+
+def spec_acme_inv001() -> MessageSpec:
+    """Simulated mailbox for the public Acme bill. Canonical id is INV-001."""
+    return _spec(
+        "acme-inv001",
+        "MSG-ACME-INV-001",
+        "Acme Supplies",
+        "billing@acmesupplies.example",
+        "Invoice ACM-2026-4410 from Acme Supplies",
+        "Please process the attached vendor invoice for PO-101.",
+        attachments=[
+            MessageAttachment(
+                filename="ACM-2026-4410.pdf",
+                mime_type="application/pdf",
+                content=ACME_INV001_INVOICE,
             )
         ],
     )

@@ -115,6 +115,13 @@ test("legacy agent display names map to job titles", () => {
   expect(formatAgent("bot_ap")).toBe("Accounts Payable Agent");
 });
 
+test("World is not formatted as a live roster Bot", () => {
+  expect(formatAgent("world")).toMatch(/not on live roster/i);
+  expect(formatAgent("World")).toMatch(/not on live roster/i);
+  expect(formatAgent("ap")).toBe(AGENT_COPY.ap.name);
+  expect(formatAgent("Counterparty Message Agent")).not.toBe("Email Agent");
+});
+
 test("exceptions and methods become sentences", () => {
   expect(formatException("three_way_match_failed")).toMatch(/purchase order/i);
   expect(formatException("exception_duplicate_candidate")).toMatch(/duplicate/i);

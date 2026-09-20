@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from atomic_json import write_json_atomic
+from harness_handles import write_peer_handle
 from models import (
     CashPosition,
     PaymentAuditResult,
@@ -247,9 +248,19 @@ def write_ctl_pay_wake(
         ),
         "plan_id": plan_id,
     }
-    path = computer_root / "workspace" / "pay" / "wakes" / f"{handle_id}.json"
-    write_json_atomic(path, payload)
-    return path
+    wake_path = computer_root / "workspace" / "pay" / "wakes" / f"{handle_id}.json"
+    write_json_atomic(wake_path, payload)
+    write_peer_handle(
+        computer_root,
+        from_slug=PAY_SLUG,
+        to_slug=CTL_PAY_SLUG,
+        profile=REVIEW_PAY_PROFILE,
+        paths=[rel_plan],
+        prompt=payload["prompt"],
+        extra={"plan_id": plan_id},
+        handle_id=handle_id,
+    )
+    return wake_path
 
 
 def write_expected_outflows(
@@ -337,6 +348,16 @@ def write_cash_wake(
     }
     path = computer_root / "workspace" / "cash" / "wakes" / f"{handle_id}.json"
     write_json_atomic(path, payload)
+    write_peer_handle(
+        computer_root,
+        from_slug=PAY_SLUG,
+        to_slug=CASH_SLUG,
+        profile="match",
+        paths=[rel],
+        prompt=payload["prompt"],
+        extra={"plan_id": plan_id, "executed": False},
+        handle_id=handle_id,
+    )
     return path
 
 

@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "comment": "Session 09. Compiler patches mutability here. grantDenylist tightens Verifier Display names so constructor twins cannot hold Operator write or rebuild ops.",
+  "comment": "Session 09 plus AP T9. Compiler patches mutability here. grantDenylist tightens Verifier Display names so constructor twins cannot hold Operator write or rebuild ops. ctl-pay keeps get_case_evidence as the re-performance read. Do not union RECORD_TOOLS onto ctl-pay.",
   "ops": {
     "accrual.tools.create_accrual": {
       "mutability": "write-local",
@@ -11,6 +11,18 @@
       "mutability": "write-local",
       "sodClass": "accrual-write",
       "ownerPrefixes": ["runs/accrual/"]
+    },
+    "inbox.tools.send_inbox_message": {
+      "mutability": "write-local",
+      "ownerPrefixes": ["runs/inbox/"]
+    },
+    "inbox.tools.reply_in_thread": {
+      "mutability": "write-local",
+      "ownerPrefixes": ["runs/inbox/"]
+    },
+    "inbox.tools.send_office_outbound": {
+      "mutability": "write-local",
+      "ownerPrefixes": ["runs/inbox/"]
     },
     "audit.tools.get_audit_ground_truth": {
       "evalOnly": true,
@@ -72,6 +84,48 @@
     "Month-End Close Reviewer": [
       "accrual.tools.create_accrual",
       "accrual.tools.reconcile_accrual_with_invoice"
+    ],
+    "Counterparty Message Agent": [
+      "inbox.tools.dispatch_inbox_action",
+      "inbox.tools.send_office_outbound",
+      "inbox.tools.classify_inbox_message",
+      "inbox.tools.extract_inbox_invoice",
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "accrual.tools.create_accrual",
+      "accrual.tools.reconcile_accrual_with_invoice",
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool",
+      "ar.tools.get_cash_application_facts"
+    ],
+    "Finance Inbox Agent": [
+      "inbox.tools.send_inbox_message",
+      "inbox.tools.compose_counterparty_message",
+      "inbox.tools.reply_in_thread"
+    ],
+    "Email Invoice Agent": [
+      "inbox.tools.send_inbox_message",
+      "inbox.tools.compose_counterparty_message",
+      "inbox.tools.reply_in_thread"
+    ],
+    "Collections Agent": [
+      "inbox.tools.send_inbox_message",
+      "inbox.tools.compose_counterparty_message",
+      "inbox.tools.reply_in_thread",
+      "inbox.tools.dispatch_inbox_action"
+    ],
+    "Stripe Payout Agent": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "accrual.tools.create_accrual",
+      "accrual.tools.reconcile_accrual_with_invoice",
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool",
+      "invoice_ingestion.tools.find_related_invoice"
     ]
   },
   "profileDenylist": {

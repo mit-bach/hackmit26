@@ -15,6 +15,7 @@ from ar.cash import (
     validate_proposal,
 )
 from ar.collections import (
+    SEND_ACTIONS,
     WRITEOFF_ACTIONS,
     collection_candidates,
     enforce_collection_decision,
@@ -22,7 +23,13 @@ from ar.collections import (
 )
 from ar.context import ar_close_snapshot
 from ar.drain import mark_apply_drained, new_deposits
-from ar.handles import collect_drain_handle, collect_writeoff_handle, persist_drain
+from ar.handles import (
+    apply_identified_handle,
+    collect_drain_handle,
+    collect_dun_handle,
+    collect_writeoff_handle,
+    persist_drain,
+)
 from ar.ledger import mark_payment_decision, post_application
 from ar.models import (
     AgingReport,
@@ -38,6 +45,7 @@ from ar.store import (
     applications_for_payment,
     get_invoice,
     get_payment,
+    get_customer,
     next_id,
     outbox,
     reset_state,
@@ -47,6 +55,78 @@ from ar.store import (
 from skills.loader import usage_from_agent
 
 DEFAULT_AS_OF = "2026-09-30"
+COLLECTIONS_FROM = "collections@hackmit-cfo.example"
+
+
+def _customer_mailbox(customer_id: str, customer_name: str) -> tuple[str, str]:
+    customer = get_customer(customer_id)
+    if customer and customer.billing_email:
+        return customer.customer_name or customer_name, customer.billing_email
+    slug = "".join(ch.lower() for ch in customer_name if ch.isalnum()) or "customer"
+    return customer_name, f"ap@{slug}.example"
+
+
+def _deliver_collection_send(decision, as_of: str, *, persist: bool) -> CollectionMessage:
+    from inbox.tools import _send_office_outbound
+    from inbox.transport import get_message as get_mailbox_message
+
+    to_name, to_address = _customer_mailbox(decision.customer_id, decision.customer_name)
+    thread_id = f"THR-AR-{decision.invoice_id}"
+    existing = [item.message_id for item in outbox()]
+    message_id = next_id("MSG-AR", existing)
+    outbound = _send_office_outbound(
+        thread_id=thread_id,
+        message_id=message_id,
+        to_name=to_name,
+        to_address=to_address,
+        subject=f"{decision.action.replace('_', ' ').title()}: {decision.invoice_id}",
+        body_text=decision.draft_message,
+        from_address=COLLECTIONS_FROM,
+        from_name="Maximor Collections",
+        sent_at=_now(),
+    )
+    sent = bool(outbound.get("found")) and get_mailbox_message(message_id) is not None
+    if persist and sent:
+        invoice = get_invoice(decision.invoice_id)
+        if invoice:
+            save_invoice(
+                invoice.model_copy(
+                    update={
+                        "last_collection_contact": as_of,
+                        "reminder_count": invoice.reminder_count + 1,
+                        "collection_status": (
+                            "ESCALATED"
+                            if decision.action == "SEND_FINAL_NOTICE"
+                            else "REMINDED"
+                        ),
+                    }
+                )
+            )
+    message = CollectionMessage(
+        message_id=next_id("AR-MSG", [item.message_id for item in outbox()]),
+        invoice_id=decision.invoice_id,
+        customer_id=decision.customer_id,
+        customer_name=decision.customer_name,
+        action=decision.action,
+        outstanding_amount=decision.outstanding_amount,
+        draft_message=decision.draft_message,
+        reason=decision.reason,
+        evidence_used=decision.evidence_used,
+        confidence=decision.confidence,
+        human_approval_required=decision.human_approval_required,
+        created_at=_now(),
+        as_of_date=as_of,
+        sent=sent,
+        mailbox_message_id=message_id if sent else None,
+        thread_id=thread_id if sent else None,
+    )
+    if persist:
+        if sent:
+            from ar.ledger import record_collection_contact
+
+            record_collection_contact(decision.customer_id, decision.invoice_id, decision.action, as_of)
+        add_outbox(message)
+    return message
 
 
 def _now() -> str:
@@ -129,6 +209,7 @@ def run_collections(
     decisions: list[CollectionDecision] = []
     messages: list[CollectionMessage] = []
     verifier_handles: list[str] = []
+    world_handles: list[str] = []
     used_agent = False
     for facts in candidates:
         if live:
@@ -140,41 +221,20 @@ def run_collections(
         decisions.append(decision)
         if persist and decision.action in WRITEOFF_ACTIONS:
             verifier_handles.append(str(collect_writeoff_handle(facts, decision)))
-        if decision.action in {"SEND_GENTLE_REMINDER", "SEND_OVERDUE_REMINDER", "SEND_FINAL_NOTICE"}:
-            if persist and decision.draft_message:
-                invoice = get_invoice(decision.invoice_id)
-                if invoice:
-                    save_invoice(
-                        invoice.model_copy(
-                            update={
-                                "last_collection_contact": as_of,
-                                "reminder_count": invoice.reminder_count + 1,
-                                "collection_status": (
-                                    "ESCALATED"
-                                    if decision.action == "SEND_FINAL_NOTICE"
-                                    else "REMINDED"
-                                ),
-                            }
+        if decision.action in SEND_ACTIONS and decision.draft_message:
+            message = _deliver_collection_send(decision, as_of, persist=persist)
+            messages.append(message)
+            if persist and message.sent and message.thread_id and message.mailbox_message_id:
+                world_handles.append(
+                    str(
+                        collect_dun_handle(
+                            facts,
+                            decision,
+                            thread_id=message.thread_id,
+                            message_id=message.mailbox_message_id,
                         )
                     )
-                message = CollectionMessage(
-                    message_id=next_id("AR-MSG", [item.message_id for item in outbox()]),
-                    invoice_id=decision.invoice_id,
-                    customer_id=decision.customer_id,
-                    customer_name=decision.customer_name,
-                    action=decision.action,
-                    outstanding_amount=decision.outstanding_amount,
-                    draft_message=decision.draft_message,
-                    reason=decision.reason,
-                    evidence_used=decision.evidence_used,
-                    confidence=decision.confidence,
-                    human_approval_required=decision.human_approval_required,
-                    created_at=_now(),
-                    as_of_date=as_of,
-                    sent=False,
                 )
-                add_outbox(message)
-                messages.append(message)
         elif persist and decision.action in {"ESCALATE_DISPUTE", "REQUEST_INTERNAL_REVIEW"}:
             add_event(
                 "collections_review",
@@ -201,16 +261,21 @@ def run_collections(
         used_agent=used_agent,
         blocked=False,
         verifier_handle_paths=verifier_handles,
+        world_handle_paths=world_handles,
         drained_payment_ids=[],
     )
     if persist:
         path = save_trace("collections", run)
         run.trace_path = str(path)
+        sent_count = sum(1 for item in messages if item.sent)
         add_event(
             "collections_run",
-            f"Collections run as of {as_of}: {len(decisions)} decisions, {len(messages)} drafts",
+            (
+                f"Collections run as of {as_of}: {len(decisions)} decisions, "
+                f"{sent_count} mailbox sends"
+            ),
             invoice_ids=[item.invoice_id for item in decisions],
-            details={"actions": [item.action for item in decisions]},
+            details={"actions": [item.action for item in decisions], "sent": sent_count},
         )
     return run
 
@@ -393,6 +458,8 @@ def run_cash_apply(
     if persist:
         path = save_trace(f"cash-{payment.payment_id}", trace)
         trace.trace_path = str(path)
+        if posted:
+            trace.cash_handle_path = str(apply_identified_handle(trace))
         if final.decision == "HUMAN_REVIEW" and not posted:
             from ar.review import enqueue_review
 

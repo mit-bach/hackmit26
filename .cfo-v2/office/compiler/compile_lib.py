@@ -45,6 +45,7 @@ SOD_BY_MODULE = {
     "audit.tools": "audit-read",
     "memory.tools": "memory-read",
     "inbox.tools": "inbox",
+    "integrations.tools": "processor-payout",
 }
 
 

@@ -93,7 +93,14 @@ export {
   applyAttachEnv,
   loadExtensionsManifest,
 } from "./client-attach.ts";
-export { loadIntercept, saveIntercept, resolveIntercept, seedVerifierIntercept } from "./intercept.ts";
+export {
+  loadIntercept,
+  saveIntercept,
+  resolveIntercept,
+  seedVerifierIntercept,
+  operatorCompletesIntercept,
+  interceptApproverLabel,
+} from "./intercept.ts";
 export { listMemoryOverview, readMemoryDoc, writeMemoryDoc } from "./memory.ts";
 export {
   mosaicLayout,

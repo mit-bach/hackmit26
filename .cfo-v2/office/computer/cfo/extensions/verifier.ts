@@ -56,6 +56,7 @@ export function verifierInstruction(route: VerifierRoute, packetPath: string): s
   return [
     `profile: ${route.profile}`,
     `Concur or refuse this Kernel op. Packet: ${packetPath}`,
+    "First line of the Handle result must be CONCUR or REFUSE.",
     "Do not ask a human. Do not call ask_user. Kernel math still wins.",
   ].join("\n");
 }

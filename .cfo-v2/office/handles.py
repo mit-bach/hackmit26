@@ -1,4 +1,4 @@
-"""Peer Handle destinations for the fifteen grain Bots.
+"""Peer Handle destinations for the grain Bots, including World as the simulated mailbox.
 
 Source of truth: office/computer/cfo/handle-map.json.
 A peer Handle is not approval. Accept is not complete.
@@ -16,6 +16,7 @@ GRAIN_SLUGS: tuple[str, ...] = (
     "stripe",
     "bank",
     "books",
+    "world",
     "ap",
     "pay",
     "apply",

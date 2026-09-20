@@ -1,9 +1,13 @@
-# Session 06 notes — Bot collect
+# NOTES — collect
 
-Constitution: `.cfo-v2/office/constitution.md`.
+Constitution: `.cfo-v2/office/constitution.md`. Prompt 02.
 
-Kernel gate: `run_collections` refuses while `new_deposits(as_of)` is non-empty. Routine `daily-aging` on slug `collect` is already in `office/computer/harness/roster.json`.
+Done-when is a Kernel-allowed SEND_* in the simulated mailbox (`sent=True`), a hold, a dispute, or a `ctl-pay` write-off packet. `sent=False` is not contact.
 
-Write-off Handles target `ctl-pay`. Session 09 writes that Bot. Until concurrence, the packet sits on disk.
+Dunning: `send_office_outbound` from `collections@hackmit-cfo.example`, then Handle `world` / `customer`.
 
-Handle completion through Pi was not live-proven.
+Write-off: Handle `ctl-pay` / `review-pay`. Not `ctl-cash`. Floor intercept default already points collect at `ctl-pay`.
+
+Apply-before-collect remains. If `new_deposits` is non-empty, Handle apply and stop.
+
+Stage A invoicing is planted World-pack data. No Bot `ar`.

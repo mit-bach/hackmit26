@@ -551,12 +551,59 @@ def match_prior_cases(exception_type: str = "", vendor: str = "") -> list[PriorC
     return matches
 
 
-def vendor_alias_established(evidence: APCaseEvidence) -> bool:
-    """True only when a stored prior case already linked these two vendor strings."""
+def _vendor_pair(evidence: APCaseEvidence) -> tuple[str, str] | None:
     if evidence.invoice is None or evidence.purchase_order is None:
-        return False
+        return None
     invoice_vendor = normalize_vendor(evidence.invoice.vendor)
     po_vendor = normalize_vendor(evidence.purchase_order.vendor)
+    if not invoice_vendor or not po_vendor:
+        return None
+    return invoice_vendor, po_vendor
+
+
+def operational_vendor_alias_established(evidence: APCaseEvidence) -> bool:
+    """True when a prior AP turn stored this vendor pair as an alias.
+
+    Current Kernel facts must still support the alias. Precedent cannot
+    override a live blocking must_hold on a different control.
+    """
+    pair = _vendor_pair(evidence)
+    if pair is None:
+        return False
+    if not evidence.vendors_are_similar:
+        return False
+    invoice_vendor, po_vendor = pair
+    from memory.store import load_memories
+
+    for record in load_memories():
+        if record.workflow != "accounts_payable":
+            continue
+        if record.accounting_treatment != "vendor_alias":
+            continue
+        names = {
+            normalize_vendor(str(item.label or ""))
+            for item in record.evidence
+            if item.kind in {"invoice_vendor", "po_vendor"}
+        }
+        if {invoice_vendor, po_vendor} <= names or names == {invoice_vendor, po_vendor}:
+            return True
+        details_pairs: set[str] = set()
+        for item in record.evidence:
+            if item.kind == "vendor_pair":
+                details_pairs.add(normalize_vendor(str(item.label or "")))
+        joined = f"{invoice_vendor}:{po_vendor}"
+        alt = f"{po_vendor}:{invoice_vendor}"
+        if joined in details_pairs or alt in details_pairs:
+            return True
+    return False
+
+
+def vendor_alias_established(evidence: APCaseEvidence) -> bool:
+    """True when stored evidence already linked these two vendor strings."""
+    pair = _vendor_pair(evidence)
+    if pair is None:
+        return False
+    invoice_vendor, po_vendor = pair
     for case in match_prior_cases(exception_type="vendor_mismatch"):
         if case.final_decision != "APPROVE":
             continue
@@ -564,12 +611,11 @@ def vendor_alias_established(evidence: APCaseEvidence) -> bool:
         case_po = normalize_vendor(str(case.facts.get("po_vendor") or ""))
         if {case_invoice, case_po} == {invoice_vendor, po_vendor}:
             return True
-    return False
+    return operational_vendor_alias_established(evidence)
 
 
-@function_tool
-def get_invoice(invoice_id: str) -> dict:
-    """Look up one invoice by invoice_id. Returns found=false if it does not exist."""
+def invoice_lookup(invoice_id: str) -> dict:
+    """Catalog payload for tools.get_invoice. Does not invent a missing bill."""
     invoice = load_invoice(invoice_id)
     if invoice is None:
         return {
@@ -577,6 +623,12 @@ def get_invoice(invoice_id: str) -> dict:
             "error": f"Invoice {invoice_id} was not found. Do not invent invoice data.",
         }
     return {"found": True, "invoice": _dump(invoice)}
+
+
+@function_tool
+def get_invoice(invoice_id: str) -> dict:
+    """Look up one invoice by invoice_id. Returns found=false if it does not exist."""
+    return invoice_lookup(invoice_id)
 
 
 @function_tool

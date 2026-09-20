@@ -180,6 +180,7 @@ class DecisionTrace(BaseModel):
     trace_path: str | None = None
     packet_path: str | None = None
     verifier_handle: dict | None = None
+    close_handle: dict | None = None
     kernel_holds: list[str] = Field(default_factory=list)
     posted_to_pool: bool = False
     wakes: list[dict] = Field(default_factory=list)

@@ -53,7 +53,6 @@
         "memory.tools.get_decision_memories"
       ],
       "skills": [
-        "three-way-match-analysis",
         "ap-exception-investigation",
         "prior-period-precedent",
         "superseded-document-handling"
@@ -69,8 +68,6 @@
         "tools.get_prior_cases"
       ],
       "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation",
         "prior-period-precedent"
       ],
       "outputType": "ReviewerDecision",
@@ -84,8 +81,6 @@
         "tools.get_prior_cases"
       ],
       "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation",
         "prior-period-precedent"
       ],
       "outputType": "ApproverDecision",
@@ -97,10 +92,7 @@
         "tools.get_company_policies",
         "tools.find_relevant_policies"
       ],
-      "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation"
-      ],
+      "skills": [],
       "outputType": "AuditResult",
       "source": "agent.py"
     },
@@ -284,10 +276,7 @@
         "scheduling.tools.get_cash_position",
         "scheduling.tools.get_treasury_policies"
       ],
-      "skills": [
-        "payment-prioritization",
-        "early-payment-discount-evaluation"
-      ],
+      "skills": [],
       "outputType": "PaymentAuditResult",
       "source": "scheduling/agent.py"
     },
@@ -296,7 +285,8 @@
         "ar.tools.get_collection_candidates",
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
-        "ar.tools.get_ar_precedents"
+        "ar.tools.get_ar_precedents",
+        "inbox.tools.send_office_outbound"
       ],
       "skills": [
         "ar-collections-policy"
@@ -349,7 +339,11 @@
       "ops": [
         "inbox.tools.compose_counterparty_message",
         "inbox.tools.send_inbox_message",
-        "inbox.tools.reply_in_thread"
+        "inbox.tools.reply_in_thread",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.list_world_personas"
       ],
       "skills": [],
       "outputType": "CounterpartyAgentOutput",
@@ -361,7 +355,11 @@
         "inbox.tools.get_inbox_attachment",
         "inbox.tools.classify_inbox_message",
         "inbox.tools.extract_inbox_invoice",
-        "inbox.tools.dispatch_inbox_action"
+        "inbox.tools.dispatch_inbox_action",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.send_office_outbound"
       ],
       "skills": [
         "inbox-triage",

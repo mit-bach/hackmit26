@@ -1,6 +1,6 @@
 ---
 name: payment-prioritization
-description: Ranks approved invoices for this week's payment run using Python due-date, priority, and cash facts. Use when building or auditing a weekly AP payment plan.
+description: Chooses among Kernel payment candidates for this week's draft. Use when Bot pay wears Profile schedule. Not a Verifier skill.
 status: extracted
 ---
 
@@ -8,47 +8,33 @@ status: extracted
 
 ## Purpose
 
-Decide which approved invoices should be paid this week versus deferred, given spendable cash and published treasury policy.
+Pick which Kernel-eligible invoices to propose this week. Python already computed due dates, priority, spendable cash, and unnecessary early pays. Kernel `apply_cash_and_policy_net` binds the plan after you.
 
 ## When to Use
 
-Apply when the Payment Scheduler builds a plan or Payment Audit reviews that plan. Only invoices already in the approved pool are in scope.
+Bot `pay` Profile `schedule` only. Do not wear this on `ctl-pay`. Payment Audit looks for reasons to refuse. It does not rank the run again.
 
 ## Inputs / Evidence
 
-Use get_payment_candidates, get_approved_pool, get_cash_position, and get_treasury_policies. Python already computed:
-
-- spendable cash
-- days until due / late / due_within_horizon
-- vendor_priority
-- unnecessary_if_paid_early
-- pay_amount_if_this_week
-
-Do not recalculate discounts, due dates, or spendable cash.
+`get_payment_candidates`, `get_approved_pool`, `get_cash_position`, `get_treasury_policies`. Trust `pay_amount_if_this_week`, `vendor_priority`, `unnecessary_if_paid_early`, and spendable cash. Do not recalculate them.
 
 ## Procedure
 
-1. Confirm every pay candidate is in the approved pool.
-2. Pay invoices that are late or due within the horizon, highest vendor_priority first.
-3. Stop before breaching the minimum cash reserve.
-4. Do not pay invoices whose discount has expired and that are not due this horizon.
-5. Leave remaining approved invoices in defer with a cash or timing reason.
+Choose among candidate ids. Prefer late and due-this-horizon when cash is tight. Leave the rest in defer with a cash or timing reason. Stop. Kernel strips HOLD, strips unnecessary early pays, and refuses a reserve breach.
 
 ## Decision Criteria
 
-- Never pay an invoice that is not in the approved pool or that AP held.
-- Late and due-this-horizon invoices outrank invoices that can wait.
-- Higher vendor_priority is paid first when cash is tight.
-- A distant invoice with a closed discount is an unnecessary early payment and should be deferred.
-- If cash cannot cover a due/late invoice without breaching the reserve, defer it and say so. Do not invent a different reserve.
+- Never propose an id that is not in the approved pool.
+- If cash cannot cover a due item without breaching the reserve, defer it. Do not invent a different reserve.
+- Do not pay. There is no send-as-bank Connector.
 
 ## Output Expectations
 
-Return pay_this_week and defer lists using only candidate invoice IDs, plus total_payout, cash_after_payments, reserve_ok, reasons, and confidence. Auditors should set passed=false when a due/late invoice was skipped without a cash reason or when a non-approved invoice was paid.
+`PaymentPlan` invoice ids only. Totals on disk must match Kernel net, not your arithmetic.
 
 ## Boundaries
 
 - Do not execute a bank payment.
 - Do not recalculate cash, reserves, or due dates.
 - Do not pull HOLD invoices into the plan.
-- Do not change AP approval outcomes; scheduling only sequences already-approved invoices.
+- Do not change AP match outcomes. Scheduling only sequences already-approved invoices.

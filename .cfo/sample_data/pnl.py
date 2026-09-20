@@ -1,6 +1,8 @@
 """Canonical P&L facts for the shared sample company.
 
-August GM 64% / September GM 61%. These lines are the only COGS postings.
+Board P&L is the $372.4M run-rate table. The named COGS facts remain the
+loud 64% → 61% mix-shift decoy (quantity × rate). Additional GL lines carry
+the rest of August $30.82M / September $31.14M revenue.
 Operational AP invoices (INV-001, INV-002, …) stay on operating expense.
 """
 
@@ -42,8 +44,25 @@ OPERATIONAL_AP_IDS = frozenset(
     }
 )
 
-INTENDED_COGS_MINOR = {"2026-08": 36_000_000, "2026-09": 39_000_000}
-INTENDED_REVENUE_MINOR = {"2026-08": 100_000_000, "2026-09": 100_000_000}
+# Loud decoy slice (quantity × rate on named hosting/supplier/freight IDs).
+DECOY_COGS_MINOR = {"2026-08": 36_000_000, "2026-09": 39_000_000}
+
+# Catalog scale table. 36% / 39% COGS → GM 64% → 61% on the full books.
+INTENDED_REVENUE_MINOR = {"2026-08": 3_082_000_000, "2026-09": 3_114_000_000}
+INTENDED_COGS_MINOR = {"2026-08": 1_109_520_000, "2026-09": 1_214_460_000}
+
+ANNUAL_REVENUE_RUN_RATE = 372_400_000.00
+AUGUST_REVENUE = 30_820_000.00
+SEPTEMBER_REVENUE = 31_140_000.00
+W2_HEADCOUNT = 2_840
+CONTRACTOR_1099_COUNT = 412
+BIWEEKLY_PAYROLL_GROSS = 8_437_291.44
+AP_OPEN = 18_420_000.00
+AR_OPEN = 41_260_000.00
+OPERATING_CASH_2026_09_30 = 14_882_410.18
+ACTIVE_VENDORS = 340
+AP_INVOICES_TRAILING = 4_800
+BANK_LINES_PER_MONTH = 210
 
 
 class CogsFact(NamedTuple):
@@ -115,8 +134,8 @@ def validate_fact_arithmetic() -> list[str]:
             )
         if fact.invoice_id in OPERATIONAL_AP_IDS:
             errors.append(f"{fact.transaction_id} reuses operational AP id {fact.invoice_id}")
-    for period, expected in INTENDED_COGS_MINOR.items():
+    for period, expected in DECOY_COGS_MINOR.items():
         actual = intended_cogs_minor(period)
         if actual != expected:
-            errors.append(f"{period} COGS facts sum {actual} != intended {expected}")
+            errors.append(f"{period} decoy COGS facts sum {actual} != {expected}")
     return errors

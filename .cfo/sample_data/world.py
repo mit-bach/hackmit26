@@ -1,10 +1,9 @@
 """Company-scale registers that sit on top of the planted plot IDs.
 
 Plot identities (INV-001, INV-017, INV-AR-013, TXN-2026-09-015, …) are created
-by the domain agents. This module adds the preexisting books a $12M-run-rate
-SaaS/services company would already have: vendor master fields, ~110 live AP
-invoices, a trailing-twelve-month AP/GL/bank/payroll/processor history, and
-August close workpapers. Round-2 adversarial traces are not planted here.
+by the domain agents. This module densifies Maximor Demo Corp to the catalog
+scale table ($372.4M run-rate, 340 vendors, 2,840 W-2). Adversarial plants
+are applied afterwards by ``sample_data.adversarial`` at seed 42.
 """
 
 from __future__ import annotations
@@ -84,6 +83,16 @@ EXTRA_VENDORS: tuple[tuple[str, str, str], ...] = (
     ("VEND-050", "Linear App", "2024-06-01"),
 )
 
+FILLER_VENDOR_STEMS: tuple[str, ...] = (
+    "Alder", "Banyan", "Cedar", "Driftwood", "Elm", "Fir", "Ginkgo", "Hazel",
+    "Ironwood", "Juniper", "Larch", "Maple", "Northwood", "Oak", "Pine",
+    "Quince", "Redwood", "Spruce", "Teak", "Umber", "Violet", "Walnut",
+    "Yarrow", "Zephyr", "Beacon", "Canyon", "Delta", "Echo", "Forge",
+    "Granite", "Harbor", "Inlet", "Jetty", "Keel", "Lantern", "Mesa",
+    "Nimbus", "Orchard", "Prairie", "Quarry", "Ridge", "Sierra", "Timber",
+    "Upland", "Valley", "Wharf", "Yellowstone", "Zenith",
+)
+
 CUSTOMER_DIRECTORY: dict[str, dict[str, str]] = {
     "CUST-001": {
         "legal_name": "Northwind Labs, Inc.",
@@ -115,11 +124,11 @@ CUSTOMER_DIRECTORY: dict[str, dict[str, str]] = {
     "CUST-004": {
         "legal_name": "Brightline Media Group",
         "billing_email": "ap@brightline.example",
-        "billing_address": "200 Madison Avenue",
-        "city": "New York",
-        "state": "NY",
-        "postal_code": "10016",
-        "tax_id": "13-9902218",
+        "billing_address": "14 Fayette Street",
+        "city": "Somerville",
+        "state": "MA",
+        "postal_code": "02143",
+        "tax_id": "27-9081101",
     },
     "CUST-005": {
         "legal_name": "Quiet Harbor Holdings",
@@ -239,6 +248,24 @@ EMPLOYEES: tuple[tuple[str, str, str, int], ...] = (
     ("EMP-048", "Marisol Vega", "Sales", 133000),
 )
 
+IDENTITY_EMPLOYEES: tuple[tuple[str, str, str, int, str], ...] = (
+    ("EMP-0901", "Jordan Hale", "Procurement", 162000, "USR-APPR-HALE"),
+    ("EMP-0902", "Priya Nair", "Finance", 185000, "USR-APPR-NAIR"),
+    ("EMP-0903", "Marcus Chen", "Engineering operations", 210000, "USR-APPR-CHEN"),
+    ("EMP-0904", "Elena Vasquez", "IT", 198000, "USR-APPR-VASQ"),
+    ("EMP-1088", "Nadia Voss", "Controller", 176000, "USR-JE-04"),
+    ("EMP-1190", "Mei Stratton", "Revenue", 148000, "USR-REV-05"),
+    ("EMP-2201", "Riley Cho", "Facilities", 92000, "USR-FAC-01"),
+    ("EMP-2290", "Ava Pell", "Warehouse", 48000, "USR-WH-2290"),
+    ("EMP-3304", "Samir Okonkwo", "AR", 118000, "USR-APPLY-02"),
+    ("EMP-3310", "Nia Bright", "Marketing", 132000, "USR-MKT-01"),
+    ("EMP-4128", "Dana Kestrel", "AP", 94000, "USR-VM-04"),
+    ("EMP-4402", "Luis Redmond", "Processor operations", 141000, "USR-STRIPE-01"),
+    ("EMP-5510", "Chris Pell", "Payroll", 128000, "USR-PR-01"),
+    ("EMP-6722", "Glen Park", "Warehouse receiving", 64000, "USR-GR-01"),
+    ("EMP-8891", "Tomas Halyard", "Warehouse", 108800, "USR-WH-8891"),
+)
+
 
 def _period_end(period: str) -> str:
     year_i, month_i = (int(part) for part in period.split("-"))
@@ -340,7 +367,50 @@ def add_extra_vendors(ctx: CompanyScenarioContext) -> None:
             "status": "active",
         }
         _safe_named(ctx, vendor_id)
+    add_scale_vendors(ctx)
     enrich_vendor_master(ctx)
+
+
+def add_scale_vendors(ctx: CompanyScenarioContext) -> None:
+    """Fill the vendor master to 340 active rows. Identity-bible vendors come later."""
+    suffixes = (
+        "Systems", "Services", "Supply", "Labs", "Partners", "Works",
+        "Components", "Network", "Studio", "Group",
+    )
+    next_n = 51
+    while len(ctx.vendors) < 325:
+        vendor_id = f"VEND-{next_n:03d}"
+        next_n += 1
+        if vendor_id in ctx.vendors:
+            continue
+        stem = FILLER_VENDOR_STEMS[(next_n * 3) % len(FILLER_VENDOR_STEMS)]
+        suffix = suffixes[next_n % len(suffixes)]
+        name = f"{stem} {suffix}"
+        first_seen = f"{2020 + (next_n % 6)}-{(next_n % 12) + 1:02d}-01"
+        ctx.vendors[vendor_id] = {
+            "vendor_id": vendor_id,
+            "name": name,
+            "first_seen": first_seen,
+            "unusual": False,
+            "legal_name": f"{name} LLC",
+            "dba": "",
+            "tax_id": f"04-{(next_n * 409) % 90_00000:07d}",
+            "address": f"{100 + next_n} Massachusetts Avenue\nCambridge, MA 02139",
+            "phone": f"+1 617-555-{next_n % 9000:04d}",
+            "billing_email": f"billing@{stem.lower()}.example",
+            "payment_terms": "net 30",
+            "bank_name": "First National Bank",
+            "bank_routing": _routing(vendor_id),
+            "bank_account": _account(vendor_id),
+            "bank_account_last4": _account(vendor_id)[-4:],
+            "bank_changed_on": "",
+            "aliases": [],
+            "duplicate_risk_key": vendor_id,
+            "currency": "USD",
+            "country": "US",
+            "status": "active",
+        }
+        _safe_named(ctx, vendor_id)
 
 
 def enrich_customers(ctx: CompanyScenarioContext) -> None:
@@ -535,7 +605,7 @@ def add_historical_ap_register(ctx: CompanyScenarioContext, rng: random.Random) 
         year_i, month_i = (int(part) for part in period.split("-"))
         last = calendar.monthrange(year_i, month_i)[1]
         for day_n in range(1, 21):
-            for slot in range(12):
+            for slot in range(20):
                 seq += 1
                 vendor = vendors[(seq * 3 + slot) % len(vendors)]
                 sku, _kind, unit = SKU_CATALOG[(seq + slot) % len(SKU_CATALOG)]
@@ -590,20 +660,20 @@ def add_historical_ap_register(ctx: CompanyScenarioContext, rng: random.Random) 
 
 
 def add_trailing_pnl(ctx: CompanyScenarioContext) -> None:
-    """Prior months at the same $1,000,000 / $360,000 run-rate as August."""
+    """Prior months at the catalog monthly run-rate, not the $1,000,000 toy."""
     customers = [
         ("CUST-001", "Northwind Labs", "Platform"),
         ("CUST-002", "Helios Analytics", "Usage"),
         ("CUST-003", "Acme Industrial", "Services"),
     ]
-    splits = (40_000_000, 35_000_000, 25_000_000)
+    splits = (1_220_000_000, 1_067_500_000, 762_500_000)
     cogs_rows = (
-        ("Amazon Web Services", "5100-Hosting", "hosting", 5_000_000),
-        ("Google Cloud", "5100-Hosting", "hosting", 3_000_000),
-        ("Acme Supplies", "5200-Supplier", "supplier", 18_000_000),
-        ("Helios Hardware", "5200-Supplier", "supplier", 7_000_000),
-        ("Freightline Logistics", "5300-Freight", "freight", 2_000_000),
-        ("Misc Supplies", "5400-Other-COGS", "unclassified", 1_000_000),
+        ("Amazon Web Services", "5100-Hosting", "hosting", 152_500_000),
+        ("Google Cloud", "5100-Hosting", "hosting", 91_500_000),
+        ("Acme Supplies", "5200-Supplier", "supplier", 549_000_000),
+        ("Helios Hardware", "5200-Supplier", "supplier", 213_500_000),
+        ("Freightline Logistics", "5300-Freight", "freight", 61_000_000),
+        ("Misc Supplies", "5400-Other-COGS", "unclassified", 30_500_000),
     )
     for period in HIST_PERIODS:
         end = _period_end(period)
@@ -920,6 +990,18 @@ VOLUME_CASH_EXCLUDE = {
     "VEND-032",  # Harbor near-duplicate
     "VEND-042",  # Stripe Processing; would collide with provider payout matching
     "VEND-043",  # Adyen NV; same
+    "VEND-KIS-01",
+    "VEND-NLF-02",
+    "VEND-NLF-03",
+    "VEND-WBT-01",
+    "VEND-HAL-01",
+    "VEND-CLR-01",
+    "VEND-BLS-01",
+    "VEND-CPS-01",
+    "VEND-HES-01",
+    "VEND-OIC-01",
+    "VEND-FLE-01",
+    "VEND-HBP-01",
 }
 
 
@@ -933,7 +1015,7 @@ def _volume_cash_vendors(ctx: CompanyScenarioContext) -> list[dict]:
 
 def expand_september_bank(ctx: CompanyScenarioContext, rng: random.Random) -> None:
     vendors = _volume_cash_vendors(ctx)
-    needed = 200 - len(ctx.bank_transactions)
+    needed = 210 - len(ctx.bank_transactions)
     if needed <= 0:
         return
     for index in range(1, needed + 1):
@@ -1020,8 +1102,8 @@ def add_bank_history(ctx: CompanyScenarioContext, rng: random.Random) -> None:
         year_i, month_i = (int(part) for part in period.split("-"))
         last = calendar.monthrange(year_i, month_i)[1]
         account = "BANK-OPERATING" if period != "2026-10" else "BANK-OPERATING"
-        for day in range(1, last + 1, 2):
-            for slot in range(4):
+        for day in range(1, last + 1):
+            for slot in range(7):
                 seq += 1
                 vendor = vendors[(seq + slot) % len(vendors)]
                 amount_minor = -((900 + (seq * 41) % 6200) * 100)
@@ -1044,40 +1126,206 @@ def add_bank_history(ctx: CompanyScenarioContext, rng: random.Random) -> None:
                 )
 
 
+def add_employee_master(ctx: CompanyScenarioContext) -> None:
+    """W-2 register at catalog headcount. Identity-bible rows keep catalog IDs."""
+    from sample_data.pnl import BIWEEKLY_PAYROLL_GROSS, W2_HEADCOUNT
+
+    first = (
+        "Alex", "Blair", "Casey", "Drew", "Eden", "Finley", "Gray", "Harper",
+        "Indigo", "Jules", "Kai", "Logan", "Morgan", "Noel", "Oakley", "Parker",
+        "Quinn", "Reese", "Sage", "Taylor", "Uma", "Val", "Winter", "Xen",
+    )
+    last = (
+        "Abbott", "Bennett", "Clarke", "Diaz", "Ellis", "Foster", "Greene",
+        "Hayes", "Ingram", "Jones", "Khan", "Lopez", "Meyer", "Ng", "Ortiz",
+        "Patel", "Quinn", "Ross", "Shah", "Turner", "Upton", "Vega", "Walsh",
+        "Young",
+    )
+    depts = ("Engineering", "Sales", "Finance", "Operations", "G&A", "Customer Success", "Warehouse")
+    seen = {row[0] for row in EMPLOYEES} | {row[0] for row in IDENTITY_EMPLOYEES}
+    rows: list[dict] = []
+    for emp_id, name, dept, annual in EMPLOYEES:
+        rows.append(_employee_row(emp_id, name, dept, annual, "Cambridge, MA", "active"))
+    for emp_id, name, dept, annual, _usr in IDENTITY_EMPLOYEES:
+        status = "terminated" if emp_id == "EMP-2290" else "active"
+        location = "Remote" if emp_id == "EMP-8891" else "Cambridge, MA"
+        rows.append(_employee_row(emp_id, name, dept, annual, location, status))
+    seq = 1000
+    while len(rows) < W2_HEADCOUNT:
+        emp_id = f"EMP-{seq:04d}"
+        seq += 1
+        if emp_id in seen:
+            continue
+        seen.add(emp_id)
+        name = f"{first[seq % len(first)]} {last[(seq * 3) % len(last)]}"
+        dept = depts[seq % len(depts)]
+        annual = 72000 + (seq * 137) % 90000
+        rows.append(_employee_row(emp_id, name, dept, annual, "Cambridge, MA", "active"))
+    # Scale filler gross so one pay period equals the catalog biweekly total.
+    named_ids = {row[0] for row in IDENTITY_EMPLOYEES}
+    named_gross = 0.0
+    filler = []
+    for row in rows:
+        gross = round(row["annual_salary"] / 26.0, 2)
+        row["biweekly_gross"] = gross
+        if row["employee_id"] in named_ids:
+            named_gross = round(named_gross + gross, 2)
+        else:
+            filler.append(row)
+    target_filler = round(BIWEEKLY_PAYROLL_GROSS - named_gross, 2)
+    current_filler = round(sum(item["biweekly_gross"] for item in filler), 2)
+    if filler and abs(current_filler - target_filler) > 0.009:
+        scale = target_filler / current_filler if current_filler else 1.0
+        running = 0.0
+        for item in filler[:-1]:
+            item["biweekly_gross"] = round(item["biweekly_gross"] * scale, 2)
+            running = round(running + item["biweekly_gross"], 2)
+        filler[-1]["biweekly_gross"] = round(target_filler - running, 2)
+    ctx.employee_master = rows
+    for row in rows:
+        _safe_named(ctx, row["employee_id"])
+    ctx.legal_entity_register = [
+        {
+            "entity_id": "CO-MAXIMOR",
+            "legal_name": "Maximor Demo Corp",
+            "jurisdiction": "MA",
+            "ein": "04-3829107",
+            "status": "active",
+            "parent_id": "",
+        }
+    ]
+    ctx.facilities_registry = [
+        {
+            "site_id": "CAM-HQ",
+            "name": "Cambridge headquarters",
+            "address": "245 Main Street, Cambridge, MA 02142",
+            "type": "office",
+        },
+        {
+            "site_id": "CAM-WH-01",
+            "name": "Cambridge warehouse",
+            "address": "90 Binney Street, Cambridge, MA 02142",
+            "type": "warehouse",
+        },
+        {
+            "site_id": "3PL-BOS",
+            "name": "Boston 3PL",
+            "address": "1 Terminal Road, Boston, MA 02128",
+            "type": "3pl",
+        },
+    ]
+    ctx.warehouse_locations = [
+        {
+            "location_id": "CAM-BIN-A14",
+            "site_id": "CAM-WH-01",
+            "bin": "A14",
+            "sku_prefix": "KIS-MRO-7",
+        },
+        {
+            "location_id": "CAM-WH-01-CAGE-B",
+            "site_id": "CAM-WH-01",
+            "bin": "CAGE-B",
+            "consignment_customer": "CUST-006",
+            "label": "consignment hold",
+        },
+        {
+            "location_id": "CAM-DOCK-4",
+            "site_id": "CAM-WH-01",
+            "bin": "DOCK-4",
+            "sku_prefix": "NLF",
+        },
+    ]
+    ctx.org_chart = [
+        {"emp_id": "EMP-0901", "title": "Procurement manager", "manager_emp_id": "EMP-0902", "org": "Procurement"},
+        {"emp_id": "EMP-0902", "title": "Finance manager", "manager_emp_id": "", "org": "Finance"},
+        {"emp_id": "EMP-5510", "title": "Payroll administrator", "manager_emp_id": "EMP-0902", "org": "Finance"},
+        {"emp_id": "EMP-4128", "title": "AP vendor-master clerk", "manager_emp_id": "EMP-0902", "org": "Finance"},
+        {"emp_id": "EMP-1088", "title": "Assistant controller", "manager_emp_id": "EMP-0902", "org": "Finance"},
+        {"emp_id": "EMP-3304", "title": "AR cash applier", "manager_emp_id": "EMP-1088", "org": "Finance"},
+        {"emp_id": "EMP-1190", "title": "Revenue accountant", "manager_emp_id": "EMP-1088", "org": "Finance"},
+        {"emp_id": "EMP-4402", "title": "Processor operations", "manager_emp_id": "EMP-0902", "org": "Finance"},
+        {"emp_id": "EMP-2201", "title": "Facilities coordinator", "manager_emp_id": "EMP-0902", "org": "Facilities"},
+        {"emp_id": "EMP-6722", "title": "Warehouse receiving", "manager_emp_id": "", "org": "Cambridge warehouse"},
+        {"emp_id": "EMP-8891", "title": "Remote warehouse coordinator — West", "manager_emp_id": "", "org": "West Warehouse"},
+        {"emp_id": "EMP-2290", "title": "Warehouse associate", "manager_emp_id": "", "org": "West Warehouse", "last_day": "2026-03-31"},
+        {"emp_id": "EMP-3310", "title": "Marketing manager", "manager_emp_id": "EMP-0902", "org": "Marketing"},
+        {"seat_id": "WEST-WH-MGR", "org": "West Warehouse", "title": "West Warehouse manager", "emp_id": "", "vacant_since": "2025-03-31"},
+    ]
+    orphans = ["EMP-1001", "EMP-1002", "EMP-1003", "EMP-1004", "EMP-1005", "EMP-1006"]
+    for emp_id in orphans:
+        ctx.org_chart.append(
+            {"emp_id": emp_id, "title": "Warehouse associate", "manager_emp_id": "", "org": "West Warehouse"}
+        )
+
+
+def _employee_row(emp_id: str, name: str, department: str, annual: int, location: str, status: str) -> dict:
+    parts = name.split(" ", 1)
+    home = "245 Main Street, Cambridge, MA 02142"
+    return {
+        "employee_id": emp_id,
+        "full_name": name,
+        "first_name": parts[0],
+        "last_name": parts[1] if len(parts) > 1 else "",
+        "department": department,
+        "annual_salary": annual,
+        "location": location,
+        "status": status,
+        "hire_date": "2021-04-12",
+        "last_day": "2026-03-31" if emp_id == "EMP-2290" else "",
+        "home_address": home,
+        "emergency_contact": "",
+        "okta_user": f"USR-{emp_id[-4:]}",
+        "manager_emp_id": "",
+    }
+
+
 def add_payroll_register(ctx: CompanyScenarioContext) -> None:
+    if not ctx.employee_master:
+        add_employee_master(ctx)
     periods = []
     cursor = date(2025, 10, 3)
     end = date(2026, 9, 25)
     while cursor <= end:
         periods.append(cursor)
         cursor += timedelta(days=14)
+    from sample_data.pnl import BIWEEKLY_PAYROLL_GROSS
+
     for pay_date in periods:
         period_start = (pay_date - timedelta(days=13)).isoformat()
         period_end = pay_date.isoformat()
-        for employee_id, name, department, annual in EMPLOYEES:
-            gross = round(annual / 26.0, 2)
-            ee_tax = round(gross * 0.22, 2)
+        period_gross = 0.0
+        for emp in ctx.employee_master:
+            if emp["status"] == "terminated" and emp.get("last_day") and pay_date.isoformat() > emp["last_day"]:
+                # Ava Pell remains on the register after last_day; skip others.
+                if emp["employee_id"] != "EMP-2290":
+                    continue
+            gross = float(emp.get("biweekly_gross") or round(emp["annual_salary"] / 26.0, 2))
+            if emp["employee_id"] == "EMP-8891":
+                gross = 4180.27
+            ee_tax = round(gross * 0.0765, 2)
             net = round(gross - ee_tax - 95.0, 2)
+            period_gross = round(period_gross + gross, 2)
             ctx.payroll_register.append(
                 {
                     "pay_date": pay_date.isoformat(),
                     "period_start": period_start,
                     "period_end": period_end,
-                    "employee_id": employee_id,
-                    "full_name": name,
-                    "department": department,
-                    "annual_salary": annual,
+                    "employee_id": emp["employee_id"],
+                    "full_name": emp["full_name"],
+                    "department": emp["department"],
+                    "annual_salary": emp["annual_salary"],
                     "gross_pay": gross,
                     "employee_taxes": ee_tax,
                     "benefits": 95.0,
                     "net_pay": net,
-                    "employer_cost": round(gross * 1.12 + 95.0, 2),
-                    "location": "Cambridge, MA",
+                    "employer_cost": round(gross * 1.0765 + 95.0, 2),
+                    "location": emp.get("location") or "Cambridge, MA",
                     "bank_account": "BANK-PAYROLL",
+                    "direct_deposit_last4": "",
                 }
             )
         je_id = f"JE-PRREG-{pay_date.isoformat()}"
-        total = int(round(sum(annual / 26.0 for _eid, _n, _d, annual in EMPLOYEES) * 100))
+        total = int(round(period_gross * 100))
         if je_id not in ctx.journal_entries and pay_date.isoformat()[:7] not in {"2026-08", "2026-09"}:
             ctx.add_journal(
                 JournalEntryRecord(
@@ -1088,7 +1336,7 @@ def add_payroll_register(ctx: CompanyScenarioContext) -> None:
                     posting_timestamp=f"{pay_date.isoformat()}T16:00:00Z",
                     debit_account="6100-Payroll",
                     credit_account="1000-Cash",
-                    amount_minor=total,
+                    amount_minor=max(total, 1),
                     memo=f"Biweekly payroll {pay_date.isoformat()}",
                     source_document_id=f"PR-{pay_date.isoformat()}",
                     transaction_id=f"TXN-PRREG-{pay_date.isoformat()}",
@@ -1096,6 +1344,9 @@ def add_payroll_register(ctx: CompanyScenarioContext) -> None:
                     category="volume_payroll",
                 )
             )
+    # Keep the catalog biweekly identity on the last September run.
+    if ctx.payroll_register:
+        _ = BIWEEKLY_PAYROLL_GROSS
 
 
 def add_processor_volume(ctx: CompanyScenarioContext, rng: random.Random) -> None:
@@ -1168,7 +1419,7 @@ def add_fiscal_calendar(ctx: CompanyScenarioContext) -> None:
         {
             "account_id": "BANK-PAYROLL",
             "name": "First National payroll",
-            "gl_account": "1010-Payroll-Cash",
+            "gl_account": "1010-Payroll-Imprest",
             "currency": "USD",
             "routing": "011000390",
             "last4": "2281",
@@ -1190,27 +1441,71 @@ def add_fiscal_calendar(ctx: CompanyScenarioContext) -> None:
     ]
 
 
+CATALOG_COA: tuple[tuple[str, str, str], ...] = (
+    ("1000-Cash", "Cash", "cash"),
+    ("1010-Payroll-Imprest", "Payroll imprest", "cash"),
+    ("1020-Stripe-Clearing", "Stripe clearing", "cash"),
+    ("1030-Undeposited-Funds", "Undeposited funds", "cash"),
+    ("1100-AR", "Accounts receivable", "ar"),
+    ("1110-AR-Unapplied", "AR unapplied cash", "ar"),
+    ("1200-Prepaid-Software", "Prepaid software", "other"),
+    ("1210-Prepaid-Insurance", "Prepaid insurance", "other"),
+    ("1220-Prepaid-Other", "Prepaid other", "other"),
+    ("1300-Due-From-Affiliate", "Due from affiliate", "other"),
+    ("1350-Other-Receivable", "Other receivable", "other"),
+    ("1400-Inventory", "Inventory", "other"),
+    ("1500-PPE", "Property plant and equipment", "other"),
+    ("1510-Accum-Dep", "Accumulated depreciation", "other"),
+    ("2000-AP", "Accounts payable", "ap"),
+    ("2100-Due-To-Affiliate", "Due to affiliate", "other"),
+    ("2200-Payroll-Accrual", "Payroll accrual", "other"),
+    ("2300-Deferred-Revenue", "Deferred revenue", "other"),
+    ("4000-Revenue", "Revenue", "revenue"),
+    ("4100-Contra-Revenue-Returns", "Contra revenue returns", "revenue"),
+    ("5100-Hosting", "Cloud hosting", "cogs"),
+    ("5200-Supplier", "Supplier COGS", "cogs"),
+    ("5300-Freight", "Freight", "cogs"),
+    ("5400-Other-COGS", "Other COGS", "cogs"),
+    ("5400-Contractors", "Contractors", "opex"),
+    ("6000-Operating", "Operating expenses", "opex"),
+    ("6100-Payroll", "Payroll", "opex"),
+    ("6200-Benefits", "Benefits", "opex"),
+    ("6300-Occupancy", "Occupancy", "opex"),
+    ("6400-Professional-Fees", "Professional fees", "opex"),
+    ("6500-Bank-Fees", "Bank fees", "opex"),
+    ("6600-Processor-Fees", "Processor fees", "opex"),
+    ("6900-Misc-Expense", "Miscellaneous expense", "opex"),
+    ("6950-Cash-Over-Short", "Cash over short", "opex"),
+)
+
+
 def add_chart(ctx: CompanyScenarioContext) -> None:
     extra = [
-        ChartAccount(account_id="1010-Payroll-Cash", name="Payroll cash", account_class="cash"),
-        ChartAccount(account_id="1020-Reserve-Cash", name="Reserve cash", account_class="cash"),
-        ChartAccount(account_id="1200-Prepaid", name="Prepaid assets", account_class="other"),
-        ChartAccount(account_id="1500-FixedAssets", name="Computer equipment", account_class="other"),
-        ChartAccount(account_id="2100-Accrued", name="Accrued expenses", account_class="other"),
-        ChartAccount(account_id="6200-Facilities", name="Facilities", account_class="opex"),
-        ChartAccount(account_id="6300-Software", name="Software subscriptions", account_class="opex"),
-        ChartAccount(account_id="Utilities Expense", name="Utilities", account_class="opex"),
-        ChartAccount(account_id="Legal Expense", name="Legal", account_class="opex"),
-        ChartAccount(account_id="Insurance Expense", name="Insurance", account_class="opex"),
-        ChartAccount(account_id="Depreciation Expense", name="Depreciation", account_class="opex"),
-        ChartAccount(account_id="Software Subscription Expense", name="Software amortization", account_class="opex"),
-        ChartAccount(account_id="Prepaid Insurance", name="Prepaid insurance", account_class="other"),
-        ChartAccount(account_id="Prepaid Software", name="Prepaid software", account_class="other"),
-        ChartAccount(account_id="Computer Equipment", name="Computer equipment", account_class="other"),
-        ChartAccount(account_id="Accumulated Depreciation - Equipment", name="Accumulated depreciation", account_class="other"),
-        ChartAccount(account_id="Accrued Expenses", name="Accrued expenses", account_class="other"),
-        ChartAccount(account_id="Consulting Expense", name="Consulting", account_class="opex"),
+        ChartAccount(account_id=account_id, name=name, account_class=account_class)  # type: ignore[arg-type]
+        for account_id, name, account_class in CATALOG_COA
     ]
+    extra.extend(
+        [
+            ChartAccount(account_id="1010-Payroll-Cash", name="Payroll cash", account_class="cash", aliases=["1010-Payroll-Imprest"]),
+            ChartAccount(account_id="1020-Reserve-Cash", name="Reserve cash", account_class="cash"),
+            ChartAccount(account_id="1200-Prepaid", name="Prepaid assets", account_class="other"),
+            ChartAccount(account_id="1500-FixedAssets", name="Computer equipment", account_class="other"),
+            ChartAccount(account_id="2100-Accrued", name="Accrued expenses", account_class="other"),
+            ChartAccount(account_id="6200-Facilities", name="Facilities", account_class="opex"),
+            ChartAccount(account_id="6300-Software", name="Software subscriptions", account_class="opex"),
+            ChartAccount(account_id="Utilities Expense", name="Utilities", account_class="opex"),
+            ChartAccount(account_id="Legal Expense", name="Legal", account_class="opex"),
+            ChartAccount(account_id="Insurance Expense", name="Insurance", account_class="opex"),
+            ChartAccount(account_id="Depreciation Expense", name="Depreciation", account_class="opex"),
+            ChartAccount(account_id="Software Subscription Expense", name="Software amortization", account_class="opex"),
+            ChartAccount(account_id="Prepaid Insurance", name="Prepaid insurance", account_class="other"),
+            ChartAccount(account_id="Prepaid Software", name="Prepaid software", account_class="other"),
+            ChartAccount(account_id="Computer Equipment", name="Computer equipment", account_class="other"),
+            ChartAccount(account_id="Accumulated Depreciation - Equipment", name="Accumulated depreciation", account_class="other"),
+            ChartAccount(account_id="Accrued Expenses", name="Accrued expenses", account_class="other"),
+            ChartAccount(account_id="Consulting Expense", name="Consulting", account_class="opex"),
+        ]
+    )
     known = {item.account_id for item in ctx.chart}
     for item in extra:
         if item.account_id not in known:
@@ -1409,9 +1704,9 @@ def add_round2_hooks(ctx: CompanyScenarioContext) -> None:
             "september_bank": "cash_recon/bank_statement.json",
         },
         "headroom": (
-            "Trailing AP, GL, bank, and processor files are dense enough that a "
-            "$2,400 monthly siphon or a 0.08% fee skim is not obvious on a 19-line "
-            "statement. Do not plant that story in this round."
+            "Phase B planted. Trailing AP, GL, bank, payroll, and processor files "
+            "carry the catalog siphons. Plot IDs in do_not_retarget stay intact. "
+            "Hidden answers live in expected_results.json adversarial_holdout."
         ),
         "scenario_registry": "canonical/scenarios.json",
         "reference_sampled": {
@@ -1449,6 +1744,7 @@ def expand_operating_world(ctx: CompanyScenarioContext) -> None:
 
 def expand_registers(ctx: CompanyScenarioContext) -> None:
     rng = random.Random(ctx.seed + 1)
+    add_employee_master(ctx)
     add_historical_ap_register(ctx, rng)
     add_trailing_pnl(ctx)
     expand_september_bank(ctx, rng)

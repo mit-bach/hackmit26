@@ -12,22 +12,25 @@ from cash_recon.case_store import (
     load_bound_case,
     save_bound_case,
 )
-from cash_recon.models import MatchCandidate
+from cash_recon.identifiers import identifier_for_bank
+from cash_recon.models import MatchCandidate, PipeIdentifier
 from memory.tools import get_decision_memories
 
 _BANK: dict = {}
 _LEDGER: dict = {}
 _FEES: dict = {}
 _CANDIDATES: list[MatchCandidate] = []
+_IDENTIFIERS: list[PipeIdentifier] = []
 _ACTIVE_CASE_ID = ""
 
 
 def unbind_case() -> None:
-    global _BANK, _LEDGER, _FEES, _CANDIDATES, _ACTIVE_CASE_ID
+    global _BANK, _LEDGER, _FEES, _CANDIDATES, _IDENTIFIERS, _ACTIVE_CASE_ID
     _BANK = {}
     _LEDGER = {}
     _FEES = {}
     _CANDIDATES = []
+    _IDENTIFIERS = []
     _ACTIVE_CASE_ID = ""
 
 
@@ -62,6 +65,13 @@ def bind_case(
             idempotency_key=idempotency_key,
         )
     return _ACTIVE_CASE_ID
+
+
+def bind_identifiers(identifiers: list[PipeIdentifier] | None) -> int:
+    """Host-side bind of apply/pay identifiers. Not a Catalog op."""
+    global _IDENTIFIERS
+    _IDENTIFIERS = list(identifiers or [])
+    return len(_IDENTIFIERS)
 
 
 def load_case_into_memory(case_id: str) -> bool:
@@ -131,6 +141,27 @@ def read_candidate(candidate_id: str) -> dict:
     return {"error": f"unknown candidate {candidate_id}"}
 
 
+def read_pipe_identifier(bank_transaction_id: str) -> dict:
+    """Read apply/pay identity for this bank line. Missing identity is fail-closed, not a guess."""
+    _ensure_loaded()
+    bank = _BANK.get(bank_transaction_id)
+    reference = bank.reference if bank is not None else ""
+    ident = identifier_for_bank(
+        bank_transaction_id, _IDENTIFIERS, bank_reference=reference
+    )
+    if ident is None:
+        return {
+            "bank_transaction_id": bank_transaction_id,
+            "identifier_present": False,
+            "fail_closed": True,
+            "reason": "apply/pay have not identified this line. Do not invent the counterparty.",
+        }
+    payload = ident.model_dump(mode="json")
+    payload["identifier_present"] = True
+    payload["fail_closed"] = False
+    return payload
+
+
 @function_tool
 def get_bank_transaction(transaction_id: str) -> dict:
     return read_bank_transaction(transaction_id)
@@ -154,3 +185,8 @@ def get_match_candidates(case_id: str = "") -> list[dict]:
 @function_tool
 def get_candidate(candidate_id: str) -> dict:
     return read_candidate(candidate_id)
+
+
+@function_tool
+def get_pipe_identifier(bank_transaction_id: str) -> dict:
+    return read_pipe_identifier(bank_transaction_id)

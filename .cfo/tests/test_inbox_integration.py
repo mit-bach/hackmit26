@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 from inbox.agents import counterparty_message_agent, finance_inbox_agent
 from inbox.tools import COUNTERPARTY_TOOL_NAMES, FORBIDDEN_COUNTERPARTY_TOOLS, INBOX_TOOL_NAMES
@@ -136,6 +137,16 @@ def test_clarification_reply_in_same_thread_creates_one_invoice():
     assert first.final_status == "NEEDS_INFORMATION"
     assert first.receiver.clarification is not None
     assert "invoice_number" in first.receiver.clarification.missing_fields or "amount" in first.receiver.clarification.missing_fields
+    outbound = get_message("MSG-INBOX-011-OUT")
+    assert outbound is not None
+    assert outbound.metadata.get("office_outbound") is True
+    assert outbound.sender_address == "ap@hackmit-cfo.example"
+    handle_path = first.receiver.dispatch.details.get("world_handle_path")
+    assert handle_path
+    assert Path(handle_path).is_file()
+    handle_path = first.receiver.dispatch.details.get("world_handle_path")
+    assert handle_path
+    assert Path(handle_path).is_file()
     reply_spec = spec_incomplete_reply()
     second = handoff_reply(
         reply_spec.thread_id,

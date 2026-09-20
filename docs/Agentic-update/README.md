@@ -2,7 +2,7 @@
 
 This directory is source material plus one launch file. Files `01`–`04`, `02b`, `pipes/`, `surfaces/`, and `evidence/` are not prompts. They do not tell a later agent how to implement. They exist so that agent can see what is broken, why it is broken, what still works, and what a finished pipe must be able to do.
 
-The Cursor agent prompts, attach lists, and sequencing live in `05-cursor-agent-prompts.md`. Use that file to start chats. Do not paste this README as the mission.
+The Cursor agent prompts live in `prompts/`. Same spawn shape as `design-workshop/dominik/Prompts/web-overhaul`: read `prompts/00-SHARED-LAWS.md`, then one numbered file. Do not paste this README as the mission. Do not attach the corpus with `@`. The numbered prompt lists every path.
 
 Date of the live snapshot behind this corpus: 2026-09-20.
 
@@ -20,7 +20,7 @@ Computer: `.cfo-v2/office/computer`.
 3. Four pipe analyses: AP, AR, cash, close/story/audit. Intake sits in front of all four.
 4. Surface analyses: BOT.md, skills, Grants/tools, Harness protocol, World/inbox, Verifiers, memory, wakes, other prompt layers.
 5. An evidence snapshot of the live Computer on 2026-09-20.
-6. A launch pack: five Cursor prompts, attach lists, sequencing, and office done-when.
+6. A launch pack under `prompts/`: shared laws plus five self-contained Cursor briefs.
 
 Each corpus file (`01`–`04`, `02b`, `pipes/`, `surfaces/`, `evidence/`) states:
 
@@ -38,7 +38,7 @@ Each corpus file (`01`–`04`, `02b`, `pipes/`, `surfaces/`, `evidence/`) states
 
 Do not treat `01`–`04`, `02b`, `pipes/`, `surfaces/`, or `evidence/` as:
 
-- prompts to paste into Cursor (that is `05-cursor-agent-prompts.md`)
+- prompts to paste into Cursor (that is `prompts/`)
 - a rewrite of BOT.md
 - a rewrite of SKILL.md
 - a procedure the model must follow
@@ -63,7 +63,9 @@ Read in this order the first time:
 7. `pipes/` for the pipe you will work
 8. `surfaces/` for the artifact class you will touch
 9. `evidence/live-computer-2026-09-20.md` when you need a fact from disk
-10. `05-cursor-agent-prompts.md` when you are starting the Floor and pipe agents
+10. `prompts/README.md` when you are starting the Floor and pipe agents. Paste or point at one numbered file plus `prompts/00-SHARED-LAWS.md`.
+11. `docs/Office-prove/` when Bots must be tasked on instances. That directory is the prove loop, not this corpus.
+12. `docs/Office-show/` when prove has a verdict and you need one golden desk to live a September and record. That is the tape. Prove Wakes are not that tape.
 
 Process law for the four pipes lives in `design-workshop/dominik/cfo-office-processes.md`. Grain law lives in `design-workshop/dominik/cfo-bot-grain.md`. Constitution and SUPERSEDES live under `.cfo-v2/office/`.
 
@@ -107,7 +109,10 @@ A Pipe is not a Bot. The six-slug tree `examples/cfo-floor` is not this office. 
 | `02b-inadequacy-index.md` | Category → file pointers. Loudest inadequacy per pipe. |
 | `03-novelty-boundary.md` | What a later agent may invent. What it must not freeze. |
 | `04-what-is-good.md` | What to keep. Do not “fix” these by deleting them. |
-| `05-cursor-agent-prompts.md` | How to attach the corpus. Five copy-paste prompts. Floor first, then AR/AP, then cash, then close. |
+| `05-cursor-agent-prompts.md` | Stub. Real briefs are in `prompts/`. |
+| `prompts/README.md` | Spawn order. One numbered file per Cursor agent. Same pattern as web-overhaul. |
+| `prompts/00-SHARED-LAWS.md` | Grain, honesty, T-categories, file ownership. Every agent reads this first. |
+| `prompts/01-FLOOR.md` … `prompts/05-CLOSE.md` | Self-contained implementing briefs. Floor, AR, AP, cash, close. |
 
 ### Pipes
 
@@ -141,11 +146,18 @@ A Pipe is not a Bot. The six-slug tree `examples/cfo-floor` is not this office. 
 | --- | --- |
 | `evidence/live-computer-2026-09-20.md` | Counts and paths from disk that day. |
 
+### Prove (after repair)
+
+| File | Contents |
+| --- | --- |
+| `docs/Office-prove/` | Instance loops that task standing Bots. HARD vs SOFT. Skills, pipes, Catalog ops. Not a demo script. |
+| `docs/Office-show/` | One golden instance. Onboard, lived September, Demo record, cut videos. |
+
 ---
 
 ## Constraint for every later writer
 
-The launch prompts already live in `05-cursor-agent-prompts.md`. If you write another:
+The launch prompts already live in `prompts/`. If you write another:
 
 - Point at a pipe and a failure category.
 - State the intended function as an outcome on an open item.

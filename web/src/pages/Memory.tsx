@@ -1,189 +1,170 @@
 import { useEffect, useState } from "react";
 import { get, usd } from "../api";
+import { ProcessPanel, SourceArtifactViewer } from "../components/Demo";
+import {
+  lookupFromUnknown,
+  MemoryEvalBoard,
+  MemoryPeriods,
+  type MemoryLookupView,
+} from "../components/rest/MemoryPeriods";
+import { RestHead } from "../components/rest/RestHead";
+import {
+  asRecord,
+  asRecordList,
+  asUnknownList,
+  ioOutputs,
+  readNumber,
+  readString,
+  workflowInner,
+  workflowStages,
+} from "../components/rest/kernel";
+import { formatAccountingMethod } from "../copy";
 import { useWorkflow } from "../hooks";
-import { ErrorBox, Pill, RunBar } from "../layout/Shell";
-import { DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
-import { Definition, DevDetails, ResultBlock, StoryCard, TraceIds, WhatsHappening } from "../components/Explain";
-import { formatAccountingMethod, formatAccountingSentence, formatAgent, formatStatus } from "../copy";
+import { ErrorBox, RunBar } from "../layout/Shell";
 
-function describeLookup(lookup: any) {
-  if (!lookup || typeof lookup !== "object") return null;
-  const retrieved = lookup.retrieved || lookup.retrieved_ids || [];
-  const used = lookup.precedent_used;
-  const method = lookup.final_method || lookup.method || lookup.selected_method;
-  return (
-    <ResultBlock
-      found={
-        retrieved.length
-          ? "When September arrived without a bill, Maximor retrieved the August Harbor Electric decision, including the evidence, amount, method, and reason."
-          : "Maximor looked for a prior Harbor Electric decision to reuse."
-      }
-      why={
-        used
-          ? "The August approach still fit the current evidence, so Maximor reused that precedent as a starting point — then re-checked September's bills and contract before posting."
-          : lookup.deviation
-            ? `Maximor did not copy the old answer. ${lookup.deviation}`
-            : "Maximor checked September's evidence again before deciding whether the August approach still made sense."
-      }
-      result={
-        method
-          ? `September decision: ${formatAccountingMethod(method)}${lookup.amount != null ? ` at ${usd(lookup.amount)}` : ""}.`
-          : "See the September decision below."
-      }
-    />
-  );
+const STAKE = "Reuse a treatment only when current evidence still supports it.";
+
+type MemoryThread = "harbor" | "stripe";
+type MemoryView = "periods" | "eval";
+
+function firstArtifactTitle(items: unknown[]): string | undefined {
+  for (const item of items) {
+    const title = readString(asRecord(item), "title");
+    if (title) {
+      return title;
+    }
+  }
+  return undefined;
 }
 
-export default function Memory() {
-  const [data, setData] = useState<any>(null);
+function harborBundle(data: unknown): Record<string, unknown> | null {
+  return asRecord(asRecord(data)?.harbor);
+}
+
+function lookupFromResult(result: unknown): MemoryLookupView {
+  const inner = workflowInner(result);
+  const outputs = ioOutputs(inner);
+  return lookupFromUnknown(outputs?.september_lookup);
+}
+
+export default function Memory(): JSX.Element {
+  const [data, setData] = useState<unknown>(null);
+  const [thread, setThread] = useState<MemoryThread>("harbor");
+  const [view, setView] = useState<MemoryView>("periods");
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
-    get("/api/memory").then(setData);
+    get("/api/memory")
+      .then(setData)
+      .catch(() => setData(null));
   }, [result]);
 
-  const inner = result?.result;
-  const io = inner?.io;
-  const off = result?.workflow === "memory-eval" ? inner?.payload : null;
-  const method = io?.outputs?.final_method;
-  const amount = io?.outputs?.final_amount;
+  const inner = workflowInner(result);
+  const outputs = ioOutputs(inner);
+  const workflowName = readString(asRecord(result), "workflow");
+  const evalPayload = workflowName === "memory-eval" ? inner?.payload ?? inner : null;
+  const lookup = lookupFromResult(result);
+  const method = readString(outputs, "final_method") || lookup.method;
+  const amount = readNumber(outputs, "final_amount") ?? lookup.amount;
+  const ran = workflowName === "memory" && Boolean(inner);
+  const harbor = harborBundle(data);
+  const prior = asUnknownList(harbor?.prior_memory);
+  const augustLabel = thread === "stripe" ? "August Stripe payout decision" : firstArtifactTitle(prior) || "Harbor Electric decision";
+  const septemberLabel = thread === "stripe" ? "September payout re-check" : "September re-check";
+  const stages = workflowStages(result);
+  const journal = asRecord(outputs?.journal_entry);
 
   return (
-    <DemoLayout
-      eyebrow="Organizational memory"
-      title="Decisions that travel from August to September"
-      task="Decision memory lets Maximor remember how it handled a finance decision in an earlier period, including the evidence and reasoning behind it. Later periods can use that precedent, reject it when facts change, and record why."
-      happening={
-        <WhatsHappening
-          happening="In August, Maximor estimated Harbor Electric from the contract and recent bills and saved that decision. In September the bill is missing again. Maximor retrieves the August record, then re-evaluates current evidence instead of blindly copying last month's number."
-          figureOut="Should September reuse August's Harbor Electric method, or do current facts require a different estimate?"
-          why="This is how accounting precedent survives across months without freezing the books into last month's answer."
+    <div className="rest-page">
+      <RestHead title="August still matters" stake={STAKE} />
+      <div className="rest-chip-row" aria-label="Memory view">
+        <button
+          type="button"
+          className={`rest-chip${view === "periods" && thread === "harbor" ? " is-on" : ""}`}
+          aria-pressed={view === "periods" && thread === "harbor"}
+          onClick={() => {
+            setView("periods");
+            setThread("harbor");
+          }}
+        >
+          Harbor Electric
+        </button>
+        <button
+          type="button"
+          className={`rest-chip${view === "periods" && thread === "stripe" ? " is-on" : ""}`}
+          aria-pressed={view === "periods" && thread === "stripe"}
+          onClick={() => {
+            setView("periods");
+            setThread("stripe");
+          }}
+        >
+          Stripe
+        </button>
+        <button
+          type="button"
+          className={`rest-chip${view === "eval" ? " is-on" : ""}`}
+          aria-pressed={view === "eval"}
+          onClick={() => setView("eval")}
+        >
+          Memory on vs off
+        </button>
+      </div>
+      {view === "eval" ? (
+        <MemoryEvalBoard payload={evalPayload} />
+      ) : (
+        <MemoryPeriods
+          august={{ label: augustLabel, detail: "Saved evidence, method, amount, and reason." }}
+          september={{
+            label: septemberLabel,
+            detail: ran && method ? formatAccountingMethod(method) + (amount != null ? ` at ${usd(amount)}` : "") : "Re-check current evidence before reuse.",
+          }}
+          lookup={ran ? { ...lookup, method, amount } : { reused: null, retrieved: [] }}
+          ran={ran}
         />
-      }
-      runBar={
-        <>
-          <RunBar
-            label="Replay Harbor Electric memory"
-            running={running}
-            onRun={() => run("/api/workflows/memory", { story: "harbor" })}
-            extra={
-              <>
-                <button className="btn" disabled={running} onClick={() => run("/api/workflows/memory", { story: "stripe" })}>
-                  Replay Stripe memory
-                </button>
-                <button className="btn" disabled={running} onClick={() => run("/api/workflows/memory-eval")}>
-                  Compare memory on vs off
-                </button>
-              </>
-            }
+      )}
+      <RunBar
+        label={thread === "stripe" ? "Replay Stripe memory" : "Replay Harbor Electric memory"}
+        running={running}
+        onRun={() => {
+          setView("periods");
+          run("/api/workflows/memory", { story: thread });
+        }}
+        extra={
+          <button
+            type="button"
+            className="btn"
+            disabled={running}
+            onClick={() => {
+              setView("eval");
+              run("/api/workflows/memory-eval");
+            }}
+          >
+            Compare memory on vs off
+          </button>
+        }
+      />
+      <ErrorBox error={error} />
+      {inner && view === "periods" ? (
+        <ProcessPanel stages={asRecordList(stages)} handoffs={asUnknownList(inner.handoffs)} summary={readString(inner, "summary")} />
+      ) : null}
+      <details className="rest-evidence">
+        <summary>Evidence</summary>
+        {prior.map((item, idx) => (
+          <SourceArtifactViewer key={readString(asRecord(item), "artifact_id") || `prior-${idx}`} artifact={item} />
+        ))}
+        <SourceArtifactViewer artifact={harbor?.history_table} />
+        {journal ? (
+          <SourceArtifactViewer
+            artifact={{
+              kind: "journal_entry",
+              artifact_id: readString(journal, "entry_id") || "harbor-je",
+              title: "September journal",
+              source_path: "memory.scenarios",
+              record: journal,
+            }}
           />
-          <ErrorBox error={error} />
-        </>
-      }
-      input={
-        <div className="stack">
-          <StoryCard title="What decision memory is">
-            <Definition term="Decision memory" />
-            <p>This is the saved professional judgment — what Maximor saw, what it decided, and why — so the next period can argue with it.</p>
-          </StoryCard>
-          <div className="card">
-            <h2>What Maximor remembered from August</h2>
-            <p>In August, Maximor estimated Harbor Electric using the contract plus recent bills. It saved the evidence, amount, method, and reason for that decision.</p>
-            {(data?.harbor?.prior_memory || []).map((item: any) => (
-              <SourceArtifactViewer key={item.artifact_id} artifact={item} />
-            ))}
-          </div>
-          <div className="card">
-            <h2>September evidence</h2>
-            <SourceArtifactViewer artifact={data?.harbor?.history_table} />
-          </div>
-        </div>
-      }
-      process={<ProcessPanel stages={inner?.stages} handoffs={inner?.handoffs} summary={inner?.summary} />}
-      output={
-        <div className="stack">
-          <div className="card">
-            <OutputHeadline label="How September estimated the missing bill" value={method ? formatAccountingMethod(method) : inner?.summary || "Not run yet"} />
-            {method ? (
-              <ResultBlock
-                found={`Maximor chose “${formatAccountingMethod(method)}”${amount != null ? ` and estimated ${usd(Number(amount))}` : ""}.`}
-                why={formatAccountingSentence(method)}
-                result="The system's memory carries accounting precedent from one month into the next, but current evidence can override that precedent."
-              />
-            ) : (
-              <p className="muted">Run the Harbor memory story to see whether September reused or overrode August's method.</p>
-            )}
-            <TraceIds ids={[io?.outputs?.written_memory_id, io?.outputs?.journal_entry?.entry_id]} />
-            {io?.outputs?.journal_entry ? (
-              <SourceArtifactViewer
-                artifact={{
-                  kind: "journal_entry",
-                  artifact_id: io.outputs.journal_entry.entry_id || "harbor-je",
-                  title: "September Harbor Electric journal",
-                  source_path: "memory.scenarios",
-                  record: io.outputs.journal_entry,
-                }}
-              />
-            ) : null}
-            {io?.outputs?.september_lookup ? (
-              <div style={{ marginTop: 12 }}>
-                <h2>How September used August</h2>
-                <DevDetails raw={io.outputs.september_lookup}>{describeLookup(io.outputs.september_lookup)}</DevDetails>
-              </div>
-            ) : null}
-          </div>
-          {off ? (
-            <div className="card">
-              <h2>Memory on versus memory off</h2>
-              <p className="muted">Same original Harbor input. Turning memory off forces September to estimate without last month's saved decision.</p>
-              <DevDetails raw={off}>
-                <ResultBlock
-                  found="The same Harbor Electric facts were run twice: once with last month's saved decision available, and once as if September had never seen the vendor."
-                  why="This measures whether memory actually changes the estimate, rather than restating that memory exists."
-                  result="The numbers below come from that live comparison. They are not rewritten here."
-                />
-              </DevDetails>
-            </div>
-          ) : null}
-          <div className="card">
-            <h2>Saved decisions in this runtime</h2>
-            {(data?.decisions || []).length === 0 ? (
-              <p className="muted">No organizational decisions written yet. Run a memory story.</p>
-            ) : (
-              (data.decisions || []).map((item: any) => (
-                <div key={item.decision_id || item.id} className="card" style={{ marginBottom: 8 }}>
-                  <strong>{formatAccountingMethod(item.decision || item.accounting_treatment) || item.summary}</strong>
-                  <p className="muted">{item.situation_summary || item.reason || item.summary}</p>
-                  <TraceIds ids={[item.decision_id || item.id]} />
-                  <DevDetails raw={item}>
-                    <dl className="kv">
-                      <dt>Decision</dt>
-                      <dd>{formatAccountingMethod(item.decision)}</dd>
-                      <dt>Period</dt>
-                      <dd>{item.period || "—"}</dd>
-                      <dt>Why</dt>
-                      <dd>{item.rationale || item.reason || item.situation_summary || "—"}</dd>
-                    </dl>
-                  </DevDetails>
-                </div>
-              ))
-            )}
-          </div>
-          <div className="card">
-            <h2>Other remembered events</h2>
-            {(data?.events || []).map((item: any) => (
-              <div className="split" key={item.event_id} style={{ marginBottom: 8 }}>
-                <div>
-                  <div>{item.title}</div>
-                  <div className="muted">{item.period} · {formatStatus(item.kind)}</div>
-                  <TraceIds ids={item.record_ids} />
-                </div>
-                <Pill>{formatAgent(item.agent)}</Pill>
-              </div>
-            ))}
-          </div>
-        </div>
-      }
-    />
+        ) : null}
+      </details>
+    </div>
   );
 }

@@ -1,11 +1,17 @@
 import assert from "node:assert/strict";
-import {existsSync, mkdtempSync, rmSync, writeFileSync} from "node:fs";
+import {existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync} from "node:fs";
 import {tmpdir} from "node:os";
 import {dirname, join} from "node:path";
 import {describe, it} from "node:test";
 import {fileURLToPath} from "node:url";
 
 import {callConnectedTool} from "./call.ts";
+import {
+  clientConcurPath,
+  completedHandleAllowsOp,
+  harnessHandlePath,
+  pendingIndexPath,
+} from "./intercept.ts";
 import {isRecord, loadClientFiles, parseSlugMap} from "./load.ts";
 import {bindBot, botIdForSlug, parseProfileFromWake} from "./profile.ts";
 import {searchConnectedTools} from "./search.ts";
@@ -293,15 +299,21 @@ describe("cfo facade bind", () => {
         throw new Error("expected intercept packet");
       }
       const handleId = String(pending.result.handleId);
-      const handlePath = join(scratch, "workspace", "verifier", "handles", `${handleId}.json`);
+      const verifierId = botIdForSlug("ctl-books");
+      const completePath = harnessHandlePath(scratch, verifierId, handleId);
+      mkdirSync(dirname(completePath), {recursive: true});
       writeFileSync(
-        handlePath,
+        completePath,
         `${JSON.stringify({
           id: handleId,
           status: "completed",
-          decision: "CONCUR",
+          result: "CONCUR\npacket complete",
           op: "accrual.tools.create_accrual",
         })}\n`,
+      );
+      assert.equal(
+        completePath,
+        join(scratch, "harness", "bots", verifierId, "handles", `${handleId}.json`),
       );
       const after = await callConnectedTool(
         bind,
@@ -312,6 +324,116 @@ describe("cfo facade bind", () => {
       );
       assert.equal(after.error, "sidecar_unavailable");
       assert.notEqual(after.error, "verifier_required");
+    } finally {
+      rmSync(scratch, {recursive: true, force: true});
+    }
+  });
+
+  it("a Client-only CONCUR file does not unlock a Kernel op", async () => {
+    const files = filesOf();
+    const scratch = mkdtempSync(join(tmpdir(), "cfo-concur-"));
+    try {
+      const bind = bindBot({
+        computerRoot: scratch,
+        slug: "close",
+        profile: "accrue",
+        grants: files.grants,
+        slugMap: files.slugMap,
+      });
+      const pending = await callConnectedTool(
+        bind,
+        files.catalog,
+        {name: "accrual.tools.create_accrual", args: {vendor: "Acme"}, idempotencyKey: "accrual-3"},
+        undefined,
+        null,
+      );
+      assert.equal(isRecord(pending.result), true);
+      if (!isRecord(pending.result)) {
+        throw new Error("expected intercept packet");
+      }
+      const handleId = String(pending.result.handleId);
+      const stale = clientConcurPath(scratch, handleId);
+      mkdirSync(dirname(stale), {recursive: true});
+      writeFileSync(
+        stale,
+        `${JSON.stringify({
+          id: handleId,
+          status: "completed",
+          decision: "CONCUR",
+          op: "accrual.tools.create_accrual",
+        })}\n`,
+      );
+      const op = files.catalog.ops.find((row) => row.id === "accrual.tools.create_accrual");
+      assert.ok(op);
+      assert.equal(completedHandleAllowsOp(scratch, handleId, op), false);
+      const still = await callConnectedTool(
+        bind,
+        files.catalog,
+        {name: "accrual.tools.create_accrual", args: {vendor: "Acme"}, idempotencyKey: "accrual-3"},
+        undefined,
+        handleId,
+      );
+      assert.equal(still.error, "verifier_required");
+    } finally {
+      rmSync(scratch, {recursive: true, force: true});
+    }
+  });
+
+  it("BOT.md and constitution are readable from Computer cwd", () => {
+    assert.equal(existsSync(join(computerRoot, "office", "bots", "collect", "BOT.md")), true);
+    assert.equal(existsSync(join(computerRoot, "office", "constitution.md")), true);
+  });
+
+  it("intercept collect write-off owner is ctl-pay", () => {
+    const raw: unknown = JSON.parse(readFileSync(join(computerRoot, "harness", "intercept.json"), "utf8"));
+    assert.equal(isRecord(raw), true);
+    if (!isRecord(raw) || !isRecord(raw.default) || !isRecord(raw.bots) || !isRecord(raw.bots.collect)) {
+      throw new Error("expected intercept map");
+    }
+    assert.equal(raw.default.kind, "bot");
+    assert.notEqual(raw.default.kind, "operator");
+    assert.equal(raw.bots.collect.kind, "bot");
+    assert.equal(raw.bots.collect.bot, "ctl-pay");
+    assert.equal(isRecord(raw.bots.apply) && raw.bots.apply.bot, "ctl-cash");
+    assert.equal(isRecord(raw.bots.close) && raw.bots.close.bot, "ctl-books");
+  });
+
+  it("pending index records the Harness Handle path", async () => {
+    const files = filesOf();
+    const scratch = mkdtempSync(join(tmpdir(), "cfo-pending-"));
+    try {
+      const bind = bindBot({
+        computerRoot: scratch,
+        slug: "close",
+        profile: "accrue",
+        grants: files.grants,
+        slugMap: files.slugMap,
+      });
+      const pending = await callConnectedTool(
+        bind,
+        files.catalog,
+        {name: "accrual.tools.create_accrual", args: {vendor: "Acme"}, idempotencyKey: "accrual-4"},
+        undefined,
+        null,
+      );
+      if (!isRecord(pending.result)) {
+        throw new Error("expected intercept packet");
+      }
+      const handleId = String(pending.result.handleId);
+      const indexPath = pendingIndexPath(scratch, handleId);
+      assert.equal(existsSync(indexPath), true);
+      const index: unknown = JSON.parse(readFileSync(indexPath, "utf8"));
+      assert.equal(isRecord(index), true);
+      if (!isRecord(index)) {
+        throw new Error("expected pending index");
+      }
+      assert.equal(index.handleStore, "harness");
+      assert.equal(
+        index.handlePath,
+        harnessHandlePath(scratch, botIdForSlug("ctl-books"), handleId),
+      );
+      assert.notEqual(index.status, "completed");
+      assert.equal(index.decision, undefined);
     } finally {
       rmSync(scratch, {recursive: true, force: true});
     }

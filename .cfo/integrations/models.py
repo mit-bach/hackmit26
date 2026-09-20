@@ -115,6 +115,20 @@ class EmailSourceRecord(BaseModel):
     attachments: list[dict[str, Any]] = Field(default_factory=list)
 
 
+class PayoutAgentOutput(BaseModel):
+    """Stripe Bot output. Waterfall math stays Python. Never an invoice candidate."""
+
+    payout_id: str
+    provider: str = "stripe"
+    invoice_candidates: int = 0
+    waterfall_status: str = ""
+    bank_deposit_id: Optional[str] = None
+    charge_ids: list[str] = Field(default_factory=list)
+    next_owner_deposit: str = "cash"
+    next_owner_charges: str = "apply"
+    reason: str = ""
+
+
 class IntegrationResult(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
