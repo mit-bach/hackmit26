@@ -4,6 +4,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from memory.models import MemoryLookup
 from skills.models import AgentSkillTrace
 
 
@@ -23,6 +24,10 @@ class Invoice(BaseModel):
     early_payment_discount_deadline: Optional[str] = None
     late_fee_percent: float = 0
     vendor_priority: str = "normal"
+    source_message_id: Optional[str] = None
+    source_thread_id: Optional[str] = None
+    source_trace_id: Optional[str] = None
+    source_attachment_hashes: list[str] = Field(default_factory=list)
 
 
 class PurchaseOrder(BaseModel):
@@ -170,6 +175,8 @@ class DecisionTrace(BaseModel):
     reconsideration: dict | None = None
     final: FinalAPDecision
     agents: list[AgentSkillTrace] = Field(default_factory=list)
+    memory_lookup: MemoryLookup | None = None
+    written_memory_id: str | None = None
     trace_path: str | None = None
     packet_path: str | None = None
     verifier_handle: dict | None = None

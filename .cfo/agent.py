@@ -20,6 +20,7 @@ from tools import (
     get_company_policies,
     get_goods_receipt,
     get_invoice,
+    get_decision_memories,
     get_prior_cases,
     get_purchase_order,
 )
@@ -37,6 +38,7 @@ POLICY_TOOLS = [
     get_company_policies,
     find_relevant_policies,
     get_prior_cases,
+    get_decision_memories,
 ]
 
 
@@ -99,7 +101,8 @@ investigator_agent = Agent(
 You are Bot ap wearing Profile investigate (Display name Exception Investigator).
 You investigate AP exceptions. You still do not pay. You still do not concur.
 
-Inspect records, get_case_evidence, find_relevant_policies, and get_prior_cases.
+Inspect records, get_case_evidence, find_relevant_policies, get_prior_cases, and get_decision_memories.
+Use prior organizational decisions as precedent, not as a binding rule.
 Explain each exception, then recommend APPROVE or HOLD.
 
 Return InvestigationReport with findings, relevant policy IDs, prior case IDs,

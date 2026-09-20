@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from memory.hooks import apply_prepaid_precedent, lookup_for_prepaid, write_prepaid_memory
 from prepaid.agent import deterministic_prepare, deterministic_review, prepaid_preparer, prepaid_reviewer
 from prepaid.models import PrepaidRun, PrepaidTrace
 from prepaid.posting import amortize_item, remaining_by_account
@@ -47,7 +48,20 @@ def run_prepaid_workflow(period: str, *, use_agent: bool = False) -> PrepaidRun:
                 )
             )
             continue
+        lookup = lookup_for_prepaid(item, period)
         preparer, reviewer, live = _decide(item, use_agent=use_agent)
+        method = preparer.selected_method or item.amortization_method
+        lookup = apply_prepaid_precedent(item, method or "", lookup)
+        if lookup.precedent_used and preparer.reasoning_summary:
+            preparer = preparer.model_copy(
+                update={
+                    "reasoning_summary": (
+                        f"{preparer.reasoning_summary} Prior {lookup.retrieved[0]} treated "
+                        f"{item.vendor} the same way; current service-period evidence agrees."
+                    ),
+                    "evidence_used": list(dict.fromkeys(list(preparer.evidence_used) + lookup.retrieved)),
+                }
+            )
         used_agent = used_agent or live
         agents = []
         if live:
@@ -68,6 +82,7 @@ def run_prepaid_workflow(period: str, *, use_agent: bool = False) -> PrepaidRun:
                     explanation=reason,
                     agents=agents,
                     used_agent=live,
+                    memory_lookup=lookup,
                 )
             )
             continue
@@ -76,6 +91,13 @@ def run_prepaid_workflow(period: str, *, use_agent: bool = False) -> PrepaidRun:
         posted_all.extend(posted)
         journals.extend(line.journal_entry_id for line in posted if line.journal_entry_id)
         refreshed = get_item(item.prepaid_id) or item
+        written = write_prepaid_memory(
+            refreshed,
+            period,
+            selected_method=method,
+            reviewer_decision=reviewer.decision,
+            trace_id=item.prepaid_id,
+        )
         traces.append(
             PrepaidTrace(
                 prepaid_id=item.prepaid_id,
@@ -93,6 +115,8 @@ def run_prepaid_workflow(period: str, *, use_agent: bool = False) -> PrepaidRun:
                 ),
                 agents=agents,
                 used_agent=live,
+                memory_lookup=lookup,
+                written_memory_id=written[0].decision_id if written is not None else None,
             )
         )
     return PrepaidRun(

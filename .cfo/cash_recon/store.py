@@ -65,17 +65,25 @@ def matches_for_period(period: str) -> list[ReconciliationMatch]:
     return [item for item in _matches.values() if item.period == period]
 
 
+def _trace_key(trace: MatchTrace) -> str:
+    return f"{trace.period}:{trace.reconciliation_id}"
+
+
 def remember_trace(trace: MatchTrace) -> tuple[MatchTrace, bool]:
-    existing = _traces.get(trace.reconciliation_id)
+    key = _trace_key(trace)
+    existing = _traces.get(key)
     if existing is not None:
         existing.replay = True
         return existing, False
-    _traces[trace.reconciliation_id] = trace
+    _traces[key] = trace
     return trace, True
 
 
 def get_trace(reconciliation_id: str) -> MatchTrace | None:
-    return _traces.get(reconciliation_id)
+    matches = [item for item in _traces.values() if item.reconciliation_id == reconciliation_id]
+    if not matches:
+        return None
+    return matches[-1]
 
 
 def traces_for_period(period: str) -> list[MatchTrace]:

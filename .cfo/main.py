@@ -187,6 +187,8 @@ def _usage() -> int:
     print("       python main.py reconcile-cash --month 2026-09 --seed-demo")
     print("       python main.py reconcile-trace REC-001")
     print("       python main.py eval-cash-reconciliation")
+    print("       python main.py memory-demo [--story stripe|prepaid|both]")
+    print("       python main.py eval-memory")
     print("       python main.py month-end [period]")
     print("       python main.py close-month --month 2026-09 --seed-demo")
     print("       python main.py close-trace --month 2026-09")
@@ -606,6 +608,16 @@ def main() -> int:
         from integrations.cli import run_stripe_demo
 
         return run_stripe_demo()
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"memory-demo", "memory_demo"}:
+        from memory.cli import run_memory_demo
+
+        return run_memory_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-memory", "memory-eval", "eval_memory"}:
+        from memory.cli import run_memory_eval
+
+        return run_memory_eval(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "integrations":
         from integrations.cli import run_cli

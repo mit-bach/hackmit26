@@ -34,14 +34,17 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Exception Investigator": (
         "three-way-match-analysis",
         "ap-exception-investigation",
+        "prior-period-precedent",
     ),
     "AP Reviewer": (
         "three-way-match-analysis",
         "ap-exception-investigation",
+        "prior-period-precedent",
     ),
     "AP Approver": (
         "three-way-match-analysis",
         "ap-exception-investigation",
+        "prior-period-precedent",
     ),
     "AP Audit": (
         "three-way-match-analysis",
@@ -69,13 +72,15 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Cash Exception Investigator": (
         "reconciliation-exception-investigation",
         "bank-reference-interpretation",
+        "prior-period-precedent",
     ),
     "Cash Reconciliation Reviewer": (
         "cash-reconciliation-method-selection",
         "reconciliation-exception-investigation",
+        "prior-period-precedent",
     ),
-    "Prepaid Preparer": ("prepaid-expense-accounting",),
-    "Prepaid Reviewer": ("prepaid-expense-accounting",),
+    "Prepaid Preparer": ("prepaid-expense-accounting", "prior-period-precedent"),
+    "Prepaid Reviewer": ("prepaid-expense-accounting", "prior-period-precedent"),
     "Fixed Asset Preparer": ("fixed-asset-depreciation",),
     "Fixed Asset Reviewer": ("fixed-asset-depreciation",),
     "Balance Sheet Reconciliation Preparer": ("balance-sheet-reconciliation",),

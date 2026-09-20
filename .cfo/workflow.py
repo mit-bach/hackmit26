@@ -180,9 +180,11 @@ def _run_investigator(
     invoice_id: str,
     evidence_path: Path,
     preparer_path: Path,
+    memory_block: str = "",
 ) -> InvestigationReport:
     rel = evidence_path.as_posix()
     prep = preparer_path.as_posix()
+    extra = f"\n\n{memory_block}" if memory_block else ""
     return wake_bot(
         slug=AP_SLUG,
         profile=INVESTIGATE_PROFILE,
@@ -192,6 +194,7 @@ def _run_investigator(
             f"Kernel evidence path: {rel}\n"
             f"Preparer packet path: {prep}\n"
             "Search policies and prior cases. If nothing supports payment, HOLD. Do not pay."
+            f"{extra}"
         ),
         paths=[rel, prep],
         invoice_id=invoice_id,
@@ -383,13 +386,23 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
     print(f"Python facts: exceptions={evidence.exception_types or ['none']}", flush=True)
     print(flush=True)
 
+    invoice_date = evidence.invoice.invoice_date if evidence.invoice else started_at[:10]
+    period = invoice_date[:7] if invoice_date else started_at[:7]
+    from memory.format import format_precedents
+    from memory.hooks import lookup_for_ap, write_ap_memory
+
+    memory_lookup = lookup_for_ap(evidence, period)
+    memory_block = format_precedents(memory_lookup)
+
     preparer = _run_preparer(invoice_id, evidence_path)
     preparer_note = Path(RUNS_DIR) / "ap" / "packets" / f"{invoice_id}.prepare.json"
     write_json_atomic(preparer_note, preparer.model_dump(mode="json"))
 
     investigation = None
     if _needs_investigation(evidence, preparer):
-        investigation = _run_investigator(invoice_id, evidence_path, preparer_note)
+        investigation = _run_investigator(
+            invoice_id, evidence_path, preparer_note, memory_block=memory_block
+        )
 
     proposed, reasons, confidence, evidence_used, holds = _propose(
         evidence, preparer, investigation
@@ -413,6 +426,17 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
     if investigation is not None:
         ran.append(investigator_agent)
 
+    if investigation is not None and memory_lookup.precedents:
+        extra = [
+            f"{item.decision_id}: {item.reusable_precedent}" for item in memory_lookup.precedents
+        ]
+        investigation = investigation.model_copy(
+            update={"relevant_precedents": list(dict.fromkeys(list(investigation.relevant_precedents) + extra))}
+        )
+        memory_lookup.precedent_used = True
+        memory_lookup.current_evidence_checked = True
+        memory_lookup.decision = final.decision
+    written = write_ap_memory(evidence, final, period=period, trace_id=invoice_id)
     trace = DecisionTrace(
         invoice_id=invoice_id,
         started_at=started_at,
@@ -429,6 +453,8 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
         verifier_handle=handle,
         kernel_holds=holds,
         posted_to_pool=False,
+        memory_lookup=memory_lookup,
+        written_memory_id=written[0].decision_id if written is not None else None,
         wakes=[
             {
                 "slug": AP_SLUG,

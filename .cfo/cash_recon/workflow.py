@@ -96,6 +96,13 @@ def explain(candidate: MatchCandidate) -> str:
             f"({money_text(candidate.bank_amount)})."
         )
     if candidate.match_type == "FEE_NETTED":
+        if candidate.provider:
+            return (
+                f"{candidate.provider.title()} payout {candidate.provider_payout_id} "
+                f"arrived net of processor fees and chargebacks. Bank {bank_ids} is "
+                f"ledger {ledger_ids} ({money_text(candidate.ledger_amount)}) less "
+                f"{money_text(abs(candidate.difference))}."
+            )
         return (
             f"Wire {bank_ids} is ledger principal {ledger_ids} "
             f"({money_text(candidate.ledger_amount)}) plus bank fee "
@@ -215,10 +222,11 @@ def _agent_prepare(candidate: MatchCandidate) -> PreparerSelection:
         return deterministic_prepare(candidate)
 
 
-def _agent_investigate(candidate: MatchCandidate) -> InvestigationNote:
+def _agent_investigate(candidate: MatchCandidate, memory_block: str = "") -> InvestigationNote:
     from agent import run_agent
     from cash_recon.agent import investigator_agent
 
+    extra = f"\n\n{memory_block}" if memory_block else ""
     try:
         return run_agent(
             investigator_agent,
@@ -226,6 +234,7 @@ def _agent_investigate(candidate: MatchCandidate) -> InvestigationNote:
                 f"Investigate cash exception {candidate.candidate_id}.\n"
                 "Do not invent an explanation. Copy Python amounts.\n"
                 f"{candidate.model_dump_json(indent=2)}"
+                f"{extra}"
             ),
         )
     except Exception:
@@ -275,6 +284,7 @@ def finalize_match(
     reviewer: ReviewerVerdict,
     used_agent: bool,
     replay: bool,
+    memory_lookup=None,
 ) -> tuple[ReconciliationMatch, MatchTrace]:
     disposition = reviewer.disposition
     if not validation.passed:
@@ -352,6 +362,7 @@ def finalize_match(
         agents=agents,
         used_agent=used_agent,
         replay=replay or not is_new,
+        memory_lookup=memory_lookup,
     )
     stored_trace, trace_new = remember_trace(trace)
     if not trace_new:
@@ -365,6 +376,7 @@ def run_cash_reconciliation(
     seed_demo: bool = False,
     use_agent: bool = False,
     reset: bool = False,
+    seed_providers: bool = True,
     balances: PeriodBalances | None = None,
     bank: list[BankTransaction] | None = None,
     ledger: list[LedgerEntry] | None = None,
@@ -386,7 +398,8 @@ def run_cash_reconciliation(
     if balances is None or bank is None or ledger is None:
         raise ValueError("Cash reconciliation requires balances, bank activity, and ledger entries.")
     fees = fees or []
-    seed_provider_payouts()
+    if seed_providers:
+        seed_provider_payouts()
 
     bank = prepare_bank(bank)
     ledger = prepare_ledger(ledger)
@@ -411,8 +424,19 @@ def run_cash_reconciliation(
             preparer = deterministic_prepare(candidate)
         validation = validate_candidate(candidate, bank_map, ledger_map)
         investigation = None
+        memory_lookup = None
         if candidate.match_type in NEEDS_INVESTIGATION or not validation.passed or validation.human_review_required:
-            investigation = _agent_investigate(candidate) if use_agent else deterministic_investigate(candidate)
+            from memory.hooks import apply_cash_investigation, lookup_for_cash
+
+            memory_lookup = lookup_for_cash(candidate, period)
+            from memory.format import format_precedents
+
+            investigation = (
+                _agent_investigate(candidate, memory_block=format_precedents(memory_lookup))
+                if use_agent
+                else deterministic_investigate(candidate)
+            )
+            investigation, memory_lookup = apply_cash_investigation(candidate, investigation, memory_lookup)
         if use_agent:
             reviewer = _agent_review(candidate, preparer, validation)
             reviewer = deterministic_review(candidate, preparer, validation, investigation).model_copy(
@@ -443,7 +467,19 @@ def run_cash_reconciliation(
             reviewer=reviewer,
             used_agent=use_agent,
             replay=False,
+            memory_lookup=memory_lookup,
         )
+        from memory.hooks import write_cash_memory
+
+        if memory_lookup is not None and match.provider == "stripe" and match.status in {
+            "MATCHED",
+            "EXPLAINED_EXCEPTION",
+        }:
+            memory_lookup.decision = "reconcile payout net of fees and chargebacks"
+        written = write_cash_memory(match, trace)
+        written_id = written[0].decision_id if written is not None else None
+        if memory_lookup is not None or written_id:
+            trace = trace.model_copy(update={"memory_lookup": memory_lookup, "written_memory_id": written_id})
         matches.append(match)
         traces.append(trace)
         agent_traces.extend(trace.agents)

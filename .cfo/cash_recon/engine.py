@@ -20,7 +20,7 @@ from cash_recon.candidates import (
 from cash_recon.mathutil import date_gap
 from cash_recon.models import BankTransaction, FeeEvidence, LedgerEntry, MatchCandidate
 from cash_recon.normalize import prepare_bank, prepare_ledger
-from cash_recon.providers import provider_candidates
+from cash_recon.providers import provider_candidates, provider_netted_candidates
 
 PRIORITY = {
     "PROVIDER_PAYOUT": 0,
@@ -83,6 +83,7 @@ def generate_all_candidates(
     ledger = prepare_ledger(ledger)
     rows: list[MatchCandidate] = []
     rows.extend(provider_candidates(bank, ledger))
+    rows.extend(provider_netted_candidates(bank, ledger))
     rows.extend(exact_candidates(bank, ledger))
     rows.extend(grouped_candidates(bank, ledger))
     rows.extend(fee_candidates(bank, ledger, fees))
@@ -115,6 +116,14 @@ def propose_matches(
         elif candidate.provider_status and candidate.provider_status != "MATCH":
             selected.append(candidate)
             _consume(candidate, used_bank, used_ledger)
+
+    for candidate in provider_netted_candidates(bank, ledger):
+        if any(item in used_bank for item in candidate.bank_transaction_ids):
+            continue
+        if any(item in used_ledger for item in candidate.ledger_entry_ids):
+            continue
+        selected.append(candidate)
+        _consume(candidate, used_bank, used_ledger)
 
     period_bank = [item for item in bank if item.period == period]
     period_ledger = [item for item in ledger if item.period == period]

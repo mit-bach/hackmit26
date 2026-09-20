@@ -32,6 +32,17 @@ def isolated_ar_state(tmp_path, monkeypatch):
 
 
 @pytest.fixture(autouse=True)
+def isolated_memory_store(tmp_path):
+    from memory.store import configure_paths, reset_memory
+
+    configure_paths(tmp_path / "memory")
+    reset_memory()
+    yield
+    reset_memory()
+    configure_paths(tmp_path / "memory-done")
+
+
+@pytest.fixture(autouse=True)
 def isolated_cash_recon(tmp_path, monkeypatch):
     from cash_recon.store import reset_cash_state
     from cash_recon.case_store import configure_case_dir
