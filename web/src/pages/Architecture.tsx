@@ -1,77 +1,52 @@
 import { useEffect, useState } from "react";
 import { get } from "../api";
 import { PageHead } from "../layout/Shell";
-import { AGENT_COPY, formatAgent } from "../copy";
-import { TraceIds } from "../components/Explain";
+import { ArchitectureDiagram } from "../components/ArchitectureDiagram";
+import { AgentDirectory, AgentPanel } from "../components/AgentPanel";
+import { AGENTS, AGENTS_BY_SLUG, ROUTINES } from "../data/agents";
+import { formatAgent } from "../copy";
 
 export default function Architecture() {
   const [data, setData] = useState<any>(null);
+  const [open, setOpen] = useState<string>("ap");
+
   useEffect(() => {
     get("/api/architecture").then(setData);
   }, []);
 
+  const agent = AGENTS_BY_SLUG[open as keyof typeof AGENTS_BY_SLUG] || AGENTS[0];
+  const live = (data?.bots || []).find((bot: any) => bot.slug === agent.slug);
+
   return (
     <div>
       <PageHead
-        eyebrow="Implementation"
-        title="System architecture"
-        lede="Data sources feed a canonical Maximor company state. Fifteen specialized finance agents share skills and decision memory, then close, audit, and evaluate against known cases."
+        eyebrow="Architecture"
+        title="How the finance team is actually organized"
+        lede="Standing agents share one company picture. Related jobs live as profiles on those agents. Control agents recheck uncertain work. Audit samples after the fact. This page is drawn from the live office roster, not from an older, larger agent list."
       />
-      <div className="arch">
-        <div className="arch-col">
-          <h3>Data sources</h3>
-          {(data?.data_sources || []).map((item: string) => (
-            <div key={item} className="chip">
-              {item}
-            </div>
-          ))}
+      <ArchitectureDiagram selected={open} onSelect={setOpen} />
+      <div className="grid-2" style={{ marginTop: 18 }}>
+        <div className="card">
+          <h2>The team</h2>
+          <AgentDirectory selected={open} onSelect={setOpen} />
         </div>
-        <div className="arch-col">
-          <h3>Canonical state</h3>
-          <div className="chip">{data?.canonical_state}</div>
-          <div className="chip">Kernel .cfo/</div>
-        </div>
-        <div className="arch-col">
-          <h3>Rooms</h3>
-          {(data?.rooms || []).map((room: any) => (
-            <div key={room.id} style={{ marginBottom: 8 }}>
-              <strong>{room.id}</strong>
-              <div className="muted">{(room.members || []).join(", ")}</div>
-            </div>
-          ))}
-        </div>
-        <div className="arch-col">
-          <h3>Memory</h3>
-          {(data?.decision_memory || []).map((item: string) => (
-            <div key={item} className="chip">
-              {item}
-            </div>
-          ))}
+        <div className="card">
+          <AgentPanel agent={agent} live={live} />
         </div>
       </div>
-      <div className="card" style={{ marginTop: 16 }}>
-        <h2>15 specialized finance agents</h2>
-        <table className="data">
-          <thead>
-            <tr>
-              <th>Agent</th>
-              <th>What it does</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(data?.bots || []).map((bot: any) => (
-              <tr key={bot.slug}>
-                <td>
-                  <div>{formatAgent(bot.slug)}</div>
-                  <TraceIds ids={[bot.slug]} label="Internal slug" />
-                </td>
-                <td>{AGENT_COPY[bot.slug]?.role || bot.purpose}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p className="muted">{data?.note}</p>
+      <div className="card" style={{ marginTop: 14 }}>
+        <h2>Scheduled office routines</h2>
+        <p className="muted">These are recurring jobs on the calendar. They are not extra agents.</p>
+        {(data?.routines || ROUTINES).map((row: any) => (
+          <div className="split" key={row.id || row.name} style={{ marginBottom: 8 }}>
+            <div>
+              <div>{row.title || row.id || row.name}</div>
+              <div className="muted">{row.cadence} · {formatAgent(row.bot)}</div>
+            </div>
+          </div>
+        ))}
       </div>
+      <p className="muted">Older, narrower finance roles still exist as jobs inside these agents. They are not separate standing agents.</p>
     </div>
   );
 }

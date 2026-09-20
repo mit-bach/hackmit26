@@ -12,11 +12,22 @@ import Audit from "./pages/Audit";
 import Memory from "./pages/Memory";
 import Agents from "./pages/Agents";
 import Evaluations from "./pages/Evaluations";
-import Scenarios from "./pages/Scenarios";
+import Simulations from "./pages/Simulations";
 import Architecture from "./pages/Architecture";
+import Workflow from "./pages/Workflow";
+import Videos from "./pages/Videos";
+import Coverage from "./pages/Coverage";
 
 export const ROUTES = [
   "/",
+  "/architecture",
+  "/workflow",
+  "/memory",
+  "/simulations",
+  "/videos",
+  "/coverage",
+  "/evaluations",
+  "/agents",
   "/inbox",
   "/ap",
   "/ar",
@@ -25,11 +36,7 @@ export const ROUTES = [
   "/close",
   "/forecast",
   "/audit",
-  "/memory",
-  "/agents",
-  "/evaluations",
   "/scenarios",
-  "/architecture",
 ];
 
 export default function App() {
@@ -37,6 +44,15 @@ export default function App() {
     <Shell>
       <Routes>
         <Route path="/" element={<Overview />} />
+        <Route path="/architecture" element={<Architecture />} />
+        <Route path="/workflow" element={<Workflow />} />
+        <Route path="/memory" element={<Memory />} />
+        <Route path="/simulations" element={<Simulations />} />
+        <Route path="/simulations/:id" element={<Simulations />} />
+        <Route path="/videos" element={<Videos />} />
+        <Route path="/coverage" element={<Coverage />} />
+        <Route path="/evaluations" element={<Evaluations />} />
+        <Route path="/agents" element={<Agents />} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/ap" element={<AP />} />
         <Route path="/ar" element={<AR />} />
@@ -45,11 +61,7 @@ export default function App() {
         <Route path="/close" element={<Close />} />
         <Route path="/forecast" element={<Forecast />} />
         <Route path="/audit" element={<Audit />} />
-        <Route path="/memory" element={<Memory />} />
-        <Route path="/agents" element={<Agents />} />
-        <Route path="/evaluations" element={<Evaluations />} />
-        <Route path="/scenarios" element={<Scenarios />} />
-        <Route path="/architecture" element={<Architecture />} />
+        <Route path="/scenarios" element={<Simulations />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Shell>

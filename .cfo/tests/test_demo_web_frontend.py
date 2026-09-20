@@ -21,12 +21,12 @@ def test_frontend_does_not_hardcode_workflow_outcomes():
 
 def test_frontend_io_labels_exist():
     demo = (FRONTEND / "components" / "Demo.tsx").read_text()
-    assert "Original input" in demo
-    assert "Final output" in demo
+    assert "What arrived" in demo
+    assert "What changed" in demo
     assert "SourceArtifactViewer" in demo
     assert "BeforeAfterDiff" in demo
     pages = "\n".join(path.read_text() for path in (FRONTEND / "pages").glob("*.tsx"))
-    for token in ("Original input", "Final output", "Starting company state"):
+    for token in ("What arrived", "What changed", "Starting company state"):
         assert token in pages or token in demo
     app = (FRONTEND / "App.tsx").read_text()
     for route in (
@@ -44,6 +44,10 @@ def test_frontend_io_labels_exist():
         "/evaluations",
         "/scenarios",
         "/architecture",
+        "/simulations",
+        "/videos",
+        "/workflow",
+        "/coverage",
     ):
         assert route in app
 
@@ -57,7 +61,10 @@ def test_presentation_layer_hides_internal_tokens():
     assert "Grain" not in pages["Agents.tsx"]
     assert "JSON.stringify" not in pages["Memory.tsx"]
     assert "What's happening?" in (FRONTEND / "components" / "Explain.tsx").read_text()
+    assert "Decision" in (FRONTEND / "components" / "Explain.tsx").read_text()
+    assert "Who receives the result next" in (FRONTEND / "components" / "Explain.tsx").read_text()
     assert "Not overdue yet" in copy
+    agents = (FRONTEND / "data" / "agents.ts").read_text()
     for slug in (
         "email",
         "stripe",
@@ -75,7 +82,7 @@ def test_presentation_layer_hides_internal_tokens():
         "ctl-books",
         "audit",
     ):
-        assert f"{slug}:" in copy or f'"{slug}":' in copy
+        assert f"{slug}:" in copy or f'"{slug}":' in copy or f'"{slug}"' in agents
     assert "table-scroll" in (FRONTEND / "styles.css").read_text()
     assert "onlyChanged" in (FRONTEND / "components" / "Demo.tsx").read_text()
     assert "Developer details" in (FRONTEND / "components" / "Demo.tsx").read_text()

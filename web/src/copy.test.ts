@@ -8,11 +8,17 @@ import {
   METHOD_COPY,
   STATUS_COPY,
   formatAccountingMethod,
+  formatAccountingSentence,
   formatAgingBucket,
   formatAgent,
   formatEvalCase,
+  formatException,
+  formatFamily,
+  formatHandoff,
   formatMatchType,
+  formatPeriod,
   formatStatus,
+  formatSummary,
   formatTask,
   humanizeToken,
 } from "./copy";
@@ -101,4 +107,29 @@ test("known enum tables stay internally keyed", () => {
   expect(STATUS_COPY.HUMAN_REVIEW).toMatch(/unresolved/i);
   expect(MATCH_TYPE_COPY.UNEXPLAINED_DIFFERENCE).toBeTruthy();
   expect(METHOD_COPY.seasonal_prior_year).toBeTruthy();
+});
+
+test("legacy agent display names map to job titles", () => {
+  expect(formatAgent("AP Preparer")).toBe("Accounts Payable Agent");
+  expect(formatAgent("ctl-pay")).toBe("Payables Control Agent");
+  expect(formatAgent("bot_ap")).toBe("Accounts Payable Agent");
+});
+
+test("exceptions and methods become sentences", () => {
+  expect(formatException("three_way_match_failed")).toMatch(/purchase order/i);
+  expect(formatException("exception_duplicate_candidate")).toMatch(/duplicate/i);
+  expect(formatException("partial_receipt")).toMatch(/received so far/i);
+  expect(formatStatus("approved_pool")).toMatch(/this week's payments/i);
+  expect(formatAccountingSentence("seasonal_prior_year")).toMatch(/seasonal pattern from last year/i);
+  expect(formatFamily("anti_hack")).toMatch(/same-dollar/i);
+  expect(formatPeriod("2026-09")).toBe("September 2026");
+});
+
+test("summaries and handoffs stay in English", () => {
+  expect(formatSummary("Close BLOCKED")).toMatch(/cannot finish/i);
+  expect(formatSummary("classified as quote")).toMatch(/identified as/i);
+  expect(formatSummary("Python evidence")).toMatch(/supporting records/i);
+  expect(formatHandoff(["ap", "ctl-pay"], "ap")).toMatch(/Accounts Payable Agent/);
+  expect(formatHandoff(["ap", "ctl-pay"], "ap")).toMatch(/Payables Control/);
+  expect(formatHandoff(["ap", "ctl-pay"], "ap")).not.toMatch(/AP_AGENT/);
 });

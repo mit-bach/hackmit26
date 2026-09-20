@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { get } from "../api";
+import { get, usd } from "../api";
 import { useWorkflow } from "../hooks";
 import { ErrorBox, Pill, RunBar } from "../layout/Shell";
-import { ArtifactStack, DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
-import { WhatsHappening } from "../components/Explain";
+import { DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
+import { ResultBlock, WhatsHappening } from "../components/Explain";
 import { formatStatus } from "../copy";
 
 export default function Inbox() {
@@ -36,34 +36,32 @@ export default function Inbox() {
       runBar={
         <>
           <RunBar
-            label="Run ingestion"
+            label="Identify this document"
             running={running}
             onRun={() => run("/api/workflows/invoice-ingestion", { sample_id: selected })}
             extra={
               <button className="btn" disabled={running} onClick={() => run("/api/workflows/inbox", {})}>
-                Run inbox handoff
+                Sort the inbox
               </button>
             }
           />
           <ErrorBox error={error} />
           <div className="card" style={{ marginBottom: 14 }}>
-            <h2>Prepared samples</h2>
+            <h2>Documents to try</h2>
             <table className="data">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Kind hint</th>
                   <th>Subject</th>
+                  <th>What it looks like</th>
                 </tr>
               </thead>
               <tbody>
                 {(catalog?.samples || []).map((item: any) => (
                   <tr key={item.sample_id} className={item.sample_id === selected ? "selected" : ""} onClick={() => setSelected(item.sample_id)}>
-                    <td className="mono">{item.sample_id}</td>
+                    <td>{item.subject}</td>
                     <td>
                       <Pill>{formatStatus(item.kind)}</Pill>
                     </td>
-                    <td>{item.subject}</td>
                   </tr>
                 ))}
               </tbody>
@@ -87,33 +85,41 @@ export default function Inbox() {
       output={
         inner ? (
           <div className="card">
-            <OutputHeadline label="Is this an invoice?" value={formatStatus(outputs?.is_invoice ? "invoice" : outputs?.classification || inner.classification)} />
+            <OutputHeadline label="Is this a vendor invoice?" value={formatStatus(outputs?.is_invoice ? "invoice" : outputs?.classification || inner.classification)} />
+            <ResultBlock
+              found={
+                outputs?.is_invoice || inner.classification === "invoice"
+                  ? "The Email Agent identified this as a vendor invoice and extracted the fields needed to book a bill."
+                  : `The Email Agent identified this as ${formatStatus(outputs?.classification || inner.classification).toLowerCase()}, not a vendor bill to pay.`
+              }
+              why={inner.classification_reason || "A quote, statement, or receipt should not create money the company owes."}
+              result={
+                (inner.record_ids || []).length
+                  ? "A vendor bill was created from this document and handed to Accounts Payable."
+                  : "No vendor bill was created. Treating this as a bill would invent an amount the company does not owe."
+              }
+            />
             <dl className="kv">
-              <dt>Classification</dt>
+              <dt>Document type</dt>
               <dd>
                 <Pill>{formatStatus(outputs?.classification || inner.classification)}</Pill>
               </dd>
               <dt>Vendor</dt>
               <dd>{inner.extracted?.vendor || "—"}</dd>
-              <dt>Invoice #</dt>
+              <dt>Invoice number</dt>
               <dd>{inner.extracted?.invoice_number || "—"}</dd>
               <dt>Amount</dt>
-              <dd>{inner.extracted?.amount ?? "—"}</dd>
-              <dt>PO</dt>
+              <dd>{inner.extracted?.amount != null && inner.extracted?.amount !== "—" ? usd(Number(inner.extracted.amount)) : "—"}</dd>
+              <dt>Purchase order</dt>
               <dd className="mono">{inner.extracted?.po_number || "—"}</dd>
-              <dt>Canonical IDs</dt>
-              <dd className="mono">{(inner.record_ids || []).join(", ") || "none — not treated as a bill"}</dd>
             </dl>
             {(outputs?.canonical_invoices || []).map((item: any) => (
               <SourceArtifactViewer key={item.artifact_id} artifact={item} compact />
             ))}
-            <p className="muted" style={{ marginTop: 10 }}>
-              Explanation: {inner.classification_reason}
-            </p>
           </div>
         ) : (
           <div className="card">
-            <p className="muted">Run ingestion to see the produced classification, extracted fields, and canonical invoice (if any).</p>
+            <p className="muted">Run this document through intake to see whether Maximor treats it as a vendor bill, and what it extracts.</p>
           </div>
         )
       }

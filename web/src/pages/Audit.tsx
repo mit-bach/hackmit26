@@ -127,7 +127,7 @@ export default function Audit() {
               return (
                 <div key={item.finding_id || idx} className="card" style={{ marginBottom: 8 }}>
                   <div className="split">
-                    <strong>{item.control_name || item.title || "Control finding"}</strong>
+                    <strong>{item.control_name ? formatStatus(item.control_name) : item.title || "Control finding"}</strong>
                     <Pill tone={statusTone(item.severity || item.result)}>{formatStatus(item.severity || item.result)}</Pill>
                   </div>
                   <ResultBlock found={copy.found} why={copy.why} result={copy.result} />

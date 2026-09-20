@@ -220,7 +220,7 @@ def cash_view() -> dict:
         from cash_recon.store import get_report
 
         stored = get_report(PERIOD)
-        report = dump(stored) if stored is not None else None
+        report = dump(stored.model_copy(update={"traces": [], "agents": []})) if stored is not None else None
     except Exception:
         report = None
     return {
@@ -581,12 +581,12 @@ def overview() -> dict:
         },
     ]
     ops = [
-        {"id": "ap", "label": "Accounts Payable", "status": "exceptions" if ap_holds else "clear", "href": "/ap", "metric": f"{len(invoices)} invoices"},
-        {"id": "ar", "label": "Accounts Receivable", "status": "open", "href": "/ar", "metric": f"${ar['outstanding']:,.0f} outstanding"},
-        {"id": "cash", "label": "Cash reconciliation", "status": "blocked", "href": "/cash", "metric": f"${unexplained:.2f} unexplained"},
-        {"id": "close", "label": "Month-end close", "status": close["status"].lower(), "href": "/close", "metric": close["status"]},
-        {"id": "forecast", "label": "13-week forecast", "status": "live", "href": "/forecast", "metric": f"${money(forecast.get('projected_ending_cash') or 0):,.0f} ending"},
-        {"id": "audit", "label": "Audit & controls", "status": "ready", "href": "/audit", "metric": "independent"},
+        {"id": "ap", "label": "Accounts Payable", "status": "Needs attention" if ap_holds else "Clear", "href": "/ap", "metric": f"{len(invoices)} invoices"},
+        {"id": "ar", "label": "Accounts Receivable", "status": "In progress", "href": "/ar", "metric": f"${ar['outstanding']:,.0f} outstanding"},
+        {"id": "cash", "label": "Cash reconciliation", "status": "Cannot finish yet", "href": "/cash", "metric": f"${unexplained:.2f} unexplained"},
+        {"id": "close", "label": "Month-end close", "status": str(close["status"]).replace("_", " ").title(), "href": "/close", "metric": str(close["status"]).replace("_", " ").title()},
+        {"id": "forecast", "label": "13-week forecast", "status": "Live", "href": "/forecast", "metric": f"${money(forecast.get('projected_ending_cash') or 0):,.0f} ending"},
+        {"id": "audit", "label": "Audit & controls", "status": "Ready", "href": "/audit", "metric": "Independent sampling"},
     ]
     timeline = read_json(data_file("timeline.json")) or []
     return {

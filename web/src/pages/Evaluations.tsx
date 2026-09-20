@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { get, statusTone } from "../api";
 import { useWorkflow } from "../hooks";
-import { ErrorBox, Pill, RunBar } from "../layout/Shell";
+import { Pill, RunBar } from "../layout/Shell";
 import { DemoLayout, OutputHeadline, ProcessPanel } from "../components/Demo";
 import { DevDetails, LineageChain, ResultBlock, TraceIds, WhatsHappening } from "../components/Explain";
-import { formatCapability, formatEvalCase, formatStatus, friendlyExpected } from "../copy";
+import { formatCapability, formatEvalCase, formatFamily, formatPeriod, formatStatus, friendlyExpected } from "../copy";
 
 const FAMILY_ORDER = [
   "documents",
@@ -27,18 +27,25 @@ export default function Evaluations() {
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
-    get("/api/evaluations").then(setData);
-    get("/api/gauntlet").then(setGauntlet);
-    get("/api/stories/trap").then((row) => setStories((prev: any) => ({ ...prev, trap: row })));
-    get("/api/stories/harbor").then((row) => setStories((prev: any) => ({ ...prev, harbor: row })));
-    get("/api/stories/stripe").then((row) => setStories((prev: any) => ({ ...prev, stripe: row })));
-    get("/api/stories/correction").then((row) => setStories((prev: any) => ({ ...prev, correction: row })));
-    get("/api/lineage/INV-001").then(setLineage);
+    get("/api/evaluations").then(setData).catch(() => setData(null));
+    get("/api/gauntlet").then(setGauntlet).catch(() => setGauntlet(null));
+    get("/api/stories/trap").then((row) => setStories((prev: any) => ({ ...prev, trap: row }))).catch(() => undefined);
+    get("/api/stories/harbor").then((row) => setStories((prev: any) => ({ ...prev, harbor: row }))).catch(() => undefined);
+    get("/api/stories/stripe").then((row) => setStories((prev: any) => ({ ...prev, stripe: row }))).catch(() => undefined);
+    get("/api/stories/correction").then((row) => setStories((prev: any) => ({ ...prev, correction: row }))).catch(() => undefined);
+    get("/api/lineage/INV-006")
+      .then(setLineage)
+      .catch(() => setLineage(null));
   }, [result]);
 
   const gauntletPayload = result?.workflow === "gauntlet" ? result?.result?.payload || result?.result : gauntlet?.latest;
   const scorecard = gauntletPayload?.scorecard || gauntlet?.latest?.scorecard;
-  const gauntletCases = gauntletPayload?.cases || gauntlet?.cases || gauntlet?.catalog || [];
+  const gauntletCases =
+    gauntletPayload?.cases ||
+    gauntlet?.cases ||
+    gauntlet?.catalog ||
+    data?.catalog ||
+    [];
   const scored = Boolean(scorecard);
   const cases = latestAgentCases(data, result);
   const summary = summarize(data?.latest, cases, data?.summary);
@@ -52,7 +59,7 @@ export default function Evaluations() {
 
   return (
     <DemoLayout
-      eyebrow="Measurement"
+      eyebrow="Evaluation Lab"
       title="Can these agents run connected finance work over time?"
       task="The Finance Gauntlet tests the same Maximor agents used in the live office against finance scenarios with known correct outcomes. Hidden expected outcomes stay off the agent path. A judge should be able to see what Maximor received, what it decided, why, what changed elsewhere, and whether that was correct."
       happening={
@@ -62,16 +69,16 @@ export default function Evaluations() {
           why="This is how we show that the office is measured, not just narrated."
         />
       }
+      error={error}
       runBar={
-        <>
-          <RunBar
+        <RunBar
             label="Run Finance Gauntlet"
             running={running}
             onRun={() => run("/api/workflows/gauntlet")}
             extra={
               <>
                 <button className="btn" disabled={running} onClick={() => run("/api/workflows/evaluate")}>
-                  Run agent cases
+                  Run the published finance cases
                 </button>
                 <button className="btn" disabled={running} onClick={() => run("/api/workflows/gauntlet", { modes: true })}>
                   Compare memory on vs off
@@ -79,15 +86,13 @@ export default function Evaluations() {
               </>
             }
           />
-          <ErrorBox error={error} />
-        </>
       }
       input={
         <div className="stack">
           <div className="card">
             <h2>What Maximor is tested on</h2>
             <p className="muted">
-              Public fixtures are the documents and questions the agents see. Expected answers live in a grader-only folder and are blocked from operational file reads.
+              Public documents and questions are what the agents see. The correct answers are kept separate so Maximor cannot read them while it works.
             </p>
             <div className="table-scroll">
               <table className="data">
@@ -158,21 +163,33 @@ export default function Evaluations() {
                   })}
                 </div>
                 <dl className="kv">
-                  <dt>Cross-workflow consistency</dt>
-                  <dd>{pct(scorecard.cross_workflow_consistency_rate ?? scorecard.cross_workflow_consistency)}</dd>
-                  <dt>Error propagation</dt>
-                  <dd>{pct(scorecard.error_propagation_rate)}</dd>
-                  <dt>Unsupported assertions</dt>
-                  <dd>{pct(scorecard.unsupported_assertion_rate ?? scorecard.unsupported_action_rate)}</dd>
-                  <dt>Recovery</dt>
-                  <dd>{pct(scorecard.recovery_rate ?? scorecard.error_recovery)}</dd>
+                  <dt>Did every workflow agree?</dt>
+                  <dd>
+                    {pct(scorecard.cross_workflow_consistency_rate ?? scorecard.cross_workflow_consistency)}
+                    <div className="muted">How often payables, cash, close, and reporting treated the same bill the same way.</div>
+                  </dd>
+                  <dt>Did a mistake spread?</dt>
+                  <dd>
+                    {pct(scorecard.error_propagation_rate)}
+                    <div className="muted">How often an error in one step contaminated later finance work.</div>
+                  </dd>
+                  <dt>Unsupported claims</dt>
+                  <dd>
+                    {pct(scorecard.unsupported_assertion_rate ?? scorecard.unsupported_action_rate)}
+                    <div className="muted">How often Maximor claimed something it did not have evidence for.</div>
+                  </dd>
+                  <dt>Recovery after a bad file</dt>
+                  <dd>
+                    {pct(scorecard.recovery_rate ?? scorecard.error_recovery)}
+                    <div className="muted">How often Maximor recovered after a broken document or duplicate event instead of inventing books.</div>
+                  </dd>
                 </dl>
                 {scorecard.long_horizon_by_period ? (
                   <div>
                     <h2>Month after month</h2>
                     {Object.entries(scorecard.long_horizon_by_period).map(([period, row]: any) => (
                       <p key={period}>
-                        {period}: {pct(row.rate)} ({row.passed}/{row.total})
+                        {formatPeriod(period)}: {pct(row.rate)} ({row.passed}/{row.total} cases correct)
                       </p>
                     ))}
                   </div>
@@ -186,31 +203,38 @@ export default function Evaluations() {
             <div className="card">
               <h2>Did architecture features change the score?</h2>
               <p>
-                Memory on: {pct(modes.comparison.memory_on_vs_off?.on)} long-horizon {pct(modes.comparison.memory_on_vs_off?.long_horizon_on)}. Memory off:{" "}
-                {pct(modes.comparison.memory_on_vs_off?.off)} long-horizon {pct(modes.comparison.memory_on_vs_off?.long_horizon_off)}.
+                With last month's saved decisions available, Maximor scored {pct(modes.comparison.memory_on_vs_off?.on)} overall and{" "}
+                {pct(modes.comparison.memory_on_vs_off?.long_horizon_on)} on month-after-month cases. Without that memory, it scored{" "}
+                {pct(modes.comparison.memory_on_vs_off?.off)} overall and {pct(modes.comparison.memory_on_vs_off?.long_horizon_off)} on those later-month cases.
               </p>
               <p>
-                Shared canonical state on: {pct(modes.comparison.shared_state_on_vs_off?.on)}. Reduced shared state:{" "}
+                With every agent sharing the same company books, Maximor scored {pct(modes.comparison.shared_state_on_vs_off?.on)}. With a reduced shared picture, it scored{" "}
                 {pct(modes.comparison.shared_state_on_vs_off?.off)}.
               </p>
               <p className="muted">These come from real configuration switches, not restated claims. If a feature does not help, the measured result stays visible.</p>
             </div>
           ) : null}
-          {lineage ? (
+          {lineage?.received || lineage?.decision ? (
             <div className="card">
               <h2>Transaction lineage</h2>
-              <p>{lineage.received}</p>
-              <p>
-                <strong>Decision.</strong> {lineage.decision}
-              </p>
-              <p>
-                <strong>Why.</strong> {lineage.why}
-              </p>
+              {lineage.received ? <p>{lineage.received}</p> : null}
+              {lineage.decision ? (
+                <p>
+                  <strong>Decision.</strong> {lineage.decision}
+                </p>
+              ) : null}
+              {lineage.why ? (
+                <p>
+                  <strong>Why.</strong> {lineage.why}
+                </p>
+              ) : null}
               <LineageChain steps={lineage.steps} />
               {(lineage.changed || []).map((item: string) => (
                 <p key={item}>{item}</p>
               ))}
-              <Pill tone={lineage.correct ? "ok" : "warn"}>{lineage.correct ? "Consistent across workflows" : "Needs review"}</Pill>
+              {typeof lineage.correct === "boolean" ? (
+                <Pill tone={lineage.correct ? "ok" : "warn"}>{lineage.correct ? "Consistent across workflows" : "Needs review"}</Pill>
+              ) : null}
             </div>
           ) : null}
           {selected ? (
@@ -218,7 +242,7 @@ export default function Evaluations() {
               <h2>{selected.title || selectedCopy.title}</h2>
               <ResultBlock
                 found={selected.prompt || selectedCopy.test}
-                why={`Family: ${familyLabel(selected.family, gauntlet)}.`}
+                why={`This belongs to the “${familyLabel(selected.family, gauntlet)}” tests.`}
                 evidence={
                   <>
                     <p>{selected.passed === undefined || selected.passed === null ? "Not scored yet." : selected.reason || selectedCopy.test}</p>
@@ -294,7 +318,7 @@ export default function Evaluations() {
 function familyLabel(family: string | undefined, gauntlet: any) {
   const row = gauntlet?.families?.[family || ""];
   if (row?.plain) return row.plain;
-  return formatStatus(family || "other");
+  return formatFamily(family || "other");
 }
 
 function pct(value: unknown) {

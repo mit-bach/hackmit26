@@ -141,7 +141,7 @@ export default function AR() {
                 why={
                   applied.length
                     ? "The remittance or amount lined up with those invoices strongly enough to apply automatically."
-                    : "Lumen Labs has more than one open $5,000 invoice, and the payment message only says “September billing.” Guessing would put the wrong invoice to paid."
+                    : "Lumen Labs has more than one open $5,000 invoice, and the payment message only says “September billing.” Guessing would mark the wrong invoice as paid."
                 }
                 result={
                   applied.length
@@ -154,7 +154,7 @@ export default function AR() {
             <div className="card">
               <h2>Invoice aging</h2>
               <p className="muted">
-                Invoice aging groups unpaid customer invoices by how long they have been outstanding. Older balances are more concerning, since customers are taking longer to pay.
+                Invoice aging groups unpaid customer invoices by how long they have been outstanding. An invoice that was due 75 days ago belongs in the 61–90 day group. Older balances are more concerning, since customers are taking longer to pay.
               </p>
               <p>
                 Most of the company's unpaid customer invoices are still current ({usd(current)} of {usd(outstanding)}),

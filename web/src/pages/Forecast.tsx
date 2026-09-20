@@ -57,7 +57,7 @@ export default function Forecast() {
             <SourceArtifactViewer artifact={data?.inputs?.original_forecast} />
           </div>
           <div className="card">
-            <h2>New source events</h2>
+            <h2>New events that can change the forecast</h2>
             {(data?.inputs?.new_events || []).map((item: any) => (
               <SourceArtifactViewer key={item.artifact_id} artifact={item} />
             ))}
@@ -77,7 +77,7 @@ export default function Forecast() {
           <div className="card">
             <OutputHeadline label="Projected cash at week 13" value={usd(ending)} tone="info" />
             <p>
-              Starting with {usd(opening)}, Maximor currently expects to end the 13-week window with {usd(ending)}.
+              Starting with {usd(opening)}, Maximor currently expects to end the 13-week window with {usd(ending)}. The largest expected cash outflows are payroll and vendor payments. Customer collections are the main inflow.
             </p>
             <h2>{changed.length ? "Weeks whose ending cash changed" : "Week-ending cash comparison"}</h2>
             {changed.length === 0 ? (
@@ -105,7 +105,7 @@ export default function Forecast() {
           </div>
           <div className="card">
             <h2>Weekly cash outlook</h2>
-            <p className="muted">Friendly view of the 13 weeks. Full source rows remain in developer details on the original forecast artifact.</p>
+            <p className="muted">Week by week, here is how cash is expected to move from customer collections, vendor payments, and other activity.</p>
             <div className="table-scroll">
               <table className="data">
                 <thead>

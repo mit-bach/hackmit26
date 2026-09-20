@@ -1,26 +1,29 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { ReactNode, useEffect, useState } from "react";
 import { get, post, statusTone } from "../api";
-import { formatAgent } from "../copy";
+import { formatAgent, formatExecution, formatPeriod, formatStatus, formatSummary } from "../copy";
 
 const PRIMARY = [
-  ["/", "Overview"],
-  ["/inbox", "Inbox"],
-  ["/ap", "Accounts Payable"],
-  ["/ar", "Accounts Receivable"],
-  ["/cash", "Cash"],
-  ["/stripe", "Stripe Reconciliation"],
-  ["/close", "Close"],
-  ["/forecast", "Forecast"],
-  ["/audit", "Audit & Controls"],
+  ["/", "Home"],
+  ["/architecture", "Architecture"],
+  ["/workflow", "One invoice"],
   ["/memory", "Memory"],
-  ["/agents", "Agent Activity"],
-  ["/evaluations", "Evaluation Lab"],
+  ["/simulations", "Simulations"],
+  ["/videos", "Videos"],
+  ["/coverage", "Coverage"],
+  ["/evaluations", "Evidence"],
 ];
 
 const SECONDARY = [
-  ["/scenarios", "Demo Scenarios"],
-  ["/architecture", "System Architecture"],
+  ["/inbox", "Inbox"],
+  ["/ap", "Payables"],
+  ["/ar", "Receivables"],
+  ["/cash", "Cash"],
+  ["/stripe", "Stripe"],
+  ["/close", "Close"],
+  ["/forecast", "Forecast"],
+  ["/audit", "Audit"],
+  ["/agents", "Team activity"],
 ];
 
 export function Shell({ children }: { children: ReactNode }) {
@@ -32,7 +35,7 @@ export function Shell({ children }: { children: ReactNode }) {
     get("/api/demo/status").then(setStatus).catch(() => setStatus(null));
   }, [location.pathname]);
 
-  async function resetDemo() {
+  async function resetBooks() {
     setResetting(true);
     try {
       await post("/api/demo/reset");
@@ -56,20 +59,20 @@ export function Shell({ children }: { children: ReactNode }) {
             Company <strong>{typeof status?.company === "string" ? status.company : status?.company?.legal_name || status?.company?.company?.legal_name || "Maximor Demo Corp"}</strong>
           </span>
           <span>
-            Period <strong>{status?.period || "2026-09"}</strong>
+            Period <strong>{formatPeriod(status?.period || "2026-09")}</strong>
           </span>
-          <span className={`pill ${statusTone(status?.system_status)}`}>{status?.system_status || "loading"}</span>
+          <span className={`pill ${statusTone(status?.system_status)}`}>{formatStatus(status?.system_status || "operational")}</span>
           <span className={`pill ${status?.autonomy?.live_llm ? "warn" : "ok"}`}>
-            {status?.autonomy?.execution || "kernel-deterministic"}
+            {formatExecution(status?.autonomy?.execution || "kernel-deterministic")}
           </span>
           <span className={`pill ${status?.stripe?.mode === "live" ? "warn" : "info"}`}>
-            Stripe {status?.stripe?.mode || "simulated"}
+            Stripe {formatStatus(status?.stripe?.mode || "simulated")}
           </span>
         </div>
       </header>
       <aside className="sidebar">
         <div>
-          <div className="nav-label">Operations</div>
+          <div className="nav-label">Showcase</div>
           {PRIMARY.map(([to, label]) => (
             <NavLink key={to} to={to} end={to === "/"} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
               {label}
@@ -77,14 +80,14 @@ export function Shell({ children }: { children: ReactNode }) {
           ))}
         </div>
         <div>
-          <div className="nav-label">Demo</div>
+          <div className="nav-label">Live office</div>
           {SECONDARY.map(([to, label]) => (
             <NavLink key={to} to={to} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
               {label}
             </NavLink>
           ))}
-          <button className="nav-link" style={{ width: "100%", background: "transparent", border: 0, textAlign: "left" }} onClick={resetDemo} disabled={resetting}>
-            {resetting ? "Resetting…" : "Reset Demo"}
+          <button className="nav-link" style={{ width: "100%", background: "transparent", border: 0, textAlign: "left" }} onClick={resetBooks} disabled={resetting}>
+            {resetting ? "Resetting…" : "Reset books"}
           </button>
         </div>
       </aside>
@@ -126,7 +129,7 @@ export function RunBar({
         </button>
         {extra}
       </div>
-      {running ? <Pill tone="warn">queued → running</Pill> : null}
+      {running ? <Pill tone="warn">Checking the work…</Pill> : null}
     </div>
   );
 }
@@ -139,10 +142,10 @@ export function Stages({ stages }: { stages?: any[] }) {
         <div className="stage" key={stage.id || stage.label}>
           <div className={`stage-dot ${stage.status || "completed"}`} />
           <div className="stage-copy">
-            <div>
-              {stage.label} {stage.bot ? <Pill>{formatAgent(stage.bot)}</Pill> : null}
-            </div>
-            {stage.detail ? <div className="muted">{stage.detail}</div> : null}
+          <div>
+            {formatSummary(stage.label)} {stage.bot ? <Pill>{formatAgent(stage.bot)}</Pill> : null}
+          </div>
+          {stage.detail ? <div className="muted">{formatSummary(stage.detail)}</div> : null}
           </div>
         </div>
       ))}
@@ -152,7 +155,13 @@ export function Stages({ stages }: { stages?: any[] }) {
 
 export function ErrorBox({ error }: { error: string | null }) {
   if (!error) return null;
-  return <div className="error">{error}</div>;
+  const text =
+    error === "Not Found" || /^not found$/i.test(error)
+      ? "That request did not match a route on the running demo API. Restart the Maximor API and try again."
+      : error === "Internal Server Error" || error === "Failed to fetch" || /failed to fetch/i.test(error)
+        ? "The demo API did not respond. If it was restarting, run this again."
+        : error;
+  return <div className="error error-top">{text}</div>;
 }
 
 export function JsonBlock({ value }: { value: unknown }) {

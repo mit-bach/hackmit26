@@ -4,7 +4,7 @@ import { useWorkflow } from "../hooks";
 import { ErrorBox, Pill, RunBar } from "../layout/Shell";
 import { DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
 import { Definition, DevDetails, ResultBlock, StoryCard, TraceIds, WhatsHappening } from "../components/Explain";
-import { formatAccountingMethod, formatStatus } from "../copy";
+import { formatAccountingMethod, formatAccountingSentence, formatAgent, formatStatus } from "../copy";
 
 function describeLookup(lookup: any) {
   if (!lookup || typeof lookup !== "object") return null;
@@ -84,7 +84,7 @@ export default function Memory() {
         <div className="stack">
           <StoryCard title="What decision memory is">
             <Definition term="Decision memory" />
-            <p>This is not a database inspector. It is the saved professional judgment — what Maximor saw, what it decided, and why — so the next period can argue with it.</p>
+            <p>This is the saved professional judgment — what Maximor saw, what it decided, and why — so the next period can argue with it.</p>
           </StoryCard>
           <div className="card">
             <h2>What Maximor remembered from August</h2>
@@ -103,17 +103,16 @@ export default function Memory() {
       output={
         <div className="stack">
           <div className="card">
-            <OutputHeadline label="September method" value={method ? formatAccountingMethod(method) : inner?.summary || "Not run yet"} />
+            <OutputHeadline label="How September estimated the missing bill" value={method ? formatAccountingMethod(method) : inner?.summary || "Not run yet"} />
             {method ? (
               <ResultBlock
                 found={`Maximor chose “${formatAccountingMethod(method)}”${amount != null ? ` and estimated ${usd(Number(amount))}` : ""}.`}
-                why="Current Harbor Electric evidence was checked against the August precedent before posting. The system did not paste last month's number without looking."
+                why={formatAccountingSentence(method)}
                 result="The system's memory carries accounting precedent from one month into the next, but current evidence can override that precedent."
               />
             ) : (
               <p className="muted">Run the Harbor memory story to see whether September reused or overrode August's method.</p>
             )}
-            {method ? <p className="muted">Internal method: {String(method).toLowerCase()}</p> : null}
             <TraceIds ids={[io?.outputs?.written_memory_id, io?.outputs?.journal_entry?.entry_id]} />
             {io?.outputs?.journal_entry ? (
               <SourceArtifactViewer
@@ -138,7 +137,11 @@ export default function Memory() {
               <h2>Memory on versus memory off</h2>
               <p className="muted">Same original Harbor input. Turning memory off forces September to estimate without last month's saved decision.</p>
               <DevDetails raw={off}>
-                <p>This comparison is the evaluation payload from the live memory-on versus memory-off run. The numbers are not rewritten in the UI.</p>
+                <ResultBlock
+                  found="The same Harbor Electric facts were run twice: once with last month's saved decision available, and once as if September had never seen the vendor."
+                  why="This measures whether memory actually changes the estimate, rather than restating that memory exists."
+                  result="The numbers below come from that live comparison. They are not rewritten here."
+                />
               </DevDetails>
             </div>
           ) : null}
@@ -175,7 +178,7 @@ export default function Memory() {
                   <div className="muted">{item.period} · {formatStatus(item.kind)}</div>
                   <TraceIds ids={item.record_ids} />
                 </div>
-                <Pill>{item.agent}</Pill>
+                <Pill>{formatAgent(item.agent)}</Pill>
               </div>
             ))}
           </div>

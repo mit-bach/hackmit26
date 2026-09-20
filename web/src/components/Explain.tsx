@@ -46,6 +46,47 @@ export function StoryCard({
   );
 }
 
+export function DecisionExplanation({
+  decision,
+  reason,
+  evidence,
+  effect,
+}: {
+  decision?: ReactNode;
+  reason?: ReactNode;
+  evidence?: ReactNode;
+  effect?: ReactNode;
+}) {
+  return (
+    <div className="result-block">
+      {decision ? (
+        <section>
+          <h2>Decision</h2>
+          <p>{decision}</p>
+        </section>
+      ) : null}
+      {reason ? (
+        <section>
+          <h2>Reason</h2>
+          <p>{reason}</p>
+        </section>
+      ) : null}
+      {evidence ? (
+        <section>
+          <h2>Evidence</h2>
+          {evidence}
+        </section>
+      ) : null}
+      {effect ? (
+        <section>
+          <h2>Effect</h2>
+          <p>{effect}</p>
+        </section>
+      ) : null}
+    </div>
+  );
+}
+
 export function ResultBlock({
   found,
   why,
@@ -57,32 +98,105 @@ export function ResultBlock({
   evidence?: ReactNode;
   result?: ReactNode;
 }) {
+  return <DecisionExplanation decision={found} reason={why} evidence={evidence} effect={result} />;
+}
+
+export function AgentAction({
+  agent,
+  did,
+  why,
+  next,
+}: {
+  agent: ReactNode;
+  did: ReactNode;
+  why?: ReactNode;
+  next?: ReactNode;
+}) {
   return (
-    <div className="result-block">
-      {found ? (
-        <section>
-          <h2>What Maximor found</h2>
-          <p>{found}</p>
-        </section>
-      ) : null}
+    <div className="result-block agent-action">
+      <section>
+        <h2>Agent</h2>
+        <p>{agent}</p>
+      </section>
+      <section>
+        <h2>What it did</h2>
+        <p>{did}</p>
+      </section>
       {why ? (
         <section>
           <h2>Why</h2>
           <p>{why}</p>
         </section>
       ) : null}
+      {next ? (
+        <section>
+          <h2>Who receives the result next</h2>
+          <p>{next}</p>
+        </section>
+      ) : null}
+    </div>
+  );
+}
+
+export function ExceptionCard({
+  problem,
+  evidence,
+  response,
+  effect,
+}: {
+  problem: ReactNode;
+  evidence?: ReactNode;
+  response?: ReactNode;
+  effect?: ReactNode;
+}) {
+  return (
+    <div className="result-block exception-card">
+      <section>
+        <h2>Problem</h2>
+        <p>{problem}</p>
+      </section>
       {evidence ? (
         <section>
           <h2>Evidence</h2>
-          {evidence}
+          {typeof evidence === "string" ? <p>{evidence}</p> : evidence}
         </section>
       ) : null}
-      {result ? (
+      {response ? (
         <section>
-          <h2>Result</h2>
-          <p>{result}</p>
+          <h2>System response</h2>
+          <p>{response}</p>
         </section>
       ) : null}
+      {effect ? (
+        <section>
+          <h2>Financial effect</h2>
+          <p>{effect}</p>
+        </section>
+      ) : null}
+    </div>
+  );
+}
+
+export function MetricCard({
+  label,
+  value,
+  interpretation,
+  change,
+  driver,
+}: {
+  label: string;
+  value: ReactNode;
+  interpretation?: ReactNode;
+  change?: ReactNode;
+  driver?: ReactNode;
+}) {
+  return (
+    <div className="metric">
+      <div className="metric-label">{label}</div>
+      <div className="metric-value">{value}</div>
+      {interpretation ? <div className="metric-note">{interpretation}</div> : null}
+      {change ? <div className="metric-note">{change}</div> : null}
+      {driver ? <div className="metric-note">{driver}</div> : null}
     </div>
   );
 }

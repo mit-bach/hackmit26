@@ -12,7 +12,7 @@ export default function Cash() {
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
-    get("/api/cash").then(setData);
+    get("/api/cash").then(setData).catch(() => undefined);
   }, [result]);
 
   const report = result?.result?.report || data?.report;
@@ -53,7 +53,7 @@ export default function Cash() {
       }
       input={
         <div className="stack">
-          <StoryCard title={focus === "unexplained" ? "Input" : "Bank and ledger evidence"}>
+          <StoryCard title={focus === "unexplained" ? "What the bank and the books show" : "Bank and ledger evidence"}>
             {focus === "unexplained" ? (
               <>
                 <p>The bank shows that Northstar paid Maximor $12,412.40.</p>

@@ -4,7 +4,7 @@ import { useWorkflow } from "../hooks";
 import { ErrorBox, Pill, RunBar } from "../layout/Shell";
 import { BeforeAfterDiff, DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
 import { Definition, ResultBlock, StoryCard, TraceIds, WhatsHappening } from "../components/Explain";
-import { formatAccountingMethod, formatStatus, formatTask } from "../copy";
+import { formatAccountingSentence, formatStatus, formatTask } from "../copy";
 
 export default function Close() {
   const [data, setData] = useState<any>(null);
@@ -95,15 +95,16 @@ export default function Close() {
               found={`Maximor estimated September's Harbor Electric expense at ${usd(amount)}.`}
               why={
                 method
-                  ? `It chose “${formatAccountingMethod(method)}” after checking the contract, recent bills, and last month's saved decision.`
+                  ? formatAccountingSentence(method)
                   : "It used Harbor Electric's contract and recent monthly bills as evidence. The seeded September books already include this estimate."
               }
               result={`Maximor recorded ${usd(amount)} of September utility expense, paired with a ${usd(amount)} accrued liability. This lets September reflect the cost even though Harbor Electric has not sent the invoice yet.`}
             />
             <TraceIds ids={[accrualOut?.accrual_id || data?.harbor?.accrual_id, accrualOut?.written_memory_id, journal?.entry_id || data?.harbor?.journal_id]} />
             <h2>Formal journal entry</h2>
+            <Definition term="Journal entry" />
             <p className="muted">
-              Debit (expense) {journal?.debit_account || "Utilities Expense"} · Credit (what is owed) {journal?.credit_account || "Accrued Expenses"} · {usd(amount)}
+              This records {usd(amount)} of September utility expense, paired with {usd(amount)} still owed until the real bill arrives.
             </p>
             {accrualOut?.journal_entry ? (
               <SourceArtifactViewer artifact={{ kind: "journal_entry", artifact_id: accrualOut.journal_entry.entry_id, title: "Harbor Electric accrual", source_path: "accrual workflow", record: accrualOut.journal_entry }} />
@@ -124,7 +125,7 @@ export default function Close() {
             ))}
           </div>
           <div className="card">
-            <h2>Checklist before / after this run</h2>
+            <h2>What changed on the close checklist</h2>
             <BeforeAfterDiff before={beforeTasks} after={afterTasks} onlyChanged unchangedMessage="Close-task statuses did not change in this run." labelFor={formatTask} />
           </div>
           <div className="card">

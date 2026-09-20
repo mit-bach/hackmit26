@@ -1,4 +1,7 @@
 import { usd } from "./api";
+import { AGENT_COPY, GRAIN_SLUGS } from "./data/agents";
+
+export { AGENT_COPY, GRAIN_SLUGS };
 
 /** Title-case leftover snake/kebab/enum tokens without pretending they are known. */
 export function humanizeToken(value: unknown): string {
@@ -48,7 +51,8 @@ export const STATUS_COPY: Record<string, string> = {
   FAIL: "Failed",
   FAILED: "Failed",
   TIED: "Tied out",
-  EXCEPTION: "Exception",
+  EXCEPTION: "Needs investigation",
+  exceptions: "Needs attention",
   EXPLAINED_EXCEPTION: "Difference found and explained",
   OUTSTANDING_TIMING_ITEM: "Timing difference — expected to clear later",
   RECONCILED: "Bank and ledger agree",
@@ -62,9 +66,17 @@ export const STATUS_COPY: Record<string, string> = {
   RESOLVED: "Resolved",
   IN_REVIEW: "Still being evaluated",
   PENDING: "Pending",
+  pending_review: "Waiting for more evidence before a decision",
   SKIPPED: "Skipped",
   RUNNING: "Running",
   queued: "Queued",
+  clear: "Clear",
+  live: "Live",
+  simulated: "Simulated",
+  operational: "Running",
+  "not run": "Not run yet",
+  not_run: "Not run yet",
+  independent: "Independent sampling",
   true: "Yes",
   false: "No",
   invoice: "Invoice",
@@ -75,7 +87,22 @@ export const STATUS_COPY: Record<string, string> = {
   other: "Not treated as a vendor invoice",
   not_an_invoice: "Not an invoice",
   duplicate: "Looks like a duplicate bill",
+  approved_pool: "Ready for this week's payments",
   malformed: "Missing required fields",
+  three_way_match_failed: "The invoice, purchase order, and delivery record do not all agree",
+  exception_duplicate_candidate: "This invoice may be a duplicate of another bill already in the system",
+  HIGH: "High severity",
+  MEDIUM: "Medium severity",
+  LOW: "Low severity",
+  CRITICAL: "Critical",
+  INFO: "Informational",
+  CONFIRMED_CONTROL_FAILURE: "Confirmed control failure",
+  RISK_INDICATOR: "Risk indicator — extra testing needed",
+  AGREE: "Records agree",
+  DISAGREE: "Records disagree",
+  "kernel-deterministic": "Using the company's recorded rules",
+  "live-llm": "Using a live language model",
+  "office-completes-work": "The office finishes the work itself",
 };
 
 export const DECISION_COPY: Record<string, string> = {
@@ -121,18 +148,96 @@ export const METHOD_COPY: Record<string, string> = {
   seasonal_prior_year: "Use the comparable season from last year",
   SEASONAL_PRIOR_YEAR: "Use the comparable season from last year",
   last_invoice: "Reuse the most recent bill amount",
+  LAST_INVOICE: "Reuse the most recent bill amount",
   simple_average: "Average of historical bills",
+  SIMPLE_AVERAGE: "Average of historical bills",
   recent_average: "Average of the most recent bills",
+  RECENT_AVERAGE: "Average of the most recent bills",
   weighted_recent_average: "Weighted average of recent bills, with later months counting more",
+  WEIGHTED_RECENT_AVERAGE: "Weighted average of recent bills, with later months counting more",
   linear_trend: "Project the recent trend forward",
+  LINEAR_TREND: "Project the recent trend forward",
   contract_commitment: "Use the contracted monthly amount",
+  CONTRACT_COMMITMENT: "Use the contracted monthly amount",
   usage_run_rate: "Estimate from usage multiplied by the contract rate",
+  USAGE_RUN_RATE: "Estimate from usage multiplied by the contract rate",
   goods_receipt: "Use proof that goods or services were received",
   purchase_order: "Use the authorized purchase-order amount",
   conservative_minimum: "Use the most conservative available estimate",
+  CONSERVATIVE_MINIMUM: "Use the most conservative available estimate",
   AMORTIZE: "Spread the prepaid cost across the months it covers",
   DEPRECIATE: "Spread the asset cost across its useful life",
   EXPENSE: "Record the full amount as an expense now",
+};
+
+export const METHOD_SENTENCE: Record<string, string> = {
+  seasonal_prior_year:
+    "The system estimated this bill using the same seasonal pattern from last year, since a current invoice has not arrived yet.",
+  SEASONAL_PRIOR_YEAR:
+    "The system estimated this bill using the same seasonal pattern from last year, since a current invoice has not arrived yet.",
+  last_invoice: "The system reused the most recent bill amount because a current invoice has not arrived yet.",
+  LAST_INVOICE: "The system reused the most recent bill amount because a current invoice has not arrived yet.",
+  simple_average: "The system averaged earlier bills from this vendor to estimate the missing amount.",
+  recent_average: "The system averaged the most recent bills from this vendor to estimate the missing amount.",
+  weighted_recent_average: "The system weighted recent bills more heavily than older ones to estimate the missing amount.",
+  linear_trend: "The system projected the recent trend in this vendor's bills forward to estimate the missing amount.",
+  contract_commitment: "The system used the contracted monthly amount because that is what the company has already agreed to pay.",
+  usage_run_rate: "The system multiplied recent usage by the contract rate to estimate the missing amount.",
+  goods_receipt: "The system used proof that the goods or services were received to estimate the amount that belongs in this month.",
+  purchase_order: "The system used the authorized purchase-order amount as the best available estimate.",
+  conservative_minimum: "The system used the most conservative available estimate so the month is not overstated.",
+  AMORTIZE: "The system is spreading a cost that was paid up front across the months it actually covers.",
+  DEPRECIATE: "The system is spreading the cost of equipment across the years it will be used.",
+  EXPENSE: "The system recorded the full amount as an expense in this month.",
+};
+
+export const FAMILY_COPY: Record<string, string> = {
+  documents: "Messy invoices, quotes, and look-alike documents",
+  cash: "Bank activity matched to the books with real evidence",
+  anti_hack: "Same-dollar distractors that must not be forced together",
+  questions: "Questions that combine several company records",
+  rubrics: "Close work graded on several criteria, not one number",
+  consistency: "Whether every workflow agrees about the same bill",
+  long_horizon: "Whether August decisions still matter in later months",
+  memory: "Whether a prior decision is reused only when current evidence still supports it",
+  recovery: "Whether a broken file or duplicate event causes invented books",
+};
+
+export const AGENT_ALIASES: Record<string, string> = {
+  "AP Preparer": "ap",
+  "Exception Investigator": "ap",
+  "AP Reviewer": "ctl-pay",
+  "AP Approver": "ctl-pay",
+  "AP Audit": "ctl-pay",
+  "Email Invoice Agent": "email",
+  "Counterparty Message Agent": "email",
+  "Finance Inbox Agent": "email",
+  "Payment Scheduler": "pay",
+  "Payment Audit": "ctl-pay",
+  "Collections Agent": "collect",
+  "Cash Application Agent": "apply",
+  "Cash Application Reviewer": "ctl-cash",
+  "Cash Reconciliation Preparer": "cash",
+  "Cash Exception Investigator": "cash",
+  "Cash Reconciliation Reviewer": "ctl-cash",
+  "Close Manager": "close",
+  "Accrual Agent": "close",
+  "Prepaid Preparer": "close",
+  "Fixed Asset Preparer": "close",
+  "Month-End Close Reviewer": "ctl-books",
+  "Cash Forecast Agent": "story",
+  "Variance Analysis Agent": "story",
+  "Forecast Variance Agent": "story",
+  "Auditor Agent": "audit",
+  "Audit Report Agent": "audit",
+  "bot_ap": "ap",
+  "bot_ctl_pay": "ctl-pay",
+  "bot_ctl_cash": "ctl-cash",
+  "bot_ctl_books": "ctl-books",
+  AP_AGENT: "ap",
+  CASH_AGENT: "cash",
+  AR_AGENT: "apply",
+  CLOSE_AGENT: "close",
 };
 
 export const TASK_COPY: Record<string, string> = {
@@ -152,132 +257,6 @@ export const TASK_COPY: Record<string, string> = {
   depreciation: "Fixed assets",
   bs: "Balance sheet reconciliation",
   final: "Final close check",
-};
-
-export const AGENT_COPY: Record<
-  string,
-  { name: string; role: string; example: string; inputs: string; outputs: string; passesTo: string }
-> = {
-  email: {
-    name: "Email Agent",
-    role: "Reads incoming finance emails and attachments and identifies what kind of document arrived.",
-    example: "If a vendor emails an invoice, the Email Agent identifies it as an invoice, extracts the attachment, and sends the record into accounts payable.",
-    inputs: "Emails, attachments, employee uploads, and vendor-portal documents.",
-    outputs: "A classification (invoice, quote, statement, receipt, or other) plus extracted fields when the document is a bill.",
-    passesTo: "Hands invoices to the Accounts Payable Agent and customer remittances toward cash application.",
-  },
-  stripe: {
-    name: "Stripe Agent",
-    role: "Tracks money processed through Stripe. It connects customer charges, refunds, disputes, Stripe fees, and payouts so Maximor can explain exactly how a Stripe payout became a bank deposit.",
-    example: "When Stripe sends a payout, this agent reconstructs gross charges minus refunds, chargebacks, and fees, then ties that net amount to the bank deposit.",
-    inputs: "Stripe payouts, balance transactions, refunds, disputes, and matching bank deposits.",
-    outputs: "A payout waterfall and a yes/no answer for whether the deposit matches Stripe's net.",
-    passesTo: "Hands the explained payout to the Bank Agent and Cash Reconciliation Agent.",
-  },
-  bank: {
-    name: "Bank Agent",
-    role: "Reads bank activity and provides the cash transactions that Maximor needs to reconcile against the accounting ledger.",
-    example: "It lands each deposit and withdrawal from the bank feed so cash reconciliation can look for a matching ledger explanation.",
-    inputs: "Bank statement lines and corporate-card charges.",
-    outputs: "Canonical bank transactions used by cash reconciliation.",
-    passesTo: "Hands bank lines to the Cash Reconciliation Agent. A card charge is not treated as a vendor bill.",
-  },
-  books: {
-    name: "Books Agent",
-    role: "Provides the company's accounting records: the general ledger, vendor and customer records, purchase orders, and period-close information.",
-    example: "When another agent needs the authorized purchase order or a ledger cash entry, the Books Agent supplies the official record.",
-    inputs: "ERP and accounting-system records (ledger, vendors, customers, POs, period lock).",
-    outputs: "Read-only accounting records other agents can rely on.",
-    passesTo: "Serves every operating agent; it does not close the period itself.",
-  },
-  ap: {
-    name: "Accounts Payable Agent",
-    role: "Checks vendor bills before they are paid. It compares invoices with purchase orders and proof that goods or services were received, detects duplicates, and identifies exceptions.",
-    example: "A clean Acme invoice that matches its purchase order and receiving record is approved. A second copy of the same Northline bill is held as a duplicate.",
-    inputs: "Vendor invoices, purchase orders, goods receipts, and prior vendor decisions.",
-    outputs: "Approve or hold decisions, exception reasons, and links to later payment records.",
-    passesTo: "Approved bills go to the Payments Agent. Held bills stay with payables until the exception is resolved. Payables Control independently verifies match decisions.",
-  },
-  pay: {
-    name: "Payments Agent",
-    role: "Builds the proposed vendor-payment schedule from bills that have already passed Maximor's payable checks.",
-    example: "Once invoices are approved, this agent decides which bills belong in this week's payment run based on due dates, cash, and discounts — it does not move money on its own.",
-    inputs: "The approved bill pool, cash position, and treasury policies.",
-    outputs: "A draft weekly payment plan.",
-    passesTo: "Sends the draft plan to the Payables Control Agent for concurrence before any cash is released.",
-  },
-  apply: {
-    name: "Cash Application Agent",
-    role: "Matches incoming customer payments to the customer invoices those payments settle.",
-    example: "If Lumen Labs sends $5,000 labeled only 'September billing,' this agent tries to determine which Lumen invoices that money belongs to — and leaves it unmatched when the evidence is not strong enough.",
-    inputs: "Customer payments, remittance text, open invoices, and prior cash-application precedents.",
-    outputs: "Applied, partially applied, or unmatched payment decisions.",
-    passesTo: "Hands uncertain applications to Cash Control. Remaining unpaid invoices go to the Collections Agent.",
-  },
-  collect: {
-    name: "Collections Agent",
-    role: "Tracks unpaid customer invoices and identifies overdue balances that need collection follow-up.",
-    example: "It looks at invoice aging and decides which customers are late enough to chase, after cash application has already applied any incoming payments.",
-    inputs: "Open customer invoices, aging, payment history, and collection policy.",
-    outputs: "Follow-up recommendations for overdue customers.",
-    passesTo: "Works after cash application. Write-off or reserve proposals go to control agents.",
-  },
-  cash: {
-    name: "Cash Reconciliation Agent",
-    role: "Matches bank activity to accounting records and explains differences such as grouped payments, bank fees, and unresolved discrepancies.",
-    example: "It matches a $30,000 bank withdrawal to three vendor invoices, nets a wire against its bank fee, and leaves the $12.40 Northstar difference unresolved when no evidence exists.",
-    inputs: "Bank transactions, ledger cash entries, fee evidence, and Stripe payout explanations.",
-    outputs: "Match decisions, explained exceptions, and unresolved differences.",
-    passesTo: "Sends material reconciling items to Cash Control. Unresolved cash differences block month-end close.",
-  },
-  close: {
-    name: "Month-End Close Agent",
-    role: "Coordinates the work needed to finish a month's books, including accruals, prepaids, fixed assets, reconciliations, and final close checks.",
-    example: "When Harbor Electric's September bill has not arrived, this agent estimates the electricity expense so September still includes the cost.",
-    inputs: "Close checklist, vendor history, contracts, prepaid schedules, asset records, and cash status.",
-    outputs: "Accruals, prepaid treatments, depreciation, close-task status, and journal entries.",
-    passesTo: "Hands treatments and the period lock to the Books Control Agent. Asks cash, payables, and receivables agents for current status.",
-  },
-  story: {
-    name: "Reporting Agent",
-    role: "Explains what changed in the company's cash and results. It builds the 13-week cash forecast, variance analysis, and board-facing financial narrative.",
-    example: "It projects weekly ending cash from expected customer collections, vendor payments, and payroll, then explains why this month's margin moved.",
-    inputs: "Ledger actuals, forecast assumptions, collections timing, and payment schedules.",
-    outputs: "13-week cash forecast, variance explanations, and board metrics tied to the books.",
-    passesTo: "Reads close and cash results; does not move money or own the books.",
-  },
-  "ctl-pay": {
-    name: "Payables Control Agent",
-    role: "Independently checks accounts-payable match decisions and proposed payment plans before they become final. It looks for reasons to refuse, not reasons to wave things through.",
-    example: "If payables approved a bill, this agent re-checks the invoice, purchase order, and receiving record and only concurs when the packet is complete.",
-    inputs: "AP match packets, payment-run drafts, and company policy.",
-    outputs: "Concurrence or refusal on match and payment-plan decisions.",
-    passesTo: "Returns a verified decision to the Accounts Payable and Payments agents. It does not ask a person to intervene.",
-  },
-  "ctl-cash": {
-    name: "Cash Control Agent",
-    role: "Independently checks cash-application and bank-reconciliation decisions before they are accepted as complete.",
-    example: "If cash reconciliation claims a fee-netted match, this agent verifies the bank line, ledger entries, and fee evidence before concurring.",
-    inputs: "Cash-application packets and bank-reconciliation proposals.",
-    outputs: "Concurrence or refusal on cash matches.",
-    passesTo: "Returns verified cash decisions to the Cash Application and Cash Reconciliation agents.",
-  },
-  "ctl-books": {
-    name: "Books Control Agent",
-    role: "Independently checks month-end accounting treatments and whether the period is actually ready to lock.",
-    example: "It reviews the Harbor Electric accrual, prepaid amortization, asset depreciation, and balance-sheet recs, and will not lock the month while cash is still unresolved.",
-    inputs: "Accrual, prepaid, asset, and balance-sheet packets plus close-gate results.",
-    outputs: "Concurrence on treatments and the period lock.",
-    passesTo: "Returns verified close treatments to the Month-End Close Agent.",
-  },
-  audit: {
-    name: "Audit Agent",
-    role: "Independently inspects transactions and accounting records for signs that company controls were broken or records do not agree. It does not operate the books.",
-    example: "It flags an invoice that the same user requested and approved, two bills that look like the same vendor invoice, and round-number payments that need extra testing.",
-    inputs: "Invoices, payments, journals, vendors, and approval records sampled after the fact.",
-    outputs: "Control findings with source evidence.",
-    passesTo: "Reports independently. It does not fix or re-post the books.",
-  },
 };
 
 export const WORKFLOW_COPY: Record<string, string> = {
@@ -304,6 +283,13 @@ export const WORKFLOW_COPY: Record<string, string> = {
   evaluate: "evaluation run",
   accrual: "missing-bill accrual",
   forecast: "13-week cash forecast",
+  "ar-aging": "unpaid invoice aging",
+  "ar-collections": "collections follow-up",
+  "ar-cash-apply": "customer payment matching",
+  "bank-reconciliation": "bank reconciliation",
+  gauntlet: "the Finance Gauntlet",
+  "memory-eval": "memory on versus off comparison",
+  schedule: "vendor payment scheduling",
 };
 
 export const CAPABILITY_COPY: Record<string, string> = {
@@ -424,13 +410,27 @@ export const EVAL_CASE_COPY: Record<string, { title: string; test: string }> = {
 };
 
 export const EXCEPTION_COPY: Record<string, string> = {
-  duplicate: "This looks like a second copy of a bill Maximor already has.",
+  duplicate: "This invoice may be a duplicate of another invoice already in the system.",
   vendor_mismatch: "The vendor name on the bill does not match the purchase order, but a known alias may explain it.",
   quantity_variance: "The quantity billed does not match what was ordered or received.",
   price_variance: "The price billed does not match the authorized purchase order.",
   missing_po: "No purchase order was found for this bill.",
   missing_receipt: "There is no receiving record showing the goods or services arrived.",
   self_approval: "The same person requested and approved this transaction.",
+  three_way_match_failed: "The invoice could not be fully matched to the purchase order and delivery record.",
+  exception_duplicate_candidate: "This invoice may be a duplicate of another invoice already in the system.",
+  partial_receipt: "The company was billed for more than has actually been received so far.",
+  goods_not_received: "There is no record that the ordered goods or services arrived.",
+  po_not_approved: "The purchase order was never approved, so this bill is not authorized.",
+  material_amount_mismatch: "The billed amount is materially different from what was authorized.",
+  small_amount_discrepancy: "The billed amount is slightly different from the purchase order, within a small tolerance.",
+  unusual_timing: "The invoice is dated before the purchase order, which is unusual.",
+  approval_limit_exceeded: "The purchase exceeds the amount this approver is allowed to authorize.",
+  unknown_invoice: "This invoice is not in the company's records.",
+  amount_mismatch: "The billed amount does not agree with the authorized purchase order or receiving record.",
+  date_mismatch: "The dates on the bill do not line up with the order or delivery.",
+  po_mismatch: "The purchase-order number on the bill does not match company records.",
+  unexplained_difference: "The bank and the ledger disagree, and no supporting fee or adjustment was found.",
 };
 
 export const AGING_COPY: Record<string, string> = {
@@ -458,9 +458,16 @@ export const GLOSSARY: Record<string, string> = {
   Variance: "The difference between what was expected and what actually happened.",
   "13-week cash forecast": "A week-by-week estimate of how much money will be in the bank over the next 13 weeks.",
   Chargeback: "A customer dispute that pulls money back out of a card or Stripe payout.",
-  "Three-way match": "Comparing a vendor invoice with the purchase order and the record that goods or services were received.",
+  "Three-way match": "A check that the invoice, purchase order, and proof of delivery all agree.",
   "Unapplied cash": "Customer money that has arrived but has not yet been matched to a specific invoice.",
   "Decision memory": "A saved record of how Maximor handled a finance decision, including the evidence and reason, so a later period can reuse or override it.",
+  "Purchase order": "The company's authorization to buy specific goods or services at an agreed price.",
+  "Goods receipt": "The record that the ordered goods or services actually arrived.",
+  "Gross margin": "The share of sales left after the direct costs of delivering the product or service.",
+  "Balance sheet": "The snapshot of what the company owns and owes at a point in time.",
+  "Fixed asset": "Equipment or other long-lived property that should be recorded as an asset and spread over its useful life.",
+  Depreciation: "Spreading the cost of equipment across the years it will be used.",
+  "Stripe payout": "The net amount Stripe sends to the bank after charges, refunds, disputes, and fees.",
 };
 
 export const KNOWN_ENUMS = {
@@ -504,6 +511,10 @@ export function formatAccountingMethod(value: unknown): string {
   return lookup(METHOD_COPY, value, humanizeToken(value) || "—");
 }
 
+export function formatAccountingSentence(value: unknown): string {
+  return lookup(METHOD_SENTENCE, value, formatAccountingMethod(value));
+}
+
 export function formatControlResult(value: unknown): string {
   return lookup(STATUS_COPY, value, humanizeToken(value) || "—");
 }
@@ -514,10 +525,30 @@ export function formatWorkflow(value: unknown): string {
 
 export function formatAgent(value: unknown): string {
   const key = String(value || "").trim();
+  if (!key) return "Agent";
   if (AGENT_COPY[key]) return AGENT_COPY[key].name;
+  const aliased = AGENT_ALIASES[key] || AGENT_ALIASES[key.replace(/_/g, "-")];
+  if (aliased && AGENT_COPY[aliased]) return AGENT_COPY[aliased].name;
   const slug = key.replace(/_/g, "-").replace(/^bot-/, "");
   if (AGENT_COPY[slug]) return AGENT_COPY[slug].name;
   return humanizeToken(key) || "Agent";
+}
+
+export function formatFamily(value: unknown): string {
+  return lookup(FAMILY_COPY, value, humanizeToken(value) || "Other tests");
+}
+
+export function formatPeriod(value: unknown): string {
+  const raw = String(value || "").trim();
+  const match = raw.match(/^(\d{4})-(\d{2})$/);
+  if (!match) return raw || "—";
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = months[Number(match[2]) - 1];
+  return month ? `${month} ${match[1]}` : raw;
+}
+
+export function formatExecution(value: unknown): string {
+  return lookup(STATUS_COPY, value, humanizeToken(value) || "Using the company's recorded rules");
 }
 
 export function formatRecordType(value: unknown): string {
@@ -536,6 +567,8 @@ export function formatRecordType(value: unknown): string {
     historical_invoice: "Prior monthly bill",
     payment: "Payment",
     remittance: "Customer payment",
+    document: "Document",
+    table: "Supporting table",
   };
   return lookup(table, value, humanizeToken(value) || "Record");
 }
@@ -591,8 +624,120 @@ export function formatFieldKey(key: string): string {
     payment_state: "Payment status",
     accounting_status: "Accounting status",
     invoice_id: "Invoice",
+    vendor: "Vendor",
+    vendor_name: "Vendor",
+    amount: "Amount",
+    po_id: "Purchase order",
+    invoice_number: "Invoice number",
+    vendor_invoice_number: "Vendor invoice number",
+    invoice_date: "Invoice date",
+    due_date: "Due date",
+    description: "Description",
+    status: "Status",
+    exceptions: "Problems found",
+    linked_payments: "Linked payments",
+    linked_journals: "Linked journal entries",
+    artifact_id: "Record",
+    source_path: "Source file",
+    content_type: "File type",
+    amount_minor: "Amount",
+    payout_id: "Stripe payout",
+    bank_deposit_id: "Bank deposit",
+    bank_deposit_amount: "Bank deposit amount",
+    transaction_id: "Bank transaction",
+    entry_id: "Ledger entry",
+    counterparty: "Counterparty",
+    reference: "Reference",
+    beginning_cash: "Cash at start of week",
+    ending_cash: "Cash at end of week",
+    ar_collections: "Expected customer collections",
+    ap_payments: "Expected vendor payments",
+    payroll: "Payroll",
+    pay_this_week: "Bills in this week's payment run",
+    defer: "Bills deferred to a later week",
+    classification: "Document type",
+    is_invoice: "Is this a vendor invoice?",
+    period_status: "Reconciliation status",
+    match_type: "How it was matched",
+    final_method: "Estimation method",
+    final_amount: "Estimated amount",
+    control_name: "Control",
+    control_id: "Control",
+    severity: "Severity",
+    requester_id: "Requested by",
+    approver_id: "Approved by",
+    debit_account: "Expense or asset account",
+    credit_account: "Offset account",
+    memo: "Memo",
+    quantity_ordered: "Quantity ordered",
+    quantity_received: "Quantity received",
+    authorized_amount: "Authorized amount",
+    received: "Received",
+    application_status: "Payment match",
+    outstanding_amount: "Still unpaid",
+    customer_name: "Customer",
+    remittance_text: "Payment message",
+    payer_name: "Payer",
   };
   return table[key] || humanizeToken(key);
+}
+
+export function formatSummary(value: unknown): string {
+  let text = String(value ?? "").trim();
+  if (!text) return "";
+  const replacements: Array<[RegExp, string | ((substring: string, ...args: string[]) => string)]> = [
+    [/\bHUMAN_REVIEW\b/g, "could not finish with the available evidence"],
+    [/\bUNEXPLAINED_DIFFERENCE\b/g, "unresolved difference"],
+    [/\bGROUPED_MATCH\b/g, "one payment covering several bills"],
+    [/\bFEE_NETTED\b/g, "transfer matched after the bank fee"],
+    [/\bPROVIDER_PAYOUT\b/g, "Stripe payout matched to the bank"],
+    [/\bEXACT_MATCH\b/g, "exact match"],
+    [/\bAUTO_APPLY\b/g, "matched automatically"],
+    [/\bUNAPPLIED\b/g, "not yet matched to an invoice"],
+    [/\bNEEDS_REVIEW\b/g, "still needs more evidence"],
+    [/\bthree_way_match_failed\b/g, "the invoice, purchase order, and delivery record do not all agree"],
+    [/\bexception_duplicate_candidate\b/g, "possible duplicate invoice"],
+    [/\bseasonal_prior_year\b/gi, "last year's seasonal pattern"],
+    [/\bcanonical invoices\b/gi, "recognized vendor invoices"],
+    [/\bclassified as\b/gi, "identified as"],
+    [/\bpayout waterfalls\b/gi, "payout explanations"],
+    [/\bprovider matches\b/gi, "processor payouts tied to the bank"],
+    [/\bAR outstanding\b/g, "Unpaid customer invoices"],
+    [/\bClose ([A-Z_]+)\b/g, (_m, status: string) => `Month-end status: ${formatStatus(status)}`],
+    [/\bCFO cycle close=([A-Z_]+)\b/g, (_m, status: string) => `The connected finance cycle finished with month-end still ${formatStatus(status).toLowerCase()}`],
+    [/\bctl-pay\b/gi, "Payables Control"],
+    [/\bctl-cash\b/gi, "Cash Control"],
+    [/\bctl-books\b/gi, "Books Control"],
+    [/\bPython evidence\b/gi, "Supporting records"],
+    [/\bPython candidates\b/gi, "Possible matches"],
+    [/\bPython match combinations\b/gi, "Possible invoice matches"],
+    [/\bPython estimate candidates\b/gi, "Possible estimates"],
+    [/\bApproved pool\b/g, "Bills already cleared for payment"],
+    [/\bCash \+ policy net\b/g, "Cash on hand and payment policy"],
+    [/\bField interpretation\b/g, "Read the invoice fields"],
+    [/\bCanonical invoice registration\b/g, "Create a vendor bill if this is actually an invoice"],
+    [/\bCanonical registration\b/g, "Create a vendor bill if this is actually an invoice"],
+    [/\bInbox classification\b/g, "Identify what kind of document arrived"],
+    [/\bDocument classification\b/g, "Identify what kind of document arrived"],
+    [/\bnot an invoice\b/gi, "not treated as a vendor invoice"],
+    [/\bduplicates removed\b/gi, "duplicate copies set aside"],
+    [/\bBS recs\b/g, "Balance-sheet checks"],
+    [/\bMemory ON vs OFF evaluation complete\b/g, "Compared September with last month's saved decision against estimating from scratch"],
+  ];
+  for (const [pattern, next] of replacements) {
+    text = text.replace(pattern, next as never);
+  }
+  text = text.replace(/\b[A-Z][A-Z0-9_]{3,}\b/g, (token) => {
+    if (looksLikeId(token)) return token;
+    const friendly = lookup(STATUS_COPY, token, lookup(DECISION_COPY, token, lookup(MATCH_TYPE_COPY, token, "")));
+    return friendly || humanizeToken(token);
+  });
+  text = text.replace(/\b[a-z]+(?:_[a-z0-9]+)+\b/g, (token) => lookup(STATUS_COPY, token, lookup(EXCEPTION_COPY, token, humanizeToken(token))));
+  text = text.replace(/\b(\d{5,}(?:\.\d+)?)\b/g, (token) => {
+    const num = Number(token);
+    return Number.isFinite(num) ? usd(num) : token;
+  });
+  return text;
 }
 
 export function explainCashMatch(item: any): { title: string; body: string } {
@@ -633,38 +778,103 @@ export function explainCashMatch(item: any): { title: string; body: string } {
 }
 
 export function formatHandoff(bots: unknown, workflow?: unknown): string {
-  const slugs = Array.isArray(bots) ? bots.map(String).filter(Boolean) : [];
-  if (!slugs.length) {
-    return workflow ? `${formatAgent(workflow)} completed ${formatWorkflow(workflow)}.` : "";
+  const slugs = (Array.isArray(bots) ? bots : [bots])
+    .map((item) => {
+      if (item && typeof item === "object") {
+        const row = item as Record<string, unknown>;
+        return String(row.slug || row.bot || row.display_name || row.name || "");
+      }
+      return String(item || "");
+    })
+    .filter(Boolean);
+  const unique = Array.from(new Set(slugs.map(formatAgent)));
+  const work = formatWorkflow(workflow || slugs[0]);
+  if (!unique.length) {
+    return workflow ? `Work continued on ${work}.` : "";
   }
-  if (slugs.length === 1) {
-    return `${formatAgent(slugs[0])} completed ${formatWorkflow(workflow || slugs[0])}.`;
+  if (unique.length === 1) {
+    return `${unique[0]} finished ${work} and recorded the result on the shared company books.`;
   }
-  const names = slugs.map(formatAgent);
-  const last = names[names.length - 1];
-  const lead = names.slice(0, -1).join(", ");
-  return `${lead} handed work to ${last} so ${formatWorkflow(workflow || slugs[0])} could continue.`;
+  if (unique.length === 2) {
+    return `${unique[0]} sent this work to ${unique[1]} so ${work} could continue.`;
+  }
+  const last = unique[unique.length - 1];
+  const lead = unique.slice(0, -1).join(", ");
+  return `${lead} each completed their part, then handed the result to ${last} so ${work} could continue.`;
 }
 
 export function formatStage(stage: any): { label: string; detail?: string } {
   const bot = formatAgent(stage?.bot || stage?.slug);
-  const raw = String(stage?.label || stage?.id || "");
+  const id = String(stage?.id || "");
   const known: Record<string, string> = {
     memory: `${bot} retrieved the prior-period decision.`,
     ap: `${bot} reviewed featured vendor bills.`,
     ar: `${bot} applied or evaluated customer payments.`,
     cash: `${bot} reconciled bank activity to the ledger.`,
     close: `${bot} ran the month-end close checklist.`,
-    reporting: `${bot} refreshed the cash forecast and variance explanation.`,
+    reporting: `${bot} refreshed the cash forecast and explained why results changed.`,
     audit: `${bot} independently re-tested company controls.`,
     ingest: `${bot} classified the incoming document.`,
     match: `${bot} compared the bill with its purchase order and receiving record.`,
     apply: `${bot} tried to match the customer payment to invoices.`,
+    facts: `${bot} gathered the invoice, purchase order, and delivery record.`,
+    prepare: `${bot} checked whether the bill is safe to pay.`,
+    investigate: `${bot} investigated why the bill does not line up.`,
+    concur: `${bot} independently rechecked the payables decision.`,
+    pool: `${bot} collected bills that had already passed payable checks.`,
+    policy: `${bot} weighed due dates, cash on hand, and payment policy.`,
+    candidates: `${bot} listed possible matches from the available records.`,
+    decide: `${bot} made a decision from the available evidence.`,
+    verify: `${bot} independently rechecked an uncertain match.`,
+    unpack: `${bot} unpacked the Stripe payout into charges, refunds, fees, and disputes.`,
+    math: `${bot} checked whether charges minus refunds, disputes, and fees equal the payout.`,
+    bank: `${bot} tied the explained payout to the bank deposit.`,
+    gl: `${bot} compared the result with the accounting records.`,
+    evidence: `${bot} collected contracts, prior bills, and other supporting records.`,
+    journal: `${bot} recorded the formal accounting entry.`,
+    sample: `${bot} sampled invoices, payments, journals, and approvals.`,
+    controls: `${bot} re-performed the company's controls.`,
+    findings: `${bot} wrote findings with source evidence.`,
+    sources: `${bot} collected incoming finance documents.`,
+    classified: `${bot} identified what kind of document arrived.`,
+    fields: `${bot} read vendor, amount, dates, and invoice number.`,
+    canonical: `${bot} created a vendor bill only if the document is actually an invoice.`,
+    duplicate: `${bot} checked whether this is a second copy of a bill already on file.`,
+    received: `${bot} received the incoming document.`,
+    dispatch: `${bot} routed the document to the right next agent.`,
+    lock: `${bot} decided whether the month is actually ready to lock.`,
+    prepaid: `${bot} spread prepaid costs across the months they cover.`,
+    assets: `${bot} recorded equipment as an asset instead of an immediate expense.`,
+    bs: `${bot} checked that balance-sheet accounts agree with supporting records.`,
+    accrual: `${bot} estimated expenses that belong in the month before the bill arrives.`,
   };
-  return {
-    label: known[stage?.id] || stage?.label || `${bot} ran ${formatWorkflow(raw)}.`,
-    detail: stage?.detail,
+  const rawLabel = String(stage?.label || "");
+  const label = known[id] || (rawLabel && !/[._]|Python|ctl-|canonical/i.test(rawLabel) ? rawLabel : `${bot} ran ${formatWorkflow(rawLabel || id)}.`);
+  const detail = stage?.detail != null && stage.detail !== "" ? formatSummary(stage.detail) : undefined;
+  return { label, detail };
+}
+
+export function explainMetric(key: string, value: unknown, extras?: Record<string, unknown>): { label: string; interpretation: string } {
+  const label = formatFieldKey(key);
+  const amount = typeof value === "number" ? usd(value) : formatStatus(value);
+  const overdue60 = extras?.overdue60 != null ? usd(Number(extras.overdue60)) : null;
+  const table: Record<string, string> = {
+    cash: `The company currently has ${amount} available in the bank. This is the starting point for paying vendors and covering payroll.`,
+    ap_outstanding: `The company currently owes vendors ${amount}. These bills will reduce cash when they are paid.`,
+    ar_outstanding: overdue60
+      ? `Customers currently owe the company ${amount}. ${overdue60} of that amount has been unpaid for more than 60 days, which makes collection less certain and could affect near-term cash.`
+      : `Customers currently owe the company ${amount}. Until they pay, this cash is not yet in the bank.`,
+    projected_ending_cash: `The company is projected to have about ${amount} in cash at the end of the 13-week forecast, after expected customer collections, vendor payments, and payroll.`,
+    projected_13w_ending_cash: `The company is projected to have about ${amount} in cash at the end of the 13-week forecast. The largest expected cash outflows are payroll and vendor payments.`,
+    unreconciled_items: `The bank and the books disagree by ${amount}. Until that difference is explained, cash reconciliation — and therefore month-end close — stays incomplete.`,
+    unreconciled_item: `There is still an unresolved bank item: ${amount}.`,
+    close_status: `Month-end close is currently “${amount}.” The month cannot be treated as finished while required checks remain open.`,
+    exception_count: `${amount} items still need investigation before they can be treated as complete.`,
+    journal_count: `${amount} formal accounting entries are on the books for this period.`,
+    decision_memory_count: `${amount} earlier decisions are saved so later months can reuse or override them.`,
+    open_audit_findings: extras?.open_audit_findings == null ? "Independent audit findings appear after the audit is run." : `${amount} control issues were written by independent audit.`,
   };
+  return { label, interpretation: table[key] || `${label}: ${amount}.` };
 }
 
 export function friendlyExpected(value: unknown): string {
@@ -718,5 +928,3 @@ export function idsOf(...groups: Array<unknown>): string[] {
   }
   return Array.from(new Set(out.filter(Boolean)));
 }
-
-export const GRAIN_SLUGS = Object.keys(AGENT_COPY);

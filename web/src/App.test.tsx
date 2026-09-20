@@ -41,7 +41,7 @@ afterEach(() => {
 
 test("route table includes the operations shell", () => {
   expect(ROUTES).toEqual(
-    expect.arrayContaining(["/", "/inbox", "/ap", "/ar", "/cash", "/stripe", "/close", "/forecast", "/audit", "/memory", "/agents", "/evaluations", "/scenarios", "/architecture"])
+    expect.arrayContaining(["/", "/inbox", "/ap", "/ar", "/cash", "/stripe", "/close", "/forecast", "/audit", "/memory", "/agents", "/evaluations", "/scenarios", "/architecture", "/simulations", "/videos", "/workflow", "/coverage"])
   );
 });
 
@@ -55,24 +55,25 @@ test.each(ROUTES)("renders %s without hardcoded demo success copy", async (route
   expect(screen.queryByText("Invoice approved")).not.toBeInTheDocument();
 });
 
-test("demo layout exposes original input and final output", async () => {
+test("demo layout exposes what arrived and what changed", async () => {
   render(
     <MemoryRouter initialEntries={["/inbox"]}>
       <App />
     </MemoryRouter>
   );
-  expect(screen.getAllByText(/Original input/i).length).toBeGreaterThan(0);
-  expect(screen.getAllByText(/Final output/i).length).toBeGreaterThan(0);
+  expect(screen.getAllByText(/What arrived/i).length).toBeGreaterThan(0);
+  expect(screen.getAllByText(/What changed/i).length).toBeGreaterThan(0);
 });
 
-test("agents page uses specialized finance agents framing", async () => {
+test("agents page uses finance team framing", async () => {
   render(
     <MemoryRouter initialEntries={["/agents"]}>
       <App />
     </MemoryRouter>
   );
-  expect(await screen.findByText(/15 specialized finance agents/i)).toBeInTheDocument();
+  expect(await screen.findByText(/The finance team/i)).toBeInTheDocument();
   expect(screen.queryByText("Fifteen bots")).not.toBeInTheDocument();
+  expect(screen.queryByText(/43 autonomous agents/i)).not.toBeInTheDocument();
 });
 
 test("evaluations route is the evaluation lab", async () => {

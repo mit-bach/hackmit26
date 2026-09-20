@@ -200,6 +200,13 @@ def test_runtime_survives_rebind(tmp_path):
     shutdown_workspace()
 
 
+def test_story_routes_do_not_recurse(client):
+    for path in ("/api/stories/harbor", "/api/stories/correction", "/api/stories/stripe", "/api/stories/trap"):
+        response = client.get(path)
+        assert response.status_code == 200, path
+        assert response.json()
+
+
 def test_gauntlet_and_lineage_are_judge_readable(client):
     payload = client.get("/api/gauntlet").json()
     assert payload["scored"] is False
@@ -208,6 +215,12 @@ def test_gauntlet_and_lineage_are_judge_readable(client):
     trap = client.get("/api/stories/trap").json()
     assert "naive" in trap
     assert trap["payable"] is False
+    harbor = client.get("/api/stories/harbor")
+    assert harbor.status_code == 200
+    assert harbor.json()["title"]
+    correction = client.get("/api/stories/correction")
+    assert correction.status_code == 200
+    assert correction.json()["title"]
     lineage = client.get("/api/lineage/INV-001").json()
     assert "Acme Supplies" in lineage["title"]
     assert lineage["steps"]

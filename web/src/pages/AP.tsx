@@ -3,7 +3,7 @@ import { get, usd, statusTone } from "../api";
 import { useWorkflow } from "../hooks";
 import { ErrorBox, Pill, RunBar } from "../layout/Shell";
 import { BeforeAfterDiff, DemoLayout, OutputHeadline, ProcessPanel, ProvenanceLinks, SourceArtifactViewer } from "../components/Demo";
-import { Definition, LineageChain, TraceIds, WhatsHappening } from "../components/Explain";
+import { Definition, ExceptionCard, LineageChain, ResultBlock, TraceIds, WhatsHappening } from "../components/Explain";
 import { formatDecision, formatException, formatFieldKey, formatStatus } from "../copy";
 
 export default function AP() {
@@ -45,12 +45,12 @@ export default function AP() {
       runBar={
         <>
           <RunBar
-            label={`Run AP on ${selected}`}
+            label="Check this vendor bill"
             running={running}
             onRun={() => run(`/api/workflows/ap/${selected}`)}
             extra={
               <button className="btn" disabled={running} onClick={() => run("/api/workflows/schedule")}>
-                Run payment schedule
+                Draft this week's payments
               </button>
             }
           />
@@ -91,11 +91,11 @@ export default function AP() {
         pair?.document_a ? (
           <div className="stack">
             <div className="card">
-              <h2>Input document A</h2>
+              <h2>First copy</h2>
               <SourceArtifactViewer artifact={pair.document_a} />
             </div>
             <div className="card">
-              <h2>Input document B</h2>
+              <h2>Second copy</h2>
               <SourceArtifactViewer artifact={pair.document_b} />
             </div>
           </div>
@@ -116,10 +116,12 @@ export default function AP() {
               </div>
               <div className="card">
                 <h2>Purchase order</h2>
+                <p className="muted">The company's authorization to buy these goods or services.</p>
                 <SourceArtifactViewer artifact={tw.purchase_order} compact />
               </div>
               <div className="card">
-                <h2>Goods receipt</h2>
+                <h2>Delivery record</h2>
+                <p className="muted">Proof that the ordered goods or services actually arrived.</p>
                 <SourceArtifactViewer artifact={tw.goods_receipt} compact />
               </div>
             </div>
@@ -133,35 +135,33 @@ export default function AP() {
             <OutputHeadline label="Payables decision" value={formatDecision(inner?.decision?.decision || detail?.match_status || "not run")} />
             <Definition term="Three-way match" />
             {pair?.comparison ? (
-              <table className="data">
-                <thead>
-                  <tr>
-                    <th>What was compared</th>
-                    <th>Result</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.entries(pair.comparison)
-                    .filter(([key]) => key.endsWith("_match"))
-                    .map(([key, value]) => (
-                      <tr key={key}>
-                        <td>{formatFieldKey(key.replace("_match", ""))}</td>
-                        <td>{String(value) === "true" ? "Agrees" : String(value) === "false" ? "Does not agree" : formatStatus(value)}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            ) : null}
+              <ExceptionCard
+                problem="These two documents look like the same vendor bill sent twice."
+                evidence="The vendor, amount, and invoice identity line up closely enough that paying both would mean paying twice for one shipment."
+                response="The Accounts Payable Agent held the extra copy and sent the packet to Payables Control to recheck the hold."
+                effect="No second amount owed was created, and this copy will not enter a payment run."
+              />
+            ) : (detail?.exceptions || inner?.evidence?.exception_types || []).length ? (
+              <ExceptionCard
+                problem={(detail?.exceptions || inner?.evidence?.exception_types || []).map(formatException).join(" ")}
+                evidence="The invoice was compared with the purchase order and the record that goods or services were received."
+                response="Payment is paused until the mismatch is resolved."
+                effect="This bill is not treated as money the company should pay yet."
+              />
+            ) : (
+              <ResultBlock
+                found={inner?.explanation?.narrative || inner?.io?.explanation || "Run accounts payable to see whether this bill is safe to pay."}
+                why="A vendor bill is only safe to pay if it matches what was ordered and what actually arrived, and is not a second copy of a bill already on file."
+                result={formatDecision(inner?.decision?.decision || detail?.match_status || "not run")}
+              />
+            )}
+            {inner?.naive ? <p>{inner.naive}</p> : null}
             <dl className="kv">
               <dt>Duplicate check</dt>
               <dd>{formatStatus(detail?.duplicate_status)}</dd>
-              <dt>Problems found</dt>
-              <dd>{(detail?.exceptions || inner?.evidence?.exception_types || []).map(formatException).join("; ") || "None"}</dd>
               <dt>Payment</dt>
               <dd>{formatStatus(detail?.payment_state)}</dd>
             </dl>
-            <p>{inner?.explanation?.narrative || inner?.io?.explanation || "Run AP to see the English decision."}</p>
-            {inner?.naive ? <p>{inner.naive}</p> : null}
             <LineageChain steps={inner?.lineage?.steps} />
             {(inner?.lineage?.changed || []).map((item: string) => (
               <p key={item}>{item}</p>
@@ -170,7 +170,7 @@ export default function AP() {
           </div>
           {io?.before || io?.after ? (
             <div className="card">
-              <h2>Before / after</h2>
+              <h2>What changed on the books</h2>
               <BeforeAfterDiff before={io.before} after={io.after} fields={["invoice_id", "match_status", "duplicate_status", "payment_state", "accounting_status", "exceptions", "linked_payments", "linked_journals"]} labelFor={formatFieldKey} />
             </div>
           ) : null}

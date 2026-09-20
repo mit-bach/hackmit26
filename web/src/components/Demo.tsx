@@ -1,8 +1,8 @@
 import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
 import { usd, statusTone } from "../api";
-import { formatAgent, formatFieldKey, formatHandoff, formatRecordType, formatStage, formatStatus } from "../copy";
-import { Pill, Stages } from "../layout/Shell";
+import { formatAgent, formatFieldKey, formatHandoff, formatRecordType, formatStage, formatStatus, formatSummary } from "../copy";
+import { ErrorBox, Pill, Stages } from "../layout/Shell";
 
 export function DemoLayout({
   eyebrow,
@@ -14,6 +14,7 @@ export function DemoLayout({
   process,
   extra,
   runBar,
+  error,
 }: {
   eyebrow: string;
   title: string;
@@ -24,6 +25,7 @@ export function DemoLayout({
   process?: ReactNode;
   extra?: ReactNode;
   runBar?: ReactNode;
+  error?: string | null;
 }) {
   return (
     <div className="demo-page">
@@ -32,25 +34,26 @@ export function DemoLayout({
         <h1>{title}</h1>
         <p className="lede">{task}</p>
       </div>
+      <ErrorBox error={error} />
       {happening}
       {runBar}
-      <div className="io-flow" aria-label="Original input to final output">
+      <div className="io-flow" aria-label="What arrived, what the agents did, and what changed">
         <div className="io-col input-col">
-          <div className="io-label">Original input</div>
+          <div className="io-label">What arrived</div>
           {input}
         </div>
         <div className="io-arrow" aria-hidden>
           →
         </div>
         <div className="io-col process-col">
-          <div className="io-label">System process</div>
-          {process || <p className="muted">Run the workflow to see agent steps.</p>}
+          <div className="io-label">What the agents did</div>
+          {process || <p className="muted">Run the workflow to see each agent step in order.</p>}
         </div>
         <div className="io-arrow" aria-hidden>
           →
         </div>
         <div className="io-col output-col">
-          <div className="io-label">Final output</div>
+          <div className="io-label">What changed</div>
           {output}
         </div>
       </div>
@@ -164,7 +167,7 @@ export function BeforeAfterDiff({
         <tbody>
           {visible.map((row) => (
             <tr key={row.key} className={row.changed ? "changed" : ""}>
-              <td>{labelFor ? labelFor(row.key) : row.key}</td>
+              <td>{labelFor ? labelFor(row.key) : formatFieldKey(row.key)}</td>
               <td>{row.left}</td>
               <td>{row.right}</td>
             </tr>
@@ -183,29 +186,28 @@ function formatValue(value: unknown, key?: string): string {
     if (key && /cash|amount|outstanding|payment|inflow|outflow|payroll|expense/.test(key)) return usd(value);
     return String(value);
   }
-  if (Array.isArray(value)) return value.length ? value.map((item) => (typeof item === "object" ? formatStatus(item) : formatStatus(item))).join(", ") : "—";
-  if (typeof value === "object") return formatStatus(value);
+  if (typeof value === "object") {
+    if (Array.isArray(value)) return value.length ? value.map((item) => (typeof item === "object" ? formatStatus(item) : formatStatus(item))).join(", ") : "—";
+    const row = value as Record<string, unknown>;
+    if (row.decision) return formatStatus(row.decision);
+    if (row.status) return formatStatus(row.status);
+    return "See developer details";
+  }
   return formatStatus(value);
 }
 
 export function ProcessPanel({ stages, handoffs, summary }: { stages?: any[]; handoffs?: any[]; summary?: string }) {
   const translated = (stages || []).map((stage) => {
     const copy = formatStage(stage);
-    return { ...stage, label: copy.label, detail: copy.detail || stage.detail };
+    return { ...stage, label: copy.label, detail: copy.detail };
   });
   return (
     <div className="card process-card">
-      {summary ? <div className="muted" style={{ marginBottom: 8 }}>{summary}</div> : null}
+      {summary ? <div className="muted" style={{ marginBottom: 8 }}>{formatSummary(summary)}</div> : null}
       <Stages stages={translated} />
       {handoffs?.length ? (
         <div className="handoff-list">
-          {handoffs.map((item: any, idx: number) => (
-            <p key={idx} className="muted">
-              {typeof item === "string"
-                ? formatHandoff([item])
-                : formatHandoff(item.bots || [item.slug || item.display_name], item.workflow)}
-            </p>
-          ))}
+          <p>{formatHandoff(handoffs)}</p>
         </div>
       ) : null}
     </div>
@@ -237,17 +239,16 @@ export function Kv({ rows }: { rows: Array<[string, ReactNode]> }) {
 }
 
 export function SourceArtifactViewer({ artifact, compact = false }: { artifact: any; compact?: boolean }) {
-  if (!artifact) return <p className="muted">No source artifact on file for this record.</p>;
+  if (!artifact) return <p className="muted">The original document is not attached to this record.</p>;
   const kind = artifact.kind || artifact.record?.kind;
   const record = artifact.record ?? artifact;
   return (
     <div className={`artifact ${compact ? "compact" : ""}`}>
       <div className="split">
-        <strong>{artifact.title || artifact.artifact_id || kind}</strong>
-        <span className="mono muted">{artifact.artifact_id}</span>
+        <strong>{artifact.title || formatRecordLabel(kind) || "Source record"}</strong>
       </div>
       <div className="muted" style={{ marginBottom: 8 }}>
-        {formatRecordLabel(kind)} {artifact.source_path ? <span className="mono">· {artifact.source_path}</span> : null}
+        {formatRecordLabel(kind)}
       </div>
       <FriendlyRaw
         raw={record}
@@ -271,7 +272,7 @@ function renderFriendly(kind: string, artifact: any, record: any) {
   if (kind === "bank_transaction" || kind === "ledger_entry") {
     return (
       <dl className="kv">
-        <dt>ID</dt>
+        <dt>Bank transaction</dt>
         <dd className="mono">{record.transaction_id || record.entry_id}</dd>
         <dt>Date</dt>
         <dd>{record.date}</dd>
@@ -279,9 +280,9 @@ function renderFriendly(kind: string, artifact: any, record: any) {
         <dd>{usd(record.amount)}</dd>
         <dt>Description</dt>
         <dd>{record.description}</dd>
-        <dt>Counterparty</dt>
+        <dt>Who it was with</dt>
         <dd>{record.counterparty}</dd>
-        <dt>Reference</dt>
+        <dt>Bank reference</dt>
         <dd className="mono">{record.reference || "—"}</dd>
       </dl>
     );
@@ -290,18 +291,14 @@ function renderFriendly(kind: string, artifact: any, record: any) {
     const cents = record.amount;
     return (
       <dl className="kv">
-        <dt>ID</dt>
+        <dt>Stripe payout</dt>
         <dd className="mono">{record.payout_id || record.id}</dd>
-        <dt>Type</dt>
-        <dd>{record.type || record.source_event_type || kind}</dd>
-        <dt>Amount (minor)</dt>
-        <dd>{cents}</dd>
+        <dt>What this line is</dt>
+        <dd>{formatStatus(record.type || record.source_event_type) || formatRecordType(kind)}</dd>
         <dt>Amount</dt>
         <dd>{typeof cents === "number" ? usd(cents / 100) : "—"}</dd>
-        <dt>Payout</dt>
-        <dd className="mono">{record.payout_id || record.payout}</dd>
         <dt>Bank deposit</dt>
-        <dd>{record.bank_deposit_id} {record.bank_deposit_amount != null ? usd(record.bank_deposit_amount) : ""}</dd>
+        <dd>{record.bank_deposit_amount != null ? usd(record.bank_deposit_amount) : record.bank_deposit_id || "—"}</dd>
       </dl>
     );
   }
@@ -345,8 +342,8 @@ function DocumentView({ filename, contentType, text }: { filename?: string; cont
   return (
     <div className="doc-wrap">
       <div className="split">
-        <span className="mono">{filename || "document"}</span>
-        <span className="muted">{contentType || (isPdf ? "application/pdf" : "text")}</span>
+        <span>{filename || "Document"}</span>
+        <span className="muted">{isPdf ? "PDF" : isImage ? "Image" : "Text"}</span>
       </div>
       {isImage && text?.startsWith("data:") ? <img src={text} alt={filename || "source"} className="doc-image" /> : <div className={`doc-paper ${isPdf ? "pdf" : ""}`}><pre>{text || "(empty)"}</pre></div>}
     </div>
@@ -371,7 +368,7 @@ function InvoiceView({ invoice, emails }: { invoice: any; emails?: any[] }) {
         <dd>{invoice.due_date}</dd>
         <dt>Amount</dt>
         <dd>{usd(invoice.amount)}</dd>
-        <dt>PO</dt>
+        <dt>Purchase order</dt>
         <dd className="mono">{invoice.po_id || "—"}</dd>
         <dt>Description</dt>
         <dd>{invoice.description}</dd>
@@ -383,17 +380,17 @@ function InvoiceView({ invoice, emails }: { invoice: any; emails?: any[] }) {
 function PoView({ po }: { po: any }) {
   return (
     <dl className="kv">
-      <dt>PO</dt>
+      <dt>Purchase order</dt>
       <dd className="mono">{po.po_id}</dd>
       <dt>Vendor</dt>
       <dd>{po.vendor}</dd>
-      <dt>Authorized</dt>
+      <dt>Authorized amount</dt>
       <dd>{usd(po.authorized_amount)}</dd>
       <dt>Status</dt>
-      <dd>{po.status}</dd>
-      <dt>Approver</dt>
+      <dd>{formatStatus(po.status)}</dd>
+      <dt>Approved by</dt>
       <dd>{po.approver}</dd>
-      <dt>Description</dt>
+      <dt>What was ordered</dt>
       <dd>{po.description}</dd>
     </dl>
   );
@@ -402,15 +399,15 @@ function PoView({ po }: { po: any }) {
 function GrView({ gr }: { gr: any }) {
   return (
     <dl className="kv">
-      <dt>Receipt</dt>
+      <dt>Delivery record</dt>
       <dd className="mono">{gr.receipt_id}</dd>
-      <dt>PO</dt>
+      <dt>Purchase order</dt>
       <dd className="mono">{gr.po_id}</dd>
-      <dt>Received</dt>
-      <dd>{String(gr.received)}</dd>
-      <dt>Qty ordered</dt>
+      <dt>Did it arrive?</dt>
+      <dd>{gr.received === true || String(gr.received).toLowerCase() === "true" ? "Yes" : gr.received === false ? "No" : formatStatus(gr.received)}</dd>
+      <dt>Quantity ordered</dt>
       <dd>{gr.quantity_ordered}</dd>
-      <dt>Qty received</dt>
+      <dt>Quantity received</dt>
       <dd>{gr.quantity_received}</dd>
       <dt>Amount received</dt>
       <dd>{usd(gr.amount_received)}</dd>
@@ -422,31 +419,30 @@ function JournalView({ row }: { row: any }) {
   const amount = row.amount ?? (row.amount_minor != null ? row.amount_minor / 100 : null);
   return (
     <dl className="kv">
-      <dt>Entry</dt>
+      <dt>Journal entry</dt>
       <dd className="mono">{row.entry_id}</dd>
-      <dt>Debit</dt>
+      <dt>Expense or asset account</dt>
       <dd>{row.debit_account || row.account}</dd>
-      <dt>Credit</dt>
+      <dt>Offset account</dt>
       <dd>{row.credit_account || "—"}</dd>
       <dt>Amount</dt>
       <dd>{usd(amount)}</dd>
-      <dt>Memo</dt>
+      <dt>Why it was recorded</dt>
       <dd>{row.memo || row.description}</dd>
-      <dt>Source</dt>
-      <dd className="mono">{row.source_document_id || (row.related_ids || []).join(", ") || "—"}</dd>
     </dl>
   );
 }
 
 function RowView({ row }: { row: any }) {
-  if (!row || typeof row !== "object") return <pre className="raw-json">{String(row)}</pre>;
-  const entries = Object.entries(row).filter(([key]) => key !== "raw_metadata" && key !== "lines" && key !== "attachments");
+  if (!row || typeof row !== "object") return <p className="muted">{String(row)}</p>;
+  const skip = new Set(["raw_metadata", "lines", "attachments", "source_path", "content_hash", "checksum", "bytes", "mime", "artifact_id"]);
+  const entries = Object.entries(row).filter(([key]) => !skip.has(key) && row[key] !== null && row[key] !== undefined && row[key] !== "");
   return (
     <dl className="kv">
       {entries.slice(0, 14).map(([key, value]) => (
         <div key={key} className="kv-row">
-          <dt>{key}</dt>
-          <dd className="mono">{formatValue(value, key)}</dd>
+          <dt>{formatFieldKey(key)}</dt>
+          <dd>{formatValue(value, key)}</dd>
         </div>
       ))}
     </dl>

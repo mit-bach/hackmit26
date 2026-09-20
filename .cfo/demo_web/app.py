@@ -142,7 +142,7 @@ def create_app(canonical: Path | None = None, runtime: Path | None = None) -> Fa
     def story_harbor() -> dict:
         from demo_web.gauntlet import harbor_story
 
-        return story_harbor()
+        return harbor_story()
 
     @app.get("/api/stories/stripe")
     def story_stripe() -> dict:
@@ -154,7 +154,7 @@ def create_app(canonical: Path | None = None, runtime: Path | None = None) -> Fa
     def story_correction() -> dict:
         from demo_web.gauntlet import correction_story
 
-        return story_correction()
+        return correction_story()
 
     @app.get("/api/scenarios")
     def scenario_list() -> dict:

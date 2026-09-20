@@ -150,7 +150,7 @@ def ingest_sample(sample_id: str | None = None, *, all_sources: bool = False) ->
     if all_sources:
         report = ingest_invoices(PERIOD, use_llm=False, forward_to_ap=True, run_ap=False, reset_overlay=False)
         return {
-            "summary": f"Ingested {len(report.canonical_invoices)} canonical invoices",
+            "summary": f"Recognized {len(report.canonical_invoices)} vendor invoices from incoming documents",
             "report": dump(report),
             "stages": _ingest_stages(report),
             "record_ids": [item.invoice_id for item in report.canonical_invoices],
@@ -167,7 +167,7 @@ def ingest_sample(sample_id: str | None = None, *, all_sources: bool = False) ->
     report = ingest_candidates(candidates, PERIOD, forward_to_ap=True, run_ap=False, reset_overlay=False)
     picked = dump(candidates[0]) if candidates else None
     payload = {
-        "summary": f"{sample_id or email.get('message_id')}: classified as {classification}",
+        "summary": f"The document was identified as a {classification.replace('_', ' ')}",
         "sample_id": email.get("message_id"),
         "classification": classification,
         "classification_reason": reason,
@@ -176,19 +176,19 @@ def ingest_sample(sample_id: str | None = None, *, all_sources: bool = False) ->
         "report": dump(report),
         "stages": [
             {"id": "received", "label": "Document received", "status": "completed", "detail": email.get("subject")},
-            {"id": "classified", "label": "Document classification", "status": "completed", "detail": classification},
-            {"id": "fields", "label": "Field interpretation", "status": "completed", "detail": reason},
+            {"id": "classified", "label": "Identify what kind of document arrived", "status": "completed", "detail": classification},
+            {"id": "fields", "label": "Read vendor, amount, dates, and invoice number", "status": "completed", "detail": reason},
             {
                 "id": "canonical",
-                "label": "Canonical invoice registration",
+                "label": "Create a vendor bill only if this is actually an invoice",
                 "status": "completed" if report.canonical_invoices else "skipped",
-                "detail": ", ".join(item.invoice_id for item in report.canonical_invoices) or "not an invoice",
+                "detail": ", ".join(item.invoice_id for item in report.canonical_invoices) or "not treated as a vendor invoice",
             },
             {
                 "id": "duplicate",
-                "label": "Duplicate detection",
+                "label": "Check for a second copy of the same bill",
                 "status": "completed",
-                "detail": f"{report.duplicates_removed} duplicates removed",
+                "detail": f"{report.duplicates_removed} duplicate copies set aside",
             },
         ],
         "record_ids": [item.invoice_id for item in report.canonical_invoices],
@@ -206,10 +206,10 @@ def ingest_sample(sample_id: str | None = None, *, all_sources: bool = False) ->
 
 def _ingest_stages(report) -> list[dict]:
     return [
-        {"id": "sources", "label": "Sources processed", "status": "completed", "detail": str(len(report.source_runs))},
-        {"id": "candidates", "label": "Candidates", "status": "completed", "detail": str(len(report.candidates))},
-        {"id": "canonical", "label": "Canonical invoices", "status": "completed", "detail": str(len(report.canonical_invoices))},
-        {"id": "duplicates", "label": "Duplicates removed", "status": "completed", "detail": str(report.duplicates_removed)},
+        {"id": "sources", "label": "Incoming documents collected", "status": "completed", "detail": str(len(report.source_runs))},
+        {"id": "candidates", "label": "Possible bills reviewed", "status": "completed", "detail": str(len(report.candidates))},
+        {"id": "canonical", "label": "Vendor invoices created", "status": "completed", "detail": str(len(report.canonical_invoices))},
+        {"id": "duplicates", "label": "Duplicate copies set aside", "status": "completed", "detail": str(report.duplicates_removed)},
     ]
 
 
@@ -223,7 +223,10 @@ def run_inbox(case_id: str | None = None) -> dict:
         spec = specs[0]
     result = handoff(spec, persist=True)
     payload = {
-        "summary": f"Inbox {result.final_status}: {result.receiver.dispatch.invoice_id or result.receiver.classification.classification}",
+        "summary": (
+            f"The inbox identified this as {result.receiver.classification.classification.replace('_', ' ')}"
+            + (f" and created {result.receiver.dispatch.invoice_id}" if result.receiver.dispatch.invoice_id else ", and did not create a vendor bill")
+        ),
         "handoff": dump(result),
         "record_ids": [result.receiver.dispatch.invoice_id] if result.receiver.dispatch.invoice_id else [],
         "stages": [
@@ -257,7 +260,7 @@ def run_ap(invoice_id: str) -> dict:
     from close.orchestrator import decide_ap
     from tools import collect_case_evidence, load_invoice
     from demo_web.views import invoice_state
-    from cfo.explain import explain_ap
+    from cfo.explain import explain_ap, explain_exception
     from cfo.consistency import event_consistency
     from cfo.lineage_story import describe_event
 
@@ -297,15 +300,15 @@ def run_ap(invoice_id: str) -> dict:
         "lineage": lineage,
         "consistency": consistency,
         "stages": [
-            {"id": "facts", "label": "Python evidence", "status": "completed", "detail": ", ".join(evidence.exception_types) or "clean match"},
-            {"id": "prepare", "label": "AP prepare", "status": "completed", "bot": "ap"},
+            {"id": "facts", "label": "Gather invoice, purchase order, and delivery record", "status": "completed", "detail": ", ".join(explain_exception(item) for item in evidence.exception_types) or "the records agree"},
+            {"id": "prepare", "label": "Check whether the bill is safe to pay", "status": "completed", "bot": "ap"},
             {
                 "id": "investigate",
-                "label": "Exception investigation",
+                "label": "Investigate why the bill does not line up",
                 "status": "completed" if evidence.exception_types else "skipped",
                 "bot": "ap",
             },
-            {"id": "concur", "label": "ctl-pay concurrence", "status": "completed", "bot": "ctl-pay", "detail": result.decision},
+            {"id": "concur", "label": "Independently recheck the payables decision", "status": "completed", "bot": "ctl-pay", "detail": result.decision},
         ],
         "handoffs": _handoff(handoffs),
         "downstream": {
@@ -335,14 +338,14 @@ def run_schedule() -> dict:
     pay_ids = [item.invoice_id for item in trace.plan.pay_this_week]
     defer_ids = [item.invoice_id for item in trace.plan.defer]
     payload = {
-        "summary": f"Pay {len(pay_ids)} this week, defer {len(defer_ids)}",
+        "summary": f"Include {len(pay_ids)} approved bills in this week's payment run and hold {len(defer_ids)} for later",
         "trace": dump(trace),
         "record_ids": pay_ids + defer_ids,
         "handoffs": _handoff(["Payment Scheduler", "Payment Audit"]),
         "stages": [
-            {"id": "pool", "label": "Approved pool", "status": "completed", "bot": "pay"},
-            {"id": "policy", "label": "Cash + policy net", "status": "completed", "bot": "pay"},
-            {"id": "audit", "label": "Payment audit", "status": "completed", "bot": "ctl-pay"},
+            {"id": "pool", "label": "Collect bills that already passed payable checks", "status": "completed", "bot": "pay"},
+            {"id": "policy", "label": "Weigh due dates, cash on hand, and payment policy", "status": "completed", "bot": "pay"},
+            {"id": "audit", "label": "Independently recheck the payment plan", "status": "completed", "bot": "ctl-pay"},
         ],
     }
     return artifacts.wrap_io(
@@ -359,7 +362,7 @@ def run_ar_aging() -> dict:
 
     report = run_aging(AS_OF, persist=True)
     payload = {
-        "summary": f"AR outstanding {report.totals.total_ar}",
+        "summary": f"Customers currently owe {report.totals.total_ar}",
         "report": dump(report),
         "handoffs": _handoff(["Collections Agent"]),
         "record_ids": [item.invoice_id for item in report.lines[:12]],
@@ -376,7 +379,7 @@ def run_ar_collections() -> dict:
 
     result = run_collections(AS_OF, live=False)
     return {
-        "summary": "Collections candidates scored",
+        "summary": "Overdue customer invoices were grouped by how late they are and flagged for follow-up",
         "result": dump(result),
         "handoffs": _handoff(["Collections Agent"]),
         "record_ids": [],
@@ -389,16 +392,16 @@ def run_ar_apply(payment_id: str = "PAY-004") -> dict:
     trace = run_cash_apply(payment_id, live=False)
     selected = list(getattr(trace.final, "invoice_ids", None) or getattr(trace.final, "related_invoice_ids", None) or [])
     payload = {
-        "summary": f"{payment_id} {trace.final.decision}",
+        "summary": f"The {payment_id} customer payment was {str(trace.final.decision).replace('_', ' ').lower()}",
         "trace": dump(trace),
         "record_ids": [payment_id, *selected],
         "handoffs": _handoff(["Cash Application Agent", "Cash Application Reviewer"]),
         "stages": [
-            {"id": "candidates", "label": "Python match combinations", "status": "completed", "bot": "apply"},
-            {"id": "decide", "label": "Application decision", "status": "completed", "detail": trace.final.decision, "bot": "apply"},
+            {"id": "candidates", "label": "List possible invoice matches", "status": "completed", "bot": "apply"},
+            {"id": "decide", "label": "Decide whether the payment can be applied safely", "status": "completed", "detail": trace.final.decision, "bot": "apply"},
             {
                 "id": "verify",
-                "label": "ctl-cash review",
+                "label": "Independently recheck an uncertain match",
                 "status": "completed" if trace.final.decision == "HUMAN_REVIEW" else "skipped",
                 "bot": "ctl-cash",
             },
@@ -421,17 +424,17 @@ def run_bank_recon(*, reset: bool = True) -> dict:
         item for item in report.matches if item.match_type in {"UNEXPLAINED_DIFFERENCE", "UNMATCHED_BANK", "UNMATCHED_LEDGER"} or item.status == "HUMAN_REVIEW"
     ]
     payload = {
-        "summary": f"{report.period_status}: {len(report.matches)} matches, {len(unexplained)} needing attention",
-        "report": dump(report),
+        "summary": f"Bank and ledger compared: {len(report.matches)} matches found, {len(unexplained)} still need investigation",
+        "report": dump(report.model_copy(update={"traces": [], "agents": []})),
         "record_ids": [tid for match in report.matches for tid in match.bank_transaction_ids],
         "handoffs": _handoff(
             ["Cash Reconciliation Preparer", "Cash Exception Investigator", "Cash Reconciliation Reviewer"]
         ),
         "stages": [
-            {"id": "candidates", "label": "Python candidates", "status": "completed", "bot": "cash"},
-            {"id": "prepare", "label": "Match selection", "status": "completed", "bot": "cash"},
-            {"id": "investigate", "label": "Exceptions", "status": "completed", "bot": "cash"},
-            {"id": "review", "label": "ctl-cash concurrence", "status": "completed", "bot": "ctl-cash"},
+            {"id": "candidates", "label": "List possible bank-to-ledger matches", "status": "completed", "bot": "cash"},
+            {"id": "prepare", "label": "Choose how each bank line should be explained", "status": "completed", "bot": "cash"},
+            {"id": "investigate", "label": "Investigate differences that do not line up", "status": "completed", "bot": "cash"},
+            {"id": "review", "label": "Independently recheck the reconciliation", "status": "completed", "bot": "ctl-cash"},
         ],
     }
     return artifacts.wrap_io(
@@ -453,7 +456,7 @@ def run_stripe_recon() -> dict:
     report = run_cash_reconciliation(PERIOD, seed_demo=True, use_agent=False, reset=False, seed_providers=True)
     stripe_matches = [item for item in report.matches if item.provider == "stripe" or item.match_type == "PROVIDER_PAYOUT"]
     payload = {
-        "summary": f"{len(math_view['payouts'])} payout waterfalls; {len(stripe_matches)} provider matches",
+        "summary": f"Explained {len(math_view['payouts'])} Stripe payouts and tied {len(stripe_matches)} of them to bank deposits",
         "payouts": math_view["payouts"],
         "mode": math_view["mode"],
         "matches": dump(stripe_matches),
@@ -461,10 +464,10 @@ def run_stripe_recon() -> dict:
         "record_ids": [item["payout"]["payout_id"] for item in math_view["payouts"]],
         "handoffs": _handoff(["Cash Reconciliation Preparer"]),
         "stages": [
-            {"id": "unpack", "label": "Unpack payout lines", "status": "completed", "bot": "stripe"},
-            {"id": "math", "label": "gross − refunds − chargebacks − fees = net", "status": "completed", "bot": "stripe"},
-            {"id": "bank", "label": "Tie to bank deposit", "status": "completed", "bot": "cash"},
-            {"id": "gl", "label": "Ledger / recon status", "status": "completed", "bot": "cash"},
+            {"id": "unpack", "label": "Unpack the payout into charges, refunds, fees, and disputes", "status": "completed", "bot": "stripe"},
+            {"id": "math", "label": "Check that charges minus refunds, disputes, and fees equal the payout", "status": "completed", "bot": "stripe"},
+            {"id": "bank", "label": "Tie the explained payout to the bank deposit", "status": "completed", "bot": "cash"},
+            {"id": "gl", "label": "Compare the result with the accounting records", "status": "completed", "bot": "cash"},
         ],
     }
     return artifacts.wrap_io(
@@ -481,19 +484,19 @@ def run_close() -> dict:
     state = run_month_end(PERIOD, scenario="demo", live=False, reset=True, allow_close=False)
     after = artifacts.close_task_snapshot()
     payload = {
-        "summary": f"Close {state.period.status}",
+        "summary": f"Month-end close is still {str(state.period.status).replace('_', ' ').lower()}",
         "state": dump(state),
         "record_ids": [PERIOD, state.close_id],
         "handoffs": _handoff(["Close Manager", "Accrual Agent", "Prepaid Preparer", "Fixed Asset Preparer", "Month-End Close Reviewer"]),
         "stages": [
-            {"id": "ap", "label": "AP", "status": "completed", "bot": "ap"},
-            {"id": "ar", "label": "AR", "status": "completed", "bot": "apply"},
-            {"id": "cash", "label": "Cash", "status": "completed", "bot": "cash"},
-            {"id": "accrual", "label": "Accruals", "status": "completed", "bot": "close"},
-            {"id": "prepaid", "label": "Prepaids", "status": "completed", "bot": "close"},
-            {"id": "assets", "label": "Fixed assets", "status": "completed", "bot": "close"},
-            {"id": "bs", "label": "BS recs", "status": "completed", "bot": "close"},
-            {"id": "lock", "label": "Final review", "status": "completed", "bot": "ctl-books", "detail": state.period.status},
+            {"id": "ap", "label": "Accounts payable", "status": "completed", "bot": "ap"},
+            {"id": "ar", "label": "Accounts receivable", "status": "completed", "bot": "apply"},
+            {"id": "cash", "label": "Cash reconciliation", "status": "completed", "bot": "cash"},
+            {"id": "accrual", "label": "Estimate missing bills", "status": "completed", "bot": "close"},
+            {"id": "prepaid", "label": "Spread prepaid costs", "status": "completed", "bot": "close"},
+            {"id": "assets", "label": "Record equipment as assets", "status": "completed", "bot": "close"},
+            {"id": "bs", "label": "Check balance-sheet accounts", "status": "completed", "bot": "close"},
+            {"id": "lock", "label": "Decide whether the month is ready to lock", "status": "completed", "bot": "ctl-books", "detail": state.period.status},
         ],
     }
     return artifacts.wrap_io(
@@ -512,16 +515,16 @@ def run_accrual(vendor: str = "Harbor Electric") -> dict:
     traces = dump(getattr(report, "traces", None) or [])
     first = traces[0] if traces else {}
     payload = {
-        "summary": f"{vendor}: {report.total_accrued_expense}",
+        "summary": f"{vendor}: estimated {report.total_accrued_expense} because the current bill has not arrived yet",
         "report": dump(report),
         "record_ids": [vendor, first.get("accrual_id") or "ACC-HE-2026-09", first.get("journal_entry", {}).get("entry_id") if isinstance(first.get("journal_entry"), dict) else None],
         "handoffs": _handoff(["Accrual Agent"]),
         "stages": [
-            {"id": "evidence", "label": "Available evidence", "status": "completed", "bot": "close"},
-            {"id": "candidates", "label": "Python estimate candidates", "status": "completed", "bot": "close"},
-            {"id": "memory", "label": "Prior-period memory", "status": "completed", "bot": "close"},
-            {"id": "decide", "label": "Method selection", "status": "completed", "bot": "close"},
-            {"id": "journal", "label": "Journal entry", "status": "completed", "bot": "close"},
+            {"id": "evidence", "label": "Collect contracts, prior bills, and other supporting records", "status": "completed", "bot": "close"},
+            {"id": "candidates", "label": "Compare possible ways to estimate the missing bill", "status": "completed", "bot": "close"},
+            {"id": "memory", "label": "Retrieve how this was handled last month", "status": "completed", "bot": "close"},
+            {"id": "decide", "label": "Choose the estimate", "status": "completed", "bot": "close"},
+            {"id": "journal", "label": "Record the formal accounting entry", "status": "completed", "bot": "close"},
         ],
     }
     return artifacts.wrap_io(
@@ -546,7 +549,7 @@ def run_memory(story: str = "harbor") -> dict:
 
     if story == "stripe":
         payload = run_stripe_cross_period(memory_enabled=True)
-        summary = "Stripe August precedent retrieved for September payout"
+        summary = "September retrieved August's Stripe payout decision, then re-checked current evidence"
         record_ids = ["po_mem_aug_001", "po_mem_sep_001"]
         agents = ["Cash Reconciliation Preparer"]
     elif story in {"harbor-correct", "self-correction", "correction"}:
@@ -556,7 +559,7 @@ def run_memory(story: str = "harbor") -> dict:
         agents = ["Accrual Agent"]
     else:
         payload = run_harbor_cross_period(memory_enabled=True)
-        summary = "Harbor Electric August methodology retrieved in September"
+        summary = "September retrieved August's Harbor Electric method, then re-checked current evidence"
         record_ids = ["Harbor Electric"]
         agents = ["Accrual Agent"]
     body = dump(payload)
@@ -607,7 +610,7 @@ def run_memory_eval() -> dict:
     payload = run_memory_evaluation()
     dest = website_dir() / "memory_eval.json"
     dest.write_text(json.dumps(dump(payload), indent=2) + "\n")
-    result = {"summary": "Memory ON vs OFF evaluation complete", "payload": dump(payload), "path": str(dest)}
+    result = {"summary": "Compared September with last month's saved decision against estimating from scratch", "payload": dump(payload), "path": str(dest)}
     return artifacts.wrap_io(
         result,
         inputs={"same_original_input": artifacts.harbor_input(), "comparison": "memory_enabled True vs False"},
@@ -628,7 +631,7 @@ def run_forecast() -> dict:
         reporting = run_reporting_workflow()
     after_weeks = dump(snapshot.weeks)
     payload = {
-        "summary": f"13-week ending cash {snapshot.weeks[-1].ending_cash if snapshot.weeks else None}",
+        "summary": f"The 13-week forecast currently ends at {snapshot.weeks[-1].ending_cash if snapshot.weeks else None}",
         "snapshot": dump(snapshot),
         "reporting": dump(reporting),
         "handoffs": _handoff(["Cash Forecast Agent", "Variance Analysis Agent", "Forecast Variance Agent"]),
@@ -660,7 +663,7 @@ def run_audit() -> dict:
             metrics = None
     findings = dump(getattr(run, "findings", None) or [])
     payload = {
-        "summary": f"Audit produced {len(findings)} findings",
+        "summary": f"Independent audit wrote {len(findings)} control findings",
         "run": dump(run),
         "metrics": dump(metrics),
         "report": format_audit_report(run),
@@ -689,7 +692,7 @@ def run_cfo_cycle() -> dict:
     after = company_state()
     dumped = dump(payload)
     result = {
-        "summary": f"CFO cycle close={payload['closed_close'].period.status}",
+        "summary": f"The connected finance cycle finished with month-end still {str(payload['closed_close'].period.status).replace('_', ' ').lower()}",
         "payload": dumped,
         "narrative": format_cfo_demo(payload),
         "handoffs": _handoff(["Close Manager", "AP Preparer", "Cash Reconciliation Preparer", "Accrual Agent", "Auditor Agent"]),

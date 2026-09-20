@@ -3,7 +3,7 @@ import { get, usd, statusTone } from "../api";
 import { useWorkflow } from "../hooks";
 import { ErrorBox, Pill, RunBar } from "../layout/Shell";
 import { DemoLayout, OutputHeadline, ProcessPanel, SourceArtifactViewer } from "../components/Demo";
-import { Definition, TraceIds, WhatsHappening } from "../components/Explain";
+import { Definition, ResultBlock, TraceIds, WhatsHappening } from "../components/Explain";
 import { formatStatus } from "../copy";
 
 export default function Stripe() {
@@ -41,7 +41,7 @@ export default function Stripe() {
           <div className="toolbar">
             <div className="btn-row">
               <button className="btn primary" disabled={running} onClick={() => run("/api/workflows/stripe-reconciliation")}>
-                {running ? "Running…" : "Run reconciliation"}
+                {running ? "Running…" : "Explain this payout"}
               </button>
             </div>
             <Pill tone={data?.mode?.mode === "live" ? "warn" : "info"}>Stripe {data?.mode?.mode || "simulated"}</Pill>
@@ -52,7 +52,7 @@ export default function Stripe() {
       input={
         <div className="stack">
           <div className="card">
-            <h2>Payout record</h2>
+            <h2>The payout Stripe sent</h2>
             {(payouts || []).map((item: any, idx: number) => (
               <div key={item.payout?.payout_id} className="card clickable" onClick={() => setIndex(idx)} style={{ marginBottom: 8 }}>
                 <div className="split">
@@ -65,7 +65,7 @@ export default function Stripe() {
             <SourceArtifactViewer artifact={bundle?.payout} />
           </div>
           <div className="card">
-            <h2>Balance transactions</h2>
+            <h2>Charges, refunds, fees, and disputes</h2>
             {(bundle?.balance_transactions || []).map((item: any) => (
               <SourceArtifactViewer key={item.artifact_id} artifact={item} compact />
             ))}
@@ -80,15 +80,30 @@ export default function Stripe() {
           <OutputHeadline label="Tied to the bank deposit?" value={current?.tied ? "Yes" : current ? "Not yet" : "Select a payout"} tone={current?.tied ? "ok" : "bad"} />
           <Definition term="Chargeback" />
           {bd ? (
-            <div className="waterfall-eq">
-              <div>Customer charges {usd(bd.gross_payments)}</div>
-              <div>− refunds {usd(bd.refunds)}</div>
-              <div>− disputes / chargebacks {usd(bd.chargebacks)}</div>
-              <div>− Stripe fees {usd(bd.fees)}</div>
-              <div>= expected payout {usd(expected)}</div>
-              <div>Bank deposit {usd(deposit)}</div>
-              <div>Difference {usd((expected || 0) - (deposit || 0))}</div>
-            </div>
+            <>
+              <ResultBlock
+                found={
+                  current?.tied
+                    ? `Customer charges, refunds, disputes, and Stripe fees add up to an expected payout of ${usd(expected)}, which matches the ${usd(deposit)} bank deposit.`
+                    : `The expected payout of ${usd(expected)} does not match the ${usd(deposit)} bank deposit.`
+                }
+                why="A Stripe payout is not a single customer payment. It is the net of everything Stripe processed before sending money to the bank."
+                result={
+                  current?.tied
+                    ? "Cash reconciliation can treat this bank deposit as explained."
+                    : "Cash reconciliation still needs an explanation for the difference before the deposit can be treated as complete."
+                }
+              />
+              <div className="waterfall-eq">
+                <div>Customer charges {usd(bd.gross_payments)}</div>
+                <div>− refunds {usd(bd.refunds)}</div>
+                <div>− disputes / chargebacks {usd(bd.chargebacks)}</div>
+                <div>− Stripe fees {usd(bd.fees)}</div>
+                <div>= expected payout {usd(expected)}</div>
+                <div>Bank deposit {usd(deposit)}</div>
+                <div>Difference {usd((expected || 0) - (deposit || 0))}</div>
+              </div>
+            </>
           ) : (
             <p className="muted">Select a payout. The arithmetic comes from Stripe reconciliation, not a number invented in this page.</p>
           )}

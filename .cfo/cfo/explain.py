@@ -68,7 +68,34 @@ def explain_decision(
     }
 
 
+EXCEPTION_COPY = {
+    "duplicate": "this looks like a second copy of a bill already on the books",
+    "vendor_mismatch": "the vendor name does not match the purchase order",
+    "quantity_variance": "the quantity billed does not match what was ordered or received",
+    "price_variance": "the price billed does not match the purchase order",
+    "missing_po": "no purchase order was found",
+    "missing_receipt": "there is no record that the goods or services arrived",
+    "self_approval": "the same person requested and approved the transaction",
+    "three_way_match_failed": "the invoice, purchase order, and delivery record do not all agree",
+    "exception_duplicate_candidate": "this may be a duplicate of another invoice already in the system",
+    "partial_receipt": "the company was billed for more than has actually been received so far",
+    "goods_not_received": "there is no record that the ordered goods or services arrived",
+    "po_not_approved": "the purchase order was never approved",
+    "material_amount_mismatch": "the billed amount is materially different from what was authorized",
+    "small_amount_discrepancy": "the billed amount is slightly different from the purchase order",
+    "unusual_timing": "the invoice is dated before the purchase order",
+    "approval_limit_exceeded": "the purchase exceeds the approver's authorization limit",
+    "unknown_invoice": "this invoice is not in the company's records",
+}
+
+
+def explain_exception(code: str) -> str:
+    key = str(code or "").strip()
+    return EXCEPTION_COPY.get(key, key.replace("_", " "))
+
+
 def explain_ap(invoice_id: str, vendor: str, decision: str, exceptions: list[str], *, amount: float | None = None) -> dict[str, Any]:
+    readable = [explain_exception(item) for item in exceptions]
     if decision == "HOLD" and "duplicate" in exceptions:
         return explain_decision(
             happened=f"Maximor received a bill from {label_record(invoice_id, vendor=vendor)} for {money(amount)}.",
@@ -86,11 +113,11 @@ def explain_ap(invoice_id: str, vendor: str, decision: str, exceptions: list[str
         return explain_decision(
             happened=f"Maximor reviewed {label_record(invoice_id, vendor=vendor)} for {money(amount)} and did not approve it.",
             selected=[invoice_id],
-            why="The three-way match or policy checks found " + join_ids(exceptions) + ".",
+            why="The invoice, purchase order, and delivery check found " + join_ids(readable) + ".",
             books_change="The invoice stays on hold and is not scheduled for payment.",
         )
     return explain_decision(
-        happened=f"Maximor approved {label_record(invoice_id, vendor=vendor)} for {money(amount)}.",
+        happened=f"Maximor approved {label_record(invoice_id, vendor=vendor)} for {money(amount)} after matching the vendor, amount, purchase order, and delivery record. No duplicate invoice was found.",
         selected=[invoice_id],
         why="Purchase order, receiving, and invoice amounts agree, and no blocking exception remains.",
         books_change="The invoice may enter the weekly payment pool unless it is already paid.",
@@ -102,6 +129,16 @@ def explain_cash(match) -> dict[str, Any]:
     ledger_ids = list(getattr(match, "ledger_entry_ids", None) or [])
     status = getattr(match, "status", "")
     match_type = getattr(match, "match_type", "")
+    match_copy = {
+        "PROVIDER_PAYOUT": "a Stripe or processor payout matched to the bank deposit",
+        "GROUPED_MATCH": "one bank payment covering several bills",
+        "FEE_NETTED": "a transfer matched after subtracting the bank fee",
+        "EXACT_MATCH": "an exact bank-to-ledger match",
+        "UNEXPLAINED_DIFFERENCE": "an unresolved difference with no supporting evidence",
+        "UNMATCHED_BANK": "a bank movement with no matching ledger explanation yet",
+        "UNMATCHED_LEDGER": "a ledger cash entry with no matching bank movement yet",
+        "TIMING_DIFFERENCE": "the same event recorded on different dates",
+    }
     if match_type == "PROVIDER_PAYOUT":
         why = "The bank deposit is the Stripe or Adyen payout net of fees, refunds, and chargebacks — not a single customer invoice."
     elif match_type == "GROUPED_MATCH":
@@ -115,7 +152,7 @@ def explain_cash(match) -> dict[str, Any]:
     else:
         why = "Bank and ledger amounts, dates, and counterparties support the same cash event."
     return explain_decision(
-        happened=f"Cash reconciliation classified this activity as {match_type or status}.",
+        happened=f"Cash reconciliation treated this activity as {match_copy.get(match_type, match_copy.get(status, 'a bank-to-ledger comparison'))}.",
         selected=bank_ids + ledger_ids,
         why=why,
         books_change="Source bank and ledger rows were not rewritten to force a tie.",
