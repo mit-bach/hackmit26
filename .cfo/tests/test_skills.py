@@ -16,6 +16,7 @@ from ar.agents import cash_application_agent, cash_reviewer_agent, collections_a
 from accrual.agent import accrual_agent
 from accrual.models import AccrualDecision
 from accrual.workflow import finalize_vendor_close
+from inbox.agents import counterparty_message_agent, finance_inbox_agent
 from invoice_ingestion.agents import AGENTS
 from invoice_ingestion.models import SOURCE_AGENTS
 from invoice_ingestion.sources import run_email_source, run_erp_source
@@ -97,6 +98,8 @@ AGENTS_BY_NAME = {
     cash_forecast_agent.name: cash_forecast_agent,
     forecast_reviewer_agent.name: forecast_reviewer_agent,
     forecast_variance_agent.name: forecast_variance_agent,
+    counterparty_message_agent.name: counterparty_message_agent,
+    finance_inbox_agent.name: finance_inbox_agent,
 }
 AGENTS_BY_NAME.update({agent.name: agent for agent in AGENTS.values()})
 
@@ -107,9 +110,16 @@ EXPECTED_ASSIGNMENTS = {
         "invoice-source-identification",
         "invoice-field-interpretation",
     ),
+    "Counterparty Message Agent": (),
+    "Finance Inbox Agent": (
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+    ),
     "Accrual Agent": (
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ),
     "Payment Scheduler": (
         "payment-prioritization",
@@ -160,6 +170,7 @@ def test_selective_loading_excludes_unrelated_skills():
     assert accrual_names == [
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ]
     assert "invoice-source-identification" not in accrual_names
     assert "payment-prioritization" not in accrual_names
@@ -302,6 +313,7 @@ def test_accrual_trace_records_skill_hashes(tmp_path, monkeypatch):
     assert [item.name for item in trace.agent.skills] == [
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ]
     dumped = trace.model_dump()["agent"]
     assert dumped["load_errors"] == []
@@ -313,7 +325,7 @@ def test_accrual_trace_records_skill_hashes(tmp_path, monkeypatch):
 
 def test_inspect_index_lists_assignments_without_bodies():
     text = format_skills_index()
-    assert "Accrual Agent\n  accrual-evidence-evaluation\n  accrual-method-selection" in text
+    assert "Accrual Agent\n  accrual-evidence-evaluation\n  accrual-method-selection\n  prior-period-precedent" in text
     assert "Payment Scheduler\n  payment-prioritization\n  early-payment-discount-evaluation" in text
     assert "ERP Invoice Agent\n  (none)" in text
     assert "## Purpose" not in text

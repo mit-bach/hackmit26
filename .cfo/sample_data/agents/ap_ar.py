@@ -145,6 +145,18 @@ class APARSampleDataAgent(SampleDataAgent):
         "SCN-AR-010",
         "SCN-AR-011",
         "SCN-AR-012",
+        "SCN-AR-013",
+        "SCN-AP-013",
+        "SCN-ING-001",
+        "SCN-ING-002",
+        "SCN-ING-003",
+        "SCN-ING-004",
+        "SCN-ING-005",
+        "SCN-ING-006",
+        "SCN-ING-007",
+        "SCN-ING-008",
+        "SCN-ING-009",
+        "SCN-ING-010",
     ]
 
     def plan(self, ctx: CompanyScenarioContext) -> ScenarioPlan:
@@ -186,6 +198,7 @@ class APARSampleDataAgent(SampleDataAgent):
     def _masters(self, ctx: CompanyScenarioContext) -> None:
         _vendor(ctx, "VEND-001", "Acme Supplies", "2024-01-15")
         _vendor(ctx, "VEND-001-DUP", "Acme Supplies LLC", "2026-09-01")
+        _vendor(ctx, "VEND-001-ALIAS", "Acme Supply Co.", "2024-01-15")
         _vendor(ctx, "VEND-002", "Amazon Web Services", "2022-01-01")
         _vendor(ctx, "VEND-003", "Northline Fabrication", "2023-04-12")
         _vendor(ctx, "VEND-004", "Office Depot", "2023-02-01")
@@ -410,6 +423,38 @@ class APARSampleDataAgent(SampleDataAgent):
         # Orbit prepaid software (already paid last year conceptually — still a source doc).
         _ap(ctx, invoice_id="INV-020", vendor="Orbit Analytics", po_id=None, amount=24000.0, invoice_date="2025-10-01", due_date="2025-10-15", vendor_invoice_number="OA-ANN-2025", description="Analytics platform annual")
 
+        # August precedent: Acme Supply Co. is the same legal vendor as Acme Supplies (CASE-001).
+        _ap(
+            ctx,
+            invoice_id="INV-021",
+            vendor="Acme Supply Co.",
+            po_id="PO-101",
+            amount=12450.0,
+            invoice_date="2026-09-10",
+            due_date="2026-09-24",
+            vendor_invoice_number="ACM-2026-4411",
+            description="Second Acme shipment billed under the known vendor alias",
+            payment_terms="2/10 net 30",
+            early_payment_discount_percent=2,
+            early_payment_discount_deadline="2026-09-20",
+        )
+        _je(
+            ctx,
+            "JE-AP-INV-021",
+            period="2026-09",
+            date="2026-09-10",
+            debit="6000-Operating",
+            credit="2000-AP",
+            amount_minor=1_245_000,
+            memo="Acme alias invoice using August CASE-001 precedent",
+            source_document_id="INV-021",
+            transaction_id="TXN-AP-INV-021",
+            vendor="Acme Supply Co.",
+            category="opex",
+            entry_type="ap_invoice",
+        )
+        ctx.plant("SCN-AP-013", ["INV-021", "PO-101", "GR-101", "CASE-001"], storyline="STORY-CLEAN")
+
         ctx.approved_pool = [
             {"invoice_id": "INV-001", "vendor": "Acme Supplies", "amount": 12450.0, "approval_source": "ap_policy", "added_at": FIXED_GENERATED_AT},
             {"invoice_id": "INV-002", "vendor": "Amazon Web Services", "amount": 8320.0, "approval_source": "ap_policy", "added_at": FIXED_GENERATED_AT},
@@ -555,10 +600,37 @@ class APARSampleDataAgent(SampleDataAgent):
 
         _ar_inv(ctx, invoice_id="INV-AR-014", customer_id="CUST-005", customer_name="Quiet Harbor", invoice_date="2026-09-18", due_date="2026-10-02", original_amount=25000.0, outstanding_amount=25000.0, status="OPEN", description="Forecasted collection that will arrive late")
 
+        _ar_inv(ctx, invoice_id="INV-AR-015", customer_id="CUST-004", customer_name="Brightline Media", invoice_date="2026-09-12", due_date="2026-10-12", original_amount=8000.0, outstanding_amount=8000.0, status="OPEN", description="Named invoice that the customer overpays")
+        _pay(ctx, payment_id="PAY-007", payment_date="2026-09-28", amount=9500.0, payer_name="Brightline Media", customer_id="CUST-004", bank_reference="ACH-BRIGHT-9500", remittance_text="Payment for INV-AR-015 campaign add-on", invoice_reference="INV-AR-015", source="ach")
+        ctx.plant("SCN-AR-013", ["INV-AR-015", "PAY-007"])
+
+        _ar_inv(ctx, invoice_id="INV-AR-016", customer_id="CUST-010", customer_name="Meridian Health", invoice_date="2026-09-20", due_date="2026-10-20", original_amount=1800.0, outstanding_amount=1800.0, status="OPEN", description="Later similar quiet remittance after a human correction")
+        _pay(ctx, payment_id="PAY-008", payment_date="2026-09-30", amount=1800.0, payer_name="Meridian Health", customer_id="CUST-010", bank_reference="ACH-MER-1800", remittance_text="September ops", source="ach")
+
         _je(ctx, "JE-AR-INV-AR-013", period="2026-09", date="2026-09-01", debit="1100-AR", credit="4000-Revenue", amount_minor=1_240_000, memo="Northstar platform", source_document_id="INV-AR-013", transaction_id="TXN-AR-013", customer="Northstar LLC", product="Platform", category="revenue", entry_type="ar_invoice")
         ctx.ar_precedents = [
-            ARPrecedent(precedent_id="AR-PREC-001", customer_id="CUST-007", kind="batch_payment", summary="Atlas commonly pays several invoices in one wire.", facts={"typical_remittance": "batch"}),
-            ARPrecedent(precedent_id="AR-PREC-002", customer_id="CUST-008", kind="ambiguous_amount", summary="Lumen often has two invoices with the same outstanding.", facts={"same_amount": True}),
+            ARPrecedent(precedent_id="AR-PREC-001", customer_id="CUST-007", kind="batch_payment", summary="Atlas commonly pays several invoices in one wire.", facts={"typical_remittance": "batch"}, source="seed"),
+            ARPrecedent(precedent_id="AR-PREC-002", customer_id="CUST-008", kind="ambiguous_amount", summary="Lumen often has two invoices with the same outstanding.", facts={"same_amount": True}, source="seed"),
+            ARPrecedent(
+                precedent_id="AR-PREC-003",
+                customer_id="CUST-010",
+                kind="human_correction",
+                summary="August reviewer applied an unlabeled Meridian ACH to INV-AR-012.",
+                facts={"invoice_ids": ["INV-AR-012"], "amount": 3200.0, "period": "2026-08"},
+                source="human",
+                support_count=1,
+                source_payment_id="PAY-005",
+                source_review_id="REV-AR-PREC-003",
+            ),
+            ARPrecedent(
+                precedent_id="AR-PREC-004",
+                customer_id="CUST-007",
+                kind="batch_payment",
+                summary="August Atlas wire covered two invoices without naming them.",
+                facts={"invoice_ids": ["INV-AR-008", "INV-AR-009"], "typical_remittance": "batch", "period": "2026-08"},
+                source="seed",
+                support_count=2,
+            ),
         ]
 
     def _ingestion(self, ctx: CompanyScenarioContext) -> None:
@@ -571,7 +643,47 @@ class APARSampleDataAgent(SampleDataAgent):
                 "subject": "Invoice ACM-2026-4410 from Acme Supplies",
                 "sent_at": "2026-09-08T10:00:00Z",
                 "body": "Please find invoice ACM-2026-4410 for $12,450.00. PO-101.",
-                "attachments": [{"attachment_id": "ATT-E-001", "filename": "ACM-2026-4410.pdf", "content_type": "application/pdf", "text": "INVOICE ACM-2026-4410\nVendor: Acme Supplies\nAmount: 12450.00\nPO: PO-101"}],
+                "attachments": [{"attachment_id": "ATT-E-001", "filename": "ACM-2026-4410.pdf", "content_type": "application/pdf", "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"}],
+            },
+            {
+                "message_id": "MSG-E-MESSY",
+                "period": ctx.period,
+                "from": "billing@northline.example",
+                "to": "ap@maximor.example",
+                "subject": "inv nf-201   pls pay",
+                "sent_at": "2026-09-04T16:22:00Z",
+                "body": "scanned copy attached. sorry for the quality.",
+                "attachments": [{"attachment_id": "ATT-E-MESSY", "filename": "nf201-scan.txt", "content_type": "text/plain", "text": "1NVOICE\nInvoice number: NF-201\nInvoice date: 2026-09-04\nVendor: Northline Fabrication\nAmount due: 5000.00\nPO: PO-201\nThank you"}],
+            },
+            {
+                "message_id": "MSG-E-INFER",
+                "period": ctx.period,
+                "from": "billing@acmesupplies.example",
+                "to": "ap@maximor.example",
+                "subject": "Invoice ACM-2026-4411",
+                "sent_at": "2026-09-10T09:15:00Z",
+                "body": "Attached is the second Cambridge shipment. The header omitted our legal name; Acme Supplies is the vendor on PO-101.",
+                "attachments": [{"attachment_id": "ATT-E-INFER", "filename": "ACM-2026-4411.pdf", "content_type": "application/pdf", "text": "INVOICE\nInvoice number: ACM-2026-4411\nInvoice date: 2026-09-10\nAmount due: 12450.00\nPO: PO-101\nAcme Supplies"}],
+            },
+            {
+                "message_id": "MSG-E-MISSING",
+                "period": ctx.period,
+                "from": "unknown@vendor.example",
+                "to": "ap@maximor.example",
+                "subject": "Please process the attached invoice",
+                "sent_at": "2026-09-11T14:00:00Z",
+                "body": "Please process the attached invoice.",
+                "attachments": [{"attachment_id": "ATT-E-MISSING", "filename": "invoice-unknown.pdf", "content_type": "application/pdf", "text": "Please process the attached invoice.\nNo amount, vendor, or invoice number is printed."}],
+            },
+            {
+                "message_id": "MSG-E-DUP-001",
+                "period": ctx.period,
+                "from": "ap@acmesupplies.example",
+                "to": "ap@maximor.example",
+                "subject": "FW: Invoice ACM-2026-4410 from Acme Supplies",
+                "sent_at": "2026-09-08T15:40:00Z",
+                "body": "Resending in case the first copy was missed.",
+                "attachments": [{"attachment_id": "ATT-E-DUP-001", "filename": "ACM-2026-4410-copy.pdf", "content_type": "application/pdf", "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"}],
             },
             {
                 "message_id": "MSG-E-QUOTE",
@@ -633,9 +745,77 @@ class APARSampleDataAgent(SampleDataAgent):
                 "content_type": "application/pdf",
                 "text": "QUOTATION Q-8891. This is not an invoice.",
                 "received_date": "2026-09-09",
+            },
+            {
+                "document_id": "DOC-SCAN-INV-001",
+                "period": ctx.period,
+                "origin": "mailroom_scan",
+                "filename": "acm-2026-4410.pdf",
+                "content_type": "application/pdf",
+                "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101",
+                "received_date": "2026-09-08",
+            },
+        ]
+        ctx.ingestion_erp = [
+            {
+                "record_id": "NS-4410",
+                "period": ctx.period,
+                "system": "NetSuite",
+                "vendor_name": "Acme Supplies",
+                "vendor_id": "VEND-001",
+                "invoice_number": "ACM-2026-4410",
+                "invoice_date": "2026-09-08",
+                "due_date": "2026-09-22",
+                "currency": "USD",
+                "subtotal": 12450.0,
+                "tax": 0.0,
+                "total": 12450.0,
+                "po_number": "PO-101",
+                "description": "Standing desks and monitors — same economic event as INV-001",
             }
         ]
+        ctx.ingestion_procurement = [
+            {
+                "record_id": "COUPA-INV-013",
+                "period": ctx.period,
+                "system": "Coupa",
+                "document_type": "invoice",
+                "vendor_name": "Office Depot",
+                "vendor_id": "VEND-004",
+                "invoice_number": "OD-DISC-2100",
+                "invoice_date": "2026-09-14",
+                "due_date": "2026-10-14",
+                "currency": "USD",
+                "subtotal": 2100.0,
+                "tax": 0.0,
+                "total": 2100.0,
+                "po_number": "PO-104",
+                "description": "Toner and paper — same economic event as INV-013",
+            },
+            {
+                "record_id": "ZIP-PO-ONLY",
+                "period": ctx.period,
+                "system": "Zip",
+                "document_type": "purchase_request",
+                "vendor_name": "Office Depot",
+                "request_number": "PR-9901",
+                "requested_date": "2026-09-21",
+                "currency": "USD",
+                "amount": 640.0,
+                "description": "Request for additional whiteboard supplies — not an invoice",
+            },
+        ]
         ctx.plant("SCN-AP-012", ["MSG-E-QUOTE", "MSG-E-STMT", "MSG-E-RCPT", "MSG-E-MKT", "MSG-E-PO"])
+        ctx.plant("SCN-ING-001", ["MSG-E-INV-001", "INV-001"])
+        ctx.plant("SCN-ING-002", ["MSG-E-MESSY", "INV-014"])
+        ctx.plant("SCN-ING-003", ["MSG-E-PO", "PO-101"])
+        ctx.plant("SCN-ING-004", ["MSG-E-QUOTE"])
+        ctx.plant("SCN-ING-005", ["MSG-E-RCPT"])
+        ctx.plant("SCN-ING-006", ["MSG-E-STMT"])
+        ctx.plant("SCN-ING-007", ["MSG-E-MKT"])
+        ctx.plant("SCN-ING-008", ["MSG-E-INFER", "INV-021"])
+        ctx.plant("SCN-ING-009", ["MSG-E-MISSING"])
+        ctx.plant("SCN-ING-010", ["MSG-E-DUP-001", "MSG-E-INV-001", "INV-001"])
 
     def _accrual_history(self, ctx: CompanyScenarioContext) -> None:
         from accrual.models import AccrualInvoice, VendorContract

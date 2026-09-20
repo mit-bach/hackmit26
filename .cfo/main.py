@@ -163,8 +163,12 @@ def _usage() -> int:
     print("       python main.py close finalize --period 2026-09")
     print("       python main.py demo-close [period]")
     print("       python main.py ingest [period] [--no-ap] [--llm] [--replay-check]")
+    print("       python main.py demo-inbox [--full] [--reset]")
     print("       python main.py integration-demo")
     print("       python main.py stripe-demo")
+    print("       python main.py simulate-stripe")
+    print("       python main.py eval-stripe")
+    print("       python main.py eval-stripe-modes")
     print("       python main.py integrations status")
     print("       python main.py webhook-demo [stripe|adyen|gmail|outlook|xero]")
     print("       python main.py sync [coupa|netsuite|stripe]")
@@ -186,7 +190,7 @@ def _usage() -> int:
     print("       python main.py reconcile-cash --month 2026-09 --seed-demo")
     print("       python main.py reconcile-trace REC-001")
     print("       python main.py eval-cash-reconciliation")
-    print("       python main.py memory-demo [--story stripe|prepaid|both]")
+    print("       python main.py memory-demo [--story stripe|prepaid|close|both]")
     print("       python main.py eval-memory")
     print("       python main.py month-end [period]")
     print("       python main.py close-month --month 2026-09 --seed-demo")
@@ -592,6 +596,11 @@ def main() -> int:
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"demo-close", "close-demo"}:
         return run_demo_close_cli(sys.argv[2:])
 
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"demo-inbox", "inbox-demo", "demo_inbox"}:
+        from inbox.cli import run_demo_inbox_cli
+
+        return run_demo_inbox_cli(sys.argv[2:])
+
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "ingest":
         from invoice_ingestion.demo import run_demo
 
@@ -607,6 +616,21 @@ def main() -> int:
         from integrations.cli import run_stripe_demo
 
         return run_stripe_demo()
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"simulate-stripe", "simulate_stripe"}:
+        from simulations.stripe.cli import run_simulate
+
+        return run_simulate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-stripe", "eval_stripe"}:
+        from simulations.stripe.cli import run_eval
+
+        return run_eval(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-stripe-modes", "eval_stripe_modes"}:
+        from simulations.stripe.cli import run_eval_modes
+
+        return run_eval_modes(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"memory-demo", "memory_demo"}:
         from memory.cli import run_memory_demo

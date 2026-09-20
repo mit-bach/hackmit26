@@ -11,7 +11,17 @@ from typing import Any, Literal, Optional
 from pydantic import BaseModel, ConfigDict, Field
 
 Severity = Literal["LOW", "MEDIUM", "HIGH", "CRITICAL"]
-Domain = Literal["ap_ar", "cash_recon", "close", "audit_controls", "reporting_forecasting"]
+Domain = Literal[
+    "ap_ar",
+    "cash_recon",
+    "close",
+    "audit_controls",
+    "reporting_forecasting",
+    "ingestion",
+    "memory",
+    "orchestration",
+    "handoff",
+]
 ExpectedBehavior = Literal[
     "APPROVE",
     "HOLD",
@@ -33,6 +43,11 @@ ExpectedBehavior = Literal[
     "PASS",
     "FORECAST_MISS",
     "VARIANCE_DRIVER",
+    "CLASSIFY",
+    "MEMORY",
+    "HANDOFF",
+    "ORCHESTRATE",
+    "LEARN",
 ]
 
 

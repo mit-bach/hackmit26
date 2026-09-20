@@ -28,7 +28,14 @@ PaymentApplicationStatus = Literal[
     "HUMAN_REVIEW",
 ]
 CashDecision = Literal["AUTO_APPLY", "HUMAN_REVIEW", "UNAPPLIED"]
-ARJournalType = Literal["ar_invoice", "cash_receipt", "unapplied_cash"]
+ARJournalType = Literal[
+    "ar_invoice",
+    "cash_receipt",
+    "unapplied_cash",
+    "refund",
+    "processor_fee",
+    "dispute",
+]
 
 
 class Customer(BaseModel):

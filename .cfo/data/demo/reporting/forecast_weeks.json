@@ -16,6 +16,7 @@
       "FL-AP-INV-SUP-AUG-001",
       "FL-AP-INV-SUP-AUG-002",
       "FL-AP-INV-FRT-AUG-001",
+      "FL-AP-INV-MSC-AUG-001",
       "FL-STRIPE-po_1MaximorFees"
     ]
   },
@@ -25,12 +26,13 @@
     "beginning_cash": 151110.0,
     "ar_collections": 0.0,
     "other_inflows": 9450.0,
-    "ap_payments": 8320.0,
+    "ap_payments": 20770.0,
     "payroll": 70000.0,
     "other_outflows": 0.0,
-    "ending_cash": 82240.0,
+    "ending_cash": 69790.0,
     "line_ids": [
       "FL-AP-INV-002",
+      "FL-AP-INV-021",
       "FL-PR-PR-2026-09-25",
       "FL-STRIPE-po_1MaximorRefunds",
       "FL-STRIPE-po_1MaximorDisputes"
@@ -39,13 +41,13 @@
   {
     "week_start": "2026-09-28",
     "week_end": "2026-10-04",
-    "beginning_cash": 82240.0,
+    "beginning_cash": 69790.0,
     "ar_collections": 69400.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 70000.0,
     "other_outflows": 15000.0,
-    "ending_cash": 66640.0,
+    "ending_cash": 54190.0,
     "line_ids": [
       "FL-AR-INV-AR-006",
       "FL-AR-INV-AR-007",
@@ -60,13 +62,13 @@
   {
     "week_start": "2026-10-05",
     "week_end": "2026-10-11",
-    "beginning_cash": 66640.0,
+    "beginning_cash": 54190.0,
     "ar_collections": 40600.0,
     "other_inflows": 0.0,
     "ap_payments": 60000.0,
     "payroll": 0.0,
     "other_outflows": 0.0,
-    "ending_cash": 47240.0,
+    "ending_cash": 34790.0,
     "line_ids": [
       "FL-AR-INV-AR-008",
       "FL-AR-INV-AR-009",
@@ -77,24 +79,28 @@
   {
     "week_start": "2026-10-12",
     "week_end": "2026-10-18",
-    "beginning_cash": 47240.0,
-    "ar_collections": 999600.0,
+    "beginning_cash": 34790.0,
+    "ar_collections": 1007600.0,
     "other_inflows": 0.0,
     "ap_payments": 392100.0,
     "payroll": 70000.0,
     "other_outflows": 4200.0,
-    "ending_cash": 580540.0,
+    "ending_cash": 576090.0,
     "line_ids": [
       "FL-AR-INV-AR-SEP-001",
       "FL-AR-INV-AR-SEP-002",
       "FL-AR-INV-AR-SEP-003",
       "FL-AR-INV-AR-001",
+      "FL-AR-INV-AR-015",
       "FL-AP-INV-013",
       "FL-AP-INV-HOST-SEP-001",
       "FL-AP-INV-HOST-SEP-002",
+      "FL-AP-INV-HOST-SEP-003",
       "FL-AP-INV-SUP-SEP-001",
       "FL-AP-INV-SUP-SEP-002",
       "FL-AP-INV-FRT-SEP-001",
+      "FL-AP-INV-FRT-SEP-002",
+      "FL-AP-INV-MSC-SEP-001",
       "FL-PR-PR-2026-10-16",
       "FL-OTH-INS-2026-10"
     ]
@@ -102,25 +108,27 @@
   {
     "week_start": "2026-10-19",
     "week_end": "2026-10-25",
-    "beginning_cash": 580540.0,
-    "ar_collections": 0.0,
+    "beginning_cash": 576090.0,
+    "ar_collections": 1800.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 0.0,
     "other_outflows": 0.0,
-    "ending_cash": 580540.0,
-    "line_ids": []
+    "ending_cash": 577890.0,
+    "line_ids": [
+      "FL-AR-INV-AR-016"
+    ]
   },
   {
     "week_start": "2026-10-26",
     "week_end": "2026-11-01",
-    "beginning_cash": 580540.0,
+    "beginning_cash": 577890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 70000.0,
     "other_outflows": 0.0,
-    "ending_cash": 510540.0,
+    "ending_cash": 507890.0,
     "line_ids": [
       "FL-PR-PR-2026-10-30"
     ]
@@ -128,25 +136,25 @@
   {
     "week_start": "2026-11-02",
     "week_end": "2026-11-08",
-    "beginning_cash": 510540.0,
+    "beginning_cash": 507890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 0.0,
     "other_outflows": 0.0,
-    "ending_cash": 510540.0,
+    "ending_cash": 507890.0,
     "line_ids": []
   },
   {
     "week_start": "2026-11-09",
     "week_end": "2026-11-15",
-    "beginning_cash": 510540.0,
+    "beginning_cash": 507890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 70000.0,
     "other_outflows": 0.0,
-    "ending_cash": 440540.0,
+    "ending_cash": 437890.0,
     "line_ids": [
       "FL-PR-PR-2026-11-13"
     ]
@@ -154,25 +162,25 @@
   {
     "week_start": "2026-11-16",
     "week_end": "2026-11-22",
-    "beginning_cash": 440540.0,
+    "beginning_cash": 437890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 0.0,
     "other_outflows": 0.0,
-    "ending_cash": 440540.0,
+    "ending_cash": 437890.0,
     "line_ids": []
   },
   {
     "week_start": "2026-11-23",
     "week_end": "2026-11-29",
-    "beginning_cash": 440540.0,
+    "beginning_cash": 437890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 70000.0,
     "other_outflows": 0.0,
-    "ending_cash": 370540.0,
+    "ending_cash": 367890.0,
     "line_ids": [
       "FL-PR-PR-2026-11-27"
     ]
@@ -180,25 +188,25 @@
   {
     "week_start": "2026-11-30",
     "week_end": "2026-12-06",
-    "beginning_cash": 370540.0,
+    "beginning_cash": 367890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 0.0,
     "other_outflows": 0.0,
-    "ending_cash": 370540.0,
+    "ending_cash": 367890.0,
     "line_ids": []
   },
   {
     "week_start": "2026-12-07",
     "week_end": "2026-12-13",
-    "beginning_cash": 370540.0,
+    "beginning_cash": 367890.0,
     "ar_collections": 0.0,
     "other_inflows": 0.0,
     "ap_payments": 0.0,
     "payroll": 70000.0,
     "other_outflows": 0.0,
-    "ending_cash": 300540.0,
+    "ending_cash": 297890.0,
     "line_ids": [
       "FL-PR-PR-2026-12-11"
     ]

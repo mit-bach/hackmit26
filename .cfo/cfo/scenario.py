@@ -20,7 +20,10 @@ from cfo.audit_bridge import (
 from cfo.company import (
     AS_OF,
     CHAIN_SPECS,
+    COMPANY_ID,
+    COMPANY_NAME,
     FEATURED,
+    HEADQUARTERS,
     PERIOD,
     REPORTING_AS_OF,
     WORKFLOW_INVENTORY,
@@ -266,6 +269,28 @@ def _build_chains(
                     break
         if spec["chain_id"] == "CHAIN-CASH-BREAK" and reporting_run is not None:
             chain["report_line"] = f"close snapshot {chain['snapshot_id']}"
+        if spec["chain_id"] == "CHAIN-CLOSE-HARBOR":
+            harbor = _harbor_trace(closed_close) or _harbor_trace(blocked_close)
+            if harbor is not None:
+                lookup = getattr(harbor, "memory_lookup", None)
+                chain["invoice_id"] = harbor.vendor
+                chain["status"] = f"{harbor.final_method}/{harbor.final_decision}"
+                chain["amount"] = harbor.final_amount
+                chain["journal_entry_id"] = (
+                    harbor.journal_entry.entry_id if harbor.journal_entry else ""
+                )
+                chain["review_id"] = (
+                    lookup.retrieved[0]
+                    if lookup is not None and lookup.retrieved
+                    else ""
+                )
+                chain["report_line"] = (
+                    f"prior decision {lookup.retrieved[0]}"
+                    if lookup is not None and lookup.precedent_used and lookup.retrieved
+                    else (lookup.deviation if lookup is not None and lookup.deviation else "")
+                )
+                if getattr(harbor, "written_memory_id", None):
+                    chain["approval_id"] = harbor.written_memory_id
         chains.append(chain)
     return chains
 
@@ -299,11 +324,43 @@ def _resolve_reviews(period: str) -> dict:
     return resolved
 
 
+def _harbor_trace(state):
+    report = getattr(state, "accrual", None) if state is not None else None
+    if report is None:
+        return None
+    return next((item for item in report.traces if item.vendor == FEATURED["harbor_vendor"]), None)
+
+
+def _seed_august_memory() -> dict:
+    """Write August precedents on the same company books September will read."""
+    from memory.scenarios import AUGUST_STRIPE, run_harbor_period, run_stripe_period
+
+    harbor_decision, harbor_trace = run_harbor_period(
+        "2026-08",
+        memory_enabled=True,
+        hide_period_invoices=True,
+        method="seasonal_prior_year",
+        reset=True,
+        run_id="cfo-aug-harbor",
+    )
+    stripe = run_stripe_period(AUGUST_STRIPE, memory_enabled=True, reset=True)
+    return {
+        "harbor_decision": harbor_decision,
+        "harbor_trace": harbor_trace,
+        "stripe": stripe,
+        "harbor_memory_id": harbor_trace.written_memory_id,
+        "stripe_memory_id": getattr(getattr(stripe, "traces", [None])[0], "written_memory_id", None)
+        if getattr(stripe, "traces", None)
+        else None,
+    }
+
+
 def run_cfo_scenario(*, persist: bool = True) -> dict:
     """Execute the connected September lifecycle. Deterministic; no API key."""
     from ar.workflow import run_aging, run_ar_demo
     from audit.workflow import run_audit
 
+    august_memory = _seed_august_memory()
     balances, _bank, _ledger, _fees = load_demo_dataset()
     invoices = list(all_invoices())
     opening_ar = run_aging(AS_OF, persist=False)
@@ -379,6 +436,22 @@ def run_cfo_scenario(*, persist: bool = True) -> dict:
     )
     human = _human_reviews(ap_results, ar_demo, blocked_cash, blocked)
     handoffs = _handoffs(ap_results, ar_demo, blocked_cash, closed, audit_run)
+    harbor_trace = _harbor_trace(closed) or _harbor_trace(blocked)
+    harbor_packet = ""
+    if closed.accrual is not None:
+        from close.report import format_close_run, format_month_end_demo
+        from close.models import AuditRefs, CloseRun
+
+        packet = CloseRun(
+            period=PERIOD,
+            close_id=closed.close_id,
+            started_at=closed.period.opened_at,
+            discovery=closed.accrual.discovery,
+            accrual=closed.accrual,
+            audit=AuditRefs(close_id=closed.close_id, accrual_trace_dir=closed.accrual.trace_dir),
+            trace_path=closed.trace_path,
+        )
+        harbor_packet = f"{format_close_run(packet)}\n\n{format_month_end_demo(closed)}"
     payload = {
         "period": PERIOD,
         "inventory": WORKFLOW_INVENTORY,
@@ -410,6 +483,15 @@ def run_cfo_scenario(*, persist: bool = True) -> dict:
         "chains": chains,
         "human_reviews": human,
         "handoffs": handoffs,
+        "company": {
+            "company_id": COMPANY_ID,
+            "legal_name": COMPANY_NAME,
+            "period": PERIOD,
+            "headquarters": HEADQUARTERS,
+        },
+        "august_memory": august_memory,
+        "harbor_trace": harbor_trace,
+        "harbor_packet": harbor_packet,
         "post_close_rejected": post_close_rejected,
         "post_close_detail": post_close_detail,
         "closed_cash_tied": bool(
@@ -425,6 +507,7 @@ def run_cfo_scenario(*, persist: bool = True) -> dict:
             "reporting": "COMPLETE",
             "forecast": "COMPLETE" if reporting_run.forecast else "MISSING",
             "audit": "COMPLETE",
+            "memory": "COMPLETE" if august_memory.get("harbor_memory_id") else "MISSING",
         },
         "task_status": {item.task_id: item.status for item in closed.tasks},
     }

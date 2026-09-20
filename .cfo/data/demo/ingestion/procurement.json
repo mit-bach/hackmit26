@@ -1,1 +1,31 @@
-[]
+[
+  {
+    "record_id": "COUPA-INV-013",
+    "period": "2026-09",
+    "system": "Coupa",
+    "document_type": "invoice",
+    "vendor_name": "Office Depot",
+    "vendor_id": "VEND-004",
+    "invoice_number": "OD-DISC-2100",
+    "invoice_date": "2026-09-14",
+    "due_date": "2026-10-14",
+    "currency": "USD",
+    "subtotal": 2100.0,
+    "tax": 0.0,
+    "total": 2100.0,
+    "po_number": "PO-104",
+    "description": "Toner and paper \u2014 same economic event as INV-013"
+  },
+  {
+    "record_id": "ZIP-PO-ONLY",
+    "period": "2026-09",
+    "system": "Zip",
+    "document_type": "purchase_request",
+    "vendor_name": "Office Depot",
+    "request_number": "PR-9901",
+    "requested_date": "2026-09-21",
+    "currency": "USD",
+    "amount": 640.0,
+    "description": "Request for additional whiteboard supplies \u2014 not an invoice"
+  }
+]

@@ -64,6 +64,27 @@ def is_reusable_ap_decision(*, exception_types: list[str], decision: str) -> boo
     return bool(set(exception_types) & reusable)
 
 
+REUSABLE_ACCRUAL_METHODS = {
+    "last_invoice",
+    "simple_average",
+    "recent_average",
+    "weighted_recent_average",
+    "linear_trend",
+    "seasonal_prior_year",
+    "contract_commitment",
+    "usage_run_rate",
+    "goods_receipt",
+    "purchase_order",
+    "conservative_minimum",
+}
+
+
+def is_reusable_accrual_decision(*, status: str, method: str | None) -> bool:
+    if status != "accrual_required":
+        return False
+    return method in REUSABLE_ACCRUAL_METHODS
+
+
 def write_decision(
     *,
     period: str,

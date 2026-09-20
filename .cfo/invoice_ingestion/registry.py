@@ -17,12 +17,20 @@ _handed_off: set[str] = set()
 
 def next_canonical_id() -> str:
     used: list[int] = []
-    for canonical_id in _canonicals:
+
+    def _take(canonical_id: str) -> None:
         if not canonical_id.startswith("ING-"):
-            continue
+            return
         suffix = canonical_id.split("-", 1)[-1]
         if suffix.isdigit():
             used.append(int(suffix))
+
+    for canonical_id in _canonicals:
+        _take(canonical_id)
+    from tools import all_invoices
+
+    for invoice in all_invoices():
+        _take(invoice.invoice_id)
     return f"ING-{max(used, default=0) + 1:03d}"
 
 

@@ -15,6 +15,7 @@ from pathlib import Path
 ANSWER_KEY_NAMES = frozenset(
     {
         "expected_results.json",
+        "expected_outcomes.json",
         "discrepancy_contracts.json",
         "holdout_contracts.json",
     }
@@ -22,6 +23,8 @@ ANSWER_KEY_NAMES = frozenset(
 EVALUATION_ONLY_NAMES = frozenset(
     {
         "expected_results.json",
+        "expected_outcomes.json",
+        "agent_cases.json",
         "ground_truth.json",
         "discrepancy_contracts.json",
         "holdout_contracts.json",

@@ -6,6 +6,7 @@ import re
 from itertools import combinations
 
 from accrual.estimation import money
+from ar.models import ARPrecedent
 from ar.aging import derive_status
 from ar.models import (
     CashApplicationFacts,
@@ -94,12 +95,63 @@ def identify_customer(payment: CustomerPayment, customers: list[Customer] | None
     return best[1], best[0], [best[2]]
 
 
+def _token_set(value: str) -> set[str]:
+    return {item for item in re.findall(r"[a-z0-9]+", (value or "").lower()) if len(item) > 2}
+
+
+def _precedent_support(invoice: CustomerInvoice, payment: CustomerPayment, rows: list[ARPrecedent]) -> float:
+    haystack = " ".join(
+        part
+        for part in [
+            payment.remittance_text,
+            payment.invoice_reference,
+            payment.bank_reference,
+            " ".join(str(value) for value in (payment.metadata or {}).values()),
+            invoice.description,
+            invoice.reference or "",
+            invoice.invoice_id,
+        ]
+        if part
+    )
+    tokens = _token_set(haystack)
+    score = 0.0
+    for item in rows:
+        facts = item.facts or {}
+        prior_ids = [str(value) for value in facts.get("invoice_ids") or []]
+        prior_desc = str(facts.get("description") or "")
+        overlap = _token_set(prior_desc) & _token_set(invoice.description + " " + (invoice.reference or ""))
+        if invoice.invoice_id in prior_ids:
+            score += 2.0
+        if overlap:
+            score += min(1.5, 0.5 * len(overlap))
+        if facts.get("source") == "stripe" and payment.source == "stripe":
+            score += 0.25
+    invoice_day = (invoice.invoice_date or "")[:10]
+    due_day = (invoice.due_date or "")[:10]
+    payment_day = (payment.payment_date or "")[:10]
+    if payment_day and invoice_day and payment_day >= invoice_day and (not due_day or payment_day <= due_day):
+        score += 0.1
+    invoice_tokens = _token_set(f"{invoice.description} {invoice.reference or ''} {invoice.invoice_id}")
+    remittance_tokens = _token_set(f"{payment.remittance_text} {payment.invoice_reference or ''}")
+    shared = invoice_tokens & remittance_tokens
+    if shared:
+        score += min(2.0, 0.75 * len(shared))
+    return score
+
+
 def extract_invoice_ids(
     payment: CustomerPayment,
     invoices: list[CustomerInvoice] | None = None,
 ) -> list[str]:
     found: list[str] = []
-    blobs = [payment.invoice_reference or "", payment.remittance_text or "", payment.bank_reference or ""]
+    meta = payment.metadata or {}
+    blobs = [
+        payment.invoice_reference or "",
+        payment.remittance_text or "",
+        payment.bank_reference or "",
+        str(meta.get("invoice_id") or ""),
+        str(meta.get("order_id") or ""),
+    ]
     for raw in blobs:
         for match in list(INVOICE_RE.findall(raw)) + list(INVOICE_TOKEN_RE.findall(raw)):
             key = re.sub(r"\s+", "-", match.upper())
@@ -207,7 +259,9 @@ def generate_cash_candidates(
     elif invoices is not None and customer is None:
         customer_open = [item for item in invoices if money(item.outstanding_amount) > 0]
 
-    used_precedents = precedents(customer.customer_id) if customer else []
+    from memory.policy import memory_enabled
+
+    used_precedents = precedents(customer.customer_id) if customer and memory_enabled() else []
     facts: list[str] = [
         f"Payment {payment.payment_id} {money(payment.amount)} {payment.currency} from {payment.payer_name}",
         f"Remittance: {payment.remittance_text or '(none)'}",
@@ -271,6 +325,30 @@ def generate_cash_candidates(
         )
         index += 1
 
+    if len(exact) > 1:
+        ranked = sorted(
+            ((_precedent_support(invoice, payment, used_precedents), invoice) for invoice in exact),
+            key=lambda item: (-item[0], item[1].invoice_id),
+        )
+        best_score, best_invoice = ranked[0]
+        runner_up = ranked[1][0] if len(ranked) > 1 else 0.0
+        if best_score >= 0.75 and best_score > runner_up:
+            match_type = "precedent_context" if used_precedents else "contextual_description"
+            candidates.append(
+                _candidate(
+                    f"C{index}",
+                    [best_invoice],
+                    payment,
+                    match_type,
+                    [
+                        f"{best_invoice.invoice_id} uniquely matches remittance/precedent context "
+                        f"(score {best_score:.2f})"
+                    ],
+                    score=0.9,
+                )
+            )
+            index += 1
+
     combo_limit = min(4, len(pool))
     seen_combo: set[tuple[str, ...]] = set()
     for size in range(2, combo_limit + 1):
@@ -326,15 +404,25 @@ def generate_cash_candidates(
             )
         )
 
-    # Deduplicate equivalent application sets.
+    # Deduplicate equivalent application sets, keeping the most specific match type.
+    rank = {
+        "explicit_invoice": 0,
+        "explicit_multi": 0,
+        "precedent_context": 1,
+        "contextual_description": 1,
+        "exact_amount": 2,
+        "combination": 2,
+        "partial_single_open": 3,
+        "global_exact_amount": 4,
+    }
     unique: list[CashMatchCandidate] = []
-    seen_sets: set[tuple[tuple[str, float], ...]] = set()
+    seen_sets: dict[tuple[tuple[str, float], ...], CashMatchCandidate] = {}
     for item in candidates:
         key = tuple(sorted((row.invoice_id, row.amount) for row in item.applications))
-        if key in seen_sets:
-            continue
-        seen_sets.add(key)
-        unique.append(item)
+        existing = seen_sets.get(key)
+        if existing is None or rank.get(item.match_type, 9) < rank.get(existing.match_type, 9):
+            seen_sets[key] = item
+    unique = list(seen_sets.values())
 
     exact_like = [item for item in unique if item.match_type in {"exact_amount", "combination", "explicit_invoice"}]
     if len(exact_like) > 1 or len(unique) > 1:
@@ -435,6 +523,7 @@ def policy_cash_decision(facts: CashApplicationFacts) -> CashApplicationProposal
         )
 
     explicit = [item for item in candidates if item.match_type in {"explicit_invoice", "explicit_multi"}]
+    contextual = [item for item in candidates if item.match_type in {"precedent_context", "contextual_description"}]
     exact = [item for item in candidates if item.match_type == "exact_amount"]
     combos = [item for item in candidates if item.match_type == "combination"]
 
@@ -460,6 +549,23 @@ def policy_cash_decision(facts: CashApplicationFacts) -> CashApplicationProposal
             review_question="Which open invoice should this stale reference apply to?",
             precedent_used=facts.precedents,
             precedent_affected=False,
+        )
+
+    if len(contextual) == 1 and not explicit:
+        chosen = contextual[0]
+        return CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="AUTO_APPLY",
+            applications=chosen.applications,
+            confidence=0.88,
+            reason=(
+                "Prior Stripe remittance pattern and current description uniquely support "
+                + ", ".join(row.invoice_id for row in chosen.applications)
+                + ". Current-period facts were not overwritten."
+            ),
+            evidence_used=used + chosen.evidence,
+            precedent_used=facts.precedents,
+            precedent_affected=bool(facts.precedents) or chosen.match_type == "precedent_context",
         )
 
     if len(explicit) == 1 and not (exact or combos) or (len(explicit) == 1 and explicit[0].match_type == "explicit_invoice"):
@@ -590,6 +696,67 @@ def policy_cash_decision(facts: CashApplicationFacts) -> CashApplicationProposal
         ambiguities=[item.match_type for item in candidates],
         review_question="Which invoices should receive this payment?",
         precedent_used=facts.precedents,
+    )
+
+
+def strict_deterministic_cash_decision(facts: CashApplicationFacts) -> CashApplicationProposal:
+    """Baseline that uses only explicit Stripe invoice metadata.
+
+    Description overlap, unique-amount guesses, and remittance precedent are
+    withheld so agentic judgment can be measured against this mode.
+    """
+    payment = facts.payment
+    used = list(facts.facts)
+    if payment.application_status in {"APPLIED", "PARTIALLY_APPLIED"}:
+        return CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="UNAPPLIED",
+            reason="Payment was already posted; refusing to apply it again.",
+            confidence=1.0,
+            evidence_used=used,
+        )
+    explicit = [item for item in facts.candidates if item.match_type in {"explicit_invoice", "explicit_multi"}]
+    if len(explicit) == 1 and explicit[0].match_type == "explicit_invoice":
+        chosen = explicit[0]
+        named_outstanding = money(sum(item.amount for item in chosen.applications))
+        if money(payment.amount) - named_outstanding > 0.001:
+            return CashApplicationProposal(
+                payment_id=payment.payment_id,
+                decision="HUMAN_REVIEW",
+                applications=chosen.applications,
+                confidence=0.7,
+                reason=(
+                    f"Payment {money(payment.amount)} exceeds named invoice outstanding "
+                    f"{named_outstanding}; residual must not disappear."
+                ),
+                evidence_used=used + chosen.evidence,
+                ambiguities=[f"Overpayment residual {money(payment.amount - named_outstanding)}"],
+                review_question="How should the overpayment residual be treated?",
+            )
+        return CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="AUTO_APPLY",
+            applications=chosen.applications,
+            confidence=0.96,
+            reason="Invoice is explicitly named and the amount fits the outstanding balance.",
+            evidence_used=used + chosen.evidence,
+        )
+    if not facts.identified_customer_id and not explicit:
+        return CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="UNAPPLIED",
+            reason="No explicit invoice ID and payer is not uniquely identified.",
+            confidence=0.35,
+            evidence_used=used,
+        )
+    return CashApplicationProposal(
+        payment_id=payment.payment_id,
+        decision="HUMAN_REVIEW" if facts.candidates else "UNAPPLIED",
+        confidence=0.35,
+        reason="Strict baseline does not use description context or remittance precedent.",
+        evidence_used=used,
+        ambiguities=[item.match_type for item in facts.candidates],
+        review_question="Which invoice should receive this payment?",
     )
 
 

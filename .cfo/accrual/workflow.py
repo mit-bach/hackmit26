@@ -26,6 +26,8 @@ from accrual.trace import (
     vendor_slug,
 )
 from accrual.validate import failed_safe_decision, validate_agent_decision
+from memory.format import format_precedents
+from memory.hooks import apply_accrual_precedent, lookup_for_accrual, write_accrual_memory
 
 RUNS_DIR = Path(__file__).resolve().parent.parent / "runs"
 MAX_AGENT_TURNS = 12
@@ -145,9 +147,11 @@ def finalize_vendor_close(
     run_id: str,
     tools_called: list[str] | None = None,
     discovery: DiscoveryResult | None = None,
+    memory_lookup=None,
 ) -> tuple[AccrualDecision, VendorDecisionTrace]:
     """Apply validation and deterministic safety rules to a raw agent decision."""
     context = build_estimate_context(vendor, period)
+    lookup = memory_lookup or lookup_for_accrual(vendor, period)
     candidates = candidates_for(context)
     raw = raw_decision.model_copy(update={"vendor": vendor, "period": period, "journal_entry": None})
     errors = validate_agent_decision(raw, candidates)
@@ -173,6 +177,20 @@ def finalize_vendor_close(
             discovery.discovery_trace_id if discovery else "",
         )
 
+    lookup = apply_accrual_precedent(context, decision.estimation_method, decision.status, lookup)
+    if lookup.precedent_used and lookup.retrieved:
+        prior_id = lookup.retrieved[0]
+        decision = decision.model_copy(
+            update={
+                "reasoning_summary": (
+                    f"{decision.reasoning_summary} Prior {prior_id} used the same "
+                    f"{decision.estimation_method} methodology; current evidence still supports it."
+                ).strip(),
+                "evidence": list(dict.fromkeys(list(decision.evidence) + [prior_id])),
+            }
+        )
+    written = write_accrual_memory(decision, trace_id=make_trace_id(period, run_id, vendor))
+
     trace = build_trace(
         context=context,
         raw_decision=raw_decision.model_copy(update={"vendor": vendor, "period": period}),
@@ -183,6 +201,8 @@ def finalize_vendor_close(
         tools_called=tools_called or [],
         discovery_trace_id=discovery.discovery_trace_id if discovery else None,
         expectation_confidence=discovery.expectation_confidence if discovery else None,
+        memory_lookup=lookup,
+        written_memory_id=written[0].decision_id if written is not None else None,
     )
     return decision.model_copy(
         update={
@@ -233,6 +253,8 @@ def _run_vendor(
             f"{discovery.reason}"
         )
     recorder = ToolCallRecorder()
+    lookup = lookup_for_accrual(vendor, period)
+    memory_block = format_precedents(lookup)
     try:
         decision = run_agent(
             accrual_agent,
@@ -240,6 +262,7 @@ def _run_vendor(
                 f"Close period {period} for vendor {vendor}.\n"
                 "Decide accrual_required, no_accrual_needed, or insufficient_evidence.\n"
                 f"{signal_line}\n"
+                f"{memory_block}\n"
                 "Use tools to load evidence and Python estimate candidates. "
                 "Copy the Python amount exactly. Do not invent amounts."
             ),
@@ -250,7 +273,9 @@ def _run_vendor(
             raise TypeError(f"Accrual Agent returned {type(decision).__name__}, not AccrualDecision")
     except Exception as exc:
         decision = _safe_raw_decision(vendor, period, exc)
-    return finalize_vendor_close(vendor, period, decision, run_id, recorder.calls, discovery=discovery)
+    return finalize_vendor_close(
+        vendor, period, decision, run_id, recorder.calls, discovery=discovery, memory_lookup=lookup
+    )
 
 
 def _run_policy_vendor(
@@ -306,10 +331,27 @@ def run_accrual_workflow(
     vendors: list[str] | None = None,
     run_id: str | None = None,
     use_agent: bool = True,
+    hide_period_invoices: bool = False,
 ) -> AccrualPeriodReport:
     run_id = run_id or new_run_id()
-    with data_cutoff(period, hide_period_invoices=False, allow_later_invoices=False):
-        discovery = discover_period(period, run_id=run_id)
+    with data_cutoff(period, hide_period_invoices=hide_period_invoices, allow_later_invoices=False):
+        return _run_accrual_workflow(
+            period,
+            reset=reset,
+            vendors=vendors,
+            run_id=run_id,
+            use_agent=use_agent,
+        )
+
+
+def _run_accrual_workflow(
+    period: str,
+    reset: bool,
+    vendors: list[str] | None,
+    run_id: str,
+    use_agent: bool,
+) -> AccrualPeriodReport:
+    discovery = discover_period(period, run_id=run_id)
     if vendors:
         wanted = {name.lower() for name in vendors}
         ordered = []

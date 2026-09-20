@@ -29,8 +29,9 @@ Writes happen only after a real completed decision, and only when the case is re
 | Workflow | What is written |
 | --- | --- |
 | Cash reconciliation | Stripe/Adyen payout differences explained by processor fees, chargebacks, or refunds |
-| Prepaid / month-end close | Vendor amortization method after reviewer approval |
+| Prepaid | Vendor amortization method after reviewer approval |
 | Accounts payable | Exception treatments such as vendor-invoice patterns — not clean three-way matches |
+| Month-end close / accruals | Recurring or seasonal missing-bill methodology after an accrual is booked |
 
 Exact matches and unresolved exceptions are not stored.
 
@@ -41,6 +42,7 @@ Exact matches and unresolved exceptions are not stored.
 | Cash reconciliation | Before investigating a payout difference or fee-netted Stripe case |
 | Prepaid | Before preparing a prepaid treatment |
 | Accounts payable | Before exception investigation |
+| Month-end close / accruals | Before booking a missing-bill accrual |
 
 Agents that receive the `prior-period-precedent` skill can also call `get_decision_memories`.
 
@@ -85,6 +87,14 @@ Prepaid companion:
 python main.py memory-demo --story prepaid
 ```
 
+Harbor Electric month-end companion:
+
+```bash
+python main.py memory-demo --story close
+```
+
+August books a seasonal utility estimate (prior-year August peak cooling, invoice not yet received). September still has no Harbor Electric bill; recent months are seasonally misleading, so the same `seasonal_prior_year` method is reused only after current candidates are checked. The September close packet cites the August `decision_id`. If August had used `recent_average` instead, September records a visible deviation and still books from current evidence.
+
 ## Memory ON vs OFF eval
 
 ```bash
@@ -95,11 +105,11 @@ Writes `runs/memory_eval/MEM-*/eval.json` and `summary.md`.
 
 Both modes use the same Python accounting logic. Memory ON is scored on retrieval, investigation steps, and treatment consistency — not by forcing Memory OFF to be wrong.
 
-Latest local run (12 cases):
+Latest local run (17 cases, including Harbor Electric close):
 
 ```text
-Memory OFF: 12/12 correct, 0 inconsistent treatments, 54 investigation steps, 0 precedent uses
-Memory ON:  12/12 correct, 0 inconsistent treatments, 14 investigation steps, 6 precedent uses
+Memory OFF: 17/17 correct, 0 inconsistent treatments, 114 investigation steps, 0 precedent uses
+Memory ON:  17/17 correct, 0 inconsistent treatments, 56 investigation steps, 8 precedent uses
 ```
 
 ## Architecture
@@ -119,7 +129,7 @@ flowchart TD
 ## Current limitations
 
 - Retrieval is structured field matching, not embeddings.
-- Only cash payout differences, prepaid treatments, and selected AP exceptions are written.
+- Only cash payout differences, prepaid treatments, selected AP exceptions, and booked accrual methodologies are written.
 - Deterministic workflows apply precedent; live LLM agents also receive the skill and tool, but tests use the Python path.
 - Memory does not change published policy or Python arithmetic.
 - AR cash-application precedents remain in `ar/store.py`; they are not migrated into this file.

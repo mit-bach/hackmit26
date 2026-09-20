@@ -6,6 +6,23 @@ from accrual.report import _month_name, money_text
 from close.models import CloseRun
 
 
+def _accrual_precedent_lines(report) -> list[str]:
+    lines: list[str] = []
+    for card in report.traces:
+        lookup = getattr(card, "memory_lookup", None)
+        if lookup is None:
+            continue
+        amount = money_text(card.final_amount) if card.final_decision == "accrual_required" else card.final_decision
+        method = card.final_method or "—"
+        if lookup.precedent_used and lookup.retrieved:
+            lines.append(
+                f"{card.vendor}: {method} {amount} (prior decision {lookup.retrieved[0]})"
+            )
+        elif lookup.deviation:
+            lines.append(f"{card.vendor}: {method} {amount} — {lookup.deviation}")
+    return lines
+
+
 def format_close_run(state: CloseRun) -> str:
     accrual = state.accrual
     discovery = state.discovery
@@ -35,6 +52,10 @@ def format_close_run(state: CloseRun) -> str:
                 f"Accrued expense: {money_text(accrual.total_accrued_expense)}",
             ]
         )
+        precedents = _accrual_precedent_lines(accrual)
+        if precedents:
+            lines.extend(["", "PRIOR-PERIOD ACCRUAL DECISIONS", ""])
+            lines.extend(precedents)
     else:
         lines.append("Accrual workflow did not run.")
     lines.extend(["", "PAYMENTS", ""])
@@ -203,8 +224,14 @@ def format_demo_close(state: CloseRun) -> str:
             if not card:
                 continue
             if card.final_decision == "accrual_required":
+                lookup = getattr(card, "memory_lookup", None)
+                prior = ""
+                if lookup is not None and lookup.precedent_used and lookup.retrieved:
+                    prior = f" (prior decision {lookup.retrieved[0]})"
+                elif lookup is not None and lookup.deviation:
+                    prior = f" (deviation from {lookup.retrieved[0]})" if lookup.retrieved else " (prior-period deviation)"
                 lines.append(
-                    f"   {vendor}: {card.final_method} {money_text(card.final_amount)}"
+                    f"   {vendor}: {card.final_method} {money_text(card.final_amount)}{prior}"
                 )
             else:
                 lines.append(f"   {vendor}: {card.final_decision}")
@@ -322,6 +349,10 @@ def format_month_end_demo(state) -> str:
         ):
             status = "WAITING"
         lines.append(f"[{index}/{len(steps)}] {label} {status}")
+    if state.accrual:
+        citations = _accrual_precedent_lines(state.accrual)
+        if citations:
+            lines.extend(["", "ACCRUAL METHODOLOGY", *citations])
     journals = load_entries()
     journal_lines = [
         f"- {item['entry_id']}  Dr {item['debit_account']}  Cr {item['credit_account']}  "

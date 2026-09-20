@@ -33,6 +33,7 @@ class CloseSampleDataAgent(SampleDataAgent):
         "SCN-CLOSE-013",
         "SCN-CLOSE-014",
         "SCN-CLOSE-015",
+        "SCN-CLOSE-016",
     ]
 
     def plan(self, ctx: CompanyScenarioContext) -> ScenarioPlan:

@@ -28,6 +28,12 @@
     "aliases": []
   },
   {
+    "account_id": "5400-Other-COGS",
+    "name": "Other COGS",
+    "account_class": "cogs",
+    "aliases": []
+  },
+  {
     "account_id": "6000-Operating",
     "name": "Operating Expenses",
     "account_class": "opex",

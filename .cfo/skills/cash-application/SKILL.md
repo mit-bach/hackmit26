@@ -27,7 +27,7 @@ Do not search new invoice combinations and do not recalculate totals.
 
 ## Procedure
 
-1. Read the remittance evidence hierarchy: explicit invoice number, then identified customer plus unique exact amount, then a unique combination, then precedent as supporting color only.
+1. Read the remittance evidence hierarchy: explicit invoice number (including Stripe metadata `invoice_id` / `order_id`), then identified customer plus unique exact amount, then a unique combination, then remittance/description overlap, then prior-period Stripe remittance precedent as supporting color only.
 2. If the memo names a live invoice and the amount is at or below outstanding, AUTO_APPLY that candidate as a full or partial application. Do not mark the invoice fully paid when a residual remains.
 3. If one customer has exactly one invoice matching the amount, AUTO_APPLY.
 4. If two candidates both explain the amount exactly (single invoice vs combination, or two invoices with the same balance), HUMAN_REVIEW.
@@ -37,7 +37,8 @@ Do not search new invoice combinations and do not recalculate totals.
 8. If the payment amount exceeds the named invoice outstanding, HUMAN_REVIEW and preserve the residual. Do not drop it.
 9. If the payment is already APPLIED or PARTIALLY_APPLIED, refuse a second application.
 7. Tell the reviewer whether precedent actually matches these present facts.
-8. After a human correction, treat the stored precedent as scoped evidence for similar later remittances. It must not override a contradictory live remittance or an accounting invariant.
+8. After a human correction or a prior Stripe metadata match, treat the stored precedent as scoped evidence for similar later remittances. It must not override a contradictory live remittance or an accounting invariant.
+9. When Stripe metadata is missing, customer + amount + date + description may still uniquely identify the invoice. If two open invoices have the same amount and no unique contextual or precedent support, HUMAN_REVIEW. Do not pick an arbitrary invoice.
 
 ## Decision Criteria
 

@@ -10,6 +10,7 @@ from sample_data.agents.cash_recon import CashReconSampleDataAgent
 from sample_data.agents.close import CloseSampleDataAgent
 from sample_data.agents.reporting_forecasting import ReportingForecastingSampleDataAgent
 from sample_data.context import Company, CompanyScenarioContext, build_calendar
+from sample_data.extended import plant_extended_scenarios
 from sample_data.models import DatasetManifest
 from sample_data.schema_map import SCHEMA_VERSION
 from sample_data.validators import validate_dataset
@@ -37,6 +38,7 @@ class CFOSampleDataOrchestrator:
         ctx = self.build_context(seed=seed, period=period)
         for agent in self.agents:
             agent.generate(ctx)
+        plant_extended_scenarios(ctx)
         validate_dataset(ctx)
         if output is not None:
             write_dataset(ctx, Path(output))

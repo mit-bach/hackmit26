@@ -10,6 +10,12 @@ from skills.loader import list_skill_names, load_skill
 
 # Agent display names must match Agent.name / SOURCE_AGENTS values.
 AGENT_SKILLS: dict[str, tuple[str, ...]] = {
+    "Counterparty Message Agent": (),
+    "Finance Inbox Agent": (
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+    ),
     "Email Invoice Agent": (
         "invoice-source-identification",
         "invoice-field-interpretation",
@@ -53,6 +59,7 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Accrual Agent": (
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ),
     "Payment Scheduler": (
         "payment-prioritization",
@@ -85,7 +92,7 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Fixed Asset Reviewer": ("fixed-asset-depreciation",),
     "Balance Sheet Reconciliation Preparer": ("balance-sheet-reconciliation",),
     "Balance Sheet Reconciliation Reviewer": ("balance-sheet-reconciliation",),
-    "Month-End Close Reviewer": ("month-end-close-review",),
+    "Month-End Close Reviewer": ("month-end-close-review", "prior-period-precedent"),
     "Close Manager": ("month-end-close-coordination",),
     "Auditor Agent": (
         "audit-sampling-interpretation",
@@ -133,6 +140,9 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
 }
 
 AGENT_ALIASES: dict[str, str] = {
+    "counterparty": "Counterparty Message Agent",
+    "inbox": "Finance Inbox Agent",
+    "finance-inbox": "Finance Inbox Agent",
     "email": "Email Invoice Agent",
     "erp": "ERP Invoice Agent",
     "procurement": "Procurement Invoice Agent",

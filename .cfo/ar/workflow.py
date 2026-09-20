@@ -196,6 +196,7 @@ def run_cash_apply(
     as_of: str = DEFAULT_AS_OF,
     live: bool | None = None,
     persist: bool = True,
+    decision_fn=None,
 ) -> CashApplyTrace:
     live = bool(os.environ.get("OPENAI_API_KEY")) if live is None else live
     payment = get_payment(payment_id)
@@ -243,6 +244,8 @@ def run_cash_apply(
     if live:
         preparer = _live_cash_proposal(facts, payment.payment_id)
         used_agent = True
+    elif decision_fn is not None:
+        preparer = decision_fn(facts)
     else:
         preparer = policy_cash_decision(facts)
 

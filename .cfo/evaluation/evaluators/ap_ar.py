@@ -27,6 +27,7 @@ AP_CASES = (
     ("SCN-AP-006", "INV-008", "HOLD", ("po_not_approved",)),
     ("SCN-AP-007", "INV-009", "HOLD", ("approval_limit_exceeded",)),
     ("SCN-AP-008", "INV-010", "HOLD", ("goods_not_received",)),
+    ("SCN-AP-013", "INV-021", "APPROVE", ("vendor_mismatch",)),
 )
 
 AP_PAYMENT = (
@@ -203,6 +204,11 @@ def _ingestion_cases() -> list[EvaluationCaseResult]:
         "MSG-E-RCPT": "receipt",
         "MSG-E-MKT": "marketing",
         "MSG-E-PO": "purchase_order",
+        "MSG-E-INV-001": "invoice",
+        "MSG-E-MESSY": "invoice",
+        "MSG-E-INFER": "invoice",
+        "MSG-E-MISSING": "not_invoice",
+        "MSG-E-DUP-001": "invoice",
     }
     cases = []
     for message_id, kind in expected.items():
@@ -270,6 +276,7 @@ AR_CASH = (
     ("SCN-AR-008", "PAY-003", "AUTO_APPLY"),
     ("SCN-AR-009", "PAY-004", "HUMAN_REVIEW"),
     ("SCN-AR-010", "PAY-005", "HUMAN_REVIEW"),
+    ("SCN-AR-013", "PAY-007", "HUMAN_REVIEW"),
 )
 
 

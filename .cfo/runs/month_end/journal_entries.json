@@ -19,7 +19,7 @@
       "prepaid_id": "PRE-SFT-001",
       "service_period": "2026-09"
     },
-    "created_at": "2026-09-19T21:29:16Z"
+    "created_at": "2026-09-19T23:56:41Z"
   },
   {
     "entry_id": "JE-202609-002",
@@ -41,7 +41,7 @@
       "prepaid_id": "PRE-INS-001",
       "service_period": "2026-09"
     },
-    "created_at": "2026-09-19T21:29:16Z"
+    "created_at": "2026-09-19T23:56:41Z"
   },
   {
     "entry_id": "JE-202609-003",
@@ -63,6 +63,28 @@
       "asset_id": "FA-DELL-001",
       "service_period": "2026-09"
     },
-    "created_at": "2026-09-19T21:29:16Z"
+    "created_at": "2026-09-19T23:56:41Z"
+  },
+  {
+    "entry_id": "JE-202608-001",
+    "period": "2026-08",
+    "memo": "Amortize PRE-MEM-CLOUD-AUG Annual CloudCo platform license for 2026-08",
+    "debit_account": "6200-Software",
+    "credit_account": "1400-Prepaid-Expenses",
+    "debit": 1000.0,
+    "credit": 1000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-MEM-CLOUD-AUG:2026-08",
+    "source_document_id": "DOC-CLOUD-AUG-2026",
+    "transaction_id": "PRE-MEM-CLOUD-AUG",
+    "evidence_refs": [
+      "DOC-CLOUD-AUG-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-MEM-CLOUD-AUG",
+      "service_period": "2026-08"
+    },
+    "created_at": "2026-09-20T00:05:01Z"
   }
 ]

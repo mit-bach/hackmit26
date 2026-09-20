@@ -24,6 +24,7 @@ python3 -m venv .cfo/.venv
 source .cfo/.venv/bin/activate
 pip install -r requirements.txt
 python main.py INV-001
+python main.py demo-inbox
 python main.py skills
 pytest
 ```

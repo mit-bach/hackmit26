@@ -19,6 +19,7 @@ from accrual.ledger import (
     reconcile_accrual,
 )
 from accrual.models import EstimationMethod
+from memory.tools import get_decision_memories
 from accrual.store import (
     build_estimate_context,
     contract_for,

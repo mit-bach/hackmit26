@@ -14,6 +14,7 @@ def format_summary(ctx: CompanyScenarioContext, *, data_root: Path | None = None
     close_ids = [key for key in scenarios if key.startswith("SCN-CLOSE")]
     audit_ids = [key for key in scenarios if key.startswith("SCN-AUDIT")]
     report_ids = [key for key in scenarios if key.startswith("SCN-REPORT")]
+    extra_ids = [key for key in scenarios if key.startswith(("SCN-ING", "SCN-MEM", "SCN-HAND", "SCN-CFO", "SCN-LEARN"))]
     root = f"\nOutput: {data_root}" if data_root else ""
     return "\n".join(
         [
@@ -47,6 +48,9 @@ def format_summary(ctx: CompanyScenarioContext, *, data_root: Path | None = None
             f"  periods: {ctx.calendar.comparison_period}, {ctx.period}",
             f"  forecast weeks: {len(ctx.forecast_weeks)}",
             f"  planted variance cases: {len(report_ids)}",
+            "",
+            "Ingestion / memory / orchestration",
+            f"  planted scenarios: {len(extra_ids)}",
             "",
             "Cross-domain validation: PASS",
             root,

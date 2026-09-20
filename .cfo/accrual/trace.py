@@ -113,6 +113,8 @@ def build_trace(
     tools_called: list[str],
     discovery_trace_id: str | None = None,
     expectation_confidence: float | None = None,
+    memory_lookup=None,
+    written_memory_id: str | None = None,
 ) -> VendorDecisionTrace:
     from accrual.diagnostics import method_diagnostics
     from accrual.policy import preferred_candidate
@@ -155,6 +157,8 @@ def build_trace(
         policy_amount=policy.amount if policy else None,
         policy_agreement=agree,
         diagnostic_warnings=warnings,
+        memory_lookup=memory_lookup,
+        written_memory_id=written_memory_id,
     )
 
 

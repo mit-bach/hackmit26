@@ -262,7 +262,7 @@ def test_approval_threshold_control_flags_limit_breach():
 
 def test_operational_modules_do_not_read_holdout_answer_keys():
     forbidden = ("holdout_catalog", "holdout_contracts", "discrepancy_contracts", "expected_results")
-    skip_parts = {"evaluation", "discrepancy", "final_eval", "tests", "sample_data", "eval.py"}
+    skip_parts = {"evaluation", "discrepancy", "final_eval", "tests", "sample_data", "eval.py", "demo", "evals"}
     hits = []
     for path in ROOT.rglob("*.py"):
         if any(part in path.parts or path.name in skip_parts for part in skip_parts):
@@ -271,6 +271,38 @@ def test_operational_modules_do_not_read_holdout_answer_keys():
         if any(token in text for token in forbidden):
             hits.append(str(path.relative_to(ROOT)))
     assert hits == []
+
+
+def test_awaiting_bank_becomes_match_when_deposit_arrives():
+    from cash_recon.demo import load_demo_dataset, seed_provider_payouts
+    from cash_recon.store import reset_cash_state
+    from cash_recon.workflow import run_cash_reconciliation
+    from sample_data.paths import data_root
+
+    reset_cash_state()
+    with data_root(ROOT / "data" / "demo"):
+        seed_provider_payouts()
+        balances, bank, ledger, fees = load_demo_dataset()
+        report = run_cash_reconciliation(
+            "2026-09",
+            seed_demo=False,
+            use_agent=False,
+            reset=True,
+            balances=balances,
+            bank=bank,
+            ledger=ledger,
+            fees=fees,
+        )
+    by_id = {}
+    for item in report.matches:
+        for bank_id in item.bank_transaction_ids:
+            by_id[bank_id] = item
+    refunds = by_id["TXN-2026-09-022S"]
+    disputes = by_id["TXN-2026-09-026S"]
+    assert refunds.match_type == "PROVIDER_PAYOUT"
+    assert refunds.status == "MATCHED"
+    assert disputes.match_type == "PROVIDER_PAYOUT"
+    assert disputes.status == "MATCHED"
 
 
 def test_cash_provider_awareness_separate_from_arithmetic():

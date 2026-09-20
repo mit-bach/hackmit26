@@ -27,7 +27,7 @@ Apply when preparing or reviewing a bank-to-ledger match for a period, including
 2. Prefer a unique EXACT_MATCH when amount, sign, and dates agree and counterparties are compatible.
 3. Prefer GROUPED_MATCH when several ledger entries from the same vendor/customer sum exactly to one bank amount. Do not group ledger items whose counterparties are incompatible with the bank. If the same-vendor group is close but leaves a residual with no fee or timing evidence, keep UNEXPLAINED_DIFFERENCE. Do not call it a valid grouped match.
 4. Prefer FEE_NETTED only when Python attached fee evidence and a proposed (unposted) bank-fee entry.
-5. Prefer PROVIDER_PAYOUT when the bank description is a Stripe or Adyen settlement and the existing adapter reports MATCH.
+5. Prefer PROVIDER_PAYOUT when the bank description is a Stripe or Adyen settlement and the existing adapter reports MATCH. A payout is a bag of balance transactions (charges, refunds, disputes, fees), not one customer invoice. Match the bank deposit to payout membership / net settlement, never to a single gross sale. A refund or chargeback that settles in a later payout is not an unexplained bank discrepancy. A September charge that pays out in October is cash timing, not an error.
 6. Treat TIMING_DIFFERENCE as an outstanding item when the same amount clears in an adjacent period. It is not an accounting error.
 7. If two bank refunds or two identical ledger postings compete for one counterpart, match one and leave the extra as a duplicate suspicion.
 8. If a small remainder has no supporting evidence, select UNEXPLAINED_DIFFERENCE. Do not relabel it as a fee.

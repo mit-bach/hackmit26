@@ -7,6 +7,7 @@ from accrual.tools import (
     compute_accrual_estimate,
     create_accrual,
     get_current_period_invoices,
+    get_decision_memories,
     get_estimate_candidates,
     get_expected_invoices,
     get_goods_receipts,
@@ -29,6 +30,7 @@ ACCRUAL_TOOLS = [
     get_vendor_usage,
     get_estimate_candidates,
     compute_accrual_estimate,
+    get_decision_memories,
     create_accrual,
     get_open_accruals,
     reconcile_accrual_with_invoice,
@@ -57,9 +59,11 @@ that has been incurred but not yet invoiced.
 Workflow:
 1. Load current-period invoices, history, contract, usage, POs, and receipts.
 2. Call get_estimate_candidates. Those amounts are authoritative.
-3. Decide whether evidence supports an accrual, then select a Python candidate.
-4. If you accrue, call create_accrual with the chosen method so the ledger is updated.
-5. Return AccrualDecision with evidence, confidence, method, and reasoning.
+3. Call get_decision_memories for the same vendor and month_end_close / accrual_methodology.
+   Treat a prior method as precedent, not a rule. Reuse it only if current candidates still support it.
+4. Decide whether evidence supports an accrual, then select a Python candidate.
+5. If you accrue, call create_accrual with the chosen method so the ledger is updated.
+6. Return AccrualDecision with evidence, confidence, method, and reasoning.
 
 Status must be one of: accrual_required, no_accrual_needed, insufficient_evidence.
 

@@ -48,6 +48,7 @@ def merge_candidates(group: list[InvoiceCandidate], canonical_id: str) -> Canoni
         if candidate.line_items:
             description = _prefer_text(description, candidate.line_items[0].description)
     existing_id = existing_ap_match(vendor, number) if vendor and number else None
+    already_seed = existing_id is not None and not str(existing_id).startswith("ING-")
 
     merged = CanonicalInvoice(
         canonical_id=canonical_id,
@@ -66,7 +67,7 @@ def merge_candidates(group: list[InvoiceCandidate], canonical_id: str) -> Canoni
         sources=[_source_ref(item) for item in group],
         document_hash=hash_value,
         evidence=evidence,
-        already_in_ap_inbox=existing_id is not None,
+        already_in_ap_inbox=already_seed,
         existing_ap_invoice_id=existing_id,
         canonical_key=canonical_invoice_key(vendor=vendor, vendor_invoice_number=number),
     )

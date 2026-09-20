@@ -59,6 +59,18 @@ def _resolve_against_registry(item: CanonicalInvoice) -> tuple[CanonicalInvoice,
     item.canonical_key = item.canonical_key or canonical_invoice_key(item)
     existing = lookup(item)
     if existing is None:
+        reuse_id = item.existing_ap_invoice_id
+        if reuse_id and str(reuse_id).startswith("ING-"):
+            item = item.model_copy(
+                update={
+                    "canonical_id": reuse_id,
+                    "ingestion_status": "existing_canonical_invoice",
+                    "new_this_run": False,
+                    "provenance_added": False,
+                }
+            )
+            remember(item)
+            return item, set()
         item = item.model_copy(
             update={
                 "canonical_id": next_canonical_id(),
@@ -260,11 +272,14 @@ def _finalize_candidates(
         for item in report.canonical_invoices:
             if item.validation_status != "valid":
                 continue
-            if item.already_in_ap_inbox:
+            if item.already_in_ap_inbox or (
+                item.existing_ap_invoice_id and str(item.existing_ap_invoice_id).startswith("ING-")
+            ):
                 item.ap_result = (
                     f"already in AP inbox as {item.existing_ap_invoice_id}; not forwarded"
                 )
                 item.forwarded_to_ap = False
+                item.ap_invoice_id = item.existing_ap_invoice_id or item.canonical_id
                 continue
             if already_handed_off(item.canonical_id):
                 item.forwarded_to_ap = False

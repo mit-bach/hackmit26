@@ -159,11 +159,26 @@ def get_invoice(invoice_id: str) -> CustomerInvoice | None:
     return load_state().invoices.get(invoice_id)
 
 
+def save_customer(customer: Customer) -> Customer:
+    state = load_state()
+    state.customers[customer.customer_id] = customer
+    save_state()
+    return customer
+
+
 def save_invoice(invoice: CustomerInvoice) -> CustomerInvoice:
     state = load_state()
     state.invoices[invoice.invoice_id] = invoice
     save_state()
     return invoice
+
+
+def load_empty_state() -> ARState:
+    """Start an empty AR book. Used by isolated Stripe simulations."""
+    global _state
+    _state = ARState()
+    save_state()
+    return _state
 
 
 def all_payments() -> list[CustomerPayment]:

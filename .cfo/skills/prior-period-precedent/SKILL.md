@@ -12,7 +12,7 @@ Use organizational memory so a decision made in an earlier accounting period can
 
 ## When to Use
 
-Apply when investigating a cash payout difference, a prepaid treatment, or an AP exception that may have happened before for the same vendor, customer, or payment provider.
+Apply when investigating a cash payout difference, a prepaid treatment, an AP exception, or a month-end accrual methodology that may have happened before for the same vendor, customer, or payment provider.
 
 ## Inputs / Evidence
 

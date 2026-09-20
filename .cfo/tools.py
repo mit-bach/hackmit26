@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import fcntl
 import json
+import os
 import re
 from datetime import date
 from functools import lru_cache
@@ -8,7 +10,6 @@ from pathlib import Path
 
 from agents import function_tool
 
-from memory.tools import get_decision_memories
 from models import (
     APCaseEvidence,
     CompanyPolicy,
@@ -57,6 +58,75 @@ def _read_json(path: Path) -> list:
 
 
 _runtime_invoices: dict[str, Invoice] = {}
+_runtime_loaded = False
+RUNTIME_DIR_ENV = "CFO_AP_RUNTIME_DIR"
+_ROOT = Path(__file__).resolve().parent
+_DEFAULT_RUNTIME_DIR = _ROOT / "runs" / "ap"
+RUNTIME_DIR = _DEFAULT_RUNTIME_DIR
+
+
+def _default_runtime_dir() -> Path:
+    override = os.environ.get(RUNTIME_DIR_ENV)
+    if override:
+        return Path(override)
+    return _DEFAULT_RUNTIME_DIR
+
+
+RUNTIME_DIR = _default_runtime_dir()
+
+
+def runtime_invoices_path() -> Path:
+    return RUNTIME_DIR / "runtime_invoices.json"
+
+
+def configure_runtime_dir(directory: Path | None = None) -> Path:
+    """Point the durable AP overlay at an isolated directory. Does not edit invoices.json."""
+    global RUNTIME_DIR, _runtime_loaded
+    RUNTIME_DIR = Path(directory) if directory is not None else _default_runtime_dir()
+    _runtime_invoices.clear()
+    _runtime_loaded = False
+    return RUNTIME_DIR
+
+
+def _runtime_lock_path() -> Path:
+    return runtime_invoices_path().with_name(runtime_invoices_path().name + ".lock")
+
+
+def _atomic_write_json(path: Path, payload) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    text = json.dumps(payload, indent=2) + "\n"
+    with tmp.open("w") as handle:
+        handle.write(text)
+        handle.flush()
+        os.fsync(handle.fileno())
+    tmp.replace(path)
+
+
+def _ensure_runtime_loaded() -> None:
+    global _runtime_loaded
+    if _runtime_loaded:
+        return
+    _runtime_loaded = True
+    path = runtime_invoices_path()
+    if not path.exists():
+        return
+    raw = json.loads(path.read_text())
+    rows = raw.get("invoices") if isinstance(raw, dict) else raw
+    for row in rows or []:
+        invoice = Invoice.model_validate(row)
+        _runtime_invoices[invoice.invoice_id] = invoice
+
+
+def _persist_runtime_invoices() -> Path:
+    path = runtime_invoices_path()
+    _atomic_write_json(
+        path,
+        {
+            "invoices": [item.model_dump() for item in _runtime_invoices.values()],
+        },
+    )
+    return path
 
 
 @lru_cache(maxsize=1)
@@ -64,17 +134,58 @@ def _file_invoices() -> list[Invoice]:
     return [Invoice.model_validate(item) for item in _read_json(DATA_DIR / "invoices.json")]
 
 
-def register_runtime_invoice(invoice: Invoice) -> None:
-    """Add an ingested invoice to the AP lookup overlay. Does not edit invoices.json."""
-    _runtime_invoices[invoice.invoice_id] = invoice
+def register_runtime_invoice(invoice: Invoice) -> Invoice:
+    """Persist an ingested invoice in the canonical AP overlay. Does not edit invoices.json."""
+    global _runtime_loaded
+    path = runtime_invoices_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = _runtime_lock_path()
+    with lock_path.open("a") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        try:
+            _runtime_loaded = False
+            _ensure_runtime_loaded()
+            _runtime_invoices[invoice.invoice_id] = invoice
+            _persist_runtime_invoices()
+            return invoice
+        finally:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
 
 
 def clear_runtime_invoices() -> None:
-    """Drop ingested overlay invoices. Existing AP inbox files are unchanged."""
+    """Drop in-memory overlay invoices. The durable file is reloaded on next read."""
+    global _runtime_loaded
     _runtime_invoices.clear()
+    _runtime_loaded = False
+
+
+def reset_runtime_invoices() -> None:
+    """Clear the durable AP overlay file and memory. Does not edit invoices.json."""
+    global _runtime_loaded
+    path = runtime_invoices_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = _runtime_lock_path()
+    with lock_path.open("a") as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        try:
+            clear_runtime_invoices()
+            if path.exists():
+                path.unlink()
+            tmp = path.with_name(path.name + ".tmp")
+            if tmp.exists():
+                tmp.unlink()
+            _runtime_loaded = True
+        finally:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+
+
+def runtime_invoices() -> list[Invoice]:
+    _ensure_runtime_loaded()
+    return list(_runtime_invoices.values())
 
 
 def _invoices() -> list[Invoice]:
+    _ensure_runtime_loaded()
     base = list(_file_invoices())
     if not _runtime_invoices:
         return base
@@ -527,3 +638,6 @@ def get_prior_cases(exception_type: str = "", vendor: str = "") -> dict:
         "match_count": len(matches),
         "cases": [_dump(item) for item in matches],
     }
+
+
+from memory.tools import get_decision_memories  # noqa: E402

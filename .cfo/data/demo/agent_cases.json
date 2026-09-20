@@ -1,0 +1,531 @@
+[
+  {
+    "case_id": "AC-EMAIL-CLEAN",
+    "agent": "Email Invoice Agent",
+    "capability": "ingestion.classify_document",
+    "input": {
+      "message_id": "MSG-E-INV-001"
+    },
+    "expected": {
+      "classification": "invoice",
+      "invoice_number": "ACM-2026-4410"
+    },
+    "source_record_ids": [
+      "MSG-E-INV-001"
+    ],
+    "downstream_record_ids": [
+      "INV-001"
+    ],
+    "visualization_tags": [
+      "happy_path",
+      "ap"
+    ]
+  },
+  {
+    "case_id": "AC-EMAIL-QUOTE",
+    "agent": "Email Invoice Agent",
+    "capability": "ingestion.classify_document",
+    "input": {
+      "message_id": "MSG-E-QUOTE"
+    },
+    "expected": {
+      "classification": "quote"
+    },
+    "source_record_ids": [
+      "MSG-E-QUOTE"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "exception",
+      "ap"
+    ]
+  },
+  {
+    "case_id": "AC-AP-PREPARER-CLEAN",
+    "agent": "AP Preparer",
+    "capability": "ap.three_way_match",
+    "input": {
+      "invoice_id": "INV-001"
+    },
+    "expected": {
+      "decision": "APPROVE",
+      "exceptions": []
+    },
+    "source_record_ids": [
+      "INV-001",
+      "PO-101",
+      "GR-101"
+    ],
+    "downstream_record_ids": [
+      "PAY-AP-001"
+    ],
+    "visualization_tags": [
+      "happy_path",
+      "ap"
+    ]
+  },
+  {
+    "case_id": "AC-AP-INVESTIGATOR-ALIAS",
+    "agent": "Exception Investigator",
+    "capability": "memory.cross_period",
+    "input": {
+      "invoice_id": "INV-021"
+    },
+    "expected": {
+      "decision": "APPROVE",
+      "exceptions": [
+        "vendor_mismatch"
+      ],
+      "precedent_id": "CASE-001"
+    },
+    "source_record_ids": [
+      "INV-021",
+      "CASE-001"
+    ],
+    "downstream_record_ids": [
+      "JE-AP-INV-021"
+    ],
+    "visualization_tags": [
+      "memory",
+      "ap"
+    ]
+  },
+  {
+    "case_id": "AC-AP-DUP",
+    "agent": "AP Reviewer",
+    "capability": "ap.three_way_match",
+    "input": {
+      "invoice_id": "INV-006"
+    },
+    "expected": {
+      "decision": "HOLD",
+      "exceptions": [
+        "duplicate"
+      ]
+    },
+    "source_record_ids": [
+      "INV-006",
+      "INV-007"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "exception",
+      "ap",
+      "audit"
+    ]
+  },
+  {
+    "case_id": "AC-SCHEDULER-DUE",
+    "agent": "Payment Scheduler",
+    "capability": "ap.payment_scheduling",
+    "input": {
+      "invoice_id": "INV-002",
+      "as_of": "2026-09-19"
+    },
+    "expected": {
+      "eligible": true
+    },
+    "source_record_ids": [
+      "INV-002"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "ap"
+    ]
+  },
+  {
+    "case_id": "AC-COLLECTIONS",
+    "agent": "Collections Agent",
+    "capability": "ar.aging_collections",
+    "input": {
+      "invoice_id": "INV-AR-005",
+      "as_of": "2026-09-30"
+    },
+    "expected": {
+      "aging_bucket": "90+",
+      "action_not": "NO_ACTION"
+    },
+    "source_record_ids": [
+      "INV-AR-005",
+      "CUST-005"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "ar",
+      "exception"
+    ]
+  },
+  {
+    "case_id": "AC-CASH-APPLY-EXACT",
+    "agent": "Cash Application Agent",
+    "capability": "ar.cash_application",
+    "input": {
+      "payment_id": "PAY-001"
+    },
+    "expected": {
+      "decision": "AUTO_APPLY",
+      "invoice_ids": [
+        "INV-AR-007"
+      ]
+    },
+    "source_record_ids": [
+      "PAY-001",
+      "INV-AR-007"
+    ],
+    "downstream_record_ids": [
+      "TXN-AR-PAY-001"
+    ],
+    "visualization_tags": [
+      "happy_path",
+      "ar"
+    ]
+  },
+  {
+    "case_id": "AC-CASH-APPLY-AMBIGUOUS",
+    "agent": "Cash Application Reviewer",
+    "capability": "ar.cash_application",
+    "input": {
+      "payment_id": "PAY-004"
+    },
+    "expected": {
+      "decision": "HUMAN_REVIEW"
+    },
+    "source_record_ids": [
+      "PAY-004",
+      "INV-AR-010",
+      "INV-AR-011"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "exception",
+      "ar"
+    ]
+  },
+  {
+    "case_id": "AC-CASH-RECON-1240",
+    "agent": "Cash Reconciliation Preparer",
+    "capability": "cash.bank_reconciliation",
+    "input": {
+      "bank_id": "TXN-2026-09-015"
+    },
+    "expected": {
+      "status": "HUMAN_REVIEW",
+      "difference_cents": 1240
+    },
+    "source_record_ids": [
+      "TXN-2026-09-015",
+      "GL-AR-NS"
+    ],
+    "downstream_record_ids": [
+      "TASK-CASH"
+    ],
+    "visualization_tags": [
+      "cash",
+      "close",
+      "demo_highlight"
+    ]
+  },
+  {
+    "case_id": "AC-CASH-RECON-GROUPED",
+    "agent": "Cash Reconciliation Preparer",
+    "capability": "cash.bank_reconciliation",
+    "input": {
+      "bank_id": "TXN-2026-09-008"
+    },
+    "expected": {
+      "match_type": "GROUPED_MATCH"
+    },
+    "source_record_ids": [
+      "TXN-2026-09-008",
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "cash",
+      "ap"
+    ]
+  },
+  {
+    "case_id": "AC-CASH-INVESTIGATOR",
+    "agent": "Cash Exception Investigator",
+    "capability": "cash.bank_reconciliation",
+    "input": {
+      "bank_id": "TXN-2026-09-015"
+    },
+    "expected": {
+      "status": "HUMAN_REVIEW",
+      "invented_explanation": false
+    },
+    "source_record_ids": [
+      "TXN-2026-09-015"
+    ],
+    "downstream_record_ids": [
+      "TASK-CASH"
+    ],
+    "visualization_tags": [
+      "cash",
+      "exception"
+    ]
+  },
+  {
+    "case_id": "AC-CASH-REVIEWER",
+    "agent": "Cash Reconciliation Reviewer",
+    "capability": "cash.bank_reconciliation",
+    "input": {
+      "bank_id": "TXN-2026-09-011"
+    },
+    "expected": {
+      "match_type": "FEE_NETTED"
+    },
+    "source_record_ids": [
+      "TXN-2026-09-011",
+      "FEE-729103"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "cash",
+      "exception"
+    ]
+  },
+  {
+    "case_id": "AC-ACCRUAL",
+    "agent": "Accrual Agent",
+    "capability": "close.accruals",
+    "input": {
+      "vendor": "Harbor Electric",
+      "period": "2026-09"
+    },
+    "expected": {
+      "needed": true,
+      "accrual_id": "ACC-HE-2026-09"
+    },
+    "source_record_ids": [
+      "CTR-HE-001",
+      "HI-HE-2026-08"
+    ],
+    "downstream_record_ids": [
+      "JE-ACC-HE-202609"
+    ],
+    "visualization_tags": [
+      "close",
+      "memory"
+    ]
+  },
+  {
+    "case_id": "AC-PREPAID",
+    "agent": "Prepaid Preparer",
+    "capability": "close.prepaids",
+    "input": {
+      "prepaid_id": "PRE-INS-001"
+    },
+    "expected": {
+      "treatment": "AMORTIZE"
+    },
+    "source_record_ids": [
+      "PRE-INS-001",
+      "INV-019"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "close"
+    ]
+  },
+  {
+    "case_id": "AC-ASSET",
+    "agent": "Fixed Asset Preparer",
+    "capability": "close.fixed_assets",
+    "input": {
+      "source": "INV-018"
+    },
+    "expected": {
+      "treatment": "DEPRECIATE"
+    },
+    "source_record_ids": [
+      "INV-018"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "close"
+    ]
+  },
+  {
+    "case_id": "AC-BS-RECON",
+    "agent": "Balance Sheet Reconciliation Preparer",
+    "capability": "close.balance_sheet_recs",
+    "input": {
+      "period": "2026-09"
+    },
+    "expected": {
+      "cash_open": true
+    },
+    "source_record_ids": [
+      "TXN-2026-09-015"
+    ],
+    "downstream_record_ids": [
+      "TASK-BS"
+    ],
+    "visualization_tags": [
+      "close",
+      "cash"
+    ]
+  },
+  {
+    "case_id": "AC-CLOSE-REVIEW",
+    "agent": "Month-End Close Reviewer",
+    "capability": "close.month_end",
+    "input": {
+      "period": "2026-09"
+    },
+    "expected": {
+      "period_status": "BLOCKED",
+      "blocker": "12.40"
+    },
+    "source_record_ids": [
+      "TXN-2026-09-015",
+      "TASK-CASH"
+    ],
+    "downstream_record_ids": [
+      "CLOSE-2026-09"
+    ],
+    "visualization_tags": [
+      "close",
+      "demo_highlight"
+    ]
+  },
+  {
+    "case_id": "AC-CLOSE-MANAGER",
+    "agent": "Close Manager",
+    "capability": "close.month_end",
+    "input": {
+      "period": "2026-09"
+    },
+    "expected": {
+      "coordination": "deterministic_coordinate",
+      "blocked": true
+    },
+    "source_record_ids": [
+      "TASK-CASH"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "close"
+    ]
+  },
+  {
+    "case_id": "AC-AUDITOR",
+    "agent": "Auditor Agent",
+    "capability": "audit.controls",
+    "input": {
+      "period": "2026-09",
+      "seed": 42
+    },
+    "expected": {
+      "findings_include": [
+        "VEND-001",
+        "INV-006",
+        "PAY-AP-009",
+        "JE-POST-CLOSE-001",
+        "APR-INV-SELF"
+      ]
+    },
+    "source_record_ids": [
+      "VEND-001-DUP",
+      "INV-006",
+      "PAY-AP-009"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "audit"
+    ]
+  },
+  {
+    "case_id": "AC-VARIANCE",
+    "agent": "Variance Analysis Agent",
+    "capability": "reporting.variance_board",
+    "input": {
+      "metric": "gross_margin_pct",
+      "period": "2026-09"
+    },
+    "expected": {
+      "august": 0.64,
+      "september": 0.61,
+      "driver_ids": [
+        "TXN-SUP-SEP-001",
+        "TXN-HOST-SEP-001"
+      ]
+    },
+    "source_record_ids": [
+      "TXN-SUP-SEP-001",
+      "TXN-HOST-SEP-001",
+      "TXN-FRT-SEP-001"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "forecast",
+      "demo_highlight"
+    ]
+  },
+  {
+    "case_id": "AC-FORECAST",
+    "agent": "Cash Forecast Agent",
+    "capability": "forecast.thirteen_week",
+    "input": {
+      "as_of": "2026-09-19",
+      "weeks": 13
+    },
+    "expected": {
+      "week_count": 13
+    },
+    "source_record_ids": [
+      "INV-AR-014",
+      "INV-012"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "forecast"
+    ]
+  },
+  {
+    "case_id": "AC-FORECAST-VAR",
+    "agent": "Forecast Variance Agent",
+    "capability": "forecast.thirteen_week",
+    "input": {
+      "period": "2026-09"
+    },
+    "expected": {
+      "miss_sources": [
+        "INV-AR-014",
+        "INV-012"
+      ]
+    },
+    "source_record_ids": [
+      "INV-AR-014",
+      "INV-012"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "forecast"
+    ]
+  },
+  {
+    "case_id": "AC-BOARD",
+    "agent": "Board Reporting Agent",
+    "capability": "reporting.variance_board",
+    "input": {
+      "period": "2026-09"
+    },
+    "expected": {
+      "metrics_tie_to_gl": true
+    },
+    "source_record_ids": [
+      "4000-Revenue",
+      "5200-Supplier"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "forecast"
+    ]
+  }
+]

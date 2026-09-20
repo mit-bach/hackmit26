@@ -323,6 +323,44 @@
     ]
   },
   {
+    "line_id": "FL-AR-INV-AR-015",
+    "source_type": "receivable",
+    "source_id": "INV-AR-015",
+    "expected_date": "2026-10-12",
+    "amount": 8000.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-015",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Brightline Media",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-015"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-016",
+    "source_type": "receivable",
+    "source_id": "INV-AR-016",
+    "expected_date": "2026-10-20",
+    "amount": 1800.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-016",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Meridian Health",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-016"
+    ]
+  },
+  {
     "line_id": "FL-AP-INV-002",
     "source_type": "invoice",
     "source_id": "INV-002",
@@ -396,6 +434,25 @@
     "trace_ids": [],
     "evidence_refs": [
       "invoice:INV-019"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-021",
+    "source_type": "invoice",
+    "source_id": "INV-021",
+    "expected_date": "2026-09-24",
+    "amount": -12450.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-021",
+    "week_start": "",
+    "vendor": "Acme Supply Co.",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-021"
     ]
   },
   {
@@ -479,7 +536,7 @@
     "source_type": "invoice",
     "source_id": "INV-FRT-AUG-001",
     "expected_date": "2026-09-15",
-    "amount": -30000.0,
+    "amount": -20000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-FRT-AUG-001",
     "week_start": "",
@@ -494,11 +551,30 @@
     ]
   },
   {
+    "line_id": "FL-AP-INV-MSC-AUG-001",
+    "source_type": "invoice",
+    "source_id": "INV-MSC-AUG-001",
+    "expected_date": "2026-09-15",
+    "amount": -10000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-MSC-AUG-001",
+    "week_start": "",
+    "vendor": "Misc Supplies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-MSC-AUG-001"
+    ]
+  },
+  {
     "line_id": "FL-AP-INV-HOST-SEP-001",
     "source_type": "invoice",
     "source_id": "INV-HOST-SEP-001",
     "expected_date": "2026-10-15",
-    "amount": -55000.0,
+    "amount": -50000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-HOST-SEP-001",
     "week_start": "",
@@ -517,7 +593,7 @@
     "source_type": "invoice",
     "source_id": "INV-HOST-SEP-002",
     "expected_date": "2026-10-15",
-    "amount": -32000.0,
+    "amount": -30000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-HOST-SEP-002",
     "week_start": "",
@@ -532,11 +608,30 @@
     ]
   },
   {
+    "line_id": "FL-AP-INV-HOST-SEP-003",
+    "source_type": "invoice",
+    "source_id": "INV-HOST-SEP-003",
+    "expected_date": "2026-10-15",
+    "amount": -15000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-HOST-SEP-003",
+    "week_start": "",
+    "vendor": "Amazon Web Services",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-HOST-SEP-003"
+    ]
+  },
+  {
     "line_id": "FL-AP-INV-SUP-SEP-001",
     "source_type": "invoice",
     "source_id": "INV-SUP-SEP-001",
     "expected_date": "2026-10-15",
-    "amount": -198000.0,
+    "amount": -187200.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-SUP-SEP-001",
     "week_start": "",
@@ -555,7 +650,7 @@
     "source_type": "invoice",
     "source_id": "INV-SUP-SEP-002",
     "expected_date": "2026-10-15",
-    "amount": -70000.0,
+    "amount": -72800.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-SUP-SEP-002",
     "week_start": "",
@@ -574,7 +669,7 @@
     "source_type": "invoice",
     "source_id": "INV-FRT-SEP-001",
     "expected_date": "2026-10-15",
-    "amount": -35000.0,
+    "amount": -20000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-FRT-SEP-001",
     "week_start": "",
@@ -586,6 +681,44 @@
     "trace_ids": [],
     "evidence_refs": [
       "invoice:INV-FRT-SEP-001"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-FRT-SEP-002",
+    "source_type": "invoice",
+    "source_id": "INV-FRT-SEP-002",
+    "expected_date": "2026-10-15",
+    "amount": -4000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-FRT-SEP-002",
+    "week_start": "",
+    "vendor": "Freightline Logistics",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-FRT-SEP-002"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-MSC-SEP-001",
+    "source_type": "invoice",
+    "source_id": "INV-MSC-SEP-001",
+    "expected_date": "2026-10-15",
+    "amount": -11000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-MSC-SEP-001",
+    "week_start": "",
+    "vendor": "Misc Supplies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-MSC-SEP-001"
     ]
   },
   {

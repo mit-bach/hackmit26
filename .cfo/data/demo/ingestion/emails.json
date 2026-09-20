@@ -12,7 +12,75 @@
         "attachment_id": "ATT-E-001",
         "filename": "ACM-2026-4410.pdf",
         "content_type": "application/pdf",
-        "text": "INVOICE ACM-2026-4410\nVendor: Acme Supplies\nAmount: 12450.00\nPO: PO-101"
+        "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-MESSY",
+    "period": "2026-09",
+    "from": "billing@northline.example",
+    "to": "ap@maximor.example",
+    "subject": "inv nf-201   pls pay",
+    "sent_at": "2026-09-04T16:22:00Z",
+    "body": "scanned copy attached. sorry for the quality.",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-MESSY",
+        "filename": "nf201-scan.txt",
+        "content_type": "text/plain",
+        "text": "1NVOICE\nInvoice number: NF-201\nInvoice date: 2026-09-04\nVendor: Northline Fabrication\nAmount due: 5000.00\nPO: PO-201\nThank you"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-INFER",
+    "period": "2026-09",
+    "from": "billing@acmesupplies.example",
+    "to": "ap@maximor.example",
+    "subject": "Invoice ACM-2026-4411",
+    "sent_at": "2026-09-10T09:15:00Z",
+    "body": "Attached is the second Cambridge shipment. The header omitted our legal name; Acme Supplies is the vendor on PO-101.",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-INFER",
+        "filename": "ACM-2026-4411.pdf",
+        "content_type": "application/pdf",
+        "text": "INVOICE\nInvoice number: ACM-2026-4411\nInvoice date: 2026-09-10\nAmount due: 12450.00\nPO: PO-101\nAcme Supplies"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-MISSING",
+    "period": "2026-09",
+    "from": "unknown@vendor.example",
+    "to": "ap@maximor.example",
+    "subject": "Please process the attached invoice",
+    "sent_at": "2026-09-11T14:00:00Z",
+    "body": "Please process the attached invoice.",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-MISSING",
+        "filename": "invoice-unknown.pdf",
+        "content_type": "application/pdf",
+        "text": "Please process the attached invoice.\nNo amount, vendor, or invoice number is printed."
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-DUP-001",
+    "period": "2026-09",
+    "from": "ap@acmesupplies.example",
+    "to": "ap@maximor.example",
+    "subject": "FW: Invoice ACM-2026-4410 from Acme Supplies",
+    "sent_at": "2026-09-08T15:40:00Z",
+    "body": "Resending in case the first copy was missed.",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-DUP-001",
+        "filename": "ACM-2026-4410-copy.pdf",
+        "content_type": "application/pdf",
+        "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
       }
     ]
   },
