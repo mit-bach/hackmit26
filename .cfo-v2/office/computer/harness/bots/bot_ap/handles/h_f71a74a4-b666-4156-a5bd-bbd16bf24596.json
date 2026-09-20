@@ -1,0 +1,22 @@
+{
+  "id": "h_f71a74a4-b666-4156-a5bd-bbd16bf24596",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\npath: workspace/sources/email/MSG-S12.json\nLanded a vendor bill. Do not invent amounts.",
+  "paths": [
+    "workspace/sources/email/MSG-S12.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T11:18:37.002Z",
+  "updatedAt": "2026-09-20T11:19:43.062Z",
+  "result": "**HOLD — INV-S12 not prepared for payment path.**\n\n| Check | Result |\n| --- | --- |\n| Source `workspace/sources/email/MSG-S12.json` | Marker only (`classification: invoice`). No vendor, amount, invoice #, PO, or attachment text. |\n| `tools.get_invoice(INV-S12)` | **not found** (`k_46157cf4ba19`) |\n| `tools.get_case_evidence(INV-S12)` | **not found** (`k_703406ee8936`) |\n\nNo three-way match possible. **Amounts not invented.**\n\nPacket: `workspace/ap/packets/INV-S12.json` — `proposal: HOLD`, `destination: null`. Not sent to ctl-pay (prior stub APPROVE already **REFUSE**d).\n\n**Need from Email:** full bill fields or a Kernel-registered invoice id before AP can re-run match.",
+  "resultPaths": [],
+  "seq": 18
+}

@@ -104,12 +104,30 @@ export function piSessionDir(computerRoot: string, botId: string): string {
   return join(botDir(computerRoot, botId), "pi-session");
 }
 
+/** Durable AskBot prompt/reply posts. Pair UI reads this file, not session folds. */
+export function threadsDir(computerRoot: string): string {
+  return join(harnessRoot(computerRoot), "threads");
+}
+
+export function threadFilePath(computerRoot: string, pairId: string): string {
+  const safe = pairId.replace(/[^A-Za-z0-9._-]+/g, "__");
+  return join(threadsDir(computerRoot), `${safe}.json`);
+}
+
 export function extensionsManifestPath(computerRoot: string): string {
   return join(harnessRoot(computerRoot), "extensions.json");
 }
 
 export function interceptPath(computerRoot: string): string {
   return join(harnessRoot(computerRoot), "intercept.json");
+}
+
+export function demoRoot(computerRoot: string): string {
+  return join(harnessRoot(computerRoot), "demo");
+}
+
+export function demoLatestDir(computerRoot: string): string {
+  return join(demoRoot(computerRoot), "latest");
 }
 
 export function computerSkillsRoot(computerRoot: string): string {

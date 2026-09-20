@@ -9,10 +9,12 @@ import { handleOperatorApi, messagesForBot, type ApiContext, type OperatorMessag
 import { saveExtensionsManifest } from "../client-attach.ts";
 import { handleDeskCompat, wireRun } from "./desk.ts";
 import { loadClientRuntime, overlayOperatorConfig, clientRuntimePath } from "../client-runtime.ts";
-import { readJsonIfExists, readJsonl, writeJsonAtomic } from "../fs.ts";
+import { readJsonIfExists, writeJsonAtomic } from "../fs.ts";
 import { loadOperatorConfig, patchOperatorConfig, publicOperatorConfig } from "./operator-config.ts";
-import { piRpcLogPath } from "../paths.ts";
-import { hydratePiTurns, type PiHydratedTurn } from "./pi-runtime.ts";
+import { piSessionDir } from "../paths.ts";
+import { listPiSessions, readPiSession } from "./pi-sessions.ts";
+import { getPairChannel, isPairChannelId, listPairChannels, pairChannelId } from "./pair-channels.ts";
+import { projectSessionDesk } from "./session-desk.ts";
 
 const MAUS_COLORS = [
   "teal",
@@ -39,6 +41,14 @@ interface OmbMessage {
   readonly sendId?: string;
   readonly parentId?: string | null;
   readonly from?: { readonly botId: string; readonly name: string; readonly color: MausColor };
+  readonly peerAsk?: { readonly botId: string; readonly name: string };
+  readonly comm?: {
+    readonly groupId: string;
+    readonly threadId?: string;
+    readonly withBotId: string;
+    readonly withName: string;
+    readonly withColor: MausColor;
+  };
   readonly tool?: {
     readonly name: string;
     readonly ok?: boolean;
@@ -164,11 +174,52 @@ function epoch(iso: string): number {
   return Number.isFinite(parsed) ? parsed : Date.now();
 }
 
-function toOmbMessage(row: OperatorMessage): OmbMessage {
+export function peerCommPayload(
+  roster: Roster,
+  fromKey: string,
+  toKey: string,
+  handleId?: string,
+  viewerId?: string,
+): {
+  readonly comm: NonNullable<OmbMessage["comm"]>;
+  readonly tool: { readonly name: string; readonly ok: true };
+} | undefined {
+  const from = findBot(roster, fromKey);
+  const peer = findBot(roster, toKey);
+  if (!from || !peer) {
+    return undefined;
+  }
+  const viewerIsReceiver = viewerId === peer.id;
+  const shown = viewerIsReceiver ? from : peer;
+  const index = roster.bots.findIndex((bot) => bot.id === shown.id);
+  return {
+    comm: {
+      groupId: pairChannelId(from.id, peer.id),
+      ...(handleId ? { threadId: handleId } : {}),
+      withBotId: shown.id,
+      withName: shown.name,
+      withColor: colorFor(index),
+    },
+    tool: {
+      name: viewerIsReceiver ? `Message from @${from.name}` : `Messaged @${peer.name}`,
+      ok: true,
+    },
+  };
+}
+
+function toOmbMessage(row: OperatorMessage, roster: Roster, viewerId: string): OmbMessage {
   const role: OmbMessage["role"] = row.role === "user" ? "user" : "bot";
   const kind: OmbMessage["kind"] =
     row.kind === "options" ? "options" : row.kind === "activity" ? "activity" : "text";
   const id = role === "user" && row.handleId ? row.handleId : row.id;
+  const peerFrom =
+    row.from && row.from !== "operator" && row.from !== "harness"
+      ? findBot(roster, row.from)
+      : undefined;
+  const comm =
+    kind === "activity" && row.to && row.from && row.from !== "operator" && row.from !== "harness"
+      ? peerCommPayload(roster, row.from, row.to, row.handleId, viewerId)
+      : undefined;
   return {
     id,
     role,
@@ -186,59 +237,9 @@ function toOmbMessage(row: OperatorMessage): OmbMessage {
           },
         }
       : {}),
+    ...(peerFrom && role === "user" ? { peerAsk: { botId: peerFrom.id, name: peerFrom.name } } : {}),
+    ...(comm ? { comm: comm.comm, tool: comm.tool, text: comm.tool.name } : {}),
   };
-}
-
-function mergeHydratedPi(computerRoot: string, botId: string, messages: OmbMessage[]): OmbMessage[] {
-  const turns = hydratePiTurns(readJsonl(piRpcLogPath(computerRoot, botId)));
-  if (turns.length === 0) {
-    return messages;
-  }
-  const botTexts = messages.filter((row) => row.role === "bot" && row.kind === "text");
-  const offset = Math.max(0, botTexts.length - turns.length);
-  const byId = new Map<string, PiHydratedTurn>();
-  botTexts.slice(offset).forEach((msg, index) => {
-    const turn = turns[index];
-    if (turn) {
-      byId.set(msg.id, turn);
-    }
-  });
-  const out: OmbMessage[] = [];
-  const seenTools = new Set<string>();
-  for (const msg of messages) {
-    const turn = byId.get(msg.id);
-    if (!turn) {
-      out.push(msg);
-      continue;
-    }
-    for (const tool of turn.tools) {
-      const id = `tool-${tool.id}-done`;
-      if (seenTools.has(id)) {
-        continue;
-      }
-      seenTools.add(id);
-      out.push({
-        id,
-        role: "bot",
-        kind: "activity",
-        text: tool.ok ? `Finished ${tool.name}` : `Failed ${tool.name}`,
-        at: msg.at,
-        tool: {
-          name: tool.name,
-          ok: tool.ok,
-          spoken: tool.ok ? `Finished ${tool.name}` : `Failed ${tool.name}`,
-          ...(tool.summary ? { summary: tool.summary } : {}),
-          ...(tool.input ? { input: tool.input } : {}),
-          ...(tool.output ? { output: tool.output } : {}),
-        },
-      });
-    }
-    out.push({
-      ...msg,
-      ...(turn.reasoning.length > 0 ? { reasoning: turn.reasoning } : {}),
-    });
-  }
-  return out;
 }
 
 function chainMessages(rows: readonly OmbMessage[]): OmbMessage[] {
@@ -252,11 +253,29 @@ function botTranscript(computerRoot: string, botId: string): {
   readonly messages: OmbMessage[];
   readonly activeLeafId: string | null;
 } {
+  const roster = loadRoster(computerRoot);
+  const projected = projectSessionDesk(computerRoot, botId, roster);
+  if (projected.length > 0) {
+    const messages = chainMessages(projected);
+    return { messages, activeLeafId: messages.at(-1)?.id ?? null };
+  }
   const rows = messagesForBot(computerRoot, botId).filter(
     (row) => row.kind === "text" || row.kind === "options" || (row.kind === "activity" && row.text !== "running"),
   );
-  const messages = chainMessages(mergeHydratedPi(computerRoot, botId, rows.map(toOmbMessage)));
+  const messages = chainMessages(rows.map((row) => toOmbMessage(row, roster, botId)));
   return { messages, activeLeafId: messages.at(-1)?.id ?? null };
+}
+
+/** Full Bot frame including the session-projected transcript. */
+export function wireBotFrame(computerRoot: string, botId: string): Record<string, unknown> | undefined {
+  const roster = loadRoster(computerRoot);
+  const index = roster.bots.findIndex((bot) => bot.id === botId);
+  const bot = index >= 0 ? roster.bots[index] : findBot(roster, botId);
+  if (!bot) {
+    return undefined;
+  }
+  const liveIndex = index >= 0 ? index : roster.bots.findIndex((row) => row.id === bot.id);
+  return toWireBot(computerRoot, roster, bot, liveIndex < 0 ? 0 : liveIndex);
 }
 
 /** Latest chained transcript line for a Bot thread, for live SSE. */
@@ -729,9 +748,12 @@ export async function handleOmbCompat(
       status: 200,
       body: {
         bots: roster.bots.map((bot, index) => toWireBot(computerRoot, roster, bot, index)),
-        groups: roster.rooms
-          .map((room) => toWireGroup(computerRoot, roster, room.id))
-          .filter((row): row is Record<string, unknown> => row !== undefined),
+        groups: [
+          ...roster.rooms
+            .map((room) => toWireGroup(computerRoot, roster, room.id))
+            .filter((row): row is Record<string, unknown> => row !== undefined),
+          ...listPairChannels(computerRoot, roster),
+        ],
         sections: [roster.system],
         computerControl: {},
         botQueuedMessages: {},
@@ -836,6 +858,26 @@ export async function handleOmbCompat(
       return { status: 200, body: toWireBot(computerRoot, roster, bot, index) };
     }
 
+    if (method === "GET" && rest === "/sessions") {
+      return {
+        status: 200,
+        body: {
+          sessionDir: piSessionDir(computerRoot, bot.id),
+          sessions: listPiSessions(computerRoot, bot.id),
+        },
+      };
+    }
+
+    const sessionOne = /^\/sessions\/([^/]+)$/.exec(rest);
+    if (method === "GET" && sessionOne) {
+      const name = decodeURIComponent(sessionOne[1] ?? "");
+      const session = readPiSession(computerRoot, bot.id, name);
+      if (!session) {
+        return { status: 404, body: { error: "no such session" } };
+      }
+      return { status: 200, body: session };
+    }
+
     if (method === "GET" && rest === "/messages") {
       return undefined;
     }
@@ -875,6 +917,12 @@ export async function handleOmbCompat(
   const groupMessages = /^\/api\/groups\/([^/]+)\/messages$/.exec(path);
   if (groupMessages && method === "POST") {
     const roomId = decodeURIComponent(groupMessages[1] ?? "");
+    if (isPairChannelId(roomId)) {
+      return {
+        status: 403,
+        body: { error: "This is a bot-to-bot handoff log. Message a Bot in their own chat." },
+      };
+    }
     const roster = loadRoster(computerRoot);
     const room = findRoom(roster, roomId);
     if (!room) {
@@ -916,9 +964,17 @@ export async function handleOmbCompat(
     const roomId = decodeURIComponent(groupMatch[1] ?? "");
     const rest = groupMatch[2] ?? "";
     const roster = loadRoster(computerRoot);
-    const group = toWireGroup(computerRoot, roster, roomId);
+    const group = isPairChannelId(roomId)
+      ? getPairChannel(computerRoot, roomId, roster)
+      : toWireGroup(computerRoot, roster, roomId);
     if (!group) {
       return { status: 404, body: { error: "no such group" } };
+    }
+    if (isPairChannelId(roomId) && method !== "GET") {
+      return {
+        status: 403,
+        body: { error: "This is a bot-to-bot handoff log. Message a Bot in their own chat." },
+      };
     }
     if (method === "GET" && rest === "") {
       return { status: 200, body: group };

@@ -57,6 +57,7 @@ Arithmetic, duplicates, tolerance, and receipt completeness are Python facts. Ch
 2. If the Kernel-allowed proposal is `APPROVE`, `bot_send_prompt` to `ctl-pay` with header `profile: review-match` and that path. Await the Handle.
 3. If the bill is payable after Verifier concurrence and Kernel allow, Handle `pay`. That peer Handle is not approval.
 4. Unreceived work may Handle `close`. That peer Handle is not approval.
+5. Missing vendor documents the vendor must answer → Handle `world` / `vendor` (`vendor-query`). Do not send as the vendor.
 
 Wake text names a path. Do not paste the invoice into the prompt or into Memory.
 

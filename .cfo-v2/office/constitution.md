@@ -8,7 +8,7 @@ Computer root: `.cfo-v2/office/computer`.
 Bind: `HARNESS_COMPUTER=<repo>/.cfo-v2/office/computer`.
 `HARNESS_BOT` is the grain slug (`ctl-pay`, not `bot_ctl_pay`).
 
-This file is the durable copy of the migration Constitution, plus SUPERSEDES, the name map, the fifteen slugs, the id scheme, Rooms, Routines, and slug-map notes. It does not replace `design-workshop/dominik/cfo-bot-grain.md`. Grain remains the test for adding a Bot.
+This file is the durable copy of the migration Constitution, plus SUPERSEDES, the name map, the sixteen slugs, the id scheme, Rooms, Routines, and slug-map notes. It does not replace `design-workshop/dominik/cfo-bot-grain.md`. Grain remains the test for adding a Bot.
 
 ---
 
@@ -44,19 +44,19 @@ Harness v2 at `.harness/Harness-v2`. Named Bots, one Computer, Handles (accept �
 
 Read and obey:
 
-- `design-workshop/dominik/cfo-bot-grain.md` (Roster grain: 15 Bots, four tests)
+- `design-workshop/dominik/cfo-bot-grain.md` (Roster grain: Tests A–D; sixteen Bots after `world` passed)
 - `docs/CFO_HARNESS_EXTENSION.md` (compiler, grants, sidecar, facade) except every sentence listed in `office/SUPERSEDES.md`
 - `GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md`
 - `docs/LAYOUT.md`
 - this file
 
-## Fifteen Bots
+## Sixteen Bots
 
-Do not invent a sixteenth without failing Tests A–D in the grain.
+Do not invent a seventeenth without failing Tests A–D in the grain. Bot `world` passed Tests A–D: it is the simulated outside mailbox.
 
 | Class | Slugs |
 | --- | --- |
-| Source | `email`, `stripe`, `bank`, `books` |
+| Source | `email`, `stripe`, `bank`, `books`, `world` |
 | Operator | `ap`, `pay`, `apply`, `collect`, `cash`, `close`, `story` |
 | Verifier | `ctl-pay`, `ctl-cash`, `ctl-books` |
 | Assurance | `audit` |
@@ -93,7 +93,7 @@ A Pipe is not a Bot. A Display name is not a Bot. A Connector is not a Bot. A Ke
 4. Python wins on amounts. The model chooses among Kernel candidates. It does not invent totals.
 5. Fail closed. Missing evidence is refuse / HOLD / INSUFFICIENT, not a guess.
 6. Do not union Grants when two Display names share a slug. Use Profiles.
-7. Rooms in this Harness are 2–6 members. Partition Rooms. Do not put 15 Bots in one Room.
+7. Rooms in this Harness are 2–6 members. Partition Rooms. Do not put all sixteen Bots in one Room.
 8. Roster `approvalLevel` for these Bots is `"never"`. Do not park consequential tools on the human Operator.
 9. Eval isolation stays. Operational Bots never load `expected_results.json`, ground truth, or `get_audit_ground_truth`.
 10. Sample-data Display names are not Bots.
@@ -119,15 +119,15 @@ File: `office/computer/harness/roster.json`.
 
 - `system`: `cfo-agentic-system`
 - `computer`: `office/computer` (relative to Client-system root `.cfo-v2`)
-- Fifteen Bots. No `ingest`. No `ar` as a Bot (AR is a Pipe; Operator Bots are `apply` and `collect`)
-- `approvalLevel`: `"never"` on all fifteen
+- Sixteen Bots. No `ingest`. No `ar` as a Bot (AR is a Pipe; Operator Bots are `apply` and `collect`)
+- `approvalLevel`: `"never"` on all sixteen
 - `instructions`: two to five sentences. Point at `office/bots/<slug>/BOT.md`. Never ask a human. Name the Verifier slug when the grain names one
 
 ### Rooms (2–4 members, never more than 6)
 
 | Room id | Members (slugs) |
 | --- | --- |
-| `intake` | `email`, `stripe`, `bank`, `books` |
+| `intake` | `email`, `stripe`, `bank`, `books`, `world` |
 | `pay` | `ap`, `pay`, `ctl-pay` |
 | `cash` | `apply`, `collect`, `cash`, `ctl-cash` |
 | `books-close` | `close`, `ctl-books`, `story`, `audit` |
@@ -148,6 +148,10 @@ Harness encodes a Room conversation as `room:<roomId>`. Do not use default `oper
 File: `office/computer/cfo/slug-map.json`. Operator-owned topology. No list-unions. `defaultProfile` required on every slug.
 
 Each Profile value is exactly one Display name (or empty string when no Display name exists yet). Two Display names never become one `ops` array.
+
+### World Profile `vendor`
+
+Grain Tests A–D passed. Bot `world` is the simulated outside mailbox. Default Profile `vendor` maps to Display name Counterparty Message Agent. Profiles `customer`, `bank`, and `employee` share that Grant set. Finance Inbox Agent is Profile `triage` on Bot `email`. Do not create a second inbox Bot. Do not live-connect Gmail.
 
 ### Stripe Profile `payout`
 

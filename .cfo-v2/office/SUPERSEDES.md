@@ -68,10 +68,10 @@ The Bot bus is Harness: write a path on the Computer, `bot_send_prompt`, accept-
 
 VOID. `.harness/Harness-v2/examples/cfo-floor` is a Harness bind fixture (six slugs including `ingest`). It is not this office.
 
-This office’s Roster is `office/computer/harness/roster.json`, system `cfo-agentic-system`, fifteen grain slugs. Do not copy that example. Do not add slug `ingest`. Do not put 15 Bots in one Room.
+This office’s Roster is `office/computer/harness/roster.json`, system `cfo-agentic-system`, sixteen grain slugs. Do not copy that example. Do not add slug `ingest`. Do not put 16 Bots in one Room.
 
 ---
 
 ## Harness v2 (do not fork)
 
-`GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md` describes a human gate on the Operator for consequential actions. For this Client, that sentence is VOID at the office layer. Do not edit `.harness/Harness-v2/src` to know what an invoice is. Map `blocked` / concurrence to Verifier slugs in Client code (later sessions). Roster `approvalLevel` for these fifteen Bots is `"never"`.
+`GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md` describes a human gate on the Operator for consequential actions. For this Client, that sentence is VOID at the office layer. Do not edit `.harness/Harness-v2/src` to know what an invoice is. Map `blocked` / concurrence to Verifier slugs in Client code (later sessions). Roster `approvalLevel` for these sixteen Bots is `"never"`.

@@ -17,7 +17,7 @@ MONEY_RE = re.compile(r"\$?\s*([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{2})|[0-9]+\.[0
 ISO_DATE_RE = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
 US_DATE_RE = re.compile(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b")
 INVOICE_NUMBER_LABEL_RE = re.compile(
-    r"(?:invoice\s*(?:number|#)|inv(?:oice)?\s*#)\s*[:#]?\s*([A-Z0-9][A-Z0-9\-_/]+)",
+    r"(?:invoice\s*(?:number|#)|inv(?:oice)?\s*#)\s*[:#]?\s*([A-Z0-9][A-Z0-9\-_/]*\d[A-Z0-9\-_/]*)",
     re.I,
 )
 PO_RE = re.compile(r"(?:po|purchase\s*order)\s*(?:number|#)?\s*[:#]?\s*(PO-?\d+)", re.I)

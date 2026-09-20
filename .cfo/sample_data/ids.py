@@ -25,3 +25,6 @@ class IdFactory:
 
     def named(self, value: str) -> str:
         return self.reserve(value)
+
+    def contains(self, value: str) -> bool:
+        return value in self._reserved

@@ -209,6 +209,9 @@ def _usage() -> int:
     print("       python main.py reporting [period] [as-of]")
     print("       python main.py generate-sample-data [--seed 42] [--month 2026-09] [--output data/demo]")
     print("       python main.py validate-sample-data [--data-root data/demo]")
+    print("       python main.py export-demo [--output data/demo] [--seed 42] [--month 2026-09]")
+    print("       python main.py validate-demo [--data-root data/demo]")
+    print("       python main.py reset-demo [--dest runs/demo_runtime]")
     print("       python main.py sample-data-summary [--data-root data/demo]")
     print("       python main.py evaluate-cfo [--data-root data/demo] [--seed 42] [--all]")
     print("       python main.py cfo-demo")
@@ -369,6 +372,30 @@ def main() -> int:
         from sample_data.cli import run_validate
 
         return run_validate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "export-demo",
+        "export_demo",
+    }:
+        from demo.cli import run_export_demo
+
+        return run_export_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "validate-demo",
+        "validate_demo",
+    }:
+        from demo.cli import run_validate_demo
+
+        return run_validate_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "reset-demo",
+        "reset_demo",
+    }:
+        from demo.cli import run_reset_demo
+
+        return run_reset_demo(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
         "sample-data-summary",

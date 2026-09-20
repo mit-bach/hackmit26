@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-335
+PO Number: PO-335
+Vendor: HubSpot
+Goods received in full on 2026-09-09
+Packing list attached: PL-GR-335
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 16,200.13 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

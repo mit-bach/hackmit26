@@ -82,3 +82,18 @@ export {
 } from "./client-attach.ts";
 export { loadIntercept, saveIntercept, resolveIntercept, seedVerifierIntercept } from "./intercept.ts";
 export { listMemoryOverview, readMemoryDoc, writeMemoryDoc } from "./memory.ts";
+export {
+  mosaicLayout,
+  foldAwake,
+  projectFrame,
+  loadDemoBundle,
+  recordDemoSession,
+  demoMeta,
+} from "./demo-replay.ts";
+export {
+  DEFAULT_DEMO_PLAYBACK,
+  clampPlaybackSettings,
+  collectBeats,
+  projectPlayhead,
+  timelineTotalMs,
+} from "./demo-playback.ts";

@@ -555,7 +555,12 @@ function ActivityChip({ message }: { message: Message }): React.ReactElement | n
     return (
       <div className="flex justify-start">
         <button
-          onClick={() => dispatch({ type: "select", id: comm.groupId })}
+          onClick={() => {
+            dispatch({ type: "select", id: comm.groupId });
+            if (comm.threadId) {
+              dispatch({ type: "focusMessage", threadId: comm.groupId, messageId: comm.threadId });
+            }
+          }}
           title={t("chat.openConversationWith", { name: comm.withName })}
           className="flex items-center gap-2 rounded-full border border-hairline/40 bg-panel px-3 py-1.5 text-[13px] text-ink-secondary hover:bg-raised hover:text-ink"
         >

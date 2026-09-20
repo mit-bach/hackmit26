@@ -13,12 +13,14 @@ Entry: `ui/src/main.tsx` → `App`. Loopback `GET /api/auth/session` authenticat
 | Shell | Sidebar + main column + docks | `App.tsx` `Shell` | SSE hello snapshot |
 | Bots (roster) | Named Bots with live status | `Sidebar.tsx` `BotListItem` | `GET /api/bots` ← `harness/roster.json` + `lane.json` |
 | New Bot | Name, slug, purpose, instructions | `NewBotDialog.tsx` | `POST /api/bots` → `roster.json` + `harness/bots/<id>/` |
-| Bot DM | Transcript, composer, Stop | `ChatView.tsx`, `Composer.tsx` | `POST /api/bots/:id/messages` → `user_dm` inbox + Handle + `transcript.jsonl`; Stop → `POST …/interrupt` → `user_stop` |
+| Bot DM | Your 1:1 with that Bot | `ChatView.tsx`, `Composer.tsx` | `POST /api/bots/:id/messages` → `user_dm` |
+| Bot threads | Read-only Bot↔Bot handoff log | `GroupView.tsx` (no composer) | `pair:<id>:<id>` projected from `protocol.jsonl`; POST messages 403 |
+| Rooms | Members, log, post | `GroupView.tsx`, `ManageMembersPanel.tsx` | `POST /api/groups` → `roster.rooms` (2–6 members); `POST /api/groups/:id/messages` → `room_post` + `rooms/<id>/log.jsonl` |
 | Approval | Allow / Deny on a parked tool | `ApprovalCard.tsx` | `POST /api/threads/:id/respond` → `harness/approvals/<id>.json` |
 | Inspector | Protocol / Handles / Transcript | `InspectorPanel.tsx` | `GET /api/threads/:id/events` ← `protocol.jsonl` + Handle files + `transcript.jsonl` |
-| Rooms | Members, log, post | `GroupView.tsx`, `ManageMembersPanel.tsx` | `POST /api/groups` → `roster.rooms` (2–6 members); `POST /api/groups/:id/messages` → `room_post` + `rooms/<id>/log.jsonl` |
 | Routines | Calendar / list / logs | `RoutinesPage.tsx` (`RoutineCalendarPage.tsx`) | `GET/POST/PATCH/DELETE /api/routines` → `roster.routines`; runs ← `receipts/` |
 | Protocol | Office-wide log + search | `ProtocolPage.tsx` | `GET /api/protocol?query=` ← `protocol.jsonl` |
+| Demo | Replay protocol from wipe; awake Bots spawn mosaic panes | `DemoPage.tsx` | `GET /api/demo` ← `protocol.jsonl` + transcripts; `POST /api/demo/record` → `harness/demo/latest/` |
 | Search | Jump to a message / Handle | `CommandPalette.tsx`, `SearchResults.tsx`, `ChatFindBar.tsx` | `GET /api/search?q=` |
 | Computer | Shared cwd tree + file edit | `ComputerPanel.tsx` | `GET /api/computer/tree`, `GET/PUT /api/computer/file` ← `workspace/` + `harness/` |
 | Bot settings | Overview, identity, skills, memory, routines, approvals | `BotSettingsDialog.tsx` + `bot-settings/*` | PATCH bot → `roster.json`; skills → `Computer/skills/<name>/SKILL.md`; memory → `harness/bots/<id>/memory/` |
@@ -28,7 +30,7 @@ Entry: `ui/src/main.tsx` → `App`. Loopback `GET /api/auth/session` authenticat
 
 Empty states name the missing artifact and the one action that creates it (Add a Bot, paste a key, write `Computer/skills/<name>/SKILL.md`).
 
-Plus menu: New Bot, New Room (2–6 members), Archived if any. Tools: Protocol, Routines, Computer. You: Settings, Keyboard shortcuts, About.
+Plus menu: New Bot, New Room (2–6 members), Archived if any. Tools: Demo, Protocol, Routines, Computer. You: Settings, Keyboard shortcuts, About.
 
 ---
 
@@ -40,6 +42,7 @@ Same files a terminal Operator would touch:
 <computer>/harness/
   roster.json                 Bots, rooms, routines
   protocol.jsonl              Office log
+  demo/latest/                Optional recorded replay (survives wipe)
   intercept.json              Operator vs Verifier Bot
   extensions.json             Extra Pi -e paths
   bots/<botId>/
@@ -62,7 +65,7 @@ Same files a terminal Operator would touch:
 
 | Target | Shipped | Note |
 | --- | --- | --- |
-| Nav: Bots, Rooms, Routines, Protocol, Computer, Settings | Yes | Sidebar footer + plus menu. Rooms live in the same list as Bots. |
+| Nav: Bots, Rooms, Routines, Protocol, Computer, Demo, Settings | Yes | Sidebar footer + plus menu. Rooms live in the same list as Bots. Demo is full-stage replay of protocol.jsonl. |
 | Roster create/patch/delete on `roster.json` | Yes | Last Bot delete refused in `desk.ts`. Room membership 2–6. UI New Room refuses 1 and >6 before POST. |
 | Chat is a projection of protocol / transcript / handles | Yes | Inspector lenses labeled Protocol / Handles / Transcript. |
 | Stop, pending Handle, approval Allow/Deny | Yes | Approval wire includes `card.tool`. Pump fingerprints `id:status` so Allow hydrates. |

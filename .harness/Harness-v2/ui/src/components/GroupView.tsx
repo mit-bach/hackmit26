@@ -2,7 +2,7 @@
 // carry the personality; avatars inside the room stay still so a busy group
 // does not become a wall of competing motion. Plain messages go to the room's
 // default responder; @mentions override that routing.
-import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { activeLocale, t } from "@/lib/i18n";
 import { ArrowDown, Check, ChevronDown, ChevronRight, Folder, FolderOpen, Loader2, MessageSquareReply, Pin, PinOff, Plus, Search, X } from "lucide-react";
 import {
@@ -12,6 +12,7 @@ import {
   formatTime,
   openNotificationTarget,
   type Bot,
+  type ConfigStatus,
   type Group,
   type GroupDefaultResponder,
   type Message,
@@ -21,7 +22,7 @@ import { ThreadChip } from "./ThreadChip";
 import { ToolActivity } from "./ToolActivity";
 import { ThreadRefText } from "./ThreadRefs";
 import { TurnPresence } from "./TurnPresence";
-import { showToolCallsEnabled } from "@/lib/feature-flags";
+import { showToolCallsEnabled, transcriptVerbosity, type TranscriptVerbosity } from "@/lib/feature-flags";
 import { CompactionChip, DigestChip } from "./DigestChip";
 import { roomActivityVisible } from "@/lib/room-activity";
 import { normalizeState } from "@/lib/mascot";
@@ -58,6 +59,30 @@ import {
 } from "@/lib/transcript-window";
 import { useReplyDraft } from "@/lib/drafts";
 
+function PairHandoffBar({ group, members }: { group: Group; members: Bot[] }): ReactElement {
+  const { dispatch } = useStore();
+  return (
+    <div className="border-t border-hairline/40 bg-panel px-5 py-3">
+      <p className="text-[12.5px] leading-relaxed text-ink-secondary">
+        {t("pair.log.subtitle", { name: group.name })}
+      </p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {members.map((member) => (
+          <button
+            key={member.id}
+            type="button"
+            onClick={() => dispatch({ type: "select", id: member.id })}
+            className="inline-flex items-center gap-1.5 rounded-full border border-hairline/40 bg-raised px-3 py-1.5 text-[12.5px] text-ink hover:bg-raised-hover"
+          >
+            <BotAvatar bot={member} state="happy" size={16} />
+            {t("pair.log.open", { name: member.name })}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function dayLabel(at: number): string {
   const d = new Date(at);
   const now = new Date();
@@ -89,12 +114,11 @@ export function RoomToolChip({ message, roomId }: { message: Message; roomId?: s
           type="button"
           onClick={() => {
             dispatch({ type: "select", id: comm.groupId });
-            const destination = state.groups.find(g => g.id === comm.groupId);
-            if (comm.threadId && destination?.tasks?.some(task => task.threadId === comm.threadId)) {
-              dispatch({ type: "switchGroupTask", groupId: comm.groupId, threadId: comm.threadId });
+            if (comm.threadId) {
+              dispatch({ type: "focusMessage", threadId: comm.groupId, messageId: comm.threadId });
             }
           }}
-          title={t("room.openBot", { name: comm.withName })}
+          title={t("chat.openConversationWith", { name: comm.withName })}
           className="flex items-center gap-2 rounded-full border border-hairline/40 bg-panel px-3 py-1.5 text-[13px] text-ink-secondary hover:bg-raised hover:text-ink"
         >
           <BotAvatar bot={withBot ?? { name: comm.withName, color: comm.withColor }} state="happy" size={16} />
@@ -181,6 +205,7 @@ const Transcript = memo(function Transcript({
 }) {
   const { state, dispatch } = useStore();
   const showToolCalls = showToolCallsEnabled(state.config);
+  const verbosity = transcriptVerbosity(state.config);
   const memberOf = (id?: string) => members.find((b) => b.id === id);
   // Several bots working at once turn a room into a wall of chips; fold the
   // finished ones the same way a 1:1 chat does.
@@ -280,8 +305,17 @@ const Transcript = memo(function Transcript({
             <CompactionChip message={m} />
           ) : m.kind === "digest" ? (
             showToolCalls ? <DigestChip message={m} /> : null
-          ) : m.kind === "text" && (m.text || m.attachments?.length) ? (
+          ) : m.kind === "text" && (m.text || m.reasoning || m.attachments?.length) ? (
             <div className={cn("group flex w-full flex-col", user ? "items-end" : "items-start")}>
+              {!user && verbosity === "full" && Boolean(m.reasoning?.trim()) ? (
+                <div className="mb-2 w-full max-w-[min(42rem,78%)] rounded-lg border border-hairline/40 bg-inset px-3 py-2">
+                  <div className="mb-1 text-[11px] font-medium uppercase tracking-wide text-ink-secondary">
+                    {t("chat.live.reasoning")}
+                  </div>
+                  <div className="whitespace-pre-wrap text-[13px] leading-relaxed text-ink-secondary">{m.reasoning}</div>
+                </div>
+              ) : null}
+              {(m.text || m.attachments?.length) ? (
               <div className={cn("flex w-full items-end gap-1.5", user ? "justify-end" : "justify-start")}>
                 {user && (
                   <>
@@ -335,7 +369,7 @@ const Transcript = memo(function Transcript({
                     </>
                   )}
                 </div>
-                {!user && (
+                {!user && !group.dm && (
                   <>
                     <button
                       type="button"
@@ -353,6 +387,7 @@ const Transcript = memo(function Transcript({
                   {formatTime(m.at)}
                 </span>
               </div>
+              ) : null}
             </div>
           ) : null;
         if (!row) return null;
@@ -877,6 +912,7 @@ export function GroupView({ group }: { group: Group }) {
   // right-hand controls below the renderer-drawn caption buttons.
   const { dragStyle: headerDragStyle, noDragStyle: headerNoDragStyle, controlsShiftStyle } = useCaptionChrome();
   const stream = useStreaming();
+  const verbosity = transcriptVerbosity(state.config);
   const streaming = stream.streaming[group.threadId];
   const scrollRef = useRef<HTMLDivElement>(null);
   const transcriptRef = useRef<HTMLDivElement>(null);
@@ -1018,12 +1054,15 @@ export function GroupView({ group }: { group: Group }) {
   // deps track the FULL messages.length, so expanding the window (which only
   // changes windowedMessages) can never re-trigger this bottom scrollTo.
   // `follow` is intentionally omitted — see ChatView.
+  const memberLiveKey = members
+    .map((member) => `${stream.streaming[member.id] ?? ""}|${stream.reasoning[member.id] ?? ""}`)
+    .join("||");
   useEffect(() => {
     const el = scrollRef.current;
     if (!el || !followRef.current) return;
     el.scrollTo({ top: el.scrollHeight });
     previousScrollTop.current = el.scrollTop;
-  }, [group.id, group.messages.length, streaming, group.busyBotId, group.working, composerDock.pad]);
+  }, [group.id, group.messages.length, streaming, memberLiveKey, group.busyBotId, group.working, composerDock.pad]);
 
   // Expanding prepends rows: capture the height first, then after the commit
   // shift scrollTop by the growth so the message under the cursor stays put
@@ -1116,6 +1155,31 @@ export function GroupView({ group }: { group: Group }) {
             messages={group.messages}
             isGroup
           />
+          {group.dm ? (
+            <select
+              aria-label={t("settings.verbosity.aria")}
+              title={t("settings.verbosity.subtitle")}
+              className="max-w-[168px] shrink-0 rounded-md border border-hairline/40 bg-raised px-2 py-1 text-[12px] text-ink"
+              value={verbosity}
+              onChange={(event) => {
+                const next = event.target.value as TranscriptVerbosity;
+                void api("/api/config", {
+                  method: "PUT",
+                  body: JSON.stringify({
+                    features: { ...state.config?.features, transcriptVerbosity: next, showToolCalls: next !== "compact" },
+                  }),
+                })
+                  .then((config) => dispatch({ type: "configStatus", config: config as ConfigStatus }))
+                  .catch((cause: unknown) => {
+                    dispatch({ type: "error", message: cause instanceof Error ? cause.message : String(cause) });
+                  });
+              }}
+            >
+              <option value="compact">{t("settings.verbosity.compact")}</option>
+              <option value="tools">{t("settings.verbosity.tools")}</option>
+              <option value="full">{t("settings.verbosity.full")}</option>
+            </select>
+          ) : null}
           {group.dm || remoteClient ? (
             memberMauses
           ) : (
@@ -1317,16 +1381,20 @@ export function GroupView({ group }: { group: Group }) {
       )}
 
       <div ref={composerDockRef} className="absolute inset-x-0 bottom-0 z-[2]">
-      <Composer
-        key={group.threadId}
-        group={group}
-        members={members}
-        locked={setupPending}
-        replyTo={replyTo}
-        onClearReply={clearReply}
-        onConsumeReply={consumeReply}
-        onRestoreReply={restoreReply}
-      />
+      {group.dm ? (
+        <PairHandoffBar group={group} members={members} />
+      ) : (
+        <Composer
+          key={group.threadId}
+          group={group}
+          members={members}
+          locked={setupPending}
+          replyTo={replyTo}
+          onClearReply={clearReply}
+          onConsumeReply={consumeReply}
+          onRestoreReply={restoreReply}
+        />
+      )}
       </div>
       </div>
     </main>

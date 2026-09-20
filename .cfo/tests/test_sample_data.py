@@ -153,7 +153,9 @@ def test_operational_ap_invoices_are_not_posted_to_cogs():
     for entry in ctx.journal_entries.values():
         if entry.debit_account in COGS_ACCOUNTS:
             assert entry.source_document_id not in OPERATIONAL_AP_IDS, entry.entry_id
-            assert entry.source_document_id in cogs_invoice_ids()
+            assert entry.source_document_id in cogs_invoice_ids() or str(
+                entry.source_document_id
+            ).startswith("INV-COGS-HIST-")
         if entry.source_document_id in {"INV-001", "INV-002", "INV-006", "INV-016", "INV-017"}:
             assert entry.debit_account not in COGS_ACCOUNTS
     cogs_sources = [
@@ -180,6 +182,8 @@ def test_reporting_ties_and_gross_margin():
     rev = {"2026-08": 0, "2026-09": 0}
     cogs = {"2026-08": 0, "2026-09": 0}
     for line in ctx.reporting_lines:
+        if line.period not in rev:
+            continue
         if line.account_class == "revenue" and line.side == "credit":
             rev[line.period] += cents(line.amount)
         if line.account_class == "cogs" and line.side == "debit":
@@ -238,6 +242,30 @@ def test_writes_manifest(tmp_path):
     assert manifest["validation"] == "PASS"
     assert (output / "expected_results.json").exists()
     assert (output / "invoices.json").exists()
+    assert (output / "lineage.json").exists()
+    assert (output / "timeline.json").exists()
+    assert (output / "demo_queries.json").exists()
+    assert (output / "demo_snapshot.json").exists()
+    assert (output / "memory_events.json").exists()
+
+
+def test_company_scale_registers_and_plot_ids():
+    ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    assert len(ctx.ap_invoices) >= 110
+    assert len(ctx.bank_transactions) >= 200
+    assert len(ctx.journal_entries) >= 2000
+    assert len(ctx.historical_ap_register) >= 2000
+    assert len(ctx.processor_transactions) >= 2000
+    assert len(ctx.vendors) >= 40
+    assert ctx.ap_invoices["INV-001"].amount == 12450
+    assert ctx.ap_invoices["INV-017"].amount == 10000
+    assert ctx.ar_invoices["INV-AR-013"].original_amount == 12400
+    assert "TXN-2026-09-015" in ctx.bank_transactions
+    text = ctx.document_texts["invoices/INV-001.txt"]
+    assert len(text) >= 400
+    assert "Amount Due" in text
+    assert "HUMAN_REVIEW" not in text
+    assert ctx.company.legal_name == "Maximor Demo Corp"
 
 
 def dollars_of(amount_minor: int) -> float:

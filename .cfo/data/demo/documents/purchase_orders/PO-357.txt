@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-357
+PO Number: PO-357
+Issued: 2026-09-04
+Vendor: Stripe Processing
+Vendor legal name: Stripe Processing
+Vendor tax ID: 00-0000000
+Authorized amount: 60.78
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+usage overage block billed 2026-09-04
+
+This purchase order is not an invoice. The vendor must bill against PO-357.
+Payment terms follow the vendor master unless this order states otherwise.

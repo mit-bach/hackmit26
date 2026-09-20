@@ -52,6 +52,14 @@ class Customer(BaseModel):
     currency: str = "USD"
     notes: str = ""
     aliases: list[str] = Field(default_factory=list)
+    legal_name: str = ""
+    billing_email: str = ""
+    billing_address: str = ""
+    city: str = ""
+    state: str = ""
+    postal_code: str = ""
+    tax_id: str = ""
+    payment_terms: str = "net 30"
 
 
 class CustomerInvoice(BaseModel):

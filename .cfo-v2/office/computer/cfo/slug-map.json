@@ -5,6 +5,7 @@
       "defaultProfile": "invoice",
       "profiles": {
         "invoice": "Email Invoice Agent",
+        "triage": "Finance Inbox Agent",
         "employee": "Employee Submission Agent",
         "portal": "Vendor Portal Agent",
         "document": "Physical Mail / Document Agent"
@@ -28,6 +29,15 @@
         "erp-invoice": "ERP Invoice Agent",
         "procurement": "Procurement Invoice Agent",
         "edi": "EDI / Electronic Invoicing Agent"
+      }
+    },
+    "world": {
+      "defaultProfile": "vendor",
+      "profiles": {
+        "vendor": "Counterparty Message Agent",
+        "customer": "Counterparty Message Agent",
+        "bank": "Counterparty Message Agent",
+        "employee": "Counterparty Message Agent"
       }
     },
     "ap": {

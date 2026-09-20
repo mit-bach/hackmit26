@@ -7,10 +7,11 @@
 //            items, requests, token usage, errors. Follows live over SSE.
 //   Raw    — the provider's own protocol messages, verbatim (the native
 //            tee). Read from disk; refreshed when a turn settles.
+//   Sessions — Pi's on-Computer conversation files (Grok chat logs).
 //
 // Nothing here is captured for the panel's sake — both logs already exist
 // under ~/.openmausbot (server/harness/bus.ts, server/drivers/native.ts).
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactElement } from "react";
 import { Bug, ChevronDown, ChevronRight, RefreshCw, X } from "lucide-react";
 import { useStore, visibleMessages, type Bot } from "@/state/store";
 import { transcriptVerbosity } from "@/lib/feature-flags";
@@ -23,7 +24,7 @@ import { RunLog } from "./RunLog";
 import { timelineEvents } from "@/lib/taskTimeline";
 import { t } from "@/lib/i18n";
 
-type Lens = "run" | "events" | "raw";
+type Lens = "run" | "events" | "raw" | "sessions";
 
 export function InspectorPanel({ bot }: { bot: Bot }) {
   const { state, dispatch } = useStore();
@@ -221,7 +222,7 @@ export function InspectorPanel({ bot }: { bot: Bot }) {
           tabs[next].focus();
           tabs[next].click();
         }}>
-          {(["run", "events", "raw"] as const).map((l) => (
+          {(["run", "events", "raw", "sessions"] as const).map((l) => (
             <button
               key={l}
               type="button"
@@ -236,20 +237,31 @@ export function InspectorPanel({ bot }: { bot: Bot }) {
                 lens === l ? "bg-raised text-ink" : "text-ink-secondary hover:text-ink",
               )}
             >
-              {l === "run" ? t("inspector.lens.run") : l === "events" ? t("inspector.lens.events") : t("inspector.lens.raw")}
+              {l === "run"
+                ? t("inspector.lens.run")
+                : l === "events"
+                  ? t("inspector.lens.events")
+                  : l === "raw"
+                    ? t("inspector.lens.raw")
+                    : t("inspector.lens.sessions")}
             </button>
           ))}
         </div>
-        {lens !== "run" && <span className="ml-auto text-[11px] text-ink-secondary">
+        {lens !== "run" && lens !== "sessions" && <span className="ml-auto text-[11px] text-ink-secondary">
           {page ? (shown < total ? `last ${shown} of ${total}` : `${shown} entries`) : "loading…"}
         </span>}
-        {lens !== "run" && <button onClick={() => managedRefresh.current()} className="rounded-md p-1 text-ink-secondary hover:bg-raised hover:text-ink" title="Reload from disk">
+        {lens !== "run" && lens !== "sessions" && <button onClick={() => managedRefresh.current()} className="rounded-md p-1 text-ink-secondary hover:bg-raised hover:text-ink" title="Reload from disk">
           <RefreshCw size={14} />
         </button>}
       </div>
 
       <div role="tabpanel" id={`inspector-panel-${lens}`} aria-labelledby={`inspector-tab-${lens}`} tabIndex={0} className="flex min-h-0 flex-1 flex-col outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent/60">
-      {lens === "run" ? <RunLog key={threadId} events={activity} /> : <div ref={listRef} onScroll={onScroll} className="min-h-0 flex-1 overflow-y-auto font-mono text-[11.5px]">
+      {lens === "run" ? (
+        <RunLog key={threadId} events={activity} />
+      ) : lens === "sessions" ? (
+        <SessionLog botId={bot.id} />
+      ) : (
+        <div ref={listRef} onScroll={onScroll} className="min-h-0 flex-1 overflow-y-auto font-mono text-[11.5px]">
         {error && <div className="px-4 py-3 text-danger">couldn't load: {error}</div>}
         {page && rows.length === 0 && !error && (
           <div className="px-4 py-6 text-ink-secondary">
@@ -261,7 +273,8 @@ export function InspectorPanel({ bot }: { bot: Bot }) {
         {rows.map((row) => (
           <Row key={row.key} row={row} open={expanded.has(row.key)} onToggle={() => toggle(row.key)} />
         ))}
-      </div>}
+      </div>
+      )}
       </div>
     </aside>
   );
@@ -295,6 +308,158 @@ function Row({ row, open, onToggle }: { row: InspectorRow; open: boolean; onTogg
           {JSON.stringify(row.data, null, 2)}
         </pre>
       )}
+    </div>
+  );
+}
+
+interface SessionSummary {
+  readonly name: string;
+  readonly id: string;
+  readonly path: string;
+  readonly startedAt: string;
+  readonly messageCount: number;
+}
+
+interface SessionTurn {
+  readonly id: string;
+  readonly role: "user" | "assistant" | "tool";
+  readonly text: string;
+  readonly at: string;
+  readonly toolName?: string;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function parseSessionList(body: unknown): SessionSummary[] {
+  if (!isRecord(body) || !Array.isArray(body.sessions)) {
+    return [];
+  }
+  return body.sessions.filter((row): row is SessionSummary => {
+    if (!isRecord(row) || typeof row.name !== "string") {
+      return false;
+    }
+    return typeof row.path === "string" && typeof row.startedAt === "string";
+  });
+}
+
+function parseSessionTurns(body: unknown): SessionTurn[] {
+  if (!isRecord(body) || !Array.isArray(body.turns)) {
+    return [];
+  }
+  return body.turns.filter((row): row is SessionTurn => {
+    if (!isRecord(row) || typeof row.id !== "string" || typeof row.text !== "string") {
+      return false;
+    }
+    return row.role === "user" || row.role === "assistant" || row.role === "tool";
+  });
+}
+
+function SessionLog({ botId }: { botId: string }): ReactElement {
+  const [sessions, setSessions] = useState<SessionSummary[]>([]);
+  const [active, setActive] = useState<string | null>(null);
+  const [turns, setTurns] = useState<SessionTurn[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const loadList = useCallback(async (): Promise<void> => {
+    setBusy(true);
+    try {
+      const res = await fetch(`/api/bots/${encodeURIComponent(botId)}/sessions`);
+      if (!res.ok) {
+        throw new Error(`${res.status}`);
+      }
+      const body: unknown = await res.json();
+      const next = parseSessionList(body);
+      setSessions(next);
+      setError(null);
+      setActive((current) => current ?? next[0]?.name ?? null);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause));
+      setSessions([]);
+    } finally {
+      setBusy(false);
+    }
+  }, [botId]);
+
+  const loadOne = useCallback(async (name: string): Promise<void> => {
+    try {
+      const res = await fetch(
+        `/api/bots/${encodeURIComponent(botId)}/sessions/${encodeURIComponent(name)}`,
+      );
+      if (!res.ok) {
+        throw new Error(`${res.status}`);
+      }
+      const body: unknown = await res.json();
+      setTurns(parseSessionTurns(body));
+      setError(null);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause));
+      setTurns([]);
+    }
+  }, [botId]);
+
+  useEffect(() => {
+    setActive(null);
+    setTurns([]);
+    void loadList();
+  }, [botId, loadList]);
+
+  useEffect(() => {
+    if (active) {
+      void loadOne(active);
+    }
+  }, [active, loadOne]);
+
+  return (
+    <div className="flex min-h-0 flex-1 flex-col">
+      <p className="border-b border-hairline/40 px-4 py-2 text-[12px] leading-relaxed text-ink-secondary">
+        {t("inspector.sessions.hint")}
+      </p>
+      {error ? <div className="px-4 py-2 text-[12px] text-danger">{error}</div> : null}
+      <div className="flex min-h-0 flex-1">
+        <div className="w-[38%] overflow-y-auto border-r border-hairline/40">
+          {busy && sessions.length === 0 ? (
+            <div className="px-3 py-6 text-[12px] text-ink-secondary">loading…</div>
+          ) : null}
+          {!busy && sessions.length === 0 && !error ? (
+            <div className="px-3 py-6 text-[12px] text-ink-secondary">{t("inspector.empty.sessions")}</div>
+          ) : null}
+          {sessions.map((session) => (
+            <button
+              key={session.name}
+              type="button"
+              onClick={() => setActive(session.name)}
+              className={cn(
+                "flex w-full flex-col gap-0.5 px-3 py-2 text-left text-[12px] hover:bg-raised/50",
+                active === session.name ? "bg-raised text-ink" : "text-ink",
+              )}
+            >
+              <span className="truncate font-medium">{session.name}</span>
+              <span className="text-[11px] text-ink-secondary">
+                {session.messageCount} messages · {formatTime(session.startedAt)}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-3 py-3 space-y-2">
+          {turns.map((turn) => (
+            <div
+              key={turn.id}
+              className={cn(
+                "rounded-lg border border-hairline/40 px-3 py-2 text-[12.5px] leading-relaxed",
+                turn.role === "user" ? "ml-8 bg-inset" : "mr-8 bg-panel",
+              )}
+            >
+              <div className="mb-1 text-[11px] font-medium uppercase tracking-wide text-ink-secondary">
+                {turn.role === "tool" ? turn.toolName ?? "tool" : turn.role}
+              </div>
+              <pre className="whitespace-pre-wrap break-words font-sans text-ink">{turn.text}</pre>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

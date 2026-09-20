@@ -13,6 +13,7 @@ import type {
   SendRequest,
   SendResult,
 } from "./types.ts";
+import { appendThreadAsk } from "./server/thread-log.ts";
 
 function conversationFor(request: SendRequest, fromId: string, toId: string): Conversation {
   if (request.conversation) {
@@ -100,6 +101,16 @@ export function sendPrompt(request: SendRequest): SendResult {
       from: fromId,
       to: target.id,
     });
+    appendTranscript(request.computerRoot, target.id, {
+      seq: acceptedEvent.seq,
+      t: acceptedEvent.t,
+      kind: "handoff.received",
+      text: `message from ${fromBot.slug}, handle ${handleId}`,
+      handleId,
+      from: fromId,
+      to: target.id,
+    });
+    appendThreadAsk(request.computerRoot, fromBot.id, target.id, handleId, request.prompt, createdAt);
   }
 
   const live = liveStatus(request.computerRoot, target.id);

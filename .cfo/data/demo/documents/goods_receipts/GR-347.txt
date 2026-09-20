@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-347
+PO Number: PO-347
+Vendor: Notion Labs
+Goods received in full on 2026-09-21
+Packing list attached: PL-GR-347
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 37.69 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

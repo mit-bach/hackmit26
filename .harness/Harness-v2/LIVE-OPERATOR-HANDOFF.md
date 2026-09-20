@@ -21,7 +21,7 @@ Then on `http://127.0.0.1:8800/`:
 
 1. Open **Email**. Header **Transcript detail** → **Full**. Ask it to `call_connected_tool` `list_email_candidates` for `2026-09`. Expect MSG-E01…MSG-E04 plus expanded Kernel JSON.
 2. Open **AP**. Ask it to `call_connected_tool` `tools.get_invoice` `ING-001`. Expect Acme Supplies / 12,450 from demo-inbox.
-3. Bug icon → Inspector **Pi events** / **Pi RPC** for the verbatim Harness stream (not a mascot-only “thinking” row).
+3. Bug icon → Inspector **Sessions** for the Grok/Pi jsonl chat log (also Computer → Pi sessions). **Pi events** / **Pi RPC** for the verbatim stream. Click **Messaged @…** to open the read-only pair handoff log, not the other Bot.
 
 Proven live 2026-09-20: Email replied `office-ok`; `search_connected_tools` and `list_email_candidates` ran; AP loaded ING-001. Capabilities were not deleted — they were hidden by thinking-only UI and a `turn_end` that cleared the stream mid-tool.
 

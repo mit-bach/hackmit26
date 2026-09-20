@@ -126,8 +126,32 @@ export function resolveRosterFile(computerRoot: string): string {
   throw new Error(`no roster.json under ${computerRoot}`);
 }
 
+function waitBriefly(): void {
+  try {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 20);
+  } catch {
+    const end = Date.now() + 20;
+    while (Date.now() < end) {
+      // spin
+    }
+  }
+}
+
 export function loadRoster(computerRoot: string): Roster {
-  return parseRoster(readJsonUnknown(resolveRosterFile(computerRoot)));
+  const path = resolveRosterFile(computerRoot);
+  let last: unknown;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      return parseRoster(readJsonUnknown(path));
+    } catch (error) {
+      last = error;
+      waitBriefly();
+    }
+  }
+  if (last instanceof Error) {
+    throw last;
+  }
+  throw new Error(String(last));
 }
 
 export function saveRoster(computerRoot: string, roster: Roster): void {

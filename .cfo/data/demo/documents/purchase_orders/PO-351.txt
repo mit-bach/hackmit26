@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-351
+PO Number: PO-351
+Issued: 2026-09-25
+Vendor: Acme Supplies
+Vendor legal name: Acme Supplies, Inc.
+Vendor tax ID: 04-2218891
+Authorized amount: 12,600.17
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+premium support billed 2026-09-25
+
+This purchase order is not an invoice. The vendor must bill against PO-351.
+Payment terms follow the vendor master unless this order states otherwise.

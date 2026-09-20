@@ -8,7 +8,7 @@ status: new
 
 ## Purpose
 
-Give Bot `email` a consistent way to decide what an inbound message is and which registered Kernel action to dispatch. Display name Finance Inbox Agent is a Grant source on this Bot, not a sixteenth Bot.
+Give Bot `email` a consistent way to decide what an inbound message is and which registered Kernel action to dispatch. Display name Finance Inbox Agent is Profile `triage` on Bot `email`. Bot `world` owns persona send/reply.
 
 ## When to Use
 

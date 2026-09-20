@@ -56,6 +56,9 @@ export interface PiHydratedTurn {
   readonly reasoning: string;
   readonly text: string;
   readonly tools: readonly PiHydratedTool[];
+  readonly conversation: "operator_dm" | "peer_dm" | "room";
+  readonly handleId?: string;
+  readonly fromId?: string;
 }
 
 export interface FoldedPiChunk {
@@ -133,16 +136,37 @@ function assistantEvent(raw: Record<string, unknown>): Record<string, unknown> |
   return undefined;
 }
 
+function argsRecord(
+  raw: Record<string, unknown>,
+  nested?: Record<string, unknown>,
+): Record<string, unknown> | undefined {
+  if (nested && isRecord(nested.arguments)) {
+    return nested.arguments;
+  }
+  if (nested && isRecord(nested.args)) {
+    return nested.args;
+  }
+  if (isRecord(raw.args)) {
+    return raw.args;
+  }
+  if (isRecord(raw.arguments)) {
+    return raw.arguments;
+  }
+  return undefined;
+}
+
 function toolNameOf(raw: Record<string, unknown>, nested?: Record<string, unknown>): string {
   const fromNested = nested ? asString(nested.toolName) || asString(nested.name) : "";
-  if (fromNested.length > 0) {
-    return fromNested;
+  const named = fromNested.length > 0 ? fromNested : asString(raw.toolName) || asString(raw.name);
+  const args = argsRecord(raw, nested);
+  const inner = args ? asString(args.name) : "";
+  if (named === "call_connected_tool" && inner.length > 0) {
+    return inner;
   }
-  const named = asString(raw.toolName) || asString(raw.name);
   if (named.length > 0) {
     return named;
   }
-  return "tool";
+  return inner.length > 0 ? inner : "tool";
 }
 
 function toolIdOf(raw: Record<string, unknown>, nested?: Record<string, unknown>, fallback = ""): string {
@@ -281,8 +305,11 @@ export function foldPiRpc(raw: unknown, ctx: FoldPiContext): FoldedPiChunk {
       );
     } else if (innerType === "toolcall_start") {
       const name = toolNameOf(raw, inner);
-      const id = toolIdOf(raw, inner, ctx.nextId());
+      const id = toolIdOf(raw, inner);
       events.push(baseEvent(ctx, "item.started", raw, { itemType: "tool", title: name, summary: name }));
+      if (id.length === 0) {
+        return { events };
+      }
       return {
         events,
         activity: { id, name, spoken: `Calling ${name}` },
@@ -300,21 +327,28 @@ export function foldPiRpc(raw: unknown, ctx: FoldPiContext): FoldedPiChunk {
 
   if (type === "tool_execution_start") {
     const name = toolNameOf(raw);
-    const id = toolIdOf(raw, undefined, ctx.nextId());
+    const id = toolIdOf(raw);
     const summary = clip(stringifyUnknown(raw.args), 200);
+    const input = clip(stringifyUnknown(raw.args), TOOL_OUTPUT_CHARS);
     events.push(baseEvent(ctx, "item.started", raw, { itemType: "tool", title: name, summary }));
+    if (id.length === 0) {
+      return { events };
+    }
     return {
       events,
-      activity: { id, name, spoken: `Running ${name}`, summary, input: summary },
+      activity: { id, name, spoken: `Running ${name}`, summary, input },
     };
   }
 
   if (type === "tool_execution_end") {
     const name = toolNameOf(raw);
-    const id = toolIdOf(raw, undefined, ctx.nextId());
+    const id = toolIdOf(raw);
     const ok = raw.isError !== true;
     const output = clip(stringifyUnknown(raw.result), TOOL_OUTPUT_CHARS);
     events.push(baseEvent(ctx, "item.completed", raw, { itemType: "tool", ok, output, title: name }));
+    if (id.length === 0) {
+      return { events };
+    }
     return {
       events,
       activity: { id, name, spoken: ok ? `Finished ${name}` : `Failed ${name}`, ok, output },
@@ -334,6 +368,37 @@ interface MutableHydratedTurn {
   reasoning: string;
   text: string;
   tools: PiHydratedTool[];
+  conversation: "operator_dm" | "peer_dm" | "room";
+  handleId?: string;
+  fromId?: string;
+}
+
+function wakeConversation(text: string): "operator_dm" | "peer_dm" | "room" {
+  if (/\bkind:\s*a2a_handoff\b/i.test(text) || /\bconversation:\s*peer_dm\b/i.test(text)) {
+    return "peer_dm";
+  }
+  if (/\bkind:\s*group_/i.test(text) || /\bconversation:\s*room\b/i.test(text)) {
+    return "room";
+  }
+  return "operator_dm";
+}
+
+function wakeField(text: string, name: string): string | undefined {
+  const match = new RegExp(`\\b${name}:\\s+(\\S+)`, "i").exec(text);
+  const value = match?.[1];
+  return value && value.length > 0 ? value : undefined;
+}
+
+function applyWake(turn: MutableHydratedTurn, text: string): void {
+  turn.conversation = wakeConversation(text);
+  const handleId = wakeField(text, "handle");
+  const fromId = wakeField(text, "from");
+  if (handleId) {
+    turn.handleId = handleId;
+  }
+  if (fromId) {
+    turn.fromId = fromId;
+  }
 }
 
 function absorbAssistantMessage(turn: MutableHydratedTurn, message: unknown): void {
@@ -356,7 +421,7 @@ export function hydratePiTurns(rows: readonly unknown[]): PiHydratedTurn[] {
   let current: MutableHydratedTurn | undefined;
 
   const start = (): MutableHydratedTurn => {
-    current = { reasoning: "", text: "", tools: [] };
+    current = { reasoning: "", text: "", tools: [], conversation: "operator_dm" };
     return current;
   };
   const finish = (): void => {
@@ -368,6 +433,9 @@ export function hydratePiTurns(rows: readonly unknown[]): PiHydratedTurn[] {
         reasoning: current.reasoning,
         text: current.text,
         tools: current.tools,
+        conversation: current.conversation,
+        ...(current.handleId ? { handleId: current.handleId } : {}),
+        ...(current.fromId ? { fromId: current.fromId } : {}),
       });
     }
     current = undefined;
@@ -381,6 +449,14 @@ export function hydratePiTurns(rows: readonly unknown[]): PiHydratedTurn[] {
     if (type === "agent_start") {
       finish();
       start();
+      continue;
+    }
+    if (type === "message_start" || type === "message_end") {
+      const message = raw.message;
+      if (isRecord(message) && asString(message.role) === "user") {
+        const turn = current ?? start();
+        applyWake(turn, assistantTextFromMessage(message));
+      }
       continue;
     }
     const turn = current ?? start();
@@ -399,7 +475,7 @@ export function hydratePiTurns(rows: readonly unknown[]): PiHydratedTurn[] {
     } else if (type === "tool_execution_start") {
       const id = toolIdOf(raw);
       const name = toolNameOf(raw);
-      const input = clip(stringifyUnknown(raw.args), 400);
+      const input = clip(stringifyUnknown(raw.args), TOOL_OUTPUT_CHARS);
       turn.tools.push({
         id: id.length > 0 ? id : `tool-${turn.tools.length}`,
         name,
@@ -432,7 +508,9 @@ export function hydratePiTurns(rows: readonly unknown[]): PiHydratedTurn[] {
     } else if (type === "agent_end") {
       if (Array.isArray(raw.messages)) {
         for (const message of raw.messages) {
-          if (isRecord(message) && asString(message.role) === "assistant") {
+          if (isRecord(message) && asString(message.role) === "user") {
+            applyWake(turn, assistantTextFromMessage(message));
+          } else if (isRecord(message) && asString(message.role) === "assistant") {
             absorbAssistantMessage(turn, message);
           }
         }

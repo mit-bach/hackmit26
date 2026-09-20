@@ -255,7 +255,7 @@
     "amount": -3000.0,
     "currency": "USD",
     "account": "1000-Cash",
-    "counterparty": "Cambridge Office Services",
+    "counterparty": "Cambridge Services",
     "reference": "CAM-SVC",
     "description": "Facilities draw",
     "entry_type": "ap_payment",
@@ -316,6 +316,3264 @@
     "raw_metadata": {
       "payout_id": "po_1MaximorDisputes",
       "provider": "stripe"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-001",
+    "date": "2026-09-02",
+    "amount": -1000.17,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies LLC",
+    "reference": "ACH-0001",
+    "description": "Books Acme Supplies LLC 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100017,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-001"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-002",
+    "date": "2026-09-03",
+    "amount": -1000.34,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supply Co.",
+    "reference": "ACH-0002",
+    "description": "Books Acme Supply Co. 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100034,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-002"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-003",
+    "date": "2026-09-04",
+    "amount": -1000.51,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Amazon Web Services",
+    "reference": "ACH-0003",
+    "description": "Books Amazon Web Services 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100051,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-003"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-004",
+    "date": "2026-09-05",
+    "amount": -1000.68,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fabrication",
+    "reference": "ACH-0004",
+    "description": "Books Northline Fabrication 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100068,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-004"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-005",
+    "date": "2026-09-06",
+    "amount": -1000.85,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Office Depot",
+    "reference": "ACH-0005",
+    "description": "Books Office Depot 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100085,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-005"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-006",
+    "date": "2026-09-07",
+    "amount": -1001.02,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware",
+    "reference": "ACH-0006",
+    "description": "Books Helios Hardware 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100102,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-006"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-007",
+    "date": "2026-09-08",
+    "amount": 1001.19,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Datadog",
+    "reference": "ACH-0007",
+    "description": "Books Datadog 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100119,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-007"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-008",
+    "date": "2026-09-09",
+    "amount": -1001.36,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Slack Technologies",
+    "reference": "ACH-0008",
+    "description": "Books Slack Technologies 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100136,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-008"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-009",
+    "date": "2026-09-10",
+    "amount": -1001.53,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Figma",
+    "reference": "ACH-0009",
+    "description": "Books Figma 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100153,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-009"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-010",
+    "date": "2026-09-11",
+    "amount": -1001.7,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Google Cloud",
+    "reference": "ACH-0010",
+    "description": "Books Google Cloud 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100170,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-010"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-011",
+    "date": "2026-09-12",
+    "amount": -1001.87,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Hartford Insurance",
+    "reference": "TXN-VOL-2026-09-011",
+    "description": "Books Hartford Insurance 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100187,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-011"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-012",
+    "date": "2026-09-13",
+    "amount": -1002.04,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Orbit Analytics",
+    "reference": "ACH-0012",
+    "description": "Books Orbit Analytics 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100204,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-012"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-013",
+    "date": "2026-09-14",
+    "amount": -1002.21,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cambridge Properties",
+    "reference": "ACH-0013",
+    "description": "Books Cambridge Properties 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100221,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-013"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-014",
+    "date": "2026-09-15",
+    "amount": 1002.38,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Dell Technologies",
+    "reference": "ACH-0014",
+    "description": "Books Dell Technologies 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100238,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-014"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-015",
+    "date": "2026-09-16",
+    "amount": -1002.55,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Electric",
+    "reference": "ACH-0015",
+    "description": "Books Harbor Electric 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100255,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-015"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-016",
+    "date": "2026-09-17",
+    "amount": -1002.72,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lindholm & Ruiz LLP",
+    "reference": "ACH-0016",
+    "description": "Books Lindholm & Ruiz LLP 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100272,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-016"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-017",
+    "date": "2026-09-18",
+    "amount": -1002.89,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "GitHub",
+    "reference": "ACH-0017",
+    "description": "Books GitHub 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100289,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-017"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-018",
+    "date": "2026-09-19",
+    "amount": -1003.06,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Shadow Vendor LLC",
+    "reference": "ACH-0018",
+    "description": "Books Shadow Vendor LLC 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100306,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-018"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-019",
+    "date": "2026-09-20",
+    "amount": -1003.23,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Freightline Logistics",
+    "reference": "ACH-0019",
+    "description": "Books Freightline Logistics 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100323,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-019"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-020",
+    "date": "2026-09-21",
+    "amount": -1003.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lenovo",
+    "reference": "ACH-0020",
+    "description": "Books Lenovo 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100340,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-020"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-021",
+    "date": "2026-09-22",
+    "amount": 1003.57,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Misc Supplies",
+    "reference": "ACH-0021",
+    "description": "Books Misc Supplies 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100357,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-021"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-022",
+    "date": "2026-09-23",
+    "amount": -1003.74,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Twilio",
+    "reference": "TXN-VOL-2026-09-022",
+    "description": "Books Twilio 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100374,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-022"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-023",
+    "date": "2026-09-24",
+    "amount": -1003.91,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Notion Labs",
+    "reference": "ACH-0023",
+    "description": "Books Notion Labs 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100391,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-023"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-024",
+    "date": "2026-09-25",
+    "amount": -1004.08,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Snowflake",
+    "reference": "ACH-0024",
+    "description": "Books Snowflake 2026-09-25",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100408,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-024"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-025",
+    "date": "2026-09-26",
+    "amount": -1004.25,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Okta",
+    "reference": "ACH-0025",
+    "description": "Books Okta 2026-09-26",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100425,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-025"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-026",
+    "date": "2026-09-27",
+    "amount": -1004.42,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CrowdStrike",
+    "reference": "ACH-0026",
+    "description": "Books CrowdStrike 2026-09-27",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100442,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-026"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-027",
+    "date": "2026-09-28",
+    "amount": -1004.59,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Zoom Video",
+    "reference": "ACH-0027",
+    "description": "Books Zoom Video 2026-09-28",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100459,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-027"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-028",
+    "date": "2026-09-01",
+    "amount": 1004.76,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Atlassian",
+    "reference": "ACH-0028",
+    "description": "Books Atlassian 2026-09-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100476,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-028"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-029",
+    "date": "2026-09-02",
+    "amount": -1004.93,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cloudflare",
+    "reference": "ACH-0029",
+    "description": "Books Cloudflare 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100493,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-029"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-030",
+    "date": "2026-09-03",
+    "amount": -1005.1,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fab Group",
+    "reference": "ACH-0030",
+    "description": "Books Northline Fab Group 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100510,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-030"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-031",
+    "date": "2026-09-04",
+    "amount": -1005.27,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware Supply",
+    "reference": "ACH-0031",
+    "description": "Books Helios Hardware Supply 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100527,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-031"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-032",
+    "date": "2026-09-05",
+    "amount": -1005.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Power & Light",
+    "reference": "ACH-0032",
+    "description": "Books Harbor Power & Light 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100544,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-032"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-033",
+    "date": "2026-09-06",
+    "amount": -1005.61,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Staples Business Advantage",
+    "reference": "TXN-VOL-2026-09-033",
+    "description": "Books Staples Business Advantage 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100561,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-033"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-034",
+    "date": "2026-09-07",
+    "amount": -1005.78,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FedEx",
+    "reference": "ACH-0034",
+    "description": "Books FedEx 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100578,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-034"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-035",
+    "date": "2026-09-08",
+    "amount": 1005.95,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "ADP",
+    "reference": "ACH-0035",
+    "description": "Books ADP 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100595,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-035"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-036",
+    "date": "2026-09-09",
+    "amount": -1006.12,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "WeWork Cambridge",
+    "reference": "ACH-0036",
+    "description": "Books WeWork Cambridge 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100612,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-036"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-037",
+    "date": "2026-09-10",
+    "amount": -1006.29,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Comcast Business",
+    "reference": "ACH-0037",
+    "description": "Books Comcast Business 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100629,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-037"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-038",
+    "date": "2026-09-11",
+    "amount": -1006.46,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Pagaya Coffee Service",
+    "reference": "ACH-0038",
+    "description": "Books Pagaya Coffee Service 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100646,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-038"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-039",
+    "date": "2026-09-12",
+    "amount": -1006.63,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CleanRoom Janitorial",
+    "reference": "ACH-0039",
+    "description": "Books CleanRoom Janitorial 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100663,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-039"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-040",
+    "date": "2026-09-13",
+    "amount": -1006.8,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Kendall Square Parking",
+    "reference": "ACH-0040",
+    "description": "Books Kendall Square Parking 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100680,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-040"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-041",
+    "date": "2026-09-14",
+    "amount": -1006.97,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HubSpot",
+    "reference": "ACH-0041",
+    "description": "Books HubSpot 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100697,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-041"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-042",
+    "date": "2026-09-15",
+    "amount": 1007.14,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Stripe Processing",
+    "reference": "ACH-0042",
+    "description": "Books Stripe Processing 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100714,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-042"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-043",
+    "date": "2026-09-16",
+    "amount": -1007.31,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Adyen NV",
+    "reference": "ACH-0043",
+    "description": "Books Adyen NV 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100731,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-043"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-044",
+    "date": "2026-09-17",
+    "amount": -1007.48,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "DocuSign",
+    "reference": "TXN-VOL-2026-09-044",
+    "description": "Books DocuSign 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100748,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-044"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-045",
+    "date": "2026-09-18",
+    "amount": -1007.65,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Palo Alto Networks",
+    "reference": "ACH-0045",
+    "description": "Books Palo Alto Networks 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100765,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-045"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-046",
+    "date": "2026-09-19",
+    "amount": -1007.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Boston Edison Steam",
+    "reference": "ACH-0046",
+    "description": "Books Boston Edison Steam 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100782,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-046"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-047",
+    "date": "2026-09-20",
+    "amount": -1007.99,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Carta",
+    "reference": "ACH-0047",
+    "description": "Books Carta 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100799,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-047"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-048",
+    "date": "2026-09-21",
+    "amount": -1008.16,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Gusto Payroll",
+    "reference": "ACH-0048",
+    "description": "Books Gusto Payroll 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100816,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-048"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-049",
+    "date": "2026-09-22",
+    "amount": 1008.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Vanta",
+    "reference": "ACH-0049",
+    "description": "Books Vanta 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100833,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-049"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-050",
+    "date": "2026-09-23",
+    "amount": -1008.5,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Linear App",
+    "reference": "ACH-0050",
+    "description": "Books Linear App 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100850,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-050"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-051",
+    "date": "2026-09-24",
+    "amount": -1008.67,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies",
+    "reference": "ACH-0051",
+    "description": "Books Acme Supplies 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100867,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-051"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-052",
+    "date": "2026-09-25",
+    "amount": -1008.84,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies LLC",
+    "reference": "ACH-0052",
+    "description": "Books Acme Supplies LLC 2026-09-25",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100884,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-052"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-053",
+    "date": "2026-09-26",
+    "amount": -1009.01,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supply Co.",
+    "reference": "ACH-0053",
+    "description": "Books Acme Supply Co. 2026-09-26",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100901,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-053"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-054",
+    "date": "2026-09-27",
+    "amount": -1009.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Amazon Web Services",
+    "reference": "ACH-0054",
+    "description": "Books Amazon Web Services 2026-09-27",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100918,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-054"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-055",
+    "date": "2026-09-28",
+    "amount": -1009.35,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fabrication",
+    "reference": "TXN-VOL-2026-09-055",
+    "description": "Books Northline Fabrication 2026-09-28",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100935,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-055"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-056",
+    "date": "2026-09-01",
+    "amount": 1009.52,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Office Depot",
+    "reference": "ACH-0056",
+    "description": "Books Office Depot 2026-09-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 100952,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-056"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-057",
+    "date": "2026-09-02",
+    "amount": -1009.69,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware",
+    "reference": "ACH-0057",
+    "description": "Books Helios Hardware 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100969,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-057"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-058",
+    "date": "2026-09-03",
+    "amount": -1009.86,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Datadog",
+    "reference": "ACH-0058",
+    "description": "Books Datadog 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -100986,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-058"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-059",
+    "date": "2026-09-04",
+    "amount": -1010.03,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Slack Technologies",
+    "reference": "ACH-0059",
+    "description": "Books Slack Technologies 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101003,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-059"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-060",
+    "date": "2026-09-05",
+    "amount": -1010.2,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Figma",
+    "reference": "ACH-0060",
+    "description": "Books Figma 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101020,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-060"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-061",
+    "date": "2026-09-06",
+    "amount": -1010.37,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Google Cloud",
+    "reference": "ACH-0061",
+    "description": "Books Google Cloud 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101037,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-061"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-062",
+    "date": "2026-09-07",
+    "amount": -1010.54,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Hartford Insurance",
+    "reference": "ACH-0062",
+    "description": "Books Hartford Insurance 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101054,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-062"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-063",
+    "date": "2026-09-08",
+    "amount": 1010.71,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Orbit Analytics",
+    "reference": "ACH-0063",
+    "description": "Books Orbit Analytics 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101071,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-063"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-064",
+    "date": "2026-09-09",
+    "amount": -1010.88,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cambridge Properties",
+    "reference": "ACH-0064",
+    "description": "Books Cambridge Properties 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101088,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-064"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-065",
+    "date": "2026-09-10",
+    "amount": -1011.05,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Dell Technologies",
+    "reference": "ACH-0065",
+    "description": "Books Dell Technologies 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101105,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-065"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-066",
+    "date": "2026-09-11",
+    "amount": -1011.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Electric",
+    "reference": "TXN-VOL-2026-09-066",
+    "description": "Books Harbor Electric 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101122,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-066"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-067",
+    "date": "2026-09-12",
+    "amount": -1011.39,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lindholm & Ruiz LLP",
+    "reference": "ACH-0067",
+    "description": "Books Lindholm & Ruiz LLP 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101139,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-067"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-068",
+    "date": "2026-09-13",
+    "amount": -1011.56,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "GitHub",
+    "reference": "ACH-0068",
+    "description": "Books GitHub 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101156,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-068"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-069",
+    "date": "2026-09-14",
+    "amount": -1011.73,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Shadow Vendor LLC",
+    "reference": "ACH-0069",
+    "description": "Books Shadow Vendor LLC 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101173,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-069"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-070",
+    "date": "2026-09-15",
+    "amount": 1011.9,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Freightline Logistics",
+    "reference": "ACH-0070",
+    "description": "Books Freightline Logistics 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101190,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-070"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-071",
+    "date": "2026-09-16",
+    "amount": -1012.07,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lenovo",
+    "reference": "ACH-0071",
+    "description": "Books Lenovo 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101207,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-071"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-072",
+    "date": "2026-09-17",
+    "amount": -1012.24,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Misc Supplies",
+    "reference": "ACH-0072",
+    "description": "Books Misc Supplies 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101224,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-072"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-073",
+    "date": "2026-09-18",
+    "amount": -1012.41,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Twilio",
+    "reference": "ACH-0073",
+    "description": "Books Twilio 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101241,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-073"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-074",
+    "date": "2026-09-19",
+    "amount": -1012.58,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Notion Labs",
+    "reference": "ACH-0074",
+    "description": "Books Notion Labs 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101258,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-074"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-075",
+    "date": "2026-09-20",
+    "amount": -1012.75,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Snowflake",
+    "reference": "ACH-0075",
+    "description": "Books Snowflake 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101275,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-075"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-076",
+    "date": "2026-09-21",
+    "amount": -1012.92,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Okta",
+    "reference": "ACH-0076",
+    "description": "Books Okta 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101292,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-076"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-077",
+    "date": "2026-09-22",
+    "amount": 1013.09,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CrowdStrike",
+    "reference": "TXN-VOL-2026-09-077",
+    "description": "Books CrowdStrike 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101309,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-077"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-078",
+    "date": "2026-09-23",
+    "amount": -1013.26,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Zoom Video",
+    "reference": "ACH-0078",
+    "description": "Books Zoom Video 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101326,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-078"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-079",
+    "date": "2026-09-24",
+    "amount": -1013.43,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Atlassian",
+    "reference": "ACH-0079",
+    "description": "Books Atlassian 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101343,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-079"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-080",
+    "date": "2026-09-25",
+    "amount": -1013.6,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cloudflare",
+    "reference": "ACH-0080",
+    "description": "Books Cloudflare 2026-09-25",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101360,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-080"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-081",
+    "date": "2026-09-26",
+    "amount": -1013.77,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fab Group",
+    "reference": "ACH-0081",
+    "description": "Books Northline Fab Group 2026-09-26",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101377,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-081"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-082",
+    "date": "2026-09-27",
+    "amount": -1013.94,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware Supply",
+    "reference": "ACH-0082",
+    "description": "Books Helios Hardware Supply 2026-09-27",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101394,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-082"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-083",
+    "date": "2026-09-28",
+    "amount": -1014.11,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Power & Light",
+    "reference": "ACH-0083",
+    "description": "Books Harbor Power & Light 2026-09-28",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101411,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-083"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-084",
+    "date": "2026-09-01",
+    "amount": 1014.28,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Staples Business Advantage",
+    "reference": "ACH-0084",
+    "description": "Books Staples Business Advantage 2026-09-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101428,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-084"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-085",
+    "date": "2026-09-02",
+    "amount": -1014.45,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FedEx",
+    "reference": "ACH-0085",
+    "description": "Books FedEx 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101445,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-085"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-086",
+    "date": "2026-09-03",
+    "amount": -1014.62,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "ADP",
+    "reference": "ACH-0086",
+    "description": "Books ADP 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101462,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-086"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-087",
+    "date": "2026-09-04",
+    "amount": -1014.79,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "WeWork Cambridge",
+    "reference": "ACH-0087",
+    "description": "Books WeWork Cambridge 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101479,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-087"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-088",
+    "date": "2026-09-05",
+    "amount": -1014.96,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Comcast Business",
+    "reference": "TXN-VOL-2026-09-088",
+    "description": "Books Comcast Business 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101496,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-088"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-089",
+    "date": "2026-09-06",
+    "amount": -1015.13,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Pagaya Coffee Service",
+    "reference": "ACH-0089",
+    "description": "Books Pagaya Coffee Service 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101513,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-089"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-090",
+    "date": "2026-09-07",
+    "amount": -1015.3,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CleanRoom Janitorial",
+    "reference": "ACH-0090",
+    "description": "Books CleanRoom Janitorial 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101530,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-090"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-091",
+    "date": "2026-09-08",
+    "amount": 1015.47,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Kendall Square Parking",
+    "reference": "ACH-0091",
+    "description": "Books Kendall Square Parking 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101547,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-091"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-092",
+    "date": "2026-09-09",
+    "amount": -1015.64,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HubSpot",
+    "reference": "ACH-0092",
+    "description": "Books HubSpot 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101564,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-092"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-093",
+    "date": "2026-09-10",
+    "amount": -1015.81,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Stripe Processing",
+    "reference": "ACH-0093",
+    "description": "Books Stripe Processing 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101581,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-093"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-094",
+    "date": "2026-09-11",
+    "amount": -1015.98,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Adyen NV",
+    "reference": "ACH-0094",
+    "description": "Books Adyen NV 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101598,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-094"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-095",
+    "date": "2026-09-12",
+    "amount": -1016.15,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "DocuSign",
+    "reference": "ACH-0095",
+    "description": "Books DocuSign 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101615,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-095"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-096",
+    "date": "2026-09-13",
+    "amount": -1016.32,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Palo Alto Networks",
+    "reference": "ACH-0096",
+    "description": "Books Palo Alto Networks 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101632,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-096"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-097",
+    "date": "2026-09-14",
+    "amount": -1016.49,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Boston Edison Steam",
+    "reference": "ACH-0097",
+    "description": "Books Boston Edison Steam 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101649,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-097"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-098",
+    "date": "2026-09-15",
+    "amount": 1016.66,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Carta",
+    "reference": "ACH-0098",
+    "description": "Books Carta 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101666,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-098"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-099",
+    "date": "2026-09-16",
+    "amount": -1016.83,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Gusto Payroll",
+    "reference": "TXN-VOL-2026-09-099",
+    "description": "Books Gusto Payroll 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101683,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-099"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-100",
+    "date": "2026-09-17",
+    "amount": -1017.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Vanta",
+    "reference": "ACH-0100",
+    "description": "Books Vanta 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101700,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-100"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-101",
+    "date": "2026-09-18",
+    "amount": -1017.17,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Linear App",
+    "reference": "ACH-0101",
+    "description": "Books Linear App 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101717,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-101"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-102",
+    "date": "2026-09-19",
+    "amount": -1017.34,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies",
+    "reference": "ACH-0102",
+    "description": "Books Acme Supplies 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101734,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-102"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-103",
+    "date": "2026-09-20",
+    "amount": -1017.51,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies LLC",
+    "reference": "ACH-0103",
+    "description": "Books Acme Supplies LLC 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101751,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-103"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-104",
+    "date": "2026-09-21",
+    "amount": -1017.68,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supply Co.",
+    "reference": "ACH-0104",
+    "description": "Books Acme Supply Co. 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101768,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-104"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-105",
+    "date": "2026-09-22",
+    "amount": 1017.85,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Amazon Web Services",
+    "reference": "ACH-0105",
+    "description": "Books Amazon Web Services 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101785,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-105"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-106",
+    "date": "2026-09-23",
+    "amount": -1018.02,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fabrication",
+    "reference": "ACH-0106",
+    "description": "Books Northline Fabrication 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101802,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-106"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-107",
+    "date": "2026-09-24",
+    "amount": -1018.19,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Office Depot",
+    "reference": "ACH-0107",
+    "description": "Books Office Depot 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101819,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-107"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-108",
+    "date": "2026-09-25",
+    "amount": -1018.36,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware",
+    "reference": "ACH-0108",
+    "description": "Books Helios Hardware 2026-09-25",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101836,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-108"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-109",
+    "date": "2026-09-26",
+    "amount": -1018.53,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Datadog",
+    "reference": "ACH-0109",
+    "description": "Books Datadog 2026-09-26",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101853,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-109"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-110",
+    "date": "2026-09-27",
+    "amount": -1018.7,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Slack Technologies",
+    "reference": "TXN-VOL-2026-09-110",
+    "description": "Books Slack Technologies 2026-09-27",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101870,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-110"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-111",
+    "date": "2026-09-28",
+    "amount": -1018.87,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Figma",
+    "reference": "ACH-0111",
+    "description": "Books Figma 2026-09-28",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101887,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-111"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-112",
+    "date": "2026-09-01",
+    "amount": 1019.04,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Google Cloud",
+    "reference": "ACH-0112",
+    "description": "Books Google Cloud 2026-09-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 101904,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-112"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-113",
+    "date": "2026-09-02",
+    "amount": -1019.21,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Hartford Insurance",
+    "reference": "ACH-0113",
+    "description": "Books Hartford Insurance 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101921,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-113"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-114",
+    "date": "2026-09-03",
+    "amount": -1019.38,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Orbit Analytics",
+    "reference": "ACH-0114",
+    "description": "Books Orbit Analytics 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101938,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-114"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-115",
+    "date": "2026-09-04",
+    "amount": -1019.55,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cambridge Properties",
+    "reference": "ACH-0115",
+    "description": "Books Cambridge Properties 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101955,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-115"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-116",
+    "date": "2026-09-05",
+    "amount": -1019.72,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Dell Technologies",
+    "reference": "ACH-0116",
+    "description": "Books Dell Technologies 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101972,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-116"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-117",
+    "date": "2026-09-06",
+    "amount": -1019.89,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Electric",
+    "reference": "ACH-0117",
+    "description": "Books Harbor Electric 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -101989,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-117"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-118",
+    "date": "2026-09-07",
+    "amount": -1020.06,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lindholm & Ruiz LLP",
+    "reference": "ACH-0118",
+    "description": "Books Lindholm & Ruiz LLP 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102006,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-118"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-119",
+    "date": "2026-09-08",
+    "amount": 1020.23,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "GitHub",
+    "reference": "ACH-0119",
+    "description": "Books GitHub 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102023,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-119"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-120",
+    "date": "2026-09-09",
+    "amount": -1020.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Shadow Vendor LLC",
+    "reference": "ACH-0120",
+    "description": "Books Shadow Vendor LLC 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102040,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-120"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-121",
+    "date": "2026-09-10",
+    "amount": -1020.57,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Freightline Logistics",
+    "reference": "TXN-VOL-2026-09-121",
+    "description": "Books Freightline Logistics 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102057,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-121"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-122",
+    "date": "2026-09-11",
+    "amount": -1020.74,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lenovo",
+    "reference": "ACH-0122",
+    "description": "Books Lenovo 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102074,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-122"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-123",
+    "date": "2026-09-12",
+    "amount": -1020.91,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Misc Supplies",
+    "reference": "ACH-0123",
+    "description": "Books Misc Supplies 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102091,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-123"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-124",
+    "date": "2026-09-13",
+    "amount": -1021.08,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Twilio",
+    "reference": "ACH-0124",
+    "description": "Books Twilio 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102108,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-124"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-125",
+    "date": "2026-09-14",
+    "amount": -1021.25,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Notion Labs",
+    "reference": "ACH-0125",
+    "description": "Books Notion Labs 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102125,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-125"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-126",
+    "date": "2026-09-15",
+    "amount": 1021.42,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Snowflake",
+    "reference": "ACH-0126",
+    "description": "Books Snowflake 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102142,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-126"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-127",
+    "date": "2026-09-16",
+    "amount": -1021.59,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Okta",
+    "reference": "ACH-0127",
+    "description": "Books Okta 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102159,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-127"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-128",
+    "date": "2026-09-17",
+    "amount": -1021.76,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CrowdStrike",
+    "reference": "ACH-0128",
+    "description": "Books CrowdStrike 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102176,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-128"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-129",
+    "date": "2026-09-18",
+    "amount": -1021.93,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Zoom Video",
+    "reference": "ACH-0129",
+    "description": "Books Zoom Video 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102193,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-129"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-130",
+    "date": "2026-09-19",
+    "amount": -1022.1,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Atlassian",
+    "reference": "ACH-0130",
+    "description": "Books Atlassian 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102210,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-130"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-131",
+    "date": "2026-09-20",
+    "amount": -1022.27,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cloudflare",
+    "reference": "ACH-0131",
+    "description": "Books Cloudflare 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102227,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-131"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-132",
+    "date": "2026-09-21",
+    "amount": -1022.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fab Group",
+    "reference": "TXN-VOL-2026-09-132",
+    "description": "Books Northline Fab Group 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102244,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-132"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-133",
+    "date": "2026-09-22",
+    "amount": 1022.61,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware Supply",
+    "reference": "ACH-0133",
+    "description": "Books Helios Hardware Supply 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102261,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-133"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-134",
+    "date": "2026-09-23",
+    "amount": -1022.78,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Power & Light",
+    "reference": "ACH-0134",
+    "description": "Books Harbor Power & Light 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102278,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-134"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-135",
+    "date": "2026-09-24",
+    "amount": -1022.95,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Staples Business Advantage",
+    "reference": "ACH-0135",
+    "description": "Books Staples Business Advantage 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102295,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-135"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-136",
+    "date": "2026-09-25",
+    "amount": -1023.12,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FedEx",
+    "reference": "ACH-0136",
+    "description": "Books FedEx 2026-09-25",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102312,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-136"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-137",
+    "date": "2026-09-26",
+    "amount": -1023.29,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "ADP",
+    "reference": "ACH-0137",
+    "description": "Books ADP 2026-09-26",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102329,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-137"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-138",
+    "date": "2026-09-27",
+    "amount": -1023.46,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "WeWork Cambridge",
+    "reference": "ACH-0138",
+    "description": "Books WeWork Cambridge 2026-09-27",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102346,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-138"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-139",
+    "date": "2026-09-28",
+    "amount": -1023.63,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Comcast Business",
+    "reference": "ACH-0139",
+    "description": "Books Comcast Business 2026-09-28",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102363,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-139"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-140",
+    "date": "2026-09-01",
+    "amount": 1023.8,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Pagaya Coffee Service",
+    "reference": "ACH-0140",
+    "description": "Books Pagaya Coffee Service 2026-09-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102380,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-140"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-141",
+    "date": "2026-09-02",
+    "amount": -1023.97,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CleanRoom Janitorial",
+    "reference": "ACH-0141",
+    "description": "Books CleanRoom Janitorial 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102397,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-141"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-142",
+    "date": "2026-09-03",
+    "amount": -1024.14,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Kendall Square Parking",
+    "reference": "ACH-0142",
+    "description": "Books Kendall Square Parking 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102414,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-142"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-143",
+    "date": "2026-09-04",
+    "amount": -1024.31,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HubSpot",
+    "reference": "TXN-VOL-2026-09-143",
+    "description": "Books HubSpot 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102431,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-143"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-144",
+    "date": "2026-09-05",
+    "amount": -1024.48,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Stripe Processing",
+    "reference": "ACH-0144",
+    "description": "Books Stripe Processing 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102448,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-144"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-145",
+    "date": "2026-09-06",
+    "amount": -1024.65,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Adyen NV",
+    "reference": "ACH-0145",
+    "description": "Books Adyen NV 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102465,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-145"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-146",
+    "date": "2026-09-07",
+    "amount": -1024.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "DocuSign",
+    "reference": "ACH-0146",
+    "description": "Books DocuSign 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102482,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-146"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-147",
+    "date": "2026-09-08",
+    "amount": 1024.99,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Palo Alto Networks",
+    "reference": "ACH-0147",
+    "description": "Books Palo Alto Networks 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102499,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-147"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-148",
+    "date": "2026-09-09",
+    "amount": -1025.16,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Boston Edison Steam",
+    "reference": "ACH-0148",
+    "description": "Books Boston Edison Steam 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102516,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-148"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-149",
+    "date": "2026-09-10",
+    "amount": -1025.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Carta",
+    "reference": "ACH-0149",
+    "description": "Books Carta 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102533,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-149"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-150",
+    "date": "2026-09-11",
+    "amount": -1025.5,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Gusto Payroll",
+    "reference": "ACH-0150",
+    "description": "Books Gusto Payroll 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102550,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-150"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-151",
+    "date": "2026-09-12",
+    "amount": -1025.67,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Vanta",
+    "reference": "ACH-0151",
+    "description": "Books Vanta 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102567,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-151"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-152",
+    "date": "2026-09-13",
+    "amount": -1025.84,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Linear App",
+    "reference": "ACH-0152",
+    "description": "Books Linear App 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102584,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-152"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-153",
+    "date": "2026-09-14",
+    "amount": -1026.01,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies",
+    "reference": "ACH-0153",
+    "description": "Books Acme Supplies 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102601,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-153"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-154",
+    "date": "2026-09-15",
+    "amount": 1026.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supplies LLC",
+    "reference": "TXN-VOL-2026-09-154",
+    "description": "Books Acme Supplies LLC 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102618,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-154"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-155",
+    "date": "2026-09-16",
+    "amount": -1026.35,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Acme Supply Co.",
+    "reference": "ACH-0155",
+    "description": "Books Acme Supply Co. 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102635,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-155"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-156",
+    "date": "2026-09-17",
+    "amount": -1026.52,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Amazon Web Services",
+    "reference": "ACH-0156",
+    "description": "Books Amazon Web Services 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102652,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-156"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-157",
+    "date": "2026-09-18",
+    "amount": -1026.69,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Northline Fabrication",
+    "reference": "ACH-0157",
+    "description": "Books Northline Fabrication 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102669,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-157"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-158",
+    "date": "2026-09-19",
+    "amount": -1026.86,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Office Depot",
+    "reference": "ACH-0158",
+    "description": "Books Office Depot 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102686,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-158"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-159",
+    "date": "2026-09-20",
+    "amount": -1027.03,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Helios Hardware",
+    "reference": "ACH-0159",
+    "description": "Books Helios Hardware 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102703,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-159"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-160",
+    "date": "2026-09-21",
+    "amount": -1027.2,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Datadog",
+    "reference": "ACH-0160",
+    "description": "Books Datadog 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102720,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-160"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-161",
+    "date": "2026-09-22",
+    "amount": 1027.37,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Slack Technologies",
+    "reference": "ACH-0161",
+    "description": "Books Slack Technologies 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102737,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-161"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-162",
+    "date": "2026-09-23",
+    "amount": -1027.54,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Figma",
+    "reference": "ACH-0162",
+    "description": "Books Figma 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102754,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-162"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-163",
+    "date": "2026-09-24",
+    "amount": -1027.71,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Google Cloud",
+    "reference": "ACH-0163",
+    "description": "Books Google Cloud 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102771,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-163"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-164",
+    "date": "2026-09-25",
+    "amount": -1027.88,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Hartford Insurance",
+    "reference": "ACH-0164",
+    "description": "Books Hartford Insurance 2026-09-25",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102788,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-164"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-165",
+    "date": "2026-09-26",
+    "amount": -1028.05,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Orbit Analytics",
+    "reference": "TXN-VOL-2026-09-165",
+    "description": "Books Orbit Analytics 2026-09-26",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102805,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-165"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-166",
+    "date": "2026-09-27",
+    "amount": -1028.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Cambridge Properties",
+    "reference": "ACH-0166",
+    "description": "Books Cambridge Properties 2026-09-27",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102822,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-166"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-167",
+    "date": "2026-09-28",
+    "amount": -1028.39,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Dell Technologies",
+    "reference": "ACH-0167",
+    "description": "Books Dell Technologies 2026-09-28",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102839,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-167"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-168",
+    "date": "2026-09-01",
+    "amount": 1028.56,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Harbor Electric",
+    "reference": "ACH-0168",
+    "description": "Books Harbor Electric 2026-09-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102856,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-168"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-169",
+    "date": "2026-09-02",
+    "amount": -1028.73,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lindholm & Ruiz LLP",
+    "reference": "ACH-0169",
+    "description": "Books Lindholm & Ruiz LLP 2026-09-02",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102873,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-169"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-170",
+    "date": "2026-09-03",
+    "amount": -1028.9,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "GitHub",
+    "reference": "ACH-0170",
+    "description": "Books GitHub 2026-09-03",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102890,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-170"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-171",
+    "date": "2026-09-04",
+    "amount": -1029.07,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Shadow Vendor LLC",
+    "reference": "ACH-0171",
+    "description": "Books Shadow Vendor LLC 2026-09-04",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102907,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-171"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-172",
+    "date": "2026-09-05",
+    "amount": -1029.24,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Freightline Logistics",
+    "reference": "ACH-0172",
+    "description": "Books Freightline Logistics 2026-09-05",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102924,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-172"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-173",
+    "date": "2026-09-06",
+    "amount": -1029.41,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Lenovo",
+    "reference": "ACH-0173",
+    "description": "Books Lenovo 2026-09-06",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102941,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-173"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-174",
+    "date": "2026-09-07",
+    "amount": -1029.58,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Misc Supplies",
+    "reference": "ACH-0174",
+    "description": "Books Misc Supplies 2026-09-07",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102958,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-174"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-175",
+    "date": "2026-09-08",
+    "amount": 1029.75,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Twilio",
+    "reference": "ACH-0175",
+    "description": "Books Twilio 2026-09-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 102975,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-175"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-176",
+    "date": "2026-09-09",
+    "amount": -1029.92,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Notion Labs",
+    "reference": "TXN-VOL-2026-09-176",
+    "description": "Books Notion Labs 2026-09-09",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -102992,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-176"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-177",
+    "date": "2026-09-10",
+    "amount": -1030.09,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Snowflake",
+    "reference": "ACH-0177",
+    "description": "Books Snowflake 2026-09-10",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103009,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-177"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-178",
+    "date": "2026-09-11",
+    "amount": -1030.26,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Okta",
+    "reference": "ACH-0178",
+    "description": "Books Okta 2026-09-11",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103026,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-178"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-179",
+    "date": "2026-09-12",
+    "amount": -1030.43,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CrowdStrike",
+    "reference": "ACH-0179",
+    "description": "Books CrowdStrike 2026-09-12",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103043,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-179"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-180",
+    "date": "2026-09-13",
+    "amount": -1030.6,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Zoom Video",
+    "reference": "ACH-0180",
+    "description": "Books Zoom Video 2026-09-13",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103060,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-180"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-181",
+    "date": "2026-09-14",
+    "amount": -1030.77,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Atlassian",
+    "reference": "ACH-0181",
+    "description": "Books Atlassian 2026-09-14",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103077,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-181"
     }
   }
 ]

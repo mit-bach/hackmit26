@@ -46,11 +46,13 @@
         "tools.get_case_evidence",
         "tools.get_company_policies",
         "tools.find_relevant_policies",
-        "tools.get_prior_cases"
+        "tools.get_prior_cases",
+        "memory.tools.get_decision_memories"
       ],
       "skills": [
         "three-way-match-analysis",
-        "ap-exception-investigation"
+        "ap-exception-investigation",
+        "prior-period-precedent"
       ],
       "outputType": "InvestigationReport",
       "source": "agent.py"
@@ -64,7 +66,8 @@
       ],
       "skills": [
         "three-way-match-analysis",
-        "ap-exception-investigation"
+        "ap-exception-investigation",
+        "prior-period-precedent"
       ],
       "outputType": "ReviewerDecision",
       "source": "agent.py"
@@ -78,7 +81,8 @@
       ],
       "skills": [
         "three-way-match-analysis",
-        "ap-exception-investigation"
+        "ap-exception-investigation",
+        "prior-period-precedent"
       ],
       "outputType": "ApproverDecision",
       "source": "agent.py"
@@ -154,7 +158,8 @@
         "cash_recon.tools.get_ledger_entry",
         "cash_recon.tools.get_fee_evidence",
         "cash_recon.tools.get_match_candidates",
-        "cash_recon.tools.get_candidate"
+        "cash_recon.tools.get_candidate",
+        "memory.tools.get_decision_memories"
       ],
       "skills": [
         "cash-reconciliation-method-selection",
@@ -169,11 +174,13 @@
         "cash_recon.tools.get_ledger_entry",
         "cash_recon.tools.get_fee_evidence",
         "cash_recon.tools.get_match_candidates",
-        "cash_recon.tools.get_candidate"
+        "cash_recon.tools.get_candidate",
+        "memory.tools.get_decision_memories"
       ],
       "skills": [
         "reconciliation-exception-investigation",
-        "bank-reference-interpretation"
+        "bank-reference-interpretation",
+        "prior-period-precedent"
       ],
       "outputType": "InvestigationNote",
       "source": "cash_recon/agent.py"
@@ -184,11 +191,13 @@
         "cash_recon.tools.get_ledger_entry",
         "cash_recon.tools.get_fee_evidence",
         "cash_recon.tools.get_match_candidates",
-        "cash_recon.tools.get_candidate"
+        "cash_recon.tools.get_candidate",
+        "memory.tools.get_decision_memories"
       ],
       "skills": [
         "cash-reconciliation-method-selection",
-        "reconciliation-exception-investigation"
+        "reconciliation-exception-investigation",
+        "prior-period-precedent"
       ],
       "outputType": "ReviewerVerdict",
       "source": "cash_recon/agent.py"
@@ -224,10 +233,12 @@
         "prepaid.tools.get_prepaid",
         "prepaid.tools.list_prepaids",
         "prepaid.tools.get_prepaid_treatment_candidates",
-        "prepaid.tools.get_prepaid_schedule"
+        "prepaid.tools.get_prepaid_schedule",
+        "memory.tools.get_decision_memories"
       ],
       "skills": [
-        "prepaid-expense-accounting"
+        "prepaid-expense-accounting",
+        "prior-period-precedent"
       ],
       "outputType": "PrepaidDecision",
       "source": "prepaid/agent.py"
@@ -237,10 +248,12 @@
         "prepaid.tools.get_prepaid",
         "prepaid.tools.list_prepaids",
         "prepaid.tools.get_prepaid_treatment_candidates",
-        "prepaid.tools.get_prepaid_schedule"
+        "prepaid.tools.get_prepaid_schedule",
+        "memory.tools.get_decision_memories"
       ],
       "skills": [
-        "prepaid-expense-accounting"
+        "prepaid-expense-accounting",
+        "prior-period-precedent"
       ],
       "outputType": "PrepaidReview",
       "source": "prepaid/agent.py"
@@ -276,7 +289,8 @@
         "ar.tools.get_collection_candidates",
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
-        "ar.tools.get_ar_precedents"
+        "ar.tools.get_ar_precedents",
+        "inbox.tools.send_office_outbound"
       ],
       "skills": [
         "ar-collections-policy"
@@ -324,6 +338,40 @@
       "outputType": "CloseManagerDecision",
       "source": "close/agents.py"
     },
+    "Counterparty Message Agent": {
+      "ops": [
+        "inbox.tools.compose_counterparty_message",
+        "inbox.tools.send_inbox_message",
+        "inbox.tools.reply_in_thread",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.list_world_personas"
+      ],
+      "skills": [],
+      "outputType": "CounterpartyAgentOutput",
+      "source": "inbox/agents.py"
+    },
+    "Finance Inbox Agent": {
+      "ops": [
+        "inbox.tools.get_inbox_message",
+        "inbox.tools.get_inbox_attachment",
+        "inbox.tools.classify_inbox_message",
+        "inbox.tools.extract_inbox_invoice",
+        "inbox.tools.dispatch_inbox_action",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.send_office_outbound"
+      ],
+      "skills": [
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation"
+      ],
+      "outputType": "InboxAgentOutput",
+      "source": "inbox/agents.py"
+    },
     "Email Invoice Agent": {
       "ops": [
         "invoice_ingestion.tools.list_email_candidates",
@@ -332,7 +380,8 @@
       ],
       "skills": [
         "invoice-source-identification",
-        "invoice-field-interpretation"
+        "invoice-field-interpretation",
+        "inbox-triage"
       ],
       "outputType": "SourceAgentOutput",
       "source": "invoice_ingestion/agents.py"

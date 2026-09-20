@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-348
+PO Number: PO-348
+Vendor: Northline Fab Group
+Goods received in full on 2026-09-22
+Packing list attached: PL-GR-348
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 169.82 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

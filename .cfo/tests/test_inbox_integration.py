@@ -40,6 +40,7 @@ def test_two_distinct_agents_and_tool_boundaries():
     assert not (FORBIDDEN_COUNTERPARTY_TOOLS & cp_tools)
     assert "dispatch_inbox_action" in ib_tools or INBOX_TOOL_NAMES & ib_tools
     assert "send_inbox_message" not in ib_tools
+    assert "send_office_outbound" not in cp_tools
     assert finance_inbox_agent.tools
     assert counterparty_message_agent.instructions != finance_inbox_agent.instructions
 

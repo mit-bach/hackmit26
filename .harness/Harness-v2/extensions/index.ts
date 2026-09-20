@@ -11,7 +11,7 @@ import {
   resolveApproval,
   waitForApproval,
 } from "../src/approvals.ts";
-import { askPeer, tryOperatorAskHandoff } from "../src/ask-peer.ts";
+import { askPeer } from "../src/ask-peer.ts";
 import { awaitTurn } from "../src/await.ts";
 import { resolveBind, type BindResult } from "../src/bind.ts";
 import { findHandle, listHandles } from "../src/handle.ts";
@@ -42,7 +42,6 @@ import { transcriptTail } from "../src/transcript-tail.ts";
 import { acquireLease, releaseLease } from "../src/leases.ts";
 import { harnessPackageRoot } from "../src/pkg.ts";
 import { notifyIntercept } from "../src/intercept.ts";
-import type { InboxItem } from "../src/types.ts";
 
 interface BoundSession {
   readonly bind: Extract<BindResult, { ok: true }>;
@@ -100,20 +99,6 @@ function kickWake(session: BoundSession): void {
   void kickWakeAsync(session);
 }
 
-async function routeAskIfNeeded(session: BoundSession, item: InboxItem): Promise<boolean> {
-  const handed = await tryOperatorAskHandoff(
-    session.bind.computerRoot,
-    session.bind.bot.id,
-    item,
-    120_000,
-  );
-  if (!handed) {
-    return false;
-  }
-  completeTurn(session.lane, handed);
-  return true;
-}
-
 async function kickWakeAsync(session: BoundSession): Promise<void> {
   if (session.lane.drainLock) {
     return;
@@ -122,9 +107,6 @@ async function kickWakeAsync(session: BoundSession): Promise<void> {
     interruptIfStop(session.lane);
     const item = startNextTurn(session.lane);
     if (!item) {
-      return;
-    }
-    if (await routeAskIfNeeded(session, item)) {
       return;
     }
     session.pi.sendUserMessage(formatWake(item, session.bind.roster, session.bind.bot.slug), {
@@ -499,10 +481,10 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "ask_bot",
     label: "Ask a Bot",
     description:
-      "Send a question to another Bot and wait for their result. Always registered. This is how Bots talk to each other.",
-    promptSnippet: "Ask a teammate a question and wait for their answer",
+      "Send a message to another Bot. The Harness posts your prompt in your shared thread and wakes them. Their assistant reply is posted in that same thread. This is not a message to the Operator. After they reply, tell the Operator what they said.",
+    promptSnippet: "Send a message to a teammate and wait for their thread reply",
     promptGuidelines: [
-      "When the Operator asks you to ask another Bot, call ask_bot (same as bot_ask) with that Bot's slug and the question. Then report the result text. Never say this tool is missing.",
+      "ask_bot sends a message into the pair thread and waits for that Bot's reply in the same thread. Then tell the Operator what they said. Never say this tool is missing.",
     ],
     parameters: askParams,
     execute: runAsk,
@@ -512,8 +494,8 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "bot_ask",
     label: "Ask a Bot",
     description:
-      "Same as ask_bot: send a question to another Bot and wait for their result. Always registered.",
-    promptSnippet: "Ask a teammate a question and wait for their answer",
+      "Same as ask_bot: send a message to another Bot. Their reply is posted in your shared thread. Always registered.",
+    promptSnippet: "Send a message to a teammate and wait for their thread reply",
     promptGuidelines: [
       "bot_ask is the Harness name for ask_bot. Use either. Do not claim it is disabled.",
     ],

@@ -176,6 +176,17 @@ class CompanyScenarioContext:
     storylines: list[Storyline] = field(default_factory=list)
     expected: ExpectedResults | None = None
     opening_cash_forecast_minor: int = 50_000_000
+    document_texts: dict[str, str] = field(default_factory=dict)
+    historical_ap_register: list[dict] = field(default_factory=list)
+    bank_history: list[dict] = field(default_factory=list)
+    payroll_register: list[dict] = field(default_factory=list)
+    processor_transactions: list[dict] = field(default_factory=list)
+    workpapers: dict[str, str] = field(default_factory=dict)
+    fiscal_periods: list[dict] = field(default_factory=list)
+    approval_matrix: list[dict] = field(default_factory=list)
+    bank_account_master: list[dict] = field(default_factory=list)
+    round2_hooks: dict = field(default_factory=dict)
+    august_close_pack: dict = field(default_factory=dict)
 
     @property
     def period(self) -> str:

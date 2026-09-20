@@ -1,0 +1,11 @@
+Adyen NV
+Packing list
+Ship date: 2026-09-02
+PO Number: PO-328
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 328-0902
+
+Contents:
+  - Line GR-328 — qty 1
+
+This packing list is not an invoice.

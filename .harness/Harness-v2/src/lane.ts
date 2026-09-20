@@ -19,6 +19,7 @@ import { appendProtocol } from "./protocol-log.ts";
 import { settleReceiptsForHandle } from "./routines.ts";
 import { appendTranscript } from "./transcript.ts";
 import { parseAskPeer } from "./ask-peer.ts";
+import { appendThreadReply } from "./server/thread-log.ts";
 import type { BotRecord, HandleRecord, InboxItem, Roster, TurnResult } from "./types.ts";
 
 export interface BoundLane {
@@ -332,6 +333,9 @@ export function completeTurn(lane: BoundLane, result: TurnResult): void {
   appendTranscript(lane.computerRoot, lane.bot.id, line);
   if (item.from !== "operator" && item.from !== "harness" && item.from !== lane.bot.id) {
     appendTranscript(lane.computerRoot, item.from, line);
+    if (item.kind === "a2a_handoff") {
+      appendThreadReply(lane.computerRoot, lane.bot.id, item.from, item.handleId, result.text, event.t);
+    }
   }
   appendDailyLog(lane.computerRoot, lane.bot.id, `${item.kind} from ${item.from} → ${nextStatus}`);
   lane.currentInbox = undefined;
@@ -362,6 +366,13 @@ export function formatWake(item: InboxItem, roster?: Roster, selfSlug?: string):
         `Required tool: call bot_ask (same as ask_bot) with bot_id=${parsed.slug} and prompt=${JSON.stringify(parsed.question)}. Then report the peer result. These tools are registered. Never say they are missing.`,
       );
     }
+  }
+  if (item.kind === "a2a_handoff") {
+    lines.push(
+      "",
+      "---",
+      "Harness note: Your assistant text is the reply in the pair thread with the sender. It also appears in this Bot's operator chat. Do not call ask_bot just to answer the sender. Messaging the Operator is a separate turn.",
+    );
   }
   return lines.filter((line) => line.length > 0).join("\n");
 }

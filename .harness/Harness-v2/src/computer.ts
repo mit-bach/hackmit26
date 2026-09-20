@@ -17,6 +17,7 @@ import {
   memoryTopicsDir,
   receiptDir,
   roomDir,
+  threadsDir,
 } from "./paths.ts";
 import { loadRoster } from "./roster.ts";
 import type { Roster } from "./types.ts";
@@ -27,6 +28,7 @@ export function initComputer(computerRoot: string, roster?: Roster): Roster {
   ensureDir(leaseDir(computerRoot));
   ensureDir(approvalDir(computerRoot));
   ensureDir(receiptDir(computerRoot));
+  ensureDir(threadsDir(computerRoot));
   const client = loadClientRuntime(computerRoot);
   if (client.extraExtensions.length > 0 || client.clientSkills) {
     applyClientAttach(computerRoot, client);

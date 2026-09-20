@@ -1,0 +1,15 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+September 2026 missing-bill accruals
+Period: 2026-09
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: Accrual Agent
+Reviewer: Month-End Close Reviewer
+Status: COMPLETE
+Prepared: 2026-09-03T16:40:00Z
+
+Harbor Electric ACC-HE-2026-09 $4,780 from CTR-HE-001 and HI-HE-2026-08. Lindholm & Ruiz ACC-LR-2026-09 $8,500 from CTR-LR-001. October bills INV-HE-2026-09 and INV-LR-2026-09 are the reversal candidates.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

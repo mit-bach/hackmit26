@@ -190,7 +190,7 @@ def land_email_message(
 def land_inbox_spec(computer: Path, spec, *, profile: str = "invoice") -> SourceWakeResult:
     """Rohan inbox Kernel: classify + durable AP overlay, then office Handle intents.
 
-    Counterparty Message Agent is a fixture sender, not a Bot.
+    Counterparty Message Agent is Bot world. This helper still uses the Kernel fixture sender.
     """
     from inbox.workflow import handoff
 

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-378
+PO Number: PO-378
+Vendor: WeWork Cambridge
+Goods received in full on 2026-09-25
+Packing list attached: PL-GR-378
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 3,151.30 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

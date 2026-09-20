@@ -123,7 +123,7 @@ def build_timeline(ctx: CompanyScenarioContext) -> list[dict]:
         {"event_id": "EVT-012", "sequence": 12, "period": "2026-09", "event_type": "AGENT_DECISION", "agent": "Exception Investigator", "title": "Recognized Acme alias via CASE-001", "record_ids": ["INV-021", "CASE-001"], "amount_cents": 1_245_000, "status": "APPROVE", "related_workflows": ["ap", "memory"]},
         {"event_id": "EVT-020", "sequence": 20, "period": "2026-09", "event_type": "PAYMENT", "agent": "Payment Scheduler", "title": "Scheduled Acme and grouped Northline payments", "record_ids": ["PAY-AP-001", "INV-014", "INV-015", "INV-016"], "status": "PLANNED", "related_workflows": ["payment_scheduling", "cash"]},
         {"event_id": "EVT-030", "sequence": 30, "period": "2026-09", "event_type": "CASH_APPLICATION", "agent": "Cash Application Agent", "title": "Applied Northwind exact remittance", "record_ids": ["PAY-001", "INV-AR-007"], "amount_cents": 1_200_000, "status": "AUTO_APPLY", "related_workflows": ["ar"]},
-        {"event_id": "EVT-031", "sequence": 31, "period": "2026-09", "event_type": "AGENT_DECISION", "agent": "Cash Application Agent", "title": "Escalated ambiguous Lumen remittance", "record_ids": ["PAY-004", "INV-AR-010", "INV-AR-011"], "amount_cents": 500_000, "status": "HUMAN_REVIEW", "related_workflows": ["ar"]},
+        {"event_id": "EVT-031", "sequence": 31, "period": "2026-09", "event_type": "AGENT_DECISION", "agent": "Cash Application Agent", "title": "Escalated ambiguous Lumen remittance", "record_ids": ["PAY-004", "INV-AR-010", "INV-AR-011"], "amount_cents": 500_000, "status": "EXCEPTION_OPEN", "related_workflows": ["ar"]},
         {"event_id": "EVT-040", "sequence": 40, "period": "2026-09", "event_type": "RECONCILIATION", "agent": "Cash Reconciliation Preparer", "title": "Matched one ACH to three Northline invoices", "record_ids": ["TXN-2026-09-008", "INV-014", "INV-015", "INV-016"], "status": "MATCHED", "related_workflows": ["cash_reconciliation"]},
         {"event_id": "EVT-041", "sequence": 41, "period": "2026-09", "event_type": "RECONCILIATION", "agent": "Cash Exception Investigator", "title": "Explained Helios wire net of $25 fee", "record_ids": ["TXN-2026-09-011", "INV-017"], "amount_cents": -1_002_500, "status": "EXPLAINED_EXCEPTION", "related_workflows": ["cash_reconciliation"]},
         {"event_id": "EVT-042", "sequence": 42, "period": "2026-09", "event_type": "AGENT_DECISION", "agent": "Cash Reconciliation Preparer", "title": "Detected unexplained cash difference", "record_ids": ["TXN-2026-09-015", "GL-AR-NS", "INV-AR-013"], "amount_cents": 1240, "status": "BLOCKED", "related_workflows": ["cash_reconciliation", "month_end_close"]},
@@ -226,9 +226,9 @@ def build_snapshot(ctx: CompanyScenarioContext, lineage: list[dict], timeline: l
                 for item in ctx.ar_invoices.values()
             ],
             "exceptions": [
-                {"id": "TXN-2026-09-015", "kind": "unexplained_difference", "amount_cents": 1240},
-                {"id": "INV-006", "kind": "duplicate_invoice"},
-                {"id": "PAY-004", "kind": "ambiguous_remittance"},
+            {"id": "TXN-2026-09-015", "kind": "unexplained_difference", "amount_cents": 1240, "status": "UNEXPLAINED_DIFFERENCE"},
+            {"id": "INV-006", "kind": "duplicate_invoice", "status": "EXCEPTION_OPEN"},
+            {"id": "PAY-004", "kind": "ambiguous_remittance", "status": "EXCEPTION_OPEN"},
             ],
         },
         "relationships": lineage,

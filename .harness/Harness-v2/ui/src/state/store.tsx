@@ -730,7 +730,7 @@ export interface AppState {
   config: ConfigStatus | null;
   /** selected chat — a bot id OR a group id */
   selectedId: string;
-  activeView: "chat" | "protocol" | "routines" | "computer";
+  activeView: "chat" | "protocol" | "routines" | "computer" | "demo";
   routines: Routine[];
   routineRuns: RoutineRun[];
   routinesLoadState: "loading" | "ready" | "error";
@@ -885,6 +885,7 @@ export type Action =
   | { type: "showRoutines"; section?: "schedule" | "logs"; view?: "calendar" | "list"; botId?: string; routineId?: string }
   | { type: "showProtocol" }
   | { type: "showComputer" }
+  | { type: "showDemo" }
   | { type: "showChat" }
   | { type: "routinesHydrated"; routines: Routine[]; runs: RoutineRun[] }
   | { type: "routinesLoadFailed" }
@@ -1265,6 +1266,16 @@ export function reducer(state: AppState, action: Action): AppState {
         appSettingsOpen: false,
         pluginsOpen: false,
       };
+    case "showDemo":
+      return {
+        ...state,
+        activeView: "demo",
+        computerOpen: false,
+        settingsOpen: false,
+        inspectorOpen: false,
+        appSettingsOpen: false,
+        pluginsOpen: false,
+      };
     case "routinesHydrated":
       return { ...state, routines: action.routines, routineRuns: trimRoutineRuns(action.runs), routinesLoadState: "ready" };
     case "routinesLoadFailed":
@@ -1342,6 +1353,9 @@ export function reducer(state: AppState, action: Action): AppState {
           botSettingsSection: action.id !== state.selectedId ? "overview" : state.botSettingsSection,
           groups: state.groups.map((g) => (g.id === action.id ? { ...g, unread: false } : g)),
         };
+      }
+      if (!state.bots.some((b) => b.id === action.id)) {
+        return { ...state, activeView: "chat", selectedId: action.id };
       }
       return updateBot(
         withMascotMotion(
@@ -1471,9 +1485,12 @@ export function reducer(state: AppState, action: Action): AppState {
         // A complete frame omits section after another client moves the bot
         // into General. Retaining the old label strands an empty team in UI.
         section: action.bot.section,
-        // Clear immediately on deletion: old approvals must never be sent
-        // to the replacement thread while waiting for its transcript.
-        messages: switchedThread ? [] : b.messages,
+        // A frame that includes messages is the session file, not a status ping.
+        messages: Array.isArray(action.bot.messages)
+          ? action.bot.messages
+          : switchedThread
+            ? []
+            : b.messages,
       }));
       return reconcileModelVariantSessions(patched);
     }
@@ -1506,9 +1523,11 @@ export function reducer(state: AppState, action: Action): AppState {
         };
       }
       // The POST response and the canonical SSE frame may arrive in either
-      // order. A repeated message is already folded; moving the active leaf
-      // back to it can hide a newer assistant reply that won the race.
-      if (bot.messages.some((message) => message.id === action.message.id)) return state;
+      // order. A repeated id on a tool chip is a live patch (start → end),
+      // not a second row.
+      if (bot.messages.some((message) => message.id === action.message.id)) {
+        return reducer(state, { type: "messagePatched", threadId: action.threadId, message: action.message });
+      }
       const optimisticId = action.message.sendId
         ? optimisticMessageId(action.message.sendId)
         : null;
@@ -1617,7 +1636,11 @@ export function reducer(state: AppState, action: Action): AppState {
       const next = motion ? withMascotMotion(state, bot.id, motion) : state;
       return updateBot(next, bot.id, (b) => ({
         ...b,
-        messages: b.messages.map((m) => (m.id === action.message.id ? action.message : m)),
+        messages: b.messages.map((m) =>
+          m.id === action.message.id
+            ? { ...m, ...action.message, parentId: action.message.parentId ?? m.parentId }
+            : m
+        ),
       }));
     }
     case "screenFrame":
@@ -2940,6 +2963,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           } else if (group?.unread) {
             api(`/api/groups/${action.id}/read`, { method: "POST" }).catch(() => {});
           }
+          if (!group && !bot && action.id.startsWith("pair:")) {
+            void api<Partial<Group> & { id?: string }>(`/api/groups/${encodeURIComponent(action.id)}`)
+              .then((body) => {
+                if (typeof body.id === "string") {
+                  rawDispatch({ type: "groupPatched", group: { ...body, id: body.id } });
+                }
+              })
+              .catch(showError);
+          }
           break;
         }
         case "createGroup":
@@ -3314,9 +3346,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           const incoming = frame.message as Message;
           if (incoming?.role === "bot" && incoming.kind === "text") {
             flushDeltas();
+            const speakerId = incoming.from?.botId;
             const thought = incoming.reasoning?.trim()
               ? incoming.reasoning
-              : streamRef.current.reasoning[frame.threadId];
+              : streamRef.current.reasoning[frame.threadId]
+                ?? (speakerId ? streamRef.current.reasoning[speakerId] : undefined);
             rawDispatch({
               type: "messageAdded",
               threadId: frame.threadId,

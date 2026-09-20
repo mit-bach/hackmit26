@@ -34,6 +34,7 @@ POLICY_FUNS = {"get_company_policies", "find_relevant_policies", "get_prior_case
 SOD_BY_MODULE = {
     "tools": "ap-records",
     "invoice_ingestion.tools": "ingestion",
+    "inbox.tools": "inbox",
     "accrual.tools": "accrual-read",
     "scheduling.tools": "treasury",
     "ar.tools": "ar",
@@ -307,6 +308,42 @@ def module_to_path(module: str, kernel: Path) -> Path | None:
     return None
 
 
+def local_function_refs(tree: ast.Module, path: Path, kernel: Path) -> dict[str, ToolRef]:
+    module = module_name_for(path, kernel)
+    return {
+        node.name: ToolRef(module, node.name)
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef)
+    }
+
+
+def resolve_tool_ref(
+    ref: ToolRef,
+    kernel: Path,
+    cache: dict[str, ast.Module],
+    seen: set[str] | None = None,
+) -> ToolRef:
+    """Follow re-exports until the name is a FunctionDef in some tools module."""
+    visited = seen if seen is not None else set()
+    if ref.catalog_id in visited:
+        return ref
+    visited.add(ref.catalog_id)
+    foreign_path = module_to_path(ref.module, kernel)
+    if foreign_path is None:
+        return ref
+    key = str(foreign_path)
+    if key not in cache:
+        cache[key] = parse_file(foreign_path)
+    foreign_tree = cache[key]
+    local_fns = local_function_refs(foreign_tree, foreign_path, kernel)
+    if ref.qualname in local_fns:
+        return local_fns[ref.qualname]
+    foreign_fn_map = import_function_map(foreign_tree)
+    if ref.qualname in foreign_fn_map:
+        return resolve_tool_ref(foreign_fn_map[ref.qualname], kernel, cache, visited)
+    return ref
+
+
 def eval_tools_expr(
     node: ast.AST,
     tree: ast.Module,
@@ -314,31 +351,67 @@ def eval_tools_expr(
     kernel: Path,
     fn_map: dict[str, ToolRef],
     list_cache: dict[str, list[ToolRef]],
+    cache: dict[str, ast.Module] | None = None,
 ) -> list[ToolRef]:
+    parsed = cache if cache is not None else {}
+
+    def recurse(item: ast.AST, current_tree: ast.Module, current_path: Path, current_fn_map: dict[str, ToolRef]) -> list[ToolRef]:
+        return eval_tools_expr(
+            item, current_tree, current_path, kernel, current_fn_map, list_cache, parsed
+        )
+
     if isinstance(node, ast.List):
         refs: list[ToolRef] = []
         for elt in node.elts:
-            refs.extend(eval_tools_expr(elt, tree, path, kernel, fn_map, list_cache))
+            refs.extend(recurse(elt, tree, path, fn_map))
         return refs
     if isinstance(node, ast.Tuple):
         refs = []
         for elt in node.elts:
-            refs.extend(eval_tools_expr(elt, tree, path, kernel, fn_map, list_cache))
+            refs.extend(recurse(elt, tree, path, fn_map))
         return refs
     if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
-        return eval_tools_expr(node.left, tree, path, kernel, fn_map, list_cache) + eval_tools_expr(
-            node.right, tree, path, kernel, fn_map, list_cache
+        return recurse(node.left, tree, path, fn_map) + recurse(node.right, tree, path, fn_map)
+    if isinstance(node, ast.Call):
+        func = node.func
+        if isinstance(func, ast.Name) and func.id in {"list", "tuple"} and len(node.args) == 1:
+            return recurse(node.args[0], tree, path, fn_map)
+        raise CompileError(
+            f"{path}: cannot resolve tools= expression Call; implicit all-tools is forbidden"
         )
     if isinstance(node, ast.Name):
         if node.id in list_cache:
             return list(list_cache[node.id])
-        if node.id in fn_map:
-            return [fn_map[node.id]]
+        local_fns = local_function_refs(tree, path, kernel)
+        if node.id in local_fns:
+            return [local_fns[node.id]]
         bindings = constant_bindings(tree)
         if node.id in bindings:
-            resolved = eval_tools_expr(bindings[node.id], tree, path, kernel, fn_map, list_cache)
+            resolved = recurse(bindings[node.id], tree, path, fn_map)
             list_cache[node.id] = resolved
             return resolved
+        if node.id in fn_map:
+            imported = fn_map[node.id]
+            foreign_path = module_to_path(imported.module, kernel)
+            if foreign_path is not None:
+                key = str(foreign_path)
+                if key not in parsed:
+                    parsed[key] = parse_file(foreign_path)
+                foreign_tree = parsed[key]
+                foreign_bindings = constant_bindings(foreign_tree)
+                value = foreign_bindings.get(imported.qualname)
+                if isinstance(value, (ast.List, ast.Tuple, ast.BinOp, ast.Call)):
+                    foreign_fn_map = import_function_map(foreign_tree)
+                    return eval_tools_expr(
+                        value,
+                        foreign_tree,
+                        foreign_path,
+                        kernel,
+                        foreign_fn_map,
+                        {},
+                        parsed,
+                    )
+            return [resolve_tool_ref(imported, kernel, parsed)]
         raise CompileError(f"{path}: cannot resolve tools name {node.id!r}")
     if isinstance(node, ast.Constant) and node.value is None:
         return []
@@ -441,9 +514,11 @@ def scan_agent_file(
     list_cache: dict[str, list[ToolRef]] = {}
     bindings = constant_bindings(tree)
     for name, value in bindings.items():
-        if isinstance(value, (ast.List, ast.BinOp, ast.Tuple)):
+        if isinstance(value, (ast.List, ast.BinOp, ast.Tuple, ast.Call)):
             try:
-                list_cache[name] = eval_tools_expr(value, tree, path, kernel, fn_map, list_cache)
+                list_cache[name] = eval_tools_expr(
+                    value, tree, path, kernel, fn_map, list_cache, cache
+                )
             except CompileError:
                 continue
     rows: list[tuple[str, list[ToolRef], str, str]] = []
@@ -453,7 +528,7 @@ def scan_agent_file(
         if tools_node is None:
             refs: list[ToolRef] = []
         else:
-            refs = eval_tools_expr(tools_node, tree, path, kernel, fn_map, list_cache)
+            refs = eval_tools_expr(tools_node, tree, path, kernel, fn_map, list_cache, cache)
         rows.append((display, refs, output_type_of(call), str(path.relative_to(kernel))))
     return rows
 

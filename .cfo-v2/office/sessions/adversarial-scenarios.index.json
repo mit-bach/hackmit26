@@ -1,0 +1,2529 @@
+{
+  "pack": "maximor-adversarial-v1",
+  "company": "Maximor Demo Corp",
+  "entity_id": "CO-MAXIMOR",
+  "closed_period": "2026-08",
+  "open_period": "2026-09",
+  "scenario_count": 109,
+  "storyline_count": 12,
+  "stealth_5_count": 30,
+  "surviving_plot_ids": [
+    "INV-001",
+    "PO-101",
+    "GR-101",
+    "PAY-AP-001",
+    "TXN-2026-09-018A",
+    "INV-017",
+    "TXN-2026-09-011",
+    "FEE-729103",
+    "TXN-2026-09-015",
+    "INV-AR-013",
+    "PAY-006",
+    "GL-AR-NS",
+    "PR-2026-10-02",
+    "INV-AR-014"
+  ],
+  "storylines": [
+    {
+      "id": "SL-ADV-KESTREL",
+      "title": "Kestrel — vendor-master clerk, three AP techniques",
+      "insider": "Dana Kestrel EMP-4128",
+      "span": "2025-11 → 2026-09",
+      "techniques": [
+        "related-party vendor",
+        "near-duplicate fab vendors",
+        "PO split under Hale $25,000",
+        "GR quantity overstatement"
+      ],
+      "cumulative": "$187,412.18 related-party remittance plus $94,618.40 near-dup fab"
+    },
+    {
+      "id": "SL-ADV-RESIDUAL",
+      "title": "0.1 percent remittance residual — true explanation of $12.40",
+      "insider": "Nadia Voss EMP-1088 (plugs) with Clearing Solutions LLC",
+      "span": "2025-11 → 2026-09",
+      "techniques": [
+        "customer remits 100.1 percent",
+        "books take 100 percent",
+        "monthly rec plug to VEND-CLR-01",
+        "September plug skipped during CFO sabbatical"
+      ],
+      "cumulative": "$86,418.60 over 11 plugged months; $12.40 unplugged on TXN-2026-09-015"
+    },
+    {
+      "id": "SL-ADV-HALYARD",
+      "title": "Ghost employee plus janitorial vendor, same bank",
+      "insider": "Chris Pell failed deprovision; Tomas Halyard is the ghost identity",
+      "span": "2025-04 → 2026-09",
+      "techniques": [
+        "ghost W-2",
+        "vendor with colliding DFI account",
+        "terminated employee still paid",
+        "1099 double dip"
+      ],
+      "cumulative": "$146,309.45 W-2 plus $28,800 facilities AP plus $18,400 1099"
+    },
+    {
+      "id": "SL-ADV-ORBIT",
+      "title": "Prepaid that never hits P&L",
+      "insider": "Nadia Voss + Orbit Insights Corp",
+      "span": "2025-01 → 2026-09",
+      "techniques": [
+        "amort posted to BS clearing",
+        "expense reversed by net-zero pair",
+        "near-name vendor vs Orbit Analytics"
+      ],
+      "cumulative": "$180,000 PRE-SFT-002 still on BS; $96,000 software cap that should expense"
+    },
+    {
+      "id": "SL-ADV-LAPPING",
+      "title": "AR lapping under chronic-late cover",
+      "insider": "Samir Okonkwo EMP-3304",
+      "span": "2025-12 → 2026-09",
+      "techniques": [
+        "apply A remittance to B invoice",
+        "park unapplied cash",
+        "Quiet Harbor lateness as cover"
+      ],
+      "cumulative": "$412,880.00 misapplied stock; bank totals still tie"
+    },
+    {
+      "id": "SL-ADV-PINNACLE",
+      "title": "Bill-and-hold and revenue cutoff",
+      "insider": "Mei Stratton EMP-1190",
+      "span": "2026-06 → 2026-09",
+      "techniques": [
+        "September 29 bill-and-hold",
+        "90-day return side letter",
+        "cutoff JE 23:47 Sep 30"
+      ],
+      "cumulative": "$2,400,000 Pinnacle plus $1,180,000 Atlas pulled into September"
+    },
+    {
+      "id": "SL-ADV-PROCESSOR",
+      "title": "Processor fee overstatement into a connected account",
+      "insider": "Luis Redmond EMP-4402",
+      "span": "2025-10 → 2026-09",
+      "techniques": [
+        "book 3.41 percent vs contract 2.9 percent + $0.30",
+        "connected account acct_1MaximorProc",
+        "payout still equals bank"
+      ],
+      "cumulative": "$214,660.18 fee delta plus $18,440 dispute-win retention"
+    },
+    {
+      "id": "SL-ADV-MERRIMACK",
+      "title": "Intercompany that is not intercompany",
+      "insider": "Nadia Voss + Merrimack Holdings",
+      "span": "2025-12 → 2026-09",
+      "techniques": [
+        "1300-Due-From-Affiliate",
+        "wires described as IC sweep",
+        "net-zero true-up JEs"
+      ],
+      "cumulative": "$4,851,220.00 due-from balance; $2,200,000 cash already left"
+    },
+    {
+      "id": "SL-ADV-BRIGHTLINE",
+      "title": "Customer-vendor round trip",
+      "insider": "shared address 14 Fayette Street; no single employee required",
+      "span": "2025-09 → 2026-09",
+      "techniques": [
+        "AR to Brightline Media",
+        "AP to Brightline Studio",
+        "net cash out $2,200/month"
+      ],
+      "cumulative": "$484,800 revenue and $524,800 opex; net $40,000 cash out"
+    },
+    {
+      "id": "SL-ADV-CAMBRIDGE",
+      "title": "CAM true-up and bank-number transposition",
+      "insider": "Riley Cho EMP-2201",
+      "span": "2025-07 → 2026-09",
+      "techniques": [
+        "second vendor for CAM",
+        "ACH account last-two transposition labeled format cleanup",
+        "double occupancy accrual"
+      ],
+      "cumulative": "$126,408.22 CAM plus $48,000 diverted rent months"
+    },
+    {
+      "id": "SL-ADV-CLOSECOSMETIC",
+      "title": "Net-zero close cosmetics and missing assets",
+      "insider": "Nadia Voss EMP-1088",
+      "span": "2026-03 → 2026-09",
+      "techniques": [
+        "undeposited-funds cash hole",
+        "effective-date vs posting-date (not labeled post_close)",
+        "Lenovo rollout capitalized but not tagged"
+      ],
+      "cumulative": "$186,420.18 cash parked; $154,214.00 of FA with no asset tag"
+    },
+    {
+      "id": "SL-ADV-FREIGHT",
+      "title": "Accessorial freight skim, 40 basis points not 300",
+      "insider": "Dana Kestrel (shared) + Freightline Expedite",
+      "span": "2025-11 → 2026-09",
+      "techniques": [
+        "small accessorial ACH",
+        "grouped ACH with Kestrel",
+        "COGS 40 bps, not the loud 3-point GM story"
+      ],
+      "cumulative": "$61,288.40 accessorials"
+    }
+  ],
+  "reason_codes_private": [
+    "RELATED_PARTY_VENDOR",
+    "RELATED_PARTY_REMITTANCE",
+    "BANK_INSTRUMENT_DRIFT",
+    "NEAR_DUPLICATE_VENDOR",
+    "PO_SPLIT_UNDER_LIMIT",
+    "GR_QUANTITY_OVERSTATEMENT",
+    "STANDING_PO_OVERCONSUMED",
+    "GR_BEFORE_AUTHORIZATION",
+    "CROSS_VENDOR_INVOICE_NUMBER",
+    "REMITTANCE_RATE_RESIDUAL",
+    "RESIDUAL_UNPLUGGED",
+    "REC_PLUG_NET_ZERO",
+    "UNAPPLIED_CASH_PARK",
+    "GHOST_EMPLOYEE",
+    "PAYROLL_VENDOR_BANK_COLLISION",
+    "CONTRACTOR_W2_DOUBLE_DIP",
+    "TERMINATED_EMPLOYEE_PAID",
+    "PREPAID_AMORT_MISPOSTED",
+    "AMORT_REVERSAL_PAIR",
+    "AR_LAPPING",
+    "REVENUE_CUTOFF",
+    "CHANNEL_STUFFING",
+    "BILL_AND_HOLD",
+    "PROCESSOR_FEE_OVERSTATEMENT",
+    "CONNECTED_ACCOUNT_SKIM",
+    "FAKE_INTERCOMPANY",
+    "ROUND_TRIP_COUNTERPARTY",
+    "CAM_TRUEUP_ORPHAN",
+    "NET_ZERO_JE_PAIR",
+    "CAPITALIZED_UNRECEIVED",
+    "FORECAST_BIAS_FROM_AR",
+    "FREIGHT_SURCHARGE_SKIM",
+    "SELF_APPROVAL_ALIAS",
+    "EFFECTIVE_DATE_MISMATCH",
+    "MIXED_SABBATICAL_SURFACE"
+  ],
+  "scenarios": [
+    {
+      "id": "ADV-VM-001",
+      "title": "Kestrel Industrial on the vendor master",
+      "domain": "vendor-master",
+      "stealth": 5,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "vendor_master:VEND-KIS-01",
+        "employee_master:EMP-4128",
+        "vendor_bank:VEND-KIS-01:011000138:4419",
+        "ap_invoices:INV-KIS-2025-11 through INV-KIS-2026-09",
+        "gl:2000-AP",
+        "gl:6000-Operating"
+      ],
+      "expected_finding": "RELATED_PARTY_VENDOR | $187,412.18 cumulative | VEND-KIS-01, EMP-4128, EIN 87-2144091, bank ****4419",
+      "detective_path": [
+        "List vendors created after 2025-10-01 with monthly AP between $10,000 and $25,000.",
+        "Join vendor_master.address and organizer_name to employee_master.home_address and emergency_contact for EMP-4128.",
+        "Match EIN 87-2144091 and 18 Ware Street to Dana Kestrel's personnel file.",
+        "Sum AP to VEND-KIS-01 from 2025-11 through 2026-09 ($187,412.18).",
+        "Trace ACH receiving DFI account 4419 to the same routing Dana uses for payroll."
+      ]
+    },
+    {
+      "id": "ADV-VM-002",
+      "title": "North Line Fab Inc beside Northline Fabrication",
+      "domain": "vendor-master",
+      "stealth": 4,
+      "span": "2026-01 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "vendor_master:VEND-003",
+        "vendor_master:VEND-NLF-02",
+        "ap_invoices:INV-NLF-02-*",
+        "purchase_orders:PO-NLF-02-*",
+        "bank:TXN-NLF-02-*"
+      ],
+      "expected_finding": "NEAR_DUPLICATE_VENDOR | $94,618.40 | VEND-NLF-02 vs VEND-003, 440 D Street vs 438 D Street",
+      "detective_path": [
+        "Cluster vendors by street number on D Street, Boston 02210.",
+        "Compare remit names NORTHLINE FAB vs NORTH LINE FAB INC on ACH.",
+        "Confirm VEND-003 invoices INV-014/015/016 still group-match TXN-2026-09-008.",
+        "Sum VEND-NLF-02 AP 2026-01 through 2026-09 ($94,618.40).",
+        "Check that Dana Kestrel last-touched VEND-NLF-02 on 2026-01-14."
+      ]
+    },
+    {
+      "id": "ADV-VM-003",
+      "title": "NLF Industrial Components on the same dock",
+      "domain": "vendor-master",
+      "stealth": 4,
+      "span": "2026-03 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "vendor_master:VEND-NLF-03",
+        "ap_invoices:INV-NLF-03-*",
+        "purchase_orders:PO-NLF-03-*",
+        "goods_receipts:GR-NLF-03-*"
+      ],
+      "expected_finding": "NEAR_DUPLICATE_VENDOR | $41,206.88 | VEND-NLF-03, CAM-DOCK-4, combined with VEND-NLF-02 above Hale limit",
+      "detective_path": [
+        "Group open AP by delivery_dock_id CAM-DOCK-4.",
+        "Find BOLs that list both NLF-2 and NLF-3 SKUs on one truck.",
+        "Add VEND-NLF-02 and VEND-NLF-03 monthly spend. Several months exceed $25,000 combined.",
+        "Match Suite B mail forwarding to 18 Ware Street (Kestrel home)."
+      ]
+    },
+    {
+      "id": "ADV-VM-004",
+      "title": "Kestrel Industrial bank fields after a format cleanup",
+      "domain": "vendor-master",
+      "stealth": 5,
+      "span": "2026-06-12 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "vendor_bank_history:VEND-KIS-01",
+        "vendor_master.change_memo",
+        "bank_statement.receiving_account on TXN-KIS-* after 2026-06-12",
+        "payroll_direct_deposit:EMP-4128"
+      ],
+      "expected_finding": "BANK_INSTRUMENT_DRIFT | $62,118.90 after 2026-06-12 | VEND-KIS-01 account 4401→4419, EMP-4128 payroll account 4419",
+      "detective_path": [
+        "Diff vendor_bank_history for VEND-KIS-01 on 2026-06-12.",
+        "Do not wait for a control named bank-change. Compare vendor_bank.account_last4 to bank_statement.receiving_account_last4.",
+        "Join 4419 plus routing 011000138 to payroll_direct_deposit for EMP-4128.",
+        "Confirm invoices after 2026-06-12 still three-way match.",
+        "Magnitude after the swap only: $62,118.90 (June-September)."
+      ]
+    },
+    {
+      "id": "ADV-AP-001",
+      "title": "Three POs the same week under the Hale limit",
+      "domain": "ap",
+      "stealth": 5,
+      "span": "2026-04-06 → 2026-04-10 and repeats monthly",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "purchase_orders:PO-KIS-4601",
+        "purchase_orders:PO-WBT-4602",
+        "purchase_orders:PO-KIS-4603",
+        "ap_invoices:INV-KIS-4601",
+        "ap_invoices:INV-WBT-4602",
+        "ap_invoices:INV-KIS-4603",
+        "goods_receipts:GR-KIS-4601",
+        "goods_receipts:GR-WBT-4602",
+        "goods_receipts:GR-KIS-4603"
+      ],
+      "expected_finding": "PO_SPLIT_UNDER_LIMIT | $72,400.18 April cluster; $348,206.40 across five months | PO-KIS-4601, PO-WBT-4602, PO-KIS-4603 and monthly siblings",
+      "detective_path": [
+        "Cluster POs by requested_by EMP-4128 and by week.",
+        "Join line items on sku_prefix KIS-MRO-7.",
+        "Sum authorized_amount per cluster. Flag clusters above $25,000 with one requester.",
+        "Match Westbrook remit address on INV-WBT-4602 to 18 Ware Street (occurs on 2026-07 and 2026-08 only — not every month).",
+        "Repeat the cluster detection across 2026-04 through 2026-09. Five of six months contain a trio."
+      ]
+    },
+    {
+      "id": "ADV-AP-002",
+      "title": "Invoice numbers that are unique per vendor_id",
+      "domain": "ap",
+      "stealth": 3,
+      "span": "2026-05 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "ap_invoices:INV-KIS-10442",
+        "ap_invoices:INV-NLF-10442",
+        "ingestion:files/KIS-10442.pdf",
+        "ingestion:files/NLF-10442.pdf"
+      ],
+      "expected_finding": "CROSS_VENDOR_INVOICE_NUMBER | $18,406.22 + $18,424.62 | INV-KIS-10442, INV-NLF-10442, number KIS-10442",
+      "detective_path": [
+        "Hash invoice PDFs regardless of vendor_id.",
+        "Compare vendor_invoice_number across the whole AP population, not within vendor.",
+        "Note both files share creator Dana Kestrel's laptop asset tag MX-LPT-4128 in PDF metadata.",
+        "Tie both invoices to CAM-DOCK-4 receipts on the same day."
+      ]
+    },
+    {
+      "id": "ADV-AP-003",
+      "title": "Goods receipt quantity that matches the invoice and not the floor",
+      "domain": "ap",
+      "stealth": 5,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "goods_receipts:GR-KIS-*",
+        "cycle_counts:CC-CAM-A14-2025-12 through CC-CAM-A14-2026-09",
+        "inventory:1400-Inventory",
+        "warehouse:CAM-BIN-A14",
+        "employee_master:EMP-6722"
+      ],
+      "expected_finding": "GR_QUANTITY_OVERSTATEMENT | $28,614.80 shrink JEs covering 9,412 units | GR-KIS-*, CC-CAM-A14-*, JE-SHRINK-YYYY-MM, EMP-6722",
+      "detective_path": [
+        "Reperform three-way match on INV-KIS-* (it will pass).",
+        "Join GR quantity to cycle_counts for the same SKU and bin.",
+        "Sum JE-SHRINK-YYYY-MM. Eleven months = $28,614.80 labeled cycle variance.",
+        "Compare Glen Park GR timestamps: 41 receipts posted 16:02–16:04, same minute as the invoice scan.",
+        "Physical short vs GR on KIS-MRO-7 is 9,412 units cumulative."
+      ]
+    },
+    {
+      "id": "ADV-AP-004",
+      "title": "Freight add-on invoices under the variance policy",
+      "domain": "ap",
+      "stealth": 3,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "purchase_orders:PO-KIS-FRT-STANDING",
+        "ap_invoices:INV-KIS-FRT-2025-11 through INV-KIS-FRT-2026-09",
+        "company_policies:P-008",
+        "company_policies:P-009"
+      ],
+      "expected_finding": "STANDING_PO_OVERCONSUMED | $2,618.47 vs $300 authorized | PO-KIS-FRT-STANDING, INV-KIS-FRT-*",
+      "detective_path": [
+        "List invoices paid against PO-KIS-FRT-STANDING.",
+        "Sum them ($2,618.47). The standing PO authorized_amount is $300, not $2,618.",
+        "Test whether AP rolled up standing-PO consumption across months (it did not).",
+        "Join freight invoice remit to VEND-KIS-01, not Freightline Logistics."
+      ]
+    },
+    {
+      "id": "ADV-AP-005",
+      "title": "Receipt date before purchase-order date",
+      "domain": "ap",
+      "stealth": 3,
+      "span": "2026-08-11 → 2026-08-14",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "purchase_orders:PO-KIS-4812",
+        "goods_receipts:GR-KIS-4812",
+        "ap_invoices:INV-KIS-4812",
+        "close/tasks August TASK-AP"
+      ],
+      "expected_finding": "GR_BEFORE_AUTHORIZATION | $19,406.50 | PO-KIS-4812 2026-08-14, GR-KIS-4812 2026-08-11, INV-KIS-4812",
+      "detective_path": [
+        "For every GR, test received_date >= po.created_date.",
+        "Filter exceptions to requested_by EMP-4128.",
+        "INV-KIS-4812 is $19,406.50, paid 2026-08-28 TXN-KIS-4812.",
+        "Confirm August close workpapers did not include a date-order test."
+      ]
+    },
+    {
+      "id": "ADV-AP-006",
+      "title": "Westbrook Tooling remit street that sometimes matches Kestrel",
+      "domain": "ap",
+      "stealth": 4,
+      "span": "2026-07 → 2026-08",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "vendor_master:VEND-WBT-01",
+        "ap_invoices:INV-WBT-2026-07",
+        "ap_invoices:INV-WBT-2026-08",
+        "ingestion:files/INV-WBT-2026-07.pdf",
+        "bank:TXN-WBT-2026-07"
+      ],
+      "expected_finding": "RELATED_PARTY_REMITTANCE | $48,046.18 | INV-WBT-2026-07, INV-WBT-2026-08, 18 Ware Street",
+      "detective_path": [
+        "Extract remit address from invoice PDFs, not only vendor_master.address.",
+        "Find 18 Ware Street on INV-WBT-2026-07 and INV-WBT-2026-08.",
+        "Join that street to EMP-4128.",
+        "Amounts: $24,106.18 (Jul) and $23,940.00 (Aug). Not round thousands except Aug is $23,940.00 — still not $25,000."
+      ]
+    },
+    {
+      "id": "ADV-MIX-001",
+      "title": "Kestrel spend in AP, bank, forecast, and the audit sample",
+      "domain": "mixed",
+      "stealth": 5,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "ap_invoices:INV-KIS-*",
+        "bank:TXN-KIS-*",
+        "reporting/forecast_lines:FC-MRO-KIS",
+        "audit/invoices sample item AUD-SAMP-KIS-08",
+        "reporting/budget MRO_industrial"
+      ],
+      "expected_finding": "RELATED_PARTY_REMITTANCE | September function-green, combined $72,188.20 vs $18,000 budget | INV-KIS-2026-09-*, TXN-KIS-2026-09-16, FC-MRO-KIS, AUD-SAMP-KIS-08",
+      "detective_path": [
+        "AP Bot: list VEND-KIS-01 YTD.",
+        "Cash Bot: match TXN-KIS-2026-09-16 $47,293.62 as grouped ACH of two Kestrel plus one Westbrook.",
+        "Story Bot: FC-MRO-KIS week of 2026-09-21 is $24,880.44 'as planned'.",
+        "Audit Bot: sample AUD-SAMP-KIS-08 PASS on three-way match.",
+        "Join the four pictures on vendor_id and EMP-4128. Combined September outflow $72,188.20 vs budget $18,000 MRO."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-007",
+      "title": "Low-value recurring MRO in the audit sample",
+      "domain": "audit",
+      "stealth": 4,
+      "span": "2026-09 sample of 2025-11 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "audit/invoices:AUD-SAMP-KIS-08",
+        "audit/policy.json round_number.ordinary_recurring_max",
+        "ap_invoices:INV-KIS-2026-02-08"
+      ],
+      "expected_finding": "RELATED_PARTY_VENDOR | sample PASS, population $187,412.18 | AUD-SAMP-KIS-08, VEND-KIS-01",
+      "detective_path": [
+        "Reperform three-way match on AUD-SAMP-KIS-08 (PASS).",
+        "Extend the sample to all VEND-KIS-01 invoices, not the random draw.",
+        "Add related-party join from ADV-VM-001.",
+        "Write finding on population, not on the sample item match."
+      ]
+    },
+    {
+      "id": "ADV-VM-011",
+      "title": "Harbor Electric Services beside Harbor Electric",
+      "domain": "vendor-master",
+      "stealth": 4,
+      "span": "2026-02 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "vendor_master:VEND-015",
+        "vendor_master:VEND-HES-01",
+        "ap_invoices:INV-HES-*",
+        "close/accruals:ACC-HE-2026-09",
+        "vendor_contracts:CTR-HE-001"
+      ],
+      "expected_finding": "NEAR_DUPLICATE_VENDOR | $29,418.66 | VEND-HES-01 vs VEND-015, ACC-HE-2026-09 untouched",
+      "detective_path": [
+        "Keep ACC-HE-2026-09 and CTR-HE-001 as the clean utility path.",
+        "Sum VEND-HES-01 AP February through September ($29,418.66).",
+        "Meter IDs on HES invoices equal Harbor Electric's Cambridge campus meters with suffix -P.",
+        "created_by USR-VM-04. Remit address forwards to 18 Ware Street on two invoices (2026-05 and 2026-08)."
+      ]
+    },
+    {
+      "id": "ADV-CASH-014",
+      "title": "Northstar remittance residual versus invoice",
+      "domain": "cash",
+      "stealth": 5,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "ar_invoices:INV-AR-013",
+        "ar_payments:PAY-006",
+        "bank:TXN-2026-09-015",
+        "gl:GL-AR-NS",
+        "close/tasks:TASK-CASH",
+        "historical_ar:INV-NS-*",
+        "bank_archive:TXN-NS-*-residual"
+      ],
+      "expected_finding": "RESIDUAL_UNPLUGGED | $12.40 on TXN-2026-09-015 which is 0.1 percent of $12,400.00; $86,418.60 plugged 2025-11..2026-08 | INV-AR-013, PAY-006, TXN-2026-09-015, GL-AR-NS, JE-REC-PLUG-*",
+      "detective_path": [
+        "Keep TXN-2026-09-015 unmatched. Do not force MATCHED.",
+        "Compute bank_amount / invoice_amount for every Northstar cash line 2025-11 through 2026-09. Rate is 1.001 on 14 of 14 receipts.",
+        "Extend the ratio test to Meridian Health and Lumen Labs ACH (ADV-AR-013).",
+        "Find JE-REC-PLUG-YYYY-MM in August and prior. None exists for 2026-09.",
+        "Tie residual population to VEND-CLR-01 payments (ADV-CASH-009).",
+        "Reason code is RESIDUAL_UNPLUGGED, not UNEXPLAINED_DIFFERENCE as a dead end."
+      ]
+    },
+    {
+      "id": "ADV-CASH-008",
+      "title": "Monthly cash-over-short plug journals",
+      "domain": "cash",
+      "stealth": 5,
+      "span": "2025-11 → 2026-08",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "gl:JE-REC-PLUG-2025-11 through JE-REC-PLUG-2026-08",
+        "gl:6950-Cash-Over-Short",
+        "close/journal_entries",
+        "employee_master:EMP-1088"
+      ],
+      "expected_finding": "REC_PLUG_NET_ZERO | $86,418.60 across 11 months | JE-REC-PLUG-2025-11..JE-REC-PLUG-2026-08, 6950-Cash-Over-Short, USR-JE-04",
+      "detective_path": [
+        "List journals with memo containing 'rec true-up' or account 6950.",
+        "For each month, sum (bank - AR applied) on 1.001-rate customers. Compare to the plug.",
+        "Confirm no JE-REC-PLUG-2026-09 exists.",
+        "Check approver_id USR-REV-04 has no person in employee_master."
+      ]
+    },
+    {
+      "id": "ADV-CASH-009",
+      "title": "Clearing Solutions LLC paid from the plug",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "vendor_master:VEND-CLR-01",
+        "ap_invoices:INV-CLR-2025-12 through INV-CLR-2026-08",
+        "bank:TXN-CLR-*",
+        "canonical/vendor_payments:PAY-CLR-*"
+      ],
+      "expected_finding": "RELATED_PARTY_REMITTANCE | $86,418.60 | VEND-CLR-01, INV-CLR-*, PAY-CLR-*, CTR-CLR-001 vs actuals",
+      "detective_path": [
+        "Compare INV-CLR-YYYY-MM amount to JE-REC-PLUG for the prior month. Equal within $0.08.",
+        "CTR-CLR-001 monthly_minimum is $10,000 but invoices are $6,100–$8,800. The retainer is cover, not economics.",
+        "Vendor EIN 85-2201988 organizer is a registered agent in Wilmington with no operating website.",
+        "Payment initiator USR-JE-04, not USR-PAY-01, on 8 of 11 ACH (SOD on payment initiation)."
+      ]
+    },
+    {
+      "id": "ADV-CASH-010",
+      "title": "Account 6950 that always finishes near zero",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2025-11 → 2026-08",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "reporting/ledger_seed:6950-Cash-Over-Short",
+        "close/materiality.json",
+        "gl:JE-REC-PLUG-*"
+      ],
+      "expected_finding": "REC_PLUG_NET_ZERO | throughput $86,418.60 vs ending $12.18 | 6950-Cash-Over-Short",
+      "detective_path": [
+        "Pull 6950 YTD debits and credits, not the ending balance.",
+        "Throughput $86,418.60 vs ending $12.18 is the finding.",
+        "Map every credit in 6950 to a VEND-CLR-01 invoice.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-011",
+      "title": "Undeposited funds used as a residual parking lot",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2026-03 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "gl:1030-Undeposited-Funds",
+        "bank:undeposited_batch_refs",
+        "close/tasks:TASK-CASH"
+      ],
+      "expected_finding": "UNAPPLIED_CASH_PARK | $1,121.06 aged in 1030 | 1030-Undeposited-Funds, including TXN-2026-09-015 residual",
+      "detective_path": [
+        "Age 1030 items. Anything >5 business days is an exception at this company (policy plant P-CASH-UNDEP-AGE).",
+        "Sum slices with memo ACH batch remainder ($1,121.06 including $12.40).",
+        "Match slice sizes to 0.1 percent of the same-day AR batch.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-012",
+      "title": "Northstar Settlement Co refunds that recycle the residual",
+      "domain": "cash",
+      "stealth": 5,
+      "span": "2026-02 → 2026-08",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "ar_customers:CUST-NSC-01",
+        "bank:TXN-NSC-REF-*",
+        "gl:6900-Misc-Expense",
+        "ar_customers:CUST-009"
+      ],
+      "expected_finding": "RELATED_PARTY_REMITTANCE | $8,406.00 refunds vs $8,388.20 residuals | CUST-NSC-01, REF-NSC-*, CUST-009",
+      "detective_path": [
+        "Sum REF-NSC-* ($8,406.00 through August).",
+        "Compare to 0.1 percent of Northstar LLC receipts over the same window ($8,388.20). Gap $17.80.",
+        "Confirm CUST-NSC-01 has no open AR invoices of its own.",
+        "Do not treat this as the $12.40 itself. It is the recycle path for plugged months."
+      ]
+    },
+    {
+      "id": "ADV-CASH-013",
+      "title": "Wire instructions that ask customers for 0.1 percent cover",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "ingestion:customer_instructions/northstar_wire.pdf",
+        "ingestion:customer_instructions/meridian_wire.pdf",
+        "ingestion:customer_instructions/lumen_wire.pdf",
+        "ar_customers:CUST-009",
+        "ar_customers:CUST-010",
+        "ar_customers:CUST-008"
+      ],
+      "expected_finding": "REMITTANCE_RATE_RESIDUAL | 0.10 percent instruction vs 0 percent policy | northstar_wire.pdf, meridian_wire.pdf, lumen_wire.pdf",
+      "detective_path": [
+        "Read the remit-to PDFs. Extract the 0.10 percent sentence.",
+        "Confirm company_policies has no such fee.",
+        "Confirm Stripe/Adyen are not in the path for these ACH customers.",
+        "Tie the instruction author to USR-APPLY-02 or USR-JE-04 in PDF metadata (Nadia)."
+      ]
+    },
+    {
+      "id": "ADV-AR-013",
+      "title": "Meridian and Lumen ACH at the same 1.001 rate",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "ar_payments:PAY-MER-2025-12 through PAY-MER-2026-09",
+        "ar_payments:PAY-LUM-2026-01 through PAY-LUM-2026-09",
+        "ar_invoices:INV-AR-MER-*",
+        "ar_invoices:INV-AR-LUM-*"
+      ],
+      "expected_finding": "REMITTANCE_RATE_RESIDUAL | September extras $48.62 Meridian + $31.10 Lumen plus $12.40 Northstar | PAY-MER-2026-09, PAY-LUM-2026-09, PAY-006",
+      "detective_path": [
+        "Compute bank/invoice for Meridian and Lumen named-invoice ACH.",
+        "Exclude PAY-004 $5,000 ambiguous pair from the rate test.",
+        "Add residuals to the Northstar series. Combined unplugged September residual is $12.40 + $48.62 + $31.10 = $92.12. Only $12.40 is on the famous TXN.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-008",
+      "title": "August close plugged, September close not",
+      "domain": "close",
+      "stealth": 4,
+      "span": "2026-08-31 → 2026-09-20",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "audit/periods:2026-08",
+        "close/journal_entries:JE-REC-PLUG-2026-08",
+        "close/tasks:TASK-CASH",
+        "close/tasks:TASK-FINAL"
+      ],
+      "expected_finding": "RESIDUAL_UNPLUGGED | August plugged $7,206.18, September unplugged $12.40 (and $92.12 population) | JE-REC-PLUG-2026-08 vs missing JE-REC-PLUG-2026-09, TASK-CASH",
+      "detective_path": [
+        "Compare August TASK-CASH workpaper to September.",
+        "August workpaper includes line 'over/short true-up $7,206.18'. September workpaper has a blank true-up line.",
+        "Do not auto-post a September plug. The demo needs the block.",
+        "Write the finding as undocumented close step plus residual rate, not as 'forgot a journal'."
+      ]
+    },
+    {
+      "id": "ADV-RPT-007",
+      "title": "Other income that was never booked on the residuals",
+      "domain": "reporting",
+      "stealth": 3,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "reporting/actuals",
+        "reporting/ledger_seed:4000-Revenue",
+        "gl:6950-Cash-Over-Short",
+        "reporting/budget"
+      ],
+      "expected_finding": "REMITTANCE_RATE_RESIDUAL | $86,418.60 cash-in never in 4000-Revenue | 6950 vs 4000, VEND-CLR-01",
+      "detective_path": [
+        "Tie bank cash-in to revenue + AR movement + residual parking.",
+        "Show $86,418.60 cash-in with no revenue, no AP reduction except VEND-CLR-01.",
+        "Do not attribute GM drop to this thread.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-MIX-003",
+      "title": "Residual thread across cash, close, AP, forecast",
+      "domain": "mixed",
+      "stealth": 5,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "bank:TXN-2026-09-015",
+        "close/tasks:TASK-CASH",
+        "vendor_master:VEND-CLR-01",
+        "reporting/forecast_lines:FC-OTHER-IN",
+        "gl:6950-Cash-Over-Short"
+      ],
+      "expected_finding": "RESIDUAL_UNPLUGGED | $12.40 visible, $86,418.60 historical, forecast miss ~$7,187.60 | TXN-2026-09-015, TASK-CASH, INV-CLR-2026-08, FC-OTHER-IN",
+      "detective_path": [
+        "Cash: EXCEPTION_OPEN on TXN-2026-09-015.",
+        "Close: CLOSE_BLOCKED.",
+        "AP: INV-CLR-2026-08 still open.",
+        "Story: FC-OTHER-IN week 2026-09-28 misses by ~$7,187.60.",
+        "Join on rate 0.001 and VEND-CLR-01."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-008",
+      "title": "Bank rec sample that ties after the plug",
+      "domain": "audit",
+      "stealth": 3,
+      "span": "2026-08 sample",
+      "storyline": "SL-ADV-RESIDUAL",
+      "plant_objects": [
+        "audit/reconciliations:REC-AUG-PLUG",
+        "audit/reconciliations:REC-NS-1240",
+        "gl:JE-REC-PLUG-2026-08"
+      ],
+      "expected_finding": "REC_PLUG_NET_ZERO | August rec PASS with unexplained methodology | REC-AUG-PLUG, REC-NS-1240",
+      "detective_path": [
+        "Reperform REC-AUG-PLUG (arithmetic PASS).",
+        "Ask what the plug represents. No support beyond a spreadsheet tab 'NS-MER-LUM 0.1%'.",
+        "Carry that tab to September and it predicts $12.40 on Northstar plus Meridian/Lumen extras.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PAY-001",
+      "title": "Remote warehouse coordinator on the payroll register",
+      "domain": "payroll",
+      "stealth": 5,
+      "span": "2025-04-14 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "payroll_register:EMP-8891",
+        "employee_master:EMP-8891",
+        "reporting/payroll:PR-2026-09-25",
+        "gl:JE-PAYROLL-2026-08",
+        "gl:JE-PAYROLL-2026-09",
+        "org_chart:West Warehouse"
+      ],
+      "expected_finding": "GHOST_EMPLOYEE | $146,309.45 gross | EMP-8891, PR-2026-09-25, vacant manager seat West Warehouse",
+      "detective_path": [
+        "Count distinct emp_id on payroll_register vs employee_master.status=active vs badge_access last 90 days.",
+        "EMP-8891 has payroll and an employee_master row, but badge_last_seen is null and okta_last_login is null.",
+        "Org chart West Warehouse manager seat is vacant since 2025-03-31 (Ava Pell termination).",
+        "Sum gross 2025-04-14 through 2026-09-25 = $146,309.45."
+      ]
+    },
+    {
+      "id": "ADV-PAY-002",
+      "title": "No badge, no Okta, no laptop asset",
+      "domain": "payroll",
+      "stealth": 4,
+      "span": "2025-04-14 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "badge_access:EMP-8891",
+        "it_assets:MX-LPT-*",
+        "fixed_assets:laptop population",
+        "okta_export:EMP-8891"
+      ],
+      "expected_finding": "GHOST_EMPLOYEE | $0 IT assets, $0 badges, $146,309.45 payroll | EMP-8891",
+      "detective_path": [
+        "Left join payroll remote employees to it_assets and badge_access.",
+        "EMP-8891 is the only remote warehouse row with both joins empty.",
+        "Expense reports for EMP-8891: zero rows.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PAY-003",
+      "title": "Employer taxes remitted on the ghost",
+      "domain": "payroll",
+      "stealth": 3,
+      "span": "2025-04 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "payroll_tax:941-2025-Q2 through 941-2026-Q3",
+        "bank:TXN-941-*",
+        "gl:6200-Benefits"
+      ],
+      "expected_finding": "GHOST_EMPLOYEE | employer FICA $11,192.65 on top of gross | 941 filings, EMP-8891",
+      "detective_path": [
+        "Recompute 941 from the register. It ties, including EMP-8891.",
+        "The finding is not a tax break. It is that taxes were paid on an employee with no labor evidence.",
+        "Employer FICA extra $11,192.65 across the span.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PAY-004",
+      "title": "Payroll DFI account that matches Halyard Facilities",
+      "domain": "payroll",
+      "stealth": 5,
+      "span": "2025-04-20 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "payroll_direct_deposit:EMP-8891",
+        "vendor_bank:VEND-HAL-01",
+        "ap_invoices:INV-HAL-*",
+        "bank:TXN-HAL-*",
+        "bank:TXN-PAYROLL-*"
+      ],
+      "expected_finding": "PAYROLL_VENDOR_BANK_COLLISION | $146,309.45 payroll + $28,800.00 AP | EMP-8891, VEND-HAL-01, routing 211370545 account ****9022",
+      "detective_path": [
+        "Join payroll_direct_deposit.account_hash to vendor_bank.account_hash.",
+        "Hit: EMP-8891 and VEND-HAL-01, routing 211370545, last4 9022.",
+        "AP to VEND-HAL-01 $2,400.00 per month x 12 months in span = $28,800.00 (this one is round — monthly janitorial often is. Pair it with the non-round payroll so amount is not the only signal).",
+        "Vendor has no insurance cert, no W-9 on file."
+      ]
+    },
+    {
+      "id": "ADV-PAY-005",
+      "title": "1099 to the same person as the W-2",
+      "domain": "payroll",
+      "stealth": 4,
+      "span": "2026-01 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "contractors:CTR-HALYARD-1099",
+        "ap_invoices:INV-HAL-WKND-*",
+        "payroll_register:EMP-8891",
+        "gl:5400-Contractors"
+      ],
+      "expected_finding": "CONTRACTOR_W2_DOUBLE_DIP | $18,400.00 1099 on top of W-2 | CTR-HALYARD-1099, EMP-8891, INV-HAL-WKND-*",
+      "detective_path": [
+        "Fuzzy-match contractor legal_name to employee legal_name.",
+        "SSN last4 on W-4 and W-9 both 4419 (plant W-9). Same last4 as Kestrel bank is coincidence? Use 9022 last4 for Halyard SSN-last4 to avoid cross-storyline collision. Plant TIN last4 9022.",
+        "Sum INV-HAL-WKND-* $18,400.00 Jan–Aug plus September open $2,300.00.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PAY-006",
+      "title": "Org chart manager seat left empty",
+      "domain": "payroll",
+      "stealth": 3,
+      "span": "2025-03-31 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "org_chart:West Warehouse",
+        "employee_master:EMP-2290",
+        "employee_master:EMP-8891"
+      ],
+      "expected_finding": "GHOST_EMPLOYEE | 0 direct reports, 6 orphans | EMP-8891, org_chart West Warehouse",
+      "detective_path": [
+        "List employees with manager_emp_id pointing at EMP-8891: zero.",
+        "List employees who should report to West Warehouse Coordinator: 6 people, manager null.",
+        "Tomas has no direct reports and no skip-level.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PAY-007",
+      "title": "October 2 payroll above schedule",
+      "domain": "payroll",
+      "stealth": 3,
+      "span": "2026-10-02",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "reporting/payroll:PR-2026-10-02",
+        "reporting/actuals:ACT-PAYROLL-HIGH",
+        "payroll_register:2026-10-02"
+      ],
+      "expected_finding": "GHOST_EMPLOYEE | $4,500.06 of PR-2026-10-02 miss after supported OT | PR-2026-10-02, ACT-PAYROLL-HIGH, EMP-8891, OT-2026-10-02",
+      "detective_path": [
+        "Recompute actual vs schedule.",
+        "Subtract supported OT $17,821.40.",
+        "Remainder $4,500.06 = EMP-8891 $4,180.27 + $319.79 FICA.",
+        "Do not let the OT file swallow the ghost."
+      ]
+    },
+    {
+      "id": "ADV-PAY-008",
+      "title": "Terminated warehouse associate still paid",
+      "domain": "payroll",
+      "stealth": 4,
+      "span": "2026-04-01 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "employee_master:EMP-2290",
+        "payroll_register:EMP-2290",
+        "employee_master:EMP-5510",
+        "badge_access:EMP-2290 last 2026-03-30"
+      ],
+      "expected_finding": "TERMINATED_EMPLOYEE_PAID | $23,947.30 | EMP-2290, USR-PR-01, last_day 2026-03-31",
+      "detective_path": [
+        "Join employee_master.status=terminated to payroll_register.pay_date > last_day.",
+        "EMP-2290 hits from PR-2026-04-11 through PR-2026-09-25 = $23,947.30.",
+        "Badge stopped 2026-03-30. Okta deactivated 2026-04-02.",
+        "Initiator of include_flag is USR-PR-01 Chris Pell."
+      ]
+    },
+    {
+      "id": "ADV-VM-007",
+      "title": "Halyard Facilities janitorial vendor",
+      "domain": "vendor-master",
+      "stealth": 3,
+      "span": "2025-04-20 → 2026-09",
+      "storyline": "SL-ADV-HALYARD",
+      "plant_objects": [
+        "vendor_master:VEND-HAL-01",
+        "vendor_contracts:CTR-HAL-01",
+        "ap_invoices:INV-HAL-2025-05 through INV-HAL-2026-09",
+        "purchase_orders:PO-HAL-STANDING"
+      ],
+      "expected_finding": "RELATED_PARTY_VENDOR | $28,800.00 standing janitorial | VEND-HAL-01, PO-HAL-STANDING, no West campus in facilities_registry",
+      "detective_path": [
+        "Vendor created 6 days after EMP-8891 start.",
+        "No insurance certificate.",
+        "Same DFI as ADV-PAY-004.",
+        "Service location 'West campus' does not exist in facilities_registry (Maximor has Cambridge and a 3PL, not a West campus)."
+      ]
+    },
+    {
+      "id": "ADV-PRE-001",
+      "title": "Orbit Insights prepaid that expenses into a balance-sheet account",
+      "domain": "prepaid-fa",
+      "stealth": 5,
+      "span": "2025-01-06 → 2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "close/prepaids:PRE-SFT-002",
+        "close/prepaids:PRE-SFT-001",
+        "gl:JE-PRE-OIC-*",
+        "gl:1220-Prepaid-Other",
+        "vendor_master:VEND-OIC-01",
+        "ap_invoices:INV-OIC-2025-01"
+      ],
+      "expected_finding": "PREPAID_AMORT_MISPOSTED | $100,000 parked in 1220 after 20 months; $0 P&L | PRE-SFT-002, JE-PRE-OIC-*, 1220-Prepaid-Other, VEND-OIC-01",
+      "detective_path": [
+        "List all prepaid_id, not only PRE-SFT-001 and PRE-INS-001.",
+        "For PRE-SFT-002, follow the monthly JE debit account. It is 1220, not Software Subscription Expense.",
+        "GL 1220 at Aug 31 = $180,000 original (never declined) + $5,000 * 20 months if the mispost accumulates — plant so original cash $180,000 remains in 1200-Prepaid-Software and 1220 also holds $100,000 of 'amort'. Specify: cash out Jan 2025 $180,000 to 1200. Each month Dr 1220 $5,000 Cr 1200 $5,000. 1200 remaining $80,000 after 20 months looks amortized. 1220 $100,000 is a second asset. P&L expense $0.",
+        "P&L software expense includes PRE-SFT-001 $2,000/month only."
+      ]
+    },
+    {
+      "id": "ADV-PRE-002",
+      "title": "Expense posted then reversed the next day",
+      "domain": "prepaid-fa",
+      "stealth": 5,
+      "span": "2026-03 → 2026-08",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "gl:JE-PRE-OIC-EXP-2026-03 through 2026-08",
+        "gl:JE-PRE-OIC-REV-2026-03 through 2026-08",
+        "gl:1350-Other-Receivable"
+      ],
+      "expected_finding": "AMORT_REVERSAL_PAIR | $30,000 moved to 1350 | JE-PRE-OIC-EXP-*, JE-PRE-OIC-REV-*, 1350-Other-Receivable",
+      "detective_path": [
+        "Find journals that reverse within 48 hours with equal amount and swapped accounts.",
+        "Six pairs, $5,000.00 each, poster USR-JE-04, approver USR-NA-VOSS (same person, ADV-AUDIT-005).",
+        "1350-Other-Receivable subledger has no customer, no invoice. Memo 'Orbit implementation recoveries'.",
+        "No cash ever collected on 1350."
+      ]
+    },
+    {
+      "id": "ADV-PRE-003",
+      "title": "Expired insurance rider still on the prepaid schedule",
+      "domain": "prepaid-fa",
+      "stealth": 3,
+      "span": "2026-01-09 → 2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "close/prepaids:PRE-INS-RIDER",
+        "vendor_master:VEND-HBP-01",
+        "ap_invoices:INV-HBP-2026-01",
+        "close/prepaids:PRE-INS-001"
+      ],
+      "expected_finding": "PREPAID_AMORT_MISPOSTED | $9,300 remaining after policy end 2026-03-31 | PRE-INS-RIDER, VEND-HBP-01",
+      "detective_path": [
+        "Compare prepaid.end_date to remaining_balance. PRE-INS-RIDER end_date 2026-03-31 with $9,300 remaining in September is impossible under straight_line.",
+        "VEND-HBP-01 is not VEND-011.",
+        "No certificate of insurance after 2026-03-31.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PRE-004",
+      "title": "Orbit Insights versus Orbit Analytics",
+      "domain": "vendor-master",
+      "stealth": 4,
+      "span": "2025-01-06 → 2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "vendor_master:VEND-012",
+        "vendor_master:VEND-OIC-01",
+        "vendor_contracts:CTR-OIC-001",
+        "vendor_contracts:DOC-SFT-2025"
+      ],
+      "expected_finding": "NEAR_DUPLICATE_VENDOR | $180,000 | VEND-OIC-01 vs VEND-012, PO-OIC-001, INV-OIC-2025-01",
+      "detective_path": [
+        "Compare contracts: Orbit Analytics is a $24,000 SaaS. Orbit Insights claims a 36-month platform plus implementation.",
+        "Website and W-9 for VEND-OIC-01 use a WeWork Boston mailbox.",
+        "PO-OIC-001 description equals Orbit Analytics SKU names from INV-020.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PRE-005",
+      "title": "Prepaid tie-out that only lists the two demo items",
+      "domain": "close",
+      "stealth": 3,
+      "span": "2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "close/tasks:TASK-PREPAID",
+        "close/prepaids",
+        "gl:1200-Prepaid-Software",
+        "gl:1210-Prepaid-Insurance",
+        "gl:1220-Prepaid-Other"
+      ],
+      "expected_finding": "PREPAID_AMORT_MISPOSTED | GL prepaid accounts exceed demo schedule by $189,300.00 | TASK-PREPAID, PRE-SFT-002, PRE-INS-RIDER, 1220, 1350",
+      "detective_path": [
+        "Sum GL prepaid accounts.",
+        "Sum close/prepaids remaining_balance including PRE-SFT-002 and PRE-INS-RIDER.",
+        "Difference is the 1350 diversion plus any 1220 parked amort.",
+        "Do not mark TASK-PREPAID complete without the GL join."
+      ]
+    },
+    {
+      "id": "ADV-PRE-006",
+      "title": "Hartford Brokerage Partners rider invoice",
+      "domain": "ap",
+      "stealth": 2,
+      "span": "2026-01-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "ap_invoices:INV-HBP-2026-01",
+        "vendor_master:VEND-HBP-01",
+        "vendor_master:VEND-011",
+        "bank:TXN-HBP-2026-01"
+      ],
+      "expected_finding": "NEAR_DUPLICATE_VENDOR | $18,600.00 | VEND-HBP-01 vs VEND-011, INV-HBP-2026-01",
+      "detective_path": [
+        "Compare remit EIN to VEND-011. Different.",
+        "Bank counterparty HARTFORD BROKERAGE PARTNERS not HARTFORD INS.",
+        "No policy number that the real Hartford recognizes in source_documents.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-003",
+      "title": "Prepaid task green on the famous two items",
+      "domain": "close",
+      "stealth": 4,
+      "span": "2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "close/tasks:TASK-PREPAID",
+        "close/prepaids:PRE-SFT-001",
+        "close/prepaids:PRE-INS-001",
+        "close/prepaids:PRE-SFT-002"
+      ],
+      "expected_finding": "PREPAID_AMORT_MISPOSTED | TASK-PREPAID blocked on 1220/1350, not on PRE-SFT-001 | TASK-PREPAID, 1220, 1350",
+      "detective_path": [
+        "Complete the famous two amortizations (they should still work).",
+        "Require a GL roll-forward of all 12x accounts.",
+        "Block TASK-PREPAID on 1220 unexplained $100,000 and 1350 $30,000.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-FA-004",
+      "title": "Implementation cost capitalized that should be expense",
+      "domain": "prepaid-fa",
+      "stealth": 4,
+      "span": "2025-01-06 → 2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "close/fixed_assets:FA-OIC-IMPL",
+        "ap_invoices:INV-OIC-2025-01",
+        "gl:JE-FA-OIC-*",
+        "close/fixed_assets:FA-DELL-001"
+      ],
+      "expected_finding": "CAPITALIZED_UNRECEIVED | $96,000 implementation with no serial | FA-OIC-IMPL, INV-OIC-2025-01, FA-DELL-001 untouched",
+      "detective_path": [
+        "Split INV-OIC-2025-01 $276,000 = $180,000 PRE-SFT-002 + $96,000 FA-OIC-IMPL.",
+        "No IT ticket, no serial, placed_in_service_date = invoice date.",
+        "Depreciation $2,666.67/month. After 20 months $53,333.40 expense — the only Orbit amount that ever hit P&L, and it is below the line in opex not COGS.",
+        "Keep FA-DELL-001 depreciation as the clean demo."
+      ]
+    },
+    {
+      "id": "ADV-RPT-006",
+      "title": "EBITDA addback named non-recurring implementation",
+      "domain": "reporting",
+      "stealth": 3,
+      "span": "2026-08 board pack → 2026-09",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "reporting/board_pack:EBITDA_addbacks",
+        "reporting/actuals",
+        "close/prepaids:PRE-SFT-002"
+      ],
+      "expected_finding": "PREPAID_AMORT_MISPOSTED | $40,000 FYTD addback with no GL expense | board_pack EBITDA_addbacks, PRE-SFT-002",
+      "detective_path": [
+        "Recompute EBITDA from GL.",
+        "Addbacks that have no GL expense are the finding ($5,000 x 8 months in FY2026 YTD = $40,000).",
+        "Do not use the loud GM 3-point story as this addback.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AR-001",
+      "title": "Cash applications that follow a chain",
+      "domain": "ar",
+      "stealth": 5,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_payments:PAY-LAP-*",
+        "ar_invoices:INV-AR-QH-*",
+        "ar_invoices:INV-AR-HE-*",
+        "ar_invoices:INV-AR-PIN-*",
+        "ar_precedents",
+        "employee_master:EMP-3304"
+      ],
+      "expected_finding": "AR_LAPPING | $412,880.00 misapplied stock | PAY-LAP-*, USR-APPLY-02, CUST-005, CUST-002, CUST-006",
+      "detective_path": [
+        "For each PAY-LAP-*, compare remittance.named_invoice_id to application.invoice_id.",
+        "Build a directed graph of (payer_customer -> applied_customer). A 3-cycle QH→Helios→Pinnacle→QH appears every month.",
+        "All applications after 18:00 local Friday are USR-APPLY-02.",
+        "Stock in the chain at 2026-09-20 is $412,880.00."
+      ]
+    },
+    {
+      "id": "ADV-AR-002",
+      "title": "Remittance text that names a different invoice",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-01 → 2026-09",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_payments:PAY-LAP-2026-09-12",
+        "ingestion:remittance/PAY-LAP-2026-09-12.txt",
+        "ar_invoices:INV-AR-HE-4412",
+        "ar_invoices:INV-AR-PIN-2208"
+      ],
+      "expected_finding": "AR_LAPPING | $88,400.00 | PAY-LAP-2026-09-12, INV-AR-HE-4412 left open, INV-AR-PIN-2208 closed",
+      "detective_path": [
+        "Parse remittance text first.",
+        "Compare named invoice customer to bank counterparty HELIOS ANALYTICS.",
+        "INV-AR-HE-4412 remains open $91,200.00. INV-AR-PIN-2208 closed.",
+        "USR-APPLY-02 note: 'amount match PIN-2208'."
+      ]
+    },
+    {
+      "id": "ADV-AR-003",
+      "title": "Unapplied cash parked then reused",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-04-03 → 2026-09",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "gl:1110-AR-Unapplied",
+        "ar_payments:PAY-UNAPP-*",
+        "ar_ledger:unapplied_subledger"
+      ],
+      "expected_finding": "UNAPPLIED_CASH_PARK | $36,208.40 ending; $25,791.60 reused | 1110-AR-Unapplied, CUST-005, PAY-UNAPP-*",
+      "detective_path": [
+        "Roll forward 1110 by customer.",
+        "Quiet Harbor unapplied in $62,000, out $25,791.60 to Helios invoices.",
+        "Ending 1110 $36,208.40 is all CUST-005.",
+        "No credit memo issued (credit-memo lifecycle is partial; plant the open unapplied, do not require a refund cycle)."
+      ]
+    },
+    {
+      "id": "ADV-AR-004",
+      "title": "Aging that looks current because of the chain",
+      "domain": "ar",
+      "stealth": 3,
+      "span": "2026-09-20",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_invoices aging snapshot 2026-09-20",
+        "ar_customers:CUST-005",
+        "reporting/balances ar"
+      ],
+      "expected_finding": "AR_LAPPING | aging understates Quiet Harbor 90+ by $170,000.00 | CUST-005 aging snapshot vs remittance-faithful rebuild",
+      "detective_path": [
+        "Rebuild aging from invoice_date and cash with remittance-faithful applications.",
+        "Faithful aging: Quiet Harbor $188,400 in 90+.",
+        "Posted aging: $18,400 in 1-30.",
+        "Delta $170,000 is lapping cover."
+      ]
+    },
+    {
+      "id": "ADV-AR-005",
+      "title": "Friday after-hours applications",
+      "domain": "ar",
+      "stealth": 3,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_payments.applied_at",
+        "employee_master:EMP-3304",
+        "harness traces if present, else ledger timestamps"
+      ],
+      "expected_finding": "AR_LAPPING | 38 Friday 18:12–19:04 applications | USR-APPLY-02 timestamps",
+      "detective_path": [
+        "Histogram applied_at by weekday and hour.",
+        "Join those rows to remittance mismatches from ADV-AR-002.",
+        "EMP-3304 badge_access on those Fridays: often already exited CAM-4 at 17:10 (VPN from home, which is allowed).",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AR-006",
+      "title": "Quiet Harbor late collection used as cover",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-10-09 vs applications in September",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_invoices:INV-AR-014",
+        "reporting/actuals:ACT-DELAY-AR",
+        "bank:BNK-AR-FC-001",
+        "ar_payments:PAY-LAP-QH-SEP-PRE",
+        "ar_payments:PAY-014-OCT"
+      ],
+      "expected_finding": "AR_LAPPING | $25,000.00 INV-AR-014 timing vs application | INV-AR-014, BNK-AR-FC-001, PAY-LAP-QH-SEP-PRE, PAY-014-OCT",
+      "detective_path": [
+        "Keep the forecast miss identity.",
+        "Show PAY-LAP-QH-SEP-PRE $25,000 applied 2026-09-22 with remittance 'expected QH INV-AR-014'.",
+        "BNK-AR-FC-001 lands 2026-10-09 and is applied to INV-AR-PIN-2210.",
+        "INV-AR-014 may show paid from the September application. Bank date disagrees."
+      ]
+    },
+    {
+      "id": "ADV-AR-007",
+      "title": "Credit memo that patches a hole in the chain",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-08-28",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_credit_memos:CM-HE-088",
+        "ar_invoices:INV-AR-HE-4390",
+        "gl:4100-Contra-Revenue-Returns"
+      ],
+      "expected_finding": "AR_LAPPING | $12,640.00 credit with no return | CM-HE-088, INV-AR-HE-4390, USR-APPLY-02",
+      "detective_path": [
+        "Match CM-HE-088 to INV-AR-HE-4390. No shipping return, no ticket.",
+        "Date is the Friday the lapping chain skipped (Samir PTO 2026-08-21–2026-08-27).",
+        "Approver USR-APPLY-02 on his own credit (SOD).",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-003",
+      "title": "AR bank batches that still match in total",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "bank:BATCH-AR-*",
+        "cash_recon/ledger AR cash",
+        "ar_payments:PAY-LAP-*"
+      ],
+      "expected_finding": "AR_LAPPING | batch MATCHED, exploded mismatch $412,880.00 | BATCH-AR-*, PAY-LAP-*",
+      "detective_path": [
+        "Reperform batch rec (PASS on amounts).",
+        "Explode batch to remittance-level customer vs application-level customer.",
+        "Mismatch count 41, dollars $412,880 stock.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-RPT-002",
+      "title": "Forecast collections that use application dates",
+      "domain": "reporting",
+      "stealth": 4,
+      "span": "2026-09 13-week",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "reporting/forecast_weeks",
+        "reporting/forecast_lines AR",
+        "ar_payments.applied_at vs bank.date"
+      ],
+      "expected_finding": "FORECAST_BIAS_FROM_AR | $91,800.00 week of 2026-09-21 | forecast_lines AR vs remittance-faithful rebuild",
+      "detective_path": [
+        "Rebuild forecast using bank dates and remittance-faithful open items.",
+        "Week of 2026-09-21 AR inflow forecast $1,840,000 vs remittance-faithful $1,748,200.",
+        "Delta $91,800 is lapping air.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-MIX-006",
+      "title": "Lapping across apply, cash, forecast, audit",
+      "domain": "mixed",
+      "stealth": 5,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-LAPPING",
+      "plant_objects": [
+        "ar_payments:PAY-LAP-*",
+        "bank:BATCH-AR-*",
+        "reporting/forecast_lines",
+        "audit/payments sample"
+      ],
+      "expected_finding": "AR_LAPPING | function-green, population $412,880.00 | PAY-LAP-*, BATCH-AR-2026-09-12, forecast week 2026-09-21",
+      "detective_path": [
+        "Force a directed sample of USR-APPLY-02 Friday applications.",
+        "Explode one September batch.",
+        "Show forecast air $91,800.",
+        "Leave PAY-001 clean."
+      ]
+    },
+    {
+      "id": "ADV-AR-008",
+      "title": "Pinnacle bill-and-hold dated September 29",
+      "domain": "ar",
+      "stealth": 5,
+      "span": "2026-09-29 → 2026-09-30",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "ar_invoices:INV-AR-PIN-BH-01",
+        "inventory:CAM-WH-01 bins PIN-BH-*",
+        "gl:4000-Revenue",
+        "gl:1400-Inventory",
+        "gl:5200-Supplier",
+        "warehouse_locations:CAM-WH-01"
+      ],
+      "expected_finding": "BILL_AND_HOLD | $2,400,000.00 revenue; $1,104,000.00 COGS | INV-AR-PIN-BH-01, WT-BH-01, CAM-WH-01, CUST-006",
+      "detective_path": [
+        "Read ship_to. It is CAM-WH-01, not a Pinnacle DC.",
+        "Cycle count 2026-09-30 still counts PIN-BH SKUs in CAM-WH-01.",
+        "Side letter SL-PIN-2026-09-28 grants 90-day right of return (ADV-AR-009).",
+        "Revenue cut-off test: FOB destination, not yet delivered."
+      ]
+    },
+    {
+      "id": "ADV-AR-009",
+      "title": "Pinnacle side letter with a 90-day return right",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-09-28",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "close/source_documents:DOC-SL-PIN-2026-09-28",
+        "ar_invoices:INV-AR-PIN-BH-01",
+        "company_policies revenue recognition (new plant P-REV-001)"
+      ],
+      "expected_finding": "CHANNEL_STUFFING | $2,400,000.00 | DOC-SL-PIN-2026-09-28 para 4, P-REV-001, INV-AR-PIN-BH-01",
+      "detective_path": [
+        "Parse DOC-SL-PIN-2026-09-28 paragraph 4.",
+        "Compare to P-REV-001.",
+        "Hold revenue $2,400,000 until delivery or until the return right lapses.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AR-010",
+      "title": "Atlas Robotics pull-forward",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-09-30",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "ar_invoices:INV-AR-ATL-PF-01",
+        "gl:JE-REV-ATL-PF-01",
+        "purchase_orders customer-side:PO-ATL-8841 dated 2026-10-02 (after invoice)"
+      ],
+      "expected_finding": "REVENUE_CUTOFF | $1,180,000.00 | INV-AR-ATL-PF-01, PO-ATL-8841, ASN missing at Sep 30",
+      "detective_path": [
+        "Compare invoice_date to customer PO date.",
+        "PO-ATL-8841 created 2026-10-02 for the same SKUs.",
+        "Shipping system has no ASN until 2026-10-12.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AR-011",
+      "title": "Goods still in the Cambridge warehouse",
+      "domain": "ar",
+      "stealth": 4,
+      "span": "2026-09-30",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "inventory:1400-Inventory",
+        "cycle_counts:CC-CAM-WH-01-2026-09-30",
+        "gl:5200-Supplier"
+      ],
+      "expected_finding": "BILL_AND_HOLD | floor over perpetual $1,611,400.00 at cost | CC-CAM-WH-01-2026-09-30, INV-AR-PIN-BH-01, INV-AR-ATL-PF-01",
+      "detective_path": [
+        "Cycle count units vs perpetual units for PIN-BH and ATL-PF.",
+        "Floor > perpetual by $1,104,000 + $507,400 = $1,611,400 at cost.",
+        "That is the COGS relieved too early.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AR-012",
+      "title": "October return window already reserved in email",
+      "domain": "ar",
+      "stealth": 5,
+      "span": "2026-09-30 email, returns 2026-10-18",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "inbox:MSG-PIN-HOLD-01",
+        "later_ar:CM-PIN-OCT-01",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "expected_finding": "CHANNEL_STUFFING | $2,400,000.00 at risk of October credit | MSG-PIN-HOLD-01, CM-PIN-OCT-01 (October context), INV-AR-PIN-BH-01",
+      "detective_path": [
+        "Classify MSG-PIN-HOLD-01 as customer correspondence, not a vendor bill.",
+        "Join to INV-AR-PIN-BH-01.",
+        "Do not wait for October to write the finding. Cut-off is a September issue.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-004",
+      "title": "Revenue journal at 23:47 on September 30",
+      "domain": "close",
+      "stealth": 4,
+      "span": "2026-09-30",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "canonical/journal_entries:JE-REV-CUTOFF-01",
+        "canonical/journal_entries:JE-REV-CUTOFF-02",
+        "close/journal_entries",
+        "employee_master:EMP-1190"
+      ],
+      "expected_finding": "REVENUE_CUTOFF | $3,580,000.00 | JE-REV-CUTOFF-01, JE-REV-CUTOFF-02, 2026-09-30T23:47:00Z",
+      "detective_path": [
+        "List September revenue JEs after 20:00.",
+        "Join to INV-AR-PIN-BH-01 and INV-AR-ATL-PF-01.",
+        "Approver USR-REV-05 equals preparer EMP-1190 mapped via ADV-AUDIT-005 style alias? Mei uses one ID. Approver is USR-JE-02 (the usual rubber stamp).",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-RPT-003",
+      "title": "Product GM up while company GM down",
+      "domain": "reporting",
+      "stealth": 3,
+      "span": "2026-09 vs 2026-08",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "reporting/actuals product GM",
+        "gross_margin_drivers remaining TXN-SUP-SEP-001 etc.",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "expected_finding": "CHANNEL_STUFFING | stuffed revenue hid ~2.6 GM points | INV-AR-PIN-BH-01, INV-AR-ATL-PF-01, vs TXN-SUP-SEP-001 cost story",
+      "detective_path": [
+        "Recompute Sep GM excluding INV-AR-PIN-BH-01 and INV-AR-ATL-PF-01.",
+        "Company GM would be ~58.4% not 61%. The stuffing hid ~2.6 points.",
+        "Keep the cost drivers. Add the revenue overlay as a second story.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-RPT-008",
+      "title": "Thirteen-week forecast counts Pinnacle cash in week 3",
+      "domain": "reporting",
+      "stealth": 4,
+      "span": "2026-09-14 → 2026-12-07",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "reporting/forecast_weeks:2026-10-05",
+        "reporting/forecast_lines:FC-PIN-BH",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "expected_finding": "FORECAST_BIAS_FROM_AR | $2,400,000.00 in week 2026-10-05 vs due 2026-12-28 | FC-PIN-BH, INV-AR-PIN-BH-01",
+      "detective_path": [
+        "Compare due_date 2026-12-28 to forecast week 2026-10-05.",
+        "Override user USR-REV-05.",
+        "This miss will not wait until week 3 of the live demo if the Bot rebuilds from terms.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PROC-001",
+      "title": "Booked processor rate versus contract rate",
+      "domain": "processor",
+      "stealth": 5,
+      "span": "2025-10 → 2026-09",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "vendor_contracts:CTR-STRIPE-001",
+        "integrations/stripe/charges",
+        "integrations/stripe/balance_transactions",
+        "gl:6600-Processor-Fees",
+        "integrations/stripe/payouts:po_1MaximorFees"
+      ],
+      "expected_finding": "PROCESSOR_FEE_OVERSTATEMENT | $214,660.18 span; $18,206.40 in 2026-09 | CTR-STRIPE-001, 6600-Processor-Fees vs Stripe fee lines, po_1MaximorFees kept",
+      "detective_path": [
+        "Sum Stripe fee balance_transactions for Sep.",
+        "Sum GL 6600 for Sep.",
+        "Delta is the skim. September $18,206.40. Span $214,660.18.",
+        "Contract math on charge gross should match Stripe fees within a few dollars, not GL."
+      ]
+    },
+    {
+      "id": "ADV-PROC-002",
+      "title": "Connected account that is not a vendor",
+      "domain": "processor",
+      "stealth": 5,
+      "span": "2025-10 → 2026-09",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "integrations/stripe/transfers:tr_mpr_*",
+        "integrations/stripe/connected_account:acct_1MaximorProc",
+        "vendor_master (absent VEND-MPR-01)",
+        "bank (no separate bank line; netted in payout)"
+      ],
+      "expected_finding": "CONNECTED_ACCOUNT_SKIM | $214,660.18 | acct_1MaximorProc, tr_mpr_*, EMP-4402, absent from vendor_master",
+      "detective_path": [
+        "List Stripe connected accounts in the sim pack.",
+        "acct_1MaximorProc legal name Maximor Processing LLC EIN 88-4412109.",
+        "Join EIN to employee or vendor master: no hit. Join dashboard user to EMP-4402.",
+        "Sum transfers $214,660.18."
+      ]
+    },
+    {
+      "id": "ADV-PROC-003",
+      "title": "Payout that still equals the bank deposit",
+      "domain": "cash",
+      "stealth": 3,
+      "span": "2026-09-19",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "integrations/stripe/payouts:po_1MaximorFees",
+        "bank:TXN-2026-09-019A",
+        "integrations/stripe/bank_deposits"
+      ],
+      "expected_finding": "PROCESSOR_FEE_OVERSTATEMENT | payout MATCHED $12,610.00; fee GL still high on the densified population | po_1MaximorFees, TXN-2026-09-019A",
+      "detective_path": [
+        "Match payout to bank (PASS).",
+        "Continue into fee GL vs contract.",
+        "Keep SCN-CASH-009 behavior on this identity.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PROC-004",
+      "title": "Refund where the fee is not given back",
+      "domain": "processor",
+      "stealth": 4,
+      "span": "2026-09-22",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "integrations/stripe/refunds",
+        "integrations/stripe/payouts:po_1MaximorRefunds",
+        "gl:6600-Processor-Fees",
+        "bank:TXN-2026-09-022S"
+      ],
+      "expected_finding": "PROCESSOR_FEE_OVERSTATEMENT | $6,208.00 extra refund fees | po_1MaximorRefunds kept, densified refunds, 6600",
+      "detective_path": [
+        "For each refund, check whether original fee reversed in GL. It did not.",
+        "Extra GL 6600 on refunds $6,208.00 span.",
+        "Do not confuse with TXN-2026-09-012A/B duplicate refund.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PROC-005",
+      "title": "Adyen blended rate used to explain Stripe",
+      "domain": "processor",
+      "stealth": 4,
+      "span": "2026-06 → 2026-09",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "integrations/adyen (sampled sim)",
+        "gl:JE-FEE-BLEND-*",
+        "vendor_contracts:CTR-STRIPE-001",
+        "vendor_contracts:CTR-ADYEN-001"
+      ],
+      "expected_finding": "PROCESSOR_FEE_OVERSTATEMENT | blend memo hides Stripe 50 bps | JE-FEE-BLEND-*, CTR-STRIPE-001 vs CTR-ADYEN-001",
+      "detective_path": [
+        "Keep processor IDs on each charge.",
+        "Apply each contract to its own volume.",
+        "Stripe overcharge = ADV-PROC-001. Adyen GL matches Adyen contract.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PROC-006",
+      "title": "Dispute win that never returns to the ledger",
+      "domain": "processor",
+      "stealth": 4,
+      "span": "2026-07-18 → 2026-09",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "integrations/stripe/disputes:dsp_win_4419",
+        "integrations/stripe/transfers:tr_mpr_win_4419",
+        "gl:4000-Revenue",
+        "gl:6600-Processor-Fees",
+        "payouts:po_1MaximorDisputes"
+      ],
+      "expected_finding": "CONNECTED_ACCOUNT_SKIM | $18,440.00 won dispute | dsp_win_4419, tr_mpr_win_4419, po_1MaximorDisputes kept as the other dispute story",
+      "detective_path": [
+        "List disputes with status won.",
+        "Check GL cash or revenue reinstatement: none for dsp_win_4419.",
+        "Transfer tr_mpr_win_4419 $18,440.00 to acct_1MaximorProc.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PROC-007",
+      "title": "Single reconciler on processor operations",
+      "domain": "audit",
+      "stealth": 3,
+      "span": "2025-10 → 2026-09",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "audit/reconciliations:REC-STRIPE-*",
+        "employee_master:EMP-4402",
+        "audit/approvals"
+      ],
+      "expected_finding": "SELF_APPROVAL_ALIAS | processor recs 12 months | REC-STRIPE-*, USR-STRIPE-01, EMP-4402",
+      "detective_path": [
+        "Map reviewer_id and preparer_id to emp_id.",
+        "Both are EMP-4402.",
+        "Finding is SOD on processor rec, which then licenses ADV-PROC-001 testing.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-PROC-008",
+      "title": "Reserve release that is a connected-account transfer",
+      "domain": "processor",
+      "stealth": 4,
+      "span": "2026-09-24",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "bank:TXN-STRIPE-RESERVE-REL",
+        "integrations/stripe/transfers",
+        "gl:6600-Processor-Fees",
+        "reporting/actuals:ACT-UNEXPECTED kept on BNK-UNX-001"
+      ],
+      "expected_finding": "CONNECTED_ACCOUNT_SKIM | $22,400.00 labeled reserve release | TXN-STRIPE-RESERVE-REL, acct_1MaximorProc, 6600 credit",
+      "detective_path": [
+        "Confirm Maximor Stripe reserve balance in sim is $0.",
+        "Source of funds is acct_1MaximorProc.",
+        "Keep BNK-UNX-001 $800 as a separate miss.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-004",
+      "title": "Stripe receipts below forecast, two causes",
+      "domain": "cash",
+      "stealth": 3,
+      "span": "2026-09-19",
+      "storyline": "SL-ADV-PROCESSOR",
+      "plant_objects": [
+        "reporting/actuals:ACT-STRIPE-LOW",
+        "payouts:po_1MaximorFees",
+        "bank:TXN-2026-09-019A",
+        "transfers:tr_mpr_2026-09-19"
+      ],
+      "expected_finding": "CONNECTED_ACCOUNT_SKIM | teaching delta $1,184.22 on the famous payout day; population $214,660.18 | po_1MaximorFees, ACT-STRIPE-LOW, tr_mpr_2026-09-19",
+      "detective_path": [
+        "Keep the forecast-miss identity.",
+        "Split miss: documented Stripe fees/refunds vs connected-account transfer.",
+        "Do not force the small demo payout to carry the entire $214k skim. The skim lives on densified volume; this payout is the teaching example.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-001",
+      "title": "Due-from-affiliate that is not an affiliate",
+      "domain": "close",
+      "stealth": 5,
+      "span": "2025-12-11 → 2026-09",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "gl:1300-Due-From-Affiliate",
+        "ar_customers:CUST-IC-EU",
+        "close/tasks:TASK-BS",
+        "legal_entity_register (absent Maximor EU BV)"
+      ],
+      "expected_finding": "FAKE_INTERCOMPANY | $4,851,220.00 | 1300-Due-From-Affiliate, CUST-IC-EU, missing legal_entity",
+      "detective_path": [
+        "Ask for articles of incorporation of Maximor EU BV. None in source_documents.",
+        "Bank wires against this balance go to Merrimack Holdings (ADV-CASH-005).",
+        "Balance grew $440,000–$520,000 per month since 2025-12.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-002",
+      "title": "Intercompany true-up journals that net to zero",
+      "domain": "close",
+      "stealth": 5,
+      "span": "2026-01 → 2026-08",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "gl:JE-IC-TU-*",
+        "gl:JE-IC-CLR-*",
+        "gl:2100-Due-To-Affiliate",
+        "gl:1300-Due-From-Affiliate",
+        "bank:TXN-MRH-*"
+      ],
+      "expected_finding": "NET_ZERO_JE_PAIR | cash out $2,200,000.00 across pairs; 1300 residual growth | JE-IC-TU-*, JE-IC-CLR-*, 2100, 1300",
+      "detective_path": [
+        "Always pull IC journals in 48-hour pairs.",
+        "Map the cash credit to TXN-MRH-* Merrimack wires.",
+        "August pair: JE-IC-TU-2026-08 $512,400.00, JE-IC-CLR-2026-08 cash $472,400.00, 1300 increase $40,000.00.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-005",
+      "title": "Wires described as an IC sweep",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2025-12-11 → 2026-09",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "bank:TXN-MRH-2025-12 through TXN-MRH-2026-08",
+        "vendor_master (no VEND-MRH-01 on master — plant the name only on the bank line, optional hidden vendor file for the plant team)",
+        "gl:1000-Cash"
+      ],
+      "expected_finding": "FAKE_INTERCOMPANY | $2,200,000.00 wires | TXN-MRH-*, memo IC SWEEP EU, EIN 83-6612045",
+      "detective_path": [
+        "UNMATCHED or JOURNAL_MATCH to JE-IC-CLR-* is not enough.",
+        "Lookup Merrimack EIN 83-6612045 in legal_entity_register: absent.",
+        "Beneficiary address 100 Low Street Newburyport. Not Amsterdam.",
+        "September has no sweep yet (sabbatical). 1300 still sits."
+      ]
+    },
+    {
+      "id": "ADV-VM-008",
+      "title": "Merrimack missing from the vendor master",
+      "domain": "vendor-master",
+      "stealth": 3,
+      "span": "2025-12-11 → 2026-09",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "vendor_master",
+        "bank:TXN-MRH-*",
+        "canonical/vendor_payments"
+      ],
+      "expected_finding": "FAKE_INTERCOMPANY | $2,200,000.00 bank-only counterparty | TXN-MRH-*, vendor_master miss",
+      "detective_path": [
+        "List bank counterparties with no vendor_id and no customer_id.",
+        "Merrimack is the largest such outflow.",
+        "Compare to Harbor Electric and Lindholm which do have vendors.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-MIX-002",
+      "title": "Fake affiliate in close, cash, forecast, and journal sample",
+      "domain": "mixed",
+      "stealth": 5,
+      "span": "2025-12 → 2026-09",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "close/tasks:TASK-BS",
+        "bank:TXN-MRH-*",
+        "reporting/forecast_lines:FC-IC-IN",
+        "audit/journal_entries:JE-IC-TU-2026-08"
+      ],
+      "expected_finding": "FAKE_INTERCOMPANY | $4,851,220.00 receivable, $2,200,000.00 cash gone | 1300, TXN-MRH-*, FC-IC-IN, JE-IC-TU-2026-08 + JE-IC-CLR-2026-08",
+      "detective_path": [
+        "Close: 1300 unsupported by legal entity.",
+        "Cash: beneficiary Newburyport.",
+        "Story: FC-IC-IN is not collectible.",
+        "Audit: sample the pair, not the true-up alone."
+      ]
+    },
+    {
+      "id": "ADV-RPT-004",
+      "title": "Forecast treats the affiliate receivable as week-8 cash",
+      "domain": "reporting",
+      "stealth": 4,
+      "span": "2026-11-02 week",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "reporting/forecast_lines:FC-IC-IN",
+        "reporting/forecast_weeks:2026-11-02",
+        "gl:1300-Due-From-Affiliate"
+      ],
+      "expected_finding": "FORECAST_BIAS_FROM_AR | $500,000.00 week 2026-11-02 | FC-IC-IN, 1300",
+      "detective_path": [
+        "List forecast lines with source_type affiliate.",
+        "Historical cash-in from Merrimack or Maximor EU BV: $0.",
+        "Remove FC-IC-IN. Week 8 operating cash drops $500,000.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-002",
+      "title": "Journal sample of a true-up that nets",
+      "domain": "audit",
+      "stealth": 4,
+      "span": "2026-08 sample",
+      "storyline": "SL-ADV-MERRIMACK",
+      "plant_objects": [
+        "audit/journal_entries:AUD-SAMP-IC-08",
+        "gl:JE-IC-TU-2026-08",
+        "gl:JE-IC-CLR-2026-08"
+      ],
+      "expected_finding": "NET_ZERO_JE_PAIR | sample PASS, pair FAIL $472,400.00 cash | AUD-SAMP-IC-08, JE-IC-CLR-2026-08",
+      "detective_path": [
+        "PASS the arithmetic on AUD-SAMP-IC-08.",
+        "Expand to related_ids on the same day+1.",
+        "JE-IC-CLR-2026-08 contains the cash credit. That is the fail.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AR-014",
+      "title": "Brightline Media monthly platform invoices",
+      "domain": "ar",
+      "stealth": 3,
+      "span": "2025-09 → 2026-09",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "ar_customers:CUST-004",
+        "ar_invoices:INV-AR-BLM-2025-09 through INV-AR-BLM-2026-09",
+        "ar_payments:PAY-BLM-*",
+        "gl:4000-Revenue"
+      ],
+      "expected_finding": "ROUND_TRIP_COUNTERPARTY | AR $419,800.00 FYTD through Aug | INV-AR-BLM-*, CUST-004, 14 Fayette Street",
+      "detective_path": [
+        "Keep CUST-004 identity.",
+        "Sum FYTD revenue $419,800.00 through August plus September open $38,200.00.",
+        "Bank inflows BRIGHTLINE MEDIA match AR.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AP-007",
+      "title": "Brightline Studio monthly retainers",
+      "domain": "ap",
+      "stealth": 4,
+      "span": "2025-09 → 2026-09",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "vendor_master:VEND-BLS-01",
+        "ap_invoices:INV-BLS-*",
+        "purchase_orders:PO-BLS-STANDING",
+        "purchase_orders:PO-BLS-SPLIT-*",
+        "employee_master:EMP-3310"
+      ],
+      "expected_finding": "ROUND_TRIP_COUNTERPARTY | AP $444,400.00 FYTD through Aug | VEND-BLS-01, CUST-004, 14 Fayette Street, EINs 27-9081144 vs 27-9081101",
+      "detective_path": [
+        "Vendor address 14 Fayette Street Somerville.",
+        "Customer Brightline Media address 14 Fayette Street (plant on CUST-004).",
+        "EIN 27-9081144 (Studio) vs 27-9081101 (Media). Consecutive.",
+        "AP FYTD $444,400.00 through August."
+      ]
+    },
+    {
+      "id": "ADV-CASH-006",
+      "title": "Net cash out on the Brightline pair",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2025-09 → 2026-09",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "bank:TXN-BLM-IN-*",
+        "bank:TXN-BLS-OUT-*",
+        "cash_recon"
+      ],
+      "expected_finding": "ROUND_TRIP_COUNTERPARTY | net cash out $26,400.00 through Aug | TXN-BLM-IN-*, TXN-BLS-OUT-*",
+      "detective_path": [
+        "Net bank counterparties containing BRIGHTLINE.",
+        "Net $2,200.00 x 13 months in span through Sep (Sep AP may still be open) = $26,400.00 through Aug, $28,600.00 if Sep paid.",
+        "Plant Sep AP unpaid so net through Aug $26,400.00 cash out, Sep inflow may already have landed.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-RPT-005",
+      "title": "Revenue and opex both inflated by Brightline",
+      "domain": "reporting",
+      "stealth": 3,
+      "span": "FY2026 YTD August",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "reporting/actuals revenue",
+        "reporting/actuals opex marketing",
+        "gl:4000-Revenue",
+        "gl:6000-Operating"
+      ],
+      "expected_finding": "ROUND_TRIP_COUNTERPARTY | YTD revenue +$419,800 and opex +$444,400 | CUST-004, VEND-BLS-01",
+      "detective_path": [
+        "Strip Brightline AR and AP from YTD.",
+        "Revenue down $419,800. Marketing down $444,400. EBITDA up $24,600.",
+        "Do not mix into GM 64→61.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-003",
+      "title": "Two Brightline legal names, one street",
+      "domain": "audit",
+      "stealth": 5,
+      "span": "2026-09 sample of 2025-09 → 2026-09",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "audit/vendors:VEND-BLS-01",
+        "ar_customers:CUST-004",
+        "vendor_master.address",
+        "ar_customers.address (new field in densify)"
+      ],
+      "expected_finding": "ROUND_TRIP_COUNTERPARTY | address join 14 Fayette Street | CUST-004, VEND-BLS-01, EMP-3310",
+      "detective_path": [
+        "Normalize street 14 Fayette St / 14 Fayette Street.",
+        "Hit: CUST-004 and VEND-BLS-01.",
+        "Add EIN consecutive numbers.",
+        "Nia Bright EMP-3310 emergency_contact at that street."
+      ]
+    },
+    {
+      "id": "ADV-MIX-004",
+      "title": "Brightline in AR, AP, cash, and board pack",
+      "domain": "mixed",
+      "stealth": 4,
+      "span": "2025-09 → 2026-09",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "ar_invoices:INV-AR-BLM-*",
+        "ap_invoices:INV-BLS-*",
+        "bank:TXN-BLM-IN-*",
+        "bank:TXN-BLS-OUT-*",
+        "reporting/actuals"
+      ],
+      "expected_finding": "ROUND_TRIP_COUNTERPARTY | four greens, net $2,200.00 per month out | CUST-004, VEND-BLS-01",
+      "detective_path": [
+        "Collect: Brightline Media 12 days late (true).",
+        "Pay: Studio within terms (true).",
+        "Cash: both MATCHED.",
+        "Story: net $2,200/month out and inflated top line."
+      ]
+    },
+    {
+      "id": "ADV-VM-009",
+      "title": "Brightline Studio standing vendor",
+      "domain": "vendor-master",
+      "stealth": 2,
+      "span": "2025-09-01 → 2026-09",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "plant_objects": [
+        "vendor_master:VEND-BLS-01",
+        "employee_master:EMP-4128",
+        "employee_master:EMP-3310"
+      ],
+      "expected_finding": "NEAR_DUPLICATE_VENDOR | created_by EMP-4128, economics with EMP-3310 | VEND-BLS-01",
+      "detective_path": [
+        "created_by USR-VM-04.",
+        "Do not attribute the round-trip cash to Dana without the Fayette join.",
+        "Use this as evidence that vendor-master control is weak, which enables Kestrel and Brightline both.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-VM-010",
+      "title": "Cambridge Properties account number after format cleanup",
+      "domain": "vendor-master",
+      "stealth": 5,
+      "span": "2026-05-22 → 2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "vendor_master:VEND-013",
+        "vendor_bank_history:VEND-013",
+        "vendor_master:VEND-CPS-01",
+        "employee_master:EMP-2201",
+        "bank:TXN-CAM-RENT-* after 2026-05-22"
+      ],
+      "expected_finding": "BANK_INSTRUMENT_DRIFT | $192,000.00 rent Jun–Sep at transposed account | VEND-013 44552109→44552190, VEND-CPS-01, EMP-2201, CTR-CAM-001",
+      "detective_path": [
+        "Diff vendor_bank_history 2026-05-22. Transposition 09→90.",
+        "Compare bank receiving_account to landlord lockbox on the lease.",
+        "Join 44552190 to VEND-CPS-01.",
+        "Rent still $48,000.00 (round, because rent is round — pair with CAM true-up cents).",
+        "Do not emit a control FAIL named vendor-bank-change. Emit BANK_INSTRUMENT_DRIFT from the field compare."
+      ]
+    },
+    {
+      "id": "ADV-AP-008",
+      "title": "CAM true-up invoices to Property Services",
+      "domain": "ap",
+      "stealth": 4,
+      "span": "2025-07 → 2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "vendor_master:VEND-CPS-01",
+        "ap_invoices:INV-CPS-*",
+        "vendor_contracts:CTR-CAM-001",
+        "purchase_orders:PO-CPS-CAM"
+      ],
+      "expected_finding": "CAM_TRUEUP_ORPHAN | $126,408.22 monthly CAM plus $18,200.00 annual CAM | INV-CPS-*, INV-CAM-CAM-2026, CTR-CAM-001",
+      "detective_path": [
+        "CTR-CAM-001 CAM_true_up_cadence = annual.",
+        "Count INV-CPS-* monthly = 15 invoices, $126,408.22.",
+        "Landlord VEND-013 already billed Q1 2026 annual CAM $18,200.00 on INV-CAM-CAM-2026.",
+        "Double bill: annual from landlord plus monthly from Services."
+      ]
+    },
+    {
+      "id": "ADV-AP-009",
+      "title": "Same month rent to two Cambridge vendors",
+      "domain": "ap",
+      "stealth": 3,
+      "span": "2026-06 → 2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "ap_invoices:INV-CAM-RENT-2026-06",
+        "ap_invoices:INV-CPS-RENT-2026-06",
+        "ap_invoices:INV-CAM-RENT-2026-08",
+        "ap_invoices:INV-CPS-RENT-2026-08"
+      ],
+      "expected_finding": "CAM_TRUEUP_ORPHAN | extra $8,000.00 June+August | INV-CPS-RENT-2026-06, INV-CPS-RENT-2026-08",
+      "detective_path": [
+        "Group AP by contract_id CTR-CAM-001 and month.",
+        "June and August have two rent-like bills.",
+        "Extra $8,000.00 is the finding inside the larger CAM skim.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-007",
+      "title": "ACH counterparty name Property SVC",
+      "domain": "cash",
+      "stealth": 3,
+      "span": "2026-06 → 2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "bank:TXN-CAM-RENT-2026-06 through 2026-09",
+        "ap_invoices:INV-CAM-RENT-*",
+        "vendor_master:VEND-013"
+      ],
+      "expected_finding": "BANK_INSTRUMENT_DRIFT | $48,000.00 monthly after May | TXN-CAM-RENT-*, counterparty CAMBRIDGE PROPERTY SVC, last4 2190",
+      "detective_path": [
+        "Compare bank counterparty to vendor_master.name.",
+        "Compare receiving_account last4 2190 vs lease lockbox 2109.",
+        "Amount match is not enough.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-005",
+      "title": "Occupancy accrued and prepaid in the same month",
+      "domain": "close",
+      "stealth": 3,
+      "span": "2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "close/accruals:ACC-CAM-2026-09",
+        "close/prepaids:PRE-CAM-Q3",
+        "ap_invoices:INV-CAM-RENT-2026-09",
+        "gl:6300-Occupancy"
+      ],
+      "expected_finding": "CAM_TRUEUP_ORPHAN | ~$48,000.00 double occupancy | ACC-CAM-2026-09, INV-CAM-RENT-2026-09, PRE-CAM-Q3, ACC-HE-2026-09 untouched",
+      "detective_path": [
+        "List occupancy charges in September GL.",
+        "Detect double count: AP invoice + accrual on the same lease month.",
+        "Keep ACC-HE-2026-09 as the clean utility accrual.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-004",
+      "title": "Vendor sample that never joins the receiving account",
+      "domain": "audit",
+      "stealth": 5,
+      "span": "2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "audit/vendors:VEND-013",
+        "vendor_bank_history:VEND-013",
+        "bank:TXN-CAM-RENT-*",
+        "audit/policy.json"
+      ],
+      "expected_finding": "BANK_INSTRUMENT_DRIFT | sample PASS on name, FAIL on account 44552190 | VEND-013, lease lockbox 44552109",
+      "detective_path": [
+        "Do not FAIL VEND-013 on DUPLICATE_VENDOR.",
+        "Join vendor_bank to bank receiving_account to lease lockbox.",
+        "Write BANK_INSTRUMENT_DRIFT on the sample expansion.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-MIX-005",
+      "title": "Cambridge rent in AP, bank, close, and facilities payroll",
+      "domain": "mixed",
+      "stealth": 4,
+      "span": "2025-07 → 2026-09",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "plant_objects": [
+        "payroll_register:ALLW-CHO",
+        "ap_invoices:INV-CPS-*",
+        "bank:TXN-CAM-RENT-*",
+        "close/accruals:ACC-CAM-2026-09",
+        "employee_master:EMP-2201"
+      ],
+      "expected_finding": "BANK_INSTRUMENT_DRIFT | rent diversion $192,000 plus CAM $126,408.22 plus stipend $18,000.00 span | EMP-2201, VEND-013, VEND-CPS-01, ALLW-CHO",
+      "detective_path": [
+        "AP: CAM monthly.",
+        "Cash: transposed rent account.",
+        "Close: double occupancy.",
+        "Payroll: ALLW-CHO $1,200.00 to the same person who submitted the bank change."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-006",
+      "title": "Cash parked in undeposited funds at month-end",
+      "domain": "close",
+      "stealth": 5,
+      "span": "2026-03-31 → 2026-08-31",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "gl:JE-CASH-PARK-2026-03",
+        "gl:JE-CASH-PARK-2026-05",
+        "gl:JE-CASH-PARK-2026-08",
+        "gl:JE-CASH-UNPARK-2026-04",
+        "gl:JE-CASH-UNPARK-2026-06",
+        "gl:1030-Undeposited-Funds",
+        "gl:1000-Cash",
+        "cash_recon/balances"
+      ],
+      "expected_finding": "NET_ZERO_JE_PAIR | $186,420.18 parked 2026-08-31, still open | JE-CASH-PARK-2026-08, DIT-FAKE-0831, 1030, 1000",
+      "detective_path": [
+        "List 1030 items older than 5 days at each close.",
+        "August park $186,420.18 still open. No bank deposit exists for that batch id DIT-FAKE-0831.",
+        "The amount equals the residual of Merrimack August wire $472,400.00 minus IC residual $40,000 minus other plugs — plant as equal to the hole Nadia needed to hide vs bank. Specify: $186,420.18 = operating book/bank gap after IC journal but before park.",
+        "Do not MATCH DIT-FAKE-0831."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-007",
+      "title": "Unpark journals with a different memo",
+      "domain": "close",
+      "stealth": 4,
+      "span": "2026-04-02 and 2026-06-02",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "gl:JE-CASH-UNPARK-2026-04",
+        "gl:JE-CASH-UNPARK-2026-06",
+        "bank_statement April and June 1st-3rd"
+      ],
+      "expected_finding": "NET_ZERO_JE_PAIR | $186,420.18 unpark without bank | JE-CASH-UNPARK-2026-04, JE-CASH-UNPARK-2026-06 vs GL-AP-HE timing kept",
+      "detective_path": [
+        "For each unpark, search next 5 bank days for $186,420.18. No hit.",
+        "Contrast with real timing item GL-AP-HE / TXN-2026-10-001 which should remain a true timing difference.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-009",
+      "title": "Payroll accrual reversed into other receivable",
+      "domain": "close",
+      "stealth": 4,
+      "span": "2026-08-31 → 2026-09-02",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "gl:JE-PR-ACC-2026-08",
+        "gl:JE-PR-SHIFT-2026-08",
+        "gl:JE-PR-AR-2026-08",
+        "gl:2200-Payroll-Accrual",
+        "gl:1350-Other-Receivable",
+        "reporting/payroll"
+      ],
+      "expected_finding": "NET_ZERO_JE_PAIR | $84,000.00 payroll expense moved to 1350 | JE-PR-SHIFT-2026-08, JE-PR-AR-2026-08, 1350",
+      "detective_path": [
+        "Split 1350 subledger by memo. Orbit vs payroll reclass vs other.",
+        "$84,000.00 payroll piece has no contractor invoice.",
+        "6100 September flux looks better by $84,000 versus budget.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CLOSE-010",
+      "title": "August effective date, September posting date, not labeled post-close",
+      "domain": "close",
+      "stealth": 5,
+      "span": "2026-09-04 posting for 2026-08-31 effective",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "canonical/journal_entries:JE-AUG-LATE-01",
+        "audit/periods:2026-08 close_timestamp",
+        "gl:JE-POST-CLOSE-001"
+      ],
+      "expected_finding": "EFFECTIVE_DATE_MISMATCH | $41,206.18 posted after August close without post_close flag | JE-AUG-LATE-01, CLOSE-2026-08, Westbrook",
+      "detective_path": [
+        "Compare posting_timestamp to close_timestamp regardless of post_close boolean.",
+        "JE-AUG-LATE-01 posted 2026-09-04T08:12:00Z > 2026-09-03T18:00:00Z.",
+        "Keep JE-POST-CLOSE-001 as the loud decoy the Kernel already finds.",
+        "Vendor on the late JE is Westbrook (Kestrel split counterpart)."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-001",
+      "title": "Reviewer ID that is a distribution list",
+      "domain": "audit",
+      "stealth": 4,
+      "span": "2026-03 → 2026-09",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "audit/approvals",
+        "employee_master",
+        "directory:USR-REV-04",
+        "gl posters USR-JE-04"
+      ],
+      "expected_finding": "SELF_APPROVAL_ALIAS | USR-REV-04 is not a person | JE-REC-PLUG-*, JE-IC-*, JE-CASH-PARK-*, USR-JE-04",
+      "detective_path": [
+        "Resolve every approver_id to an emp_id.",
+        "USR-REV-04 fails resolution.",
+        "All Nadia cosmetic JEs use this approver.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-005",
+      "title": "Two user IDs for Nadia Voss",
+      "domain": "audit",
+      "stealth": 5,
+      "span": "2022-09-08 → 2026-09",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "employee_master:EMP-1088",
+        "user_map:USR-JE-04",
+        "user_map:USR-NA-VOSS",
+        "gl:JE-PRE-OIC-EXP-*",
+        "gl:JE-PRE-OIC-REV-*"
+      ],
+      "expected_finding": "SELF_APPROVAL_ALIAS | EMP-1088 as USR-JE-04 and USR-NA-VOSS | JE-PRE-OIC-REV-*, JE-IC-TU-2026-05, JE-IC-TU-2026-07",
+      "detective_path": [
+        "Join user_map.emp_id.",
+        "Flag journals where preparer emp_id == approver emp_id even if usr_id differs.",
+        "Hits on the Orbit reversal pairs and two IC true-ups.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-FA-001",
+      "title": "Lenovo rollout capitalized beyond tagged units",
+      "domain": "prepaid-fa",
+      "stealth": 5,
+      "span": "2026-03-18 → 2026-09",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "close/fixed_assets:FA-LEN-ROLL-26",
+        "ap_invoices:INV-LEN-ROLL-26",
+        "goods_receipts:GR-LEN-ROLL",
+        "it_assets:MX-LPT-*",
+        "close/fixed_assets:FA-DELL-001",
+        "vendor_master:VEND-020"
+      ],
+      "expected_finding": "CAPITALIZED_UNRECEIVED | $154,214.00 untagged | FA-LEN-ROLL-26, GR-LEN-ROLL, 107 of 168 MX-LPT tags, VEND-020",
+      "detective_path": [
+        "Count MX-LPT tags issued in the rollout series: 107.",
+        "61 missing = $154,214.00 at $2,528.10 unit cost.",
+        "Glen Park posted GR-LEN-ROLL in 3 minutes (same pattern as Kestrel GRs).",
+        "Keep INV-018 / FA-DELL-001."
+      ]
+    },
+    {
+      "id": "ADV-FA-003",
+      "title": "Depreciation on untagged laptops",
+      "domain": "prepaid-fa",
+      "stealth": 3,
+      "span": "2026-04 → 2026-09",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "plant_objects": [
+        "runs/month_end/depreciation_schedule:FA-LEN-ROLL-26",
+        "gl:JE-FA-LEN-*",
+        "close/fixed_assets:FA-LEN-ROLL-26"
+      ],
+      "expected_finding": "CAPITALIZED_UNRECEIVED | extra dep $25,701.48 | JE-FA-LEN-*, FA-LEN-ROLL-26",
+      "detective_path": [
+        "Recompute dep on tagged cost only $428,650 * 107/168.",
+        "Extra dep $4,283.58 x 6 months = $25,701.48.",
+        "Keep Dell dep as the demo identity.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AP-010",
+      "title": "Freightline Expedite accessorial invoices",
+      "domain": "ap",
+      "stealth": 3,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-FREIGHT",
+      "plant_objects": [
+        "vendor_master:VEND-FLE-01",
+        "vendor_master:VEND-019",
+        "ap_invoices:INV-FLE-*",
+        "reporting:TXN-FRT-SEP-001"
+      ],
+      "expected_finding": "FREIGHT_SURCHARGE_SKIM | $61,288.40 | VEND-FLE-01 vs VEND-019, INV-FLE-*, PO-FLE-ACC",
+      "detective_path": [
+        "Sum INV-FLE-* $61,288.40.",
+        "BOL numbers on Expedite invoices reuse Logistics BOLs with suffix -X.",
+        "Dana Kestrel created VEND-FLE-01 on 2025-11-10.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-001",
+      "title": "Small ACH to Expedite between Logistics payments",
+      "domain": "cash",
+      "stealth": 3,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-FREIGHT",
+      "plant_objects": [
+        "bank:TXN-FLE-*",
+        "ap_invoices:INV-FLE-*",
+        "cash_recon"
+      ],
+      "expected_finding": "FREIGHT_SURCHARGE_SKIM | ~90 ACH items $61,288.40 | TXN-FLE-*",
+      "detective_path": [
+        "Do not fuzzy-merge EXPEDITE into LOGISTICS.",
+        "Exact counterparty match to VEND-FLE-01.",
+        "Count of small ACH ~90 items.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-CASH-002",
+      "title": "Grouped ACH that mixes Expedite with Kestrel",
+      "domain": "cash",
+      "stealth": 4,
+      "span": "2026-07-16 and 2026-08-20",
+      "storyline": "SL-ADV-FREIGHT",
+      "plant_objects": [
+        "bank:TXN-MIX-2026-07-16",
+        "bank:TXN-MIX-2026-08-20",
+        "canonical/vendor_payments",
+        "bank:TXN-2026-09-008"
+      ],
+      "expected_finding": "FREIGHT_SURCHARGE_SKIM | mixed grouped ACH $26,412.40 and $25,118.62 | TXN-MIX-2026-07-16, TXN-MIX-2026-08-20, EMP-4128",
+      "detective_path": [
+        "Explode TXN-MIX-2026-07-16 $26,412.40 = INV-KIS-0716 $24,880.44 + INV-FLE-0716 $1,531.96.",
+        "Keep TXN-2026-09-008 as clean Northline grouped match.",
+        "Requester on both invoices EMP-4128.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-RPT-001",
+      "title": "Freight variance of 40 basis points",
+      "domain": "reporting",
+      "stealth": 4,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-FREIGHT",
+      "plant_objects": [
+        "reporting/actuals freight",
+        "vendor_contracts:CTR-FRL-001",
+        "ap_invoices:INV-FLE-*",
+        "gross_margin_drivers (untouched)"
+      ],
+      "expected_finding": "FREIGHT_SURCHARGE_SKIM | ~40 bps; September $12,440.18 | INV-FLE-2026-09-*, CTR-FRL-001, not TXN-FRT-SEP-001",
+      "detective_path": [
+        "Compute freight / revenue with and without VEND-FLE-01.",
+        "40 bps on $31.1M Sep revenue ≈ $12,440 in September Expedite (plant Sep FLE $12,440.18).",
+        "Do not add INV-FLE to gross_margin_drivers in the loud key.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-MIX-007",
+      "title": "Freight leak in AP, bank, COGS, and Kestrel identity",
+      "domain": "mixed",
+      "stealth": 4,
+      "span": "2025-11 → 2026-09",
+      "storyline": "SL-ADV-FREIGHT",
+      "plant_objects": [
+        "vendor_master:VEND-FLE-01",
+        "vendor_master:VEND-KIS-01",
+        "bank:TXN-MIX-*",
+        "reporting/actuals freight"
+      ],
+      "expected_finding": "FREIGHT_SURCHARGE_SKIM | $61,288.40 plus pointer to VEND-KIS-01 $187,412.18 | VEND-FLE-01, VEND-KIS-01, EMP-4128",
+      "detective_path": [
+        "Vendor master created_by join.",
+        "Mixed ACH explode.",
+        "COGS 40 bps.",
+        "Then open the Kestrel related-party join."
+      ]
+    },
+    {
+      "id": "ADV-AUDIT-006",
+      "title": "Freight sample treated as ordinary recurring",
+      "domain": "audit",
+      "stealth": 3,
+      "span": "2026-09",
+      "storyline": "SL-ADV-FREIGHT",
+      "plant_objects": [
+        "audit/invoices freight sample",
+        "ap_invoices:INV-FLE-*",
+        "audit/policy.json"
+      ],
+      "expected_finding": "FREIGHT_SURCHARGE_SKIM | Logistics sample PASS, Expedite population $61,288.40 | VEND-019 sample vs VEND-FLE-01",
+      "detective_path": [
+        "Search vendor names containing Freightline, not equal Logistics.",
+        "Include VEND-FLE-01 in the freight sample expansion.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-AP-011",
+      "title": "Early-payment discount taken and then the gross paid",
+      "domain": "ap",
+      "stealth": 3,
+      "span": "2026-06-18 → 2026-07-02",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "ap_invoices:INV-KIS-0618",
+        "canonical/vendor_payments:PAY-KIS-DISC",
+        "canonical/vendor_payments:PAY-KIS-GROSS-BAL",
+        "gl:discount income",
+        "bank:TXN-KIS-0618",
+        "bank:TXN-KIS-0702"
+      ],
+      "expected_finding": "RELATED_PARTY_REMITTANCE | $482.12 discount clawback on INV-KIS-0618 | PAY-KIS-DISC, PAY-KIS-GROSS-BAL, INV-001 untouched",
+      "detective_path": [
+        "Keep INV-001 discount path clean.",
+        "Link the two Kestrel payments to one invoice.",
+        "Net cash $24,106.18 = face. Discount was a timing siphon of $482.12 for 14 days plus a books bounce.",
+        "July true-up initiator USR-VM-04."
+      ]
+    },
+    {
+      "id": "ADV-AP-012",
+      "title": "September invoice for October service",
+      "domain": "ap",
+      "stealth": 2,
+      "span": "2026-09-30",
+      "storyline": "SL-ADV-ORBIT",
+      "plant_objects": [
+        "ap_invoices:INV-OIC-PREBILL",
+        "close/prepaids (missing this item)",
+        "gl:6000-Operating",
+        "vendor_master:VEND-OIC-01"
+      ],
+      "expected_finding": "PREPAID_AMORT_MISPOSTED | $15,000.00 Q4 service expensed 2026-09-30 | INV-OIC-PREBILL, VEND-OIC-01",
+      "detective_path": [
+        "Read service_period on the invoice PDF.",
+        "Should be PRE or 1220, not 6000 in September.",
+        "$15,000.00 September opex overstated.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-FA-002",
+      "title": "Bill-and-hold cage tagged as consignment",
+      "domain": "prepaid-fa",
+      "stealth": 3,
+      "span": "2026-09-29",
+      "storyline": "SL-ADV-PINNACLE",
+      "plant_objects": [
+        "warehouse_locations:CAM-WH-01-CAGE-B",
+        "company_policies:P-INV-001",
+        "inventory:PIN-BH SKUs",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "expected_finding": "BILL_AND_HOLD | consignment cage vs $2,400,000.00 sale | CAM-WH-01-CAGE-B, P-INV-001, INV-AR-PIN-BH-01",
+      "detective_path": [
+        "Read location.consignment_customer.",
+        "Apply P-INV-001.",
+        "Reverse revenue and restore 1400.",
+        "Write the finding with the reason code, magnitude, and IDs. Do not use HUMAN_REVIEW as a Bot status."
+      ]
+    },
+    {
+      "id": "ADV-MIX-008",
+      "title": "Four storylines in one two-hour sim",
+      "domain": "mixed",
+      "stealth": 5,
+      "span": "2025-04 → 2026-09",
+      "storyline": "SL-ADV-KESTREL",
+      "plant_objects": [
+        "bank:TXN-2026-09-015",
+        "payroll_register:EMP-8891",
+        "vendor_master:VEND-KIS-01",
+        "gl:1300-Due-From-Affiliate",
+        "close/tasks:TASK-CASH",
+        "close/tasks:TASK-BS",
+        "close/tasks:TASK-PREPAID"
+      ],
+      "expected_finding": "MIXED_SABBATICAL_SURFACE | $12.40 + $146,309.45 + $187,412.18 + $4,851,220.00 | TXN-2026-09-015, EMP-8891, VEND-KIS-01, 1300",
+      "detective_path": [
+        "Start with close blockers (cash $12.40, optional prepaid GL, optional 1030 park).",
+        "Rate-test the $12.40.",
+        "Headcount vs register.",
+        "Vendor address vs employee home.",
+        "Affiliate legal-entity test."
+      ]
+    }
+  ]
+}

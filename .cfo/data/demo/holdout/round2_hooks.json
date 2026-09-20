@@ -1,0 +1,70 @@
+{
+  "note": "Private holdout. Operational Email/AP/Audit Bots must not load this file. Round 2 may add rows to these registers without rewriting plot IDs.",
+  "seed": 42,
+  "stable_id_prefixes": [
+    "INV-",
+    "HAP-",
+    "TXN-",
+    "TXN-VOL-",
+    "TXN-HIST-",
+    "JE-",
+    "VEND-",
+    "GL-",
+    "GL-VOL-",
+    "CUST-",
+    "EMP-"
+  ],
+  "do_not_retarget": [
+    "INV-001",
+    "PO-101",
+    "GR-101",
+    "INV-017",
+    "INV-AR-013",
+    "PAY-006",
+    "TXN-2026-09-015",
+    "GL-AR-NS",
+    "PAY-AP-009",
+    "JE-POST-CLOSE-001",
+    "VEND-001",
+    "VEND-001-DUP"
+  ],
+  "vendor_near_duplicates": [
+    {
+      "a": "VEND-001",
+      "b": "VEND-001-DUP",
+      "relation": "normalize_vendor already collapses this pair"
+    },
+    {
+      "a": "VEND-003",
+      "b": "VEND-030",
+      "relation": "similar legal name, different tax ID and bank \u2014 not labeled"
+    },
+    {
+      "a": "VEND-005",
+      "b": "VEND-031",
+      "relation": "similar legal name, different tax ID and bank \u2014 not labeled"
+    },
+    {
+      "a": "VEND-015",
+      "b": "VEND-032",
+      "relation": "similar utility name, different tax ID and bank \u2014 not labeled"
+    }
+  ],
+  "registers": {
+    "ap_history": "registers/ap_history.csv",
+    "gl_detail": "registers/gl_detail.csv",
+    "bank_history": "registers/bank_history.csv",
+    "payroll": "registers/payroll_register.csv",
+    "processor": "integrations/processor/card_transactions.csv",
+    "vendor_master": "canonical/vendors.json",
+    "september_bank": "cash_recon/bank_statement.json"
+  },
+  "headroom": "Trailing AP, GL, bank, and processor files are dense enough that a $2,400 monthly siphon or a 0.08% fee skim is not obvious on a 19-line statement. Do not plant that story in this round.",
+  "scenario_registry": "canonical/scenarios.json",
+  "reference_sampled": {
+    "invoice_sandbox": "document letterhead/line-item bar; gold_master PDFs not copied",
+    "apex_accounting": "workpaper density; company remains Maximor Demo Corp",
+    "dabstep": "processor column layout and 3,000-tx volume, merchants remapped",
+    "recbench": "degraded_ref / unbundle_leg / fee_inclusive description patterns on volume bank lines"
+  }
+}

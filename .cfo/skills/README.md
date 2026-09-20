@@ -88,7 +88,7 @@ These agents keep role/tool instructions only. Their remaining guidance is workf
 | --- | --- |
 | ERP Invoice Agent | Structured NetSuite/SAP/Oracle/Workday records are mapped in Python |
 | EDI / Electronic Invoicing Agent | Prefer `python_parse`; remap only empty fields. Parsing stays in Python |
-| Counterparty Message Agent | Fixture sender for inbox demos. Not a Bot. |
+| Counterparty Message Agent | Simulated Bot `world`. Persona mail. Not AP. |
 
 ## Adding a skill
 

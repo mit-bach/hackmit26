@@ -2,17 +2,32 @@
 
 from __future__ import annotations
 
+import csv
 import json
 from pathlib import Path
 from typing import Any
 
 from sample_data.context import CompanyScenarioContext, dollars
 from sample_data.schema_map import SCHEMA_VERSION
+from sample_data.world import sampled_reference_note
 
 
 def _dump(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=True) + "\n")
+
+
+def _csv(path: Path, rows: list[dict], fieldnames: list[str] | None = None) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not rows:
+        path.write_text("")
+        return
+    names = fieldnames or list(rows[0].keys())
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=names, extrasaction="ignore")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
 
 
 def _models(rows) -> list[dict]:
@@ -174,6 +189,12 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
     save("integrations/stripe/payouts.json", [item.model_dump(mode="json") for item in ctx.stripe_payouts])
 
     save("ingestion/emails.json", ctx.ingestion_emails)
+    from inbox.fixtures import full_inbox_specs
+
+    save(
+        "inbox/messages.json",
+        [item.model_dump(mode="json") for item in full_inbox_specs()],
+    )
     save("ingestion/documents.json", ctx.ingestion_documents)
     save("ingestion/erp.json", ctx.ingestion_erp)
     save("ingestion/procurement.json", ctx.ingestion_procurement)
@@ -187,6 +208,56 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
     save("canonical/journal_entries.json", [item.model_dump(mode="json") for item in ctx.journal_entries.values()])
     save("canonical/scenarios.json", _models(ctx.scenarios.values()))
     save("canonical/storylines.json", _models(ctx.storylines))
+    save("vendors.json", list(ctx.vendors.values()))
+
+    gl_rows = [
+        {
+            "entry_id": item.entry_id,
+            "period": item.period,
+            "effective_date": item.effective_date,
+            "posting_date": item.posting_date,
+            "debit_account": item.debit_account,
+            "credit_account": item.credit_account,
+            "amount_minor": item.amount_minor,
+            "amount": item.amount,
+            "memo": item.memo,
+            "vendor": item.vendor,
+            "customer": item.customer,
+            "source_document_id": item.source_document_id,
+            "transaction_id": item.transaction_id,
+            "entry_type": item.entry_type,
+            "category": item.category,
+        }
+        for item in ctx.journal_entries.values()
+    ]
+    _csv(output / "registers" / "gl_detail.csv", gl_rows)
+    written.append("registers/gl_detail.csv")
+    _csv(output / "registers" / "ap_history.csv", ctx.historical_ap_register)
+    written.append("registers/ap_history.csv")
+    _csv(output / "registers" / "bank_history.csv", ctx.bank_history)
+    written.append("registers/bank_history.csv")
+    _csv(output / "registers" / "payroll_register.csv", ctx.payroll_register)
+    written.append("registers/payroll_register.csv")
+    _csv(output / "integrations" / "processor" / "card_transactions.csv", ctx.processor_transactions)
+    written.append("integrations/processor/card_transactions.csv")
+
+    save("registers/fiscal_calendar.json", ctx.fiscal_periods)
+    save("registers/bank_accounts.json", ctx.bank_account_master)
+    save("registers/approval_matrix.json", ctx.approval_matrix)
+    save("registers/reference_sample_note.json", sampled_reference_note())
+    save("close/prior_period/2026-08/pack.json", ctx.august_close_pack)
+    save("holdout/round2_hooks.json", ctx.round2_hooks)
+
+    for rel, text in ctx.document_texts.items():
+        dest = output / "documents" / rel
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(text if text.endswith("\n") else text + "\n")
+        written.append(f"documents/{rel}")
+    for rel, text in ctx.workpapers.items():
+        dest = output / rel
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(text if text.endswith("\n") else text + "\n")
+        written.append(rel)
 
     if ctx.expected is not None:
         save("expected_results.json", ctx.expected.model_dump(mode="json"))
@@ -217,6 +288,14 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
         "scenarios": len(ctx.scenarios),
         "memory_events": len(ctx.memory_events),
         "ingestion_emails": len(ctx.ingestion_emails),
+        "inbox_messages": 17,
+        "documents": len(ctx.document_texts),
+        "historical_ap": len(ctx.historical_ap_register),
+        "bank_history": len(ctx.bank_history),
+        "payroll_register": len(ctx.payroll_register),
+        "processor_transactions": len(ctx.processor_transactions),
+        "vendors": len(ctx.vendors),
+        "workpapers": len(ctx.workpapers),
     }
     manifest_files = written + ["manifest.json"]
     save(

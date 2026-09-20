@@ -119,6 +119,12 @@ def _known(ctx: CompanyScenarioContext, ref: str) -> bool:
         or ref.startswith("CTR-")
         or ref.startswith("DOC-")
         or ref.startswith("OPEX-")
+        or ref.startswith("HAP-")
+        or ref.startswith("INV-COGS-HIST-")
+        or ref.startswith("INV-AR-HIST-")
+        or ref.startswith("TXN-VOL-")
+        or ref.startswith("TXN-HIST-")
+        or ref.startswith("HPO-")
     )
 
 
@@ -381,6 +387,86 @@ def validate_scenarios_planted(ctx: CompanyScenarioContext) -> list[str]:
     return []
 
 
+PLOT_AMOUNTS = {
+    "INV-001": 12450.0,
+    "INV-017": 10000.0,
+    "INV-AR-013": 12400.0,
+}
+
+
+def validate_plot_identities(ctx: CompanyScenarioContext) -> list[str]:
+    errors = []
+    for invoice_id, amount in PLOT_AMOUNTS.items():
+        bag = ctx.ap_invoices if invoice_id.startswith("INV-") and not invoice_id.startswith("INV-AR") else ctx.ar_invoices
+        if invoice_id not in bag:
+            errors.append(f"missing plot identity {invoice_id}")
+            continue
+        actual = bag[invoice_id].amount if invoice_id in ctx.ap_invoices else bag[invoice_id].original_amount
+        if abs(float(actual) - amount) > 0.009:
+            errors.append(f"{invoice_id} amount {actual} != {amount}")
+    if "PO-101" not in ctx.purchase_orders or "GR-101" not in ctx.goods_receipts:
+        errors.append("clean three-way PO-101 / GR-101 missing")
+    if "PAY-006" not in ctx.ar_payments:
+        errors.append("missing PAY-006")
+    if "TXN-2026-09-015" not in ctx.bank_transactions:
+        errors.append("missing TXN-2026-09-015")
+    if ctx.company.company_id != "CO-MAXIMOR" or ctx.company.legal_name != "Maximor Demo Corp":
+        errors.append("company identity is not Maximor Demo Corp")
+    return errors
+
+
+def validate_scale_floors(ctx: CompanyScenarioContext) -> list[str]:
+    errors = []
+    checks = {
+        "ap_invoices": (len(ctx.ap_invoices), 110),
+        "vendors": (len(ctx.vendors), 40),
+        "bank_transactions": (len(ctx.bank_transactions), 200),
+        "journal_entries": (len(ctx.journal_entries), 2000),
+        "historical_ap": (len(ctx.historical_ap_register), 2000),
+        "processor": (len(ctx.processor_transactions), 2000),
+        "payroll_register": (len(ctx.payroll_register), 400),
+        "documents": (len(ctx.document_texts), 80),
+    }
+    for name, (actual, floor) in checks.items():
+        if actual < floor:
+            errors.append(f"{name} count {actual} is below floor {floor}")
+    if not any(item.get("status") == "CLOSED" and item.get("period") == "2026-08" for item in ctx.fiscal_periods):
+        errors.append("August is not a closed fiscal period")
+    if not any(item.get("status") == "OPEN" and item.get("period") == "2026-09" for item in ctx.fiscal_periods):
+        errors.append("September is not the open fiscal period")
+    return errors
+
+
+def validate_document_quality(ctx: CompanyScenarioContext) -> list[str]:
+    errors = []
+    for invoice_id in ("INV-001", "INV-017", "INV-018", "INV-021"):
+        text = ctx.document_texts.get(f"invoices/{invoice_id}.txt", "")
+        if len(text) < 400:
+            errors.append(f"{invoice_id} document is only {len(text)} characters")
+        lower = text.lower()
+        if "amount due" not in lower:
+            errors.append(f"{invoice_id} document missing Amount Due")
+        if "invoice number" not in lower:
+            errors.append(f"{invoice_id} document missing Invoice Number")
+        if invoice_id == "INV-001" and "po-101" not in lower:
+            errors.append("INV-001 document missing PO-101")
+    banned = ("human_review", "this is the fraud", "planted")
+    for message in ctx.ingestion_emails:
+        blob = f"{message.get('body') or ''} " + " ".join(
+            str(item.get("text") or "") for item in message.get("attachments") or []
+        )
+        lower = blob.lower()
+        for token in banned:
+            if token in lower:
+                errors.append(f"ingestion email {message.get('message_id')} contains {token}")
+    for rel, text in ctx.document_texts.items():
+        lower = text.lower()
+        for token in banned:
+            if token in lower:
+                errors.append(f"document {rel} contains {token}")
+    return errors
+
+
 VALIDATORS = [
     validate_unique_ids,
     validate_foreign_keys,
@@ -398,6 +484,9 @@ VALIDATORS = [
     validate_audit_population_integrity,
     validate_prepaid_amortization,
     validate_scenarios_planted,
+    validate_plot_identities,
+    validate_scale_floors,
+    validate_document_quality,
 ]
 
 

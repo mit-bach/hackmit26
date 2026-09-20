@@ -44,12 +44,16 @@ Leave 8792 for the other UI agent. Do not reuse a contested 8795.
 
 `--wipe` clears inboxes, Handles, transcripts, receipts, lanes, and Pi sessions on that Computer. Roster, skills, Catalog, Grants, intercept, and `client.json` stay. Lazy spawn: a Bot starts when it has pending work. Auto-Routines stay off until `--routines`. Transcript detail defaults to **full** (Pi reasoning + tools) from `harness/client.json`.
 
+Pi conversation files (Grok/Pi chat logs) live on the Computer at `harness/bots/<botId>/pi-session/*.jsonl`, with sibling `pi-rpc.jsonl` / `pi-runtime.jsonl` / `transcript.jsonl`. That is not the Harness package folder `.harness/Harness-v2/.pi` (Pi settings only). Inspector → Sessions opens those files as a chat. Computer → Pi sessions lists them. Sidebar → Protocol is `harness/protocol.jsonl`. Tools → Demo replays that log from seq 0 (wipe look) with a slider. Awake Bots (`turn.start` without `turn.end`) spawn mosaic panes; a finished turn leaves the stage. **Record** copies protocol + transcripts to `harness/demo/latest/` so a later `--wipe` does not erase the show.
+
+Bot↔Bot handoffs are a third conversation kind (GrokBot: Operator DM, pair DM, Room). Click **Messaged @Name** to open the read-only pair log (`pair:<id>:<id>`), not the other Bot's Operator chat. Sidebar **Bot threads** lists those logs.
+
 ```bash
 curl -s http://127.0.0.1:8800/health
 curl -s http://127.0.0.1:8800/api/office
 ```
 
-`health.sidecar.port` and `office.attach.clientSkills` should be on. Fifteen Bots. Fake workers are off.
+`health.sidecar.port` and `office.attach.clientSkills` should be on. Sixteen Bots. Fake workers are off.
 
 Rebuild the Operator SPA only when `ui/` changed: `npm run ui:build`.
 
@@ -153,9 +157,9 @@ python3 main.py evaluate-cfo
 
 Operational phase cannot open `expected_results.json` or `ground_truth.json`. Production Grants omit `get_audit_ground_truth`. Stripe simulation ground truth lives under `.cfo/data/simulations/stripe/evaluation/` and is eval-only.
 
-## 8. Inbox and Stripe simulation (Kernel, not extra Bots)
+## 8. Inbox, World, and Stripe simulation
 
-These come from Rohan's `durable-inbox-ap-persistence` branch. They feed Bot `email` and Bot `stripe`. They are not a sixteenth Bot.
+Rohan's inbox Kernel feeds Bot `email`. Bot `world` is the simulated outside mailbox. It is a Source Bot. Stripe simulation feeds Bot `stripe`. Do not live-connect Gmail or Stripe.
 
 After a wipe, seed the Computer so the desk has invoices, Stripe objects, and a pay pool without a mailbox:
 
@@ -176,7 +180,9 @@ PYTHONPATH=.cfo HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer" \
 PYTHONPATH=.cfo .cfo/.venv/bin/python .cfo/main.py simulate-stripe
 ```
 
-`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`.
+`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`. Missing fields: Email `send_office_outbound` then Handle `world`.
+
+On 8800, open **World** and prompt `Send Acme's September invoice into the finance inbox`. World must compose+send. Sidecar restart is required after compile so new inbox ops appear.
 
 `simulate-stripe` unpacks payout waterfalls in Python. `invoice_candidates` stays 0. Bot `stripe` still has empty constructor Grants.
 

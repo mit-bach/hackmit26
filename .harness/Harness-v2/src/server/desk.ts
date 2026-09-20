@@ -6,6 +6,15 @@ import {
   readMemoryDoc,
   writeMemoryDoc,
 } from "../memory.ts";
+import {
+  DemoRecordingMissingError,
+  demoMeta,
+  loadDemoBundle,
+  parseDemoSourceQuery,
+  projectFrame,
+  recordDemoSession,
+  removeDemoRecording,
+} from "../demo-replay.ts";
 import { computerSkillsRoot, piRpcLogPath, piRuntimePath, protocolLogPath, rosterPath } from "../paths.ts";
 import { readProtocol, searchProtocol } from "../protocol-log.ts";
 import { findBot, findRoom, loadRoster, saveRoster } from "../roster.ts";
@@ -533,7 +542,7 @@ function commsBody(computerRoot: string): Record<string, unknown> {
     computerRoot,
     roster: rosterPath(computerRoot),
     protocol: protocolLogPath(computerRoot),
-    bots: "harness/bots/<botId>/{inbox.jsonl,handles/*.json,transcript.jsonl,memory/}",
+    bots: "harness/bots/<botId>/{inbox.jsonl,handles/*.json,transcript.jsonl,pi-session/*.jsonl,pi-rpc.jsonl,memory/}",
     rooms: "harness/rooms/<roomId>/log.jsonl",
     intercept: "harness/intercept.json",
     extensions: "harness/extensions.json",
@@ -1103,6 +1112,42 @@ export function handleDeskCompat(
       });
     }
     return { status: 200, body: { ...publicOperatorConfig(), extra: collectExtraExtensionPaths({ computerRoot, config: loadOperatorConfig() }) } };
+  }
+
+  if (method === "GET" && path === "/api/demo/meta") {
+    return { status: 200, body: demoMeta(computerRoot, parseDemoSourceQuery(url.searchParams.get("source"))) };
+  }
+
+  if (method === "GET" && path === "/api/demo/frame") {
+    try {
+      const bundle = loadDemoBundle(computerRoot, parseDemoSourceQuery(url.searchParams.get("source")));
+      const seq = Number(url.searchParams.get("seq") ?? "0");
+      return { status: 200, body: projectFrame(bundle, Number.isFinite(seq) ? seq : 0) };
+    } catch (cause) {
+      if (cause instanceof DemoRecordingMissingError) {
+        return { status: 404, body: { error: cause.message } };
+      }
+      throw cause;
+    }
+  }
+
+  if (method === "GET" && path === "/api/demo") {
+    try {
+      return { status: 200, body: loadDemoBundle(computerRoot, parseDemoSourceQuery(url.searchParams.get("source"))) };
+    } catch (cause) {
+      if (cause instanceof DemoRecordingMissingError) {
+        return { status: 404, body: { error: cause.message } };
+      }
+      throw cause;
+    }
+  }
+
+  if (method === "POST" && path === "/api/demo/record") {
+    return { status: 200, body: recordDemoSession(computerRoot) };
+  }
+
+  if (method === "DELETE" && path === "/api/demo/record") {
+    return { status: 200, body: { ok: removeDemoRecording(computerRoot) } };
   }
 
   return undefined;

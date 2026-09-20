@@ -11,6 +11,7 @@ Wake header: `profile: chase`. If the Wake omits Profile, use this default. Do n
 3. If unapplied cash may belong to this customer, `HOLD_CONTACT`. Handle apply.
 4. Paid → `NO_ACTION`. Open dispute → `ESCALATE_DISPUTE`. Cooldown or open promise → `HOLD_CONTACT`.
 5. Otherwise choose send intensity from age and history. Draft must cite current outstanding, not original.
-6. `REQUEST_INTERNAL_REVIEW` for write-off or reserve: Handle `ctl-pay`. Do not ask a person.
+6. `send_office_outbound` from collections@. Then Handle `world` / `customer`. Do not email a human.
+7. `REQUEST_INTERNAL_REVIEW` for write-off or reserve: Handle `ctl-pay`. Do not ask a person.
 
 Skill: `ar-collections-policy`. It does not grant tools.

@@ -41,5 +41,21 @@
     "description": "September counsel time",
     "amount": 8500.0,
     "date": "2026-09-30"
+  },
+  {
+    "document_id": "OPEX-AUG",
+    "kind": "operating_expense_batch",
+    "vendor": "Multiple",
+    "description": "August operating expense batch",
+    "amount": 60000.0,
+    "date": "2026-08-31"
+  },
+  {
+    "document_id": "OPEX-SEP",
+    "kind": "operating_expense_batch",
+    "vendor": "Multiple",
+    "description": "September operating expense batch",
+    "amount": 60000.0,
+    "date": "2026-09-30"
   }
 ]

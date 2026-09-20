@@ -51,6 +51,8 @@ function resolvePiCli(): string | undefined {
 }
 
 const eventSeq = new Map<string, number>();
+/** One chip id per Kernel/Pi toolCallId so start and end patch the same row. */
+const publishedToolIds = new Map<string, Set<string>>();
 
 function nextEventId(botId: string): string {
   const n = (eventSeq.get(botId) ?? 0) + 1;
@@ -88,20 +90,30 @@ function publishRuntime(
   bus?.publish({ kind: "runtime", slug, botId, event });
 }
 
+function toolChipMessageId(chipId: string): string {
+  return `tool-${chipId}`;
+}
+
 function publishActivity(
   bus: EventBus | undefined,
+  _computerRoot: string,
   botId: string,
   chip: PiActivityChip,
 ): void {
   if (!bus) {
     return;
   }
-  const suffix = chip.ok === undefined ? "run" : "done";
-  const id = `tool-${chip.id}-${suffix}`;
-  const parentId = ombChainParent(botId);
-  ombAdoptLeaf(botId, id);
+  const id = toolChipMessageId(chip.id);
+  const seen = publishedToolIds.get(botId) ?? new Set<string>();
+  const exists = seen.has(id);
+  const parentId = exists ? undefined : ombChainParent(botId);
+  if (!exists) {
+    ombAdoptLeaf(botId, id);
+    seen.add(id);
+    publishedToolIds.set(botId, seen);
+  }
   bus.publish({
-    kind: "message",
+    kind: exists ? "message.patch" : "message",
     threadId: botId,
     message: {
       id,
@@ -109,7 +121,7 @@ function publishActivity(
       kind: "activity",
       text: chip.spoken,
       at: Date.now(),
-      parentId,
+      ...(parentId !== undefined ? { parentId } : {}),
       tool: {
         name: chip.name,
         spoken: chip.spoken,
@@ -140,7 +152,7 @@ function foldRpcChunk(
     publishRuntime(computerRoot, bus, slug, botId, event);
   }
   if (folded.activity) {
-    publishActivity(bus, botId, folded.activity);
+    publishActivity(bus, computerRoot, botId, folded.activity);
   }
 }
 
@@ -309,12 +321,16 @@ export async function startSupervisor(options: SupervisorOptions): Promise<Super
   }
 
   const watch = setInterval(() => {
-    for (const bot of rosterOf().bots) {
-      const status = liveStatus(options.computerRoot, bot.id);
-      const pending = pendingCount(options.computerRoot, bot.id);
-      if (status === "offline" && (pending > 0 || !options.lazy)) {
-        ensure(bot.slug);
+    try {
+      for (const bot of rosterOf().bots) {
+        const status = liveStatus(options.computerRoot, bot.id);
+        const pending = pendingCount(options.computerRoot, bot.id);
+        if (status === "offline" && (pending > 0 || !options.lazy)) {
+          ensure(bot.slug);
+        }
       }
+    } catch {
+      // keep the supervisor up if roster.json is mid-write
     }
   }, 2000);
   timers.push(watch);

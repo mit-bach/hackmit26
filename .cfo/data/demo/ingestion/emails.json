@@ -6,13 +6,81 @@
     "to": "ap@maximor.example",
     "subject": "Invoice ACM-2026-4410 from Acme Supplies",
     "sent_at": "2026-09-08T10:00:00Z",
-    "body": "Please find invoice ACM-2026-4410 for $12,450.00. PO-101.",
+    "body": "Hello Maximor AP,\n\nPlease find invoice ACM-2026-4410 for standing desks and monitors. The order is PO-101. Goods were received at Dock B on 2026-09-05 (GR-101). Terms are 2/10 net 30; a 2% discount is available through 2026-09-18.\n\nRemit ACH to First National Bank routing 011000390 account ****4410 and include ACM-2026-4410 on the payment advice.\n\nThank you,\nAcme Supplies billing desk\n180 Northern Avenue, Suite 400, Boston, MA 02210\nbilling@acmesupplies.example",
     "attachments": [
       {
         "attachment_id": "ATT-E-001",
         "filename": "ACM-2026-4410.pdf",
         "content_type": "application/pdf",
-        "text": "INVOICE ACM-2026-4410\nVendor: Acme Supplies\nAmount: 12450.00\nPO: PO-101"
+        "text": "Acme Supplies, Inc.\n180 Northern Avenue, Suite 400\nBoston, MA 02210\nPhone +1 617-555-0140   billing@acmesupplies.example\nTax ID 04-2218891\n\nINVOICE\n\nInvoice Number: ACM-2026-4410\nInvoice Date: 2026-09-08\nDue Date: 2026-09-22\nPO Number: PO-101\nPayment Terms: 2/10 net 30\nCurrency: USD\nVendor: Acme Supplies\n\nBill To:\nMaximor Demo Corp\nAccounts Payable\n245 Main Street, Floor 4\nCambridge, MA 02142\nUnited States\nap@maximor.example\nEIN 04-3829107\n\nDescription                                    Qty          Unit        Amount\n------------------------------------------------------------------------------\nApex standing desk, maple, 72-inch           10.00        890.00      8,900.00\n27-inch 4K monitor, height-adjust arm        10.00        355.00      3,550.00\n\nSubtotal                                                             12,450.00\nTax                                                                       0.00\nAmount Due                                                           12,450.00\n\nRemit to:\nACH routing 011000390  account ****4410\nBank: First National Bank  ****4410\nPlease include invoice ACM-2026-4410 on the payment advice.\nLate payments may accrue a 1.5% monthly finance charge after the due date.\nQuestions: billing@acmesupplies.example\n\nEarly payment discount 2% if paid by 2026-09-18 (2/10 net 30).\nPacking list PL-101 / goods receipt GR-101 at Dock B.\n"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-MESSY",
+    "period": "2026-09",
+    "from": "billing@northline.example",
+    "to": "ap@maximor.example",
+    "subject": "inv nf-201   pls pay",
+    "sent_at": "2026-09-04T16:22:00Z",
+    "body": "Hi AP \u2014 scanned copy attached, sorry for the quality. Northline Fabrication lot NF-201 against PO-201. Please process when you can read the header.\n\nRegards,\nWarehouse billing\nNorthline Fabrication Corp.\n55 Industrial Way, Somerville, MA 02143",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-MESSY",
+        "filename": "nf201-scan.txt",
+        "content_type": "text/plain",
+        "text": "Northline Fabrication\n55 Industrial Way\nSomerville, MA 02143\nPhone +1 617-555-2201   ar@northline.example\nTax ID 04-5510298\n\n1NVOICE\n\nInvoice Number: NF-201\nInvoice Date: 2026-09-04\nDue Date: 2026-09-20\nPO Number: PO-201\nPayment Terms: net 15\nCurrency: USD\nVendor: Northline Fabrication\n\nBill To:\nMaximor Demo Corp\nAccounts Payable\n245 Main Street, Floor 4\nCambridge, MA 02142\nUnited States\nap@maximor.example\nEIN 04-3829107\n\nDescription                                    Qty          Unit        Amount\n------------------------------------------------------------------------------\nCNC bracket lot NF-201                        1.00      5,000.00      5,000.00\n\nSubtotal                                                              5,000.00\nTax                                                                       0.00\nAmount Due                                                            5,000.00\n\nRemit to:\nACH Citizens routing 011500120  account ****2010\nBank: Citizens Bank  ****2010\nPlease include invoice NF-201 on the payment advice.\nLate payments may accrue a 1.5% monthly finance charge after the due date.\nQuestions: ar@northline.example\n"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-INFER",
+    "period": "2026-09",
+    "from": "billing@acmesupplies.example",
+    "to": "ap@maximor.example",
+    "subject": "Invoice ACM-2026-4411",
+    "sent_at": "2026-09-10T09:15:00Z",
+    "body": "Attached is the second Cambridge shipment billed as ACM-2026-4411. The header omitted our legal name; Acme Supplies is the vendor on PO-101 and CASE-001 already confirmed the Acme Supply Co. alias.\n\nAccounts receivable\nAcme Supplies, Inc.",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-INFER",
+        "filename": "ACM-2026-4411.pdf",
+        "content_type": "application/pdf",
+        "text": "Acme Supplies, Inc. d/b/a Acme Supply Co.\n180 Northern Avenue, Suite 400\nBoston, MA 02210\nPhone +1 617-555-0140   billing@acmesupplies.example\nTax ID 04-2218891\n\nINVOICE\n\nInvoice Number: ACM-2026-4411\nInvoice Date: 2026-09-10\nDue Date: 2026-09-24\nPO Number: PO-101\nPayment Terms: 2/10 net 30\nCurrency: USD\nVendor: Acme Supply Co.\n\nBill To:\nMaximor Demo Corp\nAccounts Payable\n245 Main Street, Floor 4\nCambridge, MA 02142\nUnited States\nap@maximor.example\nEIN 04-3829107\n\nDescription                                    Qty          Unit        Amount\n------------------------------------------------------------------------------\nApex standing desk, maple, 72-inch           10.00        890.00      8,900.00\n27-inch 4K monitor, height-adjust arm        10.00        355.00      3,550.00\n\nSubtotal                                                             12,450.00\nTax                                                                       0.00\nAmount Due                                                           12,450.00\n\nRemit to:\nACH routing 011000390  account ****4410\nBank: First National Bank  ****4410\nPlease include invoice ACM-2026-4411 on the payment advice.\nLate payments may accrue a 1.5% monthly finance charge after the due date.\nQuestions: billing@acmesupplies.example\n"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-MISSING",
+    "period": "2026-09",
+    "from": "unknown@vendor.example",
+    "to": "ap@maximor.example",
+    "subject": "Please process the attached invoice",
+    "sent_at": "2026-09-11T14:00:00Z",
+    "body": "Please process the attached invoice for last week's delivery.\n\nWe will send a complete bill if this scan is unreadable.\n",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-MISSING",
+        "filename": "invoice-unknown.pdf",
+        "content_type": "application/pdf",
+        "text": "Please process the attached invoice.\nNo amount, vendor, or invoice number is printed.\nScan quality is too poor to recover the header.\nContact unknown@vendor.example if you can identify the shipment.\n"
+      }
+    ]
+  },
+  {
+    "message_id": "MSG-E-DUP-001",
+    "period": "2026-09",
+    "from": "ap@acmesupplies.example",
+    "to": "ap@maximor.example",
+    "subject": "FW: Invoice ACM-2026-4410 from Acme Supplies",
+    "sent_at": "2026-09-08T15:40:00Z",
+    "body": "Resending in case the first copy of ACM-2026-4410 was missed. Same invoice, same PO-101, same $12,450.00. Please do not pay twice.\n\nBilling\nAcme Supplies, Inc.\n180 Northern Avenue, Boston, MA 02210",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-DUP-001",
+        "filename": "ACM-2026-4410-copy.pdf",
+        "content_type": "application/pdf",
+        "text": "Acme Supplies, Inc.\n180 Northern Avenue, Suite 400\nBoston, MA 02210\nPhone +1 617-555-0140   billing@acmesupplies.example\nTax ID 04-2218891\n\nINVOICE\n\nInvoice Number: ACM-2026-4410\nInvoice Date: 2026-09-08\nDue Date: 2026-09-22\nPO Number: PO-101\nPayment Terms: 2/10 net 30\nCurrency: USD\nVendor: Acme Supplies\n\nBill To:\nMaximor Demo Corp\nAccounts Payable\n245 Main Street, Floor 4\nCambridge, MA 02142\nUnited States\nap@maximor.example\nEIN 04-3829107\n\nDescription                                    Qty          Unit        Amount\n------------------------------------------------------------------------------\nApex standing desk, maple, 72-inch           10.00        890.00      8,900.00\n27-inch 4K monitor, height-adjust arm        10.00        355.00      3,550.00\n\nSubtotal                                                             12,450.00\nTax                                                                       0.00\nAmount Due                                                           12,450.00\n\nRemit to:\nACH routing 011000390  account ****4410\nBank: First National Bank  ****4410\nPlease include invoice ACM-2026-4410 on the payment advice.\nLate payments may accrue a 1.5% monthly finance charge after the due date.\nQuestions: billing@acmesupplies.example\n\nEarly payment discount 2% if paid by 2026-09-18 (2/10 net 30).\nPacking list PL-101 / goods receipt GR-101 at Dock B.\n"
       }
     ]
   },
@@ -23,13 +91,13 @@
     "to": "ap@maximor.example",
     "subject": "Quote Q-8891 for additional standing desks",
     "sent_at": "2026-09-09T11:40:00Z",
-    "body": "This is a quotation, not a request for payment until you issue a PO.",
+    "body": "This is a quotation, not a request for payment until you issue a PO. Quote Number Q-8891 covers additional standing desks if you want a second lot.\n\nSales\nAcme Supplies, Inc.",
     "attachments": [
       {
         "attachment_id": "ATT-E-QUOTE",
         "filename": "Q-8891-quote.pdf",
         "content_type": "application/pdf",
-        "text": "QUOTATION Q-8891\nNot an invoice."
+        "text": "Acme Supplies, Inc.\n180 Northern Avenue, Suite 400\nBoston, MA 02210\nbilling@acmesupplies.example\n\nQUOTATION\n\nQuote Number: Q-8891\nQuoted amount: $12,450.00\nEstimate valid until 2026-10-01\nThis promotional invoice-ready catalog is a quote, not a request for payment.\nNo invoice number is issued until you return a signed purchase order.\n\nBill To:\nMaximor Demo Corp\nAccounts Payable\n245 Main Street, Floor 4\nCambridge, MA 02142\nUnited States\nap@maximor.example\nEIN 04-3829107\n\nDescription                                    Qty          Unit        Amount\n------------------------------------------------------------------------------\nApex standing desk, maple, 72-inch           10.00        890.00      8,900.00\n27-inch 4K monitor, height-adjust arm        10.00        355.00      3,550.00\n\nQuoted total                                                         12,450.00\n\nThis is a quotation. Do not pay against this document.\n"
       }
     ]
   },
@@ -40,13 +108,13 @@
     "to": "ap@maximor.example",
     "subject": "Account statement September 2026",
     "sent_at": "2026-09-30T08:00:00Z",
-    "body": "Attached is your monthly statement of open items. This is not an invoice.",
+    "body": "Attached is your monthly statement of open items. This is not an invoice. Please match the listed Office Depot invoices to your AP subledger.\n\nStatements desk\nOffice Depot, LLC",
     "attachments": [
       {
         "attachment_id": "ATT-E-STMT",
         "filename": "statement-sep.pdf",
         "content_type": "application/pdf",
-        "text": "STATEMENT of account. Balance brought forward. Not an invoice."
+        "text": "Office Depot, LLC\n6600 North Military Trail\nBoca Raton, FL 33496\n\nStatement of Account\nThis is not an invoice.\nAccount statement for September 2026.\nCustomer: Maximor Demo Corp  (CO-MAXIMOR)\n\nOpen invoices:\n  OD-DISC-2100               2,100.00\n  OD-HOLD-9912               3,280.00\n\nBalance brought forward                    5,380.00\nPlease remit against the listed invoice numbers. Do not pay this statement as a bill.\n"
       }
     ]
   },
@@ -57,13 +125,13 @@
     "to": "ap@maximor.example",
     "subject": "Uber receipt for campus visit",
     "sent_at": "2026-09-12T18:00:00Z",
-    "body": "Receipt for $42.10. This is a payment confirmation / receipt, not a vendor invoice.",
+    "body": "Uber trip receipt for a campus visit on 2026-09-12. Fare $42.10 charged to the corporate card ending 4410. This is a payment confirmation / receipt, not a vendor invoice.\n\nRider: Maya Ortiz\nPickup: Kendall Square  Dropoff: 245 Main Street",
     "attachments": [
       {
         "attachment_id": "ATT-E-RCPT",
         "filename": "uber-receipt.pdf",
         "content_type": "application/pdf",
-        "text": "RECEIPT. Paid. Thank you. Not an invoice."
+        "text": "UBER\nTrip receipt\nFare 42.10 USD\nDate 2026-09-12\nThis is a payment confirmation / receipt, not a vendor invoice.\nCard \u2022\u2022\u2022\u20224410  Rider Maya Ortiz\nPickup Kendall T  Dropoff Maximor HQ Dock B\n"
       }
     ]
   },
@@ -74,7 +142,7 @@
     "to": "ap@maximor.example",
     "subject": "New Slack AI features \u2014 limited time",
     "sent_at": "2026-09-08T16:02:00Z",
-    "body": "Upgrade your workspace with Slack AI. Unsubscribe anytime. This newsletter is not an invoice.",
+    "body": "Upgrade your workspace with Slack AI. Limited time for Business+ customers. Unsubscribe anytime. This newsletter is not an invoice.\n\nSlack marketing  \u00b7  500 Howard Street, San Francisco, CA 94105",
     "attachments": []
   },
   {
@@ -84,13 +152,13 @@
     "to": "ap@maximor.example",
     "subject": "PO-101 issued to Acme Supplies",
     "sent_at": "2026-09-02T09:00:00Z",
-    "body": "Purchase order PO-101 has been issued. This is a PO, not a vendor invoice.",
+    "body": "Purchase order PO-101 has been issued to Acme Supplies for office equipment authorized at $12,450.00. This is a PO, not a vendor invoice.\n\nProcurement\nMaximor Demo Corp",
     "attachments": [
       {
         "attachment_id": "ATT-E-PO",
         "filename": "PO-101.pdf",
         "content_type": "application/pdf",
-        "text": "PURCHASE ORDER PO-101\nAcme Supplies\nAuthorized 12450.00"
+        "text": "MAXIMOR DEMO CORP\nProcurement  \u00b7  245 Main Street, Cambridge, MA 02142\n\nPURCHASE ORDER\n\nPurchase Order PO-101\nPO Number: PO-101\nIssued: 2026-09-02\nVendor: Acme Supplies\nVendor legal name: Acme Supplies, Inc.\nVendor tax ID: 04-2218891\nAuthorized amount: 12,450.00\nCurrency: USD\nApprover: Jordan Hale\nShip to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142\n\nDescription\nOffice equipment\n\nThis purchase order is not an invoice. The vendor must bill against PO-101.\nPayment terms follow the vendor master unless this order states otherwise.\n"
       }
     ]
   }

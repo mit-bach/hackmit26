@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-360
+PO Number: PO-360
+Vendor: Orbit Analytics
+Goods received in full on 2026-09-07
+Packing list attached: PL-GR-360
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 666.17 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

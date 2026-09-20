@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_ctl_pay",
+  "threadId": "pair:bot_ap:bot_ctl_pay",
+  "name": "AP ↔ ctl-pay",
+  "memberIds": [
+    "bot_ap",
+    "bot_ctl_pay"
+  ],
+  "createdAt": 1789903117078,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_66d8b6e6-8c3f-415b-8871-7bc98b6466da",
+      "handleId": "h_66d8b6e6-8c3f-415b-8871-7bc98b6466da",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-match\npath: workspace/ap/packets/INV-S12.json\nApprove-shaped draft. Concur or refuse. Never a person.",
+      "at": 1789903117078,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "pair-result-h_66d8b6e6-8c3f-415b-8871-7bc98b6466da",
+      "handleId": "h_66d8b6e6-8c3f-415b-8871-7bc98b6466da",
+      "role": "bot",
+      "kind": "text",
+      "text": "**REFUSE** concurrence on INV-S12.\n\n- Packet `workspace/ap/packets/INV-S12.json` is incomplete: only `proposal: APPROVE` with no match facts, exception_types, PO/receipt IDs, or evidence cites.\n- Kernel `tools.get_case_evidence` for `INV-S12`: **not found** — no three-way match facts to re-perform.\n- Standing rule: concur only when the Kernel already allows and the packet is complete. Neither holds.\n\nNo APPROVE path. AP must resubmit a complete packet backed by live Kernel evidence.",
+      "at": 1789903142375,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    }
+  ]
+}

@@ -33,4 +33,4 @@ Adapters (never silent copies):
 - PrepaidItem / FixedAsset → close seed files + reporting opex lines
 """
 
-SCHEMA_VERSION = "2026.09-cfo-sample-1"
+SCHEMA_VERSION = "2026.09-cfo-sample-2"

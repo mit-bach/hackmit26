@@ -7,5 +7,14 @@
     "content_type": "application/pdf",
     "text": "QUOTATION Q-8891. This is not an invoice.",
     "received_date": "2026-09-09"
+  },
+  {
+    "document_id": "DOC-SCAN-INV-001",
+    "period": "2026-09",
+    "origin": "mailroom_scan",
+    "filename": "acm-2026-4410.pdf",
+    "content_type": "application/pdf",
+    "text": "Acme Supplies, Inc.\n180 Northern Avenue, Suite 400\nBoston, MA 02210\nPhone +1 617-555-0140   billing@acmesupplies.example\nTax ID 04-2218891\n\nINVOICE\n\nInvoice Number: ACM-2026-4410\nInvoice Date: 2026-09-08\nDue Date: 2026-09-22\nPO Number: PO-101\nPayment Terms: 2/10 net 30\nCurrency: USD\nVendor: Acme Supplies\n\nBill To:\nMaximor Demo Corp\nAccounts Payable\n245 Main Street, Floor 4\nCambridge, MA 02142\nUnited States\nap@maximor.example\nEIN 04-3829107\n\nDescription                                    Qty          Unit        Amount\n------------------------------------------------------------------------------\nApex standing desk, maple, 72-inch           10.00        890.00      8,900.00\n27-inch 4K monitor, height-adjust arm        10.00        355.00      3,550.00\n\nSubtotal                                                             12,450.00\nTax                                                                       0.00\nAmount Due                                                           12,450.00\n\nRemit to:\nACH routing 011000390  account ****4410\nBank: First National Bank  ****4410\nPlease include invoice ACM-2026-4410 on the payment advice.\nLate payments may accrue a 1.5% monthly finance charge after the due date.\nQuestions: billing@acmesupplies.example\n\nEarly payment discount 2% if paid by 2026-09-18 (2/10 net 30).\nPacking list PL-101 / goods receipt GR-101 at Dock B.\n",
+    "received_date": "2026-09-08"
   }
 ]

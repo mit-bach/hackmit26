@@ -18,9 +18,11 @@ import type { SidecarHandle } from "../sidecar.ts";
 import { transcriptTail } from "../transcript-tail.ts";
 import type { ApprovalLevel, BotRecord, ProtocolEvent, Roster } from "../types.ts";
 import { wipeRuntime } from "../wipe.ts";
+import { isPeerHandoff } from "./pair-channels.ts";
 import type { EventBus } from "./bus.ts";
 import { listComputerTree, readComputerFile, writeComputerFile } from "./computer-tree.ts";
 import { loadOperatorConfig, publicOperatorConfig } from "./operator-config.ts";
+import { listPiSessions, readPiSession } from "./pi-sessions.ts";
 import type { Supervisor } from "./supervisor.ts";
 
 const BOT_COLORS = ["teal", "amber", "violet", "rose", "sky", "lime"] as const;
@@ -103,11 +105,19 @@ export function toOperatorBot(computerRoot: string, bot: BotRecord, index: numbe
 }
 
 export function messagesForBot(computerRoot: string, botId: string, limit = 200): OperatorMessage[] {
+  const roster = loadRoster(computerRoot);
   const rows = transcriptTail(computerRoot, botId, limit);
   const messages: OperatorMessage[] = [];
   const seenUser = new Set<string>();
   for (const row of rows) {
     if (row.kind === "poke" || row.kind === "send.queued") {
+      continue;
+    }
+    if (
+      isPeerHandoff(roster, row.from, row.to) &&
+      row.kind !== "handoff.sent" &&
+      row.kind !== "handoff.received"
+    ) {
       continue;
     }
     let role: OperatorMessage["role"] = "bot";
@@ -121,9 +131,19 @@ export function messagesForBot(computerRoot: string, botId: string, limit = 200)
       }
       seenUser.add(key);
     } else if (row.kind === "turn.start") {
-      role = "system";
-      kind = "activity";
-      text = "running";
+      const wake = /^wake from [^:]+:\s*/i.exec(text);
+      const prompt = wake ? text.slice(wake[0].length) : text;
+      if (prompt.trim().length === 0) {
+        continue;
+      }
+      role = "user";
+      kind = "text";
+      text = prompt;
+      const key = `${row.handleId ?? ""}:${text}`;
+      if (seenUser.has(key)) {
+        continue;
+      }
+      seenUser.add(key);
     } else if (
       row.kind === "turn.end" ||
       row.kind === "result" ||
@@ -133,8 +153,12 @@ export function messagesForBot(computerRoot: string, botId: string, limit = 200)
       role = "bot";
       const stripped = text.replace(/^[^\n]*finished handle \S+:\s*/i, "").replace(/^[^\n]*cancelled handle \S+:\s*/i, "");
       text = stripped.length > 0 ? stripped : text;
-    } else if (row.kind === "handoff.sent") {
-      continue;
+    } else if (row.kind === "handoff.sent" || row.kind === "handoff.received") {
+      role = "bot";
+      kind = "activity";
+      if (text.trim().length === 0) {
+        continue;
+      }
     } else if (row.kind.startsWith("send.") || row.kind === "activity") {
       role = "system";
       kind = "activity";
@@ -285,6 +309,24 @@ export async function handleOperatorApi(
     if (method === "GET" && rest === "/messages") {
       const limit = Number(url.searchParams.get("limit") ?? "200");
       return { status: 200, body: messagesForBot(computerRoot, bot.id, Number.isFinite(limit) ? limit : 200) };
+    }
+    if (method === "GET" && rest === "/sessions") {
+      return {
+        status: 200,
+        body: {
+          sessionDir: piSessionDir(computerRoot, bot.id),
+          sessions: listPiSessions(computerRoot, bot.id),
+        },
+      };
+    }
+    const sessionOne = /^\/sessions\/([^/]+)$/.exec(rest);
+    if (method === "GET" && sessionOne) {
+      const name = decodeURIComponent(sessionOne[1] ?? "");
+      const session = readPiSession(computerRoot, bot.id, name);
+      if (!session) {
+        return { status: 404, body: { error: "no such session" } };
+      }
+      return { status: 200, body: session };
     }
     if (method === "POST" && rest === "/messages") {
       const text = isRecord(body) && typeof body.text === "string" ? body.text : "";

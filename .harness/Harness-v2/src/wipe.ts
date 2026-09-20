@@ -20,6 +20,7 @@ import {
   roomDir,
   roomLogPath,
   seqPath,
+  threadsDir,
   transcriptPath,
 } from "./paths.ts";
 
@@ -86,7 +87,9 @@ function wipeRunsTree(computerRoot: string, cleared: string[]): void {
 
 /**
  * Drop session runtime on this Computer. Roster, skills, Catalog, Grants,
- * intercept, client.json, and workspace files stay. Benchmarks start here.
+ * intercept, client.json, workspace files, and harness/demo recordings stay.
+ * Benchmarks start here. Record a demo before wipe if the Operator still
+ * needs to replay this session.
  */
 export function wipeRuntime(computerRoot: string, options: WipeOptions = {}): WipeReport {
   const roster = loadRoster(computerRoot);
@@ -97,6 +100,7 @@ export function wipeRuntime(computerRoot: string, options: WipeOptions = {}): Wi
   emptyDir(approvalDir(computerRoot), cleared, "harness/approvals");
   emptyDir(receiptDir(computerRoot), cleared, "harness/receipts");
   emptyDir(leaseDir(computerRoot), cleared, "harness/leases");
+  emptyDir(threadsDir(computerRoot), cleared, "harness/threads");
   for (const bot of roster.bots) {
     resetFile(inboxPath(computerRoot, bot.id), cleared, `bots/${bot.slug}/inbox`);
     resetFile(transcriptPath(computerRoot, bot.id), cleared, `bots/${bot.slug}/transcript`);

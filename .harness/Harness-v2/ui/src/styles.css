@@ -1370,3 +1370,34 @@ button:disabled.bg-danger {
 [data-sidebar] :is(button, [role="button"]):not(:disabled, [aria-busy="true"]) {
   cursor: pointer;
 }
+
+.demo-mosaic-cell {
+  transition:
+    left var(--demo-linger, 560ms) cubic-bezier(0.22, 1, 0.36, 1),
+    top var(--demo-linger, 560ms) cubic-bezier(0.22, 1, 0.36, 1),
+    width var(--demo-linger, 560ms) cubic-bezier(0.22, 1, 0.36, 1),
+    height var(--demo-linger, 560ms) cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 420ms ease,
+    transform 420ms ease;
+}
+.demo-mosaic-cell[data-exiting="true"] {
+  opacity: 0;
+  transform: scale(0.985);
+  pointer-events: none;
+}
+.demo-stream-caret {
+  display: inline-block;
+  width: 0.085em;
+  height: 0.95em;
+  margin-left: 0.12em;
+  background: currentColor;
+  animation: demo-caret 0.9s steps(1) infinite;
+  vertical-align: -0.08em;
+}
+@keyframes demo-caret {
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-mosaic-cell { transition: none; }
+  .demo-stream-caret { animation: none; }
+}

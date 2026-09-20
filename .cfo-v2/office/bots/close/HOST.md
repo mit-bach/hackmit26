@@ -4,7 +4,7 @@ Kernel module: `close.host.run_close_host`.
 Routine: `month-end`.
 First Profile: `coordinate`.
 
-This host is the month-end control plane for Bot `close`. It is not a sixteenth Bot. It is not `Runner.run_sync`. It does not lock.
+This host is the month-end control plane for Bot `close`. It is not a seventeenth Bot. It is not `Runner.run_sync`. It does not lock.
 
 ## Sequence
 

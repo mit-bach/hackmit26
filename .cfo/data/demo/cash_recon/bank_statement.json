@@ -232,9 +232,9 @@
     "date": "2026-09-21",
     "amount": -3000.0,
     "currency": "USD",
-    "description": "ACH OUT CAMBRIDGE OFFICE",
+    "description": "ACH OUT CAMBRIDGE",
     "reference": "",
-    "counterparty": "CAMBRIDGE OFFICE",
+    "counterparty": "Cambridge",
     "transaction_type": "ach_debit",
     "source": "operating_account",
     "provider": null,
@@ -328,6 +328,3445 @@
     "raw_metadata": {
       "payout_id": "po_1MaximorDisputes",
       "provider": "stripe"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-001",
+    "date": "2026-09-02",
+    "amount": -1000.17,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES LLC",
+    "reference": "ACH-0001",
+    "counterparty": "ACME SUPPLIES LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100017,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-DUP"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-002",
+    "date": "2026-09-03",
+    "amount": -1000.34,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLY CO.",
+    "reference": "ACH-0002",
+    "counterparty": "ACME SUPPLY CO.",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100034,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-ALIAS"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-003",
+    "date": "2026-09-04",
+    "amount": -1000.51,
+    "currency": "USD",
+    "description": "ACH OUT AMAZON WEB SERVICES",
+    "reference": "ACH-0003",
+    "counterparty": "AMAZON WEB SERVICES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100051,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-002"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-004",
+    "date": "2026-09-05",
+    "amount": -1000.68,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FABRICATION",
+    "reference": "ACH-0004",
+    "counterparty": "NORTHLINE FABRICATION",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100068,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-003"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-005",
+    "date": "2026-09-06",
+    "amount": -1000.85,
+    "currency": "USD",
+    "description": "ACH OUT OFFICE DEPOT",
+    "reference": "ACH-0005",
+    "counterparty": "OFFICE DEPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100085,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-004"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-006",
+    "date": "2026-09-07",
+    "amount": -1001.02,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE",
+    "reference": "ACH-0006",
+    "counterparty": "HELIOS HARDWARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100102,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-005"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-007",
+    "date": "2026-09-08",
+    "amount": 1001.19,
+    "currency": "USD",
+    "description": "ACH IN DATADOG",
+    "reference": "ACH-0007",
+    "counterparty": "DATADOG",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100119,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-006"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-008",
+    "date": "2026-09-09",
+    "amount": -1001.36,
+    "currency": "USD",
+    "description": "ACH OUT SLACK TECHNOLOGIES",
+    "reference": "ACH-0008",
+    "counterparty": "SLACK TECHNOLOGIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100136,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-007"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-009",
+    "date": "2026-09-10",
+    "amount": -1001.53,
+    "currency": "USD",
+    "description": "ACH OUT FIGMA",
+    "reference": "ACH-0009",
+    "counterparty": "FIGMA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100153,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-008"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-010",
+    "date": "2026-09-11",
+    "amount": -1001.7,
+    "currency": "USD",
+    "description": "ACH OUT GOOGLE CLOUD",
+    "reference": "ACH-0010",
+    "counterparty": "GOOGLE CLOUD",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100170,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-009"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-011",
+    "date": "2026-09-12",
+    "amount": -1001.87,
+    "currency": "USD",
+    "description": "HARTFORD 0912 SETTLEMENT",
+    "reference": "HARTFO 12",
+    "counterparty": "HARTFORD INSURANCE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100187,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-011"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-012",
+    "date": "2026-09-13",
+    "amount": -1002.04,
+    "currency": "USD",
+    "description": "ACH OUT ORBIT ANALYTICS",
+    "reference": "ACH-0012",
+    "counterparty": "ORBIT ANALYTICS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100204,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-012"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-013",
+    "date": "2026-09-14",
+    "amount": -1002.21,
+    "currency": "USD",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "reference": "ACH-0013",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100221,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-013"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-014",
+    "date": "2026-09-15",
+    "amount": 1002.38,
+    "currency": "USD",
+    "description": "ACH IN DELL TECHNOLOGIES",
+    "reference": "ACH-0014",
+    "counterparty": "DELL TECHNOLOGIES",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100238,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-014"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-015",
+    "date": "2026-09-16",
+    "amount": -1002.55,
+    "currency": "USD",
+    "description": "ACH OUT HARBOR ELECTRIC",
+    "reference": "ACH-0015",
+    "counterparty": "HARBOR ELECTRIC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100255,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-015"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-016",
+    "date": "2026-09-17",
+    "amount": -1002.72,
+    "currency": "USD",
+    "description": "ACH OUT LINDHOLM & RUIZ LLP",
+    "reference": "ACH-0016",
+    "counterparty": "LINDHOLM & RUIZ LLP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100272,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-016"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-017",
+    "date": "2026-09-18",
+    "amount": -1002.89,
+    "currency": "USD",
+    "description": "ACH OUT GITHUB",
+    "reference": "ACH-0017",
+    "counterparty": "GITHUB",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100289,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-017"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-018",
+    "date": "2026-09-19",
+    "amount": -1003.06,
+    "currency": "USD",
+    "description": "ACH OUT SHADOW VENDOR LLC",
+    "reference": "ACH-0018",
+    "counterparty": "SHADOW VENDOR LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100306,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-018"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-019",
+    "date": "2026-09-20",
+    "amount": -1003.23,
+    "currency": "USD",
+    "description": "ACH OUT FREIGHTLINE LOGISTICS BATCH LEG 2",
+    "reference": "ACH-0019",
+    "counterparty": "FREIGHTLINE LOGISTICS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100323,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-019"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-020",
+    "date": "2026-09-21",
+    "amount": -1003.4,
+    "currency": "USD",
+    "description": "ACH OUT LENOVO",
+    "reference": "ACH-0020",
+    "counterparty": "LENOVO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100340,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-020"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-021",
+    "date": "2026-09-22",
+    "amount": 1003.57,
+    "currency": "USD",
+    "description": "ACH IN MISC SUPPLIES",
+    "reference": "ACH-0021",
+    "counterparty": "MISC SUPPLIES",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100357,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-021"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-022",
+    "date": "2026-09-23",
+    "amount": -1003.74,
+    "currency": "USD",
+    "description": "TWILIO 0923 SETTLEMENT",
+    "reference": "TWILIO 23",
+    "counterparty": "TWILIO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100374,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-022"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-023",
+    "date": "2026-09-24",
+    "amount": -1003.91,
+    "currency": "USD",
+    "description": "WIRE NOTION LABS INCL WIRE CHG",
+    "reference": "ACH-0023",
+    "counterparty": "NOTION LABS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100391,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-023"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-024",
+    "date": "2026-09-25",
+    "amount": -1004.08,
+    "currency": "USD",
+    "description": "ACH OUT SNOWFLAKE",
+    "reference": "ACH-0024",
+    "counterparty": "SNOWFLAKE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100408,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-024"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-025",
+    "date": "2026-09-26",
+    "amount": -1004.25,
+    "currency": "USD",
+    "description": "ACH OUT OKTA",
+    "reference": "ACH-0025",
+    "counterparty": "OKTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100425,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-025"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-026",
+    "date": "2026-09-27",
+    "amount": -1004.42,
+    "currency": "USD",
+    "description": "ACH OUT CROWDSTRIKE",
+    "reference": "ACH-0026",
+    "counterparty": "CROWDSTRIKE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100442,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-026"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-027",
+    "date": "2026-09-28",
+    "amount": -1004.59,
+    "currency": "USD",
+    "description": "ACH OUT ZOOM VIDEO",
+    "reference": "ACH-0027",
+    "counterparty": "ZOOM VIDEO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100459,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-027"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-028",
+    "date": "2026-09-01",
+    "amount": 1004.76,
+    "currency": "USD",
+    "description": "ACH IN ATLASSIAN",
+    "reference": "ACH-0028",
+    "counterparty": "ATLASSIAN",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100476,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-028"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-029",
+    "date": "2026-09-02",
+    "amount": -1004.93,
+    "currency": "USD",
+    "description": "ACH OUT CLOUDFLARE",
+    "reference": "ACH-0029",
+    "counterparty": "CLOUDFLARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100493,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-029"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-030",
+    "date": "2026-09-03",
+    "amount": -1005.1,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FAB GROUP",
+    "reference": "ACH-0030",
+    "counterparty": "NORTHLINE FAB GROUP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100510,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-030"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-031",
+    "date": "2026-09-04",
+    "amount": -1005.27,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE SUPPLY",
+    "reference": "ACH-0031",
+    "counterparty": "HELIOS HARDWARE SUPPLY",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100527,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-031"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-032",
+    "date": "2026-09-05",
+    "amount": -1005.44,
+    "currency": "USD",
+    "description": "ACH OUT HARBOR POWER & LIGHT",
+    "reference": "ACH-0032",
+    "counterparty": "HARBOR POWER & LIGHT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100544,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-032"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-033",
+    "date": "2026-09-06",
+    "amount": -1005.61,
+    "currency": "USD",
+    "description": "STAPLES 0906 SETTLEMENT",
+    "reference": "STAPLE 06",
+    "counterparty": "STAPLES BUSINESS ADVANTAGE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100561,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-033"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-034",
+    "date": "2026-09-07",
+    "amount": -1005.78,
+    "currency": "USD",
+    "description": "ACH OUT FEDEX",
+    "reference": "ACH-0034",
+    "counterparty": "FEDEX",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100578,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-034"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-035",
+    "date": "2026-09-08",
+    "amount": 1005.95,
+    "currency": "USD",
+    "description": "ACH IN ADP",
+    "reference": "ACH-0035",
+    "counterparty": "ADP",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100595,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-035"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-036",
+    "date": "2026-09-09",
+    "amount": -1006.12,
+    "currency": "USD",
+    "description": "ACH OUT WEWORK CAMBRIDGE",
+    "reference": "ACH-0036",
+    "counterparty": "WEWORK CAMBRIDGE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100612,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-036"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-037",
+    "date": "2026-09-10",
+    "amount": -1006.29,
+    "currency": "USD",
+    "description": "ACH OUT COMCAST BUSINESS",
+    "reference": "ACH-0037",
+    "counterparty": "COMCAST BUSINESS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100629,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-037"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-038",
+    "date": "2026-09-11",
+    "amount": -1006.46,
+    "currency": "USD",
+    "description": "ACH OUT PAGAYA COFFEE SERVICE BATCH LEG 3",
+    "reference": "ACH-0038",
+    "counterparty": "PAGAYA COFFEE SERVICE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100646,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-038"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-039",
+    "date": "2026-09-12",
+    "amount": -1006.63,
+    "currency": "USD",
+    "description": "ACH OUT CLEANROOM JANITORIAL",
+    "reference": "ACH-0039",
+    "counterparty": "CLEANROOM JANITORIAL",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100663,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-039"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-040",
+    "date": "2026-09-13",
+    "amount": -1006.8,
+    "currency": "USD",
+    "description": "ACH OUT KENDALL SQUARE PARKING",
+    "reference": "ACH-0040",
+    "counterparty": "KENDALL SQUARE PARKING",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100680,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-040"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-041",
+    "date": "2026-09-14",
+    "amount": -1006.97,
+    "currency": "USD",
+    "description": "ACH OUT HUBSPOT",
+    "reference": "ACH-0041",
+    "counterparty": "HUBSPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100697,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-041"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-042",
+    "date": "2026-09-15",
+    "amount": 1007.14,
+    "currency": "USD",
+    "description": "ACH IN STRIPE PROCESSING",
+    "reference": "ACH-0042",
+    "counterparty": "STRIPE PROCESSING",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100714,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-042"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-043",
+    "date": "2026-09-16",
+    "amount": -1007.31,
+    "currency": "USD",
+    "description": "ACH OUT ADYEN NV",
+    "reference": "ACH-0043",
+    "counterparty": "ADYEN NV",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100731,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-043"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-044",
+    "date": "2026-09-17",
+    "amount": -1007.48,
+    "currency": "USD",
+    "description": "DOCUSIGN 0917 SETTLEMENT",
+    "reference": "DOCUSI 17",
+    "counterparty": "DOCUSIGN",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100748,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-044"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-045",
+    "date": "2026-09-18",
+    "amount": -1007.65,
+    "currency": "USD",
+    "description": "ACH OUT PALO ALTO NETWORKS",
+    "reference": "ACH-0045",
+    "counterparty": "PALO ALTO NETWORKS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100765,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-045"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-046",
+    "date": "2026-09-19",
+    "amount": -1007.82,
+    "currency": "USD",
+    "description": "WIRE BOSTON EDISON STEAM INCL WIRE CHG",
+    "reference": "ACH-0046",
+    "counterparty": "BOSTON EDISON STEAM",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100782,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-046"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-047",
+    "date": "2026-09-20",
+    "amount": -1007.99,
+    "currency": "USD",
+    "description": "ACH OUT CARTA",
+    "reference": "ACH-0047",
+    "counterparty": "CARTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100799,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-047"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-048",
+    "date": "2026-09-21",
+    "amount": -1008.16,
+    "currency": "USD",
+    "description": "ACH OUT GUSTO PAYROLL",
+    "reference": "ACH-0048",
+    "counterparty": "GUSTO PAYROLL",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100816,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-048"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-049",
+    "date": "2026-09-22",
+    "amount": 1008.33,
+    "currency": "USD",
+    "description": "ACH IN VANTA",
+    "reference": "ACH-0049",
+    "counterparty": "VANTA",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100833,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-049"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-050",
+    "date": "2026-09-23",
+    "amount": -1008.5,
+    "currency": "USD",
+    "description": "ACH OUT LINEAR APP",
+    "reference": "ACH-0050",
+    "counterparty": "LINEAR APP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100850,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-050"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-051",
+    "date": "2026-09-24",
+    "amount": -1008.67,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES",
+    "reference": "ACH-0051",
+    "counterparty": "ACME SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100867,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-052",
+    "date": "2026-09-25",
+    "amount": -1008.84,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES LLC",
+    "reference": "ACH-0052",
+    "counterparty": "ACME SUPPLIES LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100884,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-DUP"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-053",
+    "date": "2026-09-26",
+    "amount": -1009.01,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLY CO.",
+    "reference": "ACH-0053",
+    "counterparty": "ACME SUPPLY CO.",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100901,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-ALIAS"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-054",
+    "date": "2026-09-27",
+    "amount": -1009.18,
+    "currency": "USD",
+    "description": "ACH OUT AMAZON WEB SERVICES",
+    "reference": "ACH-0054",
+    "counterparty": "AMAZON WEB SERVICES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100918,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-002"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-055",
+    "date": "2026-09-28",
+    "amount": -1009.35,
+    "currency": "USD",
+    "description": "NORTHLINE 0928 SETTLEMENT",
+    "reference": "NORTHL 28",
+    "counterparty": "NORTHLINE FABRICATION",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100935,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-003"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-056",
+    "date": "2026-09-01",
+    "amount": 1009.52,
+    "currency": "USD",
+    "description": "ACH IN OFFICE DEPOT",
+    "reference": "ACH-0056",
+    "counterparty": "OFFICE DEPOT",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 100952,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-004"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-057",
+    "date": "2026-09-02",
+    "amount": -1009.69,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE BATCH LEG 1",
+    "reference": "ACH-0057",
+    "counterparty": "HELIOS HARDWARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100969,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-005"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-058",
+    "date": "2026-09-03",
+    "amount": -1009.86,
+    "currency": "USD",
+    "description": "ACH OUT DATADOG",
+    "reference": "ACH-0058",
+    "counterparty": "DATADOG",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -100986,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-006"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-059",
+    "date": "2026-09-04",
+    "amount": -1010.03,
+    "currency": "USD",
+    "description": "ACH OUT SLACK TECHNOLOGIES",
+    "reference": "ACH-0059",
+    "counterparty": "SLACK TECHNOLOGIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101003,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-007"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-060",
+    "date": "2026-09-05",
+    "amount": -1010.2,
+    "currency": "USD",
+    "description": "ACH OUT FIGMA",
+    "reference": "ACH-0060",
+    "counterparty": "FIGMA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101020,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-008"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-061",
+    "date": "2026-09-06",
+    "amount": -1010.37,
+    "currency": "USD",
+    "description": "ACH OUT GOOGLE CLOUD",
+    "reference": "ACH-0061",
+    "counterparty": "GOOGLE CLOUD",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101037,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-009"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-062",
+    "date": "2026-09-07",
+    "amount": -1010.54,
+    "currency": "USD",
+    "description": "ACH OUT HARTFORD INSURANCE",
+    "reference": "ACH-0062",
+    "counterparty": "HARTFORD INSURANCE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101054,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-011"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-063",
+    "date": "2026-09-08",
+    "amount": 1010.71,
+    "currency": "USD",
+    "description": "ACH IN ORBIT ANALYTICS",
+    "reference": "ACH-0063",
+    "counterparty": "ORBIT ANALYTICS",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101071,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-012"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-064",
+    "date": "2026-09-09",
+    "amount": -1010.88,
+    "currency": "USD",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "reference": "ACH-0064",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101088,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-013"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-065",
+    "date": "2026-09-10",
+    "amount": -1011.05,
+    "currency": "USD",
+    "description": "ACH OUT DELL TECHNOLOGIES",
+    "reference": "ACH-0065",
+    "counterparty": "DELL TECHNOLOGIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101105,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-014"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-066",
+    "date": "2026-09-11",
+    "amount": -1011.22,
+    "currency": "USD",
+    "description": "HARBOR 0911 SETTLEMENT",
+    "reference": "HARBOR 11",
+    "counterparty": "HARBOR ELECTRIC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101122,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-015"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-067",
+    "date": "2026-09-12",
+    "amount": -1011.39,
+    "currency": "USD",
+    "description": "ACH OUT LINDHOLM & RUIZ LLP",
+    "reference": "ACH-0067",
+    "counterparty": "LINDHOLM & RUIZ LLP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101139,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-016"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-068",
+    "date": "2026-09-13",
+    "amount": -1011.56,
+    "currency": "USD",
+    "description": "ACH OUT GITHUB",
+    "reference": "ACH-0068",
+    "counterparty": "GITHUB",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101156,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-017"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-069",
+    "date": "2026-09-14",
+    "amount": -1011.73,
+    "currency": "USD",
+    "description": "WIRE SHADOW VENDOR LLC INCL WIRE CHG",
+    "reference": "ACH-0069",
+    "counterparty": "SHADOW VENDOR LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101173,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-018"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-070",
+    "date": "2026-09-15",
+    "amount": 1011.9,
+    "currency": "USD",
+    "description": "ACH IN FREIGHTLINE LOGISTICS",
+    "reference": "ACH-0070",
+    "counterparty": "FREIGHTLINE LOGISTICS",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101190,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-019"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-071",
+    "date": "2026-09-16",
+    "amount": -1012.07,
+    "currency": "USD",
+    "description": "ACH OUT LENOVO",
+    "reference": "ACH-0071",
+    "counterparty": "LENOVO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101207,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-020"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-072",
+    "date": "2026-09-17",
+    "amount": -1012.24,
+    "currency": "USD",
+    "description": "ACH OUT MISC SUPPLIES",
+    "reference": "ACH-0072",
+    "counterparty": "MISC SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101224,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-021"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-073",
+    "date": "2026-09-18",
+    "amount": -1012.41,
+    "currency": "USD",
+    "description": "ACH OUT TWILIO",
+    "reference": "ACH-0073",
+    "counterparty": "TWILIO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101241,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-022"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-074",
+    "date": "2026-09-19",
+    "amount": -1012.58,
+    "currency": "USD",
+    "description": "ACH OUT NOTION LABS",
+    "reference": "ACH-0074",
+    "counterparty": "NOTION LABS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101258,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-023"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-075",
+    "date": "2026-09-20",
+    "amount": -1012.75,
+    "currency": "USD",
+    "description": "ACH OUT SNOWFLAKE",
+    "reference": "ACH-0075",
+    "counterparty": "SNOWFLAKE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101275,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-024"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-076",
+    "date": "2026-09-21",
+    "amount": -1012.92,
+    "currency": "USD",
+    "description": "ACH OUT OKTA BATCH LEG 2",
+    "reference": "ACH-0076",
+    "counterparty": "OKTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101292,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-025"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-077",
+    "date": "2026-09-22",
+    "amount": 1013.09,
+    "currency": "USD",
+    "description": "CROWDSTRIKE 0922 SETTLEMENT",
+    "reference": "CROWDS 22",
+    "counterparty": "CROWDSTRIKE",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101309,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-026"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-078",
+    "date": "2026-09-23",
+    "amount": -1013.26,
+    "currency": "USD",
+    "description": "ACH OUT ZOOM VIDEO",
+    "reference": "ACH-0078",
+    "counterparty": "ZOOM VIDEO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101326,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-027"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-079",
+    "date": "2026-09-24",
+    "amount": -1013.43,
+    "currency": "USD",
+    "description": "ACH OUT ATLASSIAN",
+    "reference": "ACH-0079",
+    "counterparty": "ATLASSIAN",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101343,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-028"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-080",
+    "date": "2026-09-25",
+    "amount": -1013.6,
+    "currency": "USD",
+    "description": "ACH OUT CLOUDFLARE",
+    "reference": "ACH-0080",
+    "counterparty": "CLOUDFLARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101360,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-029"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-081",
+    "date": "2026-09-26",
+    "amount": -1013.77,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FAB GROUP",
+    "reference": "ACH-0081",
+    "counterparty": "NORTHLINE FAB GROUP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101377,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-030"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-082",
+    "date": "2026-09-27",
+    "amount": -1013.94,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE SUPPLY",
+    "reference": "ACH-0082",
+    "counterparty": "HELIOS HARDWARE SUPPLY",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101394,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-031"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-083",
+    "date": "2026-09-28",
+    "amount": -1014.11,
+    "currency": "USD",
+    "description": "ACH OUT HARBOR POWER & LIGHT",
+    "reference": "ACH-0083",
+    "counterparty": "HARBOR POWER & LIGHT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101411,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-032"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-084",
+    "date": "2026-09-01",
+    "amount": 1014.28,
+    "currency": "USD",
+    "description": "ACH IN STAPLES BUSINESS ADVANTAGE",
+    "reference": "ACH-0084",
+    "counterparty": "STAPLES BUSINESS ADVANTAGE",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101428,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-033"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-085",
+    "date": "2026-09-02",
+    "amount": -1014.45,
+    "currency": "USD",
+    "description": "ACH OUT FEDEX",
+    "reference": "ACH-0085",
+    "counterparty": "FEDEX",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101445,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-034"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-086",
+    "date": "2026-09-03",
+    "amount": -1014.62,
+    "currency": "USD",
+    "description": "ACH OUT ADP",
+    "reference": "ACH-0086",
+    "counterparty": "ADP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101462,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-035"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-087",
+    "date": "2026-09-04",
+    "amount": -1014.79,
+    "currency": "USD",
+    "description": "ACH OUT WEWORK CAMBRIDGE",
+    "reference": "ACH-0087",
+    "counterparty": "WEWORK CAMBRIDGE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101479,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-036"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-088",
+    "date": "2026-09-05",
+    "amount": -1014.96,
+    "currency": "USD",
+    "description": "COMCAST 0905 SETTLEMENT",
+    "reference": "COMCAS 05",
+    "counterparty": "COMCAST BUSINESS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101496,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-037"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-089",
+    "date": "2026-09-06",
+    "amount": -1015.13,
+    "currency": "USD",
+    "description": "ACH OUT PAGAYA COFFEE SERVICE",
+    "reference": "ACH-0089",
+    "counterparty": "PAGAYA COFFEE SERVICE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101513,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-038"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-090",
+    "date": "2026-09-07",
+    "amount": -1015.3,
+    "currency": "USD",
+    "description": "ACH OUT CLEANROOM JANITORIAL",
+    "reference": "ACH-0090",
+    "counterparty": "CLEANROOM JANITORIAL",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101530,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-039"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-091",
+    "date": "2026-09-08",
+    "amount": 1015.47,
+    "currency": "USD",
+    "description": "ACH IN KENDALL SQUARE PARKING",
+    "reference": "ACH-0091",
+    "counterparty": "KENDALL SQUARE PARKING",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101547,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-040"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-092",
+    "date": "2026-09-09",
+    "amount": -1015.64,
+    "currency": "USD",
+    "description": "WIRE HUBSPOT INCL WIRE CHG",
+    "reference": "ACH-0092",
+    "counterparty": "HUBSPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101564,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-041"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-093",
+    "date": "2026-09-10",
+    "amount": -1015.81,
+    "currency": "USD",
+    "description": "ACH OUT STRIPE PROCESSING",
+    "reference": "ACH-0093",
+    "counterparty": "STRIPE PROCESSING",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101581,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-042"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-094",
+    "date": "2026-09-11",
+    "amount": -1015.98,
+    "currency": "USD",
+    "description": "ACH OUT ADYEN NV",
+    "reference": "ACH-0094",
+    "counterparty": "ADYEN NV",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101598,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-043"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-095",
+    "date": "2026-09-12",
+    "amount": -1016.15,
+    "currency": "USD",
+    "description": "ACH OUT DOCUSIGN BATCH LEG 3",
+    "reference": "ACH-0095",
+    "counterparty": "DOCUSIGN",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101615,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-044"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-096",
+    "date": "2026-09-13",
+    "amount": -1016.32,
+    "currency": "USD",
+    "description": "ACH OUT PALO ALTO NETWORKS",
+    "reference": "ACH-0096",
+    "counterparty": "PALO ALTO NETWORKS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101632,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-045"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-097",
+    "date": "2026-09-14",
+    "amount": -1016.49,
+    "currency": "USD",
+    "description": "ACH OUT BOSTON EDISON STEAM",
+    "reference": "ACH-0097",
+    "counterparty": "BOSTON EDISON STEAM",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101649,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-046"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-098",
+    "date": "2026-09-15",
+    "amount": 1016.66,
+    "currency": "USD",
+    "description": "ACH IN CARTA",
+    "reference": "ACH-0098",
+    "counterparty": "CARTA",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101666,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-047"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-099",
+    "date": "2026-09-16",
+    "amount": -1016.83,
+    "currency": "USD",
+    "description": "GUSTO 0916 SETTLEMENT",
+    "reference": "GUSTO  16",
+    "counterparty": "GUSTO PAYROLL",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101683,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-048"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-100",
+    "date": "2026-09-17",
+    "amount": -1017.0,
+    "currency": "USD",
+    "description": "ACH OUT VANTA",
+    "reference": "ACH-0100",
+    "counterparty": "VANTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101700,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-049"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-101",
+    "date": "2026-09-18",
+    "amount": -1017.17,
+    "currency": "USD",
+    "description": "ACH OUT LINEAR APP",
+    "reference": "ACH-0101",
+    "counterparty": "LINEAR APP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101717,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-050"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-102",
+    "date": "2026-09-19",
+    "amount": -1017.34,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES",
+    "reference": "ACH-0102",
+    "counterparty": "ACME SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101734,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-103",
+    "date": "2026-09-20",
+    "amount": -1017.51,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES LLC",
+    "reference": "ACH-0103",
+    "counterparty": "ACME SUPPLIES LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101751,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-DUP"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-104",
+    "date": "2026-09-21",
+    "amount": -1017.68,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLY CO.",
+    "reference": "ACH-0104",
+    "counterparty": "ACME SUPPLY CO.",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101768,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-ALIAS"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-105",
+    "date": "2026-09-22",
+    "amount": 1017.85,
+    "currency": "USD",
+    "description": "ACH IN AMAZON WEB SERVICES",
+    "reference": "ACH-0105",
+    "counterparty": "AMAZON WEB SERVICES",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101785,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-002"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-106",
+    "date": "2026-09-23",
+    "amount": -1018.02,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FABRICATION",
+    "reference": "ACH-0106",
+    "counterparty": "NORTHLINE FABRICATION",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101802,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-003"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-107",
+    "date": "2026-09-24",
+    "amount": -1018.19,
+    "currency": "USD",
+    "description": "ACH OUT OFFICE DEPOT",
+    "reference": "ACH-0107",
+    "counterparty": "OFFICE DEPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101819,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-004"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-108",
+    "date": "2026-09-25",
+    "amount": -1018.36,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE",
+    "reference": "ACH-0108",
+    "counterparty": "HELIOS HARDWARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101836,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-005"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-109",
+    "date": "2026-09-26",
+    "amount": -1018.53,
+    "currency": "USD",
+    "description": "ACH OUT DATADOG",
+    "reference": "ACH-0109",
+    "counterparty": "DATADOG",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101853,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-006"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-110",
+    "date": "2026-09-27",
+    "amount": -1018.7,
+    "currency": "USD",
+    "description": "SLACK 0927 SETTLEMENT",
+    "reference": "SLACK  27",
+    "counterparty": "SLACK TECHNOLOGIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101870,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-007"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-111",
+    "date": "2026-09-28",
+    "amount": -1018.87,
+    "currency": "USD",
+    "description": "ACH OUT FIGMA",
+    "reference": "ACH-0111",
+    "counterparty": "FIGMA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101887,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-008"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-112",
+    "date": "2026-09-01",
+    "amount": 1019.04,
+    "currency": "USD",
+    "description": "ACH IN GOOGLE CLOUD",
+    "reference": "ACH-0112",
+    "counterparty": "GOOGLE CLOUD",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 101904,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-009"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-113",
+    "date": "2026-09-02",
+    "amount": -1019.21,
+    "currency": "USD",
+    "description": "ACH OUT HARTFORD INSURANCE",
+    "reference": "ACH-0113",
+    "counterparty": "HARTFORD INSURANCE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101921,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-011"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-114",
+    "date": "2026-09-03",
+    "amount": -1019.38,
+    "currency": "USD",
+    "description": "ACH OUT ORBIT ANALYTICS BATCH LEG 1",
+    "reference": "ACH-0114",
+    "counterparty": "ORBIT ANALYTICS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101938,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-012"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-115",
+    "date": "2026-09-04",
+    "amount": -1019.55,
+    "currency": "USD",
+    "description": "WIRE CAMBRIDGE PROPERTIES INCL WIRE CHG",
+    "reference": "ACH-0115",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101955,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-013"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-116",
+    "date": "2026-09-05",
+    "amount": -1019.72,
+    "currency": "USD",
+    "description": "ACH OUT DELL TECHNOLOGIES",
+    "reference": "ACH-0116",
+    "counterparty": "DELL TECHNOLOGIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101972,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-014"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-117",
+    "date": "2026-09-06",
+    "amount": -1019.89,
+    "currency": "USD",
+    "description": "ACH OUT HARBOR ELECTRIC",
+    "reference": "ACH-0117",
+    "counterparty": "HARBOR ELECTRIC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -101989,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-015"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-118",
+    "date": "2026-09-07",
+    "amount": -1020.06,
+    "currency": "USD",
+    "description": "ACH OUT LINDHOLM & RUIZ LLP",
+    "reference": "ACH-0118",
+    "counterparty": "LINDHOLM & RUIZ LLP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102006,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-016"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-119",
+    "date": "2026-09-08",
+    "amount": 1020.23,
+    "currency": "USD",
+    "description": "ACH IN GITHUB",
+    "reference": "ACH-0119",
+    "counterparty": "GITHUB",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102023,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-017"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-120",
+    "date": "2026-09-09",
+    "amount": -1020.4,
+    "currency": "USD",
+    "description": "ACH OUT SHADOW VENDOR LLC",
+    "reference": "ACH-0120",
+    "counterparty": "SHADOW VENDOR LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102040,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-018"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-121",
+    "date": "2026-09-10",
+    "amount": -1020.57,
+    "currency": "USD",
+    "description": "FREIGHTLINE 0910 SETTLEMENT",
+    "reference": "FREIGH 10",
+    "counterparty": "FREIGHTLINE LOGISTICS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102057,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-019"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-122",
+    "date": "2026-09-11",
+    "amount": -1020.74,
+    "currency": "USD",
+    "description": "ACH OUT LENOVO",
+    "reference": "ACH-0122",
+    "counterparty": "LENOVO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102074,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-020"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-123",
+    "date": "2026-09-12",
+    "amount": -1020.91,
+    "currency": "USD",
+    "description": "ACH OUT MISC SUPPLIES",
+    "reference": "ACH-0123",
+    "counterparty": "MISC SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102091,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-021"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-124",
+    "date": "2026-09-13",
+    "amount": -1021.08,
+    "currency": "USD",
+    "description": "ACH OUT TWILIO",
+    "reference": "ACH-0124",
+    "counterparty": "TWILIO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102108,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-022"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-125",
+    "date": "2026-09-14",
+    "amount": -1021.25,
+    "currency": "USD",
+    "description": "ACH OUT NOTION LABS",
+    "reference": "ACH-0125",
+    "counterparty": "NOTION LABS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102125,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-023"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-126",
+    "date": "2026-09-15",
+    "amount": 1021.42,
+    "currency": "USD",
+    "description": "ACH IN SNOWFLAKE",
+    "reference": "ACH-0126",
+    "counterparty": "SNOWFLAKE",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102142,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-024"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-127",
+    "date": "2026-09-16",
+    "amount": -1021.59,
+    "currency": "USD",
+    "description": "ACH OUT OKTA",
+    "reference": "ACH-0127",
+    "counterparty": "OKTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102159,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-025"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-128",
+    "date": "2026-09-17",
+    "amount": -1021.76,
+    "currency": "USD",
+    "description": "ACH OUT CROWDSTRIKE",
+    "reference": "ACH-0128",
+    "counterparty": "CROWDSTRIKE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102176,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-026"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-129",
+    "date": "2026-09-18",
+    "amount": -1021.93,
+    "currency": "USD",
+    "description": "ACH OUT ZOOM VIDEO",
+    "reference": "ACH-0129",
+    "counterparty": "ZOOM VIDEO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102193,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-027"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-130",
+    "date": "2026-09-19",
+    "amount": -1022.1,
+    "currency": "USD",
+    "description": "ACH OUT ATLASSIAN",
+    "reference": "ACH-0130",
+    "counterparty": "ATLASSIAN",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102210,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-028"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-131",
+    "date": "2026-09-20",
+    "amount": -1022.27,
+    "currency": "USD",
+    "description": "ACH OUT CLOUDFLARE",
+    "reference": "ACH-0131",
+    "counterparty": "CLOUDFLARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102227,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-029"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-132",
+    "date": "2026-09-21",
+    "amount": -1022.44,
+    "currency": "USD",
+    "description": "NORTHLINE 0921 SETTLEMENT",
+    "reference": "NORTHL 21",
+    "counterparty": "NORTHLINE FAB GROUP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102244,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-030"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-133",
+    "date": "2026-09-22",
+    "amount": 1022.61,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE SUPPLY BATCH LEG 2",
+    "reference": "ACH-0133",
+    "counterparty": "HELIOS HARDWARE SUPPLY",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102261,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-031"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-134",
+    "date": "2026-09-23",
+    "amount": -1022.78,
+    "currency": "USD",
+    "description": "ACH OUT HARBOR POWER & LIGHT",
+    "reference": "ACH-0134",
+    "counterparty": "HARBOR POWER & LIGHT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102278,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-032"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-135",
+    "date": "2026-09-24",
+    "amount": -1022.95,
+    "currency": "USD",
+    "description": "ACH OUT STAPLES BUSINESS ADVANTAGE",
+    "reference": "ACH-0135",
+    "counterparty": "STAPLES BUSINESS ADVANTAGE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102295,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-033"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-136",
+    "date": "2026-09-25",
+    "amount": -1023.12,
+    "currency": "USD",
+    "description": "ACH OUT FEDEX",
+    "reference": "ACH-0136",
+    "counterparty": "FEDEX",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102312,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-034"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-137",
+    "date": "2026-09-26",
+    "amount": -1023.29,
+    "currency": "USD",
+    "description": "ACH OUT ADP",
+    "reference": "ACH-0137",
+    "counterparty": "ADP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102329,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-035"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-138",
+    "date": "2026-09-27",
+    "amount": -1023.46,
+    "currency": "USD",
+    "description": "WIRE WEWORK CAMBRIDGE INCL WIRE CHG",
+    "reference": "ACH-0138",
+    "counterparty": "WEWORK CAMBRIDGE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102346,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-036"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-139",
+    "date": "2026-09-28",
+    "amount": -1023.63,
+    "currency": "USD",
+    "description": "ACH OUT COMCAST BUSINESS",
+    "reference": "ACH-0139",
+    "counterparty": "COMCAST BUSINESS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102363,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-037"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-140",
+    "date": "2026-09-01",
+    "amount": 1023.8,
+    "currency": "USD",
+    "description": "ACH IN PAGAYA COFFEE SERVICE",
+    "reference": "ACH-0140",
+    "counterparty": "PAGAYA COFFEE SERVICE",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102380,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-038"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-141",
+    "date": "2026-09-02",
+    "amount": -1023.97,
+    "currency": "USD",
+    "description": "ACH OUT CLEANROOM JANITORIAL",
+    "reference": "ACH-0141",
+    "counterparty": "CLEANROOM JANITORIAL",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102397,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-039"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-142",
+    "date": "2026-09-03",
+    "amount": -1024.14,
+    "currency": "USD",
+    "description": "ACH OUT KENDALL SQUARE PARKING",
+    "reference": "ACH-0142",
+    "counterparty": "KENDALL SQUARE PARKING",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102414,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-040"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-143",
+    "date": "2026-09-04",
+    "amount": -1024.31,
+    "currency": "USD",
+    "description": "HUBSPOT 0904 SETTLEMENT",
+    "reference": "HUBSPO 04",
+    "counterparty": "HUBSPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102431,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-041"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-144",
+    "date": "2026-09-05",
+    "amount": -1024.48,
+    "currency": "USD",
+    "description": "ACH OUT STRIPE PROCESSING",
+    "reference": "ACH-0144",
+    "counterparty": "STRIPE PROCESSING",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102448,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-042"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-145",
+    "date": "2026-09-06",
+    "amount": -1024.65,
+    "currency": "USD",
+    "description": "ACH OUT ADYEN NV",
+    "reference": "ACH-0145",
+    "counterparty": "ADYEN NV",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102465,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-043"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-146",
+    "date": "2026-09-07",
+    "amount": -1024.82,
+    "currency": "USD",
+    "description": "ACH OUT DOCUSIGN",
+    "reference": "ACH-0146",
+    "counterparty": "DOCUSIGN",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102482,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-044"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-147",
+    "date": "2026-09-08",
+    "amount": 1024.99,
+    "currency": "USD",
+    "description": "ACH IN PALO ALTO NETWORKS",
+    "reference": "ACH-0147",
+    "counterparty": "PALO ALTO NETWORKS",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102499,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-045"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-148",
+    "date": "2026-09-09",
+    "amount": -1025.16,
+    "currency": "USD",
+    "description": "ACH OUT BOSTON EDISON STEAM",
+    "reference": "ACH-0148",
+    "counterparty": "BOSTON EDISON STEAM",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102516,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-046"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-149",
+    "date": "2026-09-10",
+    "amount": -1025.33,
+    "currency": "USD",
+    "description": "ACH OUT CARTA",
+    "reference": "ACH-0149",
+    "counterparty": "CARTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102533,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-047"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-150",
+    "date": "2026-09-11",
+    "amount": -1025.5,
+    "currency": "USD",
+    "description": "ACH OUT GUSTO PAYROLL",
+    "reference": "ACH-0150",
+    "counterparty": "GUSTO PAYROLL",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102550,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-048"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-151",
+    "date": "2026-09-12",
+    "amount": -1025.67,
+    "currency": "USD",
+    "description": "ACH OUT VANTA",
+    "reference": "ACH-0151",
+    "counterparty": "VANTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102567,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-049"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-152",
+    "date": "2026-09-13",
+    "amount": -1025.84,
+    "currency": "USD",
+    "description": "ACH OUT LINEAR APP BATCH LEG 3",
+    "reference": "ACH-0152",
+    "counterparty": "LINEAR APP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102584,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-050"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-153",
+    "date": "2026-09-14",
+    "amount": -1026.01,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLIES",
+    "reference": "ACH-0153",
+    "counterparty": "ACME SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102601,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-154",
+    "date": "2026-09-15",
+    "amount": 1026.18,
+    "currency": "USD",
+    "description": "ACME 0915 SETTLEMENT",
+    "reference": "ACME S 15",
+    "counterparty": "ACME SUPPLIES LLC",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102618,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-001-DUP"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-155",
+    "date": "2026-09-16",
+    "amount": -1026.35,
+    "currency": "USD",
+    "description": "ACH OUT ACME SUPPLY CO.",
+    "reference": "ACH-0155",
+    "counterparty": "ACME SUPPLY CO.",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102635,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-001-ALIAS"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-156",
+    "date": "2026-09-17",
+    "amount": -1026.52,
+    "currency": "USD",
+    "description": "ACH OUT AMAZON WEB SERVICES",
+    "reference": "ACH-0156",
+    "counterparty": "AMAZON WEB SERVICES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102652,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-002"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-157",
+    "date": "2026-09-18",
+    "amount": -1026.69,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FABRICATION",
+    "reference": "ACH-0157",
+    "counterparty": "NORTHLINE FABRICATION",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102669,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-003"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-158",
+    "date": "2026-09-19",
+    "amount": -1026.86,
+    "currency": "USD",
+    "description": "ACH OUT OFFICE DEPOT",
+    "reference": "ACH-0158",
+    "counterparty": "OFFICE DEPOT",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102686,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-004"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-159",
+    "date": "2026-09-20",
+    "amount": -1027.03,
+    "currency": "USD",
+    "description": "ACH OUT HELIOS HARDWARE",
+    "reference": "ACH-0159",
+    "counterparty": "HELIOS HARDWARE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102703,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-005"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-160",
+    "date": "2026-09-21",
+    "amount": -1027.2,
+    "currency": "USD",
+    "description": "ACH OUT DATADOG",
+    "reference": "ACH-0160",
+    "counterparty": "DATADOG",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102720,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-006"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-161",
+    "date": "2026-09-22",
+    "amount": 1027.37,
+    "currency": "USD",
+    "description": "WIRE SLACK TECHNOLOGIES INCL WIRE CHG",
+    "reference": "ACH-0161",
+    "counterparty": "SLACK TECHNOLOGIES",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102737,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "fee_inclusive",
+      "vendor_id": "VEND-007"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-162",
+    "date": "2026-09-23",
+    "amount": -1027.54,
+    "currency": "USD",
+    "description": "ACH OUT FIGMA",
+    "reference": "ACH-0162",
+    "counterparty": "FIGMA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102754,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-008"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-163",
+    "date": "2026-09-24",
+    "amount": -1027.71,
+    "currency": "USD",
+    "description": "ACH OUT GOOGLE CLOUD",
+    "reference": "ACH-0163",
+    "counterparty": "GOOGLE CLOUD",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102771,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-009"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-164",
+    "date": "2026-09-25",
+    "amount": -1027.88,
+    "currency": "USD",
+    "description": "ACH OUT HARTFORD INSURANCE",
+    "reference": "ACH-0164",
+    "counterparty": "HARTFORD INSURANCE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102788,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-011"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-165",
+    "date": "2026-09-26",
+    "amount": -1028.05,
+    "currency": "USD",
+    "description": "ORBIT 0926 SETTLEMENT",
+    "reference": "ORBIT  26",
+    "counterparty": "ORBIT ANALYTICS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102805,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-012"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-166",
+    "date": "2026-09-27",
+    "amount": -1028.22,
+    "currency": "USD",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "reference": "ACH-0166",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102822,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-013"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-167",
+    "date": "2026-09-28",
+    "amount": -1028.39,
+    "currency": "USD",
+    "description": "ACH OUT DELL TECHNOLOGIES",
+    "reference": "ACH-0167",
+    "counterparty": "DELL TECHNOLOGIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102839,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-014"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-168",
+    "date": "2026-09-01",
+    "amount": 1028.56,
+    "currency": "USD",
+    "description": "ACH IN HARBOR ELECTRIC",
+    "reference": "ACH-0168",
+    "counterparty": "HARBOR ELECTRIC",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102856,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-015"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-169",
+    "date": "2026-09-02",
+    "amount": -1028.73,
+    "currency": "USD",
+    "description": "ACH OUT LINDHOLM & RUIZ LLP",
+    "reference": "ACH-0169",
+    "counterparty": "LINDHOLM & RUIZ LLP",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102873,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-016"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-170",
+    "date": "2026-09-03",
+    "amount": -1028.9,
+    "currency": "USD",
+    "description": "ACH OUT GITHUB",
+    "reference": "ACH-0170",
+    "counterparty": "GITHUB",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102890,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-017"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-171",
+    "date": "2026-09-04",
+    "amount": -1029.07,
+    "currency": "USD",
+    "description": "ACH OUT SHADOW VENDOR LLC BATCH LEG 1",
+    "reference": "ACH-0171",
+    "counterparty": "SHADOW VENDOR LLC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102907,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "unbundle_leg",
+      "vendor_id": "VEND-018"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-172",
+    "date": "2026-09-05",
+    "amount": -1029.24,
+    "currency": "USD",
+    "description": "ACH OUT FREIGHTLINE LOGISTICS",
+    "reference": "ACH-0172",
+    "counterparty": "FREIGHTLINE LOGISTICS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102924,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-019"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-173",
+    "date": "2026-09-06",
+    "amount": -1029.41,
+    "currency": "USD",
+    "description": "ACH OUT LENOVO",
+    "reference": "ACH-0173",
+    "counterparty": "LENOVO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102941,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-020"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-174",
+    "date": "2026-09-07",
+    "amount": -1029.58,
+    "currency": "USD",
+    "description": "ACH OUT MISC SUPPLIES",
+    "reference": "ACH-0174",
+    "counterparty": "MISC SUPPLIES",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102958,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-021"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-175",
+    "date": "2026-09-08",
+    "amount": 1029.75,
+    "currency": "USD",
+    "description": "ACH IN TWILIO",
+    "reference": "ACH-0175",
+    "counterparty": "TWILIO",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 102975,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-022"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-176",
+    "date": "2026-09-09",
+    "amount": -1029.92,
+    "currency": "USD",
+    "description": "NOTION 0909 SETTLEMENT",
+    "reference": "NOTION 09",
+    "counterparty": "NOTION LABS",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -102992,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "degraded_ref",
+      "vendor_id": "VEND-023"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-177",
+    "date": "2026-09-10",
+    "amount": -1030.09,
+    "currency": "USD",
+    "description": "ACH OUT SNOWFLAKE",
+    "reference": "ACH-0177",
+    "counterparty": "SNOWFLAKE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -103009,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-024"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-178",
+    "date": "2026-09-11",
+    "amount": -1030.26,
+    "currency": "USD",
+    "description": "ACH OUT OKTA",
+    "reference": "ACH-0178",
+    "counterparty": "OKTA",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -103026,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-025"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-179",
+    "date": "2026-09-12",
+    "amount": -1030.43,
+    "currency": "USD",
+    "description": "ACH OUT CROWDSTRIKE",
+    "reference": "ACH-0179",
+    "counterparty": "CROWDSTRIKE",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -103043,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-026"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-180",
+    "date": "2026-09-13",
+    "amount": -1030.6,
+    "currency": "USD",
+    "description": "ACH OUT ZOOM VIDEO",
+    "reference": "ACH-0180",
+    "counterparty": "ZOOM VIDEO",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -103060,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-027"
+    }
+  },
+  {
+    "transaction_id": "TXN-VOL-2026-09-181",
+    "date": "2026-09-14",
+    "amount": -1030.77,
+    "currency": "USD",
+    "description": "ACH OUT ATLASSIAN",
+    "reference": "ACH-0181",
+    "counterparty": "ATLASSIAN",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -103077,
+    "raw_metadata": {
+      "volume": true,
+      "difficulty": "exact",
+      "vendor_id": "VEND-028"
     }
   }
 ]

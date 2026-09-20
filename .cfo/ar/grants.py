@@ -15,6 +15,7 @@ COLLECT_OPS: frozenset[str] = frozenset(
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
         "ar.tools.get_ar_precedents",
+        "inbox.tools.send_office_outbound",
     }
 )
 
@@ -44,6 +45,9 @@ MUST_NOT_COLLECT: frozenset[str] = frozenset(
         "scheduling.tools.get_payment_candidates",
         "ar.tools.get_ar_close_snapshot",
         "audit.tools.get_audit_ground_truth",
+        "inbox.tools.send_inbox_message",
+        "inbox.tools.compose_counterparty_message",
+        "inbox.tools.reply_in_thread",
     }
 )
 

@@ -323,6 +323,310 @@
     ]
   },
   {
+    "line_id": "FL-AR-INV-AR-015",
+    "source_type": "receivable",
+    "source_id": "INV-AR-015",
+    "expected_date": "2026-10-12",
+    "amount": 8000.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-015",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Brightline Media",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-015"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-016",
+    "source_type": "receivable",
+    "source_id": "INV-AR-016",
+    "expected_date": "2026-10-20",
+    "amount": 1800.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-016",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Meridian Health",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-016"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-017",
+    "source_type": "receivable",
+    "source_id": "INV-AR-017",
+    "expected_date": "2026-10-12",
+    "amount": 18400.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-017",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Beacon Biotech",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-017"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-018",
+    "source_type": "receivable",
+    "source_id": "INV-AR-018",
+    "expected_date": "2026-09-19",
+    "amount": 9600.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-018",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Copperline Logistics",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-018"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-019",
+    "source_type": "receivable",
+    "source_id": "INV-AR-019",
+    "expected_date": "2026-08-14",
+    "amount": 7200.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-019",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Summit Civic",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-019"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-020",
+    "source_type": "receivable",
+    "source_id": "INV-AR-020",
+    "expected_date": "2026-07-10",
+    "amount": 15800.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-020",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Redwood Clinics",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-020"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-021",
+    "source_type": "receivable",
+    "source_id": "INV-AR-021",
+    "expected_date": "2026-10-05",
+    "amount": 22100.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-021",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Ironclad Software",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-021"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-022",
+    "source_type": "receivable",
+    "source_id": "INV-AR-022",
+    "expected_date": "2026-10-22",
+    "amount": 6400.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-022",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Northwind Labs",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-022"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-023",
+    "source_type": "receivable",
+    "source_id": "INV-AR-023",
+    "expected_date": "2026-10-08",
+    "amount": 4100.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-023",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Pinnacle Retail",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-023"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-024",
+    "source_type": "receivable",
+    "source_id": "INV-AR-024",
+    "expected_date": "2026-09-27",
+    "amount": 8900.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-024",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Atlas Robotics",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-024"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-025",
+    "source_type": "receivable",
+    "source_id": "INV-AR-025",
+    "expected_date": "2026-06-01",
+    "amount": 27500.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-025",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Brightline Media",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-025"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-026",
+    "source_type": "receivable",
+    "source_id": "INV-AR-026",
+    "expected_date": "2026-10-25",
+    "amount": 3800.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-026",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Quiet Harbor",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-026"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-027",
+    "source_type": "receivable",
+    "source_id": "INV-AR-027",
+    "expected_date": "2026-10-18",
+    "amount": 5100.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-027",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Meridian Health",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-027"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-028",
+    "source_type": "receivable",
+    "source_id": "INV-AR-028",
+    "expected_date": "2026-10-14",
+    "amount": 13300.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-028",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Helios Analytics",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-028"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-029",
+    "source_type": "receivable",
+    "source_id": "INV-AR-029",
+    "expected_date": "2026-10-16",
+    "amount": 2700.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-029",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Lumen Labs",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-029"
+    ]
+  },
+  {
+    "line_id": "FL-AR-INV-AR-030",
+    "source_type": "receivable",
+    "source_id": "INV-AR-030",
+    "expected_date": "2026-10-21",
+    "amount": 4500.0,
+    "confidence": 0.7,
+    "rationale": "Collection of INV-AR-030",
+    "week_start": "",
+    "vendor": "",
+    "customer": "Northstar LLC",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ar",
+    "trace_ids": [],
+    "evidence_refs": [
+      "receivable:INV-AR-030"
+    ]
+  },
+  {
     "line_id": "FL-AP-INV-002",
     "source_type": "invoice",
     "source_id": "INV-002",
@@ -396,6 +700,25 @@
     "trace_ids": [],
     "evidence_refs": [
       "invoice:INV-019"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-021",
+    "source_type": "invoice",
+    "source_id": "INV-021",
+    "expected_date": "2026-09-24",
+    "amount": -12450.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-021",
+    "week_start": "",
+    "vendor": "Acme Supply Co.",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-021"
     ]
   },
   {
@@ -479,7 +802,7 @@
     "source_type": "invoice",
     "source_id": "INV-FRT-AUG-001",
     "expected_date": "2026-09-15",
-    "amount": -30000.0,
+    "amount": -20000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-FRT-AUG-001",
     "week_start": "",
@@ -494,11 +817,30 @@
     ]
   },
   {
+    "line_id": "FL-AP-INV-MSC-AUG-001",
+    "source_type": "invoice",
+    "source_id": "INV-MSC-AUG-001",
+    "expected_date": "2026-09-15",
+    "amount": -10000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-MSC-AUG-001",
+    "week_start": "",
+    "vendor": "Misc Supplies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-MSC-AUG-001"
+    ]
+  },
+  {
     "line_id": "FL-AP-INV-HOST-SEP-001",
     "source_type": "invoice",
     "source_id": "INV-HOST-SEP-001",
     "expected_date": "2026-10-15",
-    "amount": -55000.0,
+    "amount": -50000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-HOST-SEP-001",
     "week_start": "",
@@ -517,7 +859,7 @@
     "source_type": "invoice",
     "source_id": "INV-HOST-SEP-002",
     "expected_date": "2026-10-15",
-    "amount": -32000.0,
+    "amount": -30000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-HOST-SEP-002",
     "week_start": "",
@@ -532,11 +874,30 @@
     ]
   },
   {
+    "line_id": "FL-AP-INV-HOST-SEP-003",
+    "source_type": "invoice",
+    "source_id": "INV-HOST-SEP-003",
+    "expected_date": "2026-10-15",
+    "amount": -15000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-HOST-SEP-003",
+    "week_start": "",
+    "vendor": "Amazon Web Services",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-HOST-SEP-003"
+    ]
+  },
+  {
     "line_id": "FL-AP-INV-SUP-SEP-001",
     "source_type": "invoice",
     "source_id": "INV-SUP-SEP-001",
     "expected_date": "2026-10-15",
-    "amount": -198000.0,
+    "amount": -187200.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-SUP-SEP-001",
     "week_start": "",
@@ -555,7 +916,7 @@
     "source_type": "invoice",
     "source_id": "INV-SUP-SEP-002",
     "expected_date": "2026-10-15",
-    "amount": -70000.0,
+    "amount": -72800.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-SUP-SEP-002",
     "week_start": "",
@@ -574,7 +935,7 @@
     "source_type": "invoice",
     "source_id": "INV-FRT-SEP-001",
     "expected_date": "2026-10-15",
-    "amount": -35000.0,
+    "amount": -20000.0,
     "confidence": 0.85,
     "rationale": "Scheduled payment of INV-FRT-SEP-001",
     "week_start": "",
@@ -586,6 +947,1488 @@
     "trace_ids": [],
     "evidence_refs": [
       "invoice:INV-FRT-SEP-001"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-FRT-SEP-002",
+    "source_type": "invoice",
+    "source_id": "INV-FRT-SEP-002",
+    "expected_date": "2026-10-15",
+    "amount": -4000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-FRT-SEP-002",
+    "week_start": "",
+    "vendor": "Freightline Logistics",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-FRT-SEP-002"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-MSC-SEP-001",
+    "source_type": "invoice",
+    "source_id": "INV-MSC-SEP-001",
+    "expected_date": "2026-10-15",
+    "amount": -11000.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-MSC-SEP-001",
+    "week_start": "",
+    "vendor": "Misc Supplies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-MSC-SEP-001"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-022",
+    "source_type": "invoice",
+    "source_id": "INV-022",
+    "expected_date": "2026-10-24",
+    "amount": -72.78,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-022",
+    "week_start": "",
+    "vendor": "Slack Technologies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-022"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-023",
+    "source_type": "invoice",
+    "source_id": "INV-023",
+    "expected_date": "2026-10-25",
+    "amount": -294.91,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-023",
+    "week_start": "",
+    "vendor": "Harbor Electric",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-023"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-024",
+    "source_type": "invoice",
+    "source_id": "INV-024",
+    "expected_date": "2026-10-26",
+    "amount": -121.04,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-024",
+    "week_start": "",
+    "vendor": "Twilio",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-024"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-025",
+    "source_type": "invoice",
+    "source_id": "INV-025",
+    "expected_date": "2026-10-27",
+    "amount": -1981.17,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-025",
+    "week_start": "",
+    "vendor": "Cloudflare",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-025"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-026",
+    "source_type": "invoice",
+    "source_id": "INV-026",
+    "expected_date": "2026-10-01",
+    "amount": -1801.3,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-026",
+    "week_start": "",
+    "vendor": "WeWork Cambridge",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-026"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-027",
+    "source_type": "invoice",
+    "source_id": "INV-027",
+    "expected_date": "2026-10-02",
+    "amount": -191.43,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-027",
+    "week_start": "",
+    "vendor": "Adyen NV",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-027"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-028",
+    "source_type": "invoice",
+    "source_id": "INV-028",
+    "expected_date": "2026-10-03",
+    "amount": -117.06,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-028",
+    "week_start": "",
+    "vendor": "Linear App",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-028"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-029",
+    "source_type": "invoice",
+    "source_id": "INV-029",
+    "expected_date": "2026-10-04",
+    "amount": -1801.69,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-029",
+    "week_start": "",
+    "vendor": "Helios Hardware",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-029"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-030",
+    "source_type": "invoice",
+    "source_id": "INV-030",
+    "expected_date": "2026-10-05",
+    "amount": -61.82,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-030",
+    "week_start": "",
+    "vendor": "Cambridge Properties",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-030"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-031",
+    "source_type": "invoice",
+    "source_id": "INV-031",
+    "expected_date": "2026-10-06",
+    "amount": -253.95,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-031",
+    "week_start": "",
+    "vendor": "Lenovo",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-031"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-032",
+    "source_type": "invoice",
+    "source_id": "INV-032",
+    "expected_date": "2026-10-07",
+    "amount": -107.08,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-032",
+    "week_start": "",
+    "vendor": "Zoom Video",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-032"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-033",
+    "source_type": "invoice",
+    "source_id": "INV-033",
+    "expected_date": "2026-10-08",
+    "amount": -1760.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-033",
+    "week_start": "",
+    "vendor": "FedEx",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-033"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-034",
+    "source_type": "invoice",
+    "source_id": "INV-034",
+    "expected_date": "2026-10-09",
+    "amount": -16200.13,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-034",
+    "week_start": "",
+    "vendor": "HubSpot",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-034"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-035",
+    "source_type": "invoice",
+    "source_id": "INV-035",
+    "expected_date": "2026-10-10",
+    "amount": -95.26,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-035",
+    "week_start": "",
+    "vendor": "Gusto Payroll",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-035"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-036",
+    "source_type": "invoice",
+    "source_id": "INV-036",
+    "expected_date": "2026-10-11",
+    "amount": -77.39,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-036",
+    "week_start": "",
+    "vendor": "Northline Fabrication",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-036"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-037",
+    "source_type": "invoice",
+    "source_id": "INV-037",
+    "expected_date": "2026-10-12",
+    "amount": -1350.52,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-037",
+    "week_start": "",
+    "vendor": "Hartford Insurance",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-037"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-038",
+    "source_type": "invoice",
+    "source_id": "INV-038",
+    "expected_date": "2026-10-13",
+    "amount": -48.65,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-038",
+    "week_start": "",
+    "vendor": "Shadow Vendor LLC",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-038"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-039",
+    "source_type": "invoice",
+    "source_id": "INV-039",
+    "expected_date": "2026-10-14",
+    "amount": -210.78,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-039",
+    "week_start": "",
+    "vendor": "Okta",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-039"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-040",
+    "source_type": "invoice",
+    "source_id": "INV-040",
+    "expected_date": "2026-10-15",
+    "amount": -90.91,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-040",
+    "week_start": "",
+    "vendor": "Harbor Power & Light",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-040"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-041",
+    "source_type": "invoice",
+    "source_id": "INV-041",
+    "expected_date": "2026-10-16",
+    "amount": -1541.04,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-041",
+    "week_start": "",
+    "vendor": "CleanRoom Janitorial",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-041"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-042",
+    "source_type": "invoice",
+    "source_id": "INV-042",
+    "expected_date": "2026-10-17",
+    "amount": -14401.17,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-042",
+    "week_start": "",
+    "vendor": "Boston Edison Steam",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-042"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-043",
+    "source_type": "invoice",
+    "source_id": "INV-043",
+    "expected_date": "2026-10-18",
+    "amount": -856.3,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-043",
+    "week_start": "",
+    "vendor": "Acme Supply Co.",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-043"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-044",
+    "source_type": "invoice",
+    "source_id": "INV-044",
+    "expected_date": "2026-10-19",
+    "amount": -39.93,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-044",
+    "week_start": "",
+    "vendor": "Figma",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-044"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-045",
+    "source_type": "invoice",
+    "source_id": "INV-045",
+    "expected_date": "2026-10-20",
+    "amount": -901.56,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-045",
+    "week_start": "",
+    "vendor": "Lindholm & Ruiz LLP",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-045"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-046",
+    "source_type": "invoice",
+    "source_id": "INV-046",
+    "expected_date": "2026-10-21",
+    "amount": -37.69,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-046",
+    "week_start": "",
+    "vendor": "Notion Labs",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-046"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-047",
+    "source_type": "invoice",
+    "source_id": "INV-047",
+    "expected_date": "2026-10-22",
+    "amount": -169.82,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-047",
+    "week_start": "",
+    "vendor": "Northline Fab Group",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-047"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-048",
+    "source_type": "invoice",
+    "source_id": "INV-048",
+    "expected_date": "2026-10-23",
+    "amount": -76.95,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-048",
+    "week_start": "",
+    "vendor": "Comcast Business",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-048"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-049",
+    "source_type": "invoice",
+    "source_id": "INV-049",
+    "expected_date": "2026-10-24",
+    "amount": -1322.08,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-049",
+    "week_start": "",
+    "vendor": "DocuSign",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-049"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-050",
+    "source_type": "invoice",
+    "source_id": "INV-050",
+    "expected_date": "2026-10-25",
+    "amount": -12600.17,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-050",
+    "week_start": "",
+    "vendor": "Acme Supplies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-050"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-051",
+    "source_type": "invoice",
+    "source_id": "INV-051",
+    "expected_date": "2026-10-26",
+    "amount": -760.13,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-051",
+    "week_start": "",
+    "vendor": "Datadog",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-051"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-052",
+    "source_type": "invoice",
+    "source_id": "INV-052",
+    "expected_date": "2026-10-27",
+    "amount": -346.76,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-052",
+    "week_start": "",
+    "vendor": "Dell Technologies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-052"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-053",
+    "source_type": "invoice",
+    "source_id": "INV-053",
+    "expected_date": "2026-10-01",
+    "amount": -450.39,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-053",
+    "week_start": "",
+    "vendor": "Misc Supplies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-053"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-054",
+    "source_type": "invoice",
+    "source_id": "INV-054",
+    "expected_date": "2026-10-02",
+    "amount": -24.52,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-054",
+    "week_start": "",
+    "vendor": "Atlassian",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-054"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-055",
+    "source_type": "invoice",
+    "source_id": "INV-055",
+    "expected_date": "2026-10-03",
+    "amount": -126.65,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-055",
+    "week_start": "",
+    "vendor": "ADP",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-055"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-056",
+    "source_type": "invoice",
+    "source_id": "INV-056",
+    "expected_date": "2026-10-04",
+    "amount": -60.78,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-056",
+    "week_start": "",
+    "vendor": "Stripe Processing",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-056"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-057",
+    "source_type": "invoice",
+    "source_id": "INV-057",
+    "expected_date": "2026-10-05",
+    "amount": -1100.91,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-057",
+    "week_start": "",
+    "vendor": "Vanta",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-057"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-058",
+    "source_type": "invoice",
+    "source_id": "INV-058",
+    "expected_date": "2026-10-06",
+    "amount": -10801.04,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-058",
+    "week_start": "",
+    "vendor": "Office Depot",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-058"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-059",
+    "source_type": "invoice",
+    "source_id": "INV-059",
+    "expected_date": "2026-10-07",
+    "amount": -666.17,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-059",
+    "week_start": "",
+    "vendor": "Orbit Analytics",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-059"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-060",
+    "source_type": "invoice",
+    "source_id": "INV-060",
+    "expected_date": "2026-10-08",
+    "amount": -309.3,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-060",
+    "week_start": "",
+    "vendor": "Freightline Logistics",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-060"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-061",
+    "source_type": "invoice",
+    "source_id": "INV-061",
+    "expected_date": "2026-10-09",
+    "amount": -4051.43,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-061",
+    "week_start": "",
+    "vendor": "CrowdStrike",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-061"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-062",
+    "source_type": "invoice",
+    "source_id": "INV-062",
+    "expected_date": "2026-10-10",
+    "amount": -13.56,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-062",
+    "week_start": "",
+    "vendor": "Staples Business Advantage",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-062"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-063",
+    "source_type": "invoice",
+    "source_id": "INV-063",
+    "expected_date": "2026-10-11",
+    "amount": -85.69,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-063",
+    "week_start": "",
+    "vendor": "Kendall Square Parking",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-063"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-064",
+    "source_type": "invoice",
+    "source_id": "INV-064",
+    "expected_date": "2026-10-12",
+    "amount": -46.82,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-064",
+    "week_start": "",
+    "vendor": "Carta",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-064"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-065",
+    "source_type": "invoice",
+    "source_id": "INV-065",
+    "expected_date": "2026-10-13",
+    "amount": -881.95,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-065",
+    "week_start": "",
+    "vendor": "Amazon Web Services",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-065"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-066",
+    "source_type": "invoice",
+    "source_id": "INV-066",
+    "expected_date": "2026-10-14",
+    "amount": -9002.08,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-066",
+    "week_start": "",
+    "vendor": "Google Cloud",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-066"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-067",
+    "source_type": "invoice",
+    "source_id": "INV-067",
+    "expected_date": "2026-10-15",
+    "amount": -570.0,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-067",
+    "week_start": "",
+    "vendor": "GitHub",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-067"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-068",
+    "source_type": "invoice",
+    "source_id": "INV-068",
+    "expected_date": "2026-10-16",
+    "amount": -269.63,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-068",
+    "week_start": "",
+    "vendor": "Snowflake",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-068"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-069",
+    "source_type": "invoice",
+    "source_id": "INV-069",
+    "expected_date": "2026-10-17",
+    "amount": -3600.26,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-069",
+    "week_start": "",
+    "vendor": "Helios Hardware Supply",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-069"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-070",
+    "source_type": "invoice",
+    "source_id": "INV-070",
+    "expected_date": "2026-10-18",
+    "amount": -108.39,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-070",
+    "week_start": "",
+    "vendor": "Pagaya Coffee Service",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-070"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-071",
+    "source_type": "invoice",
+    "source_id": "INV-071",
+    "expected_date": "2026-10-19",
+    "amount": -42.52,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-071",
+    "week_start": "",
+    "vendor": "Palo Alto Networks",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-071"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-072",
+    "source_type": "invoice",
+    "source_id": "INV-072",
+    "expected_date": "2026-10-20",
+    "amount": -30.65,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-072",
+    "week_start": "",
+    "vendor": "Acme Supplies LLC",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-072"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-073",
+    "source_type": "invoice",
+    "source_id": "INV-073",
+    "expected_date": "2026-10-21",
+    "amount": -660.78,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-073",
+    "week_start": "",
+    "vendor": "Slack Technologies",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-073"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-074",
+    "source_type": "invoice",
+    "source_id": "INV-074",
+    "expected_date": "2026-10-22",
+    "amount": -7200.91,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-074",
+    "week_start": "",
+    "vendor": "Harbor Electric",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-074"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-075",
+    "source_type": "invoice",
+    "source_id": "INV-075",
+    "expected_date": "2026-10-23",
+    "amount": -476.04,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-075",
+    "week_start": "",
+    "vendor": "Twilio",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-075"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-076",
+    "source_type": "invoice",
+    "source_id": "INV-076",
+    "expected_date": "2026-10-24",
+    "amount": -232.17,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-076",
+    "week_start": "",
+    "vendor": "Cloudflare",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-076"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-077",
+    "source_type": "invoice",
+    "source_id": "INV-077",
+    "expected_date": "2026-10-25",
+    "amount": -3151.3,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-077",
+    "week_start": "",
+    "vendor": "WeWork Cambridge",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-077"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-078",
+    "source_type": "invoice",
+    "source_id": "INV-078",
+    "expected_date": "2026-10-26",
+    "amount": -97.43,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-078",
+    "week_start": "",
+    "vendor": "Adyen NV",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-078"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-079",
+    "source_type": "invoice",
+    "source_id": "INV-079",
+    "expected_date": "2026-10-27",
+    "amount": -379.56,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-079",
+    "week_start": "",
+    "vendor": "Linear App",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-079"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-080",
+    "source_type": "invoice",
+    "source_id": "INV-080",
+    "expected_date": "2026-10-01",
+    "amount": -16.69,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-080",
+    "week_start": "",
+    "vendor": "Helios Hardware",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-080"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-081",
+    "source_type": "invoice",
+    "source_id": "INV-081",
+    "expected_date": "2026-10-02",
+    "amount": -441.82,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-081",
+    "week_start": "",
+    "vendor": "Cambridge Properties",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-081"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-082",
+    "source_type": "invoice",
+    "source_id": "INV-082",
+    "expected_date": "2026-10-03",
+    "amount": -5401.95,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-082",
+    "week_start": "",
+    "vendor": "Lenovo",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-082"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-083",
+    "source_type": "invoice",
+    "source_id": "INV-083",
+    "expected_date": "2026-10-04",
+    "amount": -382.08,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-083",
+    "week_start": "",
+    "vendor": "Zoom Video",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-083"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-084",
+    "source_type": "invoice",
+    "source_id": "INV-084",
+    "expected_date": "2026-10-05",
+    "amount": -192.5,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-084",
+    "week_start": "",
+    "vendor": "FedEx",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-084"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-085",
+    "source_type": "invoice",
+    "source_id": "INV-085",
+    "expected_date": "2026-10-06",
+    "amount": -2700.13,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-085",
+    "week_start": "",
+    "vendor": "HubSpot",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-085"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-086",
+    "source_type": "invoice",
+    "source_id": "INV-086",
+    "expected_date": "2026-10-07",
+    "amount": -84.26,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-086",
+    "week_start": "",
+    "vendor": "Gusto Payroll",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-086"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-087",
+    "source_type": "invoice",
+    "source_id": "INV-087",
+    "expected_date": "2026-10-08",
+    "amount": -336.39,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-087",
+    "week_start": "",
+    "vendor": "Northline Fabrication",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-087"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-088",
+    "source_type": "invoice",
+    "source_id": "INV-088",
+    "expected_date": "2026-10-09",
+    "amount": -135.52,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-088",
+    "week_start": "",
+    "vendor": "Hartford Insurance",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-088"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-089",
+    "source_type": "invoice",
+    "source_id": "INV-089",
+    "expected_date": "2026-10-10",
+    "amount": -220.65,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-089",
+    "week_start": "",
+    "vendor": "Shadow Vendor LLC",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-089"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-090",
+    "source_type": "invoice",
+    "source_id": "INV-090",
+    "expected_date": "2026-10-11",
+    "amount": -3600.78,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-090",
+    "week_start": "",
+    "vendor": "Okta",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-090"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-091",
+    "source_type": "invoice",
+    "source_id": "INV-091",
+    "expected_date": "2026-10-12",
+    "amount": -285.91,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-091",
+    "week_start": "",
+    "vendor": "Harbor Power & Light",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-091"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-092",
+    "source_type": "invoice",
+    "source_id": "INV-092",
+    "expected_date": "2026-10-13",
+    "amount": -155.04,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-092",
+    "week_start": "",
+    "vendor": "CleanRoom Janitorial",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-092"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-093",
+    "source_type": "invoice",
+    "source_id": "INV-093",
+    "expected_date": "2026-10-14",
+    "amount": -2251.17,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-093",
+    "week_start": "",
+    "vendor": "Boston Edison Steam",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-093"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-094",
+    "source_type": "invoice",
+    "source_id": "INV-094",
+    "expected_date": "2026-10-15",
+    "amount": -73.3,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-094",
+    "week_start": "",
+    "vendor": "Acme Supply Co.",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-094"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-095",
+    "source_type": "invoice",
+    "source_id": "INV-095",
+    "expected_date": "2026-10-16",
+    "amount": -295.43,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-095",
+    "week_start": "",
+    "vendor": "Figma",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-095"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-096",
+    "source_type": "invoice",
+    "source_id": "INV-096",
+    "expected_date": "2026-10-17",
+    "amount": -121.56,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-096",
+    "week_start": "",
+    "vendor": "Lindholm & Ruiz LLP",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-096"
+    ]
+  },
+  {
+    "line_id": "FL-AP-INV-097",
+    "source_type": "invoice",
+    "source_id": "INV-097",
+    "expected_date": "2026-10-18",
+    "amount": -1981.69,
+    "confidence": 0.85,
+    "rationale": "Scheduled payment of INV-097",
+    "week_start": "",
+    "vendor": "Notion Labs",
+    "customer": "",
+    "hold": false,
+    "committed": true,
+    "source_workflow": "ap",
+    "trace_ids": [],
+    "evidence_refs": [
+      "invoice:INV-097"
     ]
   },
   {

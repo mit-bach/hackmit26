@@ -10,6 +10,7 @@ from ar.tools import (
     get_collection_candidates,
     get_collection_invoice_facts,
 )
+from inbox.tools import send_office_outbound
 from skills import compose_instructions, skills_for
 
 COLLECTION_TOOLS = [
@@ -17,6 +18,7 @@ COLLECTION_TOOLS = [
     get_collection_invoice_facts,
     get_ar_customer,
     get_ar_precedents,
+    send_office_outbound,
 ]
 CASH_TOOLS = [
     get_cash_application_facts,
@@ -51,6 +53,9 @@ REQUEST_INTERNAL_REVIEW, ESCALATE_DISPUTE, HOLD_CONTACT.
 When the action is a customer-facing send, draft the message. The draft must
 include customer name, invoice number, due date, and the current outstanding
 amount. Strengthen tone as delinquency ages.
+
+Call send_office_outbound from collections@hackmit-cfo.example. Then Handle
+Bot world / customer. Do not email a human. Do not send as the customer.
 
 If aging is dirty or unapplied cash may belong to this customer, HOLD_CONTACT
 and Handle apply. Do not invent that they unpaid.

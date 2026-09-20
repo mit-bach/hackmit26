@@ -97,8 +97,11 @@ class ReportingForecastingSampleDataAgent(SampleDataAgent):
         ]
 
     def _reporting_lines(self, ctx: CompanyScenarioContext) -> None:
+        board_periods = {ctx.calendar.comparison_period, ctx.period}
         rows: list[ReportingLine] = []
         for entry in ctx.journal_entries.values():
+            if entry.period not in board_periods:
+                continue
             if entry.source_document_id in OPERATIONAL_AP_IDS:
                 continue
             if entry.category not in PNL_LINE_CATEGORIES:

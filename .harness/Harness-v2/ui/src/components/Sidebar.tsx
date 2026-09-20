@@ -9,6 +9,7 @@ import {
   CalendarDays,
   Check,
   ChevronRight,
+  Clapperboard,
   ClipboardCopy,
   Copy,
   Crown,
@@ -1940,6 +1941,18 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
         {density === "icons" && (
           <>
           <button
+            onClick={() => dispatch({ type: "showDemo" })}
+            aria-label="Demo"
+            title="Demo"
+            className={cn(
+              "flex min-h-10 w-full items-center rounded-xl py-2 text-left transition-colors",
+              "justify-center px-2",
+              state.activeView === "demo" ? "bg-raised text-ink" : "text-ink hover:bg-raised/50",
+            )}
+          >
+            <Clapperboard size={20} className={state.activeView === "demo" ? "text-accent" : "text-ink-secondary"} />
+          </button>
+          <button
             onClick={() => dispatch({ type: "showProtocol" })}
             aria-label="Protocol"
             title="Protocol"
@@ -1982,6 +1995,13 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
           {density !== "icons" && (
           <SidebarMoreMenu
             items={[
+              {
+                key: "demo",
+                label: "Demo",
+                icon: <Clapperboard size={18} />,
+                active: state.activeView === "demo",
+                onSelect: () => dispatch({ type: "showDemo" }),
+              },
               {
                 key: "protocol",
                 label: "Protocol",

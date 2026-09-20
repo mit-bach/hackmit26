@@ -1,46 +1,43 @@
 # Office demo walkthrough
 
-Seeded without live email. Kernel traces and the Stripe pack are on this Computer.
+This is the **target** show. The desk on 8800 is not there yet.
+
+Current seed (do not demo this as the product): 2 inbox handoffs, 4 operational emails, one AP lookup (`ING-001`). Canonical Maximor (`data/demo`, 72 scenarios) is not what the Computer loads. Design: `DEMO-DESIGN.md`.
+
+Simulated data only. No live Gmail, Stripe, or bank.
 
 - Computer: `/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/computer`
-- Inbox handoffs: 2
-- Pay pool: INV-001, INV-002, INV-003, INV-004, INV-005, INV-006, INV-007, INV-008, INV-009, INV-011, INV-012, INV-017, ING-001
-- Stripe pack: `/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/computer/data/simulations/stripe`
+- URL: `http://127.0.0.1:8800/`
+- Replay: Tools → Demo (slider from wipe; Record before wipe)
+- Transcript detail: Full
+- Thinking: low
 
-## What to show
+## Plot (one company, September 2026)
 
-- Open Email. Set Transcript detail to Full. Ask it to call list_email_candidates for 2026-09.
-- Open AP. Ask it to load invoice ING-001 with tools.get_invoice (demo-inbox already landed it).
-- Inspector → Pi events / Pi RPC shows the live Harness stream, not a mascot-only status.
-- There is no live mailbox. demo-inbox wrote traces under computer/runs/inbox.
-- Stripe objects live under computer/data/simulations/stripe (symlink to .cfo/data).
+1. **STORY-CLEAN** — Acme `INV-001` matches PO-101 / GR-101, gets paid, hits the bank, is sampled by audit, and shows up in forecast actuals.
+2. **STORY-RESOLVED** — Helios `INV-017` wire lands $25 over books. Fee evidence explains it.
+3. **STORY-UNRESOLVED** — Northstar bank line is **$12.40** over the ledger. Close stays blocked.
 
-## Inbox seed
+## Ten minutes
 
-```
-Finance Inbox Demo
+| When | Lane | Prompt the Bot to do | Pass if |
+| --- | --- | --- | --- |
+| 0:00 | Desk | Open Email. Full verbosity. | 16 Bots. Not a chatbot. World is talkable. |
+| 0:30 | Email | Classify the September inbox. Land vendor invoices. Ignore quotes, statements, newsletters, and prompt-injection. Hand the clean Acme bill to AP. | Traps + a Handle, not a paragraph. |
+| 2:00 | AP | Three-way match `INV-001`. Investigate the price-mismatch bill. Draft concurrence to ctl-pay. Do not pay. | Match vs hold. SoD. |
+| 4:00 | ctl-pay, then Pay | Concur the match. Build this week’s run. Take the 2/10 on `INV-001`. Skip held bills. | Valid is not paid. |
+| 5:30 | Stripe, Bank, Cash | Unpack a payout (charges − fees − refunds). Explain the Helios $25. Do not force-match the $12.40. | Processor math + a real break. |
+| 7:30 | Close | Accrue / prepaid that have evidence. Final review stays blocked on the unexplained difference. | Month-end. Close does not lie. |
+| 8:30 | Audit | Reperform `INV-001`. Find duplicate vendor, round-number payment, post-close JE. | Independent. |
+| 9:15 | Story | Why GM moved 64% → 61%. Quiet Harbor paid late. 13-week miss. | Same IDs as AP and cash. |
 
-[1] MSG-INBOX-001
-Sender: Counterparty Message Agent  run=RUN-CP-MSG-INBOX-001  sent MSG-INBOX-001
-Receiver: Finance Inbox Agent  run=RUN-IB-MSG-INBOX-001
-Classification: VENDOR_INVOICE  action=CREATE_AP_INVOICE
-Extracted: invoice=ACM-INBOX-1001, vendor=Acme Supplies, amount_cents=1245000, po=PO-101
-Duplicate/validation: none  errors=[]
-Canonical invoice: ING-001
-Three-way match: MATCHED  exceptions=[]
-Final status: CREATED  reasons=['AP_INVOICE_CREATED']
-Trace: /Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/computer/runs/inbox/traces/INBOX-MSG-INBOX-001.json
+## What not to say
 
-[2] MSG-INBOX-010
-Sender: Counterparty Message Agent  run=RUN-CP-MSG-INBOX-010  sent MSG-INBOX-010
-Receiver: Finance Inbox Agent  run=RUN-IB-MSG-INBOX-010
-Classification: NON_FINANCE  action=IGNORE
-Extracted: vendor=People Ops
-Duplicate/validation: none  errors=[]
-Canonical invoice: (none)
-Three-way match: n/a  exceptions=[]
-Final status: IGNORED  reasons=['IGNORED']
-Trace: /Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/computer/runs/inbox/traces/INBOX-MSG-INBOX-010.json
+- Do not call Kernel 97% “the office score.” That number is Python on planted JSON. Show Inspector → Pi RPC for live proof.
+- Do not say HUMAN_REVIEW to judges. The status is exception open / close blocked.
+- Do not open live Stripe or a real mailbox. World is simulated. Open slug `world` to role-play vendors.
+- Do not load `expected_results.json` into a Bot.
 
-Inbox-created AP invoices: ING-001
-```
+## After the world is rebuilt
+
+Seed must use `full_inbox_specs()` (17 messages), the Stripe sim pack as Stripe Bot input, and `data/demo` as the only company picture. Then delete this “not there yet” banner.

@@ -30,8 +30,9 @@ Profile `chase` may call:
 - `ar.tools.get_collection_invoice_facts`
 - `ar.tools.get_ar_customer`
 - `ar.tools.get_ar_precedents`
+- `inbox.tools.send_office_outbound`
 
-Must not call: `get_cash_application_facts`, `create_accrual`, pay-run ops, `get_ar_close_snapshot`, `get_audit_ground_truth`. Skills never grant tools.
+Must not call: `get_cash_application_facts`, `send_inbox_message`, `compose_counterparty_message`, `reply_in_thread`, `create_accrual`, pay-run ops, `get_ar_close_snapshot`, `get_audit_ground_truth`. Skills never grant tools.
 
 ## Kernel
 
@@ -42,6 +43,7 @@ Must not call: `get_cash_application_facts`, `create_accrual`, pay-run ops, `get
 Write the path on the Computer. `bot_send_prompt`. Await the Handle. Peer Handle is not approval.
 
 - Dirty aging or unapplied cash that may be theirs → `apply` / `apply`.
+- Kernel-allowed dunning → `send_office_outbound` from `collections@hackmit-cfo.example`, then Handle `world` / `customer` (`dun`). Not a human email.
 - Write-off or reserve → `ctl-pay` / `review-pay`.
 - Do not Handle `ctl-cash` to apply cash. That is apply's job.
 
@@ -63,4 +65,4 @@ Only collection precedents about invoices you chased: promises, dispute habits, 
 
 ## Done when
 
-Every overdue invoice for the as-of is either contacted under Kernel allow, held, disputed internally, or sitting in a `ctl-pay` write-off packet. Aging used for close is the post-apply aging.
+Every overdue invoice for the as-of is either contacted under Kernel allow (outbound mail plus Handle `world`), held, disputed internally, or sitting in a `ctl-pay` write-off packet. Aging used for close is the post-apply aging.

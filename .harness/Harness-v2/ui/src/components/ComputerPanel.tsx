@@ -48,6 +48,28 @@ function parseTree(body: unknown): TreeEntry[] {
   return [];
 }
 
+interface SessionSummary {
+  readonly name: string;
+  readonly path: string;
+  readonly startedAt: string;
+  readonly messageCount: number;
+}
+
+function parseSessions(body: unknown): SessionSummary[] {
+  if (!isRecord(body) || !Array.isArray(body.sessions)) {
+    return [];
+  }
+  return body.sessions.filter((row): row is SessionSummary => {
+    return (
+      isRecord(row) &&
+      typeof row.name === "string" &&
+      typeof row.path === "string" &&
+      typeof row.startedAt === "string" &&
+      typeof row.messageCount === "number"
+    );
+  });
+}
+
 function parseFile(body: unknown): FileBody | null {
   if (!isRecord(body) || typeof body.path !== "string" || typeof body.content !== "string") {
     return null;
@@ -75,6 +97,7 @@ export function ComputerPanel({
   const [busy, setBusy] = useState(false);
   const [treeLoading, setTreeLoading] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [sessions, setSessions] = useState<SessionSummary[]>([]);
   const docked = state.activeView !== "computer";
 
   const loadTree = useCallback(async (): Promise<void> => {
@@ -94,6 +117,28 @@ export function ComputerPanel({
   useEffect(() => {
     void loadTree();
   }, [loadTree, bot?.id]);
+
+  useEffect(() => {
+    if (!bot?.id) {
+      setSessions([]);
+      return;
+    }
+    let cancelled = false;
+    void api(`/api/bots/${encodeURIComponent(bot.id)}/sessions`)
+      .then((body: unknown) => {
+        if (!cancelled) {
+          setSessions(parseSessions(body));
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setSessions([]);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [bot?.id]);
 
   const openFile = async (path: string): Promise<void> => {
     setSelected(path);
@@ -172,7 +217,9 @@ export function ComputerPanel({
       </div>
       <p className="border-b border-hairline/40 px-4 pb-3 text-[12px] leading-relaxed text-ink-secondary">
         Shared cwd for this floor: workspace files and harness/. Not a VM screenshot.
-        {bot ? ` Open Bot folder: harness/bots/${bot.id}/` : ""}
+        {bot
+          ? ` Pi sessions live at harness/bots/${bot.id}/pi-session/*.jsonl on this Computer — not the Harness package .pi folder.`
+          : ""}
       </p>
       {error ? <div className="px-4 py-2 text-[12px] text-danger">{error}</div> : null}
       {notice ? <div className="px-4 py-2 text-[12px] text-ink-secondary">{notice}</div> : null}
@@ -184,6 +231,27 @@ export function ComputerPanel({
           {!treeLoading && tree.length === 0 && !error ? (
             <div className="px-3 py-6 text-ink-secondary">
               This Computer has no files yet. They appear under the cwd passed to `harness serve`.
+            </div>
+          ) : null}
+          {sessions.length > 0 ? (
+            <div className="border-b border-hairline/40 py-1">
+              <div className="px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-ink-secondary">
+                Pi sessions
+              </div>
+              {sessions.map((session) => (
+                <button
+                  key={session.path}
+                  type="button"
+                  onClick={() => void openFile(session.path)}
+                  className={cn(
+                    "flex w-full items-center gap-1.5 px-3 py-1 text-left hover:bg-raised/50",
+                    selected === session.path ? "bg-raised text-ink" : "text-ink",
+                  )}
+                >
+                  <FileText size={12} className="shrink-0 text-ink-secondary" />
+                  <span className="truncate">{session.name}</span>
+                </button>
+              ))}
             </div>
           ) : null}
           {dirs.map((row) => (

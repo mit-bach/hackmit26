@@ -39,6 +39,7 @@ harness-impl/
 .cfo-v2/office/computer/cfo/.import-path/
 .cfo-v2/office/computer/cfo/kernel.port
 .cfo-v2/office/computer/cfo/kernel.log.jsonl
+.cfo-v2/office/reference-datasets/
 *.tmp.*
 *.lock
 **/pi-session/

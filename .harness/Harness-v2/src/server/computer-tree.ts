@@ -7,7 +7,7 @@ export interface TreeEntry {
   readonly size?: number;
 }
 
-const SKIP_DIR = new Set(["node_modules", ".git", "dist", ".DS_Store", "pi-session"]);
+const SKIP_DIR = new Set(["node_modules", ".git", "dist", ".DS_Store"]);
 const MAX_ENTRIES = 800;
 const MAX_DEPTH = 7;
 const MAX_FILE_BYTES = 200_000;

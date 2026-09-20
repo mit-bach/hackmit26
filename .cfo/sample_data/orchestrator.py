@@ -14,6 +14,7 @@ from sample_data.extended import plant_extended_scenarios
 from sample_data.models import DatasetManifest
 from sample_data.schema_map import SCHEMA_VERSION
 from sample_data.validators import validate_dataset
+from sample_data.world import add_chart, expand_operating_world, expand_registers
 from sample_data.writers import write_dataset
 
 
@@ -36,8 +37,15 @@ class CFOSampleDataOrchestrator:
 
     def generate(self, *, seed: int = 42, period: str = "2026-09", output: Path | None = None) -> CompanyScenarioContext:
         ctx = self.build_context(seed=seed, period=period)
-        for agent in self.agents:
-            agent.generate(ctx)
+        ap_ar, cash, close, audit, reporting = self.agents
+        ap_ar.generate(ctx)
+        expand_operating_world(ctx)
+        cash.generate(ctx)
+        close.generate(ctx)
+        expand_registers(ctx)
+        audit.generate(ctx)
+        reporting.generate(ctx)
+        add_chart(ctx)
         plant_extended_scenarios(ctx)
         validate_dataset(ctx)
         if output is not None:

@@ -5,6 +5,8 @@ import { test } from "node:test";
 
 import { startServer } from "../src/server/http.ts";
 import { listComputerTree } from "../src/server/computer-tree.ts";
+import { messagesForBot } from "../src/server/api.ts";
+import { appendTranscript } from "../src/transcript.ts";
 import { makeCfoComputer, makeComputer } from "./helpers.ts";
 
 interface SnapshotBody {
@@ -158,6 +160,22 @@ test("POST /api/bots/:slug/messages asking another Bot returns the peer text", a
     assert.equal(awaited.done, true);
     assert.equal(awaited.status, "completed");
     assert.match(awaited.result ?? "", /\[beta\]/i);
+    const snap = (await (await fetch(`${started.url}/api/bots`)).json()) as {
+      bots: readonly {
+        id: string;
+        messages: readonly { kind?: string; comm?: { groupId: string }; tool?: { name: string } }[];
+      }[];
+      groups: readonly { id: string; dm?: boolean }[];
+    };
+    const alpha = snap.bots.find((bot) => bot.id === "bot_alpha");
+    const beta = snap.bots.find((bot) => bot.id === "bot_beta");
+    assert.ok(alpha?.messages.some((row) => row.comm && /Messaged @Beta/.test(row.tool?.name ?? "")));
+    assert.ok(beta?.messages.some((row) => row.comm && /Message from @Alpha/.test(row.tool?.name ?? "")));
+    assert.ok(
+      snap.groups.some(
+        (group) => group.dm === true && group.id.includes("bot_alpha") && group.id.includes("bot_beta"),
+      ),
+    );
   } finally {
     await started.stop();
   }
@@ -244,4 +262,62 @@ test("POST /api/rooms/:id/messages and PATCH /api/bots/:slug update the Computer
   } finally {
     await started.stop();
   }
+});
+
+test("messagesForBot keeps operator wakes and peer handoff chips, not the pair log", () => {
+  const computer = makeComputer();
+  appendTranscript(computer, "bot_alpha", {
+    seq: 1,
+    t: "2026-09-20T00:00:00.000Z",
+    kind: "turn.start",
+    text: "wake from operator: list invoices",
+    handleId: "h_1",
+    from: "operator",
+    to: "bot_alpha",
+  });
+  appendTranscript(computer, "bot_alpha", {
+    seq: 2,
+    t: "2026-09-20T00:00:01.000Z",
+    kind: "handoff.sent",
+    text: "handed to beta, handle h_2",
+    handleId: "h_2",
+    from: "bot_alpha",
+    to: "bot_beta",
+  });
+  appendTranscript(computer, "bot_alpha", {
+    seq: 3,
+    t: "2026-09-20T00:00:02.000Z",
+    kind: "turn.start",
+    text: "wake from bot_beta: what color is the sky",
+    handleId: "h_3",
+    from: "bot_beta",
+    to: "bot_alpha",
+  });
+  appendTranscript(computer, "bot_alpha", {
+    seq: 4,
+    t: "2026-09-20T00:00:03.000Z",
+    kind: "handoff.done",
+    text: "alpha finished handle h_3: blue",
+    handleId: "h_3",
+    from: "bot_beta",
+    to: "bot_alpha",
+  });
+  const rows = messagesForBot(computer, "bot_alpha");
+  assert.ok(rows.some((row) => row.role === "user" && row.text === "list invoices"));
+  assert.ok(rows.some((row) => row.kind === "activity" && row.to === "bot_beta" && row.handleId === "h_2"));
+  assert.equal(rows.some((row) => /sky/.test(row.text ?? "")), false);
+  assert.equal(rows.some((row) => /blue/i.test(row.text ?? "")), false);
+
+  appendTranscript(computer, "bot_beta", {
+    seq: 2,
+    t: "2026-09-20T00:00:01.000Z",
+    kind: "handoff.received",
+    text: "message from alpha, handle h_2",
+    handleId: "h_2",
+    from: "bot_alpha",
+    to: "bot_beta",
+  });
+  const betaRows = messagesForBot(computer, "bot_beta");
+  assert.ok(betaRows.some((row) => row.kind === "activity" && row.from === "bot_alpha" && row.handleId === "h_2"));
+  assert.equal(betaRows.some((row) => /sky/.test(row.text ?? "")), false);
 });

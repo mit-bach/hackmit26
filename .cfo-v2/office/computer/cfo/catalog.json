@@ -482,6 +482,189 @@
       "ownerPrefixes": []
     },
     {
+      "id": "inbox.tools.classify_inbox_message",
+      "python": "inbox.tools:classify_inbox_message",
+      "exportName": "classify_inbox_message",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.compose_counterparty_message",
+      "python": "inbox.tools:compose_counterparty_message",
+      "exportName": "compose_counterparty_message",
+      "args": {
+        "case_id": "string",
+        "message_id": "string",
+        "thread_id": "string",
+        "sender_name": "string",
+        "sender_address": "string",
+        "subject": "string",
+        "body_text": "string",
+        "sent_at": "string",
+        "received_at": "string",
+        "in_reply_to": "string",
+        "correlation_id": "string",
+        "recipient": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.dispatch_inbox_action",
+      "python": "inbox.tools:dispatch_inbox_action",
+      "exportName": "dispatch_inbox_action",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.extract_inbox_invoice",
+      "python": "inbox.tools:extract_inbox_invoice",
+      "exportName": "extract_inbox_invoice",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.get_inbox_attachment",
+      "python": "inbox.tools:get_inbox_attachment",
+      "exportName": "get_inbox_attachment",
+      "args": {
+        "message_id": "string",
+        "filename": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.get_inbox_message",
+      "python": "inbox.tools:get_inbox_message",
+      "exportName": "get_inbox_message",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.get_inbox_thread",
+      "python": "inbox.tools:get_inbox_thread",
+      "exportName": "get_inbox_thread",
+      "args": {
+        "thread_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.list_inbox_messages",
+      "python": "inbox.tools:list_inbox_messages",
+      "exportName": "list_inbox_messages",
+      "args": {
+        "thread_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.list_inbox_threads",
+      "python": "inbox.tools:list_inbox_threads",
+      "exportName": "list_inbox_threads",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.list_world_personas",
+      "python": "inbox.tools:list_world_personas",
+      "exportName": "list_world_personas",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.reply_in_thread",
+      "python": "inbox.tools:reply_in_thread",
+      "exportName": "reply_in_thread",
+      "args": {
+        "thread_id": "string",
+        "in_reply_to": "string",
+        "message_id": "string",
+        "body_text": "string",
+        "subject": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/inbox/"
+      ]
+    },
+    {
+      "id": "inbox.tools.send_inbox_message",
+      "python": "inbox.tools:send_inbox_message",
+      "exportName": "send_inbox_message",
+      "args": {
+        "envelope_json": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/inbox/"
+      ]
+    },
+    {
+      "id": "inbox.tools.send_office_outbound",
+      "python": "inbox.tools:send_office_outbound",
+      "exportName": "send_office_outbound",
+      "args": {
+        "thread_id": "string",
+        "message_id": "string",
+        "to_name": "string",
+        "to_address": "string",
+        "subject": "string",
+        "body_text": "string",
+        "from_address": "string",
+        "from_name": "string",
+        "in_reply_to": "string",
+        "sent_at": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/inbox/"
+      ]
+    },
+    {
       "id": "invoice_ingestion.tools.find_related_invoice",
       "python": "invoice_ingestion.tools:find_related_invoice",
       "exportName": "find_related_invoice",
@@ -696,6 +879,22 @@
       },
       "mutability": "read",
       "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "memory.tools.get_decision_memories",
+      "python": "memory.tools:get_decision_memories",
+      "exportName": "get_decision_memories",
+      "args": {
+        "workflow": "string",
+        "entity_id": "string",
+        "situation_type": "string",
+        "period": "string",
+        "entity_type": "string"
+      },
+      "mutability": "read",
+      "sodClass": "kernel",
       "evalOnly": false,
       "ownerPrefixes": []
     },

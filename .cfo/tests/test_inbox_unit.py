@@ -8,6 +8,8 @@ from inbox.dispatch import action_for_classification, lookup_handler
 from inbox.extract import hash_attachment
 from inbox.fixtures import (
     CLEAN_INVOICE,
+    INCOMPLETE_INVOICE,
+    INCOMPLETE_REPLY,
     spec_clean_attachment,
     spec_credit_memo,
     spec_injection,
@@ -176,3 +178,18 @@ def test_malformed_attachment_has_stable_reason_code():
     assert result.invoice_id is None
     assert "PARSE_FAILURE" in result.trace.reason_codes or "UNSUPPORTED_ATTACHMENT" in result.trace.reason_codes
     assert created_invoice_ids() == []
+
+
+def test_incomplete_prose_does_not_parse_and_as_invoice_number():
+    from invoice_ingestion.interpret import INVOICE_NUMBER_LABEL_RE, parse_invoice_text_clean
+
+    assert INVOICE_NUMBER_LABEL_RE.search(INCOMPLETE_INVOICE) is None
+    incomplete = parse_invoice_text_clean(text=INCOMPLETE_INVOICE, source_type="email", source_id="incomplete")
+    assert incomplete.vendor_invoice_number != "AND"
+    assert incomplete.vendor_invoice_number is None
+    combined = parse_invoice_text_clean(
+        text=f"{INCOMPLETE_INVOICE}\n{INCOMPLETE_REPLY}",
+        source_type="email",
+        source_id="reply",
+    )
+    assert combined.vendor_invoice_number == "ACM-INBOX-5005"

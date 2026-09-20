@@ -1,0 +1,39 @@
+Figma, Inc.
+760 Market Street, Floor 10
+San Francisco, CA 94102
+Phone +1 415-890-5400   billing@figma.example
+Tax ID 46-5748921
+
+INVOICE
+
+Invoice Number: FIG-ORG-0926
+Invoice Date: 2026-09-06
+Due Date: 2026-10-06
+PO Number: PO-108
+Payment Terms: net 30
+Currency: USD
+Vendor: Figma
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Figma Organization seats                     35.00        125.00      4,375.00
+
+Subtotal                                                              4,375.00
+Tax                                                                       0.00
+Amount Due                                                            4,375.00
+
+Remit to:
+ACH First Republic routing 321081669  account ****0926
+Bank: First Republic  ****0926
+Please include invoice FIG-ORG-0926 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@figma.example

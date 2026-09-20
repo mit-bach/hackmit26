@@ -28,6 +28,12 @@
     "aliases": []
   },
   {
+    "account_id": "5400-Other-COGS",
+    "name": "Other COGS",
+    "account_class": "cogs",
+    "aliases": []
+  },
+  {
     "account_id": "6000-Operating",
     "name": "Operating Expenses",
     "account_class": "opex",
@@ -59,6 +65,114 @@
     "account_id": "2000-AP",
     "name": "Accounts Payable",
     "account_class": "ap",
+    "aliases": []
+  },
+  {
+    "account_id": "1010-Payroll-Cash",
+    "name": "Payroll cash",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1020-Reserve-Cash",
+    "name": "Reserve cash",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1200-Prepaid",
+    "name": "Prepaid assets",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1500-FixedAssets",
+    "name": "Computer equipment",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2100-Accrued",
+    "name": "Accrued expenses",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "6200-Facilities",
+    "name": "Facilities",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6300-Software",
+    "name": "Software subscriptions",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Utilities Expense",
+    "name": "Utilities",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Legal Expense",
+    "name": "Legal",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Insurance Expense",
+    "name": "Insurance",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Depreciation Expense",
+    "name": "Depreciation",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Software Subscription Expense",
+    "name": "Software amortization",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Prepaid Insurance",
+    "name": "Prepaid insurance",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Prepaid Software",
+    "name": "Prepaid software",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Computer Equipment",
+    "name": "Computer equipment",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Accumulated Depreciation - Equipment",
+    "name": "Accumulated depreciation",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Accrued Expenses",
+    "name": "Accrued expenses",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Consulting Expense",
+    "name": "Consulting",
+    "account_class": "opex",
     "aliases": []
   }
 ]

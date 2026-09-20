@@ -45,7 +45,7 @@ test("foldPiRpc turns Kernel tool execution into live activity chips", () => {
     ctx(),
   );
   assert.equal(start.events[0]?.type, "item.started");
-  assert.equal(start.activity?.name, "call_connected_tool");
+  assert.equal(start.activity?.name, "list_email_candidates");
   assert.equal(start.activity?.id, "call_1");
 
   const end = foldPiRpc(
@@ -54,6 +54,29 @@ test("foldPiRpc turns Kernel tool execution into live activity chips", () => {
   );
   assert.equal(end.events[0]?.type, "item.completed");
   assert.equal(end.activity?.ok, true);
+  assert.equal(end.activity?.id, "call_1");
+});
+
+test("foldPiRpc toolcall_start and execution share one toolCallId", () => {
+  const begin = foldPiRpc(
+    {
+      type: "message_update",
+      assistantMessageEvent: {
+        type: "toolcall_start",
+        id: "call_1",
+        name: "call_connected_tool",
+        arguments: { name: "list_email_candidates" },
+      },
+    },
+    ctx(),
+  );
+  assert.equal(begin.activity?.id, "call_1");
+  assert.equal(begin.activity?.name, "list_email_candidates");
+  const start = foldPiRpc(
+    { type: "tool_execution_start", toolCallId: "call_1", toolName: "call_connected_tool", args: { name: "list_email_candidates" } },
+    ctx(),
+  );
+  assert.equal(start.activity?.id, begin.activity?.id);
 });
 
 test("foldPiRpc ignores noise and maps agent_settled to turn.completed", () => {
@@ -87,6 +110,27 @@ test("hydratePiTurns keeps reasoning, Kernel tools, and assistant text together"
   assert.equal(turns[0]?.text, "Found tools.");
   assert.equal(turns[0]?.tools[0]?.name, "search_connected_tools");
   assert.equal(turns[0]?.tools[0]?.ok, true);
+  assert.equal(turns[0]?.conversation, "operator_dm");
+});
+
+test("hydratePiTurns marks a2a wakes as peer_dm", () => {
+  const turns = hydratePiTurns([
+    { type: "agent_start" },
+    {
+      type: "message_start",
+      message: {
+        role: "user",
+        content: [{ type: "text", text: "[harness wake]\nkind: a2a_handoff\nfrom: bot_email\nconversation: peer_dm\nWhat color is the sky?" }],
+      },
+    },
+    {
+      type: "agent_end",
+      messages: [{ role: "assistant", content: [{ type: "text", text: "Blue." }] }],
+    },
+  ]);
+  assert.equal(turns.length, 1);
+  assert.equal(turns[0]?.conversation, "peer_dm");
+  assert.equal(turns[0]?.text, "Blue.");
 });
 
 test("piModelArg appends thinking only when the model has no suffix", () => {
