@@ -486,6 +486,7 @@ export type ServerFrame =
   | { kind: "routine"; routine: Routine }
   | { kind: "routine.deleted"; routineId: string }
   | { kind: "routine.run"; run: RoutineRun }
+  | { kind: "approvals"; approvals: unknown }
   | { kind: "webhook"; webhook: WebhookTrigger }
   | { kind: "webhook.attempt"; attempt: WebhookAttempt }
   | { kind: "webhook.deleted"; webhookId: string }

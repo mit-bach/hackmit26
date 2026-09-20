@@ -19,7 +19,8 @@ const FALLBACK_LABELS: Array<[RegExp, LocaleKey]> = [
   [/\blist_rooms\b/i, "chat.activity.rooms"],
   [/\bpost_to_room\b/i, "chat.activity.postRoom"],
   [/\bdelegate_bot\b/i, "chat.activity.handoff"],
-  [/\b(?:ask_bot|send_message)\b/i, "chat.activity.askTeammate"],
+  [/\b(?:call_connected_tool|search_connected_tools)\b/i, "chat.activity.working"],
+  [/\b(?:list_email|list_invoice|prepare)\b/i, "chat.activity.working"],
 ];
 
 function sentenceCase(value: string): string {

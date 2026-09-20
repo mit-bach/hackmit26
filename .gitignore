@@ -36,3 +36,9 @@ Harness/.pi/
 .harness/**/node_modules/
 .harness/**/.pi/
 harness-impl/
+.cfo-v2/office/computer/cfo/.import-path/
+.cfo-v2/office/computer/cfo/kernel.port
+.cfo-v2/office/computer/cfo/kernel.log.jsonl
+*.tmp.*
+*.lock
+**/pi-session/

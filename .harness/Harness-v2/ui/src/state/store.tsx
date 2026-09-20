@@ -33,9 +33,7 @@ import {
 import type { Routine, RoutineInput, RoutineRun } from "@/lib/routines";
 import type { WebhookAttempt, WebhookIngressStatus, WebhookTrigger } from "@/lib/webhooks";
 import { answerResponse, dismissResponse } from "@/lib/card-answer";
-import { currentCall } from "@/lib/call";
 import { showNotification, type NotificationTarget } from "@/lib/notify";
-import { speaker } from "@/lib/tts";
 import { roleProfilePatch, type BotRole } from "@/lib/bot-roles";
 import { t } from "@/lib/i18n";
 import { createBotPatchQueue, type BotUpdatePatch } from "./bot-patch-queue";
@@ -137,6 +135,8 @@ export interface Message {
   role: "bot" | "user";
   kind: "text" | "options" | "activity" | "screen" | "connector" | "secret" | "routine.run" | "goal.run" | "digest" | "compaction";
   text?: string;
+  /** Pi extended thinking for this assistant turn. Shown when verbosity is full. */
+  reasoning?: string;
   /** digest messages: what the turn did, rendered in `text` and structured here. */
   digest?: TurnDigest;
   compaction?: import("../../shared/wire").WireMessage["compaction"];
@@ -337,6 +337,12 @@ export interface Bot {
   name: string;
   title: string;
   description: string;
+  /** Roster slug (HARNESS_BOT bind key). */
+  harnessSlug?: string;
+  /** Roster approvalLevel mapped through the OMB wire. */
+  approvalLevel?: "ask" | "always" | "never";
+  skills?: string[];
+  connectors?: string[];
   /** Standing instructions (SOUL.md). Canonical on the server; the file is a mirror. */
   soul?: string;
   /** The SOUL.md mirror on disk differs from the record; the Soul editor offers apply/discard. */
@@ -492,19 +498,20 @@ export interface ConfigStatus {
   xai?: { configured: boolean };
   anthropic?: { configured: boolean };
   openaiCompat?: { configured: boolean; url?: string };
+  google?: { configured: boolean };
   /** what this server is entitled to; Settings shows only what works here */
   edition?: { edition: "oss" | "enterprise"; features: string[] };
   /** a fleet agent exists on this server (Settings → Workspaces) */
-  fleet?: { available: boolean };
+  fleet?: { available: boolean }; // deleted screen: Workspaces fleet
   budgets?: { monthlyUsd?: number; warnAtPercent?: number };
   billing?: { currency?: string; prices?: Record<string, { inputPerMillion: number; outputPerMillion: number; cachedInputPerMillion?: number }> };
-  composio: { configured: boolean; mode?: "managed" | "self-hosted" | "unavailable" };
-  box: { configured: boolean };
-  vps: { configured: boolean; sshAlias: string };
+  composio: { configured: boolean; mode?: "managed" | "self-hosted" | "unavailable" }; // deleted screen: Composio plugins marketplace
+  box: { configured: boolean }; // deleted screen: Box computer
+  vps: { configured: boolean; sshAlias: string }; // deleted screen: VpsConnection
   rooms: { turnTimeoutMinutes: number };
   threads?: { maxConcurrentPerBot: number };
   localVm: { mode: "shared" | "per-bot"; maxInstances: number };
-  opencodeGo?: { configured: boolean };
+  opencodeGo?: { configured: boolean }; // deleted screen: OpenCode Go key row
   /** Voice. `configured` = the engine has what it needs (an ElevenLabs or
    * Fish Audio key, or a Chatterbox server address); `ready` = that AND a voice, which is
    * what it takes to actually speak. The key itself is never echoed back;
@@ -513,7 +520,7 @@ export interface ConfigStatus {
     configured: boolean;
     ready: boolean;
     voice: string;
-    provider?: "elevenlabs" | "fish" | "system" | "chatterbox";
+    provider?: "elevenlabs" | "fish" | "system" | "chatterbox"; // deleted screen: Voice / SpeakButton
     baseUrl?: string;
     model?: string;
   };
@@ -533,7 +540,7 @@ export interface ConfigStatus {
   /** UI language override; "" (or absent) follows the system language. */
   language?: string;
   /** Opt-in flags. Absent means off. */
-  features?: { skillAuthoring: boolean; showToolCalls?: boolean; browser?: boolean; sharedComputers?: boolean; claudeUserMcp?: boolean };
+  features?: { skillAuthoring: boolean; showToolCalls?: boolean; transcriptVerbosity?: "compact" | "tools" | "full"; browser?: boolean; sharedComputers?: boolean; claudeUserMcp?: boolean };
   /** First-run progress: whether the welcome tour was finished and which
    * one-time hints were dismissed. Server-owned so it follows the workspace. */
   onboarding?: OnboardingStatus;
@@ -542,6 +549,25 @@ export interface ConfigStatus {
   browserEngine?: BrowserEngineSummary;
   /** Named browser sessions any bot can be pointed at. */
   browserProfiles?: BrowserProfile[];
+  /** Harness Operator desk: spawn, extra Pi extensions, and on-disk comms. */
+  harness?: {
+    spawnPolicy: string;
+    extraExtensions: string[];
+    clientSkills: boolean;
+    provider?: string;
+    model?: string;
+    thinkingLevel?: string;
+    configPath: string;
+    protocol: string;
+    roster: string;
+  };
+  extraExtensions?: string[];
+  clientSkills?: boolean;
+  spawnPolicy?: string;
+  provider?: string;
+  model?: string;
+  thinkingLevel?: string;
+  configPath?: string;
 }
 
 export interface BrowserEngineSummary {
@@ -563,30 +589,37 @@ export interface BrowserProfile {
 
 export type ConfigStatusFrame = Pick<
   ConfigStatus,
-  "xai" | "composio" | "box" | "vps" | "rooms" | "threads" | "localVm" | "opencodeGo" | "tts" | "imageGen" | "profile" | "language" | "features" | "onboarding" | "browserEngine" | "browserProfiles" | "edition" | "budgets" | "billing"
+  | "xai"
+  | "anthropic"
+  | "openaiCompat"
+  | "google"
+  | "harness"
+  | "profile"
+  | "language"
+  | "features"
+  | "spawnPolicy"
+  | "extraExtensions"
+  | "clientSkills"
 >;
 
 export function configStatusFromFrame(frame: ConfigStatusFrame): ConfigStatus {
   return {
     xai: frame.xai,
-    composio: frame.composio,
-    box: frame.box,
-    vps: frame.vps,
-    rooms: frame.rooms,
-    threads: frame.threads,
-    localVm: frame.localVm,
-    opencodeGo: frame.opencodeGo,
-    tts: frame.tts,
-    imageGen: frame.imageGen,
+    anthropic: frame.anthropic,
+    openaiCompat: frame.openaiCompat,
+    google: frame.google,
+    harness: frame.harness,
     profile: frame.profile,
     language: frame.language,
     features: frame.features,
-    onboarding: frame.onboarding,
-    browserEngine: frame.browserEngine,
-    browserProfiles: frame.browserProfiles,
-    edition: frame.edition,
-    budgets: frame.budgets,
-    billing: frame.billing,
+    spawnPolicy: frame.spawnPolicy,
+    extraExtensions: frame.extraExtensions,
+    clientSkills: frame.clientSkills,
+    composio: { configured: false, mode: "unavailable" },
+    box: { configured: false },
+    vps: { configured: false, sshAlias: "" },
+    rooms: { turnTimeoutMinutes: 30 },
+    localVm: { mode: "shared", maxInstances: 1 },
   };
 }
 
@@ -667,35 +700,15 @@ export interface InstanceInfo {
   claudeAccount?: { configDir: string; signInCommand: string; signInShell: "powershell" | "sh"; isDefault: boolean };
 }
 
-export type AppSettingsSection =
-  | "general"
-  | "desktopWorkspaces"
-  | "organization"
-  | "appearance"
-  | "experimental"
-  | "connections"
-  | "engines"
-  | "companion"
-  | "remote"
-  | "computer"
-  | "usage"
-  | "people"
-  | "backups"
-  | "workspaces";
+export type AppSettingsSection = "harness" | "general" | "appearance" | "connections";
 
 export type BotSettingsSection =
   | "overview"
   | "identity"
-  | "soul"
   | "skills"
   | "memory"
   | "routines"
-  | "access"
-  | "model"
-  | "permissions"
-  | "voice"
-  | "history"
-  | "usage";
+  | "permissions";
 
 export interface ModelVariantSession {
   instanceId: string;
@@ -717,7 +730,7 @@ export interface AppState {
   config: ConfigStatus | null;
   /** selected chat — a bot id OR a group id */
   selectedId: string;
-  activeView: "chat" | "team-map" | "routines";
+  activeView: "chat" | "protocol" | "routines" | "computer";
   routines: Routine[];
   routineRuns: RoutineRun[];
   routinesLoadState: "loading" | "ready" | "error";
@@ -870,7 +883,8 @@ export type Action =
   | { type: "botQueues"; queues: AppState["pendingQueued"] }
   | { type: "sections"; sections: string[] }
   | { type: "showRoutines"; section?: "schedule" | "logs"; view?: "calendar" | "list"; botId?: string; routineId?: string }
-  | { type: "showTeamMap" }
+  | { type: "showProtocol" }
+  | { type: "showComputer" }
   | { type: "showChat" }
   | { type: "routinesHydrated"; routines: Routine[]; runs: RoutineRun[] }
   | { type: "routinesLoadFailed" }
@@ -1231,12 +1245,22 @@ export function reducer(state: AppState, action: Action): AppState {
       };
     case "showChat":
       return state.activeView === "chat" ? state : { ...state, activeView: "chat" };
-    case "showTeamMap":
+    case "showProtocol":
       return {
         ...state,
-        activeView: "team-map",
+        activeView: "protocol",
         settingsOpen: false,
         computerOpen: false,
+        inspectorOpen: false,
+        appSettingsOpen: false,
+        pluginsOpen: false,
+      };
+    case "showComputer":
+      return {
+        ...state,
+        activeView: "computer",
+        computerOpen: false,
+        settingsOpen: false,
         inspectorOpen: false,
         appSettingsOpen: false,
         pluginsOpen: false,
@@ -1508,7 +1532,12 @@ export function reducer(state: AppState, action: Action): AppState {
         // append). A message parented elsewhere is a chain-insert of a late
         // turn artifact (settle-time screenshot) — the leaf must stay put,
         // or the follow-up send it raced would fall off the active branch.
-        const adoptsLeaf = (action.message.parentId ?? null) === (b.activeLeafId ?? null);
+        const parentId = action.message.parentId ?? null;
+        const parentMissing = parentId !== null && !b.messages.some((message) => message.id === parentId);
+        const adoptsLeaf =
+          parentId === (b.activeLeafId ?? null) ||
+          parentMissing ||
+          action.message.role === "bot";
         let messages = [...b.messages, action.message];
         // base64 screen frames are big; a long computer-use session would
         // grow memory without bound. Keep the newest few frames' pixels and
@@ -2019,7 +2048,7 @@ export const initialState: AppState = {
   computerOpen: false,
   inspectorOpen: false,
   appSettingsOpen: false,
-  appSettingsSection: "general",
+  appSettingsSection: "harness",
   shortcutsOpen: false,
   welcomeOpen: false,
   tourOpen: false,
@@ -2066,7 +2095,7 @@ export async function createBotWithRole(role?: BotRole, request: typeof api = ap
   }
 }
 
-export async function api<T = any>(path: string, init?: RequestInit & { timeoutMs?: number }): Promise<T> {
+export async function api<T = unknown>(path: string, init?: RequestInit & { timeoutMs?: number }): Promise<T> {
   // timeoutMs races the fetch against AbortSignal.timeout, combined with any
   // caller signal so either can cancel. Omitted means no behavior change.
   const { timeoutMs, signal, ...rest } = init ?? {};
@@ -2079,9 +2108,13 @@ export async function api<T = any>(path: string, init?: RequestInit & { timeoutM
         ? AbortSignal.any([signal, AbortSignal.timeout(timeoutMs)])
         : AbortSignal.timeout(timeoutMs),
   });
-  const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw new ApiError(body.error ?? `${res.status} ${res.statusText}`, res.status);
-  return body;
+  const body: unknown = await res.json().catch(() => ({}));
+  const record = typeof body === "object" && body !== null ? (body as Record<string, unknown>) : {};
+  if (!res.ok) {
+    const message = typeof record.error === "string" ? record.error : `${res.status} ${res.statusText}`;
+    throw new ApiError(message, res.status);
+  }
+  return body as T;
 }
 
 type TrustedApprovalBridge = {
@@ -2357,6 +2390,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   // state is intentionally OUTSIDE the reducer so token frames re-render
   // only StreamContext consumers
   const [stream, setStream] = useState<StreamState>(EMPTY_STREAM);
+  const streamRef = useRef(stream);
+  streamRef.current = stream;
   const deltaBuffer = useMemo(() => createStreamDeltaBuffer((entries) => {
     setStream((prev) => {
       const streaming = { ...prev.streaming };
@@ -2830,7 +2865,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
               action.onCreated?.();
               if (profileError) {
                 showError(t("newBot.profileFailed", { error: profileError }));
-                rawDispatch({ type: "toggleSettings", open: true, section: "soul" });
+                rawDispatch({ type: "toggleSettings", open: true, section: "identity" });
               }
             })
             .catch((error) => {
@@ -2913,10 +2948,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             body: JSON.stringify({
               memberIds: action.memberIds,
               name: action.name,
-              section: action.section,
-              ...(window.ogb?.remoteClient?.active
-                ? { setup: { bulletin: "", defaultResponder: { kind: "mentions" } } }
-                : {}),
             }),
           })
             .then(({ group }) => {
@@ -3149,14 +3180,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           return () => rawDispatch({ type: "routinesHydrated", routines, runs });
         },
       },
-      ...(window.ogb?.remoteClient?.active ? [] : [{
-        key: "webhooks",
-        request: async () => {
-          const { webhooks, attempts, ingress } = await api("/api/webhooks");
-          return () =>
-            rawDispatch({ type: "webhooksHydrated", webhooks, attempts: attempts ?? [], ingress });
-        },
-      } satisfies PeripheralPart]),
     ];
     const partByKey = new Map(peripheralParts.map((part) => [part.key, part]));
     const schedulePeripheralRetry = (part: PeripheralPart, error?: Error) => {
@@ -3288,30 +3311,27 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           rawDispatch({ type: "botQueues", queues: frame.queues });
           break;
         case "message": {
-          rawDispatch({ type: "messageAdded", threadId: frame.threadId, message: frame.message as Message });
-          if (frame.message?.role === "user" && typeof frame.message.queueId === "string") {
+          const incoming = frame.message as Message;
+          if (incoming?.role === "bot" && incoming.kind === "text") {
+            flushDeltas();
+            const thought = incoming.reasoning?.trim()
+              ? incoming.reasoning
+              : streamRef.current.reasoning[frame.threadId];
+            rawDispatch({
+              type: "messageAdded",
+              threadId: frame.threadId,
+              message: thought ? { ...incoming, reasoning: thought } : incoming,
+            });
+            clearStream(frame.threadId);
+          } else {
+            rawDispatch({ type: "messageAdded", threadId: frame.threadId, message: incoming });
+          }
+          if (incoming?.role === "user" && typeof incoming.queueId === "string") {
             rawDispatch({
               type: "consumePendingQueued",
               threadId: frame.threadId,
-              queueId: frame.message.queueId,
+              queueId: incoming.queueId,
             });
-          }
-          // a settled assistant bubble replaces the in-flight stream
-          if (frame.message?.role === "bot" && frame.message?.kind === "text") {
-            clearStream(frame.threadId);
-            // Auto-speak lives HERE rather than in the chat view so a bot
-            // you switched away from still reads its answer out — which is
-            // the whole point of listening while you do something else. A
-            // Auto-speak is disabled during any call. Call mode owns both the
-            // singleton speaker and microphone ordering for its whole lifetime.
-            const owner = stateRef.current.bots.find((b) => b.threadId === frame.threadId || b.tasks?.some((task) => task.threadId === frame.threadId));
-            if (owner?.speakReplies && currentCall() === null && frame.message.text?.trim()) {
-              void speaker.speak(frame.message.text, {
-                botId: owner.id,
-                messageId: frame.message.id,
-                voiceId: owner.voice,
-              });
-            }
           }
           break;
         }
@@ -3376,6 +3396,31 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           break;
         case "routine.run":
           rawDispatch({ type: "routineRunPatched", run: frame.run });
+          break;
+        case "approvals":
+          void api<{
+            bots: Bot[];
+            groups?: Group[];
+            sections?: string[];
+            computerControl?: Record<string, { held: boolean; helpReason: string | null }>;
+            botQueuedMessages?: AppState["pendingQueued"];
+          }>("/api/bots")
+            .then(({ bots, groups, sections, computerControl, botQueuedMessages }) => {
+              rawDispatch({
+                type: "hydrate",
+                bots,
+                groups: groups ?? [],
+                sections: sections ?? [],
+                computerControl: computerControl ?? {},
+                botQueuedMessages,
+              });
+            })
+            .catch((cause: unknown) => {
+              rawDispatch({
+                type: "error",
+                message: cause instanceof Error ? cause.message : String(cause),
+              });
+            });
           break;
         case "webhook":
           rawDispatch({ type: "webhookPatched", webhook: frame.webhook });

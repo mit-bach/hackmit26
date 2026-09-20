@@ -1,10 +1,12 @@
 import { Check, ChevronRight, X } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import type { Message } from "@/state/store";
+import { useStore } from "@/state/store";
 import { cn } from "@/lib/cn";
 import { t } from "@/lib/i18n";
 import { placeLabelKey, type Place } from "@/lib/place";
 import { nameIsCommand } from "@/lib/verify-steps";
+import { transcriptVerbosity } from "@/lib/feature-flags";
 import { PlaceIcon } from "./PlaceIcon";
 import { WorkingDots } from "./WorkingIndicator";
 
@@ -13,12 +15,15 @@ import { WorkingDots } from "./WorkingIndicator";
 /** `place` names where a screen or page tool ran, so a transcript shows the
  * place of every step, not just the current one. Absent for tools that touch
  * no screen. */
-export function ToolActivity({ tool, place = null }: { tool: NonNullable<Message["tool"]>; place?: Place | null }) {
-  const [expanded, setExpanded] = useState(false);
+export function ToolActivity({ tool, place = null }: { tool: NonNullable<Message["tool"]>; place?: Place | null }): ReactElement {
+  const { state } = useStore();
+  const verbosity = transcriptVerbosity(state.config);
+  const defaultOpen = verbosity === "full" && tool.ok !== undefined;
+  const [expanded, setExpanded] = useState(defaultOpen);
   const failed = tool.ok === false;
   const status = tool.ok === undefined ? t("toolDetail.running") : failed ? t("toolDetail.failed") : t("toolDetail.completed");
   return (
-    <details onToggle={(event) => setExpanded(event.currentTarget.open)} className="group/tool w-fit max-w-full rounded-xl border border-hairline/40 bg-panel text-[13px] open:w-[min(38rem,100%)]" data-testid="tool-activity">
+    <details open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)} className="group/tool w-fit max-w-full rounded-xl border border-hairline/40 bg-panel text-[13px] open:w-[min(38rem,100%)]" data-testid="tool-activity">
       <summary
         role="button"
         aria-expanded={expanded}

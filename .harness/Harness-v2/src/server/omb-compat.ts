@@ -1,11 +1,18 @@
 import { listApprovals, resolveApproval } from "../approvals.ts";
 import { liveStatus } from "../lane-state.ts";
+import { pendingCount } from "../inbox.ts";
 import { findBot, findRoom, loadRoster } from "../roster.ts";
 import { readRoomLog, roomPost } from "../rooms.ts";
 import { fireRoutine } from "../routines.ts";
 import type { ApprovalLevel, BotRecord, Roster } from "../types.ts";
 import { handleOperatorApi, messagesForBot, type ApiContext, type OperatorMessage } from "./api.ts";
+import { saveExtensionsManifest } from "../client-attach.ts";
+import { handleDeskCompat, wireRun } from "./desk.ts";
+import { loadClientRuntime, overlayOperatorConfig, clientRuntimePath } from "../client-runtime.ts";
+import { readJsonIfExists, readJsonl, writeJsonAtomic } from "../fs.ts";
 import { loadOperatorConfig, patchOperatorConfig, publicOperatorConfig } from "./operator-config.ts";
+import { piRpcLogPath } from "../paths.ts";
+import { hydratePiTurns, type PiHydratedTurn } from "./pi-runtime.ts";
 
 const MAUS_COLORS = [
   "teal",
@@ -27,15 +34,25 @@ interface OmbMessage {
   readonly role: "bot" | "user";
   readonly kind: "text" | "options" | "activity";
   readonly text?: string;
+  readonly reasoning?: string;
   readonly at: number;
   readonly sendId?: string;
   readonly parentId?: string | null;
   readonly from?: { readonly botId: string; readonly name: string; readonly color: MausColor };
+  readonly tool?: {
+    readonly name: string;
+    readonly ok?: boolean;
+    readonly spoken?: string;
+    readonly summary?: string;
+    readonly input?: string;
+    readonly output?: string;
+  };
   readonly card?: {
     readonly title: string;
     readonly subtitle: string;
     readonly options: readonly string[];
     readonly requestId?: string;
+    readonly tool?: string;
   };
 }
 
@@ -70,11 +87,23 @@ interface JsonResult {
 
 /** Last operator leaf id the OpenMausBot client will walk from. */
 const lastUserLeaf = new Map<string, string>();
+/** Visible-branch head, including live tool chips published mid-turn. */
+const lastChainLeaf = new Map<string, string>();
 const taskOverlays = new Map<string, Record<string, unknown>>();
 
 /** Parent id for a live bot reply so the client leaf walk stays intact. */
 export function ombUserLeaf(botId: string): string | null {
   return lastUserLeaf.get(botId) ?? null;
+}
+
+/** Current visible-branch head for this Bot thread. */
+export function ombChainParent(botId: string): string | null {
+  return lastChainLeaf.get(botId) ?? lastUserLeaf.get(botId) ?? null;
+}
+
+/** Record a newly published message as the visible leaf. */
+export function ombAdoptLeaf(botId: string, messageId: string): void {
+  lastChainLeaf.set(botId, messageId);
 }
 
 const ombUi: {
@@ -153,10 +182,63 @@ function toOmbMessage(row: OperatorMessage): OmbMessage {
             subtitle: row.card.subtitle,
             options: row.card.options,
             requestId: row.card.requestId,
+            ...(row.card.tool ? { tool: row.card.tool } : {}),
           },
         }
       : {}),
   };
+}
+
+function mergeHydratedPi(computerRoot: string, botId: string, messages: OmbMessage[]): OmbMessage[] {
+  const turns = hydratePiTurns(readJsonl(piRpcLogPath(computerRoot, botId)));
+  if (turns.length === 0) {
+    return messages;
+  }
+  const botTexts = messages.filter((row) => row.role === "bot" && row.kind === "text");
+  const offset = Math.max(0, botTexts.length - turns.length);
+  const byId = new Map<string, PiHydratedTurn>();
+  botTexts.slice(offset).forEach((msg, index) => {
+    const turn = turns[index];
+    if (turn) {
+      byId.set(msg.id, turn);
+    }
+  });
+  const out: OmbMessage[] = [];
+  const seenTools = new Set<string>();
+  for (const msg of messages) {
+    const turn = byId.get(msg.id);
+    if (!turn) {
+      out.push(msg);
+      continue;
+    }
+    for (const tool of turn.tools) {
+      const id = `tool-${tool.id}-done`;
+      if (seenTools.has(id)) {
+        continue;
+      }
+      seenTools.add(id);
+      out.push({
+        id,
+        role: "bot",
+        kind: "activity",
+        text: tool.ok ? `Finished ${tool.name}` : `Failed ${tool.name}`,
+        at: msg.at,
+        tool: {
+          name: tool.name,
+          ok: tool.ok,
+          spoken: tool.ok ? `Finished ${tool.name}` : `Failed ${tool.name}`,
+          ...(tool.summary ? { summary: tool.summary } : {}),
+          ...(tool.input ? { input: tool.input } : {}),
+          ...(tool.output ? { output: tool.output } : {}),
+        },
+      });
+    }
+    out.push({
+      ...msg,
+      ...(turn.reasoning.length > 0 ? { reasoning: turn.reasoning } : {}),
+    });
+  }
+  return out;
 }
 
 function chainMessages(rows: readonly OmbMessage[]): OmbMessage[] {
@@ -171,9 +253,9 @@ function botTranscript(computerRoot: string, botId: string): {
   readonly activeLeafId: string | null;
 } {
   const rows = messagesForBot(computerRoot, botId).filter(
-    (row) => row.kind === "text" || row.kind === "options",
+    (row) => row.kind === "text" || row.kind === "options" || (row.kind === "activity" && row.text !== "running"),
   );
-  const messages = chainMessages(rows.map(toOmbMessage));
+  const messages = chainMessages(mergeHydratedPi(computerRoot, botId, rows.map(toOmbMessage)));
   return { messages, activeLeafId: messages.at(-1)?.id ?? null };
 }
 
@@ -182,16 +264,20 @@ export function ombLatestMessage(computerRoot: string, botId: string): OmbMessag
   return botTranscript(computerRoot, botId).messages.at(-1);
 }
 
-function defaultModel(): string {
+function defaultModel(computerRoot?: string): string {
+  if (computerRoot) {
+    return liveConfig(computerRoot).model ?? "default";
+  }
   return loadOperatorConfig().model ?? "default";
 }
 
 function toWireBot(computerRoot: string, roster: Roster, bot: BotRecord, index: number): Record<string, unknown> {
   const status = liveStatus(computerRoot, bot.id);
-  const activity = activityFor(status);
+  const pending = pendingCount(computerRoot, bot.id);
+  const activity = pending > 0 && status !== "blocked" ? "working" : activityFor(status);
   const busy = activity === "working" || activity === "waiting-on-you";
   const transcript = botTranscript(computerRoot, bot.id);
-  const model = defaultModel();
+  const model = defaultModel(computerRoot);
   const overlay = taskOverlays.get(bot.id) ?? {};
   const modelSelection = isRecord(overlay.modelSelection)
     ? overlay.modelSelection
@@ -237,6 +323,10 @@ function toWireBot(computerRoot: string, roster: Roster, bot: BotRecord, index: 
     messages: transcript.messages,
     activeLeafId: transcript.activeLeafId,
     createdAt,
+    skills: [...bot.skills],
+    connectors: [...bot.connectors],
+    harnessSlug: bot.slug,
+    approvalLevel: bot.approvalLevel,
   };
 }
 
@@ -289,8 +379,8 @@ function toWireGroup(computerRoot: string, roster: Roster, roomId: string): Reco
   };
 }
 
-function piInstance(): Record<string, unknown> {
-  const model = defaultModel();
+function piInstance(computerRoot?: string): Record<string, unknown> {
+  const model = defaultModel(computerRoot);
   return {
     instanceId: "pi",
     driverKind: "pi",
@@ -310,13 +400,20 @@ function piInstance(): Record<string, unknown> {
   };
 }
 
-function configStatus(): Record<string, unknown> {
-  const publicCfg = publicOperatorConfig();
+function liveConfig(computerRoot: string): ReturnType<typeof overlayOperatorConfig> {
+  return overlayOperatorConfig(computerRoot, loadOperatorConfig(), loadClientRuntime(computerRoot));
+}
+
+function configStatus(ctx?: ApiContext): Record<string, unknown> {
+  const publicCfg = publicOperatorConfig(ctx ? liveConfig(ctx.computerRoot) : loadOperatorConfig());
   const keys = publicCfg.keys;
+  const profile = publicCfg.profile ?? ombUi.profile;
+  const spawnPolicy = ctx?.fakeWorkers === true ? "fake" : publicCfg.spawnPolicy;
   return {
     xai: { configured: Boolean(keys.xai || keys.XAI_API_KEY) },
     anthropic: { configured: Boolean(keys.anthropic || keys.ANTHROPIC_API_KEY) },
     openaiCompat: { configured: Boolean(keys.openai || keys.OPENAI_API_KEY), url: "" },
+    google: { configured: Boolean(keys.google || keys.GOOGLE_API_KEY || keys.gemini) },
     edition: { edition: "oss", features: [] },
     fleet: { available: false },
     composio: { configured: false, mode: "unavailable" },
@@ -327,12 +424,13 @@ function configStatus(): Record<string, unknown> {
     localVm: { mode: "shared", maxInstances: 1 },
     opencodeGo: { configured: false },
     tts: { configured: false, ready: false, voice: "" },
-    profile: ombUi.profile,
+    profile,
     language: ombUi.language,
     features: {
-      skillAuthoring: false,
-      showToolCalls: true,
-      browser: false,
+      skillAuthoring: publicCfg.features.skillAuthoring,
+      showToolCalls: publicCfg.features.showToolCalls,
+      transcriptVerbosity: publicCfg.features.transcriptVerbosity,
+      browser: publicCfg.features.browser,
       sharedComputers: false,
       claudeUserMcp: false,
     },
@@ -340,11 +438,25 @@ function configStatus(): Record<string, unknown> {
     browserEngine: { kind: "unavailable", reason: "browser is not part of this host" },
     browserProfiles: [],
     signIn: { admins: [], members: [] },
-    spawnPolicy: publicCfg.spawnPolicy,
+    spawnPolicy,
     model: publicCfg.model,
     provider: publicCfg.provider,
+    extraExtensions: publicCfg.extraExtensions,
+    clientSkills: publicCfg.clientSkills,
     keys: publicCfg.keys,
     configPath: publicCfg.configPath,
+    thinkingLevel: publicCfg.thinkingLevel,
+    harness: {
+      spawnPolicy,
+      extraExtensions: publicCfg.extraExtensions,
+      clientSkills: publicCfg.clientSkills,
+      provider: publicCfg.provider,
+      model: publicCfg.model,
+      thinkingLevel: publicCfg.thinkingLevel,
+      configPath: publicCfg.configPath,
+      protocol: "harness/protocol.jsonl",
+      roster: "harness/roster.json",
+    },
   };
 }
 
@@ -369,10 +481,17 @@ function mergeOnboarding(patch: unknown): void {
 
 function harnessBotPatch(body: unknown): Record<string, unknown> {
   const patch: Record<string, unknown> = isRecord(body) ? { ...body } : {};
-  if (patch.approvalMode === "auto") {
-    patch.approvalLevel = "never";
-  } else if (patch.approvalMode === "ask") {
-    patch.approvalLevel = "ask";
+  if (typeof patch.approvalLevel !== "string") {
+    if (patch.approvalMode === "auto") {
+      patch.approvalLevel = "never";
+    } else if (patch.approvalMode === "edits") {
+      patch.approvalLevel = "always";
+    } else if (patch.approvalMode === "ask") {
+      patch.approvalLevel = "ask";
+    }
+  }
+  if (typeof patch.harnessSlug === "string") {
+    patch.slug = patch.harnessSlug;
   }
   if (typeof patch.soul === "string") {
     patch.instructions = patch.soul;
@@ -411,27 +530,20 @@ function applyConfigPatch(body: unknown, ctx: ApiContext): JsonResult {
   if (!isRecord(body)) {
     return { status: 400, body: { error: "object required" } };
   }
-  const harnessPatch: Record<string, unknown> = {};
-  if (body.spawnPolicy !== undefined) {
-    harnessPatch.spawnPolicy = body.spawnPolicy;
+  const next = patchOperatorConfig(body);
+  if (
+    Array.isArray(body.extraExtensions) ||
+    typeof body.extraExtensions === "string" ||
+    typeof body.clientSkills === "boolean"
+  ) {
+    saveExtensionsManifest(ctx.computerRoot, {
+      extraExtensions: [...next.extraExtensions],
+      clientSkills: next.clientSkills,
+    });
   }
-  if (body.model !== undefined) {
-    harnessPatch.model = body.model;
-  }
-  if (body.provider !== undefined) {
-    harnessPatch.provider = body.provider;
-  }
-  if (body.apiKeys !== undefined) {
-    harnessPatch.apiKeys = body.apiKeys;
-  }
-  if (body.openBrowser !== undefined) {
-    harnessPatch.openBrowser = body.openBrowser;
-  }
-  if (Object.keys(harnessPatch).length > 0) {
-    const next = patchOperatorConfig(harnessPatch);
-    ctx.bus?.publish({ kind: "config", ...configStatus(), spawnPolicy: next.spawnPolicy });
-  }
-  if (isRecord(body.profile)) {
+  if (next.profile) {
+    ombUi.profile = { name: next.profile.name, email: next.profile.email };
+  } else if (isRecord(body.profile)) {
     ombUi.profile = {
       name: typeof body.profile.name === "string" ? body.profile.name : ombUi.profile.name,
       email: typeof body.profile.email === "string" ? body.profile.email : ombUi.profile.email,
@@ -440,18 +552,31 @@ function applyConfigPatch(body: unknown, ctx: ApiContext): JsonResult {
   if (typeof body.language === "string") {
     ombUi.language = body.language;
   }
+  if (isRecord(body.features) || typeof body.thinkingLevel === "string") {
+    const path = clientRuntimePath(ctx.computerRoot);
+    const existing = readJsonIfExists(path);
+    const rec: Record<string, unknown> = isRecord(existing) ? { ...existing } : {};
+    if (isRecord(body.features)) {
+      const prev = isRecord(rec.features) ? rec.features : {};
+      rec.features = { ...prev, ...body.features };
+    }
+    if (typeof body.thinkingLevel === "string") {
+      rec.thinkingLevel = body.thinkingLevel;
+    }
+    writeJsonAtomic(path, rec);
+  }
   if (body.onboarding !== undefined) {
     mergeOnboarding(body.onboarding);
   }
-  const status = configStatus();
-  ctx.bus?.publish({ kind: "config", ...status });
+  const status = configStatus(ctx);
+  ctx.bus?.publish({ kind: "config", ...status, spawnPolicy: next.spawnPolicy });
   return { status: 200, body: status };
 }
 
 function environmentBody(): Record<string, unknown> {
   return {
     environmentId: "local",
-    label: "OpenMausBot",
+    label: "Harness",
     platform: process.platform,
     version: "2.0.0",
     capabilities: { remoteSessions: true, selfUpdate: "operator" },
@@ -467,7 +592,7 @@ function toRoutine(roster: Roster, name: string, botSlug: string, cadence: strin
     prompt,
     target: "bot",
     botId: owner?.id ?? botSlug,
-    runOn: "maus",
+    runOn: "harness",
     enabled: true,
     schedule:
       cadence === "daily"
@@ -517,6 +642,10 @@ export async function handleOmbCompat(
   ctx: ApiContext,
 ): Promise<JsonResult | undefined> {
   const computerRoot = ctx.computerRoot;
+  const desk = handleDeskCompat(method, path, url, body, ctx);
+  if (desk) {
+    return desk;
+  }
 
   if (method === "GET" && path === "/.well-known/openmausbot/environment") {
     return { status: 200, body: environmentBody() };
@@ -536,12 +665,12 @@ export async function handleOmbCompat(
   if (method === "GET" && path === "/api/brand") {
     return {
       status: 200,
-      body: { brand: { name: "OpenMausBot" }, source: "default", file: "" },
+      body: { brand: { name: "Harness" }, source: "default", file: "" },
     };
   }
 
   if (method === "GET" && path === "/api/config") {
-    return { status: 200, body: configStatus() };
+    return { status: 200, body: configStatus(ctx) };
   }
 
   if ((method === "PUT" || method === "PATCH") && path === "/api/config") {
@@ -549,12 +678,12 @@ export async function handleOmbCompat(
   }
 
   if (method === "GET" && path === "/api/instances") {
-    return { status: 200, body: { instances: [piInstance()] } };
+    return { status: 200, body: { instances: [piInstance(ctx.computerRoot)] } };
   }
 
   const refreshModels = /^\/api\/instances\/([^/]+)\/refresh-models$/.exec(path);
   if (refreshModels && method === "POST") {
-    return { status: 200, body: { instances: [piInstance()] } };
+    return { status: 200, body: { instances: [piInstance(ctx.computerRoot)] } };
   }
 
   if (method === "GET" && path === "/api/webhooks") {
@@ -572,17 +701,6 @@ export async function handleOmbCompat(
     return { status: 200, body: { toolkits: [] } };
   }
 
-  if (method === "GET" && path === "/api/routines") {
-    const roster = loadRoster(computerRoot);
-    return {
-      status: 200,
-      body: {
-        routines: roster.routines.map((row) => toRoutine(roster, row.name, row.bot, row.cadence, row.prompt)),
-        runs: [],
-      },
-    };
-  }
-
   const routineRun = /^\/api\/routines\/([^/]+)\/run$/.exec(path);
   if (routineRun && method === "POST") {
     const name = decodeURIComponent(routineRun[1] ?? "");
@@ -594,23 +712,12 @@ export async function handleOmbCompat(
       return { status: 404, body: { error: message } };
     }
     const roster = loadRoster(computerRoot);
-    const routine = roster.routines.find((row) => row.name === fired.name);
+    const run = wireRun(roster, fired);
+    ctx.bus?.publish({ kind: "routine.run", run });
     return {
       status: 201,
       body: {
-        run: {
-          id: fired.id,
-          routineId: fired.name,
-          routineName: fired.name,
-          prompt: routine?.prompt,
-          target: "bot",
-          botId: findBot(roster, fired.bot)?.id ?? fired.bot,
-          runOn: "maus",
-          scheduledFor: epoch(fired.at),
-          status: fired.status === "queued" ? "queued" : fired.status === "running" ? "running" : "completed",
-          manual: true,
-          createdAt: epoch(fired.at),
-        },
+        run,
         ...fired,
       },
     };
@@ -639,8 +746,14 @@ export async function handleOmbCompat(
         ? body.slug
         : slugify(name);
     const purpose =
-      (isRecord(body) && asString(body.title)) ?? (isRecord(body) && asString(body.description)) ?? "";
-    const instructions = isRecord(body) && asString(body.description) ? body.description : "";
+      (isRecord(body) && asString(body.purpose)) ??
+      (isRecord(body) && asString(body.title)) ??
+      (isRecord(body) && asString(body.description)) ??
+      "";
+    const instructions =
+      (isRecord(body) && asString(body.instructions)) ??
+      (isRecord(body) && asString(body.soul)) ??
+      "";
     return wrapBotMutation(
       method,
       path,
@@ -688,6 +801,7 @@ export async function handleOmbCompat(
         ...(sendId ? { sendId } : {}),
       };
       lastUserLeaf.set(bot.id, message.id);
+      lastChainLeaf.set(bot.id, message.id);
       return {
         status: 200,
         body: {
@@ -707,7 +821,7 @@ export async function handleOmbCompat(
     }
 
     if (method === "POST" && rest === "/tasks") {
-      return { status: 200, body: { bot: toWireBot(computerRoot, roster, bot, index) } };
+      return { status: 400, body: { error: "Harness Bots have one transcript.jsonl, not threads" } };
     }
 
     if (method === "PATCH" && rest === "") {
@@ -727,43 +841,24 @@ export async function handleOmbCompat(
     }
 
     if (method === "GET" && rest === "/computer/control") {
-      return { status: 200, body: { held: false, helpReason: null } };
+      return { status: 404, body: { error: "the Computer is the shared cwd, not a per-Bot VM" } };
     }
 
     if (rest.startsWith("/computer") || rest.startsWith("/local-computer")) {
-      return {
-        status: 200,
-        body: {
-          held: false,
-          helpReason: null,
-          configured: false,
-          ready: false,
-          computer: "off",
-          bot: toWireBot(computerRoot, roster, bot, index),
-        },
-      };
+      return { status: 404, body: { error: "the Computer is the shared cwd, not a per-Bot VM" } };
     }
 
     const taskMatch = /^\/tasks\/([^/]+)$/.exec(rest);
-    if (taskMatch && (method === "PATCH" || method === "POST" || method === "DELETE")) {
+    if (taskMatch && method === "PATCH") {
       rememberTaskOverlay(bot.id, body);
       return { status: 200, body: { bot: toWireBot(computerRoot, roster, bot, index) } };
     }
+    if (taskMatch) {
+      return { status: 400, body: { error: "Harness Bots have one transcript.jsonl, not threads" } };
+    }
 
     if (method !== "GET") {
-      rememberTaskOverlay(bot.id, body);
-      return {
-        status: 200,
-        body: {
-          ok: true,
-          bot: toWireBot(computerRoot, roster, bot, index),
-          held: false,
-          helpReason: null,
-          configured: false,
-          ready: false,
-          computer: "off",
-        },
-      };
+      return { status: 404, body: { error: `unknown bot route ${rest || "/"}` } };
     }
   }
 
@@ -838,12 +933,15 @@ export async function handleOmbCompat(
     if (requestId.length === 0) {
       return { status: 400, body: { error: "requestId required" } };
     }
-    const allowed = behavior !== "deny";
+    const allowed = behavior === "allow";
     let resolved: ReturnType<typeof resolveApproval> | undefined;
     try {
       resolved = resolveApproval(computerRoot, requestId, allowed);
-    } catch {
-      return { status: 200, body: { ok: true } };
+    } catch (cause: unknown) {
+      return {
+        status: 400,
+        body: { error: cause instanceof Error ? cause.message : "could not resolve approval" },
+      };
     }
     ctx.bus?.publish({ kind: "approvals", approvals: listApprovals(computerRoot) });
     return { status: 200, body: { ok: true, resolved } };
@@ -852,15 +950,6 @@ export async function handleOmbCompat(
   const threadEvents = /^\/api\/threads\/([^/]+)\/events$/.exec(path);
   if (threadEvents && method === "GET") {
     return { status: 200, body: { events: [], native: [] } };
-  }
-
-  if (method === "POST" && path === "/api/routines") {
-    return { status: 200, body: { ok: true, routines: [], runs: [] } };
-  }
-
-  const routineRest = /^\/api\/routines\/([^/]+)$/.exec(path);
-  if (routineRest && (method === "PATCH" || method === "DELETE")) {
-    return { status: 200, body: { ok: true } };
   }
 
   if (method === "POST" && path === "/api/auth/logout") {

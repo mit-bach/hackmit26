@@ -1,0 +1,75 @@
+{
+  "canonicals": [
+    {
+      "canonical_id": "ING-001",
+      "vendor": "Acme Supplies",
+      "vendor_id": "Acme Supplies",
+      "vendor_invoice_number": "ACM-INBOX-1001",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "currency": "USD",
+      "amount": 12450.0,
+      "subtotal": 12450.0,
+      "tax": 0.0,
+      "po_id": "PO-101",
+      "description": "Acme Supplies ACM-INBOX-1001",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-001",
+          "source_uri": "inbox://THR-clean-attachment/MSG-INBOX-001",
+          "agent": "Email Invoice Agent",
+          "document_hash": "e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7"
+        }
+      ],
+      "document_hash": "e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Acme Supplies",
+          "value": "Acme Supplies"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: ACM-INBOX-1001",
+          "value": "ACM-INBOX-1001"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 12450.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "acmesupply:ACM-INBOX-1001",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    }
+  ],
+  "index": {
+    "invoice:acmesupply:ACM-INBOX-1001": "ING-001",
+    "hash:e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7": "ING-001",
+    "source:email:MSG-INBOX-001": "ING-001"
+  },
+  "handed_off": [
+    "ING-001"
+  ]
+}

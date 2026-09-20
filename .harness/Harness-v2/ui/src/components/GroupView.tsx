@@ -29,17 +29,12 @@ import { effectiveDefaultResponder, groupResponseHint } from "@/lib/group-routin
 import { ChatMarkdown } from "./ChatMarkdown";
 import { Composer } from "./Composer";
 import { ChatFindBar } from "./ChatFindBar";
-import { GroupTaskPicker } from "./TaskPicker";
 import { ExportTranscriptMenu } from "./ExportTranscriptMenu";
 import { ReplyQuote } from "./ReplyQuote";
-import { ConnectorCard } from "./ConnectorCard";
 import { SecretRequestCard } from "./SecretRequestCard";
 import { hasRoutineExecutionTask, RoutineRunCard } from "./RoutineRunCard";
-import { GoalRunCard } from "./GoalRunCard";
 import { AttachmentGallery, MessageAttachmentGallery } from "./AttachmentGallery";
 import { OptionCard } from "./OptionCard";
-import { GroupCallButton, GroupCallOverlay } from "./GroupCallView";
-
 import { ApprovalCard } from "./ApprovalCard";
 import { QuestionCard } from "./QuestionCard";
 import { ManageMembersPanel } from "./ManageMembersPanel";
@@ -243,8 +238,10 @@ const Transcript = memo(function Transcript({
           // one of those questions, and answers in its own card.
           m.kind === "secret" && m.secret && m.from?.botId ? (
             <SecretRequestCard botId={m.from.botId} threadId={group.threadId} message={m} />
-          ) : m.kind === "connector" && m.connector && m.from?.botId ? (
-            <ConnectorCard botId={m.from.botId} threadId={group.threadId} message={m} />
+          ) : m.kind === "connector" && m.from?.botId ? (
+            <div className="rounded-lg border border-hairline/40 bg-inset px-3 py-2 text-[12.5px] text-ink-secondary">
+              {m.text || "Connector request — grant keys in Settings."}
+            </div>
           ) : m.kind === "options" && m.card?.requestId && m.card.questionRequest ? (
             <div className="flex justify-start">
               <QuestionCard threadId={group.threadId} bot={memberOf(m.from?.botId)} message={m} />
@@ -262,7 +259,9 @@ const Transcript = memo(function Transcript({
             </div>
           ) : m.kind === "goal.run" ? (
             <div className="flex justify-start">
-              <GoalRunCard message={m} />
+              <div className="rounded-lg border border-hairline/40 bg-inset px-3 py-2 text-[12.5px] text-ink-secondary">
+                {m.text || "Room post"}
+              </div>
             </div>
           ) : m.kind === "routine.run" ? (
             <div className="flex justify-start">
@@ -555,26 +554,8 @@ function setupResponderMode(responder: GroupDefaultResponder): RoomResponderMode
   return responder.kind === "member" ? "lead" : responder.kind;
 }
 
-function roomNeedsSetup(group: Group): boolean {
-  if (group.dm || group.messages.length > 0) return false;
-  // SAFETY: setup fields are additive server metadata; the existing Group shape remains valid when absent.
-  const marker = group as Group & RoomSetupFields;
-  const hasSetupMarker =
-    Object.prototype.hasOwnProperty.call(marker, "setupCompletedAt") ||
-    Object.prototype.hasOwnProperty.call(marker, "setupSkippedAt");
-  // Legacy empty rooms omit both keys and remain immediately usable.
-  if (!hasSetupMarker) return false;
-  if (
-    marker.setupPending === false ||
-    marker.setupRequired === false ||
-    marker.setupState === "completed" ||
-    marker.setupState === "skipped" ||
-    marker.setupCompletedAt != null ||
-    marker.setupSkippedAt != null
-  ) {
-    return false;
-  }
-  return true;
+function roomNeedsSetup(_group: Group): boolean {
+  return false;
 }
 
 function RoomSetup({ group, members }: { group: Group; members: Bot[] }) {
@@ -905,8 +886,6 @@ export function GroupView({ group }: { group: Group }) {
   const followRef = useRef(true);
   const previousScrollTop = useRef(0);
   const touchY = useRef(0);
-  const [bulletinOpen, setBulletinOpen] = useState(false);
-  const [bulletinDraft, setBulletinDraft] = useState(group.bulletin);
   const [folderOpen, setFolderOpen] = useState(false);
   const [membersOpen, setMembersOpen] = useState(false);
   const [findOpen, setFindOpen] = useState(false);
@@ -1033,7 +1012,6 @@ export function GroupView({ group }: { group: Group }) {
   }, [group.messages, group.threadId, setBottomFollow, state.focusMessage, transcriptKey]);
   useFocusMessage(group.threadId, group.messages.length > 0);
 
-  useEffect(() => setBulletinDraft(group.bulletin), [group.id, group.bulletin]);
   // an open folder editor belongs to the room it was opened in
   useEffect(() => setFolderOpen(false), [group.id]);
   useEffect(() => setMembersOpen(false), [group.id]);
@@ -1080,13 +1058,6 @@ export function GroupView({ group }: { group: Group }) {
     return !el || el.scrollHeight - el.scrollTop - el.clientHeight < BOTTOM_FOLLOW_THRESHOLD;
   };
 
-  const saveBulletin = () => {
-    setBulletinOpen(false);
-    if (bulletinDraft !== group.bulletin) {
-      dispatch({ type: "patchGroup", groupId: group.id, patch: { bulletin: bulletinDraft } });
-    }
-  };
-
   // Static profile avatars: one per member, a ring + dot on whoever is working.
   const memberMauses = members.map((b) => (
     <span
@@ -1106,7 +1077,6 @@ export function GroupView({ group }: { group: Group }) {
 
   return (
     <main className="relative flex h-full min-w-0 flex-1 flex-col bg-app">
-      <GroupCallOverlay group={group} members={members} />
       {membersOpen && !remoteClient && !group.dm && (
         <ManageMembersPanel group={group} onClose={closeMembers} triggerRef={membersTriggerRef} />
       )}
@@ -1121,7 +1091,6 @@ export function GroupView({ group }: { group: Group }) {
       >
         <div className="flex min-w-0 items-center gap-2" style={headerNoDragStyle}>
           <span className="truncate text-[15px] font-semibold text-ink">{group.name}</span>
-          {!setupPending && !group.dm && <GroupTaskPicker group={group} />}
         </div>
         <div
           className="flex items-center gap-1.5"
@@ -1147,9 +1116,6 @@ export function GroupView({ group }: { group: Group }) {
             messages={group.messages}
             isGroup
           />
-          <GroupCallButton group={group} members={members} />
-          {!remoteClient && !setupPending && !group.dm && <RoomWorkingFolderChip group={group} onToggle={() => setFolderOpen((open) => !open)} />}
-          {!remoteClient && !setupPending && !group.dm && <DefaultResponderSelect group={group} members={members} />}
           {group.dm || remoteClient ? (
             memberMauses
           ) : (
@@ -1178,41 +1144,6 @@ export function GroupView({ group }: { group: Group }) {
 
       {findOpen && <ChatFindBar threadId={group.threadId} onClose={() => setFindOpen(false)} />}
 
-      {/* Bulletin: one pinned line; click to edit */}
-      {!setupPending && <div className="w-full px-5">
-        {bulletinOpen ? (
-          <div className="mb-1 rounded-lg border border-hairline/40 bg-panel p-2">
-            <textarea
-              autoFocus
-              value={bulletinDraft}
-              onChange={(e) => setBulletinDraft(e.target.value)}
-              onBlur={saveBulletin}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) saveBulletin();
-                if (e.key === "Escape") {
-                  setBulletinDraft(group.bulletin);
-                  setBulletinOpen(false);
-                }
-              }}
-              placeholder={t("room.bulletin.placeholder")}
-              rows={4}
-              className="w-full resize-none bg-transparent text-[13px] leading-relaxed text-ink placeholder:text-ink-secondary focus:outline-none"
-            />
-          </div>
-        ) : (
-          <button
-            disabled={remoteClient}
-            onClick={() => { if (!remoteClient) setBulletinOpen(true); }}
-            className={cn("mb-1 flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left", !remoteClient && "hover:bg-raised/40")}
-            title={t("room.bulletin.title")}
-          >
-            <Pin size={12} className="shrink-0 text-ink-secondary" />
-            <span className={cn("truncate text-[12.5px]", group.bulletin ? "text-ink-secondary" : "text-ink-secondary/60")}>
-              {group.bulletin.split("\n")[0] || (remoteClient ? t("room.bulletin.none") : t("room.bulletin.add"))}
-            </span>
-          </button>
-        )}
-      </div>}
 
       {/* Working folder card — the chip in the header toggles it */}
       {!setupPending && folderOpen && !group.dm && (

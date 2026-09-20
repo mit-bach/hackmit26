@@ -1,11 +1,15 @@
-import { writeFileSync } from "node:fs";
+import { existsSync, writeFileSync } from "node:fs";
 
-import { ensureDir } from "./fs.ts";
+import { applyClientAttach, loadClientRuntime } from "./client-runtime.ts";
+import { ensureDir, writeJsonAtomic } from "./fs.ts";
+import { seedVerifierIntercept } from "./intercept.ts";
 import {
   approvalDir,
   botDir,
+  extensionsManifestPath,
   handleDir,
   harnessRoot,
+  interceptPath,
   leaseDir,
   memoryDir,
   memoryFile,
@@ -23,6 +27,16 @@ export function initComputer(computerRoot: string, roster?: Roster): Roster {
   ensureDir(leaseDir(computerRoot));
   ensureDir(approvalDir(computerRoot));
   ensureDir(receiptDir(computerRoot));
+  const client = loadClientRuntime(computerRoot);
+  if (client.extraExtensions.length > 0 || client.clientSkills) {
+    applyClientAttach(computerRoot, client);
+  } else if (!existsSync(extensionsManifestPath(computerRoot))) {
+    writeJsonAtomic(extensionsManifestPath(computerRoot), { extraExtensions: [], clientSkills: false });
+  }
+  if (!existsSync(interceptPath(computerRoot))) {
+    writeJsonAtomic(interceptPath(computerRoot), { default: { kind: "operator" }, bots: {} });
+  }
+  seedVerifierIntercept(computerRoot);
   for (const bot of loaded.bots) {
     ensureDir(botDir(computerRoot, bot.id));
     ensureDir(handleDir(computerRoot, bot.id));

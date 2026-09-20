@@ -13,6 +13,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Bug, ChevronDown, ChevronRight, RefreshCw, X } from "lucide-react";
 import { useStore, visibleMessages, type Bot } from "@/state/store";
+import { transcriptVerbosity } from "@/lib/feature-flags";
 import { cn } from "@/lib/cn";
 import { useCaptionChrome } from "@/components/DesktopCapabilities";
 import { formatTime, toRows, type InspectorEntry, type InspectorPage, type InspectorRow } from "@/lib/inspector";
@@ -25,11 +26,14 @@ import { t } from "@/lib/i18n";
 type Lens = "run" | "events" | "raw";
 
 export function InspectorPanel({ bot }: { bot: Bot }) {
-  const { dispatch } = useStore();
+  const { state, dispatch } = useStore();
   // Docked flush under the Windows caption corner: drop the header 16px.
   const { padClass } = useCaptionChrome();
   const threadId = bot.threadId;
-  const [lens, setLens] = useState<Lens>("run");
+  const verbosity = transcriptVerbosity(state.config);
+  const [lens, setLens] = useState<Lens>(() =>
+    verbosity === "compact" ? "run" : verbosity === "tools" ? "events" : "raw",
+  );
   const activity = useMemo(() => timelineEvents(visibleMessages(bot)), [bot]);
   const [page, setPage] = useState<InspectorPage | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -193,6 +197,7 @@ export function InspectorPanel({ bot }: { bot: Bot }) {
       <div className={cn("flex items-center justify-between px-4 py-3", padClass)}>
         <span className="flex items-center gap-2 text-[15px] font-semibold text-ink">
           <Bug size={16} className="text-ink-secondary" /> Inspector
+          <span className="text-[12px] font-normal text-ink-secondary">{t("inspector.subtitle")}</span>
         </span>
         <button
           onClick={() => dispatch({ type: "toggleInspector", open: false })}
@@ -227,11 +232,11 @@ export function InspectorPanel({ bot }: { bot: Bot }) {
               tabIndex={lens === l ? 0 : -1}
               onClick={() => setLens(l)}
               className={cn(
-                "rounded-md px-2.5 py-1 text-[12px] font-medium capitalize",
+                "rounded-md px-2.5 py-1 text-[12px] font-medium",
                 lens === l ? "bg-raised text-ink" : "text-ink-secondary hover:text-ink",
               )}
             >
-              {l === "run" ? t("inspector.run.title") : l}
+              {l === "run" ? t("inspector.lens.run") : l === "events" ? t("inspector.lens.events") : t("inspector.lens.raw")}
             </button>
           ))}
         </div>
@@ -248,7 +253,9 @@ export function InspectorPanel({ bot }: { bot: Bot }) {
         {error && <div className="px-4 py-3 text-danger">couldn't load: {error}</div>}
         {page && rows.length === 0 && !error && (
           <div className="px-4 py-6 text-ink-secondary">
-            {lens === "raw" ? "No native protocol messages recorded for this thread yet." : "No runtime events for this thread yet."}
+            {lens === "raw"
+              ? t("inspector.empty.raw")
+              : t("inspector.empty.events")}
           </div>
         )}
         {rows.map((row) => (

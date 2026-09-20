@@ -95,7 +95,7 @@ export function OverviewSection({
             <p className="text-[13px] leading-relaxed text-ink-secondary">{overview.who.soulLead}</p>
             <button
               type="button"
-              onClick={() => onOpen("soul")}
+              onClick={() => onOpen("identity")}
               className="mt-1.5 rounded-md text-[12px] font-medium text-accent-text hover:underline"
             >
               Read all
@@ -151,7 +151,7 @@ export function OverviewSection({
           <div className="text-[15px] font-medium text-ink">Recent changes</div>
           <button
             type="button"
-            onClick={() => onOpen("history")}
+            onClick={() => onOpen("identity")}
             className="shrink-0 text-[12px] text-ink-secondary hover:text-ink"
           >
             View all →

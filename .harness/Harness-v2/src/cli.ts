@@ -2,6 +2,8 @@ import { spawn } from "node:child_process";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { applyAttachEnv } from "./client-attach.ts";
+import { applyClientEnv, loadClientRuntime, overlayOperatorConfig } from "./client-runtime.ts";
 import { awaitTurn } from "./await.ts";
 import { initComputer } from "./computer.ts";
 import { findHandle } from "./handle.ts";
@@ -11,8 +13,9 @@ import { searchProtocol } from "./protocol-log.ts";
 import { fireRoutine } from "./routines.ts";
 import { searchAgents } from "./search.ts";
 import { sendPrompt } from "./send.ts";
-import { loadOperatorConfig } from "./server/operator-config.ts";
+import { loadOperatorConfig, piEnvFromConfig, type SpawnPolicy } from "./server/operator-config.ts";
 import { startServer } from "./server/http.ts";
+import { wipeRuntime } from "./wipe.ts";
 
 function takeOption(args: readonly string[], name: string): string | undefined {
   const idx = args.indexOf(name);
@@ -55,7 +58,9 @@ export async function runCli(argv: string[]): Promise<void> {
     process.stdout.write(`harness — named Bots on a shared Computer
 
 Commands:
-  serve [--computer DIR] [--port N] [--no-workers] [--lazy] [--fake] [--no-open]
+  serve [--computer DIR] [--port N] [--no-workers] [--lazy] [--fake] [--eager]
+        [--wipe] [--keep-memory] [--wipe-runs] [--no-sidecar] [--routines] [--no-open]
+  wipe [--computer DIR] [--keep-memory] [--wipe-runs]
   bot <slug> [--computer DIR]
   send <slug> <prompt...> [--computer DIR]
   stop <slug> [--computer DIR]
@@ -66,27 +71,56 @@ Commands:
   routine <name> [--computer DIR]
   floor [--computer DIR]
 
+Load harness/client.json on the Computer for extra -e, sidecar, spawn, and model.
+wipe drops session files (inboxes, Handles, transcripts, receipts) and keeps roster.
 The Operator shell is a loopback SPA on the same process as the JSON API.
 `);
     return;
   }
 
+  if (cmd === "wipe") {
+    initComputer(computerRoot);
+    const report = wipeRuntime(computerRoot, {
+      keepMemory: hasFlag(rest, "--keep-memory"),
+      wipeRuns: hasFlag(rest, "--wipe-runs"),
+    });
+    process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
+    return;
+  }
+
   if (cmd === "serve") {
-    const config = loadOperatorConfig();
-    const port = Number(takeOption(rest, "--port") ?? String(config.port));
-    const fakeWorkers = hasFlag(rest, "--fake") || (!hasFlag(rest, "--lazy") && config.spawnPolicy === "fake");
-    const lazyWorkers = hasFlag(rest, "--lazy") || (!fakeWorkers && config.spawnPolicy === "lazy");
+    initComputer(computerRoot);
+    const client = loadClientRuntime(computerRoot);
+    const home = loadOperatorConfig();
+    const merged = overlayOperatorConfig(computerRoot, home, client);
+    const policy: SpawnPolicy = hasFlag(rest, "--fake")
+      ? "fake"
+      : hasFlag(rest, "--lazy")
+        ? "lazy"
+        : hasFlag(rest, "--eager")
+          ? "eager"
+          : merged.spawnPolicy;
+    const port = Number(takeOption(rest, "--port") ?? String(merged.port));
     const started = await startServer({
       computerRoot,
       host: "127.0.0.1",
       port: Number.isFinite(port) ? port : 8787,
       workers: !hasFlag(rest, "--no-workers"),
-      lazyWorkers,
-      fakeWorkers,
+      lazyWorkers: policy === "lazy",
+      fakeWorkers: policy === "fake",
+      autoRoutines: hasFlag(rest, "--routines") ? true : hasFlag(rest, "--no-routines") ? false : client.autoRoutines,
+      wipe: hasFlag(rest, "--wipe"),
+      keepMemory: hasFlag(rest, "--keep-memory"),
+      wipeRuns: hasFlag(rest, "--wipe-runs"),
+      sidecar: !hasFlag(rest, "--no-sidecar"),
+      config: { ...merged, spawnPolicy: policy },
     });
     process.stdout.write(`harness listening ${started.url} computer=${computerRoot}\n`);
     process.stdout.write(`operator shell ${started.url}/\n`);
-    if (config.openBrowser && !hasFlag(rest, "--no-open")) {
+    if (client.system) {
+      process.stdout.write(`client ${client.system} spawn=${policy} sidecar=${started.sidecar?.port ?? "off"}\n`);
+    }
+    if (merged.openBrowser && !hasFlag(rest, "--no-open")) {
       const opener = process.platform === "darwin" ? "open" : process.platform === "win32" ? "cmd" : "xdg-open";
       const args = process.platform === "win32" ? ["/c", "start", started.url] : [started.url];
       spawn(opener, args, { stdio: "ignore", detached: true }).unref();
@@ -110,9 +144,16 @@ The Operator shell is a loopback SPA on the same process as the JSON API.
       throw new Error("usage: harness bot <slug>");
     }
     initComputer(computerRoot);
-    const child = spawn("pi", ["-e", extensionEntryPath(), ...extraExtensionArgs(), "--name", slug], {
+    const operator = overlayOperatorConfig(computerRoot, loadOperatorConfig());
+    const client = loadClientRuntime(computerRoot);
+    const env = applyClientEnv(
+      applyAttachEnv(piEnvFromConfig(operator), computerRoot, operator),
+      computerRoot,
+      client,
+    );
+    const child = spawn("pi", ["-e", extensionEntryPath(), ...extraExtensionArgs(env), "--name", slug], {
       cwd: computerRoot,
-      env: { ...process.env, HARNESS_BOT: slug, HARNESS_COMPUTER: computerRoot },
+      env: { ...env, HARNESS_BOT: slug, HARNESS_COMPUTER: computerRoot },
       stdio: "inherit",
     });
     await new Promise<void>((resolvePromise, reject) => {
@@ -199,12 +240,17 @@ The Operator shell is a loopback SPA on the same process as the JSON API.
 
   if (cmd === "floor") {
     const roster = initComputer(computerRoot);
+    const operator = overlayOperatorConfig(computerRoot, loadOperatorConfig());
+    const extra = extraExtensionArgs(
+      applyClientEnv(applyAttachEnv(piEnvFromConfig(operator), computerRoot, operator), computerRoot),
+    );
+    const extraFlag = extra.length > 0 ? ` ${extra.join(" ")}` : "";
     process.stdout.write(`Computer: ${computerRoot}\n`);
     process.stdout.write(`System: ${roster.system}\n`);
     process.stdout.write("Start one pane per Bot:\n");
     for (const bot of roster.bots) {
       process.stdout.write(
-        `  HARNESS_BOT=${bot.slug} HARNESS_COMPUTER=${computerRoot} pi -e ${extensionEntryPath()} --name ${bot.slug}\n`,
+        `  HARNESS_BOT=${bot.slug} HARNESS_COMPUTER=${computerRoot} pi -e ${extensionEntryPath()}${extraFlag} --name ${bot.slug}\n`,
       );
       process.stdout.write(`    status now: ${liveStatus(computerRoot, bot.id)}\n`);
     }

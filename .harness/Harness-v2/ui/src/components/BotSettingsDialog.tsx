@@ -2,27 +2,20 @@
 // same shell pattern as InspectorPanel. Every section lives under
 // bot-settings/; this dialog owns only the fetches (overview, system-prompt,
 // history) and which accordion row is expanded.
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown, Search, X } from "lucide-react";
 
 import { api, useStore, type Bot } from "@/state/store";
 import type { BotOverview } from "@/lib/bot-overview-types";
 import { cn } from "@/lib/cn";
-import { ConfirmDialog } from "./ConfirmDialog";
 import { BOT_SECTIONS } from "./bot-settings/sections";
 import { useBotSettingsDerived } from "./bot-settings/useBotSettingsDerived";
 import { OverviewSection } from "./bot-settings/OverviewSection";
 import { IdentitySection } from "./bot-settings/IdentitySection";
-import { SoulSection } from "./bot-settings/SoulSection";
 import { SkillsSection } from "./bot-settings/SkillsSection";
 import { MemorySection } from "./bot-settings/MemorySection";
 import { RoutinesSection } from "./bot-settings/RoutinesSection";
-import { AccessSection } from "./bot-settings/AccessSection";
-import { ModelSection } from "./bot-settings/ModelSection";
 import { PermissionsSection } from "./bot-settings/PermissionsSection";
-import { VoiceSection } from "./bot-settings/VoiceSection";
-import { HistorySection, type HistoryRow } from "./bot-settings/HistorySection";
-import { UsageSection } from "./bot-settings/UsageSection";
 import type { PromptPreviewData } from "./bot-settings/PromptPreview";
 
 function sectionMatches(entry: (typeof BOT_SECTIONS)[number], query: string): boolean {
@@ -46,12 +39,6 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
   const [overviewError, setOverviewError] = useState(false);
   const [prompt, setPrompt] = useState<PromptPreviewData | null>(null);
   const [promptError, setPromptError] = useState(false);
-  const [historyRows, setHistoryRows] = useState<HistoryRow[] | null>(null);
-  const [historyError, setHistoryError] = useState(false);
-  const [historyRevision, setHistoryRevision] = useState<string | null>(null);
-  const historyRequest = useRef(0);
-  const [rollingBack, setRollingBack] = useState(false);
-  const [rollbackTarget, setRollbackTarget] = useState<{ id: string; expectedRevision: string } | null>(null);
 
   // The bot-record fields the server-built overview and system-prompt
   // preview actually read (OverviewFacts.bot plus the prompt's persona
@@ -71,11 +58,8 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
         bot.approvePeerComms,
         bot.peers,
         bot.section,
-        bot.composio,
-        bot.browser,
-        bot.mcpServers,
-        bot.chiefOfStaff,
-        bot.managedSections,
+        bot.harnessSlug,
+        bot.approvalLevel,
         bot.modelSelection,
       ]),
     [
@@ -90,11 +74,8 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
       bot.approvePeerComms,
       bot.peers,
       bot.section,
-      bot.composio,
-      bot.browser,
-      bot.mcpServers,
-      bot.chiefOfStaff,
-      bot.managedSections,
+      bot.harnessSlug,
+      bot.approvalLevel,
       bot.modelSelection,
     ],
   );
@@ -133,51 +114,6 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
       cancelled = true;
     };
   }, [bot.id, section, factsSignature, state.routines, state.webhooks, flushBotPatches]);
-
-  // Read the file-backed history only when its section is opened. A newer
-  // load (or leaving History) invalidates older rows, revision, and errors.
-  const loadHistory = useCallback(() => {
-    const request = ++historyRequest.current;
-    setHistoryError(false);
-    return flushBotPatches(bot.id)
-      .then(() => api(`/api/bots/${bot.id}/history?limit=100`))
-      .then((data: { rows: HistoryRow[]; revision: string }) => {
-        if (request !== historyRequest.current) return;
-        setHistoryRows(data.rows);
-        setHistoryRevision(data.revision);
-      })
-      .catch(() => {
-        if (request === historyRequest.current) setHistoryError(true);
-      });
-  }, [bot.id, flushBotPatches]);
-
-  useEffect(() => {
-    if (section !== "history") return;
-    void loadHistory();
-    return () => { historyRequest.current++; };
-  }, [section, loadHistory]);
-
-  // A rollback failure (the row's soul text no longer round-trips the
-  // server's validation, say) still reloads history so the list matches
-  // the server's actual state, but also surfaces the server's message
-  // through the app's error toast — mirrors SoulField's Apply/Discard.
-  const rollbackHistory = async (target: { id: string; expectedRevision: string }) => {
-    if (rollingBack) return;
-    setRollbackTarget(null);
-    setRollingBack(true);
-    try {
-      await flushBotPatches(bot.id);
-      await api(`/api/bots/${bot.id}/history/rollback`, {
-        method: "POST",
-        body: JSON.stringify(target),
-      });
-    } catch (e: unknown) {
-        dispatch({ type: "error", message: e instanceof Error ? e.message : "Couldn't undo that change." });
-    } finally {
-      await loadHistory();
-      setRollingBack(false);
-    }
-  };
 
   useEffect(() => {
     // Search narrows the collapsed row list. Choosing a row (or following
@@ -236,10 +172,6 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
             prompt={prompt}
             promptError={promptError}
             onOpen={(target) => dispatch({ type: "toggleSettings", open: true, section: target })}
-            onSetup={derived.canCoordinate && !bot.busy ? () => {
-              dispatch({ type: "toggleSettings", open: false });
-              dispatch({ type: "send", botId: bot.id, text: "/setup", threadId: bot.threadId });
-            } : undefined}
           />
         );
       case "identity":
@@ -251,45 +183,14 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
             mascotMotion={derived.mascotMotion}
           />
         );
-      case "soul":
-        return <SoulSection bot={bot} patch={derived.patch} />;
       case "skills":
         return <SkillsSection bot={bot} />;
       case "memory":
-        // Memory has an explicit Save button; preserve its unsaved draft
-        // while the user consults another section. It fetches when it
-        // becomes the active section. Always mounted; visibility toggled
-        // via hidden on the accordion body wrapper.
         return <MemorySection bot={bot} active={!collapsed && section === "memory"} />;
       case "routines":
         return <RoutinesSection bot={bot} routines={derived.botRoutines} runs={state.routineRuns} />;
-      case "access":
-        return <AccessSection bot={bot} derived={derived} />;
-      case "model":
-        return <ModelSection bot={bot} />;
       case "permissions":
         return <PermissionsSection bot={bot} derived={derived} />;
-      case "voice":
-        return <VoiceSection bot={bot} derived={derived} />;
-      case "history":
-        return historyRows === null && historyError ? (
-          <div className="rounded-xl bg-card p-4 text-[13px] text-ink-secondary">Couldn’t load history.</div>
-        ) : (
-          // Same precedence as the Overview: rows already on screen
-          // survive a failed reload (after an undo, say) with a quiet
-          // note rather than being replaced by an error block.
-          <HistorySection
-            bot={bot}
-            rows={historyRows}
-            refreshError={historyRows !== null && historyError}
-            onRollback={(id) => {
-              if (historyRevision) setRollbackTarget({ id, expectedRevision: historyRevision });
-            }}
-            rollingBack={rollingBack || !historyRevision}
-          />
-        );
-      case "usage":
-        return <UsageSection bot={bot} />;
       default:
         return null;
     }
@@ -398,16 +299,6 @@ export function BotSettingsDialog({ bot }: { bot: Bot }) {
           })}
         </div>
       </aside>
-      <ConfirmDialog
-        open={rollbackTarget !== null}
-        title="Restore previous instructions?"
-        body="Replaces current SOUL with the version before this change. Current version stays in History."
-        confirmLabel="Restore instructions"
-        tone="neutral"
-        returnFocusRef={dialogRef}
-        onCancel={() => setRollbackTarget(null)}
-        onConfirm={() => { if (rollbackTarget) void rollbackHistory(rollbackTarget); }}
-      />
     </>
   );
 }

@@ -145,6 +145,7 @@ export function ProviderMark({ driverKind, size, className }: IconProps & { driv
     case "antigravityAgent":
       return <AntigravityMark size={size} className={className} />;
     case "opencodeGo":
+      // deleted screen: OpenCode Go key row — keep the glyph if an old instance id is still on the wire
       return <OpenCodeMark size={size} className={className} />;
     case "qwenAgent":
       return <QwenMark size={size} className={className} />;

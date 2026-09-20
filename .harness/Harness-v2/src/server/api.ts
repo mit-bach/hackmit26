@@ -1,8 +1,11 @@
 import { listApprovals, readApproval, resolveApproval } from "../approvals.ts";
 import { awaitTurn } from "../await.ts";
+import { loadExtensionsManifest } from "../client-attach.ts";
+import { loadClientRuntime, overlayOperatorConfig } from "../client-runtime.ts";
 import { initComputer } from "../computer.ts";
 import { findHandle, listHandles } from "../handle.ts";
 import { listInbox, pendingCount } from "../inbox.ts";
+import { loadIntercept } from "../intercept.ts";
 import { liveStatus, readLane } from "../lane-state.ts";
 import { readMemoryFile } from "../memory.ts";
 import { piSessionDir } from "../paths.ts";
@@ -11,8 +14,10 @@ import { findBot, findRoom, loadRoster, saveRoster } from "../roster.ts";
 import { readRoomLog, roomPost } from "../rooms.ts";
 import { fireRoutine, listReceipts } from "../routines.ts";
 import { sendPrompt } from "../send.ts";
+import type { SidecarHandle } from "../sidecar.ts";
 import { transcriptTail } from "../transcript-tail.ts";
 import type { ApprovalLevel, BotRecord, ProtocolEvent, Roster } from "../types.ts";
+import { wipeRuntime } from "../wipe.ts";
 import type { EventBus } from "./bus.ts";
 import { listComputerTree, readComputerFile, writeComputerFile } from "./computer-tree.ts";
 import { loadOperatorConfig, publicOperatorConfig } from "./operator-config.ts";
@@ -49,6 +54,7 @@ export interface OperatorMessage {
     readonly subtitle: string;
     readonly options: readonly string[];
     readonly requestId: string;
+    readonly tool?: string;
     readonly answered?: string;
   };
 }
@@ -71,6 +77,7 @@ export interface OperatorSnapshot {
   readonly config: ReturnType<typeof publicOperatorConfig>;
   readonly sessions: readonly { readonly slug: string; readonly pid?: number; readonly alive: boolean }[];
   readonly protocol: readonly ProtocolEvent[];
+  readonly sidecar: { readonly port: number; readonly owned: boolean } | null;
 }
 
 function colorFor(index: number): string {
@@ -170,6 +177,7 @@ export function messagesForBot(computerRoot: string, botId: string, limit = 200)
         subtitle: `${approval.toolName} · ${approval.detail.slice(0, 180)}`,
         options: ["Allow", "Deny"],
         requestId: approval.id,
+        tool: approval.toolName,
       },
     });
   }
@@ -180,6 +188,7 @@ export function buildSnapshot(
   computerRoot: string,
   fakeWorkers: boolean,
   supervisor?: Supervisor,
+  sidecar?: SidecarHandle,
 ): OperatorSnapshot {
   const roster = loadRoster(computerRoot);
   return {
@@ -197,9 +206,10 @@ export function buildSnapshot(
     routines: roster.routines,
     approvals: listApprovals(computerRoot),
     receipts: listReceipts(computerRoot),
-    config: publicOperatorConfig(loadOperatorConfig()),
+    config: publicOperatorConfig(overlayOperatorConfig(computerRoot, loadOperatorConfig(), loadClientRuntime(computerRoot))),
     sessions: supervisor?.sessions() ?? [],
     protocol: readProtocol(computerRoot).slice(-120),
+    sidecar: sidecar ? { port: sidecar.port, owned: sidecar.owned } : null,
   };
 }
 
@@ -208,6 +218,11 @@ export interface ApiContext {
   readonly fakeWorkers: boolean;
   readonly supervisor?: Supervisor;
   readonly bus?: EventBus;
+  readonly sidecar?: SidecarHandle;
+}
+
+function snap(ctx: ApiContext): OperatorSnapshot {
+  return buildSnapshot(ctx.computerRoot, ctx.fakeWorkers, ctx.supervisor, ctx.sidecar);
 }
 
 function emit(ctx: ApiContext, frame: { readonly kind: string; readonly [key: string]: unknown }): void {
@@ -234,7 +249,7 @@ export async function handleOperatorApi(
   const computerRoot = ctx.computerRoot;
 
   if (method === "GET" && path === "/api/snapshot") {
-    return { status: 200, body: buildSnapshot(computerRoot, ctx.fakeWorkers, ctx.supervisor) };
+    return { status: 200, body: snap(ctx) };
   }
 
   if (method === "GET" && path === "/api/bots") {
@@ -327,15 +342,25 @@ export async function handleOperatorApi(
         return {
           ...row,
           name: typeof body.name === "string" && body.name.length > 0 ? body.name : row.name,
+          slug:
+            typeof body.slug === "string" && body.slug.trim().length > 0
+              ? body.slug.trim().toLowerCase().replace(/[^a-z0-9-]/g, "-")
+              : row.slug,
           purpose: typeof body.purpose === "string" ? body.purpose : row.purpose,
           instructions: typeof body.instructions === "string" ? body.instructions : row.instructions,
           approvalLevel: approval,
+          skills: Array.isArray(body.skills)
+            ? body.skills.filter((item): item is string => typeof item === "string")
+            : row.skills,
+          connectors: Array.isArray(body.connectors)
+            ? body.connectors.filter((item): item is string => typeof item === "string")
+            : row.connectors,
         };
       });
       const next: Roster = { ...roster, bots: nextBots };
       saveRoster(computerRoot, next);
       initComputer(computerRoot, next);
-      emit(ctx, { kind: "hello", snapshot: buildSnapshot(computerRoot, ctx.fakeWorkers, ctx.supervisor) });
+      emit(ctx, { kind: "hello", snapshot: snap(ctx) });
       return { status: 200, body: findBot(next, bot.id) };
     }
   }
@@ -366,7 +391,7 @@ export async function handleOperatorApi(
     saveRoster(computerRoot, next);
     initComputer(computerRoot, next);
     ctx.supervisor?.ensure(created.slug);
-    emit(ctx, { kind: "hello", snapshot: buildSnapshot(computerRoot, ctx.fakeWorkers, ctx.supervisor) });
+    emit(ctx, { kind: "hello", snapshot: snap(ctx) });
     return { status: 200, body: created };
   }
 
@@ -439,7 +464,7 @@ export async function handleOperatorApi(
   if (routineMatch && method === "POST") {
     const name = decodeURIComponent(routineMatch[1] ?? "");
     const fired = fireRoutine(computerRoot, name);
-    emit(ctx, { kind: "hello", snapshot: buildSnapshot(computerRoot, ctx.fakeWorkers, ctx.supervisor) });
+    emit(ctx, { kind: "hello", snapshot: snap(ctx) });
     return { status: 200, body: fired };
   }
 
@@ -512,6 +537,57 @@ export async function handleOperatorApi(
 
   if (method === "GET" && path === "/api/sessions") {
     return { status: 200, body: ctx.supervisor?.sessions() ?? [] };
+  }
+
+  if (method === "GET" && path === "/api/office") {
+    const roster = loadRoster(computerRoot);
+    const client = loadClientRuntime(computerRoot);
+    return {
+      status: 200,
+      body: {
+        system: roster.system,
+        computerRoot,
+        bots: roster.bots.length,
+        rooms: roster.rooms.length,
+        routines: roster.routines.length,
+        client: {
+          extraExtensions: client.extraExtensions,
+          clientSkills: client.clientSkills,
+          spawnPolicy: client.spawnPolicy ?? null,
+          autoRoutines: client.autoRoutines,
+          provider: client.provider ?? null,
+          model: client.model ?? null,
+          thinkingLevel: client.thinkingLevel ?? null,
+          features: client.features ?? null,
+          evalPhase: client.evalPhase ?? null,
+          sidecar: client.sidecar
+            ? { command: client.sidecar.command, portFile: client.sidecar.portFile }
+            : null,
+        },
+        attach: loadExtensionsManifest(computerRoot),
+        intercept: loadIntercept(computerRoot),
+        sidecar: ctx.sidecar ? { port: ctx.sidecar.port, owned: ctx.sidecar.owned } : null,
+        fakeWorkers: ctx.fakeWorkers,
+      },
+    };
+  }
+
+  if (method === "POST" && path === "/api/wipe") {
+    const keepMemory = isRecord(body) && body.keepMemory === true;
+    const wipeRuns = isRecord(body) && body.wipeRuns === true;
+    for (const session of ctx.supervisor?.sessions() ?? []) {
+      if (session.alive) {
+        ctx.supervisor?.stopBot(session.slug);
+      }
+    }
+    const report = wipeRuntime(computerRoot, {
+      keepMemory,
+      keepSidecarPort: true,
+      wipeRuns,
+    });
+    initComputer(computerRoot);
+    emit(ctx, { kind: "hello", snapshot: snap(ctx) });
+    return { status: 200, body: report };
   }
 
   return undefined;

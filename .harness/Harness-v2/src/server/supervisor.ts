@@ -1,20 +1,26 @@
 import { spawn, type ChildProcess } from "node:child_process";
-import { createRequire } from "node:module";
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
+import { applyAttachEnv } from "../client-attach.ts";
+import { applyClientEnv, loadClientRuntime, overlayOperatorConfig } from "../client-runtime.ts";
+import { appendJsonlAtomic, ensureDir } from "../fs.ts";
 import { pendingCount } from "../inbox.ts";
 import { liveStatus } from "../lane-state.ts";
-import { piSessionDir } from "../paths.ts";
+import { piRpcLogPath, piRuntimePath, piSessionDir } from "../paths.ts";
 import { extensionEntryPath, extraExtensionArgs } from "../pkg.ts";
 import { findBot, loadRoster } from "../roster.ts";
 import { cadenceToMs, fireRoutine } from "../routines.ts";
-import { ensureDir } from "../fs.ts";
 import type { EventBus } from "./bus.ts";
+import { ombAdoptLeaf, ombChainParent } from "./omb-compat.ts";
 import { loadOperatorConfig, piEnvFromConfig, type OperatorConfig } from "./operator-config.ts";
+import { foldPiRpc, type PiActivityChip, type PiRuntimeEvent } from "./pi-runtime.ts";
 
 export interface SupervisorOptions {
   readonly computerRoot: string;
   readonly lazy?: boolean;
+  readonly autoRoutines?: boolean;
   readonly bus?: EventBus;
   readonly config?: OperatorConfig;
 }
@@ -36,70 +42,115 @@ export interface Supervisor {
 
 function resolvePiCli(): string | undefined {
   try {
-    const require = createRequire(import.meta.url);
-    const pkg = require.resolve("@earendil-works/pi-coding-agent/package.json");
-    return join(dirname(pkg), "dist", "bundle", "cli.js");
+    const resolved = import.meta.resolve("@earendil-works/pi-coding-agent");
+    const cli = join(dirname(fileURLToPath(resolved)), "bundle", "cli.js");
+    return existsSync(cli) ? cli : undefined;
   } catch {
     return undefined;
   }
 }
 
-function foldRpcChunk(bus: EventBus | undefined, slug: string, botId: string, raw: unknown): void {
-  if (!bus || typeof raw !== "object" || raw === null) {
+const eventSeq = new Map<string, number>();
+
+function nextEventId(botId: string): string {
+  const n = (eventSeq.get(botId) ?? 0) + 1;
+  eventSeq.set(botId, n);
+  return `pi-${botId}-${n}`;
+}
+
+function sendRpc(child: ChildProcess, command: Record<string, unknown>): void {
+  const stdin = child.stdin;
+  if (!stdin || stdin.destroyed) {
     return;
   }
-  const rec = raw as Record<string, unknown>;
+  stdin.write(`${JSON.stringify(command)}\n`);
+}
+
+export function piModelArg(model: string | undefined, thinking: string | undefined): string | undefined {
+  const trimmed = model?.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+  if (trimmed.includes(":") || !thinking?.trim()) {
+    return trimmed;
+  }
+  return `${trimmed}:${thinking.trim()}`;
+}
+
+function publishRuntime(
+  computerRoot: string,
+  bus: EventBus | undefined,
+  slug: string,
+  botId: string,
+  event: PiRuntimeEvent,
+): void {
+  appendJsonlAtomic(piRuntimePath(computerRoot, botId), event);
+  bus?.publish({ kind: "runtime", slug, botId, event });
+}
+
+function publishActivity(
+  bus: EventBus | undefined,
+  botId: string,
+  chip: PiActivityChip,
+): void {
+  if (!bus) {
+    return;
+  }
+  const suffix = chip.ok === undefined ? "run" : "done";
+  const id = `tool-${chip.id}-${suffix}`;
+  const parentId = ombChainParent(botId);
+  ombAdoptLeaf(botId, id);
   bus.publish({
-    kind: "runtime",
-    slug,
-    botId,
-    event: rec,
+    kind: "message",
+    threadId: botId,
+    message: {
+      id,
+      role: "bot",
+      kind: "activity",
+      text: chip.spoken,
+      at: Date.now(),
+      parentId,
+      tool: {
+        name: chip.name,
+        spoken: chip.spoken,
+        ...(chip.ok !== undefined ? { ok: chip.ok } : {}),
+        ...(chip.summary ? { summary: chip.summary } : {}),
+        ...(chip.input ? { input: chip.input } : {}),
+        ...(chip.output ? { output: chip.output } : {}),
+      },
+    },
   });
-  const type = typeof rec.type === "string" ? rec.type : "";
-  const nested =
-    rec.event && typeof rec.event === "object" && rec.event !== null
-      ? (rec.event as Record<string, unknown>)
-      : rec;
-  const nestedType = typeof nested.type === "string" ? nested.type : type;
-  let text = "";
-  if (typeof nested.text === "string") {
-    text = nested.text;
-  } else if (typeof nested.delta === "string") {
-    text = nested.delta;
-  } else if (typeof nested.message === "string") {
-    text = nested.message;
+}
+
+function foldRpcChunk(
+  computerRoot: string,
+  bus: EventBus | undefined,
+  slug: string,
+  botId: string,
+  raw: unknown,
+): void {
+  appendJsonlAtomic(piRpcLogPath(computerRoot, botId), raw);
+  const folded = foldPiRpc(raw, {
+    botId,
+    slug,
+    now: (): string => new Date().toISOString(),
+    nextId: (): string => nextEventId(botId),
+  });
+  for (const event of folded.events) {
+    publishRuntime(computerRoot, bus, slug, botId, event);
   }
-  if (nestedType.includes("error") || type === "error") {
-    const message = typeof nested.message === "string" ? nested.message : JSON.stringify(nested).slice(0, 240);
-    bus.publish({
-      kind: "message",
-      threadId: botId,
-      message: {
-        id: `rpc-${Date.now()}`,
-        at: new Date().toISOString(),
-        role: "system",
-        kind: "activity",
-        text: message,
-      },
-    });
-    return;
-  }
-  if (text.length > 0 && (nestedType.includes("text") || nestedType.includes("assistant") || nestedType === "agent_end")) {
-    bus.publish({
-      kind: "message",
-      threadId: botId,
-      message: {
-        id: `rpc-${Date.now()}`,
-        at: new Date().toISOString(),
-        role: "bot",
-        kind: nestedType.includes("tool") ? "activity" : "text",
-        text,
-      },
-    });
+  if (folded.activity) {
+    publishActivity(bus, botId, folded.activity);
   }
 }
 
-function attachStdout(child: ChildProcess, slug: string, botId: string, bus: EventBus | undefined): void {
+function attachStdout(
+  computerRoot: string,
+  child: ChildProcess,
+  slug: string,
+  botId: string,
+  bus: EventBus | undefined,
+): void {
   let buf = "";
   child.stdout?.on("data", (chunk: Buffer | string) => {
     buf += typeof chunk === "string" ? chunk : chunk.toString("utf8");
@@ -114,7 +165,7 @@ function attachStdout(child: ChildProcess, slug: string, botId: string, bus: Eve
         continue;
       }
       try {
-        foldRpcChunk(bus, slug, botId, JSON.parse(line) as unknown);
+        foldRpcChunk(computerRoot, bus, slug, botId, JSON.parse(line) as unknown);
       } catch {
         // Non-JSON diagnostic lines from Pi are ignored.
       }
@@ -125,11 +176,14 @@ function attachStdout(child: ChildProcess, slug: string, botId: string, bus: Eve
     if (text.length === 0) {
       return;
     }
-    bus?.publish({
-      kind: "runtime",
-      slug,
-      botId,
-      event: { type: "stderr", text: text.slice(0, 500) },
+    publishRuntime(computerRoot, bus, slug, botId, {
+      eventId: nextEventId(botId),
+      provider: "pi",
+      threadId: botId,
+      createdAt: new Date().toISOString(),
+      type: "runtime.error",
+      message: text.slice(0, 500),
+      raw: { source: "pi-stderr", payload: text.slice(0, 500) },
     });
   });
 }
@@ -144,6 +198,7 @@ function spawnBot(
 ): ChildProcess {
   const sessionDir = piSessionDir(computerRoot, botId);
   ensureDir(sessionDir);
+  const model = piModelArg(env.HARNESS_PI_MODEL, env.HARNESS_PI_THINKING);
   const args = [
     cliPath,
     "--mode",
@@ -159,8 +214,8 @@ function spawnBot(
   if (env.HARNESS_PI_PROVIDER) {
     args.push("--provider", env.HARNESS_PI_PROVIDER);
   }
-  if (env.HARNESS_PI_MODEL) {
-    args.push("--model", env.HARNESS_PI_MODEL);
+  if (model) {
+    args.push("--model", model);
   }
   const child = spawn(process.execPath, args, {
     cwd: computerRoot,
@@ -171,7 +226,11 @@ function spawnBot(
     },
     stdio: ["pipe", "pipe", "pipe"],
   });
-  attachStdout(child, slug, botId, bus);
+  attachStdout(computerRoot, child, slug, botId, bus);
+  const thinking = env.HARNESS_PI_THINKING?.trim();
+  if (thinking) {
+    sendRpc(child, { type: "set_thinking_level", level: thinking });
+  }
   return child;
 }
 
@@ -179,11 +238,22 @@ export async function startSupervisor(options: SupervisorOptions): Promise<Super
   const cliPath = resolvePiCli();
   const children = new Map<string, ChildProcess>();
   const timers: ReturnType<typeof setInterval>[] = [];
-  const config = options.config ?? loadOperatorConfig();
-  const env = piEnvFromConfig(config);
   const bus = options.bus;
 
   const rosterOf = (): ReturnType<typeof loadRoster> => loadRoster(options.computerRoot);
+  const envFor = (): NodeJS.ProcessEnv => {
+    const client = loadClientRuntime(options.computerRoot);
+    const live = overlayOperatorConfig(
+      options.computerRoot,
+      options.config ?? loadOperatorConfig(),
+      client,
+    );
+    return applyClientEnv(
+      applyAttachEnv(piEnvFromConfig(live), options.computerRoot, live),
+      options.computerRoot,
+      client,
+    );
+  };
 
   const ensure = (slug: string): void => {
     if (!cliPath) {
@@ -198,7 +268,7 @@ export async function startSupervisor(options: SupervisorOptions): Promise<Super
     if (existing && existing.exitCode === null && !existing.killed) {
       return;
     }
-    const child = spawnBot(options.computerRoot, slug, bot.id, cliPath, env, bus);
+    const child = spawnBot(options.computerRoot, slug, bot.id, cliPath, envFor(), bus);
     children.set(slug, child);
     bus?.publish({ kind: "sessions", sessions: sessions() });
     child.on("exit", () => {
@@ -249,19 +319,21 @@ export async function startSupervisor(options: SupervisorOptions): Promise<Super
   }, 2000);
   timers.push(watch);
 
-  for (const routine of rosterOf().routines) {
-    const ms = cadenceToMs(routine.cadence);
-    if (!ms) {
-      continue;
-    }
-    const timer = setInterval(() => {
-      try {
-        fireRoutine(options.computerRoot, routine.name);
-      } catch {
-        // keep the supervisor up
+  if (options.autoRoutines === true) {
+    for (const routine of rosterOf().routines) {
+      const ms = cadenceToMs(routine.cadence);
+      if (!ms) {
+        continue;
       }
-    }, ms);
-    timers.push(timer);
+      const timer = setInterval(() => {
+        try {
+          fireRoutine(options.computerRoot, routine.name);
+        } catch {
+          // keep the supervisor up
+        }
+      }, ms);
+      timers.push(timer);
+    }
   }
 
   return {

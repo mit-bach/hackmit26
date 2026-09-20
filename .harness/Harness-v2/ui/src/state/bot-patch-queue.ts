@@ -17,6 +17,8 @@ export type BotUpdatePatch = Partial<
     | "avatarCrop"
     | "autoApprove"
     | "approvalMode"
+    | "approvalLevel"
+    | "harnessSlug"
     | "speakReplies"
     | "voice"
     | "pinned"

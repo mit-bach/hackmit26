@@ -1,7 +1,5 @@
-// Web-side mirror of server/bot-overview.ts's response shape for
-// GET /api/bots/:id/overview. No logic lives here — the sentences are
-// built once, server-side, so the phones and this dialog can never
-// disagree about what a bot does.
+import type { BotSettingsSection } from "@/state/store";
+
 export interface BotOverview {
   who: { name: string; title: string; blurb: string; soulLead: string };
   does: string[];
@@ -16,5 +14,5 @@ export interface SetupStep {
   id: "identity" | "soul" | "folder" | "apps" | "schedule";
   label: string;
   done: boolean;
-  section?: "identity" | "soul" | "access" | "routines";
+  section?: BotSettingsSection;
 }

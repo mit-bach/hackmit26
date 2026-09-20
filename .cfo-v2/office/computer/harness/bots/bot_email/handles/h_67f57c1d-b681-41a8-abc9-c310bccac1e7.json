@@ -1,0 +1,19 @@
+{
+  "id": "h_67f57c1d-b681-41a8-abc9-c310bccac1e7",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Reply with exactly: office-ok",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T03:19:38.802Z",
+  "updatedAt": "2026-09-20T03:19:42.460Z",
+  "result": "office-ok",
+  "resultPaths": [],
+  "seq": 3
+}

@@ -1,6 +1,7 @@
 export type {
   ApprovalLevel,
   ApprovalRecord,
+  AskPeerResult,
   AwaitResult,
   BotRecord,
   BotStatus,
@@ -10,6 +11,7 @@ export type {
   HandleStatus,
   InboxItem,
   MessageKind,
+  ParsedAsk,
   ProtocolEvent,
   ReceiptRecord,
   Roster,
@@ -20,8 +22,17 @@ export type {
 } from "./types.ts";
 
 export { initComputer } from "./computer.ts";
+export { wipeRuntime } from "./wipe.ts";
+export {
+  loadClientRuntime,
+  applyClientAttach,
+  overlayOperatorConfig,
+  clientRuntimePath,
+} from "./client-runtime.ts";
+export { startSidecar, readSidecarPort, sidecarHealthy } from "./sidecar.ts";
 export { loadRoster, saveRoster, findBot, requireBot, findRoom, findRoutine, parseRoster } from "./roster.ts";
 export { sendPrompt } from "./send.ts";
+export { askPeer, parseAskPeer, resolvePeer, executeFakeTurn, tryOperatorAskHandoff } from "./ask-peer.ts";
 export { awaitTurn, awaitSnapshot } from "./await.ts";
 export {
   bindLane,
@@ -47,7 +58,7 @@ export {
   waitForApproval,
   isConsequential,
 } from "./approvals.ts";
-export { fireRoutine, settleReceipt, settleReceiptsForHandle, reconcileReceipts, listReceipts, cadenceToMs } from "./routines.ts";
+export { fireRoutine, settleReceipt, settleReceiptsForHandle, reconcileReceipts, listReceipts, cadenceToMs, MAX_SAFE_INTERVAL_MS } from "./routines.ts";
 export { readMemoryFile, writeMemoryFile, injectMemoryPrefix } from "./memory.ts";
 export { liveStatus, touchLane, readLane } from "./lane-state.ts";
 export { findHandle, readHandle, listHandles, isTerminalStatus } from "./handle.ts";
@@ -58,8 +69,16 @@ export { startFakeWorkers, runFakeUntilIdle } from "./worker.ts";
 export { startServer } from "./server/http.ts";
 export { EventBus } from "./server/bus.ts";
 export { loadOperatorConfig, publicOperatorConfig, patchOperatorConfig, operatorConfigPath } from "./server/operator-config.ts";
+export { handleDeskCompat } from "./server/desk.ts";
 export { listComputerTree, readComputerFile, writeComputerFile } from "./server/computer-tree.ts";
 export { buildSnapshot } from "./server/api.ts";
 export { listInbox, pendingCount, claimInboxById } from "./inbox.ts";
 export { acquireLease, releaseLease } from "./leases.ts";
-export { harnessPackageRoot, extensionEntryPath } from "./pkg.ts";
+export { extraExtensionArgs, harnessPackageRoot, extensionEntryPath } from "./pkg.ts";
+export {
+  collectExtraExtensionPaths,
+  applyAttachEnv,
+  loadExtensionsManifest,
+} from "./client-attach.ts";
+export { loadIntercept, saveIntercept, resolveIntercept, seedVerifierIntercept } from "./intercept.ts";
+export { listMemoryOverview, readMemoryDoc, writeMemoryDoc } from "./memory.ts";

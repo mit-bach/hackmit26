@@ -209,3 +209,19 @@ export interface SearchHit {
   readonly purpose: string;
   readonly status: BotStatus;
 }
+
+export interface ParsedAsk {
+  readonly slug: string;
+  readonly botId: string;
+  readonly question: string;
+}
+
+export interface AskPeerResult {
+  readonly accepted: boolean;
+  readonly handleId?: string;
+  readonly status?: HandleStatus;
+  readonly done?: boolean;
+  readonly result?: string;
+  readonly error?: string;
+  readonly reason?: string;
+}

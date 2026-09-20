@@ -1,0 +1,6 @@
+{
+  "extraExtensions": [
+    "./extensions/index.ts"
+  ],
+  "clientSkills": true
+}

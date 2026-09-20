@@ -132,6 +132,37 @@ test("POST /api/bots/:slug/messages accepts a Handle and fake workers complete i
   }
 });
 
+test("POST /api/bots/:slug/messages asking another Bot returns the peer text", async () => {
+  const computer = makeComputer();
+  const started = await startServer({
+    computerRoot: computer,
+    port: 0,
+    workers: false,
+    fakeWorkers: true,
+  });
+  try {
+    const sent = (await (
+      await fetch(`${started.url}/api/bots/alpha/messages`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ text: "Ask the Beta agent what color the sky is" }),
+      })
+    ).json()) as SendBody;
+    assert.equal(sent.accepted, true);
+    assert.ok(sent.handleId);
+    const awaited = (await (
+      await fetch(`${started.url}/api/handles/${sent.handleId}/await?timeoutMs=8000`, {
+        method: "POST",
+      })
+    ).json()) as { done: boolean; status: string; result?: string };
+    assert.equal(awaited.done, true);
+    assert.equal(awaited.status, "completed");
+    assert.match(awaited.result ?? "", /\[beta\]/i);
+  } finally {
+    await started.stop();
+  }
+});
+
 test("SSE /api/events sends a hello snapshot", async () => {
   const computer = makeComputer();
   const started = await startServer({ computerRoot: computer, port: 0, workers: false });

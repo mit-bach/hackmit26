@@ -1,6 +1,6 @@
 import { track } from "@/lib/analytics";
 import { useCallback, useEffect, useMemo, useRef, useState, type SetStateAction } from "react";
-import { ArrowUp, BookOpen, Clock, Mic, Paperclip, Square, Target, Users, X } from "lucide-react";
+import { ArrowUp, BookOpen, Clock, Paperclip, Square, Users, X } from "lucide-react";
 import { useStore, visibleMessages, currentTaskBot, type Bot, type Group, type Message } from "@/state/store";
 import { cn } from "@/lib/cn";
 import { activeLocale, t } from "@/lib/i18n";
@@ -24,11 +24,6 @@ import {
 import { BotAvatar } from "./Avatar";
 import { MentionTextarea } from "./MentionTextarea";
 import { ComposerAttachments, pathForFile } from "./ComposerAttachments";
-import { LocalComputerAutoWarning } from "./LocalComputerAutoWarning";
-import { PlaceChip } from "./PlaceChip";
-import { FullAccessWarning } from "./FullAccessWarning";
-import { ApprovalModeSelector } from "./ApprovalModeSelector";
-import { approvalModeFor, type ApprovalMode } from "../../shared/approval-mode";
 import {
   appendPastedText,
   handoffAttachmentImagePreview,
@@ -47,7 +42,6 @@ import {
 import { normalizeState } from "@/lib/mascot";
 import { goalCoordinatorForComposer, groupComposerHint, roomRespondersForComposer } from "@/lib/group-routing";
 import { PendingApprovalActions, PendingApprovalPanel, pendingApprovals } from "./PendingApproval";
-import { useDesktopCapabilities } from "./DesktopCapabilities";
 import { ReplyQuote } from "./ReplyQuote";
 import { useThreadRefs } from "./ThreadRefs";
 import {
@@ -111,11 +105,6 @@ export function Composer({
   const locked = setupLocked || Boolean(bot?.awaitingThreadSnapshot);
   const { state, dispatch } = useStore();
   const { threads, currentBotId } = useThreadRefs();
-  const { capabilities } = useDesktopCapabilities();
-  const remoteClient = window.ogb?.remoteClient?.active === true;
-  // Unified target: a 1:1 bot thread or a room. In a room the @ picker
-  // offers members plus @everyone; explicit mentions override the room's
-  // configured default responder.
   const busy = group ? Boolean(group.working || group.busyBotId) : Boolean(bot?.busy);
   // an engine with a live session takes a message INTO the running turn;
   // for those the composer never locks — the server steers instead of 409.
@@ -254,28 +243,6 @@ export function Composer({
           )?.capabilities?.agentsMcp,
       );
     const available: ComposerSlashCommand[] = [];
-    if (group && !group.dm) available.push({
-      id: "goal",
-      label: "/goal",
-      description: t("composer.command.goalDesc"),
-    });
-    if (
-      skillAuthoringEnabled(state.config) &&
-      (group ? (members ?? []).some(supportsAgents) : supportsAgents(bot))
-    ) {
-      available.push({
-        id: "learn",
-        label: "/learn",
-        description: t("composer.command.learnDesc"),
-      });
-    }
-    // Setup mode needs the agents tools (propose_profile and friends) and a
-    // single bot: a room cannot set itself up.
-    if (!group && supportsAgents(bot)) available.push({
-      id: "setup",
-      label: "/setup",
-      description: t("composer.command.setupDesc"),
-    });
     const query = slash.query.toLowerCase();
     return available.filter(
       (command) =>
@@ -414,18 +381,7 @@ export function Composer({
     return () => window.clearTimeout(timeout);
   }, [busy, pendingCount, steering]);
   const fileInput = useRef<HTMLInputElement>(null);
-  const [approvalWarning, setApprovalWarning] = useState<{
-    mode: "auto" | "full";
-    botId: string;
-    threadId: string;
-  } | null>(null);
   const [attachmentNotice, setAttachmentNotice] = useState<string | null>(null);
-  // Approval mode belongs to one bot; a room has several, each with its own.
-  const modeBot = group ? undefined : bot;
-  const approvalEngine = modeBot
-    ? state.instances.find((instance) => instance.instanceId === modeBot.modelSelection.instanceId)
-    : undefined;
-  const trustedThreadAccess = Boolean(!remoteClient && window.ogb?.approvals && capabilities.host.packaged);
   const uploadImage = useCallback(async (file: File): Promise<Attachment | null> => {
     const optimistic = optimisticImageAttachment(file);
     if (!optimistic) return null;
@@ -465,20 +421,6 @@ export function Composer({
     } finally {
       changeDraftAttachmentPending(draftId, false);
     }
-  };
-  const setApprovalMode = (mode: ApprovalMode) => {
-    if (!modeBot || modeBot.busy || mode === approvalModeFor(modeBot)) return;
-    if ((mode === "full" || mode === "custom") && !trustedThreadAccess) return;
-    if (mode === "full") {
-      setApprovalWarning({ mode, botId: modeBot.id, threadId: modeBot.threadId });
-      return;
-    }
-    // Safe Auto still needs its dedicated warning when it can drive the host.
-    if (mode === "auto" && modeBot.computer === "local") {
-      setApprovalWarning({ mode: "auto", botId: modeBot.id, threadId: modeBot.threadId });
-      return;
-    }
-    dispatch({ type: "updateTask", botId: modeBot.id, threadId: modeBot.threadId, patch: { approvalMode: mode } });
   };
 
   const hasContent = Boolean(effectiveText.trim()) || attachments.length > 0;
@@ -545,7 +487,7 @@ export function Composer({
         sendId: sentDraft.sendId,
         replyToId: replyTo?.id,
         threadId,
-        mode: effectiveChannelMode,
+        mode: "chat",
         onError: () => restoreDraft(sentDraft),
       });
       track("message_sent", { room: true, mode: effectiveChannelMode, queued: busy });
@@ -680,15 +622,6 @@ export function Composer({
     };
   }, [recording, editText]);
 
-  const toggleMic = () => {
-    if (!capabilities.dictation.available || !window.ogb) {
-      setSpeechError(t("composer.dictation.unavailable"));
-      return;
-    }
-    baseText.current = text.trim();
-    setRecording((r) => !r);
-  };
-
   return (
     <div className="pointer-events-none relative px-5 pb-3">
       {/* No fill or hairline on this wrapper — those were the black frame
@@ -751,11 +684,7 @@ export function Composer({
                 )}
               >
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                  {command.id === "goal" ? (
-                    <Target size={15} aria-hidden="true" />
-                  ) : (
-                    <BookOpen size={15} aria-hidden="true" />
-                  )}
+                  <BookOpen size={15} aria-hidden="true" />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-[14px] font-medium text-accent">{command.label}</span>
@@ -892,58 +821,6 @@ export function Composer({
               >
                 <Paperclip size={17} />
               </button>
-              {group && !group.dm && (
-                <button
-                  type="button"
-                  aria-pressed={effectiveChannelMode === "goal"}
-                  aria-label={t("composer.goal.aria")}
-                  title={t("composer.goal.title")}
-                  onClick={() => {
-                    markDraftEdited(draftId);
-                    if (typedGoalText !== null) {
-                      const nextCaret = Math.max(0, caret - (text.length - typedGoalText.length));
-                      editText(typedGoalText);
-                      setCaret(nextCaret);
-                      setChannelMode("chat");
-                      requestAnimationFrame(() => {
-                        inputRef.current?.focus();
-                        inputRef.current?.setSelectionRange(nextCaret, nextCaret);
-                      });
-                      return;
-                    }
-                    setChannelMode((current) => current === "goal" ? "chat" : "goal");
-                  }}
-                  className={cn(
-                    "flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 text-[13px] transition-colors",
-                    effectiveChannelMode === "goal"
-                      ? "border-accent/35 bg-accent/10 text-accent"
-                      : "border-hairline/20 bg-transparent text-ink-secondary hover:bg-raised hover:text-ink",
-                  )}
-                >
-                  <Target size={14} aria-hidden="true" />
-                  {effectiveChannelMode === "goal" ? "/goal" : t("composer.goal.chip")}
-                </button>
-              )}
-              {modeBot && approvalEngine && !remoteClient && (
-                <ApprovalModeSelector
-                  approvalMode={modeBot.approvalMode}
-                  autoApprove={modeBot.autoApprove}
-                  providerName={approvalEngine.displayName}
-                  driverKind={approvalEngine.driverKind}
-                  onSelect={setApprovalMode}
-                  disabled={Boolean(modeBot.busy)}
-                  trustedModesAvailable={trustedThreadAccess}
-                />
-              )}
-              {modeBot && !remoteClient && (
-                <PlaceChip
-                  bot={modeBot}
-                  task={composerTask}
-                  live={Boolean(modeBot.busy)}
-                  disabled={Boolean(modeBot.busy)}
-                  onPin={(surface) => dispatch({ type: "updateTask", botId: modeBot.id, threadId: modeBot.threadId, patch: { surface } })}
-                />
-              )}
             </div>
           )}
           <MentionTextarea
@@ -1046,9 +923,7 @@ export function Composer({
                   ? t("composer.placeholder.queueGroup", { name: busyName })
                   : t("composer.placeholder.queue", { name: busyName })
                 : group
-                  ? channelMode === "goal"
-                    ? t("composer.placeholder.goal", { name: group.name })
-                    : t("composer.placeholder.group", {
+                  ? t("composer.placeholder.group", {
                         name: group.name,
                         hint: groupComposerHint(group, members ?? []),
                       })
@@ -1068,21 +943,6 @@ export function Composer({
             title={t("chat.stop")}
           >
             <Square size={14} className="fill-current" />
-          </button>
-        )}
-        {!locked && !busy && !hasContent && capabilities.dictation.available && (
-          <button
-            onClick={toggleMic}
-            aria-label={recording ? t("composer.dictation.stop") : t("composer.dictation.start")}
-            className={cn(
-              "flex size-8 shrink-0 items-center justify-center rounded-full",
-              recording
-                ? "animate-pulse bg-danger/20 text-danger"
-                : "text-ink-secondary hover:bg-raised hover:text-ink",
-            )}
-            title={recording ? t("composer.dictation.stopHint") : t("composer.dictation.hint")}
-          >
-            <Mic size={18} />
           </button>
         )}
         {hasContent && !locked && (
@@ -1117,35 +977,6 @@ export function Composer({
         </div>
         </div>
         </div>
-      </div>
-      <div className="pointer-events-auto">
-      <FullAccessWarning
-        open={approvalWarning?.mode === "full"}
-        scope="thread"
-        onCancel={() => setApprovalWarning(null)}
-        onConfirm={() => {
-          const target = approvalWarning;
-          setApprovalWarning(null);
-          if (target?.mode !== "full" || !trustedThreadAccess) return;
-          dispatch({ type: "updateTask", botId: target.botId, threadId: target.threadId,
-            patch: { approvalMode: "full", confirmFullAccess: true } });
-        }}
-      />
-      <LocalComputerAutoWarning
-        open={approvalWarning?.mode === "auto"}
-        onCancel={() => setApprovalWarning(null)}
-        onConfirm={() => {
-          if (approvalWarning?.mode === "auto") {
-            dispatch({
-              type: "updateTask",
-              botId: approvalWarning.botId,
-              threadId: approvalWarning.threadId,
-              patch: { approvalMode: "auto", acknowledgeLocalAuto: true },
-            });
-          }
-          setApprovalWarning(null);
-        }}
-      />
       </div>
     </div>
   );

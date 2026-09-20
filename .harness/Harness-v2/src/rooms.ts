@@ -7,7 +7,7 @@ import { appendProtocol } from "./protocol-log.ts";
 import { findBot, findRoom, loadRoster, requireBot } from "./roster.ts";
 import { sendPrompt } from "./send.ts";
 import { sleep } from "./sleep.ts";
-import type { Conversation, MessageKind } from "./types.ts";
+import type { Conversation, MessageKind, Roster } from "./types.ts";
 
 export interface RoomPost {
   readonly t: string;
@@ -26,12 +26,24 @@ export interface RoomPostOptions {
   readonly awaitTimeoutMs?: number;
 }
 
-function parseMentions(text: string, members: readonly string[]): string[] {
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function parseMentions(text: string, members: readonly string[], roster: Roster): string[] {
   const found: string[] = [];
   for (const member of members) {
-    const re = new RegExp(`@${member}\\b`, "i");
-    if (re.test(text)) {
-      found.push(member);
+    const bot = findBot(roster, member);
+    if (!bot) {
+      continue;
+    }
+    const labels = [bot.slug, bot.id, bot.name];
+    for (const label of labels) {
+      const re = new RegExp(`@${escapeRegExp(label)}\\b`, "i");
+      if (re.test(text)) {
+        found.push(bot.slug);
+        break;
+      }
     }
   }
   return found;
@@ -77,7 +89,7 @@ export async function roomPost(options: RoomPostOptions): Promise<{ readonly han
     ? undefined
     : findBot(roster, options.from);
   const fromId = fromBot?.id ?? options.from;
-  const mentions = parseMentions(options.text, room.members);
+  const mentions = parseMentions(options.text, room.members, roster);
   const wakeSlugs = mentions.length > 0 ? mentions : [...room.members];
   const kind: MessageKind = mentions.length > 0 ? "group_mention" : "group_post";
   const waitCapMs = options.waitCapMs ?? 60_000;

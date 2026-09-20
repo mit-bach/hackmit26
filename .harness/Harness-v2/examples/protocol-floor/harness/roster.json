@@ -10,7 +10,9 @@
       "slug": "alpha",
       "purpose": "owns handoff tests and writes shared files",
       "instructions": "Write context as files. Hand off with bot_send_prompt. Await done.",
-      "skills": [],
+      "skills": [
+        "briefing"
+      ],
       "connectors": [],
       "approvalLevel": "ask"
     },
@@ -39,7 +41,11 @@
     {
       "id": "floor",
       "title": "Floor",
-      "members": ["alpha", "beta", "gamma"]
+      "members": [
+        "alpha",
+        "beta",
+        "gamma"
+      ]
     }
   ],
   "routines": [

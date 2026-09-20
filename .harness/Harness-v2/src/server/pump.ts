@@ -7,9 +7,11 @@ import { liveStatus } from "../lane-state.ts";
 import { protocolLogPath } from "../paths.ts";
 import { readProtocol } from "../protocol-log.ts";
 import { loadRoster } from "../roster.ts";
+import { listReceipts } from "../routines.ts";
 import { sleep } from "../sleep.ts";
 import type { EventBus } from "./bus.ts";
-import { ombLatestMessage, ombUserLeaf } from "./omb-compat.ts";
+import { wireRun } from "./desk.ts";
+import { ombAdoptLeaf, ombChainParent, ombLatestMessage, ombUserLeaf } from "./omb-compat.ts";
 
 export function startPumps(
   computerRoot: string,
@@ -21,7 +23,11 @@ export function startPumps(
   }
   const lastStatus = new Map<string, string>();
   const lastPending = new Map<string, number>();
-  let lastApprovalCount = listApprovals(computerRoot).length;
+  let lastApprovalSig = listApprovals(computerRoot)
+    .map((row) => `${row.id}:${row.status}`)
+    .sort()
+    .join("|");
+  const lastReceiptStatus = new Map<string, string>();
   let watcher: FSWatcher | undefined;
   try {
     watcher = watch(dirname(protocolLogPath(computerRoot)), () => {
@@ -42,8 +48,9 @@ export function startPumps(
       }
       if (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") {
         const latest = ombLatestMessage(computerRoot, threadId);
-        const parentId = ombUserLeaf(threadId) ?? latest?.parentId ?? null;
+        const parentId = ombChainParent(threadId) ?? ombUserLeaf(threadId) ?? latest?.parentId ?? null;
         if (latest && latest.role === "bot" && latest.kind === "text" && (latest.text ?? "").trim().length > 0) {
+          ombAdoptLeaf(threadId, latest.id);
           bus.publish({
             kind: "message",
             threadId,
@@ -61,11 +68,13 @@ export function startPumps(
             continue;
           }
           const at = Date.parse(event.t);
+          const messageId = `seq-${event.seq}`;
+          ombAdoptLeaf(threadId, messageId);
           bus.publish({
             kind: "message",
             threadId,
             message: {
-              id: `seq-${event.seq}`,
+              id: messageId,
               role: "bot",
               kind: "text",
               text,
@@ -89,7 +98,15 @@ export function startPumps(
         lastStatus.set(bot.id, status);
         lastPending.set(bot.id, pending);
         const activity =
-          status === "running" ? "working" : status === "blocked" ? "waiting-on-you" : status === "offline" ? "no-signal" : "idle";
+          status === "running"
+            ? "working"
+            : status === "blocked"
+              ? "waiting-on-you"
+              : pending > 0
+                ? "working"
+                : status === "offline"
+                  ? "no-signal"
+                  : "idle";
         const busy = activity === "working" || activity === "waiting-on-you";
         bus.publish({
           kind: "bot",
@@ -106,9 +123,21 @@ export function startPumps(
       }
     }
     const approvals = listApprovals(computerRoot);
-    if (approvals.length !== lastApprovalCount) {
-      lastApprovalCount = approvals.length;
+    const approvalSig = approvals
+      .map((row) => `${row.id}:${row.status}`)
+      .sort()
+      .join("|");
+    if (approvalSig !== lastApprovalSig) {
+      lastApprovalSig = approvalSig;
       bus.publish({ kind: "approvals", approvals });
+    }
+    const receipts = listReceipts(computerRoot);
+    for (const receipt of receipts) {
+      const prev = lastReceiptStatus.get(receipt.id);
+      if (prev !== receipt.status) {
+        lastReceiptStatus.set(receipt.id, receipt.status);
+        bus.publish({ kind: "routine.run", run: wireRun(roster, receipt) });
+      }
     }
   };
 

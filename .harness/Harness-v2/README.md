@@ -16,18 +16,18 @@ npm run serve -- --computer examples/cfo-floor --fake
 
 Opens `http://127.0.0.1:8787/`. `--fake` completes Handles without a model so you can walk the office immediately. Drop `--fake` after keys are in Settings (or `~/.harness/config.json`) to spawn real Pi RPC children.
 
-`--no-open` skips launching a browser. Bind is loopback only.
+`--no-open` skips launching a browser. Bind is loopback only. `--wipe` drops session files on that Computer and keeps roster, skills, intercept, and `harness/client.json`. `--lazy` / `--fake` / `--eager` override spawn. `harness wipe --computer DIR` is the same reset without serving.
 
 What the shell includes:
 
-- Sidebar of specialists and Rooms (cfo-floor: ingest, ap, ar, cash, close, audit)
+- Sidebar of specialists and Rooms
 - Chat with Handle-backed prompts, Stop, approval cards
 - Room posts (Host still serializes wakes)
 - Computer panel: workspace files, not a VM screenshot
-- Inspector: Handles and lane
-- Routines and receipts
-- Office map of bounded contexts
-- Developer settings: spawn policy, model, write-only keys, roster edit, spawn/kill sessions
+- Inspector: protocol.jsonl + transcript (not a fake provider tee)
+- Routines and receipts on the roster
+- Settings → Harness: spawn policy, extra `-e` extensions, intercept, on-disk comms paths
+- Settings → Connections: nested API keys (Anthropic / OpenAI-compat / xAI) persist to `~/.harness/config.json`
 
 ## What is proven
 
@@ -48,6 +48,32 @@ What the shell includes:
 13. `/api/snapshot`, `/api/bots/:slug/messages`, SSE hello, Computer path escape, and Operator file writes.
 
 Pi TUI / RPC bind is implemented. It is not required for those tests.
+
+## Where comms live
+
+The Operator shell is a projection of files on the Computer. There is no separate Grok-style thread store.
+
+```
+<computer>/harness/roster.json          Bots, Rooms, Routines
+<computer>/harness/protocol.jsonl       office-wide log (seq, type, from, to, handleId)
+<computer>/harness/bots/<botId>/inbox.jsonl
+<computer>/harness/bots/<botId>/handles/<handleId>.json   accept ≠ complete
+<computer>/harness/bots/<botId>/transcript.jsonl
+<computer>/harness/bots/<botId>/memory/
+<computer>/harness/rooms/<roomId>/log.jsonl
+<computer>/harness/approvals/<id>.json
+<computer>/harness/receipts/<id>.json
+<computer>/harness/client.json          Client attach, sidecar, spawn, model
+<computer>/harness/intercept.json       Operator vs Verifier Bot
+<computer>/harness/extensions.json      extra Pi -e paths, client skill filter
+~/.harness/config.json                  keys, spawn, provider, model (or $HARNESS_CONFIG)
+```
+
+GET `/api/comms` returns those paths. Settings → Harness edits spawn policy, extra extensions, intercept, and keys without opening the Pi TUI.
+
+A Client (later: CFO V2) attaches by writing `harness/client.json` (or `harness/extensions.json`) extra `-e` modules, `Computer/skills/<name>/SKILL.md`, and grants on `roster.skills` / `roster.connectors`. Set Client skill filter so a Bot only loads the skills named on its roster row. `serve` starts a Kernel sidecar when `client.json` names one.
+
+---
 
 ## Layout
 
@@ -72,7 +98,8 @@ A Client system is a `roster.json` plus files on that Computer. The Harness does
 Loopback:
 
 - `GET /` Operator SPA (after `npm run ui:build`)
-- `GET /api/snapshot` `GET /api/events` (SSE)
+- `GET /api/snapshot` `GET /api/events` (SSE) `GET /api/office`
+- `POST /api/wipe` `{ "keepMemory"?: true, "wipeRuns"?: true }`
 - `POST /api/bots/:slug/messages` `{ "text": "..." }`
 - `POST /api/rooms/:id/messages`
 - `GET /api/computer/tree` `GET /api/computer/file?path=`

@@ -1,26 +1,17 @@
-// "About OpenMausBot" — the version you are running and where to go next.
-// Small on purpose: the interesting settings live in the settings panel, and
-// this exists so a bug report can quote a version number.
+// Version and product name for a bug report. Settings owns Operator controls.
 import { useEffect, useRef } from "react";
 
-import {
-  APP_NAME,
-  APP_REPOSITORY,
-  DOCS_URL,
-  LICENSE_URL,
-  RELEASES_URL,
-  appVersion,
-  openExternalLink,
-  platformLabel,
-} from "@/lib/app-links";
+import { APP_NAME, appVersion, platformLabel } from "@/lib/app-links";
 
-export function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }): React.ReactElement | null {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      return;
+    }
     closeRef.current?.focus();
-    const onKey = (event: KeyboardEvent) => {
+    const onKey = (event: KeyboardEvent): void => {
       if (event.key === "Escape") {
         event.preventDefault();
         onClose();
@@ -30,7 +21,9 @@ export function AboutDialog({ open, onClose }: { open: boolean; onClose: () => v
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open) {
+    return null;
+  }
 
   const platform = platformLabel(window.ogb?.platform);
 
@@ -54,14 +47,8 @@ export function AboutDialog({ open, onClose }: { open: boolean; onClose: () => v
           {platform ? ` · ${platform}` : ""}
         </p>
         <p className="mt-3 text-[13px] leading-relaxed text-ink-secondary">
-          An open-source desktop home for your agents. Apache 2.0 licensed.
+          Named Bots on one Computer. Pi is the per-Bot turn engine. Truth is harness/ on disk.
         </p>
-        <div className="mt-4 flex flex-wrap justify-center gap-x-4 gap-y-1.5 text-[13px]">
-          <AboutLink href={APP_REPOSITORY} label="GitHub" />
-          <AboutLink href={DOCS_URL} label="Docs" />
-          <AboutLink href={RELEASES_URL} label="Releases" />
-          <AboutLink href={LICENSE_URL} label="License" />
-        </div>
         <button
           ref={closeRef}
           type="button"
@@ -72,17 +59,5 @@ export function AboutDialog({ open, onClose }: { open: boolean; onClose: () => v
         </button>
       </div>
     </div>
-  );
-}
-
-function AboutLink({ href, label }: { href: string; label: string }) {
-  return (
-    <button
-      type="button"
-      onClick={() => void openExternalLink(href)}
-      className="text-accent hover:underline"
-    >
-      {label}
-    </button>
   );
 }

@@ -11,6 +11,7 @@ import {
   resolveApproval,
   waitForApproval,
 } from "../src/approvals.ts";
+import { askPeer, tryOperatorAskHandoff } from "../src/ask-peer.ts";
 import { awaitTurn } from "../src/await.ts";
 import { resolveBind, type BindResult } from "../src/bind.ts";
 import { findHandle, listHandles } from "../src/handle.ts";
@@ -40,6 +41,8 @@ import { liveStatus, touchLane } from "../src/lane-state.ts";
 import { transcriptTail } from "../src/transcript-tail.ts";
 import { acquireLease, releaseLease } from "../src/leases.ts";
 import { harnessPackageRoot } from "../src/pkg.ts";
+import { notifyIntercept } from "../src/intercept.ts";
+import type { InboxItem } from "../src/types.ts";
 
 interface BoundSession {
   readonly bind: Extract<BindResult, { ok: true }>;
@@ -94,6 +97,24 @@ function toolText(payload: unknown): {
 }
 
 function kickWake(session: BoundSession): void {
+  void kickWakeAsync(session);
+}
+
+async function routeAskIfNeeded(session: BoundSession, item: InboxItem): Promise<boolean> {
+  const handed = await tryOperatorAskHandoff(
+    session.bind.computerRoot,
+    session.bind.bot.id,
+    item,
+    120_000,
+  );
+  if (!handed) {
+    return false;
+  }
+  completeTurn(session.lane, handed);
+  return true;
+}
+
+async function kickWakeAsync(session: BoundSession): Promise<void> {
   if (session.lane.drainLock) {
     return;
   }
@@ -103,7 +124,12 @@ function kickWake(session: BoundSession): void {
     if (!item) {
       return;
     }
-    session.pi.sendUserMessage(formatWake(item), { deliverAs: "followUp" });
+    if (await routeAskIfNeeded(session, item)) {
+      return;
+    }
+    session.pi.sendUserMessage(formatWake(item, session.bind.roster, session.bind.bot.slug), {
+      deliverAs: "followUp",
+    });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
     process.stderr.write(`harness kickWake ${session.bind.bot.slug}: ${message}\n`);
@@ -166,13 +192,19 @@ export default function harnessExtension(pi: ExtensionAPI): void {
   let watcher: FSWatcher | undefined;
   let poll: ReturnType<typeof setInterval> | undefined;
   let lastAssistant = "";
+  let lastError: string | undefined;
 
   pi.on("resources_discover", () => {
     const skillPaths = [`${harnessPackageRoot()}/skills`];
     const computerSkills = join(bind.computerRoot, "skills");
-    // Client systems that filter skills themselves set HARNESS_CLIENT_SKILLS=1.
-    // Otherwise a whole-directory skillPaths entry would ignore the Bot allowlist.
-    if (existsSync(computerSkills) && process.env.HARNESS_CLIENT_SKILLS !== "1") {
+    if (process.env.HARNESS_CLIENT_SKILLS === "1") {
+      for (const name of bind.bot.skills) {
+        const dir = join(computerSkills, name);
+        if (existsSync(join(dir, "SKILL.md"))) {
+          skillPaths.push(dir);
+        }
+      }
+    } else if (existsSync(computerSkills)) {
       skillPaths.push(computerSkills);
     }
     return { skillPaths };
@@ -238,6 +270,7 @@ export default function harnessExtension(pi: ExtensionAPI): void {
 
   pi.on("agent_end", (event) => {
     lastAssistant = assistantTextFromMessages(event.messages) ?? lastAssistant;
+    lastError = assistantErrorFromMessages(event.messages) ?? lastError;
   });
 
   pi.on("input", (event) => {
@@ -267,7 +300,17 @@ export default function harnessExtension(pi: ExtensionAPI): void {
     if (handle?.status === "blocked") {
       return;
     }
-    completeTurn(lane, { text: lastAssistant || "(settled)", paths: [] });
+    const text =
+      lastAssistant.trim().length > 0
+        ? lastAssistant
+        : (lastError ?? "Pi finished this turn with no assistant text");
+    completeTurn(lane, {
+      text,
+      paths: [],
+      error: lastAssistant.trim().length > 0 ? undefined : lastError,
+    });
+    lastAssistant = "";
+    lastError = undefined;
     kickWake(session);
   });
 
@@ -288,6 +331,7 @@ export default function harnessExtension(pi: ExtensionAPI): void {
       toolName: event.toolName,
       detail: JSON.stringify(input),
     });
+    notifyIntercept(bind.computerRoot, approval);
     blockTurn(lane, `${event.toolName} requires Operator approval ${approval.id}`);
     let allowed = false;
     try {
@@ -325,32 +369,65 @@ export default function harnessExtension(pi: ExtensionAPI): void {
 
 function assistantTextFromMessages(messages: readonly unknown[]): string | undefined {
   for (let i = messages.length - 1; i >= 0; i -= 1) {
-    const message = messages[i];
-    if (!message || typeof message !== "object") {
-      continue;
-    }
-    const rec = message as Record<string, unknown>;
-    if (rec.role !== "assistant") {
+    const rec = asRecord(messages[i]);
+    if (!rec || rec.role !== "assistant") {
       continue;
     }
     const content = rec.content;
+    if (typeof content === "string" && content.trim().length > 0) {
+      return content;
+    }
     if (!Array.isArray(content)) {
       continue;
     }
     const parts: string[] = [];
+    const thinking: string[] = [];
     for (const part of content) {
-      if (part && typeof part === "object" && "type" in part && "text" in part) {
-        const typed = part as { type: unknown; text: unknown };
-        if (typed.type === "text" && typeof typed.text === "string") {
-          parts.push(typed.text);
+      const typed = asRecord(part);
+      if (!typed) {
+        continue;
+      }
+      if ((typed.type === "text" || typed.type === "output_text") && typeof typed.text === "string" && typed.text.trim().length > 0) {
+        parts.push(typed.text);
+      }
+      if (typed.type === "thinking") {
+        const thought = typeof typed.thinking === "string" ? typed.thinking : typeof typed.text === "string" ? typed.text : "";
+        if (thought.trim().length > 0) {
+          thinking.push(thought);
         }
       }
     }
     if (parts.length > 0) {
       return parts.join("\n");
     }
+    if (thinking.length > 0) {
+      return thinking.join("\n");
+    }
   }
   return undefined;
+}
+
+function assistantErrorFromMessages(messages: readonly unknown[]): string | undefined {
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    const rec = asRecord(messages[i]);
+    if (!rec || rec.role !== "assistant") {
+      continue;
+    }
+    if (typeof rec.errorMessage === "string" && rec.errorMessage.trim().length > 0) {
+      return rec.errorMessage;
+    }
+    if (rec.stopReason === "error" && typeof rec.error === "string" && rec.error.trim().length > 0) {
+      return rec.error;
+    }
+  }
+  return undefined;
+}
+
+function asRecord(value: unknown): Record<string, unknown> | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return undefined;
+  }
+  return value as Record<string, unknown>;
 }
 
 function registerTools(pi: ExtensionAPI, session: BoundSession): void {
@@ -384,6 +461,10 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "bot_get_profile",
     label: "Bot profile",
     description: "Return one Bot record from the Roster.",
+    promptSnippet: "Look up a teammate by slug, id, or name before you talk to them",
+    promptGuidelines: [
+      "bot_get_profile is always registered. Use it to confirm a teammate exists, then call bot_ask.",
+    ],
     parameters: Type.Object({
       bot_id: Type.String({ description: "Bot id, slug, or name" }),
     }),
@@ -396,13 +477,57 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     },
   });
 
+  const askParams = Type.Object({
+    bot_id: Type.String({ description: "Teammate slug, id, or name" }),
+    prompt: Type.String({ description: "Question or task for that Bot" }),
+  });
+  const runAsk = async (
+    _id: string,
+    params: { bot_id: string; prompt: string },
+  ): Promise<{ content: Array<{ type: "text"; text: string }>; details: unknown }> =>
+    toolText(
+      await askPeer({
+        computerRoot: bind.computerRoot,
+        from: bind.bot.id,
+        to: params.bot_id,
+        prompt: params.prompt,
+        timeoutMs: 120_000,
+      }),
+    );
+
+  pi.registerTool({
+    name: "ask_bot",
+    label: "Ask a Bot",
+    description:
+      "Send a question to another Bot and wait for their result. Always registered. This is how Bots talk to each other.",
+    promptSnippet: "Ask a teammate a question and wait for their answer",
+    promptGuidelines: [
+      "When the Operator asks you to ask another Bot, call ask_bot (same as bot_ask) with that Bot's slug and the question. Then report the result text. Never say this tool is missing.",
+    ],
+    parameters: askParams,
+    execute: runAsk,
+  });
+
+  pi.registerTool({
+    name: "bot_ask",
+    label: "Ask a Bot",
+    description:
+      "Same as ask_bot: send a question to another Bot and wait for their result. Always registered.",
+    promptSnippet: "Ask a teammate a question and wait for their answer",
+    promptGuidelines: [
+      "bot_ask is the Harness name for ask_bot. Use either. Do not claim it is disabled.",
+    ],
+    parameters: askParams,
+    execute: runAsk,
+  });
+
   pi.registerTool({
     name: "bot_send_prompt",
     label: "Send to Bot",
     description: "Accept work onto another Bot's inbox. Returns a Handle, not a result.",
-    promptSnippet: "Hand work to another Bot asynchronously",
+    promptSnippet: "Hand work to another Bot asynchronously, then call bot_await_turn",
     promptGuidelines: [
-      "Use bot_send_prompt to hand work to another Bot. The JSON is a Handle (accepted), not a result. Call bot_await_turn to learn if it finished.",
+      "Use bot_send_prompt to hand work to another Bot. The JSON is a Handle (accepted), not a result. Call bot_await_turn to learn if it finished. Prefer ask_bot when you need the peer's answer in this turn.",
     ],
     parameters: Type.Object({
       bot_id: Type.String(),
@@ -432,6 +557,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "bot_await_turn",
     label: "Await Handle",
     description: "Watch a Handle file until the receiver's turn ends or parks on the Operator.",
+    promptSnippet: "Wait until a teammate's Handle is done",
     promptGuidelines: [
       "Use bot_await_turn on a handle_id from bot_send_prompt. done is true only for completed, failed, or cancelled. blocked is not done.",
     ],
@@ -446,6 +572,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "bot_get_agent_transcript_tail",
     label: "Transcript tail",
     description: "Tail protocol + this or another Bot's transcript by seq.",
+    promptSnippet: "Read recent protocol or a teammate transcript tail",
     parameters: Type.Object({
       bot_id: Type.String(),
       limit: Type.Optional(Type.Number()),
@@ -468,6 +595,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "room_post",
     label: "Room post",
     description: "Append to a Room log. The Host wakes members in roster order.",
+    promptSnippet: "Post to a Room so the Host wakes members in roster order",
     parameters: Type.Object({
       room_id: Type.String(),
       text: Type.String(),
@@ -487,6 +615,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "room_read_log",
     label: "Room log",
     description: "Read a Room log.",
+    promptSnippet: "Read what was said in a Room",
     parameters: Type.Object({
       room_id: Type.String(),
     }),
@@ -497,6 +626,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "memory_read",
     label: "Read Memory",
     description: "Read this Bot's Memory tree. Cannot read another Bot.",
+    promptSnippet: "Read this Bot's Memory only",
     parameters: Type.Object({
       path: Type.Optional(Type.String({ description: "Relative to this Bot's memory/. Default MEMORY.md" })),
     }),
@@ -511,6 +641,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "memory_write",
     label: "Write Memory",
     description: "Write this Bot's Memory tree. Secrets are redacted. Writes are atomic.",
+    promptSnippet: "Write this Bot's Memory only",
     parameters: Type.Object({
       path: Type.String(),
       content: Type.String(),
@@ -522,9 +653,23 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
   });
 
   pi.registerTool({
+    name: "bot_resolve_approval",
+    label: "Resolve approval",
+    description: "Allow or deny a parked approval. Used by a Verifier Bot named in harness/intercept.json.",
+    promptSnippet: "Allow or deny a parked Operator approval",
+    parameters: Type.Object({
+      approval_id: Type.String(),
+      allowed: Type.Boolean(),
+    }),
+    execute: async (_id, params) =>
+      toolText(resolveApproval(bind.computerRoot, params.approval_id, params.allowed)),
+  });
+
+  pi.registerTool({
     name: "ask_user",
     label: "Ask Operator",
     description: "Ask the Operator. A peer Handle is not approval.",
+    promptSnippet: "Ask the Operator; a peer Handle is not approval",
     parameters: Type.Object({
       action: Type.String(),
       detail: Type.String(),
@@ -536,6 +681,7 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
         toolName: "ask_user",
         detail: `${params.action}: ${params.detail}`,
       });
+      notifyIntercept(bind.computerRoot, approval);
       blockTurn(lane, params.action);
       let allowed = false;
       try {

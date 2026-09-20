@@ -3,6 +3,7 @@ import { URL } from "node:url";
 
 import { listApprovals, readApproval, resolveApproval } from "../approvals.ts";
 import { awaitTurn } from "../await.ts";
+import { loadClientRuntime, overlayOperatorConfig } from "../client-runtime.ts";
 import { initComputer } from "../computer.ts";
 import { findHandle, listHandles } from "../handle.ts";
 import { listInbox, pendingCount } from "../inbox.ts";
@@ -13,14 +14,16 @@ import { findBot, loadRoster } from "../roster.ts";
 import { readRoomLog, roomPost } from "../rooms.ts";
 import { fireRoutine, listReceipts } from "../routines.ts";
 import { searchAgents } from "../search.ts";
+import { executeFakeTurn } from "../ask-peer.ts";
 import { sendPrompt } from "../send.ts";
-import { sleep } from "../sleep.ts";
+import { startSidecar, type SidecarHandle } from "../sidecar.ts";
 import { startFakeWorkers } from "../worker.ts";
+import { wipeRuntime } from "../wipe.ts";
 import { transcriptTail } from "../transcript-tail.ts";
 import { buildSnapshot, handleOperatorApi } from "./api.ts";
 import { EventBus } from "./bus.ts";
 import { handleOmbCompat } from "./omb-compat.ts";
-import { loadOperatorConfig } from "./operator-config.ts";
+import { loadOperatorConfig, type OperatorConfig } from "./operator-config.ts";
 import { startPumps } from "./pump.ts";
 import { tryServeStatic } from "./static.ts";
 import { startSupervisor, type Supervisor } from "./supervisor.ts";
@@ -32,6 +35,12 @@ export interface ServeOptions {
   readonly workers?: boolean;
   readonly lazyWorkers?: boolean;
   readonly fakeWorkers?: boolean;
+  readonly autoRoutines?: boolean;
+  readonly wipe?: boolean;
+  readonly keepMemory?: boolean;
+  readonly wipeRuns?: boolean;
+  readonly sidecar?: boolean;
+  readonly config?: OperatorConfig;
 }
 
 interface RequestContext {
@@ -39,6 +48,7 @@ interface RequestContext {
   readonly fakeWorkers: boolean;
   readonly bus: EventBus;
   readonly supervisor?: Supervisor;
+  readonly sidecar?: SidecarHandle;
 }
 
 function actualPort(server: Server, fallback: number): number {
@@ -89,29 +99,43 @@ export async function startServer(options: ServeOptions): Promise<{
   readonly url: string;
   readonly supervisor: Supervisor | undefined;
   readonly bus: EventBus;
+  readonly sidecar?: SidecarHandle;
   stop: () => Promise<void>;
 }> {
   const computerRoot = options.computerRoot;
+  if (options.wipe) {
+    wipeRuntime(computerRoot, {
+      keepMemory: options.keepMemory,
+      keepSidecarPort: true,
+      wipeRuns: options.wipeRuns === true,
+    });
+  }
   const roster = initComputer(computerRoot);
+  const client = loadClientRuntime(computerRoot);
+  const home = options.config ?? loadOperatorConfig();
+  const merged = overlayOperatorConfig(computerRoot, home, client);
   const host = options.host ?? "127.0.0.1";
-  const port = options.port ?? 8787;
+  const port = options.port ?? merged.port;
   const bus = new EventBus();
-  const config = loadOperatorConfig();
   const fake =
     options.fakeWorkers === true
-      ? startFakeWorkers(computerRoot, roster.bots.map((bot) => bot.slug), async (slug, item) => ({
-          text: `[${slug}] ${item.prompt}`.slice(0, 500),
-          paths: item.paths,
-        }))
+      ? startFakeWorkers(computerRoot, roster.bots.map((bot) => bot.slug), (slug, item) =>
+          executeFakeTurn(computerRoot, slug, item, 8_000),
+        )
       : undefined;
+  const wantSidecar = options.sidecar !== false && fake === undefined && client.sidecar !== undefined;
+  const sidecar = wantSidecar ? await startSidecar(computerRoot, client) : undefined;
+  const lazy = options.lazyWorkers ?? merged.spawnPolicy === "lazy";
+  const autoRoutines = options.autoRoutines ?? client.autoRoutines;
   const supervisor =
     options.workers === false || fake !== undefined
       ? undefined
       : await startSupervisor({
           computerRoot,
-          lazy: options.lazyWorkers ?? false,
+          lazy,
+          autoRoutines,
           bus,
-          config,
+          config: merged,
         });
   const pumps = startPumps(computerRoot, bus);
 
@@ -121,6 +145,7 @@ export async function startServer(options: ServeOptions): Promise<{
       fakeWorkers: fake !== undefined,
       bus,
       supervisor,
+      sidecar,
     });
   });
 
@@ -137,10 +162,12 @@ export async function startServer(options: ServeOptions): Promise<{
     url,
     supervisor,
     bus,
+    sidecar,
     stop: async (): Promise<void> => {
       pumps.stop();
       fake?.stop();
       await supervisor?.stop();
+      await sidecar?.stop();
       await new Promise<void>((resolve, reject) => {
         server.close((err) => {
           if (err) {
@@ -165,7 +192,7 @@ function attachSse(res: ServerResponse, ctx: RequestContext): void {
     kind: "hello",
     cursor: "h:0",
     resumed: false,
-    snapshot: buildSnapshot(ctx.computerRoot, ctx.fakeWorkers, ctx.supervisor),
+    snapshot: buildSnapshot(ctx.computerRoot, ctx.fakeWorkers, ctx.supervisor, ctx.sidecar),
   };
   res.write(`id: h:0\ndata: ${JSON.stringify(hello)}\n\n`);
   ctx.bus.subscribe(res);
@@ -210,6 +237,7 @@ async function handleRequest(
         fakeWorkers: ctx.fakeWorkers,
         supervisor: ctx.supervisor,
         bus: ctx.bus,
+        sidecar: ctx.sidecar,
       };
       const omb = await handleOmbCompat(method, path, url, body, apiCtx);
       if (omb) {
@@ -233,6 +261,7 @@ async function handleRequest(
         bots: live.bots.length,
         fakeWorkers: ctx.fakeWorkers,
         ui: true,
+        sidecar: ctx.sidecar ? { port: ctx.sidecar.port, owned: ctx.sidecar.owned } : null,
       });
       return;
     }
@@ -458,6 +487,11 @@ async function handleRequest(
     }
 
     if (tryServeStatic(req, res)) {
+      return;
+    }
+
+    if (path.startsWith("/api/")) {
+      sendJson(res, 404, { error: `no ${method} ${path}` });
       return;
     }
 

@@ -208,31 +208,48 @@ export function listReceipts(computerRoot: string): ReceiptRecord[] {
   return reconcileReceipts(computerRoot);
 }
 
+/** Largest delay `setInterval` can take on a 32-bit timer. Monthly is larger. */
+export const MAX_SAFE_INTERVAL_MS = 2_147_483_647;
+
+function clampIntervalMs(ms: number): number {
+  if (!Number.isFinite(ms) || ms < 1) {
+    return 1;
+  }
+  return Math.min(ms, MAX_SAFE_INTERVAL_MS);
+}
+
 export function cadenceToMs(cadence: string): number | undefined {
   const trimmed = cadence.trim().toLowerCase();
+  let raw: number | undefined;
   if (trimmed === "hourly") {
-    return 60 * 60 * 1000;
+    raw = 60 * 60 * 1000;
+  } else if (trimmed === "daily") {
+    raw = 24 * 60 * 60 * 1000;
+  } else if (trimmed === "weekly") {
+    raw = 7 * 24 * 60 * 60 * 1000;
+  } else if (trimmed === "monthly") {
+    raw = 30 * 24 * 60 * 60 * 1000;
+  } else {
+    const every = /^every\s+(\d+)\s*(s|m|h|ms|d)$/.exec(trimmed);
+    if (!every) {
+      return undefined;
+    }
+    const n = Number(every[1]);
+    const unit = every[2];
+    if (unit === "ms") {
+      raw = n;
+    } else if (unit === "s") {
+      raw = n * 1000;
+    } else if (unit === "m") {
+      raw = n * 60 * 1000;
+    } else if (unit === "h") {
+      raw = n * 60 * 60 * 1000;
+    } else if (unit === "d") {
+      raw = n * 24 * 60 * 60 * 1000;
+    }
   }
-  if (trimmed === "daily") {
-    return 24 * 60 * 60 * 1000;
-  }
-  const every = /^every\s+(\d+)\s*(s|m|h|ms)$/.exec(trimmed);
-  if (!every) {
+  if (raw === undefined) {
     return undefined;
   }
-  const n = Number(every[1]);
-  const unit = every[2];
-  if (unit === "ms") {
-    return n;
-  }
-  if (unit === "s") {
-    return n * 1000;
-  }
-  if (unit === "m") {
-    return n * 60 * 1000;
-  }
-  if (unit === "h") {
-    return n * 60 * 60 * 1000;
-  }
-  return undefined;
+  return clampIntervalMs(raw);
 }

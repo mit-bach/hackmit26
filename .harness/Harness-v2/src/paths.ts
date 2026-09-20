@@ -92,6 +92,26 @@ export function receiptDir(computerRoot: string): string {
   return join(harnessRoot(computerRoot), "receipts");
 }
 
+export function piRuntimePath(computerRoot: string, botId: string): string {
+  return join(botDir(computerRoot, botId), "pi-runtime.jsonl");
+}
+
+export function piRpcLogPath(computerRoot: string, botId: string): string {
+  return join(botDir(computerRoot, botId), "pi-rpc.jsonl");
+}
+
 export function piSessionDir(computerRoot: string, botId: string): string {
   return join(botDir(computerRoot, botId), "pi-session");
+}
+
+export function extensionsManifestPath(computerRoot: string): string {
+  return join(harnessRoot(computerRoot), "extensions.json");
+}
+
+export function interceptPath(computerRoot: string): string {
+  return join(harnessRoot(computerRoot), "intercept.json");
+}
+
+export function computerSkillsRoot(computerRoot: string): string {
+  return join(resolve(computerRoot), "skills");
 }

@@ -295,22 +295,41 @@
     {
       "id": "intake",
       "title": "Intake",
-      "members": ["email", "stripe", "bank", "books"]
+      "members": [
+        "email",
+        "stripe",
+        "bank",
+        "books"
+      ]
     },
     {
       "id": "pay",
       "title": "Pay",
-      "members": ["ap", "pay", "ctl-pay"]
+      "members": [
+        "ap",
+        "pay",
+        "ctl-pay"
+      ]
     },
     {
       "id": "cash",
       "title": "Cash",
-      "members": ["apply", "collect", "cash", "ctl-cash"]
+      "members": [
+        "apply",
+        "collect",
+        "cash",
+        "ctl-cash"
+      ]
     },
     {
       "id": "books-close",
       "title": "Books close",
-      "members": ["close", "ctl-books", "story", "audit"]
+      "members": [
+        "close",
+        "ctl-books",
+        "story",
+        "audit"
+      ]
     }
   ],
   "routines": [

@@ -10,7 +10,7 @@
 // re-reads, so notes the bot wrote mid-session show up on the next look.
 // The dialog keeps this mounted while hidden so an unsaved draft survives
 // a visit to another section.
-import { FileText, FolderOpen, RotateCcw, Trash2 } from "lucide-react";
+import { FileText, RotateCcw, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
@@ -21,11 +21,9 @@ import {
   fetchMemoryDoc,
   fetchMemoryJournal,
   fetchMemoryOverview,
-  fileManagerLabel,
   formatBytes,
   journalSource,
   journalSummary,
-  openMemoryLocation,
   relativeTime,
   revertMemoryChange,
   saveMemoryDoc,
@@ -183,16 +181,6 @@ export function MemorySection({ bot, active = true }: { bot: Bot; active?: boole
     }
   };
 
-  const openLocation = async (target: "obsidian" | "folder") => {
-    setError(null);
-    setNotice(null);
-    try {
-      await openMemoryLocation(bot.id, target);
-    } catch (e) {
-      setError(errorText(e));
-    }
-  };
-
   const home = capabilities.host.homeDir;
 
   return (
@@ -200,21 +188,13 @@ export function MemorySection({ bot, active = true }: { bot: Bot; active?: boole
       <div className="rounded-xl bg-card p-4">
         <div className="text-[15px] font-medium text-ink">Memory</div>
         <p className="mt-1 text-[13px] leading-relaxed text-ink-secondary">
-          Notes this bot keeps between tasks. They are plain markdown files in a folder on this computer — open them in any
-          editor, or in Obsidian.
+          Notes this Bot keeps under harness/bots/{bot.id}/memory/. Edit MEMORY.md here. There is no shared memory.
         </p>
         {overview && (
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <span className="min-w-0 flex-1 truncate font-mono text-[12px] text-ink-secondary" title={overview.workspacePath}>
               {shortPath(overview.workspacePath, home)}
             </span>
-            <button type="button" className={buttonCls} onClick={() => void openLocation("obsidian")}>
-              Open in Obsidian
-            </button>
-            <button type="button" className={cn(buttonCls, "inline-flex items-center gap-1.5")} onClick={() => void openLocation("folder")}>
-              <FolderOpen size={14} />
-              {fileManagerLabel(capabilities.host.platform)}
-            </button>
           </div>
         )}
       </div>

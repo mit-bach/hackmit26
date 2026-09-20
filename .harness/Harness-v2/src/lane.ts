@@ -9,7 +9,6 @@ import {
 import {
   isTerminalStatus,
   listHandles,
-  patchHandle,
   readHandle,
   transitionHandle,
 } from "./handle.ts";
@@ -19,7 +18,8 @@ import { appendDailyLog } from "./memory.ts";
 import { appendProtocol } from "./protocol-log.ts";
 import { settleReceiptsForHandle } from "./routines.ts";
 import { appendTranscript } from "./transcript.ts";
-import type { BotRecord, HandleRecord, InboxItem, TurnResult } from "./types.ts";
+import { parseAskPeer } from "./ask-peer.ts";
+import type { BotRecord, HandleRecord, InboxItem, Roster, TurnResult } from "./types.ts";
 
 export interface BoundLane {
   readonly computerRoot: string;
@@ -215,14 +215,6 @@ export function cancelTurn(lane: BoundLane, reason: string): void {
     return;
   }
   const handle = readHandle(lane.computerRoot, lane.bot.id, item.handleId);
-  if (handle && !isTerminalStatus(handle.status) && canCancel(handle.status)) {
-    transitionHandle(lane.computerRoot, lane.bot.id, item.handleId, "cancelled", {
-      result: reason,
-      error: reason,
-    });
-  }
-  settleReceiptsForHandle(lane.computerRoot, item.handleId, "cancelled", reason);
-  markInboxDone(lane.computerRoot, lane.bot.id, item.id);
   const event = appendProtocol(lane.computerRoot, {
     type: "turn.end",
     from: item.from,
@@ -232,6 +224,15 @@ export function cancelTurn(lane: BoundLane, reason: string): void {
     status: "cancelled",
     text: reason,
   });
+  if (handle && !isTerminalStatus(handle.status) && canCancel(handle.status)) {
+    transitionHandle(lane.computerRoot, lane.bot.id, item.handleId, "cancelled", {
+      result: reason,
+      error: reason,
+      seq: event.seq,
+    });
+  }
+  settleReceiptsForHandle(lane.computerRoot, item.handleId, "cancelled", reason);
+  markInboxDone(lane.computerRoot, lane.bot.id, item.id);
   appendTranscript(lane.computerRoot, lane.bot.id, {
     seq: event.seq,
     t: event.t,
@@ -301,13 +302,6 @@ export function completeTurn(lane: BoundLane, result: TurnResult): void {
     return;
   }
   const nextStatus = result.error ? "failed" : "completed";
-  transitionHandle(lane.computerRoot, lane.bot.id, item.handleId, nextStatus, {
-    result: result.text,
-    resultPaths: result.paths,
-    error: result.error,
-  });
-  settleReceiptsForHandle(lane.computerRoot, item.handleId, nextStatus, result.text);
-  markInboxDone(lane.computerRoot, lane.bot.id, item.id);
   const event = appendProtocol(lane.computerRoot, {
     type: "turn.end",
     from: item.from,
@@ -318,7 +312,14 @@ export function completeTurn(lane: BoundLane, result: TurnResult): void {
     text: result.text,
     paths: result.paths,
   });
-  patchHandle(lane.computerRoot, lane.bot.id, item.handleId, { seq: event.seq });
+  transitionHandle(lane.computerRoot, lane.bot.id, item.handleId, nextStatus, {
+    result: result.text,
+    resultPaths: result.paths,
+    error: result.error,
+    seq: event.seq,
+  });
+  settleReceiptsForHandle(lane.computerRoot, item.handleId, nextStatus, result.text);
+  markInboxDone(lane.computerRoot, lane.bot.id, item.id);
   const line = {
     seq: event.seq,
     t: event.t,
@@ -341,9 +342,9 @@ export function failTurn(lane: BoundLane, error: string): void {
   completeTurn(lane, { text: "", paths: [], error });
 }
 
-export function formatWake(item: InboxItem): string {
+export function formatWake(item: InboxItem, roster?: Roster, selfSlug?: string): string {
   const pathLine = item.paths.length > 0 ? `paths: ${item.paths.join(", ")}` : "";
-  return [
+  const lines = [
     "[harness wake]",
     `kind: ${item.kind}`,
     `from: ${item.from}`,
@@ -352,9 +353,17 @@ export function formatWake(item: InboxItem): string {
     pathLine,
     "",
     item.prompt,
-  ]
-    .filter((line) => line.length > 0)
-    .join("\n");
+  ];
+  if (roster && selfSlug && item.kind === "user_dm") {
+    const parsed = parseAskPeer(item.prompt, roster, selfSlug);
+    if (parsed) {
+      lines.push(
+        "",
+        `Required tool: call bot_ask (same as ask_bot) with bot_id=${parsed.slug} and prompt=${JSON.stringify(parsed.question)}. Then report the peer result. These tools are registered. Never say they are missing.`,
+      );
+    }
+  }
+  return lines.filter((line) => line.length > 0).join("\n");
 }
 
 export async function drainOnce(

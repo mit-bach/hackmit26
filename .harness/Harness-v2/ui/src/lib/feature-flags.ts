@@ -1,7 +1,16 @@
 import { t } from "./i18n";
 
+export type TranscriptVerbosity = "compact" | "tools" | "full";
+
 export interface FeatureFlagConfig {
-  features?: { skillAuthoring?: boolean; showToolCalls?: boolean; browser?: boolean; sharedComputers?: boolean; claudeUserMcp?: boolean };
+  features?: {
+    skillAuthoring?: boolean;
+    showToolCalls?: boolean;
+    transcriptVerbosity?: TranscriptVerbosity;
+    browser?: boolean;
+    sharedComputers?: boolean;
+    claudeUserMcp?: boolean;
+  };
   browserEngine?: { kind: "engine" | "unavailable"; reason?: string; installable?: boolean; installing?: boolean; installError?: string };
 }
 
@@ -32,9 +41,20 @@ export function builtInBrowserEnabled(config: FeatureFlagConfig | null | undefin
   return config?.features?.browser === true;
 }
 
-/** Tool-run chips in the transcript. Off by default — the mascot already
- * shows that work is happening. */
+/** How much of the live Pi/Harness turn to put in the chat itself. */
+export function transcriptVerbosity(config: FeatureFlagConfig | null | undefined): TranscriptVerbosity {
+  const value = config?.features?.transcriptVerbosity;
+  if (value === "compact" || value === "tools" || value === "full") {
+    return value;
+  }
+  return showToolCallsEnabled(config) ? "tools" : "compact";
+}
+
+/** Tool-run chips in the transcript. Compact hides them; tools and full show them. */
 export function showToolCallsEnabled(config: FeatureFlagConfig | null | undefined): boolean {
+  const verbosity = config?.features?.transcriptVerbosity;
+  if (verbosity === "compact") return false;
+  if (verbosity === "tools" || verbosity === "full") return true;
   return config?.features?.showToolCalls === true;
 }
 

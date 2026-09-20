@@ -7,7 +7,6 @@ import {
   ChevronRight,
   Bug,
   Copy,
-  Crown,
   MessageSquareReply,
   Monitor,
   Pencil,
@@ -21,9 +20,7 @@ import {
 } from "lucide-react";
 import { WorkingDots } from "@/components/WorkingIndicator";
 import { MessageActions, messageActionClass } from "@/components/MessageActions";
-import { useSpeech } from "@/lib/tts/useSpeech";
 import { useCaptionChrome } from "@/components/DesktopCapabilities";
-import { cachedInput, cachedKnown, contextChip, contextDetail, contextShare, costCaption, formatTokens, formatUsd, freshTokens, hasFiniteCost, lastTurnDetail, usageChip, usageDetail } from "@/lib/usage";
 import {
   api,
   currentTaskBot,
@@ -34,14 +31,13 @@ import {
   openNotificationTarget,
   visibleMessages,
   type Bot,
-  type InstanceInfo,
+  type ConfigStatus,
   type Message,
 } from "@/state/store";
-import { EngineSetup } from "./EngineSetup";
 import { isProviderSafetyBlock, PROVIDER_SAFETY_GUIDANCE, PROVIDER_SAFETY_HELP_URL } from "../../shared/provider-safety";
 import { BotAvatar } from "./Avatar";
 import { TurnPresence } from "./TurnPresence";
-import { showToolCallsEnabled, skillAuthoringEnabled } from "@/lib/feature-flags";
+import { showToolCallsEnabled, skillAuthoringEnabled, transcriptVerbosity, type TranscriptVerbosity } from "@/lib/feature-flags";
 import { normalizeState, stateForBot } from "@/lib/mascot";
 import { peerLine, type PeerLine } from "@/lib/peer-message";
 import { showWorkingDots } from "@/lib/turn-tail";
@@ -59,20 +55,12 @@ import { QuestionCard } from "./QuestionCard";
 import { Composer } from "./Composer";
 import { ChatFindBar } from "./ChatFindBar";
 import { ReplyQuote } from "./ReplyQuote";
-import { ConnectorCard } from "./ConnectorCard";
 import { SecretRequestCard } from "./SecretRequestCard";
 import { hasRoutineExecutionTask, RoutineRunCard } from "./RoutineRunCard";
 import { AttachmentGallery, collectMessageFiles } from "./AttachmentGallery";
-import { ScreenFrame } from "./ScreenFrame";
 import { CompactionChip, DigestChip } from "./DigestChip";
 import { RenameTitle } from "./RenameTitle";
-import { BotActivityPicker, TaskPicker } from "./TaskPicker";
-import { ModelPicker } from "./ModelPicker";
 import { ExportTranscriptMenu } from "./ExportTranscriptMenu";
-
-import { SpeakButton } from "./SpeakButton";
-import { CallButton, CallOverlay } from "./CallView";
-import { effectivePlace, toolPlace, type EffectivePlace } from "@/lib/place";
 import { cn } from "@/lib/cn";
 import { activeLocale, t } from "@/lib/i18n";
 import { COMPACT_BUBBLE } from "@/lib/compact-chip";
@@ -150,12 +138,10 @@ function CopyButton({ text, className }: { text: string; className?: string }) {
 export function ErrorRow({
   message,
   onRetry,
-  setupInstance,
 }: {
   message: string;
   onRetry?: () => void;
-  setupInstance?: InstanceInfo;
-}) {
+}): React.ReactElement {
   return (
     <div className="flex justify-start">
       <div className="w-fit max-w-[min(42rem,78%)] rounded-xl border border-danger/30 bg-danger/10 px-3.5 py-2.5 text-[13.5px] text-danger">
@@ -168,9 +154,6 @@ export function ErrorRow({
             {PROVIDER_SAFETY_GUIDANCE}{" "}
             <a href={PROVIDER_SAFETY_HELP_URL} target="_blank" rel="noreferrer" className="underline">About provider safety checks</a>
           </p>
-        ) : setupInstance &&
-        !(setupInstance.snapshot.state === "available" && setupInstance.snapshot.authenticated !== false) ? (
-          <EngineSetup instance={setupInstance} className="mt-2 text-ink-secondary" />
         ) : (
           onRetry && (
             <button
@@ -301,8 +284,6 @@ function Bubble({
   const mentionPeers = useMemo(() => state.bots.filter((peer) => peer.id !== bot.id), [state.bots, bot.id]);
   const [expanded, setExpanded] = useState(false);
   const [viewRaw, setViewRaw] = useState(false);
-  const speech = useSpeech();
-  const speaking = speech.messageId === message.id && speech.status !== "idle";
   const text = peer ? peer.body : (message.text ?? "");
   const generatedPaths = useMemo(() => message.attachments?.map((attachment) => attachment.path) ?? [], [message.attachments]);
   const linkedFiles = useMemo(() => user ? [] : collectMessageFiles(text, generatedPaths), [user, text, generatedPaths]);
@@ -331,6 +312,14 @@ function Bubble({
   return (
     <div className={cn("group flex w-full flex-col", user ? "animate-msg-in items-end" : "items-start")}>
       {peer && <PeerLabel peer={peer} />}
+      {!user && transcriptVerbosity(state.config) === "full" && Boolean(message.reasoning?.trim()) ? (
+        <div className="mb-2 w-full max-w-[min(42rem,78%)] rounded-lg border border-hairline/40 bg-inset px-3 py-2">
+          <div className="mb-1 text-[11px] font-medium uppercase tracking-wide text-ink-secondary">
+            {t("chat.live.reasoning")}
+          </div>
+          <div className="whitespace-pre-wrap text-[13px] leading-relaxed text-ink-secondary">{message.reasoning}</div>
+        </div>
+      ) : null}
       <div className={cn("flex w-full items-center gap-1.5", user ? "justify-end" : "justify-start")}>
         {user && (
           <MessageActions side="user">
@@ -449,12 +438,9 @@ function Bubble({
           )}
         </div>
         {!user && (
-          <MessageActions side="bot" forceOpen={viewRaw || speaking}>
+          <MessageActions side="bot" forceOpen={viewRaw}>
             {text && <CopyButton text={text} className="opacity-100" />}
             {text && <RawToggleAction active={viewRaw} onToggle={() => setViewRaw((r) => !r)} className="opacity-100" />}
-            {message.kind === "text" && text && !peer && (
-              <SpeakButton text={text} botId={bot.id} messageId={message.id} voiceId={bot.voice} className="opacity-100" />
-            )}
             {isLastBotText && !bot.busy && onRegenerate && (
               <button
                 onClick={onRegenerate}
@@ -558,12 +544,11 @@ function PeerLabel({ peer }: { peer: PeerLine }) {
 }
 
 /** A tool run: spinner while live, check/cross once settled. */
-function ActivityChip({ message, place = "auto" }: { message: Message; place?: EffectivePlace }) {
+function ActivityChip({ message }: { message: Message }): React.ReactElement | null {
   const { state, dispatch } = useStore();
   const tool = message.tool;
   if (!tool) return null;
   if (message.threadRef) return <ThreadChip message={message} />;
-  // bot⇄bot comm chip: opens the channel where the exchange lives
   const comm = message.comm;
   if (comm) {
     const withBot = state.bots.find((b) => b.id === comm.withBotId);
@@ -581,7 +566,7 @@ function ActivityChip({ message, place = "auto" }: { message: Message; place?: E
       </div>
     );
   }
-  return <ToolActivity tool={tool} place={toolPlace(tool.name, place)} />;
+  return <ToolActivity tool={tool} place={null} />;
 }
 
 /** The settled transcript, memoized as one unit: during streaming every
@@ -599,7 +584,6 @@ const MessagesList = memo(function MessagesList({
   lastBotTextId,
   emergingId,
   canRetryLast,
-  engine,
   onStartEdit,
   onCancelEdit,
   onSubmitEdit,
@@ -617,8 +601,6 @@ const MessagesList = memo(function MessagesList({
   lastBotTextId: string | undefined;
   emergingId?: string | null;
   canRetryLast: boolean;
-  /** This bot's engine, for rendering setup help on a `setup` error. */
-  engine: InstanceInfo | undefined;
   onStartEdit: (id: string) => void;
   onCancelEdit: () => void;
   onSubmitEdit: (id: string, text: string) => void;
@@ -630,8 +612,6 @@ const MessagesList = memo(function MessagesList({
   // Finished tool chips become compact runs; settled assistant narration
   // becomes one reversible turn row while the terminal answer stays visible.
   const items = useMemo(() => groupTranscript(messages), [messages, locale]);
-  // Where this conversation works, for the place icon on screen and page tools.
-  const place = effectivePlace(bot, bot.tasks?.find((task) => task.threadId === bot.threadId));
   const newestMessageId = messages.at(-1)?.id;
   const newestUserMessageId = [...messages].reverse().find((message) => message.role === "user")?.id;
   // A search hit inside a folded run has to open it: the fold keeps the
@@ -704,7 +684,7 @@ const MessagesList = memo(function MessagesList({
               <ActivityRun messages={item.messages} forceOpen={item.messages.some((step) => step.id === focusedId)}>
                 {item.messages.map((step) => (
                   <div key={step.id} className="contents" data-mid={step.id}>
-                    <ActivityChip message={step} place={place} />
+                    <ActivityChip message={step} />
                   </div>
                 ))}
               </ActivityRun>
@@ -717,7 +697,11 @@ const MessagesList = memo(function MessagesList({
             case "secret":
               return m.secret ? <SecretRequestCard botId={bot.id} threadId={bot.threadId} message={m} /> : null;
             case "connector":
-              return m.connector ? <ConnectorCard botId={bot.id} threadId={bot.threadId} message={m} /> : null;
+              return m.text ? (
+                <div className="rounded-lg border border-hairline/40 bg-inset px-3 py-2 text-[12.5px] text-ink-secondary">
+                  {m.text}
+                </div>
+              ) : null;
             case "options": {
               // a live permission ask gets the approval box; a structured
               // ask gets the question box; anything else keeps the list
@@ -767,12 +751,11 @@ const MessagesList = memo(function MessagesList({
                   <ErrorRow
                     message={m.tool.name.slice(6).trim()}
                     onRetry={m.id === messages.at(-1)?.id && canRetryLast ? onRegenerate : undefined}
-                    setupInstance={m.tool.setup ? engine : undefined}
                   />
                 );
               }
               if (!showToolCalls && !m.comm && !m.threadRef) return null;
-              return <ActivityChip message={m} place={place} />;
+              return <ActivityChip message={m} />;
             }
             case "digest":
               // the summary of the turn's tool chips: shown under the same setting
@@ -780,7 +763,7 @@ const MessagesList = memo(function MessagesList({
             case "compaction":
               return <CompactionChip message={m} />;
             case "screen":
-              return m.png ? <ScreenFrame png={m.png} mime={m.mime} /> : null;
+              return null;
             default:
               return (
                 <Bubble
@@ -856,6 +839,42 @@ function PinnedBanner({
           <X size={13} />
         </button>}
       </div>
+    </div>
+  );
+}
+
+/** Live Pi stream under the mascot: reasoning and/or assistant text. */
+function LivePiTurn({
+  reasoning,
+  streaming,
+  verbosity,
+}: {
+  reasoning?: string;
+  streaming?: string;
+  verbosity: "compact" | "tools" | "full";
+}): React.ReactElement | null {
+  if (verbosity === "compact") return null;
+  const showReasoning = verbosity === "full" && Boolean(reasoning?.trim());
+  const showText = Boolean(streaming?.trim());
+  if (!showReasoning && !showText) return null;
+  return (
+    <div className="flex w-full flex-col gap-2">
+      {showReasoning ? (
+        <div className="w-full max-w-[720px] rounded-lg border border-hairline/40 bg-inset px-3 py-2">
+          <div className="mb-1 text-[11px] font-medium uppercase tracking-wide text-ink-secondary">
+            {t("chat.live.reasoning")}
+          </div>
+          <div className="whitespace-pre-wrap text-[13px] leading-relaxed text-ink-secondary">{reasoning}</div>
+        </div>
+      ) : null}
+      {showText ? (
+        <div className="w-full max-w-[720px] rounded-2xl bg-card px-3.5 py-2.5 text-[15px] leading-relaxed text-ink">
+          <div className="mb-1 text-[11px] font-medium uppercase tracking-wide text-ink-secondary">
+            {t("chat.live.stream")}
+          </div>
+          <ChatMarkdown text={streaming ?? ""} />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -972,11 +991,17 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
     return attached.images.length > 0 || attached.files.length > 0;
   }, [lastUserMessage]);
 
-  // Mascot while the turn works. Streaming stays invisible — when the reply
-  // is finished, the whole bubble pops in above the mascot.
+  // Live Pi stream is shown according to transcript verbosity. Compact keeps
+  // the mascot; tools/full also render streamed text (and reasoning in full).
   const lastMessage = messages.at(-1);
   const toolInFlight = lastMessage?.kind === "activity" && lastMessage.tool?.ok === undefined;
-  const activityLabel = liveActivityLabel(lastMessage);
+  const verbosity = transcriptVerbosity(state.config);
+  const activityLabel =
+    verbosity === "full" && reasoning
+      ? t("chat.activity.reasoning")
+      : streaming
+        ? t("chat.activity.writing")
+        : liveActivityLabel(lastMessage);
   const waiting = Boolean(
     bot.busy &&
       bot.activity !== "waiting-on-you" &&
@@ -1131,8 +1156,6 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
 
   return (
     <main className="relative flex h-full min-w-0 flex-1 flex-col bg-app">
-      {/* Call mode covers the thread while the bot is on the line */}
-      <CallOverlay bot={bot} />
       {/* Header */}
       <div
         style={headerDragStyle}
@@ -1175,11 +1198,6 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
             className="truncate text-[15px] font-semibold text-ink"
             inputClassName="max-w-[220px] rounded bg-inset px-1.5 py-0.5 text-[15px] font-semibold"
           />
-          {bot.chiefOfStaff && (
-            <span className="flex items-center gap-1 rounded-full bg-accent/12 px-2 py-0.5 text-[11px] font-medium text-accent">
-              <Crown size={11} /> {t("chat.chiefOfStaff")}
-            </span>
-          )}
           {bot.busy && <WorkingDots className="text-ink-secondary" />}
         </div>
         <div
@@ -1206,6 +1224,29 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
             messages={messages}
             botName={bot.name}
           />
+          <select
+            aria-label={t("settings.verbosity.aria")}
+            title={t("settings.verbosity.subtitle")}
+            className="max-w-[168px] shrink-0 rounded-md border border-hairline/40 bg-raised px-2 py-1 text-[12px] text-ink"
+            value={verbosity}
+            onChange={(event) => {
+              const next = event.target.value as TranscriptVerbosity;
+              void api("/api/config", {
+                method: "PUT",
+                body: JSON.stringify({
+                  features: { ...state.config?.features, transcriptVerbosity: next, showToolCalls: next !== "compact" },
+                }),
+              })
+                .then((config) => dispatch({ type: "configStatus", config: config as ConfigStatus }))
+                .catch((cause: unknown) => {
+                  dispatch({ type: "error", message: cause instanceof Error ? cause.message : String(cause) });
+                });
+            }}
+          >
+            <option value="compact">{t("settings.verbosity.compact")}</option>
+            <option value="tools">{t("settings.verbosity.tools")}</option>
+            <option value="full">{t("settings.verbosity.full")}</option>
+          </select>
           {bot.busy && (
             <button
               onClick={() => dispatch({ type: "interrupt", botId: bot.id, threadId: bot.threadId })}
@@ -1219,10 +1260,6 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
               <span className="@max-4xl/chathead:hidden">{t("chat.stop")}</span>
             </button>
           )}
-          <TaskPicker bot={bot} />
-          <UsageChip bot={bot} />
-          {!remoteClient && <ModelPicker key={bot.threadId} bot={bot} threadId={bot.threadId} />}
-          <CallButton bot={bot} />
           <button
             data-tour="computer"
             onClick={() => dispatch({ type: "toggleComputer" })}
@@ -1249,12 +1286,15 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
         </div>
       </div>
 
-      <BotActivityPicker bot={bot} />
-      {routineExecution && <div className="mx-5 mb-2 flex flex-wrap items-center gap-2 rounded-lg border border-hairline/40 bg-inset px-3 py-2 text-[11.5px] text-ink-secondary">
-        <span className="min-w-0 flex-1 truncate">{t("routines.executionDetails", { name: routineExecution.routineName })}</span>
-        {canOpenResults && resultsThreadId && <button type="button" onClick={() => openNotificationTarget(dispatch, { botId: bot.id, threadId: resultsThreadId }, state)} className="rounded px-2 py-1 text-accent hover:bg-raised">{t("routines.results.back")}</button>}
-        <button type="button" onClick={() => dispatch({ type: "showRoutines", section: "logs", routineId: routineExecution.routineId, botId: bot.id })} className="rounded px-2 py-1 hover:bg-raised hover:text-ink">{t("routines.logs")}</button>
-      </div>}
+      {routineExecution && (
+        <div className="mx-5 mb-2 flex flex-wrap items-center gap-2 rounded-lg border border-hairline/40 bg-inset px-3 py-2 text-[11.5px] text-ink-secondary">
+          <span className="min-w-0 flex-1 truncate">{t("routines.executionDetails", { name: routineExecution.routineName })}</span>
+          {canOpenResults && resultsThreadId && (
+            <button type="button" onClick={() => openNotificationTarget(dispatch, { botId: bot.id, threadId: resultsThreadId }, state)} className="rounded px-2 py-1 text-accent hover:bg-raised">{t("routines.results.back")}</button>
+          )}
+          <button type="button" onClick={() => dispatch({ type: "showRoutines", section: "logs", routineId: routineExecution.routineId, botId: bot.id })} className="rounded px-2 py-1 hover:bg-raised hover:text-ink">{t("routines.logs")}</button>
+        </div>
+      )}
       {findOpen && <ChatFindBar threadId={bot.threadId} onClose={() => setFindOpen(false)} />}
 
       {/* Error banner */}
@@ -1350,7 +1390,6 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
             lastBotTextId={lastBotTextId}
             emergingId={popping}
             canRetryLast={!bot.busy && Boolean(lastUserMessage)}
-            engine={state.instances.find((i) => i.instanceId === bot.modelSelection.instanceId)}
             onStartEdit={startEdit}
             onCancelEdit={cancelEdit}
             onSubmitEdit={submitEdit}
@@ -1375,6 +1414,7 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
               </div>
             </div>
           )}
+          <LivePiTurn reasoning={reasoning} streaming={streaming} verbosity={verbosity} />
           <TurnPresence
             avatar={
               // BotAvatar, not a bare MausAvatar: an uploaded profile image
@@ -1450,45 +1490,5 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
       </div>
 
     </main>
-  );
-}
-
-/** What the open task has spent — quiet until the first turn settles.
- * Click opens the bot's settings, where the Usage card has the breakdown. */
-function UsageChip({ bot }: { bot: Bot }) {
-  const { state, dispatch } = useStore();
-  const usage = bot.tasks?.find((t) => t.threadId === bot.threadId)?.usage;
-  const text = usage ? usageChip(usage) : "";
-  if (!usage || !text) return null;
-  const billing = state.instances.find((i) => i.instanceId === bot.modelSelection.instanceId)?.snapshot.billing;
-  const share = contextShare(usage);
-  const detail = [
-    usage.turns === 1 ? t("chat.usage.turnsOne") : t("chat.usage.turnsMany", { count: usage.turns }),
-    usageDetail(usage),
-    lastTurnDetail(usage),
-    contextDetail(usage),
-    // the whole thread rides along on every turn, so most of "in" is the
-    // model re-reading what it already saw — say so, or the figure reads as
-    // a bug (issue #527); past 80% of the window the fix is a new thread
-    share?.tone === "danger" ? t("chat.usage.contextNudge") : null,
-    cachedInput(usage) > 0 ? (cachedKnown(usage) ? t("chat.usage.newNote") : t("chat.usage.cachedNote")) : null,
-    hasFiniteCost(usage.costUsd) ? `${formatUsd(usage.costUsd)} ${costCaption(billing)}` : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
-  // folded: one figure — cost when the engine reports one, else new tokens
-  const short = hasFiniteCost(usage.costUsd) ? formatUsd(usage.costUsd) : formatTokens(cachedKnown(usage) ? freshTokens(usage) : usage.input + usage.output);
-  const ctx = contextChip(usage);
-  return (
-    <button
-      onClick={() => dispatch({ type: "toggleSettings", open: true, section: "usage" })}
-      className="whitespace-nowrap rounded-full border border-hairline/40 bg-raised/60 px-2.5 py-1 text-[12px] tabular-nums text-ink-secondary hover:bg-raised hover:text-ink @max-4xl/chathead:px-2"
-      title={detail}
-      data-testid="usage-chip"
-    >
-      <span className="@max-4xl/chathead:hidden">{text}</span>
-      <span className="hidden @max-4xl/chathead:inline">{short}</span>
-      {ctx && <span className={cn("ml-1.5 @max-4xl/chathead:hidden", share?.tone === "danger" ? "text-danger" : share?.tone === "warning" ? "text-warning" : "")} data-testid="usage-context">{ctx}</span>}
-    </button>
   );
 }

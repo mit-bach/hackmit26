@@ -5,7 +5,7 @@ import type { BotRecord, Roster } from "./types.ts";
 export function identityBlock(bot: BotRecord, roster: Roster): string {
   const others = roster.bots
     .filter((peer) => peer.id !== bot.id)
-    .map((peer) => `- ${peer.slug} (${peer.id}): ${peer.purpose}`)
+    .map((peer) => `- ${peer.slug} (${peer.id}, ${peer.name}): ${peer.purpose}`)
     .join("\n");
   return [
     `You are the Bot ${bot.name}.`,
@@ -31,8 +31,9 @@ export function identityBlock(bot: BotRecord, roster: Roster): string {
     others.length > 0 ? others : "(you are the only Bot)",
     "",
     "Protocol:",
-    "- bot_send_prompt accepts work and returns a Handle. That is not a result.",
-    "- Do not tell the Operator a teammate finished unless bot_await_turn says done true.",
+    "- When the Operator asks you to ask another Bot, call bot_ask (same as ask_bot) with that Bot's slug and the question. Then report the peer result.",
+    "- bot_ask / ask_bot, bot_send_prompt, and bot_await_turn are always registered on a bound Bot. Never say they are missing, disabled, or not wired.",
+    "- bot_send_prompt accepts work and returns a Handle. That is not a result. Call bot_await_turn until done is true.",
     "- blocking mode is forbidden. Peer on_busy is queue. Operator DMs preempt.",
     "- Point at paths on the Computer. Do not dump Memory or transcripts into a handoff.",
   ].join("\n");

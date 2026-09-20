@@ -1,0 +1,19 @@
+{
+  "id": "h_cfc3a596-d5b0-4e05-88a9-ffa9fe28b9fe",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Call call_connected_tool name=list_email_candidates args={\"period\":\"2026-09\"}. Reply with each message_id, from, and subject. Do not skip the tool call.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T03:28:15.404Z",
+  "updatedAt": "2026-09-20T03:28:22.091Z",
+  "result": "**MSG-E01** · from: no-reply@amazon.com · subject: Your AWS invoice INV-9001 is ready  \n**MSG-E02** · from: news@slack.com · subject: New Slack AI features — limited time for Business+ customers  \n**MSG-E03** · from: sales@acmesupplies.example · subject: Quote Q-8891 for additional standing desks  \n**MSG-E04** · from: billing@quokkalabs.example · subject: Invoice QL-4412 from Quokka Labs",
+  "resultPaths": [],
+  "seq": 10
+}

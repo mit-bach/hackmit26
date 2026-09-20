@@ -1,0 +1,25 @@
+{
+  "invoices": [
+    {
+      "invoice_id": "ING-001",
+      "vendor": "Acme Supplies",
+      "po_id": "PO-101",
+      "amount": 12450.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "ACM-INBOX-1001",
+      "description": "Acme Supplies ACM-INBOX-1001",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-001",
+      "source_thread_id": "THR-clean-attachment",
+      "source_trace_id": "INBOX-MSG-INBOX-001",
+      "source_attachment_hashes": [
+        "e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7"
+      ]
+    }
+  ]
+}

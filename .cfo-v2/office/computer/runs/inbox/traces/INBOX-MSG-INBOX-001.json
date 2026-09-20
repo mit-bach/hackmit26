@@ -1,0 +1,180 @@
+{
+  "trace_id": "INBOX-MSG-INBOX-001",
+  "sender_agent": "Counterparty Message Agent",
+  "receiver_agent": "Finance Inbox Agent",
+  "sender_run_id": "RUN-CP-MSG-INBOX-001",
+  "receiver_run_id": "RUN-IB-MSG-INBOX-001",
+  "message_id": "MSG-INBOX-001",
+  "thread_id": "THR-clean-attachment",
+  "attachment_hashes": [
+    "e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7"
+  ],
+  "classification": {
+    "classification": "VENDOR_INVOICE",
+    "selected_action": "CREATE_AP_INVOICE",
+    "confidence": 0.9,
+    "document_ids": [
+      "ACM-INBOX-1001",
+      "PO-101"
+    ],
+    "counterparty_name": "Acme Supplies",
+    "vendor_id": "Acme Supplies",
+    "invoice_number": "ACM-INBOX-1001",
+    "po_number": "PO-101",
+    "amount_cents": 1245000,
+    "currency": "USD",
+    "invoice_date": "2026-09-18",
+    "due_date": "2026-10-18",
+    "evidence_refs": [
+      "message:MSG-INBOX-001",
+      "attachment:ACM-INBOX-1001.pdf"
+    ],
+    "missing_fields": [],
+    "reason_codes": [],
+    "rationale": "Document contains vendor, invoice number, invoice date, and amount due",
+    "dispatch_target": "invoice_ingestion.workflow.ingest_candidates"
+  },
+  "selected_action": "CREATE_AP_INVOICE",
+  "extracted_fields": {
+    "vendor": "Acme Supplies",
+    "invoice_number": "ACM-INBOX-1001",
+    "po_number": "PO-101",
+    "amount_cents": 1245000,
+    "currency": "USD",
+    "invoice_date": "2026-09-18",
+    "due_date": "2026-10-18"
+  },
+  "validation_errors": [],
+  "validation_warnings": [],
+  "duplicate_check": null,
+  "called_workflow": "invoice_ingestion.workflow.ingest_candidates+tools.collect_case_evidence",
+  "record_ids": [
+    "ING-001"
+  ],
+  "invoice_id": "ING-001",
+  "match_status": "MATCHED",
+  "final_status": "CREATED",
+  "reason_codes": [
+    "AP_INVOICE_CREATED"
+  ],
+  "decision_summary": "Document contains vendor, invoice number, invoice date, and amount due",
+  "attempts": [
+    {
+      "attempt": 1,
+      "message_id": "MSG-INBOX-001",
+      "classification": {
+        "classification": "VENDOR_INVOICE",
+        "selected_action": "CREATE_AP_INVOICE",
+        "confidence": 0.9,
+        "document_ids": [
+          "ACM-INBOX-1001",
+          "PO-101"
+        ],
+        "counterparty_name": "Acme Supplies",
+        "vendor_id": "Acme Supplies",
+        "invoice_number": "ACM-INBOX-1001",
+        "po_number": "PO-101",
+        "amount_cents": 1245000,
+        "currency": "USD",
+        "invoice_date": "2026-09-18",
+        "due_date": "2026-10-18",
+        "evidence_refs": [
+          "message:MSG-INBOX-001",
+          "attachment:ACM-INBOX-1001.pdf"
+        ],
+        "missing_fields": [],
+        "reason_codes": [],
+        "rationale": "Document contains vendor, invoice number, invoice date, and amount due",
+        "dispatch_target": "invoice_ingestion.workflow.ingest_candidates"
+      },
+      "dispatch": {
+        "action": "CREATE_AP_INVOICE",
+        "status": "CREATED",
+        "dispatch_target": "invoice_ingestion.workflow.ingest_candidates",
+        "record_ids": [
+          "ING-001"
+        ],
+        "invoice_id": "ING-001",
+        "canonical_id": "ING-001",
+        "match_status": "MATCHED",
+        "match_exceptions": [],
+        "ready_for_payment": false,
+        "duplicate_of": null,
+        "validation_errors": [],
+        "validation_warnings": [],
+        "reason_codes": [
+          "AP_INVOICE_CREATED"
+        ],
+        "called_workflow": "invoice_ingestion.workflow.ingest_candidates+tools.collect_case_evidence",
+        "mutation": true,
+        "details": {
+          "ingestion_status": "new_invoice",
+          "forwarded_to_ap": true,
+          "amount": 12450.0
+        }
+      },
+      "status": "CREATED",
+      "reason_codes": [
+        "AP_INVOICE_CREATED"
+      ],
+      "timestamp": "2026-09-20T03:19:03Z"
+    }
+  ],
+  "tool_calls": [
+    {
+      "agent": "Counterparty Message Agent",
+      "tool": "send_inbox_message",
+      "input_summary": "MSG-INBOX-001",
+      "output_summary": "delivered",
+      "timestamp": "2026-09-18T10:00:00Z"
+    },
+    {
+      "agent": "Finance Inbox Agent",
+      "tool": "classify_inbox_message",
+      "input_summary": "MSG-INBOX-001",
+      "output_summary": "VENDOR_INVOICE",
+      "timestamp": "2026-09-20T03:19:03Z"
+    },
+    {
+      "agent": "Finance Inbox Agent",
+      "tool": "dispatch_inbox_action",
+      "input_summary": "CREATE_AP_INVOICE",
+      "output_summary": "CREATED",
+      "timestamp": "2026-09-20T03:19:03Z"
+    }
+  ],
+  "sender_skills": {
+    "role": "Counterparty Message Agent",
+    "skills": [],
+    "load_errors": []
+  },
+  "receiver_skills": {
+    "role": "Finance Inbox Agent",
+    "skills": [
+      {
+        "name": "inbox-triage",
+        "path": "skills/inbox-triage/SKILL.md",
+        "content_hash": "5b39aff8f4f4e1ac08e9890922051c504d7b9edcb7c6d8c3612666d0a794832b",
+        "injected": true
+      },
+      {
+        "name": "invoice-source-identification",
+        "path": "skills/invoice-source-identification/SKILL.md",
+        "content_hash": "2d87d5be9293577d3eff9bd49646656526479933dddcabcdbf24177a226e1a93",
+        "injected": true
+      },
+      {
+        "name": "invoice-field-interpretation",
+        "path": "skills/invoice-field-interpretation/SKILL.md",
+        "content_hash": "d36d4f3d39d71f7b8782ba47068d87181b2c5d48e7cf0d3051ca923a0c05f68b",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "timestamps": {
+    "received_at": "2026-09-18T10:00:00Z",
+    "processed_at": "2026-09-20T03:19:03Z"
+  },
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/computer/runs/inbox/traces/INBOX-MSG-INBOX-001.json"
+}

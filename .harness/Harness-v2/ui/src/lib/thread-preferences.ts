@@ -17,12 +17,10 @@ function storage(): Storage | undefined {
 }
 
 function showThreads(): boolean {
-  if (sessionChoice !== undefined) return sessionChoice;
-  try {
-    return storage()?.getItem(SHOW_THREADS_KEY) !== "0";
-  } catch {
-    return true;
-  }
+  // Harness Bots have one transcript.jsonl. Task threads are a foreign
+  // OpenMausBot product; this preference must not resurrect them from
+  // leftover localStorage.
+  return false;
 }
 
 function notify() {
@@ -49,16 +47,16 @@ function subscribe(listener: () => void): () => void {
   };
 }
 
-export function setShowThreads(enabled: boolean): void {
-  sessionChoice = enabled;
+export function setShowThreads(_enabled: boolean): void {
+  sessionChoice = false;
   try {
-    storage()?.setItem(SHOW_THREADS_KEY, enabled ? "1" : "0");
+    storage()?.setItem(SHOW_THREADS_KEY, "0");
   } catch {
-    // The visible setting still changes for this session when storage is full.
+    // private mode
   }
   notify();
 }
 
 export function useShowThreads(): boolean {
-  return useSyncExternalStore(subscribe, showThreads, () => true);
+  return useSyncExternalStore(subscribe, showThreads, () => false);
 }
