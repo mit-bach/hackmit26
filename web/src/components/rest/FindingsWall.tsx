@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { statusTone } from "../../api";
 import { formatControlResult, formatStatus } from "../../copy";
-import { Pill } from "../../layout/Shell";
 import { TraceIds } from "../Explain";
 import { asRecord, readString, readStringList } from "./kernel";
 
@@ -175,7 +173,6 @@ export function FindingsWall(props: FindingsWallProps): JSX.Element {
             >
               <span className="rest-finding-top">
                 <strong>{title}</strong>
-                <Pill tone={statusTone(item.severity || item.result)}>{formatStatus(item.severity || item.result)}</Pill>
               </span>
               <span className="rest-finding-result">{formatControlResult(item.severity || item.result || item.status)}</span>
             </button>

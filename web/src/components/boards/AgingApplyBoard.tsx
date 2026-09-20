@@ -47,6 +47,7 @@ export interface AgingApplyBoardProps {
   readonly applyDecision: string;
   readonly collectRan: boolean;
   readonly collectionActions: readonly CollectionChip[];
+  readonly collectionNote?: string;
 }
 
 export function agingSegments(data: unknown): readonly AgingSegment[] {
@@ -175,6 +176,7 @@ export function AgingApplyBoard(props: AgingApplyBoardProps): JSX.Element {
     applyDecision,
     collectRan,
     collectionActions,
+    collectionNote,
   } = props;
   const segments = agingSegments(data);
   const payment = featuredPayment(data);
@@ -197,8 +199,8 @@ export function AgingApplyBoard(props: AgingApplyBoardProps): JSX.Element {
               onClick={() => onSelectBucket(seg.key)}
             >
               <span className="mono pay-aging-key">{seg.key}</span>
-              <span className="pay-aging-label">{formatAgingBucket(seg.key)}</span>
-              <span className="num pay-aging-amt">{usd(seg.amount)}</span>
+              {seg.widthPct >= 10 ? <span className="pay-aging-label">{formatAgingBucket(seg.key)}</span> : null}
+              {seg.widthPct >= 8 ? <span className="num pay-aging-amt">{usd(seg.amount)}</span> : null}
             </button>
           ))}
         </div>
@@ -274,7 +276,7 @@ export function AgingApplyBoard(props: AgingApplyBoardProps): JSX.Element {
                 </span>
               ))
             ) : (
-              <span className="muted">No collection action returned.</span>
+              <span className="muted">{collectionNote || "No collection action returned."}</span>
             )}
           </div>
           <p className="pay-collect-caption">Outbound mailbox is not attached on the live roster.</p>

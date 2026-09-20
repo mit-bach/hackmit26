@@ -29,7 +29,7 @@ test("draws 13 polyline points when weeks has 13", () => {
   render(<ForecastLine weeks={makeWeeks(13)} />);
   const svg = screen.getByTestId("forecast-line");
   expect(svg.querySelector("polyline")).not.toBeNull();
-  expect(svg.querySelectorAll("circle").length).toBe(13);
+  expect(svg.querySelectorAll("circle.month-line-point").length).toBe(13);
 });
 
 test("clicking a point selects that week", () => {

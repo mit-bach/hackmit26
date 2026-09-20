@@ -32,11 +32,11 @@ interface Point {
 }
 
 const VIEW_W = 960;
-const VIEW_H = 380;
+const VIEW_H = 400;
 const PAD_L = 78;
 const PAD_R = 36;
 const PAD_T = 36;
-const PAD_B = 52;
+const PAD_B = 68;
 
 function cx(...parts: Array<string | false | undefined>): string {
   return parts.filter(Boolean).join(" ");
@@ -150,7 +150,7 @@ export function ForecastLine(props: ForecastLineProps): JSX.Element {
         <text className="month-line-axis-title" x={16} y={VIEW_H / 2} transform={`rotate(-90 16 ${VIEW_H / 2})`}>
           Ending cash (USD)
         </text>
-        <text className="month-line-axis-title" x={VIEW_W / 2} y={VIEW_H - 8}>
+        <text className="month-line-axis-title" x={PAD_L + innerW} y={VIEW_H - 10} textAnchor="end">
           Week
         </text>
         <line className="month-line-axis" x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={PAD_T + innerH} />
@@ -177,6 +177,21 @@ export function ForecastLine(props: ForecastLineProps): JSX.Element {
           </text>
         ) : null}
         {points.map((point, index) => {
+          const label = formatWeekDate(point.week.week_end || point.week.week_start);
+          return (
+            <text
+              key={`x-${point.week.week_start || index}`}
+              className="month-line-x"
+              x={point.x}
+              y={PAD_T + innerH + 16}
+              textAnchor="end"
+              transform={`rotate(-36 ${point.x} ${PAD_T + innerH + 16})`}
+            >
+              {label}
+            </text>
+          );
+        })}
+        {points.map((point, index) => {
           const selected = selectedWeekStart === point.week.week_start;
           const label = formatWeekDate(point.week.week_end || point.week.week_start);
           return (
@@ -196,21 +211,13 @@ export function ForecastLine(props: ForecastLineProps): JSX.Element {
                 }
               }}
             >
+              <circle className="month-line-hit-pad" cx={point.x} cy={point.y} r={12} />
               <circle
                 className={cx("month-line-point", selected && "active", point.miss && "miss")}
                 cx={point.x}
                 cy={point.y}
                 r={selected ? 6 : 4.5}
               />
-              <text
-                className="month-line-x"
-                x={point.x}
-                y={PAD_T + innerH + 16}
-                textAnchor="end"
-                transform={`rotate(-36 ${point.x} ${PAD_T + innerH + 16})`}
-              >
-                {label}
-              </text>
               {point.miss && missId ? (
                 <text className="month-line-miss-label" x={point.x} y={point.y - 12} textAnchor="middle">
                   {missId}

@@ -1,5 +1,5 @@
 import { usd } from "../../api";
-import { explainCashMatch, formatMatchType } from "../../copy";
+import { explainCashMatch } from "../../copy";
 
 export const NORTHSTAR_TXN = "TXN-2026-09-015";
 export const NORTHSTAR_LEDGER = "GL-AR-NS";
@@ -125,11 +125,10 @@ export function pairKind(matchType: string, bankId: string, status: string): Pai
   if (bankId === HELIOS_TXN || matchType === "FEE_NETTED") {
     return "explained";
   }
-  if (
-    matchType === "UNMATCHED_BANK" ||
-    matchType === "UNMATCHED_LEDGER" ||
-    status === "HUMAN_REVIEW"
-  ) {
+  if (matchType === "EXACT_MATCH" || matchType === "GROUPED_MATCH" || matchType === "PROVIDER_PAYOUT") {
+    return "matched";
+  }
+  if (matchType === "UNMATCHED_BANK" || matchType === "UNMATCHED_LEDGER" || status === "HUMAN_REVIEW") {
     return "unexplained";
   }
   return "matched";
@@ -427,7 +426,6 @@ export function PairingLanes(props: PairingLanesProps): JSX.Element {
       {selected && story ? (
         <p className="cash-pair-caption">
           <span className="mono">{selected.bank.id}</span> {story.title}
-          {selected.matchType ? <span className="muted"> · {formatMatchType(selected.matchType)}</span> : null}
         </p>
       ) : null}
     </div>

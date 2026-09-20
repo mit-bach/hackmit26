@@ -194,10 +194,16 @@ export default function Cash(): JSX.Element {
   );
 
   useEffect(() => {
-    if (!pairs.some((pair) => pair.id === selectedId)) {
-      const northstar = pairs.find((pair) => pair.bank.id === NORTHSTAR_TXN);
-      setSelectedId(northstar?.id ?? pairs[0]?.id ?? NORTHSTAR_TXN);
+    if (pairs.some((pair) => pair.id === selectedId)) {
+      return;
     }
+    const byBank = pairs.find((pair) => pair.bank.id === selectedId);
+    if (byBank) {
+      setSelectedId(byBank.id);
+      return;
+    }
+    const northstar = pairs.find((pair) => pair.bank.id === NORTHSTAR_TXN);
+    setSelectedId(northstar?.id ?? pairs[0]?.id ?? NORTHSTAR_TXN);
   }, [pairs, selectedId]);
 
   const selected = pairs.find((pair) => pair.id === selectedId) ?? pairs[0];

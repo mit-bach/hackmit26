@@ -130,6 +130,18 @@ export function collectionChips(result: unknown): readonly CollectionChip[] {
   return chips;
 }
 
+export function collectionBlockReason(result: unknown): string | undefined {
+  const inner = workflowInner(result);
+  if (!inner) {
+    return undefined;
+  }
+  const nested = isRecord(inner.result) ? inner.result : inner;
+  if (nested.blocked !== true) {
+    return undefined;
+  }
+  return str(nested.block_reason);
+}
+
 function decisionRows(value: unknown, depth = 0): Array<Record<string, unknown>> {
   if (depth > 8) {
     return [];

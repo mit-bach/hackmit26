@@ -8,6 +8,7 @@ import {
   type AgingBucketKey,
   appliedInvoiceIds,
   asList,
+  collectionBlockReason,
   collectionChips,
   decisionToken,
   isRecord,
@@ -61,6 +62,7 @@ export default function AR(): JSX.Element {
   const appliedIds = applyRan ? appliedInvoiceIds(result) : [];
   const applyDecision = applyRan ? decisionToken(result) : "not run";
   const actions = collectRan ? collectionChips(result) : [];
+  const collectNote = collectRan ? collectionBlockReason(result) : undefined;
   const payment = featuredPayment(data);
   const featured = isRecord(data) && isRecord(data.featured_payment) ? data.featured_payment : undefined;
   const remittance = featured?.payment;
@@ -94,6 +96,7 @@ export default function AR(): JSX.Element {
         applyDecision={applyDecision}
         collectRan={collectRan}
         collectionActions={actions}
+        collectionNote={collectNote}
       />
       <div className="pay-run">
         <RunBar

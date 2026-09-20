@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { AgingApplyBoard, agingSegments, competingInvoices, featuredPayment, invoiceIdsInBucket } from "./AgingApplyBoard";
+import { collectionBlockReason } from "./pay-util";
 
 const sample = {
   outstanding: 10000,
@@ -89,6 +90,33 @@ test("collect chips mark SEND as draft and do not say email sent", () => {
   expect(screen.getByText("Outbound mailbox is not attached on the live roster.")).toBeInTheDocument();
   expect(container.textContent?.toLowerCase()).not.toMatch(/email sent/);
   expect(container.textContent?.toLowerCase()).not.toMatch(/sent the collection/);
+});
+
+test("collectionBlockReason reads Kernel blocked copy", () => {
+  expect(
+    collectionBlockReason({
+      result: { result: { blocked: true, block_reason: "Handle apply first." } },
+    })
+  ).toBe("Handle apply first.");
+  expect(collectionBlockReason({ result: { decisions: [] } })).toBeUndefined();
+});
+
+test("collect blocked reason is Kernel copy, not a send", () => {
+  const { container } = render(
+    <AgingApplyBoard
+      data={sample}
+      selectedBucket={null}
+      onSelectBucket={() => undefined}
+      applyRan={false}
+      appliedIds={[]}
+      applyDecision="not run"
+      collectRan={true}
+      collectionActions={[]}
+      collectionNote="Apply has not drained new deposits for this as-of."
+    />
+  );
+  expect(screen.getByText(/Apply has not drained new deposits/i)).toBeInTheDocument();
+  expect(container.textContent?.toLowerCase()).not.toMatch(/email sent/);
 });
 
 test("clicking CURRENT lists invoice id chips", () => {

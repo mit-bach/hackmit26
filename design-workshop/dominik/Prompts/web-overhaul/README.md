@@ -2,7 +2,9 @@
 
 Operator: Billy. These are spawn-ready briefs for **separate** Cursor agents. Do not paste them into one agent.
 
-Prompt **01 is already in flight**. Do not respawn it. Do not edit `01-FLOWPLAY-AND-HOME.md`.
+Prompts **01–08 already ran**. Do not respawn them to rebuild the site.
+
+The live gap is **first paint**: `/ap`, `/stripe`, and `/forecast` look empty/$0/Missing until Kernel GET lands. Spawn **09** only if you want that bind pass. Do not turn 02–08 back on.
 
 The first remaining-agent pack asked implementers to keep `DemoLayout` and add a board on top. That was wrong. The current site is one Kernel console printed on almost every route. The remaining prompts **replace those pages**.
 
@@ -14,8 +16,8 @@ New agent. Working directory: repo root `hackmit26`.
 
 ## Spawn order
 
-1. **01** — already running (FlowPlay + Home event board).
-2. Spawn **02 through 08 in parallel** as soon as `web/src/components/FlowPlay.tsx` exists.
+1. **01–08** — done (see agent inventory in the parent chat).
+2. Spawn **[09-VISUAL-BIND.md](09-VISUAL-BIND.md)** only. Visual verification after GET. Do not rebuild desks.
 
 They do not share page files. `styles.css` is append-only with named markers. `copy.ts` is Prompt **07** only.
 

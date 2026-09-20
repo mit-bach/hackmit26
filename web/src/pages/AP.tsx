@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { get } from "../api";
 import { BeforeAfterDiff, ProcessPanel, ProvenanceLinks, SourceArtifactViewer } from "../components/Demo";
 import { FlowPlay, type FlowEdge, type FlowNode, type FlowStep } from "../components/FlowPlay";
@@ -42,6 +42,7 @@ export default function AP(): JSX.Element {
   const [rows, setRows] = useState<unknown[]>([]);
   const [detail, setDetail] = useState<unknown>(null);
   const [selectedId, setSelectedId] = useState(DEFAULT_AP_ID);
+  const requestedId = useRef(DEFAULT_AP_ID);
   const { running, result, error, run } = useWorkflow();
 
   useEffect(() => {
@@ -51,12 +52,17 @@ export default function AP(): JSX.Element {
   }, [result]);
 
   async function open(id: string): Promise<void> {
+    requestedId.current = id;
     setSelectedId(id);
     try {
       const row = await get(`/api/invoices/${id}`);
-      setDetail(row);
+      if (requestedId.current === id) {
+        setDetail(row);
+      }
     } catch {
-      setDetail(null);
+      if (requestedId.current === id) {
+        setDetail(null);
+      }
     }
   }
 

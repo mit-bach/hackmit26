@@ -78,12 +78,16 @@ export function OfficeGraph({ selected, onSelect }: OfficeGraphProps): JSX.Eleme
       applyGraphChrome(root, selected, showAll);
     };
     apply();
+    const frame = window.requestAnimationFrame(apply);
     if (typeof MutationObserver === "undefined") {
-      return undefined;
+      return () => window.cancelAnimationFrame(frame);
     }
     const observer = new MutationObserver(apply);
     observer.observe(root, { childList: true, subtree: true });
-    return () => observer.disconnect();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [selected, showAll]);
 
   function handleGraphClick(event: MouseEvent<HTMLDivElement>): void {

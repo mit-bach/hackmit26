@@ -70,8 +70,8 @@ const JOIN_X: Record<SheetKind, number> = {
 };
 
 const JOIN_Y: Record<JoinField, number> = {
-  amount: 58,
-  qty: 76,
+  amount: 27,
+  qty: 41,
 };
 
 export function parseRailRows(rows: readonly unknown[]): InvoiceRailRow[] {
@@ -357,7 +357,7 @@ function DuplicateStage(props: {
       <SheetCard sheet={sheetFromRecord("invoice", a)} />
       <SheetCard sheet={sheetFromRecord("invoice", b)} />
       <div className="pay-stamp pay-stamp-dup">
-        <Pill tone="bad">{formatDecision(decision)}</Pill>
+        <Pill tone="bad">{stampLabel(decision)}</Pill>
       </div>
     </div>
   );
@@ -394,7 +394,7 @@ export function MatchBoard(props: MatchBoardProps): JSX.Element {
       </aside>
       <div className="pay-stage">
         <div className="pay-stamp">
-          <span className={`pill pay-stamp-pill ${decisionTone(decision)}`}>{formatDecision(decision)}</span>
+          <span className={`pill pay-stamp-pill ${decisionTone(decision)}`}>{stampLabel(decision)}</span>
         </div>
         {pair ? (
           <DuplicateStage a={pair.a} b={pair.b} decision={decision} />
@@ -412,6 +412,22 @@ export function MatchBoard(props: MatchBoardProps): JSX.Element {
       </div>
     </div>
   );
+}
+
+function stampLabel(decision: string): string {
+  const token = decision.trim();
+  const upper = token.toUpperCase();
+  if (
+    upper === "APPROVE" ||
+    upper === "HOLD" ||
+    upper === "REJECT" ||
+    upper === "AUTO_APPLY" ||
+    upper === "HUMAN_REVIEW" ||
+    upper === "UNAPPLIED"
+  ) {
+    return formatDecision(token);
+  }
+  return formatStatus(token);
 }
 
 function decisionTone(decision: string): string {

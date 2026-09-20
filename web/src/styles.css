@@ -1322,6 +1322,8 @@ table.diff tr.changed td:last-child { color: var(--brass); }
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+  max-height: 520px;
+  overflow-y: auto;
 }
 .pay-rail-item {
   display: flex;
@@ -1415,6 +1417,11 @@ table.diff tr.changed td:last-child { color: var(--brass); }
   min-height: 260px;
   margin-top: 0;
   position: relative;
+  color: #1c1710;
+}
+.pay-sheet .mono,
+.pay-sheet .num {
+  color: #1c1710;
 }
 .pay-sheet-missing {
   background: transparent;
@@ -1496,7 +1503,8 @@ table.diff tr.changed td:last-child { color: var(--brass); }
 .pay-aging-bar {
   display: flex;
   width: 100%;
-  min-height: 72px;
+  height: 76px;
+  min-height: 76px;
   border: 1px solid var(--line);
   border-radius: 8px;
   overflow: hidden;
@@ -1508,7 +1516,9 @@ table.diff tr.changed td:last-child { color: var(--brass); }
   justify-content: center;
   align-items: flex-start;
   gap: 2px;
-  min-width: 0;
+  min-width: 28px;
+  height: 100%;
+  overflow: hidden;
   padding: 8px 10px;
   border: 0;
   border-right: 1px solid var(--line);
@@ -1545,7 +1555,9 @@ table.diff tr.changed td:last-child { color: var(--brass); }
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 10px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
 }
 .pay-chip {
   padding: 2px 8px;
@@ -1689,6 +1701,8 @@ table.diff tr.changed td:last-child { color: var(--brass); }
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-height: 480px;
+  overflow: auto;
 }
 .cash-pair {
   width: 100%;
@@ -2210,7 +2224,7 @@ table.diff tr.changed td:last-child { color: var(--brass); }
 }
 .month-line-svg {
   width: 100%;
-  height: 380px;
+  height: 400px;
   display: block;
 }
 .month-line-axis {
@@ -2246,6 +2260,7 @@ table.diff tr.changed td:last-child { color: var(--brass); }
 .month-line-area {
   fill: var(--ok-bg);
   stroke: none;
+  pointer-events: none;
 }
 .month-line-poly {
   fill: none;
@@ -2253,6 +2268,7 @@ table.diff tr.changed td:last-child { color: var(--brass); }
   stroke-width: 2;
   stroke-linejoin: round;
   stroke-linecap: round;
+  pointer-events: none;
 }
 .month-line-point {
   fill: var(--surface);
@@ -2274,8 +2290,12 @@ table.diff tr.changed td:last-child { color: var(--brass); }
 .month-line-hit {
   cursor: pointer;
 }
-.month-line-hit:focus-visible {
-  outline: 2px solid var(--brass);
+.month-line-hit-pad {
+  fill: transparent;
+  stroke: none;
+}
+.month-line-hit:focus-visible .month-line-point {
+  stroke: var(--brass);
 }
 .month-line-toolbar {
   display: flex;
