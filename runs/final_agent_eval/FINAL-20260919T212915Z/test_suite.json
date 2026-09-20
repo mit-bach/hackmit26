@@ -1,5 +1,0 @@
-{
-  "command": "python -m pytest tests/",
-  "run_1": {"passed": 440, "failed": 0},
-  "run_2": {"passed": 440, "failed": 0}
-}

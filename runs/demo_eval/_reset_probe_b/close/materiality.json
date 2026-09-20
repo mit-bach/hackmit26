@@ -1,5 +1,0 @@
-{
-  "close_materiality_dollars": 1000.0,
-  "auto_review_threshold": 50.0,
-  "note": "Materiality never auto-explains an unexplained difference."
-}
