@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "comment": "After workshop isolation. Product: .cfo kernel, .cfo-v2 office, .harness, web. Notes: workshop/. Shadows: .archive.",
-  "updated_at": "2026-09-20T15:45:00Z",
-  "updated_by": "reorg-workshop-isolate",
+  "updated_at": "2026-09-20T21:25:00Z",
+  "updated_by": "reorg-sparse-root",
   "defaults": {
     "inventory_is_acl": false,
     "unclassified_policy": "report_and_refuse_bulk",
@@ -34,15 +34,10 @@
         { "path": "web", "optional": false }
       ],
       "include_files": [
-        "main.py",
-        "accrue.py",
-        "close.py",
-        "demo_month_end_close.py",
-        "demo_web.py",
-        "pytest.ini",
         "requirements.txt",
         "package.json",
-        "vercel.json"
+        "vercel.json",
+        ".pytest.ini"
       ],
       "hard_excludes": ["**/node_modules/**", "**/__pycache__/**", "**/.pi/**", "**/kernel.port"],
       "agent_may_write": true,
@@ -53,8 +48,7 @@
       "id": "B",
       "name": "product-docs",
       "roots": [
-        { "path": "workshop/docs", "optional": false },
-        { "path": "docs", "optional": true }
+        { "path": "workshop/docs", "optional": false }
       ],
       "include_files": ["README.md", "workshop/README.md", ".cfo-v2/README.md", ".archive/README.md"],
       "agent_may_write": true,
@@ -65,8 +59,7 @@
       "id": "C",
       "name": "human-notes",
       "roots": [
-        { "path": "workshop/operator-workspace", "optional": false },
-        { "path": "Operator-workspace", "optional": true }
+        { "path": "workshop/operator-workspace", "optional": false }
       ],
       "agent_may_write": false,
       "commit_prefixes": ["notes"],
@@ -79,8 +72,7 @@
       "name": "design-prep",
       "roots": [
         { "path": "workshop/design-workshop", "optional": false },
-        { "path": "design-workshop", "optional": true },
-        { "path": "GROK-WORKSHOP", "optional": false },
+        { "path": "workshop/grok-workshop", "optional": false },
         { "path": "workshop", "optional": false }
       ],
       "agent_may_write": true,

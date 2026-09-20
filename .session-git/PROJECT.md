@@ -11,7 +11,7 @@ Shared repo with Rohan (`origin` = `github.com/rohan9314/hackmit26`). Git root i
 | product (A) | `.cfo/`, `.cfo-v2/`, `.harness/`, `web/`, root shims, `vercel.json` | yes | pathspec |
 | product-docs (B) | `workshop/docs/`, `README.md`, `workshop/README.md` | yes | docs |
 | human-notes (C) | `workshop/operator-workspace/` | never | notes: human |
-| design-prep (D) | `workshop/design-workshop/`, `GROK-WORKSHOP/`, `workshop/` | yes | freeze/docs |
+| design-prep (D) | `workshop/design-workshop/`, `workshop/grok-workshop/`, `workshop/` | yes | freeze/docs |
 | dead-archive (G) | `.archive/` | no | avoid |
 | ide-noise (F) | `.obsidian/` | no | never |
 | overlay (K) | `.session-git/` | yes | separate from product |
@@ -20,7 +20,7 @@ Shared repo with Rohan (`origin` = `github.com/rohan9314/hackmit26`). Git root i
 
 - `.env`, `.obsidian/`, `node_modules/`, `__pycache__/`, `.DS_Store`, `kernel.port`
 - Live office dirt under `.cfo-v2/office/computer` and `instances/` unless the operator asked to save a desk
-- `GROK-WORKSHOP/harness-init/facecam-record/` while that session is writing
+- `workshop/grok-workshop/harness-init/facecam-record/` while that session is writing
 - untracked `.harness/Harness-v1/`
 - `.archive/` except a README that explains why the shadow exists
 
