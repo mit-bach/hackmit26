@@ -1,4 +1,5 @@
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
+import { resolve } from "node:path";
 import { URL } from "node:url";
 
 import { listApprovals, readApproval, resolveApproval } from "../approvals.ts";
@@ -22,8 +23,10 @@ import { wipeRuntime } from "../wipe.ts";
 import { transcriptTail } from "../transcript-tail.ts";
 import { buildSnapshot, handleOperatorApi } from "./api.ts";
 import { EventBus } from "./bus.ts";
-import { handleOmbCompat } from "./omb-compat.ts";
+import { handleOmbCompat, wireBotFrame } from "./omb-compat.ts";
+import { bindRunningComputer, handleOfficeInstanceRequest, resolveServeComputer } from "./office-instances.ts";
 import { loadOperatorConfig, type OperatorConfig } from "./operator-config.ts";
+import { listPairChannels } from "./pair-channels.ts";
 import { startPumps } from "./pump.ts";
 import { tryServeStatic } from "./static.ts";
 import { startSupervisor, type Supervisor } from "./supervisor.ts";
@@ -43,12 +46,23 @@ export interface ServeOptions {
   readonly config?: OperatorConfig;
 }
 
-interface RequestContext {
-  readonly computerRoot: string;
-  readonly fakeWorkers: boolean;
+/**
+ * Mutable serve context. computerRoot changes when the operator selects a
+ * saved office desk. handleRequest reads these fields on every request.
+ */
+export interface LiveOffice {
+  computerRoot: string;
+  supervisor?: Supervisor;
+  pumps: { stop: () => void };
+  fake?: { stop: () => void };
+  sidecar?: SidecarHandle;
   readonly bus: EventBus;
-  readonly supervisor?: Supervisor;
-  readonly sidecar?: SidecarHandle;
+  readonly fakeWorkers: boolean;
+  readonly workersEnabled: boolean;
+  readonly lazy: boolean;
+  readonly autoRoutines: boolean;
+  readonly wantSidecar: boolean;
+  config?: OperatorConfig;
 }
 
 function actualPort(server: Server, fallback: number): number {
@@ -94,6 +108,85 @@ const CORS = {
   "access-control-allow-headers": "content-type",
 } as const;
 
+function publishOfficeHello(live: LiveOffice): void {
+  const snapshot = buildSnapshot(live.computerRoot, live.fakeWorkers, live.supervisor, live.sidecar);
+  live.bus.publish({ kind: "hello", snapshot });
+  live.bus.publish({ kind: "office", computerRoot: live.computerRoot });
+  const roster = loadRoster(live.computerRoot);
+  for (const bot of roster.bots) {
+    const frame = wireBotFrame(live.computerRoot, bot.id);
+    if (frame) {
+      live.bus.publish({ kind: "bot", bot: frame });
+    }
+  }
+  for (const group of listPairChannels(live.computerRoot, roster)) {
+    live.bus.publish({ kind: "group", group });
+  }
+}
+
+async function bootRuntime(live: LiveOffice): Promise<void> {
+  const computerRoot = live.computerRoot;
+  if (live.fakeWorkers) {
+    const roster = loadRoster(computerRoot);
+    live.fake = startFakeWorkers(
+      computerRoot,
+      roster.bots.map((bot) => bot.slug),
+      (slug, item) => executeFakeTurn(computerRoot, slug, item, 8_000),
+    );
+  }
+  if (live.wantSidecar && live.sidecar === undefined) {
+    const client = loadClientRuntime(computerRoot);
+    live.sidecar = await startSidecar(computerRoot, client);
+  }
+  if (live.workersEnabled) {
+    live.supervisor = await startSupervisor({
+      computerRoot,
+      lazy: live.lazy,
+      autoRoutines: live.autoRoutines,
+      bus: live.bus,
+      config: live.config,
+    });
+  }
+  live.pumps = startPumps(computerRoot, live.bus);
+}
+
+async function stopRuntime(live: LiveOffice, options: { readonly keepSidecar?: boolean } = {}): Promise<void> {
+  await live.supervisor?.stop();
+  live.supervisor = undefined;
+  live.pumps.stop();
+  live.fake?.stop();
+  live.fake = undefined;
+  if (!options.keepSidecar && live.sidecar?.owned) {
+    await live.sidecar.stop();
+    live.sidecar = undefined;
+  }
+}
+
+async function applyOfficeSelect(live: LiveOffice, nextRoot: string): Promise<void> {
+  const resolved = resolve(nextRoot);
+  if (resolve(live.computerRoot) === resolved) {
+    return;
+  }
+  const previous = live.computerRoot;
+  await stopRuntime(live);
+  try {
+    live.computerRoot = resolved;
+    initComputer(resolved);
+    const client = loadClientRuntime(resolved);
+    live.config = overlayOperatorConfig(resolved, loadOperatorConfig(), client);
+    await bootRuntime(live);
+    publishOfficeHello(live);
+  } catch (error) {
+    await stopRuntime(live);
+    live.computerRoot = previous;
+    initComputer(previous);
+    const previousClient = loadClientRuntime(previous);
+    live.config = overlayOperatorConfig(previous, loadOperatorConfig(), previousClient);
+    await bootRuntime(live);
+    throw error;
+  }
+}
+
 export async function startServer(options: ServeOptions): Promise<{
   readonly server: Server;
   readonly url: string;
@@ -102,7 +195,7 @@ export async function startServer(options: ServeOptions): Promise<{
   readonly sidecar?: SidecarHandle;
   stop: () => Promise<void>;
 }> {
-  const computerRoot = options.computerRoot;
+  const computerRoot = resolveServeComputer(options.computerRoot);
   if (options.wipe) {
     wipeRuntime(computerRoot, {
       keepMemory: options.keepMemory,
@@ -110,48 +203,35 @@ export async function startServer(options: ServeOptions): Promise<{
       wipeRuns: options.wipeRuns === true,
     });
   }
-  const roster = initComputer(computerRoot);
+  initComputer(computerRoot);
+  bindRunningComputer(computerRoot);
   const client = loadClientRuntime(computerRoot);
   const home = options.config ?? loadOperatorConfig();
   const merged = overlayOperatorConfig(computerRoot, home, client);
   const host = options.host ?? "127.0.0.1";
   const port = options.port ?? merged.port;
   const bus = new EventBus();
-  const fake =
-    options.fakeWorkers === true
-      ? startFakeWorkers(computerRoot, roster.bots.map((bot) => bot.slug), (slug, item) =>
-          executeFakeTurn(computerRoot, slug, item, 8_000),
-        )
-      : undefined;
-  const wantSidecar = options.sidecar !== false && fake === undefined && client.sidecar !== undefined;
-  const sidecar = wantSidecar ? await startSidecar(computerRoot, client) : undefined;
-  const lazy = options.lazyWorkers ?? merged.spawnPolicy === "lazy";
-  const autoRoutines = options.autoRoutines ?? client.autoRoutines;
-  const supervisor =
-    options.workers === false || fake !== undefined
-      ? undefined
-      : await startSupervisor({
-          computerRoot,
-          lazy,
-          autoRoutines,
-          bus,
-          config: merged,
-        });
-  const pumps = startPumps(computerRoot, bus);
+  const fakeWorkers = options.fakeWorkers === true;
+  const live: LiveOffice = {
+    computerRoot,
+    pumps: { stop: (): void => undefined },
+    bus,
+    fakeWorkers,
+    workersEnabled: options.workers !== false && !fakeWorkers,
+    lazy: options.lazyWorkers ?? merged.spawnPolicy === "lazy",
+    autoRoutines: options.autoRoutines ?? client.autoRoutines,
+    wantSidecar: options.sidecar !== false && !fakeWorkers && client.sidecar !== undefined,
+    config: merged,
+  };
+  await bootRuntime(live);
 
   const server = createServer((req, res) => {
-    void handleRequest(req, res, {
-      computerRoot,
-      fakeWorkers: fake !== undefined,
-      bus,
-      supervisor,
-      sidecar,
-    });
+    void handleRequest(req, res, live);
   });
 
-  await new Promise<void>((resolve, reject) => {
+  await new Promise<void>((resolveListen, reject) => {
     server.listen(port, host, () => {
-      resolve();
+      resolveListen();
     });
     server.on("error", reject);
   });
@@ -160,28 +240,32 @@ export async function startServer(options: ServeOptions): Promise<{
   return {
     server,
     url,
-    supervisor,
+    get supervisor(): Supervisor | undefined {
+      return live.supervisor;
+    },
     bus,
-    sidecar,
+    get sidecar(): SidecarHandle | undefined {
+      return live.sidecar;
+    },
     stop: async (): Promise<void> => {
-      pumps.stop();
-      fake?.stop();
-      await supervisor?.stop();
-      await sidecar?.stop();
-      await new Promise<void>((resolve, reject) => {
+      live.pumps.stop();
+      live.fake?.stop();
+      await live.supervisor?.stop();
+      await live.sidecar?.stop();
+      await new Promise<void>((resolveClose, rejectClose) => {
         server.close((err) => {
           if (err) {
-            reject(err);
+            rejectClose(err);
             return;
           }
-          resolve();
+          resolveClose();
         });
       });
     },
   };
 }
 
-function attachSse(res: ServerResponse, ctx: RequestContext): void {
+function attachSse(res: ServerResponse, ctx: LiveOffice): void {
   res.writeHead(200, {
     "content-type": "text/event-stream",
     "cache-control": "no-cache",
@@ -212,9 +296,9 @@ function attachSse(res: ServerResponse, ctx: RequestContext): void {
 async function handleRequest(
   req: IncomingMessage,
   res: ServerResponse,
-  ctx: RequestContext,
+  live: LiveOffice,
 ): Promise<void> {
-  const computerRoot = ctx.computerRoot;
+  const computerRoot = live.computerRoot;
   try {
     if (req.method === "OPTIONS") {
       res.writeHead(204, CORS);
@@ -226,18 +310,31 @@ async function handleRequest(
     const method = req.method ?? "GET";
 
     if (method === "GET" && (path === "/api/events" || path === "/v1/events")) {
-      attachSse(res, ctx);
+      attachSse(res, live);
       return;
     }
 
     if (path.startsWith("/api/") || path.startsWith("/.well-known/")) {
       const body = method === "GET" || method === "HEAD" ? {} : await readBody(req);
+      if (path === "/api/office-instances" || path.startsWith("/api/office-instances/")) {
+        const office = await handleOfficeInstanceRequest(
+          method,
+          path,
+          body,
+          live.computerRoot,
+          (nextRoot) => applyOfficeSelect(live, nextRoot),
+        );
+        if (office) {
+          sendJson(res, office.status, office.body);
+          return;
+        }
+      }
       const apiCtx = {
-        computerRoot,
-        fakeWorkers: ctx.fakeWorkers,
-        supervisor: ctx.supervisor,
-        bus: ctx.bus,
-        sidecar: ctx.sidecar,
+        computerRoot: live.computerRoot,
+        fakeWorkers: live.fakeWorkers,
+        supervisor: live.supervisor,
+        bus: live.bus,
+        sidecar: live.sidecar,
       };
       const omb = await handleOmbCompat(method, path, url, body, apiCtx);
       if (omb) {
@@ -254,14 +351,14 @@ async function handleRequest(
     }
 
     if (method === "GET" && (path === "/health" || path === "/v1/health")) {
-      const live = loadRoster(computerRoot);
+      const roster = loadRoster(computerRoot);
       sendJson(res, 200, {
         ok: true,
-        system: live.system,
-        bots: live.bots.length,
-        fakeWorkers: ctx.fakeWorkers,
+        system: roster.system,
+        bots: roster.bots.length,
+        fakeWorkers: live.fakeWorkers,
         ui: true,
-        sidecar: ctx.sidecar ? { port: ctx.sidecar.port, owned: ctx.sidecar.owned } : null,
+        sidecar: live.sidecar ? { port: live.sidecar.port, owned: live.sidecar.owned } : null,
       });
       return;
     }
@@ -416,7 +513,7 @@ async function handleRequest(
     }
 
     if (method === "GET" && path === "/v1/protocol/stream") {
-      attachSse(res, ctx);
+      attachSse(res, live);
       return;
     }
 

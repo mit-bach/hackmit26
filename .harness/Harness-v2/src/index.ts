@@ -21,6 +21,7 @@ export type {
   TurnResult,
 } from "./types.ts";
 
+export { persistProtocolCard, PROTOCOL_CARD, PROTOCOL_WAKE_FOOTER } from "./protocol-card.ts";
 export { initComputer } from "./computer.ts";
 export { wipeRuntime } from "./wipe.ts";
 export {
@@ -32,7 +33,7 @@ export {
 export { startSidecar, readSidecarPort, sidecarHealthy } from "./sidecar.ts";
 export { loadRoster, saveRoster, findBot, requireBot, findRoom, findRoutine, parseRoster } from "./roster.ts";
 export { sendPrompt } from "./send.ts";
-export { askPeer, parseAskPeer, resolvePeer, executeFakeTurn, tryOperatorAskHandoff } from "./ask-peer.ts";
+export { askPeer, parseAskPeer, resolvePeer, executeFakeTurn, tryOperatorAskHandoff, sendBotMessage, replyPeerMessage } from "./ask-peer.ts";
 export { awaitTurn, awaitSnapshot } from "./await.ts";
 export {
   bindLane,
@@ -67,6 +68,18 @@ export { transcriptTail } from "./transcript-tail.ts";
 export { resolveBind, resolveComputerRoot } from "./bind.ts";
 export { startFakeWorkers, runFakeUntilIdle } from "./worker.ts";
 export { startServer } from "./server/http.ts";
+export type { LiveOffice, ServeOptions } from "./server/http.ts";
+export {
+  bindRunningComputer,
+  createOfficeInstance,
+  ensureOfficeState,
+  getOfficeInstance,
+  handleOfficeInstanceRequest,
+  listOfficeState,
+  resolveOfficeParent,
+  selectOfficeInstance,
+} from "./server/office-instances.ts";
+export type { OfficeInstanceRecord, OfficeState } from "./server/office-instances.ts";
 export { EventBus } from "./server/bus.ts";
 export { loadOperatorConfig, publicOperatorConfig, patchOperatorConfig, operatorConfigPath } from "./server/operator-config.ts";
 export { handleDeskCompat } from "./server/desk.ts";
@@ -85,7 +98,10 @@ export { listMemoryOverview, readMemoryDoc, writeMemoryDoc } from "./memory.ts";
 export {
   mosaicLayout,
   foldAwake,
+  foldAwakeStage,
+  firstAwakeSeq,
   projectFrame,
+  projectStageFrame,
   loadDemoBundle,
   recordDemoSession,
   demoMeta,

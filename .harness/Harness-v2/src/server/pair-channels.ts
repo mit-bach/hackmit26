@@ -1,8 +1,8 @@
 /**
  * GrokBot conversation kind 2: Bot↔Bot direct handoff.
  *
- * The pair UI renders harness/threads/*.json — AskBot prompt and the peer's
- * assistant reply. Session thinking and Kernel tools stay on each Bot's desk.
+ * The pair UI renders harness/threads/*.json — only ask_bot / bot_ask posts.
+ * Session thinking and Kernel tools stay on each Bot's operator desk.
  */
 import { findBot, loadRoster } from "../roster.ts";
 import { readProtocol } from "../protocol-log.ts";

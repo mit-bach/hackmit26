@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 
 import { applyClientAttach, loadClientRuntime, overlayOperatorConfig, parseClientRuntime } from "../src/client-runtime.ts";
-import { loadExtensionsManifest } from "../src/client-attach.ts";
+import { applyAttachEnv, collectExtraExtensionPaths, loadExtensionsManifest } from "../src/client-attach.ts";
 import { seedVerifierIntercept, loadIntercept } from "../src/intercept.ts";
 import { writeJsonAtomic } from "../src/fs.ts";
 import { startSidecar } from "../src/sidecar.ts";
@@ -191,6 +191,45 @@ test("serve loads client.json, boots sidecar, and POST /api/wipe clears inboxes"
   } finally {
     await started.stop();
   }
+});
+
+test("overlay and attach env keep only this Computer's CFO extension", () => {
+  const live = makeComputer();
+  const clone = makeComputer();
+  for (const root of [live, clone]) {
+    mkdirSync(join(root, "cfo", "extensions"), { recursive: true });
+    writeFileSync(join(root, "cfo", "extensions", "index.ts"), "export default function () {}\n");
+  }
+  const liveExt = join(live, "cfo", "extensions", "index.ts");
+  writeJsonAtomic(join(clone, "harness", "client.json"), {
+    extraExtensions: ["./cfo/extensions/index.ts"],
+    clientSkills: true,
+  });
+  const overlaid = overlayOperatorConfig(clone, {
+    spawnPolicy: "lazy",
+    port: 8787,
+    openBrowser: false,
+    apiKeys: {},
+    extraExtensions: [liveExt],
+    clientSkills: true,
+    features: { skillAuthoring: false, showToolCalls: true, browser: false, transcriptVerbosity: "full" },
+  });
+  assert.equal(overlaid.extraExtensions.length, 1);
+  assert.ok(overlaid.extraExtensions[0]?.includes(clone));
+  assert.equal(overlaid.extraExtensions.some((path) => path.includes(live)), false);
+
+  const collected = collectExtraExtensionPaths({
+    computerRoot: clone,
+    env: { HARNESS_EXTRA_EXTENSIONS: liveExt },
+    config: overlaid,
+  });
+  assert.equal(collected.length, 1);
+  assert.ok(collected[0]?.includes(clone));
+  assert.equal(collected.some((path) => path.includes(live)), false);
+
+  const env = applyAttachEnv({ HARNESS_EXTRA_EXTENSIONS: liveExt }, clone, overlaid);
+  assert.equal(env.HARNESS_EXTRA_EXTENSIONS?.includes(live), false);
+  assert.ok(env.HARNESS_EXTRA_EXTENSIONS?.includes(clone));
 });
 
 function readUtf(path: string): string {

@@ -19,6 +19,7 @@ import {
   roomDir,
   threadsDir,
 } from "./paths.ts";
+import { persistProtocolCard } from "./protocol-card.ts";
 import { loadRoster } from "./roster.ts";
 import type { Roster } from "./types.ts";
 
@@ -53,6 +54,7 @@ export function initComputer(computerRoot: string, roster?: Roster): Roster {
     } catch {
       // MEMORY.md already exists.
     }
+    persistProtocolCard(computerRoot, bot.id);
   }
   for (const room of loaded.rooms) {
     ensureDir(roomDir(computerRoot, room.id));

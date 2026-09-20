@@ -1,0 +1,10 @@
+{
+  "bot": "email",
+  "profile": "invoice",
+  "source_id": "MSG-S12",
+  "classification": "invoice",
+  "destination": {
+    "slug": "ap",
+    "profile": "prepare"
+  }
+}

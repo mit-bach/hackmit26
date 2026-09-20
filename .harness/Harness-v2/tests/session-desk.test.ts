@@ -6,6 +6,7 @@ import { test } from "node:test";
 import { piSessionDir } from "../src/paths.ts";
 import { loadRoster } from "../src/roster.ts";
 import { displayWake, projectSessionDesk } from "../src/server/session-desk.ts";
+import { appendThreadAsk, appendThreadReply } from "../src/server/thread-log.ts";
 import { makeComputer } from "./helpers.ts";
 
 test("displayWake strips the harness header and pair-thread note", () => {
@@ -18,7 +19,8 @@ test("displayWake strips the harness header and pair-thread note", () => {
       "conversation: peer_dm",
       "What color is the sky?",
       "---",
-      "Harness note: Your assistant text is the reply in the pair thread.",
+      "Required tool: call ask_bot (same as bot_ask) with bot_id=email.",
+      "Tools: assistant text → Operator only.",
     ].join("\n"),
   );
   assert.equal(shown, "What color is the sky?");
@@ -114,9 +116,25 @@ test("projectSessionDesk keeps both Pi reasonings in session order plus the thre
   assert.ok(kinds.length >= 5);
 });
 
-test("projectSessionDesk shows a peer wake and the Bot's reply on the operator desk", () => {
+test("projectSessionDesk keeps pair traffic on the thread, not on the operator desk", () => {
   const computer = makeComputer();
   const botId = "bot_beta";
+  appendThreadAsk(
+    computer,
+    "bot_alpha",
+    botId,
+    "h_sky",
+    "What color is the sky?",
+    "2026-09-20T10:38:47.166Z",
+  );
+  appendThreadReply(
+    computer,
+    botId,
+    "bot_alpha",
+    "h_sky",
+    "Blue (in clear daylight).",
+    "2026-09-20T10:38:49.205Z",
+  );
   const dir = piSessionDir(computer, botId);
   mkdirSync(dir, { recursive: true });
   writeFileSync(
@@ -146,6 +164,12 @@ test("projectSessionDesk shows a peer wake and the Bot's reply on the operator d
           content: [
             { type: "thinking", thinking: "Answer directly." },
             { type: "text", text: "Blue (in clear daylight)." },
+            {
+              type: "toolCall",
+              id: "call-op",
+              name: "message_operator",
+              arguments: { text: "I answered Alpha about the sky." },
+            },
           ],
         },
       }),
@@ -153,8 +177,13 @@ test("projectSessionDesk shows a peer wake and the Bot's reply on the operator d
     ].join("\n"),
   );
   const rows = projectSessionDesk(computer, botId, loadRoster(computer));
-  assert.ok(rows.some((row) => row.role === "user" && /sky/.test(row.text ?? "")));
-  assert.ok(rows.some((row) => row.peerAsk?.botId === "bot_alpha"));
+  assert.equal(rows.some((row) => row.role === "user" && /sky/.test(row.text ?? "")), false);
+  assert.equal(rows.some((row) => /Blue/.test(row.text ?? "")), false);
   assert.ok(rows.some((row) => row.comm && /Message from @Alpha/.test(row.text ?? "")));
-  assert.ok(rows.some((row) => /Blue/.test(row.text ?? "") && /Answer directly/.test(row.reasoning ?? "")));
+  assert.ok(rows.some((row) => row.comm && /Messaged @Alpha/.test(row.text ?? "")));
+  assert.ok(rows.some((row) => /I answered Alpha/.test(row.text ?? "")));
+  const senderDesk = projectSessionDesk(computer, "bot_alpha", loadRoster(computer));
+  assert.ok(senderDesk.some((row) => row.comm && /Messaged @Beta/.test(row.text ?? "")));
+  assert.ok(senderDesk.some((row) => row.comm && /Message from @Beta/.test(row.text ?? "")));
+  assert.equal(senderDesk.some((row) => /Blue/.test(row.text ?? "")), false);
 });

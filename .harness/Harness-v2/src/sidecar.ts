@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 
 import type { ClientRuntime, ClientSidecarSpec } from "./client-runtime.ts";
 import { resolveClientPath } from "./client-runtime.ts";
@@ -64,11 +64,30 @@ async function waitForPort(
   throw new Error(`sidecar did not publish a healthy port at ${spec.portFile}${extra}`);
 }
 
+function findCfoKernel(start: string): string | undefined {
+  let dir = resolve(start);
+  for (;;) {
+    const candidate = join(dir, ".cfo");
+    if (existsSync(join(candidate, "cfo_kernel")) || existsSync(join(candidate, ".venv"))) {
+      return candidate;
+    }
+    const parent = dirname(dir);
+    if (parent === dir) {
+      return undefined;
+    }
+    dir = parent;
+  }
+}
+
 function sidecarEnv(computerRoot: string, runtime: ClientRuntime, spec: ClientSidecarSpec): NodeJS.ProcessEnv {
   const env: NodeJS.ProcessEnv = { ...process.env };
   delete env.HARNESS_BOT;
   env.HARNESS_COMPUTER = computerRoot;
   env.SIDECAR_PORT_FILE = resolveClientPath(computerRoot, spec.portFile);
+  const kernel = findCfoKernel(computerRoot);
+  if (kernel) {
+    env.CFO_KERNEL = kernel;
+  }
   if (runtime.evalPhase) {
     env.CFO_EVAL_PHASE = runtime.evalPhase;
   }

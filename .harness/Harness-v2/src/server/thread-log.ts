@@ -1,7 +1,6 @@
 /**
  * Durable Bot↔Bot thread: one JSON file per pair, prompt then reply.
- * The pair UI renders this file. Session thinking and Kernel tools stay
- * in each Bot's operator desk.
+ * Only communication-protocol tool posts. Assistant text stays off this file.
  */
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -214,7 +213,7 @@ export function appendThreadAsk(
   );
 }
 
-/** Receiver assistant text into the pair thread. Separate from either Operator DM. */
+/** Receiver ask_bot text into the pair thread. Separate from either Operator DM. */
 export function appendThreadReply(
   computerRoot: string,
   fromId: string,
@@ -268,13 +267,6 @@ export function listThreadFiles(computerRoot: string): ThreadFile[] {
   return out.sort((left, right) => left.createdAt - right.createdAt);
 }
 
-function resultText(raw: string): string {
-  const stripped = raw
-    .replace(/^[^\n]*finished handle \S+:\s*/i, "")
-    .replace(/^[^\n]*cancelled handle \S+:\s*/i, "");
-  return stripped.trim().length > 0 ? stripped : raw;
-}
-
 /** Fill thread JSON from protocol send/turn events when a file is missing (upgrade path). */
 export function seedThreadsFromProtocol(
   computerRoot: string,
@@ -299,9 +291,8 @@ export function seedThreadsFromProtocol(
       appendThreadAsk(computerRoot, from, to, handleId, event.text ?? "", event.t);
       continue;
     }
-    if (event.type === "turn.end" || event.type === "send.completed" || event.type === "handoff.done") {
-      const text = resultText(event.text ?? "");
-      appendThreadReply(computerRoot, to, from, handleId, text, event.t);
+    if (event.type === "thread.reply") {
+      appendThreadReply(computerRoot, from, to, handleId, event.text ?? "", event.t);
     }
   }
 }

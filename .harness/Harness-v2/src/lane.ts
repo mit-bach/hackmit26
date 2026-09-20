@@ -19,7 +19,8 @@ import { appendProtocol } from "./protocol-log.ts";
 import { settleReceiptsForHandle } from "./routines.ts";
 import { appendTranscript } from "./transcript.ts";
 import { parseAskPeer } from "./ask-peer.ts";
-import { appendThreadReply } from "./server/thread-log.ts";
+import { PROTOCOL_WAKE_FOOTER } from "./protocol-card.ts";
+import { findBot } from "./roster.ts";
 import type { BotRecord, HandleRecord, InboxItem, Roster, TurnResult } from "./types.ts";
 
 export interface BoundLane {
@@ -302,7 +303,11 @@ export function completeTurn(lane: BoundLane, result: TurnResult): void {
     touchLane(lane.computerRoot, lane.bot.id, lane.bot.slug, "idle");
     return;
   }
-  const nextStatus = result.error ? "failed" : "completed";
+  const missedReply =
+    item.kind === "a2a_handoff" && !result.error
+      ? "did not call ask_bot to reply; assistant text is not the pair thread"
+      : result.error;
+  const nextStatus = missedReply ? "failed" : "completed";
   const event = appendProtocol(lane.computerRoot, {
     type: "turn.end",
     from: item.from,
@@ -316,7 +321,7 @@ export function completeTurn(lane: BoundLane, result: TurnResult): void {
   transitionHandle(lane.computerRoot, lane.bot.id, item.handleId, nextStatus, {
     result: result.text,
     resultPaths: result.paths,
-    error: result.error,
+    error: missedReply,
     seq: event.seq,
   });
   settleReceiptsForHandle(lane.computerRoot, item.handleId, nextStatus, result.text);
@@ -333,9 +338,6 @@ export function completeTurn(lane: BoundLane, result: TurnResult): void {
   appendTranscript(lane.computerRoot, lane.bot.id, line);
   if (item.from !== "operator" && item.from !== "harness" && item.from !== lane.bot.id) {
     appendTranscript(lane.computerRoot, item.from, line);
-    if (item.kind === "a2a_handoff") {
-      appendThreadReply(lane.computerRoot, lane.bot.id, item.from, item.handleId, result.text, event.t);
-    }
   }
   appendDailyLog(lane.computerRoot, lane.bot.id, `${item.kind} from ${item.from} → ${nextStatus}`);
   lane.currentInbox = undefined;
@@ -368,12 +370,14 @@ export function formatWake(item: InboxItem, roster?: Roster, selfSlug?: string):
     }
   }
   if (item.kind === "a2a_handoff") {
+    const sender = roster ? findBot(roster, item.from) : undefined;
+    const slug = sender?.slug ?? item.from;
     lines.push(
       "",
-      "---",
-      "Harness note: Your assistant text is the reply in the pair thread with the sender. It also appears in this Bot's operator chat. Do not call ask_bot just to answer the sender. Messaging the Operator is a separate turn.",
+      `Required tool: call ask_bot (same as bot_ask) with bot_id=${slug} and prompt set to your answer for them. That is the only way your words enter the pair thread. It completes their wait. Assistant text is not the thread and is not the Operator. Call message_operator if the Operator should hear you during this wake.`,
     );
   }
+  lines.push("", "---", PROTOCOL_WAKE_FOOTER);
   return lines.filter((line) => line.length > 0).join("\n");
 }
 

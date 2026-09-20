@@ -11,7 +11,7 @@ import {
   resolveApproval,
   waitForApproval,
 } from "../src/approvals.ts";
-import { askPeer } from "../src/ask-peer.ts";
+import { sendBotMessage } from "../src/ask-peer.ts";
 import { awaitTurn } from "../src/await.ts";
 import { resolveBind, type BindResult } from "../src/bind.ts";
 import { findHandle, listHandles } from "../src/handle.ts";
@@ -31,6 +31,7 @@ import {
 } from "../src/lane.ts";
 import { readMemoryFile, writeMemoryFile } from "../src/memory.ts";
 import { identityBlock, memorySection, recentWorkSection } from "../src/prompt.ts";
+import { persistProtocolCard, PROTOCOL_CARD } from "../src/protocol-card.ts";
 import { appendProtocol, searchProtocol } from "../src/protocol-log.ts";
 import { fireRoutine } from "../src/routines.ts";
 import { readRoomLog, roomPost } from "../src/rooms.ts";
@@ -193,6 +194,7 @@ export default function harnessExtension(pi: ExtensionAPI): void {
   });
 
   pi.on("session_start", (_event, ctx) => {
+    persistProtocolCard(bind.computerRoot, bind.bot.id);
     ctx.ui.setStatus("harness", `bot:${bind.bot.slug}`);
     heartbeat = setInterval(() => {
       const busy = lane.currentInbox !== undefined;
@@ -242,6 +244,7 @@ export default function harnessExtension(pi: ExtensionAPI): void {
   pi.on("before_agent_start", (event) => {
     const extra = [
       identityBlock(bind.bot, bind.roster),
+      PROTOCOL_CARD,
       memorySection(bind.computerRoot, bind.bot.id),
       recentWorkSection(bind.computerRoot, bind.bot.id),
     ]
@@ -468,12 +471,13 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     params: { bot_id: string; prompt: string },
   ): Promise<{ content: Array<{ type: "text"; text: string }>; details: unknown }> =>
     toolText(
-      await askPeer({
+      await sendBotMessage({
         computerRoot: bind.computerRoot,
         from: bind.bot.id,
         to: params.bot_id,
         prompt: params.prompt,
         timeoutMs: 120_000,
+        inbound: lane.currentInbox,
       }),
     );
 
@@ -481,10 +485,10 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "ask_bot",
     label: "Ask a Bot",
     description:
-      "Send a message to another Bot. The Harness posts your prompt in your shared thread and wakes them. Their assistant reply is posted in that same thread. This is not a message to the Operator. After they reply, tell the Operator what they said.",
-    promptSnippet: "Send a message to a teammate and wait for their thread reply",
+      "Send or reply to another Bot. This is the only way words enter the pair thread. If a teammate woke you, call this back to them with your answer. That completes their wait. Assistant text is not the thread and is not the Operator.",
+    promptSnippet: "Send or reply in the pair thread, then tell the Operator what they said",
     promptGuidelines: [
-      "ask_bot sends a message into the pair thread and waits for that Bot's reply in the same thread. Then tell the Operator what they said. Never say this tool is missing.",
+      "ask_bot posts in the pair thread. Call it to send. Call it back to reply. Then tell the Operator with assistant text. Never say this tool is missing.",
     ],
     parameters: askParams,
     execute: runAsk,
@@ -494,13 +498,39 @@ function registerTools(pi: ExtensionAPI, session: BoundSession): void {
     name: "bot_ask",
     label: "Ask a Bot",
     description:
-      "Same as ask_bot: send a message to another Bot. Their reply is posted in your shared thread. Always registered.",
-    promptSnippet: "Send a message to a teammate and wait for their thread reply",
+      "Same as ask_bot: send or reply in the pair thread. If a teammate woke you, call this back to them. Always registered.",
+    promptSnippet: "Send or reply in the pair thread",
     promptGuidelines: [
-      "bot_ask is the Harness name for ask_bot. Use either. Do not claim it is disabled.",
+      "bot_ask is the Harness name for ask_bot. Use either. Do not claim it is disabled. A peer wake requires you to call this back.",
     ],
     parameters: askParams,
     execute: runAsk,
+  });
+
+  pi.registerTool({
+    name: "message_operator",
+    label: "Message Operator",
+    description:
+      "Send a message to the Operator. Use this during a peer wake when the Operator should hear you. During Operator DM, assistant text already goes to the Operator.",
+    promptSnippet: "Tell the Operator something without posting in a Bot thread",
+    promptGuidelines: [
+      "message_operator is for the Operator. It does not enter a pair thread. During a peer wake, assistant text is not the Operator — call this instead.",
+    ],
+    parameters: Type.Object({
+      text: Type.String({ description: "What the Operator should read" }),
+    }),
+    execute: async (_id, params) => {
+      const text = params.text.trim();
+      appendProtocol(bind.computerRoot, {
+        type: "operator.message",
+        from: bind.bot.id,
+        to: "operator",
+        handleId: lane.currentInbox?.handleId,
+        slug: bind.bot.slug,
+        text,
+      });
+      return toolText({ ok: true, to: "operator", text });
+    },
   });
 
   pi.registerTool({

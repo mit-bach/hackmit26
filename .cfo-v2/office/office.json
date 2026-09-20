@@ -1,0 +1,23 @@
+{
+  "currentId": "protocol-proof",
+  "instances": [
+    {
+      "id": "live",
+      "name": "Live",
+      "computerRel": "computer",
+      "createdAt": "2026-09-20T11:38:39.579Z"
+    },
+    {
+      "id": "fresh-protocol",
+      "name": "fresh-protocol",
+      "computerRel": "instances/fresh-protocol",
+      "createdAt": "2026-09-20T11:40:07.497Z"
+    },
+    {
+      "id": "protocol-proof",
+      "name": "protocol-proof",
+      "computerRel": "instances/protocol-proof",
+      "createdAt": "2026-09-20T11:48:53.740Z"
+    }
+  ]
+}

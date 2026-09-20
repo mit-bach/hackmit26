@@ -127,6 +127,22 @@ export function startPumps(
         }
         publishPair(bus, computerRoot, roster, event.from, event.to);
       }
+      if (event.type === "thread.reply" && event.from && event.to) {
+        const sender = findBot(roster, event.from);
+        const receiver = findBot(roster, event.to);
+        const at = Date.parse(event.t);
+        const atMs = Number.isFinite(at) ? at : Date.now();
+        const replyKey = event.handleId ? `pair-result-${event.handleId}` : String(event.seq);
+        if (sender) {
+          publishPeerChip(bus, roster, event, sender.id, `comm-${replyKey}`, atMs);
+        }
+        if (receiver) {
+          publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${replyKey}`, atMs);
+        }
+        publishPair(bus, computerRoot, roster, event.from, event.to);
+        publishBotDesk(bus, computerRoot, event.from);
+        publishBotDesk(bus, computerRoot, event.to);
+      }
       if (
         (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") &&
         event.from &&

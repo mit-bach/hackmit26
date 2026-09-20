@@ -2,6 +2,7 @@ import { existsSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 import { ensureDir } from "./fs.ts";
+import { persistProtocolCard } from "./protocol-card.ts";
 import { loadRoster } from "./roster.ts";
 import {
   approvalDir,
@@ -115,6 +116,7 @@ export function wipeRuntime(computerRoot: string, options: WipeOptions = {}): Wi
     ensureDir(piSessionDir(computerRoot, bot.id));
     ensureDir(handleDir(computerRoot, bot.id));
     ensureDir(botDir(computerRoot, bot.id));
+    persistProtocolCard(computerRoot, bot.id);
     if (!options.keepMemory) {
       const memRoot = memoryDir(computerRoot, bot.id);
       if (existsSync(memRoot)) {

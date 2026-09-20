@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { isAbsolute, resolve } from "node:path";
+import { isAbsolute, resolve, sep } from "node:path";
 
 import { readJsonIfExists, writeJsonAtomic } from "./fs.ts";
 import { harnessPackageRoot } from "./pkg.ts";
@@ -55,6 +55,21 @@ export function saveExtensionsManifest(computerRoot: string, manifest: Extension
   writeJsonAtomic(extensionsManifestPath(computerRoot), manifest);
 }
 
+function pathIsInside(root: string, candidate: string): boolean {
+  const resolvedRoot = resolve(root);
+  const resolvedCandidate = resolve(candidate);
+  return resolvedCandidate === resolvedRoot || resolvedCandidate.startsWith(`${resolvedRoot}${sep}`);
+}
+
+/** Drop CFO extras that belong to another Computer (office instance switch). */
+function keepExtraExtensionPath(computerRoot: string, path: string): boolean {
+  if (pathIsInside(computerRoot, path) || pathIsInside(harnessPackageRoot(), path)) {
+    return true;
+  }
+  const posix = path.replaceAll("\\", "/");
+  return !posix.includes("/cfo/extensions/");
+}
+
 function uniqueResolved(computerRoot: string, items: readonly string[]): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
@@ -85,8 +100,8 @@ export function collectExtraExtensionPaths(options: {
     .filter((item) => item.length > 0);
   const fromConfig = options.config?.extraExtensions ?? [];
   const fromDisk = loadExtensionsManifest(options.computerRoot).extraExtensions;
-  return uniqueResolved(options.computerRoot, [...fromDisk, ...fromConfig, ...fromEnv]).filter((path) =>
-    existsSync(path),
+  return uniqueResolved(options.computerRoot, [...fromDisk, ...fromConfig, ...fromEnv]).filter(
+    (path) => existsSync(path) && keepExtraExtensionPath(options.computerRoot, path),
   );
 }
 
@@ -107,6 +122,8 @@ export function applyAttachEnv(
   const paths = collectExtraExtensionPaths({ computerRoot, env: next, config });
   if (paths.length > 0) {
     next.HARNESS_EXTRA_EXTENSIONS = paths.join(":");
+  } else {
+    delete next.HARNESS_EXTRA_EXTENSIONS;
   }
   const manifest = loadExtensionsManifest(computerRoot);
   const clientSkills =

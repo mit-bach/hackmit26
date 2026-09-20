@@ -36,3 +36,5 @@ Open World. Prompt: `Send Acme's September invoice into the finance inbox`. Worl
 A Handle that includes an outbound thread must `reply_in_thread` as that persona.
 
 Simulated only. No live Gmail. Sidecar must restart after compile so new `@function_tool` ops appear.
+
+Proof: `office/bots/world/PROOF.md`.

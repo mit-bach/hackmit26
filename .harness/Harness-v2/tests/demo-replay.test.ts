@@ -8,11 +8,13 @@ import {
   botsFromRoster,
   demoMeta,
   foldAwake,
+  firstAwakeSeq,
   hasDemoRecording,
   loadDemoBundle,
   mosaicLayout,
   playDelayMs,
   projectFrame,
+  projectStageFrame,
   recordDemoSession,
   removeDemoRecording,
 } from "../src/demo-replay.ts";
@@ -174,6 +176,45 @@ test("projectFrame seq 0 is the wipe look", () => {
   assert.equal(started.awake[0]?.messages.length, 1);
 });
 
+test("projectStageFrame starts on the first send and holds the last Bot", () => {
+  const bots = sampleBots();
+  const events = [
+    ev(1, "send.accepted", "bot_email", "email", { handleId: "h_email", text: "hello" }),
+    ev(2, "turn.start", "bot_email", "email", { handleId: "h_email" }),
+    ev(3, "turn.end", "bot_email", "email", { handleId: "h_email" }),
+    ev(4, "send.accepted", "bot_ap", "ap", { handleId: "h_ap", text: "pay" }),
+    ev(5, "turn.start", "bot_ap", "ap", { handleId: "h_ap" }),
+    ev(6, "turn.end", "bot_ap", "ap", { handleId: "h_ap" }),
+  ];
+  const bundle = {
+    source: "live" as const,
+    lastSeq: 6,
+    bots,
+    events,
+    transcripts: {},
+    activities: {},
+  };
+  assert.equal(firstAwakeSeq(events), 1);
+  const start = projectStageFrame(bundle, 0);
+  assert.equal(start.seq, 1);
+  assert.equal(start.awake.length, 1);
+  assert.equal(start.awake[0]?.slug, "email");
+  assert.equal(start.awake[0]?.held, false);
+  const gap = projectStageFrame(bundle, 3);
+  assert.equal(foldAwake(bots, events.filter((row) => row.seq <= 3)).length, 0);
+  assert.equal(gap.awake.length, 1);
+  assert.equal(gap.awake[0]?.slug, "email");
+  assert.equal(gap.awake[0]?.held, true);
+  const ap = projectStageFrame(bundle, 5);
+  assert.equal(ap.awake.length, 1);
+  assert.equal(ap.awake[0]?.slug, "ap");
+  assert.equal(ap.awake[0]?.held, false);
+  const end = projectStageFrame(bundle, 6);
+  assert.equal(end.awake.length, 1);
+  assert.equal(end.awake[0]?.slug, "ap");
+  assert.equal(end.awake[0]?.held, true);
+});
+
 test("playDelayMs clamps wall-clock gaps", () => {
   const a = ev(1, "turn.start", "bot_email", "email");
   const b = ev(2, "turn.end", "bot_email", "email");
@@ -304,6 +345,19 @@ test("CFO V2 office protocol folds Email then Email+AP", () => {
     assert.ok(atSeventeen.some((row) => row.slug === "email"));
     assert.ok(atSeventeen.some((row) => row.slug === "ap"));
     assert.equal(mosaicLayout(atSeventeen.length)[0]?.width, 50);
+  }
+  const origin = firstAwakeSeq(events);
+  const last = events[events.length - 1]?.seq ?? 0;
+  const tape = {
+    source: "live" as const,
+    lastSeq: last,
+    bots,
+    events,
+    transcripts: {},
+    activities: {},
+  };
+  for (let seq = origin; seq <= last; seq += 1) {
+    assert.ok(projectStageFrame(tape, seq).awake.length >= 1, `stage empty at seq ${seq}`);
   }
   const meta = demoMeta(computer, "live");
   assert.ok(meta.lastSeq >= (events[events.length - 1]?.seq ?? 0));

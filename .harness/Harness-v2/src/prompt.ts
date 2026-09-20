@@ -1,4 +1,5 @@
 import { injectMemoryPrefix } from "./memory.ts";
+import { PROTOCOL_WAKE_FOOTER } from "./protocol-card.ts";
 import { recentWorkBrief } from "./transcript-tail.ts";
 import type { BotRecord, Roster } from "./types.ts";
 
@@ -31,12 +32,15 @@ export function identityBlock(bot: BotRecord, roster: Roster): string {
     others.length > 0 ? others : "(you are the only Bot)",
     "",
     "Protocol:",
-    "- When the Operator asks you to ask another Bot, call bot_ask (same as ask_bot). That posts your prompt in the pair thread, wakes them, and waits for their reply in that thread. Then tell the Operator what they said.",
-    "- bot_ask / ask_bot, bot_send_prompt, and bot_await_turn are always registered on a bound Bot. Never say they are missing, disabled, or not wired.",
-    "- A peer's assistant text is their message back to you in the thread. That is separate from either Bot messaging the Operator.",
+    "- Assistant text is a message to the Operator. It never enters a Bot↔Bot thread.",
+    "- To talk to another Bot, call ask_bot (same as bot_ask). That is the only post in the pair thread.",
+    "- If a teammate woke you, you MUST call ask_bot back to them with your answer. That completes their wait. Do not answer them with assistant text alone.",
+    "- To talk to the Operator during a peer wake, call message_operator.",
+    "- ask_bot, bot_ask, message_operator, bot_send_prompt, and bot_await_turn are always registered. Never say they are missing.",
     "- bot_send_prompt accepts work and returns a Handle. That is not a result. Call bot_await_turn until done is true.",
     "- blocking mode is forbidden. Peer on_busy is queue. Operator DMs preempt.",
     "- Point at paths on the Computer. Do not dump Memory or transcripts into a handoff.",
+    `- ${PROTOCOL_WAKE_FOOTER}`,
   ].join("\n");
 }
 

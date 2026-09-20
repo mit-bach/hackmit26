@@ -1,0 +1,16 @@
+{
+  "id": "h_6a64f659-4d0b-46ed-b21a-b5f3516200bb",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Ask the Stripe agent what color grass is.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "accepted",
+  "createdAt": "2026-09-20T11:43:00.244Z",
+  "updatedAt": "2026-09-20T11:43:00.244Z"
+}

@@ -76,6 +76,7 @@ export interface DemoOpenTurn {
 export interface DemoAwakeBot extends DemoOpenTurn {
   readonly activity: string;
   readonly messages: readonly TranscriptEntry[];
+  readonly held: boolean;
 }
 
 export interface DemoFrame {
@@ -174,53 +175,92 @@ function resolveBot(bots: readonly DemoBotWire[], event: ProtocolEvent): DemoBot
   return undefined;
 }
 
+function snapshotOpen(open: Map<string, DemoOpenTurn>): DemoOpenTurn[] {
+  return [...open.values()].sort((left, right) => right.startedSeq - left.startedSeq);
+}
+
+function applyAwakeEvent(open: Map<string, DemoOpenTurn>, bots: readonly DemoBotWire[], event: ProtocolEvent): void {
+  const bot = resolveBot(bots, event);
+  if (!bot) {
+    return;
+  }
+  if (event.type === "send.accepted") {
+    open.set(bot.id, {
+      botId: bot.id,
+      slug: bot.slug,
+      name: bot.name,
+      purpose: bot.purpose,
+      color: bot.color,
+      status: "queued",
+      handleId: event.handleId,
+      prompt: event.text,
+      startedSeq: event.seq,
+    });
+    return;
+  }
+  if (event.type === "turn.start") {
+    const previous = open.get(bot.id);
+    open.set(bot.id, {
+      botId: bot.id,
+      slug: bot.slug,
+      name: bot.name,
+      purpose: bot.purpose,
+      color: bot.color,
+      status: "running",
+      handleId: event.handleId ?? previous?.handleId,
+      prompt: event.text ?? previous?.prompt,
+      startedSeq: event.seq,
+    });
+    return;
+  }
+  if (event.type === "turn.end") {
+    const previous = open.get(bot.id);
+    if (!previous) {
+      return;
+    }
+    if (!event.handleId || !previous.handleId || event.handleId === previous.handleId) {
+      open.delete(bot.id);
+    }
+  }
+}
+
 export function foldAwake(bots: readonly DemoBotWire[], events: readonly ProtocolEvent[]): DemoOpenTurn[] {
   const open = new Map<string, DemoOpenTurn>();
   for (const event of events) {
-    const bot = resolveBot(bots, event);
-    if (!bot) {
-      continue;
-    }
-    if (event.type === "send.accepted") {
-      open.set(bot.id, {
-        botId: bot.id,
-        slug: bot.slug,
-        name: bot.name,
-        purpose: bot.purpose,
-        color: bot.color,
-        status: "queued",
-        handleId: event.handleId,
-        prompt: event.text,
-        startedSeq: event.seq,
-      });
-      continue;
-    }
-    if (event.type === "turn.start") {
-      const previous = open.get(bot.id);
-      open.set(bot.id, {
-        botId: bot.id,
-        slug: bot.slug,
-        name: bot.name,
-        purpose: bot.purpose,
-        color: bot.color,
-        status: "running",
-        handleId: event.handleId ?? previous?.handleId,
-        prompt: event.text ?? previous?.prompt,
-        startedSeq: event.seq,
-      });
-      continue;
-    }
-    if (event.type === "turn.end") {
-      const previous = open.get(bot.id);
-      if (!previous) {
-        continue;
-      }
-      if (!event.handleId || !previous.handleId || event.handleId === previous.handleId) {
-        open.delete(bot.id);
-      }
+    applyAwakeEvent(open, bots, event);
+  }
+  return snapshotOpen(open);
+}
+
+export function firstAwakeSeq(events: readonly ProtocolEvent[]): number {
+  for (const event of events) {
+    if (event.type === "send.accepted" || event.type === "turn.start") {
+      return event.seq;
     }
   }
-  return [...open.values()].sort((left, right) => right.startedSeq - left.startedSeq);
+  return 0;
+}
+
+export interface DemoStageFold {
+  readonly live: readonly DemoOpenTurn[];
+  readonly held: readonly DemoOpenTurn[];
+  readonly stage: readonly DemoOpenTurn[];
+  readonly holding: boolean;
+}
+
+export function foldAwakeStage(bots: readonly DemoBotWire[], events: readonly ProtocolEvent[]): DemoStageFold {
+  const open = new Map<string, DemoOpenTurn>();
+  let held: DemoOpenTurn[] = [];
+  for (const event of events) {
+    applyAwakeEvent(open, bots, event);
+    const live = snapshotOpen(open);
+    if (live.length > 0) {
+      held = live;
+    }
+  }
+  const live = snapshotOpen(open);
+  const holding = live.length === 0 && held.length > 0;
+  return { live, held, stage: holding ? held : live, holding };
 }
 
 export function activityAt(rows: readonly DemoActivity[], iso: string): DemoActivity | undefined {
@@ -254,20 +294,24 @@ export function activityLabel(status: DemoPaneStatus, activity?: DemoActivity): 
   return "Running";
 }
 
-export function projectFrame(bundle: DemoBundle, cursorSeq: number): DemoFrame {
-  const lastSeq = bundle.lastSeq;
-  const seq = Math.max(0, Math.min(cursorSeq, lastSeq));
+function paintFrame(
+  bundle: DemoBundle,
+  seq: number,
+  turns: readonly DemoOpenTurn[],
+  holding: boolean,
+): DemoFrame {
   const visible = bundle.events.filter((event) => event.seq <= seq);
   const current = visible[visible.length - 1];
-  const open = foldAwake(bundle.bots, visible);
-  const layout = mosaicLayout(open.length);
-  const awake: DemoAwakeBot[] = open.map((turn) => {
+  const layout = mosaicLayout(turns.length);
+  const awake: DemoAwakeBot[] = turns.map((turn) => {
     const messages = (bundle.transcripts[turn.botId] ?? []).filter((row) => row.seq <= seq);
     const lastActivity = activityAt(bundle.activities[turn.botId] ?? [], current?.t ?? "");
     return {
       ...turn,
-      activity: activityLabel(turn.status, lastActivity),
+      status: holding ? "queued" : turn.status,
+      activity: holding ? "Idle" : activityLabel(turn.status, lastActivity),
       messages,
+      held: holding,
     };
   });
   return {
@@ -281,6 +325,25 @@ export function projectFrame(bundle: DemoBundle, cursorSeq: number): DemoFrame {
     awake,
     layout,
   };
+}
+
+export function projectFrame(bundle: DemoBundle, cursorSeq: number): DemoFrame {
+  const lastSeq = bundle.lastSeq;
+  const seq = Math.max(0, Math.min(cursorSeq, lastSeq));
+  const visible = bundle.events.filter((event) => event.seq <= seq);
+  const open = foldAwake(bundle.bots, visible);
+  return paintFrame(bundle, seq, open, false);
+}
+
+export function projectStageFrame(bundle: DemoBundle, cursorSeq: number): DemoFrame {
+  const origin = firstAwakeSeq(bundle.events);
+  if (origin <= 0 || bundle.lastSeq <= 0) {
+    return projectFrame(bundle, cursorSeq);
+  }
+  const seq = Math.max(origin, Math.min(cursorSeq, bundle.lastSeq));
+  const visible = bundle.events.filter((event) => event.seq <= seq);
+  const folded = foldAwakeStage(bundle.bots, visible);
+  return paintFrame(bundle, seq, folded.stage, folded.holding);
 }
 
 export function playDelayMs(

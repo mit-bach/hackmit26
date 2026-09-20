@@ -914,8 +914,25 @@ def upgrade_ingestion_emails(ctx: CompanyScenarioContext) -> None:
         )
 
 
+VOLUME_CASH_EXCLUDE = {
+    "VEND-030",  # Northline near-duplicate; would join the grouped ACH pool
+    "VEND-031",  # Helios near-duplicate; would join the fee-netted wire pool
+    "VEND-032",  # Harbor near-duplicate
+    "VEND-042",  # Stripe Processing; would collide with provider payout matching
+    "VEND-043",  # Adyen NV; same
+}
+
+
+def _volume_cash_vendors(ctx: CompanyScenarioContext) -> list[dict]:
+    allowed = {vendor_id for vendor_id, _name, _seen in EXTRA_VENDORS} - VOLUME_CASH_EXCLUDE
+    rows = [row for row in ctx.vendors.values() if row["vendor_id"] in allowed]
+    if not rows:
+        raise ValueError("no safe counterparties for September volume bank lines")
+    return rows
+
+
 def expand_september_bank(ctx: CompanyScenarioContext, rng: random.Random) -> None:
-    vendors = [row for row in ctx.vendors.values() if not row.get("unusual")]
+    vendors = _volume_cash_vendors(ctx)
     needed = 200 - len(ctx.bank_transactions)
     if needed <= 0:
         return

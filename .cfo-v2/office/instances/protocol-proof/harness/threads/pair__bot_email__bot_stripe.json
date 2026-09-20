@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_email:bot_stripe",
+  "threadId": "pair:bot_email:bot_stripe",
+  "name": "Email ↔ Stripe",
+  "memberIds": [
+    "bot_email",
+    "bot_stripe"
+  ],
+  "createdAt": 1789904959138,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_eddc38d6-fd91-4dec-be62-7697852e8549",
+      "handleId": "h_eddc38d6-fd91-4dec-be62-7697852e8549",
+      "role": "bot",
+      "kind": "text",
+      "text": "what color grass typically is. Use ask_bot to send Stripe that question and wait for their reply. Then tell me what Stripe said.",
+      "at": 1789904959138,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_eddc38d6-fd91-4dec-be62-7697852e8549",
+      "handleId": "h_eddc38d6-fd91-4dec-be62-7697852e8549",
+      "role": "bot",
+      "kind": "text",
+      "text": "Green. Grass is typically green.",
+      "at": 1789904962351,
+      "from": {
+        "botId": "bot_stripe",
+        "name": "Stripe",
+        "color": "blue"
+      }
+    }
+  ]
+}

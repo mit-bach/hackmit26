@@ -341,8 +341,8 @@ export function DemoPage(): React.ReactElement {
             <div className="max-w-md text-[13px] text-ink-secondary">{t("demo.empty.hint")}</div>
           </div>
         ) : frame ? (
-          <div className="relative h-full w-full" data-demo-playing={playing ? "true" : "false"} data-demo-timing={settings.timing}>
-            {frame.awake.length === 0 ? (
+          <div className="relative h-full w-full" data-demo-playing={playing ? "true" : "false"} data-demo-timing={settings.timing} data-demo-held={frame.awake.some((pane) => pane.held) ? "true" : "false"}>
+            {frame.awake.length === 0 && lastSeq === 0 ? (
               <WipeStage lastSeq={lastSeq} caption={caption(frame)} />
             ) : null}
             <DemoMosaic
@@ -734,6 +734,7 @@ function DemoMosaic({
           key={item.pane.botId}
           data-bot-slug={item.pane.slug}
           data-exiting={item.exiting ? "true" : "false"}
+          data-held={item.pane.held ? "true" : "false"}
           className="demo-mosaic-cell absolute overflow-hidden p-1"
           style={{
             left: `${item.cell.left}%`,
@@ -784,7 +785,7 @@ function DemoPane({
         <MausAvatar
           color={asMausColor(pane.color)}
           size={solo ? 36 : 28}
-          state={pane.status === "running" ? "working" : "loading"}
+          state={pane.held ? "idle" : pane.status === "running" ? "working" : "loading"}
           label={pane.name}
         />
         <div className="min-w-0 flex-1">
@@ -794,11 +795,11 @@ function DemoPane({
         <div
           className={cn(
             "flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px]",
-            pane.status === "running" ? "bg-accent/15 text-accent" : "bg-raised text-ink-secondary",
+            pane.held ? "bg-raised text-ink-secondary" : pane.status === "running" ? "bg-accent/15 text-accent" : "bg-raised text-ink-secondary",
           )}
         >
-          {pane.status === "running" ? <WorkingDots size={3} /> : <Radio size={11} />}
-          {pane.activity}
+          {pane.held ? <Radio size={11} /> : pane.status === "running" ? <WorkingDots size={3} /> : <Radio size={11} />}
+          {pane.held ? t("demo.pane.idle") : pane.activity}
         </div>
       </div>
       <div ref={scroller} className="min-h-0 flex-1 space-y-3 overflow-y-auto px-3 py-3">

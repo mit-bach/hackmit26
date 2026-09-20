@@ -104,6 +104,16 @@ export function piSessionDir(computerRoot: string, botId: string): string {
   return join(botDir(computerRoot, botId), "pi-session");
 }
 
+/** Computer-wide tool protocol. Regenerated on init; not a Bot Memory file. */
+export function protocolCardPath(computerRoot: string): string {
+  return join(harnessRoot(computerRoot), "PROTOCOL.md");
+}
+
+/** Per-Bot copy of the tool protocol, next to the session tree. */
+export function botSystemPath(computerRoot: string, botId: string): string {
+  return join(botDir(computerRoot, botId), "SYSTEM.md");
+}
+
 /** Durable AskBot prompt/reply posts. Pair UI reads this file, not session folds. */
 export function threadsDir(computerRoot: string): string {
   return join(harnessRoot(computerRoot), "threads");

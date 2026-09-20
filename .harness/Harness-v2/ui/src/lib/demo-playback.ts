@@ -1,5 +1,5 @@
 import {
-  projectFrame,
+  projectStageFrame,
   type DemoAwakeBot,
   type DemoBundle,
   type DemoFrame,
@@ -32,8 +32,8 @@ export const DEFAULT_DEMO_PLAYBACK: DemoPlaybackSettings = {
   streamHold: 0.24,
   streamCharsPerSec: 72,
   showTimestamps: false,
-  lingerMs: 560,
-  leadMs: 420,
+  lingerMs: 280,
+  leadMs: 0,
 };
 
 export interface DemoBeat {
@@ -71,7 +71,7 @@ export interface DemoCursor {
   readonly elapsedInBeat: number;
 }
 
-const PLAYBACK_STORAGE_KEY = "harness-demo-playback-v1";
+const PLAYBACK_STORAGE_KEY = "harness-demo-playback-v2";
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -176,6 +176,21 @@ interface WallMark {
   readonly beatIndex: number;
 }
 
+function openingCursor(beats: readonly DemoBeat[], settings: DemoPlaybackSettings): DemoCursor {
+  const first = beats[0];
+  if (!first) {
+    return { seq: 0, wallMs: 0, beatIndex: -1, revealFrac: 0, spanMs: beatSlotMs(settings), elapsedInBeat: 0 };
+  }
+  return {
+    seq: first.seq,
+    wallMs: first.wallMs,
+    beatIndex: 0,
+    revealFrac: 0,
+    spanMs: beatSlotMs(settings),
+    elapsedInBeat: 0,
+  };
+}
+
 export function buildWallMarks(beats: readonly DemoBeat[], settings: DemoPlaybackSettings): WallMark[] {
   if (beats.length === 0) {
     return [{ showMs: 0, wallMs: 0, seq: 0, beatIndex: -1 }];
@@ -183,8 +198,12 @@ export function buildWallMarks(beats: readonly DemoBeat[], settings: DemoPlaybac
   const speed = settings.wallSpeed > 0 ? settings.wallSpeed : 1;
   const maxGap = Math.max(0, settings.wallMaxGapMs);
   const first = beats[0]!;
-  const marks: WallMark[] = [{ showMs: 0, wallMs: first.wallMs, seq: 0, beatIndex: -1 }];
-  let show = Math.max(0, settings.leadMs);
+  const marks: WallMark[] = [];
+  let show = 0;
+  if (settings.leadMs > 0) {
+    marks.push({ showMs: 0, wallMs: first.wallMs, seq: first.seq, beatIndex: 0 });
+    show = settings.leadMs;
+  }
   let prevWall = first.wallMs;
   for (let i = 0; i < beats.length; i += 1) {
     const beat = beats[i]!;
@@ -207,9 +226,8 @@ export function buildWallMarks(beats: readonly DemoBeat[], settings: DemoPlaybac
 
 function wallCursor(beats: readonly DemoBeat[], showMs: number, settings: DemoPlaybackSettings): DemoCursor {
   const marks = buildWallMarks(beats, settings);
-  if (marks.length === 0 || showMs <= 0 || beats.length === 0) {
-    const wall = beats[0]?.wallMs ?? 0;
-    return { seq: 0, wallMs: wall, beatIndex: -1, revealFrac: 0, spanMs: settings.leadMs, elapsedInBeat: 0 };
+  if (marks.length === 0 || beats.length === 0) {
+    return openingCursor(beats, settings);
   }
   let index = 0;
   for (let i = 0; i < marks.length; i += 1) {
@@ -235,15 +253,23 @@ function wallCursor(beats: readonly DemoBeat[], showMs: number, settings: DemoPl
 }
 
 function beatCursor(beats: readonly DemoBeat[], showMs: number, settings: DemoPlaybackSettings): DemoCursor {
-  if (beats.length === 0 || showMs <= 0) {
-    return { seq: 0, wallMs: beats[0]?.wallMs ?? 0, beatIndex: -1, revealFrac: 0, spanMs: settings.leadMs, elapsedInBeat: 0 };
+  if (beats.length === 0) {
+    return openingCursor(beats, settings);
   }
   const lead = Math.max(0, settings.leadMs);
-  if (showMs <= lead) {
-    return { seq: 0, wallMs: beats[0]!.wallMs, beatIndex: -1, revealFrac: 0, spanMs: lead, elapsedInBeat: showMs };
+  const first = beats[0]!;
+  if (lead > 0 && showMs < lead) {
+    return {
+      seq: first.seq,
+      wallMs: first.wallMs,
+      beatIndex: 0,
+      revealFrac: 0,
+      spanMs: lead,
+      elapsedInBeat: showMs,
+    };
   }
   const slot = beatSlotMs(settings);
-  const into = showMs - lead;
+  const into = Math.max(0, showMs - lead);
   const index = Math.min(beats.length - 1, Math.floor(into / slot));
   const elapsed = into - index * slot;
   const beat = beats[index]!;
@@ -263,11 +289,11 @@ export function revealFraction(
   textLen: number,
   settings: DemoPlaybackSettings,
 ): number {
-  if (elapsedMs <= 0) {
-    return 0;
-  }
   if (!settings.stream) {
     return 1;
+  }
+  if (elapsedMs <= 0) {
+    return 0;
   }
   const span = Math.max(1, spanMs);
   const hold = clamp(settings.streamHold, 0, 0.45);
@@ -334,7 +360,7 @@ export function projectPlayhead(
   const totalMs = timelineTotalMs(beats, settings);
   const clamped = clamp(showMs, 0, Math.max(0, totalMs));
   const cursor = cursorAt(beats, clamped, settings);
-  const frame = projectFrame(bundle, cursor.seq);
+  const frame = projectStageFrame(bundle, cursor.seq);
   const painted = applyReveals(frame, beats, cursor, settings);
   return {
     showMs: clamped,
@@ -357,9 +383,9 @@ export function formatShowClock(ms: number): string {
 
 export function stepBeat(beats: readonly DemoBeat[], beatIndex: number, delta: number): number {
   if (beats.length === 0) {
-    return -1;
+    return 0;
   }
-  return clamp(beatIndex + delta, -1, beats.length - 1);
+  return clamp(beatIndex + delta, 0, beats.length - 1);
 }
 
 export function showMsForBeat(beats: readonly DemoBeat[], beatIndex: number, settings: DemoPlaybackSettings): number {

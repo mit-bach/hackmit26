@@ -39,6 +39,7 @@ import {
   publicOperatorConfig,
 } from "./operator-config.ts";
 import { buildSnapshot, type ApiContext } from "./api.ts";
+import { isPairChannelId } from "./pair-id.ts";
 
 export interface DeskResult {
   readonly status: number;
@@ -915,6 +916,9 @@ export function handleDeskCompat(
   const groupOne = /^\/api\/groups\/([^/]+)$/.exec(path);
   if (groupOne) {
     const roomId = decodeURIComponent(groupOne[1] ?? "");
+    if (isPairChannelId(roomId)) {
+      return undefined;
+    }
     const roster = loadRoster(computerRoot);
     const room = findRoom(roster, roomId);
     if (!room) {

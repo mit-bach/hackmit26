@@ -89,6 +89,7 @@ import { SidebarSectionHeader } from "./SidebarSectionHeader";
 import { useShowThreads } from "@/lib/thread-preferences";
 import { AttentionThreadRows, crossBotAttentionThreads, SidebarBotActivity, sidebarBotActivityTasks } from "./SidebarBotActivity";
 import { SidebarAttentionPanel } from "./SidebarAttentionPanel";
+import { OfficeInstanceControl } from "./OfficeInstanceControl";
 import { ShortcutHint } from "./ShortcutHint";
 
 const SECTION_LABEL_KEYS: Record<string, LocaleKey> = {
@@ -1794,6 +1795,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
             className="w-full bg-transparent text-[12.5px] text-ink placeholder:text-ink-secondary focus:outline-none"
           />
         </div>
+        <OfficeInstanceControl />
       </div>
 
       {attentionPinned && density !== "icons" && (

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
+import { executeFakeTurn } from "../src/ask-peer.ts";
 import { awaitTurn } from "../src/await.ts";
 import { findHandle } from "../src/handle.ts";
 import { writeMemoryFile, readMemoryFile } from "../src/memory.ts";
@@ -17,10 +18,9 @@ test("cfo-floor: a six-Bot pay cycle completes on disk without a model", async (
   const computer = makeCfoComputer();
   const roster = loadRoster(computer);
   const slugs = roster.bots.map((bot) => bot.slug);
-  const workers = startFakeWorkers(computer, slugs, async (slug, item) => ({
-    text: `${slug} handled ${item.handleId}`,
-    paths: item.paths,
-  }));
+  const workers = startFakeWorkers(computer, slugs, (slug, item) =>
+    executeFakeTurn(computer, slug, item, 4000),
+  );
 
   const ingest = findBot(roster, "ingest");
   const ap = findBot(roster, "ap");

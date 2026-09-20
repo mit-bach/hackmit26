@@ -1,7 +1,11 @@
 import { awaitTurn } from "./await.ts";
-import { findHandle } from "./handle.ts";
+import { findHandle, isTerminalStatus, readHandle, transitionHandle } from "./handle.ts";
+import { nowIso } from "./ids.ts";
+import { appendProtocol } from "./protocol-log.ts";
 import { findBot, loadRoster } from "./roster.ts";
 import { sendPrompt } from "./send.ts";
+import { appendThreadReply } from "./server/thread-log.ts";
+import { appendTranscript } from "./transcript.ts";
 import type { AskPeerResult, BotRecord, InboxItem, ParsedAsk, Roster, TurnResult } from "./types.ts";
 
 export interface AskPeerRequest {
@@ -10,6 +14,14 @@ export interface AskPeerRequest {
   readonly to: string;
   readonly prompt: string;
   readonly timeoutMs?: number;
+  readonly inbound?: InboxItem;
+}
+
+export interface ReplyPeerRequest {
+  readonly computerRoot: string;
+  readonly fromId: string;
+  readonly inbound: InboxItem;
+  readonly text: string;
 }
 
 const UNNAMED_ASK =
@@ -184,6 +196,125 @@ export async function askPeer(request: AskPeerRequest): Promise<AskPeerResult> {
   };
 }
 
+/** Receiver posts in the pair thread and completes the inbound Handle. Does not wait. */
+export function replyPeerMessage(request: ReplyPeerRequest): AskPeerResult {
+  const trimmed = request.text.trim();
+  if (trimmed.length === 0) {
+    return { accepted: false, reason: "empty reply" };
+  }
+  const inbound = request.inbound;
+  if (inbound.kind !== "a2a_handoff") {
+    return { accepted: false, reason: "not a peer wake" };
+  }
+  const roster = loadRoster(request.computerRoot);
+  const self = findBot(roster, request.fromId);
+  const peer = findBot(roster, inbound.from);
+  if (!self || !peer) {
+    return { accepted: false, reason: "unknown bot" };
+  }
+  const handle = readHandle(request.computerRoot, inbound.to, inbound.handleId);
+  if (!handle) {
+    return { accepted: false, reason: "unknown handle" };
+  }
+  if (isTerminalStatus(handle.status)) {
+    appendThreadReply(
+      request.computerRoot,
+      self.id,
+      peer.id,
+      inbound.handleId,
+      trimmed,
+      nowIso(),
+    );
+    return {
+      accepted: true,
+      handleId: inbound.handleId,
+      status: handle.status,
+      done: true,
+      result: handle.result ?? trimmed,
+    };
+  }
+  if (handle.status === "accepted" || handle.status === "queued") {
+    transitionHandle(request.computerRoot, inbound.to, inbound.handleId, "running");
+  }
+  const createdAt = nowIso();
+  appendThreadReply(request.computerRoot, self.id, peer.id, inbound.handleId, trimmed, createdAt);
+  const event = appendProtocol(request.computerRoot, {
+    type: "thread.reply",
+    from: self.id,
+    to: peer.id,
+    handleId: inbound.handleId,
+    slug: self.slug,
+    status: "completed",
+    text: trimmed,
+  });
+  appendProtocol(request.computerRoot, {
+    type: "turn.end",
+    from: inbound.from,
+    to: inbound.to,
+    handleId: inbound.handleId,
+    slug: self.slug,
+    status: "completed",
+    text: trimmed,
+  });
+  const updated = transitionHandle(request.computerRoot, inbound.to, inbound.handleId, "completed", {
+    result: trimmed,
+    seq: event.seq,
+  });
+  appendTranscript(request.computerRoot, self.id, {
+    seq: event.seq,
+    t: event.t,
+    kind: "handoff.done",
+    text: `${self.slug} replied to ${peer.slug} on handle ${inbound.handleId}`.slice(0, 500),
+    handleId: inbound.handleId,
+    from: self.id,
+    to: peer.id,
+  });
+  appendTranscript(request.computerRoot, peer.id, {
+    seq: event.seq,
+    t: event.t,
+    kind: "handoff.done",
+    text: `${self.slug} replied to ${peer.slug} on handle ${inbound.handleId}`.slice(0, 500),
+    handleId: inbound.handleId,
+    from: self.id,
+    to: peer.id,
+  });
+  return {
+    accepted: true,
+    handleId: inbound.handleId,
+    status: updated.status,
+    done: true,
+    result: trimmed,
+  };
+}
+
+/**
+ * ask_bot: reply if this turn is a peer wake from that Bot, otherwise send and wait.
+ */
+export async function sendBotMessage(request: AskPeerRequest): Promise<AskPeerResult> {
+  const roster = loadRoster(request.computerRoot);
+  const self = findBot(roster, request.from);
+  const peer = findBot(roster, request.to);
+  if (!self || !peer) {
+    return { accepted: false, reason: "unknown bot" };
+  }
+  if (self.id === peer.id) {
+    return { accepted: false, reason: "cannot message self" };
+  }
+  const inbound = request.inbound;
+  if (inbound && inbound.kind === "a2a_handoff") {
+    const sender = findBot(roster, inbound.from);
+    if (sender && sender.id === peer.id) {
+      return replyPeerMessage({
+        computerRoot: request.computerRoot,
+        fromId: self.id,
+        inbound,
+        text: request.prompt,
+      });
+    }
+  }
+  return askPeer(request);
+}
+
 export async function tryOperatorAskHandoff(
   computerRoot: string,
   fromKey: string,
@@ -219,5 +350,18 @@ export async function executeFakeTurn(
   if (handed) {
     return handed;
   }
-  return { text: `[${slug}] ${item.prompt}`.slice(0, 500), paths: item.paths };
+  const text = `[${slug}] ${item.prompt}`.slice(0, 500);
+  if (item.kind === "a2a_handoff") {
+    const roster = loadRoster(computerRoot);
+    const self = findBot(roster, slug);
+    if (self) {
+      replyPeerMessage({
+        computerRoot,
+        fromId: self.id,
+        inbound: item,
+        text,
+      });
+    }
+  }
+  return { text, paths: item.paths };
 }

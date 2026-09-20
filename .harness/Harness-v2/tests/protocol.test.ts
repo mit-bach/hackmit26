@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 
+import { replyPeerMessage } from "../src/ask-peer.ts";
 import { awaitTurn } from "../src/await.ts";
 import { findHandle } from "../src/handle.ts";
 import { bindLane, drainAll, noteBusyQueue, preemptPeerForUser, startNextTurn } from "../src/lane.ts";
@@ -70,10 +71,16 @@ test("accept happens before the receiver runs, await completes after the turn en
   const protocolAfterAccept = readProtocol(computer);
   assert.ok(protocolAfterAccept.some((row) => row.type === "send.accepted" && row.handleId === sent.handleId));
 
-  const n = await drainAll(betaLane, async (item) => ({
-    text: `PONG ${item.prompt}`,
-    paths: item.paths,
-  }));
+  const n = await drainAll(betaLane, async (item) => {
+    const text = `PONG ${item.prompt}`;
+    replyPeerMessage({
+      computerRoot: computer,
+      fromId: beta.id,
+      inbound: item,
+      text,
+    });
+    return { text, paths: item.paths };
+  });
   assert.equal(n, 1);
 
   const afterHandle = findHandle(computer, sent.handleId);

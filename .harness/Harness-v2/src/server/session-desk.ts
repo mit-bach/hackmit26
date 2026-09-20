@@ -10,6 +10,7 @@ import { findBot } from "../roster.ts";
 import type { Roster } from "../types.ts";
 import { pairChannelId } from "./pair-id.ts";
 import { listPiSessions } from "./pi-sessions.ts";
+import { listThreadFiles } from "./thread-log.ts";
 
 const MAUS_COLORS = [
   "teal",
@@ -27,6 +28,7 @@ const MAUS_COLORS = [
 type MausColor = (typeof MAUS_COLORS)[number];
 
 const ASK_TOOLS = new Set(["ask_bot", "bot_ask", "bot_send_prompt"]);
+const OPERATOR_TOOLS = new Set(["message_operator"]);
 
 export interface DeskMessage {
   readonly id: string;
@@ -163,7 +165,7 @@ export function displayWake(text: string): string {
     if (/^Required tool:/i.test(trimmed)) {
       continue;
     }
-    if (trimmed === "---" || /^Harness note:/i.test(trimmed)) {
+    if (trimmed === "---" || /^Harness note:/i.test(trimmed) || /^Tools:/i.test(trimmed)) {
       break;
     }
     if (/^Your assistant text is the reply/i.test(trimmed)) {
@@ -232,9 +234,75 @@ function commChip(
   };
 }
 
+function toolArgText(args: unknown): string {
+  if (!isRecord(args)) {
+    return "";
+  }
+  return asString(args.text) || asString(args.message);
+}
+
+function commChipsFromThreads(
+  computerRoot: string,
+  botId: string,
+  roster: Roster,
+): DeskMessage[] {
+  const out: DeskMessage[] = [];
+  for (const file of listThreadFiles(computerRoot)) {
+    if (!file.memberIds.includes(botId)) {
+      continue;
+    }
+    const otherId = file.memberIds.find((id) => id !== botId);
+    if (!otherId) {
+      continue;
+    }
+    for (const post of file.messages) {
+      const outbound = post.from.botId === botId;
+      const peer = findBot(roster, outbound ? otherId : post.from.botId);
+      if (!peer) {
+        continue;
+      }
+      const recv = !outbound;
+      const comm = commChip(
+        roster,
+        outbound ? botId : post.from.botId,
+        outbound ? otherId : botId,
+        post.handleId,
+        recv,
+      );
+      if (!comm) {
+        continue;
+      }
+      out.push({
+        id: outbound ? `comm-${post.id}` : `comm-recv-${post.id}`,
+        role: "bot",
+        kind: "activity",
+        text: outbound ? `Messaged @${peer.name}` : `Message from @${peer.name}`,
+        at: post.at,
+        comm,
+        tool: {
+          name: outbound ? `Messaged @${peer.name}` : `Message from @${peer.name}`,
+          ok: true,
+        },
+      });
+    }
+  }
+  return out;
+}
+
+function mergeDesk(session: readonly DeskMessage[], chips: readonly DeskMessage[]): DeskMessage[] {
+  const seen = new Set(session.map((row) => row.id));
+  const extra = chips.filter((row) => !seen.has(row.id));
+  return [...session, ...extra].sort((left, right) => {
+    if (left.at !== right.at) {
+      return left.at - right.at;
+    }
+    return left.id.localeCompare(right.id);
+  });
+}
+
 /**
- * One-to-one desk events from this Bot's session files, oldest file first.
- * AskBot tools get a thread chip after the tool result. Peer wakes stay visible.
+ * Operator DM from this Bot's session files plus pair-thread comm chips.
+ * Peer wake bodies stay in the messages tab, not on this desk.
  */
 export function projectSessionDesk(
   computerRoot: string,
@@ -250,7 +318,6 @@ export function projectSessionDesk(
   for (const file of files) {
     const abs = join(piSessionDir(computerRoot, botId), file.name);
     let wakeHandle: string | undefined;
-    let wakeFrom: string | undefined;
     let wakeKindNow: "operator_dm" | "peer_dm" | "room" = "operator_dm";
     const pending = new Map<string, number>();
     for (const row of readJsonl(abs)) {
@@ -265,49 +332,37 @@ export function projectSessionDesk(
         const wake = contentText(inner);
         wakeKindNow = wakeKind(wake);
         wakeHandle = wakeField(wake, "handle");
-        wakeFrom = wakeField(wake, "from");
+        if (wakeKindNow === "peer_dm") {
+          continue;
+        }
         const text = displayWake(wake);
         if (text.length === 0) {
           continue;
         }
-        const peer = wakeKindNow === "peer_dm" && wakeFrom ? findBot(roster, wakeFrom) : undefined;
         out.push({
           id: wakeHandle && wakeKindNow === "operator_dm" ? wakeHandle : `sess-${rowId}`,
           role: "user",
           kind: "text",
           text,
           at,
-          ...(peer ? { peerAsk: { botId: peer.id, name: peer.name } } : {}),
         });
-        if (wakeKindNow === "peer_dm" && wakeFrom && wakeHandle) {
-          const comm = commChip(roster, wakeFrom, botId, wakeHandle, true);
-          if (comm) {
-            const fromBot = findBot(roster, wakeFrom);
-            out.push({
-              id: `comm-recv-${wakeHandle}`,
-              role: "bot",
-              kind: "activity",
-              text: `Message from @${fromBot?.name ?? wakeFrom}`,
-              at,
-              comm,
-              tool: { name: `Message from @${fromBot?.name ?? wakeFrom}`, ok: true },
-            });
-          }
-        }
         continue;
       }
       if (role === "assistant") {
-        const reasoning = thinkingText(inner);
-        const text = contentText(inner);
-        if (reasoning.length > 0 || text.length > 0) {
-          out.push({
-            id: `sess-${rowId}`,
-            role: "bot",
-            kind: "text",
-            text,
-            at,
-            ...(reasoning.length > 0 ? { reasoning } : {}),
-          });
+        const peerTurn = wakeKindNow === "peer_dm";
+        if (!peerTurn) {
+          const reasoning = thinkingText(inner);
+          const text = contentText(inner);
+          if (reasoning.length > 0 || text.length > 0) {
+            out.push({
+              id: `sess-${rowId}`,
+              role: "bot",
+              kind: "text",
+              text,
+              at,
+              ...(reasoning.length > 0 ? { reasoning } : {}),
+            });
+          }
         }
         if (!Array.isArray(inner.content)) {
           continue;
@@ -316,8 +371,24 @@ export function projectSessionDesk(
           if (!isRecord(part) || asString(part.type) !== "toolCall") {
             continue;
           }
-          const callId = asString(part.id);
           const name = connectedName(asString(part.name), part.arguments);
+          if (peerTurn && OPERATOR_TOOLS.has(name)) {
+            const spoken = toolArgText(part.arguments);
+            if (spoken.length > 0) {
+              out.push({
+                id: `sess-op-${rowId}`,
+                role: "bot",
+                kind: "text",
+                text: spoken,
+                at,
+              });
+            }
+            continue;
+          }
+          if (peerTurn) {
+            continue;
+          }
+          const callId = asString(part.id);
           const input = stringifyUnknown(part.arguments);
           const chipId = callId.length > 0 ? `tool-${callId}` : `tool-${rowId}-${out.length}`;
           out.push({
@@ -340,6 +411,9 @@ export function projectSessionDesk(
         continue;
       }
       if (role === "toolResult" || role === "tool") {
+        if (wakeKindNow === "peer_dm") {
+          continue;
+        }
         const callId = asString(inner.toolCallId) || asString(row.toolCallId);
         const index = callId.length > 0 ? pending.get(callId) : undefined;
         const output = clip(toolResultText(inner), 8000);
@@ -381,7 +455,7 @@ export function projectSessionDesk(
       }
     }
   }
-  return out;
+  return mergeDesk(out, commChipsFromThreads(computerRoot, botId, roster));
 }
 
 function existingToolName(out: readonly DeskMessage[], index: number | undefined): string {

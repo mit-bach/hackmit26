@@ -1,0 +1,38 @@
+{
+  "version": "1",
+  "comment": "Session 06. Compiler-owned grants.json already matches constructors. This file is the must-not overlay for apply and collect.",
+  "byDisplayName": {
+    "Cash Application Agent": {
+      "ops": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "skills": ["cash-application"],
+      "outputType": "CashApplicationProposal",
+      "mustNot": [
+        "accrual.tools.create_accrual",
+        "scheduling.tools.get_approved_pool",
+        "scheduling.tools.get_payment_candidates",
+        "ar.tools.get_collection_candidates",
+        "ar.tools.get_ar_close_snapshot"
+      ]
+    },
+    "Collections Agent": {
+      "ops": [
+        "ar.tools.get_collection_candidates",
+        "ar.tools.get_collection_invoice_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "skills": ["ar-collections-policy"],
+      "outputType": "CollectionDecision",
+      "mustNot": [
+        "ar.tools.get_cash_application_facts",
+        "accrual.tools.create_accrual",
+        "scheduling.tools.get_approved_pool",
+        "ar.tools.get_ar_close_snapshot"
+      ]
+    }
+  }
+}

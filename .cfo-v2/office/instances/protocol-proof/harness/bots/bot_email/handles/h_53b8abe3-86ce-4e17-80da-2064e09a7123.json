@@ -1,0 +1,19 @@
+{
+  "id": "h_53b8abe3-86ce-4e17-80da-2064e09a7123",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Ask Stripe what color grass typically is. Use ask_bot to send Stripe that question and wait for their reply. Then tell me what Stripe said.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T11:49:15.799Z",
+  "updatedAt": "2026-09-20T11:49:24.213Z",
+  "result": "Stripe said: **Green. Grass is typically green.**",
+  "resultPaths": [],
+  "seq": 7
+}

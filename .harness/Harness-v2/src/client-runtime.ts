@@ -189,10 +189,14 @@ export function overlayOperatorConfig(
   runtime: ClientRuntime = loadClientRuntime(computerRoot),
 ): OperatorConfig {
   applyClientAttach(computerRoot, runtime);
-  const extras = uniqueStrings([
-    ...operator.extraExtensions,
-    ...runtimeExtensions(computerRoot, runtime),
-  ]);
+  const fromClient = runtimeExtensions(computerRoot, runtime);
+  const extras = fromClient.length > 0
+    ? uniqueStrings(fromClient)
+    : uniqueStrings(
+        operator.extraExtensions
+          .map((item) => resolveClientPath(computerRoot, item))
+          .filter((path) => existsSync(path)),
+      );
   const clientFeatures = runtime.features;
   const features: OperatorFeatures = featuresAreDefault(operator.features) && clientFeatures
     ? {
@@ -212,7 +216,7 @@ export function overlayOperatorConfig(
     provider: operator.provider ?? runtime.provider,
     model: operator.model ?? runtime.model,
     thinkingLevel: operator.thinkingLevel ?? runtime.thinkingLevel,
-    extraExtensions: extras.length > 0 ? extras : operator.extraExtensions,
+    extraExtensions: extras,
     clientSkills: operator.clientSkills || runtime.clientSkills,
     features,
   };

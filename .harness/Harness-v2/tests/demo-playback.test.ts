@@ -114,9 +114,10 @@ test("beat timeline is lead plus one slot per transcript line", () => {
   const settings = clampPlaybackSettings({ timing: "beat", beatMs: 1000, beatSpeed: 2, leadMs: 400 });
   assert.equal(beatSlotMs(settings), 500);
   assert.equal(timelineTotalMs(beats, settings), 400 + 3 * 500);
-  const wipe = cursorAt(beats, 200, settings);
-  assert.equal(wipe.seq, 0);
-  assert.equal(wipe.beatIndex, -1);
+  const held = cursorAt(beats, 200, settings);
+  assert.equal(held.seq, 2);
+  assert.equal(held.beatIndex, 0);
+  assert.equal(held.revealFrac, 0);
   const first = cursorAt(beats, 401, settings);
   assert.equal(first.seq, 2);
   assert.equal(first.beatIndex, 0);
@@ -199,4 +200,92 @@ test("playhead streams the current beat then holds, without jumping panes", () =
 test("formatShowClock pads seconds", () => {
   assert.equal(formatShowClock(0), "0:00");
   assert.equal(formatShowClock(65_000), "1:05");
+});
+
+test("playhead never drops to an empty stage after the first send", () => {
+  const bundle: DemoBundle = {
+    source: "recording",
+    lastSeq: 6,
+    bots: [
+      { id: "bot_email", slug: "email", name: "Email", purpose: "inbox", color: "teal" },
+      { id: "bot_ap", slug: "ap", name: "AP", purpose: "bills", color: "blue" },
+    ],
+    events: [
+      {
+        t: "2026-09-20T10:00:00.000Z",
+        seq: 1,
+        type: "send.accepted",
+        to: "bot_email",
+        slug: "email",
+        handleId: "h_email",
+        text: "hello email",
+      },
+      {
+        t: "2026-09-20T10:00:00.100Z",
+        seq: 2,
+        type: "turn.start",
+        to: "bot_email",
+        slug: "email",
+        handleId: "h_email",
+      },
+      {
+        t: "2026-09-20T10:00:01.000Z",
+        seq: 3,
+        type: "turn.end",
+        to: "bot_email",
+        slug: "email",
+        handleId: "h_email",
+      },
+      {
+        t: "2026-09-20T10:00:08.000Z",
+        seq: 4,
+        type: "send.accepted",
+        to: "bot_ap",
+        slug: "ap",
+        handleId: "h_ap",
+        text: "please pay",
+      },
+      {
+        t: "2026-09-20T10:00:08.100Z",
+        seq: 5,
+        type: "turn.start",
+        to: "bot_ap",
+        slug: "ap",
+        handleId: "h_ap",
+      },
+      {
+        t: "2026-09-20T10:00:09.000Z",
+        seq: 6,
+        type: "turn.end",
+        to: "bot_ap",
+        slug: "ap",
+        handleId: "h_ap",
+      },
+    ],
+    transcripts: {
+      bot_email: [
+        { seq: 2, t: "2026-09-20T10:00:00.100Z", kind: "turn.start", text: "hello email" },
+        { seq: 3, t: "2026-09-20T10:00:01.000Z", kind: "handoff.done", text: "parked" },
+      ],
+      bot_ap: [
+        { seq: 5, t: "2026-09-20T10:00:08.100Z", kind: "turn.start", text: "please pay this bill" },
+        { seq: 6, t: "2026-09-20T10:00:09.000Z", kind: "handoff.done", text: "queued" },
+      ],
+    },
+    activities: {},
+  };
+  const settings = clampPlaybackSettings({ timing: "beat", beatMs: 400, leadMs: 0, stream: false });
+  const open = projectPlayhead(bundle, 0, settings);
+  assert.equal(open.frame.awake.length, 1);
+  assert.equal(open.frame.awake[0]?.slug, "email");
+  const gap = projectPlayhead(bundle, showMsForBeat(collectBeats(bundle), 1, settings), settings);
+  assert.equal(gap.seq, 3);
+  assert.equal(gap.frame.awake.length, 1);
+  assert.equal(gap.frame.awake[0]?.slug, "email");
+  assert.equal(gap.frame.awake[0]?.held, true);
+  const total = timelineTotalMs(collectBeats(bundle), settings);
+  for (let show = 0; show <= total; show += 50) {
+    const head = projectPlayhead(bundle, show, settings);
+    assert.ok(head.frame.awake.length >= 1, `empty stage at ${show}ms seq ${head.seq}`);
+  }
 });

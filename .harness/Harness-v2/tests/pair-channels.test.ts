@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 
-import { askPeer } from "../src/ask-peer.ts";
+import { askPeer, executeFakeTurn } from "../src/ask-peer.ts";
 import { piSessionDir } from "../src/paths.ts";
 import { readProtocol } from "../src/protocol-log.ts";
 import { loadRoster } from "../src/roster.ts";
@@ -14,6 +14,8 @@ import {
   listPairChannels,
   pairChannelId,
 } from "../src/server/pair-channels.ts";
+import { startServer } from "../src/server/http.ts";
+import { appendThreadAsk, appendThreadReply } from "../src/server/thread-log.ts";
 import { startFakeWorkers } from "../src/worker.ts";
 import { makeComputer } from "./helpers.ts";
 
@@ -25,10 +27,9 @@ test("pairChannelId is order-independent", () => {
 
 test("listPairChannels projects Alpha→Beta handoff as a read-only dm group", async () => {
   const computer = makeComputer();
-  const workers = startFakeWorkers(computer, ["beta"], async (slug, item) => ({
-    text: `${slug} says blue for: ${item.prompt}`,
-    paths: [],
-  }));
+  const workers = startFakeWorkers(computer, ["beta"], (slug, item) =>
+    executeFakeTurn(computer, slug, item, 4000),
+  );
   const answered = await askPeer({
     computerRoot: computer,
     from: "alpha",
@@ -51,17 +52,16 @@ test("listPairChannels projects Alpha→Beta handoff as a read-only dm group", a
   assert.equal(channel.name, "Alpha ↔ Beta");
   assert.deepEqual([...channel.memberIds].sort(), ["bot_alpha", "bot_beta"]);
   assert.ok(channel.messages.some((row) => row.from.botId === "bot_alpha" && /sky/.test(row.text)));
-  assert.ok(channel.messages.some((row) => row.from.botId === "bot_beta" && /blue/.test(row.text)));
+  assert.ok(channel.messages.some((row) => row.from.botId === "bot_beta" && /\[beta\]/.test(row.text)));
   assert.equal(getPairChannel(computer, channel.id, roster)?.id, channel.id);
   assert.equal(channel.messages[0]?.parentId, null);
 });
 
 test("listPairChannels is the thread JSON of ask prompt and peer reply, not session thinking", async () => {
   const computer = makeComputer();
-  const workers = startFakeWorkers(computer, ["beta"], async (slug, item) => ({
-    text: `${slug} says blue for: ${item.prompt}`,
-    paths: [],
-  }));
+  const workers = startFakeWorkers(computer, ["beta"], (slug, item) =>
+    executeFakeTurn(computer, slug, item, 4000),
+  );
   const answered = await askPeer({
     computerRoot: computer,
     from: "alpha",
@@ -113,7 +113,7 @@ test("listPairChannels is the thread JSON of ask prompt and peer reply, not sess
   assert.ok(channel);
   assert.equal(channel.messages.length, 2);
   assert.ok(channel.messages.some((row) => row.from.botId === "bot_alpha" && /sky/.test(row.text)));
-  assert.ok(channel.messages.some((row) => row.from.botId === "bot_beta" && /blue/.test(row.text)));
+  assert.ok(channel.messages.some((row) => row.from.botId === "bot_beta" && /\[beta\]/.test(row.text)));
   assert.equal(
     channel.messages.some((row) => /Rayleigh/.test(row.reasoning ?? "") || /Rayleigh/.test(row.text)),
     false,
@@ -122,4 +122,32 @@ test("listPairChannels is the thread JSON of ask prompt and peer reply, not sess
     channel.messages.some((row) => row.kind === "activity"),
     false,
   );
+});
+
+test("GET /api/groups serves the pair thread, not a Room 404", async () => {
+  const computer = makeComputer();
+  appendThreadAsk(computer, "bot_alpha", "bot_beta", "h_pair", "What color is the sky?", "2026-09-20T12:00:00.000Z");
+  appendThreadReply(computer, "bot_beta", "bot_alpha", "h_pair", "Blue.", "2026-09-20T12:00:01.000Z");
+  const started = await startServer({
+    computerRoot: computer,
+    port: 0,
+    workers: false,
+    sidecar: false,
+    fakeWorkers: true,
+  });
+  try {
+    const id = pairChannelId("bot_alpha", "bot_beta");
+    const res = await fetch(`${started.url}/api/groups/${encodeURIComponent(id)}`);
+    assert.equal(res.status, 200);
+    const body = (await res.json()) as {
+      id: string;
+      messages: readonly { text: string; from: { botId: string } }[];
+    };
+    assert.equal(body.id, id);
+    assert.equal(body.messages.length, 2);
+    assert.ok(body.messages.some((row) => row.from.botId === "bot_alpha" && /sky/.test(row.text)));
+    assert.ok(body.messages.some((row) => row.from.botId === "bot_beta" && /Blue/.test(row.text)));
+  } finally {
+    await started.stop();
+  }
 });

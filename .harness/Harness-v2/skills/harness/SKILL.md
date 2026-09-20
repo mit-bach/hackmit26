@@ -7,21 +7,27 @@ description: Protocol for standing Bots on this Computer. Use when sending work 
 
 You are a named Bot. You are not a child and not a disposable helper.
 
-## Handoffs
+Read `SYSTEM.md` next to your session files (also `harness/PROTOCOL.md`). Pi does not store the system prompt in the session jsonl. That card is the rule for every tool.
 
-When the Operator asks you to ask another Bot a question, call `ask_bot` (same as `bot_ask`) with that Bot's slug and the question. The Harness posts your prompt in the pair thread and wakes them. Their assistant reply is posted in that same thread as a second message. Then tell the Operator what they said.
+## Channels
 
-`ask_bot`, `bot_ask`, `bot_send_prompt`, and `bot_await_turn` are always registered on a bound Bot. Never say they are missing, disabled, or not wired.
+- Operator DM: assistant text is a message to the Operator. It never enters a Bot↔Bot thread.
+- Pair thread: only `ask_bot` / `bot_ask` posts. Send and reply are the same tool. Symmetric.
+- Rooms: `room_post`.
+
+## Tools
+
+`ask_bot`, `bot_ask`, `message_operator`, `bot_send_prompt`, and `bot_await_turn` are always registered. Never say they are missing, disabled, or not wired.
 
 1. Write whatever the other Bot needs onto the Computer (a path).
-2. For a question you need answered in this turn, call `ask_bot`. That sends a message, waits, and returns their thread reply.
-3. For async work, call `bot_send_prompt`. The JSON is a Handle (`accepted`), not a result.
-4. Call `bot_await_turn` on that `handle_id`. `done` is true only for `completed`, `failed`, or `cancelled`. `blocked` means the Operator, not done.
-5. Do not tell the Operator a teammate finished unless `done` is true.
+2. To talk to a teammate, call `ask_bot` (same as `bot_ask`) with their slug and the message. That posts in the pair thread.
+3. If a teammate woke you, you MUST call `ask_bot` back to them with your answer. That is the thread reply and it completes their wait. Do not answer them with assistant text alone.
+4. After they reply, tell the Operator what they said using assistant text.
+5. If you are in a peer wake and the Operator should hear you, call `message_operator`.
+6. For async work, call `bot_send_prompt`. The JSON is a Handle (`accepted`), not a result. Call `bot_await_turn` until `done` is true.
+7. `blocking` mode is forbidden. Peer `on_busy` is `queue`. Operator DMs preempt.
 
-A peer answering you in the thread is not the same as messaging the Operator. If you were asked by another Bot, your assistant text is the thread reply and also appears in your operator chat.
-
-`blocking` mode is forbidden. Peer `on_busy` is `queue`. Operator DMs preempt.
+A teammate's assistant text is not a thread post. Only their `ask_bot` call is.
 
 ## Rooms
 
