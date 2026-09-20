@@ -227,9 +227,7 @@ def _ingestion_cases() -> list[EvaluationCaseResult]:
         attachments = row.get("attachments") or []
         text = attachments[0]["text"] if attachments else row.get("body", "")
         actual, _why = classify_text(text, subject=row.get("subject", ""), filename=attachments[0]["filename"] if attachments else "")
-        ok = actual == kind or (kind == "purchase_order" and actual in {"purchase_order", "not_invoice"})
-        if kind == "receipt" and actual in {"receipt", "payment_confirmation", "not_invoice"}:
-            ok = True
+        ok = actual == kind
         cases.append(
             case_result(
                 case_id=f"AP-INGEST-{message_id}",

@@ -1,0 +1,230 @@
+{
+  "reconciliation_id": "REC-022",
+  "period": "2026-09",
+  "match_type": "UNMATCHED_BANK",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "BNK-UNX-001",
+      "date": "2026-09-24",
+      "amount": -800.0,
+      "currency": "USD",
+      "description": "MONTHLY ACCOUNT ANALYSIS FEE",
+      "reference": "",
+      "counterparty": "FIRST NATIONAL",
+      "transaction_type": "bank_fee",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -80000,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [],
+  "candidates": [
+    {
+      "candidate_id": "UNMATCHED_BANK:BNK-UNX-001:-",
+      "match_type": "UNMATCHED_BANK",
+      "bank_transaction_ids": [
+        "BNK-UNX-001"
+      ],
+      "ledger_entry_ids": [],
+      "bank_amount": -800.0,
+      "ledger_amount": 0.0,
+      "difference": -800.0,
+      "bank_amount_minor": -80000,
+      "ledger_amount_minor": 0,
+      "difference_minor": -80000,
+      "confidence": 0.0,
+      "score": 0.0,
+      "evidence": [
+        "bank:BNK-UNX-001",
+        "amount:-80000",
+        "description:MONTHLY ACCOUNT ANALYSIS FEE"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -80000,
+    "ledger_amount_minor": 0,
+    "difference_minor": -80000,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNMATCHED_BANK:BNK-UNX-001:-",
+    "selected_candidate_id": null,
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 1.0,
+    "reasons": [
+      "No Python match candidates were returned.",
+      "The bank transaction is a monthly account analysis fee with no attached fee evidence or proposed adjusting entry."
+    ],
+    "evidence_used": [
+      "bank:BNK-UNX-001",
+      "description:MONTHLY ACCOUNT ANALYSIS FEE"
+    ],
+    "review_question": "Should this bank fee be supported by fee evidence and a proposed unposted bank-fee entry?"
+  },
+  "investigation": {
+    "case_id": "UNMATCHED_BANK:BNK-UNX-001:-",
+    "issues_investigated": [
+      "Unmatched bank transaction of -800.0 USD.",
+      "Potential bank-fee explanation.",
+      "Missing ledger entry or timing item."
+    ],
+    "findings": [
+      "Python reports bank amount -800.0, ledger amount 0.0, and difference -800.0.",
+      "The transaction is dated 2026-09-24 and described as MONTHLY ACCOUNT ANALYSIS FEE, with counterparty FIRST NATIONAL.",
+      "No ledger entry or match candidate was provided."
+    ],
+    "supported_explanations": [
+      "The bank description and transaction type support that this is a bank fee."
+    ],
+    "unsupported_hypotheses": [
+      "No fee evidence or provider fee line was supplied, so the fee cannot be treated as a supported accounting explanation.",
+      "No evidence supports rounding, FX, partial payment, duplicate, missing entry, or timing."
+    ],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.98,
+    "human_review": true,
+    "evidence_used": [
+      "Python candidate: bank amount -800.0, ledger amount 0.0, difference -800.0.",
+      "Bank transaction BNK-UNX-001: 2026-09-24, USD, MONTHLY ACCOUNT ANALYSIS FEE, FIRST NATIONAL, transaction_type bank_fee.",
+      "Match candidates: none."
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNMATCHED_BANK:BNK-UNX-001:-",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "No Python match candidates were returned.",
+      "The bank transaction is a $800.00 account analysis fee, but no fee evidence or proposed unposted adjusting entry supports it.",
+      "The $800.00 difference remains unexplained; human review is required.",
+      "python_validator_authoritative"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-022",
+    "period": "2026-09",
+    "match_key": "1d8f92bb2fca2451",
+    "bank_transaction_ids": [
+      "BNK-UNX-001"
+    ],
+    "ledger_entry_ids": [],
+    "match_type": "UNMATCHED_BANK",
+    "bank_amount": -800.0,
+    "ledger_amount": 0.0,
+    "difference": -800.0,
+    "bank_amount_minor": -80000,
+    "ledger_amount_minor": 0,
+    "difference_minor": -80000,
+    "confidence": 0.0,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unmatched bank activity BNK-UNX-001 -$800.00.",
+    "evidence": [
+      "bank:BNK-UNX-001",
+      "amount:-80000",
+      "description:MONTHLY ACCOUNT ANALYSIS FEE"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNMATCHED_BANK:BNK-UNX-001:-",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -80000,
+      "ledger_amount_minor": 0,
+      "difference_minor": -80000,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "bank:BNK-UNX-001",
+    "amount:-80000",
+    "description:MONTHLY ACCOUNT ANALYSIS FEE"
+  ],
+  "control_findings": [],
+  "agents": [
+    {
+      "role": "Cash Reconciliation Preparer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Exception Investigator",
+      "skills": [
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Reconciliation Reviewer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": true,
+  "replay": false,
+  "trace_path": null
+}

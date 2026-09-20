@@ -1,0 +1,8 @@
+{
+  "pay": {
+    "defaultProfile": "schedule",
+    "profiles": {
+      "schedule": "Payment Scheduler"
+    }
+  }
+}

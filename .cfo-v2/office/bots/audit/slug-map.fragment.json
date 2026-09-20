@@ -1,0 +1,9 @@
+{
+  "audit": {
+    "defaultProfile": "interpret",
+    "profiles": {
+      "interpret": "Auditor Agent",
+      "report": "Audit Report Agent"
+    }
+  }
+}

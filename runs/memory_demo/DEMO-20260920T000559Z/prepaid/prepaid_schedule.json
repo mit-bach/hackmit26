@@ -1,0 +1,170 @@
+[
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2026-09",
+    "amount": 1200.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-001",
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 30,
+    "posted_in_period": "2026-09"
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2026-10",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2026-11",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2026-12",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-01",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-02",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 28,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-03",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-04",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-05",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-06",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-07",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-SEP",
+    "period": "2027-08",
+    "amount": 1200.0,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": null
+  }
+]

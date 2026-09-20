@@ -27,7 +27,7 @@ SOURCE_CLASS_MAP = {
     "purchase_order": "PURCHASE_ORDER",
     "payment_confirmation": "PAYMENT_CONFIRMATION",
     "marketing": "NON_FINANCE",
-    "receipt": "GOODS_RECEIPT",
+    "receipt": "NON_FINANCE",
     "reimbursement": "INTERNAL_REQUEST",
     "not_invoice": "UNSUPPORTED_OR_UNRESOLVED",
     "unreadable": "UNSUPPORTED_OR_UNRESOLVED",

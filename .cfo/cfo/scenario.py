@@ -344,6 +344,11 @@ def _seed_august_memory() -> dict:
         run_id="cfo-aug-harbor",
     )
     stripe = run_stripe_period(AUGUST_STRIPE, memory_enabled=True, reset=True)
+    from cash_recon.store import reset_cash_state
+    from integrations.store import reset_integration_state
+
+    reset_cash_state()
+    reset_integration_state()
     return {
         "harbor_decision": harbor_decision,
         "harbor_trace": harbor_trace,

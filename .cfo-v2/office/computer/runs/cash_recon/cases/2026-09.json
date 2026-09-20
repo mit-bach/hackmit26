@@ -1,0 +1,940 @@
+{
+  "schema": "cfo.cash_recon.case.v1",
+  "case_id": "2026-09",
+  "idempotency_key": "cash-case:2026-09",
+  "content_hash": "c55afd5da9d90137465a6cfb4c83cea2cd2d79dc35e433469323da861d8179e3",
+  "bank": [
+    {
+      "transaction_id": "TXN-2026-09-004",
+      "date": "2026-09-04",
+      "amount": -4250.0,
+      "currency": "USD",
+      "description": "ACH OUT ACME INDUSTRIAL 8391",
+      "reference": "8391",
+      "counterparty": "ACME INDUSTRIAL",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -425000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-008",
+      "date": "2026-09-08",
+      "amount": -18500.0,
+      "currency": "USD",
+      "description": "ACH OUT NORTHLINE FAB",
+      "reference": "",
+      "counterparty": "NORTHLINE FAB",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -1850000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-011",
+      "date": "2026-09-11",
+      "amount": -10025.0,
+      "currency": "USD",
+      "description": "WIRE TRANSFER INTL REF 729103",
+      "reference": "729103",
+      "counterparty": "",
+      "transaction_type": "wire_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -1002500,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-012A",
+      "date": "2026-09-12",
+      "amount": -250.0,
+      "currency": "USD",
+      "description": "REFUND CARD 8892",
+      "reference": "8892",
+      "counterparty": "LUMEN LABS",
+      "transaction_type": "card_refund",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -25000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-012B",
+      "date": "2026-09-12",
+      "amount": -250.0,
+      "currency": "USD",
+      "description": "REFUND CARD 8892",
+      "reference": "8892",
+      "counterparty": "LUMEN LABS",
+      "transaction_type": "card_refund",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -25000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-015",
+      "date": "2026-09-15",
+      "amount": 12412.4,
+      "currency": "USD",
+      "description": "CUSTOMER PAYMENT NORTHSTAR LLC",
+      "reference": "",
+      "counterparty": "NORTHSTAR LLC",
+      "transaction_type": "wire_credit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": 1241240,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-018",
+      "date": "2026-09-18",
+      "amount": -1200.0,
+      "currency": "USD",
+      "description": "ACH OUT OFFICE DEPOT #4410",
+      "reference": "4410",
+      "counterparty": "OFFICE DEPOT",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -120000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-019A",
+      "date": "2026-09-19",
+      "amount": 97420.0,
+      "currency": "USD",
+      "description": "STRIPE PAYOUT STRP-97420",
+      "reference": "STRP-97420",
+      "counterparty": "STRIPE",
+      "transaction_type": "ach_credit",
+      "source": "operating_account",
+      "provider": "stripe",
+      "period": "2026-09",
+      "amount_minor": 9742000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-019B",
+      "date": "2026-09-19",
+      "amount": 84210.0,
+      "currency": "USD",
+      "description": "ADYEN SETTLEMENT ADY-SEP26",
+      "reference": "ADY-SEP26",
+      "counterparty": "ADYEN",
+      "transaction_type": "ach_credit",
+      "source": "operating_account",
+      "provider": "adyen",
+      "period": "2026-09",
+      "amount_minor": 8421000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-022",
+      "date": "2026-09-22",
+      "amount": 6750.0,
+      "currency": "USD",
+      "description": "ACH CREDIT ATLAS BIOMEDICAL INC",
+      "reference": "",
+      "counterparty": "ATLAS BIOMEDICAL INC",
+      "transaction_type": "ach_credit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": 675000,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-09-025",
+      "date": "2026-09-25",
+      "amount": -487.63,
+      "currency": "USD",
+      "description": "MISC DEBIT UNKNOWN ORIGIN",
+      "reference": "",
+      "counterparty": "",
+      "transaction_type": "misc_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -48763,
+      "raw_metadata": {}
+    },
+    {
+      "transaction_id": "TXN-2026-10-001",
+      "date": "2026-10-01",
+      "amount": -3180.0,
+      "currency": "USD",
+      "description": "ACH OUT HARBOR ELECTRIC",
+      "reference": "",
+      "counterparty": "HARBOR ELECTRIC",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-10",
+      "amount_minor": -318000,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger": [
+    {
+      "entry_id": "GL-AP-1042",
+      "date": "2026-09-04",
+      "amount": -4250.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Acme Industrial",
+      "reference": "INV-1042",
+      "description": "Vendor payment INV-1042",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -425000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-201",
+      "date": "2026-09-07",
+      "amount": -5000.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Northline Fabrication",
+      "reference": "INV-201",
+      "description": "Vendor payment INV-201",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -500000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-202",
+      "date": "2026-09-07",
+      "amount": -7500.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Northline Fabrication",
+      "reference": "INV-202",
+      "description": "Vendor payment INV-202",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -750000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-203",
+      "date": "2026-09-08",
+      "amount": -6000.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Northline Fabrication",
+      "reference": "INV-203",
+      "description": "Vendor payment INV-203",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -600000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-WIRE",
+      "date": "2026-09-11",
+      "amount": -10000.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Helios Hardware",
+      "reference": "WIRE-729103",
+      "description": "International vendor wire",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -1000000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AR-772",
+      "date": "2026-09-12",
+      "amount": -250.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Lumen Labs",
+      "reference": "REF-772",
+      "description": "Customer refund REF-772",
+      "entry_type": "refund",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -25000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AR-NS",
+      "date": "2026-09-15",
+      "amount": 12400.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Northstar LLC",
+      "reference": "INV-AR-880",
+      "description": "Customer receipt INV-AR-880",
+      "entry_type": "ar_receipt",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 1240000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-OD-1",
+      "date": "2026-09-18",
+      "amount": -1200.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Office Depot",
+      "reference": "INV-OD-4410",
+      "description": "Office Depot payment",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -120000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-OD-2",
+      "date": "2026-09-18",
+      "amount": -1200.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Office Depot",
+      "reference": "INV-OD-4410",
+      "description": "Office Depot payment",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -120000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-CASH-STRIPE",
+      "date": "2026-09-19",
+      "amount": 97420.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Stripe",
+      "reference": "po_1HackMIT97420",
+      "description": "Processor payout po_1HackMIT97420",
+      "entry_type": "processor_payout",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 9742000,
+      "raw_metadata": {
+        "provider": "stripe",
+        "payout_id": "po_1HackMIT97420"
+      }
+    },
+    {
+      "entry_id": "GL-CASH-ADYEN",
+      "date": "2026-09-19",
+      "amount": 84210.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Adyen",
+      "reference": "3JZKT2B4N7Q1P8R5S6T0",
+      "description": "Processor payout 3JZKT2B4N7Q1P8R5S6T0",
+      "entry_type": "processor_payout",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 8421000,
+      "raw_metadata": {
+        "provider": "adyen",
+        "payout_id": "3JZKT2B4N7Q1P8R5S6T0"
+      }
+    },
+    {
+      "entry_id": "GL-AR-ATLAS",
+      "date": "2026-09-22",
+      "amount": 6750.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Atlas Biomedical",
+      "reference": "INV-AR-441",
+      "description": "Customer receipt INV-AR-441",
+      "entry_type": "ar_receipt",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 675000,
+      "raw_metadata": {}
+    },
+    {
+      "entry_id": "GL-AP-HE",
+      "date": "2026-09-30",
+      "amount": -3180.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Harbor Electric",
+      "reference": "INV-HE-330",
+      "description": "Vendor payment INV-HE-330 posted at month-end",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -318000,
+      "raw_metadata": {}
+    }
+  ],
+  "fees": [
+    {
+      "evidence_id": "ADV-729103",
+      "date": "2026-09-11",
+      "amount": 25.0,
+      "fee_type": "wire_correspondent",
+      "reference": "729103",
+      "description": "Correspondent bank fee on outgoing USD wire 729103",
+      "source": "bank_advice",
+      "amount_minor": 2500,
+      "raw_metadata": {}
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "PROVIDER_PAYOUT:TXN-2026-09-019A:GL-CASH-STRIPE",
+      "match_type": "PROVIDER_PAYOUT",
+      "bank_transaction_ids": [
+        "TXN-2026-09-019A"
+      ],
+      "ledger_entry_ids": [
+        "GL-CASH-STRIPE"
+      ],
+      "bank_amount": 97420.0,
+      "ledger_amount": 97420.0,
+      "difference": 0.0,
+      "bank_amount_minor": 9742000,
+      "ledger_amount_minor": 9742000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.5,
+      "evidence": [
+        "provider:stripe",
+        "payout_id:po_1HackMIT97420",
+        "provider_status:MATCH",
+        "expected_payout:9742000",
+        "actual_payout:9742000",
+        "bank_matched:True"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": "stripe",
+      "provider_payout_id": "po_1HackMIT97420",
+      "provider_status": "MATCH",
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "PROVIDER_PAYOUT:TXN-2026-09-019B:GL-CASH-ADYEN",
+      "match_type": "PROVIDER_PAYOUT",
+      "bank_transaction_ids": [
+        "TXN-2026-09-019B"
+      ],
+      "ledger_entry_ids": [
+        "GL-CASH-ADYEN"
+      ],
+      "bank_amount": 84210.0,
+      "ledger_amount": 84210.0,
+      "difference": 0.0,
+      "bank_amount_minor": 8421000,
+      "ledger_amount_minor": 8421000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.5,
+      "evidence": [
+        "provider:adyen",
+        "payout_id:3JZKT2B4N7Q1P8R5S6T0",
+        "provider_status:MATCH",
+        "expected_payout:8421000",
+        "actual_payout:8421000",
+        "bank_matched:True"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": "adyen",
+      "provider_payout_id": "3JZKT2B4N7Q1P8R5S6T0",
+      "provider_status": "MATCH",
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-004:GL-AP-1042",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-004"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-1042"
+      ],
+      "bank_amount": -4250.0,
+      "ledger_amount": -4250.0,
+      "difference": 0.0,
+      "bank_amount_minor": -425000,
+      "ledger_amount_minor": -425000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.7833333333333332,
+      "evidence": [
+        "amount:-425000",
+        "bank_date:2026-09-04",
+        "ledger_date:2026-09-04",
+        "counterparty_overlap:0.33"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-012A:GL-AR-772",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-012A"
+      ],
+      "ledger_entry_ids": [
+        "GL-AR-772"
+      ],
+      "bank_amount": -250.0,
+      "ledger_amount": -250.0,
+      "difference": 0.0,
+      "bank_amount_minor": -25000,
+      "ledger_amount_minor": -25000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.0500000000000003,
+      "evidence": [
+        "amount:-25000",
+        "bank_date:2026-09-12",
+        "ledger_date:2026-09-12",
+        "counterparty_overlap:0.60"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-012B:GL-AR-772",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-012B"
+      ],
+      "ledger_entry_ids": [
+        "GL-AR-772"
+      ],
+      "bank_amount": -250.0,
+      "ledger_amount": -250.0,
+      "difference": 0.0,
+      "bank_amount_minor": -25000,
+      "ledger_amount_minor": -25000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.0500000000000003,
+      "evidence": [
+        "amount:-25000",
+        "bank_date:2026-09-12",
+        "ledger_date:2026-09-12",
+        "counterparty_overlap:0.60"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-018:GL-AP-OD-1",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-018"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-OD-1"
+      ],
+      "bank_amount": -1200.0,
+      "ledger_amount": -1200.0,
+      "difference": 0.0,
+      "bank_amount_minor": -120000,
+      "ledger_amount_minor": -120000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.45,
+      "evidence": [
+        "amount:-120000",
+        "bank_date:2026-09-18",
+        "ledger_date:2026-09-18",
+        "counterparty_overlap:0.60",
+        "bank_reference:4410"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-018:GL-AP-OD-2",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-018"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-OD-2"
+      ],
+      "bank_amount": -1200.0,
+      "ledger_amount": -1200.0,
+      "difference": 0.0,
+      "bank_amount_minor": -120000,
+      "ledger_amount_minor": -120000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.45,
+      "evidence": [
+        "amount:-120000",
+        "bank_date:2026-09-18",
+        "ledger_date:2026-09-18",
+        "counterparty_overlap:0.60",
+        "bank_reference:4410"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-019A:GL-CASH-STRIPE",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-019A"
+      ],
+      "ledger_entry_ids": [
+        "GL-CASH-STRIPE"
+      ],
+      "bank_amount": 97420.0,
+      "ledger_amount": 97420.0,
+      "difference": 0.0,
+      "bank_amount_minor": 9742000,
+      "ledger_amount_minor": 9742000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.6166666666666667,
+      "evidence": [
+        "amount:9742000",
+        "bank_date:2026-09-19",
+        "ledger_date:2026-09-19",
+        "counterparty_overlap:0.17"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-019B:GL-CASH-ADYEN",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-019B"
+      ],
+      "ledger_entry_ids": [
+        "GL-CASH-ADYEN"
+      ],
+      "bank_amount": 84210.0,
+      "ledger_amount": 84210.0,
+      "difference": 0.0,
+      "bank_amount_minor": 8421000,
+      "ledger_amount_minor": 8421000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.65,
+      "evidence": [
+        "amount:8421000",
+        "bank_date:2026-09-19",
+        "ledger_date:2026-09-19",
+        "counterparty_overlap:0.20"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-022:GL-AR-ATLAS",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-022"
+      ],
+      "ledger_entry_ids": [
+        "GL-AR-ATLAS"
+      ],
+      "bank_amount": 6750.0,
+      "ledger_amount": 6750.0,
+      "difference": 0.0,
+      "bank_amount_minor": 675000,
+      "ledger_amount_minor": 675000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.7833333333333332,
+      "evidence": [
+        "amount:675000",
+        "bank_date:2026-09-22",
+        "ledger_date:2026-09-22",
+        "counterparty_overlap:0.33"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-10-001:GL-AP-HE",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-10-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-HE"
+      ],
+      "bank_amount": -3180.0,
+      "ledger_amount": -3180.0,
+      "difference": 0.0,
+      "bank_amount_minor": -318000,
+      "ledger_amount_minor": -318000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.5833333333333333,
+      "evidence": [
+        "amount:-318000",
+        "bank_date:2026-10-01",
+        "ledger_date:2026-09-30",
+        "counterparty_overlap:0.20"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "GROUPED_MATCH:TXN-2026-09-008:GL-AP-203,GL-AP-201,GL-AP-202",
+      "match_type": "GROUPED_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-008"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-203",
+        "GL-AP-201",
+        "GL-AP-202"
+      ],
+      "bank_amount": -18500.0,
+      "ledger_amount": -18500.0,
+      "difference": 0.0,
+      "bank_amount_minor": -1850000,
+      "ledger_amount_minor": -1850000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.65,
+      "evidence": [
+        "group_sum:-1850000",
+        "bank_amount:-1850000",
+        "members:GL-AP-203,GL-AP-201,GL-AP-202",
+        "same_vendor:True"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE",
+      "match_type": "FEE_NETTED",
+      "bank_transaction_ids": [
+        "TXN-2026-09-011"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-WIRE"
+      ],
+      "bank_amount": -10025.0,
+      "ledger_amount": -10000.0,
+      "difference": -25.0,
+      "bank_amount_minor": -1002500,
+      "ledger_amount_minor": -1000000,
+      "difference_minor": -2500,
+      "confidence": 0.95,
+      "score": 1.6,
+      "evidence": [
+        "principal:-1000000",
+        "bank_total:-1002500",
+        "fee:2500",
+        "fee_evidence:ADV-729103",
+        "reference:729103"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [
+        "ADV-729103"
+      ],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": [
+        {
+          "memo": "Record bank fee ADV-729103 on TXN-2026-09-011",
+          "lines": [
+            {
+              "account": "6100-Bank-Fees",
+              "amount": 25.0,
+              "amount_minor": 2500,
+              "side": "debit"
+            },
+            {
+              "account": "1000-Cash",
+              "amount": 25.0,
+              "amount_minor": 2500,
+              "side": "credit"
+            }
+          ],
+          "related_bank_ids": [
+            "TXN-2026-09-011"
+          ],
+          "related_ledger_ids": [
+            "GL-AP-WIRE"
+          ],
+          "posted": false,
+          "support": "ADV-729103"
+        }
+      ]
+    },
+    {
+      "candidate_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+      "match_type": "TIMING_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-2026-10-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-HE"
+      ],
+      "bank_amount": -3180.0,
+      "ledger_amount": -3180.0,
+      "difference": 0.0,
+      "bank_amount_minor": -318000,
+      "ledger_amount_minor": -318000,
+      "difference_minor": 0,
+      "confidence": 0.9,
+      "score": 1.4,
+      "evidence": [
+        "ledger_period:2026-09",
+        "bank_period:2026-10",
+        "amount:-318000",
+        "ledger_date:2026-09-30",
+        "bank_date:2026-10-01"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-011:GL-AP-WIRE",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-2026-09-011"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-WIRE"
+      ],
+      "bank_amount": -10025.0,
+      "ledger_amount": -10000.0,
+      "difference": -25.0,
+      "bank_amount_minor": -1002500,
+      "ledger_amount_minor": -1000000,
+      "difference_minor": -2500,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:-1002500",
+        "ledger_amount:-1000000",
+        "difference:-2500",
+        "rounding_rejected:difference_not_one_cent",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "fee",
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-2026-09-015"
+      ],
+      "ledger_entry_ids": [
+        "GL-AR-NS"
+      ],
+      "bank_amount": 12412.4,
+      "ledger_amount": 12400.0,
+      "difference": 12.4,
+      "bank_amount_minor": 1241240,
+      "ledger_amount_minor": 1240000,
+      "difference_minor": 1240,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:1241240",
+        "ledger_amount:1240000",
+        "difference:1240",
+        "rounding_rejected:difference_not_one_cent",
+        "fee_rejected:no_fee_evidence",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ]
+}

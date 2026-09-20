@@ -1,21 +1,54 @@
-"""In-memory canonical invoice registry for one process/session.
+"""Disk-backed canonical invoice registry.
 
-HackMIT constraint: no production database. Cleared with the AP overlay.
-Repeated ingest_invoices() calls in the same session reuse these records
-instead of minting a second payable.
+HackMIT constraint: not a production database. The file lives under
+runs/ingestion/registry.json so a second Sidecar/Bot process sees the same
+identity. Cleared with the AP overlay when reset_overlay=True.
 """
 
 from __future__ import annotations
 
+import os
+from pathlib import Path
+
+from atomic_json import read_json_object, with_file_lock, write_json_atomic
 from invoice_ingestion.identity import canonical_invoice_key, identity_keys
 from invoice_ingestion.models import CanonicalInvoice
+
+REGISTRY_DIR_ENV = "CFO_INGEST_STATE_DIR"
+_DEFAULT_STATE_DIR = Path(__file__).resolve().parent.parent / "runs" / "ingestion"
+
+
+def _default_state_dir() -> Path:
+    override = os.environ.get(REGISTRY_DIR_ENV)
+    if override:
+        return Path(override)
+    return _DEFAULT_STATE_DIR
+
+
+STATE_DIR = _default_state_dir()
+REGISTRY_PATH = STATE_DIR / "registry.json"
+LOCK_PATH = STATE_DIR / "registry.lock"
 
 _canonicals: dict[str, CanonicalInvoice] = {}
 _index: dict[str, str] = {}
 _handed_off: set[str] = set()
+_loaded = False
+
+
+def configure_paths(directory: Path | None = None) -> Path:
+    """Point the registry at a Computer/runs tree. Tests isolate this."""
+    global STATE_DIR, REGISTRY_PATH, LOCK_PATH, _loaded
+    STATE_DIR = Path(directory) if directory is not None else _default_state_dir()
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    REGISTRY_PATH = STATE_DIR / "registry.json"
+    LOCK_PATH = STATE_DIR / "registry.lock"
+    _clear_memory()
+    _loaded = False
+    return STATE_DIR
 
 
 def next_canonical_id() -> str:
+    _ensure_loaded()
     used: list[int] = []
 
     def _take(canonical_id: str) -> None:
@@ -35,16 +68,23 @@ def next_canonical_id() -> str:
 
 
 def reset_registry() -> None:
-    _canonicals.clear()
-    _index.clear()
-    _handed_off.clear()
+    def _reset() -> None:
+        _clear_memory()
+        _save_unlocked()
+
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with_file_lock(LOCK_PATH, _reset)
+    global _loaded
+    _loaded = True
 
 
 def all_canonicals() -> list[CanonicalInvoice]:
+    _ensure_loaded()
     return list(_canonicals.values())
 
 
 def lookup(obj) -> CanonicalInvoice | None:
+    _ensure_loaded()
     for key in identity_keys(obj):
         canonical_id = _index.get(key)
         if canonical_id and canonical_id in _canonicals:
@@ -52,18 +92,15 @@ def lookup(obj) -> CanonicalInvoice | None:
     return None
 
 
-def _index_record(record: CanonicalInvoice) -> None:
-    for key in identity_keys(record):
-        _index[key] = record.canonical_id
-
-
 def remember(record: CanonicalInvoice) -> CanonicalInvoice:
-    """Store or replace the canonical record and refresh identity indexes."""
-    if not record.canonical_key:
-        record.canonical_key = canonical_invoice_key(record)
-    _canonicals[record.canonical_id] = record
-    _index_record(record)
-    return record
+    def _remember() -> CanonicalInvoice:
+        _load_unlocked()
+        _store_record(record)
+        _save_unlocked()
+        return record
+
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    return with_file_lock(LOCK_PATH, _remember)
 
 
 def merge_provenance(existing: CanonicalInvoice, incoming: CanonicalInvoice) -> bool:
@@ -90,11 +127,18 @@ def merge_provenance(existing: CanonicalInvoice, incoming: CanonicalInvoice) -> 
 
 
 def already_handed_off(canonical_id: str) -> bool:
+    _ensure_loaded()
     return canonical_id in _handed_off
 
 
 def mark_handed_off(canonical_id: str) -> None:
-    _handed_off.add(canonical_id)
+    def _mark() -> None:
+        _load_unlocked()
+        _handed_off.add(canonical_id)
+        _save_unlocked()
+
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with_file_lock(LOCK_PATH, _mark)
 
 
 def source_already_known(record: CanonicalInvoice, source_type: str, source_id: str) -> bool:
@@ -103,3 +147,51 @@ def source_already_known(record: CanonicalInvoice, source_type: str, source_id: 
 
 def known_source_pairs(record: CanonicalInvoice) -> set[tuple[str, str]]:
     return {(ref.source_type, ref.source_id) for ref in record.sources}
+
+
+def _clear_memory() -> None:
+    _canonicals.clear()
+    _index.clear()
+    _handed_off.clear()
+
+
+def _store_record(record: CanonicalInvoice) -> None:
+    if not record.canonical_key:
+        record.canonical_key = canonical_invoice_key(record)
+    _canonicals[record.canonical_id] = record
+    for key in identity_keys(record):
+        _index[key] = record.canonical_id
+    global _loaded
+    _loaded = True
+
+
+def _ensure_loaded() -> None:
+    global _loaded
+    if _loaded:
+        return
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with_file_lock(LOCK_PATH, _load_unlocked)
+
+
+def _load_unlocked() -> None:
+    global _loaded
+    _clear_memory()
+    payload = read_json_object(REGISTRY_PATH)
+    for row in payload.get("canonicals") or []:
+        record = CanonicalInvoice.model_validate(row)
+        _store_record(record)
+    for canonical_id in payload.get("handed_off") or []:
+        _handed_off.add(str(canonical_id))
+    _loaded = True
+
+
+def _save_unlocked() -> None:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    write_json_atomic(
+        REGISTRY_PATH,
+        {
+            "canonicals": [item.model_dump(mode="json") for item in _canonicals.values()],
+            "index": dict(_index),
+            "handed_off": sorted(_handed_off),
+        },
+    )

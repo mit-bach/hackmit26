@@ -1,0 +1,65 @@
+{
+  "version": "1",
+  "comment": "Session 08 fragment. Compiler (session 01) is the SoT. Never union these Display names into one Wake. create_accrual is Accrual Agent only. Close Manager ops are empty.",
+  "byDisplayName": {
+    "Accrual Agent": {
+      "ops": [
+        "accrual.tools.get_expected_invoices",
+        "accrual.tools.get_current_period_invoices",
+        "accrual.tools.get_vendor_invoice_history",
+        "accrual.tools.get_purchase_orders",
+        "accrual.tools.get_goods_receipts",
+        "accrual.tools.get_vendor_contract",
+        "accrual.tools.get_vendor_usage",
+        "accrual.tools.get_estimate_candidates",
+        "accrual.tools.compute_accrual_estimate",
+        "accrual.tools.create_accrual",
+        "accrual.tools.get_open_accruals",
+        "accrual.tools.reconcile_accrual_with_invoice"
+      ],
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection"
+      ],
+      "outputType": "AccrualDecision",
+      "source": "accrual/agent.py"
+    },
+    "Prepaid Preparer": {
+      "ops": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule"
+      ],
+      "skills": ["prepaid-expense-accounting"],
+      "outputType": "PrepaidDecision",
+      "source": "prepaid/agent.py"
+    },
+    "Fixed Asset Preparer": {
+      "ops": [
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates"
+      ],
+      "skills": ["fixed-asset-depreciation"],
+      "outputType": "AssetDecision",
+      "source": "fixed_assets/agent.py"
+    },
+    "Balance Sheet Reconciliation Preparer": {
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "skills": ["balance-sheet-reconciliation"],
+      "outputType": "ReconDecision",
+      "source": "bs_recon/agent.py"
+    },
+    "Close Manager": {
+      "ops": [],
+      "skills": ["month-end-close-coordination"],
+      "outputType": "CloseManagerDecision",
+      "source": "close/agents.py"
+    }
+  }
+}

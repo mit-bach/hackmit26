@@ -1,0 +1,12 @@
+{
+  "close": {
+    "defaultProfile": "coordinate",
+    "profiles": {
+      "accrue": "Accrual Agent",
+      "prepaid": "Prepaid Preparer",
+      "assets": "Fixed Asset Preparer",
+      "bs": "Balance Sheet Reconciliation Preparer",
+      "coordinate": "Close Manager"
+    }
+  }
+}

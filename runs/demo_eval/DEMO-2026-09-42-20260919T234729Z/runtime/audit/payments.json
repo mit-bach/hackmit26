@@ -1,0 +1,130 @@
+[
+  {
+    "payment_id": "PAY-AP-001",
+    "amount": 12450.0,
+    "currency": "USD",
+    "vendor_id": "VEND-001",
+    "vendor_name": "Acme Supplies",
+    "payment_date": "2026-09-18",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-001"
+    ],
+    "approval_ids": [
+      "APR-INV-001"
+    ],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "Vendor payment INV-001",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-AP-NORTHLINE",
+    "amount": 18500.0,
+    "currency": "USD",
+    "vendor_id": "VEND-003",
+    "vendor_name": "Northline Fabrication",
+    "payment_date": "2026-09-08",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "Grouped Northline disbursement",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-AP-017",
+    "amount": 10000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-005",
+    "vendor_name": "Helios Hardware",
+    "payment_date": "2026-09-11",
+    "payment_method": "wire",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-017"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "International vendor wire",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-AP-010",
+    "amount": 3280.0,
+    "currency": "USD",
+    "vendor_id": "VEND-004",
+    "vendor_name": "Office Depot",
+    "payment_date": "2026-09-20",
+    "payment_method": "ach",
+    "source": "manual",
+    "invoice_ids": [
+      "INV-010"
+    ],
+    "approval_ids": [
+      "APR-PAY-010"
+    ],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "Released while invoice on hold",
+    "missing_support": true
+  },
+  {
+    "payment_id": "PAY-AP-009",
+    "amount": 50000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-010",
+    "vendor_name": "Northwind Phantom LLC",
+    "payment_date": "2026-09-20",
+    "payment_method": "wire",
+    "source": "manual",
+    "invoice_ids": [
+      "INV-009"
+    ],
+    "approval_ids": [
+      "APR-PAY-009"
+    ],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "Manual wire to a new vendor",
+    "missing_support": true
+  },
+  {
+    "payment_id": "PAY-AP-012",
+    "amount": 21000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-017",
+    "vendor_name": "GitHub",
+    "payment_date": "2026-09-23",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-012"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "Paid earlier than the deferred forecast week",
+    "missing_support": false
+  }
+]

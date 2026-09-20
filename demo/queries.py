@@ -1,0 +1,120 @@
+"""Curated HackMIT demo prompts. Grade structured facts, not prose."""
+
+from __future__ import annotations
+
+
+def build_demo_queries() -> list[dict]:
+    return [
+        {
+            "query_id": "Q-CASH-RECON",
+            "prompt": "Reconcile September cash.",
+            "domain": "cash",
+            "expected_facts": {"period": "2026-09", "unexplained_difference_cents": 1240, "blocker_bank_id": "TXN-2026-09-015"},
+            "record_ids": ["TXN-2026-09-015", "TXN-2026-09-008", "TXN-2026-09-011"],
+        },
+        {
+            "query_id": "Q-PAY-WEEK",
+            "prompt": "Which invoices should we pay this week?",
+            "domain": "ap",
+            "expected_facts": {"eligible_includes": ["INV-002"], "defer_includes": ["INV-012"]},
+            "record_ids": ["INV-002", "INV-012", "INV-013"],
+        },
+        {
+            "query_id": "Q-AR-OVERDUE",
+            "prompt": "Show me our overdue receivables.",
+            "domain": "ar",
+            "expected_facts": {"buckets": ["1-30", "31-60", "61-90", "90+"], "chase_invoice": "INV-AR-005"},
+            "record_ids": ["INV-AR-002", "INV-AR-003", "INV-AR-004", "INV-AR-005"],
+        },
+        {
+            "query_id": "Q-AR-APPLY",
+            "prompt": "Apply today's customer payments.",
+            "domain": "ar",
+            "expected_facts": {"PAY-001": "AUTO_APPLY", "PAY-004": "HUMAN_REVIEW"},
+            "record_ids": ["PAY-001", "PAY-003", "PAY-004"],
+        },
+        {
+            "query_id": "Q-STRIPE",
+            "prompt": "Reconcile the latest Stripe payout.",
+            "domain": "cash",
+            "expected_facts": {"match_type": "PROVIDER_PAYOUT"},
+            "record_ids": ["TXN-2026-09-019A"],
+        },
+        {
+            "query_id": "Q-CLOSE",
+            "prompt": "Run the September close.",
+            "domain": "close",
+            "expected_facts": {"initial_status": "BLOCKED", "cause": "unexplained $12.40"},
+            "record_ids": ["TXN-2026-09-015", "TASK-CASH"],
+        },
+        {
+            "query_id": "Q-BLOCKERS",
+            "prompt": "What's blocking close?",
+            "domain": "close",
+            "expected_facts": {"difference_cents": 1240, "bank_id": "TXN-2026-09-015"},
+            "record_ids": ["TXN-2026-09-015", "INV-AR-013"],
+        },
+        {
+            "query_id": "Q-GM",
+            "prompt": "Why did gross margin fall from August to September?",
+            "domain": "reporting",
+            "expected_facts": {"august": 0.64, "september": 0.61, "driver_ids": ["TXN-SUP-SEP-001", "TXN-HOST-SEP-001", "TXN-FRT-SEP-001"]},
+            "record_ids": ["TXN-SUP-SEP-001", "TXN-HOST-SEP-001", "TXN-FRT-SEP-001", "TXN-REV-SEP-001"],
+        },
+        {
+            "query_id": "Q-FORECAST-MISS",
+            "prompt": "Why did we miss the cash forecast?",
+            "domain": "forecasting",
+            "expected_facts": {"late_collection": "INV-AR-014", "early_or_unexpected": ["INV-012"]},
+            "record_ids": ["INV-AR-014", "INV-012"],
+        },
+        {
+            "query_id": "Q-AUDIT",
+            "prompt": "Audit September and tell me what you found.",
+            "domain": "audit",
+            "expected_facts": {"must_find": ["duplicate vendor", "duplicate invoice", "round-number payment", "self-approval", "post-close journal"]},
+            "record_ids": ["VEND-001-DUP", "INV-006", "PAY-AP-009", "APR-INV-SELF", "JE-POST-CLOSE-001"],
+        },
+        {
+            "query_id": "Q-HISTORY",
+            "prompt": "Show me the history behind this exception.",
+            "domain": "memory",
+            "expected_facts": {"example": "INV-021 uses CASE-001"},
+            "record_ids": ["INV-021", "CASE-001"],
+        },
+        {
+            "query_id": "Q-LAST-MONTH",
+            "prompt": "Did we see anything like this last month?",
+            "domain": "memory",
+            "expected_facts": {"precedents": ["CASE-001", "AR-PREC-001", "AR-PREC-003"]},
+            "record_ids": ["CASE-001", "AR-PREC-001", "AR-PREC-003"],
+        },
+        {
+            "query_id": "Q-CFO-RUN",
+            "prompt": "Run the Office of the CFO for September.",
+            "domain": "orchestration",
+            "expected_facts": {"close_blocked": True, "cash_difference_cents": 1240},
+            "record_ids": ["TXN-2026-09-015", "INV-001", "INV-AR-013"],
+        },
+        {
+            "query_id": "Q-CAN-CLOSE",
+            "prompt": "Can we close the month?",
+            "domain": "orchestration",
+            "expected_facts": {"answer": False, "until": "TXN-2026-09-015 resolved"},
+            "record_ids": ["TXN-2026-09-015"],
+        },
+        {
+            "query_id": "Q-TRACE-INV-017",
+            "prompt": "Trace INV-017 through the entire system.",
+            "domain": "handoff",
+            "expected_facts": {"vendor": "Helios Hardware", "bank_id": "TXN-2026-09-011", "match_type": "FEE_NETTED"},
+            "record_ids": ["INV-017", "JE-AP-INV-017", "PAY-AP-017", "TXN-2026-09-011"],
+        },
+        {
+            "query_id": "Q-TRACE-INV-001",
+            "prompt": "Trace INV-001 through the entire system.",
+            "domain": "handoff",
+            "expected_facts": {"decision": "APPROVE", "bank_id": "TXN-2026-09-018A", "status": "MATCHED"},
+            "record_ids": ["INV-001", "PO-101", "GR-101", "PAY-AP-001", "TXN-2026-09-018A"],
+        },
+    ]

@@ -1,0 +1,276 @@
+{
+  "reconciliation_id": "REC-018",
+  "period": "2026-09",
+  "match_type": "UNEXPLAINED_DIFFERENCE",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-HO-7390",
+      "date": "2026-09-19",
+      "amount": 9150.0,
+      "currency": "USD",
+      "description": "WIRE SOLSTICE",
+      "reference": "",
+      "counterparty": "Solstice Media",
+      "transaction_type": "other",
+      "source": "bank",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": 915000,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-HO-7390",
+      "date": "2026-09-19",
+      "amount": 9076.1,
+      "currency": "USD",
+      "account": "Cash",
+      "counterparty": "Solstice Media",
+      "reference": "",
+      "description": "Solstice books",
+      "entry_type": "other",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 907610,
+      "raw_metadata": {}
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-HO-7390"
+      ],
+      "ledger_entry_ids": [
+        "GL-HO-7390"
+      ],
+      "bank_amount": 9150.0,
+      "ledger_amount": 9076.1,
+      "difference": 73.9,
+      "bank_amount_minor": 915000,
+      "ledger_amount_minor": 907610,
+      "difference_minor": 7390,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:915000",
+        "ledger_amount:907610",
+        "difference:7390",
+        "rounding_rejected:difference_not_one_cent",
+        "fee_rejected:no_fee_evidence",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": 915000,
+    "ledger_amount_minor": 907610,
+    "difference_minor": 7390,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+    "selected_candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.2,
+    "reasons": [
+      "Candidate identifies an unexplained difference with no fee, FX, partial-payment, or timing evidence.",
+      "Bank and ledger counterparties are compatible, but the amount difference remains unsupported."
+    ],
+    "evidence_used": [
+      "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+      "TXN-HO-7390: WIRE SOLSTICE; Solstice Media",
+      "GL-HO-7390: Solstice Media; Solstice books"
+    ],
+    "review_question": "Can the 73.9 difference be supported by remittance, FX, fee, duplicate/missing-entry, or timing evidence?"
+  },
+  "investigation": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+    "issues_investigated": [
+      "Bank transaction versus ledger amount",
+      "Rounding, fee, FX, partial payment, duplicate/missing entry, and timing explanations",
+      "Counterparty compatibility"
+    ],
+    "findings": [
+      "Bank amount is 9150.0 USD; ledger amount is 9076.1 USD; Python difference is 73.9 USD (7390 minor units).",
+      "Both identify Solstice Media and share the transaction date, supporting counterparty compatibility but not amount reconciliation.",
+      "The difference is not a one-cent rounding item."
+    ],
+    "supported_explanations": [],
+    "unsupported_hypotheses": [
+      "Fee: no fee evidence exists.",
+      "Foreign exchange: no FX evidence exists; both records are USD.",
+      "Partial payment: no remittance evidence names a remaining balance.",
+      "Duplicate or missing entry: no supporting duplicate or missing posting was provided.",
+      "Timing: no adjacent-period counterpart was provided."
+    ],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.2,
+    "human_review": true,
+    "evidence_used": [
+      "Python candidate: bank_amount 9150.0, ledger_amount 9076.1, difference 73.9.",
+      "Bank transaction TXN-HO-7390: 2026-09-19, USD, WIRE SOLSTICE, Solstice Media.",
+      "Ledger entry GL-HO-7390: 2026-09-19, USD, Solstice Media, Solstice books.",
+      "Python evidence: rounding rejected, no fee evidence, no FX evidence, no partial-payment remittance."
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "unexplained_difference",
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Selected candidate is present in the Python candidate list.",
+      "Bank and ledger amounts and the 73.9 difference are unchanged.",
+      "No fee, FX, remittance, duplicate, or timing evidence supports an explanation.",
+      "The unexplained difference requires human review; it must not be matched or relabeled.",
+      "python_validator_authoritative"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-018",
+    "period": "2026-09",
+    "match_key": "ef693c7dc21c1050",
+    "bank_transaction_ids": [
+      "TXN-HO-7390"
+    ],
+    "ledger_entry_ids": [
+      "GL-HO-7390"
+    ],
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "bank_amount": 9150.0,
+    "ledger_amount": 9076.1,
+    "difference": 73.9,
+    "bank_amount_minor": 915000,
+    "ledger_amount_minor": 907610,
+    "difference_minor": 7390,
+    "confidence": 0.2,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unexplained difference: $73.90",
+    "evidence": [
+      "bank_amount:915000",
+      "ledger_amount:907610",
+      "difference:7390",
+      "rounding_rejected:difference_not_one_cent",
+      "fee_rejected:no_fee_evidence",
+      "no_fx_evidence",
+      "no_partial_payment_remittance"
+    ],
+    "control_findings": [
+      "UNEXPLAINED_DIFFERENCE"
+    ],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-7390:GL-HO-7390",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": 915000,
+      "ledger_amount_minor": 907610,
+      "difference_minor": 7390,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "bank_amount:915000",
+    "ledger_amount:907610",
+    "difference:7390",
+    "rounding_rejected:difference_not_one_cent",
+    "fee_rejected:no_fee_evidence",
+    "no_fx_evidence",
+    "no_partial_payment_remittance"
+  ],
+  "control_findings": [
+    "UNEXPLAINED_DIFFERENCE"
+  ],
+  "agents": [
+    {
+      "role": "Cash Reconciliation Preparer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Exception Investigator",
+      "skills": [
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Reconciliation Reviewer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": true,
+  "replay": false,
+  "trace_path": null
+}

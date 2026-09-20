@@ -1,0 +1,795 @@
+{
+  "ap": {
+    "decisions": {
+      "INV-001": "APPROVE",
+      "INV-003": "HOLD",
+      "INV-004": "HOLD",
+      "INV-005": "HOLD",
+      "INV-006": "HOLD",
+      "INV-008": "HOLD",
+      "INV-009": "HOLD",
+      "INV-010": "HOLD",
+      "INV-021": "APPROVE"
+    },
+    "exceptions": {
+      "INV-001": [],
+      "INV-003": [
+        "partial_receipt"
+      ],
+      "INV-004": [
+        "material_amount_mismatch"
+      ],
+      "INV-005": [
+        "goods_not_received"
+      ],
+      "INV-006": [
+        "duplicate"
+      ],
+      "INV-008": [
+        "po_not_approved",
+        "goods_not_received"
+      ],
+      "INV-009": [
+        "approval_limit_exceeded"
+      ],
+      "INV-010": [
+        "goods_not_received"
+      ],
+      "INV-021": [
+        "vendor_mismatch"
+      ]
+    },
+    "paid_while_held": [
+      "INV-010"
+    ]
+  },
+  "ar": {
+    "aging": [
+      "INV-AR-005",
+      "INV-AR-004",
+      "INV-AR-003",
+      "INV-AR-002",
+      "INV-AR-SEP-003",
+      "INV-AR-008",
+      "INV-AR-009",
+      "INV-AR-015",
+      "INV-AR-SEP-002",
+      "INV-AR-010",
+      "INV-AR-011",
+      "INV-AR-012",
+      "INV-AR-016",
+      "INV-AR-013",
+      "INV-AR-001",
+      "INV-AR-007",
+      "INV-AR-SEP-001",
+      "INV-AR-006",
+      "INV-AR-014"
+    ],
+    "cash": {
+      "PAY-002": "AUTO_APPLY",
+      "PAY-001": "AUTO_APPLY",
+      "PAY-003": "AUTO_APPLY",
+      "PAY-004": "HUMAN_REVIEW",
+      "PAY-005": "HUMAN_REVIEW",
+      "PAY-007": "HUMAN_REVIEW"
+    },
+    "payments": [
+      "PAY-002",
+      "PAY-001",
+      "PAY-003",
+      "PAY-004",
+      "PAY-005",
+      "PAY-006",
+      "PAY-007",
+      "PAY-008"
+    ]
+  },
+  "cash": {
+    "by_bank": {
+      "TXN-2026-09-019A": {
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-019A"
+        ],
+        "ledger_ids": [
+          "GL-CASH-STRIPE-FEES"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-022S": {
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-022S"
+        ],
+        "ledger_ids": [
+          "GL-CASH-STRIPE-REF"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-026S": {
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-026S"
+        ],
+        "ledger_ids": [
+          "GL-CASH-STRIPE-DP"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-008": {
+        "match_type": "GROUPED_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-008"
+        ],
+        "ledger_ids": [
+          "GL-AP-203",
+          "GL-AP-201",
+          "GL-AP-202"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-011": {
+        "match_type": "FEE_NETTED",
+        "status": "EXPLAINED_EXCEPTION",
+        "bank_ids": [
+          "TXN-2026-09-011"
+        ],
+        "ledger_ids": [
+          "GL-AP-WIRE"
+        ],
+        "difference": -25.0
+      },
+      "BNK-AP-012": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "BNK-AP-012"
+        ],
+        "ledger_ids": [
+          "JE-PAY-INV-012"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-012A": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-012A"
+        ],
+        "ledger_ids": [
+          "GL-AR-772"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-018A": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-018A"
+        ],
+        "ledger_ids": [
+          "GL-AP-INV-001"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-020H": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-020H"
+        ],
+        "ledger_ids": [
+          "GL-AP-HOLD"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-020R": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-020R"
+        ],
+        "ledger_ids": [
+          "GL-AP-ROUND"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-028": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-028"
+        ],
+        "ledger_ids": [
+          "GL-AR-ATLAS"
+        ],
+        "difference": 0.0
+      },
+      "TXN-AR-PAY-001": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-AR-PAY-001"
+        ],
+        "ledger_ids": [
+          "GL-AR-PAY-001"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-10-001": {
+        "match_type": "TIMING_DIFFERENCE",
+        "status": "OUTSTANDING_TIMING_ITEM",
+        "bank_ids": [
+          "TXN-2026-10-001"
+        ],
+        "ledger_ids": [
+          "GL-AP-HE"
+        ],
+        "difference": 0.0
+      },
+      "TXN-2026-09-015": {
+        "match_type": "UNEXPLAINED_DIFFERENCE",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [
+          "TXN-2026-09-015"
+        ],
+        "ledger_ids": [
+          "GL-AR-NS"
+        ],
+        "difference": 12.4
+      },
+      "TXN-2026-09-012B": {
+        "match_type": "POSSIBLE_DUPLICATE_REFUND",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [
+          "TXN-2026-09-012B"
+        ],
+        "ledger_ids": [],
+        "difference": -250.0
+      },
+      "BNK-UNX-001": {
+        "match_type": "UNMATCHED_BANK",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [
+          "BNK-UNX-001"
+        ],
+        "ledger_ids": [],
+        "difference": -800.0
+      },
+      "TXN-2026-09-021": {
+        "match_type": "UNMATCHED_BANK",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [
+          "TXN-2026-09-021"
+        ],
+        "ledger_ids": [],
+        "difference": -3000.0
+      },
+      "TXN-2026-09-025": {
+        "match_type": "UNMATCHED_BANK",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [
+          "TXN-2026-09-025"
+        ],
+        "ledger_ids": [],
+        "difference": -180.0
+      }
+    },
+    "by_ledger": {
+      "GL-CASH-STRIPE-FEES": {
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-019A"
+        ],
+        "ledger_ids": [
+          "GL-CASH-STRIPE-FEES"
+        ],
+        "difference": 0.0
+      },
+      "GL-CASH-STRIPE-REF": {
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-022S"
+        ],
+        "ledger_ids": [
+          "GL-CASH-STRIPE-REF"
+        ],
+        "difference": 0.0
+      },
+      "GL-CASH-STRIPE-DP": {
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-026S"
+        ],
+        "ledger_ids": [
+          "GL-CASH-STRIPE-DP"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-203": {
+        "match_type": "GROUPED_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-008"
+        ],
+        "ledger_ids": [
+          "GL-AP-203",
+          "GL-AP-201",
+          "GL-AP-202"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-201": {
+        "match_type": "GROUPED_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-008"
+        ],
+        "ledger_ids": [
+          "GL-AP-203",
+          "GL-AP-201",
+          "GL-AP-202"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-202": {
+        "match_type": "GROUPED_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-008"
+        ],
+        "ledger_ids": [
+          "GL-AP-203",
+          "GL-AP-201",
+          "GL-AP-202"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-WIRE": {
+        "match_type": "FEE_NETTED",
+        "status": "EXPLAINED_EXCEPTION",
+        "bank_ids": [
+          "TXN-2026-09-011"
+        ],
+        "ledger_ids": [
+          "GL-AP-WIRE"
+        ],
+        "difference": -25.0
+      },
+      "JE-PAY-INV-012": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "BNK-AP-012"
+        ],
+        "ledger_ids": [
+          "JE-PAY-INV-012"
+        ],
+        "difference": 0.0
+      },
+      "GL-AR-772": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-012A"
+        ],
+        "ledger_ids": [
+          "GL-AR-772"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-INV-001": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-018A"
+        ],
+        "ledger_ids": [
+          "GL-AP-INV-001"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-HOLD": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-020H"
+        ],
+        "ledger_ids": [
+          "GL-AP-HOLD"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-ROUND": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-020R"
+        ],
+        "ledger_ids": [
+          "GL-AP-ROUND"
+        ],
+        "difference": 0.0
+      },
+      "GL-AR-ATLAS": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-2026-09-028"
+        ],
+        "ledger_ids": [
+          "GL-AR-ATLAS"
+        ],
+        "difference": 0.0
+      },
+      "GL-AR-PAY-001": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_ids": [
+          "TXN-AR-PAY-001"
+        ],
+        "ledger_ids": [
+          "GL-AR-PAY-001"
+        ],
+        "difference": 0.0
+      },
+      "GL-AP-HE": {
+        "match_type": "TIMING_DIFFERENCE",
+        "status": "OUTSTANDING_TIMING_ITEM",
+        "bank_ids": [
+          "TXN-2026-10-001"
+        ],
+        "ledger_ids": [
+          "GL-AP-HE"
+        ],
+        "difference": 0.0
+      },
+      "GL-AR-NS": {
+        "match_type": "UNEXPLAINED_DIFFERENCE",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [
+          "TXN-2026-09-015"
+        ],
+        "ledger_ids": [
+          "GL-AR-NS"
+        ],
+        "difference": 12.4
+      },
+      "GL-AMB-1": {
+        "match_type": "UNMATCHED_LEDGER",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [],
+        "ledger_ids": [
+          "GL-AMB-1"
+        ],
+        "difference": 3000.0
+      },
+      "GL-AMB-2": {
+        "match_type": "UNMATCHED_LEDGER",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [],
+        "ledger_ids": [
+          "GL-AMB-2"
+        ],
+        "difference": 3000.0
+      },
+      "GL-AP-ORPHAN": {
+        "match_type": "UNMATCHED_LEDGER",
+        "status": "HUMAN_REVIEW",
+        "bank_ids": [],
+        "ledger_ids": [
+          "GL-AP-ORPHAN"
+        ],
+        "difference": 880.0
+      }
+    },
+    "period_status": "OPEN",
+    "arithmetic_tied": true,
+    "human_review_count": 8,
+    "ground_truth_labels": {
+      "TXN-2026-09-018A": {
+        "match_type": "EXACT_MATCH",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-AP-INV-001"
+        ]
+      },
+      "TXN-2026-09-008": {
+        "match_type": "GROUPED_MATCH",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-AP-201",
+          "GL-AP-202",
+          "GL-AP-203"
+        ]
+      },
+      "TXN-2026-09-011": {
+        "match_type": "FEE_NETTED",
+        "disposition": "EXPLAINED_EXCEPTION",
+        "ledger_ids": [
+          "GL-AP-WIRE"
+        ]
+      },
+      "TXN-AR-PAY-001": {
+        "match_type": "EXACT_MATCH",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-AR-PAY-001"
+        ]
+      },
+      "TXN-2026-09-015": {
+        "match_type": "UNEXPLAINED_DIFFERENCE",
+        "disposition": "HUMAN_REVIEW",
+        "ledger_ids": [
+          "GL-AR-NS"
+        ],
+        "difference": 12.4
+      },
+      "TXN-2026-09-012A": {
+        "match_type": "EXACT_MATCH",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-AR-772"
+        ]
+      },
+      "TXN-2026-09-012B": {
+        "match_type": "POSSIBLE_DUPLICATE_REFUND",
+        "disposition": "HUMAN_REVIEW",
+        "ledger_ids": []
+      },
+      "GL-AP-HE": {
+        "match_type": "TIMING_DIFFERENCE",
+        "disposition": "OUTSTANDING_TIMING_ITEM",
+        "bank_ids": [
+          "TXN-2026-10-001"
+        ]
+      },
+      "TXN-2026-09-025": {
+        "match_type": "UNMATCHED_BANK",
+        "disposition": "HUMAN_REVIEW",
+        "ledger_ids": []
+      },
+      "GL-AP-ORPHAN": {
+        "match_type": "UNMATCHED_LEDGER",
+        "disposition": "HUMAN_REVIEW",
+        "bank_ids": []
+      },
+      "TXN-2026-09-019A": {
+        "match_type": "PROVIDER_PAYOUT",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-CASH-STRIPE-FEES"
+        ],
+        "provider": "stripe"
+      },
+      "TXN-2026-09-022S": {
+        "match_type": "PROVIDER_PAYOUT",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-CASH-STRIPE-REF"
+        ],
+        "provider": "stripe"
+      },
+      "TXN-2026-09-026S": {
+        "match_type": "PROVIDER_PAYOUT",
+        "disposition": "MATCHED",
+        "ledger_ids": [
+          "GL-CASH-STRIPE-DP"
+        ],
+        "provider": "stripe"
+      }
+    }
+  },
+  "close": {
+    "blockers": [
+      "cash",
+      "bs_recon"
+    ],
+    "cash_blocked": true,
+    "period_blocked": true,
+    "cash_fully_reconciled": false,
+    "journals": [
+      "JE-202609-001",
+      "JE-202609-002",
+      "JE-202609-003"
+    ],
+    "tasks": {
+      "ingest": "COMPLETE",
+      "ap": "COMPLETE",
+      "ar": "COMPLETE",
+      "cash": "NEEDS_REVIEW",
+      "accruals": "COMPLETE",
+      "prepaid": "COMPLETE",
+      "depreciation": "COMPLETE",
+      "bs_recon": "BLOCKED",
+      "exceptions": "NOT_STARTED",
+      "final_review": "NOT_STARTED",
+      "mark_closed": "NOT_STARTED"
+    },
+    "period_status": "BLOCKED",
+    "human_review_items": [
+      "Cash: $12.40 unexplained difference",
+      "AR: $4,500 unmatched customer payment"
+    ]
+  },
+  "audit": {
+    "found_ids": [
+      "APR-INV-SELF",
+      "APR-PAY-009",
+      "APR-PAY-010",
+      "INV-009",
+      "INV-010",
+      "INV-012",
+      "INV-014",
+      "INV-015",
+      "INV-016",
+      "INV-017",
+      "JE-POST-CLOSE-001",
+      "PAY-AP-009",
+      "PAY-AP-010",
+      "PAY-AP-012",
+      "PAY-AP-017",
+      "PAY-AP-NORTHLINE",
+      "VEND-001",
+      "VEND-001-ALIAS",
+      "VEND-001-DUP",
+      "VEND-003",
+      "VEND-005",
+      "VEND-010",
+      "VEND-017"
+    ],
+    "finding_ids": [
+      "FND-20260919T235636Z-AUD-RND-001-001",
+      "FND-20260919T235636Z-AUD-RND-001-002",
+      "FND-20260919T235636Z-AUD-RND-001-003",
+      "FND-20260919T235636Z-AUD-RND-001-004",
+      "FND-20260919T235636Z-AUD-SUP-001-005",
+      "FND-20260919T235636Z-AUD-SUP-001-006",
+      "FND-20260919T235636Z-AUD-THR-001-007",
+      "FND-20260919T235636Z-AUD-PCE-001-008",
+      "FND-20260919T235636Z-AUD-SOD-001-009",
+      "FND-20260919T235636Z-AUD-SOD-001-010",
+      "FND-20260919T235636Z-AUD-SOD-001-011",
+      "FND-20260919T235636Z-AUD-DUP-VEND-001-012"
+    ],
+    "sample_ids": {
+      "payments": [
+        "PAY-AP-009",
+        "PAY-AP-012",
+        "PAY-AP-NORTHLINE",
+        "PAY-AP-017",
+        "PAY-AP-001",
+        "PAY-AP-010"
+      ],
+      "journal_entries": [
+        "JE-POST-CLOSE-001",
+        "JE-OPEX-SEP-PAY",
+        "JE-TXN-REV-SEP-001",
+        "JE-TXN-REV-SEP-002",
+        "JE-TXN-REV-SEP-003",
+        "JE-TXN-SUP-SEP-001",
+        "JE-TXN-SUP-SEP-002",
+        "JE-AP-INV-018"
+      ],
+      "approvals": [
+        "APR-INV-SELF",
+        "APR-PAY-009",
+        "APR-INV-001",
+        "APR-JE-001",
+        "APR-PAY-010"
+      ],
+      "invoices": [
+        "INV-SUP-AUG-001",
+        "INV-SUP-SEP-001",
+        "INV-SUP-SEP-002",
+        "INV-SUP-AUG-002",
+        "INV-018",
+        "INV-009",
+        "INV-HOST-AUG-001",
+        "INV-HOST-SEP-001"
+      ],
+      "reconciliations": [
+        "REC-NS-1240",
+        "REC-CLEAN-001",
+        "REC-FEE-017"
+      ]
+    },
+    "audit_run_id": "20260919T235636Z",
+    "planted": [
+      {
+        "object_id": "VEND-001",
+        "control_id": "AUD-DUP-VEND-001",
+        "kind": "duplicate_vendor"
+      },
+      {
+        "object_id": "INV-006",
+        "control_id": "AUD-DUP-INV-001",
+        "kind": "duplicate_invoice"
+      },
+      {
+        "object_id": "PAY-AP-009",
+        "control_id": "AUD-RND-001",
+        "kind": "round_number"
+      },
+      {
+        "object_id": "JE-POST-CLOSE-001",
+        "control_id": "AUD-PCE-001",
+        "kind": "unauthorized_post_close_entry"
+      },
+      {
+        "object_id": "APR-INV-SELF",
+        "control_id": "AUD-SOD-001",
+        "kind": "self_approval"
+      },
+      {
+        "object_id": "PAY-AP-010",
+        "control_id": "AUD-SOD-001",
+        "kind": "self_approval"
+      }
+    ]
+  },
+  "reporting": {
+    "revenue": 1000000.0,
+    "cogs": 390000.0,
+    "gross_margin_pct": 0.61,
+    "prior_gross_margin_pct": 0.64,
+    "driver_transactions": [
+      "INV-AR-013",
+      "INV-AR-SEP-001",
+      "INV-AR-SEP-002",
+      "INV-AR-SEP-003",
+      "INV-FRT-AUG-001",
+      "INV-FRT-SEP-001",
+      "INV-FRT-SEP-002",
+      "INV-HOST-AUG-001",
+      "INV-HOST-AUG-002",
+      "INV-HOST-SEP-001",
+      "INV-HOST-SEP-002",
+      "INV-HOST-SEP-003",
+      "INV-SUP-AUG-001",
+      "INV-SUP-AUG-002",
+      "INV-SUP-SEP-001",
+      "INV-SUP-SEP-002",
+      "TXN-AR-013",
+      "TXN-FRT-AUG-001",
+      "TXN-FRT-SEP-001",
+      "TXN-FRT-SEP-EXPEDITE",
+      "TXN-HOST-AUG-001",
+      "TXN-HOST-AUG-002",
+      "TXN-HOST-SEP-001",
+      "TXN-HOST-SEP-002",
+      "TXN-HOST-SEP-OVERAGE",
+      "TXN-REV-SEP-001",
+      "TXN-REV-SEP-002",
+      "TXN-REV-SEP-003",
+      "TXN-SUP-AUG-001",
+      "TXN-SUP-AUG-002",
+      "TXN-SUP-SEP-001",
+      "TXN-SUP-SEP-002"
+    ],
+    "metrics_tie_to_gl": true,
+    "pretends_cash_reconciled": false
+  },
+  "forecast": {
+    "weeks": 13,
+    "missing_source_ids": [],
+    "actual_source_ids": [
+      "BNK-AP-012",
+      "BNK-AR-FC-001",
+      "BNK-UNX-001",
+      "INV-012",
+      "INV-AR-014",
+      "PR-2026-10-02",
+      "TXN-2026-09-019A",
+      "po_1MaximorFees"
+    ],
+    "beginning_cash": 463137.4
+  }
+}

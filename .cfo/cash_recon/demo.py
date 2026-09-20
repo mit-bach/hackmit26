@@ -72,14 +72,18 @@ def load_ground_truth() -> dict:
 
 
 def seed_provider_payouts() -> None:
-    """Replay existing Stripe/Adyen adapters so monthly recon can delegate."""
-    from integrations.demo import process_provider
-    from integrations.store import all_payouts
+    """Replay existing Stripe/Adyen adapters so monthly recon can delegate.
 
-    if not any(item.provider == "stripe" for item in all_payouts()):
+    Presence of some other Stripe payout (for example an August memory fixture)
+    must not skip the September demo payouts the bank statement expects.
+    """
+    from integrations.demo import process_provider
+    from integrations.store import get_payout
+
+    if get_payout("po_1HackMIT97420") is None:
         process_provider("stripe")
     try:
-        if not any(item.provider == "adyen" for item in all_payouts()):
+        if get_payout("3JZKT2B4N7Q1P8R5S6T0") is None:
             process_provider("adyen")
     except FileNotFoundError:
         pass

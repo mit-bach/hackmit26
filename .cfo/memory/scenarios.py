@@ -569,3 +569,119 @@ def run_harbor_cross_period(
         "august_lookup": august_trace.memory_lookup,
         "september_lookup": september_trace.memory_lookup,
     }
+
+
+def run_harbor_self_correction(
+    *,
+    actual_amount: float = 12100.0,
+    invoice_id: str = "INV-HE-2026-10",
+    memory_enabled: bool = True,
+) -> dict[str, Any]:
+    """August estimate, September reuse, October actual bill reverses the estimate."""
+    from accrual.ledger import find_accrual, load_accruals, reconcile_accrual
+    from cfo.explain import explain_accrual_correction
+    from memory.models import MemoryEvidence
+    from memory.write import write_decision
+
+    reset_accrual_books()
+    august_decision, august_trace = run_harbor_period(
+        "2026-08",
+        memory_enabled=True,
+        hide_period_invoices=True,
+        reset=False,
+        run_id="mem-aug-harbor-correct",
+    )
+    september_decision, september_trace = run_harbor_period(
+        "2026-09",
+        memory_enabled=memory_enabled,
+        hide_period_invoices=True,
+        reset=False,
+        run_id="mem-sep-harbor-correct",
+    )
+    open_rows = [item for item in load_accruals() if item.vendor == HARBOR_VENDOR and item.status == "open"]
+    target = open_rows[-1] if open_rows else find_accrual(getattr(september_decision, "accrual_id", None) or "")
+    if target is None:
+        raise RuntimeError("Harbor accrual was not booked, so it cannot be corrected.")
+    result = reconcile_accrual(target.accrual_id, invoice_id, actual_amount)
+    explanation = explain_accrual_correction(
+        HARBOR_VENDOR,
+        result.period,
+        result.estimated_amount,
+        result.actual_amount,
+        invoice_id,
+        prior_id=getattr(august_trace, "written_memory_id", None),
+    )
+    memory, _written = write_decision(
+        period="2026-10",
+        workflow="month_end_close",
+        entity_type="vendor",
+        entity_id="harbor-electric",
+        situation_type="accrual_methodology",
+        situation_summary=f"October invoice {invoice_id} arrived at {actual_amount} versus the open accrual.",
+        evidence=[
+            MemoryEvidence(kind="invoice", label=invoice_id, amount=actual_amount, reference=invoice_id),
+            MemoryEvidence(kind="accrual", label=target.accrual_id, amount=result.estimated_amount, reference=target.accrual_id),
+        ],
+        decision="reverse_and_book_actual",
+        reasoning_summary=explanation["narrative"],
+        accounting_treatment="reverse_accrual_book_actual",
+        outcome="corrected",
+        reusable_precedent="Use the actual invoice once it arrives; do not keep the estimate.",
+        source_trace_ids=[target.accrual_id],
+        tags=["harbor", "self_correction"],
+        fingerprint=f"harbor-oct-{invoice_id}-{actual_amount}",
+        entity_name=HARBOR_VENDOR,
+        accounting_category="utilities_accrual",
+    )
+    return {
+        "august": august_decision,
+        "september": september_decision,
+        "august_trace": august_trace,
+        "september_trace": september_trace,
+        "october_reconciliation": result,
+        "explanation": explanation,
+        "correction_memory": memory,
+        "detected_prior_estimate": True,
+        "books_corrected": True,
+        "memory_enabled": memory_enabled,
+    }
+
+
+def run_harbor_contamination(
+    *,
+    wrong_august_amount: float = 50000.0,
+    memory_enabled: bool = True,
+) -> dict[str, Any]:
+    """Inject a wrong August amount, then measure whether September blindly copies it."""
+    from accrual.ledger import load_accruals, save_accruals
+
+    story = run_harbor_cross_period(memory_enabled=True)
+    rows = load_accruals()
+    mutated = []
+    for item in rows:
+        if item.vendor == HARBOR_VENDOR and item.period == "2026-08":
+            mutated.append(item.model_copy(update={"estimated_amount": wrong_august_amount}))
+        else:
+            mutated.append(item)
+    save_accruals(mutated)
+    september_decision, september_trace = run_harbor_period(
+        "2026-09",
+        memory_enabled=memory_enabled,
+        hide_period_invoices=False,
+        reset=False,
+        run_id="mem-sep-harbor-contam",
+    )
+    copied = bool(
+        september_decision.estimated_amount
+        and abs(float(september_decision.estimated_amount) - wrong_august_amount) < 0.01
+    )
+    return {
+        "wrong_august_amount": wrong_august_amount,
+        "september_amount": september_decision.estimated_amount,
+        "copied_wrong_amount": copied,
+        "contained": not copied,
+        "september_decision": september_decision,
+        "september_trace": september_trace,
+        "memory_enabled": memory_enabled,
+        "clean_september_amount": getattr(story["september"], "estimated_amount", None),
+    }

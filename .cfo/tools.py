@@ -62,7 +62,8 @@ _runtime_loaded = False
 RUNTIME_DIR_ENV = "CFO_AP_RUNTIME_DIR"
 _ROOT = Path(__file__).resolve().parent
 _DEFAULT_RUNTIME_DIR = _ROOT / "runs" / "ap"
-RUNTIME_DIR = _DEFAULT_RUNTIME_DIR
+_DEFAULT_OVERLAY_NAME = "runtime_invoices.json"
+OVERLAY_NAME = _DEFAULT_OVERLAY_NAME
 
 
 def _default_runtime_dir() -> Path:
@@ -76,16 +77,37 @@ RUNTIME_DIR = _default_runtime_dir()
 
 
 def runtime_invoices_path() -> Path:
-    return RUNTIME_DIR / "runtime_invoices.json"
+    return RUNTIME_DIR / OVERLAY_NAME
 
 
 def configure_runtime_dir(directory: Path | None = None) -> Path:
     """Point the durable AP overlay at an isolated directory. Does not edit invoices.json."""
-    global RUNTIME_DIR, _runtime_loaded
+    global RUNTIME_DIR, OVERLAY_NAME, _runtime_loaded
     RUNTIME_DIR = Path(directory) if directory is not None else _default_runtime_dir()
+    OVERLAY_NAME = _DEFAULT_OVERLAY_NAME
     _runtime_invoices.clear()
     _runtime_loaded = False
     return RUNTIME_DIR
+
+
+def configure_overlay_path(path: Path | None = None) -> Path:
+    """Office/Sidecar alias for the durable AP overlay file. Does not edit invoices.json."""
+    global RUNTIME_DIR, OVERLAY_NAME, _runtime_loaded
+    if path is None:
+        RUNTIME_DIR = _default_runtime_dir()
+        OVERLAY_NAME = _DEFAULT_OVERLAY_NAME
+    else:
+        target = Path(path)
+        if target.suffix == ".json":
+            RUNTIME_DIR = target.parent
+            OVERLAY_NAME = target.name
+        else:
+            RUNTIME_DIR = target
+            OVERLAY_NAME = _DEFAULT_OVERLAY_NAME
+    RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
+    _runtime_invoices.clear()
+    _runtime_loaded = False
+    return runtime_invoices_path()
 
 
 def _runtime_lock_path() -> Path:
@@ -262,6 +284,31 @@ def load_goods_receipt(po_id: str | None) -> GoodsReceipt | None:
 
 def normalize_invoice_number(value: str) -> str:
     return "".join(ch for ch in (value or "").upper() if ch.isalnum())
+
+
+def paid_invoice_ids() -> set[str]:
+    """Invoice IDs already settled in canonical vendor_payments.json.
+
+    Presence on a vendor payment means the bill is not payable again, including
+    grouped ACH and fee-netted wires. Missing file (handwritten fixtures) is unpaid.
+    """
+    path = DATA_DIR / "canonical" / "vendor_payments.json"
+    if not path.exists():
+        return set()
+    try:
+        rows = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return set()
+    if not isinstance(rows, list):
+        return set()
+    paid: set[str] = set()
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        for invoice_id in row.get("invoice_ids") or []:
+            if invoice_id:
+                paid.add(str(invoice_id))
+    return paid
 
 
 def load_duplicate_invoices(invoice_id: str) -> list[Invoice]:

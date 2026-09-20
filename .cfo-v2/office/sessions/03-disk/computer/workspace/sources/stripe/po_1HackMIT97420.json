@@ -1,0 +1,59 @@
+{
+  "bot": "stripe",
+  "profile": "payout",
+  "provider": "stripe",
+  "payout_id": "po_1HackMIT97420",
+  "status": "processed",
+  "invoice_candidates": 0,
+  "deposit": {
+    "bank_deposit_id": "BANK-STRIPE-97420",
+    "bank_deposit_amount": 97420.0,
+    "expected_payout": 97420.0,
+    "actual_payout": 97420.0,
+    "reconciliation_status": "MATCH"
+  },
+  "charges": [
+    {
+      "line_type": "charge",
+      "category": "gross",
+      "amount": 25000.0,
+      "reference": "ORD-1001",
+      "provider_object_id": "txn_ord_1001"
+    },
+    {
+      "line_type": "charge",
+      "category": "gross",
+      "amount": 31000.0,
+      "reference": "ORD-1002",
+      "provider_object_id": "txn_ord_1002"
+    },
+    {
+      "line_type": "charge",
+      "category": "gross",
+      "amount": 28000.0,
+      "reference": "ORD-1003",
+      "provider_object_id": "txn_ord_1003"
+    },
+    {
+      "line_type": "charge",
+      "category": "gross",
+      "amount": 18000.0,
+      "reference": "ORD-1004",
+      "provider_object_id": "txn_ord_1004"
+    },
+    {
+      "line_type": "refund",
+      "category": "refund",
+      "amount": -1500.0,
+      "reference": "re_1500",
+      "provider_object_id": "txn_refund_1500"
+    },
+    {
+      "line_type": "adjustment",
+      "category": "chargeback",
+      "amount": -1000.0,
+      "reference": "dp_1000",
+      "provider_object_id": "txn_dispute_1000"
+    }
+  ]
+}

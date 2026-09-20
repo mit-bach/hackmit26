@@ -136,19 +136,99 @@ def looks_like_invoice_text(text: str) -> bool:
 
 def classify_text(text: str, *, subject: str = "", filename: str = "") -> tuple[str, str]:
     blob = f"{subject}\n{filename}\n{text}".lower()
+    invoice_like = looks_like_invoice_text(text)
     if any(token in blob for token in ("unsubscribe", "newsletter", "limited time", "marketing")):
         return "marketing", "Looks like a marketing email, not a vendor invoice"
-    if any(token in blob for token in ("quotation", "quote number", "quoted amount", "estimate valid")):
+    if any(token in blob for token in ("credit memo", "credit note", "credit memorandum")):
+        return "not_invoice", "Credit memo/credit note, not a payable vendor invoice"
+    if any(
+        token in blob
+        for token in (
+            "voided invoice",
+            "this invoice is void",
+            "void — do not pay",
+            "void - do not pay",
+            "void: do not pay",
+            "do not pay this invoice",
+            "cancelled invoice",
+            "canceled invoice",
+        )
+    ):
+        return "not_invoice", "Voided invoice, not a payable"
+    if any(
+        token in blob
+        for token in ("stripe payout", "stripe settlement", "stripe transfer to bank")
+    ) and not invoice_like:
+        return "not_invoice", "Stripe payout is a cash settlement, not a vendor invoice or revenue"
+    if any(
+        token in blob
+        for token in (
+            "quotation",
+            "quote number",
+            "quoted amount",
+            "estimate valid",
+            "valid through",
+            "this is a quote",
+            "this is an estimate",
+        )
+    ) or (re.search(r"\bestimate\b", blob) and not invoice_like):
         return "quote", "Document is a quote/estimate, not an invoice"
     if any(token in blob for token in ("payment received", "thank you for your payment", "payment confirmation")):
         return "payment_confirmation", "Payment confirmation, not a request for payment"
-    if any(token in blob for token in ("account statement", "statement of account", "this is not an invoice")):
+    if any(token in blob for token in ("account statement", "statement of account")):
         return "statement", "Account statement rather than an invoice"
-    if any(token in blob for token in ("purchase request", "requisition", "not an invoice")) and "invoice number" not in blob:
-        if "purchase request" in blob or "requisition" in blob:
-            return "purchase_order", "Purchase request/requisition, not an invoice"
-    if any(token in blob for token in ("uber trip receipt", "lyft", "reimburse", "rider receipt", "expense reimbursement")):
-        return "receipt", "Employee receipt/reimbursement documentation, not a vendor invoice"
+    po_markers = (
+        "purchase order",
+        "purchase request",
+        "requisition",
+        "this purchase order is not an invoice",
+        "this is a po",
+    )
+    if (
+        any(token in blob for token in po_markers)
+        and not invoice_like
+        and "invoice number" not in blob
+        and "amount due" not in blob
+    ):
+        return "purchase_order", "Purchase order/requisition, not a vendor invoice"
+    if any(token in blob for token in ("advance shipping notice", "shipping notice", "packing list")) and not invoice_like:
+        return "not_invoice", "Shipping notice/packing list, not a vendor invoice"
+    if (
+        any(
+            token in blob
+            for token in (
+                "card charge",
+                "this is a bank transaction",
+                "posted to your account",
+                "bank transaction, not a vendor invoice",
+            )
+        )
+        and not invoice_like
+    ):
+        return "not_invoice", "Bank/card charge, not a vendor invoice"
+    if any(
+        token in blob
+        for token in (
+            "uber trip receipt",
+            "uber receipt",
+            "lyft",
+            "rider receipt",
+            "this is a receipt",
+        )
+    ):
+        return "receipt", "Employee/paid receipt, not a vendor invoice"
+    if any(token in blob for token in ("reimburse", "expense reimbursement")):
+        return "reimbursement", "Employee reimbursement documentation, not a vendor invoice"
+    if (
+        re.search(r"\breceipt\b", blob)
+        and ("paid" in blob or "thank you" in blob)
+        and not invoice_like
+        and "goods receipt" not in blob
+        and "goods received" not in blob
+    ):
+        return "receipt", "Paid receipt, not a vendor invoice"
+    if "this is not an invoice" in blob and not invoice_like:
+        return "not_invoice", "Document explicitly is not an invoice"
     if looks_like_invoice_text(text):
         return "invoice", "Document contains vendor, invoice number, invoice date, and amount due"
     if "invoice" in blob and not looks_like_invoice_text(text):
@@ -196,6 +276,16 @@ def parse_invoice_text(
         InvoiceEvidence(field="amount", source=f"{source_type}.text", value=amount),
     ]
     classification, reason = classify_text(text)
+    from invoice_ingestion.traps import analyze_document
+
+    expected_banking = None
+    if extra_context:
+        expected_banking = extra_context.get("expected_banking")
+    analysis = analyze_document(text, expected_banking=expected_banking)
+    context = dict(extra_context or {})
+    context["document_analysis"] = analysis.as_dict()
+    if analysis.supersedes:
+        context["supersedes"] = analysis.supersedes
     return InvoiceCandidate(
         source_type=source_type,
         source_id=source_id,
@@ -213,11 +303,11 @@ def parse_invoice_text(
         document_path=document_path,
         document_hash=hash_text(text) if text.strip() else None,
         page_refs=page_refs_from_text(text) if text.strip() else [],
-        extraction_confidence=0.86 if classification == "invoice" else 0.4,
+        extraction_confidence=0.86 if analysis.classification == "invoice" and analysis.payable else 0.4,
         evidence=evidence,
-        source_context=extra_context or {},
-        classification=classification,
-        classification_reason=reason,
+        source_context=context,
+        classification=analysis.classification,
+        classification_reason=analysis.reason,
     )
 
 

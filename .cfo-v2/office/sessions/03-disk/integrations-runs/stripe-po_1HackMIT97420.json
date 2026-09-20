@@ -1,0 +1,35 @@
+{
+  "stripe_event_id": "evt_1HackMITPayoutReconciled",
+  "event_type": "payout.reconciliation_completed",
+  "payout_id": "po_1HackMIT97420",
+  "balance_transaction_ids": [
+    "txn_ord_1001",
+    "txn_ord_1002",
+    "txn_ord_1003",
+    "txn_ord_1004",
+    "txn_refund_1500",
+    "txn_dispute_1000",
+    "txn_fee_2080"
+  ],
+  "categories": [
+    "gross",
+    "gross",
+    "gross",
+    "gross",
+    "refund",
+    "chargeback",
+    "fee"
+  ],
+  "expected_payout": 97420.0,
+  "expected_payout_minor": 9742000,
+  "actual_payout": 97420.0,
+  "bank_deposit_id": "BANK-STRIPE-97420",
+  "bank_deposit_amount": 97420.0,
+  "difference": 0.0,
+  "reconciliation_status": "MATCH",
+  "exceptions": [],
+  "duplicate": false,
+  "replay": false,
+  "received_at": "2026-09-20T00:15:07.720355+00:00",
+  "provider_created_at": "2025-09-19T00:00:00+00:00"
+}

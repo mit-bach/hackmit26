@@ -1,0 +1,24 @@
+[
+  {
+    "case_id": "AR-SCN-AR-010",
+    "domain": "ar",
+    "scenario_id": "SCN-AR-010",
+    "status": "FAIL",
+    "expected": "HUMAN_REVIEW",
+    "actual": "UNAPPLIED",
+    "score": 0.0,
+    "reason": "Auto-resolved a human-review case incorrectly",
+    "source_ids": [
+      "PAY-005"
+    ],
+    "agent_run_id": "",
+    "requires_human_review": true,
+    "review_class": "HUMAN_REVIEW_EXPECTED",
+    "latency_ms": null,
+    "error_type": "UNSAFE_AUTO_RESOLUTION",
+    "diagnostics": {
+      "candidates": [],
+      "reason": "No plausible invoice match was found; cash stays unapplied."
+    }
+  }
+]

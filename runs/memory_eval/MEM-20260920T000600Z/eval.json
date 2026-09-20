@@ -1,0 +1,310 @@
+{
+  "cases": [
+    {
+      "case_id": "stripe_sep_standard",
+      "kind": "stripe_explained",
+      "memory_off": {
+        "correct": true,
+        "steps": 7,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 2,
+        "precedent_used": true,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": true
+      }
+    },
+    {
+      "case_id": "stripe_sep_contradictory",
+      "kind": "stripe_unexplained",
+      "memory_off": {
+        "correct": true,
+        "steps": 13,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 3,
+        "precedent_used": false,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "prepaid_cloudco_same_vendor",
+      "kind": "prepaid",
+      "memory_off": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": true,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "prepaid_unrelated_vendor",
+      "kind": "prepaid",
+      "memory_off": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "prepaid_cloudco_contradictory",
+      "kind": "prepaid",
+      "memory_off": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "stripe_sep_standard_repeat",
+      "kind": "stripe_explained",
+      "memory_off": {
+        "correct": true,
+        "steps": 7,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 2,
+        "precedent_used": true,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": true
+      }
+    },
+    {
+      "case_id": "stripe_sep_treatment_consistency",
+      "kind": "stripe_explained",
+      "memory_off": {
+        "correct": true,
+        "steps": 7,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 2,
+        "precedent_used": true,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": true
+      }
+    },
+    {
+      "case_id": "prepaid_treatment_consistency",
+      "kind": "prepaid",
+      "memory_off": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": true,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "stripe_sep_no_blind_reuse",
+      "kind": "stripe_unexplained",
+      "memory_off": {
+        "correct": true,
+        "steps": 13,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 3,
+        "precedent_used": false,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "prepaid_no_blind_reuse",
+      "kind": "prepaid",
+      "memory_off": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "prepaid_unrelated_not_stripe",
+      "kind": "prepaid",
+      "memory_off": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 0,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": true,
+        "inconsistent": false
+      }
+    },
+    {
+      "case_id": "memory_off_skips_retrieval",
+      "kind": "stripe_explained",
+      "memory_off": {
+        "correct": true,
+        "steps": 7,
+        "precedent_used": false,
+        "retrieved": [],
+        "queried": false,
+        "inconsistent": false
+      },
+      "memory_on": {
+        "correct": true,
+        "steps": 2,
+        "precedent_used": true,
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "queried": true,
+        "inconsistent": true
+      }
+    }
+  ],
+  "metrics": {
+    "cases": 12,
+    "memory_off": {
+      "correct": 12,
+      "total": 12,
+      "inconsistent_prior_treatments": 0,
+      "investigation_steps": 54,
+      "precedent_used": 0,
+      "retrievals": 0
+    },
+    "memory_on": {
+      "correct": 12,
+      "total": 12,
+      "inconsistent_prior_treatments": 4,
+      "investigation_steps": 14,
+      "precedent_used": 6,
+      "retrievals": 10
+    },
+    "reusable_precedent_cases": {
+      "memory_off": {
+        "correct": 7,
+        "total": 7,
+        "inconsistent_prior_treatments": 0,
+        "investigation_steps": 28,
+        "precedent_used": 0,
+        "retrievals": 0
+      },
+      "memory_on": {
+        "correct": 7,
+        "total": 7,
+        "inconsistent_prior_treatments": 4,
+        "investigation_steps": 8,
+        "precedent_used": 6,
+        "retrievals": 7
+      }
+    }
+  },
+  "memory_records": [
+    "DEC-2026-08-001",
+    "DEC-2026-09-001"
+  ],
+  "notes": [
+    "Both modes use the same Python accounting logic.",
+    "Memory ON is not rewarded for inventing a worse OFF answer.",
+    "Efficiency is investigation steps and whether August precedent was consulted."
+  ]
+}

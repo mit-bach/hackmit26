@@ -13,13 +13,7 @@ with slight numeric noise across sources.
 
 from __future__ import annotations
 
-from tools import normalize_vendor
-
-
-def normalize_invoice_number(number: str | None) -> str:
-    if not number:
-        return ""
-    return number.strip().upper().replace(" ", "")
+from tools import normalize_invoice_number, normalize_vendor
 
 
 def canonical_invoice_key(

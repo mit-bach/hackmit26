@@ -1,0 +1,42 @@
+{
+  "bot": "email",
+  "profile": "invoice",
+  "source_id": "MSG-E01",
+  "classification": "invoice",
+  "reason": "Document contains vendor, invoice number, invoice date, and amount due",
+  "canonical_id": "ING-001",
+  "candidate": {
+    "source_type": "email",
+    "source_id": "MSG-E01",
+    "source_uri": "email://ap-inbox/MSG-E01",
+    "vendor": "Amazon Web Services",
+    "vendor_id": null,
+    "vendor_invoice_number": "INV-9001",
+    "invoice_date": "2026-09-12",
+    "due_date": "2026-10-12",
+    "currency": "USD",
+    "subtotal": 4403.67,
+    "tax": 416.33,
+    "amount": 4820.0,
+    "po_id": null,
+    "line_items": [],
+    "document_path": "files/aws_inv_9001.txt",
+    "document_hash": "59eb0381c4e56486dc14632a4e798737d7881a28946ca4078dc7bc98fd0437ad",
+    "page_refs": [
+      "page 1"
+    ],
+    "extraction_confidence": 0.86,
+    "source_context": {
+      "from": "no-reply@amazon.com",
+      "subject": "Your AWS invoice INV-9001 is ready",
+      "attachment_id": "ATT-E01-1",
+      "filename": "INV-9001.pdf"
+    },
+    "classification": "invoice",
+    "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due"
+  },
+  "destination": {
+    "slug": "ap",
+    "profile": "prepare"
+  }
+}

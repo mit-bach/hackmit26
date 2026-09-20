@@ -191,7 +191,7 @@ def _usage() -> int:
     print("       python main.py reconcile-trace REC-001")
     print("       python main.py eval-cash-reconciliation")
     print("       python main.py memory-demo [--story stripe|prepaid|close|both]")
-    print("       python main.py eval-memory")
+    print("       python main.py eval-gauntlet")
     print("       python main.py month-end [period]")
     print("       python main.py close-month --month 2026-09 --seed-demo")
     print("       python main.py close-trace --month 2026-09")
@@ -636,6 +636,19 @@ def main() -> int:
         from memory.cli import run_memory_demo
 
         return run_memory_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-gauntlet", "eval_gauntlet", "finance-gauntlet"}:
+        from evals.maximor_finance_gauntlet.__main__ import main as run_gauntlet_cli
+
+        extra = sys.argv[2:]
+        if extra and extra[0] in {"--modes", "modes"}:
+            from evals.maximor_finance_gauntlet.modes import run_modes
+            import json
+
+            payload = run_modes(include_existing=False)
+            print(json.dumps(payload["comparison"], indent=2))
+            return 0
+        return run_gauntlet_cli()
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-memory", "memory-eval", "eval_memory"}:
         from memory.cli import run_memory_eval

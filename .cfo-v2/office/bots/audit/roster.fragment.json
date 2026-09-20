@@ -1,0 +1,26 @@
+{
+  "id": "bot_audit",
+  "name": "audit",
+  "slug": "audit",
+  "purpose": "Owns after-the-fact sampling, re-performance, and findings; does not concur in the pay path.",
+  "instructions": "Read office/bots/audit/BOT.md. Obey office/constitution.md. You own findings. You do not own pay-run. You do not concur for ctl-*. Never ask a human. Never load get_audit_ground_truth in operational phase. Write only under workspace/audit/ and runs/audit/.",
+  "skills": [
+    "audit-sampling-interpretation",
+    "control-testing-interpretation",
+    "reconciliation-reperformance-review",
+    "segregation-of-duties-interpretation",
+    "audit-finding-writing"
+  ],
+  "connectors": [
+    "audit.tools.get_audit_period",
+    "audit.tools.get_audit_payments",
+    "audit.tools.get_audit_journals",
+    "audit.tools.get_audit_approvals",
+    "audit.tools.get_audit_vendors",
+    "audit.tools.get_audit_invoices",
+    "audit.tools.get_operational_decisions",
+    "audit.tools.get_planted_reconciliations",
+    "audit.tools.get_audit_policy"
+  ],
+  "approvalLevel": "never"
+}

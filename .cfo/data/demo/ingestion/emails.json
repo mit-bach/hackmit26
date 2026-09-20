@@ -161,5 +161,22 @@
         "text": "PURCHASE ORDER PO-101\nAcme Supplies\nAuthorized 12450.00"
       }
     ]
+  },
+  {
+    "message_id": "MSG-E-REVISED",
+    "period": "2026-09",
+    "from": "billing@harborelectric.example",
+    "to": "ap@maximor.example",
+    "subject": "Revised invoice HE-4401-R replaces invoice HE-4401",
+    "sent_at": "2026-09-06T14:10:00Z",
+    "body": "Please use the attached revised invoice. This invoice replaces invoice HE-4401.",
+    "attachments": [
+      {
+        "attachment_id": "ATT-E-REVISED",
+        "filename": "HE-4401-R.pdf",
+        "content_type": "application/pdf",
+        "text": "INVOICE\nVendor: Harbor Electric\nInvoice number: HE-4401-R\nInvoice date: 2026-09-06\nAmount due: 4300.00\nThis invoice replaces invoice HE-4401\nRevised invoice\n"
+      }
+    ]
   }
 ]

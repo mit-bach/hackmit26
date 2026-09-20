@@ -1,0 +1,231 @@
+{
+  "payment_id": "PAY-STR-CH_STR_019",
+  "started_at": "2026-09-20T00:06:45Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-STR-CH_STR_019",
+    "payment_date": "2026-09-26",
+    "amount": 1100.0,
+    "currency": "USD",
+    "payer_name": "Harbor Electric",
+    "customer_id": null,
+    "bank_reference": "ch_str_019",
+    "remittance_text": "INV-STR-019 Harbor overpayment INV-STR-019",
+    "invoice_reference": "INV-STR-019",
+    "source": "stripe",
+    "unapplied_amount": 1100.0,
+    "application_status": "HUMAN_REVIEW",
+    "metadata": {
+      "stripe_charge_id": "ch_str_019",
+      "stripe_payment_intent_id": "pi_str_019",
+      "stripe_balance_transaction_id": "",
+      "stripe_event_type": "payment_intent.succeeded",
+      "customer_name": "Harbor Electric",
+      "invoice_id": "INV-STR-019",
+      "order_id": "INV-STR-019"
+    }
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-STR-CH_STR_019",
+      "payment_date": "2026-09-26",
+      "amount": 1100.0,
+      "currency": "USD",
+      "payer_name": "Harbor Electric",
+      "customer_id": null,
+      "bank_reference": "ch_str_019",
+      "remittance_text": "INV-STR-019 Harbor overpayment INV-STR-019",
+      "invoice_reference": "INV-STR-019",
+      "source": "stripe",
+      "unapplied_amount": 1100.0,
+      "application_status": "UNMATCHED",
+      "metadata": {
+        "stripe_charge_id": "ch_str_019",
+        "stripe_payment_intent_id": "pi_str_019",
+        "stripe_balance_transaction_id": "",
+        "stripe_event_type": "payment_intent.succeeded",
+        "customer_name": "Harbor Electric",
+        "invoice_id": "INV-STR-019",
+        "order_id": "INV-STR-019"
+      }
+    },
+    "identified_customer_id": "CUST-012",
+    "identified_customer_name": "Harbor Electric",
+    "customer_confidence": 0.95,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-STR-016",
+        "customer_id": "CUST-012",
+        "customer_name": "Harbor Electric",
+        "invoice_date": "2026-09-18",
+        "due_date": "2026-10-18",
+        "original_amount": 1800.0,
+        "outstanding_amount": 1800.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-016",
+        "description": "Harbor field service",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-019",
+        "customer_id": "CUST-012",
+        "customer_name": "Harbor Electric",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "original_amount": 950.0,
+        "outstanding_amount": 950.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-019",
+        "description": "Harbor overpayment case",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-021",
+        "customer_id": "CUST-012",
+        "customer_name": "Harbor Electric",
+        "invoice_date": "2026-09-22",
+        "due_date": "2026-10-22",
+        "original_amount": 1000.0,
+        "outstanding_amount": 1000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-021",
+        "description": "Harbor multi-payment install",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-019",
+            "amount": 950.0
+          }
+        ],
+        "total_applied": 950.0,
+        "unapplied_amount": 150.0,
+        "match_type": "explicit_invoice",
+        "score": 0.99,
+        "evidence": [
+          "Remittance names INV-STR-019"
+        ],
+        "ambiguities": []
+      }
+    ],
+    "remittance_invoice_ids": [
+      "INV-STR-019"
+    ],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-STR-CH_STR_019 1100.0 USD from Harbor Electric",
+      "Remittance: INV-STR-019 Harbor overpayment INV-STR-019",
+      "Payer 'Harbor Electric' matches 'Harbor Electric'",
+      "Remittance invoice references: INV-STR-019"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-STR-CH_STR_019",
+    "decision": "HUMAN_REVIEW",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-019",
+        "amount": 950.0
+      }
+    ],
+    "confidence": 0.7,
+    "reason": "Payment 1100.0 exceeds named invoice outstanding 950.0; overpayment residual 150.0 must not disappear.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_019 1100.0 USD from Harbor Electric",
+      "Remittance: INV-STR-019 Harbor overpayment INV-STR-019",
+      "Payer 'Harbor Electric' matches 'Harbor Electric'",
+      "Remittance invoice references: INV-STR-019",
+      "Remittance names INV-STR-019"
+    ],
+    "ambiguities": [
+      "Overpayment residual 150.0"
+    ],
+    "review_question": "How should the overpayment residual be treated?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-STR-CH_STR_019",
+    "decision": "HUMAN_REVIEW",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-019",
+        "amount": 950.0
+      }
+    ],
+    "confidence": 0.7,
+    "reason": "Payment 1100.0 exceeds named invoice outstanding 950.0; overpayment residual 150.0 must not disappear.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_019 1100.0 USD from Harbor Electric",
+      "Remittance: INV-STR-019 Harbor overpayment INV-STR-019",
+      "Payer 'Harbor Electric' matches 'Harbor Electric'",
+      "Remittance invoice references: INV-STR-019",
+      "Remittance names INV-STR-019"
+    ],
+    "ambiguities": [
+      "Overpayment residual 150.0"
+    ],
+    "review_question": "How should the overpayment residual be treated?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": false,
+  "record": null,
+  "state_changes": [],
+  "journal_entries": [],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

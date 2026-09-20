@@ -1,0 +1,369 @@
+{
+  "system": "cfo-agentic-system",
+  "version": "1",
+  "description": "Office of the CFO Client system. Fifteen grain Bots. Verifiers own concurrence. The human Operator is an emergency stop.",
+  "computer": "office/computer",
+  "bots": [
+    {
+      "id": "bot_email",
+      "name": "Email",
+      "slug": "email",
+      "purpose": "Owns messages and attachments: vendor invoices and customer remittances.",
+      "instructions": "Read office/bots/email/BOT.md and obey office/constitution.md. You land and classify mail. Never ask a human. Do not match, pay, apply, or accrue.",
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "inbox-triage",
+        "superseded-document-handling"
+      ],
+      "connectors": [
+        "gmail",
+        "outlook",
+        "employee-upload",
+        "vendor-portal",
+        "mailroom-scan"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_stripe",
+      "name": "Stripe",
+      "slug": "stripe",
+      "purpose": "Owns processor payouts, fees, refunds, and chargebacks.",
+      "instructions": "Read office/bots/stripe/BOT.md and obey office/constitution.md. Unpack the payout waterfall. Never ask a human. Do not produce InvoiceCandidate.",
+      "skills": [],
+      "connectors": [
+        "stripe",
+        "adyen"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_bank",
+      "name": "Bank",
+      "slug": "bank",
+      "purpose": "Owns bank lines and corporate-card charges.",
+      "instructions": "Read office/bots/bank/BOT.md and obey office/constitution.md. You land bank and card lines. Never ask a human. A charge is not a bill. Do not invent invoices.",
+      "skills": [
+        "bank-charge-invoice-discovery"
+      ],
+      "connectors": [
+        "bank-feed"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_books",
+      "name": "Books",
+      "slug": "books",
+      "purpose": "Owns GL, subledgers, vendor and customer master, POs, and period-lock state (read).",
+      "instructions": "Read office/bots/books/BOT.md and obey office/constitution.md. You land books records. Never ask a human. Do not close the period.",
+      "skills": [
+        "invoice-source-identification"
+      ],
+      "connectors": [
+        "xero",
+        "netsuite",
+        "coupa",
+        "edi"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ap",
+      "name": "AP",
+      "slug": "ap",
+      "purpose": "Owns open bills: three-way match, hold, and exception investigation; does not pay or concur.",
+      "instructions": "Read office/bots/ap/BOT.md and obey office/constitution.md. You own open bills. Never ask a human. Approve-shaped drafts Handle ctl-pay / review-match. You do not release cash.",
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation",
+        "prior-period-precedent",
+        "superseded-document-handling"
+      ],
+      "connectors": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_pay",
+      "name": "Pay",
+      "slug": "pay",
+      "purpose": "Owns the weekly payment-run draft over the approved pool; does not match bills or move money.",
+      "instructions": "Read office/bots/pay/BOT.md. Obey office/constitution.md. You own the payment-run draft. You do not own three-way match. You do not move money. Never ask a human. Handle every draft to ctl-pay / review-pay. Await the Handle. Peer Handle is not approval.",
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "connectors": [
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_approved_pool",
+        "scheduling.tools.get_payment_candidates",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_apply",
+      "name": "Apply",
+      "slug": "apply",
+      "purpose": "Owns unapplied cash and sticks Kernel-valid remittances to invoices.",
+      "instructions": "Read office/bots/apply/BOT.md and obey office/constitution.md. You own unapplied cash. Never ask a human. Fail-closed HUMAN_REVIEW Handles ctl-cash / review-apply. Do not dun. Do not post past Kernel refuse.",
+      "skills": [
+        "cash-application"
+      ],
+      "connectors": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_collect",
+      "name": "Collect",
+      "slug": "collect",
+      "purpose": "Owns open invoices still owed after application.",
+      "instructions": "Read office/bots/collect/BOT.md and obey office/constitution.md. You own aging after apply has drained deposits. Never ask a human. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
+      "skills": [
+        "ar-collections-policy"
+      ],
+      "connectors": [
+        "ar.tools.get_collection_candidates",
+        "ar.tools.get_collection_invoice_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_cash",
+      "name": "Cash",
+      "slug": "cash",
+      "purpose": "Owns unmatched bank lines.",
+      "instructions": "Read office/bots/cash/BOT.md and obey office/constitution.md. You own unmatched bank lines. Never ask a human. Handle sign-off to ctl-cash / review-rec. Do not invent amounts. Do not force MATCHED.",
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "bank-reference-interpretation",
+        "reconciliation-exception-investigation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
+      ],
+      "connectors": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_close",
+      "name": "Close",
+      "slug": "close",
+      "purpose": "Owns period completeness: accrue, defer, tie, and coordinate.",
+      "instructions": "Read office/bots/close/BOT.md and obey office/constitution.md. You own period completeness, not Friday's wire. Never ask a human. A Wake names one Profile. Do not union Grants. Handle treatments and lock to ctl-books. Do not mark CLOSED.",
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection",
+        "prepaid-expense-accounting",
+        "fixed-asset-depreciation",
+        "balance-sheet-reconciliation",
+        "month-end-close-coordination",
+        "prior-period-precedent"
+      ],
+      "connectors": [],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_story",
+      "name": "Story",
+      "slug": "story",
+      "purpose": "Owns flux, the 13-week forecast, and the board pack; does not move money or own the books.",
+      "instructions": "Read office/bots/story/BOT.md and obey office/constitution.md. You own the story of the books. Never ask a human. You do not move money. You do not invent amounts. Audit samples the pack. Do not wait on a person to sign it.",
+      "skills": [
+        "financial-variance-analysis",
+        "cash-forecasting",
+        "ar-cash-forecasting",
+        "forecast-vs-actual-interpretation",
+        "board-financial-reporting"
+      ],
+      "connectors": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_variance_trace",
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ctl_pay",
+      "name": "ctl-pay",
+      "slug": "ctl-pay",
+      "purpose": "Owns concurrence for AP match, payment-run release, and bill write-off.",
+      "instructions": "Read office/bots/ctl-pay/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation",
+        "payment-prioritization",
+        "early-payment-discount-evaluation",
+        "prior-period-precedent"
+      ],
+      "connectors": [
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases",
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ctl_cash",
+      "name": "ctl-cash",
+      "slug": "ctl-cash",
+      "purpose": "Owns concurrence for material cash application and bank-rec sign-off.",
+      "instructions": "Read office/bots/ctl-cash/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
+      "skills": [
+        "cash-application",
+        "cash-reconciliation-method-selection",
+        "reconciliation-exception-investigation",
+        "bank-reference-interpretation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
+      ],
+      "connectors": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents",
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ctl_books",
+      "name": "ctl-books",
+      "slug": "ctl-books",
+      "purpose": "Owns concurrence for close treatments and period lock.",
+      "instructions": "Read office/bots/ctl-books/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Do not flip period lock unless evaluate_close_gates already passed.",
+      "skills": [
+        "prepaid-expense-accounting",
+        "fixed-asset-depreciation",
+        "balance-sheet-reconciliation",
+        "month-end-close-review",
+        "prior-period-precedent"
+      ],
+      "connectors": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule",
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates",
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_audit",
+      "name": "audit",
+      "slug": "audit",
+      "purpose": "Owns after-the-fact sampling, re-performance, and findings; does not concur in the pay path.",
+      "instructions": "Read office/bots/audit/BOT.md and obey office/constitution.md. You own findings. You do not own pay-run. You do not concur for ctl-*. Never ask a human. Never load get_audit_ground_truth in operational phase. Write only under workspace/audit/ and runs/audit/.",
+      "skills": [
+        "audit-sampling-interpretation",
+        "control-testing-interpretation",
+        "reconciliation-reperformance-review",
+        "segregation-of-duties-interpretation",
+        "audit-finding-writing"
+      ],
+      "connectors": [
+        "audit.tools.get_audit_period",
+        "audit.tools.get_audit_payments",
+        "audit.tools.get_audit_journals",
+        "audit.tools.get_audit_approvals",
+        "audit.tools.get_audit_vendors",
+        "audit.tools.get_audit_invoices",
+        "audit.tools.get_operational_decisions",
+        "audit.tools.get_planted_reconciliations",
+        "audit.tools.get_audit_policy"
+      ],
+      "approvalLevel": "never"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "intake",
+      "title": "Intake",
+      "members": ["email", "stripe", "bank", "books"]
+    },
+    {
+      "id": "pay",
+      "title": "Pay",
+      "members": ["ap", "pay", "ctl-pay"]
+    },
+    {
+      "id": "cash",
+      "title": "Cash",
+      "members": ["apply", "collect", "cash", "ctl-cash"]
+    },
+    {
+      "id": "books-close",
+      "title": "Books close",
+      "members": ["close", "ctl-books", "story", "audit"]
+    }
+  ],
+  "routines": [
+    {
+      "name": "weekly-pay-run",
+      "bot": "pay",
+      "cadence": "weekly",
+      "prompt": "profile: schedule\nRun this week's payment-run draft.\nLoad pool and cash with Catalog ops. Choose among Kernel candidates only.\nStop after you return PaymentPlan invoice IDs. Kernel apply_cash_and_policy_net binds amounts.\nWrite the netted plan path. bot_send_prompt to ctl-pay with profile: review-pay. Await the Handle.\nDo not ask a human. Do not execute ACH. Do not breach the reserve.",
+      "conversation": "room:pay"
+    },
+    {
+      "name": "daily-aging",
+      "bot": "collect",
+      "cadence": "daily",
+      "prompt": "profile: chase\nAging Routine. Run only after apply has drained new deposits for this as-of. If Kernel new_deposits is non-empty, Handle apply / apply. Do not chase. Write-off or reserve Handles ctl-pay. Never ask a human.",
+      "conversation": "room:cash"
+    },
+    {
+      "name": "month-end",
+      "bot": "close",
+      "cadence": "monthly",
+      "prompt": "profile: coordinate\nRun period completeness. Read ready_tasks. Send a new Wake to Bot close with the next treatment Profile. Do not union Grants. Do not mark CLOSED. After treatments, Handle ctl-books / lock. Never ask a human.",
+      "conversation": "room:books-close"
+    },
+    {
+      "name": "period-story",
+      "bot": "story",
+      "cadence": "monthly",
+      "prompt": "Profile: flux. Wake Bot story. Read the last locked period pack path. If lock_status is not CLOSED, label every number UNLOCKED. Narrate Kernel facts only. Then self-Handle profiles forecast, forecast-miss, and board as separate Wakes. Never ask a human. You do not move money.",
+      "conversation": "room:books-close"
+    },
+    {
+      "name": "post-close-assurance",
+      "bot": "audit",
+      "cadence": "monthly",
+      "prompt": "profile: interpret\nRun after-the-fact assurance on this period's close pack.\nPack path is named in this Wake. Call bot_get_agent_transcript_tail for the protocol tail.\nPython samples and re-performs. Interpret Kernel finding IDs only.\nWrite under workspace/audit/ and runs/audit/. Path lease before each write.\nThen bot_send_prompt to audit with profile: report. Await the Handle.\nDo not ask a human. Do not load get_audit_ground_truth. Do not fix the books.\nDo not concur for ctl-*. Do not approve a pay-run.",
+      "conversation": "room:books-close"
+    }
+  ]
+}

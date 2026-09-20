@@ -70,6 +70,8 @@ python main.py validate-sample-data --data-root data/demo
 python main.py sample-data-summary --data-root data/demo
 python main.py evaluate-cfo --data-root data/demo --seed 42 --all
 python main.py cfo-demo
+python demo_web.py          # from repo root: Maximor demo website API on :8765
+# then: cd web && npm install && npm run dev
 ```
 
 Webhook receipt is deterministic. Agents classify messy email/PDF content later; they do not verify signatures or add payout totals.

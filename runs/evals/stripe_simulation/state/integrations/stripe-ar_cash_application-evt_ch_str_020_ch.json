@@ -1,0 +1,17 @@
+{
+  "stripe_event_id": "evt_ch_str_020_ch",
+  "event_type": "charge.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_020",
+  "decision": "UNAPPLIED",
+  "invoice_ids": [],
+  "posted": false,
+  "already_posted": false,
+  "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_020-20260920T000645Z.json",
+  "reason": "No plausible invoice match was found; cash stays unapplied.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [],
+  "duplicate": false
+}

@@ -18,6 +18,7 @@ ANSWER_KEY_NAMES = frozenset(
         "expected_outcomes.json",
         "discrepancy_contracts.json",
         "holdout_contracts.json",
+        "gold.json",
     }
 )
 EVALUATION_ONLY_NAMES = frozenset(
@@ -28,8 +29,10 @@ EVALUATION_ONLY_NAMES = frozenset(
         "ground_truth.json",
         "discrepancy_contracts.json",
         "holdout_contracts.json",
+        "gold.json",
     }
 )
+PRIVATE_DIR_NAMES = frozenset({"private_answers"})
 
 _OPERATIONAL_PHASE: ContextVar[bool] = ContextVar("cfo_eval_operational_phase", default=False)
 
@@ -39,12 +42,17 @@ class AnswerKeyIsolationError(RuntimeError):
 
 
 def is_answer_key(path: Path | str) -> bool:
-    name = Path(path).name
-    return name in ANSWER_KEY_NAMES
+    target = Path(path)
+    if target.name in ANSWER_KEY_NAMES:
+        return True
+    return any(part in PRIVATE_DIR_NAMES for part in target.parts)
 
 
 def is_evaluation_only(path: Path | str) -> bool:
-    return Path(path).name in EVALUATION_ONLY_NAMES
+    target = Path(path)
+    if target.name in EVALUATION_ONLY_NAMES:
+        return True
+    return any(part in PRIVATE_DIR_NAMES for part in target.parts)
 
 
 def operational_phase() -> bool:
@@ -97,7 +105,7 @@ def operational_input_files(data_root: Path) -> list[Path]:
         rel = path.relative_to(root).as_posix()
         if path.name in ANSWER_KEY_NAMES or path.name in EVALUATION_ONLY_NAMES:
             continue
-        if rel.startswith("canonical/") or rel.startswith("evaluation/"):
+        if rel.startswith("canonical/") or rel.startswith("evaluation/") or "/private_answers/" in f"/{rel}/":
             continue
         allowed.append(path)
     return allowed

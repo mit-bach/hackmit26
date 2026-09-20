@@ -1,0 +1,109 @@
+{
+  "payment_id": "PAY-STR-CH_STR_020",
+  "started_at": "2026-09-20T00:04:21Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-STR-CH_STR_020",
+    "payment_date": "2026-09-27",
+    "amount": 330.0,
+    "currency": "USD",
+    "payer_name": "Orion Freight",
+    "customer_id": null,
+    "bank_reference": "ch_str_020",
+    "remittance_text": "Unmatched Stripe charge",
+    "invoice_reference": null,
+    "source": "stripe",
+    "unapplied_amount": 330.0,
+    "application_status": "UNMATCHED",
+    "metadata": {
+      "stripe_charge_id": "ch_str_020",
+      "stripe_payment_intent_id": "pi_str_020",
+      "stripe_balance_transaction_id": "",
+      "stripe_event_type": "payment_intent.succeeded",
+      "customer_name": "Orion Freight"
+    }
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-STR-CH_STR_020",
+      "payment_date": "2026-09-27",
+      "amount": 330.0,
+      "currency": "USD",
+      "payer_name": "Orion Freight",
+      "customer_id": null,
+      "bank_reference": "ch_str_020",
+      "remittance_text": "Unmatched Stripe charge",
+      "invoice_reference": null,
+      "source": "stripe",
+      "unapplied_amount": 330.0,
+      "application_status": "UNMATCHED",
+      "metadata": {
+        "stripe_charge_id": "ch_str_020",
+        "stripe_payment_intent_id": "pi_str_020",
+        "stripe_balance_transaction_id": "",
+        "stripe_event_type": "payment_intent.succeeded",
+        "customer_name": "Orion Freight"
+      }
+    },
+    "identified_customer_id": "CUST-013",
+    "identified_customer_name": "Orion Freight",
+    "customer_confidence": 0.95,
+    "open_invoices": [],
+    "candidates": [],
+    "remittance_invoice_ids": [],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-STR-CH_STR_020 330.0 USD from Orion Freight",
+      "Remittance: Unmatched Stripe charge",
+      "Payer 'Orion Freight' matches 'Orion Freight'"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-STR-CH_STR_020",
+    "decision": "UNAPPLIED",
+    "applications": [],
+    "confidence": 0.7,
+    "reason": "No plausible invoice match was found; cash stays unapplied.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_020 330.0 USD from Orion Freight",
+      "Remittance: Unmatched Stripe charge",
+      "Payer 'Orion Freight' matches 'Orion Freight'"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-STR-CH_STR_020",
+    "decision": "UNAPPLIED",
+    "applications": [],
+    "confidence": 0.7,
+    "reason": "No plausible invoice match was found; cash stays unapplied.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_020 330.0 USD from Orion Freight",
+      "Remittance: Unmatched Stripe charge",
+      "Payer 'Orion Freight' matches 'Orion Freight'"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": false,
+  "record": null,
+  "state_changes": [],
+  "journal_entries": [],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

@@ -109,12 +109,14 @@ EXPECTED_ASSIGNMENTS = {
     SOURCE_AGENTS["email"]: (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "Counterparty Message Agent": (),
     "Finance Inbox Agent": (
         "inbox-triage",
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "Accrual Agent": (
         "accrual-evidence-evaluation",
@@ -130,6 +132,7 @@ EXPECTED_ASSIGNMENTS = {
     "Cash Reconciliation Preparer": (
         "cash-reconciliation-method-selection",
         "bank-reference-interpretation",
+        "reconciliation-evidence-validation",
     ),
 }
 
@@ -285,6 +288,7 @@ def test_ingestion_traces_include_skill_usage():
     assert [item.name for item in email.skill_usage.skills] == [
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ]
     assert all(item.injected for item in email.skill_usage.skills)
     erp = run_erp_source("2026-09")

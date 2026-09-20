@@ -1,0 +1,214 @@
+{
+  "reconciliation_id": "REC-001",
+  "period": "2026-09",
+  "match_type": "PROVIDER_PAYOUT",
+  "status": "MATCHED",
+  "bank_transactions": [
+    {
+      "transaction_id": "BANK-STR-001",
+      "date": "2026-09-04",
+      "amount": 970.7,
+      "currency": "USD",
+      "description": "STRIPE PAYOUT po_str_001",
+      "reference": "po_str_001",
+      "counterparty": "Stripe",
+      "transaction_type": "deposit",
+      "source": "bank",
+      "provider": "stripe",
+      "period": "2026-09",
+      "amount_minor": 97070,
+      "raw_metadata": {
+        "payout_id": "po_str_001"
+      }
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-STR-po_str_001",
+      "date": "2026-09-04",
+      "amount": 970.7,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Stripe",
+      "reference": "po_str_001",
+      "description": "Stripe payout po_str_001",
+      "entry_type": "processor_payout",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 97070,
+      "raw_metadata": {
+        "payout_id": "po_str_001",
+        "provider": "stripe"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "PROVIDER_PAYOUT:BANK-STR-001:GL-STR-po_str_001",
+      "match_type": "PROVIDER_PAYOUT",
+      "bank_transaction_ids": [
+        "BANK-STR-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-STR-po_str_001"
+      ],
+      "bank_amount": 970.7,
+      "ledger_amount": 970.7,
+      "difference": 0.0,
+      "bank_amount_minor": 97070,
+      "ledger_amount_minor": 97070,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.5,
+      "evidence": [
+        "provider:stripe",
+        "payout_id:po_str_001",
+        "provider_status:MATCH",
+        "expected_payout:97070",
+        "actual_payout:97070",
+        "bank_matched:True"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": "stripe",
+      "provider_payout_id": "po_str_001",
+      "provider_status": "MATCH",
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "EXACT_MATCH:BANK-STR-001:GL-STR-po_str_001",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "BANK-STR-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-STR-po_str_001"
+      ],
+      "bank_amount": 970.7,
+      "ledger_amount": 970.7,
+      "difference": 0.0,
+      "bank_amount_minor": 97070,
+      "ledger_amount_minor": 97070,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.85,
+      "evidence": [
+        "amount:97070",
+        "bank_date:2026-09-04",
+        "ledger_date:2026-09-04",
+        "counterparty_overlap:1.00",
+        "bank_reference:po_str_001",
+        "ledger_reference:po_str_001"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": 97070,
+    "ledger_amount_minor": 97070,
+    "difference_minor": 0,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "PROVIDER_PAYOUT:BANK-STR-001:GL-STR-po_str_001",
+    "selected_candidate_id": "PROVIDER_PAYOUT:BANK-STR-001:GL-STR-po_str_001",
+    "disposition": "MATCHED",
+    "confidence": 1.0,
+    "reasons": [
+      "Stripe payout po_str_001 matched to bank BANK-STR-001 (MATCH)."
+    ],
+    "evidence_used": [
+      "provider:stripe",
+      "payout_id:po_str_001",
+      "provider_status:MATCH",
+      "expected_payout:97070",
+      "actual_payout:97070",
+      "bank_matched:True"
+    ],
+    "review_question": null
+  },
+  "investigation": null,
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": false,
+    "reasons": []
+  },
+  "reviewer": {
+    "case_id": "PROVIDER_PAYOUT:BANK-STR-001:GL-STR-po_str_001",
+    "reviewer_status": "CONFIRMED",
+    "disposition": "MATCHED",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Python validation passed"
+    ],
+    "arithmetic_ok": true,
+    "human_review": false
+  },
+  "final": {
+    "reconciliation_id": "REC-001",
+    "period": "2026-09",
+    "match_key": "fa723d864c3338cb",
+    "bank_transaction_ids": [
+      "BANK-STR-001"
+    ],
+    "ledger_entry_ids": [
+      "GL-STR-po_str_001"
+    ],
+    "match_type": "PROVIDER_PAYOUT",
+    "bank_amount": 970.7,
+    "ledger_amount": 970.7,
+    "difference": 0.0,
+    "bank_amount_minor": 97070,
+    "ledger_amount_minor": 97070,
+    "difference_minor": 0,
+    "confidence": 1.0,
+    "status": "MATCHED",
+    "explanation": "Stripe payout po_str_001 matched to bank BANK-STR-001 (MATCH).",
+    "evidence": [
+      "provider:stripe",
+      "payout_id:po_str_001",
+      "provider_status:MATCH",
+      "expected_payout:97070",
+      "actual_payout:97070",
+      "bank_matched:True"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "CONFIRMED",
+    "human_review": false,
+    "candidate_id": "PROVIDER_PAYOUT:BANK-STR-001:GL-STR-po_str_001",
+    "provider": "stripe",
+    "provider_payout_id": "po_str_001",
+    "provider_status": "MATCH",
+    "calculations": {
+      "bank_amount_minor": 97070,
+      "ledger_amount_minor": 97070,
+      "difference_minor": 0,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": false,
+  "evidence": [
+    "provider:stripe",
+    "payout_id:po_str_001",
+    "provider_status:MATCH",
+    "expected_payout:97070",
+    "actual_payout:97070",
+    "bank_matched:True"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "memory_lookup": null,
+  "written_memory_id": "DEC-2026-09-013",
+  "trace_path": null
+}

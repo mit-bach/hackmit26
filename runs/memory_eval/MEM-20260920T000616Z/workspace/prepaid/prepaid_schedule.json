@@ -1,0 +1,16 @@
+[
+  {
+    "prepaid_id": "PRE-MEM-CLOUD-ONE",
+    "period": "2026-09",
+    "amount": 900.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-003",
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-ONE",
+      "POLICY-PREPAID-001"
+    ],
+    "method": "immediate_expense",
+    "days_in_period": 30,
+    "posted_in_period": "2026-09"
+  }
+]

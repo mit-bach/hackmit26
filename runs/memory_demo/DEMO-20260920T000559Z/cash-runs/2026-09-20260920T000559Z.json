@@ -1,0 +1,539 @@
+{
+  "period": "2026-09",
+  "run_id": "20260920T000559Z",
+  "started_at": "2026-09-20T00:05:59Z",
+  "opening_bank": 0.0,
+  "opening_ledger": 0.0,
+  "bank_ending": 14460.0,
+  "ledger_ending": 15000.0,
+  "reconciled_amount": 14460.0,
+  "outstanding_timing": 0.0,
+  "unexplained_difference": 0.0,
+  "human_review_count": 0,
+  "period_status": "RECONCILED",
+  "arithmetic_tied": true,
+  "tie_out": {
+    "bank_ending": 14460.0,
+    "ledger_ending": 15000.0,
+    "bank_ending_minor": 1446000,
+    "ledger_ending_minor": 1500000,
+    "break_amount": -540.0,
+    "break_minor": -54000,
+    "reconciling_sum": -540.0,
+    "reconciling_sum_minor": -54000,
+    "tied": true,
+    "items": [
+      {
+        "reconciliation_id": "REC-001",
+        "match_type": "FEE_NETTED",
+        "status": "EXPLAINED_EXCEPTION",
+        "impact": -540.0,
+        "impact_minor": -54000,
+        "explanation": "Stripe payout po_mem_sep_001 arrived net of processor fees and chargebacks. Bank BNK-STR-SEP-001 is ledger GL-STR-SEP-GROSS ($15,000.00) less $540.00."
+      }
+    ],
+    "formula": "bank_ending - ledger_ending = sum(in-period bank − in-period ledger) across matches"
+  },
+  "matches": [
+    {
+      "reconciliation_id": "REC-001",
+      "period": "2026-09",
+      "match_key": "dd1e149b722491da",
+      "bank_transaction_ids": [
+        "BNK-STR-SEP-001"
+      ],
+      "ledger_entry_ids": [
+        "GL-STR-SEP-GROSS"
+      ],
+      "match_type": "FEE_NETTED",
+      "bank_amount": 14460.0,
+      "ledger_amount": 15000.0,
+      "difference": -540.0,
+      "bank_amount_minor": 1446000,
+      "ledger_amount_minor": 1500000,
+      "difference_minor": -54000,
+      "confidence": 0.96,
+      "status": "EXPLAINED_EXCEPTION",
+      "explanation": "Stripe payout po_mem_sep_001 arrived net of processor fees and chargebacks. Bank BNK-STR-SEP-001 is ledger GL-STR-SEP-GROSS ($15,000.00) less $540.00.",
+      "evidence": [
+        "provider:stripe",
+        "payout_id:po_mem_sep_001",
+        "gross:1500000",
+        "stripe_fee:39000",
+        "chargeback:10000",
+        "refund:5000",
+        "processor_reductions:54000",
+        "reductions_equal_difference",
+        "bank_amount:1446000",
+        "ledger_amount:1500000"
+      ],
+      "control_findings": [],
+      "proposed_adjusting_entries": [
+        {
+          "memo": "Record stripe fees and chargebacks on po_mem_sep_001",
+          "lines": [
+            {
+              "account": "6100-Bank-Fees",
+              "amount": 540.0,
+              "amount_minor": 54000,
+              "side": "credit"
+            },
+            {
+              "account": "1000-Cash",
+              "amount": 540.0,
+              "amount_minor": 54000,
+              "side": "debit"
+            }
+          ],
+          "related_bank_ids": [
+            "BNK-STR-SEP-001"
+          ],
+          "related_ledger_ids": [
+            "GL-STR-SEP-GROSS"
+          ],
+          "posted": false,
+          "support": "stripe:po_mem_sep_001:processor_reductions"
+        }
+      ],
+      "reviewer_status": "CONFIRMED",
+      "human_review": false,
+      "candidate_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+      "provider": "stripe",
+      "provider_payout_id": "po_mem_sep_001",
+      "provider_status": "MATCH",
+      "calculations": {
+        "bank_amount_minor": 1446000,
+        "ledger_amount_minor": 1500000,
+        "difference_minor": -54000,
+        "group_sum_equals_bank": null
+      }
+    }
+  ],
+  "traces": [
+    {
+      "reconciliation_id": "REC-001",
+      "period": "2026-09",
+      "match_type": "FEE_NETTED",
+      "status": "EXPLAINED_EXCEPTION",
+      "bank_transactions": [
+        {
+          "transaction_id": "BNK-STR-SEP-001",
+          "date": "2026-09-26",
+          "amount": 14460.0,
+          "currency": "USD",
+          "description": "STRIPE PAYOUT po_mem_sep_001",
+          "reference": "po_mem_sep_001",
+          "counterparty": "Stripe",
+          "transaction_type": "deposit",
+          "source": "bank",
+          "provider": "stripe",
+          "period": "2026-09",
+          "amount_minor": 1446000,
+          "raw_metadata": {
+            "payout_id": "po_mem_sep_001",
+            "provider": "stripe"
+          }
+        }
+      ],
+      "ledger_entries": [
+        {
+          "entry_id": "GL-STR-SEP-GROSS",
+          "date": "2026-09-26",
+          "amount": 15000.0,
+          "currency": "USD",
+          "account": "1000-Cash",
+          "counterparty": "Stripe",
+          "reference": "po_mem_sep_001",
+          "description": "Stripe gross receipts 2026-09",
+          "entry_type": "processor_gross",
+          "period": "2026-09",
+          "source": "gl",
+          "amount_minor": 1500000,
+          "raw_metadata": {
+            "payout_id": "po_mem_sep_001",
+            "provider": "stripe",
+            "gross": 15000.0
+          }
+        }
+      ],
+      "candidates": [
+        {
+          "candidate_id": "PROVIDER_PAYOUT:BNK-STR-SEP-001:-",
+          "match_type": "PROVIDER_PAYOUT",
+          "bank_transaction_ids": [
+            "BNK-STR-SEP-001"
+          ],
+          "ledger_entry_ids": [],
+          "bank_amount": 14460.0,
+          "ledger_amount": 0.0,
+          "difference": 14460.0,
+          "bank_amount_minor": 1446000,
+          "ledger_amount_minor": 0,
+          "difference_minor": 1446000,
+          "confidence": 0.4,
+          "score": 1.0,
+          "evidence": [
+            "provider:stripe",
+            "payout_id:po_mem_sep_001",
+            "provider_status:MATCH",
+            "expected_payout:1446000",
+            "actual_payout:1446000",
+            "bank_matched:True"
+          ],
+          "ambiguities": [
+            "provider_payout_not_clean"
+          ],
+          "fee_evidence_ids": [],
+          "provider": "stripe",
+          "provider_payout_id": "po_mem_sep_001",
+          "provider_status": "MATCH",
+          "proposed_adjusting_entries": []
+        },
+        {
+          "candidate_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+          "match_type": "FEE_NETTED",
+          "bank_transaction_ids": [
+            "BNK-STR-SEP-001"
+          ],
+          "ledger_entry_ids": [
+            "GL-STR-SEP-GROSS"
+          ],
+          "bank_amount": 14460.0,
+          "ledger_amount": 15000.0,
+          "difference": -540.0,
+          "bank_amount_minor": 1446000,
+          "ledger_amount_minor": 1500000,
+          "difference_minor": -54000,
+          "confidence": 0.96,
+          "score": 2.2,
+          "evidence": [
+            "provider:stripe",
+            "payout_id:po_mem_sep_001",
+            "gross:1500000",
+            "stripe_fee:39000",
+            "chargeback:10000",
+            "refund:5000",
+            "processor_reductions:54000",
+            "reductions_equal_difference",
+            "bank_amount:1446000",
+            "ledger_amount:1500000"
+          ],
+          "ambiguities": [],
+          "fee_evidence_ids": [
+            "stripe:po_mem_sep_001:processor_reductions"
+          ],
+          "provider": "stripe",
+          "provider_payout_id": "po_mem_sep_001",
+          "provider_status": "MATCH",
+          "proposed_adjusting_entries": [
+            {
+              "memo": "Record stripe fees and chargebacks on po_mem_sep_001",
+              "lines": [
+                {
+                  "account": "6100-Bank-Fees",
+                  "amount": 540.0,
+                  "amount_minor": 54000,
+                  "side": "credit"
+                },
+                {
+                  "account": "1000-Cash",
+                  "amount": 540.0,
+                  "amount_minor": 54000,
+                  "side": "debit"
+                }
+              ],
+              "related_bank_ids": [
+                "BNK-STR-SEP-001"
+              ],
+              "related_ledger_ids": [
+                "GL-STR-SEP-GROSS"
+              ],
+              "posted": false,
+              "support": "stripe:po_mem_sep_001:processor_reductions"
+            }
+          ]
+        }
+      ],
+      "calculations": {
+        "bank_amount_minor": 1446000,
+        "ledger_amount_minor": 1500000,
+        "difference_minor": -54000,
+        "group_sum_equals_bank": null
+      },
+      "preparer": {
+        "case_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+        "selected_candidate_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+        "disposition": "EXPLAINED_EXCEPTION",
+        "confidence": 0.96,
+        "reasons": [
+          "Stripe payout po_mem_sep_001 arrived net of processor fees and chargebacks. Bank BNK-STR-SEP-001 is ledger GL-STR-SEP-GROSS ($15,000.00) less $540.00."
+        ],
+        "evidence_used": [
+          "provider:stripe",
+          "payout_id:po_mem_sep_001",
+          "gross:1500000",
+          "stripe_fee:39000",
+          "chargeback:10000",
+          "refund:5000",
+          "processor_reductions:54000",
+          "reductions_equal_difference",
+          "bank_amount:1446000",
+          "ledger_amount:1500000"
+        ],
+        "review_question": null
+      },
+      "investigation": {
+        "case_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+        "issues_investigated": [
+          "prior_precedent",
+          "stripe_fees_and_chargebacks"
+        ],
+        "findings": [
+          "Retrieved DEC-2026-08-001 from 2026-08.",
+          "Stripe payouts may arrive net of processing fees and chargebacks",
+          "Current Stripe fees and chargebacks equal the bank versus ledger difference.",
+          "Use prior decisions as precedent, not as authoritative truth. Confirm that the current evidence supports the same treatment."
+        ],
+        "supported_explanations": [
+          "FEE_NETTED",
+          "processor_net_payout"
+        ],
+        "unsupported_hypotheses": [],
+        "recommendation": "EXPLAINED_EXCEPTION",
+        "confidence": 0.96,
+        "human_review": false,
+        "evidence_used": [
+          "provider:stripe",
+          "payout_id:po_mem_sep_001",
+          "gross:1500000",
+          "stripe_fee:39000",
+          "chargeback:10000",
+          "refund:5000",
+          "processor_reductions:54000",
+          "reductions_equal_difference",
+          "bank_amount:1446000",
+          "ledger_amount:1500000",
+          "DEC-2026-08-001"
+        ]
+      },
+      "validation": {
+        "passed": true,
+        "errors": [],
+        "human_review_required": false,
+        "reasons": []
+      },
+      "reviewer": {
+        "case_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+        "reviewer_status": "CONFIRMED",
+        "disposition": "EXPLAINED_EXCEPTION",
+        "agree_with_preparer": true,
+        "confidence": 1.0,
+        "reasons": [
+          "Python validation passed"
+        ],
+        "arithmetic_ok": true,
+        "human_review": false
+      },
+      "final": {
+        "reconciliation_id": "REC-001",
+        "period": "2026-09",
+        "match_key": "dd1e149b722491da",
+        "bank_transaction_ids": [
+          "BNK-STR-SEP-001"
+        ],
+        "ledger_entry_ids": [
+          "GL-STR-SEP-GROSS"
+        ],
+        "match_type": "FEE_NETTED",
+        "bank_amount": 14460.0,
+        "ledger_amount": 15000.0,
+        "difference": -540.0,
+        "bank_amount_minor": 1446000,
+        "ledger_amount_minor": 1500000,
+        "difference_minor": -54000,
+        "confidence": 0.96,
+        "status": "EXPLAINED_EXCEPTION",
+        "explanation": "Stripe payout po_mem_sep_001 arrived net of processor fees and chargebacks. Bank BNK-STR-SEP-001 is ledger GL-STR-SEP-GROSS ($15,000.00) less $540.00.",
+        "evidence": [
+          "provider:stripe",
+          "payout_id:po_mem_sep_001",
+          "gross:1500000",
+          "stripe_fee:39000",
+          "chargeback:10000",
+          "refund:5000",
+          "processor_reductions:54000",
+          "reductions_equal_difference",
+          "bank_amount:1446000",
+          "ledger_amount:1500000"
+        ],
+        "control_findings": [],
+        "proposed_adjusting_entries": [
+          {
+            "memo": "Record stripe fees and chargebacks on po_mem_sep_001",
+            "lines": [
+              {
+                "account": "6100-Bank-Fees",
+                "amount": 540.0,
+                "amount_minor": 54000,
+                "side": "credit"
+              },
+              {
+                "account": "1000-Cash",
+                "amount": 540.0,
+                "amount_minor": 54000,
+                "side": "debit"
+              }
+            ],
+            "related_bank_ids": [
+              "BNK-STR-SEP-001"
+            ],
+            "related_ledger_ids": [
+              "GL-STR-SEP-GROSS"
+            ],
+            "posted": false,
+            "support": "stripe:po_mem_sep_001:processor_reductions"
+          }
+        ],
+        "reviewer_status": "CONFIRMED",
+        "human_review": false,
+        "candidate_id": "FEE_NETTED:BNK-STR-SEP-001:GL-STR-SEP-GROSS",
+        "provider": "stripe",
+        "provider_payout_id": "po_mem_sep_001",
+        "provider_status": "MATCH",
+        "calculations": {
+          "bank_amount_minor": 1446000,
+          "ledger_amount_minor": 1500000,
+          "difference_minor": -54000,
+          "group_sum_equals_bank": null
+        }
+      },
+      "proposed_journal_entries": [
+        {
+          "memo": "Record stripe fees and chargebacks on po_mem_sep_001",
+          "lines": [
+            {
+              "account": "6100-Bank-Fees",
+              "amount": 540.0,
+              "amount_minor": 54000,
+              "side": "credit"
+            },
+            {
+              "account": "1000-Cash",
+              "amount": 540.0,
+              "amount_minor": 54000,
+              "side": "debit"
+            }
+          ],
+          "related_bank_ids": [
+            "BNK-STR-SEP-001"
+          ],
+          "related_ledger_ids": [
+            "GL-STR-SEP-GROSS"
+          ],
+          "posted": false,
+          "support": "stripe:po_mem_sep_001:processor_reductions"
+        }
+      ],
+      "human_review": false,
+      "evidence": [
+        "provider:stripe",
+        "payout_id:po_mem_sep_001",
+        "gross:1500000",
+        "stripe_fee:39000",
+        "chargeback:10000",
+        "refund:5000",
+        "processor_reductions:54000",
+        "reductions_equal_difference",
+        "bank_amount:1446000",
+        "ledger_amount:1500000"
+      ],
+      "control_findings": [],
+      "agents": [],
+      "used_agent": false,
+      "replay": false,
+      "memory_lookup": {
+        "queried": true,
+        "memory_enabled": true,
+        "query": {
+          "workflow": "cash_reconciliation",
+          "entity_type": "payment_provider",
+          "entity_id": "stripe",
+          "situation_type": "payout_difference",
+          "tags": [
+            "cash_reconciliation",
+            "stripe",
+            "fee_netted"
+          ],
+          "accounting_category": null,
+          "prior_to_period": "2026-09",
+          "exclude_period": "2026-09",
+          "limit": 5
+        },
+        "retrieved": [
+          "DEC-2026-08-001"
+        ],
+        "precedents": [
+          {
+            "decision_id": "DEC-2026-08-001",
+            "period": "2026-08",
+            "workflow": "cash_reconciliation",
+            "entity_id": "stripe",
+            "situation_type": "payout_difference",
+            "situation_summary": "Stripe payout was lower than gross receipts; difference 380.00 matched processor reductions.",
+            "decision": "reconcile payout net of fees and chargebacks",
+            "reasoning_summary": "Bank deposit equals the processor net. Gross receipts minus fees, chargebacks, and refunds explain the difference exactly.",
+            "accounting_treatment": "net_payout_fees_and_chargebacks",
+            "reusable_precedent": "Stripe payouts may arrive net of processing fees and chargebacks",
+            "outcome": "EXPLAINED_EXCEPTION",
+            "score": 7.6,
+            "tags": [
+              "stripe",
+              "payout_difference",
+              "fees",
+              "chargebacks",
+              "cash_reconciliation"
+            ]
+          }
+        ],
+        "precedent_used": true,
+        "precedent_relevance": "Stripe payouts may arrive net of processing fees and chargebacks",
+        "current_evidence_checked": true,
+        "evidence_supports_precedent": true,
+        "deviation": null,
+        "decision": "reconcile payout net of fees and chargebacks",
+        "investigation_steps": 2,
+        "skipped_hypotheses": [
+          "rounding",
+          "foreign_exchange",
+          "partial_payment",
+          "duplicate_or_missing",
+          "timing_difference"
+        ]
+      },
+      "written_memory_id": "DEC-2026-09-001",
+      "trace_path": "runs/memory_demo/DEMO-20260920T000559Z/cash-traces/2026-09/20260920T000559Z/REC-001.json"
+    }
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "metrics": {
+    "period": "2026-09",
+    "total_bank_transactions": 1,
+    "exact_matches": 0,
+    "grouped_matches": 0,
+    "provider_matches": 0,
+    "true_exceptions": 0,
+    "false_matches": 1,
+    "false_exception_flags": 8,
+    "unexplained_items": 0,
+    "human_review_count": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "arithmetic_tied": true,
+    "ground_truth_used": true
+  },
+  "trace_path": null,
+  "trace_dir": null
+}

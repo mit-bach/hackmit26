@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from memory.format import format_lookup_trace, format_precedents
 from memory.hooks import lookup_for_cash
-from memory.models import MemoryEvidence, MemoryQuery
+from memory.models import DecisionMemory, MemoryEvidence, MemoryQuery
 from memory.policy import memory_mode
 from memory.retrieve import lookup_memories, search_memories
 from memory.scenarios import (

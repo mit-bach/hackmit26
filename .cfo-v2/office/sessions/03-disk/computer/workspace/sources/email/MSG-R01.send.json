@@ -1,0 +1,16 @@
+[
+  {
+    "from": "bot_email",
+    "to": "bot_apply",
+    "toSlug": "apply",
+    "profile": "apply",
+    "prompt": "profile: apply\npath: workspace/sources/email/MSG-R01.json\nLanded a customer remittance. Do not apply cash in this Bot.",
+    "paths": [
+      "workspace/sources/email/MSG-R01.json"
+    ],
+    "kind": "a2a_handoff",
+    "mode": "async",
+    "onBusy": "queue",
+    "idempotencyKey": "email:MSG-R01:apply:apply"
+  }
+]

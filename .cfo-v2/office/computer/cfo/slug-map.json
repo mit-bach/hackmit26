@@ -1,0 +1,116 @@
+{
+  "version": "1",
+  "bots": {
+    "email": {
+      "defaultProfile": "invoice",
+      "profiles": {
+        "invoice": "Email Invoice Agent",
+        "employee": "Employee Submission Agent",
+        "portal": "Vendor Portal Agent",
+        "document": "Physical Mail / Document Agent",
+        "inbox": "Finance Inbox Agent"
+      }
+    },
+    "stripe": {
+      "defaultProfile": "payout",
+      "profiles": {
+        "payout": ""
+      }
+    },
+    "bank": {
+      "defaultProfile": "card",
+      "profiles": {
+        "card": "Bank/Card Discovery Agent"
+      }
+    },
+    "books": {
+      "defaultProfile": "erp-invoice",
+      "profiles": {
+        "erp-invoice": "ERP Invoice Agent",
+        "procurement": "Procurement Invoice Agent",
+        "edi": "EDI / Electronic Invoicing Agent"
+      }
+    },
+    "ap": {
+      "defaultProfile": "prepare",
+      "profiles": {
+        "prepare": "AP Preparer",
+        "investigate": "Exception Investigator"
+      }
+    },
+    "pay": {
+      "defaultProfile": "schedule",
+      "profiles": {
+        "schedule": "Payment Scheduler"
+      }
+    },
+    "apply": {
+      "defaultProfile": "apply",
+      "profiles": {
+        "apply": "Cash Application Agent"
+      }
+    },
+    "collect": {
+      "defaultProfile": "chase",
+      "profiles": {
+        "chase": "Collections Agent"
+      }
+    },
+    "cash": {
+      "defaultProfile": "match",
+      "profiles": {
+        "match": "Cash Reconciliation Preparer",
+        "investigate": "Cash Exception Investigator"
+      }
+    },
+    "close": {
+      "defaultProfile": "coordinate",
+      "profiles": {
+        "accrue": "Accrual Agent",
+        "prepaid": "Prepaid Preparer",
+        "assets": "Fixed Asset Preparer",
+        "bs": "Balance Sheet Reconciliation Preparer",
+        "coordinate": "Close Manager"
+      }
+    },
+    "story": {
+      "defaultProfile": "flux",
+      "profiles": {
+        "flux": "Variance Analysis Agent",
+        "forecast": "Cash Forecast Agent",
+        "forecast-miss": "Forecast Variance Agent",
+        "board": "Board Reporting Agent"
+      }
+    },
+    "ctl-pay": {
+      "defaultProfile": "review-match",
+      "profiles": {
+        "review-match": "AP Reviewer",
+        "review-pay": "Payment Audit"
+      }
+    },
+    "ctl-cash": {
+      "defaultProfile": "review-apply",
+      "profiles": {
+        "review-apply": "Cash Application Reviewer",
+        "review-rec": "Cash Reconciliation Reviewer"
+      }
+    },
+    "ctl-books": {
+      "defaultProfile": "review-treatment",
+      "profiles": {
+        "review-treatment": "Prepaid Reviewer",
+        "review-assets": "Fixed Asset Reviewer",
+        "review-bs": "Balance Sheet Reconciliation Reviewer",
+        "lock": "Month-End Close Reviewer"
+      }
+    },
+    "audit": {
+      "defaultProfile": "interpret",
+      "profiles": {
+        "interpret": "Auditor Agent",
+        "report": "Audit Report Agent"
+      }
+    }
+  }
+}

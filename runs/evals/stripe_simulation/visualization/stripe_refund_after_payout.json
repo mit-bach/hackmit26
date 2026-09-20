@@ -1,0 +1,2254 @@
+{
+  "scenario_id": "stripe_refund_after_payout",
+  "title": "Refund after original payout",
+  "difficulty": "medium",
+  "company": "Maximor",
+  "period": "2026-09",
+  "timeline": [
+    {
+      "event_id": "evt_ch_str_005_pi",
+      "event_type": "payment_intent.succeeded",
+      "created": 1789228800,
+      "object_id": "pi_str_005"
+    },
+    {
+      "event_id": "evt_ch_str_005_ch",
+      "event_type": "charge.succeeded",
+      "created": 1789228810,
+      "object_id": "ch_str_005"
+    },
+    {
+      "event_id": "evt_po_str_005a_created",
+      "event_type": "payout.created",
+      "created": 1789488000,
+      "object_id": "po_str_005a"
+    },
+    {
+      "event_id": "evt_po_str_005a_recon",
+      "event_type": "payout.reconciliation_completed",
+      "created": 1789491600,
+      "object_id": "po_str_005a"
+    },
+    {
+      "event_id": "evt_re_str_005",
+      "event_type": "refund.created",
+      "created": 1790092800,
+      "object_id": "re_str_005"
+    },
+    {
+      "event_id": "evt_po_str_005b_created",
+      "event_type": "payout.created",
+      "created": 1790092800,
+      "object_id": "po_str_005b"
+    },
+    {
+      "event_id": "evt_po_str_005b_recon",
+      "event_type": "payout.reconciliation_completed",
+      "created": 1790096400,
+      "object_id": "po_str_005b"
+    }
+  ],
+  "entities": {
+    "customers": [
+      "CUST-001",
+      "CUST-002",
+      "CUST-003",
+      "CUST-004",
+      "CUST-005",
+      "CUST-006",
+      "CUST-008",
+      "CUST-009",
+      "CUST-010",
+      "CUST-011",
+      "CUST-012",
+      "CUST-013"
+    ],
+    "invoices": [
+      {
+        "invoice_id": "INV-STR-001",
+        "customer_id": "CUST-001",
+        "customer_name": "Northwind Labs",
+        "invoice_date": "2026-09-01",
+        "due_date": "2026-09-30",
+        "original_amount": 1000.0,
+        "outstanding_amount": 1000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-001",
+        "description": "September platform subscription",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-002A",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-02",
+        "due_date": "2026-09-30",
+        "original_amount": 1000.0,
+        "outstanding_amount": 1000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-002A",
+        "description": "Helios workspace A",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-002B",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-02",
+        "due_date": "2026-09-30",
+        "original_amount": 1500.0,
+        "outstanding_amount": 1500.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-002B",
+        "description": "Helios workspace B AMEX",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-002C",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-02",
+        "due_date": "2026-09-30",
+        "original_amount": 500.0,
+        "outstanding_amount": 500.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-002C",
+        "description": "Helios add-on seats",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-003A",
+        "customer_id": "CUST-001",
+        "customer_name": "Northwind Labs",
+        "invoice_date": "2026-09-05",
+        "due_date": "2026-10-05",
+        "original_amount": 600.0,
+        "outstanding_amount": 600.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-003A",
+        "description": "Northwind analytics pack",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-003B",
+        "customer_id": "CUST-006",
+        "customer_name": "Pinnacle Retail",
+        "invoice_date": "2026-09-05",
+        "due_date": "2026-10-05",
+        "original_amount": 400.0,
+        "outstanding_amount": 400.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-003B",
+        "description": "Pinnacle POS module",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-004",
+        "customer_id": "CUST-003",
+        "customer_name": "Acme Industrial",
+        "invoice_date": "2026-09-06",
+        "due_date": "2026-10-06",
+        "original_amount": 500.0,
+        "outstanding_amount": 500.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-004",
+        "description": "Acme spare parts",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-005",
+        "customer_id": "CUST-003",
+        "customer_name": "Acme Industrial",
+        "invoice_date": "2026-09-07",
+        "due_date": "2026-10-07",
+        "original_amount": 750.0,
+        "outstanding_amount": 750.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-005",
+        "description": "Acme tooling",
+        "created_at": "",
+        "last_payment_date": "2026-09-12",
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-006",
+        "customer_id": "CUST-005",
+        "customer_name": "Orbit Health",
+        "invoice_date": "2026-09-08",
+        "due_date": "2026-10-08",
+        "original_amount": 800.0,
+        "outstanding_amount": 800.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-006",
+        "description": "Orbit implementation",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-007",
+        "customer_id": "CUST-011",
+        "customer_name": "Lumen Labs",
+        "invoice_date": "2026-09-09",
+        "due_date": "2026-10-09",
+        "original_amount": 2000.0,
+        "outstanding_amount": 2000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-007",
+        "description": "Lumen international wire replacement",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-010",
+        "customer_id": "CUST-006",
+        "customer_name": "Pinnacle Retail",
+        "invoice_date": "2026-09-10",
+        "due_date": "2026-10-10",
+        "original_amount": 1250.0,
+        "outstanding_amount": 1250.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-010",
+        "description": "Pinnacle autumn restock",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-011A",
+        "customer_id": "CUST-004",
+        "customer_name": "Brightline Media",
+        "invoice_date": "2026-09-04",
+        "due_date": "2026-10-04",
+        "original_amount": 900.0,
+        "outstanding_amount": 900.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-011A",
+        "description": "Q3 analytics retainer",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-011B",
+        "customer_id": "CUST-004",
+        "customer_name": "Brightline Media",
+        "invoice_date": "2026-09-12",
+        "due_date": "2026-10-12",
+        "original_amount": 900.0,
+        "outstanding_amount": 900.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-011B",
+        "description": "Brand studio sprint",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-012A",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-14",
+        "due_date": "2026-10-14",
+        "original_amount": 700.0,
+        "outstanding_amount": 700.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-012A",
+        "description": "Helios refundable workshop",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-012B",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-14",
+        "due_date": "2026-10-14",
+        "original_amount": 300.0,
+        "outstanding_amount": 300.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-012B",
+        "description": "Helios extra seats",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-013A",
+        "customer_id": "CUST-005",
+        "customer_name": "Orbit Health",
+        "invoice_date": "2026-09-16",
+        "due_date": "2026-10-16",
+        "original_amount": 550.0,
+        "outstanding_amount": 550.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-013A",
+        "description": "Orbit monitoring",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-013B",
+        "customer_id": "CUST-005",
+        "customer_name": "Orbit Health",
+        "invoice_date": "2026-09-16",
+        "due_date": "2026-10-16",
+        "original_amount": 250.0,
+        "outstanding_amount": 250.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-013B",
+        "description": "Orbit alerts pack",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-014",
+        "customer_id": "CUST-009",
+        "customer_name": "Northstar LLC",
+        "invoice_date": "2026-09-01",
+        "due_date": "2026-09-30",
+        "original_amount": 12400.0,
+        "outstanding_amount": 12400.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-014",
+        "description": "Northstar platform",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-015",
+        "customer_id": "CUST-001",
+        "customer_name": "Northwind Labs",
+        "invoice_date": "2026-09-29",
+        "due_date": "2026-10-29",
+        "original_amount": 2200.0,
+        "outstanding_amount": 2200.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-015",
+        "description": "Late September expansion",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-016",
+        "customer_id": "CUST-012",
+        "customer_name": "Harbor Electric",
+        "invoice_date": "2026-09-18",
+        "due_date": "2026-10-18",
+        "original_amount": 1800.0,
+        "outstanding_amount": 1800.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-016",
+        "description": "Harbor field service",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-017",
+        "customer_id": "CUST-008",
+        "customer_name": "Summit Logistics",
+        "invoice_date": "2026-09-19",
+        "due_date": "2026-10-19",
+        "original_amount": 640.0,
+        "outstanding_amount": 640.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-017",
+        "description": "Summit retry shipment",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-018A",
+        "customer_id": "CUST-010",
+        "customer_name": "Atlas Systems",
+        "invoice_date": "2026-08-20",
+        "due_date": "2026-09-19",
+        "original_amount": 880.0,
+        "outstanding_amount": 0.0,
+        "currency": "USD",
+        "status": "PAID",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "monthly platform fee",
+        "description": "Atlas August platform fee",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-018B",
+        "customer_id": "CUST-010",
+        "customer_name": "Atlas Systems",
+        "invoice_date": "2026-09-20",
+        "due_date": "2026-10-20",
+        "original_amount": 880.0,
+        "outstanding_amount": 880.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "monthly platform fee",
+        "description": "Atlas September platform fee",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-018C",
+        "customer_id": "CUST-010",
+        "customer_name": "Atlas Systems",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "original_amount": 880.0,
+        "outstanding_amount": 880.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "professional services",
+        "description": "Atlas one-off professional services",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-019",
+        "customer_id": "CUST-012",
+        "customer_name": "Harbor Electric",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "original_amount": 950.0,
+        "outstanding_amount": 950.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-019",
+        "description": "Harbor overpayment case",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-021",
+        "customer_id": "CUST-012",
+        "customer_name": "Harbor Electric",
+        "invoice_date": "2026-09-22",
+        "due_date": "2026-10-22",
+        "original_amount": 1000.0,
+        "outstanding_amount": 1000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-021",
+        "description": "Harbor multi-payment install",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      }
+    ],
+    "payments": [
+      {
+        "payment_id": "PAY-STR-CH_STR_005",
+        "payment_date": "2026-09-12",
+        "amount": 750.0,
+        "currency": "USD",
+        "payer_name": "Acme Industrial",
+        "customer_id": null,
+        "bank_reference": "ch_str_005",
+        "remittance_text": "INV-STR-005 Acme tooling INV-STR-005",
+        "invoice_reference": "INV-STR-005",
+        "source": "stripe",
+        "unapplied_amount": 0.0,
+        "application_status": "APPLIED",
+        "metadata": {
+          "stripe_charge_id": "ch_str_005",
+          "stripe_payment_intent_id": "pi_str_005",
+          "stripe_balance_transaction_id": "txn_str_005",
+          "stripe_event_type": "payment_intent.succeeded",
+          "customer_name": "Acme Industrial",
+          "invoice_id": "INV-STR-005",
+          "order_id": "INV-STR-005"
+        }
+      }
+    ],
+    "payouts": [
+      {
+        "provider": "stripe",
+        "event_id": "evt_po_str_005a_recon",
+        "payout_id": "po_str_005a",
+        "status": "paid",
+        "amount": 72795,
+        "currency": "USD",
+        "arrival_date": "2026-09-15",
+        "provider_created_at": "1789488000",
+        "source_event_type": "payout.reconciliation_completed",
+        "raw_source_ref": "stripe:evt_po_str_005a_recon",
+        "reference": "STRIPE PAYOUT",
+        "lines": [
+          {
+            "line_type": "charge",
+            "amount": 750.0,
+            "currency": "USD",
+            "reference": "INV-STR-005",
+            "description": "INV-STR-005 Acme tooling",
+            "provider_object_id": "txn_str_005",
+            "amount_minor": 75000,
+            "fee_minor": 2205,
+            "net_minor": 72795,
+            "source_object_id": "ch_str_005",
+            "created": "2026-09-12T16:00:00+00:00",
+            "category": "gross"
+          }
+        ],
+        "bank_deposit_id": "BANK-STR-005A",
+        "bank_deposit_amount": 727.95,
+        "bank_deposit_currency": "USD"
+      },
+      {
+        "provider": "stripe",
+        "event_id": "evt_po_str_005b_recon",
+        "payout_id": "po_str_005b",
+        "status": "paid",
+        "amount": -75000,
+        "currency": "USD",
+        "arrival_date": "2026-09-22",
+        "provider_created_at": "1790092800",
+        "source_event_type": "payout.reconciliation_completed",
+        "raw_source_ref": "stripe:evt_po_str_005b_recon",
+        "reference": "STRIPE PAYOUT",
+        "lines": [
+          {
+            "line_type": "refund",
+            "amount": -750.0,
+            "currency": "USD",
+            "reference": "re_str_005",
+            "description": "Full refund after payout INV-STR-005",
+            "provider_object_id": "txn_str_005_re",
+            "amount_minor": -75000,
+            "fee_minor": 0,
+            "net_minor": -75000,
+            "source_object_id": "re_str_005",
+            "created": "2026-09-22T16:00:00+00:00",
+            "category": "refund"
+          }
+        ],
+        "bank_deposit_id": "BANK-STR-005B",
+        "bank_deposit_amount": -750.0,
+        "bank_deposit_currency": "USD"
+      }
+    ],
+    "bank_deposits": [
+      {
+        "deposit_id": "BANK-STR-005A",
+        "payout_id": "po_str_005a",
+        "amount": 727.95,
+        "amount_minor": 72795,
+        "currency": "USD",
+        "date": "2026-09-15",
+        "description": "STRIPE PAYOUT po_str_005a"
+      },
+      {
+        "deposit_id": "BANK-STR-005B",
+        "payout_id": "po_str_005b",
+        "amount": -750.0,
+        "amount_minor": -75000,
+        "currency": "USD",
+        "date": "2026-09-22",
+        "description": "STRIPE PAYOUT po_str_005b"
+      }
+    ],
+    "precedents": [
+      {
+        "precedent_id": "AR-PREC-STR-ATLAS-AUG",
+        "customer_id": "CUST-010",
+        "kind": "stripe_metadata",
+        "summary": "Atlas Systems typically remits Stripe invoice references (INV-STR-018A) with description 'Atlas August platform fee monthly platform fee'.",
+        "facts": {
+          "invoice_ids": [
+            "INV-STR-018A"
+          ],
+          "description": "Atlas August platform fee monthly platform fee",
+          "source": "stripe",
+          "amount": 880.0
+        },
+        "source": "stripe",
+        "support_count": 2,
+        "source_payment_id": "PAY-STR-CH_STR_mem_aug",
+        "source_review_id": null
+      }
+    ]
+  },
+  "agent_routing": [
+    {
+      "event_id": "evt_ch_str_005_pi",
+      "event_type": "payment_intent.succeeded",
+      "classified_workflow": "ar_cash_application",
+      "result_workflow": "ar_cash_application",
+      "status": "processed",
+      "duplicate": false,
+      "payment_id": "PAY-STR-CH_STR_005",
+      "payout_id": null,
+      "invoice_ids": [
+        "INV-STR-005"
+      ]
+    },
+    {
+      "event_id": "evt_ch_str_005_ch",
+      "event_type": "charge.succeeded",
+      "classified_workflow": "ar_cash_application",
+      "result_workflow": "ar_cash_application",
+      "status": "duplicate",
+      "duplicate": true,
+      "payment_id": "PAY-STR-CH_STR_005",
+      "payout_id": null,
+      "invoice_ids": []
+    },
+    {
+      "event_id": "evt_po_str_005a_created",
+      "event_type": "payout.created",
+      "classified_workflow": "stripe_payout_reconciliation",
+      "result_workflow": "stripe_payout_reconciliation",
+      "status": "processed",
+      "duplicate": false,
+      "payment_id": null,
+      "payout_id": "po_str_005a",
+      "invoice_ids": []
+    },
+    {
+      "event_id": "evt_po_str_005a_recon",
+      "event_type": "payout.reconciliation_completed",
+      "classified_workflow": "stripe_payout_reconciliation",
+      "result_workflow": "stripe_payout_reconciliation",
+      "status": "processed",
+      "duplicate": false,
+      "payment_id": null,
+      "payout_id": "po_str_005a",
+      "invoice_ids": []
+    },
+    {
+      "event_id": "evt_re_str_005",
+      "event_type": "refund.created",
+      "classified_workflow": "ar_refund",
+      "result_workflow": "ar_refund",
+      "status": "processed",
+      "duplicate": false,
+      "payment_id": "PAY-STR-CH_STR_005",
+      "payout_id": null,
+      "invoice_ids": [
+        "INV-STR-005"
+      ]
+    },
+    {
+      "event_id": "evt_po_str_005b_created",
+      "event_type": "payout.created",
+      "classified_workflow": "stripe_payout_reconciliation",
+      "result_workflow": "stripe_payout_reconciliation",
+      "status": "processed",
+      "duplicate": false,
+      "payment_id": null,
+      "payout_id": "po_str_005b",
+      "invoice_ids": []
+    },
+    {
+      "event_id": "evt_po_str_005b_recon",
+      "event_type": "payout.reconciliation_completed",
+      "classified_workflow": "stripe_payout_reconciliation",
+      "result_workflow": "stripe_payout_reconciliation",
+      "status": "processed",
+      "duplicate": false,
+      "payment_id": null,
+      "payout_id": "po_str_005b",
+      "invoice_ids": []
+    }
+  ],
+  "agent_actions": [
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "processed",
+      "provider_event_id": "evt_ch_str_005_pi",
+      "duplicate": false,
+      "invoice_candidates": 0,
+      "invoice_numbers": [
+        "INV-STR-005"
+      ],
+      "classification": null,
+      "payout_id": null,
+      "payout_amount": null,
+      "payment_id": "PAY-STR-CH_STR_005",
+      "workflow": "ar_cash_application",
+      "message": "payment_intent.succeeded \u2192 ar_cash_application",
+      "details": {
+        "workflow": "ar_cash_application",
+        "status": "processed",
+        "payment_id": "PAY-STR-CH_STR_005",
+        "decision": "AUTO_APPLY",
+        "invoice_ids": [
+          "INV-STR-005"
+        ],
+        "posted": true,
+        "already_posted": false,
+        "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_005-20260920T000644Z.json",
+        "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+        "precedent_used": [],
+        "precedent_affected": false,
+        "ambiguities": [],
+        "duplicate": false
+      }
+    },
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "duplicate",
+      "provider_event_id": "evt_ch_str_005_ch",
+      "duplicate": true,
+      "invoice_candidates": 0,
+      "invoice_numbers": [],
+      "classification": null,
+      "payout_id": null,
+      "payout_amount": null,
+      "payment_id": "PAY-STR-CH_STR_005",
+      "workflow": "ar_cash_application",
+      "message": "charge.succeeded \u2192 ar_cash_application",
+      "details": {
+        "workflow": "ar_cash_application",
+        "status": "already_processed",
+        "payment_id": "PAY-STR-CH_STR_005",
+        "decision": "APPLIED",
+        "invoice_ids": [],
+        "duplicate": true
+      }
+    },
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "processed",
+      "provider_event_id": "evt_po_str_005a_created",
+      "duplicate": false,
+      "invoice_candidates": 0,
+      "invoice_numbers": [],
+      "classification": null,
+      "payout_id": "po_str_005a",
+      "payout_amount": 727.95,
+      "payment_id": null,
+      "workflow": "stripe_payout_reconciliation",
+      "message": "payout.created payout po_str_005a",
+      "details": {
+        "matched": true,
+        "status": "MATCH",
+        "expected": 727.95,
+        "actual": 727.95,
+        "source_count": 1,
+        "new_reconciliation": true,
+        "exceptions": [],
+        "invoice_candidates": 0,
+        "workflow": "stripe_payout_reconciliation",
+        "balance_transaction_ids": [
+          "txn_str_005"
+        ],
+        "bank_deposit_id": "BANK-STR-005A"
+      }
+    },
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "processed",
+      "provider_event_id": "evt_po_str_005a_recon",
+      "duplicate": false,
+      "invoice_candidates": 0,
+      "invoice_numbers": [],
+      "classification": null,
+      "payout_id": "po_str_005a",
+      "payout_amount": 727.95,
+      "payment_id": null,
+      "workflow": "stripe_payout_reconciliation",
+      "message": "payout.reconciliation_completed payout po_str_005a",
+      "details": {
+        "matched": true,
+        "status": "MATCH",
+        "expected": 727.95,
+        "actual": 727.95,
+        "source_count": 1,
+        "new_reconciliation": false,
+        "exceptions": [],
+        "invoice_candidates": 0,
+        "workflow": "stripe_payout_reconciliation",
+        "balance_transaction_ids": [
+          "txn_str_005"
+        ],
+        "bank_deposit_id": "BANK-STR-005A"
+      }
+    },
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "processed",
+      "provider_event_id": "evt_re_str_005",
+      "duplicate": false,
+      "invoice_candidates": 0,
+      "invoice_numbers": [
+        "INV-STR-005"
+      ],
+      "classification": null,
+      "payout_id": null,
+      "payout_amount": null,
+      "payment_id": "PAY-STR-CH_STR_005",
+      "workflow": "ar_refund",
+      "message": "refund.created \u2192 ar_refund",
+      "details": {
+        "workflow": "ar_refund",
+        "status": "processed",
+        "event_id": "AR-EVT-0003",
+        "journal_entry_ids": [
+          "AR-JE-003"
+        ],
+        "invoice_changes": [
+          {
+            "invoice_id": "INV-STR-005",
+            "previous_outstanding": 0.0,
+            "applied_amount": -750.0,
+            "new_outstanding": 750.0,
+            "previous_status": "PAID",
+            "new_status": "OPEN"
+          }
+        ],
+        "payment_id": "PAY-STR-CH_STR_005",
+        "invoice_ids": [
+          "INV-STR-005"
+        ],
+        "amount": 750.0
+      }
+    },
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "processed",
+      "provider_event_id": "evt_po_str_005b_created",
+      "duplicate": false,
+      "invoice_candidates": 0,
+      "invoice_numbers": [],
+      "classification": null,
+      "payout_id": "po_str_005b",
+      "payout_amount": -750.0,
+      "payment_id": null,
+      "workflow": "stripe_payout_reconciliation",
+      "message": "payout.created payout po_str_005b",
+      "details": {
+        "matched": true,
+        "status": "MATCH",
+        "expected": -750.0,
+        "actual": -750.0,
+        "source_count": 1,
+        "new_reconciliation": true,
+        "exceptions": [],
+        "invoice_candidates": 0,
+        "workflow": "stripe_payout_reconciliation",
+        "balance_transaction_ids": [
+          "txn_str_005_re"
+        ],
+        "bank_deposit_id": "BANK-STR-005B"
+      }
+    },
+    {
+      "provider": "stripe",
+      "action": "webhook",
+      "status": "processed",
+      "provider_event_id": "evt_po_str_005b_recon",
+      "duplicate": false,
+      "invoice_candidates": 0,
+      "invoice_numbers": [],
+      "classification": null,
+      "payout_id": "po_str_005b",
+      "payout_amount": -750.0,
+      "payment_id": null,
+      "workflow": "stripe_payout_reconciliation",
+      "message": "payout.reconciliation_completed payout po_str_005b",
+      "details": {
+        "matched": true,
+        "status": "MATCH",
+        "expected": -750.0,
+        "actual": -750.0,
+        "source_count": 1,
+        "new_reconciliation": false,
+        "exceptions": [],
+        "invoice_candidates": 0,
+        "workflow": "stripe_payout_reconciliation",
+        "balance_transaction_ids": [
+          "txn_str_005_re"
+        ],
+        "bank_deposit_id": "BANK-STR-005B"
+      }
+    }
+  ],
+  "reconciliation": {
+    "payout_id": "po_str_005b",
+    "provider": "stripe",
+    "currency": "USD",
+    "gross_payments": 0.0,
+    "refunds": -750.0,
+    "chargebacks": 0.0,
+    "fees": 0.0,
+    "adjustments": 0.0,
+    "other": 0.0,
+    "expected_payout": -750.0,
+    "actual_payout": -750.0,
+    "difference": 0.0,
+    "bank_deposit_amount": -750.0,
+    "bank_deposit_id": "BANK-STR-005B",
+    "bank_matched": true,
+    "matched": true,
+    "status": "MATCH",
+    "exceptions": [],
+    "expected_payout_minor": -75000,
+    "actual_payout_minor": -75000,
+    "lines": [
+      {
+        "line_type": "refund",
+        "amount": -750.0,
+        "currency": "USD",
+        "reference": "re_str_005",
+        "description": "Full refund after payout INV-STR-005",
+        "provider_object_id": "txn_str_005_re",
+        "amount_minor": -75000,
+        "fee_minor": 0,
+        "net_minor": -75000,
+        "source_object_id": "re_str_005",
+        "created": "2026-09-22T16:00:00+00:00",
+        "category": "refund"
+      }
+    ]
+  },
+  "cash_reconciliation": {
+    "period": "2026-09",
+    "run_id": "20260920T000644Z",
+    "started_at": "2026-09-20T00:06:44Z",
+    "opening_bank": 0.0,
+    "opening_ledger": 0.0,
+    "bank_ending": -22.05,
+    "ledger_ending": -22.05,
+    "reconciled_amount": 1477.95,
+    "outstanding_timing": 0.0,
+    "unexplained_difference": 0.0,
+    "human_review_count": 0,
+    "period_status": "RECONCILED",
+    "arithmetic_tied": true,
+    "tie_out": {
+      "bank_ending": -22.05,
+      "ledger_ending": -22.05,
+      "bank_ending_minor": -2205,
+      "ledger_ending_minor": -2205,
+      "break_amount": 0.0,
+      "break_minor": 0,
+      "reconciling_sum": 0.0,
+      "reconciling_sum_minor": 0,
+      "tied": true,
+      "items": [],
+      "formula": "bank_ending - ledger_ending = sum(in-period bank \u2212 in-period ledger) across matches"
+    },
+    "matches": [
+      {
+        "reconciliation_id": "REC-001",
+        "period": "2026-09",
+        "match_key": "b5503b5f4599d5b4",
+        "bank_transaction_ids": [
+          "BANK-STR-005A"
+        ],
+        "ledger_entry_ids": [
+          "GL-STR-po_str_005a"
+        ],
+        "match_type": "PROVIDER_PAYOUT",
+        "bank_amount": 727.95,
+        "ledger_amount": 727.95,
+        "difference": 0.0,
+        "bank_amount_minor": 72795,
+        "ledger_amount_minor": 72795,
+        "difference_minor": 0,
+        "confidence": 1.0,
+        "status": "MATCHED",
+        "explanation": "Stripe payout po_str_005a matched to bank BANK-STR-005A (MATCH).",
+        "evidence": [
+          "provider:stripe",
+          "payout_id:po_str_005a",
+          "provider_status:MATCH",
+          "expected_payout:72795",
+          "actual_payout:72795",
+          "bank_matched:True"
+        ],
+        "control_findings": [],
+        "proposed_adjusting_entries": [],
+        "reviewer_status": "CONFIRMED",
+        "human_review": false,
+        "candidate_id": "PROVIDER_PAYOUT:BANK-STR-005A:GL-STR-po_str_005a",
+        "provider": "stripe",
+        "provider_payout_id": "po_str_005a",
+        "provider_status": "MATCH",
+        "calculations": {
+          "bank_amount_minor": 72795,
+          "ledger_amount_minor": 72795,
+          "difference_minor": 0,
+          "group_sum_equals_bank": null
+        }
+      },
+      {
+        "reconciliation_id": "REC-002",
+        "period": "2026-09",
+        "match_key": "209cb34cd62ab618",
+        "bank_transaction_ids": [
+          "BANK-STR-005B"
+        ],
+        "ledger_entry_ids": [
+          "GL-STR-po_str_005b"
+        ],
+        "match_type": "PROVIDER_PAYOUT",
+        "bank_amount": -750.0,
+        "ledger_amount": -750.0,
+        "difference": 0.0,
+        "bank_amount_minor": -75000,
+        "ledger_amount_minor": -75000,
+        "difference_minor": 0,
+        "confidence": 1.0,
+        "status": "MATCHED",
+        "explanation": "Stripe payout po_str_005b matched to bank BANK-STR-005B (MATCH).",
+        "evidence": [
+          "provider:stripe",
+          "payout_id:po_str_005b",
+          "provider_status:MATCH",
+          "expected_payout:-75000",
+          "actual_payout:-75000",
+          "bank_matched:True"
+        ],
+        "control_findings": [],
+        "proposed_adjusting_entries": [],
+        "reviewer_status": "CONFIRMED",
+        "human_review": false,
+        "candidate_id": "PROVIDER_PAYOUT:BANK-STR-005B:GL-STR-po_str_005b",
+        "provider": "stripe",
+        "provider_payout_id": "po_str_005b",
+        "provider_status": "MATCH",
+        "calculations": {
+          "bank_amount_minor": -75000,
+          "ledger_amount_minor": -75000,
+          "difference_minor": 0,
+          "group_sum_equals_bank": null
+        }
+      }
+    ],
+    "traces": [
+      {
+        "reconciliation_id": "REC-001",
+        "period": "2026-09",
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_transactions": [
+          {
+            "transaction_id": "BANK-STR-005A",
+            "date": "2026-09-15",
+            "amount": 727.95,
+            "currency": "USD",
+            "description": "STRIPE PAYOUT po_str_005a",
+            "reference": "po_str_005a",
+            "counterparty": "Stripe",
+            "transaction_type": "deposit",
+            "source": "bank",
+            "provider": "stripe",
+            "period": "2026-09",
+            "amount_minor": 72795,
+            "raw_metadata": {
+              "payout_id": "po_str_005a"
+            }
+          }
+        ],
+        "ledger_entries": [
+          {
+            "entry_id": "GL-STR-po_str_005a",
+            "date": "2026-09-15",
+            "amount": 727.95,
+            "currency": "USD",
+            "account": "1000-Cash",
+            "counterparty": "Stripe",
+            "reference": "po_str_005a",
+            "description": "Stripe payout po_str_005a",
+            "entry_type": "processor_payout",
+            "period": "2026-09",
+            "source": "gl",
+            "amount_minor": 72795,
+            "raw_metadata": {
+              "payout_id": "po_str_005a",
+              "provider": "stripe"
+            }
+          }
+        ],
+        "candidates": [
+          {
+            "candidate_id": "PROVIDER_PAYOUT:BANK-STR-005A:GL-STR-po_str_005a",
+            "match_type": "PROVIDER_PAYOUT",
+            "bank_transaction_ids": [
+              "BANK-STR-005A"
+            ],
+            "ledger_entry_ids": [
+              "GL-STR-po_str_005a"
+            ],
+            "bank_amount": 727.95,
+            "ledger_amount": 727.95,
+            "difference": 0.0,
+            "bank_amount_minor": 72795,
+            "ledger_amount_minor": 72795,
+            "difference_minor": 0,
+            "confidence": 1.0,
+            "score": 2.5,
+            "evidence": [
+              "provider:stripe",
+              "payout_id:po_str_005a",
+              "provider_status:MATCH",
+              "expected_payout:72795",
+              "actual_payout:72795",
+              "bank_matched:True"
+            ],
+            "ambiguities": [],
+            "fee_evidence_ids": [],
+            "provider": "stripe",
+            "provider_payout_id": "po_str_005a",
+            "provider_status": "MATCH",
+            "proposed_adjusting_entries": []
+          },
+          {
+            "candidate_id": "EXACT_MATCH:BANK-STR-005A:GL-STR-po_str_005a",
+            "match_type": "EXACT_MATCH",
+            "bank_transaction_ids": [
+              "BANK-STR-005A"
+            ],
+            "ledger_entry_ids": [
+              "GL-STR-po_str_005a"
+            ],
+            "bank_amount": 727.95,
+            "ledger_amount": 727.95,
+            "difference": 0.0,
+            "bank_amount_minor": 72795,
+            "ledger_amount_minor": 72795,
+            "difference_minor": 0,
+            "confidence": 1.0,
+            "score": 2.85,
+            "evidence": [
+              "amount:72795",
+              "bank_date:2026-09-15",
+              "ledger_date:2026-09-15",
+              "counterparty_overlap:1.00",
+              "bank_reference:po_str_005a",
+              "ledger_reference:po_str_005a"
+            ],
+            "ambiguities": [],
+            "fee_evidence_ids": [],
+            "provider": null,
+            "provider_payout_id": null,
+            "provider_status": null,
+            "proposed_adjusting_entries": []
+          }
+        ],
+        "calculations": {
+          "bank_amount_minor": 72795,
+          "ledger_amount_minor": 72795,
+          "difference_minor": 0,
+          "group_sum_equals_bank": null
+        },
+        "preparer": {
+          "case_id": "PROVIDER_PAYOUT:BANK-STR-005A:GL-STR-po_str_005a",
+          "selected_candidate_id": "PROVIDER_PAYOUT:BANK-STR-005A:GL-STR-po_str_005a",
+          "disposition": "MATCHED",
+          "confidence": 1.0,
+          "reasons": [
+            "Stripe payout po_str_005a matched to bank BANK-STR-005A (MATCH)."
+          ],
+          "evidence_used": [
+            "provider:stripe",
+            "payout_id:po_str_005a",
+            "provider_status:MATCH",
+            "expected_payout:72795",
+            "actual_payout:72795",
+            "bank_matched:True"
+          ],
+          "review_question": null
+        },
+        "investigation": null,
+        "validation": {
+          "passed": true,
+          "errors": [],
+          "human_review_required": false,
+          "reasons": []
+        },
+        "reviewer": {
+          "case_id": "PROVIDER_PAYOUT:BANK-STR-005A:GL-STR-po_str_005a",
+          "reviewer_status": "CONFIRMED",
+          "disposition": "MATCHED",
+          "agree_with_preparer": true,
+          "confidence": 1.0,
+          "reasons": [
+            "Python validation passed"
+          ],
+          "arithmetic_ok": true,
+          "human_review": false
+        },
+        "final": {
+          "reconciliation_id": "REC-001",
+          "period": "2026-09",
+          "match_key": "b5503b5f4599d5b4",
+          "bank_transaction_ids": [
+            "BANK-STR-005A"
+          ],
+          "ledger_entry_ids": [
+            "GL-STR-po_str_005a"
+          ],
+          "match_type": "PROVIDER_PAYOUT",
+          "bank_amount": 727.95,
+          "ledger_amount": 727.95,
+          "difference": 0.0,
+          "bank_amount_minor": 72795,
+          "ledger_amount_minor": 72795,
+          "difference_minor": 0,
+          "confidence": 1.0,
+          "status": "MATCHED",
+          "explanation": "Stripe payout po_str_005a matched to bank BANK-STR-005A (MATCH).",
+          "evidence": [
+            "provider:stripe",
+            "payout_id:po_str_005a",
+            "provider_status:MATCH",
+            "expected_payout:72795",
+            "actual_payout:72795",
+            "bank_matched:True"
+          ],
+          "control_findings": [],
+          "proposed_adjusting_entries": [],
+          "reviewer_status": "CONFIRMED",
+          "human_review": false,
+          "candidate_id": "PROVIDER_PAYOUT:BANK-STR-005A:GL-STR-po_str_005a",
+          "provider": "stripe",
+          "provider_payout_id": "po_str_005a",
+          "provider_status": "MATCH",
+          "calculations": {
+            "bank_amount_minor": 72795,
+            "ledger_amount_minor": 72795,
+            "difference_minor": 0,
+            "group_sum_equals_bank": null
+          }
+        },
+        "proposed_journal_entries": [],
+        "human_review": false,
+        "evidence": [
+          "provider:stripe",
+          "payout_id:po_str_005a",
+          "provider_status:MATCH",
+          "expected_payout:72795",
+          "actual_payout:72795",
+          "bank_matched:True"
+        ],
+        "control_findings": [],
+        "agents": [],
+        "used_agent": false,
+        "replay": false,
+        "memory_lookup": null,
+        "written_memory_id": "DEC-2026-09-016",
+        "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/cash-traces/2026-09/20260920T000644Z/REC-001.json"
+      },
+      {
+        "reconciliation_id": "REC-002",
+        "period": "2026-09",
+        "match_type": "PROVIDER_PAYOUT",
+        "status": "MATCHED",
+        "bank_transactions": [
+          {
+            "transaction_id": "BANK-STR-005B",
+            "date": "2026-09-22",
+            "amount": -750.0,
+            "currency": "USD",
+            "description": "STRIPE PAYOUT po_str_005b",
+            "reference": "po_str_005b",
+            "counterparty": "Stripe",
+            "transaction_type": "deposit",
+            "source": "bank",
+            "provider": "stripe",
+            "period": "2026-09",
+            "amount_minor": -75000,
+            "raw_metadata": {
+              "payout_id": "po_str_005b"
+            }
+          }
+        ],
+        "ledger_entries": [
+          {
+            "entry_id": "GL-STR-po_str_005b",
+            "date": "2026-09-22",
+            "amount": -750.0,
+            "currency": "USD",
+            "account": "1000-Cash",
+            "counterparty": "Stripe",
+            "reference": "po_str_005b",
+            "description": "Stripe payout po_str_005b",
+            "entry_type": "processor_payout",
+            "period": "2026-09",
+            "source": "gl",
+            "amount_minor": -75000,
+            "raw_metadata": {
+              "payout_id": "po_str_005b",
+              "provider": "stripe"
+            }
+          }
+        ],
+        "candidates": [
+          {
+            "candidate_id": "PROVIDER_PAYOUT:BANK-STR-005B:GL-STR-po_str_005b",
+            "match_type": "PROVIDER_PAYOUT",
+            "bank_transaction_ids": [
+              "BANK-STR-005B"
+            ],
+            "ledger_entry_ids": [
+              "GL-STR-po_str_005b"
+            ],
+            "bank_amount": -750.0,
+            "ledger_amount": -750.0,
+            "difference": 0.0,
+            "bank_amount_minor": -75000,
+            "ledger_amount_minor": -75000,
+            "difference_minor": 0,
+            "confidence": 1.0,
+            "score": 2.5,
+            "evidence": [
+              "provider:stripe",
+              "payout_id:po_str_005b",
+              "provider_status:MATCH",
+              "expected_payout:-75000",
+              "actual_payout:-75000",
+              "bank_matched:True"
+            ],
+            "ambiguities": [],
+            "fee_evidence_ids": [],
+            "provider": "stripe",
+            "provider_payout_id": "po_str_005b",
+            "provider_status": "MATCH",
+            "proposed_adjusting_entries": []
+          },
+          {
+            "candidate_id": "EXACT_MATCH:BANK-STR-005B:GL-STR-po_str_005b",
+            "match_type": "EXACT_MATCH",
+            "bank_transaction_ids": [
+              "BANK-STR-005B"
+            ],
+            "ledger_entry_ids": [
+              "GL-STR-po_str_005b"
+            ],
+            "bank_amount": -750.0,
+            "ledger_amount": -750.0,
+            "difference": 0.0,
+            "bank_amount_minor": -75000,
+            "ledger_amount_minor": -75000,
+            "difference_minor": 0,
+            "confidence": 1.0,
+            "score": 2.85,
+            "evidence": [
+              "amount:-75000",
+              "bank_date:2026-09-22",
+              "ledger_date:2026-09-22",
+              "counterparty_overlap:1.00",
+              "bank_reference:po_str_005b",
+              "ledger_reference:po_str_005b"
+            ],
+            "ambiguities": [],
+            "fee_evidence_ids": [],
+            "provider": null,
+            "provider_payout_id": null,
+            "provider_status": null,
+            "proposed_adjusting_entries": []
+          }
+        ],
+        "calculations": {
+          "bank_amount_minor": -75000,
+          "ledger_amount_minor": -75000,
+          "difference_minor": 0,
+          "group_sum_equals_bank": null
+        },
+        "preparer": {
+          "case_id": "PROVIDER_PAYOUT:BANK-STR-005B:GL-STR-po_str_005b",
+          "selected_candidate_id": "PROVIDER_PAYOUT:BANK-STR-005B:GL-STR-po_str_005b",
+          "disposition": "MATCHED",
+          "confidence": 1.0,
+          "reasons": [
+            "Stripe payout po_str_005b matched to bank BANK-STR-005B (MATCH)."
+          ],
+          "evidence_used": [
+            "provider:stripe",
+            "payout_id:po_str_005b",
+            "provider_status:MATCH",
+            "expected_payout:-75000",
+            "actual_payout:-75000",
+            "bank_matched:True"
+          ],
+          "review_question": null
+        },
+        "investigation": null,
+        "validation": {
+          "passed": true,
+          "errors": [],
+          "human_review_required": false,
+          "reasons": []
+        },
+        "reviewer": {
+          "case_id": "PROVIDER_PAYOUT:BANK-STR-005B:GL-STR-po_str_005b",
+          "reviewer_status": "CONFIRMED",
+          "disposition": "MATCHED",
+          "agree_with_preparer": true,
+          "confidence": 1.0,
+          "reasons": [
+            "Python validation passed"
+          ],
+          "arithmetic_ok": true,
+          "human_review": false
+        },
+        "final": {
+          "reconciliation_id": "REC-002",
+          "period": "2026-09",
+          "match_key": "209cb34cd62ab618",
+          "bank_transaction_ids": [
+            "BANK-STR-005B"
+          ],
+          "ledger_entry_ids": [
+            "GL-STR-po_str_005b"
+          ],
+          "match_type": "PROVIDER_PAYOUT",
+          "bank_amount": -750.0,
+          "ledger_amount": -750.0,
+          "difference": 0.0,
+          "bank_amount_minor": -75000,
+          "ledger_amount_minor": -75000,
+          "difference_minor": 0,
+          "confidence": 1.0,
+          "status": "MATCHED",
+          "explanation": "Stripe payout po_str_005b matched to bank BANK-STR-005B (MATCH).",
+          "evidence": [
+            "provider:stripe",
+            "payout_id:po_str_005b",
+            "provider_status:MATCH",
+            "expected_payout:-75000",
+            "actual_payout:-75000",
+            "bank_matched:True"
+          ],
+          "control_findings": [],
+          "proposed_adjusting_entries": [],
+          "reviewer_status": "CONFIRMED",
+          "human_review": false,
+          "candidate_id": "PROVIDER_PAYOUT:BANK-STR-005B:GL-STR-po_str_005b",
+          "provider": "stripe",
+          "provider_payout_id": "po_str_005b",
+          "provider_status": "MATCH",
+          "calculations": {
+            "bank_amount_minor": -75000,
+            "ledger_amount_minor": -75000,
+            "difference_minor": 0,
+            "group_sum_equals_bank": null
+          }
+        },
+        "proposed_journal_entries": [],
+        "human_review": false,
+        "evidence": [
+          "provider:stripe",
+          "payout_id:po_str_005b",
+          "provider_status:MATCH",
+          "expected_payout:-75000",
+          "actual_payout:-75000",
+          "bank_matched:True"
+        ],
+        "control_findings": [],
+        "agents": [],
+        "used_agent": false,
+        "replay": false,
+        "memory_lookup": null,
+        "written_memory_id": "DEC-2026-09-017",
+        "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/cash-traces/2026-09/20260920T000644Z/REC-002.json"
+      }
+    ],
+    "control_findings": [],
+    "agents": [],
+    "used_agent": false,
+    "replay": false,
+    "metrics": {
+      "period": "2026-09",
+      "total_bank_transactions": 2,
+      "exact_matches": 0,
+      "grouped_matches": 0,
+      "provider_matches": 2,
+      "true_exceptions": 0,
+      "false_matches": 0,
+      "false_exception_flags": 0,
+      "unexplained_items": 0,
+      "human_review_count": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "arithmetic_tied": true,
+      "ground_truth_used": false
+    },
+    "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/cash-runs/2026-09-20260920T000644Z.json",
+    "trace_dir": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/cash-traces/2026-09/20260920T000644Z"
+  },
+  "journals": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Acme Industrial",
+      "memo": "Apply PAY-STR-CH_STR_005 to INV-STR-005",
+      "debit": {
+        "account": "Cash",
+        "amount": 750.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 750.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-STR-CH_STR_005",
+      "related_invoice_ids": [
+        "INV-STR-005"
+      ],
+      "created_at": "2026-09-20T00:06:44Z"
+    },
+    {
+      "entry_id": "AR-JE-002",
+      "period": "2026-09",
+      "counterparty": "Stripe",
+      "memo": "Stripe processor fee for payout po_str_005a",
+      "debit": {
+        "account": "Stripe Processing Fees",
+        "amount": 22.05
+      },
+      "credit": {
+        "account": "Cash",
+        "amount": 22.05
+      },
+      "entry_type": "processor_fee",
+      "related_payment_id": "po_str_005a",
+      "related_invoice_ids": [],
+      "created_at": "2026-09-20T00:06:44Z"
+    },
+    {
+      "entry_id": "AR-JE-003",
+      "period": "2026-09",
+      "counterparty": "Acme Industrial",
+      "memo": "refund.created re_str_005",
+      "debit": {
+        "account": "Accounts Receivable",
+        "amount": 750.0
+      },
+      "credit": {
+        "account": "Cash",
+        "amount": 750.0
+      },
+      "entry_type": "refund",
+      "related_payment_id": "PAY-STR-CH_STR_005",
+      "related_invoice_ids": [
+        "INV-STR-005"
+      ],
+      "created_at": "2026-09-20T00:06:44Z"
+    }
+  ],
+  "applications": [
+    {
+      "application_id": "AR-APP-001",
+      "payment_id": "PAY-STR-CH_STR_005",
+      "applications": [
+        {
+          "invoice_id": "INV-STR-005",
+          "amount": 750.0
+        }
+      ],
+      "total_applied": 750.0,
+      "unapplied_amount": 0.0,
+      "decision": "AUTO_APPLY",
+      "status": "APPLIED",
+      "posted": true,
+      "invoice_changes": [
+        {
+          "invoice_id": "INV-STR-005",
+          "previous_outstanding": 750.0,
+          "applied_amount": 750.0,
+          "new_outstanding": 0.0,
+          "previous_status": "OPEN",
+          "new_status": "PAID"
+        }
+      ],
+      "journal_entry_ids": [
+        "AR-JE-001"
+      ],
+      "created_at": "2026-09-20T00:06:44Z",
+      "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+    }
+  ],
+  "relationships": {
+    "invoice_to_payments": {
+      "INV-STR-005": [
+        "PAY-STR-CH_STR_005"
+      ]
+    },
+    "payment_to_stripe": [
+      {
+        "payment_id": "PAY-STR-CH_STR_005",
+        "invoice_reference": "INV-STR-005",
+        "amount": 750.0,
+        "stripe_charge_id": "ch_str_005",
+        "stripe_payment_intent_id": "pi_str_005"
+      }
+    ],
+    "refunds": [
+      {
+        "stripe_refund_id": "re_str_005",
+        "payment_id": "PAY-STR-CH_STR_005",
+        "invoice_ids": [
+          "INV-STR-005"
+        ],
+        "amount": 750.0
+      }
+    ],
+    "disputes": [],
+    "payout_to_bank": [
+      {
+        "payout_id": "po_str_005a",
+        "payout_amount_cents": 72795,
+        "balance_transaction_ids": [
+          "txn_str_005"
+        ],
+        "charge_ids": [
+          "ch_str_005"
+        ],
+        "bank_deposit_id": "BANK-STR-005A",
+        "bank_deposit_amount": 727.95
+      },
+      {
+        "payout_id": "po_str_005b",
+        "payout_amount_cents": -75000,
+        "balance_transaction_ids": [
+          "txn_str_005_re"
+        ],
+        "charge_ids": [
+          "re_str_005"
+        ],
+        "bank_deposit_id": "BANK-STR-005B",
+        "bank_deposit_amount": -750.0
+      }
+    ]
+  },
+  "context_edges": [
+    {
+      "link_id": "LNK-0001",
+      "source_document_id": "pi_str_005",
+      "transaction_id": "PAY-STR-CH_STR_005",
+      "journal_entry_id": "",
+      "account_id": "",
+      "reconciliation_id": "",
+      "close_task_id": "",
+      "review_id": "",
+      "extra": {
+        "workflow": "ar_cash_application",
+        "stripe_event_id": "evt_ch_str_005_pi",
+        "invoice_ids": [
+          "INV-STR-005"
+        ]
+      },
+      "created_at": "2026-09-20T00:06:44Z"
+    },
+    {
+      "link_id": "LNK-0002",
+      "source_document_id": "ch_str_005",
+      "transaction_id": "PAY-STR-CH_STR_005",
+      "journal_entry_id": "",
+      "account_id": "",
+      "reconciliation_id": "",
+      "close_task_id": "",
+      "review_id": "",
+      "extra": {
+        "workflow": "ar_cash_application",
+        "stripe_event_id": "evt_ch_str_005_ch",
+        "invoice_ids": []
+      },
+      "created_at": "2026-09-20T00:06:44Z"
+    },
+    {
+      "link_id": "LNK-0003",
+      "source_document_id": "re_str_005",
+      "transaction_id": "PAY-STR-CH_STR_005",
+      "journal_entry_id": "",
+      "account_id": "",
+      "reconciliation_id": "",
+      "close_task_id": "",
+      "review_id": "",
+      "extra": {
+        "workflow": "ar_refund",
+        "stripe_event_id": "evt_re_str_005",
+        "invoice_ids": [
+          "INV-STR-005"
+        ]
+      },
+      "created_at": "2026-09-20T00:06:44Z"
+    },
+    {
+      "link_id": "LNK-0004",
+      "source_document_id": "po_str_005a",
+      "transaction_id": "po_str_005a",
+      "journal_entry_id": "",
+      "account_id": "",
+      "reconciliation_id": "po_str_005a",
+      "close_task_id": "",
+      "review_id": "",
+      "extra": {
+        "provider": "stripe",
+        "arrival_date": "2026-09-15"
+      },
+      "created_at": "2026-09-20T00:06:44Z"
+    },
+    {
+      "link_id": "LNK-0005",
+      "source_document_id": "po_str_005b",
+      "transaction_id": "po_str_005b",
+      "journal_entry_id": "",
+      "account_id": "",
+      "reconciliation_id": "po_str_005b",
+      "close_task_id": "",
+      "review_id": "",
+      "extra": {
+        "provider": "stripe",
+        "arrival_date": "2026-09-22"
+      },
+      "created_at": "2026-09-20T00:06:44Z"
+    }
+  ],
+  "ar_events": [
+    {
+      "event_id": "AR-EVT-0001",
+      "event_type": "cash_applied",
+      "created_at": "2026-09-20T00:06:44Z",
+      "payment_id": "PAY-STR-CH_STR_005",
+      "invoice_ids": [
+        "INV-STR-005"
+      ],
+      "summary": "Applied PAY-STR-CH_STR_005 $750.00 to INV-STR-005",
+      "details": {
+        "applications": [
+          {
+            "invoice_id": "INV-STR-005",
+            "amount": 750.0
+          }
+        ],
+        "unapplied_amount": 0.0,
+        "journal_entry_ids": [
+          "AR-JE-001"
+        ],
+        "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+        "evidence_used": [
+          "Payment PAY-STR-CH_STR_005 750.0 USD from Acme Industrial",
+          "Remittance: INV-STR-005 Acme tooling INV-STR-005",
+          "Payer 'Acme Industrial' matches 'Acme Industrial'",
+          "Remittance invoice references: INV-STR-005",
+          "Remittance names INV-STR-005"
+        ],
+        "precedent_used": [],
+        "precedent_affected": false
+      }
+    },
+    {
+      "event_id": "AR-EVT-0002",
+      "event_type": "stripe_fee",
+      "created_at": "2026-09-20T00:06:44Z",
+      "payment_id": null,
+      "invoice_ids": [],
+      "summary": "Stripe processor fee for payout po_str_005a",
+      "details": {
+        "payout_id": "po_str_005a",
+        "fee_amount": 22.05,
+        "journal_entry_ids": [
+          "AR-JE-002"
+        ]
+      }
+    },
+    {
+      "event_id": "AR-EVT-0003",
+      "event_type": "stripe_refund",
+      "created_at": "2026-09-20T00:06:44Z",
+      "payment_id": "PAY-STR-CH_STR_005",
+      "invoice_ids": [
+        "INV-STR-005"
+      ],
+      "summary": "refund.created re_str_005",
+      "details": {
+        "stripe_refund_id": "re_str_005",
+        "amount": 750.0,
+        "journal_entry_ids": [
+          "AR-JE-003"
+        ],
+        "invoice_changes": [
+          {
+            "invoice_id": "INV-STR-005",
+            "previous_outstanding": 0.0,
+            "applied_amount": -750.0,
+            "new_outstanding": 750.0,
+            "previous_status": "PAID",
+            "new_status": "OPEN"
+          }
+        ]
+      }
+    }
+  ],
+  "close": {
+    "effect": "CLEAR",
+    "exception_code": null,
+    "snapshot": {
+      "as_of_date": "2026-09-30",
+      "total_ar": 34650.0,
+      "current_ar": 34650.0,
+      "past_due_ar": 0.0,
+      "disputed_ar": 0.0,
+      "partially_paid_ar": 0.0,
+      "unapplied_cash": 0.0,
+      "aging_buckets": {
+        "CURRENT": 34650.0,
+        "1-30": 0.0,
+        "31-60": 0.0,
+        "61-90": 0.0,
+        "90+": 0.0
+      },
+      "open_invoice_count": 25,
+      "expected_collections_7d": 19550.0,
+      "past_due_customer_count": 0,
+      "payments_applied": 1,
+      "payments_unapplied": 0,
+      "payments_human_review": 0,
+      "collection_outbox": 0
+    }
+  },
+  "forecast": {
+    "settlement_period": "2026-09",
+    "cash_effect_cents": -75000
+  },
+  "integration_events": [
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_ch_str_005_pi",
+      "event_type": "payment_intent.succeeded",
+      "received_at": "2026-09-20T00:06:44.874427Z",
+      "provider_created_at": "2026-09-12T16:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "0a9717990f9434de422fa0a361fb4e6c42ee2801fae3e2d9783c7c41d94c9bba",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_ch_str_005_pi",
+      "receipt_count": 1,
+      "normalized_id": "PAY-STR-CH_STR_005",
+      "downstream": "ar_cash_application",
+      "result": "processed",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_ch_str_005_ch",
+      "event_type": "charge.succeeded",
+      "received_at": "2026-09-20T00:06:44.875852Z",
+      "provider_created_at": "2026-09-12T16:00:10Z",
+      "verified": true,
+      "raw_payload_hash": "0ef80d32444ea4a22b4e96cfb9d9d9ff651f91a19e476a7279a08ed540b44695",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_ch_str_005_ch",
+      "receipt_count": 1,
+      "normalized_id": "PAY-STR-CH_STR_005",
+      "downstream": "ar_cash_application",
+      "result": "already_processed",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_po_str_005a_created",
+      "event_type": "payout.created",
+      "received_at": "2026-09-20T00:06:44.876259Z",
+      "provider_created_at": "2026-09-15T16:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "e0248c686a45864d54ceb6d4c8865f6bd5ce370ff6b1c7128c2649d487f2f0d7",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_po_str_005a_created",
+      "receipt_count": 1,
+      "normalized_id": "po_str_005a",
+      "downstream": "stripe_payout_reconciliation",
+      "result": "payout_recorded",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_po_str_005a_recon",
+      "event_type": "payout.reconciliation_completed",
+      "received_at": "2026-09-20T00:06:44.876939Z",
+      "provider_created_at": "2026-09-15T17:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "0b293446392cd1759f525fadfc78d1fa927cd23f3701b9608d9a02a40dc3771d",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_po_str_005a_recon",
+      "receipt_count": 1,
+      "normalized_id": "po_str_005a",
+      "downstream": "stripe_payout_reconciliation",
+      "result": "payout_recorded",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_re_str_005",
+      "event_type": "refund.created",
+      "received_at": "2026-09-20T00:06:44.877376Z",
+      "provider_created_at": "2026-09-22T16:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "74c4772bff0567c16040a3d5e265d691fe76b9926beface58f0311836609b288",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_re_str_005",
+      "receipt_count": 1,
+      "normalized_id": "PAY-STR-CH_STR_005",
+      "downstream": "ar_refund",
+      "result": "processed",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_po_str_005b_created",
+      "event_type": "payout.created",
+      "received_at": "2026-09-20T00:06:44.878126Z",
+      "provider_created_at": "2026-09-22T16:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "88ee770a93abe192db1a673dd033000ddd3eeaf0615cc965b677038ae5623f94",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_po_str_005b_created",
+      "receipt_count": 1,
+      "normalized_id": "po_str_005b",
+      "downstream": "stripe_payout_reconciliation",
+      "result": "payout_recorded",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_po_str_005b_recon",
+      "event_type": "payout.reconciliation_completed",
+      "received_at": "2026-09-20T00:06:44.878607Z",
+      "provider_created_at": "2026-09-22T17:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "9669a924e3f4ff14187d24c13e6013d3e903017cfaa429435006dedb5e18718b",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_po_str_005b_recon",
+      "receipt_count": 1,
+      "normalized_id": "po_str_005b",
+      "downstream": "stripe_payout_reconciliation",
+      "result": "payout_recorded",
+      "error": null
+    }
+  ],
+  "replay": null,
+  "expected_outcome": {
+    "scenario_id": "stripe_refund_after_payout",
+    "expected_workflow": "ar_refund",
+    "expected_customer_invoice_ids": [
+      "INV-STR-005"
+    ],
+    "expected_net_cents": -75000,
+    "expected_reconciliation_status": "MATCH"
+  },
+  "result": "PASS",
+  "trace_ids": [
+    "evt_ch_str_005_pi",
+    "evt_ch_str_005_ch",
+    "evt_po_str_005a_created",
+    "evt_po_str_005a_recon",
+    "evt_re_str_005",
+    "evt_po_str_005b_created",
+    "evt_po_str_005b_recon"
+  ]
+}

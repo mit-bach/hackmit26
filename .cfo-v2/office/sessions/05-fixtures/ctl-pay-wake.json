@@ -1,0 +1,27 @@
+{
+  "version": "1",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "status": "accepted",
+  "done": false,
+  "id": "h_67e197b7-1d32-4f89-b3ca-fcdad43af331",
+  "from": "bot_pay",
+  "fromSlug": "pay",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "profile": "review-pay",
+  "kind": "a2a_handoff",
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_pay",
+    "toId": "bot_ctl_pay"
+  },
+  "paths": [
+    "workspace/pay/plans/plan_2026-09-19_f290ca077456.json"
+  ],
+  "prompt": "profile: review-pay\nReview the payment-run draft at workspace/pay/plans/plan_2026-09-19_f290ca077456.json.\nConcur only if Kernel reserve_ok is true and the packet is complete.\nDo not rebuild the plan. Do not execute ACH or wire. Do not ask a human.",
+  "createdAt": "2026-09-20T00:16:12Z",
+  "updatedAt": "2026-09-20T00:16:12Z",
+  "note": "Session 01/02 execute this as bot_send_prompt. Pay does not mark complete. Peer Handle is not approval.",
+  "plan_id": "plan_2026-09-19_f290ca077456"
+}

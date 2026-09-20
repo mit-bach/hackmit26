@@ -14,6 +14,16 @@ ACCRUALS_PATH = LEDGER_DIR / "open_accruals.json"
 JOURNALS_PATH = LEDGER_DIR / "journal_entries.json"
 
 
+def configure_paths(directory: Path) -> None:
+    """Point open-accrual JSON at a Computer/runs tree."""
+    global LEDGER_DIR, ACCRUALS_PATH, JOURNALS_PATH
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    LEDGER_DIR = directory
+    ACCRUALS_PATH = directory / "open_accruals.json"
+    JOURNALS_PATH = directory / "journal_entries.json"
+
+
 @contextmanager
 def isolated_ledger(directory: Path):
     """Point ledger files at a temp directory so compare/eval cannot mutate the close books."""

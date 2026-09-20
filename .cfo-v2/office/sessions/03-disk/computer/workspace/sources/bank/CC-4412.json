@@ -1,0 +1,10 @@
+{
+  "bot": "bank",
+  "profile": "card",
+  "transaction_id": "CC-4412",
+  "status": "invoice_missing",
+  "reason": "No supporting invoice documentation found for this charge",
+  "vendor_descriptor": "WEWORK*CAMBRIDGE",
+  "amount": 890.0,
+  "candidate": null
+}

@@ -1,0 +1,36 @@
+{
+  "version": "1",
+  "phase": "operational",
+  "byDisplayName": {
+    "Auditor Agent": {
+      "ops": [
+        "audit.tools.get_audit_period",
+        "audit.tools.get_audit_payments",
+        "audit.tools.get_audit_journals",
+        "audit.tools.get_audit_approvals",
+        "audit.tools.get_audit_vendors",
+        "audit.tools.get_audit_invoices",
+        "audit.tools.get_operational_decisions",
+        "audit.tools.get_planted_reconciliations",
+        "audit.tools.get_audit_policy"
+      ],
+      "skills": [
+        "audit-sampling-interpretation",
+        "control-testing-interpretation",
+        "reconciliation-reperformance-review",
+        "segregation-of-duties-interpretation"
+      ],
+      "outputType": "AuditorInterpretation",
+      "bot": "audit",
+      "profile": "interpret"
+    },
+    "Audit Report Agent": {
+      "ops": [],
+      "skills": ["audit-finding-writing"],
+      "outputType": "AuditReportAgentOutput",
+      "bot": "audit",
+      "profile": "report"
+    }
+  },
+  "note": "Production Grants omit get_audit_ground_truth. Evaluation Grants live in grants.eval.fragment.json and computer/cfo/grants.eval.json. Do not union interpret with report."
+}

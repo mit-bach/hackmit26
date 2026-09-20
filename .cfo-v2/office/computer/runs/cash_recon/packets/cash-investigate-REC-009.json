@@ -1,0 +1,12 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-009",
+  "candidate_id": "TIMING_DIFFERENCE:TXN-2026-10-001:GL-AP-HE",
+  "match_type": "TIMING_DIFFERENCE",
+  "kernel_status": "OUTSTANDING_TIMING_ITEM",
+  "difference_minor": 0,
+  "queue_owner": "cash",
+  "human_queue": false
+}

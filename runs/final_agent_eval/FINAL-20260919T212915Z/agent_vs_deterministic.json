@@ -1,0 +1,51 @@
+{
+  "modes": {
+    "ap": "AGENT_RUN",
+    "ar": "AGENT_RUN",
+    "cash": "AGENT_RUN",
+    "close": "AGENT_RUN",
+    "audit": "DETERMINISTIC_ONLY",
+    "reporting": "DETERMINISTIC_ONLY",
+    "forecasting": "DETERMINISTIC_ONLY",
+    "cross_function": "DETERMINISTIC_ONLY"
+  },
+  "cases": [
+    {
+      "domain": "ap",
+      "object_id": "INV-HO-QTY",
+      "mode": "AGENT_RUN",
+      "decision": "HOLD",
+      "exceptions": [
+        "partial_receipt"
+      ],
+      "source": "ap_workflow"
+    },
+    {
+      "domain": "ar",
+      "object_id": "PAY-HO-AR-AMB",
+      "mode": "AGENT_RUN",
+      "decision": "HUMAN_REVIEW",
+      "reason": "Two open invoices for the identified customer each exactly match the payment amount, with no invoice reference in the remittance."
+    },
+    {
+      "domain": "cash",
+      "object_id": "TXN-HO-7390",
+      "mode": "AGENT_RUN",
+      "status": "HUMAN_REVIEW",
+      "match_type": "UNEXPLAINED_DIFFERENCE"
+    },
+    {
+      "domain": "close",
+      "mode": "AGENT_RUN",
+      "period_status": "BLOCKED",
+      "human_review": [
+        "Cash: $12.40 unexplained difference",
+        "Cash: $41.25 unexplained difference",
+        "Cash: $73.90 unexplained difference",
+        "Cash: $8.37 unexplained difference",
+        "AR: $4,500 unmatched customer payment"
+      ]
+    }
+  ],
+  "note": "Live agent subset only; remaining domains stay DETERMINISTIC_ONLY."
+}
