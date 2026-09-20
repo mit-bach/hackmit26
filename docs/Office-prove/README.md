@@ -8,6 +8,8 @@ It is not Kernel pytest. Kernel green is a gate. It is not office-live.
 
 No standing Bot has been tasked, as of the start of this operation, to complete a pipe on a prove instance. These files are the procedures that do that.
 
+Live template after the 2026-09-20 repair: **16 Roster Bots** (grain 15 plus Source Bot `world`), **101 operational Catalog ops**, World bound, `send_office_outbound` granted, Stripe Payout Agent granted, Month-End Close Reviewer granted lock reads, Close Manager and Audit Report Agent honestly empty. `autoRoutines` stays false; fire Routines over HTTP. Disk on the selected instance wins if a later compile moves a count.
+
 ---
 
 ## What this operation is for

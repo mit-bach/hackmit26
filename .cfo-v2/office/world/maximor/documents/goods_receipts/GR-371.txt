@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-371
 PO Number: PO-371
-Vendor: Pagaya Coffee Service
+Vendor: Timber Partners
 Goods received in full on 2026-09-18
 Packing list attached: PL-GR-371
 Quantity ordered: 1

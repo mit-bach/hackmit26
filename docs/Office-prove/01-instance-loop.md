@@ -14,7 +14,9 @@ Code: `.harness/Harness-v2/src/server/office-instances.ts`. Wipe: `.harness/Harn
 | `protocol-proof`, `fresh-protocol` | `.cfo-v2/office/instances/<id>` | Historical desks. Dirty. Do not select them as prove instances. |
 | `prove-…` | `.cfo-v2/office/instances/<id>` | The only desks these procedures run on. |
 
-`office.json` `currentId` is whichever desk serve last selected. On 2026-09-20 it was `protocol-proof`. That does not make `protocol-proof` the prove instance. Create a new one.
+`office.json` `currentId` is whichever desk serve last selected. `protocol-proof` and `fresh-protocol` are historical. Create a new `prove-*` instance.
+
+**Operator desk:** `http://127.0.0.1:8800/`. RUN.md’s CLI default is 8787. Do not start a second serve on 8787 while 8800 holds this office. `{URL}` in these procedures is `http://127.0.0.1:8800` unless `/health` answers elsewhere.
 
 Serve honors `currentId`. If you `npm run serve -- --computer .cfo-v2/office/computer` and `currentId` is another instance, you are not on the live tree. P0 checks `GET /api/office-instances` (or `/api/office`) and confirms the Computer path.
 
@@ -32,6 +34,7 @@ Serve honors `currentId`. If you `npm run serve -- --computer .cfo-v2/office/com
 - `cfo/` Catalog, Grants, Client extension (not Kernel `.cfo/` source; skips `kernel.port`, `kernel.log.jsonl`, pyc)
 - `workspace/`
 - `data` as a symlink to the same World pack the live Computer used
+- `office/` identity (`office/bots` → office parent `bots/`, `office/constitution.md`). Clone retargets those relative links. A naive copy of `../../bots` from `computer/` would miss `BOT.md` on `instances/<id>/`.
 
 Then `initComputer` and `wipeRuntime`.
 
@@ -45,19 +48,19 @@ It does **not** copy:
 
 Kernel Python is always `.cfo/` via sidecar `PYTHONPATH`. A Kernel patch is global. A skill patch is live-template (and the next clone) unless you also edit the instance copy.
 
-BOT.md standing identity files live under `.cfo-v2/office/bots/` in the repo. P0 requires they are readable from Computer cwd (`office/bots/<slug>/BOT.md` under `$HARNESS_COMPUTER`). If Floor repair added a symlink or copy into the Computer, clone must preserve it. If P0 finds BOT.md missing on a new instance, that is HARD: the clone filter dropped identity, or Floor never landed.
+BOT.md standing identity files live under `.cfo-v2/office/bots/` in the repo. Live Computer cwd reaches them via `office/bots` → `../../bots`. Clone must retarget that link. If P0 finds BOT.md missing on a new instance, that is HARD: rebuild Harness-v2 so `cloneOfficeIdentity` is in the running `dist/`, then new instance.
 
 ---
 
 ## Create, select, serve
 
-From repo root. Replace names as you go. Serve URL is whatever `npm run serve` prints. RUN.md default is `http://127.0.0.1:8787/`.
+From repo root. Replace names as you go. Serve URL is `{URL}` = `http://127.0.0.1:8800` on this deploy (8787 only if you started a new CLI serve and 8800 is down).
 
 Create:
 
 ```bash
 # serve must already be up against the office parent, or use the UI Offices page.
-curl -sS -X POST http://127.0.0.1:8787/api/office-instances \
+curl -sS -X POST http://127.0.0.1:8800/api/office-instances \
   -H 'content-type: application/json' \
   -d '{"name":"prove-20260920-floor-r1"}'
 ```
@@ -65,14 +68,14 @@ curl -sS -X POST http://127.0.0.1:8787/api/office-instances \
 Select:
 
 ```bash
-curl -sS -X POST http://127.0.0.1:8787/api/office-instances/prove-20260920-floor-r1/select
+curl -sS -X POST http://127.0.0.1:8800/api/office-instances/prove-20260920-floor-r1/select
 ```
 
 Selecting switches the running serve Computer. Confirm:
 
 ```bash
-curl -sS http://127.0.0.1:8787/api/office-instances
-curl -sS http://127.0.0.1:8787/api/snapshot
+curl -sS http://127.0.0.1:8800/api/office-instances
+curl -sS http://127.0.0.1:8800/api/office
 ```
 
 The snapshot Computer root must end with `instances/prove-20260920-floor-r1` (or the id returned). If it still points at `office/computer` or `protocol-proof`, stop. You are on the wrong desk.
@@ -186,7 +189,7 @@ It is not allowed as:
 - Period lock
 - Write-off
 
-Those complete when `ctl-*` Bots complete their Handles. Intercept must not default to the human Operator. P0 checks `intercept.json`. If default is `{ "kind": "operator" }`, P0 is HARD (T9). Live Computer on a later 2026-09-20 pass already points default at `ctl-pay`. Disk wins. Read the selected instance’s file.
+Those complete when `ctl-*` Bots complete their Handles. Intercept must not default to the human Operator. P0 checks `intercept.json`. If default is `{ "kind": "operator" }`, P0 is HARD (T9). Live template default is `{ "kind": "bot", "bot": "ctl-pay" }`. Disk on the selected instance wins. `protocol-proof` still had Operator default; that is why it is not a prove desk.
 
 ---
 

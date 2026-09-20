@@ -6,7 +6,16 @@ const fetchMock = vi.fn(async () => {
   return {
     ok: true,
     json: async () => ({
-      weeks: [],
+      weeks: [
+        {
+          week_start: "2026-09-21",
+          week_end: "2026-09-27",
+          beginning_cash: 510000,
+          ar_collections: 20000,
+          ap_payments: 10000,
+          ending_cash: 520000,
+        },
+      ],
       miss: {},
     }),
   } as Response;
@@ -20,17 +29,16 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-test("forecast desk renders a line chart, not the weekly table first", async () => {
+test("forecast shows weekly cash outlook and the 13-week line", async () => {
   const { container } = render(
     <MemoryRouter>
       <Forecast />
     </MemoryRouter>
   );
-  expect(screen.getByRole("heading", { name: /13-week cash/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /How much cash will be in the bank/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /Weekly cash outlook/i })).toBeInTheDocument();
+  expect(screen.getByText("Week ending")).toBeInTheDocument();
   expect(screen.getByTestId("forecast-line")).toBeInTheDocument();
   expect(container.querySelector("svg")).not.toBeNull();
-  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
-  expect(screen.queryByText("Week ending")).not.toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "Numbers" })).toBeInTheDocument();
   await waitFor(() => expect(fetchMock).toHaveBeenCalled());
 });

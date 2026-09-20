@@ -1,0 +1,499 @@
+{
+  "ok": true,
+  "trace_id": "web_1225656d4491",
+  "workflow": "ap",
+  "ts": "2026-09-20T13:47:17Z",
+  "completed_at": "2026-09-20T13:47:17Z",
+  "status": "completed",
+  "bots": [
+    "ap",
+    "ctl-pay"
+  ],
+  "record_ids": [
+    "INV-003"
+  ],
+  "live_llm": false,
+  "result": {
+    "summary": "Maximor reviewed Datadog (INV-003) for $15,000.00 and did not approve it. Records that mattered: INV-003. The invoice, purchase order, and delivery check found the company was billed for more than has actually been received so far. The invoice stays on hold and is not scheduled for payment.",
+    "decision": {
+      "invoice_id": "INV-003",
+      "vendor": "Datadog",
+      "amount": 15000.0,
+      "decision": "HOLD",
+      "exceptions": [
+        "partial_receipt"
+      ],
+      "source": "ap_policy",
+      "trace_path": null,
+      "ap_decision_id": "ap-policy/INV-003"
+    },
+    "evidence": {
+      "invoice_id": "INV-003",
+      "invoice": {
+        "invoice_id": "INV-003",
+        "vendor": "Datadog",
+        "po_id": "PO-103",
+        "amount": 15000.0,
+        "invoice_date": "2026-09-03",
+        "due_date": "2026-10-03",
+        "vendor_invoice_number": "DD-INV-90211",
+        "description": "Pro monitoring 50 hosts",
+        "payment_terms": "net 30",
+        "early_payment_discount_percent": 0.0,
+        "early_payment_discount_deadline": null,
+        "late_fee_percent": 0.0,
+        "vendor_priority": "high",
+        "source_message_id": null,
+        "source_thread_id": null,
+        "source_trace_id": null,
+        "source_attachment_hashes": []
+      },
+      "purchase_order": {
+        "po_id": "PO-103",
+        "vendor": "Datadog",
+        "authorized_amount": 15000.0,
+        "description": "Monitoring 50 hosts",
+        "status": "approved",
+        "created_date": "2026-09-01",
+        "currency": "USD",
+        "approval_limit": 25000.0,
+        "approver": "Marcus Chen"
+      },
+      "goods_receipt": {
+        "receipt_id": "GR-103",
+        "po_id": "PO-103",
+        "received": true,
+        "received_date": "2026-09-02",
+        "amount_received": 12000.0,
+        "quantity_ordered": 50,
+        "quantity_received": 40
+      },
+      "amount_difference": 0.0,
+      "percent_difference": 0.0,
+      "amount_matches": true,
+      "within_amount_tolerance": false,
+      "vendor_exact_match": true,
+      "vendors_are_similar": true,
+      "po_exists": true,
+      "po_approved": true,
+      "receipt_status": "partial",
+      "duplicate_detected": false,
+      "duplicate_invoice_ids": [],
+      "exception_types": [
+        "partial_receipt"
+      ],
+      "days_until_due": 13,
+      "invoice_dated_before_po": false
+    },
+    "record_ids": [
+      "INV-003"
+    ],
+    "explanation": {
+      "what_happened": "Maximor reviewed Datadog (INV-003) for $15,000.00 and did not approve it.",
+      "records_that_mattered": [
+        "INV-003"
+      ],
+      "records_rejected": [],
+      "why": "The invoice, purchase order, and delivery check found the company was billed for more than has actually been received so far.",
+      "books_change": "The invoice stays on hold and is not scheduled for payment.",
+      "other_workflows": [],
+      "prior_decision": null,
+      "uncertainty": null,
+      "narrative": "Maximor reviewed Datadog (INV-003) for $15,000.00 and did not approve it. Records that mattered: INV-003. The invoice, purchase order, and delivery check found the company was billed for more than has actually been received so far. The invoice stays on hold and is not scheduled for payment."
+    },
+    "naive": null,
+    "lineage": {
+      "record_id": "INV-003",
+      "title": "Invoice INV-003 from Datadog",
+      "vendor": "Datadog",
+      "amount": 15000.0,
+      "received": "Maximor received invoice Datadog (INV-003) for $15,000.00, dated 2026-09-03.",
+      "decision": "Held for exceptions",
+      "why": "The three-way match found partial_receipt.",
+      "changed": [
+        "Matched to purchase order PO-103 for Datadog.",
+        "Checked receiving record PO-103.",
+        "Eligible for the weekly payment pool if policy allows.",
+        "Close and audit keep this invoice as payable evidence."
+      ],
+      "correct": true,
+      "exceptions": [
+        "partial_receipt"
+      ],
+      "paid": false,
+      "consistency": {
+        "ok": true,
+        "invoice_id": "INV-003",
+        "vendor": "Datadog",
+        "amount": 15000.0,
+        "exceptions": [
+          "partial_receipt"
+        ],
+        "approved": false,
+        "payable": false,
+        "pay_eligible": false,
+        "already_paid": false,
+        "agreements": [
+          "ap_not_payable",
+          "payment_queue_excluded"
+        ],
+        "disagreements": [],
+        "shared_state": true
+      },
+      "steps": [
+        {
+          "role": "ap_invoice",
+          "title": "Invoice recognized",
+          "record_id": "INV-003",
+          "detail": "Datadog (INV-003)"
+        },
+        {
+          "role": "purchase_order",
+          "title": "Purchase order match",
+          "record_id": "PO-103",
+          "detail": "PO-103"
+        },
+        {
+          "role": "goods_receipt",
+          "title": "Receiving record",
+          "record_id": "PO-103",
+          "detail": "Receiving checked"
+        }
+      ],
+      "purchase_order": "PO-103",
+      "purchase_order_label": "Purchase order PO-103 for Datadog"
+    },
+    "consistency": {
+      "ok": true,
+      "invoice_id": "INV-003",
+      "vendor": "Datadog",
+      "amount": 15000.0,
+      "exceptions": [
+        "partial_receipt"
+      ],
+      "approved": false,
+      "payable": false,
+      "pay_eligible": false,
+      "already_paid": false,
+      "agreements": [
+        "ap_not_payable",
+        "payment_queue_excluded"
+      ],
+      "disagreements": [],
+      "shared_state": true
+    },
+    "stages": [
+      {
+        "id": "facts",
+        "label": "Gather invoice, purchase order, and delivery record",
+        "status": "completed",
+        "detail": "the company was billed for more than has actually been received so far"
+      },
+      {
+        "id": "prepare",
+        "label": "Check whether the bill is safe to pay",
+        "status": "completed",
+        "bot": "ap"
+      },
+      {
+        "id": "investigate",
+        "label": "Investigate why the bill does not line up",
+        "status": "completed",
+        "bot": "ap"
+      },
+      {
+        "id": "concur",
+        "label": "Independently recheck the payables decision",
+        "status": "completed",
+        "bot": "ctl-pay",
+        "detail": "HOLD"
+      }
+    ],
+    "handoffs": [
+      {
+        "display_name": "AP Preparer",
+        "slug": "ap",
+        "profile": "prepare",
+        "bot_id": "bot_ap"
+      },
+      {
+        "display_name": "Exception Investigator",
+        "slug": "ap",
+        "profile": "investigate",
+        "bot_id": "bot_ap"
+      },
+      {
+        "display_name": "AP Reviewer",
+        "slug": "ctl-pay",
+        "profile": "review-match",
+        "bot_id": "bot_ctl_pay"
+      },
+      {
+        "display_name": "AP Approver"
+      },
+      {
+        "display_name": "AP Audit"
+      }
+    ],
+    "downstream": {
+      "payment_pool": false,
+      "forecast": false,
+      "close": true,
+      "audit": true
+    },
+    "io": {
+      "inputs": {
+        "invoice": {
+          "artifact_id": "INV-003",
+          "kind": "invoice",
+          "title": "INV-003 \u00b7 Datadog",
+          "source_path": "invoices.json#INV-003",
+          "record": {
+            "invoice_id": "INV-003",
+            "vendor": "Datadog",
+            "po_id": "PO-103",
+            "amount": 15000.0,
+            "invoice_date": "2026-09-03",
+            "due_date": "2026-10-03",
+            "vendor_invoice_number": "DD-INV-90211",
+            "description": "Pro monitoring 50 hosts",
+            "payment_terms": "net 30",
+            "early_payment_discount_percent": 0.0,
+            "early_payment_discount_deadline": null,
+            "late_fee_percent": 0.0,
+            "vendor_priority": "high",
+            "source_message_id": null,
+            "source_thread_id": null,
+            "source_trace_id": null,
+            "source_attachment_hashes": []
+          },
+          "provenance": [
+            {
+              "id": "PO-103",
+              "kind": "purchase_order"
+            }
+          ],
+          "source_emails": []
+        },
+        "purchase_order": {
+          "artifact_id": "PO-103",
+          "kind": "purchase_order",
+          "title": "PO-103 \u00b7 Datadog",
+          "source_path": "purchase_orders.json#PO-103",
+          "record": {
+            "po_id": "PO-103",
+            "vendor": "Datadog",
+            "authorized_amount": 15000.0,
+            "description": "Monitoring 50 hosts",
+            "status": "approved",
+            "created_date": "2026-09-01",
+            "currency": "USD",
+            "approval_limit": 25000.0,
+            "approver": "Marcus Chen"
+          },
+          "provenance": [
+            {
+              "id": "PO-103",
+              "kind": "purchase_order"
+            }
+          ]
+        },
+        "goods_receipt": {
+          "artifact_id": "GR-103",
+          "kind": "goods_receipt",
+          "title": "GR-103 \u00b7 PO-103",
+          "source_path": "goods_receipts.json#GR-103",
+          "record": {
+            "receipt_id": "GR-103",
+            "po_id": "PO-103",
+            "received": true,
+            "received_date": "2026-09-02",
+            "amount_received": 12000.0,
+            "quantity_ordered": 50,
+            "quantity_received": 40
+          },
+          "provenance": [
+            {
+              "id": "PO-103",
+              "kind": "purchase_order"
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "decision": "HOLD",
+        "source": "ap_policy",
+        "exceptions": [
+          "partial_receipt"
+        ],
+        "duplicate_detected": false,
+        "invoice": {
+          "artifact_id": "INV-003",
+          "kind": "invoice",
+          "title": "INV-003 \u00b7 Datadog",
+          "source_path": "invoices.json#INV-003",
+          "record": {
+            "invoice_id": "INV-003",
+            "vendor": "Datadog",
+            "po_id": "PO-103",
+            "amount": 15000.0,
+            "invoice_date": "2026-09-03",
+            "due_date": "2026-10-03",
+            "vendor_invoice_number": "DD-INV-90211",
+            "description": "Pro monitoring 50 hosts",
+            "payment_terms": "net 30",
+            "early_payment_discount_percent": 0.0,
+            "early_payment_discount_deadline": null,
+            "late_fee_percent": 0.0,
+            "vendor_priority": "high",
+            "source_message_id": null,
+            "source_thread_id": null,
+            "source_trace_id": null,
+            "source_attachment_hashes": []
+          },
+          "provenance": [
+            {
+              "id": "PO-103",
+              "kind": "purchase_order"
+            }
+          ],
+          "source_emails": []
+        },
+        "three_way": {
+          "invoice": {
+            "artifact_id": "INV-003",
+            "kind": "invoice",
+            "title": "INV-003 \u00b7 Datadog",
+            "source_path": "invoices.json#INV-003",
+            "record": {
+              "invoice_id": "INV-003",
+              "vendor": "Datadog",
+              "po_id": "PO-103",
+              "amount": 15000.0,
+              "invoice_date": "2026-09-03",
+              "due_date": "2026-10-03",
+              "vendor_invoice_number": "DD-INV-90211",
+              "description": "Pro monitoring 50 hosts",
+              "payment_terms": "net 30",
+              "early_payment_discount_percent": 0.0,
+              "early_payment_discount_deadline": null,
+              "late_fee_percent": 0.0,
+              "vendor_priority": "high",
+              "source_message_id": null,
+              "source_thread_id": null,
+              "source_trace_id": null,
+              "source_attachment_hashes": []
+            },
+            "provenance": [
+              {
+                "id": "PO-103",
+                "kind": "purchase_order"
+              }
+            ],
+            "source_emails": []
+          },
+          "purchase_order": {
+            "artifact_id": "PO-103",
+            "kind": "purchase_order",
+            "title": "PO-103 \u00b7 Datadog",
+            "source_path": "purchase_orders.json#PO-103",
+            "record": {
+              "po_id": "PO-103",
+              "vendor": "Datadog",
+              "authorized_amount": 15000.0,
+              "description": "Monitoring 50 hosts",
+              "status": "approved",
+              "created_date": "2026-09-01",
+              "currency": "USD",
+              "approval_limit": 25000.0,
+              "approver": "Marcus Chen"
+            },
+            "provenance": [
+              {
+                "id": "PO-103",
+                "kind": "purchase_order"
+              }
+            ]
+          },
+          "goods_receipt": {
+            "artifact_id": "GR-103",
+            "kind": "goods_receipt",
+            "title": "GR-103 \u00b7 PO-103",
+            "source_path": "goods_receipts.json#GR-103",
+            "record": {
+              "receipt_id": "GR-103",
+              "po_id": "PO-103",
+              "received": true,
+              "received_date": "2026-09-02",
+              "amount_received": 12000.0,
+              "quantity_ordered": 50,
+              "quantity_received": 40
+            },
+            "provenance": [
+              {
+                "id": "PO-103",
+                "kind": "purchase_order"
+              }
+            ]
+          }
+        },
+        "after": {
+          "invoice_id": "INV-003",
+          "vendor": "Datadog",
+          "amount": 15000.0,
+          "match_status": "exception",
+          "duplicate_status": "unique",
+          "exceptions": [
+            "partial_receipt"
+          ],
+          "payment_state": "open",
+          "accounting_status": "posted",
+          "linked_payments": [],
+          "linked_journals": [
+            "JE-AP-INV-003"
+          ],
+          "po_id": "PO-103"
+        },
+        "linked_payments": [],
+        "linked_journals": [
+          "JE-AP-INV-003"
+        ]
+      },
+      "before": {
+        "invoice_id": "INV-003",
+        "vendor": "Datadog",
+        "amount": 15000.0,
+        "match_status": "exception",
+        "duplicate_status": "unique",
+        "exceptions": [
+          "partial_receipt"
+        ],
+        "payment_state": "open",
+        "accounting_status": "posted",
+        "linked_payments": [],
+        "linked_journals": [
+          "JE-AP-INV-003"
+        ],
+        "po_id": "PO-103"
+      },
+      "after": {
+        "invoice_id": "INV-003",
+        "vendor": "Datadog",
+        "amount": 15000.0,
+        "match_status": "exception",
+        "duplicate_status": "unique",
+        "exceptions": [
+          "partial_receipt"
+        ],
+        "payment_state": "open",
+        "accounting_status": "posted",
+        "linked_payments": [],
+        "linked_journals": [
+          "JE-AP-INV-003"
+        ],
+        "po_id": "PO-103"
+      },
+      "explanation": "Maximor reviewed Datadog (INV-003) for $15,000.00 and did not approve it. Records that mattered: INV-003. The invoice, purchase order, and delivery check found the company was billed for more than has actually been received so far. The invoice stays on hold and is not scheduled for payment."
+    }
+  }
+}

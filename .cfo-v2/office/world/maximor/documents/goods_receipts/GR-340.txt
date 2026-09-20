@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-340
 PO Number: PO-340
-Vendor: Okta
+Vendor: Echo Services
 Goods received in full on 2026-09-14
 Packing list attached: PL-GR-340
 Quantity ordered: 1

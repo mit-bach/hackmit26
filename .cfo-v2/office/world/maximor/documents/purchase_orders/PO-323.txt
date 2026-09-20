@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-323
 PO Number: PO-323
 Issued: 2026-09-24
-Vendor: Slack Technologies
-Vendor legal name: Slack Technologies, LLC
-Vendor tax ID: 45-3887470
+Vendor: Ginkgo Supply
+Vendor legal name: Ginkgo Supply
+Vendor tax ID: 00-0000000
 Authorized amount: 72.78
 Currency: USD
 Approver: Jordan Hale

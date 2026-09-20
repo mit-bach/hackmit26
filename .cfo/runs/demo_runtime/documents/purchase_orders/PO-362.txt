@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-362
+PO Number: PO-362
+Issued: 2026-09-09
+Vendor: CrowdStrike
+Vendor legal name: CrowdStrike
+Vendor tax ID: 00-0000000
+Authorized amount: 4,051.43
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+colo cross-connect billed 2026-09-09
+
+This purchase order is not an invoice. The vendor must bill against PO-362.
+Payment terms follow the vendor master unless this order states otherwise.

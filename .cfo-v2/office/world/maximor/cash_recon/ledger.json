@@ -3575,5 +3575,2973 @@
       "volume": true,
       "bank_id": "TXN-VOL-2026-09-181"
     }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-182",
+    "date": "2026-09-15",
+    "amount": 1030.94,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CleanRoom Janitorial",
+    "reference": "ACH-0182",
+    "description": "Books CleanRoom Janitorial 2026-09-15",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 103094,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-182"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-183",
+    "date": "2026-09-16",
+    "amount": -1031.11,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Kendall Square Parking",
+    "reference": "ACH-0183",
+    "description": "Books Kendall Square Parking 2026-09-16",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103111,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-183"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-184",
+    "date": "2026-09-17",
+    "amount": -1031.28,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HubSpot",
+    "reference": "ACH-0184",
+    "description": "Books HubSpot 2026-09-17",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103128,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-184"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-185",
+    "date": "2026-09-18",
+    "amount": -1031.45,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "DocuSign",
+    "reference": "ACH-0185",
+    "description": "Books DocuSign 2026-09-18",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103145,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-185"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-186",
+    "date": "2026-09-19",
+    "amount": -1031.62,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Palo Alto Networks",
+    "reference": "ACH-0186",
+    "description": "Books Palo Alto Networks 2026-09-19",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103162,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-186"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-187",
+    "date": "2026-09-20",
+    "amount": -1031.79,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Boston Edison Steam",
+    "reference": "TXN-VOL-2026-09-187",
+    "description": "Books Boston Edison Steam 2026-09-20",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103179,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-187"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-188",
+    "date": "2026-09-21",
+    "amount": -1031.96,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Carta",
+    "reference": "ACH-0188",
+    "description": "Books Carta 2026-09-21",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103196,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-188"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-189",
+    "date": "2026-09-22",
+    "amount": 1032.13,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Gusto Payroll",
+    "reference": "ACH-0189",
+    "description": "Books Gusto Payroll 2026-09-22",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 103213,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-189"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-190",
+    "date": "2026-09-23",
+    "amount": -1032.3,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Vanta",
+    "reference": "ACH-0190",
+    "description": "Books Vanta 2026-09-23",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103230,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-190"
+    }
+  },
+  {
+    "entry_id": "GL-VOL-2026-09-191",
+    "date": "2026-09-24",
+    "amount": -1032.47,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "Linear App",
+    "reference": "ACH-0191",
+    "description": "Books Linear App 2026-09-24",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -103247,
+    "raw_metadata": {
+      "volume": true,
+      "bank_id": "TXN-VOL-2026-09-191"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2025-12",
+    "date": "2025-12-20",
+    "amount": -6842.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2025-12",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -684218,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-01",
+    "date": "2026-01-20",
+    "amount": -7120.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-01",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -712040,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-02",
+    "date": "2026-02-20",
+    "amount": -7455.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-02",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -745522,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-03",
+    "date": "2026-03-20",
+    "amount": -7688.9,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-03",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -768890,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-04",
+    "date": "2026-04-20",
+    "amount": -7912.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-04",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -791244,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-05",
+    "date": "2026-05-20",
+    "amount": -8214.66,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-05",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -821466,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-06",
+    "date": "2026-06-20",
+    "amount": -8420.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-06",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -842018,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CLR-2026-07",
+    "date": "2026-07-20",
+    "amount": -8544.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CLEARING SOLUTIONS LLC",
+    "reference": "TXN-CLR-2026-07",
+    "description": "ACH OUT CLEARING SOLUTIONS LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -854422,
+    "raw_metadata": {
+      "bank_id": "TXN-CLR-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2025-11",
+    "date": "2025-11-30",
+    "amount": 664.38,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2025-11",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2025-11",
+    "entry_type": "ar_receipt",
+    "period": "2025-11",
+    "source": "gl",
+    "amount_minor": 66438,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2025-12",
+    "date": "2025-12-31",
+    "amount": 691.39,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2025-12",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2025-12",
+    "entry_type": "ar_receipt",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": 69139,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-01",
+    "date": "2026-01-31",
+    "amount": 723.9,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-01",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": 72390,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-02",
+    "date": "2026-02-28",
+    "amount": 746.59,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-02",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-02",
+    "entry_type": "ar_receipt",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": 74659,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-03",
+    "date": "2026-03-31",
+    "amount": 768.3,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-03",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-03",
+    "entry_type": "ar_receipt",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": 76830,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-04",
+    "date": "2026-04-30",
+    "amount": 797.64,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-04",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-04",
+    "entry_type": "ar_receipt",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": 79764,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-05",
+    "date": "2026-05-31",
+    "amount": 817.6,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-05",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-05",
+    "entry_type": "ar_receipt",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": 81760,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-06",
+    "date": "2026-06-30",
+    "amount": 829.64,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-06",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-06",
+    "entry_type": "ar_receipt",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": 82964,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-07",
+    "date": "2026-07-31",
+    "amount": 1652.08,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-07",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-07",
+    "entry_type": "ar_receipt",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": 165208,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NSC-REF-2026-08",
+    "date": "2026-08-31",
+    "amount": 699.72,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTHSTAR SETTLEMENT CO",
+    "reference": "TXN-NSC-REF-2026-08",
+    "description": "ACH IN NORTHSTAR SETTLEMENT REF 2026-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": 69972,
+    "raw_metadata": {
+      "bank_id": "TXN-NSC-REF-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MER-2026-09",
+    "date": "2026-09-22",
+    "amount": 48620.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERIDIAN HEALTH SYSTEMS",
+    "reference": "TXN-MER-2026-09",
+    "description": "ACH IN MERIDIAN HEALTH INV-AR-MER-2026-09",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 4862000,
+    "raw_metadata": {
+      "bank_id": "TXN-MER-2026-09"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-LUM-2026-09",
+    "date": "2026-09-23",
+    "amount": 31100.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "LUMEN LABS PBC",
+    "reference": "TXN-LUM-2026-09",
+    "description": "ACH IN LUMEN LABS INV-AR-LUM-2026-09",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 3110000,
+    "raw_metadata": {
+      "bank_id": "TXN-LUM-2026-09"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2025-11",
+    "date": "2025-11-20",
+    "amount": -14206.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2025-11",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-11",
+    "source": "gl",
+    "amount_minor": -1420618,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2025-12",
+    "date": "2025-12-20",
+    "amount": -14880.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2025-12",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -1488040,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-01",
+    "date": "2026-01-20",
+    "amount": -15220.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-01",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -1522022,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-02",
+    "date": "2026-02-20",
+    "amount": -15880.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-02",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -1588018,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-03",
+    "date": "2026-03-20",
+    "amount": -16240.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-03",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -1624044,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-04",
+    "date": "2026-04-20",
+    "amount": -16820.62,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-04",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -1682062,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-05",
+    "date": "2026-05-20",
+    "amount": -17420.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-05",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -1742018,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-06",
+    "date": "2026-06-20",
+    "amount": -14625.06,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-06",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -1462506,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-07",
+    "date": "2026-07-20",
+    "amount": -17831.96,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-07",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -1783196,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-08",
+    "date": "2026-08-26",
+    "amount": -19406.5,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-08",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -1940650,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-10442",
+    "date": "2026-03-30",
+    "amount": -18406.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-10442",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -1840622,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-10442"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-10442",
+    "date": "2026-03-30",
+    "amount": -18424.62,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-10442",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -1842462,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-10442"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-01",
+    "date": "2026-01-28",
+    "amount": -9840.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-01",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -984018,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-02",
+    "date": "2026-02-28",
+    "amount": -10120.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-02",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -1012040,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-03",
+    "date": "2026-03-28",
+    "amount": -10440.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-03",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -1044022,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-04",
+    "date": "2026-04-28",
+    "amount": -10880.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-04",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -1088018,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-05",
+    "date": "2026-05-28",
+    "amount": -11220.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-05",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -1122044,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-06",
+    "date": "2026-06-28",
+    "amount": -10805.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-06",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -1080522,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-07",
+    "date": "2026-07-28",
+    "amount": -10406.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-07",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -1040618,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-NLF-02-2026-08",
+    "date": "2026-08-28",
+    "amount": -10440.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NORTH LINE FAB INC",
+    "reference": "TXN-NLF-02-2026-08",
+    "description": "ACH OUT NORTH LINE FAB INC",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -1044040,
+    "raw_metadata": {
+      "bank_id": "TXN-NLF-02-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-02",
+    "date": "2026-03-01",
+    "amount": -4480.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-02",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -448022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-03",
+    "date": "2026-03-29",
+    "amount": -4620.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-03",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -462018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-04",
+    "date": "2026-04-29",
+    "amount": -4710.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-04",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -471044,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-05",
+    "date": "2026-05-29",
+    "amount": -4880.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-05",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -488018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-06",
+    "date": "2026-06-29",
+    "amount": -5010.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-06",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -501022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-07",
+    "date": "2026-07-29",
+    "amount": -5120.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-07",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -512040,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-NLF-03-2026-08",
+    "date": "2026-08-29",
+    "amount": -5184.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "NLF INDUSTRIAL COMPONENTS",
+    "reference": "TXN-INV-NLF-03-2026-08",
+    "description": "ACH OUT NLF INDUSTRIAL COMPONENTS",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -518418,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-NLF-03-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-4601",
+    "date": "2026-04-20",
+    "amount": -24880.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-4601",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -2488044,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-4601"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-WBT-4602",
+    "date": "2026-04-21",
+    "amount": -24106.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "WESTBROOK TOOLING",
+    "reference": "TXN-INV-WBT-4602",
+    "description": "ACH OUT WESTBROOK TOOLING",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -2410618,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-WBT-4602"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-4603",
+    "date": "2026-04-22",
+    "amount": -23413.56,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-4603",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -2341356,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-4603"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-WBT-2026-07",
+    "date": "2026-07-24",
+    "amount": -24106.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "WESTBROOK TOOLING",
+    "reference": "TXN-WBT-2026-07",
+    "description": "ACH OUT WESTBROOK TOOLING",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -2410618,
+    "raw_metadata": {
+      "bank_id": "TXN-WBT-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-WBT-2026-08",
+    "date": "2026-08-24",
+    "amount": -23940.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "WESTBROOK TOOLING",
+    "reference": "TXN-INV-WBT-2026-08",
+    "description": "ACH OUT WESTBROOK TOOLING",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -2394000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-WBT-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2025-11",
+    "date": "2025-12-04",
+    "amount": -220.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2025-11",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -22018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2025-12",
+    "date": "2026-01-03",
+    "amount": -228.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2025-12",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -22840,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-01",
+    "date": "2026-02-03",
+    "amount": -232.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-01",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -23222,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-02",
+    "date": "2026-03-06",
+    "amount": -238.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-02",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -23818,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-03",
+    "date": "2026-04-03",
+    "amount": -240.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-03",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -24044,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-04",
+    "date": "2026-05-04",
+    "amount": -242.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-04",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -24218,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-05",
+    "date": "2026-06-03",
+    "amount": -244.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-05",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -24422,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-06",
+    "date": "2026-07-04",
+    "amount": -246.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-06",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -24618,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-07",
+    "date": "2026-08-03",
+    "amount": -248.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-07",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -24840,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-FRT-2026-08",
+    "date": "2026-09-03",
+    "amount": -248.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-FRT-2026-08",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -24818,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-FRT-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-KIS-0618",
+    "date": "2026-06-30",
+    "amount": -24106.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-INV-KIS-0618",
+    "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -2410618,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-KIS-0618"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-02",
+    "date": "2026-03-03",
+    "amount": -3218.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-02",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -321840,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-03",
+    "date": "2026-03-31",
+    "amount": -3440.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-03",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -344022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-04",
+    "date": "2026-05-01",
+    "amount": -3610.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-04",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -361018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-05",
+    "date": "2026-05-31",
+    "amount": -3820.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-05",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -382044,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-06",
+    "date": "2026-07-01",
+    "amount": -3688.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-06",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -368818,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-07",
+    "date": "2026-07-31",
+    "amount": -3910.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-07",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -391022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HES-2026-08",
+    "date": "2026-08-31",
+    "amount": -3840.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARBOR ELECTRIC SERVICES",
+    "reference": "TXN-INV-HES-2026-08",
+    "description": "ACH OUT HARBOR ELECTRIC SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -384018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HES-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-KIS-2026-09-16",
+    "date": "2026-09-16",
+    "amount": -47293.62,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-KIS-2026-09-16",
+    "description": "ACH OUT KESTREL INDUSTRIAL GROUPED",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -4729362,
+    "raw_metadata": {
+      "bank_id": "TXN-KIS-2026-09-16"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2025-10",
+    "date": "2025-10-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2025-10",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-10",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2025-10"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2025-11",
+    "date": "2025-11-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2025-11",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-11",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2025-12",
+    "date": "2025-12-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2025-12",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-01",
+    "date": "2026-01-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-01",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-02",
+    "date": "2026-02-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-02",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-03",
+    "date": "2026-03-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-03",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-04",
+    "date": "2026-04-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-04",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-05",
+    "date": "2026-05-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-05",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-06",
+    "date": "2026-06-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-06",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-07",
+    "date": "2026-07-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-07",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HAL-2026-08",
+    "date": "2026-08-17",
+    "amount": -2400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-HAL-2026-08",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -240000,
+    "raw_metadata": {
+      "bank_id": "TXN-HAL-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-01",
+    "date": "2026-02-09",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-01",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-02",
+    "date": "2026-03-12",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-02",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-03",
+    "date": "2026-04-09",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-03",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-04",
+    "date": "2026-05-10",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-04",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-05",
+    "date": "2026-06-09",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-05",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-06",
+    "date": "2026-07-10",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-06",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-07",
+    "date": "2026-08-09",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-07",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-HAL-WKND-2026-08",
+    "date": "2026-09-09",
+    "amount": -2300.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HALYARD FACILITIES LLC",
+    "reference": "TXN-INV-HAL-WKND-2026-08",
+    "description": "ACH OUT HALYARD FACILITIES LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -230000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-HAL-WKND-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-OIC-2025-01",
+    "date": "2025-01-18",
+    "amount": -276000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "ORBIT INSIGHTS CORP",
+    "reference": "TXN-OIC-2025-01",
+    "description": "ACH OUT ORBIT INSIGHTS CORP",
+    "entry_type": "ap_payment",
+    "period": "2025-01",
+    "source": "gl",
+    "amount_minor": -27600000,
+    "raw_metadata": {
+      "bank_id": "TXN-OIC-2025-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-HBP-2026-01",
+    "date": "2026-01-20",
+    "amount": -18600.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HARTFORD BROKERAGE PARTNERS",
+    "reference": "TXN-HBP-2026-01",
+    "description": "ACH OUT HARTFORD BROKERAGE PARTNERS",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -1860000,
+    "raw_metadata": {
+      "bank_id": "TXN-HBP-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-PAY-LAP-2026-09-12",
+    "date": "2026-09-12",
+    "amount": 88400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "HELIOS ANALYTICS CORPORATION",
+    "reference": "TXN-PAY-LAP-2026-09-12",
+    "description": "ACH IN HELIOS ANALYTICS CORPORATION INV-AR-HE-4412",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 8840000,
+    "raw_metadata": {
+      "bank_id": "TXN-PAY-LAP-2026-09-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-PAY-LAP-QH-SEP-PRE",
+    "date": "2026-09-22",
+    "amount": 25000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "QUIET HARBOR HOLDINGS",
+    "reference": "TXN-PAY-LAP-QH-SEP-PRE",
+    "description": "ACH IN QUIET HARBOR HOLDINGS INV-AR-014",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 2500000,
+    "raw_metadata": {
+      "bank_id": "TXN-PAY-LAP-QH-SEP-PRE"
+    }
+  },
+  {
+    "entry_id": "GL-BATCH-AR-2026-08-14",
+    "date": "2026-08-14",
+    "amount": 299480.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "LOCKBOX AR BATCH",
+    "reference": "BATCH-AR-2026-08-14",
+    "description": "ACH IN AR LOCKBOX BATCH",
+    "entry_type": "ar_receipt",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": 29948000,
+    "raw_metadata": {
+      "bank_id": "BATCH-AR-2026-08-14"
+    }
+  },
+  {
+    "entry_id": "GL-BATCH-AR-2026-09-12",
+    "date": "2026-09-12",
+    "amount": 88400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "LOCKBOX AR BATCH",
+    "reference": "BATCH-AR-2026-09-12",
+    "description": "ACH IN AR LOCKBOX 2026-09-12",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 8840000,
+    "raw_metadata": {
+      "bank_id": "BATCH-AR-2026-09-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-STRIPE-RESERVE-REL",
+    "date": "2026-09-27",
+    "amount": 22400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "STRIPE RESERVE RELEASE",
+    "reference": "TXN-STRIPE-RESERVE-REL",
+    "description": "ACH IN STRIPE RESERVE RELEASE",
+    "entry_type": "ar_receipt",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": 2240000,
+    "raw_metadata": {
+      "bank_id": "TXN-STRIPE-RESERVE-REL"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2025-12",
+    "date": "2025-12-31",
+    "amount": -180000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2025-12",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -18000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-01",
+    "date": "2026-01-31",
+    "amount": -220000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-01",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -22000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-02",
+    "date": "2026-02-28",
+    "amount": -240000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-02",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -24000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-03",
+    "date": "2026-03-31",
+    "amount": -250000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-03",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -25000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-04",
+    "date": "2026-04-30",
+    "amount": -260000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-04",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -26000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-05",
+    "date": "2026-05-31",
+    "amount": -270000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-05",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -27000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-06",
+    "date": "2026-06-30",
+    "amount": -280000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-06",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -28000000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-07",
+    "date": "2026-07-31",
+    "amount": -27600.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-07",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -2760000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MRH-2026-08",
+    "date": "2026-08-31",
+    "amount": -472400.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "MERRIMACK HOLDINGS LLC",
+    "reference": "TXN-MRH-2026-08",
+    "description": "WIRE OUT IC SWEEP EU EIN 83-6612045 100 LOW STREET NEWBURYPORT",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -47240000,
+    "raw_metadata": {
+      "bank_id": "TXN-MRH-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2025-09",
+    "date": "2025-09-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2025-09",
+    "description": "ACH IN BRIGHTLINE MEDIA 2025-09",
+    "entry_type": "ar_receipt",
+    "period": "2025-09",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2025-09"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2025-10",
+    "date": "2025-10-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2025-10",
+    "description": "ACH IN BRIGHTLINE MEDIA 2025-10",
+    "entry_type": "ar_receipt",
+    "period": "2025-10",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2025-10"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2025-11",
+    "date": "2025-11-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2025-11",
+    "description": "ACH IN BRIGHTLINE MEDIA 2025-11",
+    "entry_type": "ar_receipt",
+    "period": "2025-11",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2025-12",
+    "date": "2025-12-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2025-12",
+    "description": "ACH IN BRIGHTLINE MEDIA 2025-12",
+    "entry_type": "ar_receipt",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-01",
+    "date": "2026-01-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-01",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-01",
+    "entry_type": "ar_receipt",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-02",
+    "date": "2026-02-28",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-02",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-02",
+    "entry_type": "ar_receipt",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-03",
+    "date": "2026-03-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-03",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-03",
+    "entry_type": "ar_receipt",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-04",
+    "date": "2026-04-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-04",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-04",
+    "entry_type": "ar_receipt",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-05",
+    "date": "2026-05-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-05",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-05",
+    "entry_type": "ar_receipt",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-06",
+    "date": "2026-06-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-06",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-06",
+    "entry_type": "ar_receipt",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-07",
+    "date": "2026-07-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-07",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-07",
+    "entry_type": "ar_receipt",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": 3498333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLM-IN-2026-08",
+    "date": "2026-08-31",
+    "amount": 34983.37,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE MEDIA",
+    "reference": "TXN-BLM-IN-2026-08",
+    "description": "ACH IN BRIGHTLINE MEDIA 2026-08",
+    "entry_type": "ar_receipt",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": 3498337,
+    "raw_metadata": {
+      "bank_id": "TXN-BLM-IN-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2025-09",
+    "date": "2025-09-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2025-09",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-09",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2025-09"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2025-10",
+    "date": "2025-10-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2025-10",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-10",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2025-10"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2025-11",
+    "date": "2025-11-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2025-11",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-11",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2025-12",
+    "date": "2025-12-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2025-12",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-01",
+    "date": "2026-01-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-01",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-02",
+    "date": "2026-02-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-02",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-03",
+    "date": "2026-03-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-03",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-04",
+    "date": "2026-04-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-04",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-05",
+    "date": "2026-05-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-05",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-06",
+    "date": "2026-06-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-06",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-07",
+    "date": "2026-07-26",
+    "amount": -37033.33,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-07",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -3703333,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-BLS-OUT-2026-08",
+    "date": "2026-08-26",
+    "amount": -37033.37,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "BRIGHTLINE STUDIO LLC",
+    "reference": "TXN-BLS-OUT-2026-08",
+    "description": "ACH OUT BRIGHTLINE STUDIO LLC",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -3703337,
+    "raw_metadata": {
+      "bank_id": "TXN-BLS-OUT-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CAM-RENT-2026-06",
+    "date": "2026-06-13",
+    "amount": -48000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "reference": "TXN-CAM-RENT-2026-06",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -4800000,
+    "raw_metadata": {
+      "bank_id": "TXN-CAM-RENT-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CAM-RENT-2026-07",
+    "date": "2026-07-13",
+    "amount": -48000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "reference": "TXN-CAM-RENT-2026-07",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -4800000,
+    "raw_metadata": {
+      "bank_id": "TXN-CAM-RENT-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-CAM-RENT-2026-08",
+    "date": "2026-08-13",
+    "amount": -48000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "reference": "TXN-CAM-RENT-2026-08",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -4800000,
+    "raw_metadata": {
+      "bank_id": "TXN-CAM-RENT-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2025-07",
+    "date": "2025-07-27",
+    "amount": -8427.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2025-07",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2025-07",
+    "source": "gl",
+    "amount_minor": -842718,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2025-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2025-08",
+    "date": "2025-08-27",
+    "amount": -8410.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2025-08",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2025-08",
+    "source": "gl",
+    "amount_minor": -841022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2025-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2025-09",
+    "date": "2025-09-27",
+    "amount": -8390.44,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2025-09",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2025-09",
+    "source": "gl",
+    "amount_minor": -839044,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2025-09"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2025-10",
+    "date": "2025-10-27",
+    "amount": -8440.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2025-10",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2025-10",
+    "source": "gl",
+    "amount_minor": -844018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2025-10"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2025-11",
+    "date": "2025-11-27",
+    "amount": -8460.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2025-11",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2025-11",
+    "source": "gl",
+    "amount_minor": -846022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2025-12",
+    "date": "2025-12-27",
+    "amount": -8488.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2025-12",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -848818,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-01",
+    "date": "2026-01-27",
+    "amount": -8510.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-01",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -851040,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-02",
+    "date": "2026-02-27",
+    "amount": -8520.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-02",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -852018,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-03",
+    "date": "2026-03-27",
+    "amount": -8490.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-03",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -849022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-04",
+    "date": "2026-04-27",
+    "amount": -8506.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-04",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -850618,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-05",
+    "date": "2026-05-27",
+    "amount": -8518.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-05",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -851840,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-06",
+    "date": "2026-06-27",
+    "amount": -8522.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-06",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -852218,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-07",
+    "date": "2026-07-27",
+    "amount": -8530.22,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-07",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -853022,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-2026-08",
+    "date": "2026-08-27",
+    "amount": -8544.18,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-2026-08",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -854418,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CAM-CAM-2026",
+    "date": "2026-04-12",
+    "amount": -18200.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTIES",
+    "reference": "TXN-INV-CAM-CAM-2026",
+    "description": "ACH OUT CAMBRIDGE PROPERTIES",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -1820000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CAM-CAM-2026"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-RENT-2026-06",
+    "date": "2026-06-14",
+    "amount": -4000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-RENT-2026-06",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -400000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-RENT-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-CPS-RENT-2026-08",
+    "date": "2026-08-14",
+    "amount": -4000.0,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "CAMBRIDGE PROPERTY SERVICES",
+    "reference": "TXN-INV-CPS-RENT-2026-08",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SERVICES",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -400000,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-CPS-RENT-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-LEN-ROLL-26",
+    "date": "2026-03-30",
+    "amount": -424720.8,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "LENOVO",
+    "reference": "TXN-INV-LEN-ROLL-26",
+    "description": "ACH OUT LENOVO",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -42472080,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-LEN-ROLL-26"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2025-11",
+    "date": "2025-12-03",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2025-11",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2025-12",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2025-11"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2025-12",
+    "date": "2026-01-02",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2025-12",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-01",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2025-12"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-01",
+    "date": "2026-02-02",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-01",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-02",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-01"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-02",
+    "date": "2026-03-05",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-02",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-03",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-02"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-03",
+    "date": "2026-04-02",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-03",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-04",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-03"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-04",
+    "date": "2026-05-03",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-04",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-05",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-04"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-05",
+    "date": "2026-06-02",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-05",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-06",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-05"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-06",
+    "date": "2026-07-03",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-06",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-06"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-07",
+    "date": "2026-08-02",
+    "amount": -4884.82,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-07",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -488482,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-07"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-FLE-2026-08",
+    "date": "2026-09-02",
+    "amount": -4884.84,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-FLE-2026-08",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-09",
+    "source": "gl",
+    "amount_minor": -488484,
+    "raw_metadata": {
+      "bank_id": "TXN-FLE-2026-08"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-INV-FLE-0716",
+    "date": "2026-07-28",
+    "amount": -1531.96,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "FREIGHTLINE EXPEDITE",
+    "reference": "TXN-INV-FLE-0716",
+    "description": "ACH OUT FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -153196,
+    "raw_metadata": {
+      "bank_id": "TXN-INV-FLE-0716"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MIX-2026-07-16",
+    "date": "2026-07-16",
+    "amount": -26412.4,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-MIX-2026-07-16",
+    "description": "ACH OUT MIXED KESTREL FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-07",
+    "source": "gl",
+    "amount_minor": -2641240,
+    "raw_metadata": {
+      "bank_id": "TXN-MIX-2026-07-16"
+    }
+  },
+  {
+    "entry_id": "GL-TXN-MIX-2026-08-20",
+    "date": "2026-08-20",
+    "amount": -25118.62,
+    "currency": "USD",
+    "account": "1000-Cash",
+    "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+    "reference": "TXN-MIX-2026-08-20",
+    "description": "ACH OUT MIXED KESTREL FREIGHTLINE EXPEDITE",
+    "entry_type": "ap_payment",
+    "period": "2026-08",
+    "source": "gl",
+    "amount_minor": -2511862,
+    "raw_metadata": {
+      "bank_id": "TXN-MIX-2026-08-20"
+    }
   }
 ]

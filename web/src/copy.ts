@@ -549,6 +549,83 @@ export function formatPeriod(value: unknown): string {
   return month ? `${month} ${match[1]}` : raw;
 }
 
+const MONTH_LONG = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+export function formatDateTime(value: unknown): string {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "—";
+  const match = raw.match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2}))?/);
+  if (!match) return raw;
+  const month = MONTH_LONG[Number(match[2]) - 1];
+  if (!month) return raw;
+  const date = `${month} ${Number(match[3])}, ${match[1]}`;
+  return match[4] ? `${date} at ${match[4]}:${match[5]}` : date;
+}
+
+export const CADENCE_COPY: Record<string, string> = {
+  daily: "Runs every day",
+  weekly: "Runs every week",
+  monthly: "Runs every month",
+  quarterly: "Runs every quarter",
+};
+
+export function formatCadence(value: unknown): string {
+  return lookup(CADENCE_COPY, value, humanizeToken(value) || "—");
+}
+
+export function formatConfidence(value: unknown): string {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "—";
+  const pct = n <= 1 ? Math.round(n * 100) : Math.round(n);
+  return `${pct}%`;
+}
+
+/** Translate a record identifier for humans. Internal IDs stay unchanged. */
+export function formatRecordId(value: unknown): string {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+  if (raw.startsWith("BANK-po_1Maximor") || raw.startsWith("po_1Maximor")) {
+    const kind = raw.replace(/^BANK-/, "").replace(/^po_1Maximor/, "").toLowerCase();
+    const payout =
+      kind === "fees"
+        ? "Stripe payout with processing fees"
+        : kind === "refunds"
+          ? "Stripe payout with refunds"
+          : kind === "disputes"
+            ? "Stripe payout with disputes"
+            : "Stripe payout to the bank";
+    return raw.startsWith("BANK-") ? `Bank deposit for ${payout}` : payout;
+  }
+  if (TASK_COPY[raw]) return TASK_COPY[raw];
+  if (/^\d{4}-\d{2}-\d{2}/.test(raw)) return formatDateTime(raw);
+  if (/^\d{4}-\d{2}$/.test(raw)) return formatPeriod(raw);
+  if (!looksLikeId(raw)) return raw;
+  if (/^INV-AR/i.test(raw)) return `Customer invoice ${raw}`;
+  if (/^INV-/i.test(raw)) return `Vendor invoice ${raw}`;
+  if (/^PAY-/i.test(raw)) return `Customer payment ${raw}`;
+  if (/^TXN-/i.test(raw)) return `Bank transaction ${raw}`;
+  if (/^GL-/i.test(raw)) return `Ledger entry ${raw}`;
+  if (/^JE-/i.test(raw)) return `Journal entry ${raw}`;
+  if (/^ACC-/i.test(raw)) return `Accrual ${raw}`;
+  if (/^HI-/i.test(raw)) return `Earlier bill ${raw}`;
+  if (/^CTR-/i.test(raw)) return `Control test ${raw}`;
+  if (/^MSG-/i.test(raw)) return `Incoming email ${raw}`;
+  if (/^PO-/i.test(raw)) return `Purchase order ${raw}`;
+  if (/^GR-/i.test(raw)) return `Receiving record ${raw}`;
+  if (/^MEM-/i.test(raw)) return `Saved decision ${raw}`;
+  if (/^CASE-/i.test(raw)) return `Case ${raw}`;
+  if (/^CUST-/i.test(raw)) return `Customer ${raw}`;
+  if (/^VEND-/i.test(raw)) return `Vendor ${raw}`;
+  if (/^APR-/i.test(raw)) return `Approval ${raw}`;
+  if (/^PRE-/i.test(raw)) return `Prepaid ${raw}`;
+  if (/^AC-/i.test(raw)) return `Evaluation case ${raw}`;
+  if (/^DOC-/i.test(raw)) return `Document ${raw}`;
+  if (/^FEE-/i.test(raw)) return `Fee evidence ${raw}`;
+  if (/^USR-/i.test(raw)) return `User ${raw}`;
+  if (/^CO-/i.test(raw)) return `Company ${raw}`;
+  return raw;
+}
+
 export function formatExecution(value: unknown): string {
   return lookup(STATUS_COPY, value, humanizeToken(value) || "Using the company's recorded rules");
 }

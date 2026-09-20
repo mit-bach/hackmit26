@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-382
 PO Number: PO-382
-Vendor: Cambridge Properties
+Vendor: Keel Services
 Goods received in full on 2026-09-02
 Packing list attached: PL-GR-382
 Quantity ordered: 1

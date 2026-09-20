@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-import { get } from "../api";
-import { AgentPanel } from "../components/AgentPanel";
+import { demoApi } from "../demoClient";
+import { PageHead } from "../layout/Shell";
 import { ArchitectureDiagram } from "../components/ArchitectureDiagram";
-import { AGENTS_BY_SLUG, ROOMS, ROUTINES, type AgentSlug } from "../data/agents";
-import {
-  WORLD_INSPECTOR,
-  WORLD_NODE_ID,
-  isGrainId,
-  outboundHandles,
-} from "../data/officeGraph";
-import { formatAgent } from "../copy";
+import { AgentDirectory, AgentPanel } from "../components/AgentPanel";
+import { AGENTS, AGENTS_BY_SLUG, ROUTINES, type AgentSlug } from "../data/agents";
+import { WORLD_INSPECTOR, WORLD_NODE_ID, isGrainId } from "../data/officeGraph";
+import { formatAgent, formatCadence, humanizeToken } from "../copy";
 
 interface LiveBot {
   readonly slug?: string;
@@ -29,97 +25,65 @@ interface ArchitecturePayload {
   readonly routines?: readonly RoutineRow[];
 }
 
-function liveBotFor(bots: readonly LiveBot[] | undefined, slug: string): LiveBot | undefined {
-  return (bots ?? []).find((bot) => bot.slug === slug);
-}
-
 export default function Architecture(): JSX.Element {
   const [data, setData] = useState<ArchitecturePayload | null>(null);
-  const [open, setOpen] = useState<string | null>(null);
+  const [open, setOpen] = useState<string>("ap");
 
   useEffect(() => {
-    get<ArchitecturePayload>("/api/architecture")
-      .then(setData)
+    demoApi
+      .loadArchitecture()
+      .then((payload) => setData(payload as ArchitecturePayload))
       .catch(() => setData(null));
   }, []);
 
-  function handleSelect(slug: string): void {
-    setOpen((current) => (current === slug ? null : slug));
-  }
-
-  const grainAgent = open && isGrainId(open) ? AGENTS_BY_SLUG[open as AgentSlug] : undefined;
-  const live = grainAgent ? liveBotFor(data?.bots, grainAgent.slug) : undefined;
-  const outbound = open ? outboundHandles(open).slice(0, 5) : [];
-  const routines: readonly RoutineRow[] = data?.routines ?? ROUTINES;
+  const grainAgent = isGrainId(open) ? AGENTS_BY_SLUG[open as AgentSlug] : undefined;
+  const agent = grainAgent || AGENTS[0];
+  const live = (data?.bots || []).find((bot) => bot.slug === agent.slug);
+  const routines: readonly RoutineRow[] = data?.routines?.length ? data.routines : ROUTINES;
 
   return (
-    <div className="office-page">
-      <h1>The office</h1>
-      <p className="office-lede">Fifteen standing Bots, Handles between them, World not attached.</p>
-      <div className={`office-stage${open ? " is-open" : ""}`}>
-        <ArchitectureDiagram selected={open} onSelect={handleSelect} />
-        {open ? (
-          <aside className="office-inspector" aria-live="polite">
-            <button type="button" className="office-inspector-close" onClick={() => setOpen(null)}>
-              Close
-            </button>
-            {open === WORLD_NODE_ID ? (
-              <div>
-                <div className="eyebrow">{WORLD_INSPECTOR.room}</div>
-                <h2 className="office-inspector-name">{WORLD_INSPECTOR.name}</h2>
-                <p className="muted">{WORLD_INSPECTOR.title}</p>
-                <p>{WORLD_INSPECTOR.body}</p>
-              </div>
-            ) : grainAgent ? (
-              <div>
-                <div className="eyebrow">{ROOMS.find((room) => room.id === grainAgent.room)?.title}</div>
-                <h2 className="office-inspector-name">{grainAgent.name}</h2>
-              </div>
-            ) : (
-              <p className="muted">No Bot selected.</p>
-            )}
-            {outbound.length ? (
-              <div>
-                <h2>Outbound Handles</h2>
-                <ul className="plain-list">
-                  {outbound.map((edge) => (
-                    <li key={edge.id}>
-                      <span className="mono">{edge.when}</span>
-                      {" → "}
-                      {formatAgent(edge.to)}
-                      {edge.attached ? "" : " — not attached"}
-                      <div className="muted">{edge.why}</div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <p className="muted">This Bot does not start a Handle of its own.</p>
-            )}
-            {grainAgent ? (
-              <details>
-                <summary>Skills, profiles, and responsibilities</summary>
-                <AgentPanel agent={grainAgent} live={live} />
-              </details>
-            ) : null}
-          </aside>
-        ) : null}
-      </div>
-      <section className="office-routines">
-        <h2>Scheduled office routines</h2>
-        <p className="muted">These are not extra Bots. They are calendar jobs on the standing roster.</p>
-        {routines.map((row) => (
-          <div className="split" key={row.id || row.name}>
+    <div>
+      <PageHead
+        eyebrow="How the team works"
+        title="How the finance team is actually organized"
+        lede="Standing agents share one company picture. Related jobs live as profiles on those agents. Control agents recheck uncertain work. Audit samples after the fact. This page is drawn from the live office roster, not from an older, larger agent list."
+      />
+      <h2 className="section-title">The office</h2>
+      <p className="muted">Fifteen standing agents, the handles between them, and World not attached.</p>
+      <ArchitectureDiagram selected={open} onSelect={setOpen} />
+      <div className="grid-2" style={{ marginTop: 18 }}>
+        <div className="card">
+          <h2>The team</h2>
+          <AgentDirectory selected={open} onSelect={setOpen} />
+        </div>
+        <div className="card office-inspector">
+          {open === WORLD_NODE_ID ? (
             <div>
-              <div>{row.title || row.id || row.name}</div>
+              <div className="eyebrow">{WORLD_INSPECTOR.room}</div>
+              <h2 className="office-inspector-name">{WORLD_INSPECTOR.name}</h2>
+              <p className="muted">{WORLD_INSPECTOR.title}</p>
+              <p>{WORLD_INSPECTOR.body}</p>
+            </div>
+          ) : (
+            <AgentPanel agent={agent} live={live} />
+          )}
+        </div>
+      </div>
+      <div className="card" style={{ marginTop: 14 }}>
+        <h2>Scheduled office routines</h2>
+        <p className="muted">These are recurring jobs on the calendar. They are not extra agents.</p>
+        {routines.map((row) => (
+          <div className="split" key={row.id || row.name} style={{ marginBottom: 8 }}>
+            <div>
+              <div>{row.title || humanizeToken(row.id) || row.name}</div>
               <div className="muted">
-                {row.cadence} · {formatAgent(row.bot)}
+                {formatCadence(row.cadence)} · {formatAgent(row.bot)}
               </div>
             </div>
           </div>
         ))}
-      </section>
-      <p className="muted">Older finance roles still exist as jobs inside these Bots.</p>
+      </div>
+      <p className="muted">Older, narrower finance roles still exist as jobs inside these agents. They are not separate standing agents.</p>
     </div>
   );
 }

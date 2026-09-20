@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-395
 PO Number: PO-395
 Issued: 2026-09-15
-Vendor: Acme Supply Co.
-Vendor legal name: Acme Supplies, Inc. d/b/a Acme Supply Co.
-Vendor tax ID: 04-2218891
+Vendor: GitHub
+Vendor legal name: GitHub, Inc.
+Vendor tax ID: 94-3394628
 Authorized amount: 73.30
 Currency: USD
 Approver: Jordan Hale

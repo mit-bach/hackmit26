@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-378
 PO Number: PO-378
-Vendor: WeWork Cambridge
+Vendor: Wharf Labs
 Goods received in full on 2026-09-25
 Packing list attached: PL-GR-378
 Quantity ordered: 1

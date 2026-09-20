@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-396
 PO Number: PO-396
-Vendor: Figma
+Vendor: Snowflake
 Goods received in full on 2026-09-16
 Packing list attached: PL-GR-396
 Quantity ordered: 1

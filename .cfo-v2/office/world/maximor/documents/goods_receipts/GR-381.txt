@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-381
 PO Number: PO-381
-Vendor: Helios Hardware
+Vendor: Northwood Partners
 Goods received in full on 2026-09-01
 Packing list attached: PL-GR-381
 Quantity ordered: 1

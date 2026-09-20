@@ -8,7 +8,7 @@
 
 **Must not Wake.** Do not run weekly-pay-run as the P0 proof. Do not lock. Do not send mail.
 
-**Coverage claimed.** All 15 (or 16) Bots bind. Client skills intersect on. `--fake` off. Intercept default not Operator.
+**Coverage claimed.** All 16 Roster Bots bind (`world` included). Client skills intersect on. `--fake` off. Intercept default not Operator.
 
 **Preconditions.** `../05-gates.md` G1–G9 recorded. Live template is the clone source.
 
@@ -78,9 +78,9 @@ If port does not appear, spawn any Bot (S04) and recheck. Still missing → HARD
 
 Repeat spawn for every Roster slug (S04b). You do not need a finance prompt for each. Bind without crash is RUNS for P0 Bot rows. Lazy spawn may wait until first Handle. Then S05 is the Handle.
 
-World: if not on Roster, SKIP with T1. Do not add it in P0.
+World: on live Roster as Source Bot. Bind it in S04b. SKIP only if this instance’s roster dropped it (clone bug). Do not add a seventeenth Bot.
 
-Stripe: if Display name `""`, bind may HARD. Then HONEST “stripe not office-live” for P1/P4, or 05 Cash repair. Do not skip silently.
+Stripe: Stripe Payout Agent is granted `integrations.tools.*` payout ops. Bind crash is HARD. Empty Display name is no longer the live state; if an instance still has `""`, HONEST “stripe not office-live” for that desk only.
 
 ---
 
@@ -159,7 +159,7 @@ Pick a real id. If you pass `INV-S12` and get not found, that is BLOCKED-CORRECT
 - Stimulus: spawn each remaining slug, or land a one-line Wake `profile: <default>\nPing. Do not call tools.` only if spawn is not enough to prove Pi starts
 - Actor: each Roster Bot
 - RUNS when: each worker starts without bind refuse
-- HARD if: any slug missing Display name (stripe) unless you already classified HONEST not office-live
+- HARD if: any slug missing Display name (stripe included). Live Stripe Payout Agent is named.
 - Ticks: Bot table bind column
 
 A ping Wake that calls no tools is not a P7 tick.
@@ -183,7 +183,7 @@ A ping Wake that calls no tools is not a P7 tick.
 
 ## Forbidden
 
-`--fake` as proof. Operator concurrence. Adding Bot world here. Finance types in Harness src.
+`--fake` as proof. Operator concurrence. Adding a seventeenth Bot. Finance types in Harness src.
 
 ## Restart
 

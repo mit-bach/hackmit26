@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-374
 PO Number: PO-374
-Vendor: Slack Technologies
+Vendor: Juniper Works
 Goods received in full on 2026-09-21
 Packing list attached: PL-GR-374
 Quantity ordered: 1

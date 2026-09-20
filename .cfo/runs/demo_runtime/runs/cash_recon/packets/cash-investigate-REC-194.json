@@ -1,0 +1,12 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-194",
+  "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+  "match_type": "UNEXPLAINED_DIFFERENCE",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference_minor": 1240,
+  "queue_owner": "cash",
+  "human_queue": false
+}

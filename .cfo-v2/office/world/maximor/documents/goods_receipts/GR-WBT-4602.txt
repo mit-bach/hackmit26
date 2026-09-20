@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-WBT-4602
+PO Number: PO-WBT-4602
+Vendor: Westbrook Tooling
+Goods received in full on 2026-04-09
+Packing list attached: PL-GR-WBT-4602
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 24,106.18 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

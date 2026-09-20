@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-355
 PO Number: PO-355
-Vendor: Atlassian
+Vendor: Timber Supply
 Goods received in full on 2026-09-02
 Packing list attached: PL-GR-355
 Quantity ordered: 1

@@ -2,9 +2,11 @@
 
 **CFO V2 desk (show this):** `http://127.0.0.1:8800/`
 
-Leave 8792 for the other UI agent. Do not reuse 8791/8795.
+Leave 8792 for the other UI agent. Do not reuse 8791/8795. Do not start a second office serve on 8787 while 8800 is up.
 
-Computer: `.cfo-v2/office/computer`. Config: `harness/client.json` (xAI/Grok 4.5, thinking `low`, transcript **full**, extra `-e` `./cfo/extensions/index.ts`, Kernel sidecar). Pi auth is `~/.pi/agent/auth.json`. Wipe: `node dist/src/cli.js wipe --computer ../../.cfo-v2/office/computer` from Harness-v2, or `POST /api/wipe`. Run notes: `.cfo-v2/office/RUN.md`. Demo seed: `.cfo-v2/office/seed_demo.py` and `DEMO-WALKTHROUGH.md`.
+Computer template: `.cfo-v2/office/computer`. Serve honors `.cfo-v2/office/office.json` `currentId`. Prove on a `prove-*` instance cloned from live. Do not prove on `live`, `protocol-proof`, or `fresh-protocol`. `protocol-proof` is a historical desk (stale Catalog, Operator intercept default).
+
+Config: `harness/client.json` (xAI/Grok 4.5, thinking `low`, transcript **full**, extra `-e` `./cfo/extensions/index.ts`, Kernel sidecar). Pi auth is `~/.pi/agent/auth.json`. Wipe: `node dist/src/cli.js wipe --computer ../../.cfo-v2/office/computer` from Harness-v2, or `POST /api/wipe`. Run notes: `.cfo-v2/office/RUN.md`. Prove: `docs/Office-prove/`. Demo seed: `.cfo-v2/office/seed_demo.py` and `DEMO-WALKTHROUGH.md`.
 
 `.cfo-v2/` is the office. `examples/cfo-floor` is a six-slug fixture. They are not the same product.
 

@@ -1,0 +1,38 @@
+[
+  {
+    "form_id": "941-2025-Q2",
+    "period": "2025-Q2",
+    "includes_emp_id": "EMP-8891",
+    "employer_fica_extra": 319.79
+  },
+  {
+    "form_id": "941-2025-Q3",
+    "period": "2025-Q3",
+    "includes_emp_id": "EMP-8891",
+    "employer_fica_extra": 319.79
+  },
+  {
+    "form_id": "941-2025-Q4",
+    "period": "2025-Q4",
+    "includes_emp_id": "EMP-8891",
+    "employer_fica_extra": 319.79
+  },
+  {
+    "form_id": "941-2026-Q1",
+    "period": "2026-Q1",
+    "includes_emp_id": "EMP-8891",
+    "employer_fica_extra": 319.79
+  },
+  {
+    "form_id": "941-2026-Q2",
+    "period": "2026-Q2",
+    "includes_emp_id": "EMP-8891",
+    "employer_fica_extra": 319.79
+  },
+  {
+    "form_id": "941-2026-Q3",
+    "period": "2026-Q3",
+    "includes_emp_id": "EMP-8891",
+    "employer_fica_extra": 319.79
+  }
+]

@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-330
 PO Number: PO-330
-Vendor: Helios Hardware
+Vendor: Juniper Services
 Goods received in full on 2026-09-04
 Packing list attached: PL-GR-330
 Quantity ordered: 1

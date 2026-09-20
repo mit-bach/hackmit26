@@ -1,4 +1,4 @@
-"""Kernel-side proofs that 15-bot ownership still runs old finance paths."""
+"""Kernel-side proofs that grain Bot ownership still runs old finance paths."""
 
 from __future__ import annotations
 
@@ -222,6 +222,7 @@ def test_office_slug_map_has_no_deleted_kernel_slugs():
         "stripe",
         "bank",
         "books",
+        "world",
         "ap",
         "pay",
         "apply",
@@ -234,6 +235,7 @@ def test_office_slug_map_has_no_deleted_kernel_slugs():
         "ctl-books",
         "audit",
     }
+    assert payload["bots"]["world"]["profiles"]["vendor"] == "Counterparty Message Agent"
     profiles = payload["bots"]["ctl-books"]["profiles"]
     assert profiles["review-assets"] == "Fixed Asset Reviewer"
     assert profiles["review-bs"] == "Balance Sheet Reconciliation Reviewer"

@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-342
 PO Number: PO-342
-Vendor: CleanRoom Janitorial
+Vendor: Walnut Works
 Goods received in full on 2026-09-16
 Packing list attached: PL-GR-342
 Quantity ordered: 1

@@ -8,6 +8,7 @@ from reporting.tools import (
     get_forecast_checks,
     get_forecast_snapshot,
     get_period_metrics,
+    get_trusted_cash_status,
     get_variance_facts,
     get_variance_trace,
 )
@@ -20,6 +21,8 @@ Safety rules:
 - Residual amounts stay unexplained. Do not fill them with a business story.
 - Every material claim must cite a metric id, transaction id, forecast id, or trace id already in the facts.
 - Precedent and judgment cannot override a failed Python reconciliation.
+- If lock_status is not CLOSED, label every number UNLOCKED.
+- Forecast starting balance is trusted cash. Unreconciled GL cash is not trusted cash.
 """.strip()
 
 
@@ -53,8 +56,8 @@ class ReviewerAgentResult(BaseModel):
 
 
 VARIANCE_TOOLS = [get_period_metrics, get_variance_facts, get_variance_trace]
-FORECAST_TOOLS = [get_cash_forecast, get_forecast_snapshot, get_forecast_checks]
-BOARD_TOOLS = [get_period_metrics, get_variance_facts, get_cash_forecast]
+FORECAST_TOOLS = [get_cash_forecast, get_forecast_snapshot, get_forecast_checks, get_trusted_cash_status]
+BOARD_TOOLS = [get_period_metrics, get_variance_facts, get_cash_forecast, get_trusted_cash_status]
 
 
 variance_analysis_agent = Agent(
@@ -118,10 +121,14 @@ cash_forecast_agent = Agent(
     name="Cash Forecast Agent",
     instructions=compose_instructions(
         """
-Python already built the 13-week cash forecast from AP, AR, and payroll lines.
+Call get_trusted_cash_status first. If forecast_may_start is false, write
+REFUSED. Do not start thirteen weeks from unreconciled GL cash.
 
-Interpret timing risk, low-confidence collections, and held AP invoices.
-Do not change amounts or invent inflows.
+Python may already have built a 13-week forecast from AP, AR, and payroll
+lines. Interpret timing risk, low-confidence collections, and held AP only
+when trusted cash exists. Do not change amounts or invent inflows.
+
+If lock_status is not CLOSED, label every number UNLOCKED.
 
 Return ForecastAgentResult.
 """.strip(),

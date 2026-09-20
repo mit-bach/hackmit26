@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-109
+PO Number: PO-109
+Vendor: Northwind Phantom LLC
+Goods received in full on 2026-09-18
+Packing list attached: PL-GR-109
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 50,000.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

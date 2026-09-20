@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-326
 PO Number: PO-326
-Vendor: Cloudflare
+Vendor: Walnut Labs
 Goods received in full on 2026-09-27
 Packing list attached: PL-GR-326
 Quantity ordered: 1

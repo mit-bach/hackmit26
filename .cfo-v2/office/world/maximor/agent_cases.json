@@ -571,5 +571,23 @@
     "visualization_tags": [
       "forecast"
     ]
+  },
+  {
+    "case_id": "AC-STRIPE",
+    "agent": "Stripe Payout Agent",
+    "capability": "cash.provider_payout",
+    "input": {
+      "payout_id": "po_1MaximorFees"
+    },
+    "expected": {
+      "payout_equals_bank": true
+    },
+    "source_record_ids": [
+      "po_1MaximorFees"
+    ],
+    "downstream_record_ids": [],
+    "visualization_tags": [
+      "cash"
+    ]
   }
 ]

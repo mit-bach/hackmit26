@@ -1,0 +1,39 @@
+Hartford Fire Insurance Company
+One Hartford Plaza
+Hartford, CT 06155
+Phone +1 860-547-5000   billing@thehartford.example
+Tax ID 06-0383750
+
+INVOICE
+
+Invoice Number: OPEN-0010
+Invoice Date: 2026-09-11
+Due Date: 2026-10-11
+PO Number: PO-OPEN-010
+Payment Terms: net 15
+Currency: USD
+Vendor: Hartford Insurance
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    181,371.80    181,371.80
+
+Subtotal                                                            181,371.80
+Tax                                                                       0.00
+Amount Due                                                          181,371.80
+
+Remit to:
+ACH Bank of America routing 011900254  account ****2026
+Bank: Bank of America  ****2026
+Please include invoice OPEN-0010 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@thehartford.example

@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-339
 PO Number: PO-339
-Vendor: Shadow Vendor LLC
+Vendor: Ginkgo Partners
 Goods received in full on 2026-09-13
 Packing list attached: PL-GR-339
 Quantity ordered: 1

@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-329
 PO Number: PO-329
-Vendor: Linear App
+Vendor: Nimbus Partners
 Goods received in full on 2026-09-03
 Packing list attached: PL-GR-329
 Quantity ordered: 1

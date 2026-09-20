@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-346
 PO Number: PO-346
-Vendor: Lindholm & Ruiz LLP
+Vendor: Juniper Labs
 Goods received in full on 2026-09-20
 Packing list attached: PL-GR-346
 Quantity ordered: 1

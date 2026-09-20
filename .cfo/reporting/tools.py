@@ -8,6 +8,7 @@ from reporting.forecast import build_forecast, validate_forecast
 from reporting.models import CashForecastSnapshot
 from reporting.statements import period_report
 from reporting.store import latest_snapshot, load_snapshot
+from reporting.trusted import forecast_starting_balance
 from reporting.variance import analyze_variance, trace_variance
 
 
@@ -58,6 +59,12 @@ def get_forecast_checks(forecast_id: str) -> dict:
     if snapshot is None:
         return {"error": f"Unknown forecast {forecast_id}"}
     return {"forecast_id": forecast_id, "errors": validate_forecast(snapshot)}
+
+
+@function_tool
+def get_trusted_cash_status(period: str) -> dict:
+    """Return the cash Bot trusted-cash packet. Unreconciled GL cash is not trusted cash."""
+    return forecast_starting_balance(period)
 
 
 def snapshot_to_facts(snapshot: CashForecastSnapshot) -> dict:

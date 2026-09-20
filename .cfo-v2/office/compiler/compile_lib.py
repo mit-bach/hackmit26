@@ -41,6 +41,7 @@ SOD_BY_MODULE = {
     "prepaid.tools": "prepaid",
     "fixed_assets.tools": "fixed-assets",
     "bs_recon.tools": "bs-recon",
+    "close.tools": "close-read",
     "reporting.tools": "reporting",
     "audit.tools": "audit-read",
     "memory.tools": "memory-read",

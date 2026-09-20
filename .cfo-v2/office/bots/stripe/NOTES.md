@@ -1,14 +1,11 @@
-# NOTES
+# NOTES — Stripe (prompt 04)
 
-Constitution is at `.cfo-v2/office/constitution.md`. Stripe has no `Agent()` constructor. Profile `payout` maps to an empty Display name. Grants stay empty. Do not emit `InvoiceCandidate`.
+Date: 2026-09-20. Disk wins.
 
-Roster merge fields:
+Bot `stripe` is no longer an empty Display name. Profile `payout` wears **Stripe Payout Agent**. Grants compile from `.cfo/integrations/agent.py`. Tools are read-only waterfall ops. `invoice_candidates` stays 0. Adyen remains a Connector on this Bot, not a second Bot.
 
-- `id`: `bot_stripe`
-- `name`: Stripe
-- `slug`: `stripe`
-- `purpose`: Land processor payouts; hand the deposit to `cash` and charge-level facts to `apply`.
-- `instructions`: Read `office/bots/stripe/BOT.md`. Obey the Constitution. Never ask a human. Never produce InvoiceCandidate.
-- `skills`: []
-- `connectors`: `stripe`, `adyen`
-- `approvalLevel`: `never`
+Simulated Stripe only. No live keys in the judged demo. Unpack is still Kernel math (`integrations.cash.reconcile_payout`). The Bot copies it.
+
+Office-live claim: constructor + Grants exist. A live Pi `payout.paid` turn on 8800 is not in this slice. Kernel host `integrations.office.land_payout_handles` writes Harness Handles to `cash` and `apply`.
+
+Do not claim RecBench volume office-live.

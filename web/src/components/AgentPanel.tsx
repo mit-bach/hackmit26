@@ -10,7 +10,7 @@ export function AgentPanel({ agent, live }: { agent: AgentDef; live?: any }) {
     <div className="stack">
       <div>
         <div className="eyebrow">{ROOMS.find((room) => room.id === agent.room)?.title}</div>
-        <h2 style={{ textTransform: "none", letterSpacing: 0, color: "var(--text)", fontSize: 22, marginBottom: 8 }}>{agent.name}</h2>
+        <h2 className="office-inspector-name" style={{ textTransform: "none", letterSpacing: 0, color: "var(--text)", fontSize: 22, marginBottom: 8 }}>{agent.name}</h2>
         <p>{agent.role}</p>
       </div>
       <div>
@@ -78,7 +78,10 @@ export function AgentPanel({ agent, live }: { agent: AgentDef; live?: any }) {
           </>
         ) : null}
       </div>
-      <p className="muted">{agent.example}</p>
+      <div>
+        <h2>Example of this agent's work</h2>
+        <p className="muted">{agent.example}</p>
+      </div>
     </div>
   );
 }

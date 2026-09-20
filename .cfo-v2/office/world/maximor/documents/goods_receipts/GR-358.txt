@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-358
 PO Number: PO-358
-Vendor: Vanta
+Vendor: Juniper Labs
 Goods received in full on 2026-09-05
 Packing list attached: PL-GR-358
 Quantity ordered: 1

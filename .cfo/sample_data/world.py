@@ -605,7 +605,7 @@ def add_historical_ap_register(ctx: CompanyScenarioContext, rng: random.Random) 
         year_i, month_i = (int(part) for part in period.split("-"))
         last = calendar.monthrange(year_i, month_i)[1]
         for day_n in range(1, 21):
-            for slot in range(20):
+            for slot in range(22):
                 seq += 1
                 vendor = vendors[(seq * 3 + slot) % len(vendors)]
                 sku, _kind, unit = SKU_CATALOG[(seq + slot) % len(SKU_CATALOG)]

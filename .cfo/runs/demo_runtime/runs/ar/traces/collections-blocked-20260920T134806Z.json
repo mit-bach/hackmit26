@@ -1,0 +1,16 @@
+{
+  "as_of_date": "2026-09-30",
+  "started_at": "2026-09-20T13:48:06Z",
+  "candidates": [],
+  "decisions": [],
+  "outbox": [],
+  "agents": [],
+  "used_agent": false,
+  "trace_path": null,
+  "blocked": true,
+  "block_reason": "Apply has not drained new deposits for this as-of. Handle apply / apply with the unmatched payment ids. Do not chase.",
+  "apply_handle_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/demo_runtime/runs/ar/handles/collect-drain-2026-09-30.json",
+  "verifier_handle_paths": [],
+  "world_handle_paths": [],
+  "drained_payment_ids": []
+}

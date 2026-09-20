@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-344
 PO Number: PO-344
-Vendor: Acme Supply Co.
+Vendor: Quince Group
 Goods received in full on 2026-09-18
 Packing list attached: PL-GR-344
 Quantity ordered: 1

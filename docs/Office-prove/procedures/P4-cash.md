@@ -102,13 +102,13 @@ Trust apply/pay identifiers. Do not re-interpret the counterparty from scratch.
 
 ---
 
-## S08 — Stripe honesty
+## S08 — Stripe payout
 
-- Stimulus: read stripe Grant on this instance; if office-live, Handle deposit/charges from P1 S20
-- HONEST: empty Grant → not office-live. Kernel `simulate-stripe` is P9/Kernel
-- INTENDED if granted: unpack math, invoice_candidates 0, deposit to rec, charges to apply
-- HARD if: costume Bot claimed office-live with empty ops
-- Ticks: stripe edges or honest skip
+- Stimulus: read stripe Grant on this instance; Handle deposit/charges from P1 S20
+- Must call: integrations payout ops if not already ticked in P1
+- INTENDED: unpack math, invoice_candidates 0, deposit to rec, charges to apply
+- HARD if: empty ops on this instance (live is granted — clone/compile stale); InvoiceCandidate
+- Ticks: stripe edges; integrations payout ops
 
 ---
 
@@ -123,7 +123,7 @@ Trust apply/pay identifiers. Do not re-interpret the counterparty from scratch.
 
 ## Done-when
 
-- Bare min: S01 RUNS; S05 BLOCKED-CORRECT; no throw; stripe honest
+- Bare min: S01 RUNS; S05 BLOCKED-CORRECT; no throw; stripe payout ops RUNS
 - INTENDED: S02/S03 identifier trust on this instance; Harness Handle to ctl-cash; trusted cash Handle close; $12.40 still unexplained
 
 ## Forbidden

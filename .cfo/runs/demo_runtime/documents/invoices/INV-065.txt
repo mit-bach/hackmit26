@@ -1,0 +1,39 @@
+Amazon Web Services, Inc.
+410 Terry Avenue North
+Seattle, WA 98109
+Phone +1 206-266-1000   billing@aws.amazon.example
+Tax ID 91-1646860
+
+INVOICE
+
+Invoice Number: AMA-2026-09-0066
+Invoice Date: 2026-09-13
+Due Date: 2026-10-13
+PO Number: PO-366
+Payment Terms: net 30
+Currency: USD
+Vendor: Amazon Web Services
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+implementation hours billed 2026-09-13        1.00        881.95        881.95
+
+Subtotal                                                                881.95
+Tax                                                                       0.00
+Amount Due                                                              881.95
+
+Remit to:
+ACH Wells Fargo routing 121000248  account ****2910
+Bank: Wells Fargo  ****2910
+Please include invoice AMA-2026-09-0066 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@aws.amazon.example

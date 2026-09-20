@@ -4,7 +4,7 @@ One Cursor agent executes this directory. Specialist Bots do not read these file
 
 You may instead execute the procedures by hand. The copy-this prompt is for the Cursor agent that Billy launches to run the loops.
 
-This is not the Floor/AR/AP/Cash/Close repair pack. If P0 or a pipe HARD on a missing tool, stop prove and send that hole to `docs/Agentic-update/prompts/`. Then come back.
+This is not the Floor/AR/AP/Cash/Close repair pack. Those five agents already landed on live. If P0 or a pipe HARD on a missing tool, patch it (small) or stop and say so. Do not assume World, send, Stripe Grants, or lock reads are still missing — read this Computer’s disk.
 
 ---
 
@@ -67,9 +67,11 @@ Your job is to execute docs/Office-prove/procedures in order, on named prove ins
 
 You are not a specialist Bot. You do not concur as ctl-pay. You do not lock the period. You do not clear TXN-2026-09-015.
 
-Start with 05-gates.md. If a gate fails, that is HARD. Patch or stop for the 05 repair agents. Do not skip to P2.
+Start with 05-gates.md. If a gate fails, that is HARD. Patch or stop. Repair already ran; do not wait for a sixth 05 agent unless the hole is huge.
 
 Then P0 on a new instance prove-<date>-floor-r1. P0 must be INTENDED before any other procedure claims office-live.
+
+URL: http://127.0.0.1:8800 unless /health is elsewhere. Do not start a second serve on 8787 while 8800 holds the office. Do not prove on live, protocol-proof, or fresh-protocol.
 
 Default sequence on a month instance prove-<date>-month-r1: P1, P2, P3, P4, P5, P8.
 Parallel allowed: P2 and P3 on different instances after P0. Cash and close still need a month instance that has identifiers.
@@ -88,7 +90,7 @@ RUNS is bare minimum for a tool. INTENDED is corpus next state. BLOCKED-CORRECT 
 
 Serve live Pi. Client -e attached. HARNESS_CLIENT_SKILLS=1. No --fake proof. No Operator concurrence. No Bot named ar. No INV-S12 as the judged bill. No holdout. No get_audit_ground_truth on operational Bots.
 
-If send_office_outbound still ImportError, or World is required for a mailbox step and is unbound, HARD/SKIP as 02 says. Point at 05 AR/Floor. Do not invent SMTP.
+If send_office_outbound still ImportError, HARD/SKIP as 02 says. Live Kernel defines it. A FAIL is PYTHONPATH (repo-root inbox/ shadow) or a stale clone. Do not invent SMTP. World is on the live Roster.
 
 Use grain names. Use T-categories in every HARD/SOFT row. Tick 04-coverage.md as you go.
 

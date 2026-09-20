@@ -91,6 +91,9 @@ Check that the selected candidate is in the Python list, that arithmetic was
 not altered, that duplicate risk was not waved through, and that unsupported
 fee or difference explanations were not accepted.
 
+You cannot convert UNEXPLAINED_DIFFERENCE to MATCHED. You cannot convert
+ambiguous apply to AUTO_APPLY. You do not post.
+
 Recommend CONFIRMED only when the disposition is supported.
 Otherwise HUMAN_REVIEW. Return ReviewerVerdict.
 """.strip(),

@@ -1,52 +1,68 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { ReactNode, useEffect, useState } from "react";
-import { get, post, statusTone } from "../api";
-import { formatAgent, formatExecution, formatPeriod, formatStatus, formatSummary } from "../copy";
+import { Fragment, type ReactNode, useEffect, useState } from "react";
+import { statusTone } from "../api";
+import { demoApi } from "../demoClient";
+import { useHealth } from "../hooks";
+import { formatAgent, formatExecution, formatFieldKey, formatPeriod, formatStatus, formatSummary } from "../copy";
 
 interface NavItem {
   readonly to: string;
   readonly label: string;
 }
 
-const PITCH: readonly NavItem[] = [
+const SHOWCASE: readonly NavItem[] = [
   { to: "/", label: "Home" },
-  { to: "/architecture", label: "Office graph" },
-  { to: "/workflow", label: "Three stories" },
-  { to: "/coverage", label: "Capabilities" },
-  { to: "/evaluations", label: "Evidence" },
+  { to: "/architecture", label: "How they work" },
+  { to: "/workflow", label: "One invoice" },
+  { to: "/memory", label: "Saved decisions" },
+  { to: "/simulations", label: "Simulations" },
+  { to: "/videos", label: "Videos" },
+  { to: "/coverage", label: "What it covers" },
+  { to: "/evaluations", label: "Evaluation" },
 ];
 
 const LIVE_OFFICE: readonly NavItem[] = [
   { to: "/inbox", label: "Inbox" },
-  { to: "/ap", label: "Payables" },
-  { to: "/ar", label: "Receivables" },
-  { to: "/cash", label: "Cash" },
+  { to: "/ap", label: "Bills to pay" },
+  { to: "/ar", label: "Customer invoices" },
+  { to: "/cash", label: "Bank vs books" },
   { to: "/stripe", label: "Stripe" },
-  { to: "/close", label: "Close" },
-  { to: "/forecast", label: "Forecast" },
-  { to: "/audit", label: "Audit" },
-  { to: "/memory", label: "Memory" },
-  { to: "/agents", label: "Team activity" },
+  { to: "/close", label: "Finish the month" },
+  { to: "/forecast", label: "Cash outlook" },
+  { to: "/audit", label: "Control tests" },
+  { to: "/agents", label: "The team" },
 ];
 
-const MORE: readonly NavItem[] = [
-  { to: "/simulations", label: "Simulations" },
-  { to: "/videos", label: "Videos" },
-];
+interface StatusPayload {
+  readonly company?: string | { legal_name?: string; company?: { legal_name?: string } };
+  readonly period?: string;
+  readonly system_status?: string;
+  readonly autonomy?: { live_llm?: boolean; execution?: string };
+  readonly stripe?: { mode?: string };
+}
+
+function companyName(status: StatusPayload | null): string {
+  const company = status?.company;
+  if (typeof company === "string") {
+    return company;
+  }
+  return company?.legal_name || company?.company?.legal_name || "Maximor Demo Corp";
+}
 
 export function Shell({ children }: { children: ReactNode }): JSX.Element {
-  const [status, setStatus] = useState<any>(null);
+  const [status, setStatus] = useState<StatusPayload | null>(null);
   const [resetting, setResetting] = useState(false);
+  const live = useHealth();
   const location = useLocation();
 
   useEffect(() => {
-    get("/api/demo/status").then(setStatus).catch(() => setStatus(null));
+    demoApi.loadStatus().then((payload) => setStatus(payload as StatusPayload)).catch(() => setStatus(null));
   }, [location.pathname]);
 
   async function resetBooks(): Promise<void> {
     setResetting(true);
     try {
-      await post("/api/demo/reset");
+      await demoApi.resetBooks();
       window.location.reload();
     } finally {
       setResetting(false);
@@ -64,10 +80,10 @@ export function Shell({ children }: { children: ReactNode }): JSX.Element {
         </div>
         <div className="top-meta">
           <span>
-            Company <strong>{typeof status?.company === "string" ? status.company : status?.company?.legal_name || status?.company?.company?.legal_name || "Maximor Demo Corp"}</strong>
+            Company <strong>{companyName(status)}</strong>
           </span>
           <span>
-            Period <strong>{formatPeriod(status?.period || "2026-09")}</strong>
+            Accounting month <strong>{formatPeriod(status?.period || "2026-09")}</strong>
           </span>
           <span className={`pill ${statusTone(status?.system_status)}`}>{formatStatus(status?.system_status || "operational")}</span>
           <span className={`pill ${status?.autonomy?.live_llm ? "warn" : "ok"}`}>
@@ -76,18 +92,14 @@ export function Shell({ children }: { children: ReactNode }): JSX.Element {
           <span className={`pill ${status?.stripe?.mode === "live" ? "warn" : "info"}`}>
             Stripe {formatStatus(status?.stripe?.mode || "simulated")}
           </span>
+          <span className={`pill ${live ? "ok" : "warn"}`}>{live ? "Live office" : "Saved demo"}</span>
         </div>
       </header>
       <aside className="sidebar">
         <div>
-          <div className="nav-label">Pitch</div>
-          {PITCH.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
-              className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}
-            >
+          <div className="nav-label">Showcase</div>
+          {SHOWCASE.map((item) => (
+            <NavLink key={item.to} to={item.to} end={item.to === "/"} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
               {item.label}
             </NavLink>
           ))}
@@ -99,20 +111,7 @@ export function Shell({ children }: { children: ReactNode }): JSX.Element {
               {item.label}
             </NavLink>
           ))}
-        </div>
-        <div>
-          <div className="nav-label">More</div>
-          {MORE.map((item) => (
-            <NavLink key={item.to} to={item.to} className={({ isActive }) => `nav-link${isActive ? " active" : ""}`}>
-              {item.label}
-            </NavLink>
-          ))}
-          <button
-            className="nav-link"
-            style={{ width: "100%", background: "transparent", border: 0, textAlign: "left" }}
-            onClick={resetBooks}
-            disabled={resetting}
-          >
+          <button className="nav-link" style={{ width: "100%", background: "transparent", border: 0, textAlign: "left" }} onClick={() => void resetBooks()} disabled={resetting}>
             {resetting ? "Resetting…" : "Reset books"}
           </button>
         </div>
@@ -122,7 +121,7 @@ export function Shell({ children }: { children: ReactNode }): JSX.Element {
   );
 }
 
-export function PageHead({ eyebrow, title, lede }: { eyebrow: string; title: string; lede?: string }) {
+export function PageHead({ eyebrow, title, lede }: { eyebrow: string; title: string; lede?: string }): JSX.Element {
   return (
     <div className="page-head">
       <div className="eyebrow">{eyebrow}</div>
@@ -132,7 +131,7 @@ export function PageHead({ eyebrow, title, lede }: { eyebrow: string; title: str
   );
 }
 
-export function Pill({ children, tone }: { children: ReactNode; tone?: string }) {
+export function Pill({ children, tone }: { children: ReactNode; tone?: string }): JSX.Element {
   return <span className={`pill ${tone || "neutral"}`}>{children}</span>;
 }
 
@@ -146,7 +145,7 @@ export function RunBar({
   running: boolean;
   onRun: () => void;
   extra?: ReactNode;
-}) {
+}): JSX.Element {
   return (
     <div className="toolbar">
       <div className="btn-row">
@@ -160,7 +159,7 @@ export function RunBar({
   );
 }
 
-export function Stages({ stages }: { stages?: any[] }) {
+export function Stages({ stages }: { stages?: Array<{ id?: string; label?: string; bot?: string; status?: string; detail?: string }> }): JSX.Element | null {
   if (!stages?.length) return null;
   return (
     <div className="stages">
@@ -179,22 +178,44 @@ export function Stages({ stages }: { stages?: any[] }) {
   );
 }
 
-export function ErrorBox({ error }: { error: string | null }) {
+export function ErrorBox({ error }: { error: string | null }): JSX.Element | null {
   if (!error) return null;
-  const text =
-    error === "Not Found" || /^not found$/i.test(error)
-      ? "That request did not match a route on the running demo API. Restart the Maximor API and try again."
-      : error === "Internal Server Error" || error === "Failed to fetch" || /failed to fetch/i.test(error)
-        ? "The demo API did not respond. If it was restarting, run this again."
-        : error;
-  return <div className="error error-top">{text}</div>;
+  const unavailable =
+    /not found/i.test(error) ||
+    /unknown api route/i.test(error) ||
+    /did not match a route/i.test(error) ||
+    /method not allowed/i.test(error) ||
+    /failed to fetch/i.test(error) ||
+    /demo api unavailable/i.test(error) ||
+    /internal server error/i.test(error) ||
+    /timed out/i.test(error) ||
+    /timeout/i.test(error) ||
+    /aborted/i.test(error);
+  return (
+    <div className="notice notice-top">
+      {unavailable ? "Live agent run unavailable. Showing the saved demonstration result if one is available." : error}
+    </div>
+  );
 }
 
-export function JsonBlock({ value }: { value: unknown }) {
+export function SourceBadge({ source }: { source?: "live" | "saved" | null }): JSX.Element | null {
+  if (!source) return null;
+  return <span className={`source-badge ${source}`}>{source === "live" ? "Live run" : "Saved demo result"}</span>;
+}
+
+export function JsonBlock({ value }: { value: unknown }): JSX.Element {
   if (value === null || value === undefined) return <div className="muted">None</div>;
+  if (typeof value !== "object") return <div>{String(value)}</div>;
+  const entries = Object.entries(value as Record<string, unknown>).slice(0, 12);
+  if (!entries.length) return <div className="muted">None</div>;
   return (
-    <pre className="mono" style={{ whiteSpace: "pre-wrap", color: "var(--muted)", fontSize: 12 }}>
-      {JSON.stringify(value, null, 2)}
-    </pre>
+    <dl className="kv">
+      {entries.map(([key, item]) => (
+        <Fragment key={key}>
+          <dt>{formatFieldKey(key)}</dt>
+          <dd>{typeof item === "object" ? "See explanation above" : formatStatus(item)}</dd>
+        </Fragment>
+      ))}
+    </dl>
   );
 }

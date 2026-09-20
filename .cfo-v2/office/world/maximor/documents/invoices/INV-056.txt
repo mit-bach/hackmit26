@@ -1,18 +1,18 @@
-Stripe Processing
+Nimbus Components
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@stripeprocessing.example
+Phone +1 617-555-0000   billing@nimbuscomponents.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: STR-2026-09-0057
+Invoice Number: NIM-2026-09-0057
 Invoice Date: 2026-09-04
 Due Date: 2026-10-04
 PO Number: PO-357
 Payment Terms: net 30
 Currency: USD
-Vendor: Stripe Processing
+Vendor: Nimbus Components
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                               60.78
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice STR-2026-09-0057 on the payment advice.
+Please include invoice NIM-2026-09-0057 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@stripeprocessing.example
+Questions: billing@nimbuscomponents.example

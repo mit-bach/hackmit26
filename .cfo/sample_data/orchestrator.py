@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from sample_data.adversarial import fill_scale_pnl, finish_adversarial, plant_adversarial
 from sample_data.agents.ap_ar import APARSampleDataAgent
 from sample_data.agents.audit_controls import AuditControlsSampleDataAgent
 from sample_data.agents.cash_recon import CashReconSampleDataAgent
@@ -43,10 +44,13 @@ class CFOSampleDataOrchestrator:
         cash.generate(ctx)
         close.generate(ctx)
         expand_registers(ctx)
+        plant_adversarial(ctx)
         audit.generate(ctx)
+        fill_scale_pnl(ctx)
         reporting.generate(ctx)
         add_chart(ctx)
         plant_extended_scenarios(ctx)
+        finish_adversarial(ctx)
         validate_dataset(ctx)
         if output is not None:
             write_dataset(ctx, Path(output))

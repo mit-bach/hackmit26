@@ -22,6 +22,7 @@ afterEach(() => {
 test("architecture first paint is a graph of Bot buttons and Handle edges", () => {
   const { container } = render(<Architecture />);
   expect(screen.getByRole("heading", { name: "The office" })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /How the finance team is actually organized/i })).toBeInTheDocument();
   expect(container.querySelector(".arch-rooms")).toBeNull();
   expect(container.querySelector(".arch-node")).toBeNull();
   expect(container.querySelectorAll(".flow-node").length).toBe(GRAIN_SLUGS.length + 1);
@@ -31,10 +32,10 @@ test("architecture first paint is a graph of Bot buttons and Handle edges", () =
     expect(container.querySelector(`[data-node-id="${slug}"]`)).not.toBeNull();
   }
   expect(container.querySelector('[data-node-id="world"]')).not.toBeNull();
-  expect(screen.queryByRole("heading", { name: "Accounts Payable Agent" })).not.toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "Accounts Payable Agent" })).toBeInTheDocument();
 });
 
-test("clicking AP emphasizes its Handles and opens an inspector", () => {
+test("clicking AP emphasizes its Handles and opens the team panel", () => {
   const { container } = render(<Architecture />);
   fireEvent.click(screen.getByRole("button", { name: "Accounts Payable" }));
   const inspector = container.querySelector(".office-inspector");
@@ -56,25 +57,30 @@ test("clicking World stays on a static not-attached panel", () => {
   expect(inspector?.textContent).toMatch(/simulated mailbox/i);
   expect(inspector?.textContent).toMatch(/send_office_outbound/i);
   expect(inspector?.querySelector(".office-inspector-name")?.textContent).toBe("World");
-  expect(container.querySelector("details")).toBeNull();
 });
 
-test("Pitch nav walks Home, Office graph, Three stories, Capabilities, Evidence", () => {
+test("Showcase nav walks Home, How they work, One invoice, and live office", () => {
   render(
     <MemoryRouter initialEntries={["/architecture"]}>
       <App />
     </MemoryRouter>
   );
-  const pitch = screen.getByText("Pitch").parentElement;
-  expect(pitch).not.toBeNull();
-  const pitchLinks = pitch ? within(pitch).getAllByRole("link").map((link) => link.textContent) : [];
-  expect(pitchLinks).toEqual(["Home", "Office graph", "Three stories", "Capabilities", "Evidence"]);
-  expect(screen.getByText("Capabilities")).toBeInTheDocument();
-  expect(screen.queryByText("Showcase")).not.toBeInTheDocument();
-  expect(screen.queryByRole("link", { name: "One invoice" })).not.toBeInTheDocument();
-  const live = screen.getByText("Live office").parentElement;
-  expect(live && within(live).getByRole("link", { name: "Memory" })).toBeTruthy();
-  const more = screen.getByText("More").parentElement;
-  expect(more && within(more).getByRole("link", { name: "Simulations" })).toBeTruthy();
-  expect(more && within(more).getByRole("link", { name: "Videos" })).toBeTruthy();
+  const showcase = screen.getByText("Showcase").parentElement;
+  expect(showcase).not.toBeNull();
+  const showcaseLinks = showcase ? within(showcase).getAllByRole("link").map((link) => link.textContent) : [];
+  expect(showcaseLinks).toEqual([
+    "Home",
+    "How they work",
+    "One invoice",
+    "Saved decisions",
+    "Simulations",
+    "Videos",
+    "What it covers",
+    "Evaluation",
+  ]);
+  expect(screen.getByRole("link", { name: "One invoice" })).toHaveAttribute("href", "/workflow");
+  const live = screen.getByText("Live office", { selector: ".nav-label" }).parentElement;
+  expect(live && within(live).getByRole("link", { name: "Cash outlook" })).toBeTruthy();
+  expect(live && within(live).getByRole("link", { name: "The team" })).toBeTruthy();
+  expect(live && within(live).getByRole("link", { name: "Bank vs books" })).toBeTruthy();
 });

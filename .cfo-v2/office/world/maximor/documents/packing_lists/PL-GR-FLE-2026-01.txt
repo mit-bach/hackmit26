@@ -1,0 +1,11 @@
+Freightline Expedite
+Packing list
+Ship date: 2026-01-21
+PO Number: PO-FLE-2026-01
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO -01-0121
+
+Contents:
+  - Line GR-FLE-2026-01 — qty 1
+
+This packing list is not an invoice.

@@ -1,0 +1,57 @@
+[
+  {
+    "emp_id": "EMP-4128",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-1088",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-2290",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": false
+  },
+  {
+    "emp_id": "EMP-2201",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-3304",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-3310",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-6722",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-4402",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-5510",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-1190",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  },
+  {
+    "emp_id": "EMP-0901",
+    "last_login": "2026-09-19T12:00:00Z",
+    "active": true
+  }
+]

@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-HBP-2026-01
+PO Number: PO-HBP-2026-01
+Issued: 2026-01-08
+Vendor: Hartford Brokerage Partners
+Vendor legal name: Hartford Brokerage Partners LLC
+Vendor tax ID: 06-2291188
+Authorized amount: 18,600.00
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Cyber rider
+
+This purchase order is not an invoice. The vendor must bill against PO-HBP-2026-01.
+Payment terms follow the vendor master unless this order states otherwise.

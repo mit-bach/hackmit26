@@ -16,7 +16,7 @@ This file is the only place HARD vs SOFT is defined. Procedures point here.
 | **HARD** | Throw, crash, missing Grant, missing op, bind refuse, sidecar down, ImportError, two Handle stores disagree, Operator still in the completion path, identity never entered Kernel | Stop this instance | Stop this procedure | Code, constructors, compiler, Harness generic bus, intercept, Handle unlock. Then new instance or wipe |
 | **BLOCKED-CORRECT** | Kernel or Verifier refused in the way the corpus requires (`$12.40` unexplained, HOLD missing GR, collect while deposits remain) | Keep | Continue | Nothing. This is a pass of law |
 | **HONEST-EMPTY** | Profile has `ops: []` and the corpus already said that Profile is not a Catalog caller (Close Manager coordinate; sample-data Display names) | Keep | Tick as honest, not as office-live caller | Do not fake ops in `grants.json` |
-| **SKIP** | Step cannot run because an upstream hole is named (World off Roster; Stripe empty Display name). The hole is already HARD or HONEST on another row | Keep | Continue other steps | Do not skip silently |
+| **SKIP** | Step cannot run because an upstream hole is named (this instance dropped World; no EDI documents in pack). The hole is already HARD or HONEST on another row | Keep | Continue other steps | Do not skip silently |
 
 RUNS vs SOFT: if you expected only “does not throw,” the step is RUNS. If you expected a specific next state and did not get it, and nothing threw, the step is SOFT (skill/judgment) **unless** the miss is a missing door the model could not open. Missing door is HARD (T3).
 

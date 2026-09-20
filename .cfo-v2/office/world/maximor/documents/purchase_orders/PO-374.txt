@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-374
 PO Number: PO-374
 Issued: 2026-09-21
-Vendor: Slack Technologies
-Vendor legal name: Slack Technologies, LLC
-Vendor tax ID: 45-3887470
+Vendor: Juniper Works
+Vendor legal name: Juniper Works
+Vendor tax ID: 00-0000000
 Authorized amount: 660.78
 Currency: USD
 Approver: Jordan Hale

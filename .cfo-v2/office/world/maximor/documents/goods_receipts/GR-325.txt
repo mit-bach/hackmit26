@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-325
 PO Number: PO-325
-Vendor: Twilio
+Vendor: Alder Components
 Goods received in full on 2026-09-26
 Packing list attached: PL-GR-325
 Quantity ordered: 1

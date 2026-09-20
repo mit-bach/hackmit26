@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-347
 PO Number: PO-347
-Vendor: Notion Labs
+Vendor: Office Depot
 Goods received in full on 2026-09-21
 Packing list attached: PL-GR-347
 Quantity ordered: 1

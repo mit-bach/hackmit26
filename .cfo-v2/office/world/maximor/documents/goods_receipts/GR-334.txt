@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-334
 PO Number: PO-334
-Vendor: FedEx
+Vendor: Wharf Group
 Goods received in full on 2026-09-08
 Packing list attached: PL-GR-334
 Quantity ordered: 1

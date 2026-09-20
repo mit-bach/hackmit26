@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-353
 PO Number: PO-353
-Vendor: Dell Technologies
+Vendor: Carta
 Goods received in full on 2026-09-27
 Packing list attached: PL-GR-353
 Quantity ordered: 1

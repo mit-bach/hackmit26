@@ -1,0 +1,11 @@
+GitHub
+Packing list
+Ship date: 2026-09-15
+PO Number: PO-368
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 368-0915
+
+Contents:
+  - Line GR-368 — qty 1
+
+This packing list is not an invoice.

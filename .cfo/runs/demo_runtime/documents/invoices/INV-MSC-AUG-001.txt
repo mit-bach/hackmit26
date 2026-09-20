@@ -1,0 +1,39 @@
+Miscellaneous Industrial Supplies Co.
+14 Warehouse Road
+Medford, MA 02155
+Phone +1 781-555-0177   billing@miscsupplies.example
+Tax ID 04-2299104
+
+INVOICE
+
+Invoice Number: INV-MSC-AUG-001-VIN
+Invoice Date: 2026-08-28
+Due Date: 2026-09-15
+PO Number: (none)
+Payment Terms: net 30
+Currency: USD
+Vendor: Misc Supplies
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Unclassified August COGS                      1.00     10,000.00     10,000.00
+
+Subtotal                                                             10,000.00
+Tax                                                                       0.00
+Amount Due                                                           10,000.00
+
+Remit to:
+ACH Santander routing 011075150  account ****MSC1
+Bank: Santander  ****MSC1
+Please include invoice INV-MSC-AUG-001-VIN on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@miscsupplies.example

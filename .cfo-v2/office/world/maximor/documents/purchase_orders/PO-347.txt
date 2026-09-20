@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-347
 PO Number: PO-347
 Issued: 2026-09-21
-Vendor: Notion Labs
-Vendor legal name: Notion Labs
-Vendor tax ID: 00-0000000
+Vendor: Office Depot
+Vendor legal name: Office Depot, LLC
+Vendor tax ID: 59-2663954
 Authorized amount: 37.69
 Currency: USD
 Approver: Jordan Hale

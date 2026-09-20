@@ -128,8 +128,9 @@ def test_agent_cases_execute_against_live_workflows(tmp_path):
         "AC-CLOSE-REVIEW",
         "AC-VARIANCE",
     }
-    demo_root = Path(__file__).resolve().parents[1] / "data" / "demo"
-    with operational_dataset(demo_root, tmp_path / "agent_state"):
+    from sample_data.paths import OFFICE_WORLD
+
+    with operational_dataset(OFFICE_WORLD, tmp_path / "agent_state"):
         payload = run_agent_cases()
     assert payload["unhandled"] == []
     assert payload["total"] == 24

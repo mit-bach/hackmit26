@@ -25,6 +25,7 @@ from cash_recon.agent import (
     preparer_agent as cash_recon_preparer,
     reviewer_agent as cash_recon_reviewer,
 )
+from integrations.agent import payout_agent
 from prepaid.agent import prepaid_preparer, prepaid_reviewer
 from fixed_assets.agent import fixed_asset_preparer, fixed_asset_reviewer
 from bs_recon.agent import bs_preparer, bs_reviewer
@@ -77,6 +78,7 @@ AGENTS_BY_NAME = {
     cash_recon_preparer.name: cash_recon_preparer,
     cash_recon_investigator.name: cash_recon_investigator,
     cash_recon_reviewer.name: cash_recon_reviewer,
+    payout_agent.name: payout_agent,
     prepaid_preparer.name: prepaid_preparer,
     prepaid_reviewer.name: prepaid_reviewer,
     fixed_asset_preparer.name: fixed_asset_preparer,
@@ -136,6 +138,7 @@ EXPECTED_ASSIGNMENTS = {
         "bank-reference-interpretation",
         "reconciliation-evidence-validation",
     ),
+    "Stripe Payout Agent": (),
 }
 
 

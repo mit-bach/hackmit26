@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-393
 PO Number: PO-393
 Issued: 2026-09-13
-Vendor: CleanRoom Janitorial
-Vendor legal name: CleanRoom Janitorial
-Vendor tax ID: 00-0000000
+Vendor: Amazon Web Services
+Vendor legal name: Amazon Web Services, Inc.
+Vendor tax ID: 91-1646860
 Authorized amount: 155.04
 Currency: USD
 Approver: Jordan Hale

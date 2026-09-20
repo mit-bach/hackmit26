@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-345
 PO Number: PO-345
-Vendor: Figma
+Vendor: Nimbus Components
 Goods received in full on 2026-09-19
 Packing list attached: PL-GR-345
 Quantity ordered: 1

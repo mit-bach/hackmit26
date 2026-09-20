@@ -1,0 +1,39 @@
+North Line Fab Inc
+440 D Street
+Boston, MA 02210
+Phone +1 617-555-4402   ar@northlinefab.example
+Tax ID 04-7712091
+
+INVOICE
+
+Invoice Number: NLF2-2026-03
+Invoice Date: 2026-03-16
+Due Date: 2026-04-15
+PO Number: PO-NLF-02-2026-03
+Payment Terms: net 30
+Currency: USD
+Vendor: North Line Fab Inc
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Secondary fab cell. SKU                       1.00     10,440.22     10,440.22
+
+Subtotal                                                             10,440.22
+Tax                                                                       0.00
+Amount Due                                                           10,440.22
+
+Remit to:
+ACH Citizens routing 011500120  account ****4402
+Bank: Citizens Bank  ****4402
+Please include invoice NLF2-2026-03 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: ar@northlinefab.example

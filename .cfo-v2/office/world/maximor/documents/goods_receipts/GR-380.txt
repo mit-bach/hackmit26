@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-380
 PO Number: PO-380
-Vendor: Linear App
+Vendor: Quarry Network
 Goods received in full on 2026-09-27
 Packing list attached: PL-GR-380
 Quantity ordered: 1

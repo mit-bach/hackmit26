@@ -1,0 +1,173 @@
+{
+  "reconciliation_id": "REC-009",
+  "period": "2026-09",
+  "match_type": "EXACT_MATCH",
+  "status": "MATCHED",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-2026-09-020R",
+      "date": "2026-09-20",
+      "amount": -50000.0,
+      "currency": "USD",
+      "description": "WIRE OUT NORTHWIND PHANTOM",
+      "reference": "",
+      "counterparty": "NORTHWIND PHANTOM LLC",
+      "transaction_type": "wire_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -5000000,
+      "raw_metadata": {
+        "payment_id": "PAY-AP-009"
+      }
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-AP-ROUND",
+      "date": "2026-09-20",
+      "amount": -50000.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Northwind Phantom LLC",
+      "reference": "INV-009",
+      "description": "Vendor payment INV-009",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -5000000,
+      "raw_metadata": {
+        "payment_id": "PAY-AP-009"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-020R:GL-AP-ROUND",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-2026-09-020R"
+      ],
+      "ledger_entry_ids": [
+        "GL-AP-ROUND"
+      ],
+      "bank_amount": -50000.0,
+      "ledger_amount": -50000.0,
+      "difference": 0.0,
+      "bank_amount_minor": -5000000,
+      "ledger_amount_minor": -5000000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 1.8499999999999999,
+      "evidence": [
+        "amount:-5000000",
+        "bank_date:2026-09-20",
+        "ledger_date:2026-09-20",
+        "counterparty_overlap:0.40"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -5000000,
+    "ledger_amount_minor": -5000000,
+    "difference_minor": 0,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "EXACT_MATCH:TXN-2026-09-020R:GL-AP-ROUND",
+    "selected_candidate_id": "EXACT_MATCH:TXN-2026-09-020R:GL-AP-ROUND",
+    "disposition": "MATCHED",
+    "confidence": 1.0,
+    "reasons": [
+      "Bank TXN-2026-09-020R equals ledger GL-AP-ROUND at -$50,000.00."
+    ],
+    "evidence_used": [
+      "amount:-5000000",
+      "bank_date:2026-09-20",
+      "ledger_date:2026-09-20",
+      "counterparty_overlap:0.40"
+    ],
+    "review_question": null
+  },
+  "investigation": null,
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": false,
+    "reasons": []
+  },
+  "reviewer": {
+    "case_id": "EXACT_MATCH:TXN-2026-09-020R:GL-AP-ROUND",
+    "reviewer_status": "CONFIRMED",
+    "disposition": "MATCHED",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Python validation passed"
+    ],
+    "arithmetic_ok": true,
+    "human_review": false
+  },
+  "final": {
+    "reconciliation_id": "REC-009",
+    "period": "2026-09",
+    "match_key": "eaa7d6872a25b53e",
+    "bank_transaction_ids": [
+      "TXN-2026-09-020R"
+    ],
+    "ledger_entry_ids": [
+      "GL-AP-ROUND"
+    ],
+    "match_type": "EXACT_MATCH",
+    "bank_amount": -50000.0,
+    "ledger_amount": -50000.0,
+    "difference": 0.0,
+    "bank_amount_minor": -5000000,
+    "ledger_amount_minor": -5000000,
+    "difference_minor": 0,
+    "confidence": 1.0,
+    "status": "MATCHED",
+    "explanation": "Bank TXN-2026-09-020R equals ledger GL-AP-ROUND at -$50,000.00.",
+    "evidence": [
+      "amount:-5000000",
+      "bank_date:2026-09-20",
+      "ledger_date:2026-09-20",
+      "counterparty_overlap:0.40"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "CONFIRMED",
+    "human_review": false,
+    "candidate_id": "EXACT_MATCH:TXN-2026-09-020R:GL-AP-ROUND",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -5000000,
+      "ledger_amount_minor": -5000000,
+      "difference_minor": 0,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": false,
+  "evidence": [
+    "amount:-5000000",
+    "bank_date:2026-09-20",
+    "ledger_date:2026-09-20",
+    "counterparty_overlap:0.40"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "memory_lookup": null,
+  "written_memory_id": null,
+  "trace_path": null
+}

@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-366
 PO Number: PO-366
-Vendor: Amazon Web Services
+Vendor: Keel Group
 Goods received in full on 2026-09-13
 Packing list attached: PL-GR-366
 Quantity ordered: 1

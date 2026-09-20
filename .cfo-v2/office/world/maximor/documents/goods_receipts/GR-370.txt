@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-370
 PO Number: PO-370
-Vendor: Helios Hardware Supply
+Vendor: Walnut Network
 Goods received in full on 2026-09-17
 Packing list attached: PL-GR-370
 Quantity ordered: 1

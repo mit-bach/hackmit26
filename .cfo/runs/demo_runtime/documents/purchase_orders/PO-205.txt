@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-205
+PO Number: PO-205
+Issued: 2026-09-01
+Vendor: Helios Hardware
+Vendor legal name: Helios Hardware, Inc.
+Vendor tax ID: 04-7733102
+Authorized amount: 10,000.00
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Lab controllers
+
+This purchase order is not an invoice. The vendor must bill against PO-205.
+Payment terms follow the vendor master unless this order states otherwise.

@@ -1,18 +1,18 @@
-FedEx
+Wharf Group
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@fedex.example
+Phone +1 617-555-0000   billing@wharfgroup.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: FED-2026-09-0034
+Invoice Number: WHA-2026-09-0034
 Invoice Date: 2026-09-08
 Due Date: 2026-10-08
 PO Number: PO-334
 Payment Terms: net 30
 Currency: USD
-Vendor: FedEx
+Vendor: Wharf Group
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                            1,760.00
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice FED-2026-09-0034 on the payment advice.
+Please include invoice WHA-2026-09-0034 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@fedex.example
+Questions: billing@wharfgroup.example

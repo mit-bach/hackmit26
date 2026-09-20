@@ -1,18 +1,18 @@
-Harbor Electric Company
-800 Massachusetts Avenue
-Cambridge, MA 02139
-Phone +1 800-555-0192   billing@harborelectric.example
-Tax ID 04-1002201
+Echo Group
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@echogroup.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: HAR-2026-09-0024
+Invoice Number: ECH-2026-09-0024
 Invoice Date: 2026-09-25
 Due Date: 2026-10-25
 PO Number: PO-324
-Payment Terms: net 20
+Payment Terms: net 30
 Currency: USD
-Vendor: Harbor Electric
+Vendor: Echo Group
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                              294.91
 
 Remit to:
-ACH State Street routing 011000028  account ****HE01
-Bank: State Street  ****HE01
-Please include invoice HAR-2026-09-0024 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice ECH-2026-09-0024 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@harborelectric.example
+Questions: billing@echogroup.example

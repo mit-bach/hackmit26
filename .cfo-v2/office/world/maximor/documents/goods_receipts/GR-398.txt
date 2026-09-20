@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-398
 PO Number: PO-398
-Vendor: Notion Labs
+Vendor: Pagaya Coffee Service
 Goods received in full on 2026-09-18
 Packing list attached: PL-GR-398
 Quantity ordered: 1

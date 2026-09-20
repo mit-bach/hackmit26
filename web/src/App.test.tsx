@@ -54,18 +54,18 @@ test.each(ROUTES)("renders %s without hardcoded demo success copy", async (route
   expect(screen.queryByText("Invoice approved")).not.toBeInTheDocument();
 });
 
-test("inbox classify stage has a sample control and no invoice approved", async () => {
+test("inbox classify stage has curated documents and a run control", async () => {
   const { container } = render(
     <MemoryRouter initialEntries={["/inbox"]}>
       <App />
     </MemoryRouter>
   );
   expect(screen.queryByText("Invoice approved")).not.toBeInTheDocument();
-  expect(screen.getByRole("heading", { name: /What arrived/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /What just arrived in finance email/i })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /Identify this document/i })).toBeInTheDocument();
-  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
-  expect(container.querySelector(".io-flow")).toBeNull();
-  expect(screen.queryByText("What changed")).not.toBeInTheDocument();
+  expect(screen.getAllByText(/August warehouse supplies invoice/i).length).toBeGreaterThan(0);
+  expect(screen.getAllByText(/Quote for office renovation/i).length).toBeGreaterThan(0);
+  expect(container.querySelector(".io-flow")).not.toBeNull();
 });
 
 test("audit and memory omit the happening essay", async () => {
@@ -87,17 +87,17 @@ test("audit and memory omit the happening essay", async () => {
   expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
 });
 
-test("agents page is an activity tape, not a second architecture", async () => {
+test("agents page is the team directory with recent activity", async () => {
   render(
     <MemoryRouter initialEntries={["/agents"]}>
       <App />
     </MemoryRouter>
   );
-  expect(await screen.findByRole("heading", { name: /What the Bots just did/i })).toBeInTheDocument();
-  expect(screen.getByRole("link", { name: /Open office graph/i })).toHaveAttribute("href", "/architecture");
+  expect(await screen.findByRole("heading", { name: /The finance team/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "The team" })).toBeInTheDocument();
+  expect(screen.getByText(/Who it works with/i)).toBeInTheDocument();
   expect(screen.queryByText("Fifteen bots")).not.toBeInTheDocument();
   expect(screen.queryByText(/43 autonomous agents/i)).not.toBeInTheDocument();
-  expect(screen.queryByText(/Who it works with/i)).not.toBeInTheDocument();
 });
 
 test("evaluations route is the kernel gauntlet scoreboard", async () => {

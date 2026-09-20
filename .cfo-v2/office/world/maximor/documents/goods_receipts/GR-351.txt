@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-351
 PO Number: PO-351
-Vendor: Acme Supplies
+Vendor: Staples Business Advantage
 Goods received in full on 2026-09-25
 Packing list attached: PL-GR-351
 Quantity ordered: 1

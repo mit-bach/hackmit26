@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-368
 PO Number: PO-368
-Vendor: GitHub
+Vendor: Echo Labs
 Goods received in full on 2026-09-15
 Packing list attached: PL-GR-368
 Quantity ordered: 1

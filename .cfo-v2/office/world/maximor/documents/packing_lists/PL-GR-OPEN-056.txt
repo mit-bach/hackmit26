@@ -1,0 +1,11 @@
+Quarry Services
+Packing list
+Ship date: 2026-09-03
+PO Number: PO-OPEN-056
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 056-0903
+
+Contents:
+  - Line GR-OPEN-056 — qty 1
+
+This packing list is not an invoice.

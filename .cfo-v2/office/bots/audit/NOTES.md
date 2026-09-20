@@ -1,12 +1,15 @@
-# Session 11 notes
+# Audit — period pass notes
 
-Wrote this slice against the Constitution, grain § audit, and compiled Grants.
+Operational Grants omit `get_audit_ground_truth`. Eval Grants may include it on Auditor Agent only. Audit Report Agent stays `tools=[]`: Kernel `ReportStats` on the packet, not a ledger searcher.
 
-Missing at write time (earlier sessions):
+`source_records_mutated` stays false. Path lease before writes under `workspace/audit/` and `runs/audit/`.
 
-- Live Pi bind (`HARNESS_BOT=audit`) and `bot_send_prompt` / `bot_get_agent_transcript_tail` on a running Harness
-- Kernel sidecar RPC (`python -m cfo_kernel`). Grant refuse is local in `grants.py` plus the Pi facade `call.ts`
+Audit is not `ctl-pay`. It does not concur on Friday’s wire. It does not fix the books.
 
-Handle completion was not live-proven. Kernel `run_audit` and unit tests are the proof layer.
+Loud decoys are planted. Stealth holdout is not in operational books. Do not retell decoys as the product.
 
-Do not use this Bot as the pay-run approver. That object belongs to `ctl-pay`.
+## Routines
+
+Live `client.json` has `autoRoutines: false`. Routine `post-close-assurance` will not fire itself. Floor owns that flag.
+
+Handle completion on live Pi is not claimed here. Kernel `run_audit` and unit tests are the proof layer.

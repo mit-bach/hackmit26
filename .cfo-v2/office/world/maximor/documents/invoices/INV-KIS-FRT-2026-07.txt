@@ -1,0 +1,39 @@
+Kestrel Industrial Supply LLC
+18 Ware Street
+Cambridge, MA 02138
+Phone +1 617-555-4419   billing@kestrelindustrial.example
+Tax ID 87-2144091
+
+INVOICE
+
+Invoice Number: KIS-FRT-2026-07
+Invoice Date: 2026-07-22
+Due Date: 2026-08-06
+PO Number: PO-KIS-FRT-STANDING
+Payment Terms: net 30
+Currency: USD
+Vendor: Kestrel Industrial Supply LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Freight add-on under standing PO. SKU         1.00        248.40        248.40
+
+Subtotal                                                                248.40
+Tax                                                                       0.00
+Amount Due                                                              248.40
+
+Remit to:
+ACH routing 011000138  account ****4419
+Bank: First National Bank  ****4419
+Please include invoice KIS-FRT-2026-07 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@kestrelindustrial.example

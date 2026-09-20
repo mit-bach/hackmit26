@@ -1,0 +1,536 @@
+{
+  "ok": true,
+  "trace_id": "web_4ddad74efde5",
+  "workflow": "ingest",
+  "ts": "2026-09-20T14:14:21Z",
+  "completed_at": "2026-09-20T14:14:21Z",
+  "status": "completed",
+  "bots": [
+    "email",
+    "ap"
+  ],
+  "record_ids": [],
+  "live_llm": false,
+  "result": {
+    "summary": "The document was identified as a invoice",
+    "sample_id": "MSG-E-INV-001",
+    "classification": "invoice",
+    "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due",
+    "extracted": {
+      "source_type": "email",
+      "source_id": "MSG-E-INV-001",
+      "source_uri": null,
+      "vendor": "Acme Supplies",
+      "vendor_id": null,
+      "vendor_invoice_number": "ACM-2026-4410",
+      "invoice_date": "2026-09-08",
+      "due_date": null,
+      "currency": null,
+      "subtotal": null,
+      "tax": null,
+      "amount": 12450.0,
+      "po_id": "PO-101",
+      "line_items": [],
+      "document_path": "ACM-2026-4410.pdf",
+      "document_hash": "8606911b0ac5dfc2715b1c7004b7cde8b47708a7610cda994adc1cd7e288f813",
+      "page_refs": [
+        "page 1"
+      ],
+      "extraction_confidence": 0.86,
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Acme Supplies",
+          "value": "Acme Supplies"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice number: ACM-2026-4410",
+          "value": "ACM-2026-4410"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-08",
+          "value": "2026-09-08"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 12450.0
+        }
+      ],
+      "source_context": {
+        "from": "billing@acmesupplies.example",
+        "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+        "attachment_id": "ATT-E-001",
+        "filename": "ACM-2026-4410.pdf",
+        "document_analysis": {
+          "classification": "invoice",
+          "reason": "Document contains vendor, invoice number, invoice date, and amount due",
+          "payable": true,
+          "flags": [],
+          "supersedes": null,
+          "tax_consistent": null,
+          "banking": {}
+        }
+      },
+      "classification": "invoice",
+      "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due"
+    },
+    "candidates": [
+      {
+        "source_type": "email",
+        "source_id": "MSG-E-INV-001",
+        "source_uri": null,
+        "vendor": "Acme Supplies",
+        "vendor_id": null,
+        "vendor_invoice_number": "ACM-2026-4410",
+        "invoice_date": "2026-09-08",
+        "due_date": null,
+        "currency": null,
+        "subtotal": null,
+        "tax": null,
+        "amount": 12450.0,
+        "po_id": "PO-101",
+        "line_items": [],
+        "document_path": "ACM-2026-4410.pdf",
+        "document_hash": "8606911b0ac5dfc2715b1c7004b7cde8b47708a7610cda994adc1cd7e288f813",
+        "page_refs": [
+          "page 1"
+        ],
+        "extraction_confidence": 0.86,
+        "evidence": [
+          {
+            "field": "vendor",
+            "source": "email.text",
+            "text": "Acme Supplies",
+            "value": "Acme Supplies"
+          },
+          {
+            "field": "vendor_invoice_number",
+            "source": "email.text",
+            "text": "Invoice number: ACM-2026-4410",
+            "value": "ACM-2026-4410"
+          },
+          {
+            "field": "invoice_date",
+            "source": "email.text",
+            "text": "2026-09-08",
+            "value": "2026-09-08"
+          },
+          {
+            "field": "amount",
+            "source": "email.text",
+            "text": null,
+            "value": 12450.0
+          }
+        ],
+        "source_context": {
+          "from": "billing@acmesupplies.example",
+          "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+          "attachment_id": "ATT-E-001",
+          "filename": "ACM-2026-4410.pdf",
+          "document_analysis": {
+            "classification": "invoice",
+            "reason": "Document contains vendor, invoice number, invoice date, and amount due",
+            "payable": true,
+            "flags": [],
+            "supersedes": null,
+            "tax_consistent": null,
+            "banking": {}
+          }
+        },
+        "classification": "invoice",
+        "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due"
+      }
+    ],
+    "report": {
+      "period": "2026-09",
+      "started_at": "2026-09-20T14:14:21Z",
+      "source_runs": [],
+      "candidates": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-E-INV-001",
+          "source_uri": null,
+          "vendor": "Acme Supplies",
+          "vendor_id": null,
+          "vendor_invoice_number": "ACM-2026-4410",
+          "invoice_date": "2026-09-08",
+          "due_date": null,
+          "currency": null,
+          "subtotal": null,
+          "tax": null,
+          "amount": 12450.0,
+          "po_id": "PO-101",
+          "line_items": [],
+          "document_path": "ACM-2026-4410.pdf",
+          "document_hash": "8606911b0ac5dfc2715b1c7004b7cde8b47708a7610cda994adc1cd7e288f813",
+          "page_refs": [
+            "page 1"
+          ],
+          "extraction_confidence": 0.86,
+          "evidence": [
+            {
+              "field": "vendor",
+              "source": "email.text",
+              "text": "Acme Supplies",
+              "value": "Acme Supplies"
+            },
+            {
+              "field": "vendor_invoice_number",
+              "source": "email.text",
+              "text": "Invoice number: ACM-2026-4410",
+              "value": "ACM-2026-4410"
+            },
+            {
+              "field": "invoice_date",
+              "source": "email.text",
+              "text": "2026-09-08",
+              "value": "2026-09-08"
+            },
+            {
+              "field": "amount",
+              "source": "email.text",
+              "text": null,
+              "value": 12450.0
+            }
+          ],
+          "source_context": {
+            "from": "billing@acmesupplies.example",
+            "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+            "attachment_id": "ATT-E-001",
+            "filename": "ACM-2026-4410.pdf",
+            "document_analysis": {
+              "classification": "invoice",
+              "reason": "Document contains vendor, invoice number, invoice date, and amount due",
+              "payable": true,
+              "flags": [],
+              "supersedes": null,
+              "tax_consistent": null,
+              "banking": {}
+            }
+          },
+          "classification": "invoice",
+          "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due"
+        }
+      ],
+      "rejected": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-E-INV-001",
+          "source_uri": null,
+          "vendor": "Acme Supplies",
+          "vendor_id": null,
+          "vendor_invoice_number": "ACM-2026-4410",
+          "invoice_date": "2026-09-08",
+          "due_date": null,
+          "currency": null,
+          "subtotal": null,
+          "tax": null,
+          "amount": 12450.0,
+          "po_id": "PO-101",
+          "line_items": [],
+          "document_path": "ACM-2026-4410.pdf",
+          "document_hash": "8606911b0ac5dfc2715b1c7004b7cde8b47708a7610cda994adc1cd7e288f813",
+          "page_refs": [
+            "page 1"
+          ],
+          "extraction_confidence": 0.86,
+          "evidence": [
+            {
+              "field": "vendor",
+              "source": "email.text",
+              "text": "Acme Supplies",
+              "value": "Acme Supplies"
+            },
+            {
+              "field": "vendor_invoice_number",
+              "source": "email.text",
+              "text": "Invoice number: ACM-2026-4410",
+              "value": "ACM-2026-4410"
+            },
+            {
+              "field": "invoice_date",
+              "source": "email.text",
+              "text": "2026-09-08",
+              "value": "2026-09-08"
+            },
+            {
+              "field": "amount",
+              "source": "email.text",
+              "text": null,
+              "value": 12450.0
+            }
+          ],
+          "source_context": {
+            "from": "billing@acmesupplies.example",
+            "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+            "attachment_id": "ATT-E-001",
+            "filename": "ACM-2026-4410.pdf",
+            "document_analysis": {
+              "classification": "invoice",
+              "reason": "Document contains vendor, invoice number, invoice date, and amount due",
+              "payable": true,
+              "flags": [],
+              "supersedes": null,
+              "tax_consistent": null,
+              "banking": {}
+            }
+          },
+          "classification": "invoice",
+          "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due"
+        }
+      ],
+      "canonical_invoices": [],
+      "discovery": [],
+      "traces": [],
+      "duplicates_removed": 0,
+      "forwarded_invoice_ids": [],
+      "new_canonical_count": 0,
+      "replayed_canonical_count": 0,
+      "provenance_updates": 0,
+      "new_ap_handoffs": 0,
+      "errors": [],
+      "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/ingestion/ingest-2026-09-20260920T141421Z.json"
+    },
+    "stages": [
+      {
+        "id": "received",
+        "label": "Document received",
+        "status": "completed",
+        "detail": "Invoice ACM-2026-4410 from Acme Supplies"
+      },
+      {
+        "id": "classified",
+        "label": "Identify what kind of document arrived",
+        "status": "completed",
+        "detail": "invoice"
+      },
+      {
+        "id": "fields",
+        "label": "Read vendor, amount, dates, and invoice number",
+        "status": "completed",
+        "detail": "Document contains vendor, invoice number, invoice date, and amount due"
+      },
+      {
+        "id": "canonical",
+        "label": "Create a vendor bill only if this is actually an invoice",
+        "status": "skipped",
+        "detail": "not treated as a vendor invoice"
+      },
+      {
+        "id": "duplicate",
+        "label": "Check for a second copy of the same bill",
+        "status": "completed",
+        "detail": "0 duplicate copies set aside"
+      }
+    ],
+    "record_ids": [],
+    "handoffs": [
+      {
+        "display_name": "Email Invoice Agent",
+        "slug": "email",
+        "profile": "invoice",
+        "bot_id": "bot_email"
+      },
+      {
+        "display_name": "AP Preparer",
+        "slug": "ap",
+        "profile": "prepare",
+        "bot_id": "bot_ap"
+      }
+    ],
+    "source": {
+      "message_id": "MSG-E-INV-001",
+      "period": "2026-09",
+      "from": "billing@acmesupplies.example",
+      "to": "ap@maximor.example",
+      "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+      "sent_at": "2026-09-08T10:00:00Z",
+      "body": "Please find invoice ACM-2026-4410 for $12,450.00. PO-101.",
+      "attachments": [
+        {
+          "attachment_id": "ATT-E-001",
+          "filename": "ACM-2026-4410.pdf",
+          "content_type": "application/pdf",
+          "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+        }
+      ]
+    },
+    "io": {
+      "inputs": {
+        "email": {
+          "artifact_id": "MSG-E-INV-001",
+          "kind": "email",
+          "title": "Invoice ACM-2026-4410 from Acme Supplies",
+          "source_path": "ingestion/emails.json#MSG-E-INV-001",
+          "record": {
+            "message_id": "MSG-E-INV-001",
+            "period": "2026-09",
+            "from": "billing@acmesupplies.example",
+            "to": "ap@maximor.example",
+            "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+            "sent_at": "2026-09-08T10:00:00Z",
+            "body": "Please find invoice ACM-2026-4410 for $12,450.00. PO-101.",
+            "attachments": [
+              {
+                "attachment_id": "ATT-E-001",
+                "filename": "ACM-2026-4410.pdf",
+                "content_type": "application/pdf",
+                "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+              }
+            ]
+          },
+          "provenance": [
+            {
+              "id": "ATT-E-001",
+              "kind": "document"
+            }
+          ],
+          "email": {
+            "from": "billing@acmesupplies.example",
+            "to": "ap@maximor.example",
+            "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+            "sent_at": "2026-09-08T10:00:00Z",
+            "body": "Please find invoice ACM-2026-4410 for $12,450.00. PO-101.",
+            "attachments": [
+              {
+                "attachment_id": "ATT-E-001",
+                "filename": "ACM-2026-4410.pdf",
+                "content_type": "application/pdf",
+                "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+              }
+            ]
+          },
+          "attachments": [
+            {
+              "artifact_id": "ATT-E-001",
+              "kind": "document",
+              "title": "ACM-2026-4410.pdf",
+              "source_path": "ingestion/emails.json#MSG-E-INV-001/ATT-E-001",
+              "record": {
+                "attachment_id": "ATT-E-001",
+                "filename": "ACM-2026-4410.pdf",
+                "content_type": "application/pdf",
+                "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+              },
+              "provenance": [
+                {
+                  "id": "MSG-E-INV-001",
+                  "kind": "email"
+                }
+              ],
+              "filename": "ACM-2026-4410.pdf",
+              "content_type": "application/pdf",
+              "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+            }
+          ]
+        },
+        "attachments": [
+          {
+            "artifact_id": "ATT-E-001",
+            "kind": "document",
+            "title": "ACM-2026-4410.pdf",
+            "source_path": "ingestion/emails.json#MSG-E-INV-001/ATT-E-001",
+            "record": {
+              "attachment_id": "ATT-E-001",
+              "filename": "ACM-2026-4410.pdf",
+              "content_type": "application/pdf",
+              "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+            },
+            "provenance": [
+              {
+                "id": "MSG-E-INV-001",
+                "kind": "email"
+              }
+            ],
+            "filename": "ACM-2026-4410.pdf",
+            "content_type": "application/pdf",
+            "text": "INVOICE\nInvoice number: ACM-2026-4410\nInvoice date: 2026-09-08\nVendor: Acme Supplies\nAmount due: 12450.00\nPO: PO-101"
+          }
+        ]
+      },
+      "outputs": {
+        "classification": "invoice",
+        "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due",
+        "extracted": {
+          "source_type": "email",
+          "source_id": "MSG-E-INV-001",
+          "source_uri": null,
+          "vendor": "Acme Supplies",
+          "vendor_id": null,
+          "vendor_invoice_number": "ACM-2026-4410",
+          "invoice_date": "2026-09-08",
+          "due_date": null,
+          "currency": null,
+          "subtotal": null,
+          "tax": null,
+          "amount": 12450.0,
+          "po_id": "PO-101",
+          "line_items": [],
+          "document_path": "ACM-2026-4410.pdf",
+          "document_hash": "8606911b0ac5dfc2715b1c7004b7cde8b47708a7610cda994adc1cd7e288f813",
+          "page_refs": [
+            "page 1"
+          ],
+          "extraction_confidence": 0.86,
+          "evidence": [
+            {
+              "field": "vendor",
+              "source": "email.text",
+              "text": "Acme Supplies",
+              "value": "Acme Supplies"
+            },
+            {
+              "field": "vendor_invoice_number",
+              "source": "email.text",
+              "text": "Invoice number: ACM-2026-4410",
+              "value": "ACM-2026-4410"
+            },
+            {
+              "field": "invoice_date",
+              "source": "email.text",
+              "text": "2026-09-08",
+              "value": "2026-09-08"
+            },
+            {
+              "field": "amount",
+              "source": "email.text",
+              "text": null,
+              "value": 12450.0
+            }
+          ],
+          "source_context": {
+            "from": "billing@acmesupplies.example",
+            "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+            "attachment_id": "ATT-E-001",
+            "filename": "ACM-2026-4410.pdf",
+            "document_analysis": {
+              "classification": "invoice",
+              "reason": "Document contains vendor, invoice number, invoice date, and amount due",
+              "payable": true,
+              "flags": [],
+              "supersedes": null,
+              "tax_consistent": null,
+              "banking": {}
+            }
+          },
+          "classification": "invoice",
+          "classification_reason": "Document contains vendor, invoice number, invoice date, and amount due"
+        },
+        "canonical_invoices": [],
+        "duplicates_removed": 0,
+        "is_invoice": true,
+        "sample_id": "MSG-E-INV-001"
+      },
+      "before": null,
+      "after": null,
+      "explanation": "Document contains vendor, invoice number, invoice date, and amount due"
+    }
+  }
+}

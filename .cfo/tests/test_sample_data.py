@@ -13,6 +13,8 @@ from sample_data.orchestrator import generate_sample_data
 from sample_data.paths import data_root, snapshot_loader_paths
 from sample_data.pnl import (
     COGS_ACCOUNTS,
+    INTENDED_COGS_MINOR,
+    INTENDED_REVENUE_MINOR,
     OPERATIONAL_AP_IDS,
     cogs_invoice_ids,
     quantity_rate_amount,
@@ -150,12 +152,18 @@ def test_cogs_quantity_times_rate_equals_line_amount():
 
 def test_operational_ap_invoices_are_not_posted_to_cogs():
     ctx = generate_sample_data(seed=42, period="2026-09", output=None)
+    extra_cogs = (
+        "INV-COGS-HIST-",
+        "INV-PIN-",
+        "INV-ATL-",
+        "INV-FLE-",
+        "INV-SCALE-",
+    )
     for entry in ctx.journal_entries.values():
         if entry.debit_account in COGS_ACCOUNTS:
             assert entry.source_document_id not in OPERATIONAL_AP_IDS, entry.entry_id
-            assert entry.source_document_id in cogs_invoice_ids() or str(
-                entry.source_document_id
-            ).startswith("INV-COGS-HIST-")
+            source = str(entry.source_document_id)
+            assert source in cogs_invoice_ids() or source.startswith(extra_cogs), source
         if entry.source_document_id in {"INV-001", "INV-002", "INV-006", "INV-016", "INV-017"}:
             assert entry.debit_account not in COGS_ACCOUNTS
     cogs_sources = [
@@ -188,10 +196,10 @@ def test_reporting_ties_and_gross_margin():
             rev[line.period] += cents(line.amount)
         if line.account_class == "cogs" and line.side == "debit":
             cogs[line.period] += cents(line.amount)
-    assert rev["2026-08"] == 100_000_000
-    assert rev["2026-09"] == 100_000_000
-    assert cogs["2026-08"] == 36_000_000
-    assert cogs["2026-09"] == 39_000_000
+    assert rev["2026-08"] == INTENDED_REVENUE_MINOR["2026-08"]
+    assert rev["2026-09"] == INTENDED_REVENUE_MINOR["2026-09"]
+    assert cogs["2026-08"] == INTENDED_COGS_MINOR["2026-08"]
+    assert cogs["2026-09"] == INTENDED_COGS_MINOR["2026-09"]
     gm_aug = 1 - cogs["2026-08"] / rev["2026-08"]
     gm_sep = 1 - cogs["2026-09"] / rev["2026-09"]
     assert abs((gm_aug - gm_sep) - 0.03) < 1e-9
@@ -265,7 +273,12 @@ def test_company_scale_registers_and_plot_ids():
     assert len(text) >= 400
     assert "Amount Due" in text
     assert "HUMAN_REVIEW" not in text
-    assert ctx.company.legal_name == "Maximor Demo Corp"
+    assert len(ctx.vendors) >= 340
+    assert len(ctx.employee_master) == 2840
+    assert ctx.company.annual_revenue_run_rate == 372_400_000.00
+    assert ctx.expected is not None
+    assert len(ctx.expected.adversarial_holdout) == 109
+    assert ctx.expected.reconciliation_statuses["TXN-2026-09-015"] == "EXCEPTION_OPEN"
 
 
 def dollars_of(amount_minor: int) -> float:

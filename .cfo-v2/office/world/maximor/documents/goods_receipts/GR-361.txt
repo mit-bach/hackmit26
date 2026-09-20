@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-361
 PO Number: PO-361
-Vendor: Freightline Logistics
+Vendor: Beacon Partners
 Goods received in full on 2026-09-08
 Packing list attached: PL-GR-361
 Quantity ordered: 1

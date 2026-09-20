@@ -334,5 +334,562 @@
     "method": "straight_line_monthly",
     "days_in_period": 31,
     "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-01",
+    "amount": 4270.07,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 26,
+    "posted_in_period": "2025-01"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-02",
+    "amount": 4598.54,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 28,
+    "posted_in_period": "2025-02"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-03",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2025-03"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-04",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2025-04"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-05",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2025-05"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-06",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2025-06"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-07",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2025-07"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-08",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2025-08"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-09",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2025-09"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-10",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2025-10"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-11",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2025-11"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2025-12",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2025-12"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-01",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2026-01"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-02",
+    "amount": 4598.54,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 28,
+    "posted_in_period": "2026-02"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-03",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2026-03"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-04",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2026-04"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-05",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2026-05"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-06",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2026-06"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-07",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2026-07"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-08",
+    "amount": 5091.24,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": "2026-08"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-09",
+    "amount": 4927.01,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-003",
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": "2026-09"
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-10",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-11",
+    "amount": 4927.01,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2026-12",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-01",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-02",
+    "amount": 4598.54,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 28,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-03",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-04",
+    "amount": 4927.01,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-05",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-06",
+    "amount": 4927.01,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-07",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-08",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-09",
+    "amount": 4927.01,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-10",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-11",
+    "amount": 4927.01,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 30,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2027-12",
+    "amount": 5091.24,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 31,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-SFT-002",
+    "period": "2028-01",
+    "amount": 985.39,
+    "status": "scheduled",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-OIC-2025-01",
+      "CTR-OIC-001"
+    ],
+    "method": "daily_prorate",
+    "days_in_period": 6,
+    "posted_in_period": null
+  },
+  {
+    "prepaid_id": "PRE-INS-RIDER",
+    "period": "2026-01",
+    "amount": 6200.0,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-HBP-2026-01"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": "2026-01"
+  },
+  {
+    "prepaid_id": "PRE-INS-RIDER",
+    "period": "2026-02",
+    "amount": 6200.0,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-HBP-2026-01"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 28,
+    "posted_in_period": "2026-02"
+  },
+  {
+    "prepaid_id": "PRE-INS-RIDER",
+    "period": "2026-03",
+    "amount": 6200.0,
+    "status": "posted",
+    "journal_entry_id": null,
+    "evidence_refs": [
+      "INV-HBP-2026-01"
+    ],
+    "method": "straight_line_monthly",
+    "days_in_period": 31,
+    "posted_in_period": "2026-03"
   }
 ]

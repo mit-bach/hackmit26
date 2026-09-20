@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-NLF-03-2026-08
+PO Number: PO-NLF-03-2026-08
+Vendor: NLF Industrial Components
+Goods received in full on 2026-08-17
+Packing list attached: PL-GR-NLF-03-2026-08
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 5,184.18 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

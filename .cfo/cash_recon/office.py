@@ -6,6 +6,7 @@ This host writes harness/bots/<id>/handles/. Finance types stay out of Harness s
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from atomic_json import write_json_atomic
@@ -43,6 +44,55 @@ def collect_pipe_identifiers(
     return rows
 
 
+def _status_for_candidate(candidate) -> str:
+    if candidate.match_type in {
+        "UNEXPLAINED_DIFFERENCE",
+        "UNMATCHED_BANK",
+        "UNMATCHED_LEDGER",
+        "POSSIBLE_DUPLICATE_BANK_TXN",
+        "POSSIBLE_DUPLICATE_REFUND",
+        "POSSIBLE_DUPLICATE_LEDGER_ENTRY",
+    }:
+        return "HUMAN_REVIEW"
+    if candidate.match_type == "FEE_NETTED":
+        return "EXPLAINED_EXCEPTION"
+    if candidate.match_type == "TIMING_DIFFERENCE":
+        return "OUTSTANDING_TIMING_ITEM"
+    if candidate.difference_minor == 0:
+        return "MATCHED"
+    return "HUMAN_REVIEW"
+
+
+def _overlay_candidate(current: ReconciliationMatch, candidate) -> ReconciliationMatch:
+    """Copy the Kernel candidate onto the existing match. Do not invent amounts."""
+    if current.candidate_id == candidate.candidate_id:
+        return current
+    status = _status_for_candidate(candidate)
+    return current.model_copy(
+        update={
+            "match_type": candidate.match_type,
+            "bank_transaction_ids": list(candidate.bank_transaction_ids),
+            "ledger_entry_ids": list(candidate.ledger_entry_ids),
+            "bank_amount": candidate.bank_amount,
+            "ledger_amount": candidate.ledger_amount,
+            "difference": candidate.difference,
+            "bank_amount_minor": candidate.bank_amount_minor,
+            "ledger_amount_minor": candidate.ledger_amount_minor,
+            "difference_minor": candidate.difference_minor,
+            "confidence": candidate.confidence,
+            "status": status,
+            "human_review": status == "HUMAN_REVIEW",
+            "reviewer_status": "HUMAN_REVIEW" if status == "HUMAN_REVIEW" else current.reviewer_status,
+            "candidate_id": candidate.candidate_id,
+            "evidence": list(candidate.evidence),
+            "proposed_adjusting_entries": list(candidate.proposed_adjusting_entries),
+            "provider": candidate.provider,
+            "provider_payout_id": candidate.provider_payout_id,
+            "provider_status": candidate.provider_status,
+        }
+    )
+
+
 def tick_universe(
     report: CashReconciliationReport,
     identifiers: list[PipeIdentifier],
@@ -50,24 +100,17 @@ def tick_universe(
     require_identifier: bool = False,
 ) -> list[ReconciliationMatch]:
     """Re-select from Kernel candidates using apply/pay identifiers. Do not re-guess."""
-    by_id = {trace.final.candidate_id: trace for trace in report.traces if trace.final.candidate_id}
+    by_final = {
+        trace.final.candidate_id: trace.final
+        for trace in report.traces
+        if trace.final.candidate_id
+    }
     universe = []
     for trace in report.traces:
         universe.extend(trace.candidates or [])
     if not universe:
-        universe = [
-            next(
-                (
-                    cand
-                    for trace in report.traces
-                    for cand in trace.candidates
-                    if cand.candidate_id == match.candidate_id
-                ),
-                None,
-            )
-            for match in report.matches
-        ]
-        universe = [item for item in universe if item is not None]
+        universe = _matches_as_candidates(report.matches)
+    cand_by_id = {item.candidate_id: item for item in universe}
     bank_ids: list[str] = []
     for match in report.matches:
         for bank_id in match.bank_transaction_ids:
@@ -78,17 +121,17 @@ def tick_universe(
     for bank_id in bank_ids:
         tick = choose_candidate_for_line(
             bank_id,
-            universe or _matches_as_candidates(report.matches),
+            universe,
             identifiers,
             require_identifier=require_identifier,
         )
+        current = next(
+            (item for item in report.matches if bank_id in item.bank_transaction_ids),
+            None,
+        )
+        if current is None:
+            continue
         if tick.fail_closed:
-            current = next(
-                (item for item in report.matches if bank_id in item.bank_transaction_ids),
-                None,
-            )
-            if current is None:
-                continue
             findings = list(current.control_findings)
             if "missing_pipe_identifier" not in findings and not tick.identifier_present:
                 findings.append("missing_pipe_identifier")
@@ -107,18 +150,17 @@ def tick_universe(
             )
             used.add(bank_id)
             continue
-        if tick.selected_candidate_id and tick.selected_candidate_id in by_id:
-            chosen = by_id[tick.selected_candidate_id].final
-            adjusted.append(chosen)
+        selected_id = tick.selected_candidate_id
+        if selected_id and selected_id in by_final:
+            adjusted.append(by_final[selected_id])
             used.add(bank_id)
             continue
-        current = next(
-            (item for item in report.matches if bank_id in item.bank_transaction_ids),
-            None,
-        )
-        if current is not None:
-            adjusted.append(current)
+        if selected_id and selected_id in cand_by_id:
+            adjusted.append(_overlay_candidate(current, cand_by_id[selected_id]))
             used.add(bank_id)
+            continue
+        adjusted.append(current)
+        used.add(bank_id)
     for match in report.matches:
         if any(item in used for item in match.bank_transaction_ids):
             continue
@@ -248,6 +290,8 @@ def persist_harness_rec_queue(
     """Kernel packets plus Harness Handles cash → ctl-cash / review-rec."""
     kernel_paths = persist_rec_queue(period=period, case_id=case_id, matches=matches)
     written = list(kernel_paths)
+    dest_dir = computer_root / "workspace" / "cash" / "rec"
+    dest_dir.mkdir(parents=True, exist_ok=True)
     for match in matches:
         if not (
             match.human_review
@@ -256,7 +300,9 @@ def persist_harness_rec_queue(
         ):
             continue
         handle_path, packet_path = verifier_handle(match, period=period, case_id=case_id)
-        rel = relative_to_computer(computer_root, packet_path)
+        computer_packet = dest_dir / f"{match.reconciliation_id}.json"
+        write_json_atomic(computer_packet, json.loads(packet_path.read_text()))
+        rel = relative_to_computer(computer_root, computer_packet)
         dest, _payload = write_peer_handle(
             computer_root,
             from_slug=CASH_SLUG,
@@ -275,7 +321,7 @@ def persist_harness_rec_queue(
                 "queueOwner": CTL_CASH_SLUG,
             },
         )
-        written.extend([handle_path, dest])
+        written.extend([handle_path, dest, computer_packet])
     return written
 
 

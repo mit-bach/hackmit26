@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-327
 PO Number: PO-327
-Vendor: WeWork Cambridge
+Vendor: Timber Systems
 Goods received in full on 2026-09-01
 Packing list attached: PL-GR-327
 Quantity ordered: 1

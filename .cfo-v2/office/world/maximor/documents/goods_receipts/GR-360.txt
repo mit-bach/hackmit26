@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-360
 PO Number: PO-360
-Vendor: Orbit Analytics
+Vendor: Driftwood Network
 Goods received in full on 2026-09-07
 Packing list attached: PL-GR-360
 Quantity ordered: 1

@@ -1,0 +1,16 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-205",
+  "candidate_id": "UNMATCHED_LEDGER:-:GL-AP-ORPHAN",
+  "match_type": "UNMATCHED_LEDGER",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference": 880.0,
+  "difference_minor": 88000,
+  "explanation": "Unmatched ledger activity GL-AP-ORPHAN -$880.00.",
+  "control_findings": [],
+  "proposed_adjusting_entries_posted": false,
+  "queue_owner": "ctl-cash",
+  "human_queue": false
+}

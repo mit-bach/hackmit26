@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-365
 PO Number: PO-365
-Vendor: Carta
+Vendor: Northwood Supply
 Goods received in full on 2026-09-12
 Packing list attached: PL-GR-365
 Quantity ordered: 1

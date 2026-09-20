@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-333
 PO Number: PO-333
-Vendor: Zoom Video
+Vendor: Beacon Supply
 Goods received in full on 2026-09-07
 Packing list attached: PL-GR-333
 Quantity ordered: 1

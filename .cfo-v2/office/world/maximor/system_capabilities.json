@@ -253,6 +253,15 @@
       ]
     },
     {
+      "agent": "Stripe Payout Agent",
+      "skills": [],
+      "functionalities": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "workflows": [],
+      "entrypoints": []
+    },
+    {
       "agent": "AP Preparer",
       "skills": [
         "three-way-match-analysis",
@@ -292,7 +301,6 @@
     {
       "agent": "Exception Investigator",
       "skills": [
-        "three-way-match-analysis",
         "ap-exception-investigation",
         "prior-period-precedent",
         "superseded-document-handling"
@@ -329,8 +337,6 @@
     {
       "agent": "AP Reviewer",
       "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation",
         "prior-period-precedent"
       ],
       "functionalities": [
@@ -358,8 +364,6 @@
     {
       "agent": "AP Approver",
       "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation",
         "prior-period-precedent"
       ],
       "functionalities": [
@@ -386,10 +390,7 @@
     },
     {
       "agent": "AP Audit",
-      "skills": [
-        "three-way-match-analysis",
-        "ap-exception-investigation"
-      ],
+      "skills": [],
       "functionalities": [
         "ap.three_way_match"
       ],
@@ -475,10 +476,7 @@
     },
     {
       "agent": "Payment Audit",
-      "skills": [
-        "payment-prioritization",
-        "early-payment-discount-evaluation"
-      ],
+      "skills": [],
       "functionalities": [
         "ap.payment_scheduling"
       ],
@@ -1243,14 +1241,11 @@
     },
     {
       "name": "ap-exception-investigation",
-      "description": "Distinguishes payment-blocking AP exceptions from policy-supported exceptions using published policy and prior cases. Use when an invoice is not a clean three-way match.",
+      "description": "Explains how this vendor's mess differs from Kernel exception_types. Use when prepare returned INVESTIGATE or exception_types is non-empty.",
       "status": "extracted",
       "path": "skills/ap-exception-investigation/SKILL.md",
       "used_by": [
-        "Exception Investigator",
-        "AP Reviewer",
-        "AP Approver",
-        "AP Audit"
+        "Exception Investigator"
       ]
     },
     {
@@ -1266,7 +1261,7 @@
     {
       "name": "ar-collections-policy",
       "description": "Chooses the next collections action from Kernel aging and contact facts. Use when Bot collect wakes on the aging Routine after apply has drained deposits for that as-of.",
-      "status": "new",
+      "status": "extracted",
       "path": "skills/ar-collections-policy/SKILL.md",
       "used_by": [
         "Collections Agent"
@@ -1274,7 +1269,7 @@
     },
     {
       "name": "audit-finding-writing",
-      "description": "Write audit findings and report language from structured Python facts without inventing counts, IDs, or severity.",
+      "description": "Write audit findings from Kernel ReportStats without inventing counts, IDs, or severity.",
       "status": "new",
       "path": "skills/audit-finding-writing/SKILL.md",
       "used_by": [
@@ -1311,7 +1306,7 @@
     },
     {
       "name": "bank-reference-interpretation",
-      "description": "Interprets messy bank descriptions and remittance references without inventing invoice numbers or counterparties.",
+      "description": "Read messy bank memos and processor payout labels. Do not invent invoice numbers or counterparties. Memory is color, not fee evidence.",
       "status": "new",
       "path": "skills/bank-reference-interpretation/SKILL.md",
       "used_by": [
@@ -1321,7 +1316,7 @@
     },
     {
       "name": "board-financial-reporting",
-      "description": "Write a compact board narrative from Python statements, variances, and the 13-week cash forecast. Use when assembling or reviewing a board pack.",
+      "description": "Write a compact board narrative from Kernel facts. Unlocked drafts label every number UNLOCKED.",
       "status": "new",
       "path": "skills/board-financial-reporting/SKILL.md",
       "used_by": [
@@ -1331,8 +1326,8 @@
     },
     {
       "name": "cash-application",
-      "description": "Choose among Python-generated invoice matches for a customer payment, including ambiguous remittances. Use when applying cash or reviewing a material / non-unique proposal.",
-      "status": "new",
+      "description": "Chooses among Kernel remittance-match candidates for one customer payment. Use when Bot apply wakes on a remittance path, including an ambiguous or material deposit.",
+      "status": "extracted",
       "path": "skills/cash-application/SKILL.md",
       "used_by": [
         "Cash Application Agent",
@@ -1351,7 +1346,7 @@
     },
     {
       "name": "cash-reconciliation-method-selection",
-      "description": "Distinguishes exact, grouped, fee-netted, timing, duplicate, provider, and unexplained cash matches using Python candidates only.",
+      "description": "Choose a Kernel candidate_id for a bank line. Trust apply/pay identifiers. Do not invent fees or replay match_type taxonomy.",
       "status": "new",
       "path": "skills/cash-reconciliation-method-selection/SKILL.md",
       "used_by": [
@@ -1383,12 +1378,11 @@
     },
     {
       "name": "early-payment-discount-evaluation",
-      "description": "Decides whether to capture an open early-payment discount this week using Python discount and cash facts. Use when scheduling or auditing approved AP payments.",
+      "description": "Chooses whether to capture an open 2/10 this week from Kernel discount facts. Use when Bot pay schedules. Not a Verifier skill.",
       "status": "extracted",
       "path": "skills/early-payment-discount-evaluation/SKILL.md",
       "used_by": [
-        "Payment Scheduler",
-        "Payment Audit"
+        "Payment Scheduler"
       ]
     },
     {
@@ -1459,7 +1453,7 @@
     },
     {
       "name": "month-end-close-coordination",
-      "description": "Coordinates month-end close tasks, blockers, and reviewer routing without inventing balances.",
+      "description": "Coordinates month-end close tasks from Kernel ready_tasks without inventing balances or marking CLOSED.",
       "status": "new",
       "path": "skills/month-end-close-coordination/SKILL.md",
       "used_by": [
@@ -1468,7 +1462,7 @@
     },
     {
       "name": "month-end-close-review",
-      "description": "Decides whether a month can close from the checklist, blockers, and unsigned reconciliations. Use at final close review.",
+      "description": "Reads close gates and refuses lock when evaluate_close_gates failed. Cannot mark CLOSED.",
       "status": "new",
       "path": "skills/month-end-close-review/SKILL.md",
       "used_by": [
@@ -1477,12 +1471,11 @@
     },
     {
       "name": "payment-prioritization",
-      "description": "Ranks approved invoices for this week's payment run using Python due-date, priority, and cash facts. Use when building or auditing a weekly AP payment plan.",
+      "description": "Chooses among Kernel payment candidates for this week's draft. Use when Bot pay wears Profile schedule. Not a Verifier skill.",
       "status": "extracted",
       "path": "skills/payment-prioritization/SKILL.md",
       "used_by": [
-        "Payment Scheduler",
-        "Payment Audit"
+        "Payment Scheduler"
       ]
     },
     {
@@ -1497,7 +1490,7 @@
     },
     {
       "name": "prior-period-precedent",
-      "description": "Retrieves prior-period finance decisions, compares them to current evidence, and reuses a treatment only when the current facts support it.",
+      "description": "Reuse a prior-period treatment only when current evidence still supports it.",
       "status": "new",
       "path": "skills/prior-period-precedent/SKILL.md",
       "used_by": [
@@ -1514,7 +1507,7 @@
     },
     {
       "name": "reconciliation-evidence-validation",
-      "description": "Accepts a bank-to-ledger match only when entity, date, type, and source evidence support the relationship, not when amounts merely coincide.",
+      "description": "Accept a bank-to-ledger tick only when Kernel evidence and pipe identifiers support it. Coincident amounts are not enough.",
       "status": "new",
       "path": "skills/reconciliation-evidence-validation/SKILL.md",
       "used_by": [
@@ -1525,7 +1518,7 @@
     },
     {
       "name": "reconciliation-exception-investigation",
-      "description": "Investigates unmatched cash activity without inventing explanations. Use when a bank or ledger item does not have a unique supported match.",
+      "description": "Investigate unmatched cash without inventing a story. Memory of payout labels cannot override missing fee evidence.",
       "status": "new",
       "path": "skills/reconciliation-exception-investigation/SKILL.md",
       "used_by": [
@@ -1581,15 +1574,11 @@
     },
     {
       "name": "three-way-match-analysis",
-      "description": "Interprets Python three-way-match facts to identify clean matches versus blocking or uncertain AP exceptions. Use when preparing, reviewing, approving, or auditing an invoice for payment.",
+      "description": "Interprets Kernel three-way facts when the packet is messy or uncertain. Does not restate must_hold. Use when preparing an open bill.",
       "status": "extracted",
       "path": "skills/three-way-match-analysis/SKILL.md",
       "used_by": [
-        "AP Preparer",
-        "Exception Investigator",
-        "AP Reviewer",
-        "AP Approver",
-        "AP Audit"
+        "AP Preparer"
       ]
     }
   ],

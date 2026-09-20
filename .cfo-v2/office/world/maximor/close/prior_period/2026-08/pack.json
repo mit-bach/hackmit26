@@ -7,8 +7,8 @@
   "trial_balance": [
     {
       "account": "1000-Cash",
-      "amount_minor": -87896515,
-      "amount": -878965.15
+      "amount_minor": -143176174,
+      "amount": -1431761.74
     },
     {
       "account": "1100-AR",
@@ -47,8 +47,8 @@
     },
     {
       "account": "6000-Operating",
-      "amount_minor": 73896515,
-      "amount": 738965.15
+      "amount_minor": 129176174,
+      "amount": 1291761.74
     },
     {
       "account": "6100-Payroll",

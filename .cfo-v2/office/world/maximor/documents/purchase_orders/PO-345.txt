@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-345
 PO Number: PO-345
 Issued: 2026-09-19
-Vendor: Figma
-Vendor legal name: Figma, Inc.
-Vendor tax ID: 46-5748921
+Vendor: Nimbus Components
+Vendor legal name: Nimbus Components
+Vendor tax ID: 00-0000000
 Authorized amount: 39.93
 Currency: USD
 Approver: Jordan Hale

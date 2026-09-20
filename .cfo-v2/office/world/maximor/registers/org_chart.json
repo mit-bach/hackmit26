@@ -1,0 +1,124 @@
+[
+  {
+    "emp_id": "EMP-0901",
+    "title": "Procurement manager",
+    "manager_emp_id": "EMP-0902",
+    "org": "Procurement"
+  },
+  {
+    "emp_id": "EMP-0902",
+    "title": "Finance manager",
+    "manager_emp_id": "",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-5510",
+    "title": "Payroll administrator",
+    "manager_emp_id": "EMP-0902",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-4128",
+    "title": "AP vendor-master clerk",
+    "manager_emp_id": "EMP-0902",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-1088",
+    "title": "Assistant controller",
+    "manager_emp_id": "EMP-0902",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-3304",
+    "title": "AR cash applier",
+    "manager_emp_id": "EMP-1088",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-1190",
+    "title": "Revenue accountant",
+    "manager_emp_id": "EMP-1088",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-4402",
+    "title": "Processor operations",
+    "manager_emp_id": "EMP-0902",
+    "org": "Finance"
+  },
+  {
+    "emp_id": "EMP-2201",
+    "title": "Facilities coordinator",
+    "manager_emp_id": "EMP-0902",
+    "org": "Facilities"
+  },
+  {
+    "emp_id": "EMP-6722",
+    "title": "Warehouse receiving",
+    "manager_emp_id": "",
+    "org": "Cambridge warehouse"
+  },
+  {
+    "emp_id": "EMP-8891",
+    "title": "Remote warehouse coordinator \u2014 West",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  },
+  {
+    "emp_id": "EMP-2290",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse",
+    "last_day": "2026-03-31"
+  },
+  {
+    "emp_id": "EMP-3310",
+    "title": "Marketing manager",
+    "manager_emp_id": "EMP-0902",
+    "org": "Marketing"
+  },
+  {
+    "seat_id": "WEST-WH-MGR",
+    "org": "West Warehouse",
+    "title": "West Warehouse manager",
+    "emp_id": "",
+    "vacant_since": "2025-03-31"
+  },
+  {
+    "emp_id": "EMP-1001",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  },
+  {
+    "emp_id": "EMP-1002",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  },
+  {
+    "emp_id": "EMP-1003",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  },
+  {
+    "emp_id": "EMP-1004",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  },
+  {
+    "emp_id": "EMP-1005",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  },
+  {
+    "emp_id": "EMP-1006",
+    "title": "Warehouse associate",
+    "manager_emp_id": "",
+    "org": "West Warehouse"
+  }
+]

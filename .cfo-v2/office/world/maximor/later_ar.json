@@ -1,0 +1,9 @@
+[
+  {
+    "invoice_id": "CM-PIN-OCT-01",
+    "customer_id": "CUST-006",
+    "amount": 2400000.0,
+    "date": "2026-10-18",
+    "description": "Reserved October return window"
+  }
+]

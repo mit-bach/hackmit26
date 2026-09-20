@@ -1,0 +1,32 @@
+[
+  {
+    "employee_id": "EMP-4128",
+    "badge_id": "BDG-4128",
+    "last_seen": "2026-09-19T17:02:00Z",
+    "door": "CAM-4"
+  },
+  {
+    "employee_id": "EMP-6722",
+    "badge_id": "BDG-6722",
+    "last_seen": "2026-09-19T16:04:00Z",
+    "door": "CAM-WH-01"
+  },
+  {
+    "employee_id": "EMP-2290",
+    "badge_id": "BDG-2290",
+    "last_seen": "2026-03-30T16:40:00Z",
+    "door": "CAM-WH-01"
+  },
+  {
+    "employee_id": "EMP-3304",
+    "badge_id": "BDG-3304",
+    "last_seen": "2026-09-18T17:10:00Z",
+    "door": "CAM-4"
+  },
+  {
+    "employee_id": "EMP-2201",
+    "badge_id": "BDG-2201",
+    "last_seen": "2026-09-19T18:11:00Z",
+    "door": "CAM-HQ"
+  }
+]

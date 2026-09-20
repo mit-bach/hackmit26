@@ -1,18 +1,18 @@
-WeWork Cambridge
+Wharf Labs
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@weworkcambridge.example
+Phone +1 617-555-0000   billing@wharflabs.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: WEW-2026-09-0078
+Invoice Number: WHA-2026-09-0078
 Invoice Date: 2026-09-25
 Due Date: 2026-10-25
 PO Number: PO-378
 Payment Terms: net 30
 Currency: USD
-Vendor: WeWork Cambridge
+Vendor: Wharf Labs
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                            3,151.30
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice WEW-2026-09-0078 on the payment advice.
+Please include invoice WHA-2026-09-0078 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@weworkcambridge.example
+Questions: billing@wharflabs.example

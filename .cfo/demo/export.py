@@ -165,6 +165,7 @@ def build_agent_cases(ctx: CompanyScenarioContext) -> list[dict]:
         {"case_id": "AC-FORECAST", "agent": "Cash Forecast Agent", "capability": "forecast.thirteen_week", "input": {"as_of": "2026-09-19", "weeks": 13}, "expected": {"week_count": 13}, "source_record_ids": ["INV-AR-014", "INV-012"], "downstream_record_ids": [], "visualization_tags": ["forecast"]},
         {"case_id": "AC-FORECAST-VAR", "agent": "Forecast Variance Agent", "capability": "forecast.thirteen_week", "input": {"period": "2026-09"}, "expected": {"miss_sources": ["INV-AR-014", "INV-012"]}, "source_record_ids": ["INV-AR-014", "INV-012"], "downstream_record_ids": [], "visualization_tags": ["forecast"]},
         {"case_id": "AC-BOARD", "agent": "Board Reporting Agent", "capability": "reporting.variance_board", "input": {"period": "2026-09"}, "expected": {"metrics_tie_to_gl": True}, "source_record_ids": ["4000-Revenue", "5200-Supplier"], "downstream_record_ids": [], "visualization_tags": ["forecast"]},
+        {"case_id": "AC-STRIPE", "agent": "Stripe Payout Agent", "capability": "cash.provider_payout", "input": {"payout_id": "po_1MaximorFees"}, "expected": {"payout_equals_bank": True}, "source_record_ids": ["po_1MaximorFees"], "downstream_record_ids": [], "visualization_tags": ["cash"]},
     ]
 
 

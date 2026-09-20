@@ -16,14 +16,11 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-test("stripe is a bar waterfall with a simulated-mode pill", async () => {
+test("stripe explains how a payout became a bank deposit", async () => {
   const { container } = render(<StripePage />);
-  expect(await screen.findByRole("heading", { name: "Stripe payout" })).toBeInTheDocument();
-  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
-  expect(screen.queryByText("What arrived")).not.toBeInTheDocument();
-  expect(container.querySelector(".waterfall-eq")).toBeNull();
+  expect(await screen.findByRole("heading", { name: /How a Stripe payout became a bank deposit/i })).toBeInTheDocument();
+  expect(screen.getByText("What's happening?")).toBeInTheDocument();
   expect(container.querySelector(".cash-waterfall")).not.toBeNull();
-  expect(container.querySelectorAll(".cash-waterfall-bar").length).toBeGreaterThan(0);
-  expect(screen.getByText(/Stripe Simulated/i)).toBeInTheDocument();
+  expect(screen.getByText(/Stripe simulated/i)).toBeInTheDocument();
   expect(container.textContent).not.toMatch(/\bCLOSED\b/);
 });

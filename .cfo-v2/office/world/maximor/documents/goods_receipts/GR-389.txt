@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-389
 PO Number: PO-389
-Vendor: Hartford Insurance
+Vendor: Nimbus Systems
 Goods received in full on 2026-09-09
 Packing list attached: PL-GR-389
 Quantity ordered: 1

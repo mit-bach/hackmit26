@@ -90,11 +90,11 @@ If you cannot set up dirty aging on this pack, SKIP and still run S04 after S01 
 
 - Stimulus: continuation of S04 or Wake naming a Kernel-allowed SEND_GENTLE_REMINDER / SEND_OVERDUE_REMINDER / SEND_FINAL_NOTICE invoice
 - Actor: `collect` then finance mailbox (email send Grant) and/or World
-- Must call: the send op AR repair granted (`inbox.tools.send_office_outbound` or the live equivalent on Collections / Finance Inbox — **read grants.json**, do not guess). World does not get finance send if SoD split
+- Must call: `inbox.tools.send_office_outbound` from Collections (and/or Finance Inbox on an email outbound turn). World does not get finance send
 - Must not: sent=False outbox-only as INTENDED; live SMTP; tone Verifier
-- INTENDED: simulated mailbox message from a finance address; `sent` true in that transport
-- RUNS: send op returns without throw even if World unbound (then SKIP reply)
-- HARD: ImportError; Grant missing; Worker crash
+- INTENDED: simulated mailbox message from a finance address; then Handle `world` / `customer` (`dun` edge). `sent` true in that transport
+- RUNS: send op returns without throw
+- HARD: ImportError; Grant missing on this instance (live Grants include it); Worker crash
 - SOFT: preview despite working send
 - SKIP: G2 send FAIL — name T3. Do not tick contacted
 - Ticks: send op; T4 last mile
@@ -104,9 +104,9 @@ If you cannot set up dirty aging on this pack, SKIP and still run S04 after S01 
 ## S06 — World / customer reply
 
 - Stimulus: Wake `world` as that customer, or Email sees inbound in-thread
-- Actor: `world` if bound, else `email` classifying inbound
+- Actor: `world` / `customer` (Counterparty Message Agent), else `email` classifying inbound
 - INTENDED: reply in-thread; Email classifies; remittance may Handle apply (loop to S01, do not dun)
-- SKIP: World off Roster. Then last-mile INTENDED is only “finance sent.” Reply unproved
+- SKIP only if this instance roster omitted `world`. Live binds World. Reply unproved only in that clone-bug case
 - HARD: World classifies the finance inbox and dispatches pay
 - Ticks: world; reply_in_thread; remittance loop
 
@@ -155,7 +155,7 @@ If you cannot set up dirty aging on this pack, SKIP and still run S04 after S01 
 ## Done-when
 
 - Bare min: S01 RUNS; S04 Routine lands; collect does not throw; send ImportError is a named hole not a fake contacted
-- INTENDED: apply first; mailbox send; write-off owner ctl-pay; World reply or named SKIP
+- INTENDED: apply first; mailbox send; write-off owner ctl-pay; World reply
 
 ## Forbidden
 

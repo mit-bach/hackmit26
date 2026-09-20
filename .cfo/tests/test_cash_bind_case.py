@@ -39,6 +39,8 @@ CASH_OPS = (
     "cash_recon.tools.get_fee_evidence",
     "cash_recon.tools.get_match_candidates",
     "cash_recon.tools.get_candidate",
+    "cash_recon.tools.get_pipe_identifier",
+    "memory.tools.get_decision_memories",
 )
 
 
@@ -155,3 +157,8 @@ def test_cash_grants_cannot_create_accrual_or_release_pay_run():
         assert not any("pay_run" in item or "pay-run" in item for item in ops)
     reviewer = by_name["Cash Reconciliation Reviewer"]["ops"]
     assert "accrual.tools.create_accrual" not in reviewer
+    stripe_ops = by_name["Stripe Payout Agent"]["ops"]
+    assert "integrations.tools.get_payout_waterfall" in stripe_ops
+    assert "integrations.tools.get_processor_payout" in stripe_ops
+    assert not any(item.startswith("accrual.tools.") for item in stripe_ops)
+    assert not any(item.startswith("invoice_ingestion.tools.") for item in stripe_ops)

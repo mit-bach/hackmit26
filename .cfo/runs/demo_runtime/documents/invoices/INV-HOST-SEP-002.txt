@@ -1,0 +1,39 @@
+Google LLC
+1600 Amphitheatre Parkway
+Mountain View, CA 94043
+Phone +1 650-253-0000   billing@cloud.google.example
+Tax ID 77-0493581
+
+INVOICE
+
+Invoice Number: INV-HOST-SEP-002-VIN
+Invoice Date: 2026-09-28
+Due Date: 2026-10-15
+PO Number: (none)
+Payment Terms: net 30
+Currency: USD
+Vendor: Google Cloud
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+GCP September compute                         1.00     30,000.00     30,000.00
+
+Subtotal                                                             30,000.00
+Tax                                                                       0.00
+Amount Due                                                           30,000.00
+
+Remit to:
+ACH Citi routing 021000089  account ****6006
+Bank: Citibank  ****6006
+Please include invoice INV-HOST-SEP-002-VIN on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@cloud.google.example

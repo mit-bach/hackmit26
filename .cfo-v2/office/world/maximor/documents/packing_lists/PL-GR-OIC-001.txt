@@ -1,0 +1,11 @@
+Orbit Insights Corp
+Packing list
+Ship date: 2025-01-06
+PO Number: PO-OIC-001
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 001-0106
+
+Contents:
+  - Line GR-OIC-001 — qty 1
+
+This packing list is not an invoice.

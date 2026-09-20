@@ -1,0 +1,23 @@
+[
+  {
+    "employee_id": "EMP-4128",
+    "routing": "011000138",
+    "account": "10004419",
+    "account_last4": "4419",
+    "account_hash": "dd-kestrel-4419"
+  },
+  {
+    "employee_id": "EMP-8891",
+    "routing": "211370545",
+    "account": "10009022",
+    "account_last4": "9022",
+    "account_hash": "dd-halyard-9022"
+  },
+  {
+    "employee_id": "EMP-2201",
+    "routing": "011000390",
+    "account": "10002201",
+    "account_last4": "2201",
+    "account_hash": "dd-cho-2201"
+  }
+]

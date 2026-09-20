@@ -233,9 +233,12 @@ def test_helios_fee_netted_requires_kernel_fee_evidence():
     fee = next(row for row in report.matches if "TXN-2026-09-011" in row.bank_transaction_ids)
     assert fee.match_type == "FEE_NETTED"
     assert fee.status == "EXPLAINED_EXCEPTION"
-    assert any("FEE-729103" in item for item in fee.evidence) or any(
-        entry.support == "FEE-729103" for entry in fee.proposed_adjusting_entries
+    kernel_fee_ids = {row.evidence_id for row in load_demo_dataset()[3]}
+    blob = " ".join(fee.evidence) + " " + " ".join(
+        entry.support for entry in fee.proposed_adjusting_entries
     )
+    assert kernel_fee_ids
+    assert any(item in blob for item in kernel_fee_ids)
     validation = validate_candidate(
         next(
             cand
@@ -324,8 +327,13 @@ def test_stripe_unpack_emits_zero_invoice_candidates():
     ops = grants["byDisplayName"]["Stripe Payout Agent"]["ops"]
     assert "integrations.tools.get_payout_waterfall" in ops
     assert "integrations.tools.get_processor_payout" in ops
-    assert not any("create_accrual" in item for item in ops)
+    assert not any(item.startswith("accrual.tools.") for item in ops)
     assert not any(item.startswith("invoice_ingestion.tools.") for item in ops)
+    catalog = json.loads((REPO / ".cfo-v2" / "office" / "computer" / "cfo" / "catalog.json").read_text())
+    op_ids = [item["id"] for item in catalog["ops"]]
+    assert "cash_recon.tools.bind_case" not in op_ids
+    assert "cash_recon.tools.get_pipe_identifier" in op_ids
+    assert "integrations.tools.get_payout_waterfall" in op_ids
 
 
 def test_stripe_land_handles_are_harness_not_invoice(tmp_path):
@@ -458,3 +466,6 @@ def test_persist_harness_rec_queue_writes_bot_ctl_cash(tmp_path):
     payload = json.loads(files[0].read_text())
     assert payload["op"] == "bot_send_prompt"
     assert payload["humanQueue"] is False
+    rec_packet = computer / "workspace" / "cash" / "rec" / "REC-NS.json"
+    assert rec_packet.is_file()
+    assert payload["paths"] == ["workspace/cash/rec/REC-NS.json"]

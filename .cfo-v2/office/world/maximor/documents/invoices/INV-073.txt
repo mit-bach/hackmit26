@@ -1,18 +1,18 @@
-Slack Technologies, LLC
-500 Howard Street
-San Francisco, CA 94105
-Phone +1 415-579-9123   billing@slack.example
-Tax ID 45-3887470
+Juniper Works
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@juniperworks.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: SLA-2026-09-0074
+Invoice Number: JUN-2026-09-0074
 Invoice Date: 2026-09-21
 Due Date: 2026-10-21
 PO Number: PO-374
 Payment Terms: net 30
 Currency: USD
-Vendor: Slack Technologies
+Vendor: Juniper Works
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                              660.78
 
 Remit to:
-ACH SVB routing 121140399  account ****1088
-Bank: Silicon Valley Bank  ****1088
-Please include invoice SLA-2026-09-0074 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice JUN-2026-09-0074 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@slack.example
+Questions: billing@juniperworks.example

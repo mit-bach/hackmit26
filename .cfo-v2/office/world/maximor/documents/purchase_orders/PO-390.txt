@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-390
 PO Number: PO-390
 Issued: 2026-09-10
-Vendor: Shadow Vendor LLC
-Vendor legal name: Shadow Vendor LLC
-Vendor tax ID: 51-7782104
+Vendor: Juniper Network
+Vendor legal name: Juniper Network
+Vendor tax ID: 00-0000000
 Authorized amount: 220.65
 Currency: USD
 Approver: Jordan Hale

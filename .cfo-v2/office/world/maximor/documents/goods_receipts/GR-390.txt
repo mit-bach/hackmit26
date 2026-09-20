@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-390
 PO Number: PO-390
-Vendor: Shadow Vendor LLC
+Vendor: Juniper Network
 Goods received in full on 2026-09-10
 Packing list attached: PL-GR-390
 Quantity ordered: 1

@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-348
 PO Number: PO-348
 Issued: 2026-09-22
-Vendor: Northline Fab Group
-Vendor legal name: Northline Fab Group
-Vendor tax ID: 00-0000000
+Vendor: Orbit Analytics
+Vendor legal name: Orbit Analytics, Inc.
+Vendor tax ID: 04-6622108
 Authorized amount: 169.82
 Currency: USD
 Approver: Jordan Hale

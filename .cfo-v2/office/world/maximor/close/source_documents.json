@@ -57,5 +57,15 @@
     "description": "September operating expense batch",
     "amount": 60000.0,
     "date": "2026-09-30"
+  },
+  {
+    "document_id": "DOC-NS-WIRE",
+    "title": "Northstar wire instructions",
+    "path": "ingestion/customer_instructions/northstar_wire.pdf"
+  },
+  {
+    "document_id": "DOC-SL-PIN-2026-09-28",
+    "title": "Pinnacle side letter",
+    "body": "Side letter dated 2026-09-28. Paragraph 4 grants Pinnacle a 90-day right of return on INV-AR-PIN-BH-01. Goods remain at CAM-WH-01."
   }
 ]

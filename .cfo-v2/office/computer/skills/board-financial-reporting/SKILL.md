@@ -1,6 +1,6 @@
 ---
 name: board-financial-reporting
-description: Write a compact board narrative from Python statements, variances, and the 13-week cash forecast. Use when assembling or reviewing a board pack.
+description: Write a compact board narrative from Kernel facts. Unlocked drafts label every number UNLOCKED.
 status: new
 ---
 
@@ -8,40 +8,17 @@ status: new
 
 ## Purpose
 
-Select the material, already-computed facts a board should see and write a short narrative that stays tied to evidence IDs.
+Select Kernel facts a board should see. Stay tied to evidence IDs. Do not own the books.
 
 ## When to Use
 
-Apply when Bot `story` Profile `board` (Board Reporting Agent) drafts section narratives. Reporting Reviewer Agent is a Kernel constructor only, not a Bot. `audit` samples the pack.
+Bot `story` Profile `board`. `audit` samples the pack. There is no reporting Verifier.
 
-## Inputs / Evidence
+## Remainder
 
-Use get_period_metrics, get_variance_facts, and get_cash_forecast. Authoritative numbers are:
+Lead with revenue, gross margin, operating income, and cash **as Python computed them**. Choose which verified Kernel contributor belongs in the lead sentence. Do not add a second story. Do not fill a residual.
 
-- income-statement metrics and comparisons
-- variance IDs and contributor transaction IDs
-- forecast IDs and weekly cash totals
-- reviewer findings and escalation flags
-
-Do not introduce a metric that is not in the Python pack.
-
-## Procedure
-
-1. Lead with revenue, gross margin, operating income, and cash.
-2. Use the verified variance narrative for material moves. Do not add a second story.
-3. Summarize the 13-week outlook from weekly totals and named risks (holds, late collections).
-4. Put unresolved residuals and low-confidence AR in items requiring attention.
-5. Attach metric, variance, forecast, or transaction IDs to every material sentence.
-
-## Decision Criteria
-
-- If Python has no contributor, the board pack may not claim a cause.
-- A number that does not match the statement is a defect, not a rounding story.
-- Attention items are for unresolved, held, or low-confidence items — not strategy advice.
-
-## Output Expectations
-
-Return a short executive narrative and attention list. Every material claim keeps an evidence reference already present in the facts.
+If `lock_status` is not `CLOSED`, label every number `UNLOCKED`. Forecast starting balance is trusted cash. Unreconciled GL cash is not trusted cash. If trusted cash is missing, the 13-week start is refused.
 
 ## Boundaries
 
@@ -49,3 +26,4 @@ Return a short executive narrative and attention list. Every material claim keep
 - Do not invent market, competitive, or macroeconomic explanations.
 - Do not add metrics that Python did not produce.
 - Do not drop evidence IDs from material claims.
+- Do not treat an unlocked draft as a closed pack.

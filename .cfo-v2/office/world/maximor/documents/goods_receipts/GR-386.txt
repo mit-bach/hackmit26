@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-386
 PO Number: PO-386
-Vendor: HubSpot
+Vendor: Walnut Group
 Goods received in full on 2026-09-06
 Packing list attached: PL-GR-386
 Quantity ordered: 1

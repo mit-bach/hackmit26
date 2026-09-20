@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-BLS-2026-04
+PO Number: PO-BLS-2026-04
+Issued: 2026-04-14
+Vendor: Brightline Studio LLC
+Vendor legal name: Brightline Studio LLC
+Vendor tax ID: 27-9081144
+Authorized amount: 37,033.33
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Demand-gen retainer
+
+This purchase order is not an invoice. The vendor must bill against PO-BLS-2026-04.
+Payment terms follow the vendor master unless this order states otherwise.

@@ -7,7 +7,9 @@ import os
 
 
 def _run(args: argparse.Namespace) -> int:
-    from close.engine import run_month_end
+    from pathlib import Path
+
+    from close.engine import load_state, run_month_end
     from close.report import format_month_end_status
 
     live = bool(getattr(args, "llm", False)) and bool(os.environ.get("OPENAI_API_KEY"))
@@ -16,6 +18,26 @@ def _run(args: argparse.Namespace) -> int:
     scenario = "clean" if getattr(args, "clean", False) else "demo"
     if getattr(args, "seed_demo", False):
         scenario = "seed_demo"
+    computer = os.environ.get("HARNESS_COMPUTER")
+    if computer:
+        from close.host import run_close_host
+
+        result = run_close_host(
+            period=args.period,
+            scenario=scenario,
+            live=live,
+            reset=args.reset,
+            computer_root=Path(computer),
+        )
+        state = load_state(args.period)
+        if state is not None:
+            print(format_month_end_status(state))
+        print(f"lock_door={result['lock_door']}")
+        print(f"lock_status={result['status']}")
+        print(f"marked_closed={result['marked_closed']}")
+        print(f"runs={Path(computer) / 'runs' / 'month_end'}")
+        print(f"pack={Path(computer) / result['pack_path']}")
+        return 0
     state = run_month_end(
         args.period,
         scenario=scenario,

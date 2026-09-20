@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-359
 PO Number: PO-359
-Vendor: Office Depot
+Vendor: Harbor Systems
 Goods received in full on 2026-09-06
 Packing list attached: PL-GR-359
 Quantity ordered: 1

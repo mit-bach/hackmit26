@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-027
+PO Number: PO-OPEN-027
+Vendor: Helios Hardware Supply
+Goods received in full on 2026-09-01
+Packing list attached: PL-GR-OPEN-027
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 183,703.86 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

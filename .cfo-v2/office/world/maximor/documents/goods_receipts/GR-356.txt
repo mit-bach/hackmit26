@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-356
 PO Number: PO-356
-Vendor: ADP
+Vendor: Quince Group
 Goods received in full on 2026-09-03
 Packing list attached: PL-GR-356
 Quantity ordered: 1

@@ -1,18 +1,18 @@
-Vanta
+Juniper Labs
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@vanta.example
+Phone +1 617-555-0000   billing@juniperlabs.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: VAN-2026-09-0058
+Invoice Number: JUN-2026-09-0058
 Invoice Date: 2026-09-05
 Due Date: 2026-10-05
 PO Number: PO-358
 Payment Terms: net 30
 Currency: USD
-Vendor: Vanta
+Vendor: Juniper Labs
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                            1,100.91
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice VAN-2026-09-0058 on the payment advice.
+Please include invoice JUN-2026-09-0058 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@vanta.example
+Questions: billing@juniperlabs.example

@@ -1,0 +1,11 @@
+Northline Fabrication
+Packing list
+Ship date: 2026-09-04
+PO Number: PO-OPEN-003
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 003-0904
+
+Contents:
+  - Line GR-OPEN-003 — qty 1
+
+This packing list is not an invoice.

@@ -10,16 +10,14 @@ function renderWorkflow(path = "/workflow"): ReturnType<typeof render> {
   );
 }
 
-test("first paint is a docket of three case files, not the nine-card list", () => {
+test("first paint is the one-invoice path plus the three case files", () => {
   const { container } = renderWorkflow();
+  expect(screen.getByRole("heading", { name: /Follow a vendor invoice through the office/i })).toBeInTheDocument();
+  expect(container.querySelector("ol.story-timeline")).not.toBeNull();
   expect(screen.getByRole("heading", { name: /Three invoices, one set of books/i })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /^CLEAN/i })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /^RESOLVED/i })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /^UNRESOLVED/i })).toBeInTheDocument();
-  expect(container.querySelector("ol.story-timeline")).toBeNull();
-  const details = container.querySelector("details");
-  expect(details).not.toBeNull();
-  expect(details?.open).toBeFalsy();
 });
 
 test("CLEAN ticker includes INV-001 and TXN-2026-09-018A", () => {

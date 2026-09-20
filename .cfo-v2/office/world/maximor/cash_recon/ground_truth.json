@@ -188,7 +188,182 @@
     "TXN-VOL-2026-09-178",
     "TXN-VOL-2026-09-179",
     "TXN-VOL-2026-09-180",
-    "TXN-VOL-2026-09-181"
+    "TXN-VOL-2026-09-181",
+    "TXN-VOL-2026-09-182",
+    "TXN-VOL-2026-09-183",
+    "TXN-VOL-2026-09-184",
+    "TXN-VOL-2026-09-185",
+    "TXN-VOL-2026-09-186",
+    "TXN-VOL-2026-09-187",
+    "TXN-VOL-2026-09-188",
+    "TXN-VOL-2026-09-189",
+    "TXN-VOL-2026-09-190",
+    "TXN-VOL-2026-09-191",
+    "TXN-CLR-2025-12",
+    "TXN-CLR-2026-01",
+    "TXN-CLR-2026-02",
+    "TXN-CLR-2026-03",
+    "TXN-CLR-2026-04",
+    "TXN-CLR-2026-05",
+    "TXN-CLR-2026-06",
+    "TXN-CLR-2026-07",
+    "TXN-NSC-REF-2025-11",
+    "TXN-NSC-REF-2025-12",
+    "TXN-NSC-REF-2026-01",
+    "TXN-NSC-REF-2026-02",
+    "TXN-NSC-REF-2026-03",
+    "TXN-NSC-REF-2026-04",
+    "TXN-NSC-REF-2026-05",
+    "TXN-NSC-REF-2026-06",
+    "TXN-NSC-REF-2026-07",
+    "TXN-NSC-REF-2026-08",
+    "TXN-MER-2026-09",
+    "TXN-LUM-2026-09",
+    "TXN-KIS-2025-11",
+    "TXN-KIS-2025-12",
+    "TXN-KIS-2026-01",
+    "TXN-KIS-2026-02",
+    "TXN-KIS-2026-03",
+    "TXN-KIS-2026-04",
+    "TXN-KIS-2026-05",
+    "TXN-KIS-2026-06",
+    "TXN-KIS-2026-07",
+    "TXN-KIS-2026-08",
+    "TXN-KIS-10442",
+    "TXN-NLF-10442",
+    "TXN-NLF-02-2026-01",
+    "TXN-NLF-02-2026-02",
+    "TXN-NLF-02-2026-03",
+    "TXN-NLF-02-2026-04",
+    "TXN-NLF-02-2026-05",
+    "TXN-NLF-02-2026-06",
+    "TXN-NLF-02-2026-07",
+    "TXN-NLF-02-2026-08",
+    "TXN-INV-NLF-03-2026-02",
+    "TXN-INV-NLF-03-2026-03",
+    "TXN-INV-NLF-03-2026-04",
+    "TXN-INV-NLF-03-2026-05",
+    "TXN-INV-NLF-03-2026-06",
+    "TXN-INV-NLF-03-2026-07",
+    "TXN-INV-NLF-03-2026-08",
+    "TXN-INV-KIS-4601",
+    "TXN-INV-WBT-4602",
+    "TXN-INV-KIS-4603",
+    "TXN-WBT-2026-07",
+    "TXN-INV-WBT-2026-08",
+    "TXN-INV-KIS-FRT-2025-11",
+    "TXN-INV-KIS-FRT-2025-12",
+    "TXN-INV-KIS-FRT-2026-01",
+    "TXN-INV-KIS-FRT-2026-02",
+    "TXN-INV-KIS-FRT-2026-03",
+    "TXN-INV-KIS-FRT-2026-04",
+    "TXN-INV-KIS-FRT-2026-05",
+    "TXN-INV-KIS-FRT-2026-06",
+    "TXN-INV-KIS-FRT-2026-07",
+    "TXN-INV-KIS-FRT-2026-08",
+    "TXN-INV-KIS-0618",
+    "TXN-INV-HES-2026-02",
+    "TXN-INV-HES-2026-03",
+    "TXN-INV-HES-2026-04",
+    "TXN-INV-HES-2026-05",
+    "TXN-INV-HES-2026-06",
+    "TXN-INV-HES-2026-07",
+    "TXN-INV-HES-2026-08",
+    "TXN-KIS-2026-09-16",
+    "TXN-HAL-2025-10",
+    "TXN-HAL-2025-11",
+    "TXN-HAL-2025-12",
+    "TXN-HAL-2026-01",
+    "TXN-HAL-2026-02",
+    "TXN-HAL-2026-03",
+    "TXN-HAL-2026-04",
+    "TXN-HAL-2026-05",
+    "TXN-HAL-2026-06",
+    "TXN-HAL-2026-07",
+    "TXN-HAL-2026-08",
+    "TXN-INV-HAL-WKND-2026-01",
+    "TXN-INV-HAL-WKND-2026-02",
+    "TXN-INV-HAL-WKND-2026-03",
+    "TXN-INV-HAL-WKND-2026-04",
+    "TXN-INV-HAL-WKND-2026-05",
+    "TXN-INV-HAL-WKND-2026-06",
+    "TXN-INV-HAL-WKND-2026-07",
+    "TXN-INV-HAL-WKND-2026-08",
+    "TXN-OIC-2025-01",
+    "TXN-HBP-2026-01",
+    "TXN-PAY-LAP-2026-09-12",
+    "TXN-PAY-LAP-QH-SEP-PRE",
+    "BATCH-AR-2026-08-14",
+    "BATCH-AR-2026-09-12",
+    "TXN-STRIPE-RESERVE-REL",
+    "TXN-MRH-2025-12",
+    "TXN-MRH-2026-01",
+    "TXN-MRH-2026-02",
+    "TXN-MRH-2026-03",
+    "TXN-MRH-2026-04",
+    "TXN-MRH-2026-05",
+    "TXN-MRH-2026-06",
+    "TXN-MRH-2026-07",
+    "TXN-MRH-2026-08",
+    "TXN-BLM-IN-2025-09",
+    "TXN-BLM-IN-2025-10",
+    "TXN-BLM-IN-2025-11",
+    "TXN-BLM-IN-2025-12",
+    "TXN-BLM-IN-2026-01",
+    "TXN-BLM-IN-2026-02",
+    "TXN-BLM-IN-2026-03",
+    "TXN-BLM-IN-2026-04",
+    "TXN-BLM-IN-2026-05",
+    "TXN-BLM-IN-2026-06",
+    "TXN-BLM-IN-2026-07",
+    "TXN-BLM-IN-2026-08",
+    "TXN-BLS-OUT-2025-09",
+    "TXN-BLS-OUT-2025-10",
+    "TXN-BLS-OUT-2025-11",
+    "TXN-BLS-OUT-2025-12",
+    "TXN-BLS-OUT-2026-01",
+    "TXN-BLS-OUT-2026-02",
+    "TXN-BLS-OUT-2026-03",
+    "TXN-BLS-OUT-2026-04",
+    "TXN-BLS-OUT-2026-05",
+    "TXN-BLS-OUT-2026-06",
+    "TXN-BLS-OUT-2026-07",
+    "TXN-BLS-OUT-2026-08",
+    "TXN-CAM-RENT-2026-06",
+    "TXN-CAM-RENT-2026-07",
+    "TXN-CAM-RENT-2026-08",
+    "TXN-CAM-RENT-2026-09",
+    "TXN-INV-CPS-2025-07",
+    "TXN-INV-CPS-2025-08",
+    "TXN-INV-CPS-2025-09",
+    "TXN-INV-CPS-2025-10",
+    "TXN-INV-CPS-2025-11",
+    "TXN-INV-CPS-2025-12",
+    "TXN-INV-CPS-2026-01",
+    "TXN-INV-CPS-2026-02",
+    "TXN-INV-CPS-2026-03",
+    "TXN-INV-CPS-2026-04",
+    "TXN-INV-CPS-2026-05",
+    "TXN-INV-CPS-2026-06",
+    "TXN-INV-CPS-2026-07",
+    "TXN-INV-CPS-2026-08",
+    "TXN-INV-CAM-CAM-2026",
+    "TXN-INV-CPS-RENT-2026-06",
+    "TXN-INV-CPS-RENT-2026-08",
+    "TXN-INV-LEN-ROLL-26",
+    "TXN-FLE-2025-11",
+    "TXN-FLE-2025-12",
+    "TXN-FLE-2026-01",
+    "TXN-FLE-2026-02",
+    "TXN-FLE-2026-03",
+    "TXN-FLE-2026-04",
+    "TXN-FLE-2026-05",
+    "TXN-FLE-2026-06",
+    "TXN-FLE-2026-07",
+    "TXN-FLE-2026-08",
+    "TXN-INV-FLE-0716",
+    "TXN-MIX-2026-07-16",
+    "TXN-MIX-2026-08-20"
   ],
   "exception_bank_ids": [
     "TXN-2026-09-011",
@@ -1555,6 +1730,1231 @@
       "disposition": "MATCHED",
       "ledger_ids": [
         "GL-VOL-2026-09-181"
+      ]
+    },
+    "TXN-VOL-2026-09-182": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-182"
+      ]
+    },
+    "TXN-VOL-2026-09-183": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-183"
+      ]
+    },
+    "TXN-VOL-2026-09-184": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-184"
+      ]
+    },
+    "TXN-VOL-2026-09-185": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-185"
+      ]
+    },
+    "TXN-VOL-2026-09-186": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-186"
+      ]
+    },
+    "TXN-VOL-2026-09-187": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-187"
+      ]
+    },
+    "TXN-VOL-2026-09-188": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-188"
+      ]
+    },
+    "TXN-VOL-2026-09-189": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-189"
+      ]
+    },
+    "TXN-VOL-2026-09-190": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-190"
+      ]
+    },
+    "TXN-VOL-2026-09-191": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-VOL-2026-09-191"
+      ]
+    },
+    "TXN-CLR-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2025-12"
+      ]
+    },
+    "TXN-CLR-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-01"
+      ]
+    },
+    "TXN-CLR-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-02"
+      ]
+    },
+    "TXN-CLR-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-03"
+      ]
+    },
+    "TXN-CLR-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-04"
+      ]
+    },
+    "TXN-CLR-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-05"
+      ]
+    },
+    "TXN-CLR-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-06"
+      ]
+    },
+    "TXN-CLR-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-CLR-2026-07"
+      ]
+    },
+    "TXN-NSC-REF-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2025-11"
+      ]
+    },
+    "TXN-NSC-REF-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2025-12"
+      ]
+    },
+    "TXN-NSC-REF-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-01"
+      ]
+    },
+    "TXN-NSC-REF-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-02"
+      ]
+    },
+    "TXN-NSC-REF-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-03"
+      ]
+    },
+    "TXN-NSC-REF-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-04"
+      ]
+    },
+    "TXN-NSC-REF-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-05"
+      ]
+    },
+    "TXN-NSC-REF-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-06"
+      ]
+    },
+    "TXN-NSC-REF-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-07"
+      ]
+    },
+    "TXN-NSC-REF-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NSC-REF-2026-08"
+      ]
+    },
+    "TXN-MER-2026-09": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MER-2026-09"
+      ]
+    },
+    "TXN-LUM-2026-09": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-LUM-2026-09"
+      ]
+    },
+    "TXN-KIS-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2025-11"
+      ]
+    },
+    "TXN-KIS-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2025-12"
+      ]
+    },
+    "TXN-KIS-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-01"
+      ]
+    },
+    "TXN-KIS-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-02"
+      ]
+    },
+    "TXN-KIS-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-03"
+      ]
+    },
+    "TXN-KIS-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-04"
+      ]
+    },
+    "TXN-KIS-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-05"
+      ]
+    },
+    "TXN-KIS-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-06"
+      ]
+    },
+    "TXN-KIS-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-07"
+      ]
+    },
+    "TXN-KIS-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-08"
+      ]
+    },
+    "TXN-KIS-10442": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-10442"
+      ]
+    },
+    "TXN-NLF-10442": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-10442"
+      ]
+    },
+    "TXN-NLF-02-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-01"
+      ]
+    },
+    "TXN-NLF-02-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-02"
+      ]
+    },
+    "TXN-NLF-02-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-03"
+      ]
+    },
+    "TXN-NLF-02-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-04"
+      ]
+    },
+    "TXN-NLF-02-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-05"
+      ]
+    },
+    "TXN-NLF-02-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-06"
+      ]
+    },
+    "TXN-NLF-02-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-07"
+      ]
+    },
+    "TXN-NLF-02-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-NLF-02-2026-08"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-02"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-03"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-04"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-05"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-06"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-07"
+      ]
+    },
+    "TXN-INV-NLF-03-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-NLF-03-2026-08"
+      ]
+    },
+    "TXN-INV-KIS-4601": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-4601"
+      ]
+    },
+    "TXN-INV-WBT-4602": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-WBT-4602"
+      ]
+    },
+    "TXN-INV-KIS-4603": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-4603"
+      ]
+    },
+    "TXN-WBT-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-WBT-2026-07"
+      ]
+    },
+    "TXN-INV-WBT-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-WBT-2026-08"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2025-11"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2025-12"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-01"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-02"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-03"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-04"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-05"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-06"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-07"
+      ]
+    },
+    "TXN-INV-KIS-FRT-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-FRT-2026-08"
+      ]
+    },
+    "TXN-INV-KIS-0618": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-KIS-0618"
+      ]
+    },
+    "TXN-INV-HES-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-02"
+      ]
+    },
+    "TXN-INV-HES-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-03"
+      ]
+    },
+    "TXN-INV-HES-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-04"
+      ]
+    },
+    "TXN-INV-HES-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-05"
+      ]
+    },
+    "TXN-INV-HES-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-06"
+      ]
+    },
+    "TXN-INV-HES-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-07"
+      ]
+    },
+    "TXN-INV-HES-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HES-2026-08"
+      ]
+    },
+    "TXN-KIS-2026-09-16": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-KIS-2026-09-16"
+      ]
+    },
+    "TXN-HAL-2025-10": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2025-10"
+      ]
+    },
+    "TXN-HAL-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2025-11"
+      ]
+    },
+    "TXN-HAL-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2025-12"
+      ]
+    },
+    "TXN-HAL-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-01"
+      ]
+    },
+    "TXN-HAL-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-02"
+      ]
+    },
+    "TXN-HAL-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-03"
+      ]
+    },
+    "TXN-HAL-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-04"
+      ]
+    },
+    "TXN-HAL-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-05"
+      ]
+    },
+    "TXN-HAL-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-06"
+      ]
+    },
+    "TXN-HAL-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-07"
+      ]
+    },
+    "TXN-HAL-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HAL-2026-08"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-01"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-02"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-03"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-04"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-05"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-06"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-07"
+      ]
+    },
+    "TXN-INV-HAL-WKND-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-HAL-WKND-2026-08"
+      ]
+    },
+    "TXN-OIC-2025-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-OIC-2025-01"
+      ]
+    },
+    "TXN-HBP-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-HBP-2026-01"
+      ]
+    },
+    "TXN-PAY-LAP-2026-09-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-PAY-LAP-2026-09-12"
+      ]
+    },
+    "TXN-PAY-LAP-QH-SEP-PRE": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-PAY-LAP-QH-SEP-PRE"
+      ]
+    },
+    "BATCH-AR-2026-08-14": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-BATCH-AR-2026-08-14"
+      ]
+    },
+    "BATCH-AR-2026-09-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-BATCH-AR-2026-09-12"
+      ]
+    },
+    "TXN-STRIPE-RESERVE-REL": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-STRIPE-RESERVE-REL"
+      ]
+    },
+    "TXN-MRH-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2025-12"
+      ]
+    },
+    "TXN-MRH-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-01"
+      ]
+    },
+    "TXN-MRH-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-02"
+      ]
+    },
+    "TXN-MRH-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-03"
+      ]
+    },
+    "TXN-MRH-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-04"
+      ]
+    },
+    "TXN-MRH-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-05"
+      ]
+    },
+    "TXN-MRH-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-06"
+      ]
+    },
+    "TXN-MRH-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-07"
+      ]
+    },
+    "TXN-MRH-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MRH-2026-08"
+      ]
+    },
+    "TXN-BLM-IN-2025-09": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2025-09"
+      ]
+    },
+    "TXN-BLM-IN-2025-10": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2025-10"
+      ]
+    },
+    "TXN-BLM-IN-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2025-11"
+      ]
+    },
+    "TXN-BLM-IN-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2025-12"
+      ]
+    },
+    "TXN-BLM-IN-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-01"
+      ]
+    },
+    "TXN-BLM-IN-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-02"
+      ]
+    },
+    "TXN-BLM-IN-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-03"
+      ]
+    },
+    "TXN-BLM-IN-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-04"
+      ]
+    },
+    "TXN-BLM-IN-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-05"
+      ]
+    },
+    "TXN-BLM-IN-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-06"
+      ]
+    },
+    "TXN-BLM-IN-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-07"
+      ]
+    },
+    "TXN-BLM-IN-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLM-IN-2026-08"
+      ]
+    },
+    "TXN-BLS-OUT-2025-09": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2025-09"
+      ]
+    },
+    "TXN-BLS-OUT-2025-10": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2025-10"
+      ]
+    },
+    "TXN-BLS-OUT-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2025-11"
+      ]
+    },
+    "TXN-BLS-OUT-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2025-12"
+      ]
+    },
+    "TXN-BLS-OUT-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-01"
+      ]
+    },
+    "TXN-BLS-OUT-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-02"
+      ]
+    },
+    "TXN-BLS-OUT-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-03"
+      ]
+    },
+    "TXN-BLS-OUT-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-04"
+      ]
+    },
+    "TXN-BLS-OUT-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-05"
+      ]
+    },
+    "TXN-BLS-OUT-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-06"
+      ]
+    },
+    "TXN-BLS-OUT-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-07"
+      ]
+    },
+    "TXN-BLS-OUT-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-BLS-OUT-2026-08"
+      ]
+    },
+    "TXN-CAM-RENT-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CAM-RENT-2026-06"
+      ]
+    },
+    "TXN-CAM-RENT-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CAM-RENT-2026-07"
+      ]
+    },
+    "TXN-CAM-RENT-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CAM-RENT-2026-08"
+      ]
+    },
+    "TXN-CAM-RENT-2026-09": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-CAM-RENT-2026-09"
+      ]
+    },
+    "TXN-INV-CPS-2025-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2025-07"
+      ]
+    },
+    "TXN-INV-CPS-2025-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2025-08"
+      ]
+    },
+    "TXN-INV-CPS-2025-09": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2025-09"
+      ]
+    },
+    "TXN-INV-CPS-2025-10": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2025-10"
+      ]
+    },
+    "TXN-INV-CPS-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2025-11"
+      ]
+    },
+    "TXN-INV-CPS-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2025-12"
+      ]
+    },
+    "TXN-INV-CPS-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-01"
+      ]
+    },
+    "TXN-INV-CPS-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-02"
+      ]
+    },
+    "TXN-INV-CPS-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-03"
+      ]
+    },
+    "TXN-INV-CPS-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-04"
+      ]
+    },
+    "TXN-INV-CPS-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-05"
+      ]
+    },
+    "TXN-INV-CPS-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-06"
+      ]
+    },
+    "TXN-INV-CPS-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-07"
+      ]
+    },
+    "TXN-INV-CPS-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-2026-08"
+      ]
+    },
+    "TXN-INV-CAM-CAM-2026": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CAM-CAM-2026"
+      ]
+    },
+    "TXN-INV-CPS-RENT-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-RENT-2026-06"
+      ]
+    },
+    "TXN-INV-CPS-RENT-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-CPS-RENT-2026-08"
+      ]
+    },
+    "TXN-INV-LEN-ROLL-26": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-LEN-ROLL-26"
+      ]
+    },
+    "TXN-FLE-2025-11": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2025-11"
+      ]
+    },
+    "TXN-FLE-2025-12": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2025-12"
+      ]
+    },
+    "TXN-FLE-2026-01": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-01"
+      ]
+    },
+    "TXN-FLE-2026-02": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-02"
+      ]
+    },
+    "TXN-FLE-2026-03": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-03"
+      ]
+    },
+    "TXN-FLE-2026-04": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-04"
+      ]
+    },
+    "TXN-FLE-2026-05": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-05"
+      ]
+    },
+    "TXN-FLE-2026-06": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-06"
+      ]
+    },
+    "TXN-FLE-2026-07": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-07"
+      ]
+    },
+    "TXN-FLE-2026-08": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-FLE-2026-08"
+      ]
+    },
+    "TXN-INV-FLE-0716": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-INV-FLE-0716"
+      ]
+    },
+    "TXN-MIX-2026-07-16": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MIX-2026-07-16"
+      ]
+    },
+    "TXN-MIX-2026-08-20": {
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "ledger_ids": [
+        "GL-TXN-MIX-2026-08-20"
       ]
     }
   }

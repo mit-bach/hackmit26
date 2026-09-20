@@ -23,6 +23,13 @@ function makeOfficeComputer(): { readonly parent: string; readonly computer: str
   const computer = join(parent, "computer");
   mkdirSync(join(computer, "harness"), { recursive: true });
   mkdirSync(join(computer, "workspace"), { recursive: true });
+  const botsRoot = join(parent, "bots");
+  mkdirSync(join(botsRoot, "ap"), { recursive: true });
+  writeFileSync(join(botsRoot, "ap", "BOT.md"), "# ap\n");
+  writeFileSync(join(parent, "constitution.md"), "# constitution\n");
+  mkdirSync(join(computer, "office"), { recursive: true });
+  symlinkSync(join(parent, "bots"), join(computer, "office", "bots"));
+  symlinkSync(join(parent, "constitution.md"), join(computer, "office", "constitution.md"));
   writeJsonAtomic(rosterPath(computer), FLOOR_ROSTER);
   initComputer(computer, FLOOR_ROSTER);
   writeFileSync(join(computer, "workspace", "note.md"), "context for beta\n");
@@ -69,6 +76,10 @@ test("create fresh instance clones template files and leaves live protocol intac
   assert.equal(existsSync(join(dest, "workspace", "note.md")), true);
   assert.equal(lstatSync(join(dest, "data")).isSymbolicLink(), true);
   assert.equal(resolveLink(join(dest, "data")), dataTarget);
+  assert.equal(lstatSync(join(dest, "office", "bots")).isSymbolicLink(), true);
+  assert.equal(resolveLink(join(dest, "office", "bots")), join(parent, "bots"));
+  assert.equal(existsSync(join(dest, "office", "bots", "ap", "BOT.md")), true);
+  assert.equal(existsSync(join(dest, "office", "constitution.md")), true);
   assert.equal(existsSync(join(dest, "harness", "protocol.jsonl")) ? readProtocol(dest).length : 0, 0);
 });
 

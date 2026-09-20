@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-348
 PO Number: PO-348
-Vendor: Northline Fab Group
+Vendor: Orbit Analytics
 Goods received in full on 2026-09-22
 Packing list attached: PL-GR-348
 Quantity ordered: 1

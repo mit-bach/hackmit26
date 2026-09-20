@@ -1,0 +1,39 @@
+Westbrook Tooling LLC
+90 Westbrook Street
+Westbrook, ME 04092
+Phone +1 207-555-4092   billing@westbrooktooling.example
+Tax ID 04-6621180
+
+INVOICE
+
+Invoice Number: WBT-2026-08
+Invoice Date: 2026-08-12
+Due Date: 2026-09-11
+PO Number: PO-WBT-2026-08
+Payment Terms: net 30
+Currency: USD
+Vendor: Westbrook Tooling
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Tooling lot August. SKU                       1.00     23,940.00     23,940.00
+
+Subtotal                                                             23,940.00
+Tax                                                                       0.00
+Amount Due                                                           23,940.00
+
+Remit to:
+ACH Bangor routing 011201331  account ****4092
+Bank: Bangor Savings  ****4092
+Please include invoice WBT-2026-08 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@westbrooktooling.example

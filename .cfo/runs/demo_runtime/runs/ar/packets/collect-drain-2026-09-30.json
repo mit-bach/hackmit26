@@ -1,0 +1,16 @@
+{
+  "object": "unapplied_cash",
+  "as_of": "2026-09-30",
+  "payment_ids": [
+    "PAY-002",
+    "PAY-001",
+    "PAY-003",
+    "PAY-004",
+    "PAY-005",
+    "PAY-006",
+    "PAY-007",
+    "PAY-008"
+  ],
+  "reason": "Aging Routine woke collect before apply drained new deposits.",
+  "human_queue": false
+}

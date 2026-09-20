@@ -6,8 +6,8 @@ PURCHASE ORDER
 Purchase Order PO-378
 PO Number: PO-378
 Issued: 2026-09-25
-Vendor: WeWork Cambridge
-Vendor legal name: WeWork Cambridge
+Vendor: Wharf Labs
+Vendor legal name: Wharf Labs
 Vendor tax ID: 00-0000000
 Authorized amount: 3,151.30
 Currency: USD

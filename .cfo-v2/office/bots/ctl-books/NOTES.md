@@ -1,12 +1,7 @@
-# Session 09 notes — Bot `ctl-books`
+# ctl-books — period pass notes
 
-Period lock stays on Kernel `evaluate_close_gates`. This Bot cannot
-`create_accrual`. Profile `lock` has empty Grants. Profile `review-treatment`
-reads prepaid facts only; FA and BS reviewer Display names share the Profile
-name and do not union constructor `ops`.
+Profile `lock` now reads `close.tools.get_close_gates` and `close.tools.get_close_packet`. It still cannot mark CLOSED. CONCUR is ignored when `evaluate_close_gates` fails. September 2026 stays BLOCKED on `$12.40`.
 
-Client intercept sends `accrual.tools.create_accrual` here as
-`review-treatment`. After a completed CONCUR Handle, `close` / `accrue` may
-call the sidecar. Until then the Client returns `verifier_required`.
+`create_accrual` stays off every ctl-books Profile.
 
-Handle completion was not live-proven. Proofs are Kernel/unit.
+Routines will not auto-fire (`autoRoutines: false`). Floor owns that flag.

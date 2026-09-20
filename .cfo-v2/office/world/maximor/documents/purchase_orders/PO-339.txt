@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-339
 PO Number: PO-339
 Issued: 2026-09-13
-Vendor: Shadow Vendor LLC
-Vendor legal name: Shadow Vendor LLC
-Vendor tax ID: 51-7782104
+Vendor: Ginkgo Partners
+Vendor legal name: Ginkgo Partners
+Vendor tax ID: 00-0000000
 Authorized amount: 48.65
 Currency: USD
 Approver: Jordan Hale

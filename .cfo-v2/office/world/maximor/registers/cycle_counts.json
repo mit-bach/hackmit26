@@ -1,0 +1,110 @@
+[
+  {
+    "count_id": "CC-CAM-A14-2025-11",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2025-11",
+    "book_qty": 22,
+    "floor_qty": 19,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2025-12",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2025-12",
+    "book_qty": 23,
+    "floor_qty": 20,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-01",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-01",
+    "book_qty": 21,
+    "floor_qty": 18,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-02",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-02",
+    "book_qty": 22,
+    "floor_qty": 19,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-03",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-03",
+    "book_qty": 23,
+    "floor_qty": 20,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-04",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-04",
+    "book_qty": 24,
+    "floor_qty": 21,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-05",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-05",
+    "book_qty": 25,
+    "floor_qty": 22,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-06",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-06",
+    "book_qty": 26,
+    "floor_qty": 23,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-07",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-07",
+    "book_qty": 27,
+    "floor_qty": 24,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-08",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-08",
+    "book_qty": 28,
+    "floor_qty": 25,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-A14-2026-09",
+    "bin": "CAM-BIN-A14",
+    "sku": "KIS-MRO-7",
+    "period": "2026-09",
+    "book_qty": 20,
+    "floor_qty": 17,
+    "counter": "EMP-6722"
+  },
+  {
+    "count_id": "CC-CAM-WH-01-2026-09-30",
+    "bin": "CAM-WH-01",
+    "sku": "PIN-BH",
+    "period": "2026-09",
+    "book_qty": 0,
+    "floor_qty": 400,
+    "floor_cost": 1611400.0
+  }
+]

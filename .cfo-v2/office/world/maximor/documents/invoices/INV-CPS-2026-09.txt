@@ -1,0 +1,39 @@
+Cambridge Property Services
+1 Kendall Square
+Cambridge, MA 02139
+Phone +1 617-555-2190   billing@cambridgepropertyservices.example
+Tax ID 04-5518821
+
+INVOICE
+
+Invoice Number: CPS-CAM-2026-09
+Invoice Date: 2026-09-15
+Due Date: 2026-10-05
+PO Number: PO-CPS-2026-09
+Payment Terms: net 30
+Currency: USD
+Vendor: Cambridge Property Services
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+CAM reconciliation. SKU                       1.00      7,649.84      7,649.84
+
+Subtotal                                                              7,649.84
+Tax                                                                       0.00
+Amount Due                                                            7,649.84
+
+Remit to:
+ACH routing 011000390  account ****2190
+Bank: First National Bank  ****2190
+Please include invoice CPS-CAM-2026-09 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@cambridgepropertyservices.example

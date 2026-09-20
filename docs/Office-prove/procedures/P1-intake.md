@@ -1,6 +1,6 @@
 # P1 — Intake
 
-**Job.** Source Bots land objects. Email classifies. Bills that are bills Handle `ap`. Remittances Handle `apply`. Quotes, newsletters, injections do not become invoices. Bank lines Handle `cash`. Books land bills and open invoices. Stripe unpack is honest: Kernel math, no `InvoiceCandidate`, or stripe is not office-live.
+**Job.** Source Bots land objects. Email classifies. Bills that are bills Handle `ap`. Remittances Handle `apply`. Quotes, newsletters, injections do not become invoices. Bank lines Handle `cash`. Books land bills and open invoices. Stripe unpack is Kernel math, no `InvoiceCandidate`.
 
 **Owns.** `email`, `bank`, `books`, `stripe`, `world` if bound.
 
@@ -118,7 +118,7 @@ Classify this message. If it is a vendor bill, extract fields and Handle ap / pr
 - Stimulus: `spec_incomplete()`
 - Actor: `email`
 - INTENDED: outbound missing-info if send exists; else a typed incomplete status, not a guessed invoice
-- If send exists and World is bound, World may reply (see S16). If send missing, RUNS for classify; SKIP last-mile with T3/T4
+- If send exists and World is bound (live: both true), World may reply (see S16). If send missing, RUNS for classify; SKIP last-mile with T3/T4
 - HARD if: invented fields posted to Kernel as a complete bill
 - SOFT if: classified incomplete then still Handled ap as clean
 - Ticks: extract; maybe send_inbox_message
@@ -179,14 +179,14 @@ Classify this message. If it is a vendor bill, extract fields and Handle ap / pr
 
 ---
 
-## S16 — World round-trip (if bound)
+## S16 — World round-trip
 
 - Stimulus: after S09 outbound, or a collect send from P3. Wake `world` as the vendor/customer named in the thread
 - Actor: `world` / Counterparty Message Agent
-- Must call: compose/send/reply inbox ops granted to World, not finance classify
+- Must call: compose/send_inbox/reply inbox ops granted to World, not finance classify, not `send_office_outbound`
 - Must not: `classify_inbox_message` on the finance inbox if Grants forbid it
 - INTENDED: a reply appears where Email can classify
-- SKIP if World off Roster (T1). Name it. P3 send INTENDED cannot be claimed without a mailbox wearer
+- SKIP only if this instance roster omitted `world` (clone bug). Live template binds World. Do not add a seventeenth Bot
 - HARD if: World calls finance dispatch and pays a bill
 - Ticks: world Bind; compose; send_inbox_message; reply_in_thread
 
@@ -246,15 +246,14 @@ List bank transactions. A charge is not a bill. Handle cash / match for lines th
 
 ---
 
-## S20 — Stripe unpack or honest costume
+## S20 — Stripe unpack
 
 - Stimulus: spawn `stripe`. Wake profile `payout` to unpack a simulated payout. Do not produce InvoiceCandidate
-- Actor: `stripe`
-- Must call: whatever Grant exists after 05 Cash. If Grant empty, do not force tools
+- Actor: `stripe` / `payout` (Stripe Payout Agent)
+- Must call: `integrations.tools.list_processor_payouts` and/or `get_processor_payout` / `get_payout_waterfall`
 - INTENDED: charges Handle apply; deposit Handle cash; invoice_candidates 0
-- HONEST-EMPTY / SKIP: empty Display name or empty ops. Write “stripe not office-live; Kernel simulate-stripe is Kernel-live only.” Do not tick office-live stripe
-- HARD if: bind crash; InvoiceCandidate emitted; payout posted as AP bill
-- Ticks: stripe Handle edges or honest skip
+- HARD if: bind crash; InvoiceCandidate emitted; payout posted as AP bill; Grant empty on this instance (live is granted — then clone/compile is stale)
+- Ticks: stripe Handle edges; integrations payout ops
 
 ---
 
@@ -287,7 +286,7 @@ If World pack has no EDI documents, RUNS for empty list. Do not invent EDI.
 ## Done-when
 
 - Bare min: S01, S05, S08, S13, S19 RUNS (list, ignore quote, ignore injection, malformed fail-closed, bank no-invent)
-- INTENDED: S02 lands a Kernel bill; S14 remittance to apply; ignore paths do not mint invoices; stripe honest; World SKIP or round-trip named
+- INTENDED: S02 lands a Kernel bill; S14 remittance to apply; ignore paths do not mint invoices; stripe payout ops; World round-trip
 
 ## Forbidden
 

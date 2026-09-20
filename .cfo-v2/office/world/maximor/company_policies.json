@@ -197,5 +197,36 @@
     "exception_types": [
       "payment_scheduling"
     ]
+  },
+  {
+    "policy_id": "P-REV-001",
+    "title": "Revenue recognition",
+    "description": "FOB destination. Bill-and-hold requires delivery or lapse of return rights.",
+    "action": "HOLD_REVENUE",
+    "conditions": {
+      "fob": "destination"
+    },
+    "exception_types": []
+  },
+  {
+    "policy_id": "P-INV-001",
+    "title": "Consignment inventory",
+    "description": "Goods in a consignment cage are not sold.",
+    "action": "KEEP_ON_BALANCE_SHEET",
+    "conditions": {
+      "location_type": "consignment"
+    },
+    "exception_types": []
+  },
+  {
+    "policy_id": "P-CASH-UNDEP-AGE",
+    "title": "Undeposited funds aging",
+    "description": "Items in 1030 older than 5 business days are exceptions.",
+    "action": "EXCEPTION_OPEN",
+    "conditions": {
+      "account": "1030-Undeposited-Funds",
+      "max_business_days": 5
+    },
+    "exception_types": []
   }
 ]

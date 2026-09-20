@@ -1,0 +1,39 @@
+Clearing Solutions LLC
+1209 Orange Street
+Wilmington, DE 19801
+Phone +1 302-555-1988   billing@clearingsolutions.example
+Tax ID 85-2201988
+
+INVOICE
+
+Invoice Number: CLR-2025-12-01
+Invoice Date: 2025-12-08
+Due Date: 2025-12-28
+PO Number: PO-CLR-2025-12
+Payment Terms: net 30
+Currency: USD
+Vendor: Clearing Solutions LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Bank rec consulting true-up. SKU              1.00      6,842.18      6,842.18
+
+Subtotal                                                              6,842.18
+Tax                                                                       0.00
+Amount Due                                                            6,842.18
+
+Remit to:
+ACH Wilmington Trust routing 031100209  account ****1988
+Bank: Wilmington Trust  ****1988
+Please include invoice CLR-2025-12-01 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@clearingsolutions.example

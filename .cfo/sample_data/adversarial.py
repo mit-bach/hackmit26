@@ -29,6 +29,8 @@ from sample_data.pnl import (
     AR_OPEN,
     BIWEEKLY_PAYROLL_GROSS,
     COGS_ACCOUNTS,
+    CONTRACTOR_1099_COUNT,
+    ACTIVE_VENDORS,
     INTENDED_COGS_MINOR,
     INTENDED_REVENUE_MINOR,
     OPERATING_CASH_2026_09_30,
@@ -63,8 +65,8 @@ KIS_MONTHLY: dict[str, float] = {
     "2026-03": 16240.44,
     "2026-04": 16820.62,
     "2026-05": 17420.18,
-    "2026-06": 15625.06,
-    "2026-07": 18831.96,
+    "2026-06": 14625.06,
+    "2026-07": 17831.96,
     "2026-08": 19406.50,
     "2026-09": 24880.44,
 }
@@ -79,7 +81,7 @@ REC_PLUGS: dict[str, float] = {
     "2026-04": 8214.66,
     "2026-05": 8420.18,
     "2026-06": 8544.22,
-    "2026-07": 9014.22,
+    "2026-07": 17014.22,
     "2026-08": 7206.18,
 }
 
@@ -108,6 +110,18 @@ def finish_adversarial(ctx: CompanyScenarioContext) -> None:
     overlay_policies_and_workpapers(ctx)
     set_cash_and_company(ctx)
     attach_holdout(ctx)
+    if ctx.audit_invoices and not any(item.invoice_id == "AUD-SAMP-KIS-08" for item in ctx.audit_invoices):
+        ctx.audit_invoices.append(
+            ctx.audit_invoices[0].model_copy(
+                update={
+                    "invoice_id": "AUD-SAMP-KIS-08",
+                    "vendor": "Kestrel Industrial Supply LLC",
+                    "vendor_id": "VEND-KIS-01",
+                    "amount": KIS_MONTHLY["2026-02"],
+                    "invoice_date": "2026-02-08",
+                }
+            )
+        )
 
 
 def fill_scale_pnl(ctx: CompanyScenarioContext) -> None:
@@ -232,10 +246,8 @@ def plant_identity_bible(ctx: CompanyScenarioContext) -> None:
         },
         "EMP-8891": {
             "home_address": "PO Box 12, Reno, NV 89501",
-            "okta_user": "USR-WH-8891",
+            "okta_user": "",
             "hire_date": "2025-04-14",
-            "badge_last_seen": "",
-            "okta_last_login": "",
         },
         "EMP-2290": {
             "last_day": "2026-03-31",
@@ -274,7 +286,6 @@ def plant_identity_bible(ctx: CompanyScenarioContext) -> None:
         {"user_id": "USR-REV-05", "emp_id": "EMP-1190", "role": "revenue"},
         {"user_id": "USR-APPLY-02", "emp_id": "EMP-3304", "role": "cash_apply"},
         {"user_id": "USR-FAC-01", "emp_id": "EMP-2201", "role": "facilities"},
-        {"user_id": "USR-WH-8891", "emp_id": "EMP-8891", "role": "warehouse"},
         {"user_id": "USR-WH-2290", "emp_id": "EMP-2290", "role": "warehouse"},
         {"user_id": "USR-GR-01", "emp_id": "EMP-6722", "role": "receiving"},
         {"user_id": "USR-STRIPE-01", "emp_id": "EMP-4402", "role": "processor"},
@@ -315,11 +326,15 @@ def plant_identity_bible(ctx: CompanyScenarioContext) -> None:
         {"employee_id": "EMP-2290", "badge_id": "BDG-2290", "last_seen": "2026-03-30T16:40:00Z", "door": "CAM-WH-01"},
         {"employee_id": "EMP-3304", "badge_id": "BDG-3304", "last_seen": "2026-09-18T17:10:00Z", "door": "CAM-4"},
         {"employee_id": "EMP-2201", "badge_id": "BDG-2201", "last_seen": "2026-09-19T18:11:00Z", "door": "CAM-HQ"},
-        {"employee_id": "EMP-8891", "badge_id": "", "last_seen": "", "door": ""},
     ]
     ctx.okta_export = [
-        {"emp_id": emp_id, "last_login": "2026-09-19T12:00:00Z" if emp_id != "EMP-8891" else "", "active": emp_id not in {"EMP-8891", "EMP-2290"}}
+        {
+            "emp_id": emp_id,
+            "last_login": "2026-09-19T12:00:00Z",
+            "active": emp_id != "EMP-2290",
+        }
         for emp_id in overlays
+        if emp_id != "EMP-8891"
     ]
     ctx.it_assets = [
         {"asset_tag": "MX-LPT-4128", "employee_id": "EMP-4128", "serial": "LN-4128", "issued": "2024-01-08"},
@@ -544,6 +559,20 @@ def plant_identity_bible(ctx: CompanyScenarioContext) -> None:
             notes="Billed as a customer. Not on the legal entity register.",
         )
         _safe_named(ctx, "CUST-IC-EU")
+    seq = 900
+    while len(ctx.vendors) < ACTIVE_VENDORS:
+        vendor_id = f"VEND-Z{seq:03d}"
+        seq += 1
+        if vendor_id in ctx.vendors:
+            continue
+        _add_vendor(
+            ctx,
+            vendor_id,
+            f"Northeast Industrial {seq}",
+            first_seen="2023-03-01",
+            tax_id=f"04-{seq:07d}",
+            address=f"{seq} Albany Street\nCambridge, MA 02139",
+        )
     ctx.vendors["VEND-KIS-01"]["change_memo"] = "normalize ACH formatting / strip spaces"
 
 
@@ -1109,20 +1138,18 @@ def plant_kestrel(ctx: CompanyScenarioContext) -> None:
         description="ACH OUT KESTREL INDUSTRIAL GROUPED",
         matched=True,
     )
-    ctx.audit_invoices.append(
-        type(ctx.audit_invoices[0])(
-            **{
-                **ctx.audit_invoices[0].model_dump(),
-                "invoice_id": "AUD-SAMP-KIS-08",
-                "vendor": "Kestrel Industrial Supply LLC",
-                "vendor_id": "VEND-KIS-01",
-                "amount": KIS_MONTHLY["2026-02"],
-                "invoice_date": "2026-02-08",
-            }
+    if ctx.audit_invoices:
+        ctx.audit_invoices.append(
+            ctx.audit_invoices[0].model_copy(
+                update={
+                    "invoice_id": "AUD-SAMP-KIS-08",
+                    "vendor": "Kestrel Industrial Supply LLC",
+                    "vendor_id": "VEND-KIS-01",
+                    "amount": KIS_MONTHLY["2026-02"],
+                    "invoice_date": "2026-02-08",
+                }
+            )
         )
-        if ctx.audit_invoices
-        else None
-    )
     _ = grouped
 
 
@@ -1196,13 +1223,12 @@ def plant_halyard(ctx: CompanyScenarioContext) -> None:
             f"{period}-20",
             f"HAL-{period}",
             "West campus janitorial",
-            po_id="PO-HAL-STANDING",
+            po_id=f"PO-HAL-{period}",
             receipt_id=f"GR-HAL-{period}",
             vendor_id="VEND-HAL-01",
             paid=period < "2026-09",
             pay_id=f"PAY-HAL-{period}",
             bank_id=f"TXN-HAL-{period}",
-            reuse_po=True,
             approval_limit=25000.0,
         )
     weekend = {
@@ -1322,10 +1348,12 @@ def plant_orbit(ctx: CompanyScenarioContext) -> None:
         )
         month_n += 1
         if cursor.month == 12:
-            cursor = date(cursor.year + 1, 1, 31)
+            nxt = date(cursor.year + 1, 1, 1)
         else:
-            last = 28 if cursor.month == 2 else (30 if cursor.month in {4, 6, 9, 11} else 31)
-            cursor = date(cursor.year, cursor.month + 1, last)
+            nxt = date(cursor.year, cursor.month + 1, 1)
+        import calendar as cal
+
+        cursor = date(nxt.year, nxt.month, cal.monthrange(nxt.year, nxt.month)[1])
     _je(
         ctx,
         "JE-PRE-OIC-2026-09",
@@ -1741,14 +1769,9 @@ def plant_pinnacle(ctx: CompanyScenarioContext) -> None:
             "description": "Reserved October return window",
         }
     )
-    ctx.inbox_extra.append(
-        {
-            "message_id": "MSG-PIN-HOLD-01",
-            "subject": "Pinnacle hold — do not ship from cage B",
-            "sender": "ops@pinnacle.example",
-            "received_at": "2026-09-30T16:12:00Z",
-        }
-    )
+    from inbox.fixtures import spec_pinnacle_hold
+
+    ctx.inbox_extra.append(spec_pinnacle_hold().model_dump(mode="json"))
 
 
 def plant_processor(ctx: CompanyScenarioContext) -> None:
@@ -2098,13 +2121,12 @@ def plant_brightline(ctx: CompanyScenarioContext) -> None:
             _add_days(f"{period}-14", 15),
             f"BLS-{period}",
             "Demand-gen retainer",
-            po_id="PO-BLS-STANDING",
+            po_id=f"PO-BLS-{period}",
             receipt_id=f"GR-BLS-{period}",
             vendor_id="VEND-BLS-01",
             paid=True,
             pay_id=f"PAY-BLS-{period}",
             bank_id=f"TXN-BLS-OUT-{period}",
-            reuse_po=True,
             requested_by="EMP-3310",
         )
     _ap_match(
@@ -2116,11 +2138,10 @@ def plant_brightline(ctx: CompanyScenarioContext) -> None:
         "2026-09-29",
         "BLS-2026-09",
         "Demand-gen retainer",
-        po_id="PO-BLS-STANDING",
+        po_id="PO-BLS-2026-09",
         receipt_id="GR-BLS-2026-09",
         vendor_id="VEND-BLS-01",
         paid=False,
-        reuse_po=True,
         requested_by="EMP-3310",
     )
 
@@ -2201,11 +2222,10 @@ def plant_cambridge(ctx: CompanyScenarioContext) -> None:
             _add_days(f"{period}-15", 20),
             f"CPS-CAM-{period}",
             "CAM reconciliation",
-            po_id="PO-CPS-CAM",
+            po_id=f"PO-CPS-{period}",
             receipt_id=f"GR-CPS-{period}",
             vendor_id="VEND-CPS-01",
             paid=period < "2026-09",
-            reuse_po=True,
             account="6300-Occupancy",
         )
     _ap_match(
@@ -2260,8 +2280,9 @@ def plant_cambridge(ctx: CompanyScenarioContext) -> None:
             accrual_id="ACC-CAM-2026-09",
             vendor="Cambridge Properties",
             period="2026-09",
-            amount=48000.0,
-            status="accrual_required",
+            estimated_amount=48000.0,
+            expense_account="6300-Occupancy",
+            status="open",
             estimation_method="contract_commitment",
             confidence=0.7,
             evidence=["contract:CTR-CAM-001"],
@@ -2504,13 +2525,12 @@ def plant_freight(ctx: CompanyScenarioContext) -> None:
             _add_days(f"{period}-21", 15),
             f"FLE-{period}-X",
             "Accessorial fuel and liftgate",
-            po_id="PO-FLE-ACC",
+            po_id=f"PO-FLE-{period}",
             receipt_id=f"GR-FLE-{period}",
             vendor_id="VEND-FLE-01",
             paid=True,
             pay_id=f"PAY-FLE-{period}",
             bank_id=f"TXN-FLE-{period}",
-            reuse_po=True,
             account="5300-Freight",
             category="freight",
         )
@@ -2523,11 +2543,10 @@ def plant_freight(ctx: CompanyScenarioContext) -> None:
         "2026-10-06",
         "FLE-2026-09-X",
         "Accessorial fuel and liftgate",
-        po_id="PO-FLE-ACC",
+        po_id="PO-FLE-2026-09",
         receipt_id="GR-FLE-2026-09",
         vendor_id="VEND-FLE-01",
         paid=False,
-        reuse_po=True,
         account="5300-Freight",
         category="freight",
     )
@@ -2540,11 +2559,10 @@ def plant_freight(ctx: CompanyScenarioContext) -> None:
         "2026-07-30",
         "FLE-0716-X",
         "Accessorial mixed ACH",
-        po_id="PO-FLE-ACC",
+        po_id="PO-FLE-0716",
         receipt_id="GR-FLE-0716",
         vendor_id="VEND-FLE-01",
         paid=True,
-        reuse_po=True,
         account="5300-Freight",
         category="freight",
         requested_by="EMP-4128",
@@ -2584,7 +2602,8 @@ def densify_open_subledgers(ctx: CompanyScenarioContext) -> None:
         if inv.invoice_id not in {pay_id for pay in ctx.vendor_payments.values() for pay_id in pay.invoice_ids}
     )
     seq = 1
-    vendors = [row for row in ctx.vendors.values() if not row.get("unusual") and row["vendor_id"] not in {"VEND-001-DUP", "VEND-010", "VEND-018"}]
+    held_open = {"VEND-001-DUP", "VEND-010", "VEND-018", "VEND-015", "VEND-016"}
+    vendors = [row for row in ctx.vendors.values() if not row.get("unusual") and row["vendor_id"] not in held_open]
     while ap_open < AP_OPEN - 5000 and seq < 80:
         vendor = vendors[seq % len(vendors)]
         amount = round(180000.00 + (seq * 137.18) % 90000, 2)
@@ -2740,6 +2759,7 @@ def set_cash_and_company(ctx: CompanyScenarioContext) -> None:
     ctx.company.operating_cash = OPERATING_CASH_2026_09_30
     ctx.company.active_vendors = len(ctx.vendors)
     ctx.company.w2_headcount = len(ctx.employee_master)
+    ctx.company.contractors_1099 = CONTRACTOR_1099_COUNT
     ctx.company.biweekly_payroll_gross = BIWEEKLY_PAYROLL_GROSS
     if ctx.period_balances.get(ctx.period):
         ctx.period_balances[ctx.period].cash = OPERATING_CASH_2026_09_30
@@ -2765,12 +2785,24 @@ def attach_holdout(ctx: CompanyScenarioContext) -> None:
     payload = json.loads(INDEX_PATH.read_text()) if INDEX_PATH.is_file() else {"scenarios": []}
     items = []
     for row in payload.get("scenarios", []):
-        finding = row.get("expected_finding") or {}
-        reason = finding.get("reason_code") or ""
-        magnitude = finding.get("magnitude") or ""
-        record_ids = finding.get("record_ids") or []
-        if isinstance(record_ids, str):
-            record_ids = [part.strip() for part in record_ids.split(",") if part.strip()]
+        finding = row.get("expected_finding") or ""
+        reason = ""
+        magnitude = ""
+        record_ids: list[str] = []
+        if isinstance(finding, dict):
+            reason = str(finding.get("reason_code") or "")
+            magnitude = str(finding.get("magnitude") or "")
+            raw_ids = finding.get("record_ids") or []
+            if isinstance(raw_ids, str):
+                record_ids = [part.strip() for part in raw_ids.split(",") if part.strip()]
+            else:
+                record_ids = [str(item) for item in raw_ids]
+        else:
+            parts = [part.strip() for part in str(finding).split("|")]
+            reason = parts[0] if parts else ""
+            magnitude = parts[1] if len(parts) > 1 else ""
+            if len(parts) > 2:
+                record_ids = [part.strip() for part in parts[2].split(",") if part.strip()]
         must_unmatched = ["TXN-2026-09-015"] if row.get("id") == "ADV-CASH-014" else []
         items.append(
             AdversarialHoldoutItem(
@@ -2831,7 +2863,8 @@ def _add_vendor(
         "bank_routing": routing or "011000390",
         "bank_account": account or f"10{vendor_id[-2:]}0000",
         "bank_account_last4": last4,
-        "bank_changed_on": "",
+        "bank_changed_on": "2026-06-12" if vendor_id == "VEND-KIS-01" else "",
+        "change_memo": "normalize ACH formatting / strip spaces" if vendor_id == "VEND-KIS-01" else "",
         "aliases": [],
         "duplicate_risk_key": vendor_id,
         "currency": "USD",
@@ -2878,8 +2911,8 @@ def _ap_match(
     paid: bool = False,
     pay_id: str = "",
     bank_id: str = "",
-    approver: str = "Jordan Hale",
-    approval_limit: float = 25000.0,
+    approver: str = "Priya Nair",
+    approval_limit: float | None = None,
     requested_by: str = "",
     qty: int = 1,
     unit: float | None = None,
@@ -2899,6 +2932,7 @@ def _ap_match(
 ) -> None:
     amount = round(float(amount), 2)
     unit = round(amount / qty, 2) if unit is None else unit
+    limit = approval_limit if approval_limit is not None else max(amount, 25000.0)
     if po_id not in ctx.purchase_orders:
         ctx.purchase_orders[po_id] = PurchaseOrder(
             po_id=po_id,
@@ -2907,7 +2941,7 @@ def _ap_match(
             description=description,
             status="approved",
             created_date=po_date or invoice_date,
-            approval_limit=approval_limit,
+            approval_limit=limit,
             approver=approver,
         )
         _safe_named(ctx, po_id)
@@ -3204,13 +3238,11 @@ def _add_contract(
         "vendor": vendor,
         "start_date": start,
         "end_date": "2027-12-31",
+        "billing_cadence": "monthly",
         "description": description,
+        "monthly_minimum": monthly_minimum,
+        "amount": monthly_minimum,
     }
-    fields = set(VendorContract.model_fields)
-    if "monthly_minimum" in fields:
-        kwargs["monthly_minimum"] = monthly_minimum
-    if "amount" in fields:
-        kwargs["amount"] = monthly_minimum
     item = VendorContract.model_validate(kwargs)
     if extra:
         for key, value in extra.items():
@@ -3226,10 +3258,9 @@ def _recon_stub(reconciliation_id: str, period: str):
     return PlantedReconciliation(
         reconciliation_id=reconciliation_id,
         period=period,
-        statement_id=f"STMT-{period}",
-        label=reconciliation_id,
+        recon_type="bank",
+        original_match_type="EXACT_MATCH",
         original_status="MATCHED",
-        expected_exceptions=[],
         bank_transaction_ids=[],
         ledger_entry_ids=[],
     )

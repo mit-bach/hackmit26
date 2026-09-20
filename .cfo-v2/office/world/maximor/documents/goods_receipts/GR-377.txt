@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-377
 PO Number: PO-377
-Vendor: Cloudflare
+Vendor: Beacon Components
 Goods received in full on 2026-09-24
 Packing list attached: PL-GR-377
 Quantity ordered: 1

@@ -90,12 +90,12 @@ If slug-map review-treatment is Prepaid Reviewer only, accrual Handle still must
 
 - Stimulus: Handle `close` → `ctl-books` / `lock` after treatments
 - Actor: `ctl-books` / `lock` (Month-End Close Reviewer)
-- Must call: whatever lock Grant contains after 05 Close. If still `ops: []`, HONEST-EMPTY / costume: you cannot tick office-live lock. Kernel gates may still run from sidecar in P9. Name the hole
+- Must call: `close.tools.get_close_gates` and `close.tools.get_close_packet`. Read-only. Cannot mark CLOSED
 - Must not: close Bot marking CLOSED; `run_cfo_close` as lock; `--resolve` demo fixture; Operator
-- INTENDED: Kernel `evaluate_close_gates` BLOCKED on unexplained cash `$12.40`. Period not CLOSED
+- INTENDED: Kernel `evaluate_close_gates` BLOCKED on unexplained cash `$12.40`. Period not CLOSED. Tools return `can_mark_closed: false`, `queue_owner: ctl-books`
 - BLOCKED-CORRECT: pass of law
-- HARD if: CLOSED; $12.40 gone; ground truth loaded; ops empty but you claim office-live lock without naming HONEST-EMPTY
-- Ticks: month-end-close-review; close→ctl-books lock; $12.40
+- HARD if: CLOSED; $12.40 gone; ground truth loaded; Grant missing those two ops on this instance (live has them)
+- Ticks: month-end-close-review; close→ctl-books lock; $12.40; get_close_gates; get_close_packet
 
 ---
 
@@ -157,8 +157,8 @@ Separate Wakes: `profile: forecast`, `profile: forecast-miss`, `profile: board`.
 
 ## Done-when
 
-- Bare min: S01 Routine RUNS; S07 not CLOSED; S05 $12.40 still there; S10 did not call ground truth; no throw
-- INTENDED: treatments as separate Wakes; Computer runs/; story UNLOCKED; audit findings with ids; lock office-live or named HONEST-EMPTY; still BLOCKED on $12.40
+- Bare min: S01 Routine RUNS; S07 not CLOSED; S07 $12.40 still there; S10 did not call ground truth; no throw
+- INTENDED: treatments as separate Wakes; Computer runs/; story UNLOCKED; audit findings with ids; lock reads gates; still BLOCKED on $12.40
 
 ## Forbidden
 

@@ -1,18 +1,18 @@
-Freightline Logistics, Inc.
-1200 Port Boulevard
-Newark, NJ 07114
-Phone +1 973-555-4412   billing@freightline.example
-Tax ID 22-3301988
+Beacon Partners
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@beaconpartners.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: FRE-2026-09-0061
+Invoice Number: BEA-2026-09-0061
 Invoice Date: 2026-09-08
 Due Date: 2026-10-08
 PO Number: PO-361
-Payment Terms: net 21
+Payment Terms: net 30
 Currency: USD
-Vendor: Freightline Logistics
+Vendor: Beacon Partners
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                              309.30
 
 Remit to:
-ACH PNC routing 031207607  account ****FR01
-Bank: PNC Bank  ****FR01
-Please include invoice FRE-2026-09-0061 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice BEA-2026-09-0061 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@freightline.example
+Questions: billing@beaconpartners.example

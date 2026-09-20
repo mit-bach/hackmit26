@@ -118,5 +118,328 @@
     "unapplied_amount": 1800.0,
     "application_status": "UNMATCHED",
     "metadata": {}
+  },
+  {
+    "payment_id": "PAY-MER-2026-09",
+    "payment_date": "2026-09-22",
+    "amount": 48668.62,
+    "currency": "USD",
+    "payer_name": "Meridian Health Systems",
+    "customer_id": "CUST-010",
+    "bank_reference": "TXN-MER-2026-09",
+    "remittance_text": "INV-AR-MER-2026-09",
+    "invoice_reference": "INV-AR-MER-2026-09",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-09-22T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-LUM-2026-09",
+    "payment_date": "2026-09-23",
+    "amount": 31131.1,
+    "currency": "USD",
+    "payer_name": "Lumen Labs PBC",
+    "customer_id": "CUST-008",
+    "bank_reference": "TXN-LUM-2026-09",
+    "remittance_text": "INV-AR-LUM-2026-09",
+    "invoice_reference": "INV-AR-LUM-2026-09",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-09-23T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-LAP-2026-09-12",
+    "payment_date": "2026-09-12",
+    "amount": 88400.0,
+    "currency": "USD",
+    "payer_name": "Helios Analytics Corporation",
+    "customer_id": "CUST-002",
+    "bank_reference": "TXN-PAY-LAP-2026-09-12",
+    "remittance_text": "named INV-AR-HE-4412 apply INV-AR-PIN-2208",
+    "invoice_reference": "INV-AR-HE-4412",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-09-12T18:22:00Z",
+      "applied_invoice_id": "INV-AR-PIN-2208",
+      "named_invoice_id": "INV-AR-HE-4412"
+    }
+  },
+  {
+    "payment_id": "PAY-LAP-QH-SEP-PRE",
+    "payment_date": "2026-09-22",
+    "amount": 25000.0,
+    "currency": "USD",
+    "payer_name": "Quiet Harbor Holdings",
+    "customer_id": "CUST-005",
+    "bank_reference": "TXN-PAY-LAP-QH-SEP-PRE",
+    "remittance_text": "named INV-AR-014 apply INV-AR-PIN-2210",
+    "invoice_reference": "INV-AR-014",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-09-22T18:40:00Z",
+      "applied_invoice_id": "INV-AR-PIN-2210",
+      "named_invoice_id": "INV-AR-014"
+    }
+  },
+  {
+    "payment_id": "PAY-LAP-STOCK",
+    "payment_date": "2026-08-14",
+    "amount": 299480.0,
+    "currency": "USD",
+    "payer_name": "Quiet Harbor Holdings",
+    "customer_id": "CUST-005",
+    "bank_reference": "BATCH-AR-2026-08-14",
+    "remittance_text": "chain cover",
+    "invoice_reference": "INV-AR-QH-9001",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-08-14T18:30:00Z",
+      "applied_invoice_id": "INV-AR-HE-4390",
+      "named_invoice_id": "INV-AR-QH-9001"
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2025-09",
+    "payment_date": "2025-09-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2025-09",
+    "remittance_text": "INV-AR-BLM-2025-09",
+    "invoice_reference": "INV-AR-BLM-2025-09",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2025-09-30T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2025-10",
+    "payment_date": "2025-10-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2025-10",
+    "remittance_text": "INV-AR-BLM-2025-10",
+    "invoice_reference": "INV-AR-BLM-2025-10",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2025-10-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2025-11",
+    "payment_date": "2025-11-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2025-11",
+    "remittance_text": "INV-AR-BLM-2025-11",
+    "invoice_reference": "INV-AR-BLM-2025-11",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2025-11-30T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2025-12",
+    "payment_date": "2025-12-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2025-12",
+    "remittance_text": "INV-AR-BLM-2025-12",
+    "invoice_reference": "INV-AR-BLM-2025-12",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2025-12-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-01",
+    "payment_date": "2026-01-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-01",
+    "remittance_text": "INV-AR-BLM-2026-01",
+    "invoice_reference": "INV-AR-BLM-2026-01",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-01-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-02",
+    "payment_date": "2026-02-28",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-02",
+    "remittance_text": "INV-AR-BLM-2026-02",
+    "invoice_reference": "INV-AR-BLM-2026-02",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-02-28T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-03",
+    "payment_date": "2026-03-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-03",
+    "remittance_text": "INV-AR-BLM-2026-03",
+    "invoice_reference": "INV-AR-BLM-2026-03",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-03-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-04",
+    "payment_date": "2026-04-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-04",
+    "remittance_text": "INV-AR-BLM-2026-04",
+    "invoice_reference": "INV-AR-BLM-2026-04",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-04-30T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-05",
+    "payment_date": "2026-05-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-05",
+    "remittance_text": "INV-AR-BLM-2026-05",
+    "invoice_reference": "INV-AR-BLM-2026-05",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-05-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-06",
+    "payment_date": "2026-06-30",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-06",
+    "remittance_text": "INV-AR-BLM-2026-06",
+    "invoice_reference": "INV-AR-BLM-2026-06",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-06-30T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-07",
+    "payment_date": "2026-07-31",
+    "amount": 34983.33,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-07",
+    "remittance_text": "INV-AR-BLM-2026-07",
+    "invoice_reference": "INV-AR-BLM-2026-07",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-07-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
+  },
+  {
+    "payment_id": "PAY-BLM-2026-08",
+    "payment_date": "2026-08-31",
+    "amount": 34983.37,
+    "currency": "USD",
+    "payer_name": "Brightline Media Group",
+    "customer_id": "CUST-004",
+    "bank_reference": "TXN-BLM-IN-2026-08",
+    "remittance_text": "INV-AR-BLM-2026-08",
+    "invoice_reference": "INV-AR-BLM-2026-08",
+    "source": "bank",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "applied_at": "2026-08-31T12:00:00Z",
+      "applied_invoice_id": "",
+      "named_invoice_id": ""
+    }
   }
 ]

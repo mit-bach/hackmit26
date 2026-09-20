@@ -1,0 +1,39 @@
+Carta
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@carta.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: OPEN-0043
+Invoice Date: 2026-09-17
+Due Date: 2026-10-17
+PO Number: PO-OPEN-043
+Payment Terms: net 30
+Currency: USD
+Vendor: Carta
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    185,898.74    185,898.74
+
+Subtotal                                                            185,898.74
+Tax                                                                       0.00
+Amount Due                                                          185,898.74
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice OPEN-0043 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@carta.example

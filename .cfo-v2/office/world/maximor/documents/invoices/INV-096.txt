@@ -1,18 +1,18 @@
-Lindholm & Ruiz LLP
-100 Federal Street, 22nd Floor
+Helios Hardware Supply
+1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-8800   billing@lindholmruiz.example
-Tax ID 04-4488210
+Phone +1 617-555-0000   billing@helioshardwaresupp.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: LIN-2026-09-0097
+Invoice Number: HEL-2026-09-0097
 Invoice Date: 2026-09-17
 Due Date: 2026-10-17
 PO Number: PO-397
-Payment Terms: net 15
+Payment Terms: net 30
 Currency: USD
-Vendor: Lindholm & Ruiz LLP
+Vendor: Helios Hardware Supply
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                              121.56
 
 Remit to:
-ACH BNY routing 021000018  account ****LR01
-Bank: Bank of New York Mellon  ****LR01
-Please include invoice LIN-2026-09-0097 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice HEL-2026-09-0097 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@lindholmruiz.example
+Questions: billing@helioshardwaresupp.example

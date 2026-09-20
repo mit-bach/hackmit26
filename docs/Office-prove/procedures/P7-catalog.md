@@ -6,7 +6,7 @@
 
 **Must not.** Hand-edit grants.json. Call ops from the wrong Profile. Use eval Grants (`grants.eval.json`) on the prove desk (`client.json` evalPhase operational).
 
-**Coverage claimed.** Table E in `../04-coverage.md` (89 live ops, plus send/world list ops if compile added them).
+**Coverage claimed.** Table E in `../04-coverage.md` (101 live ops on the template). Tick from this Computer’s `cfo/catalog.json` if the length moved.
 
 **Preconditions.** P0 INTENDED. G3 Grant ops ⊆ Catalog.
 
@@ -17,7 +17,7 @@
 ## S01 — Build the remainder list
 
 - Stimulus: none. Diff coverage.md against catalog.json on **this** Computer
-- Include extras if catalog grew past 89
+- Include extras if catalog grew past 101. Live extras vs the old 89: inbox send/list/get thread/personas, close gates/packet, integrations payout trio, `cash_recon.tools.get_pipe_identifier`, `reporting.tools.get_trusted_cash_status`
 - Exclude evalOnly from the must-call list. Put them on the forbidden list
 - Empty Grant Display names: not a must-call. HONEST-EMPTY rows
 
@@ -75,15 +75,15 @@ Call audit.tools.get_audit_ground_truth.
 
 ---
 
-## S07 — BS, cash recon, FA, prepaid remainder
+## S07 — BS, cash recon, FA, prepaid, close lock remainder
 
-Wearers: close Profiles bs/assets/prepaid; cash match. One Profile each.
+Wearers: close Profiles bs/assets/prepaid; cash match; `ctl-books` / `lock` for `get_close_gates` and `get_close_packet`. One Profile each.
 
 ---
 
-## S08 — Inbox remainder (8+ extras)
+## S08 — Inbox remainder (13)
 
-Wearers: email inbox/invoice vs World counterparty. Do not call World ops from collect unless Grant says so. Send extras: only if in this Computer’s catalog.
+Wearers: email inbox/invoice vs World counterparty vs collect send. Do not call World ops from collect unless Grant says so. `send_office_outbound` is finance only.
 
 ---
 
@@ -103,7 +103,7 @@ Wearers: as Grants. `get_decision_memories` RUNS if granted. T10 INTENDED is not
 
 ## S11 — Stripe
 
-If Display name empty: no P7 ticks. HONEST not office-live. Do not call random cash ops as “stripe.”
+Wearer: `stripe` / `payout` (Stripe Payout Agent). Call the three `integrations.tools` payout ops. `invoice_candidates` stays 0. Empty Display on this instance is HARD (clone/compile stale), not HONEST.
 
 ---
 

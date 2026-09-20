@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-383
 PO Number: PO-383
-Vendor: Lenovo
+Vendor: Ginkgo Studio
 Goods received in full on 2026-09-03
 Packing list attached: PL-GR-383
 Quantity ordered: 1

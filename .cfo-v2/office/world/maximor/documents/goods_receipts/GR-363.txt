@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-363
 PO Number: PO-363
-Vendor: Staples Business Advantage
+Vendor: Teak Studio
 Goods received in full on 2026-09-10
 Packing list attached: PL-GR-363
 Quantity ordered: 1

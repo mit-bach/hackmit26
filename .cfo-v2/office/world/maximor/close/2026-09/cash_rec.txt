@@ -14,3 +14,5 @@ Open item: bank TXN-2026-09-015 posts $12,412.40 from Northstar LLC; ledger GL-A
 
 Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
 This workpaper does not authorize a journal. Postings live on the numbered JE identities.
+
+True-up line: 

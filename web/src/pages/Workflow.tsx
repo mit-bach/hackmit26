@@ -1,6 +1,9 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { PageHead } from "../layout/Shell";
 import { FlowPlay, type FlowStep } from "../components/FlowPlay";
+import { AGENTS_BY_SLUG } from "../data/agents";
+import { INVOICE_STORY } from "../data/workflowStory";
 import { SHOW_STORIES, showStoryById, type ShowStory, type ShowStoryId } from "../data/showPath";
 
 const STAKE =
@@ -95,7 +98,7 @@ function StepNow(props: { step: FlowStep | undefined }): JSX.Element | null {
   );
 }
 
-export default function Workflow(): JSX.Element {
+function ThreeInvoiceDocket(): JSX.Element {
   const [searchParams, setSearchParams] = useSearchParams();
   const story = showStoryById(searchParams.get("story"));
   const [stepId, setStepId] = useState(story.steps[0]?.id ?? "");
@@ -111,8 +114,8 @@ export default function Workflow(): JSX.Element {
   const currentStep = story.steps.find((step) => step.id === stepId) ?? story.steps[0];
 
   return (
-    <div>
-      <h1>Three invoices, one set of books</h1>
+    <section className="showcase-section" id="three-invoices">
+      <h2 className="section-title">Three invoices, one set of books</h2>
       <p className="docket-stake">{STAKE}</p>
       <div className="docket">
         <aside className="docket-rail" aria-label="Case files">
@@ -165,6 +168,40 @@ export default function Workflow(): JSX.Element {
           </details>
         </section>
       </div>
+    </section>
+  );
+}
+
+export default function Workflow(): JSX.Element {
+  return (
+    <div>
+      <PageHead
+        eyebrow="One piece of work"
+        title="Follow a vendor invoice through the office"
+        lede="One transaction is not a single-agent task. The path below is the real handoff graph: email identifies the document, payables checks it, control rechecks it, payments drafts a run, cash and close consume the effect, and audit can inspect the history."
+      />
+      <ol className="story-timeline">
+        {INVOICE_STORY.map((step) => (
+          <li key={step.n}>
+            <div className="story-n">{String(step.n).padStart(2, "0")}</div>
+            <div className="card">
+              <div className="eyebrow">{AGENTS_BY_SLUG[step.agent].name}</div>
+              <h2 style={{ textTransform: "none", letterSpacing: 0, color: "var(--text)", fontSize: 20 }}>{step.title}</h2>
+              <p>{step.body}</p>
+              {step.handoff ? <p className="muted">{step.handoff}</p> : null}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div className="btn-row">
+        <Link className="btn primary" to="/simulations/messy-invoice">
+          Run a live invoice simulation
+        </Link>
+        <Link className="btn" to="/architecture">
+          See how the agents work together
+        </Link>
+      </div>
+      <ThreeInvoiceDocket />
     </div>
   );
 }

@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-354
 PO Number: PO-354
-Vendor: Misc Supplies
+Vendor: Walnut Works
 Goods received in full on 2026-09-01
 Packing list attached: PL-GR-354
 Quantity ordered: 1

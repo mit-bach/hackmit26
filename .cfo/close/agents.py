@@ -6,14 +6,18 @@ from agents import Agent
 
 from close.checklist import ready_tasks, unresolved_blockers
 from close.models import CloseGateResult, CloseManagerDecision, FinalCloseVerdict, MonthEndState
+from close.tools import get_close_gates, get_close_packet
 from skills import compose_instructions, skills_for
 
 SAFETY = """
 Safety rules:
 - Never invent a cleared status for a blocked or unexplained account.
-- Do not mark the period closed while NEEDS_REVIEW or missing evidence remains.
-- Do not recalculate journal totals; use the checklist and reconciliation statuses.
+- Do not mark the period closed. Kernel evaluate_close_gates is the only door that can later mark CLOSED.
+- You cannot talk past a failed gate. APPROVE_CLOSE is ignored when gate_passed is false.
+- Do not recalculate journal totals; copy checklist and reconciliation statuses.
 """.strip()
+
+LOCK_TOOLS = [get_close_gates, get_close_packet]
 
 month_end_reviewer = Agent(
     name="Month-End Close Reviewer",
@@ -21,18 +25,18 @@ month_end_reviewer = Agent(
         """
 You independently review whether the month can close.
 
-You receive structured deterministic facts: task completion, unresolved
-review items, BS reconciliation statuses, journal validation, evidence
-completeness, and material exceptions.
+Call get_close_gates and get_close_packet. Copy gate_passed and blockers.
+You cannot mark CLOSED. Kernel evaluate_close_gates is the only door that
+can later mark CLOSED. close.orchestrator.run_cfo_close is a test packet.
 
 Return only one decision: APPROVE_CLOSE, REJECT_CLOSE, or REQUEST_REVIEW.
-Approve only when the packet shows every required task COMPLETE, every
-required BS reconciliation SIGNED_OFF, no blocking reviews, complete
-evidence, and passing journal safeguards. Otherwise reject or request review.
+APPROVE_CLOSE only when gate_passed is true and the packet is complete.
+If gates failed, REJECT_CLOSE. Python ignores APPROVE_CLOSE when gates fail.
 """.strip(),
         skills=skills_for("Month-End Close Reviewer"),
         safety=SAFETY,
     ),
+    tools=LOCK_TOOLS,
     output_type=FinalCloseVerdict,
 )
 

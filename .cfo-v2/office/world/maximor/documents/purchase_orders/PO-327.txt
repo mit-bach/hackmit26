@@ -6,8 +6,8 @@ PURCHASE ORDER
 Purchase Order PO-327
 PO Number: PO-327
 Issued: 2026-09-01
-Vendor: WeWork Cambridge
-Vendor legal name: WeWork Cambridge
+Vendor: Timber Systems
+Vendor legal name: Timber Systems
 Vendor tax ID: 00-0000000
 Authorized amount: 1,801.30
 Currency: USD

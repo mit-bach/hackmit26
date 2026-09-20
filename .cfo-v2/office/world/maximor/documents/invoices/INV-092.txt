@@ -1,18 +1,18 @@
-CleanRoom Janitorial
-1 Vendor Row
-Boston, MA 02110
-Phone +1 617-555-0000   billing@cleanroomjanitoria.example
-Tax ID 00-0000000
+Amazon Web Services, Inc.
+410 Terry Avenue North
+Seattle, WA 98109
+Phone +1 206-266-1000   billing@aws.amazon.example
+Tax ID 91-1646860
 
 INVOICE
 
-Invoice Number: CLE-2026-09-0093
+Invoice Number: AMA-2026-09-0093
 Invoice Date: 2026-09-13
 Due Date: 2026-10-13
 PO Number: PO-393
 Payment Terms: net 30
 Currency: USD
-Vendor: CleanRoom Janitorial
+Vendor: Amazon Web Services
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                              155.04
 
 Remit to:
-ACH routing 011000390  account ****0000
-Bank: First National Bank  ****0000
-Please include invoice CLE-2026-09-0093 on the payment advice.
+ACH Wells Fargo routing 121000248  account ****2910
+Bank: Wells Fargo  ****2910
+Please include invoice AMA-2026-09-0093 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@cleanroomjanitoria.example
+Questions: billing@aws.amazon.example

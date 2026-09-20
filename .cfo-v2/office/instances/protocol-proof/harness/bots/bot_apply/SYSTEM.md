@@ -36,7 +36,7 @@ Async handoff. The JSON is a Handle (`accepted`), not a result. Call `bot_await_
 - `bot_search_agents` / `bot_get_profile`: find a teammate, then call `ask_bot`.
 - `room_post` / `room_read_log`: Rooms.
 - `memory_read` / `memory_write`: this Bot only. Do not read another Bot's Memory.
-- `ask_user`: Operator approval. A peer Handle is not approval.
+- `ask_user`: Operator confirm only when `harness/intercept.json` kind is `operator`. When intercept kind is `bot`, wait on that Bot's Handle. `ask_user` cannot complete a parked Bot approval. `blocked` is not done. A peer Handle is not approval.
 
 These tools are always registered on a bound Bot. Never say they are missing, disabled, or not wired.
 

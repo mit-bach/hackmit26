@@ -8,7 +8,7 @@ Bare minimum for the operation: every row has RUNS, HONEST-EMPTY, SKIP-with-reas
 
 ## A. Standing Bots
 
-Live Roster (15). Instance snapshots may add `world`. Tick bind + one terminal Handle without tool throw.
+Live Roster (16). Tick bind + one terminal Handle without tool throw.
 
 | Slug | Class | P0 bind | One Handle | Home procedure |
 | --- | --- | --- | --- | --- |
@@ -16,6 +16,7 @@ Live Roster (15). Instance snapshots may add `world`. Tick bind + one terminal H
 | stripe | Source | | | P1, P4 |
 | bank | Source | | | P1, P4 |
 | books | Source | | | P1, P3, P5 |
+| world | Source | | | P1, P3 |
 | ap | Operator | | | P2 |
 | pay | Operator | | | P2 |
 | apply | Operator | | | P3 |
@@ -27,7 +28,6 @@ Live Roster (15). Instance snapshots may add `world`. Tick bind + one terminal H
 | ctl-cash | Verifier | | | P3 apply, P4 |
 | ctl-books | Verifier | | | P5 |
 | audit | Assurance | | | P5 |
-| world | Source, disputed | | | P1, P3. SKIP if off Roster. Do not silently add |
 
 ---
 
@@ -53,6 +53,10 @@ From live `cfo/handle-map.json`. Tick when a Harness Handle file exists from →
 | --- | --- | --- | --- | --- |
 | email | bill | ap | prepare | P1, P2 |
 | email | remittance | apply | apply | P1, P3 |
+| email | outbound | world | vendor | P1, P3 |
+| world | delivered | email | triage | P1, P3 |
+| ap | vendor-query | world | vendor | P2, P3 |
+| collect | dun | world | customer | P3 |
 | stripe | deposit | cash | match | P1, P4 |
 | stripe | charges | apply | apply | P1, P3 |
 | stripe | waterfall_break | ctl-cash | review-rec | P4 |
@@ -77,7 +81,7 @@ From live `cfo/handle-map.json`. Tick when a Harness Handle file exists from →
 | close | pack-story | story | flux | P5 |
 | close | pack-audit | audit | interpret | P5 |
 
-Mailbox send is not a row here until AR repair adds a collect → world (or equivalent) edge. P3 ticks send in the simulated transport even if handle-map has not grown. If you add an edge, compile/grain first. Do not add a row by editing this table alone.
+Live `handle-map.json` already has collect→world (`dun`), email→world (`outbound`), ap→world (`vendor-query`), and world→email (`delivered`). Tick those from P1/P3. Do not add a row by editing this table alone.
 
 ---
 
@@ -125,11 +129,11 @@ P6 remainder Wakes exist for intake Profiles that a month instance may not hit: 
 
 ---
 
-## E. Catalog ops (89 live)
+## E. Catalog ops (101 live)
 
 `evalOnly`: `audit.tools.get_audit_ground_truth` only. Operational prove must show that op is **not** callable. Tick FORBIDDEN-OK.
 
-Expected extras after AR repair (instance catalog had 94): `inbox.tools.send_office_outbound`, `inbox.tools.list_world_personas`, `inbox.tools.list_inbox_threads`, `inbox.tools.list_inbox_messages`, `inbox.tools.get_inbox_thread`. If live compile still has 89, P3 mailbox steps HARD/SKIP on T3. Do not tick them from a stale instance snapshot.
+Live compile 2026-09-20: 101 ops. Instance `protocol-proof` is stale (94) — do not prove there. If this Computer’s catalog length is not 101, tick from **this** file on disk, not this table’s count.
 
 Wearer = a Display name whose Grant lists the op. Call must come from a Bot that wears that Display name this turn (one Profile).
 
@@ -153,19 +157,27 @@ Forbidden: `get_audit_ground_truth`
 
 `get_reconciliation_packet`, `list_period_reconciliations`, `list_reconciling_items`
 
-### Cash recon (5) — cash, ctl-cash
+### Cash recon (6) — cash, ctl-cash
 
-`get_bank_transaction`, `get_candidate`, `get_fee_evidence`, `get_ledger_entry`, `get_match_candidates`
+`get_bank_transaction`, `get_candidate`, `get_fee_evidence`, `get_ledger_entry`, `get_match_candidates`, `get_pipe_identifier`
+
+### Close (2) — ctl-books / lock
+
+`get_close_gates`, `get_close_packet`. Read-only. Cannot mark CLOSED.
 
 ### Fixed assets (4) — close / assets
 
 `get_capital_candidates`, `get_depreciation_schedule`, `get_fixed_asset`, `list_fixed_assets`
 
-### Inbox (8 live) — email, world
+### Inbox (13 live) — email, world, collect, ap
 
-`classify_inbox_message`, `compose_counterparty_message`, `dispatch_inbox_action`, `extract_inbox_invoice`, `get_inbox_attachment`, `get_inbox_message`, `reply_in_thread`, `send_inbox_message`
+`classify_inbox_message`, `compose_counterparty_message`, `dispatch_inbox_action`, `extract_inbox_invoice`, `get_inbox_attachment`, `get_inbox_message`, `get_inbox_thread`, `list_inbox_messages`, `list_inbox_threads`, `list_world_personas`, `reply_in_thread`, `send_inbox_message`, `send_office_outbound`
 
-World/Counterparty wears compose/send/reply. Finance Inbox wears classify/dispatch. Do not grant World the finance send if AR repair split them. P3 checks that.
+World/Counterparty wears compose/send_inbox/reply/list/get thread/personas. Finance Inbox and Collections wear `send_office_outbound`. World does not get finance send. P3 checks that.
+
+### Integrations (3) — stripe / payout
+
+`list_processor_payouts`, `get_processor_payout`, `get_payout_waterfall`. `invoice_candidates` stays 0.
 
 ### Invoice ingestion (18) — email, books, bank Profiles
 
@@ -179,9 +191,9 @@ World/Counterparty wears compose/send/reply. Finance Inbox wears classify/dispat
 
 `get_prepaid`, `get_prepaid_schedule`, `get_prepaid_treatment_candidates`, `list_prepaids`
 
-### Reporting (6) — story
+### Reporting (7) — story
 
-`get_cash_forecast`, `get_forecast_checks`, `get_forecast_snapshot`, `get_period_metrics`, `get_variance_facts`, `get_variance_trace`
+`get_cash_forecast`, `get_forecast_checks`, `get_forecast_snapshot`, `get_period_metrics`, `get_trusted_cash_status`, `get_variance_facts`, `get_variance_trace`
 
 ### Scheduling (4) — pay, ctl-pay review-pay
 
@@ -201,15 +213,15 @@ Live `grants.json` empty `ops: []`:
 
 | Display name | Honest? | Rule |
 | --- | --- | --- |
-| Close Manager | maybe | Coordinate via ready_tasks + self-Wake. HONEST-EMPTY if no office-live claim that it calls ops |
-| Month-End Close Reviewer | no, if you claim lock office-live | P5 / 05 Close must give lock ops or stop the claim |
-| Audit Report Agent | no, if you claim report office-live | P5 / 05 Close |
+| Close Manager | yes | Coordinate via ready_tasks + self-Wake. HONEST-EMPTY. Do not claim office-live Catalog calls |
+| Audit Report Agent | yes | HONEST-EMPTY. Interpret Profile still has operational audit gets. Do not claim report Catalog search |
 | AP/AR Sample Data Agent | yes | Off floor |
 | Cash Recon Sample Data Agent | yes | Off floor |
 | Close Sample Data Agent | yes | Off floor |
 | Audit Controls Sample Data Agent | yes | Off floor |
 | Reporting Forecasting Sample Data Agent | yes | Off floor |
-| Stripe payout Display `""` | no | P0/P1 HARD bind or HONEST “stripe not office-live” |
+
+Stripe Payout Agent is granted (`integrations.tools` payout trio). Month-End Close Reviewer is granted lock reads. Neither belongs in this empty table.
 
 ---
 
@@ -219,11 +231,11 @@ Tick from P2–P5 and P8, not from pytest.
 
 | Pipe | Bare min RUNS | Demo-ready INTENDED |
 | --- | --- | --- |
-| Intake | Email classifies; ignore quote/injection without throw | Bill Handle ap with Kernel id `get_invoice` finds; remittance Handle apply; World round-trip if bound |
+| Intake | Email classifies; ignore quote/injection without throw | Bill Handle ap with Kernel id `get_invoice` finds; remittance Handle apply; World round-trip |
 | AP | get_invoice + HOLD/APPROVE packet without throw; ctl-pay terminal | Real bill (not INV-S12); must_hold wins; weekly-pay-run Handle ctl-pay; wires identified to cash executed false |
-| AR | apply facts ops; collect candidates ops | Apply first; SEND_* in mailbox; write-off to ctl-pay |
-| Cash | get_match_candidates without throw | Identifier trust; `$12.40` unexplained; Stripe honest |
-| Close | month-end Wake without throw; gates still BLOCKED | Computer runs/; UNLOCKED story; audit no ground truth; no CLOSED |
+| AR | apply facts ops; collect candidates ops | Apply first; SEND_* via send_office_outbound then Handle world; write-off to ctl-pay |
+| Cash | get_match_candidates without throw | Identifier trust; `$12.40` unexplained; Stripe payout ops |
+| Close | month-end Wake without throw; gates still BLOCKED | Computer runs/; UNLOCKED story; lock reads gates; audit no ground truth; no CLOSED |
 
 ---
 

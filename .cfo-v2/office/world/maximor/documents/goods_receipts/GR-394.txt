@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-394
 PO Number: PO-394
-Vendor: Boston Edison Steam
+Vendor: Google Cloud
 Goods received in full on 2026-09-14
 Packing list attached: PL-GR-394
 Quantity ordered: 1

@@ -1,18 +1,18 @@
-Dell Marketing L.P.
-One Dell Way
-Round Rock, TX 78682
-Phone +1 800-289-3355   billing@dell.example
-Tax ID 74-2616805
+Carta
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@carta.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: DEL-2026-09-0053
+Invoice Number: CAR-2026-09-0053
 Invoice Date: 2026-09-27
 Due Date: 2026-10-27
 PO Number: PO-353
 Payment Terms: net 30
 Currency: USD
-Vendor: Dell Technologies
+Vendor: Carta
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                              346.76
 
 Remit to:
-ACH Bank of America routing 111000012  account ****R760
-Bank: Bank of America  ****R760
-Please include invoice DEL-2026-09-0053 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice CAR-2026-09-0053 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@dell.example
+Questions: billing@carta.example

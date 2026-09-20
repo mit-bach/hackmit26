@@ -1,18 +1,18 @@
-Linear App
+Nimbus Partners
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@linearapp.example
+Phone +1 617-555-0000   billing@nimbuspartners.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: LIN-2026-09-0029
+Invoice Number: NIM-2026-09-0029
 Invoice Date: 2026-09-03
 Due Date: 2026-10-03
 PO Number: PO-329
 Payment Terms: net 30
 Currency: USD
-Vendor: Linear App
+Vendor: Nimbus Partners
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                              117.06
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice LIN-2026-09-0029 on the payment advice.
+Please include invoice NIM-2026-09-0029 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@linearapp.example
+Questions: billing@nimbuspartners.example

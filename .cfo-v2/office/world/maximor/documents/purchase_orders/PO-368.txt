@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-368
 PO Number: PO-368
 Issued: 2026-09-15
-Vendor: GitHub
-Vendor legal name: GitHub, Inc.
-Vendor tax ID: 94-3394628
+Vendor: Echo Labs
+Vendor legal name: Echo Labs
+Vendor tax ID: 00-0000000
 Authorized amount: 570.00
 Currency: USD
 Approver: Jordan Hale

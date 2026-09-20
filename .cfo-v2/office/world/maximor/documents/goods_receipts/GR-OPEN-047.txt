@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-047
+PO Number: PO-OPEN-047
+Vendor: Northwood Supply
+Goods received in full on 2026-09-21
+Packing list attached: PL-GR-OPEN-047
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 186,447.46 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

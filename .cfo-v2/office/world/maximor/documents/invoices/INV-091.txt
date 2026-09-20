@@ -1,18 +1,18 @@
-Harbor Power & Light
+Driftwood Services
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@harborpower&light.example
+Phone +1 617-555-0000   billing@driftwoodservices.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: HAR-2026-09-0092
+Invoice Number: DRI-2026-09-0092
 Invoice Date: 2026-09-12
 Due Date: 2026-10-12
 PO Number: PO-392
 Payment Terms: net 30
 Currency: USD
-Vendor: Harbor Power & Light
+Vendor: Driftwood Services
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                              285.91
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice HAR-2026-09-0092 on the payment advice.
+Please include invoice DRI-2026-09-0092 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@harborpower&light.example
+Questions: billing@driftwoodservices.example

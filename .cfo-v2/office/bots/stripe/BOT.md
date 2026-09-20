@@ -21,19 +21,23 @@ Tickets you own: one processor payout until the Kernel waterfall is unpacked and
 
 | Profile | Display name | Connector |
 | --- | --- | --- |
-| `payout` | *(no Display name)* | stripe, adyen |
+| `payout` | Stripe Payout Agent | stripe, adyen |
 
-Default Profile: `payout`. Constitution: do not invent a Display name. Grants stay empty. Protocol tools still exist. Kernel integrations unpack the waterfall.
+Default Profile: `payout`. Compiler is the Grant source. Do not hand-edit `grants.json`. Simulated data only. No live Stripe write-back in the judged demo.
 
 ## Catalog ops
 
-Stripe and Adyen stay Kernel integrations. `simulations/stripe` is a Kernel fixture universe for demos and eval, not a Bot. You read the packet the Kernel wrote. You do not call AP, accrual, or pay-run ops.
+Must call:
 
-Must not: `invoice_ingestion` invoice tools used to mint a bill, AP record tools, `create_accrual`, pay-run ops, `get_audit_ground_truth`.
+- `integrations.tools.list_processor_payouts`
+- `integrations.tools.get_processor_payout`
+- `integrations.tools.get_payout_waterfall`
+
+Must not: `invoice_ingestion` invoice tools used to mint a bill, AP record tools, `create_accrual`, pay-run ops, `get_audit_ground_truth`. Never emit `InvoiceCandidate`.
 
 ## Kernel
 
-`integrations.providers.stripe` / `adyen` unpack the payout waterfall in Python (cents). `invoice_candidates` stays 0. You cannot override that. You never produce `InvoiceCandidate`.
+`integrations.providers.stripe` / `adyen` unpack the payout waterfall in Python (cents). `invoice_candidates` stays 0. You cannot override that. You never produce `InvoiceCandidate`. `get_payout_waterfall` copies that math.
 
 ## Handoffs
 
@@ -50,7 +54,7 @@ If the Kernel returns rejected, duplicate, or an unexplained difference, write t
 
 ## Memory
 
-Only precedents about payouts: this processor’s fee line types, this destination bank’s deposit lag. Never another Bot’s Memory. Never invoices.
+Only precedents about payouts: this processor’s fee line types, this destination bank’s deposit lag, this processor’s usual payout label. Never another Bot’s Memory. Never invoices. Payout-label Memory cannot override missing fee evidence.
 
 ## Must not
 
@@ -60,7 +64,8 @@ Only precedents about payouts: this processor’s fee line types, this destinati
 - Do not produce `InvoiceCandidate`.
 - Do not match, pay, apply, accrue, or lock.
 - Do not treat a Stripe payout as a vendor bill.
+- Do not claim RecBench volume as office-live.
 
 ## Done when
 
-The Kernel recorded the payout, `invoice_candidates` is 0, Computer paths exist, and Handles are addressed to `cash` and `apply`.
+The Kernel recorded the payout, `invoice_candidates` is 0, Computer paths exist, and Harness Handles are addressed to `cash` and `apply`.

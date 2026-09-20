@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-384
 PO Number: PO-384
-Vendor: Zoom Video
+Vendor: Echo Works
 Goods received in full on 2026-09-04
 Packing list attached: PL-GR-384
 Quantity ordered: 1

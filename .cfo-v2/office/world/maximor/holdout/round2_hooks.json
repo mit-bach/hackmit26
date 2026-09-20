@@ -59,7 +59,7 @@
     "vendor_master": "canonical/vendors.json",
     "september_bank": "cash_recon/bank_statement.json"
   },
-  "headroom": "Trailing AP, GL, bank, and processor files are dense enough that a $2,400 monthly siphon or a 0.08% fee skim is not obvious on a 19-line statement. Do not plant that story in this round.",
+  "headroom": "Phase B planted. Trailing AP, GL, bank, payroll, and processor files carry the catalog siphons. Plot IDs in do_not_retarget stay intact. Hidden answers live in expected_results.json adversarial_holdout.",
   "scenario_registry": "canonical/scenarios.json",
   "reference_sampled": {
     "invoice_sandbox": "document letterhead/line-item bar; gold_master PDFs not copied",

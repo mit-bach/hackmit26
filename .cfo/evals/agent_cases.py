@@ -118,9 +118,10 @@ class _Runtime:
 
     def collections_run(self, as_of: str):
         if self.collections is None:
-            from ar.workflow import run_collections
+            from ar.workflow import drain_new_deposits, run_collections
 
             self.aging_report(as_of)
+            drain_new_deposits(as_of, live=False, persist=True)
             self.collections = run_collections(as_of, live=False, persist=True)
         return self.collections
 

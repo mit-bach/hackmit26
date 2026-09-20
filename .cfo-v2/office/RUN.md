@@ -64,7 +64,9 @@ cd .harness/Harness-v2
 npm run serve -- --computer ../../.cfo-v2/office/computer --no-open
 ```
 
-Loopback: `http://127.0.0.1:8787/`. Lazy spawn starts a live Pi worker when a Handle lands. Pass `--eager` to bind every Roster slug at boot. Sidecar starts from `client.json` unless `--no-sidecar`.
+CLI default loopback is `http://127.0.0.1:8787/`. The operator desk already bound on this machine is `http://127.0.0.1:8800/` — do not start a second serve on 8787 while that process holds the office. `serve` honors `.cfo-v2/office/office.json` `currentId`. If that id is an instance, `--computer …/office/computer` still serves the instance, not the live template. Prove on a `prove-*` instance. Do not prove on `live`, `protocol-proof`, or `fresh-protocol`.
+
+Lazy spawn starts a live Pi worker when a Handle lands. Pass `--eager` to bind every Roster slug at boot. Sidecar starts from `client.json` unless `--no-sidecar`.
 
 Identity files are reachable from Computer cwd: `office/bots/<slug>/BOT.md` and `office/constitution.md` exist under `$HARNESS_COMPUTER`.
 
@@ -120,23 +122,29 @@ python3 main.py evaluate-cfo
 
 Operational phase cannot open `expected_results.json` or `ground_truth.json`. Production Grants omit `get_audit_ground_truth`. Stripe simulation ground truth lives under `.cfo/data/simulations/stripe/evaluation/` and is eval-only.
 
-## 6. Inbox and Stripe simulation (Kernel, not extra Bots)
+## 6. Inbox, World, and Stripe
 
-These come from Rohan's `durable-inbox-ap-persistence` branch. They feed Bot `email` and Bot `stripe`. They are not a sixteenth Bot.
+Bot `world` is the sixteenth Source Bot: the simulated mailbox. Grain Tests A–D bound it. Kernel `demo-inbox` still feeds Bot `email`. Kernel `simulate-stripe` still feeds Bot `stripe`. Those Python commands are not extra Bots.
 
 ```bash
 python3 main.py demo-inbox
 python3 main.py simulate-stripe
 ```
 
-`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`.
+`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`. Finance outbound is `inbox.tools.send_office_outbound`, then Handle `world`. Counterparty replies use compose / `send_inbox_message` / `reply_in_thread`, not finance send.
 
-`simulate-stripe` unpacks payout waterfalls in Python. `invoice_candidates` stays 0. Bot `stripe` still has empty constructor Grants.
+`simulate-stripe` unpacks payout waterfalls in Python. `invoice_candidates` stays 0. Bot `stripe` wears Stripe Payout Agent with `integrations.tools.list_processor_payouts`, `get_processor_payout`, and `get_payout_waterfall`.
 
 ## 7. Close demo (honest $12.40)
 
+Live Bots write Computer `runs` and `workspace/close`. They do not treat `.cfo/runs` as the office destination. The Kernel shim chdirs into `.cfo/` for imports; when `HARNESS_COMPUTER` is set, close output is remapped onto that Computer.
+
 ```bash
+export HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer"
 python3 main.py close-month --month 2026-09 --seed-demo --deterministic
 ```
 
-Default September stays `BLOCKED` on the planted $12.40 cash break until a **legal Kernel source mutation** exists. There is none for that residual. Do not delete it. `demo_month_end_close.py --resolve` is an emergency/eval fixture, not the office completion path.
+Pack: `$HARNESS_COMPUTER/workspace/close/2026-09/pack.json`
+Runs: `$HARNESS_COMPUTER/runs/month_end/`
+
+Default September stays `BLOCKED` on the planted $12.40 cash break until a **legal Kernel source mutation** exists. There is none for that residual. Do not delete it. `demo_month_end_close.py --resolve` is an emergency/eval fixture, not the office completion path. `close.orchestrator.run_cfo_close` is a test packet. It does not lock.

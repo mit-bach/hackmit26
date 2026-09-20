@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-341
 PO Number: PO-341
-Vendor: Harbor Power & Light
+Vendor: Alder Studio
 Goods received in full on 2026-09-15
 Packing list attached: PL-GR-341
 Quantity ordered: 1

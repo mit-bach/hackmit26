@@ -1,18 +1,18 @@
-Office Depot, LLC
-6600 North Military Trail
-Boca Raton, FL 33496
-Phone +1 800-463-3768   ap@officedepot.example
-Tax ID 59-2663954
+Harbor Systems
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@harborsystems.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: OFF-2026-09-0059
+Invoice Number: HAR-2026-09-0059
 Invoice Date: 2026-09-06
 Due Date: 2026-10-06
 PO Number: PO-359
-Payment Terms: 2/10 net 30
+Payment Terms: net 30
 Currency: USD
-Vendor: Office Depot
+Vendor: Harbor Systems
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                           10,801.04
 
 Remit to:
-ACH Bank of America routing 011000138  account ****1040
-Bank: Bank of America  ****1040
-Please include invoice OFF-2026-09-0059 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice HAR-2026-09-0059 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: ap@officedepot.example
+Questions: billing@harborsystems.example

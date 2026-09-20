@@ -56,9 +56,10 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
             "bank_balance": dollars(ctx.opening_cash_forecast_minor),
             "minimum_cash_reserve": 100000,
             "expected_receipts_next_7_days": 75000,
-            "payroll_next_7_days": 70000,
+            "payroll_next_7_days": ctx.company.biweekly_payroll_gross,
             "other_committed_outflows": 20000,
             "payment_horizon_days": 7,
+            "operating_cash": ctx.company.operating_cash,
         },
     )
     save("ar_customers.json", _models(ctx.customers.values()))
@@ -92,7 +93,14 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
             "exception_bank_ids": [
                 key
                 for key, row in ctx.recon_labels.items()
-                if row.get("disposition") in {"HUMAN_REVIEW", "EXPLAINED_EXCEPTION", "OUTSTANDING_TIMING_ITEM"}
+                if row.get("disposition")
+                in {
+                    "HUMAN_REVIEW",
+                    "EXPLAINED_EXCEPTION",
+                    "OUTSTANDING_TIMING_ITEM",
+                    "EXCEPTION_OPEN",
+                    "CLOSE_BLOCKED",
+                }
             ],
             "labels": ctx.recon_labels,
         },
@@ -187,14 +195,24 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
     save("integrations/stripe/bank_deposit.json", ctx.stripe_deposits[0] if ctx.stripe_deposits else {})
     save("integrations/stripe/bank_deposits.json", ctx.stripe_deposits)
     save("integrations/stripe/payouts.json", [item.model_dump(mode="json") for item in ctx.stripe_payouts])
+    save("integrations/stripe/connected_accounts.json", ctx.stripe_connected_accounts)
+    save("integrations/stripe/transfers.json", ctx.stripe_transfers)
+    save("integrations/stripe/charges.json", ctx.stripe_charges)
+    save("integrations/stripe/refunds.json", ctx.stripe_refunds)
+    save("integrations/stripe/disputes.json", ctx.stripe_disputes)
+    save("integrations/adyen/sim.json", ctx.adyen_sim)
 
     save("ingestion/emails.json", ctx.ingestion_emails)
     from inbox.fixtures import full_inbox_specs
 
-    save(
-        "inbox/messages.json",
-        [item.model_dump(mode="json") for item in full_inbox_specs()],
-    )
+    inbox_rows = [item.model_dump(mode="json") for item in full_inbox_specs()]
+    seen = {row["message_id"] for row in inbox_rows}
+    for extra in ctx.inbox_extra:
+        if extra.get("message_id") in seen:
+            continue
+        inbox_rows.append(extra)
+        seen.add(extra["message_id"])
+    save("inbox/messages.json", inbox_rows)
     save("ingestion/documents.json", ctx.ingestion_documents)
     save("ingestion/erp.json", ctx.ingestion_erp)
     save("ingestion/procurement.json", ctx.ingestion_procurement)
@@ -245,6 +263,24 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
     save("registers/bank_accounts.json", ctx.bank_account_master)
     save("registers/approval_matrix.json", ctx.approval_matrix)
     save("registers/reference_sample_note.json", sampled_reference_note())
+    save("registers/employee_master.json", ctx.employee_master)
+    save("registers/user_map.json", ctx.user_map)
+    save("registers/payroll_direct_deposit.json", ctx.payroll_direct_deposit)
+    save("registers/badge_access.json", ctx.badge_access)
+    save("registers/it_assets.json", ctx.it_assets)
+    save("registers/org_chart.json", ctx.org_chart)
+    save("registers/facilities_registry.json", ctx.facilities_registry)
+    save("registers/vendor_bank_history.json", ctx.vendor_bank_history)
+    save("registers/cycle_counts.json", ctx.cycle_counts)
+    save("registers/warehouse_locations.json", ctx.warehouse_locations)
+    save("registers/legal_entity_register.json", ctx.legal_entity_register)
+    save("registers/contractors.json", ctx.contractors)
+    save("registers/okta_export.json", ctx.okta_export)
+    save("registers/payroll_tax_941.json", ctx.payroll_tax_941)
+    save("registers/inventory_bins.json", ctx.inventory_bins)
+    save("ar_credit_memos.json", ctx.ar_credit_memos)
+    save("ar_unapplied.json", ctx.ar_unapplied)
+    save("later_ar.json", ctx.later_ar)
     save("close/prior_period/2026-08/pack.json", ctx.august_close_pack)
     save("holdout/round2_hooks.json", ctx.round2_hooks)
 
@@ -288,14 +324,16 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
         "scenarios": len(ctx.scenarios),
         "memory_events": len(ctx.memory_events),
         "ingestion_emails": len(ctx.ingestion_emails),
-        "inbox_messages": 17,
+        "inbox_messages": len(inbox_rows),
         "documents": len(ctx.document_texts),
         "historical_ap": len(ctx.historical_ap_register),
         "bank_history": len(ctx.bank_history),
         "payroll_register": len(ctx.payroll_register),
         "processor_transactions": len(ctx.processor_transactions),
         "vendors": len(ctx.vendors),
+        "employees": len(ctx.employee_master),
         "workpapers": len(ctx.workpapers),
+        "adversarial_holdout": len(ctx.expected.adversarial_holdout) if ctx.expected else 0,
     }
     manifest_files = written + ["manifest.json"]
     save(

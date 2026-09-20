@@ -1,0 +1,57 @@
+{
+  "object": "unapplied_cash",
+  "payment_id": "PAY-004",
+  "kernel_status": "HUMAN_REVIEW",
+  "as_of": "2026-09-30",
+  "reason": "Multiple equally plausible exact matches explain this payment.",
+  "ambiguities": [
+    "C1 exact_amount: INV-AR-010 $5,000.00",
+    "C2 exact_amount: INV-AR-011 $5,000.00"
+  ],
+  "review_question": "Which candidate set should receive this payment?",
+  "applications": [],
+  "candidates": [
+    {
+      "candidate_id": "C1",
+      "applications": [
+        {
+          "invoice_id": "INV-AR-010",
+          "amount": 5000.0
+        }
+      ],
+      "total_applied": 5000.0,
+      "unapplied_amount": 0.0,
+      "match_type": "exact_amount",
+      "score": 0.86,
+      "evidence": [
+        "INV-AR-010 outstanding equals payment 5000.0"
+      ],
+      "ambiguities": [
+        "Competing explanations: C2"
+      ]
+    },
+    {
+      "candidate_id": "C2",
+      "applications": [
+        {
+          "invoice_id": "INV-AR-011",
+          "amount": 5000.0
+        }
+      ],
+      "total_applied": 5000.0,
+      "unapplied_amount": 0.0,
+      "match_type": "exact_amount",
+      "score": 0.86,
+      "evidence": [
+        "INV-AR-011 outstanding equals payment 5000.0"
+      ],
+      "ambiguities": [
+        "Competing explanations: C1"
+      ]
+    }
+  ],
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/demo_runtime/runs/ar/traces/cash-PAY-004-20260920T134827Z.json",
+  "queue_owner": "ctl-cash",
+  "queue_profile": "review-apply",
+  "human_queue": false
+}

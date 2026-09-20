@@ -6,8 +6,8 @@ PURCHASE ORDER
 Purchase Order PO-376
 PO Number: PO-376
 Issued: 2026-09-23
-Vendor: Twilio
-Vendor legal name: Twilio
+Vendor: Driftwood Group
+Vendor legal name: Driftwood Group
 Vendor tax ID: 00-0000000
 Authorized amount: 476.04
 Currency: USD

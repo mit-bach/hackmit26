@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-352
 PO Number: PO-352
-Vendor: Datadog
+Vendor: Kendall Square Parking
 Goods received in full on 2026-09-26
 Packing list attached: PL-GR-352
 Quantity ordered: 1

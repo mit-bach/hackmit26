@@ -82,7 +82,7 @@ def test_host_demo_september_blocked_on_1240(tmp_path, monkeypatch):
     assert result.marked_closed is False
     details = " ".join(result.blocked_on)
     assert "12.40" in details or "12.4" in details
-    pack = json.loads(Path(result.pack_path).read_text())
+    pack = json.loads((computer / result.pack_path).read_text())
     assert pack["status"] == "BLOCKED"
     assert pack["marked_closed"] is False
     assert pack["lock_door"] == "close.month_end"
@@ -118,13 +118,16 @@ def test_host_sequences_separate_profile_wakes(tmp_path, monkeypatch):
         assert "+" not in row["profile"]
     profiles = [row["profile"] for row in rows]
     assert profiles.count("coordinate") >= 1
-    lock_handle = computer / "workspace" / "close" / "2026-09" / "handles" / "ctl-books-mark_closed.json"
+    lock_handle = computer / "workspace" / "close" / "2026-09" / "handles" / "ctl-books-lock.json"
     assert lock_handle.exists()
     lock = json.loads(lock_handle.read_text())
     assert lock["toSlug"] == "ctl-books"
     assert lock["profile"] == "lock"
     assert lock["humanQueue"] is False
+    assert lock["can_mark_closed"] is False
     assert result.live_handles is False
+    harness_handles = list((computer / "harness" / "bots" / "bot_ctl_books" / "handles").glob("*.json"))
+    assert harness_handles
 
 
 def test_host_does_not_mark_closed(tmp_path, monkeypatch):

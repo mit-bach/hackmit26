@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-397
 PO Number: PO-397
 Issued: 2026-09-17
-Vendor: Lindholm & Ruiz LLP
-Vendor legal name: Lindholm & Ruiz LLP
-Vendor tax ID: 04-4488210
+Vendor: Helios Hardware Supply
+Vendor legal name: Helios Hardware Supply
+Vendor tax ID: 00-0000000
 Authorized amount: 121.56
 Currency: USD
 Approver: Jordan Hale

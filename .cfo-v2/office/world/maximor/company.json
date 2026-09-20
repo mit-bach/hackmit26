@@ -6,5 +6,15 @@
   "headquarters": "Cambridge, MA",
   "fiscal_year_start_month": 1,
   "operating_bank_id": "BANK-OPERATING",
-  "stripe_account_id": "acct_maximor_demo"
+  "stripe_account_id": "acct_maximor_demo",
+  "annual_revenue_run_rate": 372400000.0,
+  "august_revenue": 30820000.0,
+  "september_revenue": 31140000.0,
+  "w2_headcount": 2840,
+  "contractors_1099": 412,
+  "biweekly_payroll_gross": 8437291.44,
+  "ap_open": 18420000.0,
+  "ar_open": 41260000.0,
+  "operating_cash": 14882410.18,
+  "active_vendors": 340
 }

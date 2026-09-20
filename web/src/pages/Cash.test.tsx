@@ -16,18 +16,16 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-test("cash is bank vs books with the Northstar gap, not the old console", async () => {
+test("cash is bank vs books with the Northstar gap", async () => {
   const { container } = render(<Cash />);
-  expect(await screen.findByRole("heading", { name: "Bank vs books" })).toBeInTheDocument();
-  expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
-  expect(screen.queryByText("What arrived")).not.toBeInTheDocument();
-  expect(container.querySelector(".io-flow")).toBeNull();
-  expect(container.textContent).toMatch(/12\.40|TXN-2026-09-015/);
+  expect(await screen.findByRole("heading", { name: /Does the bank agree with the books/i })).toBeInTheDocument();
+  expect(screen.getByText("What's happening?")).toBeInTheDocument();
+  expect(container.textContent).toMatch(/12\.40|TXN-2026-09-015|\$12,412\.40/);
   expect(container.querySelector(".cash-stage")).not.toBeNull();
   expect(container.textContent).not.toMatch(/\bCLOSED\b/);
 });
 
 test("empty matches do not crash cash", async () => {
   render(<Cash />);
-  expect(await screen.findByRole("heading", { name: "Bank vs books" })).toBeInTheDocument();
+  expect(await screen.findByRole("heading", { name: /Does the bank agree with the books/i })).toBeInTheDocument();
 });

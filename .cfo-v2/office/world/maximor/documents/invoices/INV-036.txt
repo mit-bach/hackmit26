@@ -1,8 +1,8 @@
-Northline Fabrication Corp.
-55 Industrial Way
-Somerville, MA 02143
-Phone +1 617-555-2201   ar@northline.example
-Tax ID 04-5510298
+Northwood Systems
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@northwoodsystems.example
+Tax ID 00-0000000
 
 INVOICE
 
@@ -10,9 +10,9 @@ Invoice Number: NOR-2026-09-0037
 Invoice Date: 2026-09-11
 Due Date: 2026-10-11
 PO Number: PO-337
-Payment Terms: net 15
+Payment Terms: net 30
 Currency: USD
-Vendor: Northline Fabrication
+Vendor: Northwood Systems
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                               77.39
 
 Remit to:
-ACH Citizens routing 011500120  account ****2010
-Bank: Citizens Bank  ****2010
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
 Please include invoice NOR-2026-09-0037 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: ar@northline.example
+Questions: billing@northwoodsystems.example

@@ -1,18 +1,18 @@
-Figma, Inc.
-760 Market Street, Floor 10
-San Francisco, CA 94102
-Phone +1 415-890-5400   billing@figma.example
-Tax ID 46-5748921
+Nimbus Components
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@nimbuscomponents.example
+Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: FIG-2026-09-0045
+Invoice Number: NIM-2026-09-0045
 Invoice Date: 2026-09-19
 Due Date: 2026-10-19
 PO Number: PO-345
 Payment Terms: net 30
 Currency: USD
-Vendor: Figma
+Vendor: Nimbus Components
 
 Bill To:
 Maximor Demo Corp
@@ -32,8 +32,8 @@ Tax                                                                       0.00
 Amount Due                                                               39.93
 
 Remit to:
-ACH First Republic routing 321081669  account ****0926
-Bank: First Republic  ****0926
-Please include invoice FIG-2026-09-0045 on the payment advice.
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice NIM-2026-09-0045 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@figma.example
+Questions: billing@nimbuscomponents.example

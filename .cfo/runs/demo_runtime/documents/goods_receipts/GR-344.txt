@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-344
+PO Number: PO-344
+Vendor: Acme Supply Co.
+Goods received in full on 2026-09-18
+Packing list attached: PL-GR-344
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 856.30 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

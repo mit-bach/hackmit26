@@ -1,0 +1,11 @@
+Linear App
+Packing list
+Ship date: 2026-09-20
+PO Number: PO-OPEN-046
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 046-0920
+
+Contents:
+  - Line GR-OPEN-046 — qty 1
+
+This packing list is not an invoice.

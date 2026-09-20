@@ -1,6 +1,6 @@
 ---
 name: bank-reference-interpretation
-description: Interprets messy bank descriptions and remittance references without inventing invoice numbers or counterparties.
+description: Read messy bank memos and processor payout labels. Do not invent invoice numbers or counterparties. Memory is color, not fee evidence.
 status: new
 ---
 
@@ -8,33 +8,27 @@ status: new
 
 ## Purpose
 
-Read noisy bank statement text well enough to compare it with ledger counterparties and Python candidates. The skill interprets labels; it does not create matches.
+Read a noisy bank string well enough to compare it with Kernel candidates and apply/pay identifiers. The skill interprets labels. It does not create matches.
 
 ## When to Use
 
-Apply when a bank description is incomplete, truncated, or uses a trade name that is not the legal ledger name. Use for ACH memos, wire references, card refund descriptors, and processor payout labels.
+Wear this when a bank description is truncated, uses a trade name, or looks like a processor payout label (STRP, ADY, STRIPE, ADYEN).
 
 ## Inputs / Evidence
 
-- bank description, reference, and counterparty fields
-- ledger counterparty, invoice/reference, and memo
-- Python overlap scores already computed from those strings
+Bank description, reference, and counterparty fields. Ledger counterparty and invoice/reference. `get_pipe_identifier`. This Bot's Memory of how this processor usually labels a deposit. Python overlap scores.
 
 ## Procedure
 
-1. Treat the bank string as evidence, not as a complete identity.
-2. Keep tokens that look like counterparties (ACME INDUSTRIAL, NORTHLINE FAB, NORTHSTAR LLC).
-3. Keep explicit references (8391, 729103, STRP-97420, CARD 8892). Do not promote them into invoice IDs unless the ledger already contains that ID.
-4. Recognize processor labels: STRIPE / STRP and ADYEN / ADY refer to existing payout adapters, not to AP invoices.
-5. Recognize refund language (REFUND CARD) as a possible customer refund, not a vendor payment.
-6. If the bank text and ledger name share a distinctive token, that supports compatibility. If they name different parties, that is a conflict.
-7. Missing invoice numbers in the bank text are normal. Do not invent INV- IDs to force a match.
+Treat the bank string as a memo. Keep distinctive tokens and explicit references. Do not promote them into invoice ids unless the ledger already contains that id. If apply or pay already named the line, the memo cannot rename the customer or vendor.
+
+Processor labels belong to the Stripe/Adyen waterfall, not to an AP invoice. Remember this processor's usual payout wording for next period. That habit cannot override missing fee evidence.
 
 ## Decision Criteria
 
-- Compatible names may still match when Python amounts and dates already agree.
-- Conflicting names with no alias evidence should stay on HUMAN_REVIEW even if amounts agree.
-- Processor payout text should be handed to the named Stripe or Adyen adapter rather than treated as a customer receipt.
+- A memo token may support compatibility when Kernel amounts already agree and the pipe identifier, if present, is the same party.
+- Conflicting names with no identifier stay on HUMAN_REVIEW even if amounts agree.
+- A payout-shaped label is a deposit for `cash` and charge-level facts for `apply`. It is not a vendor bill.
 
 ## Output Expectations
 
@@ -44,4 +38,5 @@ Cite the tokens you used and whether they support, weaken, or are silent on the 
 
 - Do not recalculate amounts from the description.
 - Do not invent counterparties, invoice numbers, or remittance details that are not in the text.
-- Do not treat a truncated merchant descriptor as proof of a three-invoice group; grouping still requires Python’s exact sum.
+- Do not treat a truncated merchant descriptor as proof of a grouped ACH. Grouping still requires Python’s exact sum.
+- Do not use payout-label Memory as a fee id.

@@ -1,18 +1,18 @@
-Notion Labs
+Pagaya Coffee Service
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@notionlabs.example
+Phone +1 617-555-0000   billing@pagayacoffeeservic.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: NOT-2026-09-0098
+Invoice Number: PAG-2026-09-0098
 Invoice Date: 2026-09-18
 Due Date: 2026-10-18
 PO Number: PO-398
 Payment Terms: net 30
 Currency: USD
-Vendor: Notion Labs
+Vendor: Pagaya Coffee Service
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                            1,981.69
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice NOT-2026-09-0098 on the payment advice.
+Please include invoice PAG-2026-09-0098 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@notionlabs.example
+Questions: billing@pagayacoffeeservic.example

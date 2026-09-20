@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-369
 PO Number: PO-369
-Vendor: Snowflake
+Vendor: Alder Systems
 Goods received in full on 2026-09-16
 Packing list attached: PL-GR-369
 Quantity ordered: 1

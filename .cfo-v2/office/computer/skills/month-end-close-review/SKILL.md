@@ -1,6 +1,6 @@
 ---
 name: month-end-close-review
-description: Decides whether a month can close from the checklist, blockers, and unsigned reconciliations. Use at final close review.
+description: Reads close gates and refuses lock when evaluate_close_gates failed. Cannot mark CLOSED.
 status: new
 ---
 
@@ -8,44 +8,27 @@ status: new
 
 ## Purpose
 
-Independently decide whether remaining close tasks, exceptions, and reconciliations allow the period to be marked closed.
+Bot `ctl-books` Profile `lock` reads `evaluate_close_gates` and the period pack. It looks for reasons to refuse. It cannot mark CLOSED.
 
 ## When to Use
 
-Apply when reviewing unresolved exceptions or performing final close review for a period.
+Final close review for a period. Call `close.tools.get_close_gates` and `close.tools.get_close_packet`.
 
-## Inputs / Evidence
+## Remainder
 
-Use the close checklist statuses, exception list, reconciliation statuses, journal/evidence references already produced by upstream tasks, and any prior-period accrual decision_id cited on the packet.
+CONCUR (`APPROVE_CLOSE`) only when `gate_passed` is true and the packet is complete. If gates failed, `REJECT_CLOSE`. Python ignores `APPROVE_CLOSE` when gates fail.
 
-## Procedure
+Planted `$12.40` is unexplained. Do not relabel it as timing. Do not force-match it.
 
-1. A task is complete only when its dependencies are complete and its own status is COMPLETE.
-2. NEEDS_REVIEW, BLOCKED, and FAILED upstream work are unresolved blockers.
-3. Unsigned HUMAN_REVIEW or missing-evidence reconciliations block close.
-4. Approve close only when every required task is COMPLETE and no material exception remains.
-5. When an accrual cites a prior-period decision_id, confirm current evidence was checked and that a material methodology deviation is visible if the treatment changed.
+## Output
 
-## Decision Criteria
-
-- All checklist items COMPLETE and recs signed off → the period may close.
-- Any unexplained difference, missing evidence, or failed task → do not close.
-- Corrected failed tasks may be retried; do not repost completed journals.
-
-## Output Expectations
-
-Return only one structured decision:
-
-- `APPROVE_CLOSE`
-- `REJECT_CLOSE`
-- `REQUEST_REVIEW`
-
-Python enforces the hard gates. An `APPROVE_CLOSE` decision is ignored when deterministic checks still show a blocker.
+`FinalCloseVerdict`: `APPROVE_CLOSE`, `REJECT_CLOSE`, or `REQUEST_REVIEW`. None of these mark CLOSED. Kernel `close.month_end` is the only door that can later mark CLOSED.
 
 ## Boundaries
 
 - Do not recalculate account balances or journal totals.
 - Do not mark the period closed to hide an exception.
 - Do not treat NEEDS_REVIEW as complete.
-- Do not invent a cleared status for an account the packet still flags.
-- Do not override a failed Python gate.
+- Do not invent a cleared status.
+- Do not `create_accrual`.
+- Do not ask a human.

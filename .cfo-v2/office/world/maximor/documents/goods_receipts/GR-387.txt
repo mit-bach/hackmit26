@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-387
 PO Number: PO-387
-Vendor: Gusto Payroll
+Vendor: Timber Components
 Goods received in full on 2026-09-07
 Packing list attached: PL-GR-387
 Quantity ordered: 1

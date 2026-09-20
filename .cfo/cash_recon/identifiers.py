@@ -76,19 +76,19 @@ def choose_candidate_for_line(
     )
     if ident is not None:
         compatible = [item for item in line if identifier_compatible(item, ident)]
-        rejected = [item for item in line if item not in compatible]
-        guessed = any(item.match_type in IDENTITY_MATCH_TYPES for item in rejected)
         if not compatible:
             return IdentifierTick(
                 bank_transaction_id=bank_transaction_id,
                 identifier_present=True,
                 fail_closed=True,
-                guessed_counterparty=guessed,
+                guessed_counterparty=False,
                 reason="Identifier is present; no Kernel candidate copies it. Do not invent a counterparty.",
                 source=ident.source,
             )
         unexplained = [
-            item for item in compatible if item.match_type == "UNEXPLAINED_DIFFERENCE"
+            item
+            for item in compatible
+            if item.match_type == "UNEXPLAINED_DIFFERENCE" and item.difference_minor != 0
         ]
         if unexplained:
             chosen = sorted(unexplained, key=lambda item: (-item.score, item.candidate_id))[0]

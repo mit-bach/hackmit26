@@ -1,0 +1,34 @@
+{
+  "version": "1",
+  "comment": "Session 04 fragment. Compiler (session 01) is the SoT. Display names AP Reviewer / AP Approver / AP Audit are not mapped onto Bot ap.",
+  "byDisplayName": {
+    "AP Preparer": {
+      "ops": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence"
+      ],
+      "skills": ["three-way-match-analysis"],
+      "outputType": "PreparerRecommendation"
+    },
+    "Exception Investigator": {
+      "ops": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases"
+      ],
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation"
+      ],
+      "outputType": "InvestigationReport"
+    }
+  }
+}

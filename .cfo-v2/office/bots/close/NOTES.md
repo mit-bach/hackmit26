@@ -1,14 +1,29 @@
-# Session 08 notes — Bot `close`
+# Close — period pass notes
 
-Wrote this slice against the Constitution, grain, and compiled Catalog/Grants from session 01.
+September 2026 judged close stays **BLOCKED** on unexplained cash `$12.40` (`TXN-2026-09-015`). That is success. Do not relabel it as timing. Do not edit the bank line in Memory.
 
-Missing at write time for live Handles:
+## T5 / T8 — coordinate
 
-- Session 02 sidecar Grant re-check on every RPC (Client intercept exists; live Pi bind was not run here)
-- Session 09 Bot `ctl-books` Profiles `review-treatment` / `lock` as a live lane. Handle payloads are written under `workspace/close/<period>/handles/`. They are not live-sent. They do not auto-CLOSED.
+Profile `coordinate` (Close Manager) has `tools=[]`. That is honest. Coordination is Routine `month-end` + Kernel `ready_tasks` + self-Wake. It is not an office-live Catalog caller.
 
-Prepaid / FA / BS reviewer twins stay Compiler Display names. They are not Profiles on this Bot.
+## T5 — Computer `runs`
 
-`list_period_reconciliations` exists in `bs_recon/tools.py` and is not on constructors. It is not granted.
+When `HARNESS_COMPUTER` is set, `close.host.run_close_host` writes `$HARNESS_COMPUTER/runs/month_end` and `$HARNESS_COMPUTER/workspace/close/<period>/`. RUN.md close demo exports that env. The Kernel shim still chdirs into `.cfo/` for imports; that chdir is not the office destination.
 
-Handle completion was not live-proven (no bound Pi). Kernel host and unit tests are the proof layer.
+## T3 — lock reads gates
+
+Month-End Close Reviewer (`ctl-books` / `lock`) is granted `close.tools.get_close_gates` and `close.tools.get_close_packet`. Read-only. Cannot mark CLOSED. `evaluate_close_gates` is the only door that can later mark CLOSED. `close.orchestrator.run_cfo_close` does not lock.
+
+## Routines (Floor owns autoRoutines)
+
+Live `client.json` has `autoRoutines: false`. Routines `month-end`, `period-story`, and `post-close-assurance` parse, but they will not fire themselves. Prompt text is honest. Do not flip autoRoutines here.
+
+## Harbor
+
+Reuse Harbor Electric’s last accrual method only when current evidence still supports it. October actual-bill reversal is not fully wired in the default demo path. Do not fake that reversal as office-live.
+
+## Not claimed
+
+- September is not CLOSED.
+- Live Pi `bot_send_prompt` completion for close Handles is not claimed.
+- Stealth theft holdout is not planted in operational books.

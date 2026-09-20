@@ -10,7 +10,7 @@
   {
     "account_id": "BANK-PAYROLL",
     "name": "First National payroll",
-    "gl_account": "1010-Payroll-Cash",
+    "gl_account": "1010-Payroll-Imprest",
     "currency": "USD",
     "routing": "011000390",
     "last4": "2281"

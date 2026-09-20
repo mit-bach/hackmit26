@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-383
 PO Number: PO-383
 Issued: 2026-09-03
-Vendor: Lenovo
-Vendor legal name: Lenovo (United States) Inc.
-Vendor tax ID: 56-2189993
+Vendor: Ginkgo Studio
+Vendor legal name: Ginkgo Studio
+Vendor tax ID: 00-0000000
 Authorized amount: 5,401.95
 Currency: USD
 Approver: Jordan Hale

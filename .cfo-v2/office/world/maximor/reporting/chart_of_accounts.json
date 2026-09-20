@@ -68,10 +68,156 @@
     "aliases": []
   },
   {
+    "account_id": "1010-Payroll-Imprest",
+    "name": "Payroll imprest",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1020-Stripe-Clearing",
+    "name": "Stripe clearing",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1030-Undeposited-Funds",
+    "name": "Undeposited funds",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1110-AR-Unapplied",
+    "name": "AR unapplied cash",
+    "account_class": "ar",
+    "aliases": []
+  },
+  {
+    "account_id": "1200-Prepaid-Software",
+    "name": "Prepaid software",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1210-Prepaid-Insurance",
+    "name": "Prepaid insurance",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1220-Prepaid-Other",
+    "name": "Prepaid other",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1300-Due-From-Affiliate",
+    "name": "Due from affiliate",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1350-Other-Receivable",
+    "name": "Other receivable",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1400-Inventory",
+    "name": "Inventory",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1500-PPE",
+    "name": "Property plant and equipment",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1510-Accum-Dep",
+    "name": "Accumulated depreciation",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2100-Due-To-Affiliate",
+    "name": "Due to affiliate",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2200-Payroll-Accrual",
+    "name": "Payroll accrual",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2300-Deferred-Revenue",
+    "name": "Deferred revenue",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "4100-Contra-Revenue-Returns",
+    "name": "Contra revenue returns",
+    "account_class": "revenue",
+    "aliases": []
+  },
+  {
+    "account_id": "5400-Contractors",
+    "name": "Contractors",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6200-Benefits",
+    "name": "Benefits",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6300-Occupancy",
+    "name": "Occupancy",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6400-Professional-Fees",
+    "name": "Professional fees",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6500-Bank-Fees",
+    "name": "Bank fees",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6600-Processor-Fees",
+    "name": "Processor fees",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6900-Misc-Expense",
+    "name": "Miscellaneous expense",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6950-Cash-Over-Short",
+    "name": "Cash over short",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
     "account_id": "1010-Payroll-Cash",
     "name": "Payroll cash",
     "account_class": "cash",
-    "aliases": []
+    "aliases": [
+      "1010-Payroll-Imprest"
+    ]
   },
   {
     "account_id": "1020-Reserve-Cash",

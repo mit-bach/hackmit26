@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-343
 PO Number: PO-343
-Vendor: Boston Edison Steam
+Vendor: Timber Supply
 Goods received in full on 2026-09-17
 Packing list attached: PL-GR-343
 Quantity ordered: 1

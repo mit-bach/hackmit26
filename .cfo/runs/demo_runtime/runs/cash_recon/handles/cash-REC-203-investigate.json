@@ -1,0 +1,17 @@
+{
+  "from": "cash",
+  "to": "cash",
+  "toSlug": "cash",
+  "profile": "investigate",
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "prompt": "profile: investigate\nInvestigate REC-203 (UNMATCHED_LEDGER). Case path: runs/cash_recon/cases/2026-09.json. Do not invent an explanation. Do not ask a human.",
+  "paths": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/demo_runtime/runs/cash_recon/packets/cash-investigate-REC-203.json"
+  ],
+  "kernelStatus": "HUMAN_REVIEW",
+  "queueOwner": "cash",
+  "humanQueue": false,
+  "idempotencyKey": "cash:investigate:2026-09:REC-203:UNMATCHED_LEDGER",
+  "createdAt": "2026-09-20T13:44:25Z"
+}

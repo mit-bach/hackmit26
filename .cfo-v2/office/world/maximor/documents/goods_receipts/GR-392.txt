@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-392
 PO Number: PO-392
-Vendor: Harbor Power & Light
+Vendor: Driftwood Services
 Goods received in full on 2026-09-12
 Packing list attached: PL-GR-392
 Quantity ordered: 1

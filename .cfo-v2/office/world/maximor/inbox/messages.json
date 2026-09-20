@@ -386,5 +386,25 @@
     "source": "inbox",
     "correlation_id": "MSG-INBOX-019",
     "metadata": {}
+  },
+  {
+    "case_id": "pinnacle-hold",
+    "message_id": "MSG-PIN-HOLD-01",
+    "thread_id": "THR-pinnacle-hold",
+    "in_reply_to": null,
+    "sender_name": "Pinnacle Retail operations",
+    "sender_address": "ops@pinnacle.example",
+    "recipient_addresses": [
+      "ap@hackmit-cfo.example"
+    ],
+    "subject": "Pinnacle hold \u2014 do not ship from cage B",
+    "body_text": "Hi Maximor warehouse,\n\nPlease keep the PIN-BH pallet in CAM-WH-01 cage B through October. Store 14 is not ready to receive. Title stays with Maximor until we send a release. Do not pick against INV-AR-PIN-BH-01.\n\nCage tag is CAM-WH-01-CAGE-B. Side letter dated 2026-09-28 is with our merchandising desk.\n\nThanks,\nPinnacle Retail operations\n90 Prudential Plaza, Chicago IL 60601\n",
+    "body_html": null,
+    "sent_at": "2026-09-30T16:12:00Z",
+    "received_at": "2026-09-30T16:12:00Z",
+    "attachments": [],
+    "source": "inbox",
+    "correlation_id": "MSG-PIN-HOLD-01",
+    "metadata": {}
   }
 ]

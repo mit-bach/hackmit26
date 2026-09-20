@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-385
 PO Number: PO-385
-Vendor: FedEx
+Vendor: Alder Supply
 Goods received in full on 2026-09-05
 Packing list attached: PL-GR-385
 Quantity ordered: 1

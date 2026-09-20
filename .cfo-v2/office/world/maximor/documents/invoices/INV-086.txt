@@ -1,18 +1,18 @@
-Gusto Payroll
+Timber Components
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@gustopayroll.example
+Phone +1 617-555-0000   billing@timbercomponents.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: GUS-2026-09-0087
+Invoice Number: TIM-2026-09-0087
 Invoice Date: 2026-09-07
 Due Date: 2026-10-07
 PO Number: PO-387
 Payment Terms: net 30
 Currency: USD
-Vendor: Gusto Payroll
+Vendor: Timber Components
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                               84.26
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice GUS-2026-09-0087 on the payment advice.
+Please include invoice TIM-2026-09-0087 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@gustopayroll.example
+Questions: billing@timbercomponents.example

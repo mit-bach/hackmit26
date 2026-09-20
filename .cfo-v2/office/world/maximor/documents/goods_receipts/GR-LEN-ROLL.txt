@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-LEN-ROLL
+PO Number: PO-LEN-ROLL-26
+Vendor: Lenovo
+Goods received in full on 2026-03-18
+Packing list attached: PL-GR-LEN-ROLL
+Quantity ordered: 168
+Quantity received: 168
+Amount received: 424,720.80 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

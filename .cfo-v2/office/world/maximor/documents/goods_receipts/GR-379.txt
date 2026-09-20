@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-379
 PO Number: PO-379
-Vendor: Adyen NV
+Vendor: Teak Systems
 Goods received in full on 2026-09-26
 Packing list attached: PL-GR-379
 Quantity ordered: 1

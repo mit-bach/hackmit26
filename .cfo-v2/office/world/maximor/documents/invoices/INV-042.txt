@@ -1,18 +1,18 @@
-Boston Edison Steam
+Timber Supply
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@bostonedisonsteam.example
+Phone +1 617-555-0000   billing@timbersupply.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: BOS-2026-09-0043
+Invoice Number: TIM-2026-09-0043
 Invoice Date: 2026-09-17
 Due Date: 2026-10-17
 PO Number: PO-343
 Payment Terms: net 30
 Currency: USD
-Vendor: Boston Edison Steam
+Vendor: Timber Supply
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                           14,401.17
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice BOS-2026-09-0043 on the payment advice.
+Please include invoice TIM-2026-09-0043 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@bostonedisonsteam.example
+Questions: billing@timbersupply.example

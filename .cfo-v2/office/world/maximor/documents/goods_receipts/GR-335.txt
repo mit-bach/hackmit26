@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-335
 PO Number: PO-335
-Vendor: HubSpot
+Vendor: Teak Components
 Goods received in full on 2026-09-09
 Packing list attached: PL-GR-335
 Quantity ordered: 1

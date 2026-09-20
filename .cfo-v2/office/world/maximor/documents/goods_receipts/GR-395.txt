@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-395
 PO Number: PO-395
-Vendor: Acme Supply Co.
+Vendor: GitHub
 Goods received in full on 2026-09-15
 Packing list attached: PL-GR-395
 Quantity ordered: 1

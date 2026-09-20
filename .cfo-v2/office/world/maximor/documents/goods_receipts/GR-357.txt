@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-357
 PO Number: PO-357
-Vendor: Stripe Processing
+Vendor: Nimbus Components
 Goods received in full on 2026-09-04
 Packing list attached: PL-GR-357
 Quantity ordered: 1

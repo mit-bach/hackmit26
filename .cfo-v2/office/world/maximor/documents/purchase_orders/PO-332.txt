@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-332
 PO Number: PO-332
 Issued: 2026-09-06
-Vendor: Lenovo
-Vendor legal name: Lenovo (United States) Inc.
-Vendor tax ID: 56-2189993
+Vendor: Driftwood Works
+Vendor legal name: Driftwood Works
+Vendor tax ID: 00-0000000
 Authorized amount: 253.95
 Currency: USD
 Approver: Jordan Hale

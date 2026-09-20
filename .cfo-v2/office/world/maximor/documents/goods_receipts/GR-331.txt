@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-331
 PO Number: PO-331
-Vendor: Cambridge Properties
+Vendor: Harbor Studio
 Goods received in full on 2026-09-05
 Packing list attached: PL-GR-331
 Quantity ordered: 1

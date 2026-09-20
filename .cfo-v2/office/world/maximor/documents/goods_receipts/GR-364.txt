@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-364
 PO Number: PO-364
-Vendor: Kendall Square Parking
+Vendor: Quarry Works
 Goods received in full on 2026-09-11
 Packing list attached: PL-GR-364
 Quantity ordered: 1

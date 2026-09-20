@@ -126,5 +126,2465 @@
     "recurring": false,
     "description": "Paid earlier than the deferred forecast week",
     "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2025-12",
+    "amount": 6842.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2025-12-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-01",
+    "amount": 7120.4,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-01-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-02",
+    "amount": 7455.22,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-02-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-03",
+    "amount": 7688.9,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-03-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-04",
+    "amount": 7912.44,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-04-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-05",
+    "amount": 8214.66,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-05-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-06",
+    "amount": 8420.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-06-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CLR-2026-07",
+    "amount": 8544.22,
+    "currency": "USD",
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "payment_date": "2026-07-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CLR-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Clearing Solutions LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2025-11",
+    "amount": 14206.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2025-11-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2025-11"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-11",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2025-12",
+    "amount": 14880.4,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2025-12-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-01",
+    "amount": 15220.22,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-01-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-02",
+    "amount": 15880.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-02-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-02-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-03",
+    "amount": 16240.44,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-03-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-04",
+    "amount": 16820.62,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-04-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-05",
+    "amount": 17420.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-05-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-06",
+    "amount": 14625.06,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-06-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-07",
+    "amount": 17831.96,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-07-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-2026-08",
+    "amount": 19406.5,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-08-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-4812"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-KIS-10442",
+    "amount": 18406.22,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-03-30",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-10442"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-10442",
+    "amount": 18424.62,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-03-30",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-10442"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-01",
+    "amount": 9840.18,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-01-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-02",
+    "amount": 10120.4,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-02-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-03",
+    "amount": 10440.22,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-03-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-04",
+    "amount": 10880.18,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-04-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-05",
+    "amount": 11220.44,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-05-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-06",
+    "amount": 10805.22,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-06-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-07",
+    "amount": 10406.18,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-07-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-08",
+    "amount": 10440.4,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "payment_date": "2026-08-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-02-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH North Line Fab Inc",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-02",
+    "amount": 4480.22,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-03-01",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-03",
+    "amount": 4620.18,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-03-29",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-04",
+    "amount": 4710.44,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-04-29",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-05",
+    "amount": 4880.18,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-05-29",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-06",
+    "amount": 5010.22,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-06-29",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-07",
+    "amount": 5120.4,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-07-29",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-08",
+    "amount": 5184.18,
+    "currency": "USD",
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "payment_date": "2026-08-29",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-NLF-03-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH NLF Industrial Components",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-4601",
+    "amount": 24880.44,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-04-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-4601"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-WBT-4602",
+    "amount": 24106.18,
+    "currency": "USD",
+    "vendor_id": "VEND-WBT-01",
+    "vendor_name": "Westbrook Tooling",
+    "payment_date": "2026-04-21",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-WBT-4602"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Westbrook Tooling",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-4603",
+    "amount": 23413.56,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-04-22",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-4603"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-WBT-2026-07",
+    "amount": 24106.18,
+    "currency": "USD",
+    "vendor_id": "VEND-WBT-01",
+    "vendor_name": "Westbrook Tooling",
+    "payment_date": "2026-07-24",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-WBT-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Westbrook Tooling",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-WBT-2026-08",
+    "amount": 23940.0,
+    "currency": "USD",
+    "vendor_id": "VEND-WBT-01",
+    "vendor_name": "Westbrook Tooling",
+    "payment_date": "2026-08-24",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-WBT-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Westbrook Tooling",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2025-11",
+    "amount": 220.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2025-12-04",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2025-11"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2025-12",
+    "amount": 228.4,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-01-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-01",
+    "amount": 232.22,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-02-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-02",
+    "amount": 238.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-03-06",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-03",
+    "amount": 240.44,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-04-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-04",
+    "amount": 242.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-05-04",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-05",
+    "amount": 244.22,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-06-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-06",
+    "amount": 246.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-07-04",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-07",
+    "amount": 248.4,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-08-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-08",
+    "amount": 248.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-09-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-KIS-0618",
+    "amount": 24106.18,
+    "currency": "USD",
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "payment_date": "2026-06-30",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-KIS-0618"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-02",
+    "amount": 3218.4,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-03-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-03",
+    "amount": 3440.22,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-03-31",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-04",
+    "amount": 3610.18,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-05-01",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-05",
+    "amount": 3820.44,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-05-31",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-06",
+    "amount": 3688.18,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-07-01",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-07",
+    "amount": 3910.22,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-07-31",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-08",
+    "amount": 3840.18,
+    "currency": "USD",
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "payment_date": "2026-08-31",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HES-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Harbor Electric Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2025-10",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2025-10-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2025-10"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-10",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2025-11",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2025-11-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2025-11"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-11",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2025-12",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2025-12-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-01",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-01-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-02",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-02-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-03",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-03-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-04",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-04-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-05",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-05-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-06",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-06-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-07",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-07-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HAL-2026-08",
+    "amount": 2400.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-08-17",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-01",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-02-09",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-02",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-03-12",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-03",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-04-09",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-04",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-05-10",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-05",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-06-09",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-06",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-07-10",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-07",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-08-09",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-08",
+    "amount": 2300.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "payment_date": "2026-09-09",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "ACH Halyard Facilities LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-OIC-2025-01",
+    "amount": 276000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-OIC-01",
+    "vendor_name": "Orbit Insights Corp",
+    "payment_date": "2025-01-18",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-OIC-2025-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-01",
+    "recurring": false,
+    "description": "ACH Orbit Insights Corp",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-HBP-2026-01",
+    "amount": 18600.0,
+    "currency": "USD",
+    "vendor_id": "VEND-HBP-01",
+    "vendor_name": "Hartford Brokerage Partners",
+    "payment_date": "2026-01-20",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-HBP-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Hartford Brokerage Partners",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2025-09",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2025-09-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2025-09"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-09",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2025-10",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2025-10-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2025-10"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-10",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2025-11",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2025-11-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2025-11"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-11",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2025-12",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2025-12-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-01",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-01-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-02",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-02-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-03",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-03-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-04",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-04-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-05",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-05-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-06",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-06-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-07",
+    "amount": 37033.33,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-07-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-BLS-2026-08",
+    "amount": 37033.37,
+    "currency": "USD",
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "payment_date": "2026-08-26",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-BLS-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Brightline Studio LLC",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CAM-RENT-2026-06",
+    "amount": 48000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "payment_date": "2026-06-13",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CAM-RENT-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Cambridge Properties",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CAM-RENT-2026-07",
+    "amount": 48000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "payment_date": "2026-07-13",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CAM-RENT-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Cambridge Properties",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-CAM-RENT-2026-08",
+    "amount": 48000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "payment_date": "2026-08-13",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CAM-RENT-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Cambridge Properties",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-07",
+    "amount": 8427.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2025-07-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2025-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-07",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-08",
+    "amount": 8410.22,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2025-08-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2025-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-08",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-09",
+    "amount": 8390.44,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2025-09-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2025-09"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-09",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-10",
+    "amount": 8440.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2025-10-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2025-10"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-10",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-11",
+    "amount": 8460.22,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2025-11-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2025-11"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-11",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-12",
+    "amount": 8488.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2025-12-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-01",
+    "amount": 8510.4,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-01-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-02",
+    "amount": 8520.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-02-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-03",
+    "amount": 8490.22,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-03-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-04",
+    "amount": 8506.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-04-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-05",
+    "amount": 8518.4,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-05-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-06",
+    "amount": 8522.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-06-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-07",
+    "amount": 8530.22,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-07-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-08",
+    "amount": 8544.18,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-08-27",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CAM-CAM-2026",
+    "amount": 18200.0,
+    "currency": "USD",
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "payment_date": "2026-04-12",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CAM-CAM-2026"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Cambridge Properties",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-RENT-2026-06",
+    "amount": 4000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-06-14",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-RENT-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-CPS-RENT-2026-08",
+    "amount": 4000.0,
+    "currency": "USD",
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "payment_date": "2026-08-14",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-CPS-RENT-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Cambridge Property Services",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-LEN-ROLL-26",
+    "amount": 424720.8,
+    "currency": "USD",
+    "vendor_id": "VEND-020",
+    "vendor_name": "Lenovo",
+    "payment_date": "2026-03-30",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-LEN-ROLL-26"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Lenovo",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2025-11",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2025-12-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2025-11"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2025-12",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2025-12",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-01-02",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2025-12"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-01",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-01",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-02-02",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-01"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-02",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-02",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-03-05",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-02"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-03",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-03",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-04-02",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-03"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-04",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-04",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-05-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-04"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-05",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-05",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-06-02",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-05"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-06",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-06",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-07-03",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-06"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-07",
+    "amount": 4884.82,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-08-02",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-07"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-08",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-FLE-2026-08",
+    "amount": 4884.84,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-09-02",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-2026-08"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-09",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
+  },
+  {
+    "payment_id": "PAY-INV-FLE-0716",
+    "amount": 1531.96,
+    "currency": "USD",
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "payment_date": "2026-07-28",
+    "payment_method": "ach",
+    "source": "automated",
+    "invoice_ids": [
+      "INV-FLE-0716"
+    ],
+    "approval_ids": [],
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01",
+    "period": "2026-07",
+    "recurring": false,
+    "description": "ACH Freightline Expedite",
+    "missing_support": false
   }
 ]

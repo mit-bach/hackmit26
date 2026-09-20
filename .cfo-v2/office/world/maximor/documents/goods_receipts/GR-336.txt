@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-336
 PO Number: PO-336
-Vendor: Gusto Payroll
+Vendor: Quarry Labs
 Goods received in full on 2026-09-10
 Packing list attached: PL-GR-336
 Quantity ordered: 1

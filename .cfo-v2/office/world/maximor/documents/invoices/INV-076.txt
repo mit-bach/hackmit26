@@ -1,18 +1,18 @@
-Cloudflare
+Beacon Components
 1 Vendor Row
 Boston, MA 02110
-Phone +1 617-555-0000   billing@cloudflare.example
+Phone +1 617-555-0000   billing@beaconcomponents.example
 Tax ID 00-0000000
 
 INVOICE
 
-Invoice Number: CLO-2026-09-0077
+Invoice Number: BEA-2026-09-0077
 Invoice Date: 2026-09-24
 Due Date: 2026-10-24
 PO Number: PO-377
 Payment Terms: net 30
 Currency: USD
-Vendor: Cloudflare
+Vendor: Beacon Components
 
 Bill To:
 Maximor Demo Corp
@@ -34,6 +34,6 @@ Amount Due                                                              232.17
 Remit to:
 ACH routing 011000390  account ****0000
 Bank: First National Bank  ****0000
-Please include invoice CLO-2026-09-0077 on the payment advice.
+Please include invoice BEA-2026-09-0077 on the payment advice.
 Late payments may accrue a 1.5% monthly finance charge after the due date.
-Questions: billing@cloudflare.example
+Questions: billing@beaconcomponents.example

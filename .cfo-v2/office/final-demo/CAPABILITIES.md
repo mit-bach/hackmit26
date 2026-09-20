@@ -56,7 +56,7 @@ Grain law is fifteen finance Bots. World is the sixteenth Source Bot: the simula
 | Class | Slug | Display names (Profiles) | Owns |
 | --- | --- | --- | --- |
 | Source | `email` | Finance Inbox Agent, Email Invoice Agent, plus other intake Profiles | Messages and attachments. Classify. Outbound missing-info. Does not match or pay. |
-| Source | `stripe` | (processor unpack) | Simulated payouts, fees, refunds, chargebacks. Not an `InvoiceCandidate`. |
+| Source | `stripe` | Stripe Payout Agent | Simulated payouts, fees, refunds, chargebacks. Not an `InvoiceCandidate`. |
 | Source | `bank` | Bank/Card Discovery Agent | Bank lines and card charges. A charge is not a bill. |
 | Source | `books` | ERP / procurement / EDI Profiles | GL, subledgers, vendor and customer master, POs, lock state (read). |
 | Source | `world` | Counterparty Message Agent (vendor, customer, bank, employee) | Role-play whoever finance mailed. Compose and send inbound mail. Does not classify the finance inbox. |
@@ -117,8 +117,8 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 
 | ID | Capability | Now | Next | Planted cases |
 | --- | --- | --- | --- | --- |
-| `cash.bank_reconciliation` | Match bank to ledger only when evidence supports it: exact, grouped ACH, fee-netted, timing, duplicate, unexplained. | Kernel-live. Cash Bot office-live. ctl-cash sign-off. | RecBench-style difficulty already sampled on volume lines. Plant ADV residual explanation without renaming `TXN-2026-09-015`. | `TXN-2026-09-018A` exact. Grouped ACH. `TXN-2026-09-011` FEE_NETTED. **`TXN-2026-09-015` $12.40 unexplained. Close stays blocked.** |
-| `cash.stripe_reconciliation` | Unpack charges − fees − refunds − disputes = bank deposit. | Kernel-live on simulated Stripe. 114-event sim pack on disk. Demo payouts in the pack: 3. | Use the sim pack as Stripe Bot world. Sample DABstep volume behind it. Never live keys in the judged demo. | `SCN-CASH-009` … `011`. |
+| `cash.bank_reconciliation` | Match bank to ledger only when evidence supports it: exact, grouped ACH, fee-netted, timing, duplicate, unexplained. Trust apply/pay identifiers; do not re-guess the counterparty. | Kernel-live. Cash Bot office-live. ctl-cash sign-off. Identifier trust is Kernel + test. Harness Handle cash → ctl-cash exists as a host path. Trusted cash packet exists; close Handle only when Kernel allows. **Not RecBench office-live.** | RecBench-style difficulty already sampled on volume lines. Plant ADV residual explanation without renaming `TXN-2026-09-015`. | `TXN-2026-09-018A` exact. Grouped ACH. `TXN-2026-09-011` FEE_NETTED. **`TXN-2026-09-015` $12.40 unexplained. Close stays blocked.** |
+| `cash.stripe_reconciliation` | Unpack charges − fees − refunds − disputes = bank deposit. | Kernel-live on simulated Stripe. Constructor **Stripe Payout Agent** + compiled Grants. `invoice_candidates` stays 0. Demo payouts in the pack: 3. | Use the sim pack as Stripe Bot world. Sample DABstep volume behind it. Never live keys in the judged demo. Not RecBench office-live. | `SCN-CASH-009` … `011`. |
 
 ### Close
 

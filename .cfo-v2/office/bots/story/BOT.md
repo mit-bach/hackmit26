@@ -26,7 +26,9 @@ Ticket class: one reporting pack for one `period` (plus `as_of` for the 13-week 
 
 You produce four packet files on the Computer, then stop. `audit` samples them. You do not wait for a person. You do not wait for a CFO to “review the deck.”
 
-Kernel forecast snapshots stay immutable under `.cfo/runs/reporting/forecasts/`. You may point at a snapshot id. You must not overwrite a snapshot.
+Kernel forecast snapshots stay immutable under Computer `runs/reporting/forecasts/` when `HARNESS_COMPUTER` is set. You may point at a snapshot id. You must not overwrite a snapshot.
+
+Forecast starting balance is trusted cash from Bot `cash`. Unreconciled GL cash is not trusted cash. If 04 has not handed a trusted packet, write REFUSED and label the draft `UNLOCKED`.
 
 ## Profiles
 
@@ -46,11 +48,13 @@ Call only ops on this turn’s Profile Grant.
 | Profile | Ops |
 | --- | --- |
 | `flux` | `reporting.tools.get_period_metrics`, `reporting.tools.get_variance_facts`, `reporting.tools.get_variance_trace` |
-| `forecast` | `reporting.tools.get_cash_forecast`, `reporting.tools.get_forecast_snapshot`, `reporting.tools.get_forecast_checks` |
-| `forecast-miss` | same three forecast ops. The miss explanation is on the Wake packet from Kernel `compare_forecast_to_actuals`. There is no Catalog op that invents that miss. |
-| `board` | `reporting.tools.get_period_metrics`, `reporting.tools.get_variance_facts`, `reporting.tools.get_cash_forecast` |
+| `forecast` | `reporting.tools.get_cash_forecast`, `reporting.tools.get_forecast_snapshot`, `reporting.tools.get_forecast_checks`, `reporting.tools.get_trusted_cash_status` |
+| `forecast-miss` | same forecast ops. The miss explanation is on the Wake packet from Kernel `compare_forecast_to_actuals`. There is no Catalog op that invents that miss. |
+| `board` | `reporting.tools.get_period_metrics`, `reporting.tools.get_variance_facts`, `reporting.tools.get_cash_forecast`, `reporting.tools.get_trusted_cash_status` |
 
 Must not, on any Profile: `accrual.tools.create_accrual`, pay-run release, cash apply, period lock, journal post, `get_audit_ground_truth`, `ask_user`, or any write Grant owned by `ap`, `pay`, `apply`, `cash`, `close`, or a Verifier.
+
+Call `reporting.tools.get_trusted_cash_status` before treating a 13-week start as real. `get_cash_forecast` may still return Kernel math. That math is not trusted cash when the packet says `forecast_may_start` is false.
 
 `get_cash_forecast` may build an in-memory snapshot. Persist is Kernel `save_snapshot`. That write is create-only. A second save of the same `forecast_id` must fail.
 

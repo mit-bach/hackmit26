@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-373
 PO Number: PO-373
-Vendor: Acme Supplies LLC
+Vendor: Nimbus Studio
 Goods received in full on 2026-09-20
 Packing list attached: PL-GR-373
 Quantity ordered: 1

@@ -239,8 +239,8 @@ function HarborStrip(props: {
       <details className="month-harbor-docs">
         <summary>Contract and August memory</summary>
         {input?.contract ? <SourceArtifactViewer artifact={input.contract} compact /> : null}
-        {evidence.map((item, index) => (
-          <SourceArtifactViewer key={`ev-${index}`} artifact={item} compact />
+        {evidence.map((item: { artifact_id?: string; title?: string }, idx) => (
+          <SourceArtifactViewer key={item.artifact_id || item.title || idx} artifact={item} compact />
         ))}
         {memory.map((item, index) => (
           <SourceArtifactViewer key={`mem-${index}`} artifact={item} />

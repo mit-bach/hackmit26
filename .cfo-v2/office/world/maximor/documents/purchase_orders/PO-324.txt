@@ -6,9 +6,9 @@ PURCHASE ORDER
 Purchase Order PO-324
 PO Number: PO-324
 Issued: 2026-09-25
-Vendor: Harbor Electric
-Vendor legal name: Harbor Electric Company
-Vendor tax ID: 04-1002201
+Vendor: Echo Group
+Vendor legal name: Echo Group
+Vendor tax ID: 00-0000000
 Authorized amount: 294.91
 Currency: USD
 Approver: Jordan Hale

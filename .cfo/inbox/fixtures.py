@@ -411,6 +411,26 @@ def spec_malformed() -> MessageSpec:
     )
 
 
+def spec_pinnacle_hold() -> MessageSpec:
+    return _spec(
+        "pinnacle-hold",
+        "MSG-PIN-HOLD-01",
+        "Pinnacle Retail operations",
+        "ops@pinnacle.example",
+        "Pinnacle hold — do not ship from cage B",
+        (
+            "Hi Maximor warehouse,\n\n"
+            "Please keep the PIN-BH pallet in CAM-WH-01 cage B through October. "
+            "Store 14 is not ready to receive. Title stays with Maximor until we "
+            "send a release. Do not pick against INV-AR-PIN-BH-01.\n\n"
+            "Cage tag is CAM-WH-01-CAGE-B. Side letter dated 2026-09-28 is with "
+            "our merchandising desk.\n\n"
+            "Thanks,\nPinnacle Retail operations\n90 Prudential Plaza, Chicago IL 60601\n"
+        ),
+        sent_at="2026-09-30T16:12:00Z",
+    )
+
+
 def spec_remittance() -> MessageSpec:
     return _spec(
         "remittance",
@@ -445,6 +465,7 @@ def full_inbox_specs() -> list[MessageSpec]:
         spec_credit_memo(),
         spec_malformed(),
         spec_remittance(),
+        spec_pinnacle_hold(),
     ]
 
 

@@ -1,6 +1,6 @@
 ---
 name: cash-reconciliation-method-selection
-description: Distinguishes exact, grouped, fee-netted, timing, duplicate, provider, and unexplained cash matches using Python candidates only.
+description: Choose a Kernel candidate_id for a bank line. Trust apply/pay identifiers. Do not invent fees or replay match_type taxonomy.
 status: new
 ---
 
@@ -8,45 +8,36 @@ status: new
 
 ## Purpose
 
-Choose the reconciliation method that the Python candidate list actually supports. The model selects a candidate; Python owns the amounts.
+Pick one Kernel `candidate_id` for an unmatched bank line, or send the line to `ctl-cash`. Python already typed the match. You copy the id. You do not rename the type.
 
 ## When to Use
 
-Apply when preparing or reviewing a bank-to-ledger match for a period, including ACH, wires, refunds, fees, and processor payouts.
+Wear this as Bot `cash` Profile `match` after `get_match_candidates` returns. Do not use it to rebuild the candidate engine.
 
 ## Inputs / Evidence
 
-- Python match candidates from get_match_candidates / get_candidate
-- bank transaction text and ledger counterparties
-- fee-advice records when present
-- Stripe/Adyen provider status already computed by the existing payout adapters
+Authoritative Kernel fields: `candidate_id`, `match_type`, `difference_minor`, `fee_evidence_ids`, `provider_status`. Authoritative pipe fields: `get_pipe_identifier`. Bank description is a memo, not an identity. Memory of a processor payout label is color. It is not fee evidence.
 
 ## Procedure
 
-1. Ignore any story that does not correspond to a Python candidate.
-2. Prefer a unique EXACT_MATCH when amount, sign, dates, and economic linkage agree. Equal dollars are not enough. Require a compatible counterparty, a shared invoice/reference, or a provider payout relationship.
-3. Prefer GROUPED_MATCH when several ledger entries from the same vendor/customer sum exactly to one bank amount. Do not group ledger items whose counterparties are incompatible with the bank. If the same-vendor group is close but leaves a residual with no fee or timing evidence, keep UNEXPLAINED_DIFFERENCE. Do not call it a valid grouped match.
-4. Prefer FEE_NETTED only when Python attached fee evidence and a proposed (unposted) bank-fee entry.
-5. Prefer PROVIDER_PAYOUT when the bank description is a Stripe or Adyen settlement and the existing adapter reports MATCH. A payout is a bag of balance transactions (charges, refunds, disputes, fees), not one customer invoice. Match the bank deposit to payout membership / net settlement, never to a single gross sale. A refund or chargeback that settles in a later payout is not an unexplained bank discrepancy. A September charge that pays out in October is cash timing, not an error.
-6. Treat TIMING_DIFFERENCE as an outstanding item when the same amount clears in an adjacent period. It is not an accounting error.
-7. If two bank refunds or two identical ledger postings compete for one counterpart, match one and leave the extra as a duplicate suspicion.
-8. If a small remainder has no supporting evidence, select UNEXPLAINED_DIFFERENCE. Do not relabel it as a fee.
-9. Reject reward-hacking: do not match unrelated records whose amounts happen to close a gap, an old invoice with the same dollars as a current bank line, a near-identical customer name without shared identity, or a historical journal that merely makes the arithmetic tie.
+Call `get_pipe_identifier`. If apply or pay already named the counterparty, copy that identity and pick the candidate that uses it. Do not pick a second customer or vendor because the memo is messy. If the identifier is missing, fail closed. Handle `ctl-cash`. Do not scrape a name from the description to look done.
+
+Copy amounts by citing `candidate_id`. If the residual has no Kernel fee evidence, leave it unexplained.
 
 ## Decision Criteria
 
-- MATCHED only for EXACT_MATCH, GROUPED_MATCH, or a clean PROVIDER_PAYOUT.
-- EXPLAINED_EXCEPTION only for FEE_NETTED with evidence.
-- OUTSTANDING_TIMING_ITEM for adjacent-period clearing.
-- HUMAN_REVIEW for duplicates, unexplained differences, unmatched items, counterparty conflicts, or multiple similarly scored candidates.
+- Tick the identified line when the identifier is present and a Kernel candidate copies it.
+- Keep unexplained unexplained when Kernel has no fee evidence. Helios-class fee-netted still needs a Kernel fee id.
+- Handle `ctl-cash` when the identifier is missing, the residual is unexplained, or two candidates are equally plausible.
 
 ## Output Expectations
 
-Return a candidate_id from the Python list, a disposition, confidence, and the evidence IDs you used. Do not output a new amount.
+`PreparerSelection` with a Kernel `candidate_id` or none, disposition copied from Python, and evidence ids you used. Do not output a new amount.
 
 ## Boundaries
 
-- Do not recalculate group sums, fees, or differences.
-- Do not invent invoice numbers that are not in the records.
-- Do not mark a break MATCHED because the narrative sounds plausible.
-- Do not post the proposed bank-fee journal; it remains a recommendation.
+- Do not recalculate group sums, fees, FX, or residuals.
+- Do not invent invoice numbers or counterparties.
+- Do not freeze a table from `match_type` to English. Kernel typed it.
+- Do not post the proposed bank-fee journal.
+- Do not start a 13-week forecast from unreconciled GL cash.

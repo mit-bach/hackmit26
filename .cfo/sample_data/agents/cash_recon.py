@@ -143,7 +143,7 @@ class CashReconSampleDataAgent(SampleDataAgent):
                 "2026-09-08",
                 -grouped_minor,
                 description="ACH OUT NORTHLINE FAB",
-                counterparty="NORTHLINE FAB",
+                counterparty="Northline Fabrication",
                 transaction_type="ach_debit",
                 metadata={"payment_id": pay_g.payment_id, "invoice_ids": pay_g.invoice_ids},
             ),

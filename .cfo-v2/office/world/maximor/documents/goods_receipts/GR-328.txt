@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-328
 PO Number: PO-328
-Vendor: Adyen NV
+Vendor: Quince Network
 Goods received in full on 2026-09-02
 Packing list attached: PL-GR-328
 Quantity ordered: 1

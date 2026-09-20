@@ -9,7 +9,7 @@ Reviewer: Cash Reconciliation Reviewer
 Status: COMPLETE
 Prepared: 2026-09-03T16:40:00Z
 
-Opening book cash agreed to July close. August deposits and disbursements were sampled against the First National operating statement. Outstanding timing items cleared in the first week of September. No unexplained difference remained at sign-off. September will compare against this pack.
+Opening book cash agreed to July close. August deposits and disbursements were sampled against the First National operating statement. Outstanding timing items cleared in the first week of September. Over/short true-up $7,206.18 posted as JE-REC-PLUG-2026-08. No unexplained difference remained at sign-off. September will compare against this pack.
 Identities carried: CASE-001 (Acme alias), AR-PREC-003 (Meridian unlabeled ACH), Harbor Electric methodology CTR-HE-001 / HI-HE-2026-08.
 
 Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document

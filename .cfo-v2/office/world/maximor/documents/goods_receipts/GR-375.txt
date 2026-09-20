@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-375
 PO Number: PO-375
-Vendor: Harbor Electric
+Vendor: Harbor Supply
 Goods received in full on 2026-09-22
 Packing list attached: PL-GR-375
 Quantity ordered: 1

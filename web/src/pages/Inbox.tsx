@@ -1,226 +1,210 @@
-import { useEffect, useState } from "react";
-import { get, usd } from "../api";
-import { ProcessPanel, SourceArtifactViewer } from "../components/Demo";
-import { FlowPlay, type FlowEdge, type FlowNode, type FlowStep, type LiveStage } from "../components/FlowPlay";
-import { ClassifyStage } from "../components/rest/ClassifyStage";
-import {
-  asRecord,
-  asRecordList,
-  asUnknownList,
-  classifyKind,
-  ioOutputs,
-  readBoolean,
-  readNumber,
-  readString,
-  workflowInner,
-  workflowStages,
-} from "../components/rest/kernel";
-import { RestHead } from "../components/rest/RestHead";
-import { formatStatus } from "../copy";
+import { useEffect, useMemo, useState } from "react";
+import { usd } from "../api";
+import { demoApi } from "../demoClient";
 import { useWorkflow } from "../hooks";
-import { ErrorBox, RunBar } from "../layout/Shell";
+import { ErrorBox, Pill, RunBar } from "../layout/Shell";
+import { DemoLayout, OutputHeadline, ProcessPanel } from "../components/Demo";
+import { DocumentLetter, ExpectedSteps, SamplePicker, WORKFLOW_PREVIEWS } from "../components/Presentation";
+import { Definition, ResultBlock, WhatsHappening } from "../components/Explain";
+import { formatStatus } from "../copy";
+import { DEFAULT_INBOX_SAMPLE, GROUP_LABELS, INBOX_DOCUMENTS, INBOX_DOCUMENTS_BY_ID, type InboxDocument } from "../data/inboxDocuments";
 
-const STAKE = "A quote is not a bill.";
-const DEFAULT_SAMPLE = "MSG-E-MESSY";
-
-interface InboxSample {
-  readonly sample_id: string;
-  readonly subject?: string;
-  readonly kind?: string;
-}
-
-const INBOX_NODES: FlowNode[] = [
-  { id: "email", label: "email", kind: "operator", room: "intake" },
-  { id: "ap", label: "ap", kind: "operator", room: "pay" },
-];
-
-const INBOX_STEPS: FlowStep[] = [
-  {
-    id: "classify",
-    title: "Classify the document",
-    nodeId: "email",
-    manipulations: ["Read the message", "Stamp a document class"],
-  },
-];
-
-function samplesFromCatalog(catalog: unknown): InboxSample[] {
-  const rec = asRecord(catalog);
-  return asUnknownList(rec?.samples).flatMap((item, idx) => {
-    const row = asRecord(item);
-    const sampleId = readString(row, "sample_id");
-    if (!sampleId) {
-      return [];
-    }
-    return [
-      {
-        sample_id: sampleId,
-        subject: readString(row, "subject") || `Sample ${idx + 1}`,
-        kind: readString(row, "kind"),
-      },
-    ];
+function mergeSamples(catalog: any): InboxDocument[] {
+  const extras = (catalog?.samples || []).filter((item: any) => item?.sample_id && !INBOX_DOCUMENTS_BY_ID[item.sample_id]);
+  const featured = INBOX_DOCUMENTS.map((doc) => {
+    const api = (catalog?.samples || []).find((item: any) => item.sample_id === doc.sample_id) || {};
+    return {
+      ...doc,
+      from: api.from || doc.from,
+      sent_at: api.sent_at || doc.sent_at,
+    };
   });
-}
-
-function pickSource(catalog: unknown, selected: string): unknown {
-  const rec = asRecord(catalog);
-  const artifacts = asRecord(rec?.sample_artifacts);
-  if (artifacts && selected in artifacts) {
-    return artifacts[selected];
-  }
-  const emails = asUnknownList(rec?.emails);
-  return emails.find((item) => readString(asRecord(item), "message_id") === selected) ?? null;
-}
-
-function asArtifact(source: unknown): unknown {
-  const rec = asRecord(source);
-  if (!rec) {
-    return null;
-  }
-  if (rec.kind) {
-    return rec;
-  }
-  return {
-    kind: "email",
-    artifact_id: rec.message_id,
-    title: rec.subject,
-    source_path: "ingestion/emails.json",
-    record: rec,
-    email: rec,
-  };
-}
-
-function attachmentsOf(source: unknown): unknown[] {
-  const rec = asRecord(source);
-  if (!rec) {
-    return [];
-  }
-  const direct = asUnknownList(rec.attachments);
-  if (direct.length) {
-    return direct;
-  }
-  return asUnknownList(asRecord(rec.email)?.attachments);
-}
-
-function inboxEdges(isInvoice: boolean): FlowEdge[] {
   return [
-    {
-      id: "email-ap",
-      from: "email",
-      to: "ap",
-      label: isInvoice ? "vendor bill" : "not a bill",
-      attached: isInvoice,
-    },
+    ...featured,
+    ...extras.map((item: any) => ({
+      sample_id: item.sample_id,
+      title: item.subject || item.title || "Incoming finance document",
+      kind: item.kind || "other",
+      looks_like: item.looks_like || item.kind || "Incoming document",
+      description: item.test || item.preview || "Incoming finance document.",
+      test: item.test || "See whether Maximor treats this as a vendor bill.",
+      group: "needs_investigation" as const,
+      from: item.from || "Unknown sender",
+      to: "ap@maximor.example",
+      sent_at: item.sent_at || "",
+      body: item.preview || "",
+    })),
   ];
 }
 
-function inboxLive(ran: boolean, isInvoice: boolean, result: unknown): LiveStage[] {
-  if (!ran) {
-    return [];
-  }
-  const mapped: LiveStage[] = workflowStages(result).map((stage) => {
-    const rec = asRecord(stage);
-    return {
-      id: readString(rec, "id"),
-      bot: readString(rec, "bot"),
-      slug: readString(rec, "slug") || readString(rec, "bot"),
-      label: readString(rec, "label"),
-      status: readString(rec, "status"),
-      detail: readString(rec, "detail"),
-    };
-  });
-  if (mapped.some((stage) => stage.slug === "email" || stage.bot === "email" || stage.slug === "ap")) {
-    return mapped;
-  }
-  if (isInvoice) {
-    return [
-      { slug: "email", status: "completed" },
-      { slug: "ap", status: "completed" },
-    ];
-  }
-  return [{ slug: "email", status: "completed" }];
-}
-
 export default function Inbox(): JSX.Element {
-  const [catalog, setCatalog] = useState<unknown>(null);
-  const [selected, setSelected] = useState<string>(DEFAULT_SAMPLE);
-  const { running, result, error, run } = useWorkflow();
+  const [catalog, setCatalog] = useState<any>({ samples: INBOX_DOCUMENTS });
+  const [selected, setSelected] = useState<string>(DEFAULT_INBOX_SAMPLE);
+  const { running, result, error, source, run, setResult } = useWorkflow();
 
   useEffect(() => {
-    get("/api/inbox")
-      .then(setCatalog)
-      .catch(() => setCatalog(null));
+    demoApi.loadInbox().then(setCatalog).catch(() => setCatalog({ samples: INBOX_DOCUMENTS }));
   }, [result]);
 
-  const samples = samplesFromCatalog(catalog);
-  const source = pickSource(catalog, selected);
-  const inner = workflowInner(result);
-  const outputs = ioOutputs(inner);
-  const classification = readString(outputs, "classification") || readString(inner, "classification");
-  const docClass = classifyKind(classification);
-  const isInvoice = readBoolean(outputs, "is_invoice") === true || docClass === "invoice";
-  const extractedRec = asRecord(outputs?.extracted) ?? asRecord(inner?.extracted);
-  const amount = readNumber(extractedRec, "amount");
-  const ran = Boolean(inner && classification);
-  const stages = workflowStages(result);
+  const samples = useMemo(() => mergeSamples(catalog), [catalog]);
+  const doc = INBOX_DOCUMENTS_BY_ID[selected] || samples.find((item) => item.sample_id === selected) || samples[0];
+  const inner = result?.result;
+  const io = inner?.io;
+  const outputs = io?.outputs;
+  const isSort = inner?.classification === "inbox_sort" || Array.isArray(inner?.groups);
+  const belongsToSelection = isSort || !inner?.sample_id || inner.sample_id === selected;
+  const classification = belongsToSelection ? outputs?.classification || inner?.classification : undefined;
+  const isInvoice = Boolean(belongsToSelection && (outputs?.is_invoice || classification === "invoice"));
+  const extracted = displayExtracted(belongsToSelection ? inner?.extracted : undefined, doc);
 
   return (
-    <div className="rest-page">
-      <RestHead title="What arrived" stake={STAKE} />
-      <div className="rest-chip-row" aria-label="Documents to try">
-        {samples.map((item) => (
-          <button
-            type="button"
-            key={item.sample_id}
-            className={`rest-chip${item.sample_id === selected ? " is-on" : ""}`}
-            aria-pressed={item.sample_id === selected}
-            onClick={() => setSelected(item.sample_id)}
-          >
-            <span>{item.subject}</span>
-            {item.kind ? <span className="mono">{item.kind}</span> : null}
-          </button>
-        ))}
-      </div>
-      <ClassifyStage
-        artifact={asArtifact(source)}
-        attachments={attachmentsOf(source)}
-        docClass={ran ? docClass : null}
-        classLabel={classification ? formatStatus(classification) : "Not classified"}
-        isInvoice={isInvoice}
-        ran={ran}
-        extracted={{
-          vendor: readString(extractedRec, "vendor"),
-          invoiceNumber: readString(extractedRec, "invoice_number") || readString(extractedRec, "vendor_invoice_number"),
-          amount: amount != null ? usd(amount) : undefined,
-          poNumber: readString(extractedRec, "po_number"),
-        }}
-      />
-      <RunBar
-        label="Identify this document"
-        running={running}
-        onRun={() => run("/api/workflows/invoice-ingestion", { sample_id: selected })}
-        extra={
-          <button type="button" className="btn" disabled={running} onClick={() => run("/api/workflows/inbox", {})}>
-            Sort the inbox
-          </button>
-        }
-      />
-      <ErrorBox error={error} />
-      <FlowPlay
-        mode="live"
-        nodes={INBOX_NODES}
-        edges={inboxEdges(ran && isInvoice)}
-        steps={INBOX_STEPS}
-        liveStages={inboxLive(ran, isInvoice, result)}
-      />
-      {inner ? <ProcessPanel stages={asRecordList(stages)} handoffs={asUnknownList(inner.handoffs)} summary={readString(inner, "summary")} /> : null}
-      <details className="rest-evidence">
-        <summary>Evidence</summary>
-        {asUnknownList(outputs?.canonical_invoices).map((item, idx) => {
-          const rec = asRecord(item);
-          return <SourceArtifactViewer key={readString(rec, "artifact_id") || `out-${idx}`} artifact={item} compact />;
-        })}
-        <p className="muted">{readString(inner, "classification_reason") || "Kernel classifies before anyone books a bill."}</p>
-      </details>
-    </div>
+    <DemoLayout
+      eyebrow="Inbox"
+      title="What just arrived in finance email?"
+      task="Maximor reads incoming finance emails and attachments and decides whether they are invoices, quotes, receipts, or something else — before anyone books a bill."
+      source={source}
+      happening={
+        <WhatsHappening
+          happening="Vendors send many kinds of documents. A quote looks like a bill, a statement lists old invoices, and a receipt is proof of a purchase already made. Maximor has to classify first."
+          figureOut="Is this document a vendor invoice Maximor should put on the books?"
+          why="Treating a quote as a bill would create a fake amount owed."
+        />
+      }
+      runBar={
+        <>
+          <RunBar
+            label="Identify this document"
+            running={running}
+            onRun={() => run(() => demoApi.identifyDocument(selected))}
+            extra={
+              <button className="btn" disabled={running} onClick={() => run(() => demoApi.sortInbox())}>
+                Sort the inbox
+              </button>
+            }
+          />
+          <ErrorBox error={error} />
+          <div className="card" style={{ marginBottom: 14 }}>
+            <SamplePicker samples={samples} selected={selected} onSelect={(id) => { setSelected(id); setResult(null); }} />
+          </div>
+        </>
+      }
+      input={
+        <div className="card">
+          <Definition term="Vendor invoice" />
+          {doc ? <DocumentLetter doc={doc} /> : <p className="muted">Select a document from the list.</p>}
+        </div>
+      }
+      process={
+        belongsToSelection && inner?.stages?.length ? (
+          <ProcessPanel stages={inner.stages} handoffs={inner.handoffs} summary={inner.summary} />
+        ) : (
+          <ExpectedSteps steps={WORKFLOW_PREVIEWS.inbox} />
+        )
+      }
+      output={
+        belongsToSelection && isSort ? (
+          <div className="card">
+            <OutputHeadline label="Inbox sort" value={`${(inner.items || samples).length} documents`} />
+            <ResultBlock
+              found="Document Intake read each sample and grouped them by whether they create money the company owes."
+              why="Quotes, receipts, statements, and purchase orders must not be booked as bills."
+              result={inner?.what_changed || outputs?.what_changed || "No ledgers were rewritten. This pass only identified which documents are vendor bills and which are not."}
+            />
+            {(inner.groups || []).map((group: any) => (
+              <div key={group.id} style={{ marginTop: 12 }}>
+                <h2>{group.label || GROUP_LABELS[group.id as keyof typeof GROUP_LABELS]}</h2>
+                <ul className="plain-list">
+                  {(group.items || []).map((item: any) => (
+                    <li key={item.sample_id}>
+                      <button className="linkish" onClick={() => setSelected(item.sample_id)}>
+                        {item.title}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ) : belongsToSelection && inner ? (
+          <div className="card">
+            <OutputHeadline label="Is this a vendor invoice?" value={formatStatus(isInvoice ? "invoice" : classification)} />
+            <ResultBlock
+              found={
+                isInvoice
+                  ? "Document Intake identified this as a vendor invoice and extracted the fields needed to book a bill."
+                  : `Document Intake identified this as ${article(formatStatus(classification).toLowerCase())}.`
+              }
+              why={inner.classification_reason || doc?.test || "A quote, statement, or receipt should not create money the company owes."}
+              result={inner.what_changed || outputs?.what_changed || ((inner.record_ids || []).length ? "A vendor bill was created from this document and handed to Accounts Payable." : "No vendor bill was created.")}
+            />
+            <dl className="kv">
+              <dt>Document type</dt>
+              <dd>
+                <Pill>{formatStatus(classification)}</Pill>
+              </dd>
+              <dt>Vendor</dt>
+              <dd>{extracted.vendor}</dd>
+              <dt>{extracted.numberLabel}</dt>
+              <dd>{extracted.number}</dd>
+              <dt>Amount</dt>
+              <dd>{extracted.amount}</dd>
+              <dt>Purchase order</dt>
+              <dd>{extracted.po}</dd>
+            </dl>
+          </div>
+        ) : (
+          <div className="card">
+            <OutputHeadline label="What will appear here" value="Not run yet" />
+            <p>
+              Click <strong>Identify this document</strong> to see whether Maximor treats “{doc?.title}” as a vendor bill.
+            </p>
+            <p className="muted">{doc?.test}</p>
+            <p className="muted">This column will then show the document type, whether a payable was created, and the extracted vendor, invoice number, and amount.</p>
+          </div>
+        )
+      }
+    />
   );
+}
+
+function article(label: string) {
+  const word = String(label || "document").replace(/^an? /, "");
+  return /^[aeiou]/i.test(word) ? `an ${word}` : `a ${word}`;
+}
+
+function blank(value: unknown) {
+  return value == null || value === "" || value === "—";
+}
+
+function attachmentFields(doc?: InboxDocument) {
+  return Object.fromEntries(doc?.attachment?.fields || []);
+}
+
+function moneyFromLabel(raw?: string) {
+  if (!raw) return undefined;
+  const n = Number(String(raw).replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(n) ? n : undefined;
+}
+
+function displayExtracted(extracted: any, doc?: InboxDocument) {
+  const fields = attachmentFields(doc);
+  const vendor = !blank(extracted?.vendor) ? extracted.vendor : fields.Vendor || (doc?.from || "").split("<")[0].trim() || "—";
+  const number = !blank(extracted?.invoice_number)
+    ? extracted.invoice_number
+    : !blank(extracted?.vendor_invoice_number)
+      ? extracted.vendor_invoice_number
+      : fields["Invoice number"] || fields["Quote number"] || fields["Receipt number"] || fields["PO number"] || "—";
+  const amountValue = !blank(extracted?.amount)
+    ? Number(extracted.amount)
+    : moneyFromLabel(fields["Amount due"] || fields["Quoted amount"] || fields["Amount paid"] || fields["Authorized amount"] || fields["Balance brought forward"]);
+  const po = !blank(extracted?.po_number) ? extracted.po_number : !blank(extracted?.po_id) ? extracted.po_id : fields["Purchase order"] || "—";
+  const kind = String(doc?.kind || extracted?.classification || "").toLowerCase();
+  const numberLabel = kind === "quote" ? "Quote number" : kind === "receipt" ? "Receipt number" : kind === "purchase_order" ? "Purchase order number" : "Invoice number";
+  return {
+    vendor: vendor || "—",
+    number: number || "—",
+    numberLabel,
+    amount: amountValue != null && Number.isFinite(amountValue) ? usd(amountValue) : "—",
+    po: po || "—",
+  };
 }

@@ -25,7 +25,7 @@ Every step in P0–P9 uses this shape. If a step is missing a field, fill it bef
 
 Wait for `turn.end` in protocol or a terminal Handle status before you classify. Do not classify from a streaming sentence.
 
-Serve URL below is `{URL}`. Default `http://127.0.0.1:8787`. Computer is `{COMPUTER}` = selected instance root.
+Serve URL below is `{URL}`. This deploy: `http://127.0.0.1:8800`. RUN.md CLI default remains 8787 if you start a new serve and nothing is on 8800. Computer is `{COMPUTER}` = selected instance root.
 
 ---
 

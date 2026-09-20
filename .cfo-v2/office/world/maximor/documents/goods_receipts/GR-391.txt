@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-391
 PO Number: PO-391
-Vendor: Okta
+Vendor: Harbor Partners
 Goods received in full on 2026-09-11
 Packing list attached: PL-GR-391
 Quantity ordered: 1

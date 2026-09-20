@@ -3,7 +3,7 @@ Receiving report
 
 Goods Receipt GR-397
 PO Number: PO-397
-Vendor: Lindholm & Ruiz LLP
+Vendor: Helios Hardware Supply
 Goods received in full on 2026-09-17
 Packing list attached: PL-GR-397
 Quantity ordered: 1

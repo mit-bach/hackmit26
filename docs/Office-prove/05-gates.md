@@ -18,7 +18,7 @@ RUNS: exit 0. Writes live `computer/cfo/catalog.json` and `grants.json`.
 
 HARD: non-zero. Constructor tool did not resolve. This is T3. Do not hand-edit Grant ops.
 
-INTENDED: Collections Agent Grant includes send if AR repair landed. Close lock Profile is either granted or honestly empty (then P5 must not claim office-live lock). Stripe Display name is non-empty or P1 will HONEST “stripe not office-live.”
+INTENDED on live after repair: Collections Agent and Finance Inbox include `inbox.tools.send_office_outbound`. Month-End Close Reviewer includes `close.tools.get_close_gates` and `close.tools.get_close_packet`. Stripe Payout Agent is non-empty. Close Manager and Audit Report Agent stay `ops: []` (honest). Catalog length 101. A later compile that moves the length is still G1 RUNS if exit 0; then rewrite coverage from disk.
 
 ---
 
@@ -42,7 +42,7 @@ print("collections constructor", type(collections_agent))
 PY
 ```
 
-If `send_office_outbound` still ImportError, G2 is HARD for any P3 mailbox INTENDED step. You may continue P0, P2, P4 cash-without-AR, P5 BLOCKED, P7 on ops that exist. You may not tick AR send.
+If `send_office_outbound` still ImportError, G2 is HARD for any P3 mailbox INTENDED step. Live Kernel defines it in `.cfo/inbox/tools.py`. You may continue P0, P2, P4 cash-without-AR, P5 BLOCKED, P7 on ops that exist. You may not tick AR send.
 
 If `collections_agent` cannot construct, HARD T13 for collect.
 
@@ -81,7 +81,7 @@ Note empty names for P7 HONEST-EMPTY vs costume.
 Not office-live. Must not be red, or prove will misread BLOCKED as a tool throw.
 
 ```bash
-cd .cfo && .venv/bin/python -m pytest tests/test_workflow.py tests/test_scheduling.py tests/test_ingestion_ap.py -q --tb=line
+cd .cfo && .venv/bin/python -m pytest tests/test_workflow.py tests/test_scheduling.py tests/test_ingestion_ap.py tests/test_kernel_agent_consolidation_regressions.py tests/test_close_office.py tests/test_story_unlocked.py -q --tb=line
 ```
 
 If venv pytest is too heavy, run the files the pipe will touch. A failing Kernel test is HARD for that pipe. Fix Kernel. Do not “prove around” a red `must_hold`.
@@ -101,7 +101,7 @@ ls -l .cfo-v2/office/computer/office/bots/ap/BOT.md \
       .cfo-v2/office/bots/ap/BOT.md
 ```
 
-If Computer cwd cannot see `office/bots/ap/BOT.md`, G5 is HARD for P0 INTENDED. Floor repair owns the layout (copy or symlink). Prove does not invent a second constitution.
+If Computer cwd cannot see `office/bots/ap/BOT.md`, G5 is HARD for P0 INTENDED. Live template uses `computer/office/bots` → `../../bots`. Clone must retarget that link onto `instances/<id>/office/bots`. Prove does not invent a second constitution.
 
 ---
 
@@ -161,4 +161,4 @@ Note `currentId`. P0 will create a prove instance and select it. If `currentId` 
 
 Write `docs/Office-prove/logs/runs/_gates/GATES.md` with pass/fail per G1–G9. Then start P0.
 
-If G2 send is FAIL and G1 compiled without send, AR mailbox is out of scope until 05 AR lands. Continue other pipes. Name the hole. Do not pretend collect contacted anyone.
+If G2 send is FAIL, AR mailbox is out of scope. Continue other pipes. Name the hole. Do not pretend collect contacted anyone. Repair already landed send on live; a FAIL means the running sidecar PYTHONPATH is wrong (repo-root `inbox/` shadow) or the prove instance cloned a stale Catalog.

@@ -8,6 +8,7 @@ import {
   existsSync,
   lstatSync,
   mkdirSync,
+  readdirSync,
   readlinkSync,
   rmSync,
   symlinkSync,
@@ -292,19 +293,51 @@ function copyTreeIfPresent(from: string, to: string, filter?: (source: string) =
   cpSync(from, to, { recursive: true });
 }
 
-function cloneDataSymlink(fromRoot: string, toRoot: string): void {
-  const from = join(fromRoot, "data");
+/** Retarget a symlink so the clone still points at the original absolute path. */
+function cloneRetargetedSymlink(fromPath: string, toPath: string): boolean {
   try {
-    const stat = lstatSync(from);
+    const stat = lstatSync(fromPath);
     if (!stat.isSymbolicLink()) {
-      return;
+      return false;
     }
-    const raw = readlinkSync(from);
-    const absolute = resolve(dirname(from), raw);
-    const nextRel = relative(toRoot, absolute);
-    symlinkSync(nextRel.length > 0 ? nextRel : absolute, join(toRoot, "data"));
+    const raw = readlinkSync(fromPath);
+    const absolute = resolve(dirname(fromPath), raw);
+    mkdirSync(dirname(toPath), { recursive: true });
+    const nextRel = relative(dirname(toPath), absolute);
+    symlinkSync(nextRel.length > 0 ? nextRel : absolute, toPath);
+    return true;
   } catch {
+    return false;
+  }
+}
+
+function cloneDataSymlink(fromRoot: string, toRoot: string): void {
+  cloneRetargetedSymlink(join(fromRoot, "data"), join(toRoot, "data"));
+}
+
+/**
+ * Copy Computer cwd identity (`office/bots`, constitution) onto a new instance.
+ * Live uses relative symlinks into the office parent; a naive copy would break.
+ */
+function cloneOfficeIdentity(fromRoot: string, toRoot: string): void {
+  const from = join(fromRoot, "office");
+  if (!existsSync(from)) {
     return;
+  }
+  const to = join(toRoot, "office");
+  mkdirSync(to, { recursive: true });
+  for (const name of readdirSync(from)) {
+    const source = join(from, name);
+    const dest = join(to, name);
+    if (cloneRetargetedSymlink(source, dest)) {
+      continue;
+    }
+    const stat = lstatSync(source);
+    if (stat.isDirectory()) {
+      copyTreeIfPresent(source, dest);
+      continue;
+    }
+    copyIfPresent(source, dest);
   }
 }
 
@@ -334,6 +367,7 @@ function cloneTemplateComputer(fromRoot: string, toRoot: string): void {
   copyTreeIfPresent(join(fromRoot, "workspace"), join(toRoot, "workspace"));
   mkdirSync(join(toRoot, "workspace"), { recursive: true });
   cloneDataSymlink(fromRoot, toRoot);
+  cloneOfficeIdentity(fromRoot, toRoot);
 }
 
 function liveTemplateRoot(officeParent: string, office: OfficeState): string {
