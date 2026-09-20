@@ -330,7 +330,7 @@ def run_audit(
             payments=payments, vendors=vendors, policy=policy, audit_run_id=audit_run_id
         ),
         run_missing_support_payments(payments=payments, audit_run_id=audit_run_id),
-        run_approval_threshold_invoices(audit_run_id=audit_run_id),
+        run_approval_threshold_invoices(audit_invoices=audit_invoices, audit_run_id=audit_run_id),
         run_post_close_entries(journals=journals, period=close_period, audit_run_id=audit_run_id),
         run_segregation_of_duties(approvals=approvals, policy=policy, audit_run_id=audit_run_id),
         run_duplicate_invoices(

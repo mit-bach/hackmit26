@@ -1,7 +1,7 @@
 {
   "system": "cfo-agentic-system",
   "version": "1",
-  "description": "Office of the CFO Client system. Sixteen grain Bots. Verifiers own concurrence. The human Operator is an emergency stop.",
+  "description": "Office of the CFO Client system. Fifteen grain Bots. Verifiers own concurrence. The human Operator is an emergency stop.",
   "computer": "office/computer",
   "bots": [
     {
@@ -9,11 +9,12 @@
       "name": "Email",
       "slug": "email",
       "purpose": "Owns messages and attachments: vendor invoices and customer remittances.",
-      "instructions": "Read office/bots/email/BOT.md and obey office/constitution.md. You land and classify mail. Outbound missing-info uses send_office_outbound then Handle world. Never ask a human. Do not match, pay, apply, or accrue.",
+      "instructions": "Read office/bots/email/BOT.md and obey office/constitution.md. You land and classify mail. Never ask a human. Do not match, pay, apply, or accrue.",
       "skills": [
         "invoice-source-identification",
         "invoice-field-interpretation",
-        "inbox-triage"
+        "inbox-triage",
+        "superseded-document-handling"
       ],
       "connectors": [
         "gmail",
@@ -69,24 +70,6 @@
       "approvalLevel": "never"
     },
     {
-      "id": "bot_world",
-      "name": "World",
-      "slug": "world",
-      "purpose": "Owns simulated counterparty messages: the outside world's mailbox.",
-      "instructions": "Read office/bots/world/BOT.md and obey office/constitution.md. You role-play vendors, customers, banks, and employees. Never ask a human. Do not write AP. Do not dispatch the finance inbox. Simulated mail only.",
-      "skills": [],
-      "connectors": [
-        "inbox.tools.compose_counterparty_message",
-        "inbox.tools.send_inbox_message",
-        "inbox.tools.reply_in_thread",
-        "inbox.tools.list_inbox_threads",
-        "inbox.tools.list_inbox_messages",
-        "inbox.tools.get_inbox_thread",
-        "inbox.tools.list_world_personas"
-      ],
-      "approvalLevel": "never"
-    },
-    {
       "id": "bot_ap",
       "name": "AP",
       "slug": "ap",
@@ -94,7 +77,9 @@
       "instructions": "Read office/bots/ap/BOT.md and obey office/constitution.md. You own open bills. Never ask a human. Approve-shaped drafts Handle ctl-pay / review-match. You do not release cash.",
       "skills": [
         "three-way-match-analysis",
-        "ap-exception-investigation"
+        "ap-exception-investigation",
+        "prior-period-precedent",
+        "superseded-document-handling"
       ],
       "connectors": [
         "tools.get_invoice",
@@ -144,7 +129,7 @@
       "name": "Collect",
       "slug": "collect",
       "purpose": "Owns open invoices still owed after application.",
-      "instructions": "Read office/bots/collect/BOT.md and obey office/constitution.md. You own aging after apply has drained deposits. Never ask a human. Dunning is send_office_outbound then Handle world. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
+      "instructions": "Read office/bots/collect/BOT.md and obey office/constitution.md. You own aging after apply has drained deposits. Never ask a human. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
       "skills": [
         "ar-collections-policy"
       ],
@@ -152,8 +137,7 @@
         "ar.tools.get_collection_candidates",
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
-        "ar.tools.get_ar_precedents",
-        "inbox.tools.send_office_outbound"
+        "ar.tools.get_ar_precedents"
       ],
       "approvalLevel": "never"
     },
@@ -166,7 +150,9 @@
       "skills": [
         "cash-reconciliation-method-selection",
         "bank-reference-interpretation",
-        "reconciliation-exception-investigation"
+        "reconciliation-exception-investigation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
       ],
       "connectors": [
         "cash_recon.tools.get_bank_transaction",
@@ -189,7 +175,8 @@
         "prepaid-expense-accounting",
         "fixed-asset-depreciation",
         "balance-sheet-reconciliation",
-        "month-end-close-coordination"
+        "month-end-close-coordination",
+        "prior-period-precedent"
       ],
       "connectors": [],
       "approvalLevel": "never"
@@ -227,7 +214,8 @@
         "three-way-match-analysis",
         "ap-exception-investigation",
         "payment-prioritization",
-        "early-payment-discount-evaluation"
+        "early-payment-discount-evaluation",
+        "prior-period-precedent"
       ],
       "connectors": [
         "tools.get_case_evidence",
@@ -249,7 +237,9 @@
         "cash-application",
         "cash-reconciliation-method-selection",
         "reconciliation-exception-investigation",
-        "bank-reference-interpretation"
+        "bank-reference-interpretation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
       ],
       "connectors": [
         "ar.tools.get_cash_application_facts",
@@ -273,13 +263,20 @@
         "prepaid-expense-accounting",
         "fixed-asset-depreciation",
         "balance-sheet-reconciliation",
-        "month-end-close-review"
+        "month-end-close-review",
+        "prior-period-precedent"
       ],
       "connectors": [
         "prepaid.tools.get_prepaid",
         "prepaid.tools.list_prepaids",
         "prepaid.tools.get_prepaid_treatment_candidates",
-        "prepaid.tools.get_prepaid_schedule"
+        "prepaid.tools.get_prepaid_schedule",
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates",
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
       ],
       "approvalLevel": "never"
     },
@@ -314,42 +311,22 @@
     {
       "id": "intake",
       "title": "Intake",
-      "members": [
-        "email",
-        "stripe",
-        "bank",
-        "books",
-        "world"
-      ]
+      "members": ["email", "stripe", "bank", "books"]
     },
     {
       "id": "pay",
       "title": "Pay",
-      "members": [
-        "ap",
-        "pay",
-        "ctl-pay"
-      ]
+      "members": ["ap", "pay", "ctl-pay"]
     },
     {
       "id": "cash",
       "title": "Cash",
-      "members": [
-        "apply",
-        "collect",
-        "cash",
-        "ctl-cash"
-      ]
+      "members": ["apply", "collect", "cash", "ctl-cash"]
     },
     {
       "id": "books-close",
       "title": "Books close",
-      "members": [
-        "close",
-        "ctl-books",
-        "story",
-        "audit"
-      ]
+      "members": ["close", "ctl-books", "story", "audit"]
     }
   ],
   "routines": [

@@ -1,0 +1,18 @@
+[
+  {
+    "record_id": "NS-4410",
+    "period": "2026-09",
+    "system": "NetSuite",
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "subtotal": 12450.0,
+    "tax": 0.0,
+    "total": 12450.0,
+    "po_number": "PO-101",
+    "description": "Standing desks and monitors \u2014 same economic event as INV-001"
+  }
+]

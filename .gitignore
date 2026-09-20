@@ -31,6 +31,8 @@ traces/cash_recon/
 .cfo/traces/accruals/
 .cfo/traces/cash_recon/
 node_modules/
+web/dist/
+web/node_modules/
 Harness/node_modules/
 Harness/.pi/
 .harness/**/node_modules/

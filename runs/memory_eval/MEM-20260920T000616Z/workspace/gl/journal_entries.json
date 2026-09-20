@@ -1,0 +1,90 @@
+[
+  {
+    "entry_id": "JE-202608-001",
+    "period": "2026-08",
+    "memo": "Amortize PRE-MEM-CLOUD-AUG Annual CloudCo platform license for 2026-08",
+    "debit_account": "6200-Software",
+    "credit_account": "1400-Prepaid-Expenses",
+    "debit": 1000.0,
+    "credit": 1000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-MEM-CLOUD-AUG:2026-08",
+    "source_document_id": "DOC-CLOUD-AUG-2026",
+    "transaction_id": "PRE-MEM-CLOUD-AUG",
+    "evidence_refs": [
+      "DOC-CLOUD-AUG-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-MEM-CLOUD-AUG",
+      "service_period": "2026-08"
+    },
+    "created_at": "2026-09-20T00:06:16Z"
+  },
+  {
+    "entry_id": "JE-202609-001",
+    "period": "2026-09",
+    "memo": "Amortize PRE-MEM-CLOUD-SEP CloudCo analytics add-on annual license for 2026-09",
+    "debit_account": "6200-Software",
+    "credit_account": "1400-Prepaid-Expenses",
+    "debit": 1200.0,
+    "credit": 1200.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-MEM-CLOUD-SEP:2026-09",
+    "source_document_id": "DOC-CLOUD-SEP-2026",
+    "transaction_id": "PRE-MEM-CLOUD-SEP",
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-2026",
+      "POLICY-PREPAID-001"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-MEM-CLOUD-SEP",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T00:06:16Z"
+  },
+  {
+    "entry_id": "JE-202609-002",
+    "period": "2026-09",
+    "memo": "Amortize PRE-MEM-NORDIC-SEP Nordic warehouse insurance for 2026-09",
+    "debit_account": "6400-Insurance",
+    "credit_account": "1400-Prepaid-Expenses",
+    "debit": 300.0,
+    "credit": 300.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-MEM-NORDIC-SEP:2026-09",
+    "source_document_id": "DOC-NORDIC-SEP",
+    "transaction_id": "PRE-MEM-NORDIC-SEP",
+    "evidence_refs": [
+      "DOC-NORDIC-SEP",
+      "POLICY-PREPAID-001"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-MEM-NORDIC-SEP",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T00:06:16Z"
+  },
+  {
+    "entry_id": "JE-202609-003",
+    "period": "2026-09",
+    "memo": "Amortize PRE-MEM-CLOUD-ONE CloudCo one-month burst capacity for 2026-09",
+    "debit_account": "6200-Software",
+    "credit_account": "1400-Prepaid-Expenses",
+    "debit": 900.0,
+    "credit": 900.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-MEM-CLOUD-ONE:2026-09",
+    "source_document_id": "DOC-CLOUD-SEP-ONE",
+    "transaction_id": "PRE-MEM-CLOUD-ONE",
+    "evidence_refs": [
+      "DOC-CLOUD-SEP-ONE",
+      "POLICY-PREPAID-001"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-MEM-CLOUD-ONE",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T00:06:16Z"
+  }
+]

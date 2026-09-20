@@ -1,0 +1,13 @@
+{
+  "clean_auto_resolution": true,
+  "clean_exception_types": [],
+  "false_positive_exception_rate": 0.0,
+  "clean_close_status": "CLOSED",
+  "clean_close_completion": true,
+  "unnecessary_human_review": false,
+  "clean_cash_arithmetic_tied": true,
+  "clean_cash_period_status": "OPEN",
+  "clean_audit_findings": 12,
+  "clean_audit_confirmed": 8,
+  "clean_audit_confirmed_rate": 0.6667
+}

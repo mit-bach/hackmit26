@@ -1,0 +1,185 @@
+{
+  "payment_id": "PAY-007",
+  "started_at": "2026-09-19T23:56:35Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-007",
+    "payment_date": "2026-09-28",
+    "amount": 9500.0,
+    "currency": "USD",
+    "payer_name": "Brightline Media",
+    "customer_id": "CUST-004",
+    "bank_reference": "ACH-BRIGHT-9500",
+    "remittance_text": "Payment for INV-AR-015 campaign add-on",
+    "invoice_reference": "INV-AR-015",
+    "source": "ach",
+    "unapplied_amount": 9500.0,
+    "application_status": "HUMAN_REVIEW",
+    "metadata": {}
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-007",
+      "payment_date": "2026-09-28",
+      "amount": 9500.0,
+      "currency": "USD",
+      "payer_name": "Brightline Media",
+      "customer_id": "CUST-004",
+      "bank_reference": "ACH-BRIGHT-9500",
+      "remittance_text": "Payment for INV-AR-015 campaign add-on",
+      "invoice_reference": "INV-AR-015",
+      "source": "ach",
+      "unapplied_amount": 9500.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
+    },
+    "identified_customer_id": "CUST-004",
+    "identified_customer_name": "Brightline Media",
+    "customer_confidence": 0.99,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-AR-004",
+        "customer_id": "CUST-004",
+        "customer_name": "Brightline Media",
+        "invoice_date": "2026-06-15",
+        "due_date": "2026-07-15",
+        "original_amount": 31000.0,
+        "outstanding_amount": 31000.0,
+        "currency": "USD",
+        "status": "PAST_DUE",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Campaign fees — 61-90 overdue",
+        "created_at": "2026-06-15T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": "2026-09-30",
+        "reminder_count": 1,
+        "collection_status": "REMINDED",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      },
+      {
+        "invoice_id": "INV-AR-015",
+        "customer_id": "CUST-004",
+        "customer_name": "Brightline Media",
+        "invoice_date": "2026-09-12",
+        "due_date": "2026-10-12",
+        "original_amount": 8000.0,
+        "outstanding_amount": 8000.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Named invoice that the customer overpays",
+        "created_at": "2026-09-12T09:00:00Z",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-AR-015",
+            "amount": 8000.0
+          }
+        ],
+        "total_applied": 8000.0,
+        "unapplied_amount": 1500.0,
+        "match_type": "explicit_invoice",
+        "score": 0.99,
+        "evidence": [
+          "Remittance names INV-AR-015"
+        ],
+        "ambiguities": []
+      }
+    ],
+    "remittance_invoice_ids": [
+      "INV-AR-015"
+    ],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-007 9500.0 USD from Brightline Media",
+      "Remittance: Payment for INV-AR-015 campaign add-on",
+      "Payment already tagged CUST-004",
+      "Remittance invoice references: INV-AR-015"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-007",
+    "decision": "HUMAN_REVIEW",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-015",
+        "amount": 8000.0
+      }
+    ],
+    "confidence": 0.7,
+    "reason": "Payment 9500.0 exceeds named invoice outstanding 8000.0; overpayment residual 1500.0 must not disappear.",
+    "evidence_used": [
+      "Payment PAY-007 9500.0 USD from Brightline Media",
+      "Remittance: Payment for INV-AR-015 campaign add-on",
+      "Payment already tagged CUST-004",
+      "Remittance invoice references: INV-AR-015",
+      "Remittance names INV-AR-015"
+    ],
+    "ambiguities": [
+      "Overpayment residual 1500.0"
+    ],
+    "review_question": "How should the overpayment residual be treated?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-007",
+    "decision": "HUMAN_REVIEW",
+    "applications": [
+      {
+        "invoice_id": "INV-AR-015",
+        "amount": 8000.0
+      }
+    ],
+    "confidence": 0.7,
+    "reason": "Payment 9500.0 exceeds named invoice outstanding 8000.0; overpayment residual 1500.0 must not disappear.",
+    "evidence_used": [
+      "Payment PAY-007 9500.0 USD from Brightline Media",
+      "Remittance: Payment for INV-AR-015 campaign add-on",
+      "Payment already tagged CUST-004",
+      "Remittance invoice references: INV-AR-015",
+      "Remittance names INV-AR-015"
+    ],
+    "ambiguities": [
+      "Overpayment residual 1500.0"
+    ],
+    "review_question": "How should the overpayment residual be treated?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": false,
+  "record": null,
+  "state_changes": [],
+  "journal_entries": [],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

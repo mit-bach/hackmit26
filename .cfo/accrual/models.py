@@ -4,6 +4,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from memory.models import MemoryLookup
 from skills.models import AgentSkillTrace
 
 
@@ -350,6 +351,8 @@ class VendorDecisionTrace(BaseModel):
     policy_amount: Optional[float] = None
     policy_agreement: Optional[bool] = None
     diagnostic_warnings: list[str] = Field(default_factory=list)
+    memory_lookup: Optional[MemoryLookup] = None
+    written_memory_id: Optional[str] = None
 
 
 class AccrualPeriodReport(BaseModel):

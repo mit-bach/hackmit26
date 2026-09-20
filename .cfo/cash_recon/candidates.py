@@ -122,8 +122,13 @@ def exact_candidates(
                 continue
             if not _date_ok(txn.date, entry.date, window):
                 continue
+            from cash_recon.evidence import economic_link_supported
+
+            link = economic_link_supported(txn, entry)
             party_score = overlap_score(combined_text(txn), combined_text(entry))
             compatible = counterparties_compatible(txn.counterparty, entry.counterparty)
+            if not link.supported:
+                continue
             if txn.counterparty and entry.counterparty and not compatible and party_score < 0.2:
                 continue
             reference_hit = bool(txn.reference and txn.reference.lower() in combined_text(entry).lower())

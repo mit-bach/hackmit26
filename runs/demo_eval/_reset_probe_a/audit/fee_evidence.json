@@ -1,0 +1,13 @@
+[
+  {
+    "evidence_id": "FEE-729103",
+    "date": "2026-09-11",
+    "amount": 25.0,
+    "fee_type": "bank_fee",
+    "reference": "729103",
+    "description": "Outgoing wire fee",
+    "source": "bank_advice",
+    "amount_minor": 2500,
+    "raw_metadata": {}
+  }
+]

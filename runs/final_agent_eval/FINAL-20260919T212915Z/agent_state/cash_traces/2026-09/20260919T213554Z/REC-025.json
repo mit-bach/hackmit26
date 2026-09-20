@@ -1,0 +1,232 @@
+{
+  "reconciliation_id": "REC-025",
+  "period": "2026-09",
+  "match_type": "UNMATCHED_BANK",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-HO-BANK",
+      "date": "2026-09-22",
+      "amount": -275.4,
+      "currency": "USD",
+      "description": "UNKNOWN DEBIT CARD",
+      "reference": "",
+      "counterparty": "Unknown",
+      "transaction_type": "other",
+      "source": "bank",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -27540,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [],
+  "candidates": [
+    {
+      "candidate_id": "UNMATCHED_BANK:TXN-HO-BANK:-",
+      "match_type": "UNMATCHED_BANK",
+      "bank_transaction_ids": [
+        "TXN-HO-BANK"
+      ],
+      "ledger_entry_ids": [],
+      "bank_amount": -275.4,
+      "ledger_amount": 0.0,
+      "difference": -275.4,
+      "bank_amount_minor": -27540,
+      "ledger_amount_minor": 0,
+      "difference_minor": -27540,
+      "confidence": 0.0,
+      "score": 0.0,
+      "evidence": [
+        "bank:TXN-HO-BANK",
+        "amount:-27540",
+        "description:UNKNOWN DEBIT CARD"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -27540,
+    "ledger_amount_minor": 0,
+    "difference_minor": -27540,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNMATCHED_BANK:TXN-HO-BANK:-",
+    "selected_candidate_id": null,
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.0,
+    "reasons": [
+      "No Python match candidates were returned.",
+      "The bank transaction is an unknown debit card charge with no identifiable counterparty or ledger entry."
+    ],
+    "evidence_used": [
+      "bank:TXN-HO-BANK",
+      "description:UNKNOWN DEBIT CARD",
+      "amount:-27540"
+    ],
+    "review_question": "Can the unknown debit card charge be identified and supported by a ledger entry or receipt?"
+  },
+  "investigation": {
+    "case_id": "UNMATCHED_BANK:TXN-HO-BANK:-",
+    "issues_investigated": [
+      "Unmatched bank debit dated 2026-09-22.",
+      "Difference of -275.4 USD between bank and ledger."
+    ],
+    "findings": [
+      "Bank transaction TXN-HO-BANK is a -275.4 USD debit with description UNKNOWN DEBIT CARD and counterparty Unknown.",
+      "No ledger entry, match candidate, fee evidence, provider, or payout information was identified.",
+      "The Python difference is exactly -275.4 USD (-27540 minor units)."
+    ],
+    "supported_explanations": [],
+    "unsupported_hypotheses": [
+      "Fee: no fee evidence.",
+      "Rounding: difference exceeds one cent.",
+      "FX: no second currency or FX evidence.",
+      "Partial payment: no remittance evidence.",
+      "Duplicate: no duplicate movement or posting evidence.",
+      "Timing: no adjacent-period counterpart identified."
+    ],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 1.0,
+    "human_review": true,
+    "evidence_used": [
+      "Python candidate UNMATCHED_BANK:TXN-HO-BANK:-",
+      "Bank transaction TXN-HO-BANK",
+      "No match candidates returned"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNMATCHED_BANK:TXN-HO-BANK:-",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "No Python match candidates were returned.",
+      "The bank transaction is an unknown debit card charge with no identifiable counterparty or ledger entry.",
+      "The difference remains -275.4 USD; no fee, timing, duplicate, or other supporting evidence is available.",
+      "python_validator_authoritative"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-025",
+    "period": "2026-09",
+    "match_key": "89a799cd33105087",
+    "bank_transaction_ids": [
+      "TXN-HO-BANK"
+    ],
+    "ledger_entry_ids": [],
+    "match_type": "UNMATCHED_BANK",
+    "bank_amount": -275.4,
+    "ledger_amount": 0.0,
+    "difference": -275.4,
+    "bank_amount_minor": -27540,
+    "ledger_amount_minor": 0,
+    "difference_minor": -27540,
+    "confidence": 0.0,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unmatched bank activity TXN-HO-BANK -$275.40.",
+    "evidence": [
+      "bank:TXN-HO-BANK",
+      "amount:-27540",
+      "description:UNKNOWN DEBIT CARD"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNMATCHED_BANK:TXN-HO-BANK:-",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -27540,
+      "ledger_amount_minor": 0,
+      "difference_minor": -27540,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "bank:TXN-HO-BANK",
+    "amount:-27540",
+    "description:UNKNOWN DEBIT CARD"
+  ],
+  "control_findings": [],
+  "agents": [
+    {
+      "role": "Cash Reconciliation Preparer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Exception Investigator",
+      "skills": [
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Reconciliation Reviewer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": true,
+  "replay": false,
+  "trace_path": null
+}

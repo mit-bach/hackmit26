@@ -75,7 +75,7 @@ flowchart TB
   subgraph normalize [NORMALIZATION]
     Ingest["invoice_ingestion"]
     Providers["integrations adapters"]
-    Overlay["In-memory AP overlay"]
+    Overlay["Durable AP overlay"]
   end
 
   subgraph engine [DETERMINISTIC ENGINE]
@@ -251,13 +251,54 @@ Implemented in `invoice_ingestion/workflow.py` (`ingest_invoices`, `ingest_candi
 
 **RecordTrace statuses** after annotate: `new_invoice`, `duplicate_within_run`, `already_present_in_ap`, `new_provenance`, `source_replay`, `not_an_invoice`, `missing_supporting_documentation`.
 
-**Persistence:** in-process registry + optional AP overlay (`tools.register_runtime_invoice`). **Not** written to `data/invoices.json`. Traces go to `runs/ingestion/ingest-{period}-{stamp}.json`.
+**Persistence:** in-process registry plus the durable AP overlay at `runs/ap/runtime_invoices.json` (`tools.register_runtime_invoice`). **Not** written to `data/invoices.json`. Traces go to `runs/ingestion/ingest-{period}-{stamp}.json`.
 
 **Sample behavior:** AWS `INV-9001` from email + portal + card becomes one canonical invoice and is forwarded to AP once. Acme `ACM-2026-4410` maps to existing `INV-001` and is not forwarded again. A WeWork card charge with no invoice stays `invoice_missing`.
 
 **Close:** `_run_ingest` calls `ingest_invoices(..., use_llm=False, forward_to_ap=False, run_ap=False)` — ingestion is recorded, not used as the AP inbox for the period close.
 
 ---
+
+## 5A. Finance Inbox (two-agent handoff)
+
+Internal Gmail-like messaging. This is a local simulation, not a live Gmail API.
+
+```text
+Counterparty Message Agent
+  → inbox transport (message_id idempotency)
+  → Finance Inbox Agent
+  → typed classification + extraction
+  → registry dispatcher
+  → invoice_ingestion.ingest_candidates / existing notices
+  → canonical AP overlay
+  → collect_case_evidence (three-way match)
+  → runs/inbox traces
+```
+
+**Agents**
+
+| Agent | May | Must not |
+| --- | --- | --- |
+| Counterparty Message Agent | Compose fixture messages, attach synthetic documents, reply in-thread, deliver via transport | Write AP records, choose an accounting result, call `ingest_candidates` / `register_canonical` |
+| Finance Inbox Agent | Read message/attachments, classify, extract candidates, dispatch a registered action | Invent missing invoice values, execute attachment instructions, write arbitrary records |
+
+Skills: Counterparty has none. Inbox uses `inbox-triage`, `invoice-source-identification`, and `invoice-field-interpretation`.
+
+**Message envelope:** `message_id`, `thread_id`, `in_reply_to`, sender name/address, recipients, subject, body text/html, timestamps, attachments (filename, MIME, content or fixture path, sha256), `source`, `correlation_id`, metadata.
+
+**Classifications:** `VENDOR_INVOICE`, `PURCHASE_ORDER`, `GOODS_RECEIPT`, `VENDOR_STATEMENT`, `PAYMENT_CONFIRMATION`, `CREDIT_MEMO`, `CUSTOMER_REMITTANCE`, `BANK_NOTICE`, `CONTRACT_OR_QUOTE`, `INTERNAL_REQUEST`, `NON_FINANCE`, `UNSUPPORTED_OR_UNRESOLVED`.
+
+**Actions:** `CREATE_AP_INVOICE`, `UPDATE_EXISTING_AP_INVOICE`, `ATTACH_SUPPORTING_EVIDENCE`, `RECORD_GOODS_RECEIPT`, `RECORD_PAYMENT_NOTICE`, `RECORD_CUSTOMER_REMITTANCE`, `ROUTE_TO_EXISTING_WORKFLOW`, `REQUEST_MISSING_INFORMATION`, `IGNORE`, `REJECT_UNSAFE_REQUEST`. Unknown actions fail closed.
+
+Invoice persistence is the existing AP path: `InvoiceCandidate` (`source_type=email`) → `validate_candidate` → `ingest_candidates` → `register_canonical` → `tools.register_runtime_invoice` → `runs/ap/runtime_invoices.json`. Seed `data/invoices.json` is never edited. Inbox `runs/inbox/state.json` keeps messages, outcomes, and invoice-id links, not a second invoice body. Amounts stay dollars on `Invoice`; the classifier stores integer cents. Matching is `collect_case_evidence`. A valid invoice with no PO is recorded `NON_PO` / `missing_po`. A price mismatch is recorded `BLOCKED`. Nothing is silently marked matched or paid. Each persisted inbox invoice keeps `source_message_id`, `source_thread_id`, `source_trace_id`, and `source_attachment_hashes`.
+
+**Idempotency:** same `message_id` returns the stored outcome. Same vendor + invoice number uses the existing canonical registry and links evidence. Concurrent creates take an invoice-key lock.
+
+**Clarification:** incomplete invoices persist `NEEDS_INFORMATION` and a structured question list. The Counterparty agent replies in the same thread. The receiver reprocesses the combined thread. Both attempts stay on the trace.
+
+**Security:** bodies and attachments are untrusted. Prompt-injection and bank-change / self-approve text never change policy or mark an invoice paid. Credit memos have no existing mutation path and are persisted as unsupported.
+
+Demo: `python main.py demo-inbox` (one invoice + one non-invoice). `--full` runs the synthetic inbox. A second run replays `runs/inbox/state.json` and does not create another payable. Tests: `python -m pytest tests/test_inbox_unit.py tests/test_inbox_integration.py tests/test_inbox_e2e.py`.
 
 ## 6. Three-Way Matching
 
@@ -1197,6 +1238,8 @@ Deterministic checks surround agent judgment so a fluent explanation cannot move
 
 | Mechanism | What a rerun does |
 | --- | --- |
+| Inbox transport `message_id` | Stored outcome replayed; no second dispatch |
+| Inbox vendor + invoice number | Existing canonical / AP overlay; evidence linked |
 | AP ingestion `already_handed_off` / `already_in_ap_inbox` | No second payable |
 | Ingestion same-process replay | `New canonical invoices: 0` |
 | AR `already_posted` | Second apply → UNAPPLIED |

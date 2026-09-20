@@ -10,9 +10,9 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from atomic_json import read_json_object, with_file_lock, write_json_atomic
 from invoice_ingestion.identity import canonical_invoice_key, identity_keys
 from invoice_ingestion.models import CanonicalInvoice
-from atomic_json import read_json_object, with_file_lock, write_json_atomic
 
 REGISTRY_DIR_ENV = "CFO_INGEST_STATE_DIR"
 _DEFAULT_STATE_DIR = Path(__file__).resolve().parent.parent / "runs" / "ingestion"
@@ -38,7 +38,7 @@ _loaded = False
 def configure_paths(directory: Path | None = None) -> Path:
     """Point the registry at a Computer/runs tree. Tests isolate this."""
     global STATE_DIR, REGISTRY_PATH, LOCK_PATH, _loaded
-    STATE_DIR = Path(directory) if directory is not None else _DEFAULT_STATE_DIR
+    STATE_DIR = Path(directory) if directory is not None else _default_state_dir()
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     REGISTRY_PATH = STATE_DIR / "registry.json"
     LOCK_PATH = STATE_DIR / "registry.lock"
@@ -50,12 +50,20 @@ def configure_paths(directory: Path | None = None) -> Path:
 def next_canonical_id() -> str:
     _ensure_loaded()
     used: list[int] = []
-    for canonical_id in _canonicals:
+
+    def _take(canonical_id: str) -> None:
         if not canonical_id.startswith("ING-"):
-            continue
+            return
         suffix = canonical_id.split("-", 1)[-1]
         if suffix.isdigit():
             used.append(int(suffix))
+
+    for canonical_id in _canonicals:
+        _take(canonical_id)
+    from tools import all_invoices
+
+    for invoice in all_invoices():
+        _take(invoice.invoice_id)
     return f"ING-{max(used, default=0) + 1:03d}"
 
 
@@ -64,6 +72,7 @@ def reset_registry() -> None:
         _clear_memory()
         _save_unlocked()
 
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
     with_file_lock(LOCK_PATH, _reset)
     global _loaded
     _loaded = True
@@ -90,6 +99,7 @@ def remember(record: CanonicalInvoice) -> CanonicalInvoice:
         _save_unlocked()
         return record
 
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
     return with_file_lock(LOCK_PATH, _remember)
 
 
@@ -127,6 +137,7 @@ def mark_handed_off(canonical_id: str) -> None:
         _handed_off.add(canonical_id)
         _save_unlocked()
 
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
     with_file_lock(LOCK_PATH, _mark)
 
 
@@ -158,6 +169,7 @@ def _ensure_loaded() -> None:
     global _loaded
     if _loaded:
         return
+    LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
     with_file_lock(LOCK_PATH, _load_unlocked)
 
 

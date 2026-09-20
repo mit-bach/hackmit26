@@ -6,7 +6,8 @@
   "instructions": "Read office/bots/ap/BOT.md and obey office/constitution.md. You own open bills. Never ask a human. Approve-shaped drafts Handle ctl-pay / review-match. You do not release cash.",
   "skills": [
     "three-way-match-analysis",
-    "ap-exception-investigation"
+    "ap-exception-investigation",
+    "prior-period-precedent"
   ],
   "connectors": [
     "tools.get_invoice",

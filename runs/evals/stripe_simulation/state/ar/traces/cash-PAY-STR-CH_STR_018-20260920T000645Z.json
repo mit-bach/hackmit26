@@ -1,0 +1,283 @@
+{
+  "payment_id": "PAY-STR-CH_STR_018",
+  "started_at": "2026-09-20T00:06:45Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-STR-CH_STR_018",
+    "payment_date": "2026-09-28",
+    "amount": 880.0,
+    "currency": "USD",
+    "payer_name": "Atlas Systems",
+    "customer_id": "CUST-010",
+    "bank_reference": "ch_str_018",
+    "remittance_text": "monthly platform fee",
+    "invoice_reference": null,
+    "source": "stripe",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "stripe_charge_id": "ch_str_018",
+      "stripe_payment_intent_id": "pi_str_018",
+      "stripe_balance_transaction_id": "",
+      "stripe_event_type": "payment_intent.succeeded",
+      "customer_name": "Atlas Systems",
+      "customer_id": "CUST-010"
+    }
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-STR-CH_STR_018",
+      "payment_date": "2026-09-28",
+      "amount": 880.0,
+      "currency": "USD",
+      "payer_name": "Atlas Systems",
+      "customer_id": "CUST-010",
+      "bank_reference": "ch_str_018",
+      "remittance_text": "monthly platform fee",
+      "invoice_reference": null,
+      "source": "stripe",
+      "unapplied_amount": 880.0,
+      "application_status": "UNMATCHED",
+      "metadata": {
+        "stripe_charge_id": "ch_str_018",
+        "stripe_payment_intent_id": "pi_str_018",
+        "stripe_balance_transaction_id": "",
+        "stripe_event_type": "payment_intent.succeeded",
+        "customer_name": "Atlas Systems",
+        "customer_id": "CUST-010"
+      }
+    },
+    "identified_customer_id": "CUST-010",
+    "identified_customer_name": "Atlas Systems",
+    "customer_confidence": 0.99,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-STR-018B",
+        "customer_id": "CUST-010",
+        "customer_name": "Atlas Systems",
+        "invoice_date": "2026-09-20",
+        "due_date": "2026-10-20",
+        "original_amount": 880.0,
+        "outstanding_amount": 880.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "monthly platform fee",
+        "description": "Atlas September platform fee",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-018C",
+        "customer_id": "CUST-010",
+        "customer_name": "Atlas Systems",
+        "invoice_date": "2026-09-21",
+        "due_date": "2026-10-21",
+        "original_amount": 880.0,
+        "outstanding_amount": 880.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "professional services",
+        "description": "Atlas one-off professional services",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C3",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-018B",
+            "amount": 880.0
+          }
+        ],
+        "total_applied": 880.0,
+        "unapplied_amount": 0.0,
+        "match_type": "precedent_context",
+        "score": 0.9,
+        "evidence": [
+          "INV-STR-018B uniquely matches remittance/precedent context (score 3.85)"
+        ],
+        "ambiguities": [
+          "Competing explanations: C2"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-018C",
+            "amount": 880.0
+          }
+        ],
+        "total_applied": 880.0,
+        "unapplied_amount": 0.0,
+        "match_type": "exact_amount",
+        "score": 0.86,
+        "evidence": [
+          "INV-STR-018C outstanding equals payment 880.0"
+        ],
+        "ambiguities": [
+          "Competing explanations: C3"
+        ]
+      }
+    ],
+    "remittance_invoice_ids": [],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [
+      "AR-PREC-STR-ATLAS-AUG"
+    ],
+    "facts": [
+      "Payment PAY-STR-CH_STR_018 880.0 USD from Atlas Systems",
+      "Remittance: monthly platform fee",
+      "Payment already tagged CUST-010",
+      "Precedent AR-PREC-STR-ATLAS-AUG: Atlas Systems typically remits Stripe invoice references (INV-STR-018A) with description 'Atlas August platform fee monthly platform fee'."
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-STR-CH_STR_018",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-018B",
+        "amount": 880.0
+      }
+    ],
+    "confidence": 0.88,
+    "reason": "Prior Stripe remittance pattern and current description uniquely support INV-STR-018B. Current-period facts were not overwritten.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_018 880.0 USD from Atlas Systems",
+      "Remittance: monthly platform fee",
+      "Payment already tagged CUST-010",
+      "Precedent AR-PREC-STR-ATLAS-AUG: Atlas Systems typically remits Stripe invoice references (INV-STR-018A) with description 'Atlas August platform fee monthly platform fee'.",
+      "INV-STR-018B uniquely matches remittance/precedent context (score 3.85)"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [
+      "AR-PREC-STR-ATLAS-AUG"
+    ],
+    "precedent_affected": true
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-STR-CH_STR_018",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-018B",
+        "amount": 880.0
+      }
+    ],
+    "confidence": 0.88,
+    "reason": "Prior Stripe remittance pattern and current description uniquely support INV-STR-018B. Current-period facts were not overwritten.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_018 880.0 USD from Atlas Systems",
+      "Remittance: monthly platform fee",
+      "Payment already tagged CUST-010",
+      "Precedent AR-PREC-STR-ATLAS-AUG: Atlas Systems typically remits Stripe invoice references (INV-STR-018A) with description 'Atlas August platform fee monthly platform fee'.",
+      "INV-STR-018B uniquely matches remittance/precedent context (score 3.85)"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [
+      "AR-PREC-STR-ATLAS-AUG"
+    ],
+    "precedent_affected": true
+  },
+  "posted": true,
+  "record": {
+    "application_id": "AR-APP-001",
+    "payment_id": "PAY-STR-CH_STR_018",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-018B",
+        "amount": 880.0
+      }
+    ],
+    "total_applied": 880.0,
+    "unapplied_amount": 0.0,
+    "decision": "AUTO_APPLY",
+    "status": "APPLIED",
+    "posted": true,
+    "invoice_changes": [
+      {
+        "invoice_id": "INV-STR-018B",
+        "previous_outstanding": 880.0,
+        "applied_amount": 880.0,
+        "new_outstanding": 0.0,
+        "previous_status": "OPEN",
+        "new_status": "PAID"
+      }
+    ],
+    "journal_entry_ids": [
+      "AR-JE-001"
+    ],
+    "created_at": "2026-09-20T00:06:45Z",
+    "reason": "Prior Stripe remittance pattern and current description uniquely support INV-STR-018B. Current-period facts were not overwritten."
+  },
+  "state_changes": [
+    {
+      "invoice_id": "INV-STR-018B",
+      "previous_outstanding": 880.0,
+      "applied_amount": 880.0,
+      "new_outstanding": 0.0,
+      "previous_status": "OPEN",
+      "new_status": "PAID"
+    }
+  ],
+  "journal_entries": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Atlas Systems",
+      "memo": "Apply PAY-STR-CH_STR_018 to INV-STR-018B",
+      "debit": {
+        "account": "Cash",
+        "amount": 880.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 880.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-STR-CH_STR_018",
+      "related_invoice_ids": [
+        "INV-STR-018B"
+      ],
+      "created_at": "2026-09-20T00:06:45Z"
+    }
+  ],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

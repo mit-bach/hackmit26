@@ -8,7 +8,12 @@ from pathlib import Path
 
 from memory.eval import format_eval_summary, persist_eval, run_memory_evaluation
 from memory.format import format_lookup_trace
-from memory.scenarios import isolated_memory_workspace, run_prepaid_cross_period, run_stripe_cross_period
+from memory.scenarios import (
+    isolated_memory_workspace,
+    run_harbor_cross_period,
+    run_prepaid_cross_period,
+    run_stripe_cross_period,
+)
 from memory.store import current_directory, load_memories
 
 
@@ -59,9 +64,32 @@ def _print_prepaid(story: dict) -> None:
     print(f"Memory records now stored: {', '.join(item.decision_id for item in load_memories()) or '(none)'}")
 
 
+def _print_harbor(story: dict) -> None:
+    aug = story["august_trace"]
+    sep = story["september_trace"]
+    print("August 2026 — Harbor Electric seasonal utility accrual")
+    if aug is not None:
+        print(f"  {aug.vendor} → {aug.final_method} {aug.final_amount}")
+        print(f"  {aug.rationale}")
+        if aug.written_memory_id:
+            print(f"  wrote {aug.written_memory_id}")
+    print()
+    print("September 2026 — month-end retrieves the August methodology")
+    if sep is not None:
+        print(f"  {sep.vendor} → {sep.final_method} {sep.final_amount}")
+        lookup = sep.memory_lookup
+        if lookup is not None:
+            print()
+            print(format_lookup_trace(lookup))
+        print()
+        print(story["september_packet"])
+    print()
+    print(f"Memory records now stored: {', '.join(item.decision_id for item in load_memories()) or '(none)'}")
+
+
 def run_memory_demo(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run the August → September memory demo.")
-    parser.add_argument("--story", choices=["stripe", "prepaid", "both"], default="stripe")
+    parser.add_argument("--story", choices=["stripe", "prepaid", "close", "accrual", "both"], default="stripe")
     parser.add_argument("--memory-off", action="store_true", help="Run the later period without retrieval.")
     args = parser.parse_args(argv)
     enabled = not args.memory_off
@@ -72,6 +100,8 @@ def run_memory_demo(argv: list[str] | None = None) -> int:
             print()
         if args.story in {"prepaid", "both"}:
             _print_prepaid(run_prepaid_cross_period(memory_enabled=enabled))
+        if args.story in {"close", "accrual", "both"}:
+            _print_harbor(run_harbor_cross_period(memory_enabled=enabled))
         print(f"\nDemo workspace: {dest}")
     return 0
 

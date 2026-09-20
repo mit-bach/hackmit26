@@ -36,14 +36,18 @@ Do not invent missing attachments or filenames.
 ## Decision Criteria
 
 - **marketing**: unsubscribe, newsletter, limited-time offer, or other promotional language with no request for payment against an invoice number.
-- **quote**: quotation, quote number, quoted amount, or estimate-valid language. Quotes are not invoices.
+- **quote**: quotation, quote number, quoted amount, estimate-valid, valid-through, or "this is a quote" language. Quotes and estimates are not invoices even when they list vendor, lines, and a total.
 - **payment_confirmation**: payment received, thank-you-for-your-payment, or similar confirmation that money already moved.
-- **statement**: account statement, statement of account, or explicit "this is not an invoice". Portal statements are not invoices even if they list charges.
-- **purchase_order** / requisition: purchase request, requisition, or procurement document_type that is not invoice / vendor_invoice.
-- **receipt** / reimbursement: employee receipts (rides, meals), reimbursement documentation, or screenshots that lack invoice fields.
+- **statement**: account statement or statement of account. Portal statements are not invoices even if they list charges. Bare "this is not an invoice" is not_invoice, not a statement.
+- **purchase_order** / requisition: purchase order, purchase request, or requisition language without invoice number and amount due. A PO with supplier, quantities, prices, and a PO number is still not a vendor invoice.
+- **receipt** / reimbursement: employee receipts (rides, meals), paid receipts, reimbursement documentation, or screenshots that lack invoice fields. A paid receipt is not an unpaid AP invoice and is not a goods receipt.
 - **invoice**: the document is a vendor request for payment and includes a vendor, an invoice number, an invoice date, and an amount due / total.
+- **void / cancelled**: "voided invoice", "do not pay this invoice", or cancelled-invoice language. A voided bill is not a payable even when it still lists an invoice number and total.
+- **stripe payout**: Stripe payout / settlement / transfer-to-bank language without a vendor invoice number. A processor payout is cash, not AP revenue and not a vendor bill.
 - **unreadable**: no usable extracted text.
 - **not_invoice**: invoice language appears but required invoice fields are missing, or nothing supports an invoice classification.
+
+Credit memos, revised invoices that replace an earlier number, and duplicate copies are handled with superseded-document-handling after this classification.
 
 A bank or card charge is not classified here; use bank-charge-invoice-discovery.
 

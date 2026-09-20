@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from cfo.company import FEATURED, PERIOD, money
+from cfo.company import COMPANY_NAME, FEATURED, HEADQUARTERS, PERIOD, money
 from cfo.eval import format_metrics
 from cfo.scenario import invoice_summary
 
@@ -150,9 +150,35 @@ def format_cfo_demo(payload: dict) -> str:
     failed_lines = [f"- {item['name']}: {item['detail']}" for item in failed] or ["- (none)"]
 
     remaining = list(closed.human_review_items)
+    harbor = payload.get("harbor_trace")
+    august = payload.get("august_memory") or {}
+    harbor_lookup = getattr(harbor, "memory_lookup", None) if harbor is not None else None
+    harbor_prior = ""
+    if harbor_lookup is not None and harbor_lookup.retrieved:
+        harbor_prior = harbor_lookup.retrieved[0]
+    harbor_line = (
+        f"Harbor Electric booked {getattr(harbor, 'final_method', 'n/a')} "
+        f"{_usd(getattr(harbor, 'final_amount', 0))} citing {harbor_prior or 'no prior decision'}."
+        if harbor is not None
+        else "Harbor Electric accrual was not on the close packet."
+    )
+    company = payload.get("company") or {}
     return "\n".join(
         [
-            "OFFICE OF THE CFO — SEPTEMBER 2026 LIFECYCLE",
+            f"{company.get('legal_name', COMPANY_NAME).upper()} — SEPTEMBER 2026",
+            f"Office of the CFO  ·  {company.get('headquarters', HEADQUARTERS)}  ·  {company.get('company_id', 'CO-MAXIMOR')}",
+            "",
+            "One company. One set of books. Every ID below is the same economic event",
+            "as it moves from AP or the bank through close, reporting, and audit.",
+            "",
+            "THE MONTH IN ONE PAGE",
+            f"- Close started {blocked.period.status} because the bank was $12.40 over the ledger.",
+            f"- A reviewer posted the correcting receipt; September is now {closed.period.status}.",
+            f"- Duplicate {FEATURED['ap_duplicate']} stayed HOLD and never entered the payment pool.",
+            f"- {harbor_line}",
+            f"- Gross margin moved {gm_prior} → {gm_now} from ledger transactions, not a new estimate.",
+            f"- August memory on file: Harbor {august.get('harbor_memory_id') or '(none)'}; "
+            f"Stripe {august.get('stripe_memory_id') or '(none)'}.",
             "",
             "Implemented workflows (not rebuilt):",
             *inv_lines,
@@ -223,7 +249,13 @@ def format_cfo_demo(payload: dict) -> str:
             "Findings",
             *finding_lines,
             "",
-            "10. TRACE",
+            "10. PRIOR-PERIOD MEMORY",
+            f"August Harbor methodology: {august.get('harbor_memory_id') or '(none)'}",
+            f"August Stripe payout treatment: {august.get('stripe_memory_id') or '(none)'}",
+            harbor_line,
+            "Current September evidence was checked before reuse. A method shift would appear as a deviation.",
+            "",
+            "11. TRACE",
             *chain_lines,
             "",
             "Agent handoffs (structured workflow outputs)",
@@ -232,7 +264,7 @@ def format_cfo_demo(payload: dict) -> str:
             "Human-review points",
             _human_block(payload["human_reviews"]),
             "",
-            "11. FINAL CFO STATE",
+            "12. FINAL CFO STATE",
             f"- AP: matched {FEATURED['ap_matched']} APPROVE; "
             f"duplicate {FEATURED['ap_duplicate']} HOLD; "
             f"review {FEATURED['ap_human_review']} HOLD",
@@ -242,6 +274,8 @@ def format_cfo_demo(payload: dict) -> str:
             f"- Reporting: {statement.period} GM {gm_now}",
             f"- Forecast: {getattr(reporting.forecast, 'forecast_id', 'n/a')}",
             f"- Audit: {audit.audit_run_id} / {len(audit.findings)} findings",
+            f"- Memory: Harbor {harbor_prior or '(none)'} → "
+            f"{getattr(harbor, 'written_memory_id', None) or '(none)'}",
             f"- Unresolved human-review items: {', '.join(remaining) if remaining else '(none)'}",
             "",
             format_metrics(payload["metrics"]),

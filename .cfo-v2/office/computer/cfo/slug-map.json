@@ -5,10 +5,10 @@
       "defaultProfile": "invoice",
       "profiles": {
         "invoice": "Email Invoice Agent",
-        "triage": "Finance Inbox Agent",
         "employee": "Employee Submission Agent",
         "portal": "Vendor Portal Agent",
-        "document": "Physical Mail / Document Agent"
+        "document": "Physical Mail / Document Agent",
+        "inbox": "Finance Inbox Agent"
       }
     },
     "stripe": {
@@ -29,15 +29,6 @@
         "erp-invoice": "ERP Invoice Agent",
         "procurement": "Procurement Invoice Agent",
         "edi": "EDI / Electronic Invoicing Agent"
-      }
-    },
-    "world": {
-      "defaultProfile": "vendor",
-      "profiles": {
-        "vendor": "Counterparty Message Agent",
-        "customer": "Counterparty Message Agent",
-        "bank": "Counterparty Message Agent",
-        "employee": "Counterparty Message Agent"
       }
     },
     "ap": {
@@ -109,6 +100,8 @@
       "defaultProfile": "review-treatment",
       "profiles": {
         "review-treatment": "Prepaid Reviewer",
+        "review-assets": "Fixed Asset Reviewer",
+        "review-bs": "Balance Sheet Reconciliation Reviewer",
         "lock": "Month-End Close Reviewer"
       }
     },

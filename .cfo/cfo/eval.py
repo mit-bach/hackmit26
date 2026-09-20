@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 
-WORKFLOWS = ("ap", "ar", "cash", "close", "reporting", "forecast", "audit")
+WORKFLOWS = ("ap", "ar", "cash", "close", "reporting", "forecast", "audit", "memory")
 
 
 def compute_metrics(payload: dict) -> dict:

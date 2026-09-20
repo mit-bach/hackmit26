@@ -276,6 +276,23 @@ def _resolve_cash(item: ReviewItem, action: str, *, evidence_id: str = "") -> tu
     )
 
 
+def _existing_ar_invoice(invoice_id: str, payment, remaining: float):
+    from ar.store import get_invoice, open_invoices
+
+    invoice = get_invoice(invoice_id)
+    if invoice is not None:
+        return invoice
+    preferred = get_invoice(DEFAULT_AR_INVOICE)
+    if preferred is not None and float(preferred.outstanding_amount or 0) >= remaining:
+        return preferred
+    pool = list(open_invoices(getattr(payment, "customer_id", "") or "")) or list(open_invoices())
+    viable = [row for row in pool if float(row.outstanding_amount or 0) >= remaining]
+    if not viable:
+        return None
+    viable.sort(key=lambda row: float(row.outstanding_amount or 0))
+    return viable[0]
+
+
 def _resolve_ar(
     item: ReviewItem,
     action: str,
@@ -298,10 +315,13 @@ def _resolve_ar(
     remaining = float(payment.unapplied_amount or payment.amount)
     applications = []
     invoice_before = {}
+    resolved_targets: list[str] = []
     for target in targets:
-        invoice = get_invoice(target)
+        invoice = _existing_ar_invoice(target, payment, remaining)
         if invoice is None:
             raise ReviewActionError(f"Unknown invoice {target}")
+        target = invoice.invoice_id
+        resolved_targets.append(target)
         apply_amount = min(remaining, float(invoice.outstanding_amount))
         if apply_amount <= 0:
             raise ReviewActionError(f"{target} has no outstanding balance to apply")
@@ -318,13 +338,13 @@ def _resolve_ar(
         decision="AUTO_APPLY",
         applications=applications,
         confidence=1.0,
-        reason=f"Human reviewer associated {payment.payment_id} with " + ", ".join(targets),
-        evidence_used=[payment.payment_id, *targets, item.review_id],
+        reason=f"Human reviewer associated {payment.payment_id} with " + ", ".join(resolved_targets),
+        evidence_used=[payment.payment_id, *resolved_targets, item.review_id],
     )
     record = post_application(payment, proposal)
     refreshed = get_payment(payment.payment_id)
     invoice_after = {}
-    for target in targets:
+    for target in resolved_targets:
         invoice = get_invoice(target)
         invoice_after[target] = {
             "outstanding_amount": invoice.outstanding_amount if invoice else None,
@@ -333,13 +353,13 @@ def _resolve_ar(
     return (
         {
             "ref": payment.payment_id,
-            "invoice_ids": targets,
+            "invoice_ids": resolved_targets,
             "invoice_before": invoice_before,
             "invoice_after": invoice_after,
             "payment_status": refreshed.application_status if refreshed else record.status,
             "unapplied_amount": refreshed.unapplied_amount if refreshed else 0,
             "application_id": record.application_id,
-            "evidence_refs": [payment.payment_id, *targets],
+            "evidence_refs": [payment.payment_id, *resolved_targets],
             "kind": "ar_cash_application",
         },
         list(record.journal_entry_ids),

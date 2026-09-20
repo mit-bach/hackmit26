@@ -1,0 +1,114 @@
+{
+  "inspection": [
+    "AUD-RND-001 extras are RISK_INDICATOR only (round-number is not automatic fraud).",
+    "AUD-SUP-001 extras PAY-AP-009/010 are demo payments marked missing_support.",
+    "AUD-THR-001 extra INV-009 is the known demo approval-limit breach.",
+    "AUD-PCE-001 extra JE-POST-CLOSE-001 is the known demo post-close journal.",
+    "AUD-SOD-001 extras are known demo self-approvals.",
+    "AUD-DUP-VEND-001 extra VEND-001/VEND-001-DUP is the known demo duplicate vendor.",
+    "None of these extras are invented holdout noise."
+  ],
+  "items": [
+    {
+      "kind": "RISK_INDICATOR",
+      "ids": [
+        "INV-014",
+        "INV-015",
+        "INV-016",
+        "PAY-AP-NORTHLINE",
+        "VEND-003"
+      ],
+      "control": "AUD-RND-001"
+    },
+    {
+      "kind": "RISK_INDICATOR",
+      "ids": [
+        "INV-017",
+        "PAY-AP-017",
+        "VEND-005"
+      ],
+      "control": "AUD-RND-001"
+    },
+    {
+      "kind": "RISK_INDICATOR",
+      "ids": [
+        "APR-PAY-009",
+        "INV-009",
+        "PAY-AP-009",
+        "VEND-010"
+      ],
+      "control": "AUD-RND-001"
+    },
+    {
+      "kind": "RISK_INDICATOR",
+      "ids": [
+        "INV-012",
+        "PAY-AP-012",
+        "VEND-017"
+      ],
+      "control": "AUD-RND-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "INV-010",
+        "PAY-AP-010"
+      ],
+      "control": "AUD-SUP-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "INV-009",
+        "PAY-AP-009"
+      ],
+      "control": "AUD-SUP-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "INV-009"
+      ],
+      "control": "AUD-THR-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "JE-POST-CLOSE-001"
+      ],
+      "control": "AUD-PCE-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "APR-INV-SELF",
+        "INV-009"
+      ],
+      "control": "AUD-SOD-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "APR-PAY-009",
+        "PAY-AP-009"
+      ],
+      "control": "AUD-SOD-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "APR-PAY-010",
+        "PAY-AP-010"
+      ],
+      "control": "AUD-SOD-001"
+    },
+    {
+      "kind": "CONFIRMED_CONTROL_FAILURE",
+      "ids": [
+        "VEND-001",
+        "VEND-001-DUP"
+      ],
+      "control": "AUD-DUP-VEND-001"
+    }
+  ]
+}

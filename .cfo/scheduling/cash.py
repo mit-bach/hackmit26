@@ -12,7 +12,7 @@ from models import (
     PaymentPlan,
     ScheduledPayment,
 )
-from tools import DATA_DIR, collect_case_evidence, load_invoice, vendor_alias_established
+from tools import DATA_DIR, collect_case_evidence, load_invoice, paid_invoice_ids, vendor_alias_established
 
 
 def cash_position_path() -> Path:
@@ -86,6 +86,8 @@ def policy_eligible_for_pool(invoice_id: str) -> bool:
     if set(evidence.exception_types) & BLOCKING_EXCEPTIONS:
         return False
     if "vendor_mismatch" in evidence.exception_types and not vendor_alias_established(evidence):
+        return False
+    if invoice_id in paid_invoice_ids():
         return False
     return True
 

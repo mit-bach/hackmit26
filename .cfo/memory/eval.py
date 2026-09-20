@@ -12,9 +12,12 @@ from memory.models import MemoryLookup
 from memory.scenarios import (
     CLOUDCO_CONTRADICT,
     CLOUDCO_SEPTEMBER,
+    LINDHOLM_VENDOR,
     NORDIC_SEPTEMBER,
     SEPTEMBER_CONTRADICT,
     SEPTEMBER_STRIPE,
+    reset_accrual_books,
+    run_harbor_cross_period,
     run_prepaid_cross_period,
     run_stripe_contradiction,
     run_stripe_cross_period,
@@ -63,13 +66,21 @@ def _correct_prepaid(trace, expected_method: str) -> bool:
     return (trace.selected_method or "") == expected_method
 
 
+def _correct_accrual(trace, expected_method: str) -> bool:
+    if trace is None:
+        return False
+    if expected_method == "no_accrual_needed":
+        return trace.final_decision == "no_accrual_needed"
+    return trace.final_decision == "accrual_required" and (trace.final_method or "") == expected_method
+
+
 def _inconsistent(trace, expected_treatment: str) -> bool:
     lookup = _lookup(trace)
     if lookup is None:
         return False
     if lookup.precedent_used and lookup.evidence_supports_precedent is False:
         return True
-    if lookup.precedent_used and expected_treatment in {"unexplained", "HUMAN_REVIEW", "immediate_expense"}:
+    if lookup.precedent_used and expected_treatment in {"unexplained", "HUMAN_REVIEW", "immediate_expense", "no_accrual_needed"}:
         return True
     return False
 
@@ -85,6 +96,10 @@ def _grade_pair(name: str, off: dict[str, Any], on: dict[str, Any], *, kind: str
         off_ok = _correct_stripe(off_trace, expect_explained=False)
         on_ok = _correct_stripe(on_trace, expect_explained=False)
         expected_treatment = "unexplained"
+    elif kind == "accrual":
+        off_ok = _correct_accrual(off_trace, expected)
+        on_ok = _correct_accrual(on_trace, expected)
+        expected_treatment = expected
     else:
         off_ok = _correct_prepaid(off_trace, expected)
         on_ok = _correct_prepaid(on_trace, expected)
@@ -118,6 +133,7 @@ def _reset_all() -> None:
     reset_cash_state()
     reset_integration_state()
     reset_prepaid()
+    reset_accrual_books()
 
 
 def run_memory_evaluation() -> dict[str, Any]:
@@ -160,6 +176,30 @@ def run_memory_evaluation() -> dict[str, Any]:
     one_on = run_prepaid_cross_period(memory_enabled=True, september_item=CLOUDCO_CONTRADICT)
     cases.append(
         _grade_pair("prepaid_cloudco_contradictory", one_off, one_on, kind="prepaid", expected="immediate_expense")
+    )
+
+    _reset_all()
+    harbor_off = run_harbor_cross_period(memory_enabled=False)
+    _reset_all()
+    harbor_on = run_harbor_cross_period(memory_enabled=True)
+    cases.append(
+        _grade_pair("harbor_sep_standard", harbor_off, harbor_on, kind="accrual", expected="seasonal_prior_year")
+    )
+
+    _reset_all()
+    shift_off = run_harbor_cross_period(memory_enabled=False, august_method="recent_average")
+    _reset_all()
+    shift_on = run_harbor_cross_period(memory_enabled=True, august_method="recent_average")
+    cases.append(
+        _grade_pair("harbor_sep_method_shift", shift_off, shift_on, kind="accrual", expected="seasonal_prior_year")
+    )
+
+    _reset_all()
+    legal_off = run_harbor_cross_period(memory_enabled=False, september_vendor=LINDHOLM_VENDOR)
+    _reset_all()
+    legal_on = run_harbor_cross_period(memory_enabled=True, september_vendor=LINDHOLM_VENDOR)
+    cases.append(
+        _grade_pair("harbor_unrelated_vendor", legal_off, legal_on, kind="accrual", expected="contract_commitment")
     )
 
     # Additional Stripe reruns after August memory exists, using the standard pair already captured.
@@ -227,6 +267,22 @@ def run_memory_evaluation() -> dict[str, Any]:
             "memory_on": _grade_pair("x", stripe_off, stripe_on, kind="stripe_explained", expected="FEE_NETTED")["memory_on"],
         }
     )
+    cases.append(
+        {
+            "case_id": "harbor_no_blind_reuse",
+            "kind": "accrual",
+            "memory_off": _grade_pair("x", shift_off, shift_on, kind="accrual", expected="seasonal_prior_year")["memory_off"],
+            "memory_on": _grade_pair("x", shift_off, shift_on, kind="accrual", expected="seasonal_prior_year")["memory_on"],
+        }
+    )
+    cases.append(
+        {
+            "case_id": "harbor_treatment_consistency",
+            "kind": "accrual",
+            "memory_off": _grade_pair("x", harbor_off, harbor_on, kind="accrual", expected="seasonal_prior_year")["memory_off"],
+            "memory_on": _grade_pair("x", harbor_off, harbor_on, kind="accrual", expected="seasonal_prior_year")["memory_on"],
+        }
+    )
 
     metrics = _summarize(cases)
     return {
@@ -254,7 +310,15 @@ def _summarize(cases: list[dict[str, Any]]) -> dict[str, Any]:
             "retrievals": sum(1 for row in values if row["retrieved"]),
         }
 
-    reusable = [item for item in cases if item["kind"] in {"stripe_explained", "prepaid"} and "contradict" not in item["case_id"] and "unrelated" not in item["case_id"]]
+    reusable = [
+        item
+        for item in cases
+        if item["kind"] in {"stripe_explained", "prepaid", "accrual"}
+        and "contradict" not in item["case_id"]
+        and "unrelated" not in item["case_id"]
+        and "shift" not in item["case_id"]
+        and "blind" not in item["case_id"]
+    ]
     off = collect("memory_off")
     on = collect("memory_on")
     return {

@@ -1,0 +1,309 @@
+{
+  "payment_id": "PAY-STR-CH_STR_006",
+  "started_at": "2026-09-19T23:54:05Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-STR-CH_STR_006",
+    "payment_date": "2026-09-15",
+    "amount": 800.0,
+    "currency": "USD",
+    "payer_name": "Orbit Health",
+    "customer_id": null,
+    "bank_reference": "ch_str_006",
+    "remittance_text": "INV-STR-006 Orbit implementation INV-STR-006",
+    "invoice_reference": "INV-STR-006",
+    "source": "stripe",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "stripe_charge_id": "ch_str_006",
+      "stripe_payment_intent_id": "pi_str_006",
+      "stripe_event_type": "payment_intent.succeeded",
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-006",
+      "order_id": "INV-STR-006"
+    }
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-STR-CH_STR_006",
+      "payment_date": "2026-09-15",
+      "amount": 800.0,
+      "currency": "USD",
+      "payer_name": "Orbit Health",
+      "customer_id": null,
+      "bank_reference": "ch_str_006",
+      "remittance_text": "INV-STR-006 Orbit implementation INV-STR-006",
+      "invoice_reference": "INV-STR-006",
+      "source": "stripe",
+      "unapplied_amount": 800.0,
+      "application_status": "UNMATCHED",
+      "metadata": {
+        "stripe_charge_id": "ch_str_006",
+        "stripe_payment_intent_id": "pi_str_006",
+        "stripe_event_type": "payment_intent.succeeded",
+        "customer_name": "Orbit Health",
+        "invoice_id": "INV-STR-006",
+        "order_id": "INV-STR-006"
+      }
+    },
+    "identified_customer_id": "CUST-005",
+    "identified_customer_name": "Orbit Health",
+    "customer_confidence": 0.95,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-STR-006",
+        "customer_id": "CUST-005",
+        "customer_name": "Orbit Health",
+        "invoice_date": "2026-09-08",
+        "due_date": "2026-10-08",
+        "original_amount": 800.0,
+        "outstanding_amount": 800.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-006",
+        "description": "Orbit implementation",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-013A",
+        "customer_id": "CUST-005",
+        "customer_name": "Orbit Health",
+        "invoice_date": "2026-09-16",
+        "due_date": "2026-10-16",
+        "original_amount": 550.0,
+        "outstanding_amount": 550.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-013A",
+        "description": "Orbit monitoring",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-013B",
+        "customer_id": "CUST-005",
+        "customer_name": "Orbit Health",
+        "invoice_date": "2026-09-16",
+        "due_date": "2026-10-16",
+        "original_amount": 250.0,
+        "outstanding_amount": 250.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-013B",
+        "description": "Orbit alerts pack",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-006",
+            "amount": 800.0
+          }
+        ],
+        "total_applied": 800.0,
+        "unapplied_amount": 0.0,
+        "match_type": "explicit_invoice",
+        "score": 0.99,
+        "evidence": [
+          "Remittance names INV-STR-006"
+        ],
+        "ambiguities": [
+          "Competing explanations: C3"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-013A",
+            "amount": 550.0
+          },
+          {
+            "invoice_id": "INV-STR-013B",
+            "amount": 250.0
+          }
+        ],
+        "total_applied": 800.0,
+        "unapplied_amount": 0.0,
+        "match_type": "combination",
+        "score": 0.84,
+        "evidence": [
+          "INV-STR-013A+INV-STR-013B sum to 800.0"
+        ],
+        "ambiguities": [
+          "Competing explanations: C1"
+        ]
+      }
+    ],
+    "remittance_invoice_ids": [
+      "INV-STR-006"
+    ],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-STR-CH_STR_006 800.0 USD from Orbit Health",
+      "Remittance: INV-STR-006 Orbit implementation INV-STR-006",
+      "Payer 'Orbit Health' matches 'Orbit Health'",
+      "Remittance invoice references: INV-STR-006"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-STR-CH_STR_006",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-006",
+        "amount": 800.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_006 800.0 USD from Orbit Health",
+      "Remittance: INV-STR-006 Orbit implementation INV-STR-006",
+      "Payer 'Orbit Health' matches 'Orbit Health'",
+      "Remittance invoice references: INV-STR-006",
+      "Remittance names INV-STR-006"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-STR-CH_STR_006",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-006",
+        "amount": 800.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_006 800.0 USD from Orbit Health",
+      "Remittance: INV-STR-006 Orbit implementation INV-STR-006",
+      "Payer 'Orbit Health' matches 'Orbit Health'",
+      "Remittance invoice references: INV-STR-006",
+      "Remittance names INV-STR-006"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": true,
+  "record": {
+    "application_id": "AR-APP-001",
+    "payment_id": "PAY-STR-CH_STR_006",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-006",
+        "amount": 800.0
+      }
+    ],
+    "total_applied": 800.0,
+    "unapplied_amount": 0.0,
+    "decision": "AUTO_APPLY",
+    "status": "APPLIED",
+    "posted": true,
+    "invoice_changes": [
+      {
+        "invoice_id": "INV-STR-006",
+        "previous_outstanding": 800.0,
+        "applied_amount": 800.0,
+        "new_outstanding": 0.0,
+        "previous_status": "OPEN",
+        "new_status": "PAID"
+      }
+    ],
+    "journal_entry_ids": [
+      "AR-JE-001"
+    ],
+    "created_at": "2026-09-19T23:54:05Z",
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+  },
+  "state_changes": [
+    {
+      "invoice_id": "INV-STR-006",
+      "previous_outstanding": 800.0,
+      "applied_amount": 800.0,
+      "new_outstanding": 0.0,
+      "previous_status": "OPEN",
+      "new_status": "PAID"
+    }
+  ],
+  "journal_entries": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Orbit Health",
+      "memo": "Apply PAY-STR-CH_STR_006 to INV-STR-006",
+      "debit": {
+        "account": "Cash",
+        "amount": 800.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 800.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-STR-CH_STR_006",
+      "related_invoice_ids": [
+        "INV-STR-006"
+      ],
+      "created_at": "2026-09-19T23:54:05Z"
+    }
+  ],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

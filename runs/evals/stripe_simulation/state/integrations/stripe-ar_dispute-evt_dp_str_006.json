@@ -1,0 +1,17 @@
+{
+  "stripe_event_id": "evt_dp_str_006",
+  "event_type": "charge.dispute.created",
+  "workflow": "ar_dispute",
+  "status": "processed",
+  "event_id": "AR-EVT-0003",
+  "journal_entry_ids": [
+    "AR-JE-003",
+    "AR-JE-004"
+  ],
+  "payment_id": "PAY-STR-CH_STR_006",
+  "invoice_ids": [
+    "INV-STR-006"
+  ],
+  "amount": 800.0,
+  "fee_amount": 15.0
+}

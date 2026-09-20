@@ -1,0 +1,51 @@
+[
+  {
+    "link_id": "LNK-0001",
+    "source_document_id": "pi_str_001",
+    "transaction_id": "PAY-STR-CH_STR_001",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "workflow": "ar_cash_application",
+      "stripe_event_id": "evt_ch_str_001_pi",
+      "invoice_ids": [
+        "INV-STR-001"
+      ]
+    },
+    "created_at": "2026-09-20T00:06:45Z"
+  },
+  {
+    "link_id": "LNK-0002",
+    "source_document_id": "ch_str_001",
+    "transaction_id": "PAY-STR-CH_STR_001",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "workflow": "ar_cash_application",
+      "stripe_event_id": "evt_ch_str_001_ch",
+      "invoice_ids": []
+    },
+    "created_at": "2026-09-20T00:06:45Z"
+  },
+  {
+    "link_id": "LNK-0003",
+    "source_document_id": "po_str_001",
+    "transaction_id": "po_str_001",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "po_str_001",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "provider": "stripe",
+      "arrival_date": "2026-09-04"
+    },
+    "created_at": "2026-09-20T00:06:45Z"
+  }
+]

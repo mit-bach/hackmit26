@@ -7,6 +7,7 @@ from memory.models import MemoryEvidence, MemoryLookup, MemoryQuery
 from memory.retrieve import lookup_memories
 from memory.write import (
     is_reusable_ap_decision,
+    is_reusable_accrual_decision,
     is_reusable_cash_decision,
     is_reusable_prepaid_decision,
     write_decision,
@@ -369,4 +370,142 @@ def write_ap_memory(evidence, final, *, period: str, trace_id: str):
         fingerprint=fingerprint,
         entity_name=vendor or None,
         accounting_category="ap",
+    )
+
+
+STANDARD_ACCRUAL_HYPOTHESES = [
+    "invoice_already_received",
+    "usage_run_rate",
+    "goods_receipt",
+    "contract_commitment",
+    "seasonal_prior_year",
+    "recent_average",
+    "weighted_recent_average",
+    "last_invoice",
+    "simple_average",
+    "linear_trend",
+    "purchase_order",
+    "conservative_minimum",
+]
+
+
+def accrual_query(vendor: str, period: str) -> MemoryQuery:
+    name = (vendor or "").strip()
+    return MemoryQuery(
+        workflow="month_end_close",
+        entity_type="vendor",
+        entity_id=name.lower() or None,
+        situation_type="accrual_methodology",
+        tags=["month_end_close", "accrual", name.lower()],
+        accounting_category="accrual",
+        prior_to_period=period,
+        exclude_period=period,
+        limit=5,
+    )
+
+
+def lookup_for_accrual(vendor: str, period: str) -> MemoryLookup:
+    return lookup_memories(accrual_query(vendor, period))
+
+
+def apply_accrual_precedent(context, selected_method: str | None, status: str, lookup: MemoryLookup) -> MemoryLookup:
+    """Reuse a prior accrual method only when current Python evidence still supports it."""
+    from accrual.estimation import candidates_for, invoice_already_received
+
+    lookup.current_evidence_checked = True
+    lookup.decision = selected_method or status
+    applicable = {
+        item.method
+        for item in candidates_for(context)
+        if item.applicable and item.amount is not None
+    }
+    invoice_in = invoice_already_received(context)
+
+    def _walk_all() -> int:
+        return len(STANDARD_ACCRUAL_HYPOTHESES)
+
+    if not lookup.memory_enabled or not lookup.precedents:
+        lookup.precedent_used = False
+        lookup.investigation_steps = _walk_all()
+        return lookup
+
+    top = lookup.precedents[0]
+    lookup.precedent_relevance = top.reusable_precedent
+    same_vendor = (getattr(context, "vendor", "") or "").lower() == (top.entity_id or "").lower()
+    prior_method = top.accounting_treatment
+    prior_still_applicable = prior_method in applicable
+
+    if (
+        same_vendor
+        and not invoice_in
+        and status == "accrual_required"
+        and selected_method
+        and selected_method == prior_method
+        and prior_still_applicable
+    ):
+        lookup.precedent_used = True
+        lookup.evidence_supports_precedent = True
+        lookup.skipped_hypotheses = [item for item in STANDARD_ACCRUAL_HYPOTHESES if item != prior_method]
+        lookup.investigation_steps = 2
+        return lookup
+
+    lookup.precedent_used = False
+    lookup.evidence_supports_precedent = False
+    if same_vendor:
+        current = selected_method or status
+        lookup.deviation = (
+            f"{top.decision_id} treated {top.entity_id} as {prior_method}; "
+            f"current evidence supports {current}."
+        )
+        lookup.investigation_steps = 1 + _walk_all()
+    else:
+        lookup.investigation_steps = _walk_all()
+    return lookup
+
+
+def write_accrual_memory(decision, *, trace_id: str):
+    method = getattr(decision, "estimation_method", None)
+    if not is_reusable_accrual_decision(status=decision.status, method=method):
+        return None
+    vendor = (decision.vendor or "").strip()
+    amount = decision.estimated_amount
+    fingerprint = "|".join(
+        [
+            vendor.lower(),
+            decision.period,
+            method or "",
+            f"{amount:.2f}" if amount is not None else "",
+        ]
+    )
+    evidence = [
+        MemoryEvidence(kind="accrual", label=decision.accrual_id or vendor, amount=amount, reference=method),
+        *[MemoryEvidence(kind="evidence", label=item) for item in list(decision.evidence)[:8]],
+    ]
+    return write_decision(
+        period=decision.period,
+        workflow="month_end_close",
+        entity_type="vendor",
+        entity_id=vendor.lower(),
+        situation_type="accrual_methodology",
+        situation_summary=(
+            f"{vendor} missing-bill accrual for {decision.period} used {method} "
+            f"({amount:,.2f})." if amount is not None else f"{vendor} accrual used {method}."
+        ),
+        evidence=evidence,
+        decision=method,
+        reasoning_summary=(
+            decision.reasoning_summary
+            or f"Python booked {vendor} with {method} from current-period evidence."
+        ),
+        accounting_treatment=method,
+        outcome=decision.status,
+        reusable_precedent=(
+            f"{vendor} recurring or seasonal missing bills may reuse {method}; "
+            "confirm current invoices, usage, and whether a recent average is still misleading."
+        ),
+        source_trace_ids=[trace_id],
+        tags=["month_end_close", "accrual", vendor.lower(), method, "seasonal"],
+        fingerprint=fingerprint,
+        entity_name=vendor,
+        accounting_category="accrual",
     )

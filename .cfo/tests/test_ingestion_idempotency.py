@@ -27,7 +27,7 @@ def test_canonical_invoice_key_is_source_independent():
     )
     assert canonical_invoice_key(email) == canonical_invoice_key(portal)
     assert canonical_invoice_key(email) is not None
-    assert canonical_invoice_key(email).endswith(":INV-9001")
+    assert canonical_invoice_key(email).endswith(":INV9001")
     keys = identity_keys(email)
     assert any(item.startswith("invoice:") for item in keys)
     assert any(item.startswith("source:email:") for item in keys)

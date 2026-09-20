@@ -1,0 +1,246 @@
+{
+  "reconciliation_id": "REC-021",
+  "period": "2026-09",
+  "match_type": "POSSIBLE_DUPLICATE_REFUND",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-HO-DUPREF-B",
+      "date": "2026-09-21",
+      "amount": -640.0,
+      "currency": "USD",
+      "description": "REFUND COPPERFIELD",
+      "reference": "",
+      "counterparty": "Copperfield Logistics",
+      "transaction_type": "refund",
+      "source": "bank",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -64000,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-HO-DUPREF-B:GL-HO-DUPREF",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-HO-DUPREF-B"
+      ],
+      "ledger_entry_ids": [
+        "GL-HO-DUPREF"
+      ],
+      "bank_amount": -640.0,
+      "ledger_amount": -640.0,
+      "difference": 0.0,
+      "bank_amount_minor": -64000,
+      "ledger_amount_minor": -64000,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.0500000000000003,
+      "evidence": [
+        "amount:-64000",
+        "bank_date:2026-09-21",
+        "ledger_date:2026-09-21",
+        "counterparty_overlap:0.60"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -64000,
+    "ledger_amount_minor": 0,
+    "difference_minor": -64000,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "POSSIBLE_DUPLICATE_REFUND:TXN-HO-DUPREF-B:-",
+    "selected_candidate_id": null,
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.99,
+    "reasons": [
+      "The Python candidate list returned no candidates.",
+      "The proposed item is explicitly a possible duplicate refund with no ledger counterpart and requires review."
+    ],
+    "evidence_used": [
+      "TXN-HO-DUPREF-B: REFUND COPPERFIELD, -640.00 USD, dated 2026-09-21",
+      "get_match_candidates returned an empty list"
+    ],
+    "review_question": "Should this refund be investigated as a duplicate of peer transaction TXN-HO-DUPREF-A?"
+  },
+  "investigation": {
+    "case_id": "POSSIBLE_DUPLICATE_REFUND:TXN-HO-DUPREF-B:-",
+    "issues_investigated": [
+      "Unmatched refund of -640.0 USD",
+      "Possible duplicate refund involving TXN-HO-DUPREF-A"
+    ],
+    "findings": [
+      "Python reports bank amount -640.0, ledger amount 0.0, and difference -640.0.",
+      "TXN-HO-DUPREF-B and TXN-HO-DUPREF-A are identical: both dated 2026-09-21, amount -640.0 USD, description REFUND COPPERFIELD, and counterparty Copperfield Logistics.",
+      "No ledger entry is associated with the case."
+    ],
+    "supported_explanations": [
+      "Duplicate suspicion is supported by the second identical bank movement."
+    ],
+    "unsupported_hypotheses": [
+      "Fee: no fee evidence.",
+      "Rounding: difference is not a one-cent remainder.",
+      "FX: no second currency or FX evidence.",
+      "Partial payment: no remittance evidence.",
+      "Timing: no adjacent-period counterpart evidence.",
+      "Missing ledger entry: not established by the available evidence."
+    ],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.99,
+    "human_review": true,
+    "evidence_used": [
+      "Python candidate data",
+      "Bank transaction TXN-HO-DUPREF-B",
+      "Bank transaction TXN-HO-DUPREF-A"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "POSSIBLE_DUPLICATE_REFUND:TXN-HO-DUPREF-B:-",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Python returned no matching candidates.",
+      "TXN-HO-DUPREF-B exactly duplicates peer refund TXN-HO-DUPREF-A in amount, date, description, and counterparty.",
+      "The difference remains -640.00 USD with no ledger counterpart; duplicate risk cannot be resolved automatically.",
+      "python_validator_authoritative"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-021",
+    "period": "2026-09",
+    "match_key": "829269934da92f31",
+    "bank_transaction_ids": [
+      "TXN-HO-DUPREF-B"
+    ],
+    "ledger_entry_ids": [],
+    "match_type": "POSSIBLE_DUPLICATE_REFUND",
+    "bank_amount": -640.0,
+    "ledger_amount": 0.0,
+    "difference": -640.0,
+    "bank_amount_minor": -64000,
+    "ledger_amount_minor": 0,
+    "difference_minor": -64000,
+    "confidence": 0.3,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Possible duplicate refund TXN-HO-DUPREF-B; one counterpart was already matched.",
+    "evidence": [
+      "amount:-64000",
+      "customer:Copperfield Logistics",
+      "reference:",
+      "timing:2026-09-21",
+      "peer:TXN-HO-DUPREF-A",
+      "ledger_reference:"
+    ],
+    "control_findings": [
+      "POSSIBLE_DUPLICATE_REFUND"
+    ],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "POSSIBLE_DUPLICATE_REFUND:TXN-HO-DUPREF-B:-",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -64000,
+      "ledger_amount_minor": 0,
+      "difference_minor": -64000,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "amount:-64000",
+    "customer:Copperfield Logistics",
+    "reference:",
+    "timing:2026-09-21",
+    "peer:TXN-HO-DUPREF-A",
+    "ledger_reference:"
+  ],
+  "control_findings": [
+    "POSSIBLE_DUPLICATE_REFUND"
+  ],
+  "agents": [
+    {
+      "role": "Cash Reconciliation Preparer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Exception Investigator",
+      "skills": [
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Reconciliation Reviewer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": true,
+  "replay": false,
+  "trace_path": null
+}

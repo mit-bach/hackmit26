@@ -1,0 +1,81 @@
+[
+  {
+    "movement_id": "ACT-DELAY-AR",
+    "source_type": "receivable",
+    "source_id": "INV-AR-014",
+    "date": "2026-10-09",
+    "amount": 25000.0,
+    "kind": "inflow",
+    "description": "Quiet Harbor paid one week late",
+    "bank_transaction_id": "BNK-AR-FC-001",
+    "ledger_entry_id": "",
+    "reconciliation_id": "",
+    "evidence_refs": [
+      "receivable:INV-AR-014",
+      "bank:BNK-AR-FC-001"
+    ]
+  },
+  {
+    "movement_id": "ACT-EARLY-AP",
+    "source_type": "invoice",
+    "source_id": "INV-012",
+    "date": "2026-09-23",
+    "amount": -21000.0,
+    "kind": "outflow",
+    "description": "GitHub paid earlier than the deferred date",
+    "bank_transaction_id": "BNK-AP-012",
+    "ledger_entry_id": "JE-PAY-INV-012",
+    "reconciliation_id": "PAY-AP-012",
+    "evidence_refs": [
+      "invoice:INV-012",
+      "bank:BNK-AP-012",
+      "payment:PAY-AP-012"
+    ]
+  },
+  {
+    "movement_id": "ACT-PAYROLL-HIGH",
+    "source_type": "payroll",
+    "source_id": "PR-2026-10-02",
+    "date": "2026-10-02",
+    "amount": -73200.0,
+    "kind": "outflow",
+    "description": "Payroll higher than the scheduled amount",
+    "bank_transaction_id": "",
+    "ledger_entry_id": "",
+    "reconciliation_id": "",
+    "evidence_refs": [
+      "payroll:PR-2026-10-02"
+    ]
+  },
+  {
+    "movement_id": "ACT-STRIPE-LOW",
+    "source_type": "other",
+    "source_id": "po_1MaximorFees",
+    "date": "2026-09-19",
+    "amount": 12610.0,
+    "kind": "inflow",
+    "description": "Stripe receipts landed below the gross expectation",
+    "bank_transaction_id": "TXN-2026-09-019A",
+    "ledger_entry_id": "",
+    "reconciliation_id": "",
+    "evidence_refs": [
+      "payout:po_1MaximorFees",
+      "bank:TXN-2026-09-019A"
+    ]
+  },
+  {
+    "movement_id": "ACT-UNEXPECTED",
+    "source_type": "other",
+    "source_id": "BNK-UNX-001",
+    "date": "2026-09-24",
+    "amount": -800.0,
+    "kind": "outflow",
+    "description": "Unforecast bank charge",
+    "bank_transaction_id": "BNK-UNX-001",
+    "ledger_entry_id": "",
+    "reconciliation_id": "",
+    "evidence_refs": [
+      "bank:BNK-UNX-001"
+    ]
+  }
+]

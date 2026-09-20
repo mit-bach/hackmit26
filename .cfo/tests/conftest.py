@@ -44,22 +44,19 @@ def isolated_memory_store(tmp_path):
 
 @pytest.fixture(autouse=True)
 def isolated_cash_recon(tmp_path, monkeypatch):
-    from cash_recon.store import reset_cash_state
     from cash_recon.case_store import configure_case_dir
-    from cash_recon.handles import configure_handle_dirs
+    from cash_recon.store import reset_cash_state
     from cash_recon.tools import unbind_case
 
     monkeypatch.setattr("cash_recon.store.RUNS_DIR", tmp_path / "cash-runs")
     monkeypatch.setattr("cash_recon.store.TRACES_DIR", tmp_path / "cash-traces")
     configure_case_dir(tmp_path / "cash-cases")
-    configure_handle_dirs(packets_dir=tmp_path / "cash-packets", handles_dir=tmp_path / "cash-handles")
-    reset_cash_state()
     unbind_case()
+    reset_cash_state()
     yield
-    reset_cash_state()
     unbind_case()
+    reset_cash_state()
     configure_case_dir(None)
-    configure_handle_dirs(packets_dir=tmp_path / "cash-packets-done", handles_dir=tmp_path / "cash-handles-done")
 
 
 @pytest.fixture(autouse=True)
@@ -83,6 +80,23 @@ def isolated_month_end_state(tmp_path, monkeypatch):
     reset_cash_state()
     yield
     reset_cash_state()
+
+
+@pytest.fixture(autouse=True)
+def isolated_accrual_ledger(tmp_path, monkeypatch):
+    from accrual.ledger import save_accruals, save_journal_entries
+
+    ledger = tmp_path / "accrual-ledger"
+    ledger.mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr("accrual.ledger.LEDGER_DIR", ledger)
+    monkeypatch.setattr("accrual.ledger.ACCRUALS_PATH", ledger / "open_accruals.json")
+    monkeypatch.setattr("accrual.ledger.JOURNALS_PATH", ledger / "journal_entries.json")
+    monkeypatch.setattr("accrual.trace.TRACES_ROOT", tmp_path / "accrual-traces")
+    save_accruals([])
+    save_journal_entries([])
+    yield
+    save_accruals([])
+    save_journal_entries([])
 
 
 @pytest.fixture(autouse=True)
@@ -123,19 +137,19 @@ def isolated_ingestion_overlay(tmp_path, monkeypatch):
     from invoice_ingestion.registry import configure_paths as configure_registry
     from invoice_ingestion.store import clear_ingestion_cache
     from integrations import store as integration_store
-    from tools import configure_overlay_path, configure_runtime_dir, reset_runtime_invoices
+    from tools import configure_runtime_dir, reset_runtime_invoices
 
-    ingest_dir = tmp_path / "ingestion-state"
+    runs = tmp_path / "integrations-runs"
     runtime = tmp_path / "ap-runtime"
     inbox = tmp_path / "inbox-runs"
-    configure_registry(ingest_dir)
-    monkeypatch.setenv("CFO_INGEST_STATE_DIR", str(ingest_dir))
-    monkeypatch.setenv("CFO_AP_RUNTIME_DIR", str(runtime))
-    monkeypatch.setenv("CFO_INBOX_RUNS_DIR", str(inbox))
-    configure_runtime_dir(runtime)
-    runs = tmp_path / "integrations-runs"
+    ingest = tmp_path / "ingestion-state"
     monkeypatch.setattr(integration_store, "RUNS_DIR", runs)
     monkeypatch.setattr(integration_store, "STATE_PATH", runs / "state.json")
+    monkeypatch.setenv("CFO_AP_RUNTIME_DIR", str(runtime))
+    monkeypatch.setenv("CFO_INBOX_RUNS_DIR", str(inbox))
+    monkeypatch.setenv("CFO_INGEST_STATE_DIR", str(ingest))
+    configure_runtime_dir(runtime)
+    configure_registry(ingest)
     reset_ingested_invoices()
     reset_runtime_invoices()
     clear_ingestion_cache()
@@ -145,8 +159,6 @@ def isolated_ingestion_overlay(tmp_path, monkeypatch):
     reset_runtime_invoices()
     clear_ingestion_cache()
     integration_store.reset_integration_state()
-    configure_registry()
-    configure_overlay_path()
 
 
 @pytest.fixture(autouse=True)

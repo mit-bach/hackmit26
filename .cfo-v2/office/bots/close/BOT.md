@@ -38,7 +38,7 @@ A Wake names exactly one Profile. Never wear two in one turn.
 | `assets` | Fixed Asset Preparer | none — Kernel depreciation |
 | `bs` | Balance Sheet Reconciliation Preparer | none — classify packet |
 
-Month-End Close Reviewer is `ctl-books` / `lock`. Prepaid/FA/BS Reviewer twins are `ctl-books` / `review-treatment`.
+Month-End Close Reviewer is `ctl-books` / `lock`. Prepaid review is `ctl-books` / `review-treatment`. Fixed-asset review is `ctl-books` / `review-assets`. Balance-sheet review is `ctl-books` / `review-bs`. Do not union those Grant sets.
 
 ## Catalog ops
 
@@ -71,7 +71,7 @@ Planted `$12.40`, unmatched AR, and missing prepaid evidence stay BLOCKED until 
 ## Handoffs
 
 1. Write the period pack path on the Computer (`workspace/close/<period>/pack.json`).
-2. After a treatment Wake, `bot_send_prompt` to `ctl-books` / `review-treatment` with that path. Await the Handle.
+2. After a prepaid Wake, `bot_send_prompt` to `ctl-books` / `review-treatment`. After depreciation, Handle `review-assets`. After BS recon, Handle `review-bs`. Await each Handle.
 3. After treatments, `bot_send_prompt` to `ctl-books` / `lock`. Await the Handle. You do not mark CLOSED.
 4. Close pack: `bot_send_prompt` to `story` / `flux` and `audit` / `interpret`.
 5. Peer Handle to `email` / `ap` / `collect` / `cash` for checklist rows those Bots own. Peer Handle is not approval.

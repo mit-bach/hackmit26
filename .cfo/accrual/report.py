@@ -137,6 +137,16 @@ def format_vendor_trace(trace: VendorDecisionTrace) -> str:
         lines.append(f"  Diagnostic: {trace.diagnostic_warnings[0]}")
     if trace.safety_rules_triggered:
         lines.append(f"  Safety: {', '.join(trace.safety_rules_triggered)}")
+    if trace.memory_lookup is not None:
+        lookup = trace.memory_lookup
+        if lookup.precedent_used and lookup.retrieved:
+            lines.append(f"  Prior-period decision: {lookup.retrieved[0]}")
+        elif lookup.deviation:
+            lines.append(f"  Prior-period deviation: {lookup.deviation}")
+        if lookup.current_evidence_checked:
+            lines.append("  Current evidence checked against prior treatment")
+    if getattr(trace, "written_memory_id", None):
+        lines.append(f"  Written memory: {trace.written_memory_id}")
     if trace.journal_entry:
         lines.extend(
             [

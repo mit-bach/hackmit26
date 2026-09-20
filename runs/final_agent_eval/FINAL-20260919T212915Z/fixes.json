@@ -1,0 +1,57 @@
+[
+  {
+    "id": "CASH-NEAR-WINDOW",
+    "behavior_changed": "Unexplained-residual pairing uses max($100, 2% of the bank amount) instead of a $50/$12.40 demo window.",
+    "regression_test": "tests/test_final_eval.py::test_unexplained_residual_window_is_not_demo_sized"
+  },
+  {
+    "id": "CASH-MULTI-CANDIDATE",
+    "behavior_changed": "One bank item with multiple same-amount ledgers is not auto EXACT_MATCHed unless those ledgers share a reference.",
+    "regression_test": "tests/test_final_eval.py::test_multiple_exact_ledger_candidates_are_not_auto_matched"
+  },
+  {
+    "id": "CASH-PROVIDER-ARRIVED",
+    "behavior_changed": "A provider payout marked AWAITING_BANK becomes MATCH once the statement deposit equals the provider net (fees/refunds already in that net).",
+    "regression_test": "tests/test_final_eval.py::test_awaiting_bank_becomes_match_when_deposit_arrives"
+  },
+  {
+    "id": "CASH-FEE-TXN-ID",
+    "behavior_changed": "Fee evidence referenced by bank transaction ID is accepted, not only description-text overlap.",
+    "regression_test": "tests/test_final_eval.py::test_fee_evidence_matches_on_transaction_id"
+  },
+  {
+    "id": "CASH-REVIEWER-RESIDUAL",
+    "behavior_changed": "Reviewer rejects a MATCHED preparer conclusion when an unexplained residual remains.",
+    "regression_test": "tests/test_final_eval.py::test_reviewer_rejects_matched_when_residual_is_unexplained"
+  },
+  {
+    "id": "AUDIT-POST-CLOSE-MONTH",
+    "behavior_changed": "Post-close classification uses calendar period-end, not only the later lock timestamp.",
+    "regression_test": "tests/test_final_eval.py::test_post_close_uses_calendar_period_end"
+  },
+  {
+    "id": "AUDIT-MISSING-SUPPORT",
+    "behavior_changed": "Missing-support is a registered control (AUD-SUP-001), not only a sampling risk signal.",
+    "regression_test": "tests/test_final_eval.py::test_missing_support_control_finds_flagged_payment"
+  },
+  {
+    "id": "AUDIT-THRESHOLD",
+    "behavior_changed": "Audit independently re-tests PO authorized amount vs approval limit (AUD-THR-001).",
+    "regression_test": "tests/test_final_eval.py::test_approval_threshold_control_flags_limit_breach"
+  },
+  {
+    "id": "EVAL-CLOSE-JE",
+    "behavior_changed": "Final eval compares close journal account/amount/period/source fields instead of awarding credit for task completion alone.",
+    "regression_test": "tests/test_final_eval.py::test_close_journal_scores_require_source_fields"
+  },
+  {
+    "id": "EVAL-AUDIT-CLASS",
+    "behavior_changed": "Audit extras are classified as CONFIRMED_CONTROL_FAILURE vs RISK_INDICATOR using existing result/severity fields.",
+    "regression_test": "tests/test_final_eval.py::test_audit_round_number_is_risk_indicator"
+  },
+  {
+    "id": "EVAL-CASH-SPLIT",
+    "behavior_changed": "Cash arithmetic, disposition, and provider-awareness are scored separately so EXACT_MATCH vs PROVIDER_PAYOUT naming is not the only grade.",
+    "regression_test": "tests/test_final_eval.py::test_cash_provider_awareness_separate_from_arithmetic"
+  }
+]

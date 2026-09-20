@@ -109,11 +109,19 @@ EXPECTED_ASSIGNMENTS = {
     SOURCE_AGENTS["email"]: (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
+    ),
+    "Counterparty Message Agent": (),
+    "Finance Inbox Agent": (
         "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "Accrual Agent": (
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ),
     "Payment Scheduler": (
         "payment-prioritization",
@@ -124,6 +132,7 @@ EXPECTED_ASSIGNMENTS = {
     "Cash Reconciliation Preparer": (
         "cash-reconciliation-method-selection",
         "bank-reference-interpretation",
+        "reconciliation-evidence-validation",
     ),
 }
 
@@ -164,6 +173,7 @@ def test_selective_loading_excludes_unrelated_skills():
     assert accrual_names == [
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ]
     assert "invoice-source-identification" not in accrual_names
     assert "payment-prioritization" not in accrual_names
@@ -278,7 +288,7 @@ def test_ingestion_traces_include_skill_usage():
     assert [item.name for item in email.skill_usage.skills] == [
         "invoice-source-identification",
         "invoice-field-interpretation",
-        "inbox-triage",
+        "superseded-document-handling",
     ]
     assert all(item.injected for item in email.skill_usage.skills)
     erp = run_erp_source("2026-09")
@@ -307,6 +317,7 @@ def test_accrual_trace_records_skill_hashes(tmp_path, monkeypatch):
     assert [item.name for item in trace.agent.skills] == [
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ]
     dumped = trace.model_dump()["agent"]
     assert dumped["load_errors"] == []
@@ -318,7 +329,7 @@ def test_accrual_trace_records_skill_hashes(tmp_path, monkeypatch):
 
 def test_inspect_index_lists_assignments_without_bodies():
     text = format_skills_index()
-    assert "Accrual Agent\n  accrual-evidence-evaluation\n  accrual-method-selection" in text
+    assert "Accrual Agent\n  accrual-evidence-evaluation\n  accrual-method-selection\n  prior-period-precedent" in text
     assert "Payment Scheduler\n  payment-prioritization\n  early-payment-discount-evaluation" in text
     assert "ERP Invoice Agent\n  (none)" in text
     assert "## Purpose" not in text

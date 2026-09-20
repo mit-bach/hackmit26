@@ -1,0 +1,106 @@
+[
+  {
+    "payment_id": "PAY-AP-001",
+    "invoice_ids": [
+      "INV-001"
+    ],
+    "vendor": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "payment_date": "2026-09-18",
+    "amount_minor": 1245000,
+    "method": "ach",
+    "bank_reference": "8391",
+    "description": "Vendor payment INV-001",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-AP-NORTHLINE",
+    "invoice_ids": [
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ],
+    "vendor": "Northline Fabrication",
+    "vendor_id": "VEND-003",
+    "payment_date": "2026-09-08",
+    "amount_minor": 1850000,
+    "method": "ach",
+    "bank_reference": "",
+    "description": "Grouped Northline disbursement",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-AP-017",
+    "invoice_ids": [
+      "INV-017"
+    ],
+    "vendor": "Helios Hardware",
+    "vendor_id": "VEND-005",
+    "payment_date": "2026-09-11",
+    "amount_minor": 1000000,
+    "method": "wire",
+    "bank_reference": "729103",
+    "description": "International vendor wire",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-AP-010",
+    "invoice_ids": [
+      "INV-010"
+    ],
+    "vendor": "Office Depot",
+    "vendor_id": "VEND-004",
+    "payment_date": "2026-09-20",
+    "amount_minor": 328000,
+    "method": "ach",
+    "bank_reference": "",
+    "description": "Released while invoice on hold",
+    "on_hold_invoice": true,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-AP-009",
+    "invoice_ids": [
+      "INV-009"
+    ],
+    "vendor": "Northwind Phantom LLC",
+    "vendor_id": "VEND-010",
+    "payment_date": "2026-09-20",
+    "amount_minor": 5000000,
+    "method": "wire",
+    "bank_reference": "",
+    "description": "Manual wire to a new vendor",
+    "on_hold_invoice": false,
+    "round_number": true,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-AP-012",
+    "invoice_ids": [
+      "INV-012"
+    ],
+    "vendor": "GitHub",
+    "vendor_id": "VEND-017",
+    "payment_date": "2026-09-23",
+    "amount_minor": 2100000,
+    "method": "ach",
+    "bank_reference": "",
+    "description": "Paid earlier than the deferred forecast week",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  }
+]

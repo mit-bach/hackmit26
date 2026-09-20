@@ -1,0 +1,146 @@
+{
+  "events": [
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_ch_str_001_pi",
+      "event_type": "payment_intent.succeeded",
+      "received_at": "2026-09-20T00:06:45.048153Z",
+      "provider_created_at": "2026-09-03T16:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "3774b5457914612124d4c952ad16cb0231ffbc85ae4c8305ab802305f6a678d2",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_ch_str_001_pi",
+      "receipt_count": 1,
+      "normalized_id": "PAY-STR-CH_STR_001",
+      "downstream": "ar_cash_application",
+      "result": "processed",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_ch_str_001_ch",
+      "event_type": "charge.succeeded",
+      "received_at": "2026-09-20T00:06:45.049618Z",
+      "provider_created_at": "2026-09-03T16:00:10Z",
+      "verified": true,
+      "raw_payload_hash": "db4cf2e524e3cc6a07b8a20fea8b75b5bccde80dc4f3ad7dd0812a6c10d9cc84",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_ch_str_001_ch",
+      "receipt_count": 1,
+      "normalized_id": "PAY-STR-CH_STR_001",
+      "downstream": "ar_cash_application",
+      "result": "already_processed",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_po_str_001_created",
+      "event_type": "payout.created",
+      "received_at": "2026-09-20T00:06:45.050023Z",
+      "provider_created_at": "2026-09-04T16:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "4e96794c1716d6f7cecbd48bc010878c65d413e4f66becfd2e87011efc29ccb8",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_po_str_001_created",
+      "receipt_count": 1,
+      "normalized_id": "po_str_001",
+      "downstream": "stripe_payout_reconciliation",
+      "result": "payout_recorded",
+      "error": null
+    },
+    {
+      "provider": "stripe",
+      "provider_event_id": "evt_po_str_001_recon",
+      "event_type": "payout.reconciliation_completed",
+      "received_at": "2026-09-20T00:06:45.050659Z",
+      "provider_created_at": "2026-09-04T17:00:00Z",
+      "verified": true,
+      "raw_payload_hash": "41d89589d33f3ee14052b2101b1e0fa423c5f84ab444310382cea1d0a094746a",
+      "processing_status": "processed",
+      "source_ref": "stripe:evt_po_str_001_recon",
+      "receipt_count": 1,
+      "normalized_id": "po_str_001",
+      "downstream": "stripe_payout_reconciliation",
+      "result": "payout_recorded",
+      "error": null
+    }
+  ],
+  "payouts": [
+    {
+      "provider": "stripe",
+      "event_id": "evt_po_str_001_recon",
+      "payout_id": "po_str_001",
+      "status": "paid",
+      "amount": 97070,
+      "currency": "USD",
+      "arrival_date": "2026-09-04",
+      "provider_created_at": "1788537600",
+      "source_event_type": "payout.reconciliation_completed",
+      "raw_source_ref": "stripe:evt_po_str_001_recon",
+      "reference": "STRIPE PAYOUT",
+      "lines": [
+        {
+          "line_type": "charge",
+          "amount": 1000.0,
+          "currency": "USD",
+          "reference": "INV-STR-001",
+          "description": "INV-STR-001 September platform subscription",
+          "provider_object_id": "txn_str_001",
+          "amount_minor": 100000,
+          "fee_minor": 2930,
+          "net_minor": 97070,
+          "source_object_id": "ch_str_001",
+          "created": "2026-09-03T16:00:00+00:00",
+          "category": "gross"
+        }
+      ],
+      "bank_deposit_id": "BANK-STR-001",
+      "bank_deposit_amount": 970.7,
+      "bank_deposit_currency": "USD"
+    }
+  ],
+  "reconciliations": [
+    {
+      "payout_id": "po_str_001",
+      "provider": "stripe",
+      "currency": "USD",
+      "gross_payments": 1000.0,
+      "refunds": 0.0,
+      "chargebacks": 0.0,
+      "fees": -29.3,
+      "adjustments": 0.0,
+      "other": 0.0,
+      "expected_payout": 970.7,
+      "actual_payout": 970.7,
+      "difference": 0.0,
+      "bank_deposit_amount": 970.7,
+      "bank_deposit_id": "BANK-STR-001",
+      "bank_matched": true,
+      "matched": true,
+      "status": "MATCH",
+      "exceptions": [],
+      "expected_payout_minor": 97070,
+      "actual_payout_minor": 97070,
+      "lines": [
+        {
+          "line_type": "charge",
+          "amount": 1000.0,
+          "currency": "USD",
+          "reference": "INV-STR-001",
+          "description": "INV-STR-001 September platform subscription",
+          "provider_object_id": "txn_str_001",
+          "amount_minor": 100000,
+          "fee_minor": 2930,
+          "net_minor": 97070,
+          "source_object_id": "ch_str_001",
+          "created": "2026-09-03T16:00:00+00:00",
+          "category": "gross"
+        }
+      ]
+    }
+  ],
+  "bank_deposits": {},
+  "gmail_history": {},
+  "outlook_subscriptions": {},
+  "sync_cursors": {}
+}
