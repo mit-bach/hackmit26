@@ -1,45 +1,55 @@
 from __future__ import annotations
 
-import json
+import os
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Iterator
+from uuid import uuid4
 
-from agent import (
-    approver_agent,
-    audit_agent,
-    investigator_agent,
-    preparer_agent,
-    reviewer_agent,
-    run_agent,
+from agent import agent_for_ap_profile, investigator_agent, preparer_agent, run_agent
+from ap_grants import (
+    AP_BOT_ID,
+    AP_SLUG,
+    CTL_PAY_BOT_ID,
+    CTL_PAY_MATCH_PROFILE,
+    CTL_PAY_SLUG,
+    INVESTIGATE_PROFILE,
+    PREPARE_PROFILE,
+    PROFILE_DISPLAY,
+    GrantError,
+    grants_for,
 )
+from atomic_json import write_json_atomic
 from models import (
     APCaseEvidence,
-    ApproverDecision,
-    AuditResult,
     DecisionTrace,
     FinalAPDecision,
     InvestigationReport,
     PreparerRecommendation,
-    ReviewerDecision,
 )
 from skills.loader import usage_from_agent
 from tools import DataFileError, collect_case_evidence, load_invoice, vendor_alias_established
 
-RUNS_DIR = Path(__file__).resolve().parent / "runs"
-MAX_RECONSIDERATIONS = 1
+
+def _default_runs_dir() -> Path:
+    computer = os.environ.get("HARNESS_COMPUTER")
+    if computer:
+        return Path(computer) / "runs"
+    return Path(__file__).resolve().parent / "runs"
 
 
-def _dump(model) -> str:
-    return json.dumps(model.model_dump(mode="json"), indent=2)
+RUNS_DIR = _default_runs_dir()
+MAX_RECONSIDERATIONS = 0
+
+_active_profile: str | None = None
 
 
-def _needs_investigation(evidence: APCaseEvidence, preparer: PreparerRecommendation) -> bool:
-    if evidence.exception_types:
-        return True
-    return preparer.recommendation == "INVESTIGATE"
+def _now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _blocking_approve_violations(evidence: APCaseEvidence) -> list[str]:
+def must_hold(evidence: APCaseEvidence) -> list[str]:
     """Hard policy holds that an APPROVE cannot survive."""
     violations: list[str] = []
     if evidence.duplicate_detected:
@@ -69,153 +79,286 @@ def _blocking_approve_violations(evidence: APCaseEvidence) -> list[str]:
     return violations
 
 
-def _run_preparer(invoice_id: str, evidence: APCaseEvidence) -> PreparerRecommendation:
-    return run_agent(
-        preparer_agent,
-        (
-            f"Prepare AP case {invoice_id}.\n\n"
-            "Python already computed these facts. Use them; do not recalculate:\n"
-            f"{_dump(evidence)}"
+def _blocking_approve_violations(evidence: APCaseEvidence) -> list[str]:
+    return must_hold(evidence)
+
+
+def kernel_allow_approve(evidence: APCaseEvidence) -> bool:
+    return not must_hold(evidence)
+
+
+def _needs_investigation(evidence: APCaseEvidence, preparer: PreparerRecommendation) -> bool:
+    if evidence.exception_types:
+        return True
+    return preparer.recommendation == "INVESTIGATE"
+
+
+@contextmanager
+def profile_turn(profile: str) -> Iterator[str]:
+    """One Profile per turn. Nesting would union Grants."""
+    global _active_profile
+    grants_for(AP_SLUG, profile)
+    if _active_profile is not None:
+        raise GrantError(
+            f"cannot nest Profile {profile!r} onto {_active_profile!r}; do not union Grants"
+        )
+    _active_profile = profile
+    try:
+        yield profile
+    finally:
+        _active_profile = None
+
+
+def wake_bot(
+    *,
+    slug: str,
+    profile: str,
+    prompt: str,
+    paths: list[str],
+    invoice_id: str,
+) -> PreparerRecommendation | InvestigationReport:
+    """Write a next-wake record sessions 01/02 can execute, then run the bound Profile.
+
+    Pi Handle completion is not live here. Tests patch ``run_agent``.
+    """
+    if slug != AP_SLUG:
+        raise GrantError(f"AP host cannot wake slug {slug!r}")
+    agent = agent_for_ap_profile(profile)
+    record = {
+        "bot": slug,
+        "botId": AP_BOT_ID,
+        "profile": profile,
+        "displayName": PROFILE_DISPLAY[profile],
+        "grants": list(grants_for(slug, profile)),
+        "invoice_id": invoice_id,
+        "prompt": prompt,
+        "paths": paths,
+        "createdAt": _now(),
+        "kind": "wake",
+    }
+    wake_path = Path(RUNS_DIR) / "ap" / "wakes" / f"{invoice_id}-{profile}.json"
+    write_json_atomic(wake_path, record)
+    with profile_turn(profile):
+        return run_agent(agent, prompt)
+
+
+def _evidence_path(invoice_id: str) -> Path:
+    return Path(RUNS_DIR) / "ap" / "packets" / f"{invoice_id}.evidence.json"
+
+
+def _packet_path(invoice_id: str) -> Path:
+    return Path(RUNS_DIR) / "ap" / "packets" / f"{invoice_id}.json"
+
+
+def _handle_path(invoice_id: str) -> Path:
+    return Path(RUNS_DIR) / "ap" / "handles" / f"{invoice_id}.json"
+
+
+def _write_evidence(invoice_id: str, evidence: APCaseEvidence) -> Path:
+    path = _evidence_path(invoice_id)
+    write_json_atomic(path, evidence.model_dump(mode="json"))
+    return path
+
+
+def _run_preparer(invoice_id: str, evidence_path: Path) -> PreparerRecommendation:
+    rel = evidence_path.as_posix()
+    return wake_bot(
+        slug=AP_SLUG,
+        profile=PREPARE_PROFILE,
+        prompt=(
+            f"profile: {PREPARE_PROFILE}\n"
+            f"Prepare AP case {invoice_id}.\n"
+            f"Kernel evidence path: {rel}\n"
+            "Call get_case_evidence. Do not recalculate. Do not pay."
         ),
+        paths=[rel],
+        invoice_id=invoice_id,
     )
 
 
 def _run_investigator(
     invoice_id: str,
-    evidence: APCaseEvidence,
-    preparer: PreparerRecommendation,
+    evidence_path: Path,
+    preparer_path: Path,
 ) -> InvestigationReport:
-    return run_agent(
-        investigator_agent,
-        (
-            f"Investigate exceptions on invoice {invoice_id}.\n\n"
-            f"Exception types: {evidence.exception_types}\n\n"
-            f"Python facts:\n{_dump(evidence)}\n\n"
-            f"Preparer recommendation:\n{_dump(preparer)}\n\n"
-            "Search policies and prior cases. If nothing supports payment, HOLD."
+    rel = evidence_path.as_posix()
+    prep = preparer_path.as_posix()
+    return wake_bot(
+        slug=AP_SLUG,
+        profile=INVESTIGATE_PROFILE,
+        prompt=(
+            f"profile: {INVESTIGATE_PROFILE}\n"
+            f"Investigate exceptions on invoice {invoice_id}.\n"
+            f"Kernel evidence path: {rel}\n"
+            f"Preparer packet path: {prep}\n"
+            "Search policies and prior cases. If nothing supports payment, HOLD. Do not pay."
         ),
+        paths=[rel, prep],
+        invoice_id=invoice_id,
     )
 
 
-def _run_reviewer(
-    invoice_id: str,
+def _propose(
     evidence: APCaseEvidence,
     preparer: PreparerRecommendation,
     investigation: InvestigationReport | None,
-    audit: AuditResult | None = None,
-) -> ReviewerDecision:
-    extra = ""
-    if audit is not None:
-        extra = (
-            "\n\nAudit found a material problem with the previous APPROVE. "
-            "Reconsider independently.\n"
-            f"{_dump(audit)}"
-        )
-    investigation_block = (
-        f"\n\nInvestigator report:\n{_dump(investigation)}" if investigation else "\n\nNo investigator report. This was treated as a straightforward case."
-    )
-    return run_agent(
-        reviewer_agent,
-        (
-            f"Independently review invoice {invoice_id}.\n\n"
-            f"Python facts:\n{_dump(evidence)}\n\n"
-            f"Preparer:\n{_dump(preparer)}"
-            f"{investigation_block}"
-            f"{extra}"
-        ),
-    )
+) -> tuple[str, list[str], float, list[str], list[str]]:
+    holds = must_hold(evidence)
+    if investigation is not None:
+        rec = investigation.recommendation
+        confidence = investigation.confidence
+        reasons = list(investigation.findings) or [investigation.recommendation]
+        evidence_used = list(preparer.evidence_used)
+    else:
+        rec = preparer.recommendation
+        confidence = preparer.confidence
+        reasons = list(preparer.reasons)
+        evidence_used = list(preparer.evidence_used)
+    if rec == "INVESTIGATE":
+        rec = "HOLD"
+        reasons.append("Final AP state cannot be INVESTIGATE; held.")
+    if holds:
+        rec = "HOLD"
+        reasons.extend(f"Kernel must_hold: {item}" for item in holds)
+        confidence = min(confidence, 0.7)
+    if rec not in {"APPROVE", "HOLD"}:
+        rec = "HOLD"
+        reasons.append("Unknown recommendation held closed.")
+    return rec, reasons, confidence, evidence_used, holds
 
 
-def _run_approver(
+def _write_match_packet(
     invoice_id: str,
-    evidence: APCaseEvidence,
+    evidence_path: Path,
     preparer: PreparerRecommendation,
     investigation: InvestigationReport | None,
-    reviewer: ReviewerDecision,
-) -> ApproverDecision:
-    investigation_block = (
-        f"\n\nInvestigator:\n{_dump(investigation)}" if investigation else "\n\nNo investigator report."
-    )
-    return run_agent(
-        approver_agent,
-        (
-            f"Make the final autonomous payment decision for {invoice_id}. "
-            "Decide APPROVE or HOLD. There is no human approver.\n\n"
-            f"Python facts:\n{_dump(evidence)}\n\n"
-            f"Preparer:\n{_dump(preparer)}"
-            f"{investigation_block}\n\n"
-            f"Reviewer:\n{_dump(reviewer)}"
-        ),
-    )
+    proposed: str,
+    holds: list[str],
+) -> Path:
+    profiles = [PREPARE_PROFILE]
+    if investigation is not None:
+        profiles.append(INVESTIGATE_PROFILE)
+    payload = {
+        "invoice_id": invoice_id,
+        "bot": AP_SLUG,
+        "profiles_run": profiles,
+        "evidence_path": evidence_path.as_posix(),
+        "preparer": preparer.model_dump(mode="json"),
+        "investigation": investigation.model_dump(mode="json") if investigation else None,
+        "kernel_holds": holds,
+        "proposed_decision": proposed,
+        "posted_to_pool": False,
+    }
+    path = _packet_path(invoice_id)
+    write_json_atomic(path, payload)
+    return path
 
 
-def _run_audit(
+def _write_ctl_pay_handle(invoice_id: str, packet_path: Path, proposed: str) -> dict | None:
+    if proposed != "APPROVE":
+        return None
+    handle_id = f"h_{uuid4()}"
+    rel = packet_path.as_posix()
+    prompt = (
+        f"profile: {CTL_PAY_MATCH_PROFILE}\n"
+        f"Review AP match packet at {rel}\n"
+        "Concur or refuse. Do not ask a human. Peer Handle is not approval."
+    )
+    payload = {
+        "id": handle_id,
+        "from": AP_BOT_ID,
+        "to": CTL_PAY_BOT_ID,
+        "toSlug": CTL_PAY_SLUG,
+        "profile": CTL_PAY_MATCH_PROFILE,
+        "prompt": prompt,
+        "paths": [rel],
+        "kind": "a2a_handoff",
+        "status": "accepted",
+        "conversation": {
+            "kind": "peer_dm",
+            "fromId": AP_BOT_ID,
+            "toId": CTL_PAY_BOT_ID,
+        },
+        "verifier_missing": False,
+        "invoice_id": invoice_id,
+        "createdAt": _now(),
+        "path": str(_handle_path(invoice_id)),
+        "queue": {"owner": CTL_PAY_SLUG, "profile": CTL_PAY_MATCH_PROFILE},
+        "humanQueue": False,
+        "done": False,
+    }
+    write_json_atomic(_handle_path(invoice_id), payload)
+    return payload
+
+
+def commit_to_pay_pool(
     invoice_id: str,
-    evidence: APCaseEvidence,
-    approver: ApproverDecision,
-    investigation: InvestigationReport | None,
-) -> AuditResult:
-    investigation_block = (
-        f"\n\nInvestigator:\n{_dump(investigation)}" if investigation else ""
-    )
-    return run_agent(
-        audit_agent,
-        (
-            f"Audit the autonomous decision for {invoice_id}.\n\n"
-            f"Python facts:\n{_dump(evidence)}\n\n"
-            f"Approver decision:\n{_dump(approver)}"
-            f"{investigation_block}"
-        ),
-    )
+    *,
+    kernel_allow: bool,
+    ctl_pay_concurred: bool,
+    confidence: float | None = None,
+) -> bool:
+    """Session 09 calls this after ctl-pay concurs. The AP host never auto-calls it."""
+    if not kernel_allow or not ctl_pay_concurred:
+        return False
+    from scheduling.pool import add_approved
+
+    add_approved(invoice_id, source="ctl_pay", confidence=confidence)
+    return True
 
 
-def _apply_safety_net(evidence: APCaseEvidence, approver: ApproverDecision, audit: AuditResult) -> AuditResult:
-    """If the model approved through a must_hold control, force reconsideration."""
-    if approver.decision != "APPROVE":
-        return audit
-    violations = _blocking_approve_violations(evidence)
-    if not violations:
-        return audit
-    findings = list(audit.findings) + [
-        f"Safety net: APPROVE conflicts with {item}" for item in violations
-    ]
-    return audit.model_copy(
-        update={
-            "passed": False,
-            "requires_reconsideration": True,
-            "policy_violations": list(dict.fromkeys(audit.policy_violations + violations)),
-            "findings": findings,
-        }
+def complete_ctl_pay_handle(
+    invoice_id: str,
+    *,
+    bot_decision: str,
+    source_slug: str,
+    audit_wake: bool = False,
+    runs_dir: Path | None = None,
+) -> dict:
+    """Kernel door for ctl-pay concurrence. Bot ap cannot call this as itself."""
+    import json
+
+    from verifier.concurrence import apply_ctl_pay_match
+
+    packet_path = _packet_path(invoice_id)
+    packet = json.loads(packet_path.read_text(encoding="utf-8"))
+    if not isinstance(packet, dict):
+        raise ValueError(f"AP packet {packet_path} is not an object")
+    return apply_ctl_pay_match(
+        invoice_id,
+        packet=packet,
+        bot_decision=bot_decision,
+        handle_path=_handle_path(invoice_id),
+        audit_wake=audit_wake,
+        source_slug=source_slug,
+        runs_dir=runs_dir or Path(RUNS_DIR),
     )
 
 
 def _build_final(
     evidence: APCaseEvidence,
-    approver: ApproverDecision,
-    audit: AuditResult,
+    proposed: str,
+    reasons: list[str],
+    confidence: float,
+    evidence_used: list[str],
     investigation_performed: bool,
-    reconsideration_performed: bool,
+    pending_verifier: bool,
 ) -> FinalAPDecision:
-    decision = approver.decision
-    reasons = list(approver.reasons)
-    if decision == "APPROVE" and not audit.passed:
-        decision = "HOLD"
-        reasons.append("Audit could not support approval; autonomous system held payment.")
-    evidence_used = list(approver.evidence_used)
-    if investigation_performed:
-        evidence_used = list(dict.fromkeys(evidence_used))
+    audit_status = "PENDING_CTL_PAY" if pending_verifier else "KERNEL_HOLD"
+    if proposed == "HOLD" and not pending_verifier:
+        audit_status = "HELD" if not must_hold(evidence) else "KERNEL_HOLD"
     return FinalAPDecision(
         invoice_id=evidence.invoice_id,
-        decision=decision,
-        confidence=approver.confidence if decision == approver.decision else min(approver.confidence, 0.7),
+        decision=proposed,  # type: ignore[arg-type]
+        confidence=confidence,
         reasons=reasons,
         amount_difference=evidence.amount_difference,
         duplicate_detected=evidence.duplicate_detected,
         receipt_status=evidence.receipt_status,
         evidence_used=evidence_used,
         investigation_performed=investigation_performed,
-        audit_status="PASS" if audit.passed and decision == approver.decision else "FAIL",
-        reconsideration_performed=reconsideration_performed,
+        audit_status=audit_status,
+        reconsideration_performed=False,
     )
 
 
@@ -224,7 +367,7 @@ def _save_trace(trace: DecisionTrace) -> Path:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = RUNS_DIR / f"{trace.invoice_id}-{stamp}.json"
     trace.trace_path = str(path)
-    path.write_text(trace.model_dump_json(indent=2) + "\n")
+    write_json_atomic(path, trace.model_dump(mode="json"))
     return path
 
 
@@ -232,71 +375,43 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
     if load_invoice(invoice_id) is None:
         raise DataFileError(f"Invoice {invoice_id} was not found")
 
-    started_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    started_at = _now()
     evidence = collect_case_evidence(invoice_id)
+    evidence_path = _write_evidence(invoice_id, evidence)
 
     print(f"Invoice: {invoice_id}", flush=True)
     print(f"Python facts: exceptions={evidence.exception_types or ['none']}", flush=True)
     print(flush=True)
 
-    preparer = _run_preparer(invoice_id, evidence)
+    preparer = _run_preparer(invoice_id, evidence_path)
+    preparer_note = Path(RUNS_DIR) / "ap" / "packets" / f"{invoice_id}.prepare.json"
+    write_json_atomic(preparer_note, preparer.model_dump(mode="json"))
 
     investigation = None
     if _needs_investigation(evidence, preparer):
-        investigation = _run_investigator(invoice_id, evidence, preparer)
+        investigation = _run_investigator(invoice_id, evidence_path, preparer_note)
 
-    reviewer = _run_reviewer(invoice_id, evidence, preparer, investigation)
-    approver = _run_approver(invoice_id, evidence, preparer, investigation, reviewer)
-    audit = _apply_safety_net(evidence, approver, _run_audit(invoice_id, evidence, approver, investigation))
-
-    reconsideration = None
-    reconsideration_performed = False
-    should_reconsider = (
-        approver.decision == "APPROVE"
-        and (audit.requires_reconsideration or not audit.passed)
-        and MAX_RECONSIDERATIONS >= 1
+    proposed, reasons, confidence, evidence_used, holds = _propose(
+        evidence, preparer, investigation
     )
-    if should_reconsider:
-        reconsideration_performed = True
-        print("Audit requested one reconsideration cycle.\n", flush=True)
-        previous = {
-            "reviewer": reviewer.model_dump(),
-            "approver": approver.model_dump(),
-            "audit": audit.model_dump(),
-        }
-        reviewer = _run_reviewer(invoice_id, evidence, preparer, investigation, audit)
-        approver = _run_approver(invoice_id, evidence, preparer, investigation, reviewer)
-        audit = _apply_safety_net(
-            evidence, approver, _run_audit(invoice_id, evidence, approver, investigation)
-        )
-        if approver.decision == "APPROVE" and not audit.passed:
-            approver = approver.model_copy(
-                update={
-                    "decision": "HOLD",
-                    "reasons": approver.reasons
-                    + ["Held after audit reconsideration because approval remained unsupported."],
-                }
-            )
-            audit = audit.model_copy(update={"requires_reconsideration": False})
-        reconsideration = {
-            "previous": previous,
-            "reviewer": reviewer.model_dump(),
-            "approver": approver.model_dump(),
-            "audit": audit.model_dump(),
-        }
-
+    packet_path = _write_match_packet(
+        invoice_id, evidence_path, preparer, investigation, proposed, holds
+    )
+    handle = _write_ctl_pay_handle(invoice_id, packet_path, proposed)
+    pending = handle is not None
     final = _build_final(
         evidence,
-        approver,
-        audit,
+        proposed,
+        reasons,
+        confidence,
+        evidence_used,
         investigation_performed=investigation is not None,
-        reconsideration_performed=reconsideration_performed,
+        pending_verifier=pending,
     )
 
     ran = [preparer_agent]
     if investigation is not None:
         ran.append(investigator_agent)
-    ran.extend([reviewer_agent, approver_agent, audit_agent])
 
     trace = DecisionTrace(
         invoice_id=invoice_id,
@@ -304,16 +419,33 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
         deterministic_evidence=evidence,
         preparer=preparer,
         investigation=investigation,
-        reviewer=reviewer,
-        approver=approver,
-        audit=audit,
-        reconsideration=reconsideration,
+        reviewer=None,
+        approver=None,
+        audit=None,
+        reconsideration=None,
         final=final,
         agents=[usage_from_agent(item) for item in ran],
+        packet_path=str(packet_path),
+        verifier_handle=handle,
+        kernel_holds=holds,
+        posted_to_pool=False,
+        wakes=[
+            {
+                "slug": AP_SLUG,
+                "profile": PREPARE_PROFILE,
+                "path": str(Path(RUNS_DIR) / "ap" / "wakes" / f"{invoice_id}-{PREPARE_PROFILE}.json"),
+            }
+        ],
     )
+    if investigation is not None:
+        trace.wakes.append(
+            {
+                "slug": AP_SLUG,
+                "profile": INVESTIGATE_PROFILE,
+                "path": str(
+                    Path(RUNS_DIR) / "ap" / "wakes" / f"{invoice_id}-{INVESTIGATE_PROFILE}.json"
+                ),
+            }
+        )
     _save_trace(trace)
-    if final.decision == "APPROVE":
-        from scheduling.pool import add_approved
-
-        add_approved(invoice_id, source="ap_workflow", confidence=final.confidence)
     return trace

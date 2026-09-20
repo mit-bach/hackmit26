@@ -3,6 +3,9 @@
 Every close CLI entrypoint must call these functions. The older
 ``run_cfo_close`` packet in ``close.orchestrator`` is an AP/accrual/schedule
 coordinator used by tests; it is not a period-close state machine.
+
+Bot close sequences Profiles in ``close.host``. That host never locks.
+Period lock stays here.
 """
 
 from __future__ import annotations

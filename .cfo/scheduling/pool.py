@@ -4,10 +4,23 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from scheduling.cash import policy_eligible_for_pool
+from models import PaymentCandidate
+from scheduling.cash import payment_candidate, policy_eligible_for_pool
 from tools import DATA_DIR, all_invoices, load_invoice
 
 POOL_PATH = DATA_DIR / "approved_pool.json"
+
+
+def candidates_from_pool() -> list[PaymentCandidate]:
+    rows = load_pool()
+    candidates = []
+    for row in rows:
+        item = payment_candidate(
+            row["invoice_id"], approval_source=row.get("approval_source", "ap_workflow")
+        )
+        if item is not None:
+            candidates.append(item)
+    return candidates
 
 
 def load_pool() -> list[dict]:
@@ -61,7 +74,8 @@ def seed_from_traces(runs_dir: Path) -> list[str]:
     for invoice_id, path in latest.items():
         payload = json.loads(path.read_text())
         decision = (payload.get("final") or {}).get("decision")
-        if decision == "APPROVE":
+        posted = payload.get("posted_to_pool") is True
+        if decision == "APPROVE" and posted:
             add_approved(
                 invoice_id,
                 source="ap_workflow",

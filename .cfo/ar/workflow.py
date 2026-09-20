@@ -11,15 +11,17 @@ from ar.cash import (
     generate_cash_candidates,
     needs_reviewer,
     policy_cash_decision,
-    reviewer_policy,
     validate_proposal,
 )
 from ar.collections import (
+    WRITEOFF_ACTIONS,
     collection_candidates,
     enforce_collection_decision,
     policy_collection_decision,
 )
 from ar.context import ar_close_snapshot
+from ar.drain import mark_apply_drained, new_deposits
+from ar.handles import collect_drain_handle, collect_writeoff_handle, persist_drain
 from ar.ledger import mark_payment_decision, post_application
 from ar.models import (
     AgingReport,
@@ -58,6 +60,22 @@ def run_aging(as_of: str = DEFAULT_AS_OF, *, persist: bool = True) -> AgingRepor
     return build_aging_report(as_of, persist=persist)
 
 
+def drain_new_deposits(
+    as_of: str = DEFAULT_AS_OF,
+    *,
+    live: bool | None = None,
+    persist: bool = True,
+) -> list:
+    """Run apply on every unmatched deposit dated on or before as-of."""
+    traces = []
+    for payment in list(new_deposits(as_of)):
+        traces.append(
+            run_cash_apply(payment.payment_id, as_of=as_of, live=live, persist=persist)
+        )
+    persist_drain(as_of, [item.payment_id for item in traces])
+    return traces
+
+
 def _live_collection_decision(facts, as_of: str) -> CollectionDecision:
     from agent import run_agent
     from ar.agents import collections_agent
@@ -80,9 +98,36 @@ def run_collections(
 ) -> CollectionRun:
     live = bool(os.environ.get("OPENAI_API_KEY")) if live is None else live
     started = _now()
+    pending = new_deposits(as_of)
+    if pending:
+        handle_path = collect_drain_handle(as_of, pending) if persist else None
+        run = CollectionRun(
+            as_of_date=as_of,
+            started_at=started,
+            candidates=[],
+            decisions=[],
+            outbox=[],
+            blocked=True,
+            block_reason=(
+                "Apply has not drained new deposits for this as-of. "
+                "Handle apply / apply with the unmatched payment ids. Do not chase."
+            ),
+            apply_handle_path=str(handle_path) if handle_path else None,
+        )
+        if persist:
+            path = save_trace("collections-blocked", run)
+            run.trace_path = str(path)
+            add_event(
+                "collections_blocked",
+                f"Collections blocked as of {as_of}: {len(pending)} undrained deposits",
+                details={"payment_ids": [item.payment_id for item in pending]},
+            )
+        return run
+
     candidates = collection_candidates(as_of)
     decisions: list[CollectionDecision] = []
     messages: list[CollectionMessage] = []
+    verifier_handles: list[str] = []
     used_agent = False
     for facts in candidates:
         if live:
@@ -92,6 +137,8 @@ def run_collections(
             raw = policy_collection_decision(facts)
         decision = enforce_collection_decision(facts, raw)
         decisions.append(decision)
+        if persist and decision.action in WRITEOFF_ACTIONS:
+            verifier_handles.append(str(collect_writeoff_handle(facts, decision)))
         if decision.action in {"SEND_GENTLE_REMINDER", "SEND_OVERDUE_REMINDER", "SEND_FINAL_NOTICE"}:
             if persist and decision.draft_message:
                 invoice = get_invoice(decision.invoice_id)
@@ -132,7 +179,7 @@ def run_collections(
                 "collections_review",
                 f"{decision.action} for {decision.invoice_id}: {decision.reason}",
                 invoice_ids=[decision.invoice_id],
-                details=decision.model_dump(mode="json"),
+                details={**decision.model_dump(mode="json"), "queue_owner": "ctl-pay" if decision.action in WRITEOFF_ACTIONS else "collect"},
             )
 
     agents = []
@@ -148,6 +195,9 @@ def run_collections(
         outbox=messages,
         agents=agents,
         used_agent=used_agent,
+        blocked=False,
+        verifier_handle_paths=verifier_handles,
+        drained_payment_ids=[],
     )
     if persist:
         path = save_trace("collections", run)
@@ -172,20 +222,6 @@ def _live_cash_proposal(facts, payment_id: str) -> CashApplicationProposal:
             "Python already computed these candidates. Choose among them; "
             "do not invent combinations:\n"
             f"{_dump(facts)}"
-        ),
-    )
-
-
-def _live_review(proposal: CashApplicationProposal, facts) -> object:
-    from agent import run_agent
-    from ar.agents import cash_reviewer_agent
-
-    return run_agent(
-        cash_reviewer_agent,
-        (
-            "Review this cash-application proposal.\n\n"
-            f"Proposal:\n{_dump(proposal)}\n\n"
-            f"Facts:\n{_dump(facts)}"
         ),
     )
 
@@ -236,6 +272,8 @@ def run_cash_apply(
         if persist:
             path = save_trace(f"cash-{payment.payment_id}", trace)
             trace.trace_path = str(path)
+            live_payment = get_payment(payment.payment_id) or payment
+            mark_apply_drained(live_payment, as_of)
         return trace
 
     facts = generate_cash_candidates(payment)
@@ -261,27 +299,28 @@ def run_cash_apply(
             review_question="Proposal failed invariant checks and was not posted.",
         )
     elif needs_reviewer(preparer, facts):
-        reviewer = _live_review(preparer, facts) if live else reviewer_policy(preparer, facts)
-        if reviewer.recommendation != "AUTO_APPLY" or not reviewer.agree_with_preparer:
-            final = CashApplicationProposal(
-                payment_id=payment.payment_id,
-                decision="HUMAN_REVIEW",
-                applications=[],
-                confidence=reviewer.confidence,
-                reason="; ".join(reviewer.reasons) or "Reviewer sent this payment to human review.",
-                evidence_used=preparer.evidence_used,
-                ambiguities=preparer.ambiguities,
-                review_question=preparer.review_question or "Reviewer found an equally plausible alternative.",
-                precedent_used=preparer.precedent_used,
-                precedent_affected=preparer.precedent_affected,
-            )
+        final = CashApplicationProposal(
+            payment_id=payment.payment_id,
+            decision="HUMAN_REVIEW",
+            applications=list(preparer.applications),
+            confidence=preparer.confidence,
+            reason=(
+                "Material or competing match. Fail-closed. Handle ctl-cash / review-apply. "
+                "Do not AUTO_APPLY."
+            ),
+            evidence_used=preparer.evidence_used,
+            ambiguities=list(preparer.ambiguities)
+            + [item.candidate_id for item in facts.candidates],
+            review_question=preparer.review_question
+            or "Which Kernel candidate should receive this payment?",
+            precedent_used=preparer.precedent_used,
+            precedent_affected=preparer.precedent_affected,
+        )
 
     posted = False
     record = None
     journals = []
-    if persist and final.decision == "AUTO_APPLY" and validation.passed and not (
-        reviewer and (reviewer.recommendation != "AUTO_APPLY" or not reviewer.agree_with_preparer)
-    ):
+    if persist and final.decision == "AUTO_APPLY" and validation.passed:
         final_validation = validate_proposal(payment, final)
         if final_validation.passed:
             record = post_application(payment, final)
@@ -304,13 +343,14 @@ def run_cash_apply(
 
     agents = []
     if used_agent:
-        from ar.agents import cash_application_agent, cash_reviewer_agent
+        from ar.agents import cash_application_agent
 
         agents = [usage_from_agent(cash_application_agent)]
-        if reviewer is not None:
-            agents.append(usage_from_agent(cash_reviewer_agent))
 
     payment_after = get_payment(payment.payment_id) or payment
+    if persist:
+        payment_after = mark_apply_drained(payment_after, as_of)
+
     trace = CashApplyTrace(
         payment_id=payment.payment_id,
         started_at=_now(),
@@ -335,17 +375,20 @@ def run_cash_apply(
         if final.decision == "HUMAN_REVIEW" and not posted:
             from ar.review import enqueue_review
 
-            enqueue_review(trace)
+            item = enqueue_review(trace)
+            trace.verifier_handle_path = item.handle_path
+            trace.packet_path = item.packet_path
     return trace
 
 
 def run_ar_demo(as_of: str = DEFAULT_AS_OF) -> dict:
-    """Deterministic judge-facing story. Resets AR state so the demo is reproducible."""
+    """Deterministic judge-facing story. Apply drains, then collect. Resets AR state."""
     reset_state()
     before = run_aging(as_of)
-    collections = run_collections(as_of, live=False)
     clear = run_cash_apply("PAY-001", as_of=as_of, live=False)
     ambiguous = run_cash_apply("PAY-AMBIGUOUS", as_of=as_of, live=False)
+    drain_new_deposits(as_of, live=False)
+    collections = run_collections(as_of, live=False)
     after = run_aging(as_of)
     snapshot = ar_close_snapshot(as_of)
     return {
@@ -384,7 +427,7 @@ def run_ar_forecast_demo(as_of: str = DEFAULT_AS_OF) -> dict:
             MatchApplication(invoice_id="INV-AR-102", amount=15000),
         ],
         "Customer confirmed both invoices in remittance email",
-        reviewer="controller",
+        reviewer="ctl-cash",
     )
     aging_after = run_aging(as_of)
     forecast_after = build_forecast(as_of, prior=forecast_before, version=next_version(as_of))

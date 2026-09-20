@@ -28,6 +28,7 @@
       "name": "product",
       "roots": [
         { "path": ".cfo", "optional": false },
+        { "path": ".cfo-v2", "optional": true },
         { "path": ".harness", "optional": false }
       ],
       "include_files": [
@@ -130,7 +131,7 @@
       "default_author": "agent"
     }
   ],
-  "active_subtrees": [".cfo", ".harness/Harness-v2"],
+  "active_subtrees": [".cfo", ".harness/Harness-v2", ".cfo-v2"],
   "branch": {
     "main": "main",
     "forbid_force_push_main": true,

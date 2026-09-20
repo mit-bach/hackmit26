@@ -1,22 +1,20 @@
 {
   "period": {
     "period": "2026-09",
-    "status": "CLOSED",
-    "opened_at": "2026-09-19T21:13:48Z",
+    "status": "BLOCKED",
+    "opened_at": "2026-09-20T00:25:48Z",
     "target_close_date": "2026-09-30",
-    "closed_at": "2026-09-19T21:13:56Z",
+    "closed_at": null,
     "reopened_at": null,
     "reopen_reason": "",
-    "scenario": "seed_demo",
-    "snapshot_ids": [
-      "2026-09-20260919T211356Z-06"
-    ],
-    "approved_by": "python-gate",
-    "approval_decision": "APPROVE_CLOSE",
-    "approval_reason": "Python close gates passed. No unresolved HUMAN_REVIEW remains.",
-    "approval_at": "2026-09-19T21:13:56Z"
+    "scenario": "demo",
+    "snapshot_ids": [],
+    "approved_by": null,
+    "approval_decision": null,
+    "approval_reason": "",
+    "approval_at": null
   },
-  "close_id": "20260919T211348Z",
+  "close_id": "20260920T002548Z",
   "tasks": [
     {
       "task_id": "ingest",
@@ -31,17 +29,17 @@
       "blocker_reason": "",
       "blocking_items": [],
       "evidence_refs": [
-        "/Users/rohandalal/Desktop/hackmit26/runs/ingestion/ingest-2026-09-20260919T211348Z.json"
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/ingestion/ingest-2026-09-20260920T002548Z.json"
       ],
       "evidence": [],
       "output_refs": [
-        "/Users/rohandalal/Desktop/hackmit26/runs/ingestion/ingest-2026-09-20260919T211348Z.json"
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/ingestion/ingest-2026-09-20260920T002548Z.json"
       ],
       "requires_review": false,
       "reviewer": "",
       "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:48Z",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": "2026-09-20T00:25:48Z",
       "stale": false
     },
     {
@@ -102,8 +100,8 @@
       "requires_review": false,
       "reviewer": "",
       "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:48Z",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": "2026-09-20T00:25:48Z",
       "stale": false
     },
     {
@@ -130,8 +128,8 @@
       "requires_review": false,
       "reviewer": "",
       "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:48Z",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": "2026-09-20T00:25:48Z",
       "stale": false
     },
     {
@@ -145,19 +143,21 @@
       "dependencies": [
         "ingest"
       ],
-      "status": "COMPLETE",
-      "blocker_reason": "",
+      "status": "NEEDS_REVIEW",
+      "blocker_reason": "Cash: $12.40 unexplained difference",
       "blocking_items": [],
-      "evidence_refs": [],
+      "evidence_refs": [
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/cash_recon/2026-09-20260920T002548Z.json"
+      ],
       "evidence": [],
       "output_refs": [
-        "/Users/rohandalal/Desktop/hackmit26/runs/cash_recon/2026-09-20260919T211353Z.json"
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/cash_recon/2026-09-20260920T002548Z.json"
       ],
       "requires_review": true,
       "reviewer": "Cash Reconciliation Reviewer",
-      "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:53Z",
+      "review_status": "NEEDS_REVIEW",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": null,
       "stale": false
     },
     {
@@ -175,17 +175,17 @@
       "blocker_reason": "",
       "blocking_items": [],
       "evidence_refs": [
-        "/Users/rohandalal/Desktop/hackmit26/traces/accruals/2026-09/20260919T211348Z"
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/traces/accruals/2026-09/20260920T002548Z"
       ],
       "evidence": [],
       "output_refs": [
-        "/Users/rohandalal/Desktop/hackmit26/traces/accruals/2026-09/20260919T211348Z"
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/traces/accruals/2026-09/20260920T002548Z"
       ],
       "requires_review": false,
       "reviewer": "",
       "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:48Z",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": "2026-09-20T00:25:48Z",
       "stale": false
     },
     {
@@ -227,8 +227,8 @@
       "requires_review": true,
       "reviewer": "Prepaid Reviewer",
       "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:48Z",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": "2026-09-20T00:25:48Z",
       "stale": false
     },
     {
@@ -263,8 +263,8 @@
       "requires_review": true,
       "reviewer": "Fixed Asset Reviewer",
       "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:48Z",
-      "completed_at": "2026-09-19T21:13:48Z",
+      "started_at": "2026-09-20T00:25:48Z",
+      "completed_at": "2026-09-20T00:25:48Z",
       "stale": false
     },
     {
@@ -283,45 +283,17 @@
         "ar",
         "ap"
       ],
-      "status": "COMPLETE",
-      "blocker_reason": "",
+      "status": "BLOCKED",
+      "blocker_reason": "Upstream unresolved: cash",
       "blocking_items": [],
-      "evidence_refs": [
-        "cash_recon:2026-09",
-        "/Users/rohandalal/Desktop/hackmit26/runs/cash_recon/2026-09-20260919T211353Z.json",
-        "data/ar_invoices.json",
-        "data/invoices.json",
-        "ACC-202609-001",
-        "ACC-202609-002",
-        "ACC-202609-003",
-        "ACC-202609-004",
-        "ACC-202609-005",
-        "ACC-202609-006",
-        "DOC-INS-2026",
-        "DOC-SFT-2025",
-        "DOC-RENT-2026",
-        "DOC-LAPTOP-FLEET",
-        "DOC-MACH-120",
-        "DOC-SERVER-24K",
-        "DOC-SOFT-CAP",
-        "DOC-DELL-R760",
-        "fixed_assets.depreciation_schedule"
-      ],
+      "evidence_refs": [],
       "evidence": [],
-      "output_refs": [
-        "BSR-2026-09-Cash",
-        "BSR-2026-09-AccountsReceivable",
-        "BSR-2026-09-AccountsPayable",
-        "BSR-2026-09-AccruedExpenses",
-        "BSR-2026-09-PrepaidExpenses",
-        "BSR-2026-09-FixedAssets",
-        "BSR-2026-09-AccumulatedDepreciation"
-      ],
+      "output_refs": [],
       "requires_review": true,
       "reviewer": "Balance Sheet Reconciliation Reviewer",
-      "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:53Z",
-      "completed_at": "2026-09-19T21:13:53Z",
+      "review_status": "",
+      "started_at": null,
+      "completed_at": null,
       "stale": false
     },
     {
@@ -335,19 +307,17 @@
       "dependencies": [
         "bs_recon"
       ],
-      "status": "COMPLETE",
-      "blocker_reason": "",
+      "status": "NOT_STARTED",
+      "blocker_reason": "Waiting on blocked upstream work",
       "blocking_items": [],
       "evidence_refs": [],
       "evidence": [],
-      "output_refs": [
-        "no_exceptions"
-      ],
+      "output_refs": [],
       "requires_review": true,
       "reviewer": "Month-End Close Reviewer",
-      "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:53Z",
-      "completed_at": "2026-09-19T21:13:53Z",
+      "review_status": "",
+      "started_at": null,
+      "completed_at": null,
       "stale": false
     },
     {
@@ -361,20 +331,17 @@
       "dependencies": [
         "exceptions"
       ],
-      "status": "COMPLETE",
+      "status": "NOT_STARTED",
       "blocker_reason": "",
       "blocking_items": [],
       "evidence_refs": [],
       "evidence": [],
-      "output_refs": [
-        "final_review",
-        "APPROVE_CLOSE"
-      ],
+      "output_refs": [],
       "requires_review": true,
       "reviewer": "Month-End Close Reviewer",
-      "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:56Z",
-      "completed_at": "2026-09-19T21:13:56Z",
+      "review_status": "",
+      "started_at": null,
+      "completed_at": null,
       "stale": false
     },
     {
@@ -388,19 +355,17 @@
       "dependencies": [
         "final_review"
       ],
-      "status": "COMPLETE",
+      "status": "NOT_STARTED",
       "blocker_reason": "",
       "blocking_items": [],
       "evidence_refs": [],
       "evidence": [],
-      "output_refs": [
-        "/Users/rohandalal/Desktop/hackmit26/runs/month_end/snapshots/2026-09-20260919T211356Z-06.json"
-      ],
+      "output_refs": [],
       "requires_review": false,
       "reviewer": "",
-      "review_status": "COMPLETE",
-      "started_at": "2026-09-19T21:13:56Z",
-      "completed_at": "2026-09-19T21:13:56Z",
+      "review_status": "",
+      "started_at": null,
+      "completed_at": null,
       "stale": false
     }
   ],
@@ -409,6 +374,21 @@
       "kind": "accrual_insufficient",
       "ref": "NewForge Consulting",
       "detail": "NewForge Consulting: insufficient accrual evidence"
+    },
+    {
+      "kind": "cash_unexplained",
+      "ref": "TXN-2026-09-015",
+      "detail": "Cash: $12.40 unexplained difference"
+    },
+    {
+      "kind": "bs_recon",
+      "ref": "PAY-CLOSE-4500",
+      "detail": "AR: $4,500 unmatched customer payment"
+    },
+    {
+      "kind": "prepaid_evidence",
+      "ref": "PRE-INS-MISSING",
+      "detail": "Prepaids: missing insurance policy evidence"
     }
   ],
   "journal_entry_ids": [
@@ -431,21 +411,16 @@
     "JE-202609-018",
     "JE-202609-019",
     "JE-202609-020",
-    "JE-202609-015",
-    "JE-202609-021"
+    "JE-202609-015"
   ],
-  "reconciliation_ids": [
-    "BSR-2026-09-Cash",
-    "BSR-2026-09-AccountsReceivable",
-    "BSR-2026-09-AccountsPayable",
-    "BSR-2026-09-AccruedExpenses",
-    "BSR-2026-09-PrepaidExpenses",
-    "BSR-2026-09-FixedAssets",
-    "BSR-2026-09-AccumulatedDepreciation"
+  "reconciliation_ids": [],
+  "human_review_items": [
+    "Cash: $12.40 unexplained difference",
+    "AR: $4,500 unmatched customer payment",
+    "Prepaids: missing insurance policy evidence"
   ],
-  "human_review_items": [],
   "evidence_refs": [],
-  "completion_pct": 100.0,
+  "completion_pct": 54.5,
   "identity_links": [
     {
       "link_id": "LNK-0001",
@@ -459,7 +434,7 @@
       "extra": {
         "status": "COMPLETE"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0002",
@@ -473,7 +448,7 @@
       "extra": {
         "kind": "capital_invoice"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0003",
@@ -487,7 +462,7 @@
       "extra": {
         "kind": "capital_invoice"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0004",
@@ -501,7 +476,7 @@
       "extra": {
         "status": "COMPLETE"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0005",
@@ -515,7 +490,7 @@
       "extra": {
         "status": "COMPLETE"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0006",
@@ -529,7 +504,7 @@
       "extra": {
         "status": "NEEDS_REVIEW"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0007",
@@ -543,7 +518,7 @@
       "extra": {
         "status": "COMPLETE"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0008",
@@ -558,7 +533,7 @@
         "prepaid_id": "PRE-INS-001",
         "service_period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0009",
@@ -573,7 +548,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2025-10"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0010",
@@ -588,7 +563,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2025-11"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0011",
@@ -603,7 +578,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2025-12"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0012",
@@ -618,7 +593,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-01"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0013",
@@ -633,7 +608,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-02"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0014",
@@ -648,7 +623,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-03"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0015",
@@ -663,7 +638,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-04"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0016",
@@ -678,7 +653,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-05"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0017",
@@ -693,7 +668,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-06"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0018",
@@ -708,7 +683,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-07"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0019",
@@ -723,7 +698,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-08"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0020",
@@ -738,7 +713,7 @@
         "prepaid_id": "PRE-SFT-001",
         "service_period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0021",
@@ -753,7 +728,7 @@
         "prepaid_id": "PRE-RENT-001",
         "service_period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0022",
@@ -767,7 +742,7 @@
       "extra": {
         "status": "COMPLETE"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0023",
@@ -782,7 +757,7 @@
         "asset_id": "FA-025",
         "kind": "capitalization"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0024",
@@ -798,7 +773,7 @@
         "kind": "depreciation",
         "period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0025",
@@ -814,7 +789,7 @@
         "kind": "depreciation",
         "period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0026",
@@ -830,7 +805,7 @@
         "kind": "depreciation",
         "period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0027",
@@ -846,7 +821,7 @@
         "kind": "depreciation",
         "period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0028",
@@ -862,7 +837,7 @@
         "kind": "depreciation",
         "period": "2026-09"
       },
-      "created_at": "2026-09-19T21:13:48Z"
+      "created_at": "2026-09-20T00:25:48Z"
     },
     {
       "link_id": "LNK-0029",
@@ -876,184 +851,7 @@
       "extra": {
         "status": "COMPLETE"
       },
-      "created_at": "2026-09-19T21:13:48Z"
-    },
-    {
-      "link_id": "LNK-0030",
-      "source_document_id": "",
-      "transaction_id": "TXN-2026-09-015",
-      "journal_entry_id": "JE-202609-021",
-      "account_id": "",
-      "reconciliation_id": "",
-      "close_task_id": "cash",
-      "review_id": "REV-2026-09-CASH-TXN-2026-09-015",
-      "extra": {
-        "action": "post_correcting_entry",
-        "source_workflow": "cash",
-        "source_object": "GL-CASH-CORR-1240"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0031",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Cash",
-      "reconciliation_id": "BSR-2026-09-Cash",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "exact_match",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0032",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Accounts Receivable",
-      "reconciliation_id": "BSR-2026-09-AccountsReceivable",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "exact_match",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0033",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Accounts Payable",
-      "reconciliation_id": "BSR-2026-09-AccountsPayable",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "exact_match",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0034",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Accrued Expenses",
-      "reconciliation_id": "BSR-2026-09-AccruedExpenses",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "explained_timing_difference",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0035",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Prepaid Expenses",
-      "reconciliation_id": "BSR-2026-09-PrepaidExpenses",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "exact_match",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0036",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Fixed Assets",
-      "reconciliation_id": "BSR-2026-09-FixedAssets",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "exact_match",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0037",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "Accumulated Depreciation",
-      "reconciliation_id": "BSR-2026-09-AccumulatedDepreciation",
-      "close_task_id": "",
-      "review_id": "",
-      "extra": {
-        "finding": "exact_match",
-        "status": "SIGNED_OFF"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0038",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "",
-      "reconciliation_id": "",
-      "close_task_id": "bs_recon",
-      "review_id": "",
-      "extra": {
-        "status": "COMPLETE"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0039",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "",
-      "reconciliation_id": "",
-      "close_task_id": "exceptions",
-      "review_id": "",
-      "extra": {
-        "status": "COMPLETE"
-      },
-      "created_at": "2026-09-19T21:13:53Z"
-    },
-    {
-      "link_id": "LNK-0040",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "",
-      "reconciliation_id": "",
-      "close_task_id": "final_review",
-      "review_id": "",
-      "extra": {
-        "status": "COMPLETE"
-      },
-      "created_at": "2026-09-19T21:13:56Z"
-    },
-    {
-      "link_id": "LNK-0041",
-      "source_document_id": "",
-      "transaction_id": "",
-      "journal_entry_id": "",
-      "account_id": "",
-      "reconciliation_id": "",
-      "close_task_id": "mark_closed",
-      "review_id": "",
-      "extra": {
-        "status": "COMPLETE"
-      },
-      "created_at": "2026-09-19T21:13:56Z"
+      "created_at": "2026-09-20T00:25:48Z"
     }
   ],
   "ap_results": [
@@ -1309,7 +1107,7 @@
     "past_due_ar": 299500.0,
     "disputed_ar": 31200.0,
     "partially_paid_ar": 16000.0,
-    "unapplied_cash": 99744.0,
+    "unapplied_cash": 104244.0,
     "aging_buckets": {
       "CURRENT": 33750.0,
       "1-30": 137100.0,
@@ -1321,7 +1119,7 @@
     "expected_collections_7d": 41600.0,
     "past_due_customer_count": 9,
     "payments_applied": 2,
-    "payments_unapplied": 9,
+    "payments_unapplied": 10,
     "payments_human_review": 0,
     "collection_outbox": 0
   },
@@ -1357,11 +1155,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-001",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-001",
-        "trace_id": "2026-09/20260919T211348Z/aether_compute",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/aether_compute"
+        "trace_id": "2026-09/20260920T002548Z/aether_compute",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/aether_compute"
       },
       {
         "vendor": "CleanSpace Facilities",
@@ -1391,11 +1189,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-002",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-002",
-        "trace_id": "2026-09/20260919T211348Z/cleanspace_facilities",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/cleanspace_facilities"
+        "trace_id": "2026-09/20260920T002548Z/cleanspace_facilities",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/cleanspace_facilities"
       },
       {
         "vendor": "Harbor Electric",
@@ -1425,11 +1223,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-003",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-003",
-        "trace_id": "2026-09/20260919T211348Z/harbor_electric",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/harbor_electric"
+        "trace_id": "2026-09/20260920T002548Z/harbor_electric",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/harbor_electric"
       },
       {
         "vendor": "Helios Hardware",
@@ -1459,11 +1257,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-004",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-004",
-        "trace_id": "2026-09/20260919T211348Z/helios_hardware",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/helios_hardware"
+        "trace_id": "2026-09/20260920T002548Z/helios_hardware",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/helios_hardware"
       },
       {
         "vendor": "Lindholm & Ruiz LLP",
@@ -1493,11 +1291,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-005",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-005",
-        "trace_id": "2026-09/20260919T211348Z/lindholm_ruiz_llp",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/lindholm_ruiz_llp"
+        "trace_id": "2026-09/20260920T002548Z/lindholm_ruiz_llp",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/lindholm_ruiz_llp"
       },
       {
         "vendor": "Pulse Recruiting",
@@ -1527,11 +1325,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-006",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-006",
-        "trace_id": "2026-09/20260919T211348Z/pulse_recruiting",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/pulse_recruiting"
+        "trace_id": "2026-09/20260920T002548Z/pulse_recruiting",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/pulse_recruiting"
       }
     ],
     "no_accrual_needed": [
@@ -1551,8 +1349,8 @@
         "expense_account": "",
         "journal_entry": null,
         "accrual_id": null,
-        "trace_id": "2026-09/20260919T211348Z/amazon_web_services",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/amazon_web_services"
+        "trace_id": "2026-09/20260920T002548Z/amazon_web_services",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/amazon_web_services"
       },
       {
         "vendor": "Orbit Analytics",
@@ -1570,8 +1368,8 @@
         "expense_account": "",
         "journal_entry": null,
         "accrual_id": null,
-        "trace_id": "2026-09/20260919T211348Z/orbit_analytics",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/orbit_analytics"
+        "trace_id": "2026-09/20260920T002548Z/orbit_analytics",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/orbit_analytics"
       }
     ],
     "uncertain_items": [
@@ -1591,14 +1389,14 @@
         "expense_account": "",
         "journal_entry": null,
         "accrual_id": null,
-        "trace_id": "2026-09/20260919T211348Z/newforge_consulting",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/newforge_consulting"
+        "trace_id": "2026-09/20260920T002548Z/newforge_consulting",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/newforge_consulting"
       }
     ],
     "total_accrued_expense": 48599.9,
     "traces": [
       {
-        "trace_id": "2026-09/20260919T211348Z/amazon_web_services",
+        "trace_id": "2026-09/20260920T002548Z/amazon_web_services",
         "vendor": "Amazon Web Services",
         "period": "2026-09",
         "invoice_received": true,
@@ -1711,7 +1509,7 @@
         "journal_entry": null,
         "accrual_id": null,
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/amazon_web_services",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/amazon_web_services",
         "expectation_confidence": 0.99,
         "estimate_confidence": 0.99,
         "agent": {
@@ -1738,7 +1536,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/orbit_analytics",
+        "trace_id": "2026-09/20260920T002548Z/orbit_analytics",
         "vendor": "Orbit Analytics",
         "period": "2026-09",
         "invoice_received": true,
@@ -1833,7 +1631,7 @@
         "journal_entry": null,
         "accrual_id": null,
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/orbit_analytics",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/orbit_analytics",
         "expectation_confidence": 0.99,
         "estimate_confidence": 0.99,
         "agent": {
@@ -1860,7 +1658,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/aether_compute",
+        "trace_id": "2026-09/20260920T002548Z/aether_compute",
         "vendor": "Aether Compute",
         "period": "2026-09",
         "invoice_received": false,
@@ -2015,7 +1813,7 @@
         },
         "accrual_id": "ACC-202609-001",
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/aether_compute",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/aether_compute",
         "expectation_confidence": 0.99,
         "estimate_confidence": 0.99,
         "agent": {
@@ -2042,7 +1840,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/cleanspace_facilities",
+        "trace_id": "2026-09/20260920T002548Z/cleanspace_facilities",
         "vendor": "CleanSpace Facilities",
         "period": "2026-09",
         "invoice_received": false,
@@ -2192,7 +1990,7 @@
         },
         "accrual_id": "ACC-202609-002",
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/cleanspace_facilities",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/cleanspace_facilities",
         "expectation_confidence": 0.99,
         "estimate_confidence": 0.99,
         "agent": {
@@ -2219,7 +2017,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/harbor_electric",
+        "trace_id": "2026-09/20260920T002548Z/harbor_electric",
         "vendor": "Harbor Electric",
         "period": "2026-09",
         "invoice_received": false,
@@ -2413,7 +2211,7 @@
         },
         "accrual_id": "ACC-202609-003",
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/harbor_electric",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/harbor_electric",
         "expectation_confidence": 0.99,
         "estimate_confidence": 0.99,
         "agent": {
@@ -2440,7 +2238,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/helios_hardware",
+        "trace_id": "2026-09/20260920T002548Z/helios_hardware",
         "vendor": "Helios Hardware",
         "period": "2026-09",
         "invoice_received": false,
@@ -2565,7 +2363,7 @@
         },
         "accrual_id": "ACC-202609-004",
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/helios_hardware",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/helios_hardware",
         "expectation_confidence": 1.0,
         "estimate_confidence": 1.0,
         "agent": {
@@ -2592,7 +2390,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/lindholm_ruiz_llp",
+        "trace_id": "2026-09/20260920T002548Z/lindholm_ruiz_llp",
         "vendor": "Lindholm & Ruiz LLP",
         "period": "2026-09",
         "invoice_received": false,
@@ -2742,7 +2540,7 @@
         },
         "accrual_id": "ACC-202609-005",
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/lindholm_ruiz_llp",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/lindholm_ruiz_llp",
         "expectation_confidence": 0.99,
         "estimate_confidence": 0.99,
         "agent": {
@@ -2769,7 +2567,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/newforge_consulting",
+        "trace_id": "2026-09/20260920T002548Z/newforge_consulting",
         "vendor": "NewForge Consulting",
         "period": "2026-09",
         "invoice_received": false,
@@ -2898,7 +2696,7 @@
         "journal_entry": null,
         "accrual_id": null,
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/newforge_consulting",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/newforge_consulting",
         "expectation_confidence": 0.25,
         "estimate_confidence": 0.25,
         "agent": {
@@ -2925,7 +2723,7 @@
         "diagnostic_warnings": []
       },
       {
-        "trace_id": "2026-09/20260919T211348Z/pulse_recruiting",
+        "trace_id": "2026-09/20260920T002548Z/pulse_recruiting",
         "vendor": "Pulse Recruiting",
         "period": "2026-09",
         "invoice_received": false,
@@ -3061,7 +2859,7 @@
         },
         "accrual_id": "ACC-202609-006",
         "tools_called": [],
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/pulse_recruiting",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/pulse_recruiting",
         "expectation_confidence": 0.97,
         "estimate_confidence": 0.97,
         "agent": {
@@ -3111,7 +2909,7 @@
             }
           ],
           "reason": "Monthly recurring vendor with no 2026-09 invoice.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/aether_compute",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/aether_compute",
           "current_invoice_ids": [],
           "indicative_amount": 11849.9,
           "indicative_method": "usage_run_rate"
@@ -3136,7 +2934,7 @@
             }
           ],
           "reason": "Expected monthly expense already invoiced via 2 distinct bills (INV-002, INV-016).",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/amazon_web_services",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/amazon_web_services",
           "current_invoice_ids": [
             "INV-002",
             "INV-016"
@@ -3164,7 +2962,7 @@
             }
           ],
           "reason": "Monthly recurring vendor with no 2026-09 invoice.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/cleanspace_facilities",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/cleanspace_facilities",
           "current_invoice_ids": [],
           "indicative_amount": 2400.0,
           "indicative_method": "contract_commitment"
@@ -3189,7 +2987,7 @@
             }
           ],
           "reason": "Monthly recurring vendor with no 2026-09 invoice.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/harbor_electric",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/harbor_electric",
           "current_invoice_ids": [],
           "indicative_amount": 4650.0,
           "indicative_method": "seasonal_prior_year"
@@ -3209,7 +3007,7 @@
             }
           ],
           "reason": "Goods received this period and no matching invoice.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/helios_hardware",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/helios_hardware",
           "current_invoice_ids": [],
           "indicative_amount": 6200.0,
           "indicative_method": "goods_receipt"
@@ -3234,7 +3032,7 @@
             }
           ],
           "reason": "Monthly recurring vendor with no 2026-09 invoice.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/lindholm_ruiz_llp",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/lindholm_ruiz_llp",
           "current_invoice_ids": [],
           "indicative_amount": 8500.0,
           "indicative_method": "contract_commitment"
@@ -3259,7 +3057,7 @@
             }
           ],
           "reason": "Weak evidence only; do not assume the expense was incurred.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/newforge_consulting",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/newforge_consulting",
           "current_invoice_ids": [],
           "indicative_amount": null,
           "indicative_method": null
@@ -3284,7 +3082,7 @@
             }
           ],
           "reason": "Expected monthly expense already invoiced (HI-OA-2026-09).",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/orbit_analytics",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/orbit_analytics",
           "current_invoice_ids": [
             "HI-OA-2026-09"
           ],
@@ -3311,7 +3109,7 @@
             }
           ],
           "reason": "Quarterly recurring vendor with no 2026-09 invoice.",
-          "discovery_trace_id": "2026-09/20260919T211348Z/discovery/pulse_recruiting",
+          "discovery_trace_id": "2026-09/20260920T002548Z/discovery/pulse_recruiting",
           "current_invoice_ids": [],
           "indicative_amount": 15000.0,
           "indicative_method": "contract_commitment"
@@ -3320,7 +3118,7 @@
       "expected_count": 9,
       "invoices_received_count": 2,
       "missing_count": 7,
-      "discovery_run_id": "20260919T211348Z"
+      "discovery_run_id": "20260920T002548Z"
     },
     "ranked_missing": [
       {
@@ -3351,11 +3149,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-006",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-006",
-        "trace_id": "2026-09/20260919T211348Z/pulse_recruiting",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/pulse_recruiting"
+        "trace_id": "2026-09/20260920T002548Z/pulse_recruiting",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/pulse_recruiting"
       },
       {
         "vendor": "Aether Compute",
@@ -3385,11 +3183,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-001",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-001",
-        "trace_id": "2026-09/20260919T211348Z/aether_compute",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/aether_compute"
+        "trace_id": "2026-09/20260920T002548Z/aether_compute",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/aether_compute"
       },
       {
         "vendor": "Lindholm & Ruiz LLP",
@@ -3419,11 +3217,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-005",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-005",
-        "trace_id": "2026-09/20260919T211348Z/lindholm_ruiz_llp",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/lindholm_ruiz_llp"
+        "trace_id": "2026-09/20260920T002548Z/lindholm_ruiz_llp",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/lindholm_ruiz_llp"
       },
       {
         "vendor": "Helios Hardware",
@@ -3453,11 +3251,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-004",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-004",
-        "trace_id": "2026-09/20260919T211348Z/helios_hardware",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/helios_hardware"
+        "trace_id": "2026-09/20260920T002548Z/helios_hardware",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/helios_hardware"
       },
       {
         "vendor": "Harbor Electric",
@@ -3487,11 +3285,11 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-003",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-003",
-        "trace_id": "2026-09/20260919T211348Z/harbor_electric",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/harbor_electric"
+        "trace_id": "2026-09/20260920T002548Z/harbor_electric",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/harbor_electric"
       },
       {
         "vendor": "CleanSpace Facilities",
@@ -3521,27 +3319,27 @@
           },
           "entry_type": "accrual",
           "related_accrual_id": "ACC-202609-002",
-          "created_at": "2026-09-19T21:13:48Z"
+          "created_at": "2026-09-20T00:25:48Z"
         },
         "accrual_id": "ACC-202609-002",
-        "trace_id": "2026-09/20260919T211348Z/cleanspace_facilities",
-        "discovery_trace_id": "2026-09/20260919T211348Z/discovery/cleanspace_facilities"
+        "trace_id": "2026-09/20260920T002548Z/cleanspace_facilities",
+        "discovery_trace_id": "2026-09/20260920T002548Z/discovery/cleanspace_facilities"
       }
     ],
-    "trace_dir": "/Users/rohandalal/Desktop/hackmit26/traces/accruals/2026-09/20260919T211348Z",
-    "trace_path": "/Users/rohandalal/Desktop/hackmit26/traces/accruals/2026-09/20260919T211348Z/_period.json"
+    "trace_dir": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/traces/accruals/2026-09/20260920T002548Z",
+    "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/traces/accruals/2026-09/20260920T002548Z/_period.json"
   },
   "cash_status": "OPEN",
-  "prepaid_exceptions": [],
+  "prepaid_exceptions": [
+    "PRE-INS-MISSING: Supporting policy or contract is missing."
+  ],
   "asset_exceptions": [
     "INV-021-DUP: duplicate of FA-025"
   ],
   "recon_exceptions": [],
-  "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/month_end/2026-09.json",
-  "snapshot_path": "/Users/rohandalal/Desktop/hackmit26/runs/month_end/snapshots/2026-09-20260919T211356Z-06.json",
-  "snapshot_ids": [
-    "2026-09-20260919T211356Z-06"
-  ],
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/month_end/2026-09.json",
+  "snapshot_path": null,
+  "snapshot_ids": [],
   "roll_forwards": [
     {
       "account": "Prepaid Expenses",
@@ -3592,10 +3390,17 @@
   "manager": {
     "period": "2026-09",
     "next_tasks": [],
-    "blocked_tasks": [],
-    "waiting_on_humans": [],
-    "narrative": "September is closed. The persisted snapshot is the official period state. A later journal dated in this month must go through the post-close control.",
-    "can_close": true
+    "blocked_tasks": [
+      "cash",
+      "bs_recon"
+    ],
+    "waiting_on_humans": [
+      "Cash: $12.40 unexplained difference",
+      "AR: $4,500 unmatched customer payment",
+      "Prepaids: missing insurance policy evidence"
+    ],
+    "narrative": "Close is blocked. Fail-closed Kernel statuses remain. Handle ctl-books. Do not mark CLOSED. Do not ask a human.",
+    "can_close": false
   },
   "materiality": {
     "close_materiality_dollars": 1000.0,
@@ -3604,80 +3409,23 @@
     "note": "Materiality never auto-explains an unexplained difference. The $12.40 cash break stays unresolved until explicit human review."
   },
   "control_events": [],
-  "resolutions": [
-    {
-      "resolution_id": "RES-REV-2026-09-CASH-TXN-2026-09-015",
-      "item_id": "TXN-2026-09-015",
-      "period": "2026-09",
-      "resolution": "Approved write-off after investigation",
-      "reviewer": "human",
-      "created_at": "2026-09-19T21:13:53Z",
-      "original_status": "OPEN",
-      "original_detail": "Cash: $12.40 unexplained difference"
-    }
-  ],
+  "resolutions": [],
   "review_ids": [
-    "REV-2026-09-CASH-TXN-2026-09-015"
+    "REV-2026-09-CASH-TXN-2026-09-015",
+    "REV-2026-09-AR-PAY-CLOSE-4500",
+    "REV-2026-09-PREPAID-PRE-INS-MISSING"
   ],
-  "invalidated_tasks": [
-    "cash",
-    "bs_recon",
-    "exceptions",
-    "final_review",
-    "mark_closed"
-  ],
+  "invalidated_tasks": [],
   "rerun_tasks": [
+    "ingest",
+    "ap",
+    "ar",
     "cash",
-    "bs_recon",
-    "exceptions",
-    "final_review",
-    "mark_closed"
+    "accruals",
+    "prepaid",
+    "depreciation"
   ],
   "force_cash_reset": false,
-  "gate": {
-    "period": "2026-09",
-    "all_required_tasks_complete": true,
-    "all_required_bs_recs_signed_off": true,
-    "no_blocking_reviews": true,
-    "evidence_complete": true,
-    "journal_safeguards_pass": true,
-    "blockers": [],
-    "task_status": {
-      "ingest": "COMPLETE",
-      "ap": "COMPLETE",
-      "ar": "COMPLETE",
-      "cash": "COMPLETE",
-      "accruals": "COMPLETE",
-      "prepaid": "COMPLETE",
-      "depreciation": "COMPLETE",
-      "bs_recon": "COMPLETE",
-      "exceptions": "COMPLETE",
-      "final_review": "COMPLETE",
-      "mark_closed": "RUNNING"
-    },
-    "recon_status": {
-      "Cash": "SIGNED_OFF",
-      "Accounts Receivable": "SIGNED_OFF",
-      "Accounts Payable": "SIGNED_OFF",
-      "Accrued Expenses": "SIGNED_OFF",
-      "Prepaid Expenses": "SIGNED_OFF",
-      "Fixed Assets": "SIGNED_OFF",
-      "Accumulated Depreciation": "SIGNED_OFF"
-    },
-    "journal_findings": [],
-    "evidence_gaps": [],
-    "passed": true
-  },
-  "final_verdict": {
-    "period": "2026-09",
-    "decision": "APPROVE_CLOSE",
-    "reasons": [
-      "Python close gates passed. No unresolved HUMAN_REVIEW remains."
-    ],
-    "evidence_used": [],
-    "reviewer": "python-gate",
-    "created_at": "2026-09-19T21:13:56Z",
-    "gate_passed": true,
-    "overridden_by_python": false
-  }
+  "gate": null,
+  "final_verdict": null
 }

@@ -3,15 +3,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from models import (
-    ApproverDecision,
-    AuditResult,
     CashPosition,
     InvestigationReport,
     PaymentAuditResult,
     PaymentPlan,
     PreparerRecommendation,
-    ReviewerDecision,
     ScheduledPayment,
 )
 from scheduling.cash import (
@@ -22,6 +21,14 @@ from scheduling.cash import (
     policy_eligible_for_pool,
     spendable_cash,
 )
+from scheduling.grants import (
+    AP_RECORD_OP_IDS,
+    PAY_SCHEDULE_OP_IDS,
+    ap_record_export_names,
+    pay_schedule_export_names,
+    profile_allows,
+)
+from scheduling.host import ConcurrenceRefused, apply_review_pay_concurrence
 from scheduling.pool import load_pool, seed_demo_pool
 from scheduling.workflow import run_schedule_workflow
 from tools import all_invoices
@@ -185,47 +192,29 @@ def _ap_packets(invoice_id: str, decision: str, exceptions: list[str]):
                 recommendation=decision,
                 confidence=0.9,
             )
-        if agent.name == "AP Reviewer":
-            return ReviewerDecision(
-                invoice_id=invoice_id,
-                recommendation=decision,
-                confidence=0.9,
-                reasons=[decision],
-                evidence_used=[invoice_id],
-            )
-        if agent.name == "AP Approver":
-            return ApproverDecision(
-                invoice_id=invoice_id,
-                decision=decision,
-                confidence=0.9,
-                reasons=[decision],
-                evidence_used=[invoice_id],
-            )
-        return AuditResult(invoice_id=invoice_id, passed=True, findings=["ok"])
+        raise AssertionError(f"Bot ap must not run {agent.name}")
 
     return fake_run
 
 
-def test_approve_writes_pool_hold_does_not(monkeypatch, tmp_path):
+def test_approve_does_not_write_pool_until_verifier(monkeypatch, tmp_path):
     monkeypatch.setattr("workflow.RUNS_DIR", tmp_path)
 
     monkeypatch.setattr("workflow.run_agent", _ap_packets("INV-001", "APPROVE", []))
     run_ap_workflow("INV-001")
-    assert [row["invoice_id"] for row in load_pool()] == ["INV-001"]
+    assert load_pool() == []
 
     monkeypatch.setattr("workflow.run_agent", _ap_packets("INV-018", "HOLD", ["duplicate"]))
     run_ap_workflow("INV-018")
-    assert [row["invoice_id"] for row in load_pool()] == ["INV-001"]
+    assert load_pool() == []
 
 
-def test_mocked_schedule_workflow_strips_unnecessary_early(monkeypatch, tmp_path):
+def test_host_strips_unnecessary_early_and_handles_ctl_pay(tmp_path):
     seed_demo_pool()
-    cash = load_cash_position()
 
-    monkeypatch.setattr(
-        "scheduling.workflow.run_scheduler",
-        lambda prompt: PaymentPlan(
-            as_of_date=cash.as_of_date,
+    def chooser(candidates, cash_pos):
+        return PaymentPlan(
+            as_of_date=cash_pos.as_of_date,
             pay_this_week=[
                 ScheduledPayment(invoice_id="INV-009", amount=21000, reason="pay everything"),
                 ScheduledPayment(invoice_id="INV-006", amount=9180, reason="late"),
@@ -234,28 +223,159 @@ def test_mocked_schedule_workflow_strips_unnecessary_early(monkeypatch, tmp_path
             total_payout=30180,
             cash_after_payments=200000,
             reserve_ok=True,
-            reasons=["model proposed GitHub"],
+            reasons=["chooser proposed GitHub"],
             confidence=0.5,
-        ),
-    )
-    monkeypatch.setattr(
-        "scheduling.workflow.run_payment_audit",
-        lambda prompt: PaymentAuditResult(passed=True, findings=["checked"]),
-    )
-    monkeypatch.setattr("scheduling.workflow.RUNS_DIR", tmp_path)
+        )
 
-    trace = run_schedule_workflow()
+    computer = tmp_path / "computer"
+    runs = tmp_path / "runs"
+    trace = run_schedule_workflow(
+        chooser=chooser, computer_root=computer, runs_dir=runs
+    )
     paid = {row.invoice_id for row in trace.plan.pay_this_week}
     assert "INV-009" not in paid
     assert "INV-006" in paid
     assert "INV-002" in paid
     assert trace.metrics.unnecessary_early_payments == 0
-    assert trace.audit.passed is True
-    assert list(tmp_path.glob("schedule-*.json"))
-    roles = [item.role for item in trace.agents]
-    assert roles == ["Payment Scheduler", "Payment Audit"]
-    names = {skill.name for item in trace.agents for skill in item.skills}
-    assert names == {"payment-prioritization", "early-payment-discount-evaluation"}
-    assert "accrual-method-selection" not in names
-    saved = json.loads(Path(trace.trace_path).read_text())
-    assert "body" not in saved["agents"][0]["skills"][0]
+    assert trace.audit.passed is False
+    assert "ctl-pay/review-pay" in trace.audit.findings[0]
+    assert list(runs.glob("schedule-*.json"))
+    wake = json.loads(Path(trace.verifier_wake_path).read_text())
+    assert wake["toSlug"] == "ctl-pay"
+    assert wake["profile"] == "review-pay"
+    assert wake["status"] == "accepted"
+    assert wake["done"] is False
+    assert wake["op"] == "bot_send_prompt"
+    assert "ask_user" not in json.dumps(wake)
+    assert trace.outflow_packet_path is None
+    assert list((computer / "workspace" / "cash" / "expected-outflows").glob("*.json")) == []
+    packet = json.loads(Path(trace.plan_packet_path).read_text())
+    assert packet["executed"] is False
+    assert packet["self_approved"] is False
+
+
+def test_policy_net_strips_hold_invoices():
+    candidates = _candidates_for("INV-002", "INV-018")
+    assert policy_eligible_for_pool("INV-018") is False
+    plan = apply_cash_and_policy_net(candidates, ["INV-018", "INV-002"])
+    paid = {row.invoice_id for row in plan.pay_this_week}
+    assert "INV-018" not in paid
+    assert "INV-002" in paid
+    hold_defer = next(row for row in plan.defer if row.invoice_id == "INV-018")
+    assert "HOLD" in hold_defer.reason
+
+
+def test_seeded_schedule_defers_inv009_class(tmp_path):
+    seed_demo_pool()
+    trace = run_schedule_workflow(
+        computer_root=tmp_path / "computer",
+        runs_dir=tmp_path / "runs",
+    )
+    paid = {row.invoice_id for row in trace.plan.pay_this_week}
+    deferred = {row.invoice_id for row in trace.plan.defer}
+    assert "INV-009" not in paid
+    assert "INV-009" in deferred
+    assert "INV-020" not in paid
+    assert "INV-018" not in paid
+    assert "INV-018" not in deferred
+
+
+def test_pay_cannot_load_record_tools():
+    assert PAY_SCHEDULE_OP_IDS.isdisjoint(AP_RECORD_OP_IDS)
+    assert pay_schedule_export_names().isdisjoint(ap_record_export_names())
+    assert profile_allows("schedule", "tools.get_invoice") is False
+    assert profile_allows("schedule", "scheduling.tools.get_cash_position") is True
+    assert profile_allows("review-pay", "scheduling.tools.get_approved_pool") is False
+    fragment = json.loads(
+        (
+            Path(__file__).resolve().parents[2]
+            / ".cfo-v2"
+            / "office"
+            / "bots"
+            / "pay"
+            / "grants.fragment.json"
+        ).read_text()
+    )
+    assert "Payment Audit" not in fragment["byDisplayName"]
+    ops = fragment["byDisplayName"]["Payment Scheduler"]["ops"]
+    assert "tools.get_invoice" not in ops
+    assert set(ops) == set(PAY_SCHEDULE_OP_IDS)
+    compiled = json.loads(
+        (
+            Path(__file__).resolve().parents[2]
+            / ".cfo-v2"
+            / "office"
+            / "computer"
+            / "cfo"
+            / "grants.json"
+        ).read_text()
+    )
+    scheduler_ops = compiled["byDisplayName"]["Payment Scheduler"]["ops"]
+    assert "tools.get_invoice" not in scheduler_ops
+    assert set(scheduler_ops) == set(PAY_SCHEDULE_OP_IDS)
+    roster = json.loads(
+        (
+            Path(__file__).resolve().parents[2]
+            / ".cfo-v2"
+            / "office"
+            / "computer"
+            / "harness"
+            / "roster.json"
+        ).read_text()
+    )
+    pay = next(bot for bot in roster["bots"] if bot["slug"] == "pay")
+    assert pay["approvalLevel"] == "never"
+    assert "tools.get_invoice" not in pay["connectors"]
+    assert "scheduling.tools.get_payment_candidates" in pay["connectors"]
+
+
+def test_pay_cannot_self_approve_and_outflows_wait_on_ctl_pay(tmp_path):
+    seed_demo_pool()
+    computer = tmp_path / "computer"
+    trace = run_schedule_workflow(
+        computer_root=computer, runs_dir=tmp_path / "runs"
+    )
+    with pytest.raises(ConcurrenceRefused, match="cannot concur"):
+        apply_review_pay_concurrence(
+            plan_packet_path=Path(trace.plan_packet_path),
+            concurrence=PaymentAuditResult(passed=True, findings=["pay tried"]),
+            source_slug="pay",
+            computer_root=computer,
+        )
+    with pytest.raises(ConcurrenceRefused, match="refused"):
+        apply_review_pay_concurrence(
+            plan_packet_path=Path(trace.plan_packet_path),
+            concurrence=PaymentAuditResult(passed=False, findings=["incomplete"]),
+            source_slug="ctl-pay",
+            computer_root=computer,
+        )
+    result = apply_review_pay_concurrence(
+        plan_packet_path=Path(trace.plan_packet_path),
+        concurrence=PaymentAuditResult(
+            passed=True, findings=["Kernel reserve_ok and packet complete"]
+        ),
+        source_slug="ctl-pay",
+        computer_root=computer,
+    )
+    assert result["executed"] is False
+    packet = json.loads(Path(result["outflow_packet_path"]).read_text())
+    assert packet["executed"] is False
+    assert packet["kind"] == "expected_outflows"
+    assert packet["after"] == "ctl-pay/review-pay"
+    cash_wake = json.loads(Path(result["cash_wake_path"]).read_text())
+    assert cash_wake["toSlug"] == "cash"
+    assert cash_wake["op"] == "bot_send_prompt"
+    assert "ACH" in cash_wake["prompt"]
+
+
+def test_pay_host_never_calls_ask_user():
+    root = Path(__file__).resolve().parents[1] / "scheduling"
+    for path in root.glob("*.py"):
+        text = path.read_text()
+        assert "ask_user" not in text
+        assert "ask the user" not in text.lower()
+    bot = Path(__file__).resolve().parents[2] / ".cfo-v2" / "office" / "bots" / "pay"
+    for path in bot.rglob("*.md"):
+        text = path.read_text().lower()
+        assert "ask the user if" not in text
+        assert "escalate to management" not in text

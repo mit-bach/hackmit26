@@ -97,6 +97,9 @@ def enqueue_review(
     assigned_role: str = "",
     downstream_tasks_affected: list[str] | None = None,
 ) -> ReviewItem:
+    from verifier.queue_owners import owner_for_close_workflow
+
+    owner = owner_for_close_workflow(source_workflow)
     existing = find_review(period, source_workflow, source_case_id)
     if existing is not None:
         if existing.status == "RESOLVED":
@@ -107,6 +110,8 @@ def enqueue_review(
                 "amount": amount if amount is not None else existing.amount,
                 "evidence_refs": list(evidence_refs or existing.evidence_refs),
                 "proposed_resolution": proposed_resolution or existing.proposed_resolution,
+                "queue_owner": existing.queue_owner or owner["owner"],
+                "queue_profile": existing.queue_profile or owner["profile"],
             }
         )
         return upsert_review(updated)
@@ -123,6 +128,8 @@ def enqueue_review(
         status="OPEN",
         assigned_role=assigned_role,
         downstream_tasks_affected=list(downstream_tasks_affected or []),
+        queue_owner=owner["owner"],
+        queue_profile=owner["profile"],
     )
     return upsert_review(item)
 

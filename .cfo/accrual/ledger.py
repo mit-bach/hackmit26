@@ -30,6 +30,16 @@ def isolated_ledger(directory: Path):
         LEDGER_DIR, ACCRUALS_PATH, JOURNALS_PATH = previous
 
 
+def configure_paths(directory: Path) -> None:
+    """Point open-accrual JSON at a Computer/runs tree."""
+    global LEDGER_DIR, ACCRUALS_PATH, JOURNALS_PATH
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    LEDGER_DIR = directory
+    ACCRUALS_PATH = directory / "open_accruals.json"
+    JOURNALS_PATH = directory / "journal_entries.json"
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 

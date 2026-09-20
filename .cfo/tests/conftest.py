@@ -34,12 +34,21 @@ def isolated_ar_state(tmp_path, monkeypatch):
 @pytest.fixture(autouse=True)
 def isolated_cash_recon(tmp_path, monkeypatch):
     from cash_recon.store import reset_cash_state
+    from cash_recon.case_store import configure_case_dir
+    from cash_recon.handles import configure_handle_dirs
+    from cash_recon.tools import unbind_case
 
     monkeypatch.setattr("cash_recon.store.RUNS_DIR", tmp_path / "cash-runs")
     monkeypatch.setattr("cash_recon.store.TRACES_DIR", tmp_path / "cash-traces")
+    configure_case_dir(tmp_path / "cash-cases")
+    configure_handle_dirs(packets_dir=tmp_path / "cash-packets", handles_dir=tmp_path / "cash-handles")
     reset_cash_state()
+    unbind_case()
     yield
     reset_cash_state()
+    unbind_case()
+    configure_case_dir(None)
+    configure_handle_dirs(packets_dir=tmp_path / "cash-packets-done", handles_dir=tmp_path / "cash-handles-done")
 
 
 @pytest.fixture(autouse=True)
@@ -90,10 +99,14 @@ def isolated_reporting(tmp_path):
 @pytest.fixture(autouse=True)
 def isolated_ingestion_overlay(tmp_path, monkeypatch):
     from invoice_ingestion.adapter import reset_ingested_invoices
+    from invoice_ingestion.registry import configure_paths as configure_registry
     from invoice_ingestion.store import clear_ingestion_cache
     from integrations import store as integration_store
-    from tools import clear_runtime_invoices
+    from tools import clear_runtime_invoices, configure_overlay_path
 
+    ingest_dir = tmp_path / "ingestion-state"
+    configure_registry(ingest_dir)
+    configure_overlay_path(ingest_dir / "overlay.json")
     runs = tmp_path / "integrations-runs"
     monkeypatch.setattr(integration_store, "RUNS_DIR", runs)
     monkeypatch.setattr(integration_store, "STATE_PATH", runs / "state.json")
@@ -106,6 +119,8 @@ def isolated_ingestion_overlay(tmp_path, monkeypatch):
     clear_ingestion_cache()
     integration_store.reset_integration_state()
     clear_runtime_invoices()
+    configure_registry()
+    configure_overlay_path()
 
 
 @pytest.fixture(autouse=True)

@@ -91,3 +91,7 @@ export function approvalDir(computerRoot: string): string {
 export function receiptDir(computerRoot: string): string {
   return join(harnessRoot(computerRoot), "receipts");
 }
+
+export function piSessionDir(computerRoot: string, botId: string): string {
+  return join(botDir(computerRoot, botId), "pi-session");
+}

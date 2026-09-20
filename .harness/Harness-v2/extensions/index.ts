@@ -1,4 +1,4 @@
-import { existsSync, watch, type FSWatcher } from "node:fs";
+import { existsSync, watch, writeFileSync, type FSWatcher } from "node:fs";
 import { dirname, join } from "node:path";
 
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
@@ -30,7 +30,7 @@ import {
 } from "../src/lane.ts";
 import { readMemoryFile, writeMemoryFile } from "../src/memory.ts";
 import { identityBlock, memorySection, recentWorkSection } from "../src/prompt.ts";
-import { searchProtocol } from "../src/protocol-log.ts";
+import { appendProtocol, searchProtocol } from "../src/protocol-log.ts";
 import { fireRoutine } from "../src/routines.ts";
 import { readRoomLog, roomPost } from "../src/rooms.ts";
 import { findBot } from "../src/roster.ts";
@@ -47,8 +47,31 @@ interface BoundSession {
   readonly pi: ExtensionAPI;
 }
 
-function showNote(pi: ExtensionAPI, ctx: { ui: { notify: (message: string, level?: "info" | "warning" | "error") => void } }, text: string, level: "info" | "warning" | "error" = "info"): void {
+function showNote(
+  pi: ExtensionAPI,
+  ctx: {
+    ui: {
+      notify: (message: string, level?: "info" | "warning" | "error") => void;
+      setStatus: (key: string, text: string | undefined) => void;
+    };
+  },
+  text: string,
+  level: "info" | "warning" | "error" = "info",
+  computerRoot?: string,
+  slug?: string,
+): void {
   ctx.ui.notify(text, level);
+  ctx.ui.setStatus("note", text.replace(/\s+/g, " ").slice(0, 160));
+  if (computerRoot) {
+    writeFileSync(join(computerRoot, "harness", "last-note.txt"), `${slug ?? "unbound"}\n${text}\n`);
+    appendProtocol(computerRoot, {
+      type: "note",
+      from: slug,
+      slug,
+      text,
+      status: level,
+    });
+  }
   pi.sendMessage(
     {
       customType: "harness-note",
@@ -101,13 +124,16 @@ export default function harnessExtension(pi: ExtensionAPI): void {
     description: "Show this process's bound Bot",
     handler: async (_args, ctx): Promise<void> => {
       if (!bind.ok) {
-        showNote(pi, ctx, `unbound (${bind.reason})`, "warning");
+        showNote(pi, ctx, `unbound (${bind.reason})`, "warning", bind.computerRoot);
         return;
       }
       showNote(
         pi,
         ctx,
         `${bind.bot.slug} ${bind.bot.id} ${liveStatus(bind.computerRoot, bind.bot.id)}`,
+        "info",
+        bind.computerRoot,
+        bind.bot.slug,
       );
     },
   });
@@ -116,13 +142,16 @@ export default function harnessExtension(pi: ExtensionAPI): void {
     description: "Show this process's bound Bot (alias of /bot)",
     handler: async (_args, ctx): Promise<void> => {
       if (!bind.ok) {
-        showNote(pi, ctx, `unbound (${bind.reason})`, "warning");
+        showNote(pi, ctx, `unbound (${bind.reason})`, "warning", bind.computerRoot);
         return;
       }
       showNote(
         pi,
         ctx,
         `${bind.bot.slug} ${bind.bot.id} ${liveStatus(bind.computerRoot, bind.bot.id)}`,
+        "info",
+        bind.computerRoot,
+        bind.bot.slug,
       );
     },
   });
@@ -141,7 +170,9 @@ export default function harnessExtension(pi: ExtensionAPI): void {
   pi.on("resources_discover", () => {
     const skillPaths = [`${harnessPackageRoot()}/skills`];
     const computerSkills = join(bind.computerRoot, "skills");
-    if (existsSync(computerSkills)) {
+    // Client systems that filter skills themselves set HARNESS_CLIENT_SKILLS=1.
+    // Otherwise a whole-directory skillPaths entry would ignore the Bot allowlist.
+    if (existsSync(computerSkills) && process.env.HARNESS_CLIENT_SKILLS !== "1") {
       skillPaths.push(computerSkills);
     }
     return { skillPaths };
@@ -537,7 +568,7 @@ function registerCommands(pi: ExtensionAPI, session: BoundSession): void {
     handler: async (_args, ctx): Promise<void> => {
       const hits = searchAgents(bind.computerRoot, "");
       const line = hits.map((hit) => `${hit.slug}:${hit.status}`).join(", ");
-      showNote(pi, ctx, line);
+      showNote(pi, ctx, line, "info", bind.computerRoot, bind.bot.slug);
     },
   });
 
@@ -549,7 +580,7 @@ function registerCommands(pi: ExtensionAPI, session: BoundSession): void {
         rows.length === 0
           ? "no handles"
           : rows.map((row) => `${row.id} ${row.status}`).join(" | ");
-      showNote(pi, ctx, line);
+      showNote(pi, ctx, line, "info", bind.computerRoot, bind.bot.slug);
     },
   });
 
@@ -561,6 +592,9 @@ function registerCommands(pi: ExtensionAPI, session: BoundSession): void {
         pi,
         ctx,
         rooms.length === 0 ? "no rooms" : rooms.map((room) => `${room.id}:${room.members.join(",")}`).join(" | "),
+        "info",
+        bind.computerRoot,
+        bind.bot.slug,
       );
     },
   });
@@ -569,7 +603,7 @@ function registerCommands(pi: ExtensionAPI, session: BoundSession): void {
     description: "End the current turn. Does not undo finished work.",
     handler: async (_args, ctx): Promise<void> => {
       cancelTurn(lane, "operator stop");
-      showNote(pi, ctx, "stopped");
+      showNote(pi, ctx, "stopped", "info", bind.computerRoot, bind.bot.slug);
     },
   });
 
@@ -581,7 +615,7 @@ function registerCommands(pi: ExtensionAPI, session: BoundSession): void {
         rows.length === 0
           ? "no protocol yet"
           : rows.map((row) => `${row.seq} ${row.type} ${row.handleId ?? ""}`).join(" | ");
-      showNote(pi, ctx, line);
+      showNote(pi, ctx, line, "info", bind.computerRoot, bind.bot.slug);
     },
   });
 
@@ -592,18 +626,18 @@ function registerCommands(pi: ExtensionAPI, session: BoundSession): void {
       const match = /^run\s+(.+)$/.exec(trimmed);
       const name = match?.[1] ?? trimmed;
       if (name.length === 0) {
-        showNote(pi, ctx, "usage: /routine run <name>", "warning");
+        showNote(pi, ctx, "usage: /routine run <name>", "warning", bind.computerRoot, bind.bot.slug);
         return;
       }
       try {
         const receipt = fireRoutine(bind.computerRoot, name);
-        showNote(pi, ctx, `routine ${receipt.name} → ${receipt.bot} ${receipt.handleId ?? ""}`);
+        showNote(pi, ctx, `routine ${receipt.name} → ${receipt.bot} ${receipt.handleId ?? ""}`, "info", bind.computerRoot, bind.bot.slug);
         if (ctx.isIdle()) {
           kickWake(session);
         }
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        showNote(pi, ctx, message, "error");
+        showNote(pi, ctx, message, "error", bind.computerRoot, bind.bot.slug);
       }
     },
   });

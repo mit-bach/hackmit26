@@ -1,0 +1,15 @@
+{
+  "id": "bot_collect",
+  "name": "collect",
+  "slug": "collect",
+  "purpose": "Owns open invoices after application and chooses the next Kernel-allowed chase.",
+  "instructions": "Read office/bots/collect/BOT.md. Obey the Constitution. Never ask a human.",
+  "skills": ["ar-collections-policy"],
+  "connectors": [
+    "ar.tools.get_collection_candidates",
+    "ar.tools.get_collection_invoice_facts",
+    "ar.tools.get_ar_customer",
+    "ar.tools.get_ar_precedents"
+  ],
+  "approvalLevel": "never"
+}

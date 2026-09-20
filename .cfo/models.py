@@ -164,13 +164,18 @@ class DecisionTrace(BaseModel):
     deterministic_evidence: APCaseEvidence
     preparer: PreparerRecommendation
     investigation: InvestigationReport | None = None
-    reviewer: ReviewerDecision
-    approver: ApproverDecision
-    audit: AuditResult
+    reviewer: ReviewerDecision | None = None
+    approver: ApproverDecision | None = None
+    audit: AuditResult | None = None
     reconsideration: dict | None = None
     final: FinalAPDecision
     agents: list[AgentSkillTrace] = Field(default_factory=list)
     trace_path: str | None = None
+    packet_path: str | None = None
+    verifier_handle: dict | None = None
+    kernel_holds: list[str] = Field(default_factory=list)
+    posted_to_pool: bool = False
+    wakes: list[dict] = Field(default_factory=list)
 
 
 class CashPosition(BaseModel):
@@ -258,3 +263,6 @@ class ScheduleTrace(BaseModel):
     audit: PaymentAuditResult
     agents: list[AgentSkillTrace] = Field(default_factory=list)
     trace_path: str | None = None
+    plan_packet_path: str | None = None
+    verifier_wake_path: str | None = None
+    outflow_packet_path: str | None = None

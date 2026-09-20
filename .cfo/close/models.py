@@ -184,6 +184,10 @@ class ReviewItem(BaseModel):
     source_object_before: dict = Field(default_factory=dict)
     source_object_after: dict = Field(default_factory=dict)
     journal_entry_ids: list[str] = Field(default_factory=list)
+    queue_owner: str = ""
+    queue_profile: str = ""
+    handle_path: str = ""
+    packet_path: str = ""
 
 
 class CloseGateResult(BaseModel):

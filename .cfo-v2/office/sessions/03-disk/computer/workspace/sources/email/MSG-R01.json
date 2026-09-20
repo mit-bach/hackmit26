@@ -1,0 +1,13 @@
+{
+  "bot": "email",
+  "profile": "invoice",
+  "source_id": "MSG-R01",
+  "classification": "payment_confirmation",
+  "reason": "Customer remittance or payment confirmation, not a vendor bill",
+  "canonical_id": null,
+  "candidate": null,
+  "destination": {
+    "slug": "apply",
+    "profile": "apply"
+  }
+}

@@ -46,6 +46,18 @@ def format_aging(report: AgingReport) -> str:
 
 def format_collections(run: CollectionRun) -> str:
     lines = [f"COLLECTIONS as of {run.as_of_date}", ""]
+    if run.blocked:
+        lines.extend(
+            [
+                "BLOCKED. Apply has not drained new deposits for this as-of.",
+                run.block_reason or "Handle apply first.",
+                "",
+            ]
+        )
+        if run.apply_handle_path:
+            lines.append(f"Handle path: {run.apply_handle_path}")
+            lines.append("")
+        return "\n".join(lines).rstrip()
     featured = sorted(
         run.decisions,
         key=lambda item: (
@@ -145,10 +157,10 @@ def format_demo(payload: dict) -> str:
     auto: CashApplyTrace = payload["auto_apply"]
     review: CashApplyTrace = payload["human_review"]
     featured = next(
-        (item for item in collections.decisions if item.invoice_id == "INV-AR-017"),
+        (item for item in collections.decisions if item.invoice_id == "INV-AR-020"),
         collections.decisions[0] if collections.decisions else None,
     )
-    human_case = next(
+    verifier_case = next(
         (item for item in collections.decisions if item.human_approval_required),
         None,
     )
@@ -160,42 +172,46 @@ def format_demo(payload: dict) -> str:
         "",
         format_aging(before),
         "",
-        "2. COLLECTIONS",
+        "2. STRAIGHTFORWARD PAYMENT (PAY-001)",
+        "",
+        format_cash_apply(auto),
+        "",
+        "3. AMBIGUOUS PAYMENT (PAY-AMBIGUOUS / PAY-005) → ctl-cash",
+        "",
+        format_cash_apply(review),
+        "",
+        "4. COLLECTIONS AFTER APPLY DRAIN",
         "",
     ]
-    if featured:
+    if collections.blocked:
+        blocks.append(collections.block_reason or "Collections blocked until apply drains.")
+        if collections.apply_handle_path:
+            blocks.append(f"Handle path: {collections.apply_handle_path}")
+    elif featured:
         blocks.append(
             f"{featured.customer_id} / {featured.invoice_id}\n"
             f"Outstanding: {money_text(featured.outstanding_amount)}\n"
             f"{featured.days_past_due} days past due\n"
             f"Prior reminders: {featured.reminder_count}\n"
             f"Action: {featured.action}\n"
-            f"Human approval: {str(featured.human_approval_required).lower()}\n"
+            f"Verifier required: {str(featured.human_approval_required).lower()}\n"
             f"Reason: {featured.reason}"
         )
         if featured.draft_message:
-            blocks.extend(["", "3. DRAFT COLLECTION MESSAGE", "", featured.draft_message])
-    if human_case and (not featured or human_case.invoice_id != featured.invoice_id):
+            blocks.extend(["", "Draft collection message", "", featured.draft_message])
+    if verifier_case and (not featured or verifier_case.invoice_id != featured.invoice_id):
         blocks.extend(
             [
                 "",
-                f"Human-review collections case: {human_case.customer_id} / {human_case.invoice_id}",
-                f"Action: {human_case.action}",
-                f"Reason: {human_case.reason}",
+                f"Verifier collections case: {verifier_case.customer_id} / {verifier_case.invoice_id}",
+                f"Action: {verifier_case.action}",
+                f"Reason: {verifier_case.reason}",
             ]
         )
     blocks.extend(
         [
             "",
-            "4. STRAIGHTFORWARD PAYMENT (PAY-001)",
-            "",
-            format_cash_apply(auto),
-            "",
-            "5. AMBIGUOUS PAYMENT (PAY-AMBIGUOUS / PAY-005)",
-            "",
-            format_cash_apply(review),
-            "",
-            "6–7. AGING AFTER SUCCESSFUL APPLICATION",
+            "5. AGING AFTER APPLICATION",
             "",
             f"Total AR before: {money_text(before.totals.total_ar)}",
             f"Total AR after:  {money_text(after.totals.total_ar)}",
@@ -203,7 +219,7 @@ def format_demo(payload: dict) -> str:
             "",
             format_aging(after),
             "",
-            "8. AUDIT TRACE",
+            "6. AUDIT TRACE",
             "",
             f"PAY-001 decision: {auto.final.decision}",
             f"  {auto.final.reason}",
@@ -216,12 +232,14 @@ def format_demo(payload: dict) -> str:
         )
     if auto.trace_path:
         blocks.append(f"  Trace: {auto.trace_path}")
+    handle_note = review.verifier_handle_path or "(no handle path)"
     blocks.extend(
         [
             "",
             f"PAY-005 decision: {review.final.decision}",
             f"  {review.final.reason}",
             "  Invoice balances were not mutated.",
+            f"  Verifier Handle: {handle_note}",
         ]
     )
     if review.trace_path:
@@ -230,7 +248,7 @@ def format_demo(payload: dict) -> str:
 
 
 def format_review_list(items: list[CashReviewItem]) -> str:
-    lines = ["AR CASH APPLICATION REVIEW QUEUE", ""]
+    lines = ["CTL-CASH VERIFIER QUEUE (not a human queue)", ""]
     if not items:
         lines.append("(empty)")
         return "\n".join(lines)
@@ -317,7 +335,7 @@ def format_forecast_demo(payload: dict) -> str:
         "",
         format_cash_forecast(payload["forecast_before"]),
         "",
-        "B. AMBIGUOUS PAY-005 → HUMAN_REVIEW",
+        "B. AMBIGUOUS PAY-005 → HUMAN_REVIEW (ctl-cash packet)",
         "",
         format_cash_apply(payload["human_review"]),
         "",
@@ -325,7 +343,7 @@ def format_forecast_demo(payload: dict) -> str:
         "",
         format_review_list(payload["queue_before"]),
         "",
-        "D. HUMAN CORRECTION",
+        "D. VERIFIER CORRECTION (ctl-cash Kernel door; ar-review-correct is emergency)",
         "",
         format_review_item(payload["resolved"]),
         "",

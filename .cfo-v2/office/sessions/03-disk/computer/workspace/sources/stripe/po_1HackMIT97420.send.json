@@ -1,0 +1,30 @@
+[
+  {
+    "from": "bot_stripe",
+    "to": "bot_cash",
+    "toSlug": "cash",
+    "profile": "match",
+    "prompt": "profile: match\npath: workspace/sources/stripe/po_1HackMIT97420.json\nLanded a processor deposit. Kernel already unpacked the waterfall. Do not invent totals.",
+    "paths": [
+      "workspace/sources/stripe/po_1HackMIT97420.json"
+    ],
+    "kind": "a2a_handoff",
+    "mode": "async",
+    "onBusy": "queue",
+    "idempotencyKey": "stripe:po_1HackMIT97420:cash:match"
+  },
+  {
+    "from": "bot_stripe",
+    "to": "bot_apply",
+    "toSlug": "apply",
+    "profile": "apply",
+    "prompt": "profile: apply\npath: workspace/sources/stripe/po_1HackMIT97420.json\nLanded charge-level payout facts. Do not apply cash in this Bot.",
+    "paths": [
+      "workspace/sources/stripe/po_1HackMIT97420.json"
+    ],
+    "kind": "a2a_handoff",
+    "mode": "async",
+    "onBusy": "queue",
+    "idempotencyKey": "stripe:po_1HackMIT97420:charges:apply:apply"
+  }
+]

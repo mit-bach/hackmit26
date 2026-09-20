@@ -6,11 +6,12 @@ import { awaitTurn } from "./await.ts";
 import { initComputer } from "./computer.ts";
 import { findHandle } from "./handle.ts";
 import { liveStatus } from "./lane-state.ts";
-import { extensionEntryPath } from "./pkg.ts";
+import { extensionEntryPath, extraExtensionArgs } from "./pkg.ts";
 import { searchProtocol } from "./protocol-log.ts";
 import { fireRoutine } from "./routines.ts";
 import { searchAgents } from "./search.ts";
 import { sendPrompt } from "./send.ts";
+import { loadOperatorConfig } from "./server/operator-config.ts";
 import { startServer } from "./server/http.ts";
 
 function takeOption(args: readonly string[], name: string): string | undefined {
@@ -54,7 +55,7 @@ export async function runCli(argv: string[]): Promise<void> {
     process.stdout.write(`harness — named Bots on a shared Computer
 
 Commands:
-  serve [--computer DIR] [--port N] [--no-workers] [--lazy] [--fake]
+  serve [--computer DIR] [--port N] [--no-workers] [--lazy] [--fake] [--no-open]
   bot <slug> [--computer DIR]
   send <slug> <prompt...> [--computer DIR]
   stop <slug> [--computer DIR]
@@ -65,21 +66,31 @@ Commands:
   routine <name> [--computer DIR]
   floor [--computer DIR]
 
-The Operator surface is HTTP JSON on loopback. There is no product UI here.
+The Operator shell is a loopback SPA on the same process as the JSON API.
 `);
     return;
   }
 
   if (cmd === "serve") {
-    const port = Number(takeOption(rest, "--port") ?? "8787");
+    const config = loadOperatorConfig();
+    const port = Number(takeOption(rest, "--port") ?? String(config.port));
+    const fakeWorkers = hasFlag(rest, "--fake") || (!hasFlag(rest, "--lazy") && config.spawnPolicy === "fake");
+    const lazyWorkers = hasFlag(rest, "--lazy") || (!fakeWorkers && config.spawnPolicy === "lazy");
     const started = await startServer({
       computerRoot,
+      host: "127.0.0.1",
       port: Number.isFinite(port) ? port : 8787,
       workers: !hasFlag(rest, "--no-workers"),
-      lazyWorkers: hasFlag(rest, "--lazy"),
-      fakeWorkers: hasFlag(rest, "--fake"),
+      lazyWorkers,
+      fakeWorkers,
     });
     process.stdout.write(`harness listening ${started.url} computer=${computerRoot}\n`);
+    process.stdout.write(`operator shell ${started.url}/\n`);
+    if (config.openBrowser && !hasFlag(rest, "--no-open")) {
+      const opener = process.platform === "darwin" ? "open" : process.platform === "win32" ? "cmd" : "xdg-open";
+      const args = process.platform === "win32" ? ["/c", "start", started.url] : [started.url];
+      spawn(opener, args, { stdio: "ignore", detached: true }).unref();
+    }
     const stop = (): void => {
       void started.stop().then(() => {
         process.exit(0);
@@ -99,7 +110,7 @@ The Operator surface is HTTP JSON on loopback. There is no product UI here.
       throw new Error("usage: harness bot <slug>");
     }
     initComputer(computerRoot);
-    const child = spawn("pi", ["-e", extensionEntryPath(), "--name", slug], {
+    const child = spawn("pi", ["-e", extensionEntryPath(), ...extraExtensionArgs(), "--name", slug], {
       cwd: computerRoot,
       env: { ...process.env, HARNESS_BOT: slug, HARNESS_COMPUTER: computerRoot },
       stdio: "inherit",

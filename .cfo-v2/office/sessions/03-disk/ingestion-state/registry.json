@@ -1,0 +1,77 @@
+{
+  "canonicals": [
+    {
+      "canonical_id": "ING-001",
+      "vendor": "Amazon Web Services",
+      "vendor_id": null,
+      "vendor_invoice_number": "INV-9001",
+      "invoice_date": "2026-09-12",
+      "due_date": "2026-10-12",
+      "currency": "USD",
+      "amount": 4820.0,
+      "subtotal": 4403.67,
+      "tax": 416.33,
+      "po_id": null,
+      "description": "Amazon Web Services INV-9001",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-E01",
+          "source_uri": "email://ap-inbox/MSG-E01",
+          "agent": "Email Invoice Agent",
+          "document_hash": "59eb0381c4e56486dc14632a4e798737d7881a28946ca4078dc7bc98fd0437ad"
+        }
+      ],
+      "document_hash": "59eb0381c4e56486dc14632a4e798737d7881a28946ca4078dc7bc98fd0437ad",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Amazon Web Services",
+          "value": "Amazon Web Services"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: INV-9001",
+          "value": "INV-9001"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-12",
+          "value": "2026-09-12"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 4820.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [
+        "missing_po"
+      ],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "amazonwebservic:INV-9001",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    }
+  ],
+  "index": {
+    "invoice:amazonwebservic:INV-9001": "ING-001",
+    "hash:59eb0381c4e56486dc14632a4e798737d7881a28946ca4078dc7bc98fd0437ad": "ING-001",
+    "source:email:MSG-E01": "ING-001"
+  },
+  "handed_off": [
+    "ING-001"
+  ]
+}

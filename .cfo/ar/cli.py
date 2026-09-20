@@ -140,7 +140,7 @@ def run_demo_cli(argv: list[str]) -> int:
 
 def _review_options(argv: list[str]) -> tuple[list[str], str, str, list]:
     reason = ""
-    reviewer = "human"
+    reviewer = "ctl-cash"
     applies = []
     rest: list[str] = []
     index = 0
@@ -212,6 +212,7 @@ def run_review_approve_cli(argv: list[str]) -> int:
 
 
 def run_review_correct_cli(argv: list[str]) -> int:
+    """Emergency Kernel door. Happy path is ctl-cash concurrence, not this CLI."""
     try:
         rest, reason, reviewer, applies = _review_options(argv)
     except ValueError as exc:

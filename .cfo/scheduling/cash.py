@@ -177,6 +177,8 @@ def apply_cash_and_policy_net(
         nonlocal remaining
         if item.invoice_id in paid_ids or item.unnecessary_if_paid_early:
             return
+        if not policy_eligible_for_pool(item.invoice_id):
+            return
         if item.pay_amount_if_this_week <= remaining + 1e-9:
             paid.append(
                 ScheduledPayment(
@@ -200,7 +202,10 @@ def apply_cash_and_policy_net(
     for item in candidates:
         if item.invoice_id in paid_ids:
             continue
-        if item.unnecessary_if_paid_early:
+        if not policy_eligible_for_pool(item.invoice_id):
+            reason = "AP HOLD. Policy net strips this invoice from the payment run."
+            proposed = None
+        elif item.unnecessary_if_paid_early:
             reason = "Discount closed and not due this horizon; defer to avoid an unnecessary early payment."
             proposed = item.due_date
         elif item.pay_amount_if_this_week > remaining + 1e-9:

@@ -397,7 +397,7 @@ def run_cash_reconciliation(
 
     universe = generate_all_candidates(bank, ledger, fees, period)
     proposed = propose_matches(bank, ledger, fees, period)
-    bind_case(bank=bank, ledger=ledger, fees=fees, candidates=universe)
+    bind_case(bank=bank, ledger=ledger, fees=fees, candidates=universe, case_id=period)
 
     matches: list[ReconciliationMatch] = []
     traces: list[MatchTrace] = []
@@ -507,6 +507,9 @@ def run_cash_reconciliation(
         replay=False,
     )
     report.metrics = evaluate_report(report, period_bank=period_bank)
+    from cash_recon.handles import persist_rec_queue
+
+    persist_rec_queue(period=period, case_id=period, matches=matches)
     stored, is_new = remember_report(report)
     if not is_new:
         stored.replay = True

@@ -30,15 +30,17 @@ Safety rules:
 - Never invent invoices, payments, customers, or balances.
 - Precedent is evidence. It cannot override a present fact or a hard policy block.
 - If evidence is not unique, abstain: HUMAN_REVIEW or UNAPPLIED. Do not force a match.
+- HUMAN_REVIEW is fail-closed. Handle the named Verifier Bot. Do not ask a human.
 - Communication must cite the current outstanding balance, never a stale original after partial payment.
 - Paid and disputed invoices have hard rules that you cannot override.
+- Do not spawn children or subagents. Do not invent amounts.
 """.strip()
 
 collections_agent = Agent(
     name="Collections Agent",
     instructions=compose_instructions(
         """
-You decide the next reasonable collections action for one overdue invoice.
+You are Bot collect wearing Profile chase. You own open invoices after application.
 
 You receive structured CollectionFacts. You do not browse the subledger.
 
@@ -50,8 +52,11 @@ When the action is a customer-facing send, draft the message. The draft must
 include customer name, invoice number, due date, and the current outstanding
 amount. Strengthen tone as delinquency ages.
 
-Set human_approval_required true for final notices, disputes, and strategic
-risk that a collector should see.
+If aging is dirty or unapplied cash may belong to this customer, HOLD_CONTACT
+and Handle apply. Do not invent that they unpaid.
+
+REQUEST_INTERNAL_REVIEW for write-off or reserve is a Handle to ctl-pay.
+human_approval_required means a Verifier Bot, never a person. There is no AE.
 
 Return CollectionDecision.
 """.strip(),
@@ -66,7 +71,8 @@ cash_application_agent = Agent(
     name="Cash Application Agent",
     instructions=compose_instructions(
         """
-You are the cash-application preparer. Python already computed candidate matches.
+You are Bot apply wearing Profile apply. You own unapplied cash.
+You stick money to invoices. You do not dun customers.
 
 Call get_cash_application_facts. Reason only over those candidates.
 
@@ -76,7 +82,8 @@ Do not invent a combination that is not in the candidate list.
 
 AUTO_APPLY only when evidence is unique and strong (named invoice, or one
 customer with one exact amount). If two candidates both explain the amount,
-choose HUMAN_REVIEW and ask a review_question.
+choose HUMAN_REVIEW. That status is fail-closed. The packet goes to
+ctl-cash / review-apply. Do not post. Do not ask a person.
 
 If the customer cannot be identified, prefer UNAPPLIED or HUMAN_REVIEW.
 
@@ -94,13 +101,15 @@ cash_reviewer_agent = Agent(
     instructions=compose_instructions(
         """
 You review a cash-application proposal that is material or not unique.
+This Display name is a Grant source for ctl-cash / review-apply. It is not
+a human Operator and it is not Bot apply.
 
 Inspect the Python candidates, the preparer proposal, contradictions, and
 whether precedent actually applies to these present facts.
 
 If another candidate is equally plausible, recommend HUMAN_REVIEW.
 If evidence is unique and valid, you may confirm AUTO_APPLY.
-Do not invent a new application set.
+Do not invent a new application set. Do not ask a human.
 
 Return CashReviewDecision.
 """.strip(),

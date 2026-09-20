@@ -1,4 +1,4 @@
-"""Persisted human-review queue for ambiguous cash applications."""
+"""Persisted cash-application packets. Queue owner is ctl-cash, not a human Operator."""
 
 from __future__ import annotations
 
@@ -33,14 +33,24 @@ def _now() -> str:
 
 
 def enqueue_review(trace: CashApplyTrace) -> CashReviewItem:
-    """Create or return the open review item for a HUMAN_REVIEW payment."""
+    """Create or return the open Verifier packet for a HUMAN_REVIEW payment."""
+    from ar.handles import apply_verifier_handle
+
     existing = get_review(trace.payment_id)
     if existing and existing.status == "OPEN":
+        updates: dict = {}
         if trace.trace_path and not existing.trace_path:
-            existing = existing.model_copy(update={"trace_path": trace.trace_path})
+            updates["trace_path"] = trace.trace_path
+        if not existing.handle_path:
+            handle_path, packet_path = apply_verifier_handle(trace)
+            updates["handle_path"] = str(handle_path)
+            updates["packet_path"] = str(packet_path)
+        if updates:
+            existing = existing.model_copy(update=updates)
             save_review(existing)
         return existing
     proposed = list(trace.preparer.applications or trace.final.applications)
+    handle_path, packet_path = apply_verifier_handle(trace)
     item = CashReviewItem(
         review_id=next_id("AR-REV", [row.review_id for row in reviews()]),
         payment_id=trace.payment_id,
@@ -60,13 +70,24 @@ def enqueue_review(trace: CashApplyTrace) -> CashReviewItem:
         trace_path=trace.trace_path,
         status="OPEN",
         created_at=_now(),
+        queue_owner="ctl-cash",
+        queue_profile="review-apply",
+        handle_path=str(handle_path),
+        packet_path=str(packet_path),
+        human_queue=False,
     )
     add_review(item)
     add_event(
         "cash_review_opened",
-        f"Opened review {item.review_id} for {item.payment_id}",
+        f"Opened ctl-cash packet {item.review_id} for {item.payment_id}",
         payment_id=item.payment_id,
-        details={"review_id": item.review_id, "ambiguities": item.ambiguities},
+        details={
+            "review_id": item.review_id,
+            "ambiguities": item.ambiguities,
+            "queue_owner": item.queue_owner,
+            "handle_path": item.handle_path,
+            "human_queue": False,
+        },
     )
     return item
 
@@ -127,14 +148,14 @@ def _resolve(
 def approve_review(
     payment_id: str,
     *,
-    reviewer: str = "human",
+    reviewer: str = "ctl-cash",
     reason: str = "Approved the proposed allocation.",
 ) -> CashReviewItem:
     item, payment = require_open_review(payment_id)
     if not item.proposed_applications:
         raise ValueError(
             f"{payment.payment_id} has no unique proposed allocation. "
-            "Use ar-review-correct --apply INV-…:amount"
+            "Use the ctl-cash packet or emergency ar-review-correct --apply INV-…:amount"
         )
     proposal = CashApplicationProposal(
         payment_id=payment.payment_id,
@@ -165,7 +186,7 @@ def correct_review(
     payment_id: str,
     applications: list[MatchApplication],
     reason: str,
-    reviewer: str = "human",
+    reviewer: str = "ctl-cash",
 ) -> CashReviewItem:
     item, payment = require_open_review(payment_id)
     record = record_human_application(
@@ -190,7 +211,7 @@ def correct_review(
 def reject_review(
     payment_id: str,
     reason: str,
-    reviewer: str = "human",
+    reviewer: str = "ctl-cash",
 ) -> CashReviewItem:
     item, payment = require_open_review(payment_id)
     metadata = dict(payment.metadata or {})

@@ -1,0 +1,14 @@
+{
+  "id": "bot_apply",
+  "name": "apply",
+  "slug": "apply",
+  "purpose": "Owns unapplied cash and sticks Kernel-valid remittances to invoices.",
+  "instructions": "Read office/bots/apply/BOT.md. Obey the Constitution. Never ask a human.",
+  "skills": ["cash-application"],
+  "connectors": [
+    "ar.tools.get_cash_application_facts",
+    "ar.tools.get_ar_customer",
+    "ar.tools.get_ar_precedents"
+  ],
+  "approvalLevel": "never"
+}

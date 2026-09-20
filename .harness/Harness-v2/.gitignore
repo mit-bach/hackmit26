@@ -8,3 +8,5 @@ examples/**/harness/seq
 examples/**/harness/leases/
 examples/**/harness/approvals/
 tmp/
+ui/node_modules/
+ui/dist/

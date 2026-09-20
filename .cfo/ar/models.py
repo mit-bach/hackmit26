@@ -212,6 +212,11 @@ class CollectionRun(BaseModel):
     agents: list[AgentSkillTrace] = Field(default_factory=list)
     used_agent: bool = False
     trace_path: Optional[str] = None
+    blocked: bool = False
+    block_reason: Optional[str] = None
+    apply_handle_path: Optional[str] = None
+    verifier_handle_paths: list[str] = Field(default_factory=list)
+    drained_payment_ids: list[str] = Field(default_factory=list)
 
 
 class MatchApplication(BaseModel):
@@ -365,6 +370,11 @@ class CashReviewItem(BaseModel):
     resolution_reason: Optional[str] = None
     final_applications: list[MatchApplication] = Field(default_factory=list)
     differed_from_agent: bool = False
+    queue_owner: str = "ctl-cash"
+    queue_profile: str = "review-apply"
+    handle_path: Optional[str] = None
+    packet_path: Optional[str] = None
+    human_queue: bool = False
 
 
 class AREvent(BaseModel):
@@ -395,6 +405,8 @@ class CashApplyTrace(BaseModel):
     used_agent: bool = False
     already_posted: bool = False
     trace_path: Optional[str] = None
+    verifier_handle_path: Optional[str] = None
+    packet_path: Optional[str] = None
 
 
 class ARCloseSnapshot(BaseModel):

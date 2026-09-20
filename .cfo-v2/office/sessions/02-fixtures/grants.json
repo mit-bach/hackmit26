@@ -1,0 +1,54 @@
+{
+  "version": "1",
+  "byDisplayName": {
+    "AP Preparer": {
+      "ops": [
+        "tools.get_invoice"
+      ],
+      "skills": [
+        "three-way-match-analysis"
+      ],
+      "outputType": "PreparerRecommendation"
+    },
+    "Accrual Agent": {
+      "ops": [
+        "accrual.tools.create_accrual"
+      ],
+      "skills": [],
+      "outputType": "AccrualDecision"
+    },
+    "Auditor Agent": {
+      "ops": [
+        "audit.tools.get_audit_period"
+      ],
+      "skills": [],
+      "outputType": "AuditFindingReport"
+    },
+    "Audit Report Agent": {
+      "ops": [],
+      "skills": [],
+      "outputType": "AuditReport"
+    },
+    "Cash Reconciliation Preparer": {
+      "ops": [
+        "cash_recon.tools.get_bank_transaction"
+      ],
+      "skills": [],
+      "outputType": "CashMatchDecision"
+    },
+    "Balance Sheet Reconciliation Preparer": {
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet"
+      ],
+      "skills": [],
+      "outputType": "ReconDecision"
+    },
+    "Close Manager": {
+      "ops": [],
+      "skills": [
+        "month-end-close-coordination"
+      ],
+      "outputType": "CloseManagerDecision"
+    }
+  }
+}

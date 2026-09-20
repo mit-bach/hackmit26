@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
+import { writeJsonAtomic } from "../src/fs.ts";
+import { writeHandle } from "../src/handle.ts";
 import { listInbox } from "../src/inbox.ts";
+import { receiptPath } from "../src/paths.ts";
 import { findBot, loadRoster } from "../src/roster.ts";
 import { fireRoutine, listReceipts } from "../src/routines.ts";
 import { startFakeWorkers } from "../src/worker.ts";
@@ -39,4 +42,39 @@ test("a Routine enqueue lands on the owning Bot inbox, not the Operator pane", a
   assert.equal(outcome.done, true);
   const settled = listReceipts(computer).find((row) => row.id === receipt.id);
   assert.equal(settled?.status, "completed");
+});
+
+test("listReceipts heals a queued receipt whose Handle already completed", () => {
+  const computer = makeComputer();
+  const roster = loadRoster(computer);
+  const beta = findBot(roster, "beta");
+  assert.ok(beta);
+  const at = new Date().toISOString();
+  const handleId = "h_orphan_receipt";
+  writeHandle(computer, beta.id, {
+    id: handleId,
+    from: "operator",
+    to: beta.id,
+    toSlug: beta.slug,
+    prompt: "stale routine",
+    paths: [],
+    conversation: { kind: "operator_dm", botId: beta.id },
+    kind: "routine",
+    status: "completed",
+    createdAt: at,
+    updatedAt: at,
+    result: "done while receipt stayed queued",
+  });
+  writeJsonAtomic(receiptPath(computer, "rc_orphan"), {
+    id: "rc_orphan",
+    name: "morning-brief",
+    bot: "beta",
+    handleId,
+    status: "queued",
+    at,
+    updatedAt: at,
+  });
+  const healed = listReceipts(computer).find((row) => row.id === "rc_orphan");
+  assert.equal(healed?.status, "completed");
+  assert.equal(healed?.result, "done while receipt stayed queued");
 });

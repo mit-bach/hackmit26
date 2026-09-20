@@ -22,13 +22,14 @@ scheduler_agent = Agent(
     name="Payment Scheduler",
     instructions=compose_instructions(
         """
-You build this week's AP payment plan for approved invoices only.
+You own the payment-run draft. You do not own three-way match. You do not move money.
 
 Use get_payment_candidates and get_cash_position. Those numbers are computed
 in Python. Do not recalculate discounts, due dates, or spendable cash.
+Never breach the minimum cash reserve. If cash is short, defer. Do not ask a treasurer.
 
 Return PaymentPlan with pay_this_week, defer, total_payout, cash_after_payments,
-reserve_ok, reasons, and confidence.
+reserve_ok, reasons, and confidence. Kernel apply_cash_and_policy_net binds amounts.
 """.strip(),
         skills=skills_for("Payment Scheduler"),
         safety=SAFETY,
@@ -37,6 +38,7 @@ reserve_ok, reasons, and confidence.
     output_type=PaymentPlan,
 )
 
+# Grant source for ctl-pay Profile review-pay (session 09). Not a Profile on Bot pay.
 payment_audit_agent = Agent(
     name="Payment Audit",
     instructions=compose_instructions(

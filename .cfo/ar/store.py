@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,11 +21,15 @@ from ar.models import (
     CustomerPayment,
     HumanCorrection,
 )
+from atomic_json import write_json_atomic
 from tools import DataFileError
 
 STATE_DIR = Path(__file__).resolve().parent.parent / "runs" / "ar"
 STATE_PATH = STATE_DIR / "state.json"
 TRACES_DIR = STATE_DIR / "traces"
+HANDLES_DIR = STATE_DIR / "handles"
+PACKETS_DIR = STATE_DIR / "packets"
+DRAIN_PATH = STATE_DIR / "drain.json"
 
 PAYMENT_ALIASES = {"PAY-AMBIGUOUS": "PAY-005"}
 
@@ -99,11 +104,19 @@ def load_state(*, reset: bool = False) -> ARState:
     return _state
 
 
+def atomic_write_text(path: Path, text: str) -> None:
+    """Write `text` to `path` with a same-directory replace so readers never see a torn file."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(f".{path.name}.tmp.{os.getpid()}")
+    tmp.write_text(text)
+    os.replace(tmp, path)
+
+
 def save_state() -> None:
     if _state is None:
         return
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    STATE_PATH.write_text(_state.model_dump_json(indent=2) + "\n")
+    write_json_atomic(STATE_PATH, json.loads(_state.model_dump_json()))
 
 
 def reset_state() -> ARState:
@@ -116,24 +129,27 @@ def clear_state_cache() -> None:
 
 
 def configure_paths(directory: Path) -> None:
-    global STATE_DIR, STATE_PATH, TRACES_DIR, _state
+    global STATE_DIR, STATE_PATH, TRACES_DIR, HANDLES_DIR, PACKETS_DIR, DRAIN_PATH, _state
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
     STATE_DIR = directory
     STATE_PATH = directory / "state.json"
     TRACES_DIR = directory / "traces"
+    HANDLES_DIR = directory / "handles"
+    PACKETS_DIR = directory / "packets"
+    DRAIN_PATH = directory / "drain.json"
     _state = None
 
 
 @contextmanager
 def isolated_ar_state(directory: Path):
-    global STATE_DIR, STATE_PATH, TRACES_DIR, _state
-    previous = (STATE_DIR, STATE_PATH, TRACES_DIR, _state)
+    global STATE_DIR, STATE_PATH, TRACES_DIR, HANDLES_DIR, PACKETS_DIR, DRAIN_PATH, _state
+    previous = (STATE_DIR, STATE_PATH, TRACES_DIR, HANDLES_DIR, PACKETS_DIR, DRAIN_PATH, _state)
     configure_paths(directory)
     try:
         yield
     finally:
-        STATE_DIR, STATE_PATH, TRACES_DIR, _state = previous
+        STATE_DIR, STATE_PATH, TRACES_DIR, HANDLES_DIR, PACKETS_DIR, DRAIN_PATH, _state = previous
 
 
 def all_customers() -> list[Customer]:
@@ -297,6 +313,11 @@ def open_reviews() -> list[CashReviewItem]:
     return [item for item in reviews() if item.status == "OPEN"]
 
 
+def open_human_reviews() -> list[CashReviewItem]:
+    """Human Operator queue. Operational apply never parks here."""
+    return [item for item in open_reviews() if item.human_queue]
+
+
 def get_review(payment_id: str) -> CashReviewItem | None:
     payment_id = resolve_payment_id(payment_id)
     matches = [item for item in reviews() if item.payment_id == payment_id]
@@ -336,7 +357,7 @@ def save_trace(name: str, payload) -> Path:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = TRACES_DIR / f"{name}-{stamp}.json"
     if hasattr(payload, "model_dump_json"):
-        path.write_text(payload.model_dump_json(indent=2) + "\n")
+        atomic_write_text(path, payload.model_dump_json(indent=2) + "\n")
     else:
-        path.write_text(json.dumps(payload, indent=2) + "\n")
+        atomic_write_text(path, json.dumps(payload, indent=2) + "\n")
     return path

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from accrual.estimation import money
 from ar.aging import aging_bucket, days_past_due, derive_status, parse_date
+from ar.drain import customer_has_unapplied_cash
 from ar.models import (
     CollectionAction,
     CollectionDecision,
@@ -12,6 +13,8 @@ from ar.models import (
     CustomerInvoice,
 )
 from ar.store import all_customers, get_customer, open_invoices, precedents
+
+WRITEOFF_ACTIONS = {"REQUEST_INTERNAL_REVIEW"}
 
 DEFAULT_COOLDOWN_DAYS = 7
 SEND_ACTIONS = {
@@ -304,6 +307,15 @@ def enforce_collection_decision(facts: CollectionFacts, decision: CollectionDeci
         message = None
         human = False
         reason = "Paid invoices cannot receive collection messages."
+    elif customer_has_unapplied_cash(facts.customer_id) and action in SEND_ACTIONS:
+        checks.append("Blocked chase while unapplied cash may belong to this customer")
+        action = "HOLD_CONTACT"
+        message = None
+        human = False
+        reason = (
+            "Unapplied cash may belong to this customer. Handle apply first. "
+            "Do not invent that the invoice is unpaid."
+        )
     elif facts.dispute_status == "OPEN" and action in SEND_ACTIONS:
         checks.append("Blocked automated demand on disputed invoice")
         action = "ESCALATE_DISPUTE"

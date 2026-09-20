@@ -24,3 +24,9 @@ Those move text between live processes. They do not give durable BotId, acceptâ‰
 - https://docs.x.ai/grok-bot/chat-and-collaboration
 - https://raw.githubusercontent.com/milind-soni/OpenMausBot/main/docs/plans/2026-09-02-bot-concurrency.md
 - https://raw.githubusercontent.com/milind-soni/OpenMausBot/main/docs/memory.md
+
+## Operator shell
+
+- Operator SPA is the OpenMausBot frontend (Apache-2.0), vendored under `ui/src`, `ui/shared`, and `ui/public`. See `ui/NOTICE` and `ui/LICENSE`.
+- The Harness host implements the OpenMausBot `/api` shapes so that UI is unchanged. Pi is the only engine. Computer panel file tree stays on Harness routes; Box/CUA/Electron bridges are stubbed.
+- Computer panel is the shared files tree, not Box/CUA.

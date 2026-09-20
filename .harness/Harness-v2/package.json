@@ -25,6 +25,8 @@
     "extensions",
     "skills",
     "examples",
+    "ui/dist",
+    "ui/NOTICE",
     ".pi"
   ],
   "pi": {
@@ -38,7 +40,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "tsc -p tsconfig.json && node --test dist/tests/*.test.js",
-    "serve": "npm run build && node dist/src/cli.js serve",
+    "ui:install": "npm --prefix ui install",
+    "ui:build": "npm --prefix ui run build",
+    "ui:dev": "npm --prefix ui run dev",
+    "serve": "npm run build && npm --prefix ui install && npm --prefix ui run build && node dist/src/cli.js serve",
     "prepare": "tsc -p tsconfig.json"
   },
   "engines": {

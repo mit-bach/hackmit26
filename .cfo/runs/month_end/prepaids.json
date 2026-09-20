@@ -58,5 +58,23 @@
     ],
     "transaction_id": "TXN-PRE-RENT-001",
     "late_discovery": false
+  },
+  {
+    "prepaid_id": "PRE-INS-MISSING",
+    "vendor": "Northshore Mutual",
+    "description": "Supplemental flood rider discovered without the policy packet",
+    "source_document_id": "",
+    "total_amount": 3600.0,
+    "start_date": "2026-09-01",
+    "end_date": "2027-08-31",
+    "initial_account": "Prepaid Insurance",
+    "expense_account": "Insurance Expense",
+    "amortization_method": "straight_line_monthly",
+    "currency": "USD",
+    "status": "review",
+    "created_at": "2026-09-18T00:00:00Z",
+    "evidence_refs": [],
+    "transaction_id": "TXN-PRE-MISSING",
+    "late_discovery": false
   }
 ]

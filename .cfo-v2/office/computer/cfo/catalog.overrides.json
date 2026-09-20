@@ -1,0 +1,116 @@
+{
+  "version": "1",
+  "comment": "Session 09. Compiler patches mutability here. grantDenylist tightens Verifier Display names so constructor twins cannot hold Operator write or rebuild ops.",
+  "ops": {
+    "accrual.tools.create_accrual": {
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "ownerPrefixes": ["runs/accrual/"]
+    },
+    "accrual.tools.reconcile_accrual_with_invoice": {
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "ownerPrefixes": ["runs/accrual/"]
+    },
+    "audit.tools.get_audit_ground_truth": {
+      "evalOnly": true,
+      "sodClass": "audit-eval"
+    }
+  },
+  "grantDenylist": {
+    "AP Reviewer": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "accrual.tools.create_accrual",
+      "accrual.tools.reconcile_accrual_with_invoice",
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool"
+    ],
+    "AP Approver": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "accrual.tools.create_accrual",
+      "scheduling.tools.get_payment_candidates"
+    ],
+    "AP Audit": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "tools.get_prior_cases",
+      "accrual.tools.create_accrual"
+    ],
+    "Payment Audit": [
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool",
+      "tools.get_invoice",
+      "accrual.tools.create_accrual"
+    ],
+    "Cash Application Reviewer": [
+      "accrual.tools.create_accrual",
+      "tools.get_invoice",
+      "scheduling.tools.get_payment_candidates"
+    ],
+    "Cash Reconciliation Reviewer": [
+      "accrual.tools.create_accrual",
+      "tools.get_invoice"
+    ],
+    "Prepaid Reviewer": [
+      "accrual.tools.create_accrual",
+      "accrual.tools.reconcile_accrual_with_invoice"
+    ],
+    "Fixed Asset Reviewer": [
+      "accrual.tools.create_accrual"
+    ],
+    "Balance Sheet Reconciliation Reviewer": [
+      "accrual.tools.create_accrual"
+    ],
+    "Month-End Close Reviewer": [
+      "accrual.tools.create_accrual",
+      "accrual.tools.reconcile_accrual_with_invoice"
+    ]
+  },
+  "profileDenylist": {
+    "ctl-pay/review-match": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "accrual.tools.create_accrual",
+      "scheduling.tools.get_payment_candidates"
+    ],
+    "ctl-pay/review-pay": [
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool",
+      "tools.get_invoice",
+      "accrual.tools.create_accrual"
+    ],
+    "ctl-cash/review-apply": [
+      "accrual.tools.create_accrual"
+    ],
+    "ctl-cash/review-rec": [
+      "accrual.tools.create_accrual"
+    ],
+    "ctl-books/review-treatment": [
+      "accrual.tools.create_accrual"
+    ],
+    "ctl-books/lock": [
+      "accrual.tools.create_accrual",
+      "accrual.tools.reconcile_accrual_with_invoice"
+    ]
+  },
+  "consequential": {
+    "accrual.tools.create_accrual": {
+      "owner": "ctl-books",
+      "profile": "review-treatment"
+    },
+    "accrual.tools.reconcile_accrual_with_invoice": {
+      "owner": "ctl-books",
+      "profile": "review-treatment"
+    }
+  }
+}

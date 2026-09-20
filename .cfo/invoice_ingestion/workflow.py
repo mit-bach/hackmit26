@@ -157,7 +157,7 @@ def ingest_invoices(
     """Run enabled sources, validate, dedupe, and optionally hand off to AP.
 
     reset_overlay=True starts a clean session (tests and the first demo run).
-    Pass False to replay against the in-memory canonical registry so the same
+    Pass False to replay against the disk-backed canonical registry so the same
     invoice is not forwarded to AP again.
     """
     enabled = list(sources or SUPPORTED_SOURCES)

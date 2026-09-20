@@ -1,11 +1,8 @@
 from __future__ import annotations
 
 from models import (
-    ApproverDecision,
-    AuditResult,
     InvestigationReport,
     PreparerRecommendation,
-    ReviewerDecision,
 )
 from invoice_ingestion.workflow import ingest_invoices
 from tools import collect_case_evidence, load_invoice
@@ -33,30 +30,7 @@ def _packet(invoice_id: str, kind: str, rec: str, **extra):
             recommendation=rec,
             confidence=0.8,
         )
-    if kind == "reviewer":
-        return ReviewerDecision(
-            invoice_id=invoice_id,
-            recommendation=rec,
-            confidence=0.85,
-            reasons=[f"reviewer {rec}"],
-            objections=[],
-            evidence_used=[invoice_id],
-        )
-    if kind == "approver":
-        return ApproverDecision(
-            invoice_id=invoice_id,
-            decision=rec,
-            confidence=0.9,
-            reasons=[f"approver {rec}"],
-            evidence_used=[invoice_id],
-            policies_used=extra.get("policies", []),
-        )
-    return AuditResult(
-        invoice_id=invoice_id,
-        passed=extra.get("passed", True),
-        findings=["audit"],
-        requires_reconsideration=False,
-    )
+    raise ValueError(kind)
 
 
 def test_ingested_helios_invoice_runs_existing_ap_workflow(monkeypatch, tmp_path):
@@ -68,21 +42,19 @@ def test_ingested_helios_invoice_runs_existing_ap_workflow(monkeypatch, tmp_path
     assert evidence.exception_types == []
 
     def fake_run(agent, prompt):
-        mapping = {
-            "AP Preparer": _packet(invoice_id, "preparer", "APPROVE"),
-            "AP Reviewer": _packet(invoice_id, "reviewer", "APPROVE"),
-            "AP Approver": _packet(invoice_id, "approver", "APPROVE", policies=["P-001"]),
-            "AP Audit": _packet(invoice_id, "audit", "APPROVE", passed=True),
-        }
         if agent.name == "Exception Investigator":
             raise AssertionError("Investigator should not run on Helios three-way match")
-        return mapping[agent.name]
+        if agent.name != "AP Preparer":
+            raise AssertionError(f"Bot ap must not run {agent.name}")
+        return _packet(invoice_id, "preparer", "APPROVE")
 
     monkeypatch.setattr("workflow.run_agent", fake_run)
     monkeypatch.setattr("workflow.RUNS_DIR", tmp_path)
     trace = run_ap_workflow(invoice_id)
     assert trace.investigation is None
     assert trace.final.decision == "APPROVE"
+    assert trace.posted_to_pool is False
+    assert trace.verifier_handle["toSlug"] == "ctl-pay"
 
 
 def test_existing_ap_invoice_still_loads_after_ingestion():

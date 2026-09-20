@@ -140,8 +140,17 @@ def classify_text(text: str, *, subject: str = "", filename: str = "") -> tuple[
         return "marketing", "Looks like a marketing email, not a vendor invoice"
     if any(token in blob for token in ("quotation", "quote number", "quoted amount", "estimate valid")):
         return "quote", "Document is a quote/estimate, not an invoice"
-    if any(token in blob for token in ("payment received", "thank you for your payment", "payment confirmation")):
-        return "payment_confirmation", "Payment confirmation, not a request for payment"
+    if any(
+        token in blob
+        for token in (
+            "payment received",
+            "thank you for your payment",
+            "payment confirmation",
+            "remittance advice",
+            "remittance",
+        )
+    ):
+        return "payment_confirmation", "Customer remittance or payment confirmation, not a vendor bill"
     if any(token in blob for token in ("account statement", "statement of account", "this is not an invoice")):
         return "statement", "Account statement rather than an invoice"
     if any(token in blob for token in ("purchase request", "requisition", "not an invoice")) and "invoice number" not in blob:

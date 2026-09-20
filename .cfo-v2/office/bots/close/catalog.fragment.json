@@ -1,0 +1,37 @@
+{
+  "version": "1",
+  "ops": [
+    {
+      "id": "accrual.tools.create_accrual",
+      "python": "accrual.tools:create_accrual",
+      "exportName": "create_accrual",
+      "args": {
+        "vendor": "string",
+        "period": "string",
+        "method": "EstimationMethod",
+        "confidence": "number",
+        "evidence": "list",
+        "reasoning_summary": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "evalOnly": false,
+      "ownerPrefixes": ["runs/accrual/"]
+    },
+    {
+      "id": "accrual.tools.reconcile_accrual_with_invoice",
+      "python": "accrual.tools:reconcile_accrual_with_invoice",
+      "exportName": "reconcile_accrual_with_invoice",
+      "args": {
+        "accrual_id": "string",
+        "invoice_id": "string",
+        "actual_amount": "number"
+      },
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "evalOnly": false,
+      "ownerPrefixes": ["runs/accrual/"]
+    }
+  ],
+  "note": "Read ops for prepaid/FA/BS already live in office/computer/cfo/catalog.json from the compiler. This fragment names the only write ops Bot close may hold, and only on Profile accrue."
+}

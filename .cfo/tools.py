@@ -6,6 +6,8 @@ from datetime import date
 from functools import lru_cache
 from pathlib import Path
 
+from atomic_json import read_json_object, with_file_lock, write_json_atomic
+
 from agents import function_tool
 
 from models import (
@@ -55,7 +57,20 @@ def _read_json(path: Path) -> list:
     return raw
 
 
+_DEFAULT_OVERLAY_PATH = Path(__file__).resolve().parent / "runs" / "ingestion" / "overlay.json"
+OVERLAY_PATH = _DEFAULT_OVERLAY_PATH
 _runtime_invoices: dict[str, Invoice] = {}
+_overlay_loaded = False
+
+
+def configure_overlay_path(path: Path | None = None) -> Path:
+    """Persist ingested AP overlay invoices. Does not edit invoices.json."""
+    global OVERLAY_PATH, _overlay_loaded
+    OVERLAY_PATH = Path(path) if path is not None else _DEFAULT_OVERLAY_PATH
+    OVERLAY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    _runtime_invoices.clear()
+    _overlay_loaded = False
+    return OVERLAY_PATH
 
 
 @lru_cache(maxsize=1)
@@ -65,15 +80,58 @@ def _file_invoices() -> list[Invoice]:
 
 def register_runtime_invoice(invoice: Invoice) -> None:
     """Add an ingested invoice to the AP lookup overlay. Does not edit invoices.json."""
-    _runtime_invoices[invoice.invoice_id] = invoice
+
+    def _register() -> None:
+        _load_overlay_unlocked()
+        _runtime_invoices[invoice.invoice_id] = invoice
+        _save_overlay_unlocked()
+
+    with_file_lock(_overlay_lock_path(), _register)
 
 
 def clear_runtime_invoices() -> None:
     """Drop ingested overlay invoices. Existing AP inbox files are unchanged."""
+
+    def _clear() -> None:
+        _runtime_invoices.clear()
+        _save_overlay_unlocked()
+
+    global _overlay_loaded
+    with_file_lock(_overlay_lock_path(), _clear)
+    _overlay_loaded = True
+
+
+def _overlay_lock_path() -> Path:
+    return OVERLAY_PATH.with_name("overlay.lock")
+
+
+def _load_overlay_unlocked() -> None:
+    global _overlay_loaded
     _runtime_invoices.clear()
+    payload = read_json_object(OVERLAY_PATH)
+    for row in payload.get("invoices") or []:
+        invoice = Invoice.model_validate(row)
+        _runtime_invoices[invoice.invoice_id] = invoice
+    _overlay_loaded = True
+
+
+def _save_overlay_unlocked() -> None:
+    OVERLAY_PATH.parent.mkdir(parents=True, exist_ok=True)
+    write_json_atomic(
+        OVERLAY_PATH,
+        {"invoices": [item.model_dump(mode="json") for item in _runtime_invoices.values()]},
+    )
+
+
+def _ensure_overlay_loaded() -> None:
+    global _overlay_loaded
+    if _overlay_loaded:
+        return
+    with_file_lock(_overlay_lock_path(), _load_overlay_unlocked)
 
 
 def _invoices() -> list[Invoice]:
+    _ensure_overlay_loaded()
     base = list(_file_invoices())
     if not _runtime_invoices:
         return base

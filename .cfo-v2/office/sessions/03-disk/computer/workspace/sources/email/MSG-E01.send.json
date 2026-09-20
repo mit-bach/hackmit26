@@ -1,0 +1,16 @@
+[
+  {
+    "from": "bot_email",
+    "to": "bot_ap",
+    "toSlug": "ap",
+    "profile": "prepare",
+    "prompt": "profile: prepare\npath: workspace/sources/email/MSG-E01.json\nLanded a vendor bill. Kernel already extracted fields. Do not invent amounts.",
+    "paths": [
+      "workspace/sources/email/MSG-E01.json"
+    ],
+    "kind": "a2a_handoff",
+    "mode": "async",
+    "onBusy": "queue",
+    "idempotencyKey": "email:MSG-E01:ap:prepare"
+  }
+]

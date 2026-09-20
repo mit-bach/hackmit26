@@ -8,7 +8,7 @@ Shared repo with Rohan (`origin` = `github.com/rohan9314/hackmit26`). The git ro
 
 | role | roots / includes | agent write | land |
 |------|------------------|-------------|------|
-| product (A) | `.cfo/`, `.harness/`, root shims (`main.py`, `accrue.py`, `close.py`, `demo_month_end_close.py`), `pytest.ini`, `requirements.txt` | yes | pathspec |
+| product (A) | `.cfo/`, `.harness/`, `.cfo-v2/` (Client attach: compiler, Computer, Pi facade), root shims (`main.py`, `accrue.py`, `close.py`, `demo_month_end_close.py`), `pytest.ini`, `requirements.txt` | yes | pathspec |
 | product-docs (B) | `docs/`, `README.md` | yes | docs |
 | human-notes (C) | `Operator-workspace/` | never | notes: human |
 | design-prep (D) | `design-workshop/`, `GROK-WORKSHOP/` | yes | freeze/docs |
@@ -37,3 +37,4 @@ Shared repo with Rohan (`origin` = `github.com/rohan9314/hackmit26`). The git ro
 - Do not invent Operator-Workspace or A-OS paths. `Operator-workspace/` already exists here; it is human-notes.
 - Leave dirty for parent unless told to land.
 - If product is UNCLASSIFIED, escalate overlay fix to parent.
+- Session 01+ Client attach lands under `.cfo-v2/` (product A). Do not put finance types in `.harness/Harness-v2/src`.

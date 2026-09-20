@@ -27,3 +27,18 @@ export function harnessPackageRoot(start = fileURLToPath(new URL(".", import.met
 export function extensionEntryPath(): string {
   return join(harnessPackageRoot(), "extensions", "index.ts");
 }
+
+export function extraExtensionArgs(env: NodeJS.ProcessEnv = process.env): string[] {
+  const raw = env.HARNESS_EXTRA_EXTENSIONS?.trim();
+  if (!raw) {
+    return [];
+  }
+  const args: string[] = [];
+  for (const item of raw.split(/[:;,]/)) {
+    const path = item.trim();
+    if (path.length > 0) {
+      args.push("-e", path);
+    }
+  }
+  return args;
+}

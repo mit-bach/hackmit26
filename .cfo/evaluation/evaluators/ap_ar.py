@@ -7,7 +7,7 @@ from pathlib import Path
 
 from ar.aging import aging_bucket, days_past_due
 from ar.store import all_invoices as ar_invoices, all_payments, reset_state
-from ar.workflow import run_aging, run_cash_apply, run_collections
+from ar.workflow import run_aging, run_cash_apply, drain_new_deposits, run_collections
 from close.orchestrator import decide_ap
 from evaluation.comparison import case_result, error_case, fail_case
 from evaluation.models import EvaluationCaseResult
@@ -296,20 +296,6 @@ def run_ar(expected, *, as_of: str = "2026-09-30") -> tuple:
             )
         )
 
-    collections = run_collections(as_of, live=False, persist=True)
-    chase = next((item for item in collections.decisions if item.invoice_id == "INV-AR-005"), None)
-    cases.append(
-        case_result(
-            case_id="AR-SCN-AR-012",
-            domain="ar",
-            scenario_id="SCN-AR-012",
-            expected=True,
-            actual=bool(chase) and chase.action != "NO_ACTION",
-            source_ids=["INV-AR-005", "CUST-005"],
-            diagnostics={"action": getattr(chase, "action", None)},
-        )
-    )
-
     cash_raw = {}
     for scenario_id, payment_id, expected_decision in AR_CASH:
         review = expected_decision == "HUMAN_REVIEW"
@@ -346,6 +332,21 @@ def run_ar(expected, *, as_of: str = "2026-09-30") -> tuple:
             actual=cash_raw.get("PAY-004"),
             source_ids=["INV-AR-010", "INV-AR-011", "PAY-004"],
             review_class="HUMAN_REVIEW_EXPECTED",
+        )
+    )
+
+    drain_new_deposits(as_of, live=False, persist=True)
+    collections = run_collections(as_of, live=False, persist=True)
+    chase = next((item for item in collections.decisions if item.invoice_id == "INV-AR-020"), None)
+    cases.append(
+        case_result(
+            case_id="AR-SCN-AR-012",
+            domain="ar",
+            scenario_id="SCN-AR-012",
+            expected=True,
+            actual=bool(chase) and chase.action != "NO_ACTION",
+            source_ids=["INV-AR-020", "CUST-005"],
+            diagnostics={"action": getattr(chase, "action", None), "blocked": collections.blocked},
         )
     )
 

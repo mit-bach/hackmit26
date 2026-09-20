@@ -1,7 +1,9 @@
 # Operator notes
 
-Bots are individuals. Bind with `HARNESS_BOT`. The protocol is files under `harness/`.
+This Computer is a Client system. The Harness runtime does not know invoices.
 
-Do not register Roster slugs as children. Do not treat `ask_user` as optional. Do not inject Routines into whoever is at the keyboard.
+Bind with `HARNESS_BOT`. Protocol files live under `harness/`. The Operator shell on loopback is the desk: HTTP commands, one SSE stream, Pi as a headless session.
 
-A Handle is accepted before the receiver runs. Await watches the Handle file. `/stop` cancels the current turn.
+A Handle is accepted before the receiver runs. `/stop` cancels the current turn. A peer Handle is not Operator approval.
+
+Do not register Roster slugs as children. Do not inject Routines into whoever is at the keyboard.

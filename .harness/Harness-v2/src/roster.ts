@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { isAbsolute, join, resolve } from "node:path";
 
-import { readJsonUnknown } from "./fs.ts";
+import { readJsonUnknown, writeJsonAtomic } from "./fs.ts";
 import { rosterPath } from "./paths.ts";
 import type { ApprovalLevel, BotRecord, RoomRecord, Roster, RoutineRecord } from "./types.ts";
 
@@ -128,6 +128,10 @@ export function resolveRosterFile(computerRoot: string): string {
 
 export function loadRoster(computerRoot: string): Roster {
   return parseRoster(readJsonUnknown(resolveRosterFile(computerRoot)));
+}
+
+export function saveRoster(computerRoot: string, roster: Roster): void {
+  writeJsonAtomic(resolveRosterFile(computerRoot), roster);
 }
 
 export function findBot(roster: Roster, key: string): BotRecord | undefined {

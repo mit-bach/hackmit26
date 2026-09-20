@@ -51,15 +51,21 @@ def format_trace(trace: DecisionTrace) -> str:
         investigator_block = (
             f"Investigator:\n{trace.investigation.recommendation}\n{finding}"
         )
-    reviewer_reason = trace.reviewer.reasons[0] if trace.reviewer.reasons else ""
-    approver_reason = trace.approver.reasons[0] if trace.approver.reasons else ""
-    audit_line = "PASS" if trace.audit.passed else "FAIL"
-    if trace.audit.findings:
-        audit_line = f"{audit_line} — {trace.audit.findings[0]}"
-    evidence = "\n".join(f"- {item}" for item in final.evidence_used) or "- (none)"
-    reconsideration = (
-        "\nReconsideration: yes\n" if final.reconsideration_performed else "\n"
+    if trace.verifier_handle:
+        handle = trace.verifier_handle
+        verifier_block = (
+            f"Verifier Handle:\n"
+            f"{handle.get('toSlug')} / {handle.get('profile')}\n"
+            f"{handle.get('id')}\n"
+            f"status={handle.get('status')} missing={handle.get('verifier_missing')}"
+        )
+    else:
+        verifier_block = "Verifier Handle:\n(none — not an approve-shaped draft)"
+    holds = trace.kernel_holds or []
+    hold_block = "Kernel must_hold:\n" + (
+        "\n".join(f"- {item}" for item in holds) if holds else "- (none)"
     )
+    evidence = "\n".join(f"- {item}" for item in final.evidence_used) or "- (none)"
     skill_lines = []
     for item in trace.agents:
         names = ", ".join(skill.name for skill in item.skills) or "(none)"
@@ -68,6 +74,7 @@ def format_trace(trace: DecisionTrace) -> str:
     skills_block = ""
     if skill_lines:
         skills_block = "\n\nSkills\n" + "\n".join(skill_lines)
+    packet = trace.packet_path or "(none)"
     return (
         f"Invoice: {final.invoice_id}\n"
         f"\n"
@@ -77,21 +84,15 @@ def format_trace(trace: DecisionTrace) -> str:
         f"\n"
         f"{investigator_block}\n"
         f"\n"
-        f"Reviewer:\n"
-        f"{trace.reviewer.recommendation}\n"
-        f"Confidence: {trace.reviewer.confidence:.2f}\n"
-        f"{reviewer_reason}\n"
+        f"{verifier_block}\n"
         f"\n"
-        f"Approver:\n"
-        f"{trace.approver.decision}\n"
-        f"Confidence: {trace.approver.confidence:.2f}\n"
-        f"{approver_reason}\n"
+        f"{hold_block}\n"
+        f"Packet: {packet}\n"
+        f"Posted to pool: {'yes' if trace.posted_to_pool else 'no'}\n"
         f"\n"
-        f"Audit:\n"
-        f"{audit_line}"
-        f"{reconsideration}"
-        f"FINAL DECISION: {final.decision}\n"
+        f"PROPOSED DECISION: {final.decision}\n"
         f"Confidence: {final.confidence:.2f}\n"
+        f"Audit status: {final.audit_status}\n"
         f"\n"
         f"Evidence:\n"
         f"{evidence}"

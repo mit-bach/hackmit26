@@ -14,16 +14,14 @@
       "rounding_rejected:difference_not_one_cent",
       "fee_rejected:no_fee_evidence",
       "no_fx_evidence",
-      "no_partial_payment_remittance",
-      "TXN-2026-09-015",
-      "GL-CASH-CORR-1240"
+      "no_partial_payment_remittance"
     ],
     "proposed_resolution": "Classify the difference as a reconciling item with evidence, or post an approved correcting cash entry.",
-    "status": "RESOLVED",
+    "status": "OPEN",
     "assigned_role": "Cash Reconciliation Reviewer",
-    "decision": "post_correcting_entry",
-    "decision_reason": "Approved write-off after investigation",
-    "decided_at": "2026-09-19T21:13:53Z",
+    "decision": "",
+    "decision_reason": "",
+    "decided_at": null,
     "downstream_tasks_affected": [
       "cash",
       "bs_recon",
@@ -31,31 +29,84 @@
       "final_review",
       "mark_closed"
     ],
-    "reviewer": "human",
-    "resolution_action": "post_correcting_entry",
-    "source_object_ref": "GL-CASH-CORR-1240",
-    "source_object_before": {
-      "ref": "TXN-2026-09-015",
-      "unexplained_difference": null,
-      "match": null,
-      "overlay": {
-        "ledger_entries": [],
-        "fee_evidence": []
-      }
-    },
-    "source_object_after": {
-      "ref": "GL-CASH-CORR-1240",
-      "entry_id": "GL-CASH-CORR-1240",
-      "amount": 12.4,
-      "close_journal_id": "JE-202609-021",
-      "evidence_refs": [
-        "TXN-2026-09-015",
-        "GL-CASH-CORR-1240"
-      ],
-      "kind": "cash_ledger_overlay"
-    },
-    "journal_entry_ids": [
-      "JE-202609-021"
-    ]
+    "reviewer": "",
+    "resolution_action": "",
+    "source_object_ref": "",
+    "source_object_before": {},
+    "source_object_after": {},
+    "journal_entry_ids": [],
+    "queue_owner": "ctl-cash",
+    "queue_profile": "review-rec",
+    "handle_path": "",
+    "packet_path": ""
+  },
+  {
+    "review_id": "REV-2026-09-AR-PAY-CLOSE-4500",
+    "period": "2026-09",
+    "source_workflow": "ar",
+    "source_case_id": "PAY-CLOSE-4500",
+    "issue_type": "unmatched_customer_payment",
+    "description": "AR: $4,500 unmatched customer payment",
+    "amount": 4500.0,
+    "evidence_refs": [
+      "PAY-CLOSE-4500",
+      "WIRE-SUMMIT-4500"
+    ],
+    "proposed_resolution": "Associate PAY-CLOSE-4500 with the correct customer invoice(s) and apply cash.",
+    "status": "OPEN",
+    "assigned_role": "Cash Application Reviewer",
+    "decision": "",
+    "decision_reason": "",
+    "decided_at": null,
+    "downstream_tasks_affected": [
+      "ar",
+      "bs_recon",
+      "exceptions",
+      "final_review",
+      "mark_closed"
+    ],
+    "reviewer": "",
+    "resolution_action": "",
+    "source_object_ref": "",
+    "source_object_before": {},
+    "source_object_after": {},
+    "journal_entry_ids": [],
+    "queue_owner": "ctl-cash",
+    "queue_profile": "review-apply",
+    "handle_path": "",
+    "packet_path": ""
+  },
+  {
+    "review_id": "REV-2026-09-PREPAID-PRE-INS-MISSING",
+    "period": "2026-09",
+    "source_workflow": "prepaid",
+    "source_case_id": "PRE-INS-MISSING",
+    "issue_type": "missing_prepaid_evidence",
+    "description": "Prepaids: missing insurance policy evidence",
+    "amount": 3600.0,
+    "evidence_refs": [],
+    "proposed_resolution": "Attach the Northshore flood policy packet (DOC-NS-FLOOD-2026) to PRE-INS-MISSING.",
+    "status": "OPEN",
+    "assigned_role": "Prepaid Reviewer",
+    "decision": "",
+    "decision_reason": "",
+    "decided_at": null,
+    "downstream_tasks_affected": [
+      "prepaid",
+      "bs_recon",
+      "exceptions",
+      "final_review",
+      "mark_closed"
+    ],
+    "reviewer": "",
+    "resolution_action": "",
+    "source_object_ref": "",
+    "source_object_before": {},
+    "source_object_after": {},
+    "journal_entry_ids": [],
+    "queue_owner": "ctl-books",
+    "queue_profile": "review-treatment",
+    "handle_path": "",
+    "packet_path": ""
   }
 ]

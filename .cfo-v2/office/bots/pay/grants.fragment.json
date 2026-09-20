@@ -1,0 +1,21 @@
+{
+  "version": "1",
+  "byDisplayName": {
+    "Payment Scheduler": {
+      "ops": [
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_approved_pool",
+        "scheduling.tools.get_payment_candidates",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "outputType": "PaymentPlan",
+      "bot": "pay",
+      "profile": "schedule"
+    }
+  },
+  "note": "Payment Audit is not a Grant on Bot pay. Session 09 maps Payment Audit to ctl-pay / review-pay and may tighten that Grant with catalog.overrides.json. Do not union the two Display names onto slug pay."
+}

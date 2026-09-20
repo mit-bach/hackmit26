@@ -1,6 +1,7 @@
 import { existsSync, readdirSync } from "node:fs";
 
 import { awaitTurn } from "./await.ts";
+import { findHandle } from "./handle.ts";
 import { readJsonIfExists, writeJsonAtomic } from "./fs.ts";
 import { newReceiptId, nowIso } from "./ids.ts";
 import { receiptDir, receiptPath } from "./paths.ts";
@@ -128,7 +129,7 @@ export async function settleReceipt(
   return updated;
 }
 
-export function listReceipts(computerRoot: string): ReceiptRecord[] {
+function loadReceipts(computerRoot: string): ReceiptRecord[] {
   const dir = receiptDir(computerRoot);
   if (!existsSync(dir)) {
     return [];
@@ -146,34 +147,65 @@ export function listReceipts(computerRoot: string): ReceiptRecord[] {
   return out;
 }
 
+function receiptStatusFromHandle(handleStatus: HandleStatus): ReceiptRecord["status"] | undefined {
+  if (handleStatus === "completed") {
+    return "completed";
+  }
+  if (handleStatus === "failed" || handleStatus === "cancelled") {
+    return "failed";
+  }
+  if (handleStatus === "running") {
+    return "running";
+  }
+  return undefined;
+}
+
 export function settleReceiptsForHandle(
   computerRoot: string,
   handleId: string,
   handleStatus: HandleStatus,
   result?: string,
 ): void {
-  for (const receipt of listReceipts(computerRoot)) {
+  const nextStatus = receiptStatusFromHandle(handleStatus);
+  if (!nextStatus) {
+    return;
+  }
+  for (const receipt of loadReceipts(computerRoot)) {
     if (receipt.handleId !== handleId) {
       continue;
     }
-    let status: ReceiptRecord["status"] = receipt.status;
-    if (handleStatus === "completed") {
-      status = "completed";
-    } else if (handleStatus === "failed" || handleStatus === "cancelled") {
-      status = "failed";
-    } else if (handleStatus === "running") {
-      status = "running";
-    } else {
+    if (receipt.status === nextStatus && receipt.result === result) {
       continue;
     }
     const updated: ReceiptRecord = {
       ...receipt,
-      status,
+      status: nextStatus,
       result,
       updatedAt: nowIso(),
     };
     writeJsonAtomic(receiptPath(computerRoot, receipt.id), updated);
   }
+}
+
+export function reconcileReceipts(computerRoot: string): ReceiptRecord[] {
+  for (const receipt of loadReceipts(computerRoot)) {
+    if (!receipt.handleId) {
+      continue;
+    }
+    if (receipt.status === "completed" || receipt.status === "failed" || receipt.status === "missed") {
+      continue;
+    }
+    const handle = findHandle(computerRoot, receipt.handleId);
+    if (!handle) {
+      continue;
+    }
+    settleReceiptsForHandle(computerRoot, handle.id, handle.status, handle.result);
+  }
+  return loadReceipts(computerRoot);
+}
+
+export function listReceipts(computerRoot: string): ReceiptRecord[] {
+  return reconcileReceipts(computerRoot);
 }
 
 export function cadenceToMs(cadence: string): number | undefined {

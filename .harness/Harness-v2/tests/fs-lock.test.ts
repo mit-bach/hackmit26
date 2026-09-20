@@ -11,7 +11,11 @@ test("appendJsonlAtomic steals a lock whose pid is already dead", () => {
   const filePath = join(dir, "events.jsonl");
   writeFileSync(`${filePath}.lock`, "99999999\n");
   appendJsonlAtomic(filePath, { kind: "ok" });
-  const rows = readJsonl<{ readonly kind: string }>(filePath);
+  const rows = readJsonl(filePath);
   assert.equal(rows.length, 1);
-  assert.equal(rows[0]?.kind, "ok");
+  const row = rows[0];
+  if (typeof row !== "object" || row === null || !("kind" in row)) {
+    assert.fail("expected a kind field");
+  }
+  assert.equal(row.kind, "ok");
 });

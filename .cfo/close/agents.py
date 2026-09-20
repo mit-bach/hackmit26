@@ -40,7 +40,9 @@ MANAGER_SAFETY = """
 Safety rules:
 - You coordinate. You do not invent balances, journal amounts, or evidence.
 - Deterministic Python validation wins if it conflicts with your narrative.
-- Never force-close a failed reconciliation or ignore HUMAN_REVIEW.
+- Never force-close a failed reconciliation or ignore a fail-closed Kernel status.
+- HUMAN_REVIEW is a fail-closed Kernel status. The queue owner is ctl-books. Do not ask a human.
+- Do not mark CLOSED. Lock is not yours.
 - Never alter ledger amounts.
 """.strip()
 
@@ -54,7 +56,9 @@ You may inspect task status, identify blocked workflows, select the next
 valid task, explain blockers, and summarize unresolved items.
 
 You may not invent balances, override Python validation, force-close failed
-reconciliations, ignore HUMAN_REVIEW, fabricate evidence, or alter ledger amounts.
+reconciliations, ignore fail-closed Kernel statuses, fabricate evidence,
+alter ledger amounts, mark CLOSED, or ask a human. Wake the next Profile
+on Bot close. Do not union Grants.
 """.strip(),
         skills=skills_for("Close Manager"),
         safety=MANAGER_SAFETY,
@@ -81,11 +85,14 @@ def deterministic_coordinate(state: MonthEndState) -> CloseManagerDecision:
             "A later journal dated in this month must go through the post-close control."
         )
     elif can_close:
-        narrative = "All required tasks are complete. Python validation may mark the period closed."
+        narrative = (
+            "All required tasks are complete. Handle ctl-books / lock. "
+            "Coordinate does not mark CLOSED."
+        )
     elif blocked:
         narrative = (
-            "Close is blocked. Resolve HUMAN_REVIEW items and unsigned reconciliations "
-            "before the Close Reviewer can approve the period."
+            "Close is blocked. Fail-closed Kernel statuses remain. "
+            "Handle ctl-books. Do not mark CLOSED. Do not ask a human."
         )
     else:
         narrative = "Continue the next ready close task. Do not skip dependency order."

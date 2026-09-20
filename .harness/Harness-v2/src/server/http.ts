@@ -17,6 +17,12 @@ import { sendPrompt } from "../send.ts";
 import { sleep } from "../sleep.ts";
 import { startFakeWorkers } from "../worker.ts";
 import { transcriptTail } from "../transcript-tail.ts";
+import { buildSnapshot, handleOperatorApi } from "./api.ts";
+import { EventBus } from "./bus.ts";
+import { handleOmbCompat } from "./omb-compat.ts";
+import { loadOperatorConfig } from "./operator-config.ts";
+import { startPumps } from "./pump.ts";
+import { tryServeStatic } from "./static.ts";
 import { startSupervisor, type Supervisor } from "./supervisor.ts";
 
 export interface ServeOptions {
@@ -31,6 +37,8 @@ export interface ServeOptions {
 interface RequestContext {
   readonly computerRoot: string;
   readonly fakeWorkers: boolean;
+  readonly bus: EventBus;
+  readonly supervisor?: Supervisor;
 }
 
 function actualPort(server: Server, fallback: number): number {
@@ -70,16 +78,25 @@ function notFound(res: ServerResponse): void {
   sendJson(res, 404, { error: "not found" });
 }
 
+const CORS = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+  "access-control-allow-headers": "content-type",
+} as const;
+
 export async function startServer(options: ServeOptions): Promise<{
   readonly server: Server;
   readonly url: string;
   readonly supervisor: Supervisor | undefined;
+  readonly bus: EventBus;
   stop: () => Promise<void>;
 }> {
   const computerRoot = options.computerRoot;
   const roster = initComputer(computerRoot);
   const host = options.host ?? "127.0.0.1";
   const port = options.port ?? 8787;
+  const bus = new EventBus();
+  const config = loadOperatorConfig();
   const fake =
     options.fakeWorkers === true
       ? startFakeWorkers(computerRoot, roster.bots.map((bot) => bot.slug), async (slug, item) => ({
@@ -93,10 +110,18 @@ export async function startServer(options: ServeOptions): Promise<{
       : await startSupervisor({
           computerRoot,
           lazy: options.lazyWorkers ?? false,
+          bus,
+          config,
         });
+  const pumps = startPumps(computerRoot, bus);
 
   const server = createServer((req, res) => {
-    void handleRequest(req, res, { computerRoot, fakeWorkers: fake !== undefined });
+    void handleRequest(req, res, {
+      computerRoot,
+      fakeWorkers: fake !== undefined,
+      bus,
+      supervisor,
+    });
   });
 
   await new Promise<void>((resolve, reject) => {
@@ -111,7 +136,9 @@ export async function startServer(options: ServeOptions): Promise<{
     server,
     url,
     supervisor,
+    bus,
     stop: async (): Promise<void> => {
+      pumps.stop();
       fake?.stop();
       await supervisor?.stop();
       await new Promise<void>((resolve, reject) => {
@@ -127,6 +154,34 @@ export async function startServer(options: ServeOptions): Promise<{
   };
 }
 
+function attachSse(res: ServerResponse, ctx: RequestContext): void {
+  res.writeHead(200, {
+    "content-type": "text/event-stream",
+    "cache-control": "no-cache",
+    connection: "keep-alive",
+    ...CORS,
+  });
+  const hello = {
+    kind: "hello",
+    cursor: "h:0",
+    resumed: false,
+    snapshot: buildSnapshot(ctx.computerRoot, ctx.fakeWorkers, ctx.supervisor),
+  };
+  res.write(`id: h:0\ndata: ${JSON.stringify(hello)}\n\n`);
+  ctx.bus.subscribe(res);
+  const ping = setInterval(() => {
+    try {
+      res.write(`data: ${JSON.stringify({ kind: "ping" })}\n\n`);
+    } catch {
+      clearInterval(ping);
+    }
+  }, 15_000);
+  ping.unref();
+  res.on("close", () => {
+    clearInterval(ping);
+  });
+}
+
 async function handleRequest(
   req: IncomingMessage,
   res: ServerResponse,
@@ -135,17 +190,40 @@ async function handleRequest(
   const computerRoot = ctx.computerRoot;
   try {
     if (req.method === "OPTIONS") {
-      res.writeHead(204, {
-        "access-control-allow-origin": "*",
-        "access-control-allow-methods": "GET,POST,OPTIONS",
-        "access-control-allow-headers": "content-type",
-      });
+      res.writeHead(204, CORS);
       res.end();
       return;
     }
     const url = new URL(req.url ?? "/", "http://127.0.0.1");
     const path = url.pathname;
     const method = req.method ?? "GET";
+
+    if (method === "GET" && (path === "/api/events" || path === "/v1/events")) {
+      attachSse(res, ctx);
+      return;
+    }
+
+    if (path.startsWith("/api/") || path.startsWith("/.well-known/")) {
+      const body = method === "GET" || method === "HEAD" ? {} : await readBody(req);
+      const apiCtx = {
+        computerRoot,
+        fakeWorkers: ctx.fakeWorkers,
+        supervisor: ctx.supervisor,
+        bus: ctx.bus,
+      };
+      const omb = await handleOmbCompat(method, path, url, body, apiCtx);
+      if (omb) {
+        sendJson(res, omb.status, omb.body);
+        return;
+      }
+      if (path.startsWith("/api/")) {
+        const result = await handleOperatorApi(method, path, url, body, apiCtx);
+        if (result) {
+          sendJson(res, result.status, result.body);
+          return;
+        }
+      }
+    }
 
     if (method === "GET" && (path === "/health" || path === "/v1/health")) {
       const live = loadRoster(computerRoot);
@@ -154,6 +232,7 @@ async function handleRequest(
         system: live.system,
         bots: live.bots.length,
         fakeWorkers: ctx.fakeWorkers,
+        ui: true,
       });
       return;
     }
@@ -266,7 +345,9 @@ async function handleRequest(
     if (method === "GET" && path === "/v1/handles") {
       const roster = loadRoster(computerRoot);
       const slug = url.searchParams.get("bot");
-      const bots = slug ? [findBot(roster, slug)].filter((bot): bot is NonNullable<typeof bot> => bot !== undefined) : [...roster.bots];
+      const bots = slug
+        ? [findBot(roster, slug)].filter((bot): bot is NonNullable<typeof bot> => bot !== undefined)
+        : [...roster.bots];
       sendJson(
         res,
         200,
@@ -306,25 +387,7 @@ async function handleRequest(
     }
 
     if (method === "GET" && path === "/v1/protocol/stream") {
-      res.writeHead(200, {
-        "content-type": "text/event-stream",
-        "cache-control": "no-cache",
-        connection: "keep-alive",
-        "access-control-allow-origin": "*",
-      });
-      let after = Number(url.searchParams.get("after") ?? "0");
-      let open = true;
-      req.on("close", () => {
-        open = false;
-      });
-      while (open) {
-        const events = readProtocol(computerRoot, after);
-        for (const event of events) {
-          res.write(`data: ${JSON.stringify(event)}\n\n`);
-          after = event.seq;
-        }
-        await sleep(400);
-      }
+      attachSse(res, ctx);
       return;
     }
 
@@ -338,8 +401,7 @@ async function handleRequest(
       if (method === "POST" && roomMatch[2] === "/post") {
         const body = await readBody(req);
         const text = isRecord(body) && typeof body.text === "string" ? body.text : "";
-        const from =
-          isRecord(body) && typeof body.from === "string" ? body.from : "operator";
+        const from = isRecord(body) && typeof body.from === "string" ? body.from : "operator";
         sendJson(res, 200, await roomPost({ computerRoot, roomId, from, text }));
         return;
       }
@@ -392,6 +454,18 @@ async function handleRequest(
       }
       const rel = url.searchParams.get("path") ?? "MEMORY.md";
       sendJson(res, 200, { path: rel, content: readMemoryFile(computerRoot, bot.id, rel) });
+      return;
+    }
+
+    if (tryServeStatic(req, res)) {
+      return;
+    }
+
+    if (method === "GET" && (path === "/" || !path.startsWith("/v1/"))) {
+      sendJson(res, 503, {
+        error: "operator ui is not built",
+        hint: "cd ui && npm install && npm run build, then restart harness serve",
+      });
       return;
     }
 

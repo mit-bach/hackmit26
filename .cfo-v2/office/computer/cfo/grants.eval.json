@@ -1,0 +1,539 @@
+{
+  "version": "1",
+  "byDisplayName": {
+    "Accrual Agent": {
+      "ops": [
+        "accrual.tools.get_expected_invoices",
+        "accrual.tools.get_current_period_invoices",
+        "accrual.tools.get_vendor_invoice_history",
+        "accrual.tools.get_purchase_orders",
+        "accrual.tools.get_goods_receipts",
+        "accrual.tools.get_vendor_contract",
+        "accrual.tools.get_vendor_usage",
+        "accrual.tools.get_estimate_candidates",
+        "accrual.tools.compute_accrual_estimate",
+        "accrual.tools.create_accrual",
+        "accrual.tools.get_open_accruals",
+        "accrual.tools.reconcile_accrual_with_invoice"
+      ],
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection"
+      ],
+      "outputType": "AccrualDecision",
+      "source": "accrual/agent.py"
+    },
+    "AP Preparer": {
+      "ops": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence"
+      ],
+      "skills": [
+        "three-way-match-analysis"
+      ],
+      "outputType": "PreparerRecommendation",
+      "source": "agent.py"
+    },
+    "Exception Investigator": {
+      "ops": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases"
+      ],
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation"
+      ],
+      "outputType": "InvestigationReport",
+      "source": "agent.py"
+    },
+    "AP Reviewer": {
+      "ops": [
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases"
+      ],
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation"
+      ],
+      "outputType": "ReviewerDecision",
+      "source": "agent.py"
+    },
+    "AP Approver": {
+      "ops": [
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases"
+      ],
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation"
+      ],
+      "outputType": "ApproverDecision",
+      "source": "agent.py"
+    },
+    "AP Audit": {
+      "ops": [
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies"
+      ],
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation"
+      ],
+      "outputType": "AuditResult",
+      "source": "agent.py"
+    },
+    "Auditor Agent": {
+      "ops": [
+        "audit.tools.get_audit_period",
+        "audit.tools.get_audit_payments",
+        "audit.tools.get_audit_journals",
+        "audit.tools.get_audit_approvals",
+        "audit.tools.get_audit_vendors",
+        "audit.tools.get_audit_invoices",
+        "audit.tools.get_operational_decisions",
+        "audit.tools.get_planted_reconciliations",
+        "audit.tools.get_audit_policy",
+        "audit.tools.get_audit_ground_truth"
+      ],
+      "skills": [
+        "audit-sampling-interpretation",
+        "control-testing-interpretation",
+        "reconciliation-reperformance-review",
+        "segregation-of-duties-interpretation"
+      ],
+      "outputType": "AuditorInterpretation",
+      "source": "audit/agent.py"
+    },
+    "Audit Report Agent": {
+      "ops": [],
+      "skills": [
+        "audit-finding-writing"
+      ],
+      "outputType": "AuditReportAgentOutput",
+      "source": "audit/agent.py"
+    },
+    "Balance Sheet Reconciliation Preparer": {
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "outputType": "ReconDecision",
+      "source": "bs_recon/agent.py"
+    },
+    "Balance Sheet Reconciliation Reviewer": {
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "outputType": "ReconReview",
+      "source": "bs_recon/agent.py"
+    },
+    "Cash Reconciliation Preparer": {
+      "ops": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "bank-reference-interpretation"
+      ],
+      "outputType": "PreparerSelection",
+      "source": "cash_recon/agent.py"
+    },
+    "Cash Exception Investigator": {
+      "ops": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "skills": [
+        "reconciliation-exception-investigation",
+        "bank-reference-interpretation"
+      ],
+      "outputType": "InvestigationNote",
+      "source": "cash_recon/agent.py"
+    },
+    "Cash Reconciliation Reviewer": {
+      "ops": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "reconciliation-exception-investigation"
+      ],
+      "outputType": "ReviewerVerdict",
+      "source": "cash_recon/agent.py"
+    },
+    "Fixed Asset Preparer": {
+      "ops": [
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates"
+      ],
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "outputType": "AssetDecision",
+      "source": "fixed_assets/agent.py"
+    },
+    "Fixed Asset Reviewer": {
+      "ops": [
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates"
+      ],
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "outputType": "AssetReview",
+      "source": "fixed_assets/agent.py"
+    },
+    "Prepaid Preparer": {
+      "ops": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule"
+      ],
+      "skills": [
+        "prepaid-expense-accounting"
+      ],
+      "outputType": "PrepaidDecision",
+      "source": "prepaid/agent.py"
+    },
+    "Prepaid Reviewer": {
+      "ops": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule"
+      ],
+      "skills": [
+        "prepaid-expense-accounting"
+      ],
+      "outputType": "PrepaidReview",
+      "source": "prepaid/agent.py"
+    },
+    "Payment Scheduler": {
+      "ops": [
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_approved_pool",
+        "scheduling.tools.get_payment_candidates",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "outputType": "PaymentPlan",
+      "source": "scheduling/agent.py"
+    },
+    "Payment Audit": {
+      "ops": [
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "outputType": "PaymentAuditResult",
+      "source": "scheduling/agent.py"
+    },
+    "Collections Agent": {
+      "ops": [
+        "ar.tools.get_collection_candidates",
+        "ar.tools.get_collection_invoice_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "skills": [
+        "ar-collections-policy"
+      ],
+      "outputType": "CollectionDecision",
+      "source": "ar/agents.py"
+    },
+    "Cash Application Agent": {
+      "ops": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "skills": [
+        "cash-application"
+      ],
+      "outputType": "CashApplicationProposal",
+      "source": "ar/agents.py"
+    },
+    "Cash Application Reviewer": {
+      "ops": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "skills": [
+        "cash-application"
+      ],
+      "outputType": "CashReviewDecision",
+      "source": "ar/agents.py"
+    },
+    "Month-End Close Reviewer": {
+      "ops": [],
+      "skills": [
+        "month-end-close-review"
+      ],
+      "outputType": "FinalCloseVerdict",
+      "source": "close/agents.py"
+    },
+    "Close Manager": {
+      "ops": [],
+      "skills": [
+        "month-end-close-coordination"
+      ],
+      "outputType": "CloseManagerDecision",
+      "source": "close/agents.py"
+    },
+    "Email Invoice Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_email_candidates",
+        "invoice_ingestion.tools.get_email",
+        "invoice_ingestion.tools.get_email_attachment"
+      ],
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation"
+      ],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "ERP Invoice Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_erp_invoice_records",
+        "invoice_ingestion.tools.get_erp_invoice"
+      ],
+      "skills": [],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "Procurement Invoice Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_procurement_records",
+        "invoice_ingestion.tools.get_procurement_record"
+      ],
+      "skills": [
+        "invoice-source-identification"
+      ],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "Vendor Portal Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_vendor_portal_documents",
+        "invoice_ingestion.tools.get_vendor_portal_document"
+      ],
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation"
+      ],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "Employee Submission Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_employee_submissions",
+        "invoice_ingestion.tools.get_employee_submission"
+      ],
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation"
+      ],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "Physical Mail / Document Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_mail_documents",
+        "invoice_ingestion.tools.get_mail_document"
+      ],
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation"
+      ],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "EDI / Electronic Invoicing Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_edi_documents",
+        "invoice_ingestion.tools.get_edi_document"
+      ],
+      "skills": [],
+      "outputType": "SourceAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "Bank/Card Discovery Agent": {
+      "ops": [
+        "invoice_ingestion.tools.list_bank_transactions",
+        "invoice_ingestion.tools.get_bank_transaction",
+        "invoice_ingestion.tools.find_related_invoice"
+      ],
+      "skills": [
+        "bank-charge-invoice-discovery"
+      ],
+      "outputType": "BankAgentOutput",
+      "source": "invoice_ingestion/agents.py"
+    },
+    "Variance Analysis Agent": {
+      "ops": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_variance_trace"
+      ],
+      "skills": [
+        "financial-variance-analysis"
+      ],
+      "outputType": "VarianceAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Reporting Reviewer Agent": {
+      "ops": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_variance_trace"
+      ],
+      "skills": [
+        "financial-variance-analysis",
+        "board-financial-reporting"
+      ],
+      "outputType": "ReviewerAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Board Reporting Agent": {
+      "ops": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_cash_forecast"
+      ],
+      "skills": [
+        "board-financial-reporting"
+      ],
+      "outputType": "BoardAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Cash Forecast Agent": {
+      "ops": [
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks"
+      ],
+      "skills": [
+        "cash-forecasting",
+        "ar-cash-forecasting"
+      ],
+      "outputType": "ForecastAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Forecast Reviewer Agent": {
+      "ops": [
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks"
+      ],
+      "skills": [
+        "cash-forecasting",
+        "ar-cash-forecasting",
+        "forecast-vs-actual-interpretation"
+      ],
+      "outputType": "ReviewerAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Forecast Variance Agent": {
+      "ops": [
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks"
+      ],
+      "skills": [
+        "forecast-vs-actual-interpretation"
+      ],
+      "outputType": "ForecastVarianceAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "AP/AR Sample Data Agent": {
+      "ops": [],
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "outputType": "ScenarioPlan",
+      "source": "sample_data/agents/ap_ar.py"
+    },
+    "Audit Controls Sample Data Agent": {
+      "ops": [],
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "outputType": "ScenarioPlan",
+      "source": "sample_data/agents/audit_controls.py"
+    },
+    "Cash Recon Sample Data Agent": {
+      "ops": [],
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "outputType": "ScenarioPlan",
+      "source": "sample_data/agents/cash_recon.py"
+    },
+    "Close Sample Data Agent": {
+      "ops": [],
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "outputType": "ScenarioPlan",
+      "source": "sample_data/agents/close.py"
+    },
+    "Reporting Forecasting Sample Data Agent": {
+      "ops": [],
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "outputType": "ScenarioPlan",
+      "source": "sample_data/agents/reporting_forecasting.py"
+    }
+  }
+}

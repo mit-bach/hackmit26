@@ -1,0 +1,92 @@
+{
+  "version": "1",
+  "ops": [
+    {
+      "id": "tools.get_invoice",
+      "python": "tools:get_invoice",
+      "exportName": "get_invoice",
+      "args": { "invoice_id": "string" },
+      "mutability": "read",
+      "sodClass": "ap-records",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.create_accrual",
+      "python": "accrual.tools:create_accrual",
+      "exportName": "create_accrual",
+      "args": {
+        "vendor": "string",
+        "period": "string",
+        "method": "string",
+        "confidence": "number",
+        "evidence": "array",
+        "reasoning_summary": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "evalOnly": false,
+      "ownerPrefixes": ["runs/accruals/"]
+    },
+    {
+      "id": "audit.tools.get_audit_ground_truth",
+      "python": "audit.tools:get_audit_ground_truth",
+      "exportName": "get_audit_ground_truth",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-eval",
+      "evalOnly": true,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_period",
+      "python": "audit.tools:get_audit_period",
+      "exportName": "get_audit_period",
+      "args": { "period": "string" },
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_bank_transaction",
+      "python": "cash_recon.tools:get_bank_transaction",
+      "exportName": "get_bank_transaction",
+      "args": { "transaction_id": "string" },
+      "mutability": "read",
+      "sodClass": "cash-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "bs_recon.tools.get_reconciliation_packet",
+      "python": "bs_recon.tools:get_reconciliation_packet",
+      "exportName": "get_reconciliation_packet",
+      "args": { "period": "string", "account_id": "string" },
+      "mutability": "read",
+      "sodClass": "bs-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "close.month_end.run_month_end",
+      "python": "close.month_end:run_month_end",
+      "exportName": "run_month_end",
+      "args": { "period": "string" },
+      "mutability": "side-effect-external",
+      "sodClass": "period-lock",
+      "evalOnly": false,
+      "ownerPrefixes": ["runs/month_end/"]
+    },
+    {
+      "id": "close.orchestrator.run_cfo_close",
+      "python": "close.orchestrator:run_cfo_close",
+      "exportName": "run_cfo_close",
+      "args": { "period": "string" },
+      "mutability": "write-local",
+      "sodClass": "close-test-packet",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    }
+  ]
+}

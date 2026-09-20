@@ -159,15 +159,17 @@ def test_collections_policy_rejects_illegal_agent_action():
 
 
 def test_seeded_collections_demo_cases():
+    from ar.workflow import drain_new_deposits
+
+    drain_new_deposits(AS_OF, live=False)
     run = run_collections(AS_OF, live=False)
+    assert run.blocked is False
     by_id = {item.invoice_id: item for item in run.decisions}
-    assert by_id["INV-AR-017"].action == "SEND_OVERDUE_REMINDER"
-    assert by_id["INV-AR-017"].human_approval_required is False
-    assert "$18,500.00" in (by_id["INV-AR-017"].draft_message or "")
+    assert "INV-AR-045" not in by_id
     assert by_id["INV-AR-020"].action == "ESCALATE_DISPUTE"
     assert by_id["INV-AR-020"].human_approval_required is True
+    assert by_id["INV-AR-020"].draft_message is None
     assert by_id["INV-AR-035"].action == "HOLD_CONTACT"
-    assert by_id["INV-AR-045"].action == "SEND_GENTLE_REMINDER"
     assert any(item.human_approval_required for item in run.decisions)
 
 
@@ -322,6 +324,9 @@ def test_human_review_does_not_mutate_and_rerun_does_not_double_apply():
 def test_collections_sees_updated_balance_after_payment():
     reset_state()
     run_cash_apply("PAY-002", live=False)
+    from ar.workflow import drain_new_deposits
+
+    drain_new_deposits(AS_OF, live=False)
     run = run_collections(AS_OF, live=False, persist=False)
     ids = {item.invoice_id for item in run.decisions}
     assert "INV-AR-045" not in ids
@@ -349,9 +354,12 @@ def test_demo_is_deterministic():
     assert payload["auto_apply"].posted is True
     assert payload["human_review"].final.decision == "HUMAN_REVIEW"
     assert payload["human_review"].posted is False
-    assert payload["after"].totals.total_ar == payload["before"].totals.total_ar - 12000
-    featured = next(item for item in payload["collections"].decisions if item.invoice_id == "INV-AR-017")
-    assert featured.action == "SEND_OVERDUE_REMINDER"
+    assert payload["human_review"].verifier_handle_path
+    assert payload["after"].totals.total_ar < payload["before"].totals.total_ar
+    assert "INV-AR-001" not in {item.invoice_id for item in payload["after"].lines}
+    featured = next(item for item in payload["collections"].decisions if item.invoice_id == "INV-AR-020")
+    assert featured.action == "ESCALATE_DISPUTE"
+    assert payload["collections"].blocked is False
     assert any(item.human_approval_required for item in payload["collections"].decisions)
 
 
