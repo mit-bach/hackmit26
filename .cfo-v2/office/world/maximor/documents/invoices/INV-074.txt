@@ -1,0 +1,39 @@
+Harbor Electric Company
+800 Massachusetts Avenue
+Cambridge, MA 02139
+Phone +1 800-555-0192   billing@harborelectric.example
+Tax ID 04-1002201
+
+INVOICE
+
+Invoice Number: HAR-2026-09-0075
+Invoice Date: 2026-09-22
+Due Date: 2026-10-22
+PO Number: PO-375
+Payment Terms: net 20
+Currency: USD
+Vendor: Harbor Electric
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+premium support billed 2026-09-22             1.00      7,200.91      7,200.91
+
+Subtotal                                                              7,200.91
+Tax                                                                       0.00
+Amount Due                                                            7,200.91
+
+Remit to:
+ACH State Street routing 011000028  account ****HE01
+Bank: State Street  ****HE01
+Please include invoice HAR-2026-09-0075 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@harborelectric.example

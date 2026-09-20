@@ -1,5 +1,7 @@
 # HackMIT demo world — design
 
+**Deprecated as product story.** Canonical write-up: `.cfo-v2/office/final-demo/` (start with `CAPABILITIES.md`). Computer data now points at `world/maximor`. Keep this file as a dated design memo.
+
 Simulated data only. One company. The live office on 8800 is not yet this world.
 
 ## Verdict

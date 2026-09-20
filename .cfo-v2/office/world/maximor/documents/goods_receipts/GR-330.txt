@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-330
+PO Number: PO-330
+Vendor: Helios Hardware
+Goods received in full on 2026-09-04
+Packing list attached: PL-GR-330
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 1,801.69 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

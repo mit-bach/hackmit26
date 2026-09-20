@@ -34,6 +34,58 @@
         "name": "Stripe",
         "color": "blue"
       }
+    },
+    {
+      "id": "h_e6f09170-853a-43c7-8b39-b5cc90c05fed",
+      "handleId": "h_e6f09170-853a-43c7-8b39-b5cc90c05fed",
+      "role": "bot",
+      "kind": "text",
+      "text": "to tell me what color dirt is.",
+      "at": 1789906197622,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_e6f09170-853a-43c7-8b39-b5cc90c05fed",
+      "handleId": "h_e6f09170-853a-43c7-8b39-b5cc90c05fed",
+      "role": "bot",
+      "kind": "text",
+      "text": "Brown. Dirt is typically brown.",
+      "at": 1789906201529,
+      "from": {
+        "botId": "bot_stripe",
+        "name": "Stripe",
+        "color": "blue"
+      }
+    },
+    {
+      "id": "h_e3d0c8b5-5fe8-41ab-b711-725fe872aca2",
+      "handleId": "h_e3d0c8b5-5fe8-41ab-b711-725fe872aca2",
+      "role": "bot",
+      "kind": "text",
+      "text": "Operator wants you to message them yourself — call message_operator (not only reply in this pair thread) and tell the Operator what color dirt is. Do not rely on me relaying it.",
+      "at": 1789906236317,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_e3d0c8b5-5fe8-41ab-b711-725fe872aca2",
+      "handleId": "h_e3d0c8b5-5fe8-41ab-b711-725fe872aca2",
+      "role": "bot",
+      "kind": "text",
+      "text": "Done. I messaged the Operator directly: dirt is typically brown.",
+      "at": 1789906238685,
+      "from": {
+        "botId": "bot_stripe",
+        "name": "Stripe",
+        "color": "blue"
+      }
     }
   ]
 }

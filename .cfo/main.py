@@ -207,10 +207,12 @@ def _usage() -> int:
     print("       python main.py eval-audit")
     print("       python main.py demo-reporting")
     print("       python main.py reporting [period] [as-of]")
-    print("       python main.py generate-sample-data [--seed 42] [--month 2026-09] [--output data/demo]")
-    print("       python main.py validate-sample-data [--data-root data/demo]")
-    print("       python main.py sample-data-summary [--data-root data/demo]")
-    print("       python main.py evaluate-cfo [--data-root data/demo] [--seed 42] [--all]")
+    print("       python main.py generate-sample-data [--seed 42] [--month 2026-09] [--output ../.cfo-v2/office/world/maximor]")
+    print("       python main.py validate-sample-data [--data-root ../.cfo-v2/office/world/maximor]")
+    print("       python main.py export-demo [--output ../.cfo-v2/office/world/maximor] [--seed 42] [--month 2026-09]")
+    print("       python main.py validate-demo [--data-root ../.cfo-v2/office/world/maximor]")
+    print("       python main.py sample-data-summary [--data-root ../.cfo-v2/office/world/maximor]")
+    print("       python main.py evaluate-cfo [--data-root ../.cfo-v2/office/world/maximor] [--seed 42] [--all]")
     print("       python main.py cfo-demo")
     print("       python main.py generate-discrepancy-data [--seed 42] [--month 2026-09] [--output data/discrepancy_demo]")
     print("       python main.py generate-holdout-data [--seed 77] [--output data/discrepancy_holdout]")
@@ -369,6 +371,22 @@ def main() -> int:
         from sample_data.cli import run_validate
 
         return run_validate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "export-demo",
+        "export_demo",
+    }:
+        from demo.cli import run_export_demo
+
+        return run_export_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
+        "validate-demo",
+        "validate_demo",
+    }:
+        from demo.cli import run_validate_demo
+
+        return run_validate_demo(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
         "sample-data-summary",

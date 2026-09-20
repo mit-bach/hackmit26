@@ -1,0 +1,366 @@
+[
+  {
+    "vendor_id": "VEND-001",
+    "vendor_name": "Acme Supplies",
+    "first_seen": "2024-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-001-DUP",
+    "vendor_name": "Acme Supplies LLC",
+    "first_seen": "2026-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-001-ALIAS",
+    "vendor_name": "Acme Supply Co.",
+    "first_seen": "2024-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-002",
+    "vendor_name": "Amazon Web Services",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-003",
+    "vendor_name": "Northline Fabrication",
+    "first_seen": "2023-04-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-004",
+    "vendor_name": "Office Depot",
+    "first_seen": "2023-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-005",
+    "vendor_name": "Helios Hardware",
+    "first_seen": "2023-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-006",
+    "vendor_name": "Datadog",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-007",
+    "vendor_name": "Slack Technologies",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-008",
+    "vendor_name": "Figma",
+    "first_seen": "2023-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-009",
+    "vendor_name": "Google Cloud",
+    "first_seen": "2022-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-010",
+    "vendor_name": "Northwind Phantom LLC",
+    "first_seen": "2026-09-15",
+    "status": "active",
+    "unusual": true
+  },
+  {
+    "vendor_id": "VEND-011",
+    "vendor_name": "Hartford Insurance",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-012",
+    "vendor_name": "Orbit Analytics",
+    "first_seen": "2024-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-014",
+    "vendor_name": "Dell Technologies",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-015",
+    "vendor_name": "Harbor Electric",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-016",
+    "vendor_name": "Lindholm & Ruiz LLP",
+    "first_seen": "2024-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-017",
+    "vendor_name": "GitHub",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-018",
+    "vendor_name": "Shadow Vendor LLC",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-019",
+    "vendor_name": "Freightline Logistics",
+    "first_seen": "2023-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-020",
+    "vendor_name": "Lenovo",
+    "first_seen": "2024-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-021",
+    "vendor_name": "Misc Supplies",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-022",
+    "vendor_name": "Twilio",
+    "first_seen": "2022-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-023",
+    "vendor_name": "Notion Labs",
+    "first_seen": "2023-02-14",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-024",
+    "vendor_name": "Snowflake",
+    "first_seen": "2023-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-025",
+    "vendor_name": "Okta",
+    "first_seen": "2022-09-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-026",
+    "vendor_name": "CrowdStrike",
+    "first_seen": "2023-01-20",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-027",
+    "vendor_name": "Zoom Video",
+    "first_seen": "2021-11-02",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-028",
+    "vendor_name": "Atlassian",
+    "first_seen": "2022-03-08",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-029",
+    "vendor_name": "Cloudflare",
+    "first_seen": "2023-05-19",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-030",
+    "vendor_name": "Northline Fab Group",
+    "first_seen": "2025-11-02",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-031",
+    "vendor_name": "Helios Hardware Supply",
+    "first_seen": "2026-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-032",
+    "vendor_name": "Harbor Power & Light",
+    "first_seen": "2024-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-033",
+    "vendor_name": "Staples Business Advantage",
+    "first_seen": "2021-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-034",
+    "vendor_name": "FedEx",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-035",
+    "vendor_name": "ADP",
+    "first_seen": "2020-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-036",
+    "vendor_name": "WeWork Cambridge",
+    "first_seen": "2022-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-037",
+    "vendor_name": "Comcast Business",
+    "first_seen": "2021-03-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-038",
+    "vendor_name": "Pagaya Coffee Service",
+    "first_seen": "2023-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-039",
+    "vendor_name": "CleanRoom Janitorial",
+    "first_seen": "2022-01-10",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-040",
+    "vendor_name": "Kendall Square Parking",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-041",
+    "vendor_name": "HubSpot",
+    "first_seen": "2022-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-042",
+    "vendor_name": "Stripe Processing",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-043",
+    "vendor_name": "Adyen NV",
+    "first_seen": "2024-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-044",
+    "vendor_name": "DocuSign",
+    "first_seen": "2022-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-045",
+    "vendor_name": "Palo Alto Networks",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-046",
+    "vendor_name": "Boston Edison Steam",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-047",
+    "vendor_name": "Carta",
+    "first_seen": "2023-08-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-048",
+    "vendor_name": "Gusto Payroll",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-049",
+    "vendor_name": "Vanta",
+    "first_seen": "2024-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-050",
+    "vendor_name": "Linear App",
+    "first_seen": "2024-06-01",
+    "status": "active",
+    "unusual": false
+  }
+]

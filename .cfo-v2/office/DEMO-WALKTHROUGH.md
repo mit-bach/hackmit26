@@ -1,5 +1,7 @@
 # Office demo walkthrough
 
+**Deprecated as product story.** Canonical show path and cards: `.cfo-v2/office/final-demo/SCENARIOS.md` and `CAPABILITIES.md`.
+
 This is the **target** show. The desk on 8800 is not there yet.
 
 Current seed (do not demo this as the product): 2 inbox handoffs, 4 operational emails, one AP lookup (`ING-001`). Canonical Maximor (`data/demo`, 72 scenarios) is not what the Computer loads. Design: `DEMO-DESIGN.md`.

@@ -1,0 +1,107 @@
+{
+  "as_of": "2026-09-20",
+  "canonical_dir": ".cfo-v2/office/final-demo",
+  "world_pack": ".cfo-v2/office/world/maximor",
+  "computer_data": ".cfo-v2/office/computer/data -> ../world/maximor",
+  "office_url": "http://127.0.0.1:8800/",
+  "documents": [
+    {
+      "file": "README.md",
+      "role": "Start here. What this folder is."
+    },
+    {
+      "file": "CAPABILITIES.md",
+      "role": "Everything the system can do and will do."
+    },
+    {
+      "file": "DOCUMENTS.md",
+      "role": "Map of related files and whether they are still true."
+    },
+    {
+      "file": "WORLD.md",
+      "role": "What the data agent left in world/maximor."
+    },
+    {
+      "file": "TESTING.md",
+      "role": "How we test. Kernel vs office vs holdout."
+    },
+    {
+      "file": "SCENARIOS.md",
+      "role": "What to draw on the website. Planted vs holdout."
+    },
+    {
+      "file": "scenarios.json",
+      "role": "Machine cards for website routes. No answer keys."
+    },
+    {
+      "file": "index.json",
+      "role": "This file."
+    }
+  ],
+  "record_counts": {
+    "ap_invoices": 110,
+    "purchase_orders": 93,
+    "goods_receipts": 91,
+    "ar_customers": 15,
+    "ar_invoices": 66,
+    "ar_payments": 8,
+    "vendor_payments": 6,
+    "bank_transactions": 200,
+    "ledger_entries": 200,
+    "stripe_payouts": 3,
+    "journal_entries": 3153,
+    "prepaids": 2,
+    "fixed_assets": 1,
+    "accruals": 2,
+    "close_tasks": 8,
+    "audit_invoices": 110,
+    "forecast_weeks": 13,
+    "reporting_lines": 25,
+    "scenarios": 94,
+    "memory_events": 5,
+    "ingestion_emails": 10,
+    "inbox_messages": 17,
+    "documents": 385,
+    "historical_ap": 2640,
+    "bank_history": 748,
+    "payroll_register": 1248,
+    "processor_transactions": 3000,
+    "vendors": 52,
+    "workpapers": 8
+  },
+  "plot_ids": {
+    "clean": [
+      "INV-001",
+      "PO-101",
+      "GR-101",
+      "PAY-AP-001",
+      "TXN-2026-09-018A"
+    ],
+    "resolved": [
+      "INV-017",
+      "TXN-2026-09-011",
+      "FEE-729103"
+    ],
+    "unresolved": [
+      "INV-AR-013",
+      "PAY-006",
+      "TXN-2026-09-015",
+      "GL-AR-NS"
+    ]
+  },
+  "roster_on_disk": 15,
+  "world_bot": {
+    "slug": "world",
+    "package": ".cfo-v2/office/bots/world/",
+    "on_disk_roster": false,
+    "intended": true
+  },
+  "deprecated_product_story": [
+    ".cfo-v2/office/DEMO-DESIGN.md",
+    ".cfo-v2/office/DEMO-WALKTHROUGH.md"
+  ],
+  "holdout_catalog": [
+    ".cfo-v2/office/sessions/ADVERSARIAL-SCENARIOS.md",
+    ".cfo-v2/office/sessions/adversarial-scenarios.index.json"
+  ]
+}

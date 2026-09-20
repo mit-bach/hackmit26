@@ -1,0 +1,39 @@
+Miscellaneous Industrial Supplies Co.
+14 Warehouse Road
+Medford, MA 02155
+Phone +1 781-555-0177   billing@miscsupplies.example
+Tax ID 04-2299104
+
+INVOICE
+
+Invoice Number: MIS-2026-09-0054
+Invoice Date: 2026-09-01
+Due Date: 2026-10-01
+PO Number: PO-354
+Payment Terms: net 30
+Currency: USD
+Vendor: Misc Supplies
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+colo cross-connect billed 2026-09-01          1.00        450.39        450.39
+
+Subtotal                                                                450.39
+Tax                                                                       0.00
+Amount Due                                                              450.39
+
+Remit to:
+ACH Santander routing 011075150  account ****MSC1
+Bank: Santander  ****MSC1
+Please include invoice MIS-2026-09-0054 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@miscsupplies.example

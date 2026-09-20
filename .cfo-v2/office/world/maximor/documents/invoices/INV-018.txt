@@ -1,0 +1,40 @@
+Dell Marketing L.P.
+One Dell Way
+Round Rock, TX 78682
+Phone +1 800-289-3355   billing@dell.example
+Tax ID 74-2616805
+
+INVOICE
+
+Invoice Number: DELL-R760-60K
+Invoice Date: 2026-09-05
+Due Date: 2026-10-05
+PO Number: PO-221
+Payment Terms: net 30
+Currency: USD
+Vendor: Dell Technologies
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+PowerEdge R760 server, 64-core                2.00     24,000.00     48,000.00
+NVMe 7.68TB mixed-use SSD pair                4.00      3,000.00     12,000.00
+
+Subtotal                                                             60,000.00
+Tax                                                                       0.00
+Amount Due                                                           60,000.00
+
+Remit to:
+ACH Bank of America routing 111000012  account ****R760
+Bank: Bank of America  ****R760
+Please include invoice DELL-R760-60K on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@dell.example

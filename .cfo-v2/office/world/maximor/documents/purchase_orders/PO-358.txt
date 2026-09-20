@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-358
+PO Number: PO-358
+Issued: 2026-09-05
+Vendor: Vanta
+Vendor legal name: Vanta
+Vendor tax ID: 00-0000000
+Authorized amount: 1,100.91
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+implementation hours billed 2026-09-05
+
+This purchase order is not an invoice. The vendor must bill against PO-358.
+Payment terms follow the vendor master unless this order states otherwise.

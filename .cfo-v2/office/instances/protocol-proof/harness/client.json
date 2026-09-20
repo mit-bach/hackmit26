@@ -1,6 +1,8 @@
 {
   "system": "cfo-agentic-system",
-  "extraExtensions": ["./cfo/extensions/index.ts"],
+  "extraExtensions": [
+    "./cfo/extensions/index.ts"
+  ],
   "clientSkills": true,
   "spawnPolicy": "lazy",
   "autoRoutines": false,
@@ -9,8 +11,12 @@
   "thinkingLevel": "low",
   "evalPhase": "operational",
   "features": {
-    "showToolCalls": true,
-    "transcriptVerbosity": "full"
+    "showToolCalls": false,
+    "transcriptVerbosity": "compact",
+    "skillAuthoring": true,
+    "browser": false,
+    "sharedComputers": false,
+    "claudeUserMcp": false
   },
   "sidecar": {
     "command": "./cfo/bin/sidecar.sh",

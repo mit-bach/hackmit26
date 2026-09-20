@@ -46,7 +46,7 @@ def main() -> int:
             "Open AP. Ask it to load invoice ING-001 with tools.get_invoice (demo-inbox already landed it).",
             "Inspector → Pi events / Pi RPC shows the live Harness stream, not a mascot-only status.",
             "There is no live mailbox. demo-inbox wrote traces under computer/runs/inbox.",
-            "Stripe objects live under computer/data/simulations/stripe (symlink to .cfo/data).",
+            "Stripe objects live under computer/data/simulations/stripe (office world pack).",
         ],
     }
     dest = OFFICE / "DEMO-WALKTHROUGH.md"

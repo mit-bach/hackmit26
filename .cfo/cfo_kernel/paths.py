@@ -9,7 +9,9 @@ Choice (session 02; later sessions must use the same env):
     DATA_DIR = $HARNESS_COMPUTER/data
     RUNS     = $HARNESS_COMPUTER/runs
 
-``data/`` is the seed tree (symlink or copy of ``.cfo/data``).
+``data/`` is the seed tree. The office Computer must mount
+``.cfo-v2/office/world/maximor`` (company pack + Stripe sim). Do not mount
+``.cfo/data``; that tree is Kernel unit-test fixtures.
 ``runs/`` is mutable overlay / cases / packets / traces.
 Idempotency and kernel logs live under ``$HARNESS_COMPUTER/cfo/``.
 
@@ -85,7 +87,7 @@ def attach_computer(root: Path) -> Computer:
     if not data.exists():
         raise FileNotFoundError(
             f"Computer data directory missing: {data}. "
-            "Symlink or copy .cfo/data here. See cfo_kernel.paths."
+            "Symlink .cfo-v2/office/world/maximor to computer/data. See cfo_kernel.paths."
         )
     runs.mkdir(parents=True, exist_ok=True)
     cfo.mkdir(parents=True, exist_ok=True)

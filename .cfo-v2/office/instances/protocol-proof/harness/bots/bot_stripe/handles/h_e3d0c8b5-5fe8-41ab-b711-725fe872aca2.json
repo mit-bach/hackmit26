@@ -1,0 +1,19 @@
+{
+  "id": "h_e3d0c8b5-5fe8-41ab-b711-725fe872aca2",
+  "from": "bot_email",
+  "to": "bot_stripe",
+  "toSlug": "stripe",
+  "prompt": "Operator wants you to message them yourself — call message_operator (not only reply in this pair thread) and tell the Operator what color dirt is. Do not rely on me relaying it.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_stripe"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T12:10:36.317Z",
+  "updatedAt": "2026-09-20T12:10:38.800Z",
+  "result": "Done. I messaged the Operator directly: dirt is typically brown.",
+  "seq": 22
+}

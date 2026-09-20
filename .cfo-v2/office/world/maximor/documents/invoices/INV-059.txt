@@ -1,0 +1,39 @@
+Orbit Analytics, Inc.
+44 South Street
+Waltham, MA 02453
+Phone +1 781-555-4410   billing@orbitanalytics.example
+Tax ID 04-6622108
+
+INVOICE
+
+Invoice Number: ORB-2026-09-0060
+Invoice Date: 2026-09-07
+Due Date: 2026-10-07
+PO Number: PO-360
+Payment Terms: net 30
+Currency: USD
+Vendor: Orbit Analytics
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+SaaS workspace add-on billed 2026-09-07       1.00        666.17        666.17
+
+Subtotal                                                                666.17
+Tax                                                                       0.00
+Amount Due                                                              666.17
+
+Remit to:
+ACH Eastern routing 011306679  account ****2025
+Bank: Eastern Bank  ****2025
+Please include invoice ORB-2026-09-0060 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@orbitanalytics.example

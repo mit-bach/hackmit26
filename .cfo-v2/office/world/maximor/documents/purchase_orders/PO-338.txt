@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-338
+PO Number: PO-338
+Issued: 2026-09-12
+Vendor: Hartford Insurance
+Vendor legal name: Hartford Fire Insurance Company
+Vendor tax ID: 06-0383750
+Authorized amount: 1,350.52
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+colo cross-connect billed 2026-09-12
+
+This purchase order is not an invoice. The vendor must bill against PO-338.
+Payment terms follow the vendor master unless this order states otherwise.

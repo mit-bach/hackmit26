@@ -10,7 +10,10 @@
     "botId": "bot_email"
   },
   "kind": "user_dm",
-  "status": "accepted",
+  "status": "completed",
   "createdAt": "2026-09-20T11:43:00.244Z",
-  "updatedAt": "2026-09-20T11:43:00.244Z"
+  "updatedAt": "2026-09-20T12:08:09.239Z",
+  "result": "Stripe replied: **Green.**",
+  "resultPaths": [],
+  "seq": 7
 }

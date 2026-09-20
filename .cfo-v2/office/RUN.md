@@ -15,7 +15,7 @@ The human Operator shell is an emergency stop and a demo overlay. It is not a wo
 python3 -m pip install -r requirements.txt
 cd .harness/Harness-v2 && npm install && cd ../..
 cd .cfo-v2/office/computer/cfo && npm install && cd ../../../..
-ln -sfn ../../../.cfo/data .cfo-v2/office/computer/data
+ln -sfn ../world/maximor .cfo-v2/office/computer/data
 mkdir -p .cfo-v2/office/computer/runs
 ```
 

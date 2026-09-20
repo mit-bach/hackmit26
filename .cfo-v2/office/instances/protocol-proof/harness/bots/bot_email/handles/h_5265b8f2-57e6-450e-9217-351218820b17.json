@@ -1,0 +1,19 @@
+{
+  "id": "h_5265b8f2-57e6-450e-9217-351218820b17",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "No, I don't want that response to come back to you. I want Stripe to message me himself and send an operator response telling me what color dirt is.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T12:10:32.699Z",
+  "updatedAt": "2026-09-20T12:10:40.206Z",
+  "result": "Stripe confirmed they messaged you directly: dirt is typically brown.",
+  "resultPaths": [],
+  "seq": 24
+}

@@ -2,44 +2,30 @@
 
 Simulated only. Seed **42**. Period **2026-09** open (starts blocked). August **2026-08** closed. Company **Maximor Demo Corp** (`CO-MAXIMOR`). No commit in this pass.
 
-Canonical pack: `.cfo/data/demo/**`. Regenerated with:
+Canonical pack: `.cfo-v2/office/world/maximor/**`. Regenerated with:
 
 ```bash
 cd .cfo
-.venv/bin/python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo
-.venv/bin/python main.py validate-sample-data --data-root data/demo
-.venv/bin/python main.py validate-demo --data-root data/demo
-.venv/bin/python main.py export-demo --output data/demo --seed 42 --month 2026-09
+.venv/bin/python main.py generate-sample-data --seed 42 --month 2026-09
+.venv/bin/python main.py validate-sample-data
+.venv/bin/python main.py validate-demo
 ```
 
-`validate-demo` / `export-demo` / `reset-demo` are wired on `.cfo/main.py`. Generation itself writes the export layer.
+Default `--output` / `--data-root` is the office world, not `.cfo/data/demo`. The Kernel generator still lives under `.cfo/`; the files the office uses do not.
 
 ## One picture (office pointing)
 
-Do **not** treat `.cfo/data/invoices.json` as the company. That file is the 20-row unit-test fixture.
-
-Current Computer symlink (`.cfo-v2/office/RUN.md`):
+Computer `data/` is **not** `.cfo/data`. Bind:
 
 ```bash
-ln -sfn ../../../.cfo/data .cfo-v2/office/computer/data
+ln -sfn ../world/maximor .cfo-v2/office/computer/data
 ```
 
-That mount still exposes three different packs:
+Kernel `DATA_DIR` is then the company pack at the Computer data root (`invoices.json` is the 110-invoice Maximor set). Stripe is `data/simulations/stripe`. Inbox fixtures are `data/inbox/messages.json`.
 
-| Path under Computer `data/` | What it is |
-| --- | --- |
-| `invoices.json` | Unit-test leftover (20 invoices). **Not** the company. |
-| `demo/` | Canonical preexisting books. **This is the truth.** |
-| `simulations/stripe/` | Stripe Bot plot (23 scenarios, 114 events). **Keep.** |
+`.cfo/data/invoices.json` is a Kernel unit-test fixture (20 rows). Do not mount it. `.cfo/data/demo` is leftover Kernel output and is not what 8800 should load.
 
-How the office should point:
-
-1. Kernel / loaders for AP, AR, cash, close, audit, reporting: `data_root = .cfo/data/demo`.
-2. Stripe intensity pack: `.cfo/data/simulations/stripe` (leave it where it is; do not shrink it to the 3 payouts in `data/demo/integrations/stripe`).
-3. Inbox traps: `data/demo/inbox/messages.json` (all 17 specs). Harness `seed_demo.py` is out of this agent's scope; it still seeds `demo_specs()` (2 messages). The office should call `full_inbox_specs()`.
-4. Do not copy Invoice Sandbox / APEX / DABstep / RecBench trees onto Computer. `reference-datasets/` stays gitignored.
-
-Leftover better scans under `.cfo/data/ingestion/files/` are not the canonical invoice set. Bots should open `data/demo/documents/**` and `data/demo/ingestion/emails.json`.
+`reference-datasets/` stays gitignored. Harness `seed_demo.py` still seeds 2 inbox messages unless someone switches it to `full_inbox_specs()`.
 
 ## Record counts (2026-09-19 → 2026-09-20)
 

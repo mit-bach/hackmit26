@@ -6,6 +6,7 @@ import argparse
 from pathlib import Path
 
 from sample_data.orchestrator import generate_sample_data, validate_sample_data
+from sample_data.paths import OFFICE_WORLD
 from sample_data.report import format_summary
 
 
@@ -13,7 +14,7 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="generate-sample-data")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--month", default="2026-09")
-    parser.add_argument("--output", default="data/demo")
+    parser.add_argument("--output", default=str(OFFICE_WORLD))
     return parser
 
 
@@ -28,7 +29,7 @@ def run_generate(argv: list[str] | None = None) -> int:
 
 def run_validate(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="validate-sample-data")
-    parser.add_argument("--data-root", default="data/demo")
+    parser.add_argument("--data-root", default=str(OFFICE_WORLD))
     args = parser.parse_args(argv)
     manifest = validate_sample_data(args.data_root)
     print(f"Validated {args.data_root}")
@@ -41,7 +42,7 @@ def run_validate(argv: list[str] | None = None) -> int:
 
 def run_summary(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="sample-data-summary")
-    parser.add_argument("--data-root", default="data/demo")
+    parser.add_argument("--data-root", default=str(OFFICE_WORLD))
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--month", default="2026-09")
     args = parser.parse_args(argv)

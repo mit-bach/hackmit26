@@ -8,6 +8,7 @@ from pathlib import Path
 from tools import configure_data_dir
 
 REPO = Path(__file__).resolve().parent.parent
+OFFICE_WORLD = REPO.parent / ".cfo-v2" / "office" / "world" / "maximor"
 CANONICAL: dict[str, Path] = {
     "tools_data": REPO / "data",
     "cash_demo": REPO / "data" / "cash_recon",
