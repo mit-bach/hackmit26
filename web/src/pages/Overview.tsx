@@ -11,6 +11,7 @@ import { HowItWorks } from "../components/HowItWorks";
 import { CoverageGrid } from "../components/CoverageGrid";
 import { SimulationCard } from "../components/SimulationCard";
 import { VideoShowcase } from "../components/VideoShowcase";
+import { AgentIcon } from "../components/AgentIcon";
 import { AGENTS, ROOMS } from "../data/agents";
 import { SIMULATIONS } from "../data/simulations";
 import { VIDEOS } from "../data/videos";
@@ -54,6 +55,9 @@ export default function Overview(): JSX.Element {
           <Link className="btn primary" to="/architecture">
             See how the agents work together
           </Link>
+          <Link className="btn" to="/sandbox">
+            How this sandbox is simulated
+          </Link>
           <Link className="btn" to="/simulations">
             Open simulations
           </Link>
@@ -67,7 +71,10 @@ export default function Overview(): JSX.Element {
               <div className="hero-room-title">{room.title}</div>
               <div className="hero-agents">
                 {AGENTS.filter((agent) => agent.room === room.id).map((agent) => (
-                  <span key={agent.slug}>{agent.name.replace(/ Agent$/, "")}</span>
+                  <span key={agent.slug} className="hero-agent-chip">
+                    <AgentIcon slug={agent.slug} size={13} />
+                    {agent.name.replace(/ Agent$/, "")}
+                  </span>
                 ))}
               </div>
             </div>
@@ -87,7 +94,7 @@ export default function Overview(): JSX.Element {
       <HowItWorks />
 
       <section className="showcase-section">
-        <div className="eyebrow">The team</div>
+        <div className="eyebrow">How the office is staffed</div>
         <h2 className="section-title">Agents coordinate. They do not each own a product demo.</h2>
         <p className="lede">
           Earlier, dozens of narrow finance roles existed as separate display names. Those jobs still exist as skills and profiles on a smaller set of standing agents. Control agents recheck uncertain work. Audit samples after the fact.

@@ -21,7 +21,7 @@ afterEach(() => {
 
 test("architecture first paint is a graph of Bot buttons and Handle edges", () => {
   const { container } = render(<Architecture />);
-  expect(screen.getByRole("heading", { name: "The office" })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "How work moves through the office" })).toBeInTheDocument();
   expect(screen.getByRole("heading", { name: /How the finance team is actually organized/i })).toBeInTheDocument();
   expect(container.querySelector(".arch-rooms")).toBeNull();
   expect(container.querySelector(".arch-node")).toBeNull();
@@ -71,6 +71,7 @@ test("Showcase nav walks Home, How they work, One invoice, and live office", () 
   expect(showcaseLinks).toEqual([
     "Home",
     "How they work",
+    "The sandbox",
     "One invoice",
     "Saved decisions",
     "Simulations",
@@ -81,6 +82,6 @@ test("Showcase nav walks Home, How they work, One invoice, and live office", () 
   expect(screen.getByRole("link", { name: "One invoice" })).toHaveAttribute("href", "/workflow");
   const live = screen.getByText("Live office", { selector: ".nav-label" }).parentElement;
   expect(live && within(live).getByRole("link", { name: "Cash outlook" })).toBeTruthy();
-  expect(live && within(live).getByRole("link", { name: "The team" })).toBeTruthy();
+  expect(live && within(live).queryByRole("link", { name: "The team" })).toBeNull();
   expect(live && within(live).getByRole("link", { name: "Bank vs books" })).toBeTruthy();
 });

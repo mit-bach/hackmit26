@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { formatStage } from "../copy";
+import { AgentIcon } from "./AgentIcon";
 
 export type FlowMode = "story" | "live";
 export type FlowNodeKind = "event" | "source" | "operator" | "verifier" | "assurance";
@@ -57,17 +58,17 @@ export interface FlowPlayProps {
   readonly autoplay?: boolean;
 }
 
-const NODE_W = 140;
-const NODE_H = 52;
-const V_GAP = 22;
-const MIN_H_GAP = 44;
+const NODE_W = 148;
+const NODE_H = 56;
+const V_GAP = 28;
+const MIN_H_GAP = 64;
 const PAD_X = 16;
-const PAD_Y = 12;
-const BAND_GAP = 28;
+const PAD_Y = 18;
+const BAND_GAP = 36;
 const STEP_MS = 1100;
-const WRAP_NODE_COUNT = 8;
-const WRAP_COL_COUNT = 6;
-const COLS_PER_BAND = 5;
+const WRAP_NODE_COUNT = 16;
+const WRAP_COL_COUNT = 12;
+const COLS_PER_BAND = 6;
 
 interface NodeBox {
   readonly id: string;
@@ -243,20 +244,57 @@ function layoutFlow(nodes: readonly FlowNode[], edges: readonly FlowEdge[], cont
   return { width, height, boxes };
 }
 
-function cubicPath(from: NodeBox, to: NodeBox): string {
+function orthogonalPath(from: NodeBox, to: NodeBox, lane: number): string {
   const x1 = from.x + from.w;
   const y1 = from.y + from.h / 2;
   const x2 = to.x;
   const y2 = to.y + to.h / 2;
-  const span = Math.max(36, Math.abs(x2 - x1) * 0.5);
-  return `M ${x1} ${y1} C ${x1 + span} ${y1}, ${x2 - span} ${y2}, ${x2} ${y2}`;
+  const yOffset = lane * 8;
+  if (x2 >= x1 && Math.abs(y1 - y2) < 3) {
+    const y = y1 + yOffset;
+    return `M ${x1} ${y} H ${x2}`;
+  }
+  if (x2 >= x1) {
+    const midX = x1 + Math.max(28, (x2 - x1) * 0.42) + lane * 12;
+    return `M ${x1} ${y1} H ${midX} V ${y2} H ${x2}`;
+  }
+  const stub = Math.max(20, 24 + lane * 10);
+  return `M ${x1} ${y1} H ${x1 + stub} V ${y2 + yOffset} H ${x2}`;
 }
 
-function labelPoint(from: NodeBox, to: NodeBox): { x: number; y: number } {
-  return {
-    x: (from.x + from.w + to.x) / 2,
-    y: (from.y + from.h / 2 + to.y + to.h / 2) / 2 - 10,
-  };
+function labelPoint(from: NodeBox, to: NodeBox, lane: number): { x: number; y: number } {
+  const x1 = from.x + from.w;
+  const y1 = from.y + from.h / 2;
+  const x2 = to.x;
+  const y2 = to.y + to.h / 2;
+  if (x2 >= x1 && Math.abs(y1 - y2) < 3) {
+    return { x: (x1 + x2) / 2, y: y1 + lane * 8 - 14 };
+  }
+  if (x2 >= x1) {
+    const midX = x1 + Math.max(28, (x2 - x1) * 0.42) + lane * 12;
+    return { x: midX, y: (y1 + y2) / 2 - 4 };
+  }
+  return { x: (x1 + x2) / 2, y: Math.min(y1, y2) - 14 };
+}
+
+function estimateLabelWidth(text: string): number {
+  return Math.max(28, text.length * 6.3 + 10);
+}
+
+function assignFlowLanes(edges: readonly FlowEdge[]): Map<string, number> {
+  const groups = new Map<string, string[]>();
+  for (const edge of edges) {
+    const key = `${edge.from}->${edge.to}`;
+    const list = groups.get(key) ?? [];
+    groups.set(key, [...list, edge.id]);
+  }
+  const lanes = new Map<string, number>();
+  for (const ids of groups.values()) {
+    ids.forEach((id, index) => {
+      lanes.set(id, index);
+    });
+  }
+  return lanes;
 }
 
 function findActiveEdgeId(
@@ -417,6 +455,7 @@ export function FlowPlay(props: FlowPlayProps): JSX.Element {
   }, [playing, isLive, index, steps.length]);
 
   const layout = useMemo(() => layoutFlow(nodes, edges, width), [nodes, edges, width]);
+  const lanes = useMemo(() => assignFlowLanes(edges), [edges]);
   const currentStep = steps[index];
   const liveStage = stages[stages.length - 1];
   const currentNodeId = isLive ? resolvedLive[resolvedLive.length - 1] : currentStep?.nodeId;
@@ -500,20 +539,32 @@ export function FlowPlay(props: FlowPlayProps): JSX.Element {
               const detached = edge.attached === false;
               const active = !detached && edge.id === activeEdgeId;
               const title = detached ? `${edge.label || "edge"}: not attached` : edge.label;
-              const mid = labelPoint(from, to);
+              const lane = lanes.get(edge.id) ?? 0;
+              const mid = labelPoint(from, to, lane);
+              const labelW = estimateLabelWidth(edge.label || "");
               return (
                 <g key={edge.id}>
                   <path
                     className={cx("flow-edge", detached && "not-attached", active && "active")}
-                    d={cubicPath(from, to)}
+                    d={orthogonalPath(from, to, lane)}
                     aria-label={detached ? `${edge.label || "edge"} not attached` : edge.label || undefined}
                   >
                     {title ? <title>{title}</title> : null}
                   </path>
                   {edge.label ? (
-                    <text className="flow-edge-label" x={mid.x} y={mid.y} textAnchor="middle">
-                      {edge.label}
-                    </text>
+                    <g className="flow-edge-label-group" pointerEvents="none">
+                      <rect
+                        className="flow-edge-label-bg"
+                        x={mid.x - labelW / 2}
+                        y={mid.y - 8}
+                        width={labelW}
+                        height={16}
+                        rx={3}
+                      />
+                      <text className="flow-edge-label" x={mid.x} y={mid.y} textAnchor="middle" dominantBaseline="middle">
+                        {edge.label}
+                      </text>
+                    </g>
                   ) : null}
                 </g>
               );
@@ -533,6 +584,7 @@ export function FlowPlay(props: FlowPlayProps): JSX.Element {
                 type="button"
                 className={cx(
                   "flow-node",
+                  "sys-node",
                   node.kind,
                   status === "active" && "active",
                   status === "done" && "done",
@@ -551,7 +603,12 @@ export function FlowPlay(props: FlowPlayProps): JSX.Element {
                   }
                 }}
               >
-                {node.label}
+                <span className="sys-node-icon">
+                  <AgentIcon slug={node.id} size={18} />
+                </span>
+                <span className="sys-node-copy">
+                  <span className="sys-node-name">{node.label}</span>
+                </span>
               </button>
             );
           })}

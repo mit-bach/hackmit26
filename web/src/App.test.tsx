@@ -40,7 +40,7 @@ afterEach(() => {
 
 test("route table includes the operations shell", () => {
   expect(ROUTES).toEqual(
-    expect.arrayContaining(["/", "/inbox", "/ap", "/ar", "/cash", "/stripe", "/close", "/forecast", "/audit", "/memory", "/agents", "/evaluations", "/scenarios", "/architecture", "/simulations", "/videos", "/workflow", "/coverage"])
+    expect.arrayContaining(["/", "/inbox", "/ap", "/ar", "/cash", "/stripe", "/close", "/forecast", "/audit", "/memory", "/agents", "/evaluations", "/scenarios", "/architecture", "/sandbox", "/simulations", "/videos", "/workflow", "/coverage"])
   );
 });
 
@@ -87,15 +87,15 @@ test("audit and memory omit the happening essay", async () => {
   expect(screen.queryByText("What's happening?")).not.toBeInTheDocument();
 });
 
-test("agents page is the team directory with recent activity", async () => {
+test("agents URL now opens How they work instead of a duplicate team page", async () => {
   render(
     <MemoryRouter initialEntries={["/agents"]}>
       <App />
     </MemoryRouter>
   );
-  expect(await screen.findByRole("heading", { name: /The finance team/i })).toBeInTheDocument();
-  expect(screen.getByRole("heading", { name: "The team" })).toBeInTheDocument();
-  expect(screen.getByText(/Who it works with/i)).toBeInTheDocument();
+  expect(await screen.findByRole("heading", { name: /How the finance team is actually organized/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "Standing agents" })).toBeInTheDocument();
+  expect(screen.queryByRole("link", { name: "The team" })).not.toBeInTheDocument();
   expect(screen.queryByText("Fifteen bots")).not.toBeInTheDocument();
   expect(screen.queryByText(/43 autonomous agents/i)).not.toBeInTheDocument();
 });

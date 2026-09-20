@@ -10,17 +10,18 @@ import Close from "./pages/Close";
 import Forecast from "./pages/Forecast";
 import Audit from "./pages/Audit";
 import Memory from "./pages/Memory";
-import Agents from "./pages/Agents";
 import Evaluations from "./pages/Evaluations";
 import Simulations from "./pages/Simulations";
 import Architecture from "./pages/Architecture";
 import Workflow from "./pages/Workflow";
 import Videos from "./pages/Videos";
 import Coverage from "./pages/Coverage";
+import Sandbox from "./pages/Sandbox";
 
 export const ROUTES = [
   "/",
   "/architecture",
+  "/sandbox",
   "/workflow",
   "/memory",
   "/simulations",
@@ -45,6 +46,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Overview />} />
         <Route path="/architecture" element={<Architecture />} />
+        <Route path="/sandbox" element={<Sandbox />} />
         <Route path="/workflow" element={<Workflow />} />
         <Route path="/memory" element={<Memory />} />
         <Route path="/simulations" element={<Simulations />} />
@@ -52,7 +54,7 @@ export default function App() {
         <Route path="/videos" element={<Videos />} />
         <Route path="/coverage" element={<Coverage />} />
         <Route path="/evaluations" element={<Evaluations />} />
-        <Route path="/agents" element={<Agents />} />
+        <Route path="/agents" element={<Navigate to="/architecture" replace />} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/ap" element={<AP />} />
         <Route path="/ar" element={<AR />} />

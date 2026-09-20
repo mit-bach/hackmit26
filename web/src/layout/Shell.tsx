@@ -13,6 +13,7 @@ interface NavItem {
 const SHOWCASE: readonly NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/architecture", label: "How they work" },
+  { to: "/sandbox", label: "The sandbox" },
   { to: "/workflow", label: "One invoice" },
   { to: "/memory", label: "Saved decisions" },
   { to: "/simulations", label: "Simulations" },
@@ -30,7 +31,6 @@ const LIVE_OFFICE: readonly NavItem[] = [
   { to: "/close", label: "Finish the month" },
   { to: "/forecast", label: "Cash outlook" },
   { to: "/audit", label: "Control tests" },
-  { to: "/agents", label: "The team" },
 ];
 
 interface StatusPayload {

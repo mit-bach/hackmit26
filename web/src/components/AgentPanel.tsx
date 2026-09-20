@@ -1,16 +1,26 @@
 import { AGENTS, AGENTS_BY_SLUG, ROOMS, skillLabel, type AgentDef } from "../data/agents";
 import { HANDOFFS, handoffsFor } from "../data/handoffs";
+import { AgentIcon } from "./AgentIcon";
 
-export function AgentPanel({ agent, live }: { agent: AgentDef; live?: any }) {
+interface LiveAgentHint {
+  readonly skills?: readonly string[];
+}
+
+export function AgentPanel({ agent, live }: { agent: AgentDef; live?: LiveAgentHint }): JSX.Element {
   const edges = handoffsFor(agent.slug);
-  const skills = (live?.skills?.length ? live.skills : agent.skills) as string[];
+  const skills: readonly string[] = live?.skills?.length ? live.skills : agent.skills;
   const profiles = agent.profiles;
 
   return (
     <div className="stack">
       <div>
         <div className="eyebrow">{ROOMS.find((room) => room.id === agent.room)?.title}</div>
-        <h2 className="office-inspector-name" style={{ textTransform: "none", letterSpacing: 0, color: "var(--text)", fontSize: 22, marginBottom: 8 }}>{agent.name}</h2>
+        <div className="agent-heading">
+          <span className="sys-node-icon agent-heading-icon">
+            <AgentIcon slug={agent.slug} size={28} />
+          </span>
+          <h2 className="office-inspector-name">{agent.name}</h2>
+        </div>
         <p>{agent.role}</p>
       </div>
       <div>
@@ -92,7 +102,7 @@ export function AgentDirectory({
 }: {
   selected: string;
   onSelect: (slug: string) => void;
-}) {
+}): JSX.Element {
   return (
     <div className="agent-directory">
       {ROOMS.map((room) => (
@@ -105,7 +115,10 @@ export function AgentDirectory({
               className={`nav-link agent-pick${selected === agent.slug ? " active" : ""}`}
               onClick={() => onSelect(agent.slug)}
             >
-              {agent.name}
+              <span className="sys-node-icon">
+                <AgentIcon slug={agent.slug} size={18} />
+              </span>
+              <span>{agent.name}</span>
             </button>
           ))}
         </div>
@@ -114,7 +127,7 @@ export function AgentDirectory({
   );
 }
 
-export function HandoffList({ slug }: { slug?: string }) {
+export function HandoffList({ slug }: { slug?: string }): JSX.Element {
   const rows = slug ? [...handoffsFor(slug).inbound, ...handoffsFor(slug).outbound] : HANDOFFS;
   const unique = slug ? rows : HANDOFFS;
   return (

@@ -1,4 +1,4 @@
-import { OfficeGraph } from "./OfficeGraph";
+import { SystemFlowchart } from "./SystemFlowchart";
 
 export interface ArchitectureDiagramProps {
   readonly selected: string | null;
@@ -6,5 +6,5 @@ export interface ArchitectureDiagramProps {
 }
 
 export function ArchitectureDiagram({ selected, onSelect }: ArchitectureDiagramProps): JSX.Element {
-  return <OfficeGraph selected={selected} onSelect={onSelect} />;
+  return <SystemFlowchart selected={selected} onSelect={onSelect} />;
 }
