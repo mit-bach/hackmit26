@@ -1,0 +1,10 @@
+{
+  "name": "maximor-cfo-demo",
+  "private": true,
+  "description": "Maximor Office of the CFO demo website. The kernel CLI is Python; Vercel hosts the Vite app in web/.",
+  "scripts": {
+    "build": "npm run build --prefix web",
+    "dev": "npm run dev --prefix web",
+    "test": "npm test --prefix web"
+  }
+}

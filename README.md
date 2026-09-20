@@ -58,6 +58,8 @@ npm run dev
 
 Open http://127.0.0.1:5173. Vite proxies `/api` to the API on port 8765.
 
+Vercel hosts the Vite app in `web/` (`vercel.json`). It is not a Python serverless function; ignore the root `main.py` CLI shim. Live agent runs still need the FastAPI process. Without it, the site uses saved demonstration results.
+
 Production-style (API serves `web/dist`):
 
 ```bash
