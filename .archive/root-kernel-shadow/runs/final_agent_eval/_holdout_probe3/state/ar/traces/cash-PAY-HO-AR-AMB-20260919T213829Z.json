@@ -1,0 +1,195 @@
+{
+  "payment_id": "PAY-HO-AR-AMB",
+  "started_at": "2026-09-19T21:38:29Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-HO-AR-AMB",
+    "payment_date": "2026-09-23",
+    "amount": 7350.0,
+    "currency": "USD",
+    "payer_name": "Solstice Media",
+    "customer_id": "CUST-HO-03",
+    "bank_reference": "ACH-SOL-7350",
+    "remittance_text": "September media services",
+    "invoice_reference": "",
+    "source": "ach",
+    "unapplied_amount": 7350.0,
+    "application_status": "HUMAN_REVIEW",
+    "metadata": {}
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-HO-AR-AMB",
+      "payment_date": "2026-09-23",
+      "amount": 7350.0,
+      "currency": "USD",
+      "payer_name": "Solstice Media",
+      "customer_id": "CUST-HO-03",
+      "bank_reference": "ACH-SOL-7350",
+      "remittance_text": "September media services",
+      "invoice_reference": "",
+      "source": "ach",
+      "unapplied_amount": 7350.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
+    },
+    "identified_customer_id": "CUST-HO-03",
+    "identified_customer_name": "Solstice Media",
+    "customer_confidence": 0.99,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-HO-AR-A1",
+        "customer_id": "CUST-HO-03",
+        "customer_name": "Solstice Media",
+        "invoice_date": "2026-09-04",
+        "due_date": "2026-10-04",
+        "original_amount": 7350.0,
+        "outstanding_amount": 7350.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Ambiguous twin A",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      },
+      {
+        "invoice_id": "INV-HO-AR-A2",
+        "customer_id": "CUST-HO-03",
+        "customer_name": "Solstice Media",
+        "invoice_date": "2026-09-04",
+        "due_date": "2026-10-04",
+        "original_amount": 7350.0,
+        "outstanding_amount": 7350.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": null,
+        "description": "Ambiguous twin B",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {}
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-HO-AR-A1",
+            "amount": 7350.0
+          }
+        ],
+        "total_applied": 7350.0,
+        "unapplied_amount": 0.0,
+        "match_type": "exact_amount",
+        "score": 0.86,
+        "evidence": [
+          "INV-HO-AR-A1 outstanding equals payment 7350.0"
+        ],
+        "ambiguities": [
+          "Competing explanations: C2"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "applications": [
+          {
+            "invoice_id": "INV-HO-AR-A2",
+            "amount": 7350.0
+          }
+        ],
+        "total_applied": 7350.0,
+        "unapplied_amount": 0.0,
+        "match_type": "exact_amount",
+        "score": 0.86,
+        "evidence": [
+          "INV-HO-AR-A2 outstanding equals payment 7350.0"
+        ],
+        "ambiguities": [
+          "Competing explanations: C1"
+        ]
+      }
+    ],
+    "remittance_invoice_ids": [],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-HO-AR-AMB 7350.0 USD from Solstice Media",
+      "Remittance: September media services",
+      "Payment already tagged CUST-HO-03"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-HO-AR-AMB",
+    "decision": "HUMAN_REVIEW",
+    "applications": [],
+    "confidence": 0.52,
+    "reason": "Multiple equally plausible exact matches explain this payment.",
+    "evidence_used": [
+      "Payment PAY-HO-AR-AMB 7350.0 USD from Solstice Media",
+      "Remittance: September media services",
+      "Payment already tagged CUST-HO-03",
+      "C1: exact_amount",
+      "C2: exact_amount"
+    ],
+    "ambiguities": [
+      "C1 exact_amount: INV-HO-AR-A1 $7,350.00",
+      "C2 exact_amount: INV-HO-AR-A2 $7,350.00"
+    ],
+    "review_question": "Which candidate set should receive this payment?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-HO-AR-AMB",
+    "decision": "HUMAN_REVIEW",
+    "applications": [],
+    "confidence": 0.52,
+    "reason": "Multiple equally plausible exact matches explain this payment.",
+    "evidence_used": [
+      "Payment PAY-HO-AR-AMB 7350.0 USD from Solstice Media",
+      "Remittance: September media services",
+      "Payment already tagged CUST-HO-03",
+      "C1: exact_amount",
+      "C2: exact_amount"
+    ],
+    "ambiguities": [
+      "C1 exact_amount: INV-HO-AR-A1 $7,350.00",
+      "C2 exact_amount: INV-HO-AR-A2 $7,350.00"
+    ],
+    "review_question": "Which candidate set should receive this payment?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": false,
+  "record": null,
+  "state_changes": [],
+  "journal_entries": [],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

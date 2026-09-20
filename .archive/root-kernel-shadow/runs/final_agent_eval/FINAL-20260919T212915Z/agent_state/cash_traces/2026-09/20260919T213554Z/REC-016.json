@@ -1,0 +1,293 @@
+{
+  "reconciliation_id": "REC-016",
+  "period": "2026-09",
+  "match_type": "UNEXPLAINED_DIFFERENCE",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-2026-09-015",
+      "date": "2026-09-15",
+      "amount": 12412.4,
+      "currency": "USD",
+      "description": "CUSTOMER PAYMENT NORTHSTAR LLC",
+      "reference": "",
+      "counterparty": "NORTHSTAR LLC",
+      "transaction_type": "wire_credit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": 1241240,
+      "raw_metadata": {
+        "payment_id": "PAY-006",
+        "invoice_ids": [
+          "INV-AR-013"
+        ]
+      }
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-AR-NS",
+      "date": "2026-09-15",
+      "amount": 12400.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Northstar LLC",
+      "reference": "INV-AR-013",
+      "description": "Customer receipt Northstar platform",
+      "entry_type": "ar_receipt",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 1240000,
+      "raw_metadata": {
+        "payment_id": "PAY-006"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-2026-09-015"
+      ],
+      "ledger_entry_ids": [
+        "GL-AR-NS"
+      ],
+      "bank_amount": 12412.4,
+      "ledger_amount": 12400.0,
+      "difference": 12.4,
+      "bank_amount_minor": 1241240,
+      "ledger_amount_minor": 1240000,
+      "difference_minor": 1240,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:1241240",
+        "ledger_amount:1240000",
+        "difference:1240",
+        "rounding_rejected:difference_not_one_cent",
+        "fee_rejected:no_fee_evidence",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": 1241240,
+    "ledger_amount_minor": 1240000,
+    "difference_minor": 1240,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+    "selected_candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.2,
+    "reasons": [
+      "The sole Python candidate is an unexplained difference, not a supported match.",
+      "Bank and ledger counterparties are compatible, but no fee, FX, remittance, or timing evidence explains the residual.",
+      "Multiple ambiguities remain, including duplicate or missing activity."
+    ],
+    "evidence_used": [
+      "candidate UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+      "bank transaction TXN-2026-09-015: NORTHSTAR LLC, INV-AR-013, PAY-006",
+      "ledger entry GL-AR-NS: Northstar LLC, INV-AR-013, PAY-006",
+      "fee_rejected:no_fee_evidence",
+      "no_fx_evidence",
+      "no_partial_payment_remittance"
+    ],
+    "review_question": "Please determine the cause of the unexplained residual and whether a missing, duplicate, timing, FX, or other adjustment exists."
+  },
+  "investigation": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+    "issues_investigated": [
+      "Bank-to-ledger amount difference",
+      "Fee, rounding, FX, partial payment, duplicate/missing entry, and timing hypotheses",
+      "Bank and ledger counterparty/reference compatibility"
+    ],
+    "findings": [
+      "Bank amount is 12412.4 USD; ledger amount is 12400.0 USD; difference is 12.4 USD (1240 minor units).",
+      "Both identify Northstar LLC and payment ID PAY-006; bank metadata and ledger reference identify INV-AR-013.",
+      "Rounding is rejected because the difference is not one cent. No fee, FX, partial-payment, duplicate/missing-entry, or adjacent-period timing evidence was provided."
+    ],
+    "supported_explanations": [
+      "The bank and ledger items are compatible by counterparty, payment ID, and invoice reference."
+    ],
+    "unsupported_hypotheses": [
+      "Bank fee",
+      "Rounding",
+      "Foreign exchange",
+      "Partial payment",
+      "Duplicate or missing entry",
+      "Timing difference"
+    ],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.2,
+    "human_review": true,
+    "evidence_used": [
+      "Python candidate: bank_amount 12412.4, ledger_amount 12400.0, difference 12.4",
+      "Bank transaction TXN-2026-09-015",
+      "Ledger entry GL-AR-NS",
+      "No fee evidence IDs",
+      "Bank metadata payment_id PAY-006 and invoice INV-AR-013",
+      "Ledger metadata payment_id PAY-006 and reference INV-AR-013"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "unexplained_difference",
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Selected candidate is in the Python candidate list.",
+      "Python records bank amount 12412.4, ledger amount 12400.0, and an unexplained difference of 12.4; arithmetic is unchanged.",
+      "No fee evidence, FX evidence, remittance support, adjacent-period timing evidence, or proposed adjustment supports explaining the residual.",
+      "The candidate remains an unexplained difference; duplicate or missing activity cannot be resolved from available evidence.",
+      "A clean match or explained exception is unsupported, so human review is required.",
+      "python_validator_authoritative"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-016",
+    "period": "2026-09",
+    "match_key": "9bbd44c7e2ac37c9",
+    "bank_transaction_ids": [
+      "TXN-2026-09-015"
+    ],
+    "ledger_entry_ids": [
+      "GL-AR-NS"
+    ],
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "bank_amount": 12412.4,
+    "ledger_amount": 12400.0,
+    "difference": 12.4,
+    "bank_amount_minor": 1241240,
+    "ledger_amount_minor": 1240000,
+    "difference_minor": 1240,
+    "confidence": 0.2,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unexplained difference: $12.40",
+    "evidence": [
+      "bank_amount:1241240",
+      "ledger_amount:1240000",
+      "difference:1240",
+      "rounding_rejected:difference_not_one_cent",
+      "fee_rejected:no_fee_evidence",
+      "no_fx_evidence",
+      "no_partial_payment_remittance"
+    ],
+    "control_findings": [
+      "UNEXPLAINED_DIFFERENCE"
+    ],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": 1241240,
+      "ledger_amount_minor": 1240000,
+      "difference_minor": 1240,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "bank_amount:1241240",
+    "ledger_amount:1240000",
+    "difference:1240",
+    "rounding_rejected:difference_not_one_cent",
+    "fee_rejected:no_fee_evidence",
+    "no_fx_evidence",
+    "no_partial_payment_remittance"
+  ],
+  "control_findings": [
+    "UNEXPLAINED_DIFFERENCE"
+  ],
+  "agents": [
+    {
+      "role": "Cash Reconciliation Preparer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Exception Investigator",
+      "skills": [
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Reconciliation Reviewer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": true,
+  "replay": false,
+  "trace_path": null
+}

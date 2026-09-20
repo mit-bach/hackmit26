@@ -1,0 +1,377 @@
+{
+  "reconciliation_id": "REC-006",
+  "period": "2026-09",
+  "match_type": "FEE_NETTED",
+  "status": "EXPLAINED_EXCEPTION",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-HO-FEE",
+      "date": "2026-09-20",
+      "amount": -5028.0,
+      "currency": "USD",
+      "description": "WIRE VESPER NET FEE",
+      "reference": "",
+      "counterparty": "Vesper Facilities",
+      "transaction_type": "other",
+      "source": "bank",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -502800,
+      "raw_metadata": {}
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-HO-FEE",
+      "date": "2026-09-20",
+      "amount": -5000.0,
+      "currency": "USD",
+      "account": "Cash",
+      "counterparty": "Vesper Facilities",
+      "reference": "",
+      "description": "Vesper principal",
+      "entry_type": "other",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -500000,
+      "raw_metadata": {}
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+      "match_type": "FEE_NETTED",
+      "bank_transaction_ids": [
+        "TXN-HO-FEE"
+      ],
+      "ledger_entry_ids": [
+        "GL-HO-FEE"
+      ],
+      "bank_amount": -5028.0,
+      "ledger_amount": -5000.0,
+      "difference": -28.0,
+      "bank_amount_minor": -502800,
+      "ledger_amount_minor": -500000,
+      "difference_minor": -2800,
+      "confidence": 0.95,
+      "score": 1.6,
+      "evidence": [
+        "principal:-500000",
+        "bank_total:-502800",
+        "fee:2800",
+        "fee_evidence:FEE-HO-28",
+        "reference:TXN-HO-FEE"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [
+        "FEE-HO-28"
+      ],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": [
+        {
+          "memo": "Record bank fee FEE-HO-28 on TXN-HO-FEE",
+          "lines": [
+            {
+              "account": "6100-Bank-Fees",
+              "amount": 28.0,
+              "amount_minor": 2800,
+              "side": "debit"
+            },
+            {
+              "account": "1000-Cash",
+              "amount": 28.0,
+              "amount_minor": 2800,
+              "side": "credit"
+            }
+          ],
+          "related_bank_ids": [
+            "TXN-HO-FEE"
+          ],
+          "related_ledger_ids": [
+            "GL-HO-FEE"
+          ],
+          "posted": false,
+          "support": "FEE-HO-28"
+        }
+      ]
+    },
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-HO-FEE:GL-HO-FEE",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-HO-FEE"
+      ],
+      "ledger_entry_ids": [
+        "GL-HO-FEE"
+      ],
+      "bank_amount": -5028.0,
+      "ledger_amount": -5000.0,
+      "difference": -28.0,
+      "bank_amount_minor": -502800,
+      "ledger_amount_minor": -500000,
+      "difference_minor": -2800,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:-502800",
+        "ledger_amount:-500000",
+        "difference:-2800",
+        "rounding_rejected:difference_not_one_cent",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "fee",
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -502800,
+    "ledger_amount_minor": -500000,
+    "difference_minor": -2800,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+    "selected_candidate_id": "FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+    "disposition": "EXPLAINED_EXCEPTION",
+    "confidence": 0.95,
+    "reasons": [
+      "Python identified a FEE_NETTED match.",
+      "Bank and ledger counterparties both identify Vesper Facilities.",
+      "Fee evidence supports the net difference; proposed entry remains unposted."
+    ],
+    "evidence_used": [
+      "FEE-HO-28",
+      "TXN-HO-FEE",
+      "GL-HO-FEE"
+    ],
+    "review_question": null
+  },
+  "investigation": {
+    "case_id": "FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+    "issues_investigated": [
+      "Bank transaction versus ledger amount",
+      "Bank fee evidence",
+      "Counterparty and reference compatibility"
+    ],
+    "findings": [
+      "Python difference: bank amount -5028.0 versus ledger amount -5000.0, difference -28.0.",
+      "Both items are dated 2026-09-20, in USD, and name Vesper Facilities.",
+      "Bank description is “WIRE VESPER NET FEE”; fee evidence references TXN-HO-FEE and documents a 28.0 outbound wire fee.",
+      "The proposed adjusting entry is unposted."
+    ],
+    "supported_explanations": [
+      "The -28.0 difference is supported as a bank fee by FEE-HO-28. Python computed an unposted fee adjustment of 28.0."
+    ],
+    "unsupported_hypotheses": [
+      "Rounding, FX, partial payment, duplicate, missing entry, and timing are not supported by the evidence."
+    ],
+    "recommendation": "EXPLAINED_EXCEPTION",
+    "confidence": 0.99,
+    "human_review": false,
+    "evidence_used": [
+      "Python candidate FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+      "Bank transaction TXN-HO-FEE",
+      "Ledger entry GL-HO-FEE",
+      "Fee evidence FEE-HO-28"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": false,
+    "reasons": []
+  },
+  "reviewer": {
+    "case_id": "FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+    "reviewer_status": "CONFIRMED",
+    "disposition": "EXPLAINED_EXCEPTION",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Selected candidate is present in the Python candidate list.",
+      "Amounts and difference are unchanged: bank -5028.0, ledger -5000.0, difference -28.0.",
+      "Fee evidence FEE-HO-28 independently supports the -28.0 net difference.",
+      "Counterparty and date agree; no duplicate ambiguity is reported.",
+      "The proposed adjusting entry is supported and remains unposted.",
+      "python_validator_authoritative"
+    ],
+    "arithmetic_ok": true,
+    "human_review": false
+  },
+  "final": {
+    "reconciliation_id": "REC-006",
+    "period": "2026-09",
+    "match_key": "45a4c638d458d5f9",
+    "bank_transaction_ids": [
+      "TXN-HO-FEE"
+    ],
+    "ledger_entry_ids": [
+      "GL-HO-FEE"
+    ],
+    "match_type": "FEE_NETTED",
+    "bank_amount": -5028.0,
+    "ledger_amount": -5000.0,
+    "difference": -28.0,
+    "bank_amount_minor": -502800,
+    "ledger_amount_minor": -500000,
+    "difference_minor": -2800,
+    "confidence": 0.95,
+    "status": "EXPLAINED_EXCEPTION",
+    "explanation": "Wire TXN-HO-FEE is ledger principal GL-HO-FEE (-$5,000.00) plus bank fee $28.00.",
+    "evidence": [
+      "principal:-500000",
+      "bank_total:-502800",
+      "fee:2800",
+      "fee_evidence:FEE-HO-28",
+      "reference:TXN-HO-FEE"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [
+      {
+        "memo": "Record bank fee FEE-HO-28 on TXN-HO-FEE",
+        "lines": [
+          {
+            "account": "6100-Bank-Fees",
+            "amount": 28.0,
+            "amount_minor": 2800,
+            "side": "debit"
+          },
+          {
+            "account": "1000-Cash",
+            "amount": 28.0,
+            "amount_minor": 2800,
+            "side": "credit"
+          }
+        ],
+        "related_bank_ids": [
+          "TXN-HO-FEE"
+        ],
+        "related_ledger_ids": [
+          "GL-HO-FEE"
+        ],
+        "posted": false,
+        "support": "FEE-HO-28"
+      }
+    ],
+    "reviewer_status": "CONFIRMED",
+    "human_review": false,
+    "candidate_id": "FEE_NETTED:TXN-HO-FEE:GL-HO-FEE",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -502800,
+      "ledger_amount_minor": -500000,
+      "difference_minor": -2800,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [
+    {
+      "memo": "Record bank fee FEE-HO-28 on TXN-HO-FEE",
+      "lines": [
+        {
+          "account": "6100-Bank-Fees",
+          "amount": 28.0,
+          "amount_minor": 2800,
+          "side": "debit"
+        },
+        {
+          "account": "1000-Cash",
+          "amount": 28.0,
+          "amount_minor": 2800,
+          "side": "credit"
+        }
+      ],
+      "related_bank_ids": [
+        "TXN-HO-FEE"
+      ],
+      "related_ledger_ids": [
+        "GL-HO-FEE"
+      ],
+      "posted": false,
+      "support": "FEE-HO-28"
+    }
+  ],
+  "human_review": false,
+  "evidence": [
+    "principal:-500000",
+    "bank_total:-502800",
+    "fee:2800",
+    "fee_evidence:FEE-HO-28",
+    "reference:TXN-HO-FEE"
+  ],
+  "control_findings": [],
+  "agents": [
+    {
+      "role": "Cash Reconciliation Preparer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Exception Investigator",
+      "skills": [
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        },
+        {
+          "name": "bank-reference-interpretation",
+          "path": "skills/bank-reference-interpretation/SKILL.md",
+          "content_hash": "940d6216a731b28081cc958b4e8017782e439dd70009de675790f4a3fdaaabd9",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Cash Reconciliation Reviewer",
+      "skills": [
+        {
+          "name": "cash-reconciliation-method-selection",
+          "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+          "content_hash": "99d403eb455165f5c1f67ca60931aa25c34534521cc06acf06180bb76cafebeb",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-exception-investigation",
+          "path": "skills/reconciliation-exception-investigation/SKILL.md",
+          "content_hash": "4c73c2eae8ffca3874b531343438667331c988b85106a0632f69905f763da9f3",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": true,
+  "replay": false,
+  "trace_path": null
+}

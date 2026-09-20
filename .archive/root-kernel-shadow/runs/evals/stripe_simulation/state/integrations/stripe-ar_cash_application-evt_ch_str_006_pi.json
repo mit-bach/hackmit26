@@ -1,0 +1,19 @@
+{
+  "stripe_event_id": "evt_ch_str_006_pi",
+  "event_type": "payment_intent.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_006",
+  "decision": "AUTO_APPLY",
+  "invoice_ids": [
+    "INV-STR-006"
+  ],
+  "posted": true,
+  "already_posted": false,
+  "trace_path": "/Users/rohandalal/Desktop/hackmit26/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_006-20260920T000644Z.json",
+  "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [],
+  "duplicate": false
+}

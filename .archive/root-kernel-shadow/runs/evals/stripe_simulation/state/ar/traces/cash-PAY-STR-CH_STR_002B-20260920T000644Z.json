@@ -1,0 +1,341 @@
+{
+  "payment_id": "PAY-STR-CH_STR_002B",
+  "started_at": "2026-09-20T00:06:44Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-STR-CH_STR_002B",
+    "payment_date": "2026-09-08",
+    "amount": 1500.0,
+    "currency": "USD",
+    "payer_name": "Helios Analytics",
+    "customer_id": null,
+    "bank_reference": "ch_str_002b",
+    "remittance_text": "INV-STR-002B Helios workspace B AMEX INV-STR-002B",
+    "invoice_reference": "INV-STR-002B",
+    "source": "stripe",
+    "unapplied_amount": 0.0,
+    "application_status": "APPLIED",
+    "metadata": {
+      "stripe_charge_id": "ch_str_002b",
+      "stripe_payment_intent_id": "pi_str_002b",
+      "stripe_balance_transaction_id": "",
+      "stripe_event_type": "payment_intent.succeeded",
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002B",
+      "order_id": "INV-STR-002B"
+    }
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-STR-CH_STR_002B",
+      "payment_date": "2026-09-08",
+      "amount": 1500.0,
+      "currency": "USD",
+      "payer_name": "Helios Analytics",
+      "customer_id": null,
+      "bank_reference": "ch_str_002b",
+      "remittance_text": "INV-STR-002B Helios workspace B AMEX INV-STR-002B",
+      "invoice_reference": "INV-STR-002B",
+      "source": "stripe",
+      "unapplied_amount": 1500.0,
+      "application_status": "UNMATCHED",
+      "metadata": {
+        "stripe_charge_id": "ch_str_002b",
+        "stripe_payment_intent_id": "pi_str_002b",
+        "stripe_balance_transaction_id": "",
+        "stripe_event_type": "payment_intent.succeeded",
+        "customer_name": "Helios Analytics",
+        "invoice_id": "INV-STR-002B",
+        "order_id": "INV-STR-002B"
+      }
+    },
+    "identified_customer_id": "CUST-002",
+    "identified_customer_name": "Helios Analytics",
+    "customer_confidence": 0.95,
+    "open_invoices": [
+      {
+        "invoice_id": "INV-STR-002B",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-02",
+        "due_date": "2026-09-30",
+        "original_amount": 1500.0,
+        "outstanding_amount": 1500.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-002B",
+        "description": "Helios workspace B AMEX",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-002C",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-02",
+        "due_date": "2026-09-30",
+        "original_amount": 500.0,
+        "outstanding_amount": 500.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-002C",
+        "description": "Helios add-on seats",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-012A",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-14",
+        "due_date": "2026-10-14",
+        "original_amount": 700.0,
+        "outstanding_amount": 700.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-012A",
+        "description": "Helios refundable workshop",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      },
+      {
+        "invoice_id": "INV-STR-012B",
+        "customer_id": "CUST-002",
+        "customer_name": "Helios Analytics",
+        "invoice_date": "2026-09-14",
+        "due_date": "2026-10-14",
+        "original_amount": 300.0,
+        "outstanding_amount": 300.0,
+        "currency": "USD",
+        "status": "OPEN",
+        "payment_terms": "net 30",
+        "purchase_order": null,
+        "reference": "ORD-STR-012B",
+        "description": "Helios extra seats",
+        "created_at": "",
+        "last_payment_date": null,
+        "last_collection_contact": null,
+        "reminder_count": 0,
+        "collection_status": "NONE",
+        "dispute_status": "NONE",
+        "dispute_reason": "",
+        "promised_pay_date": null,
+        "metadata": {
+          "source": "stripe_simulation"
+        }
+      }
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-002B",
+            "amount": 1500.0
+          }
+        ],
+        "total_applied": 1500.0,
+        "unapplied_amount": 0.0,
+        "match_type": "explicit_invoice",
+        "score": 0.99,
+        "evidence": [
+          "Remittance names INV-STR-002B"
+        ],
+        "ambiguities": [
+          "Competing explanations: C3"
+        ]
+      },
+      {
+        "candidate_id": "C3",
+        "applications": [
+          {
+            "invoice_id": "INV-STR-002C",
+            "amount": 500.0
+          },
+          {
+            "invoice_id": "INV-STR-012A",
+            "amount": 700.0
+          },
+          {
+            "invoice_id": "INV-STR-012B",
+            "amount": 300.0
+          }
+        ],
+        "total_applied": 1500.0,
+        "unapplied_amount": 0.0,
+        "match_type": "combination",
+        "score": 0.84,
+        "evidence": [
+          "INV-STR-002C+INV-STR-012A+INV-STR-012B sum to 1500.0"
+        ],
+        "ambiguities": [
+          "Competing explanations: C1"
+        ]
+      }
+    ],
+    "remittance_invoice_ids": [
+      "INV-STR-002B"
+    ],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-STR-CH_STR_002B 1500.0 USD from Helios Analytics",
+      "Remittance: INV-STR-002B Helios workspace B AMEX INV-STR-002B",
+      "Payer 'Helios Analytics' matches 'Helios Analytics'",
+      "Remittance invoice references: INV-STR-002B"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-STR-CH_STR_002B",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-002B",
+        "amount": 1500.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_002B 1500.0 USD from Helios Analytics",
+      "Remittance: INV-STR-002B Helios workspace B AMEX INV-STR-002B",
+      "Payer 'Helios Analytics' matches 'Helios Analytics'",
+      "Remittance invoice references: INV-STR-002B",
+      "Remittance names INV-STR-002B"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-STR-CH_STR_002B",
+    "decision": "AUTO_APPLY",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-002B",
+        "amount": 1500.0
+      }
+    ],
+    "confidence": 0.96,
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "evidence_used": [
+      "Payment PAY-STR-CH_STR_002B 1500.0 USD from Helios Analytics",
+      "Remittance: INV-STR-002B Helios workspace B AMEX INV-STR-002B",
+      "Payer 'Helios Analytics' matches 'Helios Analytics'",
+      "Remittance invoice references: INV-STR-002B",
+      "Remittance names INV-STR-002B"
+    ],
+    "ambiguities": [],
+    "review_question": null,
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": true,
+  "record": {
+    "application_id": "AR-APP-002",
+    "payment_id": "PAY-STR-CH_STR_002B",
+    "applications": [
+      {
+        "invoice_id": "INV-STR-002B",
+        "amount": 1500.0
+      }
+    ],
+    "total_applied": 1500.0,
+    "unapplied_amount": 0.0,
+    "decision": "AUTO_APPLY",
+    "status": "APPLIED",
+    "posted": true,
+    "invoice_changes": [
+      {
+        "invoice_id": "INV-STR-002B",
+        "previous_outstanding": 1500.0,
+        "applied_amount": 1500.0,
+        "new_outstanding": 0.0,
+        "previous_status": "OPEN",
+        "new_status": "PAID"
+      }
+    ],
+    "journal_entry_ids": [
+      "AR-JE-002"
+    ],
+    "created_at": "2026-09-20T00:06:44Z",
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+  },
+  "state_changes": [
+    {
+      "invoice_id": "INV-STR-002B",
+      "previous_outstanding": 1500.0,
+      "applied_amount": 1500.0,
+      "new_outstanding": 0.0,
+      "previous_status": "OPEN",
+      "new_status": "PAID"
+    }
+  ],
+  "journal_entries": [
+    {
+      "entry_id": "AR-JE-002",
+      "period": "2026-09",
+      "counterparty": "Helios Analytics",
+      "memo": "Apply PAY-STR-CH_STR_002B to INV-STR-002B",
+      "debit": {
+        "account": "Cash",
+        "amount": 1500.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 1500.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-STR-CH_STR_002B",
+      "related_invoice_ids": [
+        "INV-STR-002B"
+      ],
+      "created_at": "2026-09-20T00:06:44Z"
+    }
+  ],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}

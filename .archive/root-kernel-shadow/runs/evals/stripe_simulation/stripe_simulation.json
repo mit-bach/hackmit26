@@ -1,0 +1,1216 @@
+{
+  "cases": [
+    {
+      "scenario_id": "stripe_simple_payment",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-001"
+        ],
+        "net_cents": 97070,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-001"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Customer invoice $1,000; Stripe fee $29.30; net $970.70.",
+      "expected_behavior": "Match INV-STR-001, book fee separately, reconcile payout to bank.",
+      "actual_behavior": "Match INV-STR-001, book fee separately, reconcile payout to bank."
+    },
+    {
+      "scenario_id": "stripe_payout_multiple_payments",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-002A",
+          "INV-STR-002B",
+          "INV-STR-002C"
+        ],
+        "net_cents": 291185,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-002A",
+          "INV-STR-002B",
+          "INV-STR-002C"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Three Helios payments with nets $970.70, $1,455.95, $485.20 in one payout.",
+      "expected_behavior": "Do not require payout == one invoice; reconcile the bundle.",
+      "actual_behavior": "Do not require payout == one invoice; reconcile the bundle."
+    },
+    {
+      "scenario_id": "stripe_many_txns_one_deposit",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-003A",
+          "INV-STR-003B"
+        ],
+        "net_cents": 97040,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-003A",
+          "INV-STR-003B"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Two customers' charges settle in one Stripe payout / bank deposit.",
+      "expected_behavior": "Aggregate by payout membership and match the deposit.",
+      "actual_behavior": "Aggregate by payout membership and match the deposit."
+    },
+    {
+      "scenario_id": "stripe_refund_before_payout",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_refund",
+        "invoices": [
+          "INV-STR-004"
+        ],
+        "net_cents": 38520,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-004"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "ar_refund",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "$500 charge, $100 refund before payout.",
+      "expected_behavior": "Keep original payment, book refund separately, reconcile reduced net.",
+      "actual_behavior": "Keep original payment, book refund separately, reconcile reduced net."
+    },
+    {
+      "scenario_id": "stripe_refund_after_payout",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_refund",
+        "invoices": [
+          "INV-STR-005"
+        ],
+        "net_cents": -75000,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-005"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "ar_refund",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Original $750 sale already paid out; later full refund reduces a future payout.",
+      "expected_behavior": "Refund payout differs from sale payout; history preserved.",
+      "actual_behavior": "Refund payout differs from sale payout; history preserved."
+    },
+    {
+      "scenario_id": "stripe_chargeback",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_dispute",
+        "invoices": [
+          "INV-STR-006"
+        ],
+        "net_cents": -81500,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-006"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "ar_dispute",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "$800 payment later charged back plus $15 dispute fee.",
+      "expected_behavior": "Do not treat the cash reduction as an unexplained bank break.",
+      "actual_behavior": "Do not treat the cash reduction as an unexplained bank break."
+    },
+    {
+      "scenario_id": "stripe_fee_variation",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-007"
+        ],
+        "net_cents": 192800,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-007"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "International / AMEX effective fee $72.00 on $2,000, not 2.9%+$0.30.",
+      "expected_behavior": "Use source fee facts; do not hard-code a universal rate.",
+      "actual_behavior": "Use source fee facts; do not hard-code a universal rate."
+    },
+    {
+      "scenario_id": "stripe_duplicate_event",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "idempotency",
+        "invoices": [
+          "INV-STR-001"
+        ],
+        "net_cents": 97070,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-001"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "idempotency",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Exact same payout.reconciliation_completed event delivered twice.",
+      "expected_behavior": "Idempotent: no second payment, journal, or reconciliation.",
+      "actual_behavior": "Idempotent: no second payment, journal, or reconciliation."
+    },
+    {
+      "scenario_id": "stripe_out_of_order",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-001"
+        ],
+        "net_cents": 97070,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-001"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Payout event arrives before charge and before balance-transaction release.",
+      "expected_behavior": "Eventually reach the correct canonical payout and AR state.",
+      "actual_behavior": "Eventually reach the correct canonical payout and AR state."
+    },
+    {
+      "scenario_id": "stripe_missing_metadata",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-010"
+        ],
+        "net_cents": 121345,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-010"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Stripe payment has no internal invoice ID; unique $1,250 Pinnacle invoice.",
+      "expected_behavior": "Match from customer + amount + description, not ID lookup alone.",
+      "actual_behavior": "Match from customer + amount + description, not ID lookup alone."
+    },
+    {
+      "scenario_id": "stripe_ambiguous_invoice",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-011A"
+        ],
+        "net_cents": 87360,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-011A"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Brightline has two $900 invoices; description is Q3 analytics retainer.",
+      "expected_behavior": "Use description context; do not pick an arbitrary invoice.",
+      "actual_behavior": "Use description context; do not pick an arbitrary invoice."
+    },
+    {
+      "scenario_id": "stripe_payout_with_refund",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-012A",
+          "INV-STR-012B"
+        ],
+        "net_cents": 77040,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-012A",
+          "INV-STR-012B"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "ar_refund",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Two successful charges plus a $200 refund in one payout.",
+      "expected_behavior": "Bank amount is not the sum of gross sales.",
+      "actual_behavior": "Bank amount is not the sum of gross sales."
+    },
+    {
+      "scenario_id": "stripe_payout_with_dispute",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-013A",
+          "INV-STR-013B"
+        ],
+        "net_cents": 51120,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-013A",
+          "INV-STR-013B"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "ar_dispute",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Successful charges plus a $250 chargeback and $15 fee in one payout.",
+      "expected_behavior": "Net settlement includes the dispute; not an unexplained break.",
+      "actual_behavior": "Net settlement includes the dispute; not an unexplained break."
+    },
+    {
+      "scenario_id": "stripe_bank_discrepancy_1240",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "cash_reconciliation_exception",
+        "invoices": [
+          "INV-STR-014"
+        ],
+        "net_cents": 1204010,
+        "recon": "MISMATCH",
+        "close": "BLOCK_CLOSE"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-014"
+        ],
+        "recon_status": "MISMATCH",
+        "close": "BLOCK_CLOSE",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Northstar Stripe payout bank deposit is short $12.40.",
+      "expected_behavior": "Identify the exact mismatch; do not invent an explanation; block close.",
+      "actual_behavior": "Identify the exact mismatch; do not invent an explanation; block close."
+    },
+    {
+      "scenario_id": "stripe_cross_period_timing",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-015"
+        ],
+        "net_cents": 213590,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-015"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Late-September charge settles in an October payout.",
+      "expected_behavior": "September AR history stays correct; cash timing follows October settlement.",
+      "actual_behavior": "September AR history stays correct; cash timing follows October settlement."
+    },
+    {
+      "scenario_id": "stripe_partial_payment",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-016"
+        ],
+        "net_cents": 58230,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-016"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "$600 Stripe payment against $1,800 Harbor invoice.",
+      "expected_behavior": "Partial apply; invoice remains open for the residual.",
+      "actual_behavior": "Partial apply; invoice remains open for the residual."
+    },
+    {
+      "scenario_id": "stripe_failed_then_retry",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-017"
+        ],
+        "net_cents": 62114,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-017"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "payment_failed",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Card fails, then the same invoice is paid on retry.",
+      "expected_behavior": "Failed intent posts no cash; retry applies once.",
+      "actual_behavior": "Failed intent posts no cash; retry applies once."
+    },
+    {
+      "scenario_id": "stripe_unmatched_order",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [],
+        "net_cents": 32013,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Orion Freight Stripe charge has no corresponding internal invoice.",
+      "expected_behavior": "Leave cash unapplied; do not invent an order.",
+      "actual_behavior": "Leave cash unapplied; do not invent an order."
+    },
+    {
+      "scenario_id": "stripe_bank_before_payout",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-001"
+        ],
+        "net_cents": 97070,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-001"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Bank deposit is visible before the payout webhook.",
+      "expected_behavior": "Eventually match using payout membership once Stripe arrives.",
+      "actual_behavior": "Eventually match using payout membership once Stripe arrives."
+    },
+    {
+      "scenario_id": "stripe_cross_period_memory",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-018B"
+        ],
+        "net_cents": 85418,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-018B"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Atlas has two $880 September invoices; metadata missing; August Stripe precedent is monthly platform fee.",
+      "expected_behavior": "Use prior-period Stripe precedent plus description; do not overwrite current facts.",
+      "actual_behavior": "Use prior-period Stripe precedent plus description; do not overwrite current facts."
+    },
+    {
+      "scenario_id": "stripe_overpayment",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-019"
+        ],
+        "net_cents": 106780,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-019"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "$1,100 Stripe payment against $950 named invoice.",
+      "expected_behavior": "Do not drop the residual; send overpayment to human review.",
+      "actual_behavior": "Do not drop the residual; send overpayment to human review."
+    },
+    {
+      "scenario_id": "stripe_multiple_payments_one_invoice",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "ar_cash_application",
+        "invoices": [
+          "INV-STR-021"
+        ],
+        "net_cents": 97040,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-021"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Harbor invoice $1,000 paid as two Stripe charges ($400 then $600) in one payout.",
+      "expected_behavior": "Apply both gross payments to INV-STR-021; bank cash is net of both fees.",
+      "actual_behavior": "Apply both gross payments to INV-STR-021; bank cash is net of both fees."
+    },
+    {
+      "scenario_id": "stripe_payout_before_bank",
+      "passed": true,
+      "checks": {
+        "workflow_routing": true,
+        "duplicate_event_suppression": true,
+        "payment_recorded": true,
+        "payment_to_invoice_matching": true,
+        "payout_to_bank_reconciliation": true,
+        "payout_composition": true,
+        "payout_net": true,
+        "fee_treatment": true,
+        "refund_treatment": true,
+        "dispute_treatment": true,
+        "gl_posting": true,
+        "ar_effect": true,
+        "customer_paid_gross": true,
+        "ar_distinct_from_settlement": true,
+        "journals_balanced": true,
+        "gl_gross_receipt": true,
+        "cross_workflow_consistency": true,
+        "unresolved_exception_precision": true,
+        "cross_period_memory": true,
+        "event_classification": true,
+        "auditability": true
+      },
+      "notes": [],
+      "expected": {
+        "workflow": "stripe_payout_reconciliation",
+        "invoices": [
+          "INV-STR-001"
+        ],
+        "net_cents": 97070,
+        "recon": "MATCH",
+        "close": "CLEAR"
+      },
+      "actual": {
+        "applied_invoices": [
+          "INV-STR-001"
+        ],
+        "recon_status": "MATCH",
+        "close": "CLEAR",
+        "routing": [
+          "ar_cash_application",
+          "stripe_payout_reconciliation"
+        ]
+      },
+      "input_condition": "Stripe payout webhook is processed before the company bank deposit is loaded.",
+      "expected_behavior": "Payout composition is known first; bank later matches 97070 cents.",
+      "actual_behavior": "Payout composition is known first; bank later matches 97070 cents."
+    }
+  ],
+  "metrics": {
+    "event_classification": 1.0,
+    "workflow_routing": 1.0,
+    "payment_to_invoice_matching": 1.0,
+    "payout_composition": 1.0,
+    "payout_to_bank_reconciliation": 1.0,
+    "fee_treatment": 1.0,
+    "refund_treatment": 1.0,
+    "dispute_treatment": 1.0,
+    "duplicate_event_suppression": 1.0,
+    "gl_posting": 1.0,
+    "ar_effect": 1.0,
+    "customer_paid_gross": 1.0,
+    "ar_distinct_from_settlement": 1.0,
+    "journals_balanced": 1.0,
+    "gl_gross_receipt": 1.0,
+    "cross_workflow_consistency": 1.0,
+    "unresolved_exception_precision": 1.0,
+    "cross_period_memory": 1.0,
+    "auditability": 1.0,
+    "end_to_end_scenario_pass_rate": 1.0,
+    "cases_total": 23,
+    "cases_passed": 23,
+    "cases_failed": 0
+  },
+  "passed": true
+}

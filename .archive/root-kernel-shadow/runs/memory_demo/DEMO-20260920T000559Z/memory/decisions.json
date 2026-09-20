@@ -1,0 +1,394 @@
+[
+  {
+    "decision_id": "DEC-2026-08-001",
+    "period": "2026-08",
+    "workflow": "cash_reconciliation",
+    "entity_type": "payment_provider",
+    "entity_id": "stripe",
+    "situation_type": "payout_difference",
+    "situation_summary": "Stripe payout was lower than gross receipts; difference 380.00 matched processor reductions.",
+    "evidence": [
+      {
+        "kind": "match_evidence",
+        "label": "provider:stripe",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "payout_id:po_mem_aug_001",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "gross:1000000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "stripe_fee:30000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "chargeback:8000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "refund:0",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "processor_reductions:38000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "reductions_equal_difference",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "bank_amount:962000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "ledger_amount:1000000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "bank_deposit",
+        "label": "bank_deposit",
+        "amount": 9620.0,
+        "amount_minor": 962000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "ledger_entry",
+        "label": "ledger_gross_or_net",
+        "amount": 10000.0,
+        "amount_minor": 1000000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "difference",
+        "label": "payout_difference",
+        "amount": -380.0,
+        "amount_minor": -38000,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "reconcile payout net of fees and chargebacks",
+    "reasoning_summary": "Bank deposit equals the processor net. Gross receipts minus fees, chargebacks, and refunds explain the difference exactly.",
+    "accounting_treatment": "net_payout_fees_and_chargebacks",
+    "outcome": "EXPLAINED_EXCEPTION",
+    "reusable_precedent": "Stripe payouts may arrive net of processing fees and chargebacks",
+    "source_trace_ids": [
+      "REC-001"
+    ],
+    "created_at": "2026-09-20T00:05:59Z",
+    "tags": [
+      "stripe",
+      "payout_difference",
+      "fees",
+      "chargebacks",
+      "cash_reconciliation"
+    ],
+    "idempotency_key": "3fde8f11c92cb8a2dc23b6ee2083b0097103c8dd3c6124dcfb822639a4ddfcc1",
+    "entity_name": "Stripe",
+    "accounting_category": "cash",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-001",
+    "period": "2026-09",
+    "workflow": "cash_reconciliation",
+    "entity_type": "payment_provider",
+    "entity_id": "stripe",
+    "situation_type": "payout_difference",
+    "situation_summary": "Stripe payout was lower than gross receipts; difference 540.00 matched processor reductions.",
+    "evidence": [
+      {
+        "kind": "match_evidence",
+        "label": "provider:stripe",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "payout_id:po_mem_sep_001",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "gross:1500000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "stripe_fee:39000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "chargeback:10000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "refund:5000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "processor_reductions:54000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "reductions_equal_difference",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "bank_amount:1446000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "ledger_amount:1500000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "bank_deposit",
+        "label": "bank_deposit",
+        "amount": 14460.0,
+        "amount_minor": 1446000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "ledger_entry",
+        "label": "ledger_gross_or_net",
+        "amount": 15000.0,
+        "amount_minor": 1500000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "difference",
+        "label": "payout_difference",
+        "amount": -540.0,
+        "amount_minor": -54000,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "reconcile payout net of fees and chargebacks",
+    "reasoning_summary": "Bank deposit equals the processor net. Gross receipts minus fees, chargebacks, and refunds explain the difference exactly.",
+    "accounting_treatment": "net_payout_fees_and_chargebacks",
+    "outcome": "EXPLAINED_EXCEPTION",
+    "reusable_precedent": "Stripe payouts may arrive net of processing fees and chargebacks",
+    "source_trace_ids": [
+      "REC-001"
+    ],
+    "created_at": "2026-09-20T00:05:59Z",
+    "tags": [
+      "stripe",
+      "payout_difference",
+      "fees",
+      "chargebacks",
+      "cash_reconciliation"
+    ],
+    "idempotency_key": "6bcdb5e43a4af75a682b2a64868d81265746a6f5ddb9c3d3d4d17bdaa913213c",
+    "entity_name": "Stripe",
+    "accounting_category": "cash",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-08-002",
+    "period": "2026-08",
+    "workflow": "prepaid",
+    "entity_type": "vendor",
+    "entity_id": "cloudco",
+    "situation_type": "prepaid_treatment",
+    "situation_summary": "CloudCo invoice covering 2026-08-01 to 2027-07-31 classified as straight_line_monthly.",
+    "evidence": [
+      {
+        "kind": "prepaid_item",
+        "label": "PRE-MEM-CLOUD-AUG",
+        "amount": 12000.0,
+        "amount_minor": null,
+        "reference": "DOC-CLOUD-AUG-2026",
+        "details": {}
+      },
+      {
+        "kind": "service_period",
+        "label": "2026-08-01:2027-07-31",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "document",
+        "label": "DOC-CLOUD-AUG-2026",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "document",
+        "label": "POLICY-PREPAID-001",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "straight_line_monthly",
+    "reasoning_summary": "Service period spans 2026-08-01 through 2027-07-31. Python selected straight_line_monthly.",
+    "accounting_treatment": "straight_line_monthly",
+    "outcome": "amortized",
+    "reusable_precedent": "CloudCo multi-month software or service invoices are prepaid and amortized; confirm the current coverage dates before reusing the method.",
+    "source_trace_ids": [
+      "PRE-MEM-CLOUD-AUG"
+    ],
+    "created_at": "2026-09-20T00:05:59Z",
+    "tags": [
+      "prepaid",
+      "cloudco",
+      "straight_line_monthly"
+    ],
+    "idempotency_key": "af7f0d3e27100645f9552ae61de6c3b79bf5e61ea9757bbe29c4f8a576f8ca3a",
+    "entity_name": "CloudCo",
+    "accounting_category": "prepaid_expense",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-002",
+    "period": "2026-09",
+    "workflow": "prepaid",
+    "entity_type": "vendor",
+    "entity_id": "cloudco",
+    "situation_type": "prepaid_treatment",
+    "situation_summary": "CloudCo invoice covering 2026-09-01 to 2027-08-31 classified as straight_line_monthly.",
+    "evidence": [
+      {
+        "kind": "prepaid_item",
+        "label": "PRE-MEM-CLOUD-SEP",
+        "amount": 14400.0,
+        "amount_minor": null,
+        "reference": "DOC-CLOUD-SEP-2026",
+        "details": {}
+      },
+      {
+        "kind": "service_period",
+        "label": "2026-09-01:2027-08-31",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "document",
+        "label": "DOC-CLOUD-SEP-2026",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "document",
+        "label": "POLICY-PREPAID-001",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "straight_line_monthly",
+    "reasoning_summary": "Service period spans 2026-09-01 through 2027-08-31. Python selected straight_line_monthly.",
+    "accounting_treatment": "straight_line_monthly",
+    "outcome": "amortized",
+    "reusable_precedent": "CloudCo multi-month software or service invoices are prepaid and amortized; confirm the current coverage dates before reusing the method.",
+    "source_trace_ids": [
+      "PRE-MEM-CLOUD-SEP"
+    ],
+    "created_at": "2026-09-20T00:05:59Z",
+    "tags": [
+      "prepaid",
+      "cloudco",
+      "straight_line_monthly"
+    ],
+    "idempotency_key": "35f05d8a4c8b2ef380260d995574cc74e53147cb87a491d16719b281e762bef0",
+    "entity_name": "CloudCo",
+    "accounting_category": "prepaid_expense",
+    "support_count": 1
+  }
+]

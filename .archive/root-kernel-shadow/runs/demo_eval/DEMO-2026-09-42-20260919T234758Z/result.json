@@ -1,0 +1,91 @@
+{
+  "run_id": "EVAL-2026-09-42-20260919T234758Z",
+  "data_root": "data/demo",
+  "period": "2026-09",
+  "seed": 42,
+  "cases_passed": 111,
+  "cases_failed": 0,
+  "cases_error": 0,
+  "pass_rate": 1.0,
+  "pass_rate_by_domain": {
+    "ap": 1.0,
+    "ar": 1.0,
+    "cash": 1.0,
+    "close": 1.0,
+    "audit": 1.0,
+    "reporting": 1.0,
+    "forecasting": 1.0,
+    "end_to_end": 1.0
+  },
+  "pass_rate_by_agent": {},
+  "close_success_or_blocker_correct": true,
+  "memory_dependent_case_success": true,
+  "handoff_success": true,
+  "ledger_tie_out": true,
+  "cross_workflow_consistency": true,
+  "output_dir": "/Users/rohandalal/Desktop/hackmit26/runs/demo_eval/DEMO-2026-09-42-20260919T234758Z/benchmark",
+  "extra_cases": [
+    {
+      "case_id": "DEMO-MEM-ALIAS",
+      "passed": true,
+      "expected": {
+        "precedent": "CASE-001",
+        "exception": "vendor_mismatch"
+      },
+      "actual": {
+        "alias": true,
+        "exceptions": [
+          "vendor_mismatch"
+        ]
+      }
+    },
+    {
+      "case_id": "DEMO-MEM-PRIOR",
+      "passed": true,
+      "expected": "CASE-001",
+      "actual": [
+        "CASE-001",
+        "CASE-002",
+        "CASE-003",
+        "CASE-004",
+        "CASE-005",
+        "CASE-006"
+      ]
+    },
+    {
+      "case_id": "DEMO-LEARN-PRECEDENT",
+      "passed": true,
+      "expected": "AR-PREC-003",
+      "actual": [
+        "AR-PREC-003"
+      ]
+    },
+    {
+      "case_id": "DEMO-AR-OVERPAY",
+      "passed": true,
+      "expected": "HUMAN_REVIEW",
+      "actual": "HUMAN_REVIEW"
+    },
+    {
+      "case_id": "DEMO-CLOSE-BLOCKED",
+      "passed": true,
+      "expected": "BLOCKED",
+      "actual": "BLOCKED"
+    },
+    {
+      "case_id": "DEMO-POST-CLOSE",
+      "passed": true,
+      "expected": "September stays open so a post-close control can still fire",
+      "actual": "BLOCKED"
+    },
+    {
+      "case_id": "DEMO-HANDOFF-AP",
+      "passed": true,
+      "expected": "APPROVE",
+      "actual": "APPROVE"
+    }
+  ],
+  "validation": "PASS",
+  "canonical_data_root": "/Users/rohandalal/Desktop/hackmit26/data/demo",
+  "runtime_copy": "/Users/rohandalal/Desktop/hackmit26/runs/demo_eval/DEMO-2026-09-42-20260919T234758Z/runtime"
+}

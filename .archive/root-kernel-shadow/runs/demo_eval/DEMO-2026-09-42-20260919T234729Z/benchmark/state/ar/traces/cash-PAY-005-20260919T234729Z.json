@@ -1,0 +1,121 @@
+{
+  "payment_id": "PAY-005",
+  "started_at": "2026-09-19T23:47:29Z",
+  "as_of_date": "2026-09-30",
+  "payment": {
+    "payment_id": "PAY-005",
+    "payment_date": "2026-09-29",
+    "amount": 3200.0,
+    "currency": "USD",
+    "payer_name": "Unknown Remitter",
+    "customer_id": null,
+    "bank_reference": "ACH-UNK-3200",
+    "remittance_text": "September ops",
+    "invoice_reference": null,
+    "source": "ach",
+    "unapplied_amount": 3200.0,
+    "application_status": "HUMAN_REVIEW",
+    "metadata": {}
+  },
+  "facts": {
+    "payment": {
+      "payment_id": "PAY-005",
+      "payment_date": "2026-09-29",
+      "amount": 3200.0,
+      "currency": "USD",
+      "payer_name": "Unknown Remitter",
+      "customer_id": null,
+      "bank_reference": "ACH-UNK-3200",
+      "remittance_text": "September ops",
+      "invoice_reference": null,
+      "source": "ach",
+      "unapplied_amount": 3200.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
+    },
+    "identified_customer_id": null,
+    "identified_customer_name": null,
+    "customer_confidence": 0.0,
+    "open_invoices": [],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "applications": [
+          {
+            "invoice_id": "INV-AR-012",
+            "amount": 3200.0
+          }
+        ],
+        "total_applied": 3200.0,
+        "unapplied_amount": 0.0,
+        "match_type": "global_exact_amount",
+        "score": 0.55,
+        "evidence": [
+          "Unidentified payer but only one open invoice equals 3200.0"
+        ],
+        "ambiguities": [
+          "Customer is not identified"
+        ]
+      }
+    ],
+    "remittance_invoice_ids": [],
+    "stale_invoice_ids": [],
+    "missing_invoice_ids": [],
+    "identity_conflicts": [],
+    "precedents": [],
+    "facts": [
+      "Payment PAY-005 3200.0 USD from Unknown Remitter",
+      "Remittance: September ops",
+      "Payer could not be identified"
+    ]
+  },
+  "preparer": {
+    "payment_id": "PAY-005",
+    "decision": "HUMAN_REVIEW",
+    "applications": [],
+    "confidence": 0.4,
+    "reason": "Customer cannot be identified from the payer name or remittance.",
+    "evidence_used": [
+      "Payment PAY-005 3200.0 USD from Unknown Remitter",
+      "Remittance: September ops",
+      "Payer could not be identified"
+    ],
+    "ambiguities": [
+      "Unidentified payer"
+    ],
+    "review_question": "Who sent this payment?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "validation": {
+    "passed": true,
+    "errors": []
+  },
+  "reviewer": null,
+  "final": {
+    "payment_id": "PAY-005",
+    "decision": "HUMAN_REVIEW",
+    "applications": [],
+    "confidence": 0.4,
+    "reason": "Customer cannot be identified from the payer name or remittance.",
+    "evidence_used": [
+      "Payment PAY-005 3200.0 USD from Unknown Remitter",
+      "Remittance: September ops",
+      "Payer could not be identified"
+    ],
+    "ambiguities": [
+      "Unidentified payer"
+    ],
+    "review_question": "Who sent this payment?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "posted": false,
+  "record": null,
+  "state_changes": [],
+  "journal_entries": [],
+  "agents": [],
+  "used_agent": false,
+  "already_posted": false,
+  "trace_path": null
+}
