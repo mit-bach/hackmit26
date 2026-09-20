@@ -1,0 +1,21 @@
+{
+  "from": "cash",
+  "to": "ctl-cash",
+  "toSlug": "ctl-cash",
+  "profile": "review-rec",
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "prompt": "profile: review-rec\nConcur or refuse bank-rec REC-002. Kernel status is HUMAN_REVIEW (UNMATCHED_LEDGER). Do not force MATCHED. Do not ask a human. Packet path is the evidence.",
+  "paths": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/cash-runs/packets/cash-rec-REC-002.json"
+  ],
+  "kernelStatus": "HUMAN_REVIEW",
+  "queueOwner": "ctl-cash",
+  "queue": {
+    "owner": "ctl-cash",
+    "profile": "review-rec"
+  },
+  "humanQueue": false,
+  "idempotencyKey": "cash:review-rec:2026-09:REC-002:HUMAN_REVIEW",
+  "createdAt": "2026-09-20T01:18:27Z"
+}

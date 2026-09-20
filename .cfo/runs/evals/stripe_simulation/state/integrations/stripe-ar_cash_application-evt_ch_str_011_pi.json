@@ -1,0 +1,72 @@
+{
+  "stripe_event_id": "evt_ch_str_011_pi",
+  "event_type": "payment_intent.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_011",
+  "decision": "AUTO_APPLY",
+  "invoice_ids": [
+    "INV-STR-011A"
+  ],
+  "posted": true,
+  "already_posted": false,
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_011-20260920T011826Z.json",
+  "reason": "Prior Stripe remittance pattern and current description uniquely support INV-STR-011A. Current-period facts were not overwritten.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [],
+  "duplicate": false,
+  "agent_record": {
+    "kind": "cash_apply",
+    "agent_invoked": false,
+    "agents": [
+      "Cash Application Agent"
+    ],
+    "decision_requested": "Choose AUTO_APPLY, HUMAN_REVIEW, or UNAPPLIED among Python candidates.",
+    "evidence": [
+      "Payment PAY-STR-CH_STR_011 900.0 USD from Brightline Media",
+      "Remittance: Q3 analytics retainer",
+      "Payment already tagged CUST-004"
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C3",
+        "match_type": "contextual_description",
+        "invoice_ids": [
+          "INV-STR-011A"
+        ]
+      },
+      {
+        "candidate_id": "C2",
+        "match_type": "exact_amount",
+        "invoice_ids": [
+          "INV-STR-011B"
+        ]
+      }
+    ],
+    "skills": [
+      "cash-application"
+    ],
+    "tools_called": [
+      "get_cash_application_facts",
+      "get_ar_customer"
+    ],
+    "llm_called": false,
+    "decision_fn": "policy_cash_decision",
+    "final_decision": "AUTO_APPLY",
+    "reason": "Prior Stripe remittance pattern and current description uniquely support INV-STR-011A. Current-period facts were not overwritten.",
+    "validations": [
+      "validate_proposal",
+      "post_application_balanced_journal"
+    ],
+    "validation_passed": true,
+    "downstream": {
+      "posted": true,
+      "invoice_ids": [
+        "INV-STR-011A"
+      ],
+      "precedent_used": [],
+      "precedent_affected": false
+    }
+  }
+}

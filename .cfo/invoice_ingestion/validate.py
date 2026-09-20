@@ -99,8 +99,6 @@ def existing_ap_match(vendor: str, invoice_number: str) -> str | None:
     wanted_vendor = normalize_vendor(vendor)
     wanted_number = invoice_number.strip().upper()
     for invoice in all_invoices():
-        if invoice.invoice_id.startswith("ING-"):
-            continue
         if (
             normalize_vendor(invoice.vendor) == wanted_vendor
             and invoice.vendor_invoice_number.strip().upper() == wanted_number

@@ -214,23 +214,6 @@ function emit(ctx: ApiContext, frame: { readonly kind: string; readonly [key: st
   ctx.bus?.publish(frame);
 }
 
-function asOperatorMessage(row: {
-  readonly id: string;
-  readonly text: string;
-  readonly handleId?: string;
-  readonly role: OperatorMessage["role"];
-}): OperatorMessage {
-  return {
-    id: row.id,
-    at: new Date().toISOString(),
-    role: row.role,
-    kind: "text",
-    text: row.text,
-    handleId: row.handleId,
-    from: row.role === "user" ? "operator" : undefined,
-  };
-}
-
 function fail(error: unknown): { readonly status: number; readonly body: unknown } {
   const message = error instanceof Error ? error.message : String(error);
   const status = message === "path escape" || message === "not a file" || message === "not a text file" || message === "file too large" ? 400 : 500;
@@ -300,19 +283,7 @@ export async function handleOperatorApi(
         prompt: text,
         kind: "user_dm",
       });
-      if (sent.accepted && sent.handleId) {
-        emit(ctx, {
-          kind: "message",
-          threadId: bot.id,
-          message: asOperatorMessage({
-            id: sent.handleId,
-            text,
-            handleId: sent.handleId,
-            role: "user",
-          }),
-        });
-      }
-      emit(ctx, { kind: "bot", bot: toOperatorBot(computerRoot, bot, index) });
+      emit(ctx, { kind: "bot", bot: { ...toOperatorBot(computerRoot, bot, index), computer: "off" } });
       return { status: 200, body: sent };
     }
     if (method === "POST" && (rest === "/interrupt" || rest === "/stop")) {
@@ -324,7 +295,7 @@ export async function handleOperatorApi(
         kind: "user_stop",
         onBusy: "supersede",
       });
-      emit(ctx, { kind: "bot", bot: toOperatorBot(computerRoot, bot, index) });
+      emit(ctx, { kind: "bot", bot: { ...toOperatorBot(computerRoot, bot, index), computer: "off" } });
       return { status: 200, body: stopped };
     }
     if (method === "POST" && rest === "/spawn") {

@@ -1,0 +1,21 @@
+{
+  "from": "apply",
+  "to": "ctl-cash",
+  "toSlug": "ctl-cash",
+  "profile": "review-apply",
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "prompt": "profile: review-apply\nConcur or refuse cash application for PAY-STR-CH_STR_019. Packet path is the evidence. Kernel status is HUMAN_REVIEW. Do not AUTO_APPLY past a Kernel refuse. Do not ask a human.",
+  "paths": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/packets/apply-PAY-STR-CH_STR_019.json"
+  ],
+  "kernelStatus": "HUMAN_REVIEW",
+  "queueOwner": "ctl-cash",
+  "queue": {
+    "owner": "ctl-cash",
+    "profile": "review-apply"
+  },
+  "humanQueue": false,
+  "idempotencyKey": "apply:PAY-STR-CH_STR_019:HUMAN_REVIEW",
+  "createdAt": "2026-09-20T01:18:28Z"
+}

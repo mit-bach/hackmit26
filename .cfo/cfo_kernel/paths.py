@@ -91,6 +91,8 @@ def attach_computer(root: Path) -> Computer:
     cfo.mkdir(parents=True, exist_ok=True)
     (cfo / "idempotency").mkdir(parents=True, exist_ok=True)
     (runs / "ingestion").mkdir(parents=True, exist_ok=True)
+    (runs / "inbox").mkdir(parents=True, exist_ok=True)
+    (runs / "ap").mkdir(parents=True, exist_ok=True)
     (runs / "cash_recon" / "cases").mkdir(parents=True, exist_ok=True)
     (runs / "bs_recon" / "packets").mkdir(parents=True, exist_ok=True)
     (runs / "accruals").mkdir(parents=True, exist_ok=True)
@@ -127,6 +129,11 @@ def _remap_kernel(data: Path, runs: Path) -> None:
     from reporting.ledger import configure_data_reporting, configure_paths as configure_reporting_ledger
     from reporting.store import configure_paths as configure_reporting_store
     from tools import configure_data_dir, configure_overlay_path
+
+    try:
+        from inbox.store import configure_runs_dir as configure_inbox
+    except ImportError:
+        configure_inbox = None
 
     import ar.store as ar_store
     import accrual.workflow as accrual_workflow
@@ -166,6 +173,8 @@ def _remap_kernel(data: Path, runs: Path) -> None:
     configure_accrual_ledger(runs / "accruals")
     configure_overlay_path(runs / "ingestion" / "overlay.json")
     configure_registry(runs / "ingestion")
+    if configure_inbox is not None:
+        configure_inbox(runs / "inbox")
     configure_case_dir(runs / "cash_recon" / "cases")
     configure_packet_store(runs / "bs_recon" / "packets")
 

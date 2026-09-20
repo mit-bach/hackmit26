@@ -1,0 +1,46 @@
+{
+  "stripe_event_id": "evt_dp_str_006",
+  "event_type": "charge.dispute.created",
+  "workflow": "ar_dispute",
+  "status": "processed",
+  "event_id": "AR-EVT-0003",
+  "journal_entry_ids": [
+    "AR-JE-003",
+    "AR-JE-004"
+  ],
+  "payment_id": "PAY-STR-CH_STR_006",
+  "invoice_ids": [
+    "INV-STR-006"
+  ],
+  "amount": 800.0,
+  "fee_amount": 15.0,
+  "agent_record": {
+    "kind": "dispute_link",
+    "agent_invoked": false,
+    "agents": [],
+    "decision_requested": "Link dispute to original Stripe charge/payment; do not treat later payout as unexplained.",
+    "evidence": [
+      "dispute_id=dp_str_006",
+      "charge_id=ch_str_006",
+      "payment_id=PAY-STR-CH_STR_006"
+    ],
+    "skills": [],
+    "tools_called": [
+      "find_payment_for_stripe"
+    ],
+    "llm_called": false,
+    "decision_fn": "find_payment_for_stripe",
+    "final_decision": "processed",
+    "validations": [
+      "dispute_cents",
+      "duplicate_stripe_dispute_id"
+    ],
+    "downstream": {
+      "invoice_ids": [
+        "INV-STR-006"
+      ],
+      "amount": 800.0,
+      "fee_amount": 15.0
+    }
+  }
+}

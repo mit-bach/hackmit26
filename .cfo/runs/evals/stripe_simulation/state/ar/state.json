@@ -1,0 +1,1015 @@
+{
+  "invoices": {
+    "INV-STR-001": {
+      "invoice_id": "INV-STR-001",
+      "customer_id": "CUST-001",
+      "customer_name": "Northwind Labs",
+      "invoice_date": "2026-09-01",
+      "due_date": "2026-09-30",
+      "original_amount": 1000.0,
+      "outstanding_amount": 0.0,
+      "currency": "USD",
+      "status": "PAID",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-001",
+      "description": "September platform subscription",
+      "created_at": "",
+      "last_payment_date": "2026-09-03",
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-002A": {
+      "invoice_id": "INV-STR-002A",
+      "customer_id": "CUST-002",
+      "customer_name": "Helios Analytics",
+      "invoice_date": "2026-09-02",
+      "due_date": "2026-09-30",
+      "original_amount": 1000.0,
+      "outstanding_amount": 1000.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-002A",
+      "description": "Helios workspace A",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-002B": {
+      "invoice_id": "INV-STR-002B",
+      "customer_id": "CUST-002",
+      "customer_name": "Helios Analytics",
+      "invoice_date": "2026-09-02",
+      "due_date": "2026-09-30",
+      "original_amount": 1500.0,
+      "outstanding_amount": 1500.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-002B",
+      "description": "Helios workspace B AMEX",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-002C": {
+      "invoice_id": "INV-STR-002C",
+      "customer_id": "CUST-002",
+      "customer_name": "Helios Analytics",
+      "invoice_date": "2026-09-02",
+      "due_date": "2026-09-30",
+      "original_amount": 500.0,
+      "outstanding_amount": 500.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-002C",
+      "description": "Helios add-on seats",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-003A": {
+      "invoice_id": "INV-STR-003A",
+      "customer_id": "CUST-001",
+      "customer_name": "Northwind Labs",
+      "invoice_date": "2026-09-05",
+      "due_date": "2026-10-05",
+      "original_amount": 600.0,
+      "outstanding_amount": 600.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-003A",
+      "description": "Northwind analytics pack",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-003B": {
+      "invoice_id": "INV-STR-003B",
+      "customer_id": "CUST-006",
+      "customer_name": "Pinnacle Retail",
+      "invoice_date": "2026-09-05",
+      "due_date": "2026-10-05",
+      "original_amount": 400.0,
+      "outstanding_amount": 400.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-003B",
+      "description": "Pinnacle POS module",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-004": {
+      "invoice_id": "INV-STR-004",
+      "customer_id": "CUST-003",
+      "customer_name": "Acme Industrial",
+      "invoice_date": "2026-09-06",
+      "due_date": "2026-10-06",
+      "original_amount": 500.0,
+      "outstanding_amount": 500.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-004",
+      "description": "Acme spare parts",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-005": {
+      "invoice_id": "INV-STR-005",
+      "customer_id": "CUST-003",
+      "customer_name": "Acme Industrial",
+      "invoice_date": "2026-09-07",
+      "due_date": "2026-10-07",
+      "original_amount": 750.0,
+      "outstanding_amount": 750.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-005",
+      "description": "Acme tooling",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-006": {
+      "invoice_id": "INV-STR-006",
+      "customer_id": "CUST-005",
+      "customer_name": "Orbit Health",
+      "invoice_date": "2026-09-08",
+      "due_date": "2026-10-08",
+      "original_amount": 800.0,
+      "outstanding_amount": 800.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-006",
+      "description": "Orbit implementation",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-007": {
+      "invoice_id": "INV-STR-007",
+      "customer_id": "CUST-011",
+      "customer_name": "Lumen Labs",
+      "invoice_date": "2026-09-09",
+      "due_date": "2026-10-09",
+      "original_amount": 2000.0,
+      "outstanding_amount": 2000.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-007",
+      "description": "Lumen international wire replacement",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-010": {
+      "invoice_id": "INV-STR-010",
+      "customer_id": "CUST-006",
+      "customer_name": "Pinnacle Retail",
+      "invoice_date": "2026-09-10",
+      "due_date": "2026-10-10",
+      "original_amount": 1250.0,
+      "outstanding_amount": 1250.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-010",
+      "description": "Pinnacle autumn restock",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-011A": {
+      "invoice_id": "INV-STR-011A",
+      "customer_id": "CUST-004",
+      "customer_name": "Brightline Media",
+      "invoice_date": "2026-09-04",
+      "due_date": "2026-10-04",
+      "original_amount": 900.0,
+      "outstanding_amount": 900.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-011A",
+      "description": "Q3 analytics retainer",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-011B": {
+      "invoice_id": "INV-STR-011B",
+      "customer_id": "CUST-004",
+      "customer_name": "Brightline Media",
+      "invoice_date": "2026-09-12",
+      "due_date": "2026-10-12",
+      "original_amount": 900.0,
+      "outstanding_amount": 900.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-011B",
+      "description": "Brand studio sprint",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-012A": {
+      "invoice_id": "INV-STR-012A",
+      "customer_id": "CUST-002",
+      "customer_name": "Helios Analytics",
+      "invoice_date": "2026-09-14",
+      "due_date": "2026-10-14",
+      "original_amount": 700.0,
+      "outstanding_amount": 700.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-012A",
+      "description": "Helios refundable workshop",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-012B": {
+      "invoice_id": "INV-STR-012B",
+      "customer_id": "CUST-002",
+      "customer_name": "Helios Analytics",
+      "invoice_date": "2026-09-14",
+      "due_date": "2026-10-14",
+      "original_amount": 300.0,
+      "outstanding_amount": 300.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-012B",
+      "description": "Helios extra seats",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-013A": {
+      "invoice_id": "INV-STR-013A",
+      "customer_id": "CUST-005",
+      "customer_name": "Orbit Health",
+      "invoice_date": "2026-09-16",
+      "due_date": "2026-10-16",
+      "original_amount": 550.0,
+      "outstanding_amount": 550.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-013A",
+      "description": "Orbit monitoring",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-013B": {
+      "invoice_id": "INV-STR-013B",
+      "customer_id": "CUST-005",
+      "customer_name": "Orbit Health",
+      "invoice_date": "2026-09-16",
+      "due_date": "2026-10-16",
+      "original_amount": 250.0,
+      "outstanding_amount": 250.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-013B",
+      "description": "Orbit alerts pack",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-014": {
+      "invoice_id": "INV-STR-014",
+      "customer_id": "CUST-009",
+      "customer_name": "Northstar LLC",
+      "invoice_date": "2026-09-01",
+      "due_date": "2026-09-30",
+      "original_amount": 12400.0,
+      "outstanding_amount": 12400.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-014",
+      "description": "Northstar platform",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-015": {
+      "invoice_id": "INV-STR-015",
+      "customer_id": "CUST-001",
+      "customer_name": "Northwind Labs",
+      "invoice_date": "2026-09-29",
+      "due_date": "2026-10-29",
+      "original_amount": 2200.0,
+      "outstanding_amount": 2200.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-015",
+      "description": "Late September expansion",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-016": {
+      "invoice_id": "INV-STR-016",
+      "customer_id": "CUST-012",
+      "customer_name": "Harbor Electric",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "original_amount": 1800.0,
+      "outstanding_amount": 1800.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-016",
+      "description": "Harbor field service",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-017": {
+      "invoice_id": "INV-STR-017",
+      "customer_id": "CUST-008",
+      "customer_name": "Summit Logistics",
+      "invoice_date": "2026-09-19",
+      "due_date": "2026-10-19",
+      "original_amount": 640.0,
+      "outstanding_amount": 640.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-017",
+      "description": "Summit retry shipment",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-018A": {
+      "invoice_id": "INV-STR-018A",
+      "customer_id": "CUST-010",
+      "customer_name": "Atlas Systems",
+      "invoice_date": "2026-08-20",
+      "due_date": "2026-09-19",
+      "original_amount": 880.0,
+      "outstanding_amount": 0.0,
+      "currency": "USD",
+      "status": "PAID",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "monthly platform fee",
+      "description": "Atlas August platform fee",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-018B": {
+      "invoice_id": "INV-STR-018B",
+      "customer_id": "CUST-010",
+      "customer_name": "Atlas Systems",
+      "invoice_date": "2026-09-20",
+      "due_date": "2026-10-20",
+      "original_amount": 880.0,
+      "outstanding_amount": 880.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "monthly platform fee",
+      "description": "Atlas September platform fee",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-018C": {
+      "invoice_id": "INV-STR-018C",
+      "customer_id": "CUST-010",
+      "customer_name": "Atlas Systems",
+      "invoice_date": "2026-09-21",
+      "due_date": "2026-10-21",
+      "original_amount": 880.0,
+      "outstanding_amount": 880.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "professional services",
+      "description": "Atlas one-off professional services",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-019": {
+      "invoice_id": "INV-STR-019",
+      "customer_id": "CUST-012",
+      "customer_name": "Harbor Electric",
+      "invoice_date": "2026-09-21",
+      "due_date": "2026-10-21",
+      "original_amount": 950.0,
+      "outstanding_amount": 950.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-019",
+      "description": "Harbor overpayment case",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    },
+    "INV-STR-021": {
+      "invoice_id": "INV-STR-021",
+      "customer_id": "CUST-012",
+      "customer_name": "Harbor Electric",
+      "invoice_date": "2026-09-22",
+      "due_date": "2026-10-22",
+      "original_amount": 1000.0,
+      "outstanding_amount": 1000.0,
+      "currency": "USD",
+      "status": "OPEN",
+      "payment_terms": "net 30",
+      "purchase_order": null,
+      "reference": "ORD-STR-021",
+      "description": "Harbor multi-payment install",
+      "created_at": "",
+      "last_payment_date": null,
+      "last_collection_contact": null,
+      "reminder_count": 0,
+      "collection_status": "NONE",
+      "dispute_status": "NONE",
+      "dispute_reason": "",
+      "promised_pay_date": null,
+      "metadata": {
+        "source": "stripe_simulation"
+      }
+    }
+  },
+  "payments": {
+    "PAY-STR-CH_STR_001": {
+      "payment_id": "PAY-STR-CH_STR_001",
+      "payment_date": "2026-09-03",
+      "amount": 1000.0,
+      "currency": "USD",
+      "payer_name": "Northwind Labs",
+      "customer_id": null,
+      "bank_reference": "ch_str_001",
+      "remittance_text": "INV-STR-001 September platform subscription INV-STR-001",
+      "invoice_reference": "INV-STR-001",
+      "source": "stripe",
+      "unapplied_amount": 0.0,
+      "application_status": "APPLIED",
+      "metadata": {
+        "stripe_charge_id": "ch_str_001",
+        "stripe_payment_intent_id": "pi_str_001",
+        "stripe_balance_transaction_id": "txn_str_001",
+        "stripe_event_type": "payment_intent.succeeded",
+        "customer_name": "Northwind Labs",
+        "invoice_id": "INV-STR-001",
+        "order_id": "INV-STR-001",
+        "apply_drained_as_of": "2026-09-30"
+      }
+    }
+  },
+  "applications": [
+    {
+      "application_id": "AR-APP-001",
+      "payment_id": "PAY-STR-CH_STR_001",
+      "applications": [
+        {
+          "invoice_id": "INV-STR-001",
+          "amount": 1000.0
+        }
+      ],
+      "total_applied": 1000.0,
+      "unapplied_amount": 0.0,
+      "decision": "AUTO_APPLY",
+      "status": "APPLIED",
+      "posted": true,
+      "invoice_changes": [
+        {
+          "invoice_id": "INV-STR-001",
+          "previous_outstanding": 1000.0,
+          "applied_amount": 1000.0,
+          "new_outstanding": 0.0,
+          "previous_status": "OPEN",
+          "new_status": "PAID"
+        }
+      ],
+      "journal_entry_ids": [
+        "AR-JE-001"
+      ],
+      "created_at": "2026-09-20T01:18:29Z",
+      "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance."
+    }
+  ],
+  "outbox": [],
+  "events": [
+    {
+      "event_id": "AR-EVT-0001",
+      "event_type": "cash_applied",
+      "created_at": "2026-09-20T01:18:29Z",
+      "payment_id": "PAY-STR-CH_STR_001",
+      "invoice_ids": [
+        "INV-STR-001"
+      ],
+      "summary": "Applied PAY-STR-CH_STR_001 $1,000.00 to INV-STR-001",
+      "details": {
+        "applications": [
+          {
+            "invoice_id": "INV-STR-001",
+            "amount": 1000.0
+          }
+        ],
+        "unapplied_amount": 0.0,
+        "journal_entry_ids": [
+          "AR-JE-001"
+        ],
+        "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+        "evidence_used": [
+          "Payment PAY-STR-CH_STR_001 1000.0 USD from Northwind Labs",
+          "Remittance: INV-STR-001 September platform subscription INV-STR-001",
+          "Payer 'Northwind Labs' matches 'Northwind Labs'",
+          "Remittance invoice references: INV-STR-001",
+          "Remittance names INV-STR-001"
+        ],
+        "precedent_used": [],
+        "precedent_affected": false
+      }
+    },
+    {
+      "event_id": "AR-EVT-0002",
+      "event_type": "stripe_fee",
+      "created_at": "2026-09-20T01:18:29Z",
+      "payment_id": null,
+      "invoice_ids": [],
+      "summary": "Stripe processor fee for payout po_str_001",
+      "details": {
+        "payout_id": "po_str_001",
+        "fee_amount": 29.3,
+        "journal_entry_ids": [
+          "AR-JE-002"
+        ]
+      }
+    }
+  ],
+  "precedents": [
+    {
+      "precedent_id": "AR-PREC-STR-ATLAS-AUG",
+      "customer_id": "CUST-010",
+      "kind": "stripe_metadata",
+      "summary": "Atlas Systems typically remits Stripe invoice references (INV-STR-018A) with description 'Atlas August platform fee monthly platform fee'.",
+      "facts": {
+        "invoice_ids": [
+          "INV-STR-018A"
+        ],
+        "description": "Atlas August platform fee monthly platform fee",
+        "source": "stripe",
+        "amount": 880.0
+      },
+      "source": "stripe",
+      "support_count": 2,
+      "source_payment_id": "PAY-STR-CH_STR_mem_aug",
+      "source_review_id": null
+    }
+  ],
+  "journals": [
+    {
+      "entry_id": "AR-JE-001",
+      "period": "2026-09",
+      "counterparty": "Northwind Labs",
+      "memo": "Apply PAY-STR-CH_STR_001 to INV-STR-001",
+      "debit": {
+        "account": "Cash",
+        "amount": 1000.0
+      },
+      "credit": {
+        "account": "Accounts Receivable",
+        "amount": 1000.0
+      },
+      "entry_type": "cash_receipt",
+      "related_payment_id": "PAY-STR-CH_STR_001",
+      "related_invoice_ids": [
+        "INV-STR-001"
+      ],
+      "created_at": "2026-09-20T01:18:29Z"
+    },
+    {
+      "entry_id": "AR-JE-002",
+      "period": "2026-09",
+      "counterparty": "Stripe",
+      "memo": "Stripe processor fee for payout po_str_001",
+      "debit": {
+        "account": "Stripe Processing Fees",
+        "amount": 29.3
+      },
+      "credit": {
+        "account": "Cash",
+        "amount": 29.3
+      },
+      "entry_type": "processor_fee",
+      "related_payment_id": "po_str_001",
+      "related_invoice_ids": [],
+      "created_at": "2026-09-20T01:18:29Z"
+    }
+  ],
+  "human_corrections": [],
+  "reviews": [],
+  "customers": {
+    "CUST-001": {
+      "customer_id": "CUST-001",
+      "customer_name": "Northwind Labs",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Pays via Stripe with invoice metadata.",
+      "aliases": [
+        "Northwnd Labs"
+      ]
+    },
+    "CUST-002": {
+      "customer_id": "CUST-002",
+      "customer_name": "Helios Analytics",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Several September charges settle together.",
+      "aliases": [
+        "Helios Analytic"
+      ]
+    },
+    "CUST-003": {
+      "customer_id": "CUST-003",
+      "customer_name": "Acme Industrial",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Refund activity.",
+      "aliases": [
+        "Acme Inc."
+      ]
+    },
+    "CUST-004": {
+      "customer_id": "CUST-004",
+      "customer_name": "Brightline Media",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Two similar retainers.",
+      "aliases": []
+    },
+    "CUST-005": {
+      "customer_id": "CUST-005",
+      "customer_name": "Orbit Health",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Chargeback risk.",
+      "aliases": []
+    },
+    "CUST-006": {
+      "customer_id": "CUST-006",
+      "customer_name": "Pinnacle Retail",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Sometimes omits invoice metadata.",
+      "aliases": []
+    },
+    "CUST-008": {
+      "customer_id": "CUST-008",
+      "customer_name": "Summit Logistics",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Failed card then retry.",
+      "aliases": []
+    },
+    "CUST-009": {
+      "customer_id": "CUST-009",
+      "customer_name": "Northstar LLC",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Known $12.40 bank break story.",
+      "aliases": []
+    },
+    "CUST-010": {
+      "customer_id": "CUST-010",
+      "customer_name": "Atlas Systems",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "stripe_metadata",
+      "currency": "USD",
+      "notes": "Historical Stripe metadata payer.",
+      "aliases": []
+    },
+    "CUST-011": {
+      "customer_id": "CUST-011",
+      "customer_name": "Lumen Labs",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "AMEX fee variation.",
+      "aliases": []
+    },
+    "CUST-012": {
+      "customer_id": "CUST-012",
+      "customer_name": "Harbor Electric",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "Partial and multi-payment.",
+      "aliases": []
+    },
+    "CUST-013": {
+      "customer_id": "CUST-013",
+      "customer_name": "Orion Freight",
+      "payment_behavior": "on_time",
+      "on_time_rate": 0.8,
+      "average_days_late": 0,
+      "strategic": false,
+      "risk_flag": "",
+      "typical_remittance": "invoice_number",
+      "currency": "USD",
+      "notes": "No matching internal order.",
+      "aliases": []
+    }
+  },
+  "aliases": {}
+}

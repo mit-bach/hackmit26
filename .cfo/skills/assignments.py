@@ -10,9 +10,16 @@ from skills.loader import list_skill_names, load_skill
 
 # Agent display names must match Agent.name / SOURCE_AGENTS values.
 AGENT_SKILLS: dict[str, tuple[str, ...]] = {
+    "Counterparty Message Agent": (),
+    "Finance Inbox Agent": (
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+    ),
     "Email Invoice Agent": (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "inbox-triage",
     ),
     "ERP Invoice Agent": (),
     "Procurement Invoice Agent": ("invoice-source-identification",),

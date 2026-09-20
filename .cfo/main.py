@@ -164,6 +164,9 @@ def _usage() -> int:
     print("       python main.py close finalize --period 2026-09")
     print("       python main.py demo-close [period]")
     print("       python main.py ingest [period] [--no-ap] [--llm] [--replay-check]")
+    print("       python main.py demo-inbox [--full] [--reset]")
+    print("       python main.py simulate-stripe")
+    print("       python main.py eval-stripe")
     print("       python main.py integration-demo")
     print("       python main.py stripe-demo")
     print("       python main.py integrations status")
@@ -597,6 +600,26 @@ def main() -> int:
         from invoice_ingestion.demo import run_demo
 
         return run_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"demo-inbox", "inbox-demo", "demo_inbox"}:
+        from inbox.cli import run_demo_inbox_cli
+
+        return run_demo_inbox_cli(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"simulate-stripe", "simulate_stripe"}:
+        from simulations.stripe.cli import run_simulate
+
+        return run_simulate(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-stripe", "eval_stripe"}:
+        from simulations.stripe.cli import run_eval
+
+        return run_eval(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-stripe-modes", "eval_stripe_modes"}:
+        from simulations.stripe.cli import run_eval_modes
+
+        return run_eval_modes(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"integration-demo", "integrations-demo"}:
         from integrations.demo import run_integration_demo

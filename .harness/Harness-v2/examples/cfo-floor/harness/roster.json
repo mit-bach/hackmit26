@@ -69,12 +69,23 @@
     {
       "id": "floor",
       "title": "Floor",
-      "members": ["ingest", "ap", "ar", "cash", "close", "audit"]
+      "members": [
+        "ingest",
+        "ap",
+        "ar",
+        "cash",
+        "close",
+        "audit"
+      ]
     },
     {
       "id": "pay",
       "title": "Pay cycle",
-      "members": ["ingest", "ap", "cash"]
+      "members": [
+        "ingest",
+        "ap",
+        "cash"
+      ]
     }
   ],
   "routines": [

@@ -101,9 +101,22 @@ Each lands on the owning Bot inbox with `conversation` `room:<roomId>`.
 python3 main.py evaluate-cfo
 ```
 
-Operational phase cannot open `expected_results.json` or `ground_truth.json`. Production Grants omit `get_audit_ground_truth`.
+Operational phase cannot open `expected_results.json` or `ground_truth.json`. Production Grants omit `get_audit_ground_truth`. Stripe simulation ground truth lives under `.cfo/data/simulations/stripe/evaluation/` and is eval-only.
 
-## 6. Close demo (honest $12.40)
+## 6. Inbox and Stripe simulation (Kernel, not extra Bots)
+
+These come from Rohan's `durable-inbox-ap-persistence` branch. They feed Bot `email` and Bot `stripe`. They are not a sixteenth Bot.
+
+```bash
+python3 main.py demo-inbox
+python3 main.py simulate-stripe
+```
+
+`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`.
+
+`simulate-stripe` unpacks payout waterfalls in Python. `invoice_candidates` stays 0. Bot `stripe` still has empty constructor Grants.
+
+## 7. Close demo (honest $12.40)
 
 ```bash
 python3 main.py close-month --month 2026-09 --seed-demo --deterministic

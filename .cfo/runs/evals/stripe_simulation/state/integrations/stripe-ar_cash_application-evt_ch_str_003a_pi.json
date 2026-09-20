@@ -1,0 +1,66 @@
+{
+  "stripe_event_id": "evt_ch_str_003a_pi",
+  "event_type": "payment_intent.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_003A",
+  "decision": "AUTO_APPLY",
+  "invoice_ids": [
+    "INV-STR-003A"
+  ],
+  "posted": true,
+  "already_posted": false,
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_003A-20260920T011823Z.json",
+  "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [],
+  "duplicate": false,
+  "agent_record": {
+    "kind": "cash_apply",
+    "agent_invoked": false,
+    "agents": [
+      "Cash Application Agent"
+    ],
+    "decision_requested": "Choose AUTO_APPLY, HUMAN_REVIEW, or UNAPPLIED among Python candidates.",
+    "evidence": [
+      "Payment PAY-STR-CH_STR_003A 600.0 USD from Northwind Labs",
+      "Remittance: INV-STR-003A Northwind analytics pack INV-STR-003A",
+      "Payer 'Northwind Labs' matches 'Northwind Labs'",
+      "Remittance invoice references: INV-STR-003A"
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "match_type": "explicit_invoice",
+        "invoice_ids": [
+          "INV-STR-003A"
+        ]
+      }
+    ],
+    "skills": [
+      "cash-application"
+    ],
+    "tools_called": [
+      "get_cash_application_facts",
+      "get_ar_customer"
+    ],
+    "llm_called": false,
+    "decision_fn": "policy_cash_decision",
+    "final_decision": "AUTO_APPLY",
+    "reason": "Invoice is explicitly named and the amount is valid against the outstanding balance.",
+    "validations": [
+      "validate_proposal",
+      "post_application_balanced_journal"
+    ],
+    "validation_passed": true,
+    "downstream": {
+      "posted": true,
+      "invoice_ids": [
+        "INV-STR-003A"
+      ],
+      "precedent_used": [],
+      "precedent_affected": false
+    }
+  }
+}

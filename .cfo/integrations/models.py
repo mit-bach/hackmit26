@@ -128,5 +128,7 @@ class IntegrationResult(BaseModel):
     classification: Optional[str] = None
     payout_id: Optional[str] = None
     payout_amount: Optional[float] = None
+    payment_id: Optional[str] = None
+    workflow: Optional[str] = None
     message: str = ""
     details: dict[str, Any] = Field(default_factory=dict)

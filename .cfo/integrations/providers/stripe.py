@@ -14,6 +14,17 @@ from typing import Any
 from integrations.cash import classify_line, major_units, reconcile_payout
 from integrations.models import IntegrationResult, PayoutLine, ProviderPayout, WebhookEvent
 from integrations.providers.base import env, fixture_dir, live_mode, load_json
+from integrations.router import (
+    WORKFLOW_DISPUTE,
+    WORKFLOW_DUPLICATE,
+    WORKFLOW_IGNORED,
+    WORKFLOW_PAYMENT,
+    WORKFLOW_PAYMENT_FAILED,
+    WORKFLOW_PAYOUT,
+    WORKFLOW_REFUND,
+    classify_reconciliation_exception,
+    classify_stripe_event,
+)
 from integrations.store import (
     all_payouts,
     all_reconciliations,
@@ -371,7 +382,7 @@ def event_id(payload: dict) -> str:
 
 
 def _should_load_transactions(event_type: str, provider: StripeProvider, payout_id: str) -> bool:
-    if isinstance(provider, MockStripeProvider):
+    if isinstance(provider, MockStripeProvider) or getattr(provider, "mode", "") == "mock":
         return True
     if event_type in READY_TXN_EVENTS:
         return True
@@ -440,7 +451,92 @@ def ingest_payout(
     payout = remember_payout(normalize_payout(envelope, lines, bank=bank))
     breakdown = reconcile_payout(payout)
     _, is_new = remember_reconciliation(breakdown)
+    if breakdown.fees:
+        from ar.stripe_intake import apply_payout_fee
+
+        fee_date = payout.arrival_date or datetime.now(timezone.utc).date().isoformat()
+        apply_payout_fee(payout.payout_id, abs(breakdown.fees), fee_date)
     return payout, breakdown, is_new
+
+
+def _process_routed_event(payload: dict, *, stored: WebhookEvent, workflow: str) -> IntegrationResult:
+    from ar.stripe_intake import apply_stripe_dispute, apply_stripe_payment, apply_stripe_refund
+    from close.context import remember_link
+
+    obj = payload.get("data", {}).get("object") or {}
+    event_type = str(payload.get("type") or "")
+    eid = event_id(payload)
+    try:
+        if workflow == WORKFLOW_PAYMENT:
+            outcome = apply_stripe_payment(obj, event_type=event_type)
+        elif workflow == WORKFLOW_REFUND:
+            outcome = apply_stripe_refund(obj, event_type=event_type)
+        elif workflow == WORKFLOW_DISPUTE:
+            outcome = apply_stripe_dispute(obj, event_type=event_type)
+        else:
+            stored.processing_status = "processed"
+            stored.downstream = WORKFLOW_PAYMENT_FAILED
+            stored.result = "payment_failed"
+            update_event(stored)
+            return IntegrationResult(
+                provider="stripe",
+                action="webhook",
+                status="processed",
+                provider_event_id=eid,
+                workflow=WORKFLOW_PAYMENT_FAILED,
+                message=f"{event_type} recorded without AR posting",
+                details={"workflow": WORKFLOW_PAYMENT_FAILED, "object_id": obj.get("id")},
+            )
+    except Exception as exc:
+        stored.processing_status = "error"
+        stored.error = str(exc)
+        stored.downstream = workflow
+        update_event(stored)
+        return IntegrationResult(
+            provider="stripe",
+            action="webhook",
+            status="error",
+            provider_event_id=eid,
+            workflow=workflow,
+            message=str(exc),
+            details={"exceptions": ["stripe_downstream_error"], "workflow": workflow},
+        )
+
+    stored.processing_status = "processed"
+    stored.normalized_id = str(outcome.get("payment_id") or obj.get("id") or "")
+    stored.downstream = workflow
+    stored.result = str(outcome.get("status") or "processed")
+    update_event(stored)
+    remember_link(
+        source_document_id=str(obj.get("id") or eid),
+        transaction_id=str(outcome.get("payment_id") or ""),
+        extra={
+            "workflow": workflow,
+            "stripe_event_id": eid,
+            "invoice_ids": outcome.get("invoice_ids") or [],
+        },
+    )
+    write_trace(
+        f"stripe-{workflow}-{eid or obj.get('id')}",
+        {
+            "stripe_event_id": eid,
+            "event_type": event_type,
+            "workflow": workflow,
+            **{key: value for key, value in outcome.items() if key != "invoice_changes"},
+        },
+    )
+    return IntegrationResult(
+        provider="stripe",
+        action="webhook",
+        status="duplicate" if outcome.get("duplicate") or outcome.get("status") == "duplicate" else "processed",
+        provider_event_id=eid,
+        duplicate=bool(outcome.get("duplicate") or outcome.get("status") == "duplicate"),
+        payment_id=outcome.get("payment_id"),
+        workflow=workflow,
+        invoice_numbers=list(outcome.get("invoice_ids") or []),
+        message=f"{event_type} → {workflow}",
+        details={"workflow": workflow, **outcome},
+    )
 
 
 def process_event(
@@ -471,20 +567,26 @@ def process_event(
             provider_event_id=stored.provider_event_id,
             duplicate=True,
             payout_id=stored.normalized_id,
+            workflow=WORKFLOW_DUPLICATE,
             message="duplicate Stripe event; no second payout",
-            details={"exceptions": ["duplicate_event"], "replay": True},
+            details={"exceptions": ["duplicate_event"], "replay": True, "workflow": WORKFLOW_DUPLICATE},
         )
+    workflow = classify_stripe_event(event_type)
+    if workflow in {WORKFLOW_PAYMENT, WORKFLOW_REFUND, WORKFLOW_DISPUTE, WORKFLOW_PAYMENT_FAILED}:
+        return _process_routed_event(payload, stored=stored, workflow=workflow)
     if event_type not in PAYOUT_EVENTS:
         stored.processing_status = "ignored"
         stored.result = "not_a_payout_event"
+        stored.downstream = WORKFLOW_IGNORED
         update_event(stored)
         return IntegrationResult(
             provider="stripe",
             action="webhook",
             status="ignored",
             provider_event_id=eid,
+            workflow=WORKFLOW_IGNORED,
             message=f"ignored event type {event_type}",
-            details={"exceptions": ["unsupported_event"]},
+            details={"exceptions": ["unsupported_event"], "workflow": WORKFLOW_IGNORED},
         )
 
     obj = payload.get("data", {}).get("object") or {}
@@ -552,10 +654,11 @@ def process_event(
 
     stored.processing_status = "processed"
     stored.normalized_id = payout.payout_id
-    stored.downstream = "cash_reconciliation"
+    stored.downstream = WORKFLOW_PAYOUT
     stored.result = "payout_recorded"
     update_event(stored)
     _write_payout_trace(event=stored, payout=payout, breakdown=breakdown, duplicate=False, replay=not is_new)
+    exception_workflow = classify_reconciliation_exception(breakdown.exceptions)
     return IntegrationResult(
         provider="stripe",
         action="webhook",
@@ -564,6 +667,7 @@ def process_event(
         payout_id=payout.payout_id,
         payout_amount=major_units(payout.amount, payout.currency),
         invoice_candidates=0,
+        workflow=exception_workflow if breakdown.exceptions else WORKFLOW_PAYOUT,
         message=f"{event_type} payout {payout.payout_id}",
         details={
             "matched": breakdown.matched,
@@ -574,6 +678,9 @@ def process_event(
             "new_reconciliation": is_new,
             "exceptions": breakdown.exceptions,
             "invoice_candidates": 0,
+            "workflow": exception_workflow if breakdown.exceptions else WORKFLOW_PAYOUT,
+            "balance_transaction_ids": [line.provider_object_id for line in payout.lines if line.provider_object_id],
+            "bank_deposit_id": breakdown.bank_deposit_id,
         },
     )
 

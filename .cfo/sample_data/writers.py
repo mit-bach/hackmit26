@@ -175,12 +175,12 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
 
     save("ingestion/emails.json", ctx.ingestion_emails)
     save("ingestion/documents.json", ctx.ingestion_documents)
-    save("ingestion/erp.json", [])
-    save("ingestion/procurement.json", [])
-    save("ingestion/vendor_portals.json", [])
-    save("ingestion/employee_submissions.json", [])
-    save("ingestion/edi_documents.json", [])
-    save("ingestion/bank_transactions.json", [])
+    save("ingestion/erp.json", ctx.ingestion_erp)
+    save("ingestion/procurement.json", ctx.ingestion_procurement)
+    save("ingestion/vendor_portals.json", ctx.ingestion_vendor_portals)
+    save("ingestion/employee_submissions.json", ctx.ingestion_employee)
+    save("ingestion/edi_documents.json", ctx.ingestion_edi)
+    save("ingestion/bank_transactions.json", ctx.ingestion_bank)
 
     save("canonical/vendors.json", list(ctx.vendors.values()))
     save("canonical/vendor_payments.json", _models(ctx.vendor_payments.values()))
@@ -190,6 +190,10 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
 
     if ctx.expected is not None:
         save("expected_results.json", ctx.expected.model_dump(mode="json"))
+
+    from demo.export import write_demo_layer
+
+    written.extend(write_demo_layer(ctx, output))
 
     counts = {
         "ap_invoices": len(ctx.ap_invoices),
@@ -211,6 +215,8 @@ def write_dataset(ctx: CompanyScenarioContext, output: Path) -> list[str]:
         "forecast_weeks": len(ctx.forecast_weeks),
         "reporting_lines": len(ctx.reporting_lines),
         "scenarios": len(ctx.scenarios),
+        "memory_events": len(ctx.memory_events),
+        "ingestion_emails": len(ctx.ingestion_emails),
     }
     manifest_files = written + ["manifest.json"]
     save(

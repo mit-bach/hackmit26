@@ -14,3 +14,5 @@ Do not “solve” these by adding a sixteenth Bot. See `design-workshop/dominik
 10. **Harness `ask_user` still exists on the protocol surface.** This Client intercepts it and refuses. Roster `approvalLevel` is `never`. Do not fork Harness to know invoices.
 
 Session 10 also added Routine `period-story` waking Bot `story`. Constitution session 00 listed four Routines. The extra Routine still fires on the owning Bot in Room `books-close` (4 members). It is not a sixteenth Bot.
+
+Rohan `durable-inbox-ap-persistence` inbox and Stripe simulation landed as Kernel under Bots `email` and `stripe`. Finance Inbox Agent and Counterparty Message Agent stay Display names. They are not Roster slugs.

@@ -44,8 +44,9 @@ Programmatic assignments live in `skills/assignments.py` and must match this tab
 
 | Skill | Purpose | Used By | Location | Status | Related |
 | --- | --- | --- | --- | --- | --- |
-| invoice-source-identification | Distinguish vendor invoices from quotes, receipts, statements, marketing, purchase orders, and payment confirmations | Email Invoice Agent, Procurement Invoice Agent, Vendor Portal Agent, Employee Submission Agent, Physical Mail / Document Agent | `skills/invoice-source-identification/SKILL.md` | Extracted | invoice-field-interpretation |
-| invoice-field-interpretation | Extract invoice fields from messy documents without inventing values or recomputing totals | Email Invoice Agent, Vendor Portal Agent, Employee Submission Agent, Physical Mail / Document Agent | `skills/invoice-field-interpretation/SKILL.md` | Extracted | invoice-source-identification |
+| inbox-triage | Classify inbound mail and pick a registered action without inventing invoice values | Email Invoice Agent, Finance Inbox Agent | `skills/inbox-triage/SKILL.md` | Extracted | invoice-source-identification |
+| invoice-source-identification | Distinguish vendor invoices from quotes, receipts, statements, marketing, purchase orders, and payment confirmations | Email Invoice Agent, Finance Inbox Agent, Procurement Invoice Agent, Vendor Portal Agent, Employee Submission Agent, Physical Mail / Document Agent | `skills/invoice-source-identification/SKILL.md` | Extracted | invoice-field-interpretation |
+| invoice-field-interpretation | Extract invoice fields from messy documents without inventing values or recomputing totals | Email Invoice Agent, Finance Inbox Agent, Vendor Portal Agent, Employee Submission Agent, Physical Mail / Document Agent | `skills/invoice-field-interpretation/SKILL.md` | Extracted | invoice-source-identification |
 | bank-charge-invoice-discovery | Recover an invoice from a bank/card charge only when supporting invoice documentation exists | Bank/Card Discovery Agent | `skills/bank-charge-invoice-discovery/SKILL.md` | Extracted | invoice-source-identification |
 | three-way-match-analysis | Interpret Python three-way-match facts as clean match, blocking hold, or uncertain exception | AP Preparer, Exception Investigator, AP Reviewer, AP Approver, AP Audit | `skills/three-way-match-analysis/SKILL.md` | Extracted | ap-exception-investigation |
 | ap-exception-investigation | Decide whether published policy and prior cases support paying an exception | Exception Investigator, AP Reviewer, AP Approver, AP Audit | `skills/ap-exception-investigation/SKILL.md` | Extracted | three-way-match-analysis |
@@ -87,6 +88,7 @@ These agents keep role/tool instructions only. Their remaining guidance is workf
 | --- | --- |
 | ERP Invoice Agent | Structured NetSuite/SAP/Oracle/Workday records are mapped in Python |
 | EDI / Electronic Invoicing Agent | Prefer `python_parse`; remap only empty fields. Parsing stays in Python |
+| Counterparty Message Agent | Fixture sender for inbox demos. Not a Bot. |
 
 ## Adding a skill
 

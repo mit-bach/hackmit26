@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import date
 from functools import lru_cache
@@ -58,8 +59,18 @@ def _read_json(path: Path) -> list:
     return raw
 
 
-_DEFAULT_OVERLAY_PATH = Path(__file__).resolve().parent / "runs" / "ingestion" / "overlay.json"
-OVERLAY_PATH = _DEFAULT_OVERLAY_PATH
+RUNTIME_DIR_ENV = "CFO_AP_RUNTIME_DIR"
+_ROOT = Path(__file__).resolve().parent
+
+
+def _default_overlay_path() -> Path:
+    override = os.environ.get(RUNTIME_DIR_ENV)
+    if override:
+        return Path(override) / "runtime_invoices.json"
+    return _ROOT / "runs" / "ingestion" / "overlay.json"
+
+
+OVERLAY_PATH = _default_overlay_path()
 _runtime_invoices: dict[str, Invoice] = {}
 _overlay_loaded = False
 
@@ -67,11 +78,40 @@ _overlay_loaded = False
 def configure_overlay_path(path: Path | None = None) -> Path:
     """Persist ingested AP overlay invoices. Does not edit invoices.json."""
     global OVERLAY_PATH, _overlay_loaded
-    OVERLAY_PATH = Path(path) if path is not None else _DEFAULT_OVERLAY_PATH
+    OVERLAY_PATH = Path(path) if path is not None else _default_overlay_path()
     OVERLAY_PATH.parent.mkdir(parents=True, exist_ok=True)
     _runtime_invoices.clear()
     _overlay_loaded = False
     return OVERLAY_PATH
+
+
+def configure_runtime_dir(directory: Path | None = None) -> Path:
+    """Rohan-branch alias. Overlay file is ``<dir>/runtime_invoices.json``."""
+    if directory is None:
+        override = os.environ.get(RUNTIME_DIR_ENV)
+        directory = Path(override) if override else OVERLAY_PATH.parent
+    path = Path(directory)
+    path.mkdir(parents=True, exist_ok=True)
+    configure_overlay_path(path / "runtime_invoices.json")
+    return path
+
+
+def runtime_invoices_path() -> Path:
+    return OVERLAY_PATH
+
+
+def reset_runtime_invoices() -> None:
+    """Clear the durable AP overlay file and memory. Does not edit invoices.json."""
+    clear_runtime_invoices()
+    if OVERLAY_PATH.exists():
+        OVERLAY_PATH.unlink()
+
+
+def unload_runtime_invoices() -> None:
+    """Drop memory so the next read reloads the durable overlay file."""
+    global _overlay_loaded
+    _runtime_invoices.clear()
+    _overlay_loaded = False
 
 
 @lru_cache(maxsize=1)
@@ -79,15 +119,16 @@ def _file_invoices() -> list[Invoice]:
     return [Invoice.model_validate(item) for item in _read_json(DATA_DIR / "invoices.json")]
 
 
-def register_runtime_invoice(invoice: Invoice) -> None:
+def register_runtime_invoice(invoice: Invoice) -> Invoice:
     """Add an ingested invoice to the AP lookup overlay. Does not edit invoices.json."""
 
-    def _register() -> None:
+    def _register() -> Invoice:
         _load_overlay_unlocked()
         _runtime_invoices[invoice.invoice_id] = invoice
         _save_overlay_unlocked()
+        return invoice
 
-    with_file_lock(_overlay_lock_path(), _register)
+    return with_file_lock(_overlay_lock_path(), _register)
 
 
 def clear_runtime_invoices() -> None:

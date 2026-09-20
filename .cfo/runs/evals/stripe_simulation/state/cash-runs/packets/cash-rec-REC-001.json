@@ -1,0 +1,16 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-001",
+  "candidate_id": "UNMATCHED_BANK:BANK-STR-001:-",
+  "match_type": "UNMATCHED_BANK",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference": 970.7,
+  "difference_minor": 97070,
+  "explanation": "Unmatched bank activity BANK-STR-001 $970.70.",
+  "control_findings": [],
+  "proposed_adjusting_entries_posted": false,
+  "queue_owner": "ctl-cash",
+  "human_queue": false
+}

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,7 +20,6 @@ from ar.models import (
     CustomerPayment,
     HumanCorrection,
 )
-from atomic_json import write_json_atomic
 from tools import DataFileError
 
 STATE_DIR = Path(__file__).resolve().parent.parent / "runs" / "ar"
@@ -104,19 +102,11 @@ def load_state(*, reset: bool = False) -> ARState:
     return _state
 
 
-def atomic_write_text(path: Path, text: str) -> None:
-    """Write `text` to `path` with a same-directory replace so readers never see a torn file."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(f".{path.name}.tmp.{os.getpid()}")
-    tmp.write_text(text)
-    os.replace(tmp, path)
-
-
 def save_state() -> None:
     if _state is None:
         return
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    write_json_atomic(STATE_PATH, json.loads(_state.model_dump_json()))
+    STATE_PATH.write_text(_state.model_dump_json(indent=2) + "\n")
 
 
 def reset_state() -> ARState:
@@ -175,11 +165,26 @@ def get_invoice(invoice_id: str) -> CustomerInvoice | None:
     return load_state().invoices.get(invoice_id)
 
 
+def save_customer(customer: Customer) -> Customer:
+    state = load_state()
+    state.customers[customer.customer_id] = customer
+    save_state()
+    return customer
+
+
 def save_invoice(invoice: CustomerInvoice) -> CustomerInvoice:
     state = load_state()
     state.invoices[invoice.invoice_id] = invoice
     save_state()
     return invoice
+
+
+def load_empty_state() -> ARState:
+    """Start an empty AR book. Used by isolated Stripe simulations."""
+    global _state
+    _state = ARState()
+    save_state()
+    return _state
 
 
 def all_payments() -> list[CustomerPayment]:
@@ -357,7 +362,7 @@ def save_trace(name: str, payload) -> Path:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = TRACES_DIR / f"{name}-{stamp}.json"
     if hasattr(payload, "model_dump_json"):
-        atomic_write_text(path, payload.model_dump_json(indent=2) + "\n")
+        path.write_text(payload.model_dump_json(indent=2) + "\n")
     else:
-        atomic_write_text(path, json.dumps(payload, indent=2) + "\n")
+        path.write_text(json.dumps(payload, indent=2) + "\n")
     return path

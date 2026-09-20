@@ -1,0 +1,52 @@
+{
+  "stripe_event_id": "evt_ch_str_020_pi",
+  "event_type": "payment_intent.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_020",
+  "decision": "UNAPPLIED",
+  "invoice_ids": [],
+  "posted": false,
+  "already_posted": false,
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_020-20260920T011827Z.json",
+  "reason": "No plausible invoice match was found; cash stays unapplied.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [],
+  "duplicate": false,
+  "agent_record": {
+    "kind": "cash_apply",
+    "agent_invoked": false,
+    "agents": [
+      "Cash Application Agent"
+    ],
+    "decision_requested": "Choose AUTO_APPLY, HUMAN_REVIEW, or UNAPPLIED among Python candidates.",
+    "evidence": [
+      "Payment PAY-STR-CH_STR_020 330.0 USD from Orion Freight",
+      "Remittance: Unmatched Stripe charge",
+      "Payer 'Orion Freight' matches 'Orion Freight'"
+    ],
+    "candidates": [],
+    "skills": [
+      "cash-application"
+    ],
+    "tools_called": [
+      "get_cash_application_facts",
+      "get_ar_customer"
+    ],
+    "llm_called": false,
+    "decision_fn": "policy_cash_decision",
+    "final_decision": "UNAPPLIED",
+    "reason": "No plausible invoice match was found; cash stays unapplied.",
+    "validations": [
+      "validate_proposal"
+    ],
+    "validation_passed": true,
+    "downstream": {
+      "posted": false,
+      "invoice_ids": [],
+      "precedent_used": [],
+      "precedent_affected": false
+    }
+  }
+}

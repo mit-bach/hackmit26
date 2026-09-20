@@ -258,6 +258,7 @@ class AuditControlsSampleDataAgent(SampleDataAgent):
         ctx.add_journal(entry)
         ctx.audit_journals.append(journal_to_audit(entry))
         ctx.plant("SCN-AUDIT-004", ["JE-POST-CLOSE-001", "PAY-AP-009"])
+        ctx.plant("SCN-CLOSE-016", ["JE-POST-CLOSE-001", "CLOSE-2026-09"])
 
     def _expected(self, ctx: CompanyScenarioContext) -> None:
         findings = [

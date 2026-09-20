@@ -1,0 +1,19 @@
+{
+  "id": "h_b247d9cc-dec7-430e-b76b-a13c167da061",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\npath: workspace/sources/email/MSG-S12.json\nLanded a vendor bill. Do not invent amounts.",
+  "paths": [
+    "workspace/sources/email/MSG-S12.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "createdAt": "2026-09-20T01:17:09.589Z",
+  "updatedAt": "2026-09-20T01:17:09.589Z"
+}

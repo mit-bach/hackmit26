@@ -108,28 +108,43 @@ def isolated_reporting(tmp_path):
 
 
 @pytest.fixture(autouse=True)
+def isolated_inbox_state(tmp_path, monkeypatch):
+    from inbox.store import configure_runs_dir, reset_inbox_state
+
+    configure_runs_dir(tmp_path / "inbox-runs")
+    reset_inbox_state()
+    yield
+    reset_inbox_state()
+
+
+@pytest.fixture(autouse=True)
 def isolated_ingestion_overlay(tmp_path, monkeypatch):
     from invoice_ingestion.adapter import reset_ingested_invoices
     from invoice_ingestion.registry import configure_paths as configure_registry
     from invoice_ingestion.store import clear_ingestion_cache
     from integrations import store as integration_store
-    from tools import clear_runtime_invoices, configure_overlay_path
+    from tools import configure_overlay_path, configure_runtime_dir, reset_runtime_invoices
 
     ingest_dir = tmp_path / "ingestion-state"
+    runtime = tmp_path / "ap-runtime"
+    inbox = tmp_path / "inbox-runs"
     configure_registry(ingest_dir)
-    configure_overlay_path(ingest_dir / "overlay.json")
+    monkeypatch.setenv("CFO_INGEST_STATE_DIR", str(ingest_dir))
+    monkeypatch.setenv("CFO_AP_RUNTIME_DIR", str(runtime))
+    monkeypatch.setenv("CFO_INBOX_RUNS_DIR", str(inbox))
+    configure_runtime_dir(runtime)
     runs = tmp_path / "integrations-runs"
     monkeypatch.setattr(integration_store, "RUNS_DIR", runs)
     monkeypatch.setattr(integration_store, "STATE_PATH", runs / "state.json")
     reset_ingested_invoices()
+    reset_runtime_invoices()
     clear_ingestion_cache()
     integration_store.reset_integration_state()
-    clear_runtime_invoices()
     yield
     reset_ingested_invoices()
+    reset_runtime_invoices()
     clear_ingestion_cache()
     integration_store.reset_integration_state()
-    clear_runtime_invoices()
     configure_registry()
     configure_overlay_path()
 

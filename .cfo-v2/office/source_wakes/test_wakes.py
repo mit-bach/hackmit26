@@ -100,6 +100,20 @@ def test_bank_charge_without_docs_stays_invoice_missing(tmp_path):
     assert packet["candidate"] is None
 
 
+def test_inbox_kernel_lands_bill_to_ap(tmp_path):
+    from inbox.fixtures import spec_clean_attachment
+    from source_wakes.wakes import land_inbox_spec
+
+    computer = tmp_path / "computer"
+    result = land_inbox_spec(computer, spec_clean_attachment(), profile="invoice")
+    assert result.kernel_status in {"CREATED", "LINKED", "BUSINESS_DUPLICATE", "DUPLICATE_DELIVERY"}
+    assert result.packet_path is not None
+    packet = read_packet(computer, result.packet_path)
+    assert packet["destination"] == {"slug": "ap", "profile": "prepare"}
+    assert result.intents[0].to_send_payload()["toSlug"] == "ap"
+    assert result.details.get("canonical_id")
+
+
 def test_aws_bill_from_two_sources_is_one_invoice():
     report = ingest_invoices("2026-09", forward_to_ap=True, reset_overlay=True)
     aws = [item for item in report.canonical_invoices if item.vendor_invoice_number == "INV-9001"]

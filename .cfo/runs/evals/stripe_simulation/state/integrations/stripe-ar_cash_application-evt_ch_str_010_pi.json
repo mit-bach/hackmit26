@@ -1,0 +1,65 @@
+{
+  "stripe_event_id": "evt_ch_str_010_pi",
+  "event_type": "payment_intent.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_010",
+  "decision": "AUTO_APPLY",
+  "invoice_ids": [
+    "INV-STR-010"
+  ],
+  "posted": true,
+  "already_posted": false,
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_010-20260920T011825Z.json",
+  "reason": "One customer has a unique invoice whose outstanding amount matches the payment.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [],
+  "duplicate": false,
+  "agent_record": {
+    "kind": "cash_apply",
+    "agent_invoked": false,
+    "agents": [
+      "Cash Application Agent"
+    ],
+    "decision_requested": "Choose AUTO_APPLY, HUMAN_REVIEW, or UNAPPLIED among Python candidates.",
+    "evidence": [
+      "Payment PAY-STR-CH_STR_010 1250.0 USD from Pinnacle Retail",
+      "Remittance: Pinnacle autumn restock",
+      "Payment already tagged CUST-006"
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "match_type": "exact_amount",
+        "invoice_ids": [
+          "INV-STR-010"
+        ]
+      }
+    ],
+    "skills": [
+      "cash-application"
+    ],
+    "tools_called": [
+      "get_cash_application_facts",
+      "get_ar_customer"
+    ],
+    "llm_called": false,
+    "decision_fn": "policy_cash_decision",
+    "final_decision": "AUTO_APPLY",
+    "reason": "One customer has a unique invoice whose outstanding amount matches the payment.",
+    "validations": [
+      "validate_proposal",
+      "post_application_balanced_journal"
+    ],
+    "validation_passed": true,
+    "downstream": {
+      "posted": true,
+      "invoice_ids": [
+        "INV-STR-010"
+      ],
+      "precedent_used": [],
+      "precedent_affected": false
+    }
+  }
+}

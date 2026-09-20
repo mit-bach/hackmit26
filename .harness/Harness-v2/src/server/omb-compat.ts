@@ -1,3 +1,4 @@
+import { listApprovals, resolveApproval } from "../approvals.ts";
 import { liveStatus } from "../lane-state.ts";
 import { findBot, findRoom, loadRoster } from "../roster.ts";
 import { readRoomLog, roomPost } from "../rooms.ts";
@@ -28,6 +29,7 @@ interface OmbMessage {
   readonly text?: string;
   readonly at: number;
   readonly sendId?: string;
+  readonly parentId?: string | null;
   readonly from?: { readonly botId: string; readonly name: string; readonly color: MausColor };
   readonly card?: {
     readonly title: string;
@@ -36,6 +38,23 @@ interface OmbMessage {
     readonly requestId?: string;
   };
 }
+
+const SKIPPED_TOUR_HINTS: readonly string[] = [
+  "tour.composer",
+  "tour.model",
+  "tour.computer",
+  "tour.computer-browser",
+  "tour.tools",
+  "tour.apps",
+  "tour.apps-panel",
+  "tour.automations",
+  "tour.automations-page",
+  "tour.done",
+  "spot.composer",
+  "spot.model",
+  "spot.approval",
+  "spot.connector",
+];
 
 interface OmbOnboarding {
   completedAt: string;
@@ -49,13 +68,26 @@ interface JsonResult {
   readonly body: unknown;
 }
 
-const ombUi = {
+/** Last operator leaf id the OpenMausBot client will walk from. */
+const lastUserLeaf = new Map<string, string>();
+const taskOverlays = new Map<string, Record<string, unknown>>();
+
+/** Parent id for a live bot reply so the client leaf walk stays intact. */
+export function ombUserLeaf(botId: string): string | null {
+  return lastUserLeaf.get(botId) ?? null;
+}
+
+const ombUi: {
+  onboarding: OmbOnboarding;
+  profile: { name: string; email: string };
+  language: string;
+} = {
   onboarding: {
     completedAt: "2026-01-01T00:00:00.000Z",
     version: 1,
     reelSeen: true,
-    hintsSeen: [] as string[],
-  } satisfies OmbOnboarding,
+    hintsSeen: [...SKIPPED_TOUR_HINTS],
+  },
   profile: { name: "", email: "" },
   language: "",
 };
@@ -107,8 +139,9 @@ function toOmbMessage(row: OperatorMessage): OmbMessage {
   const role: OmbMessage["role"] = row.role === "user" ? "user" : "bot";
   const kind: OmbMessage["kind"] =
     row.kind === "options" ? "options" : row.kind === "activity" ? "activity" : "text";
+  const id = role === "user" && row.handleId ? row.handleId : row.id;
   return {
-    id: row.id,
+    id,
     role,
     kind,
     text: row.text,
@@ -126,6 +159,29 @@ function toOmbMessage(row: OperatorMessage): OmbMessage {
   };
 }
 
+function chainMessages(rows: readonly OmbMessage[]): OmbMessage[] {
+  return rows.map((row, index) => ({
+    ...row,
+    parentId: index === 0 ? null : rows[index - 1]?.id ?? null,
+  }));
+}
+
+function botTranscript(computerRoot: string, botId: string): {
+  readonly messages: OmbMessage[];
+  readonly activeLeafId: string | null;
+} {
+  const rows = messagesForBot(computerRoot, botId).filter(
+    (row) => row.kind === "text" || row.kind === "options",
+  );
+  const messages = chainMessages(rows.map(toOmbMessage));
+  return { messages, activeLeafId: messages.at(-1)?.id ?? null };
+}
+
+/** Latest chained transcript line for a Bot thread, for live SSE. */
+export function ombLatestMessage(computerRoot: string, botId: string): OmbMessage | undefined {
+  return botTranscript(computerRoot, botId).messages.at(-1);
+}
+
 function defaultModel(): string {
   return loadOperatorConfig().model ?? "default";
 }
@@ -134,22 +190,35 @@ function toWireBot(computerRoot: string, roster: Roster, bot: BotRecord, index: 
   const status = liveStatus(computerRoot, bot.id);
   const activity = activityFor(status);
   const busy = activity === "working" || activity === "waiting-on-you";
-  const messages = messagesForBot(computerRoot, bot.id).map(toOmbMessage);
+  const transcript = botTranscript(computerRoot, bot.id);
   const model = defaultModel();
-  const createdAt = messages[0]?.at ?? Date.now();
+  const overlay = taskOverlays.get(bot.id) ?? {};
+  const modelSelection = isRecord(overlay.modelSelection)
+    ? overlay.modelSelection
+    : { instanceId: "pi", model };
+  const approvalMode =
+    overlay.approvalMode === "auto" || overlay.approvalMode === "ask" || overlay.approvalMode === "full"
+      ? overlay.approvalMode
+      : approvalModeFor(bot.approvalLevel);
+  const autoApprove =
+    typeof overlay.autoApprove === "boolean" ? overlay.autoApprove : bot.approvalLevel === "never";
+  const createdAt = transcript.messages[0]?.at ?? Date.now();
+  const task = {
+    threadId: bot.id,
+    title: bot.purpose.length > 0 ? bot.purpose : bot.name,
+    createdAt,
+    activity,
+    busy,
+    unread: false,
+    modelSelection,
+    approvalMode,
+    autoApprove,
+    ...(typeof overlay.pinnedMessageId === "string" ? { pinnedMessageId: overlay.pinnedMessageId } : {}),
+  };
   return {
     id: bot.id,
     threadId: bot.id,
-    tasks: [
-      {
-        threadId: bot.id,
-        title: bot.purpose.length > 0 ? bot.purpose : bot.name,
-        createdAt,
-        activity,
-        busy,
-        unread: false,
-      },
-    ],
+    tasks: [task],
     name: bot.name,
     title: bot.purpose.length > 0 ? bot.purpose : bot.slug,
     description: bot.purpose,
@@ -160,12 +229,13 @@ function toWireBot(computerRoot: string, roster: Roster, bot: BotRecord, index: 
     unread: false,
     busy,
     activity,
-    modelSelection: { instanceId: "pi", model },
+    modelSelection,
     computer: "off",
-    approvalMode: approvalModeFor(bot.approvalLevel),
-    autoApprove: bot.approvalLevel === "never",
+    approvalMode,
+    autoApprove,
     section: roster.system,
-    messages,
+    messages: transcript.messages,
+    activeLeafId: transcript.activeLeafId,
     createdAt,
   };
 }
@@ -188,7 +258,7 @@ function toWireGroup(computerRoot: string, roster: Roster, roomId: string): Reco
   }
   const ids = memberIds(roster, room.members);
   const lead = ids[0] ?? roster.bots[0]?.id ?? "";
-  const messages: OmbMessage[] = readRoomLog(computerRoot, room.id).map((row, index) => {
+  const raw: OmbMessage[] = readRoomLog(computerRoot, room.id).map((row, index) => {
     const speaker = findBot(roster, row.from);
     const speakerIndex = speaker ? roster.bots.findIndex((bot) => bot.id === speaker.id) : 0;
     return {
@@ -202,6 +272,7 @@ function toWireGroup(computerRoot: string, roster: Roster, roomId: string): Reco
         : {}),
     };
   });
+  const messages = chainMessages(raw);
   return {
     id: room.id,
     threadId: `room-${room.id}`,
@@ -214,6 +285,7 @@ function toWireGroup(computerRoot: string, roster: Roster, roomId: string): Reco
     setupCompletedAt: Date.now(),
     section: roster.system,
     messages,
+    activeLeafId: messages.at(-1)?.id ?? null,
   };
 }
 
@@ -290,8 +362,49 @@ function mergeOnboarding(patch: unknown): void {
     ombUi.onboarding.reelSeen = patch.reelSeen;
   }
   if (Array.isArray(patch.hintsSeen)) {
-    ombUi.onboarding.hintsSeen = patch.hintsSeen.filter((row): row is string => typeof row === "string");
+    const incoming = patch.hintsSeen.filter((row): row is string => typeof row === "string");
+    ombUi.onboarding.hintsSeen = [...new Set([...SKIPPED_TOUR_HINTS, ...incoming])];
   }
+}
+
+function harnessBotPatch(body: unknown): Record<string, unknown> {
+  const patch: Record<string, unknown> = isRecord(body) ? { ...body } : {};
+  if (patch.approvalMode === "auto") {
+    patch.approvalLevel = "never";
+  } else if (patch.approvalMode === "ask") {
+    patch.approvalLevel = "ask";
+  }
+  if (typeof patch.soul === "string") {
+    patch.instructions = patch.soul;
+  }
+  if (typeof patch.title === "string") {
+    patch.purpose = patch.title;
+  }
+  if (typeof patch.description === "string" && typeof patch.purpose !== "string") {
+    patch.purpose = patch.description;
+  }
+  return patch;
+}
+
+function rememberTaskOverlay(botId: string, patch: unknown): void {
+  if (!isRecord(patch)) {
+    return;
+  }
+  const prev = taskOverlays.get(botId) ?? {};
+  const next: Record<string, unknown> = { ...prev };
+  if (isRecord(patch.modelSelection)) {
+    next.modelSelection = patch.modelSelection;
+  }
+  if (typeof patch.approvalMode === "string") {
+    next.approvalMode = patch.approvalMode;
+  }
+  if (typeof patch.autoApprove === "boolean") {
+    next.autoApprove = patch.autoApprove;
+  }
+  if (typeof patch.pinnedMessageId === "string") {
+    next.pinnedMessageId = patch.pinnedMessageId;
+  }
+  taskOverlays.set(botId, next);
 }
 
 function applyConfigPatch(body: unknown, ctx: ApiContext): JsonResult {
@@ -374,7 +487,7 @@ async function wrapBotMutation(
   body: unknown,
   ctx: ApiContext,
 ): Promise<JsonResult | undefined> {
-  const inner = await handleOperatorApi(method, path, url, body, ctx);
+  const inner = await handleOperatorApi(method, path, url, harnessBotPatch(body), ctx);
   if (!inner) {
     return undefined;
   }
@@ -388,6 +501,7 @@ async function wrapBotMutation(
   if (!bot) {
     return inner;
   }
+  rememberTaskOverlay(bot.id, body);
   const index = roster.bots.findIndex((row) => row.id === bot.id);
   return {
     status: method === "POST" && path === "/api/bots" ? 201 : inner.status,
@@ -548,6 +662,13 @@ export async function handleOmbCompat(
     const index = roster.bots.findIndex((row) => row.id === bot.id);
 
     if (method === "POST" && rest === "/messages") {
+      const text = isRecord(body) && typeof body.text === "string" ? body.text : "";
+      const sendId = isRecord(body) && typeof body.sendId === "string" ? body.sendId : undefined;
+      const parentId = botTranscript(computerRoot, bot.id).activeLeafId;
+      const userId = sendId ? `optimistic-${sendId}` : undefined;
+      if (userId) {
+        lastUserLeaf.set(bot.id, userId);
+      }
       const inner = await handleOperatorApi(method, path, url, body, ctx);
       if (!inner) {
         return { status: 404, body: { error: "unknown" } };
@@ -555,24 +676,25 @@ export async function handleOmbCompat(
       if (inner.status >= 400) {
         return inner;
       }
-      const text = isRecord(body) && typeof body.text === "string" ? body.text : "";
-      const sendId = isRecord(body) && typeof body.sendId === "string" ? body.sendId : undefined;
       const sent = isRecord(inner.body) ? inner.body : {};
       const handleId = typeof sent.handleId === "string" ? sent.handleId : undefined;
+      const message: OmbMessage = {
+        id: userId ?? handleId ?? `msg-${Date.now()}`,
+        role: "user",
+        kind: "text",
+        text,
+        at: Date.now(),
+        parentId,
+        ...(sendId ? { sendId } : {}),
+      };
+      lastUserLeaf.set(bot.id, message.id);
       return {
         status: 200,
         body: {
           ...sent,
           ok: true,
           threadId: bot.id,
-          message: {
-            id: handleId ?? sendId ?? `msg-${Date.now()}`,
-            role: "user",
-            kind: "text",
-            text,
-            at: Date.now(),
-            sendId,
-          },
+          message,
         },
       };
     }
@@ -592,8 +714,56 @@ export async function handleOmbCompat(
       return wrapBotMutation(method, path, url, body, ctx);
     }
 
+    if (method === "PATCH" && rest === "/profile") {
+      return wrapBotMutation("PATCH", `/api/bots/${bot.id}`, url, body, ctx);
+    }
+
     if (method === "GET" && rest === "") {
       return { status: 200, body: toWireBot(computerRoot, roster, bot, index) };
+    }
+
+    if (method === "GET" && rest === "/messages") {
+      return undefined;
+    }
+
+    if (method === "GET" && rest === "/computer/control") {
+      return { status: 200, body: { held: false, helpReason: null } };
+    }
+
+    if (rest.startsWith("/computer") || rest.startsWith("/local-computer")) {
+      return {
+        status: 200,
+        body: {
+          held: false,
+          helpReason: null,
+          configured: false,
+          ready: false,
+          computer: "off",
+          bot: toWireBot(computerRoot, roster, bot, index),
+        },
+      };
+    }
+
+    const taskMatch = /^\/tasks\/([^/]+)$/.exec(rest);
+    if (taskMatch && (method === "PATCH" || method === "POST" || method === "DELETE")) {
+      rememberTaskOverlay(bot.id, body);
+      return { status: 200, body: { bot: toWireBot(computerRoot, roster, bot, index) } };
+    }
+
+    if (method !== "GET") {
+      rememberTaskOverlay(bot.id, body);
+      return {
+        status: 200,
+        body: {
+          ok: true,
+          bot: toWireBot(computerRoot, roster, bot, index),
+          held: false,
+          helpReason: null,
+          configured: false,
+          ready: false,
+          computer: "off",
+        },
+      };
     }
   }
 
@@ -628,18 +798,73 @@ export async function handleOmbCompat(
       waitCapMs: ctx.fakeWorkers ? 400 : 60_000,
       awaitTimeoutMs: ctx.fakeWorkers ? 8_000 : 90_000,
     });
+    const before = toWireGroup(computerRoot, roster, room.id);
+    const parentId =
+      isRecord(before) && typeof before.activeLeafId === "string" ? before.activeLeafId : null;
     const threadId = `room-${room.id}`;
     const message: OmbMessage = {
-      id: sendId ?? `room-${room.id}-${Date.now()}`,
+      id: sendId ? `optimistic-${sendId}` : `room-${room.id}-${Date.now()}`,
       role: "user",
       kind: "text",
       text,
       at: Date.now(),
-      sendId,
+      parentId,
+      ...(sendId ? { sendId } : {}),
     };
     ctx.bus?.publish({ kind: "message", threadId, message });
     ctx.bus?.publish({ kind: "group", group: toWireGroup(computerRoot, roster, room.id) });
     return { status: 200, body: { ok: true, threadId, message } };
+  }
+
+  const groupMatch = /^\/api\/groups\/([^/]+)(\/.*)?$/.exec(path);
+  if (groupMatch) {
+    const roomId = decodeURIComponent(groupMatch[1] ?? "");
+    const rest = groupMatch[2] ?? "";
+    const roster = loadRoster(computerRoot);
+    const group = toWireGroup(computerRoot, roster, roomId);
+    if (!group) {
+      return { status: 404, body: { error: "no such group" } };
+    }
+    if (method === "GET" && rest === "") {
+      return { status: 200, body: group };
+    }
+    return { status: 200, body: { ok: true, group } };
+  }
+
+  const threadRespond = /^\/api\/threads\/([^/]+)\/respond$/.exec(path);
+  if (threadRespond && method === "POST") {
+    const requestId = isRecord(body) && typeof body.requestId === "string" ? body.requestId : "";
+    const behavior = isRecord(body) && typeof body.behavior === "string" ? body.behavior : "";
+    if (requestId.length === 0) {
+      return { status: 400, body: { error: "requestId required" } };
+    }
+    const allowed = behavior !== "deny";
+    let resolved: ReturnType<typeof resolveApproval> | undefined;
+    try {
+      resolved = resolveApproval(computerRoot, requestId, allowed);
+    } catch {
+      return { status: 200, body: { ok: true } };
+    }
+    ctx.bus?.publish({ kind: "approvals", approvals: listApprovals(computerRoot) });
+    return { status: 200, body: { ok: true, resolved } };
+  }
+
+  const threadEvents = /^\/api\/threads\/([^/]+)\/events$/.exec(path);
+  if (threadEvents && method === "GET") {
+    return { status: 200, body: { events: [], native: [] } };
+  }
+
+  if (method === "POST" && path === "/api/routines") {
+    return { status: 200, body: { ok: true, routines: [], runs: [] } };
+  }
+
+  const routineRest = /^\/api\/routines\/([^/]+)$/.exec(path);
+  if (routineRest && (method === "PATCH" || method === "DELETE")) {
+    return { status: 200, body: { ok: true } };
+  }
+
+  if (method === "POST" && path === "/api/auth/logout") {
+    return { status: 200, body: { ok: true } };
   }
 
   return undefined;

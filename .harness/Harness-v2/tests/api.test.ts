@@ -36,6 +36,33 @@ test("GET /api/bots returns the OpenMausBot snapshot object", async () => {
       instances: readonly { snapshot: { state: string } }[];
     };
     assert.equal(instances.instances[0]?.snapshot.state, "available");
+    const ingest = body.bots.find((row) => row.id === "bot_ingest") as
+      | {
+          id: string;
+          activeLeafId?: string | null;
+          messages: readonly { id: string; parentId?: string | null }[];
+        }
+      | undefined;
+    assert.ok(ingest);
+    if (ingest.messages.length > 0) {
+      assert.equal(ingest.messages[0]?.parentId ?? null, null);
+      for (let i = 1; i < ingest.messages.length; i += 1) {
+        assert.equal(ingest.messages[i]?.parentId, ingest.messages[i - 1]?.id);
+      }
+      assert.equal(ingest.activeLeafId, ingest.messages.at(-1)?.id);
+    }
+    const taskPatch = await fetch(`${started.url}/api/bots/bot_ap/tasks/${encodeURIComponent("bot_ap")}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ modelSelection: { instanceId: "pi", model: "default" } }),
+    });
+    assert.equal(taskPatch.status, 200);
+    const taskBody = (await taskPatch.json()) as { bot?: { id: string } };
+    assert.equal(taskBody.bot?.id, "bot_ap");
+    const config = (await (await fetch(`${started.url}/api/config`)).json()) as {
+      onboarding: { hintsSeen: string[] };
+    };
+    assert.ok(config.onboarding.hintsSeen.includes("tour.composer"));
   } finally {
     await started.stop();
   }
@@ -83,6 +110,23 @@ test("POST /api/bots/:slug/messages accepts a Handle and fake workers complete i
     const messages = (await (await fetch(`${started.url}/api/bots/beta/messages`)).json()) as unknown[];
     assert.ok(Array.isArray(messages));
     assert.ok(messages.length > 0);
+    const sendId = "send-ui-1";
+    const uiSent = (await (
+      await fetch(`${started.url}/api/bots/beta/messages`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ text: "visible operator line", sendId }),
+      })
+    ).json()) as {
+      accepted: boolean;
+      threadId: string;
+      message: { id: string; sendId?: string; parentId?: string | null; role: string };
+    };
+    assert.equal(uiSent.accepted, true);
+    assert.equal(uiSent.threadId, "bot_beta");
+    assert.equal(uiSent.message.role, "user");
+    assert.equal(uiSent.message.sendId, sendId);
+    assert.equal(uiSent.message.id, `optimistic-${sendId}`);
   } finally {
     await started.stop();
   }

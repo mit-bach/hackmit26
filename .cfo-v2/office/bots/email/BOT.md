@@ -38,6 +38,8 @@ By Profile. Skills never grant tools.
 
 **invoice** (must): `invoice_ingestion.tools.list_email_candidates`, `invoice_ingestion.tools.get_email`, `invoice_ingestion.tools.get_email_attachment`
 
+Kernel inbox (`inbox.classify` / `inbox.workflow.handoff`) is the Gmail-like front door into the same Canonical AP overlay. It is not a sixteenth Bot. Display names Finance Inbox Agent and Counterparty Message Agent are Grant/fixture sources. They are not Roster slugs.
+
 **employee** (must): `invoice_ingestion.tools.list_employee_submissions`, `invoice_ingestion.tools.get_employee_submission`
 
 **portal** (must): `invoice_ingestion.tools.list_vendor_portal_documents`, `invoice_ingestion.tools.get_vendor_portal_document`
@@ -48,7 +50,7 @@ Must not, every Profile: AP record tools (`tools.get_invoice`, `tools.get_purcha
 
 ## Kernel
 
-After you land a bill, Kernel `validate_candidate`, canonical identity (`canonical_invoice_key`), and the disk registry run. You cannot override them. Python owns amounts. If the Kernel returns rejected / INSUFFICIENT, do not guess.
+After you land a bill, Kernel `validate_candidate`, canonical identity (`canonical_invoice_key`), the disk registry, and the durable AP overlay (`register_runtime_invoice`) run. You cannot override them. Python owns amounts. If the Kernel returns rejected / INSUFFICIENT, do not guess.
 
 Output contract: `SourceAgentOutput`. If classification is not `invoice`, `candidate` is null.
 

@@ -1,0 +1,40 @@
+{
+  "object": "unapplied_cash",
+  "payment_id": "PAY-STR-CH_STR_019",
+  "kernel_status": "HUMAN_REVIEW",
+  "as_of": "2026-09-30",
+  "reason": "Payment 1100.0 exceeds named invoice outstanding 950.0; overpayment residual 150.0 must not disappear.",
+  "ambiguities": [
+    "Overpayment residual 150.0"
+  ],
+  "review_question": "How should the overpayment residual be treated?",
+  "applications": [
+    {
+      "invoice_id": "INV-STR-019",
+      "amount": 950.0
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "C1",
+      "applications": [
+        {
+          "invoice_id": "INV-STR-019",
+          "amount": 950.0
+        }
+      ],
+      "total_applied": 950.0,
+      "unapplied_amount": 150.0,
+      "match_type": "explicit_invoice",
+      "score": 0.99,
+      "evidence": [
+        "Remittance names INV-STR-019"
+      ],
+      "ambiguities": []
+    }
+  ],
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_019-20260920T011828Z.json",
+  "queue_owner": "ctl-cash",
+  "queue_profile": "review-apply",
+  "human_queue": false
+}

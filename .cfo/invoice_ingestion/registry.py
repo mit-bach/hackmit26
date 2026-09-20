@@ -7,14 +7,25 @@ identity. Cleared with the AP overlay when reset_overlay=True.
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from invoice_ingestion.identity import canonical_invoice_key, identity_keys
 from invoice_ingestion.models import CanonicalInvoice
 from atomic_json import read_json_object, with_file_lock, write_json_atomic
 
+REGISTRY_DIR_ENV = "CFO_INGEST_STATE_DIR"
 _DEFAULT_STATE_DIR = Path(__file__).resolve().parent.parent / "runs" / "ingestion"
-STATE_DIR = _DEFAULT_STATE_DIR
+
+
+def _default_state_dir() -> Path:
+    override = os.environ.get(REGISTRY_DIR_ENV)
+    if override:
+        return Path(override)
+    return _DEFAULT_STATE_DIR
+
+
+STATE_DIR = _default_state_dir()
 REGISTRY_PATH = STATE_DIR / "registry.json"
 LOCK_PATH = STATE_DIR / "registry.lock"
 

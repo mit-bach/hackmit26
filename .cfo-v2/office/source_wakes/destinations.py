@@ -4,7 +4,10 @@ from __future__ import annotations
 
 EMAIL_DESTINATION: dict[str, tuple[str, str]] = {
     "invoice": ("ap", "prepare"),
+    "vendor_invoice": ("ap", "prepare"),
     "payment_confirmation": ("apply", "apply"),
+    "remittance": ("apply", "apply"),
+    "customer_remittance": ("apply", "apply"),
 }
 
 STRIPE_DEPOSIT = ("cash", "match")

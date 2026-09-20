@@ -1,0 +1,16 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-002",
+  "candidate_id": "UNMATCHED_LEDGER:-:GL-STR-po_str_014",
+  "match_type": "UNMATCHED_LEDGER",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference": -12040.1,
+  "difference_minor": -1204010,
+  "explanation": "Unmatched ledger activity GL-STR-po_str_014 $12,040.10.",
+  "control_findings": [],
+  "proposed_adjusting_entries_posted": false,
+  "queue_owner": "ctl-cash",
+  "human_queue": false
+}

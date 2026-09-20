@@ -1,0 +1,43 @@
+{
+  "stripe_event_id": "evt_re_str_012",
+  "event_type": "refund.created",
+  "workflow": "ar_refund",
+  "status": "processed",
+  "event_id": "AR-EVT-0003",
+  "journal_entry_ids": [
+    "AR-JE-003"
+  ],
+  "payment_id": "PAY-STR-CH_STR_012A",
+  "invoice_ids": [
+    "INV-STR-012A"
+  ],
+  "amount": 200.0,
+  "agent_record": {
+    "kind": "refund_link",
+    "agent_invoked": false,
+    "agents": [],
+    "decision_requested": "Link refund to original Stripe charge/payment and reverse AR by cents.",
+    "evidence": [
+      "refund_id=re_str_012",
+      "charge_id=ch_str_012a",
+      "payment_id=PAY-STR-CH_STR_012A"
+    ],
+    "skills": [],
+    "tools_called": [
+      "find_payment_for_stripe"
+    ],
+    "llm_called": false,
+    "decision_fn": "find_payment_for_stripe",
+    "final_decision": "processed",
+    "validations": [
+      "refund_cents",
+      "duplicate_stripe_refund_id"
+    ],
+    "downstream": {
+      "invoice_ids": [
+        "INV-STR-012A"
+      ],
+      "amount": 200.0
+    }
+  }
+}

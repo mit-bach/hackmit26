@@ -1,0 +1,67 @@
+{
+  "stripe_event_id": "evt_ch_str_019_pi",
+  "event_type": "payment_intent.succeeded",
+  "workflow": "ar_cash_application",
+  "status": "processed",
+  "payment_id": "PAY-STR-CH_STR_019",
+  "decision": "HUMAN_REVIEW",
+  "invoice_ids": [
+    "INV-STR-019"
+  ],
+  "posted": false,
+  "already_posted": false,
+  "trace_path": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/runs/evals/stripe_simulation/state/ar/traces/cash-PAY-STR-CH_STR_019-20260920T011828Z.json",
+  "reason": "Payment 1100.0 exceeds named invoice outstanding 950.0; overpayment residual 150.0 must not disappear.",
+  "precedent_used": [],
+  "precedent_affected": false,
+  "ambiguities": [
+    "Overpayment residual 150.0"
+  ],
+  "duplicate": false,
+  "agent_record": {
+    "kind": "cash_apply",
+    "agent_invoked": false,
+    "agents": [
+      "Cash Application Agent"
+    ],
+    "decision_requested": "Choose AUTO_APPLY, HUMAN_REVIEW, or UNAPPLIED among Python candidates.",
+    "evidence": [
+      "Payment PAY-STR-CH_STR_019 1100.0 USD from Harbor Electric",
+      "Remittance: INV-STR-019 Harbor overpayment INV-STR-019",
+      "Payer 'Harbor Electric' matches 'Harbor Electric'",
+      "Remittance invoice references: INV-STR-019"
+    ],
+    "candidates": [
+      {
+        "candidate_id": "C1",
+        "match_type": "explicit_invoice",
+        "invoice_ids": [
+          "INV-STR-019"
+        ]
+      }
+    ],
+    "skills": [
+      "cash-application"
+    ],
+    "tools_called": [
+      "get_cash_application_facts",
+      "get_ar_customer"
+    ],
+    "llm_called": false,
+    "decision_fn": "policy_cash_decision",
+    "final_decision": "HUMAN_REVIEW",
+    "reason": "Payment 1100.0 exceeds named invoice outstanding 950.0; overpayment residual 150.0 must not disappear.",
+    "validations": [
+      "validate_proposal"
+    ],
+    "validation_passed": true,
+    "downstream": {
+      "posted": false,
+      "invoice_ids": [
+        "INV-STR-019"
+      ],
+      "precedent_used": [],
+      "precedent_affected": false
+    }
+  }
+}

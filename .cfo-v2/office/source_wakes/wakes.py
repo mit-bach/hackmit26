@@ -29,6 +29,12 @@ from source_wakes.destinations import (
 )
 from source_wakes.packets import write_packet
 
+INBOX_CLASS_TO_PIPE = {
+    "VENDOR_INVOICE": "invoice",
+    "CUSTOMER_REMITTANCE": "customer_remittance",
+    "PAYMENT_CONFIRMATION": "payment_confirmation",
+}
+
 
 def bot_id_for_slug(slug: str) -> str:
     return f"bot_{slug.replace('-', '_')}"
@@ -178,6 +184,62 @@ def land_email_message(
         intents=intents,
         invoice_candidates=1 if classification == "invoice" and candidates else 0,
         details={"canonical_id": canonical_id},
+    )
+
+
+def land_inbox_spec(computer: Path, spec, *, profile: str = "invoice") -> SourceWakeResult:
+    """Rohan inbox Kernel: classify + durable AP overlay, then office Handle intents.
+
+    Counterparty Message Agent is a fixture sender, not a Bot.
+    """
+    from inbox.workflow import handoff
+
+    result = handoff(spec, persist=True)
+    inbox_class = result.receiver.classification.classification
+    pipe = INBOX_CLASS_TO_PIPE.get(str(inbox_class), str(inbox_class).lower())
+    dest = email_destination(pipe)
+    message_id = spec.message_id
+    payload = {
+        "bot": "email",
+        "profile": profile,
+        "source_id": message_id,
+        "classification": pipe,
+        "inbox_class": inbox_class,
+        "reason": result.receiver.classification.rationale,
+        "canonical_id": result.invoice_id,
+        "destination": {"slug": dest[0], "profile": dest[1]} if dest else None,
+        "kernel_status": result.final_status,
+    }
+    path = write_packet(computer, "email", message_id, payload)
+    intents: list[HandleIntent] = []
+    if dest is not None and result.final_status not in {"IGNORED", "UNRESOLVED"}:
+        to_slug, to_profile = dest
+        sentence = (
+            "Landed a vendor bill via inbox Kernel. Do not invent amounts."
+            if to_slug == "ap"
+            else "Landed a customer remittance via inbox Kernel. Do not apply cash in this Bot."
+        )
+        intents.append(
+            _intent(
+                from_slug="email",
+                to_slug=to_slug,
+                profile=to_profile,
+                path=path,
+                source_id=message_id,
+                sentence=sentence,
+            )
+        )
+    return SourceWakeResult(
+        slug="email",
+        profile=profile,
+        source_id=message_id,
+        classification=pipe,
+        reason=result.receiver.classification.rationale,
+        packet_path=path,
+        intents=intents,
+        invoice_candidates=1 if result.invoice_id else 0,
+        kernel_status=result.final_status,
+        details={"canonical_id": result.invoice_id, "inbox_class": inbox_class},
     )
 
 

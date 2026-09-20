@@ -9,6 +9,7 @@ import { readProtocol } from "../protocol-log.ts";
 import { loadRoster } from "../roster.ts";
 import { sleep } from "../sleep.ts";
 import type { EventBus } from "./bus.ts";
+import { ombLatestMessage, ombUserLeaf } from "./omb-compat.ts";
 
 export function startPumps(
   computerRoot: string,
@@ -39,38 +40,40 @@ export function startPumps(
       if (!threadId) {
         continue;
       }
-      const at = Date.parse(event.t);
-      if (event.type === "turn.start") {
-        bus.publish({
-          kind: "message",
-          threadId,
-          message: {
-            id: `seq-${event.seq}`,
-            role: "bot",
-            kind: "activity",
-            text: "running",
-            at: Number.isFinite(at) ? at : Date.now(),
-          },
-        });
-      } else if (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") {
-        const raw = event.text ?? "";
-        const text = raw
-          .replace(/^[^\n]*finished handle \S+:\s*/i, "")
-          .replace(/^[^\n]*cancelled handle \S+:\s*/i, "");
-        if (text.trim().length === 0) {
-          continue;
+      if (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") {
+        const latest = ombLatestMessage(computerRoot, threadId);
+        const parentId = ombUserLeaf(threadId) ?? latest?.parentId ?? null;
+        if (latest && latest.role === "bot" && latest.kind === "text" && (latest.text ?? "").trim().length > 0) {
+          bus.publish({
+            kind: "message",
+            threadId,
+            message: {
+              ...latest,
+              parentId,
+            },
+          });
+        } else {
+          const raw = event.text ?? "";
+          const text = raw
+            .replace(/^[^\n]*finished handle \S+:\s*/i, "")
+            .replace(/^[^\n]*cancelled handle \S+:\s*/i, "");
+          if (text.trim().length === 0) {
+            continue;
+          }
+          const at = Date.parse(event.t);
+          bus.publish({
+            kind: "message",
+            threadId,
+            message: {
+              id: `seq-${event.seq}`,
+              role: "bot",
+              kind: "text",
+              text,
+              at: Number.isFinite(at) ? at : Date.now(),
+              parentId,
+            },
+          });
         }
-        bus.publish({
-          kind: "message",
-          threadId,
-          message: {
-            id: `seq-${event.seq}`,
-            role: "bot",
-            kind: "text",
-            text,
-            at: Number.isFinite(at) ? at : Date.now(),
-          },
-        });
       }
     }
   };
@@ -97,6 +100,7 @@ export function startPumps(
             pending,
             busy,
             activity,
+            computer: "off",
           },
         });
       }

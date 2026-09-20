@@ -72,6 +72,8 @@ def reconcile_payout(payout: ProviderPayout) -> ReconciliationBreakdown:
             continue
         if bucket == "gross":
             gross += minor
+            if line.fee_minor:
+                fees += abs(int(line.fee_minor))
         elif bucket == "refund":
             refunds += abs(minor)
         elif bucket == "chargeback":

@@ -27,7 +27,7 @@ Default Profile: `payout`. Constitution: do not invent a Display name. Grants st
 
 ## Catalog ops
 
-None from constructors. Stripe and Adyen stay Kernel integrations. You read the packet the Kernel wrote. You do not call AP, accrual, or pay-run ops.
+Stripe and Adyen stay Kernel integrations. `simulations/stripe` is a Kernel fixture universe for demos and eval, not a Bot. You read the packet the Kernel wrote. You do not call AP, accrual, or pay-run ops.
 
 Must not: `invoice_ingestion` invoice tools used to mint a bill, AP record tools, `create_accrual`, pay-run ops, `get_audit_ground_truth`.
 

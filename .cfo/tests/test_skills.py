@@ -16,6 +16,7 @@ from ar.agents import cash_application_agent, cash_reviewer_agent, collections_a
 from accrual.agent import accrual_agent
 from accrual.models import AccrualDecision
 from accrual.workflow import finalize_vendor_close
+from inbox.agents import counterparty_message_agent, finance_inbox_agent
 from invoice_ingestion.agents import AGENTS
 from invoice_ingestion.models import SOURCE_AGENTS
 from invoice_ingestion.sources import run_email_source, run_erp_source
@@ -97,6 +98,8 @@ AGENTS_BY_NAME = {
     cash_forecast_agent.name: cash_forecast_agent,
     forecast_reviewer_agent.name: forecast_reviewer_agent,
     forecast_variance_agent.name: forecast_variance_agent,
+    counterparty_message_agent.name: counterparty_message_agent,
+    finance_inbox_agent.name: finance_inbox_agent,
 }
 AGENTS_BY_NAME.update({agent.name: agent for agent in AGENTS.values()})
 
@@ -106,6 +109,7 @@ EXPECTED_ASSIGNMENTS = {
     SOURCE_AGENTS["email"]: (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "inbox-triage",
     ),
     "Accrual Agent": (
         "accrual-evidence-evaluation",
@@ -274,6 +278,7 @@ def test_ingestion_traces_include_skill_usage():
     assert [item.name for item in email.skill_usage.skills] == [
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "inbox-triage",
     ]
     assert all(item.injected for item in email.skill_usage.skills)
     erp = run_erp_source("2026-09")
