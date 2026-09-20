@@ -9,7 +9,7 @@ export function VideoCard({ video }: { video: Video }) {
         {ready && video.embedUrl ? (
           <iframe title={video.title} src={video.embedUrl} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
         ) : ready && video.src ? (
-          <video controls poster={video.thumbnail} src={video.src} />
+          <video controls playsInline preload="metadata" poster={video.thumbnail} src={video.src} />
         ) : (
           <div className="video-placeholder">
             <div className="eyebrow">Awaiting recording</div>
@@ -20,7 +20,10 @@ export function VideoCard({ video }: { video: Video }) {
       </div>
       <h2 style={{ textTransform: "none", letterSpacing: 0, color: "var(--text)", fontSize: 18 }}>{video.title}</h2>
       <p>{video.description}</p>
-      <p className="muted">Processes: {video.processes.join(" · ")}</p>
+      <p className="muted">
+        {video.duration ? `${video.duration} · ` : ""}
+        {video.processes.join(" · ")}
+      </p>
       <p className="muted">Agents: {video.agents.map((slug) => AGENTS_BY_SLUG[slug]?.name.replace(/ Agent$/, "")).join(" · ")}</p>
     </div>
   );
@@ -34,7 +37,7 @@ export function VideoShowcase({ videos, heading = true }: { videos: Video[]; hea
           <div className="eyebrow">See Maximor in action</div>
           <h2 className="section-title">Recorded office runs</h2>
           <p className="lede">
-            These slots are ready for recordings of the live system. Nothing here is a mocked success clip.
+            Cuts from the Golden September desk. A valid bill is not a payment. Harbor memory does not paste last month's number. $12.40 keeps the lock open.
           </p>
         </>
       ) : null}

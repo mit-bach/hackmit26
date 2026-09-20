@@ -2,7 +2,7 @@ import { RestHead } from "../components/rest/RestHead";
 import { VideoShowcase } from "../components/VideoShowcase";
 import { VIDEOS } from "../data/videos";
 
-const STAKE = "Cards are placeholders until a real file exists.";
+const STAKE = "Cuts from golden-20260920-r1. September is not CLOSED. Acme was not paid.";
 
 export default function Videos(): JSX.Element {
   return (

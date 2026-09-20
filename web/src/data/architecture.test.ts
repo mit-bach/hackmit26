@@ -2,7 +2,7 @@ import { AGENTS, GRAIN_SLUGS } from "./agents";
 import { CAPABILITIES } from "./capabilities";
 import { HANDOFFS } from "./handoffs";
 import { SIMULATIONS } from "./simulations";
-import { VIDEOS } from "./videos";
+import { videoHasMedia, VIDEOS } from "./videos";
 import { INVOICE_STORY } from "./workflowStory";
 
 test("architecture data matches the 15 grain slugs", () => {
@@ -44,7 +44,8 @@ test("every handoff and simulation agent exists", () => {
   }
   for (const video of VIDEOS) {
     for (const slug of video.agents) expect(slugs.has(slug)).toBe(true);
-    expect(video.src || video.embedUrl || true).toBeTruthy();
+    expect(videoHasMedia(video)).toBe(true);
+    expect(video.src).toMatch(/^\/videos\/.+\.mp4$/);
   }
 });
 
