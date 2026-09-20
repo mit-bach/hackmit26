@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "comment": "Project overlay after vault/engine split. Hidden product: .cfo and .harness.",
-  "updated_at": "2026-09-19T23:45:00Z",
-  "updated_by": "bootstrap-stamp-vault-reorg",
+  "comment": "After workshop isolation. Product: .cfo kernel, .cfo-v2 office, .harness, web. Notes: workshop/. Shadows: .archive.",
+  "updated_at": "2026-09-20T15:45:00Z",
+  "updated_by": "reorg-workshop-isolate",
   "defaults": {
     "inventory_is_acl": false,
     "unclassified_policy": "report_and_refuse_bulk",
@@ -19,7 +19,8 @@
     "**/.obsidian/**",
     "**/.DS_Store",
     "**/inbox.jsonl.lock",
-    "**/*.jsonl.tmp.*"
+    "**/*.jsonl.tmp.*",
+    "**/kernel.port"
   ],
   "classify_priority": ["E", "H", "F", "C", "K", "B", "A", "I", "J", "D", "G"],
   "zones": [
@@ -28,19 +29,22 @@
       "name": "product",
       "roots": [
         { "path": ".cfo", "optional": false },
-        { "path": ".cfo-v2", "optional": true },
-        { "path": ".harness", "optional": false }
+        { "path": ".cfo-v2", "optional": false },
+        { "path": ".harness", "optional": false },
+        { "path": "web", "optional": false }
       ],
       "include_files": [
         "main.py",
         "accrue.py",
         "close.py",
         "demo_month_end_close.py",
+        "demo_web.py",
         "pytest.ini",
-        "requirements.txt"
+        "requirements.txt",
+        "package.json",
+        "vercel.json"
       ],
-      "include_globs": [],
-      "hard_excludes": ["**/node_modules/**", "**/__pycache__/**", "**/.pi/**"],
+      "hard_excludes": ["**/node_modules/**", "**/__pycache__/**", "**/.pi/**", "**/kernel.port"],
       "agent_may_write": true,
       "commit_prefixes": ["feat", "fix", "refactor", "test", "chore"],
       "default_author": "agent"
@@ -49,10 +53,10 @@
       "id": "B",
       "name": "product-docs",
       "roots": [
-        { "path": "docs", "optional": false }
+        { "path": "workshop/docs", "optional": false },
+        { "path": "docs", "optional": true }
       ],
-      "include_files": ["README.md"],
-      "include_globs": [],
+      "include_files": ["README.md", "workshop/README.md", ".cfo-v2/README.md", ".archive/README.md"],
       "agent_may_write": true,
       "commit_prefixes": ["docs"],
       "default_author": "agent"
@@ -61,7 +65,8 @@
       "id": "C",
       "name": "human-notes",
       "roots": [
-        { "path": "Operator-workspace", "optional": false }
+        { "path": "workshop/operator-workspace", "optional": false },
+        { "path": "Operator-workspace", "optional": true }
       ],
       "agent_may_write": false,
       "commit_prefixes": ["notes"],
@@ -73,8 +78,10 @@
       "id": "D",
       "name": "design-prep",
       "roots": [
-        { "path": "design-workshop", "optional": false },
-        { "path": "GROK-WORKSHOP", "optional": false }
+        { "path": "workshop/design-workshop", "optional": false },
+        { "path": "design-workshop", "optional": true },
+        { "path": "GROK-WORKSHOP", "optional": false },
+        { "path": "workshop", "optional": false }
       ],
       "agent_may_write": true,
       "commit_prefixes": ["docs", "chore"],
@@ -83,11 +90,16 @@
     {
       "id": "F",
       "name": "ide-noise",
-      "roots": [
-        { "path": ".obsidian", "optional": false }
-      ],
+      "roots": [{ "path": ".obsidian", "optional": false }],
       "never_commit": true,
       "agent_may_write": false
+    },
+    {
+      "id": "G",
+      "name": "dead-archive",
+      "roots": [{ "path": ".archive", "optional": false }],
+      "agent_may_write": false,
+      "read_only_for_agents": true
     },
     {
       "id": "H",
@@ -103,9 +115,7 @@
     {
       "id": "I",
       "name": "project-config",
-      "roots": [
-        { "path": ".cursor", "optional": false }
-      ],
+      "roots": [{ "path": ".cursor", "optional": false }],
       "include_files": [".gitignore"],
       "agent_may_write": true,
       "commit_prefixes": ["chore", "feat", "fix"],
@@ -123,15 +133,13 @@
     {
       "id": "K",
       "name": "session-git-overlay",
-      "roots": [
-        { "path": ".session-git", "optional": false }
-      ],
+      "roots": [{ "path": ".session-git", "optional": false }],
       "agent_may_write": true,
       "commit_prefixes": ["chore", "docs"],
       "default_author": "agent"
     }
   ],
-  "active_subtrees": [".cfo", ".harness/Harness-v2", ".cfo-v2"],
+  "active_subtrees": [".cfo", ".cfo-v2/office", ".harness/Harness-v2", "web"],
   "branch": {
     "main": "main",
     "forbid_force_push_main": true,
