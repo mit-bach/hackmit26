@@ -11,8 +11,8 @@
   "thinkingLevel": "low",
   "evalPhase": "operational",
   "features": {
-    "showToolCalls": false,
-    "transcriptVerbosity": "compact",
+    "showToolCalls": true,
+    "transcriptVerbosity": "full",
     "skillAuthoring": true,
     "browser": false,
     "sharedComputers": false,

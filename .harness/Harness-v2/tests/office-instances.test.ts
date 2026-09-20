@@ -127,6 +127,12 @@ test("GET /api/office-instances and POST create/select round-trip", async () => 
     const office = (await (await fetch(`${started.url}/api/office`)).json()) as { computerRoot: string };
     assert.equal(office.computerRoot, created.computerRoot);
 
+    const botsAfterSelect = (await (await fetch(`${started.url}/api/bots`)).json()) as {
+      office?: { currentId: string; instances: readonly { id: string }[] };
+    };
+    assert.equal(botsAfterSelect.office?.currentId, "fresh-protocol");
+    assert.ok(botsAfterSelect.office?.instances.some((row) => row.id === "fresh-protocol"));
+
     const live = (await (
       await fetch(`${started.url}/api/office-instances/live/select`, { method: "POST" })
     ).json()) as { currentId: string };

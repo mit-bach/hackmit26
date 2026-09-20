@@ -195,6 +195,20 @@ export function listOfficeState(computerRoot: string): OfficeState {
   return ensureOfficeState(computerRoot);
 }
 
+/** Public office payload for GET /api/bots and SSE switch frames. */
+export function officePublicState(computerRoot: string): {
+  readonly currentId: string;
+  readonly instances: readonly OfficeInstanceRecord[];
+  readonly computerRoot: string;
+} {
+  const office = listOfficeState(computerRoot);
+  return {
+    currentId: office.currentId,
+    instances: office.instances,
+    computerRoot: resolve(computerRoot),
+  };
+}
+
 /** Point currentId at the Computer this process is actually serving. */
 export function bindRunningComputer(computerRoot: string): OfficeState {
   const office = ensureOfficeState(computerRoot);
@@ -388,13 +402,9 @@ export async function handleOfficeInstanceRequest(
   switchTo: (nextRoot: string) => Promise<void>,
 ): Promise<{ readonly status: number; readonly body: unknown } | undefined> {
   if (method === "GET" && path === "/api/office-instances") {
-    const office = listOfficeState(computerRoot);
     return {
       status: 200,
-      body: {
-        ...office,
-        computerRoot: resolve(computerRoot),
-      },
+      body: officePublicState(computerRoot),
     };
   }
 
@@ -423,15 +433,24 @@ export async function handleOfficeInstanceRequest(
     const id = decodeURIComponent(selectMatch[1] ?? "");
     try {
       const found = getOfficeInstance(computerRoot, id);
-      await switchTo(found.computerRoot);
-      const selected = selectOfficeInstance(computerRoot, id);
+      const previousId = listOfficeState(computerRoot).currentId;
+      if (previousId !== id) {
+        selectOfficeInstance(computerRoot, id);
+      }
+      try {
+        await switchTo(found.computerRoot);
+      } catch (error) {
+        if (previousId !== id) {
+          selectOfficeInstance(computerRoot, previousId);
+        }
+        throw error;
+      }
+      const selected = getOfficeInstance(computerRoot, id);
       return {
         status: 200,
         body: {
           instance: selected.instance,
-          currentId: selected.office.currentId,
-          instances: selected.office.instances,
-          computerRoot: selected.computerRoot,
+          ...officePublicState(selected.computerRoot),
         },
       };
     } catch (error) {

@@ -5,7 +5,7 @@ export function instanceSupportsLocalComputer(
   bot: Pick<Bot, "modelSelection">,
 ): boolean {
   const capabilities = instances.find(
-    (instance) => instance.instanceId === bot.modelSelection.instanceId,
+    (instance) => instance.instanceId === bot.modelSelection?.instanceId,
   )?.capabilities;
   return capabilities?.localComputerMcp === true || capabilities?.computerMcp === true;
 }

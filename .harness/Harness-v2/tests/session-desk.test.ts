@@ -114,6 +114,89 @@ test("projectSessionDesk keeps both Pi reasonings in session order plus the thre
   assert.match(rows[4]?.text ?? "", /Blue/);
   assert.equal(rows.filter((row) => (row.reasoning ?? "").length > 0).length, 2);
   assert.ok(kinds.length >= 5);
+  const ids = rows.map((row) => row.id);
+  assert.equal(new Set(ids).size, ids.length);
+});
+
+test("projectSessionDesk keeps one row per id when session and thread chips collide", () => {
+  const computer = makeComputer();
+  const botId = "bot_alpha";
+  appendThreadAsk(
+    computer,
+    botId,
+    "bot_beta",
+    "h_peer",
+    "What color is the sky?",
+    "2026-09-20T10:38:47.166Z",
+  );
+  const dir = piSessionDir(computer, botId);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(
+    join(dir, "dup.jsonl"),
+    [
+      JSON.stringify({
+        type: "message",
+        id: "u1",
+        timestamp: "2026-09-20T10:38:43.000Z",
+        message: {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: "[harness wake]\nkind: user_dm\nfrom: operator\nhandle: h_op\nconversation: operator_dm\nAsk beta.",
+            },
+          ],
+        },
+      }),
+      JSON.stringify({
+        type: "message",
+        id: "a1",
+        timestamp: "2026-09-20T10:38:45.000Z",
+        message: {
+          role: "assistant",
+          content: [
+            {
+              type: "toolCall",
+              id: "call-ask",
+              name: "ask_bot",
+              arguments: { bot_id: "beta", prompt: "sky?" },
+            },
+          ],
+        },
+      }),
+      JSON.stringify({
+        type: "message",
+        id: "t1",
+        timestamp: "2026-09-20T10:38:49.000Z",
+        message: {
+          role: "toolResult",
+          toolCallId: "call-ask",
+          toolName: "ask_bot",
+          content: [{ type: "text", text: JSON.stringify({ handleId: "h_peer" }) }],
+          details: { handleId: "h_peer" },
+          isError: false,
+        },
+      }),
+      JSON.stringify({
+        type: "message",
+        id: "t2",
+        timestamp: "2026-09-20T10:38:49.100Z",
+        message: {
+          role: "toolResult",
+          toolCallId: "call-ask",
+          toolName: "ask_bot",
+          content: [{ type: "text", text: JSON.stringify({ handleId: "h_peer" }) }],
+          details: { handleId: "h_peer" },
+          isError: false,
+        },
+      }),
+      "",
+    ].join("\n"),
+  );
+  const rows = projectSessionDesk(computer, botId, loadRoster(computer));
+  const ids = rows.map((row) => row.id);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.equal(rows.filter((row) => row.id.startsWith("comm-")).length, 1);
 });
 
 test("projectSessionDesk keeps pair traffic on the thread, not on the operator desk", () => {

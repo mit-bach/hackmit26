@@ -17,16 +17,15 @@ import { fireRoutine, listReceipts } from "../routines.ts";
 import { searchAgents } from "../search.ts";
 import { executeFakeTurn } from "../ask-peer.ts";
 import { sendPrompt } from "../send.ts";
-import { startSidecar, type SidecarHandle } from "../sidecar.ts";
+import { sidecarHealthy, startSidecar, type SidecarHandle } from "../sidecar.ts";
 import { startFakeWorkers } from "../worker.ts";
 import { wipeRuntime } from "../wipe.ts";
 import { transcriptTail } from "../transcript-tail.ts";
 import { buildSnapshot, handleOperatorApi } from "./api.ts";
 import { EventBus } from "./bus.ts";
-import { handleOmbCompat, wireBotFrame } from "./omb-compat.ts";
-import { bindRunningComputer, handleOfficeInstanceRequest, resolveServeComputer } from "./office-instances.ts";
+import { handleOmbCompat, resetOmbLiveChain } from "./omb-compat.ts";
+import { bindRunningComputer, handleOfficeInstanceRequest, officePublicState, resolveServeComputer } from "./office-instances.ts";
 import { loadOperatorConfig, type OperatorConfig } from "./operator-config.ts";
-import { listPairChannels } from "./pair-channels.ts";
 import { startPumps } from "./pump.ts";
 import { tryServeStatic } from "./static.ts";
 import { startSupervisor, type Supervisor } from "./supervisor.ts";
@@ -109,19 +108,15 @@ const CORS = {
 } as const;
 
 function publishOfficeHello(live: LiveOffice): void {
-  const snapshot = buildSnapshot(live.computerRoot, live.fakeWorkers, live.supervisor, live.sidecar);
-  live.bus.publish({ kind: "hello", snapshot });
-  live.bus.publish({ kind: "office", computerRoot: live.computerRoot });
-  const roster = loadRoster(live.computerRoot);
-  for (const bot of roster.bots) {
-    const frame = wireBotFrame(live.computerRoot, bot.id);
-    if (frame) {
-      live.bus.publish({ kind: "bot", bot: frame });
-    }
-  }
-  for (const group of listPairChannels(live.computerRoot, roster)) {
-    live.bus.publish({ kind: "group", group });
-  }
+  live.bus.publish({
+    kind: "hello",
+    cursor: "h:0",
+    resumed: false,
+  });
+  live.bus.publish({
+    kind: "office",
+    ...officePublicState(live.computerRoot),
+  });
 }
 
 async function bootRuntime(live: LiveOffice): Promise<void> {
@@ -156,8 +151,16 @@ async function stopRuntime(live: LiveOffice, options: { readonly keepSidecar?: b
   live.pumps.stop();
   live.fake?.stop();
   live.fake = undefined;
-  if (!options.keepSidecar && live.sidecar?.owned) {
+  if (options.keepSidecar && live.sidecar) {
+    const healthy = await sidecarHealthy(live.sidecar.port);
+    if (healthy) {
+      return;
+    }
+  }
+  if (live.sidecar?.owned) {
     await live.sidecar.stop();
+    live.sidecar = undefined;
+  } else {
     live.sidecar = undefined;
   }
 }
@@ -168,10 +171,11 @@ async function applyOfficeSelect(live: LiveOffice, nextRoot: string): Promise<vo
     return;
   }
   const previous = live.computerRoot;
-  await stopRuntime(live);
+  await stopRuntime(live, { keepSidecar: true });
+  resetOmbLiveChain();
   try {
     live.computerRoot = resolved;
-    initComputer(resolved);
+    bindRunningComputer(resolved);
     const client = loadClientRuntime(resolved);
     live.config = overlayOperatorConfig(resolved, loadOperatorConfig(), client);
     await bootRuntime(live);
@@ -179,7 +183,7 @@ async function applyOfficeSelect(live: LiveOffice, nextRoot: string): Promise<vo
   } catch (error) {
     await stopRuntime(live);
     live.computerRoot = previous;
-    initComputer(previous);
+    bindRunningComputer(previous);
     const previousClient = loadClientRuntime(previous);
     live.config = overlayOperatorConfig(previous, loadOperatorConfig(), previousClient);
     await bootRuntime(live);

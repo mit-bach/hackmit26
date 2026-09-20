@@ -929,7 +929,7 @@ export function ChatView({ bot: profile }: { bot: Bot }) {
   const recordedRun = useMemo(() => runSteps(messages), [messages]);
   const recordedRunCounts = runSummary(recordedRun);
   const engineSupportsAgents = Boolean(
-    state.instances.find((instance) => instance.instanceId === bot.modelSelection.instanceId)?.capabilities?.agentsMcp,
+    state.instances.find((instance) => instance.instanceId === bot.modelSelection?.instanceId)?.capabilities?.agentsMcp,
   );
   const canSaveRun =
     skillAuthoringEnabled(state.config) && engineSupportsAgents && recordedRunCounts.passed > 0 && recordedRunCounts.running === 0 && !bot.busy;

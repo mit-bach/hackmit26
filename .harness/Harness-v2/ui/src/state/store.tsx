@@ -466,16 +466,28 @@ function taskPatchFields(patch: TaskUpdatePatch): Partial<Task> {
     ...(surface === undefined ? {} : { surface: surface ?? undefined }) };
 }
 
+/** Status pings omit both the transcript and the model picker. Complete
+ * OpenMausBot frames always carry modelSelection even when messages are
+ * deferred. */
+function isPartialBotFrame(bot: BotAnnouncement): boolean {
+  return !Array.isArray(bot.messages) && bot.modelSelection === undefined;
+}
+
 /** The visible conversation: walk parentId links from the active leaf back
- * to the root. Falls back to the flat list for pre-branching payloads. */
+ * to the root. Falls back to the flat list for pre-branching payloads, and
+ * when live SSE parents a chip onto itself (that walk would freeze the desk). */
 export function visibleMessages(bot: Bot): Message[] {
+  const messages = bot.messages ?? [];
   const leafId = bot.activeLeafId;
-  if (!leafId) return bot.messages;
-  const byId = new Map(bot.messages.map((m) => [m.id, m]));
-  if (!byId.has(leafId)) return bot.messages;
+  if (!leafId) return messages;
+  const byId = new Map(messages.map((m) => [m.id, m]));
+  if (!byId.has(leafId)) return messages;
   const path: Message[] = [];
+  const seen = new Set<string>();
   let cur = byId.get(leafId);
   while (cur) {
+    if (seen.has(cur.id) || cur.parentId === cur.id) return messages;
+    seen.add(cur.id);
     path.push(cur);
     cur = cur.parentId ? byId.get(cur.parentId) : undefined;
   }
@@ -730,7 +742,8 @@ export interface AppState {
   config: ConfigStatus | null;
   /** selected chat — a bot id OR a group id */
   selectedId: string;
-  activeView: "chat" | "protocol" | "routines" | "computer" | "demo";
+  activeView: "chat" | "protocol" | "routines" | "computer" | "demo" | "office";
+  office: OfficeDesk;
   routines: Routine[];
   routineRuns: RoutineRun[];
   routinesLoadState: "loading" | "ready" | "error";
@@ -871,6 +884,19 @@ function replaceBotQueues(state: AppState, queues: AppState["pendingQueued"]): A
 
 export type BotAnnouncement = Omit<Bot, "messages"> & { messages?: Message[] };
 
+export interface OfficeInstanceRecord {
+  id: string;
+  name: string;
+  computerRel: string;
+  createdAt: string;
+}
+
+export interface OfficeDesk {
+  currentId: string;
+  instances: OfficeInstanceRecord[];
+  computerRoot?: string;
+}
+
 export type Action =
   | {
       type: "hydrate";
@@ -879,6 +905,7 @@ export type Action =
       sections?: string[];
       computerControl: Record<string, { held: boolean; helpReason: string | null }>;
       botQueuedMessages?: AppState["pendingQueued"];
+      office?: OfficeDesk;
     }
   | { type: "botQueues"; queues: AppState["pendingQueued"] }
   | { type: "sections"; sections: string[] }
@@ -886,7 +913,9 @@ export type Action =
   | { type: "showProtocol" }
   | { type: "showComputer" }
   | { type: "showDemo" }
+  | { type: "showOffice" }
   | { type: "showChat" }
+  | { type: "officePatched"; office: OfficeDesk }
   | { type: "routinesHydrated"; routines: Routine[]; runs: RoutineRun[] }
   | { type: "routinesLoadFailed" }
   | { type: "routinePatched"; routine: Routine }
@@ -1024,7 +1053,7 @@ function reconcileModelVariantSessions(state: AppState): AppState {
     const owner = state.bots.find((bot) => bot.threadId === threadId || bot.tasks?.some((task) => task.threadId === threadId));
     if (!owner) return false;
     const selection = currentTaskBot(owner, threadId).modelSelection;
-    return selection.instanceId === session.instanceId && selection.model === session.model;
+    return selection?.instanceId === session.instanceId && selection.model === session.model;
   });
   return kept.length === sessions.length ? state : { ...state, modelVariantSessions: Object.fromEntries(kept) };
 }
@@ -1223,6 +1252,7 @@ export function reducer(state: AppState, action: Action): AppState {
         selectedId,
         backgroundThreadEvents: {},
         modelVariantSessions: {},
+        ...(action.office ? { office: action.office } : {}),
       };
       return reconcileSnapshotQueues(
         action.botQueuedMessages ? replaceBotQueues(hydrated, action.botQueuedMessages) : hydrated,
@@ -1276,6 +1306,18 @@ export function reducer(state: AppState, action: Action): AppState {
         appSettingsOpen: false,
         pluginsOpen: false,
       };
+    case "showOffice":
+      return {
+        ...state,
+        activeView: "office",
+        computerOpen: false,
+        settingsOpen: false,
+        inspectorOpen: false,
+        appSettingsOpen: false,
+        pluginsOpen: false,
+      };
+    case "officePatched":
+      return { ...state, office: action.office };
     case "routinesHydrated":
       return { ...state, routines: action.routines, routineRuns: trimRoutineRuns(action.runs), routinesLoadState: "ready" };
     case "routinesLoadFailed":
@@ -1421,6 +1463,26 @@ export function reducer(state: AppState, action: Action): AppState {
       return updateBot(withMascotMotion(state, action.botId, "surprise"), action.botId, (b) => ({ ...b, unread: true }));
     case "botPatched": {
       const before = state.bots.find((b) => b.id === action.bot.id);
+      // Harness status pings are not OpenMausBot complete frames. Spreading
+      // them clobbers modelSelection/section/messages and the next ChatView
+      // render unmounts the production tree (black foundry shell).
+      if (isPartialBotFrame(action.bot)) {
+        if (!before) return state;
+        const kind =
+          action.bot.busy === true && !before.busy
+            ? "working"
+            : action.bot.busy === false && before.busy
+              ? "celebrate"
+              : null;
+        const animated = kind ? withMascotMotion(state, action.bot.id, kind) : state;
+        return updateBot(animated, action.bot.id, (b) => ({
+          ...b,
+          ...(typeof action.bot.name === "string" ? { name: action.bot.name } : {}),
+          ...(typeof action.bot.busy === "boolean" ? { busy: action.bot.busy } : {}),
+          ...(action.bot.activity !== undefined ? { activity: action.bot.activity } : {}),
+          ...(typeof action.bot.unread === "boolean" ? { unread: action.bot.unread } : {}),
+        }));
+      }
       // Bot frames are complete except for their transcript. An unknown one
       // was created by another client (the phone, another app window, or a
       // team import), so add it now; the following message frames will fill
@@ -1500,7 +1562,7 @@ export function reducer(state: AppState, action: Action): AppState {
         // room thread — plain linear append, no branching/mascot machinery
         const group = state.groups.find((g) => g.threadId === action.threadId);
         if (!group) return state;
-        if (group.messages.some((m) => m.id === action.message.id)) return state;
+        if ((group.messages ?? []).some((m) => m.id === action.message.id)) return state;
         const optimisticIndex = action.message.sendId
           ? group.messages.findIndex(
               (message) => message.id === optimisticMessageId(action.message.sendId!),
@@ -1525,7 +1587,7 @@ export function reducer(state: AppState, action: Action): AppState {
       // The POST response and the canonical SSE frame may arrive in either
       // order. A repeated id on a tool chip is a live patch (start → end),
       // not a second row.
-      if (bot.messages.some((message) => message.id === action.message.id)) {
+      if ((bot.messages ?? []).some((message) => message.id === action.message.id)) {
         return reducer(state, { type: "messagePatched", threadId: action.threadId, message: action.message });
       }
       const optimisticId = action.message.sendId
@@ -1940,7 +2002,7 @@ export function reducer(state: AppState, action: Action): AppState {
       const bot = animated.bots.find((candidate) => candidate.id === action.botId);
       const threadId = action.threadId ?? bot?.threadId;
       if (!bot || threadId !== bot.threadId) return animated;
-      if (bot.messages.some((message) => message.sendId === action.sendId)) return animated;
+      if ((bot.messages ?? []).some((message) => message.sendId === action.sendId)) return animated;
       const message = optimisticUserMessage(
         action.text,
         action.sendId,
@@ -2056,6 +2118,7 @@ export const initialState: AppState = {
   config: null,
   selectedId: "",
   activeView: "chat",
+  office: { currentId: "", instances: [] },
   routines: [],
   routineRuns: [],
   routinesLoadState: "loading",
@@ -2505,12 +2568,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         const persisted = await botPatchQueue.flush(expected.id);
         if (!persisted) return;
         const expectedSelection = expected.modelSelection;
+        const persistedSelection = persisted.modelSelection;
+        if (!expectedSelection || !persistedSelection) return;
         if (
           approvalModeFor(persisted) !== approvalModeFor(expected) ||
-          persisted.modelSelection.instanceId !== expectedSelection.instanceId ||
-          persisted.modelSelection.model !== expectedSelection.model ||
-          persisted.modelSelection.effort !== expectedSelection.effort ||
-          persisted.modelSelection.variant !== expectedSelection.variant
+          persistedSelection.instanceId !== expectedSelection.instanceId ||
+          persistedSelection.model !== expectedSelection.model ||
+          persistedSelection.effort !== expectedSelection.effort ||
+          persistedSelection.variant !== expectedSelection.variant
         ) {
           throw new Error("The approval level or model could not be saved, so this work was not started");
         }
@@ -3261,8 +3326,19 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     };
     const loadAll = async (): Promise<boolean> => {
       const chat = () =>
-        api("/api/bots").then(({ bots, groups, sections, computerControl, botQueuedMessages }) => {
+        api<{
+          bots: Bot[];
+          groups?: Group[];
+          sections?: string[];
+          computerControl?: Record<string, { held: boolean; helpReason: string | null }>;
+          botQueuedMessages?: AppState["pendingQueued"];
+          office?: OfficeDesk;
+        }>("/api/bots").then(({ bots, groups, sections, computerControl, botQueuedMessages, office }) => {
           if (!alive) return;
+          if (office && office.currentId !== stateRef.current.office.currentId) {
+            deltaBuffer.dispose();
+            setStream({ streaming: {}, reasoning: {} });
+          }
           rawDispatch({
             type: "hydrate",
             bots,
@@ -3270,6 +3346,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             sections: sections ?? [],
             computerControl: computerControl ?? {},
             botQueuedMessages,
+            office,
           });
         });
       const peripherals = peripheralParts.map((part) => ({
@@ -3325,6 +3402,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     // server replays what we missed when it can, and re-downloading every
     // transcript on a reconnect it already covered is pure waste.
     handleFrame = (frame) => {
+      try {
+        applyLiveFrame(frame);
+      } catch (cause) {
+        rawDispatch({
+          type: "error",
+          message: cause instanceof Error ? cause.message : String(cause),
+        });
+      }
+    };
+    const applyLiveFrame = (frame: ServerFrame): void => {
       if (frame.kind === "config") bumpPeripheralVersion("config", "instances");
       else if (frame.kind === "routine" || frame.kind === "routine.deleted" || frame.kind === "routine.run") {
         bumpPeripheralVersion("routines");
@@ -3343,7 +3430,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           rawDispatch({ type: "botQueues", queues: frame.queues });
           break;
         case "message": {
-          const incoming = frame.message as Message;
+          const incoming = frame.message as Message | undefined;
+          if (!incoming || typeof incoming.id !== "string") break;
+          if (incoming.parentId === incoming.id) {
+            incoming.parentId = null;
+          }
           if (incoming?.role === "bot" && incoming.kind === "text") {
             flushDeltas();
             const speakerId = incoming.from?.botId;
@@ -3438,8 +3529,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             sections?: string[];
             computerControl?: Record<string, { held: boolean; helpReason: string | null }>;
             botQueuedMessages?: AppState["pendingQueued"];
+            office?: OfficeDesk;
           }>("/api/bots")
-            .then(({ bots, groups, sections, computerControl, botQueuedMessages }) => {
+            .then(({ bots, groups, sections, computerControl, botQueuedMessages, office }) => {
               rawDispatch({
                 type: "hydrate",
                 bots,
@@ -3447,6 +3539,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
                 sections: sections ?? [],
                 computerControl: computerControl ?? {},
                 botQueuedMessages,
+                office,
               });
             })
             .catch((cause: unknown) => {
@@ -3496,6 +3589,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         case "bot.deleted":
           botPatchQueue.cancel(frame.botId);
           rawDispatch({ type: "deleteBot", botId: frame.botId });
+          break;
+        case "office":
+          rawDispatch({
+            type: "officePatched",
+            office: {
+              currentId: frame.currentId,
+              instances: frame.instances.map((row) => ({
+                id: row.id,
+                name: row.name,
+                computerRel: row.computerRel,
+                createdAt: row.createdAt,
+              })),
+              computerRoot: frame.computerRoot,
+            },
+          });
           break;
         // a key changed and the fleet hot-reloaded — refresh the picker so
         // newly available providers un-dim immediately

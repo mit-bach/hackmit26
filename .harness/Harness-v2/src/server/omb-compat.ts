@@ -14,6 +14,7 @@ import { loadOperatorConfig, patchOperatorConfig, publicOperatorConfig } from ".
 import { piSessionDir } from "../paths.ts";
 import { listPiSessions, readPiSession } from "./pi-sessions.ts";
 import { getPairChannel, isPairChannelId, listPairChannels, pairChannelId } from "./pair-channels.ts";
+import { officePublicState } from "./office-instances.ts";
 import { projectSessionDesk } from "./session-desk.ts";
 
 const MAUS_COLORS = [
@@ -114,6 +115,13 @@ export function ombChainParent(botId: string): string | null {
 /** Record a newly published message as the visible leaf. */
 export function ombAdoptLeaf(botId: string, messageId: string): void {
   lastChainLeaf.set(botId, messageId);
+}
+
+/** Drop live leaf maps when the serve Computer changes. */
+export function resetOmbLiveChain(): void {
+  lastUserLeaf.clear();
+  lastChainLeaf.clear();
+  taskOverlays.clear();
 }
 
 const ombUi: {
@@ -243,10 +251,20 @@ function toOmbMessage(row: OperatorMessage, roster: Roster, viewerId: string): O
 }
 
 function chainMessages(rows: readonly OmbMessage[]): OmbMessage[] {
-  return rows.map((row, index) => ({
-    ...row,
-    parentId: index === 0 ? null : rows[index - 1]?.id ?? null,
-  }));
+  const out: OmbMessage[] = [];
+  const seen = new Set<string>();
+  for (const row of rows) {
+    if (seen.has(row.id)) {
+      continue;
+    }
+    seen.add(row.id);
+    const parentId = out.length === 0 ? null : out[out.length - 1]?.id ?? null;
+    out.push({
+      ...row,
+      parentId: parentId === row.id ? null : parentId,
+    });
+  }
+  return out;
 }
 
 function botTranscript(computerRoot: string, botId: string): {
@@ -757,6 +775,7 @@ export async function handleOmbCompat(
         sections: [roster.system],
         computerControl: {},
         botQueuedMessages: {},
+        office: officePublicState(computerRoot),
       },
     };
   }

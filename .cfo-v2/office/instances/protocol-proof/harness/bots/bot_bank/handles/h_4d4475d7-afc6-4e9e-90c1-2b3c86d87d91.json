@@ -1,0 +1,19 @@
+{
+  "id": "h_4d4475d7-afc6-4e9e-90c1-2b3c86d87d91",
+  "from": "operator",
+  "to": "bot_bank",
+  "toSlug": "bank",
+  "prompt": "ping",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_bank"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T12:17:52.811Z",
+  "updatedAt": "2026-09-20T12:17:56.166Z",
+  "result": "pong",
+  "resultPaths": [],
+  "seq": 27
+}

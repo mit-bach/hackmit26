@@ -340,7 +340,18 @@ export async function handleOperatorApi(
         prompt: text,
         kind: "user_dm",
       });
-      emit(ctx, { kind: "bot", bot: { ...toOperatorBot(computerRoot, bot, index), computer: "off" } });
+      const status = liveStatus(computerRoot, bot.id);
+      emit(ctx, {
+        kind: "bot",
+        bot: {
+          id: bot.id,
+          name: bot.name,
+          status,
+          pending: pendingCount(computerRoot, bot.id),
+          busy: status === "running" || status === "blocked",
+          activity: status === "blocked" ? "waiting-on-you" : status === "running" ? "working" : "idle",
+        },
+      });
       return { status: 200, body: sent };
     }
     if (method === "POST" && (rest === "/interrupt" || rest === "/stop")) {
@@ -352,7 +363,18 @@ export async function handleOperatorApi(
         kind: "user_stop",
         onBusy: "supersede",
       });
-      emit(ctx, { kind: "bot", bot: { ...toOperatorBot(computerRoot, bot, index), computer: "off" } });
+      const status = liveStatus(computerRoot, bot.id);
+      emit(ctx, {
+        kind: "bot",
+        bot: {
+          id: bot.id,
+          name: bot.name,
+          status,
+          pending: pendingCount(computerRoot, bot.id),
+          busy: status === "running" || status === "blocked",
+          activity: status === "blocked" ? "waiting-on-you" : status === "running" ? "working" : "idle",
+        },
+      });
       return { status: 200, body: stopped };
     }
     if (method === "POST" && rest === "/spawn") {

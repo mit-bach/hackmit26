@@ -247,6 +247,8 @@ function spawnBot(
 }
 
 export async function startSupervisor(options: SupervisorOptions): Promise<Supervisor> {
+  eventSeq.clear();
+  publishedToolIds.clear();
   const cliPath = resolvePiCli();
   const children = new Map<string, ChildProcess>();
   const timers: ReturnType<typeof setInterval>[] = [];

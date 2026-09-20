@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Component, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Loader2, Menu } from "lucide-react";
 import { StoreProvider, useStore } from "@/state/store";
 import { ThreadRefsProvider } from "@/components/ThreadRefs";
@@ -15,10 +15,38 @@ import { WindowCaptionButtons } from "@/components/WindowCaptionButtons";
 import { RoutinesPage } from "@/components/RoutinesPage";
 import { ProtocolPage } from "@/components/ProtocolPage";
 import { DemoPage } from "@/components/DemoPage";
+import { OfficeInstancesPage } from "@/components/OfficeInstancesPage";
 import { CommandPalette } from "@/components/CommandPalette";
 import { KeyboardShortcutsModal } from "@/components/KeyboardShortcutsModal";
 import { setLocale, t } from "@/lib/i18n";
 import { shouldOpenKeyboardShortcuts } from "@/lib/keyboard-shortcuts";
+
+class DeskErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
+  state: { error: Error | null } = { error: null };
+
+  static getDerivedStateFromError(error: Error): { error: Error } {
+    return { error };
+  }
+
+  render(): ReactNode {
+    if (!this.state.error) {
+      return this.props.children;
+    }
+    return (
+      <main className="flex h-full min-w-0 flex-1 flex-col items-center justify-center gap-3 bg-app px-6 text-ink">
+        <div className="text-[15px] font-medium">The desk hit a live-update error.</div>
+        <div className="max-w-md text-center text-[13px] text-ink-secondary">{this.state.error.message}</div>
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="rounded-lg bg-control px-3 py-2 text-[13px] text-ink hover:bg-raised-hover"
+        >
+          Reload
+        </button>
+      </main>
+    );
+  }
+}
 
 function Shell(): React.ReactElement {
   const { state, dispatch } = useStore();
@@ -33,7 +61,7 @@ function Shell(): React.ReactElement {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const group = state.groups.find((item) => item.id === state.selectedId);
-  const pairPending = !group && state.selectedId.startsWith("pair:");
+  const pairPending = !group && Boolean(state.selectedId?.startsWith("pair:"));
   const bot = group || pairPending
     ? undefined
     : (state.bots.find((item) => item.id === state.selectedId) ?? state.bots[0]);
@@ -135,6 +163,8 @@ function Shell(): React.ReactElement {
         )}
         {state.activeView === "demo" ? (
           <DemoPage />
+        ) : state.activeView === "office" ? (
+          <OfficeInstancesPage />
         ) : state.activeView === "protocol" ? (
           <ProtocolPage />
         ) : state.activeView === "computer" ? (
@@ -195,11 +225,13 @@ function Shell(): React.ReactElement {
 export default function App(): React.ReactElement {
   return (
     <DesktopCapabilitiesProvider>
-      <StoreProvider>
-        <ThreadRefsProvider>
-          <Shell />
-        </ThreadRefsProvider>
-      </StoreProvider>
+      <DeskErrorBoundary>
+        <StoreProvider>
+          <ThreadRefsProvider>
+            <Shell />
+          </ThreadRefsProvider>
+        </StoreProvider>
+      </DeskErrorBoundary>
     </DesktopCapabilitiesProvider>
   );
 }

@@ -19,7 +19,12 @@ export class EventBus {
   }
 
   publish(frame: BusFrame): void {
-    const payload = `data: ${JSON.stringify(frame)}\n\n`;
+    let payload: string;
+    try {
+      payload = `data: ${JSON.stringify(frame)}\n\n`;
+    } catch {
+      return;
+    }
     for (const res of [...this.clients]) {
       try {
         res.write(payload);

@@ -14,6 +14,7 @@ import {
   Copy,
   Crown,
   FolderPlus,
+  Layers,
   Library,
   Loader2,
   Network,
@@ -1967,6 +1968,18 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
             <Network size={20} className={state.activeView === "protocol" ? "text-accent" : "text-ink-secondary"} />
           </button>
           <button
+            onClick={() => dispatch({ type: "showOffice" })}
+            aria-label={t("sidebar.office.instances")}
+            title={t("sidebar.office.instances")}
+            className={cn(
+              "flex min-h-10 w-full items-center rounded-xl py-2 text-left transition-colors",
+              "justify-center px-2",
+              state.activeView === "office" ? "bg-raised text-ink" : "text-ink hover:bg-raised/50",
+            )}
+          >
+            <Layers size={20} className={state.activeView === "office" ? "text-accent" : "text-ink-secondary"} />
+          </button>
+          <button
             data-tour="nav-automations"
             onClick={() => dispatch({ type: "showRoutines" })}
             aria-label="Routines"
@@ -2010,6 +2023,13 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
                 icon: <Network size={18} />,
                 active: state.activeView === "protocol",
                 onSelect: () => dispatch({ type: "showProtocol" }),
+              },
+              {
+                key: "office",
+                label: t("sidebar.office.instances"),
+                icon: <Layers size={18} />,
+                active: state.activeView === "office",
+                onSelect: () => dispatch({ type: "showOffice" }),
               },
               {
                 key: "routines",

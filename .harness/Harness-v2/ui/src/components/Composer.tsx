@@ -111,8 +111,8 @@ export function Composer({
   // A room steers through its busy speaker's engine, mirroring how the
   // server's queue-steer route resolves the running turn.
   const steerInstanceId = group
-    ? members?.find((member) => member.id === group.busyBotId)?.modelSelection.instanceId
-    : bot?.modelSelection.instanceId;
+    ? members?.find((member) => member.id === group.busyBotId)?.modelSelection?.instanceId
+    : bot?.modelSelection?.instanceId;
   const canSteer =
     state.instances.find((i) => i.instanceId === steerInstanceId)?.capabilities?.queueing === true;
   // a pending approval blocks the prompt until it is answered
@@ -215,7 +215,7 @@ export function Composer({
   const botSupportsImages = (candidate?: Bot) =>
     Boolean(
       candidate &&
-        state.instances.find((i) => i.instanceId === candidate.modelSelection.instanceId)?.capabilities?.images,
+        state.instances.find((i) => i.instanceId === candidate.modelSelection?.instanceId)?.capabilities?.images,
     );
   const imageTargetsSupport = (message: string, mode: "chat" | "goal") => {
     if (!group) return botSupportsImages(bot);
@@ -239,7 +239,7 @@ export function Composer({
       Boolean(
         candidate &&
           state.instances.find(
-            (instance) => instance.instanceId === candidate.modelSelection.instanceId,
+            (instance) => instance.instanceId === candidate.modelSelection?.instanceId,
           )?.capabilities?.agentsMcp,
       );
     const available: ComposerSlashCommand[] = [];

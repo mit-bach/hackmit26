@@ -23,11 +23,17 @@ function publishPeerChip(
   messageId: string,
   atMs: number,
 ): void {
+  if (ombChainParent(viewerId) === messageId) {
+    return;
+  }
   const fields = peerCommPayload(roster, event.from ?? "", event.to ?? "", event.handleId, viewerId);
   if (!fields) {
     return;
   }
   const parentId = ombChainParent(viewerId);
+  if (parentId === messageId) {
+    return;
+  }
   ombAdoptLeaf(viewerId, messageId);
   bus.publish({
     kind: "message",
@@ -98,7 +104,89 @@ export function startPumps(
     .sort()
     .join("|");
   const lastReceiptStatus = new Map<string, string>();
+  const lastDeskAt = new Map<string, number>();
+  const pendingDesk = new Set<string>();
+  const DESK_DEBOUNCE_MS = 1500;
+  let protocolFlushing = false;
+  let protocolAgain = false;
   let watcher: FSWatcher | undefined;
+
+  const publishDesk = (botId: string, immediate: boolean): void => {
+    const now = Date.now();
+    const prev = lastDeskAt.get(botId) ?? 0;
+    if (!immediate && now - prev < DESK_DEBOUNCE_MS) {
+      pendingDesk.add(botId);
+      return;
+    }
+    lastDeskAt.set(botId, now);
+    pendingDesk.delete(botId);
+    publishBotDesk(bus, computerRoot, botId);
+  };
+
+  const flushProtocol = (): void => {
+    if (protocolFlushing) {
+      protocolAgain = true;
+      return;
+    }
+    protocolFlushing = true;
+    try {
+      do {
+        protocolAgain = false;
+        const events = readProtocol(computerRoot, lastSeq);
+        for (const event of events) {
+          lastSeq = event.seq;
+          bus.publish({ kind: "protocol", event });
+          const roster = loadRoster(computerRoot);
+          if (event.type === "send.accepted" && event.from && event.from !== "operator" && event.from !== "harness" && event.to) {
+            const sender = findBot(roster, event.from);
+            const receiver = findBot(roster, event.to);
+            const at = Date.parse(event.t);
+            const atMs = Number.isFinite(at) ? at : Date.now();
+            const handleKey = event.handleId ?? String(event.seq);
+            if (sender) {
+              publishPeerChip(bus, roster, event, sender.id, `comm-${handleKey}`, atMs);
+            }
+            if (receiver) {
+              publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${handleKey}`, atMs);
+            }
+            publishPair(bus, computerRoot, roster, event.from, event.to);
+          }
+          if (event.type === "thread.reply" && event.from && event.to) {
+            const sender = findBot(roster, event.from);
+            const receiver = findBot(roster, event.to);
+            const at = Date.parse(event.t);
+            const atMs = Number.isFinite(at) ? at : Date.now();
+            const replyKey = event.handleId ? `pair-result-${event.handleId}` : String(event.seq);
+            if (sender) {
+              publishPeerChip(bus, roster, event, sender.id, `comm-${replyKey}`, atMs);
+            }
+            if (receiver) {
+              publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${replyKey}`, atMs);
+            }
+            publishPair(bus, computerRoot, roster, event.from, event.to);
+            publishDesk(event.from, true);
+            publishDesk(event.to, true);
+          }
+          if (
+            (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") &&
+            event.from &&
+            event.to
+          ) {
+            if (isPeerHandoff(roster, event.from, event.to)) {
+              publishPair(bus, computerRoot, roster, event.from, event.to);
+              publishDesk(event.to, true);
+              publishDesk(event.from, true);
+              continue;
+            }
+            publishDesk(event.to, true);
+          }
+        }
+      } while (protocolAgain);
+    } finally {
+      protocolFlushing = false;
+    }
+  };
+
   try {
     watcher = watch(dirname(protocolLogPath(computerRoot)), () => {
       flushProtocol();
@@ -106,59 +194,6 @@ export function startPumps(
   } catch {
     watcher = undefined;
   }
-
-  const flushProtocol = (): void => {
-    const events = readProtocol(computerRoot, lastSeq);
-    for (const event of events) {
-      lastSeq = event.seq;
-      bus.publish({ kind: "protocol", event });
-      const roster = loadRoster(computerRoot);
-      if (event.type === "send.accepted" && event.from && event.from !== "operator" && event.from !== "harness" && event.to) {
-        const sender = findBot(roster, event.from);
-        const receiver = findBot(roster, event.to);
-        const at = Date.parse(event.t);
-        const atMs = Number.isFinite(at) ? at : Date.now();
-        const handleKey = event.handleId ?? String(event.seq);
-        if (sender) {
-          publishPeerChip(bus, roster, event, sender.id, `comm-${handleKey}`, atMs);
-        }
-        if (receiver) {
-          publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${handleKey}`, atMs);
-        }
-        publishPair(bus, computerRoot, roster, event.from, event.to);
-      }
-      if (event.type === "thread.reply" && event.from && event.to) {
-        const sender = findBot(roster, event.from);
-        const receiver = findBot(roster, event.to);
-        const at = Date.parse(event.t);
-        const atMs = Number.isFinite(at) ? at : Date.now();
-        const replyKey = event.handleId ? `pair-result-${event.handleId}` : String(event.seq);
-        if (sender) {
-          publishPeerChip(bus, roster, event, sender.id, `comm-${replyKey}`, atMs);
-        }
-        if (receiver) {
-          publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${replyKey}`, atMs);
-        }
-        publishPair(bus, computerRoot, roster, event.from, event.to);
-        publishBotDesk(bus, computerRoot, event.from);
-        publishBotDesk(bus, computerRoot, event.to);
-      }
-      if (
-        (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") &&
-        event.from &&
-        event.to
-      ) {
-        if (isPeerHandoff(roster, event.from, event.to)) {
-          publishPair(bus, computerRoot, roster, event.from, event.to);
-          publishBotDesk(bus, computerRoot, event.to);
-          publishBotDesk(bus, computerRoot, event.from);
-          continue;
-        }
-        const threadId = event.to;
-        publishBotDesk(bus, computerRoot, threadId);
-      }
-    }
-  };
 
   const flushBots = (): void => {
     const roster = loadRoster(computerRoot);
@@ -174,7 +209,7 @@ export function startPumps(
         lastSession.set(bot.id, stamp);
         lastStatus.set(bot.id, status);
         lastPending.set(bot.id, pending);
-        publishBotDesk(bus, computerRoot, bot.id);
+        publishDesk(bot.id, false);
         continue;
       }
       if (prev !== status || prevPending !== pending) {
@@ -200,7 +235,6 @@ export function startPumps(
             pending,
             busy,
             activity,
-            computer: "off",
           },
         });
       }
@@ -220,6 +254,12 @@ export function startPumps(
       if (prev !== receipt.status) {
         lastReceiptStatus.set(receipt.id, receipt.status);
         bus.publish({ kind: "routine.run", run: wireRun(roster, receipt) });
+      }
+    }
+    const now = Date.now();
+    for (const botId of [...pendingDesk]) {
+      if (now - (lastDeskAt.get(botId) ?? 0) >= DESK_DEBOUNCE_MS) {
+        publishDesk(botId, true);
       }
     }
   };

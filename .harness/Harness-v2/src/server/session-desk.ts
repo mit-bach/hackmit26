@@ -290,9 +290,16 @@ function commChipsFromThreads(
 }
 
 function mergeDesk(session: readonly DeskMessage[], chips: readonly DeskMessage[]): DeskMessage[] {
-  const seen = new Set(session.map((row) => row.id));
-  const extra = chips.filter((row) => !seen.has(row.id));
-  return [...session, ...extra].sort((left, right) => {
+  const seen = new Set<string>();
+  const merged: DeskMessage[] = [];
+  for (const row of [...session, ...chips]) {
+    if (seen.has(row.id)) {
+      continue;
+    }
+    seen.add(row.id);
+    merged.push(row);
+  }
+  return merged.sort((left, right) => {
     if (left.at !== right.at) {
       return left.at - right.at;
     }
