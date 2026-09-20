@@ -1,48 +1,31 @@
-# HackMIT 26 — Office of the CFO
+# Maximor — Office of the CFO
 
-This directory is the Obsidian vault. Python, skills, run artifacts, and Harness live in hidden folders so Obsidian does not index them.
+HackMIT 2026. A simulated company (Maximor Demo Corp, September 2026) run by a Python finance kernel, a Harness office of standing Bots, and a website for judges.
 
-| Open in Obsidian | Hidden from Obsidian (still in git) |
-| --- | --- |
-| `docs/` | `.cfo/` — finance kernel, agents, skills, tests, data, runs |
-| `design-workshop/` | `.harness/` — Harness v1 / v2 |
-| `Operator-workspace/` | |
-| this README | |
+There are two people in this repo. **Rohan** built the kernel: invoices, cash, close, audit, inbox, the first demo site. **Dominik** built the Harness office that sits on that kernel, the operator desk, and the later website overhaul. The kernel was not replaced. The office calls it.
 
-Layout details: [`docs/LAYOUT.md`](docs/LAYOUT.md).
+## What you are looking at
 
-Architecture: [`docs/AGENTIC_SYSTEM_WORKFLOW.md`](docs/AGENTIC_SYSTEM_WORKFLOW.md).
+Open this folder as the git root. Hidden directories (names that start with `.`) are still in git. Obsidian skips them.
 
-## Python kernel
+| Path | What it is | Who |
+| --- | --- | --- |
+| [`.cfo/`](.cfo/README.md) | Finance **kernel**. Arithmetic, JSON books, skills, pytest, demo API. | Rohan (kernel). Dominik added `demo_web` and office remaps. |
+| [`.cfo-v2/`](.cfo-v2/README.md) | **Office** on Harness: 16 Bots, Catalog, Grants, Computer, prove/show instances. | Dominik |
+| [`.harness/Harness-v2/`](.harness/Harness-v2/README.md) | Harness runtime (Handles, rooms, Demo UI). Not finance. | Dominik |
+| [`web/`](web/) | Vite website. Vercel builds this. | Rohan started it. Dominik overhauled routes and copy. |
+| [`workshop/`](workshop/README.md) | Design notes, prove/show procedures, operator prompts. | Mixed. See the workshop README. |
+| [`.archive/root-kernel-shadow/`](.archive/README.md) | Incomplete Python folders Rohan re-created at the repo root after the kernel moved into `.cfo/`. Not on the run path. | Rohan |
 
-The engine README is [`.cfo/README.md`](.cfo/README.md). Copy [`.cfo/.env.example`](.cfo/.env.example) to `.cfo/.env`.
+`GROK-WORKSHOP/` stays at the root while a live session writes into it. It belongs with the workshop notes when that session is idle.
 
-From this repo root, the old commands still work (shims enter `.cfo/`):
+Root CLI files (`main.py`, `demo_web.py`, …) are shims. They `chdir` into `.cfo/`.
 
-```bash
-python3 -m venv .cfo/.venv
-source .cfo/.venv/bin/activate
-pip install -r requirements.txt
-python main.py INV-001
-python main.py demo-inbox
-python main.py skills
-pytest
-```
+## Run the website (what Vercel hosts)
 
-## Harness
+Vercel builds `web/` (`vercel.json`). That is a static UI. Live numbers need the kernel API on your machine.
 
 ```bash
-cd .harness/Harness-v2
-npm install
-npm test
-```
-
-## Demo website (HackMIT judges)
-
-The operations dashboard is a thin UI over the existing Maximor kernel. It does not invent a second set of books.
-
-```bash
-# Backend API (binds a writable copy of data/demo → runs/demo_runtime)
 python3 -m venv .cfo/.venv
 source .cfo/.venv/bin/activate
 pip install -r requirements.txt
@@ -50,93 +33,79 @@ python demo_web.py --host 127.0.0.1 --port 8765
 ```
 
 ```bash
-# Frontend
 cd web
 npm install
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. Vite proxies `/api` to the API on port 8765.
+Open http://127.0.0.1:5173. Vite proxies `/api` to port 8765.
 
-Vercel hosts the Vite app in `web/` (`vercel.json`). It is not a Python serverless function; ignore the root `main.py` CLI shim. Live agent runs still need the FastAPI process. Without it, the site uses saved demonstration results.
+Without the API, the hosted site shows saved demonstration results. It does not invent a second ledger.
 
-Production-style (API serves `web/dist`):
+Copy `.cfo/.env.example` to `.cfo/.env` if you use `OPENAI_API_KEY`. Default demo paths do not need a key.
+
+## Run the office (standing Bots)
+
+The office is `.cfo-v2` plus `.harness`. The sidecar still loads the kernel from `.cfo/`. That is required. Do not point live Bots at leftover folders in `.archive/`.
+
+One-time:
 
 ```bash
-cd web && npm install && npm run build
 source .cfo/.venv/bin/activate
-python demo_web.py
-# open http://127.0.0.1:8765
+pip install -r requirements.txt
+cd .harness/Harness-v2 && npm install && cd ../..
+cd .cfo-v2/office/computer/cfo && npm install && cd ../../../..
 ```
 
-### Environment
+Then follow [`.cfo-v2/office/RUN.md`](.cfo-v2/office/RUN.md): compile Catalog, start the kernel sidecar, start Harness `serve` on the Computer.
 
-| Variable | Purpose |
-| --- | --- |
-| `OPENAI_API_KEY` | Optional. Kernel deterministic paths run the live demo without it. |
-| `DEMO_LIVE_LLM=1` | Only if a key is set: use live agent turns for AP. Default is kernel-deterministic. |
-| `STRIPE_MODE` | `mock` (default, simulated Stripe fixtures) or `live`. |
-| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` | Live Stripe only. Never required for the demo website. |
-
-Copy `.cfo/.env.example` to `.cfo/.env` if you use a key. Do not commit `.env`.
-
-### Sample data and reset
-
-Canonical pack: `.cfo/data/demo/` (Maximor Demo Corp, September 2026).  
-Writable workspace: `.cfo/runs/demo_runtime/` (created on API start).
+Kernel CLI (same venv):
 
 ```bash
-python main.py reset-demo --dest runs/demo_runtime
-# or the Reset Demo button / POST /api/demo/reset
+python main.py INV-001
+python main.py skills
+python main.py demo-inbox
+pytest
 ```
 
-Reset copies the pack and clears website run logs. It never writes back to `data/demo`.
+## How the pieces connect
 
-### Marquee demos
+1. **Source data** — `.cfo/data/demo/` (immutable pack) and `.cfo-v2/office/world/` (office World).
+2. **Kernel** — `.cfo/` computes candidates, postings, gates. An LLM does not own a ledger total.
+3. **Office** — `.cfo-v2/office/computer` is the Harness Computer. Bots send Handles. The sidecar calls Kernel ops the Bot is granted.
+4. **Website** — `web/` + `.cfo/demo_web/` read the same books and invoke the same workflows.
 
-| UI | Backend |
+Do not treat `.harness/Harness-v2/examples/cfo-floor` as this office. That example is a six-Bot bind fixture.
+
+## Explore without running Bots
+
+| If you want | Open |
 | --- | --- |
-| Inbox → messy / quote / statement | `POST /api/workflows/invoice-ingestion` |
-| AP → INV-001 / INV-006 | `decide_ap` / AP policy |
-| Stripe page | `integrations.cash.reconcile_payout` + cash recon |
-| Cash page | `run_cash_reconciliation` |
-| Close / Harbor | `run_month_end` / `run_accrual_workflow` |
-| Memory | `memory.scenarios.run_harbor_cross_period` |
-| Forecast | `reporting.forecast.build_forecast` |
-| Audit | `audit.workflow.run_audit` |
-| Full CFO Cycle | `cfo.scenario.run_cfo_scenario` |
-| Evaluations | `evals.agent_cases.run_agent_cases` |
+| Judge website | `web/src/` and `python demo_web.py` |
+| Kernel architecture | `workshop/docs/AGENTIC_SYSTEM_WORKFLOW.md` |
+| Website architecture | `workshop/docs/demo_website_architecture.md` |
+| Office boot | `.cfo-v2/office/RUN.md` |
+| What the office refuses | `.cfo-v2/office/SUPERSEDES.md` |
+| Prove the door | `workshop/docs/Office-prove/` |
+| Record the show | `workshop/docs/Office-show/` |
+| Bot grain (why 16, not 6) | `workshop/design-workshop/dominik/cfo-bot-grain.md` |
 
-### Tests
+Compatibility links `docs`, `design-workshop`, and `Operator-workspace` still point at `workshop/` so older paths resolve.
+
+## Tests
 
 ```bash
 source .cfo/.venv/bin/activate
 pytest
-pytest tests/test_demo_web_api.py tests/test_demo_web_consistency.py
 cd web && npm test
+cd .harness/Harness-v2 && npm test
 ```
 
-### Stripe modes
+## Environment
 
-The website labels **simulated** vs **live**. Default is simulated fixtures under `data/demo/integrations/stripe/`. Live Stripe is optional and is never implied when fixtures are in use.
-
-### Known limitations
-
-- Demo books are JSON, not a production ERP.
-- Live Pi / Harness Handle completion is separate from this website; the UI calls the Kernel.
-- Organizational memory writes when those workflows run; AP `prior_cases` remain a seed file.
-- Close September remains BLOCKED on `$12.40` until the cash exception is resolved — that is the intended story.
-
-## HackMIT Demo Script
-
-About four minutes. Do not skip Reset if a previous run dirtied the workspace.
-
-1. **Overview** — cash, AP/AR, 13-week ending cash, `$12.40` unexplained, close BLOCKED, 15 bots. Read the briefing: September cannot close until TXN-2026-09-015 is explained.
-2. **Demo Scenarios → Messy Invoice** — run MSG-E-MESSY. Then run Duplicate (INV-006) and show HOLD + duplicate flag. Open AP on INV-001: same $12,450 in PO, GR, PAY-AP-001, TXN-2026-09-018A, JE-AP-INV-001.
-3. **Stripe Reconciliation** — run it. Walk gross − refunds − chargebacks − fees = net = bank deposit. Badge says simulated Stripe.
-4. **Memory** — run Harbor Electric. August seasonal methodology is retrieved for September; decision IDs are shown, not chat logs.
-5. **Audit** — run audit. Findings come from the independent auditor over the same IDs (duplicate vendor/invoice, round-number, self-approval, post-close JE).
-6. **Full CFO Cycle** — from Scenarios. Watch grain-bot stages. Close stays honest about the cash blocker unless the cycle resolves it.
-7. **Evaluations** — run agent cases. Pass/fail is scored by the existing harness, not by the frontend.
-
-Optional if time: Cash page on TXN-2026-09-015; Forecast week drill-down to INV-AR-014.
+| Variable | Role |
+| --- | --- |
+| `OPENAI_API_KEY` | Optional for deterministic kernel demos. Required for live Pi Bots. |
+| `HARNESS_COMPUTER` | Office Computer directory. Sidecar remaps `data/` and `runs/` here. |
+| `STRIPE_MODE` | `mock` (default) or `live`. |
+| `DEMO_LIVE_LLM=1` | Website AP path uses live agent turns. Default is kernel-deterministic. |

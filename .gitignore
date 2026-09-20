@@ -38,6 +38,11 @@ Harness/.pi/
 .harness/**/node_modules/
 .harness/**/.pi/
 harness-impl/
+.archive/**/__pycache__/
+.cfo-v2/office/computer/cfo/kernel.port
+.cfo-v2/office/instances/**/cfo/kernel.port
+.cfo-v2/**/*.lock
+.cfo-v2/**/*.tmp.*
 .cfo-v2/office/computer/cfo/.import-path/
 .cfo-v2/office/computer/cfo/kernel.port
 .cfo-v2/office/computer/cfo/kernel.log.jsonl

@@ -18,9 +18,11 @@ You can put every procedure on one Computer. You must not. Prove Wakes say “ca
 
 **Do not stitch prove instances into one tape.** AP on `prove-ap` and AR on `prove-ar` never share Handles. The judged story is one invoice across pipes. That requires one desk.
 
+**Time pressure:** paste `docs/Office-prove/prompts/01-PIVOT-TO-SHOW.md` into the same prove-operator chat. That brief is the good-enough bar plus this directory’s calendar. Do not wait for P6/P7 INTENDED. Do not record `prove-*`.
+
 **Do this instead:**
 
-1. Finish prove on *other* instances (`docs/Office-prove/`).
+1. Finish prove on *other* instances (`docs/Office-prove/`), or stop at the pivot bar (one granted read on live Pi).
 2. Create a **new** instance named `golden-<date>-r1`.
 3. Run **onboarding**, then a **lived September** on that desk only.
 4. `POST /api/demo/record` (Tools → Demo → Record). That snapshot is `harness/demo/latest/`. It survives wipe. Keep the instance anyway. That desk is the goose.
@@ -69,6 +71,9 @@ Scale on camera is: fifteen (or sixteen) Bots, mosaic panes, Handles between the
 8. `06-record-and-cut.md` — Demo page, record, chapters, video.
 9. `07-identities.md` — IDs you protect. IDs you do not retarget.
 10. `08-show-driver-agent.md` — Cursor prompt for the agent that runs the golden month.
+11. `09-director.md` — camera, scenes, full tape vs clip.
+12. `10-golden-inventory.md` — what r1 actually did.
+13. `11-website-videos.md` — public `/videos` vs this tape.
 
 World and cards: `.cfo-v2/office/final-demo/`. Boot: `.cfo-v2/office/RUN.md`. Demo UI: `.harness/Harness-v2/OPERATOR-UI.md` (Tools → Demo).
 
@@ -102,4 +107,7 @@ Then you decide which cuts become videos. The raw tape is already the portfolio 
 | `06-record-and-cut.md` | Showcaser / Demo replay |
 | `07-identities.md` | Featured IDs |
 | `08-show-driver-agent.md` | Cursor spawn |
+| `09-director.md` | Camera, scenes, CLI record |
+| `10-golden-inventory.md` | Golden r1 capability + tape |
+| `11-website-videos.md` | Website cards vs Harness cuts |
 | `cuts/README.md` | Chapter list to fill after record |

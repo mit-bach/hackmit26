@@ -65,7 +65,7 @@ If port does not appear, spawn any Bot (S04) and recheck. Still missing → HARD
 
 ## S04 — Bind one Bot
 
-- Stimulus: `POST {URL}/api/bots/ap/spawn` (or `email` if ap Grant empty — it is not)
+- Stimulus: `POST {URL}/api/bots/ap/spawn` (slug or `bot_ap`; both resolve). Email if you need a second bind check.
 - Actor: Bot `ap`
 - Must call: none yet (bind only)
 - Must not: unbound Pi with no `HARNESS_BOT`

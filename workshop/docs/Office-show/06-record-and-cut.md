@@ -13,6 +13,10 @@ You do not film 40 hours of waiting. You record the protocol, then **cut** seq r
 When ME is done and you have not aborted:
 
 ```bash
+# Preferred when serve is busy — no HTTP.
+node dist/src/cli.js demo record --computer ../../.cfo-v2/office/computer
+
+# Or HTTP / SPA
 curl -sS -X POST {URL}/api/demo/record
 ```
 
@@ -22,8 +26,13 @@ This copies:
 
 - `protocol.jsonl`
 - each Bot `transcript.jsonl`
-- derived activities
+- derived activities (from transcript, **not** `pi-runtime.jsonl`)
 - `meta.json` (`recordedAt`, `lastSeq`, `eventCount`, bot ids)
+- keeps `scenes.json` if you already saved director cuts
+
+`demo meta` is cheap (protocol cursor only). Do not open Tools → Demo against a serve that is still parsing Pi RPC logs — that path was removed.
+
+Camera, scenes, 9–16 panes: `09-director.md`.
 
 Wipe does **not** delete `harness/demo/latest/`. Still: copy that folder to `docs/Office-show/runs/<id>/recording/`. Then do not wipe the golden Computer.
 

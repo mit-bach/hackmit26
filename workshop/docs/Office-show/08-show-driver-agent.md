@@ -1,6 +1,8 @@
 # Show driver agent
 
-One Cursor chat. Name it `golden-driver`. It executes this directory on **one** instance. It does not run Office-prove. It does not implement Floor/AR/AP.
+**Time pressure (preferred):** do not open this as a second chat. Paste `docs/Office-prove/prompts/01-PIVOT-TO-SHOW.md` into the existing `prove-operator` conversation. Two chats on 8800 will fight over `currentId`.
+
+If prove-operator is dead and you must spawn fresh: one Cursor chat named `golden-driver`. It executes this directory on **one** instance. It does not run Office-prove. It does not implement Floor/AR/AP.
 
 If a tool throws, it stops and writes `runs/<id>/FAILED.md`. It does not patch skills on the golden desk.
 

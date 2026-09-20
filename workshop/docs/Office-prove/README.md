@@ -33,7 +33,7 @@ A third honest state is allowed:
 2. `00-what-a-procedure-is.md` — what a procedure is, how developed it must be, what it is not.
 3. `01-instance-loop.md` — create, select, wipe, restart. Instances are the unit of a run.
 4. `02-classification.md` — HARD, SOFT, RUNS, INTENDED. When you stop. When you continue.
-5. `03-operator-agent.md` — the one Cursor agent that executes these files. Attach list and copy-paste prompt.
+5. `03-operator-agent.md` and `prompts/00-OPERATOR.md` — paste the **entire** operator prompt into a new chat. Spawn from `prompts/README.md`.
 6. `04-coverage.md` — skills, Catalog ops, Handle edges, Routines, Bots. Tick these. Do not invent a second inventory.
 7. `05-gates.md` — compile, import, pytest, boot. Do this before you burn a Pi turn.
 8. `procedures/` — P0 through P9, in the order that file names.
