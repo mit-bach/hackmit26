@@ -84,7 +84,9 @@ def _run_investigator(
     invoice_id: str,
     evidence: APCaseEvidence,
     preparer: PreparerRecommendation,
+    memory_block: str = "",
 ) -> InvestigationReport:
+    extra = f"\n\n{memory_block}" if memory_block else ""
     return run_agent(
         investigator_agent,
         (
@@ -93,6 +95,7 @@ def _run_investigator(
             f"Python facts:\n{_dump(evidence)}\n\n"
             f"Preparer recommendation:\n{_dump(preparer)}\n\n"
             "Search policies and prior cases. If nothing supports payment, HOLD."
+            f"{extra}"
         ),
     )
 
@@ -239,11 +242,19 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
     print(f"Python facts: exceptions={evidence.exception_types or ['none']}", flush=True)
     print(flush=True)
 
+    invoice_date = evidence.invoice.invoice_date if evidence.invoice else started_at[:10]
+    period = invoice_date[:7] if invoice_date else started_at[:7]
+    from memory.format import format_precedents
+    from memory.hooks import lookup_for_ap, write_ap_memory
+
+    memory_lookup = lookup_for_ap(evidence, period)
+    memory_block = format_precedents(memory_lookup)
+
     preparer = _run_preparer(invoice_id, evidence)
 
     investigation = None
     if _needs_investigation(evidence, preparer):
-        investigation = _run_investigator(invoice_id, evidence, preparer)
+        investigation = _run_investigator(invoice_id, evidence, preparer, memory_block=memory_block)
 
     reviewer = _run_reviewer(invoice_id, evidence, preparer, investigation)
     approver = _run_approver(invoice_id, evidence, preparer, investigation, reviewer)
@@ -298,6 +309,17 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
         ran.append(investigator_agent)
     ran.extend([reviewer_agent, approver_agent, audit_agent])
 
+    if investigation is not None and memory_lookup.precedents:
+        extra = [
+            f"{item.decision_id}: {item.reusable_precedent}" for item in memory_lookup.precedents
+        ]
+        investigation = investigation.model_copy(
+            update={"relevant_precedents": list(dict.fromkeys(list(investigation.relevant_precedents) + extra))}
+        )
+        memory_lookup.precedent_used = True
+        memory_lookup.current_evidence_checked = True
+        memory_lookup.decision = final.decision
+    written = write_ap_memory(evidence, final, period=period, trace_id=invoice_id)
     trace = DecisionTrace(
         invoice_id=invoice_id,
         started_at=started_at,
@@ -310,6 +332,8 @@ def run_ap_workflow(invoice_id: str) -> DecisionTrace:
         reconsideration=reconsideration,
         final=final,
         agents=[usage_from_agent(item) for item in ran],
+        memory_lookup=memory_lookup,
+        written_memory_id=written[0].decision_id if written is not None else None,
     )
     _save_trace(trace)
     if final.decision == "APPROVE":

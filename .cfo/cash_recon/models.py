@@ -9,6 +9,7 @@ from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from memory.models import MemoryLookup
 from skills.models import AgentSkillTrace
 
 MatchType = Literal[
@@ -226,6 +227,8 @@ class MatchTrace(BaseModel):
     agents: list[AgentSkillTrace] = Field(default_factory=list)
     used_agent: bool = False
     replay: bool = False
+    memory_lookup: Optional[MemoryLookup] = None
+    written_memory_id: Optional[str] = None
     trace_path: Optional[str] = None
 
 

@@ -4,6 +4,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from memory.models import MemoryLookup
 from skills.models import AgentSkillTrace
 
 
@@ -88,6 +89,8 @@ class PrepaidTrace(BaseModel):
     explanation: str = ""
     agents: list[AgentSkillTrace] = Field(default_factory=list)
     used_agent: bool = False
+    memory_lookup: Optional[MemoryLookup] = None
+    written_memory_id: Optional[str] = None
 
 
 class PrepaidRun(BaseModel):

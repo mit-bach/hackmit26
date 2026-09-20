@@ -5,6 +5,7 @@ from agents import Agent
 from prepaid.models import PrepaidDecision, PrepaidReview
 from prepaid.schedule import select_treatment, treatment_candidates
 from prepaid.tools import (
+    get_decision_memories,
     get_prepaid,
     get_prepaid_schedule,
     get_prepaid_treatment_candidates,
@@ -17,6 +18,7 @@ PREPAID_TOOLS = [
     list_prepaids,
     get_prepaid_treatment_candidates,
     get_prepaid_schedule,
+    get_decision_memories,
 ]
 
 SAFETY = """
@@ -36,9 +38,10 @@ You prepare prepaid-expense amortization for one contract.
 
 Workflow:
 1. Load the prepaid item and Python treatment candidates.
-2. Choose an applicable candidate. Copy amounts from Python.
-3. If evidence is missing, selected_method is insufficient_evidence and escalate is true.
-4. Explain why the chosen method fits the service period better than the alternatives.
+2. Call get_decision_memories for the same vendor. Use prior treatment as precedent, not a rule.
+3. Choose an applicable candidate. Copy amounts from Python. Reuse a prior method only when current dates support it.
+4. If evidence is missing, selected_method is insufficient_evidence and escalate is true.
+5. Explain why the chosen method fits the service period better than the alternatives.
 """.strip(),
         skills=skills_for("Prepaid Preparer"),
         safety=SAFETY,

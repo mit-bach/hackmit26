@@ -8,6 +8,7 @@ from cash_recon.models import InvestigationNote, PreparerSelection, ReviewerVerd
 from cash_recon.tools import (
     get_bank_transaction,
     get_candidate,
+    get_decision_memories,
     get_fee_evidence,
     get_ledger_entry,
     get_match_candidates,
@@ -30,6 +31,7 @@ CASH_TOOLS = [
     get_fee_evidence,
     get_match_candidates,
     get_candidate,
+    get_decision_memories,
 ]
 
 preparer_agent = Agent(
@@ -58,6 +60,8 @@ investigator_agent = Agent(
 You investigate unmatched or mismatched cash activity. You do not post.
 
 Use Python candidates, bank descriptions, ledger entries, and fee evidence.
+Call get_decision_memories for prior-period precedent. Treat it as precedent, not truth.
+Confirm current Stripe or bank evidence before reusing a prior net-payout treatment.
 Consider fee, rounding, FX, partial payment, duplicate, missing entry, and timing.
 If none of those is supported by evidence, say so. Do not invent an explanation.
 
