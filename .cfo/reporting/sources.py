@@ -16,7 +16,7 @@ from reporting.models import (
     ReceivableStatus,
     ReportingAssumptions,
 )
-from tools import DataFileError, load_invoice
+from tools import DataFileError, load_invoice, paid_invoice_ids
 
 STATUS_MAP: dict[str, ReceivableStatus] = {
     "OPEN": "open",
@@ -270,10 +270,13 @@ def ap_forecast_lines(*, use_pool: bool = True) -> list[ForecastLine]:
             ids = [row["invoice_id"] for row in load_pool()]
     seen: set[str] = set()
     lines: list[ForecastLine] = []
+    already_paid = paid_invoice_ids()
     for invoice_id in ids:
         if invoice_id in seen:
             continue
         seen.add(invoice_id)
+        if invoice_id in already_paid:
+            continue
         invoice = load_invoice(invoice_id)
         if invoice is None:
             continue

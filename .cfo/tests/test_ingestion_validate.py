@@ -89,6 +89,35 @@ def test_similar_amount_and_date_without_invoice_number_do_not_merge():
     assert len(canonical) == 2
 
 
+def test_line_item_sum_mismatch():
+    result = validate_candidate(
+        _candidate(
+            line_items=[
+                {"description": "A", "quantity": 2, "unit_price": 40.0, "amount": 80.0},
+                {"description": "B", "quantity": 1, "unit_price": 50.0, "amount": 50.0},
+            ]
+        )
+    )
+    assert "line_item_sum_mismatch" in result.errors
+    assert result.status == "rejected"
+
+
+def test_line_item_extension_mismatch():
+    result = validate_candidate(
+        _candidate(
+            subtotal=130.0,
+            tax=0.0,
+            amount=130.0,
+            line_items=[
+                {"description": "A", "quantity": 2, "unit_price": 40.0, "amount": 80.0},
+                {"description": "B", "quantity": 1, "unit_price": 20.0, "amount": 50.0},
+            ],
+        )
+    )
+    assert "line_item_extension_mismatch" in result.errors
+    assert result.status == "rejected"
+
+
 def test_unsupported_source_type():
     result = validate_candidate(_candidate(source_type="fax"))
     assert "unsupported_source_type:fax" in result.errors

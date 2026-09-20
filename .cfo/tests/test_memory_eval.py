@@ -26,6 +26,15 @@ def test_memory_on_vs_off_eval_uses_real_differences(tmp_path):
     contradict = cases["stripe_sep_contradictory"]
     assert contradict["memory_on"]["correct"] is True
     assert contradict["memory_on"]["precedent_used"] is False
+    harbor = cases["harbor_sep_standard"]
+    assert harbor["memory_off"]["correct"] is True
+    assert harbor["memory_on"]["correct"] is True
+    assert harbor["memory_on"]["precedent_used"] is True
+    assert harbor["memory_off"]["precedent_used"] is False
+    assert harbor["memory_on"]["retrieved"]
+    shift = cases["harbor_sep_method_shift"]
+    assert shift["memory_on"]["correct"] is True
+    assert shift["memory_on"]["precedent_used"] is False
     path = persist_eval(payload, tmp_path / "eval.json")
     assert path.exists()
     summary = format_eval_summary(payload)

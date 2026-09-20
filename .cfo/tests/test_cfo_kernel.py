@@ -438,3 +438,84 @@ def test_compiled_live_grants_allow_prepare_read(tmp_path):
     )
     assert forbidden["ok"] is False
     assert forbidden["error"]["code"] == "forbidden"
+
+
+def test_decision_memory_is_remapped_onto_computer(computer):
+    from memory.models import MemoryEvidence
+    from memory.store import STATE_PATH, load_memories
+    from memory.write import write_decision
+
+    assert STATE_PATH == computer.runs / "memory" / "decisions.json"
+    record, created = write_decision(
+        period="2026-08",
+        workflow="cash_reconciliation",
+        entity_type="payment_provider",
+        entity_id="stripe",
+        situation_type="payout_difference",
+        situation_summary="Stripe payout lower than gross receipts",
+        evidence=[MemoryEvidence(kind="fee", label="processing_fees", amount=300.0, amount_minor=30000)],
+        decision="reconcile payout net of fees and chargebacks",
+        reasoning_summary="Difference matched fees plus chargebacks.",
+        accounting_treatment="net_payout_fees_and_chargebacks",
+        outcome="EXPLAINED_EXCEPTION",
+        reusable_precedent="Stripe payouts may arrive net of fees and chargebacks",
+        source_trace_ids=["REC-SIDECAR-001"],
+        tags=["stripe", "payout_difference"],
+        fingerprint="sidecar-aug",
+    )
+    assert created is True
+    assert STATE_PATH.exists()
+
+    attach_computer(computer.root)
+    ids = {item.decision_id for item in load_memories()}
+    assert record.decision_id in ids
+
+
+def test_live_grants_can_read_prior_period_memory(tmp_path):
+    live = REPO_ROOT / ".cfo-v2" / "office" / "computer"
+    grants = live / "cfo" / "grants.json"
+    catalog = live / "cfo" / "catalog.json"
+    if not grants.exists() or not catalog.exists():
+        pytest.skip("live computer catalog/grants missing")
+    dest = seed_computer(
+        tmp_path / "memory-shape",
+        catalog=catalog,
+        grants=grants,
+        slug_map=live / "cfo" / "slug-map.json",
+    )
+    attach_computer(dest)
+    from memory.models import MemoryEvidence
+    from memory.write import write_decision
+
+    write_decision(
+        period="2026-08",
+        workflow="cash_reconciliation",
+        entity_type="payment_provider",
+        entity_id="stripe",
+        situation_type="payout_difference",
+        situation_summary="Stripe payout lower than gross receipts",
+        evidence=[MemoryEvidence(kind="fee", label="processing_fees", amount=300.0, amount_minor=30000)],
+        decision="reconcile payout net of fees and chargebacks",
+        reasoning_summary="Difference matched fees plus chargebacks.",
+        accounting_treatment="net_payout_fees_and_chargebacks",
+        outcome="EXPLAINED_EXCEPTION",
+        reusable_precedent="Stripe payouts may arrive net of fees and chargebacks",
+        source_trace_ids=["REC-LIVE-001"],
+        tags=["stripe", "payout_difference"],
+        fingerprint="live-aug",
+    )
+    response = _rpc(
+        "memory.tools.get_decision_memories",
+        slug="ap",
+        profile="investigate",
+        bot_id="bot_ap",
+        args={
+            "workflow": "cash_reconciliation",
+            "entity_id": "stripe",
+            "situation_type": "payout_difference",
+            "period": "2026-09",
+        },
+    )
+    assert response["ok"] is True
+    assert response["result"]["queried"] is True
+    assert response["result"]["precedents"]

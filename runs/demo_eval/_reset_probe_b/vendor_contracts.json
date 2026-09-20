@@ -1,0 +1,28 @@
+[
+  {
+    "contract_id": "CTR-HE-001",
+    "vendor": "Harbor Electric",
+    "start_date": "2026-01-01",
+    "end_date": "2026-12-31",
+    "billing_cadence": "monthly",
+    "amount": 4750.0,
+    "currency": "USD",
+    "expense_account": "Utilities Expense",
+    "billed_in_arrears": true,
+    "monthly_minimum": 4500.0,
+    "description": "Cambridge campus electricity billed in arrears."
+  },
+  {
+    "contract_id": "CTR-LR-001",
+    "vendor": "Lindholm & Ruiz LLP",
+    "start_date": "2026-04-01",
+    "end_date": "2027-03-31",
+    "billing_cadence": "monthly",
+    "amount": 8500.0,
+    "currency": "USD",
+    "expense_account": "Legal Expense",
+    "billed_in_arrears": true,
+    "monthly_minimum": 8500.0,
+    "description": "General-counsel retainer billed in arrears."
+  }
+]

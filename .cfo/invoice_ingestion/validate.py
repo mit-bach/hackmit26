@@ -9,7 +9,7 @@ from invoice_ingestion.models import (
     SUPPORTED_SOURCES,
     ValidationResult,
 )
-from tools import all_invoices, normalize_vendor
+from tools import all_invoices, normalize_invoice_number, normalize_vendor
 
 AMOUNT_TOLERANCE = 0.01
 ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -74,6 +74,20 @@ def validate_candidate(candidate: InvoiceCandidate, seen_source_ids: set[tuple[s
     tax = parse_money(candidate.tax)
     if not amounts_consistent(subtotal, tax, amount):
         errors.append("inconsistent_totals")
+    errors.extend(_line_item_errors(candidate))
+
+    analysis = (candidate.source_context or {}).get("document_analysis") or {}
+    flags = analysis.get("flags") or []
+    if "voided" in flags:
+        errors.append("voided_document")
+    if "incorrect_banking" in flags:
+        errors.append("incorrect_banking")
+    if "tax_arithmetic_error" in flags and "inconsistent_totals" not in errors:
+        errors.append("inconsistent_totals")
+    if analysis.get("supersedes"):
+        warnings.append(f"supersedes:{analysis['supersedes']}")
+    if candidate.classification != "invoice":
+        errors.append(f"not_a_payable:{candidate.classification}")
 
     unknown = unknown_vendor_warning(candidate.vendor)
     if unknown:
@@ -95,13 +109,42 @@ def validate_candidate(candidate: InvoiceCandidate, seen_source_ids: set[tuple[s
     )
 
 
+def _line_item_errors(candidate: InvoiceCandidate) -> list[str]:
+    errors: list[str] = []
+    items = candidate.line_items or []
+    if not items:
+        return errors
+    amounts: list[float] = []
+    extension_mismatch = False
+    for item in items:
+        qty = parse_money(item.quantity)
+        unit = parse_money(item.unit_price)
+        amt = parse_money(item.amount)
+        if qty is not None and unit is not None and amt is not None:
+            expected = round(qty * unit, 2)
+            if abs(expected - amt) > AMOUNT_TOLERANCE:
+                extension_mismatch = True
+        if amt is not None:
+            amounts.append(amt)
+    if extension_mismatch:
+        errors.append("line_item_extension_mismatch")
+    if len(amounts) == len(items):
+        line_sum = round(sum(amounts), 2)
+        subtotal = parse_money(candidate.subtotal)
+        if subtotal is not None and abs(line_sum - subtotal) > AMOUNT_TOLERANCE:
+            errors.append("line_item_sum_mismatch")
+    return errors
+
+
 def existing_ap_match(vendor: str, invoice_number: str) -> str | None:
     wanted_vendor = normalize_vendor(vendor)
-    wanted_number = invoice_number.strip().upper()
+    wanted_number = normalize_invoice_number(invoice_number)
+    if not wanted_vendor or not wanted_number:
+        return None
     for invoice in all_invoices():
         if (
             normalize_vendor(invoice.vendor) == wanted_vendor
-            and invoice.vendor_invoice_number.strip().upper() == wanted_number
+            and normalize_invoice_number(invoice.vendor_invoice_number) == wanted_number
         ):
             return invoice.invoice_id
     return None

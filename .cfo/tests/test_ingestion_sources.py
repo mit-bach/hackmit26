@@ -27,9 +27,9 @@ def _by_number(report, number: str):
 
 def test_email_extracts_invoices_and_rejects_non_invoices():
     run = run_email_source("2026-09")
-    assert run.records_checked == 4
+    assert run.records_checked == 5
     numbers = {item.vendor_invoice_number for item in run.candidates}
-    assert numbers == {"INV-9001", "QL-4412"}
+    assert numbers == {"INV-9001", "QL-4412", "HE-4401-R"}
     classes = {item.classification: item.reason for item in run.traces}
     assert "marketing" in classes
     assert "quote" in classes

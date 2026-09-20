@@ -805,6 +805,21 @@
       "unapplied_amount": 0.0,
       "application_status": "APPLIED",
       "metadata": {}
+    },
+    "PAY-CLOSE-4500": {
+      "payment_id": "PAY-CLOSE-4500",
+      "payment_date": "2026-09-29",
+      "amount": 4500.0,
+      "currency": "USD",
+      "payer_name": "Summit Robotics",
+      "customer_id": "CUST-001",
+      "bank_reference": "WIRE-SUMMIT-4500",
+      "remittance_text": "Unmatched September wire",
+      "invoice_reference": null,
+      "source": "wire",
+      "unapplied_amount": 4500.0,
+      "application_status": "UNMATCHED",
+      "metadata": {}
     }
   },
   "applications": [],

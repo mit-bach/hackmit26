@@ -12,13 +12,15 @@
         "accrual.tools.get_vendor_usage",
         "accrual.tools.get_estimate_candidates",
         "accrual.tools.compute_accrual_estimate",
+        "memory.tools.get_decision_memories",
         "accrual.tools.create_accrual",
         "accrual.tools.get_open_accruals",
         "accrual.tools.reconcile_accrual_with_invoice"
       ],
       "skills": [
         "accrual-evidence-evaluation",
-        "accrual-method-selection"
+        "accrual-method-selection",
+        "prior-period-precedent"
       ],
       "outputType": "AccrualDecision",
       "source": "accrual/agent.py"
@@ -32,7 +34,8 @@
         "tools.get_case_evidence"
       ],
       "skills": [
-        "three-way-match-analysis"
+        "three-way-match-analysis",
+        "superseded-document-handling"
       ],
       "outputType": "PreparerRecommendation",
       "source": "agent.py"
@@ -52,7 +55,8 @@
       "skills": [
         "three-way-match-analysis",
         "ap-exception-investigation",
-        "prior-period-precedent"
+        "prior-period-precedent",
+        "superseded-document-handling"
       ],
       "outputType": "InvestigationReport",
       "source": "agent.py"
@@ -163,7 +167,8 @@
       ],
       "skills": [
         "cash-reconciliation-method-selection",
-        "bank-reference-interpretation"
+        "bank-reference-interpretation",
+        "reconciliation-evidence-validation"
       ],
       "outputType": "PreparerSelection",
       "source": "cash_recon/agent.py"
@@ -180,7 +185,8 @@
       "skills": [
         "reconciliation-exception-investigation",
         "bank-reference-interpretation",
-        "prior-period-precedent"
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
       ],
       "outputType": "InvestigationNote",
       "source": "cash_recon/agent.py"
@@ -197,7 +203,8 @@
       "skills": [
         "cash-reconciliation-method-selection",
         "reconciliation-exception-investigation",
-        "prior-period-precedent"
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
       ],
       "outputType": "ReviewerVerdict",
       "source": "cash_recon/agent.py"
@@ -289,8 +296,7 @@
         "ar.tools.get_collection_candidates",
         "ar.tools.get_collection_invoice_facts",
         "ar.tools.get_ar_customer",
-        "ar.tools.get_ar_precedents",
-        "inbox.tools.send_office_outbound"
+        "ar.tools.get_ar_precedents"
       ],
       "skills": [
         "ar-collections-policy"
@@ -325,7 +331,8 @@
     "Month-End Close Reviewer": {
       "ops": [],
       "skills": [
-        "month-end-close-review"
+        "month-end-close-review",
+        "prior-period-precedent"
       ],
       "outputType": "FinalCloseVerdict",
       "source": "close/agents.py"
@@ -342,11 +349,7 @@
       "ops": [
         "inbox.tools.compose_counterparty_message",
         "inbox.tools.send_inbox_message",
-        "inbox.tools.reply_in_thread",
-        "inbox.tools.list_inbox_threads",
-        "inbox.tools.list_inbox_messages",
-        "inbox.tools.get_inbox_thread",
-        "inbox.tools.list_world_personas"
+        "inbox.tools.reply_in_thread"
       ],
       "skills": [],
       "outputType": "CounterpartyAgentOutput",
@@ -358,16 +361,13 @@
         "inbox.tools.get_inbox_attachment",
         "inbox.tools.classify_inbox_message",
         "inbox.tools.extract_inbox_invoice",
-        "inbox.tools.dispatch_inbox_action",
-        "inbox.tools.list_inbox_threads",
-        "inbox.tools.list_inbox_messages",
-        "inbox.tools.get_inbox_thread",
-        "inbox.tools.send_office_outbound"
+        "inbox.tools.dispatch_inbox_action"
       ],
       "skills": [
         "inbox-triage",
         "invoice-source-identification",
-        "invoice-field-interpretation"
+        "invoice-field-interpretation",
+        "superseded-document-handling"
       ],
       "outputType": "InboxAgentOutput",
       "source": "inbox/agents.py"
@@ -381,7 +381,7 @@
       "skills": [
         "invoice-source-identification",
         "invoice-field-interpretation",
-        "inbox-triage"
+        "superseded-document-handling"
       ],
       "outputType": "SourceAgentOutput",
       "source": "invoice_ingestion/agents.py"
@@ -413,7 +413,8 @@
       ],
       "skills": [
         "invoice-source-identification",
-        "invoice-field-interpretation"
+        "invoice-field-interpretation",
+        "superseded-document-handling"
       ],
       "outputType": "SourceAgentOutput",
       "source": "invoice_ingestion/agents.py"
@@ -425,7 +426,8 @@
       ],
       "skills": [
         "invoice-source-identification",
-        "invoice-field-interpretation"
+        "invoice-field-interpretation",
+        "superseded-document-handling"
       ],
       "outputType": "SourceAgentOutput",
       "source": "invoice_ingestion/agents.py"
@@ -437,7 +439,8 @@
       ],
       "skills": [
         "invoice-source-identification",
-        "invoice-field-interpretation"
+        "invoice-field-interpretation",
+        "superseded-document-handling"
       ],
       "outputType": "SourceAgentOutput",
       "source": "invoice_ingestion/agents.py"

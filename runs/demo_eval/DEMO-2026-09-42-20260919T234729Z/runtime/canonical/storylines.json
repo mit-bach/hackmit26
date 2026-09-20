@@ -1,0 +1,75 @@
+[
+  {
+    "storyline_id": "STORY-CLEAN",
+    "title": "Acme INV-001 paid and reconciled",
+    "kind": "clean",
+    "description": "Clean three-way match, approval, ACH, exact cash match, AP/cash close tie, forecast actual, audit sample, reporting trace.",
+    "document_id": "INV-001",
+    "steps": [
+      "Vendor invoice INV-001 arrives and matches PO-101 / GR-101",
+      "AP approves the invoice",
+      "PAY-AP-001 is scheduled and paid",
+      "Bank TXN-2026-09-018A matches GL-AP-INV-001",
+      "GL reflects the AP settlement",
+      "Month-end cash and AP recs tie on this item",
+      "Forecast replaces the planned outflow with the bank actual",
+      "Auditor samples INV-001 and re-performs three-way match",
+      "Reporting can trace any related variance to INV-001"
+    ],
+    "source_ids": [
+      "INV-001",
+      "PO-101",
+      "GR-101",
+      "PAY-AP-001",
+      "TXN-2026-09-018A",
+      "GL-AP-INV-001",
+      "JE-CASH-PAY-AP-001"
+    ]
+  },
+  {
+    "storyline_id": "STORY-RESOLVED",
+    "title": "Helios wire received net of a $25 fee",
+    "kind": "resolved_exception",
+    "description": "INV-017 is paid by wire. Bank posts $10,025.00; books show $10,000.00. Fee evidence supports FEE_NETTED.",
+    "document_id": "INV-017",
+    "steps": [
+      "INV-017 is approved and paid",
+      "Bank TXN-2026-09-011 is $25 higher than GL-AP-WIRE",
+      "FEE-729103 supports the difference",
+      "Cash reconciliation classifies FEE_NETTED",
+      "Close accepts the explained exception",
+      "Audit re-performs the fee-netted recon"
+    ],
+    "source_ids": [
+      "INV-017",
+      "PAY-AP-017",
+      "TXN-2026-09-011",
+      "GL-AP-WIRE",
+      "FEE-729103"
+    ]
+  },
+  {
+    "storyline_id": "STORY-UNRESOLVED",
+    "title": "Northstar $12.40 unexplained difference",
+    "kind": "unresolved_review",
+    "description": "PAY-006 / INV-AR-013 books $12,400.00; bank posts $12,412.40. No fee evidence. Close stays blocked.",
+    "document_id": "INV-AR-013",
+    "steps": [
+      "INV-AR-013 is issued for $12,400.00",
+      "PAY-006 arrives",
+      "Bank TXN-2026-09-015 is $12,412.40",
+      "GL-AR-NS remains $12,400.00",
+      "Cash recon flags UNEXPLAINED_DIFFERENCE",
+      "TASK-CASH and TASK-FINAL stay blocked",
+      "Auditor samples the recon for human review",
+      "Forecast actuals still point at PAY-006 / TXN-2026-09-015"
+    ],
+    "source_ids": [
+      "INV-AR-013",
+      "PAY-006",
+      "TXN-2026-09-015",
+      "GL-AR-NS",
+      "TASK-CASH"
+    ]
+  }
+]

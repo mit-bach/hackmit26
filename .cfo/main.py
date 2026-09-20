@@ -51,21 +51,15 @@ def format_trace(trace: DecisionTrace) -> str:
         investigator_block = (
             f"Investigator:\n{trace.investigation.recommendation}\n{finding}"
         )
-    if trace.verifier_handle:
-        handle = trace.verifier_handle
-        verifier_block = (
-            f"Verifier Handle:\n"
-            f"{handle.get('toSlug')} / {handle.get('profile')}\n"
-            f"{handle.get('id')}\n"
-            f"status={handle.get('status')} missing={handle.get('verifier_missing')}"
-        )
-    else:
-        verifier_block = "Verifier Handle:\n(none — not an approve-shaped draft)"
-    holds = trace.kernel_holds or []
-    hold_block = "Kernel must_hold:\n" + (
-        "\n".join(f"- {item}" for item in holds) if holds else "- (none)"
-    )
+    reviewer_reason = trace.reviewer.reasons[0] if trace.reviewer.reasons else ""
+    approver_reason = trace.approver.reasons[0] if trace.approver.reasons else ""
+    audit_line = "PASS" if trace.audit.passed else "FAIL"
+    if trace.audit.findings:
+        audit_line = f"{audit_line} — {trace.audit.findings[0]}"
     evidence = "\n".join(f"- {item}" for item in final.evidence_used) or "- (none)"
+    reconsideration = (
+        "\nReconsideration: yes\n" if final.reconsideration_performed else "\n"
+    )
     skill_lines = []
     for item in trace.agents:
         names = ", ".join(skill.name for skill in item.skills) or "(none)"
@@ -74,7 +68,6 @@ def format_trace(trace: DecisionTrace) -> str:
     skills_block = ""
     if skill_lines:
         skills_block = "\n\nSkills\n" + "\n".join(skill_lines)
-    packet = trace.packet_path or "(none)"
     return (
         f"Invoice: {final.invoice_id}\n"
         f"\n"
@@ -84,15 +77,21 @@ def format_trace(trace: DecisionTrace) -> str:
         f"\n"
         f"{investigator_block}\n"
         f"\n"
-        f"{verifier_block}\n"
+        f"Reviewer:\n"
+        f"{trace.reviewer.recommendation}\n"
+        f"Confidence: {trace.reviewer.confidence:.2f}\n"
+        f"{reviewer_reason}\n"
         f"\n"
-        f"{hold_block}\n"
-        f"Packet: {packet}\n"
-        f"Posted to pool: {'yes' if trace.posted_to_pool else 'no'}\n"
+        f"Approver:\n"
+        f"{trace.approver.decision}\n"
+        f"Confidence: {trace.approver.confidence:.2f}\n"
+        f"{approver_reason}\n"
         f"\n"
-        f"PROPOSED DECISION: {final.decision}\n"
+        f"Audit:\n"
+        f"{audit_line}"
+        f"{reconsideration}"
+        f"FINAL DECISION: {final.decision}\n"
         f"Confidence: {final.confidence:.2f}\n"
-        f"Audit status: {final.audit_status}\n"
         f"\n"
         f"Evidence:\n"
         f"{evidence}"
@@ -165,10 +164,11 @@ def _usage() -> int:
     print("       python main.py demo-close [period]")
     print("       python main.py ingest [period] [--no-ap] [--llm] [--replay-check]")
     print("       python main.py demo-inbox [--full] [--reset]")
-    print("       python main.py simulate-stripe")
-    print("       python main.py eval-stripe")
     print("       python main.py integration-demo")
     print("       python main.py stripe-demo")
+    print("       python main.py simulate-stripe")
+    print("       python main.py eval-stripe")
+    print("       python main.py eval-stripe-modes")
     print("       python main.py integrations status")
     print("       python main.py webhook-demo [stripe|adyen|gmail|outlook|xero]")
     print("       python main.py sync [coupa|netsuite|stripe]")
@@ -190,8 +190,8 @@ def _usage() -> int:
     print("       python main.py reconcile-cash --month 2026-09 --seed-demo")
     print("       python main.py reconcile-trace REC-001")
     print("       python main.py eval-cash-reconciliation")
-    print("       python main.py memory-demo [--story stripe|prepaid|both]")
-    print("       python main.py eval-memory")
+    print("       python main.py memory-demo [--story stripe|prepaid|close|both]")
+    print("       python main.py eval-gauntlet")
     print("       python main.py month-end [period]")
     print("       python main.py close-month --month 2026-09 --seed-demo")
     print("       python main.py close-trace --month 2026-09")
@@ -209,9 +209,6 @@ def _usage() -> int:
     print("       python main.py reporting [period] [as-of]")
     print("       python main.py generate-sample-data [--seed 42] [--month 2026-09] [--output data/demo]")
     print("       python main.py validate-sample-data [--data-root data/demo]")
-    print("       python main.py export-demo [--output data/demo] [--seed 42] [--month 2026-09]")
-    print("       python main.py validate-demo [--data-root data/demo]")
-    print("       python main.py reset-demo [--dest runs/demo_runtime]")
     print("       python main.py sample-data-summary [--data-root data/demo]")
     print("       python main.py evaluate-cfo [--data-root data/demo] [--seed 42] [--all]")
     print("       python main.py cfo-demo")
@@ -372,30 +369,6 @@ def main() -> int:
         from sample_data.cli import run_validate
 
         return run_validate(sys.argv[2:])
-
-    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
-        "export-demo",
-        "export_demo",
-    }:
-        from demo.cli import run_export_demo
-
-        return run_export_demo(sys.argv[2:])
-
-    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
-        "validate-demo",
-        "validate_demo",
-    }:
-        from demo.cli import run_validate_demo
-
-        return run_validate_demo(sys.argv[2:])
-
-    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
-        "reset-demo",
-        "reset_demo",
-    }:
-        from demo.cli import run_reset_demo
-
-        return run_reset_demo(sys.argv[2:])
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {
         "sample-data-summary",
@@ -623,15 +596,26 @@ def main() -> int:
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"demo-close", "close-demo"}:
         return run_demo_close_cli(sys.argv[2:])
 
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"demo-inbox", "inbox-demo", "demo_inbox"}:
+        from inbox.cli import run_demo_inbox_cli
+
+        return run_demo_inbox_cli(sys.argv[2:])
+
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() == "ingest":
         from invoice_ingestion.demo import run_demo
 
         return run_demo(sys.argv[2:])
 
-    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"demo-inbox", "inbox-demo", "demo_inbox"}:
-        from inbox.cli import run_demo_inbox_cli
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"integration-demo", "integrations-demo"}:
+        from integrations.demo import run_integration_demo
 
-        return run_demo_inbox_cli(sys.argv[2:])
+        print(run_integration_demo(replay=True))
+        return 0
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"stripe-demo", "stripe_demo"}:
+        from integrations.cli import run_stripe_demo
+
+        return run_stripe_demo()
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"simulate-stripe", "simulate_stripe"}:
         from simulations.stripe.cli import run_simulate
@@ -648,21 +632,23 @@ def main() -> int:
 
         return run_eval_modes(sys.argv[2:])
 
-    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"integration-demo", "integrations-demo"}:
-        from integrations.demo import run_integration_demo
-
-        print(run_integration_demo(replay=True))
-        return 0
-
-    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"stripe-demo", "stripe_demo"}:
-        from integrations.cli import run_stripe_demo
-
-        return run_stripe_demo()
-
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"memory-demo", "memory_demo"}:
         from memory.cli import run_memory_demo
 
         return run_memory_demo(sys.argv[2:])
+
+    if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-gauntlet", "eval_gauntlet", "finance-gauntlet"}:
+        from evals.maximor_finance_gauntlet.__main__ import main as run_gauntlet_cli
+
+        extra = sys.argv[2:]
+        if extra and extra[0] in {"--modes", "modes"}:
+            from evals.maximor_finance_gauntlet.modes import run_modes
+            import json
+
+            payload = run_modes(include_existing=False)
+            print(json.dumps(payload["comparison"], indent=2))
+            return 0
+        return run_gauntlet_cli()
 
     if len(sys.argv) >= 2 and sys.argv[1].strip().lower() in {"eval-memory", "memory-eval", "eval_memory"}:
         from memory.cli import run_memory_eval

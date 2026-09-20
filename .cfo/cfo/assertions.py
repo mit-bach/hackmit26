@@ -316,6 +316,18 @@ def check_shared_identity(chains: list[dict]) -> list[dict]:
             ids=[],
         )
     )
+    harbor = by_id.get("CHAIN-CLOSE-HARBOR") or {}
+    rows.append(
+        _check(
+            "identity_harbor_accrual",
+            harbor.get("invoice_id") == FEATURED["harbor_vendor"]
+            and bool(harbor.get("review_id"))
+            and bool(harbor.get("close_run_id"))
+            and "seasonal_prior_year" in str(harbor.get("status") or ""),
+            f"harbor chain={harbor}",
+            ids=[FEATURED["harbor_vendor"]],
+        )
+    )
     return rows
 
 
@@ -373,6 +385,46 @@ def check_audit(audit_run, independence: dict, dataset) -> list[dict]:
     ]
 
 
+def check_harbor_memory(payload: dict) -> list[dict]:
+    harbor = payload.get("harbor_trace")
+    august = payload.get("august_memory") or {}
+    packet = payload.get("harbor_packet") or ""
+    prior_id = august.get("harbor_memory_id") or ""
+    lookup = getattr(harbor, "memory_lookup", None) if harbor is not None else None
+    amount_ok = harbor is not None and money(harbor.final_amount) == FEATURED["harbor_september_amount"]
+    method_ok = harbor is not None and harbor.final_method == FEATURED["harbor_method"]
+    cited = bool(prior_id) and prior_id in packet
+    reused = bool(lookup is not None and lookup.precedent_used and lookup.retrieved)
+    checked = bool(lookup is not None and lookup.current_evidence_checked)
+    return [
+        _check(
+            "harbor_september_accrual",
+            method_ok and amount_ok,
+            f"harbor method={getattr(harbor, 'final_method', None)} amount={getattr(harbor, 'final_amount', None)}",
+            ids=[FEATURED["harbor_vendor"]],
+        ),
+        _check(
+            "harbor_prior_decision_cited",
+            cited and reused,
+            f"prior={prior_id} cited={cited} reused={reused} packet_has_id={prior_id in packet}",
+            ids=[prior_id] if prior_id else [],
+        ),
+        _check(
+            "harbor_current_evidence_checked",
+            checked,
+            f"current_evidence_checked={getattr(lookup, 'current_evidence_checked', None)}",
+            ids=[FEATURED["harbor_vendor"]],
+        ),
+        _check(
+            "harbor_september_writes_memory",
+            bool(getattr(harbor, "written_memory_id", None))
+            and getattr(harbor, "written_memory_id", None) != prior_id,
+            f"september_memory={getattr(harbor, 'written_memory_id', None)} august={prior_id}",
+            ids=[str(getattr(harbor, "written_memory_id", "") or "")],
+        ),
+    ]
+
+
 def evaluate_all(payload: dict) -> list[dict]:
     checks: list[dict] = []
     checks.extend(check_ap_amounts(payload["ap_results"]))
@@ -384,6 +436,7 @@ def evaluate_all(payload: dict) -> list[dict]:
     checks.extend(check_forecast(payload["forecast"], payload["forecast_variance"], payload["statement"]))
     checks.extend(check_shared_identity(payload["chains"]))
     checks.extend(check_audit(payload["audit_run"], payload["independence"], payload["audit_dataset"]))
+    checks.extend(check_harbor_memory(payload))
     if payload.get("post_close_rejected"):
         checks.append(
             _check(

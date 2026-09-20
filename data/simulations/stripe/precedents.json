@@ -1,0 +1,19 @@
+[
+  {
+    "precedent_id": "AR-PREC-STR-ATLAS-AUG",
+    "customer_id": "CUST-010",
+    "kind": "stripe_metadata",
+    "summary": "Atlas Systems typically remits Stripe invoice references (INV-STR-018A) with description 'Atlas August platform fee monthly platform fee'.",
+    "facts": {
+      "invoice_ids": [
+        "INV-STR-018A"
+      ],
+      "description": "Atlas August platform fee monthly platform fee",
+      "source": "stripe",
+      "amount": 880.0
+    },
+    "source": "stripe",
+    "support_count": 2,
+    "source_payment_id": "PAY-STR-CH_STR_mem_aug"
+  }
+]

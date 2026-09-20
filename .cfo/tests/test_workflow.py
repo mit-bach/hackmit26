@@ -99,7 +99,7 @@ def test_mocked_clean_case_skips_investigator(monkeypatch, tmp_path):
     assert roles == ["AP Preparer"]
     preparer = saved["agents"][0]
     assert preparer["role"] == "AP Preparer"
-    assert [item["name"] for item in preparer["skills"]] == ["three-way-match-analysis"]
+    assert [item["name"] for item in preparer["skills"]] == ["three-way-match-analysis", "superseded-document-handling"]
     assert "body" not in preparer["skills"][0]
     assert preparer["skills"][0]["injected"] is True
     assert len(preparer["skills"][0]["content_hash"]) == 64

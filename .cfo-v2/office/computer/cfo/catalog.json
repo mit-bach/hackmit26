@@ -566,50 +566,6 @@
       "ownerPrefixes": []
     },
     {
-      "id": "inbox.tools.get_inbox_thread",
-      "python": "inbox.tools:get_inbox_thread",
-      "exportName": "get_inbox_thread",
-      "args": {
-        "thread_id": "string"
-      },
-      "mutability": "read",
-      "sodClass": "inbox",
-      "evalOnly": false,
-      "ownerPrefixes": []
-    },
-    {
-      "id": "inbox.tools.list_inbox_messages",
-      "python": "inbox.tools:list_inbox_messages",
-      "exportName": "list_inbox_messages",
-      "args": {
-        "thread_id": "string"
-      },
-      "mutability": "read",
-      "sodClass": "inbox",
-      "evalOnly": false,
-      "ownerPrefixes": []
-    },
-    {
-      "id": "inbox.tools.list_inbox_threads",
-      "python": "inbox.tools:list_inbox_threads",
-      "exportName": "list_inbox_threads",
-      "args": {},
-      "mutability": "read",
-      "sodClass": "inbox",
-      "evalOnly": false,
-      "ownerPrefixes": []
-    },
-    {
-      "id": "inbox.tools.list_world_personas",
-      "python": "inbox.tools:list_world_personas",
-      "exportName": "list_world_personas",
-      "args": {},
-      "mutability": "read",
-      "sodClass": "inbox",
-      "evalOnly": false,
-      "ownerPrefixes": []
-    },
-    {
       "id": "inbox.tools.reply_in_thread",
       "python": "inbox.tools:reply_in_thread",
       "exportName": "reply_in_thread",
@@ -620,12 +576,10 @@
         "body_text": "string",
         "subject": "string"
       },
-      "mutability": "write-local",
+      "mutability": "read",
       "sodClass": "inbox",
       "evalOnly": false,
-      "ownerPrefixes": [
-        "runs/inbox/"
-      ]
+      "ownerPrefixes": []
     },
     {
       "id": "inbox.tools.send_inbox_message",
@@ -634,35 +588,10 @@
       "args": {
         "envelope_json": "string"
       },
-      "mutability": "write-local",
+      "mutability": "read",
       "sodClass": "inbox",
       "evalOnly": false,
-      "ownerPrefixes": [
-        "runs/inbox/"
-      ]
-    },
-    {
-      "id": "inbox.tools.send_office_outbound",
-      "python": "inbox.tools:send_office_outbound",
-      "exportName": "send_office_outbound",
-      "args": {
-        "thread_id": "string",
-        "message_id": "string",
-        "to_name": "string",
-        "to_address": "string",
-        "subject": "string",
-        "body_text": "string",
-        "from_address": "string",
-        "from_name": "string",
-        "in_reply_to": "string",
-        "sent_at": "string"
-      },
-      "mutability": "write-local",
-      "sodClass": "inbox",
-      "evalOnly": false,
-      "ownerPrefixes": [
-        "runs/inbox/"
-      ]
+      "ownerPrefixes": []
     },
     {
       "id": "invoice_ingestion.tools.find_related_invoice",
@@ -894,7 +823,7 @@
         "entity_type": "string"
       },
       "mutability": "read",
-      "sodClass": "kernel",
+      "sodClass": "memory-read",
       "evalOnly": false,
       "ownerPrefixes": []
     },

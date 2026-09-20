@@ -15,6 +15,7 @@ def live_agent_instructions(agent_name: str) -> str:
         reviewer_agent,
     )
     from accrual.agent import accrual_agent
+    from inbox.agents import counterparty_message_agent, finance_inbox_agent
     from invoice_ingestion.agents import AGENTS
     from scheduling.agent import payment_audit_agent, scheduler_agent
     from ar.agents import cash_application_agent, cash_reviewer_agent, collections_agent
@@ -80,6 +81,8 @@ def live_agent_instructions(agent_name: str) -> str:
         cash_forecast_agent.name: cash_forecast_agent,
         forecast_reviewer_agent.name: forecast_reviewer_agent,
         forecast_variance_agent.name: forecast_variance_agent,
+        counterparty_message_agent.name: counterparty_message_agent,
+        finance_inbox_agent.name: finance_inbox_agent,
     }
     mapping.update({agent.name: agent for agent in AGENTS.values()})
     agent = mapping.get(agent_name)

@@ -16,14 +16,17 @@ Apply after accrual-evidence-evaluation has found that an expense was probably i
 
 ## Inputs / Evidence
 
-Use get_estimate_candidates / compute_accrual_estimate. Each candidate includes method, applicable flag, amount, rationale, and inputs. Also consider contract cadence, usage, receipts, and whether naive_recent_average_is_misleading is true.
+Use get_estimate_candidates / compute_accrual_estimate. Each candidate includes method, applicable flag, amount, rationale, and inputs. Also consider contract cadence, usage, receipts, whether naive_recent_average_is_misleading is true, and get_decision_memories for a prior-period methodology.
 
 ## Procedure
 
 1. Ignore methods Python marked not applicable.
-2. Choose the method that best fits the evidence — not a single naive rule and not automatically last month.
-3. If accruing, call create_accrual with that method so the ledger can be updated from the Python amount.
-4. Copy estimated_amount from the Python candidate exactly, including cents.
+2. Retrieve a prior-period methodology for the same vendor. Treat it as precedent, not a rule.
+3. Reuse that method only when the current Python candidate is still applicable and the facts still support it.
+4. Otherwise choose the method that best fits current evidence — not a single naive rule and not automatically last month.
+5. If accruing, call create_accrual with that method so the ledger can be updated from the Python amount.
+6. Copy estimated_amount from the Python candidate exactly, including cents.
+7. Cite the prior-period decision_id in the close packet when it was relied on.
 
 ## Decision Criteria
 

@@ -1,7 +1,7 @@
 {
   "system": "office-of-the-cfo",
   "version": "session-06-fragment",
-  "description": "Apply and collect Operator Bots. Merge into the sixteen-Bot roster. Not examples/cfo-floor.",
+  "description": "Apply and collect Operator Bots. Merge into the fifteen-Bot roster from session 00. Not examples/cfo-floor.",
   "computer": "office/computer",
   "bots": [
     {

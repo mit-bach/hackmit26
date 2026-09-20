@@ -1,0 +1,45 @@
+{
+  "period": "2026-09",
+  "planted_exceptions": [
+    {
+      "object_id": "VEND-001",
+      "control_id": "AUD-DUP-VEND-001",
+      "kind": "duplicate_vendor"
+    },
+    {
+      "object_id": "INV-006",
+      "control_id": "AUD-DUP-INV-001",
+      "kind": "duplicate_invoice"
+    },
+    {
+      "object_id": "PAY-AP-009",
+      "control_id": "AUD-RND-001",
+      "kind": "round_number"
+    },
+    {
+      "object_id": "JE-POST-CLOSE-001",
+      "control_id": "AUD-PCE-001",
+      "kind": "unauthorized_post_close_entry"
+    },
+    {
+      "object_id": "APR-INV-SELF",
+      "control_id": "AUD-SOD-001",
+      "kind": "self_approval"
+    },
+    {
+      "object_id": "PAY-AP-010",
+      "control_id": "AUD-SOD-001",
+      "kind": "self_approval"
+    }
+  ],
+  "expected_pass": [
+    {
+      "object_id": "INV-001",
+      "control_id": "AUD-DUP-INV-001"
+    },
+    {
+      "object_id": "PAY-AP-001",
+      "control_id": "AUD-RND-001"
+    }
+  ]
+}

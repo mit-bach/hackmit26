@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "event_id": "PCE-2026-09-2026-09-19T211356Z",
+    "event_type": "POST_CLOSE_ENTRY_ATTEMPT",
+    "period": "2026-09",
+    "created_at": "2026-09-19T21:13:56Z",
+    "actor": "cli",
+    "reason": "Journal dated in a closed period",
+    "decision": "REJECTED",
+    "attempted_entry": {
+      "memo": "Manual journal",
+      "debit_account": "Insurance Expense",
+      "credit_account": "Cash",
+      "amount": 100.0,
+      "entry_type": "manual",
+      "idempotency_key": "manual:2026-09:Manual journal:100.0:2026-09-29"
+    },
+    "audit_trace": "/Users/rohandalal/Desktop/hackmit26/runs/month_end/control_events.json"
+  },
+  {
+    "event_id": "PCE-2026-09-2026-09-20T000501Z",
+    "event_type": "POST_CLOSE_ENTRY_ATTEMPT",
+    "period": "2026-09",
+    "created_at": "2026-09-20T00:05:01Z",
+    "actor": "system",
+    "reason": "Journal dated in a closed period",
+    "decision": "REJECTED",
+    "attempted_entry": {
+      "memo": "Amortize PRE-MEM-CLOUD-SEP CloudCo analytics add-on annual license for 2026-09",
+      "debit_account": "6200-Software",
+      "credit_account": "1400-Prepaid-Expenses",
+      "amount": 1200.0,
+      "entry_type": "prepaid_amortization",
+      "idempotency_key": "prepaid:PRE-MEM-CLOUD-SEP:2026-09"
+    },
+    "audit_trace": "/Users/rohandalal/Desktop/hackmit26/runs/month_end/control_events.json"
+  }
+]

@@ -181,6 +181,8 @@ def _dataset(spec: StripePeriodSpec) -> tuple[PeriodBalances, list[BankTransacti
 @contextmanager
 def isolated_memory_workspace(root: Path):
     """Keep demo/eval side effects out of the developer's default run dirs."""
+    from accrual import ledger as accrual_ledger
+    from accrual import trace as accrual_trace
     from cash_recon import store as cash_store
     from cash_recon.store import configure_paths as configure_cash
     from close import ledger as close_ledger
@@ -201,6 +203,8 @@ def isolated_memory_workspace(root: Path):
         "prepaid": prepaid_store.STATE_DIR,
         "close": close_month_end.STATE_DIR,
         "gl": close_ledger.LEDGER_DIR,
+        "accrual_ledger": (accrual_ledger.LEDGER_DIR, accrual_ledger.ACCRUALS_PATH, accrual_ledger.JOURNALS_PATH),
+        "accrual_traces": accrual_trace.TRACES_ROOT,
         "integration_runs": integration_store.RUNS_DIR,
         "integration_state": integration_store.STATE_PATH,
     }
@@ -213,6 +217,12 @@ def isolated_memory_workspace(root: Path):
     configure_close(root / "close")
     configure_gl(root / "gl")
     reset_ledger()
+    accrual_dir = root / "accrual-ledger"
+    accrual_dir.mkdir(parents=True, exist_ok=True)
+    accrual_ledger.LEDGER_DIR = accrual_dir
+    accrual_ledger.ACCRUALS_PATH = accrual_dir / "open_accruals.json"
+    accrual_ledger.JOURNALS_PATH = accrual_dir / "journal_entries.json"
+    accrual_trace.TRACES_ROOT = root / "accrual-traces"
     integration_store.RUNS_DIR = root / "integrations"
     integration_store.STATE_PATH = root / "integrations" / "state.json"
     reset_integration_state()
@@ -225,6 +235,8 @@ def isolated_memory_workspace(root: Path):
         configure_prepaid(snapshot["prepaid"])
         configure_close(snapshot["close"])
         configure_gl(snapshot["gl"])
+        accrual_ledger.LEDGER_DIR, accrual_ledger.ACCRUALS_PATH, accrual_ledger.JOURNALS_PATH = snapshot["accrual_ledger"]
+        accrual_trace.TRACES_ROOT = snapshot["accrual_traces"]
         integration_store.RUNS_DIR = snapshot["integration_runs"]
         integration_store.STATE_PATH = snapshot["integration_state"]
         reset_integration_state()
@@ -387,3 +399,289 @@ def lookup_trace_text(lookup: MemoryLookup | None) -> str:
 
 def period_of_date(value: str) -> str:
     return period_of(value)
+
+
+HARBOR_VENDOR = "Harbor Electric"
+LINDHOLM_VENDOR = "Lindholm & Ruiz LLP"
+
+
+def reset_accrual_books() -> None:
+    from accrual.ledger import save_accruals, save_journal_entries
+
+    save_accruals([])
+    save_journal_entries([])
+
+
+def _harbor_decision(vendor: str, period: str, *, method: str | None, hide_period_invoices: bool, memory_enabled: bool, run_id: str):
+    from accrual.cutoff import data_cutoff
+    from accrual.estimation import compute_estimate
+    from accrual.models import AccrualDecision
+    from accrual.policy import preferred_candidate
+    from accrual.store import build_estimate_context
+    from accrual.workflow import finalize_vendor_close
+
+    with memory_mode(memory_enabled):
+        with data_cutoff(period, hide_period_invoices=hide_period_invoices, allow_later_invoices=False):
+            context = build_estimate_context(vendor, period)
+            if method is None:
+                candidate = preferred_candidate(context)
+            else:
+                candidate = compute_estimate(context, method)
+            if candidate is None or not candidate.applicable or candidate.amount is None:
+                raw = AccrualDecision(
+                    vendor=vendor,
+                    period=period,
+                    status="insufficient_evidence",
+                    estimated_amount=None,
+                    confidence=0,
+                    reasoning_summary="No applicable Python estimate candidate.",
+                    evidence=[],
+                )
+            else:
+                raw = AccrualDecision(
+                    vendor=vendor,
+                    period=period,
+                    status="accrual_required",
+                    estimated_amount=candidate.amount,
+                    confidence=0.88,
+                    estimation_method=candidate.method,
+                    evidence=[candidate.rationale],
+                    reasoning_summary=candidate.rationale,
+                )
+            return finalize_vendor_close(vendor, period, raw, run_id=run_id)
+
+
+def run_harbor_period(
+    period: str,
+    *,
+    memory_enabled: bool = True,
+    hide_period_invoices: bool = False,
+    method: str | None = None,
+    vendor: str = HARBOR_VENDOR,
+    reset: bool = True,
+    run_id: str | None = None,
+):
+    if reset:
+        reset_accrual_books()
+    stamp = period.replace("-", "")
+    return _harbor_decision(
+        vendor,
+        period,
+        method=method,
+        hide_period_invoices=hide_period_invoices,
+        memory_enabled=memory_enabled,
+        run_id=run_id or f"mem-{stamp}",
+    )
+
+
+def harbor_close_packet(report, *, close_id: str | None = None) -> str:
+    """Build the month-end close packet text that cites prior-period accrual decisions."""
+    from datetime import datetime, timezone
+
+    from close.models import AuditRefs, ClosePeriod, CloseRun, CloseTask, MonthEndState
+    from close.report import format_close_run, format_month_end_demo
+
+    period = report.period
+    close_id = close_id or f"CLOSE-{period}-MEM"
+    started = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    packet = CloseRun(
+        period=period,
+        close_id=close_id,
+        started_at=started,
+        discovery=report.discovery,
+        accrual=report,
+        audit=AuditRefs(close_id=close_id, accrual_trace_dir=report.trace_dir),
+        trace_path=report.trace_path,
+    )
+    month_end = MonthEndState(
+        period=ClosePeriod(period=period, opened_at=started, status="IN_PROGRESS"),
+        close_id=close_id,
+        tasks=[
+            CloseTask(
+                task_id="accruals",
+                period=period,
+                category="accruals",
+                description="Book missing-bill accruals",
+                owner_agent="Accrual Agent",
+                status="COMPLETE",
+            )
+        ],
+        accrual=report,
+        completion_pct=100,
+        trace_path=report.trace_path,
+    )
+    return f"{format_close_run(packet)}\n\n{format_month_end_demo(month_end)}"
+
+
+def _harbor_report(decision, trace, period: str):
+    from accrual.models import AccrualPeriodReport
+
+    created = [decision] if decision.status == "accrual_required" else []
+    skipped = [decision] if decision.status == "no_accrual_needed" else []
+    uncertain = [decision] if decision.status == "insufficient_evidence" else []
+    return AccrualPeriodReport(
+        period=period,
+        vendors_reviewed=1,
+        accruals_created=created,
+        no_accrual_needed=skipped,
+        uncertain_items=uncertain,
+        total_accrued_expense=round(sum(item.estimated_amount or 0 for item in created), 2),
+        traces=[trace],
+        ranked_missing=created,
+    )
+
+
+def run_harbor_cross_period(
+    *,
+    memory_enabled: bool = True,
+    september_method: str | None = None,
+    september_vendor: str = HARBOR_VENDOR,
+    august_method: str = "seasonal_prior_year",
+) -> dict[str, Any]:
+    """August books Harbor Electric. September retrieves that methodology when memory is on."""
+    reset_accrual_books()
+    august_decision, august_trace = run_harbor_period(
+        "2026-08",
+        memory_enabled=True,
+        hide_period_invoices=True,
+        method=august_method,
+        reset=False,
+        run_id="mem-aug-harbor",
+    )
+    september_decision, september_trace = run_harbor_period(
+        "2026-09",
+        memory_enabled=memory_enabled,
+        hide_period_invoices=False,
+        method=september_method,
+        vendor=september_vendor,
+        reset=True,
+        run_id="mem-sep-harbor",
+    )
+    september_report = _harbor_report(september_decision, september_trace, "2026-09")
+    return {
+        "august": august_decision,
+        "september": september_decision,
+        "august_trace": august_trace,
+        "september_trace": september_trace,
+        "september_report": september_report,
+        "september_packet": harbor_close_packet(september_report),
+        "memory_enabled": memory_enabled,
+        "august_lookup": august_trace.memory_lookup,
+        "september_lookup": september_trace.memory_lookup,
+    }
+
+
+def run_harbor_self_correction(
+    *,
+    actual_amount: float = 12100.0,
+    invoice_id: str = "INV-HE-2026-10",
+    memory_enabled: bool = True,
+) -> dict[str, Any]:
+    """August estimate, September reuse, October actual bill reverses the estimate."""
+    from accrual.ledger import find_accrual, load_accruals, reconcile_accrual
+    from cfo.explain import explain_accrual_correction
+    from memory.models import MemoryEvidence
+    from memory.write import write_decision
+
+    reset_accrual_books()
+    august_decision, august_trace = run_harbor_period(
+        "2026-08",
+        memory_enabled=True,
+        hide_period_invoices=True,
+        reset=False,
+        run_id="mem-aug-harbor-correct",
+    )
+    september_decision, september_trace = run_harbor_period(
+        "2026-09",
+        memory_enabled=memory_enabled,
+        hide_period_invoices=True,
+        reset=False,
+        run_id="mem-sep-harbor-correct",
+    )
+    open_rows = [item for item in load_accruals() if item.vendor == HARBOR_VENDOR and item.status == "open"]
+    target = open_rows[-1] if open_rows else find_accrual(getattr(september_decision, "accrual_id", None) or "")
+    if target is None:
+        raise RuntimeError("Harbor accrual was not booked, so it cannot be corrected.")
+    result = reconcile_accrual(target.accrual_id, invoice_id, actual_amount)
+    explanation = explain_accrual_correction(
+        HARBOR_VENDOR,
+        result.period,
+        result.estimated_amount,
+        result.actual_amount,
+        invoice_id,
+        prior_id=getattr(august_trace, "written_memory_id", None),
+    )
+    memory, _written = write_decision(
+        period="2026-10",
+        workflow="month_end_close",
+        entity_type="vendor",
+        entity_id="harbor-electric",
+        situation_type="accrual_methodology",
+        situation_summary=f"October invoice {invoice_id} arrived at {actual_amount} versus the open accrual.",
+        evidence=[
+            MemoryEvidence(kind="invoice", label=invoice_id, amount=actual_amount, reference=invoice_id),
+            MemoryEvidence(kind="accrual", label=target.accrual_id, amount=result.estimated_amount, reference=target.accrual_id),
+        ],
+        decision="reverse_and_book_actual",
+        reasoning_summary=explanation["narrative"],
+        accounting_treatment="reverse_accrual_book_actual",
+        outcome="corrected",
+        reusable_precedent="Use the actual invoice once it arrives; do not keep the estimate.",
+        source_trace_ids=[target.accrual_id],
+        tags=["harbor", "self_correction"],
+        fingerprint=f"harbor-oct-{invoice_id}-{actual_amount}",
+        entity_name=HARBOR_VENDOR,
+        accounting_category="utilities_accrual",
+    )
+    return {
+        "august": august_decision,
+        "september": september_decision,
+        "august_trace": august_trace,
+        "september_trace": september_trace,
+        "october_reconciliation": result,
+        "explanation": explanation,
+        "correction_memory": memory,
+        "detected_prior_estimate": True,
+        "books_corrected": True,
+        "memory_enabled": memory_enabled,
+    }
+
+
+def run_harbor_contamination(
+    *,
+    wrong_august_amount: float = 50000.0,
+    memory_enabled: bool = True,
+) -> dict[str, Any]:
+    """Inject a wrong August amount, then measure whether September blindly copies it."""
+    from accrual.ledger import load_accruals, save_accruals
+
+    story = run_harbor_cross_period(memory_enabled=True)
+    rows = load_accruals()
+    mutated = []
+    for item in rows:
+        if item.vendor == HARBOR_VENDOR and item.period == "2026-08":
+            mutated.append(item.model_copy(update={"estimated_amount": wrong_august_amount}))
+        else:
+            mutated.append(item)
+    save_accruals(mutated)
+    september_decision, september_trace = run_harbor_period(
+        "2026-09",
+        memory_enabled=memory_enabled,
+        hide_period_invoices=False,
+        reset=False,
+        run_id="mem-sep-harbor-contam",
+    )
+    copied = bool(
+        september_decision.estimated_amount
+        and abs(float(september_decision.estimated_amount) - wrong_august_amount) < 0.01
+    )
+    return {
+        "wrong_august_amount": wrong_august_amount,
+        "september_amount": september_decision.estimated_amount,
+        "copied_wrong_amount": copied,
+        "contained": not copied,
+        "september_decision": september_decision,
+        "september_trace": september_trace,
+        "memory_enabled": memory_enabled,
+        "clean_september_amount": getattr(story["september"], "estimated_amount", None),
+    }

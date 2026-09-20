@@ -2,47 +2,9 @@
   "bot": "ap",
   "profile": "prepare",
   "invoice_id": "INV-S12",
-  "source_path": "workspace/sources/email/MSG-S12.json",
-  "source_id": "MSG-S12",
-  "proposal": "HOLD",
-  "match_conclusion": "cannot_match",
-  "exception_types": [
-    "invoice_not_in_kernel",
-    "source_missing_invoice_fields"
-  ],
-  "kernel": {
-    "tools.get_invoice": {
-      "invoice_id": "INV-S12",
-      "found": false,
-      "error": "Invoice INV-S12 was not found. Do not invent invoice data.",
-      "traceId": "k_46157cf4ba19"
-    },
-    "tools.get_case_evidence": {
-      "invoice_id": "INV-S12",
-      "found": false,
-      "error": "Invoice INV-S12 was not found.",
-      "traceId": "k_703406ee8936"
-    }
-  },
-  "source_review": {
-    "path": "workspace/sources/email/MSG-S12.json",
-    "classification": "invoice",
-    "has_vendor": false,
-    "has_invoice_number": false,
-    "has_amount": false,
-    "has_po": false,
-    "has_attachment_text": false,
-    "note": "Marker only. No extractable bill fields. Amounts not invented."
-  },
-  "evidence_used": [
-    "workspace/sources/email/MSG-S12.json",
-    "tools.get_invoice:INV-S12",
-    "tools.get_case_evidence:INV-S12"
-  ],
-  "recommendation_rationale": "HOLD. No Kernel invoice or three-way-match facts for INV-S12. Email source lacks vendor, amount, invoice number, PO, and receipt linkage. Standing rule: do not invent amounts. Not eligible for ctl-pay review-match or approved pool.",
-  "destination": null,
-  "ctl_pay": {
-    "submitted": false,
-    "reason": "Prior stub APPROVE was refused; no resubmit until Kernel registers a real invoice with match facts."
+  "proposal": "APPROVE",
+  "destination": {
+    "slug": "ctl-pay",
+    "profile": "review-match"
   }
 }

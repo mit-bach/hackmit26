@@ -28,7 +28,6 @@ from scheduling.cash import (
     apply_cash_and_policy_net,
     compute_metrics,
     load_cash_position,
-    policy_eligible_for_pool,
     spendable_cash,
 )
 from scheduling.pool import add_approved, save_pool
@@ -51,7 +50,7 @@ def _policy_ap_decision(invoice_id: str) -> APCloseResult:
         raise ValueError(f"Unknown invoice {invoice_id}")
     evidence = collect_case_evidence(invoice_id)
     violations = _blocking_approve_violations(evidence)
-    hold = bool(violations) or not policy_eligible_for_pool(invoice_id)
+    hold = bool(violations)
     return APCloseResult(
         invoice_id=invoice_id,
         vendor=invoice.vendor,

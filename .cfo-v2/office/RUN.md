@@ -7,76 +7,21 @@ Computer: `.cfo-v2/office/computer`
 Kernel: `.cfo/`
 Harness: `.harness/Harness-v2`
 
-The Computer file `harness/client.json` is the office config: extra Pi `-e`, Client skills, lazy spawn, xAI/Grok 4.5, Kernel sidecar, no auto-Routines. Load that Computer and the office boots. The human Operator shell is an emergency stop and a demo overlay. It is not a worker. Verifier Bots (`ctl-pay`, `ctl-cash`, `ctl-books`) own concurrence.
+The human Operator shell is an emergency stop and a demo overlay. It is not a worker. Verifier Bots (`ctl-pay`, `ctl-cash`, `ctl-books`) own concurrence.
 
 ## 0. One-time
 
 ```bash
-python3 -m venv .cfo/.venv
-.cfo/.venv/bin/pip install -r requirements.txt
-cd .harness/Harness-v2 && npm install && npm run ui:build && cd ../..
+python3 -m pip install -r requirements.txt
+cd .harness/Harness-v2 && npm install && cd ../..
 cd .cfo-v2/office/computer/cfo && npm install && cd ../../../..
 ln -sfn ../../../.cfo/data .cfo-v2/office/computer/data
 mkdir -p .cfo-v2/office/computer/runs
-PYTHONPATH=.cfo-v2/office python3 -m compiler --phase operational
 ```
 
-`HARNESS_COMPUTER` is the Computer directory. The sidecar remaps Kernel `data/` and `runs/` onto that Computer. Do not point live Bots at `.cfo/runs`.
+`HARNESS_COMPUTER` is the Computer directory. Sidecar remaps Kernel `data/` and `runs/` onto that Computer. Do not point live Bots at `.cfo/runs`.
 
-Keys live in `~/.harness/config.json` or `$HARNESS_CONFIG`. Do not put keys in `client.json`. Default model on this office is `xai` / `grok-4.5`.
-
-## 1. Deploy (live Pi + Kernel sidecar)
-
-From `.harness/Harness-v2`:
-
-```bash
-npm run build
-node dist/src/cli.js serve \
-  --computer ../../.cfo-v2/office/computer \
-  --wipe \
-  --no-open \
-  --port 8800
-```
-
-Loopback: `http://127.0.0.1:8800/`
-
-Leave 8792 for the other UI agent. Do not reuse a contested 8795.
-
-`--wipe` clears inboxes, Handles, transcripts, receipts, lanes, and Pi sessions on that Computer. Roster, skills, Catalog, Grants, intercept, and `client.json` stay. Lazy spawn: a Bot starts when it has pending work. Auto-Routines stay off until `--routines`. Transcript detail defaults to **full** (Pi reasoning + tools) from `harness/client.json`.
-
-Pi conversation files (Grok/Pi chat logs) live on the Computer at `harness/bots/<botId>/pi-session/*.jsonl`, with sibling `pi-rpc.jsonl` / `pi-runtime.jsonl` / `transcript.jsonl`. That is not the Harness package folder `.harness/Harness-v2/.pi` (Pi settings only). Inspector → Sessions opens those files as a chat. Computer → Pi sessions lists them. Sidebar → Protocol is `harness/protocol.jsonl`. Tools → Demo replays that log from seq 0 (wipe look) with a slider. Awake Bots (`turn.start` without `turn.end`) spawn mosaic panes; a finished turn leaves the stage. **Record** copies protocol + transcripts to `harness/demo/latest/` so a later `--wipe` does not erase the show.
-
-Bot↔Bot handoffs are a third conversation kind (GrokBot: Operator DM, pair DM, Room). Click **Messaged @Name** to open the read-only pair log (`pair:<id>:<id>`), not the other Bot's Operator chat. Sidebar **Bot threads** lists those logs.
-
-```bash
-curl -s http://127.0.0.1:8800/health
-curl -s http://127.0.0.1:8800/api/office
-```
-
-`health.sidecar.port` and `office.attach.clientSkills` should be on. Sixteen Bots. Fake workers are off.
-
-Rebuild the Operator SPA only when `ui/` changed: `npm run ui:build`.
-
-## 2. Wipe / reset for a benchmark
-
-Stopped office:
-
-```bash
-node dist/src/cli.js wipe --computer ../../.cfo-v2/office/computer
-node dist/src/cli.js wipe --computer ../../.cfo-v2/office/computer --wipe-runs
-```
-
-Live office:
-
-```bash
-curl -s -X POST http://127.0.0.1:8800/api/wipe \
-  -H 'content-type: application/json' \
-  -d '{"keepMemory":true}'
-```
-
-`--keep-memory` keeps `MEMORY.md`. `--wipe-runs` also empties Computer `runs/` (Kernel overlay). Sidecar port file stays while serve is up.
-
-## 3. Compile Catalog and Grants
+## 1. Compile Catalog and Grants
 
 Constructor `tools=` lists are the Grant source. Skills never grant tools.
 
@@ -92,26 +37,29 @@ Writes:
 
 Exit non-zero if a constructor tool cannot resolve. Do not hand-edit Grant ops.
 
-## 4. Kernel sidecar (started by serve)
-
-`harness serve` runs `cfo/bin/sidecar.sh` unless `--no-sidecar` or `--fake`. Equivalent manual start:
+## 2. Kernel sidecar (not a Bot)
 
 ```bash
-.cfo-v2/office/computer/cfo/bin/sidecar.sh
+PYTHONPATH=.cfo \
+  HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer" \
+  CFO_EVAL_PHASE=operational \
+  python3 -m cfo_kernel --computer "$PWD/.cfo-v2/office/computer"
 ```
 
 Does not bind `HARNESS_BOT`. Does not drain inboxes. Writes `cfo/kernel.port` and `cfo/kernel.log.jsonl`.
 
 Period lock RPC name is `close.month_end.run_month_end` (`close/month_end`). `close.orchestrator.run_cfo_close` is a test packet, not lock.
 
-## 5. Fake workers (protocol demo, no model, no Kernel)
+## 3. Harness (bus) + Client extension (Grants)
+
+Headless, fake workers (no Pi, no model). Operator SPA is optional overlay:
 
 ```bash
 cd .harness/Harness-v2
-node dist/src/cli.js serve --computer ../../.cfo-v2/office/computer --fake --no-sidecar --no-open
+npm run serve -- --computer ../../.cfo-v2/office/computer --fake --no-open
 ```
 
-`--fake` completes Handles without a model. That is a protocol demo, not live Pi.
+Loopback: `http://127.0.0.1:8787/`. `--fake` completes Handles without a model. That is a protocol demo, not live Pi.
 
 Bind one Bot with Harness protocol tools **and** the CFO facade:
 
@@ -133,9 +81,9 @@ CFO_EVAL_PHASE=operational \
 
 Unbound Pi (no `HARNESS_BOT`) is not a finance worker.
 
-## 6. Routines (owning Bots, not Operator DM)
+## 4. Routines (owning Bots, not Operator DM)
 
-Auto-Routines are off on this office. Fire one:
+From `.harness/Harness-v2`:
 
 ```bash
 npx harness routine weekly-pay-run --computer ../../.cfo-v2/office/computer
@@ -145,11 +93,9 @@ npx harness routine period-story --computer ../../.cfo-v2/office/computer
 npx harness routine post-close-assurance --computer ../../.cfo-v2/office/computer
 ```
 
-Or pass `--routines` to `serve` to arm cadence timers. Monthly cadence is clamped to a 32-bit-safe interval.
-
 Each lands on the owning Bot inbox with `conversation` `room:<roomId>`.
 
-## 7. Eval isolation
+## 5. Eval isolation
 
 ```bash
 python3 main.py evaluate-cfo
@@ -157,36 +103,20 @@ python3 main.py evaluate-cfo
 
 Operational phase cannot open `expected_results.json` or `ground_truth.json`. Production Grants omit `get_audit_ground_truth`. Stripe simulation ground truth lives under `.cfo/data/simulations/stripe/evaluation/` and is eval-only.
 
-## 8. Inbox, World, and Stripe simulation
+## 6. Inbox and Stripe simulation (Kernel, not extra Bots)
 
-Rohan's inbox Kernel feeds Bot `email`. Bot `world` is the simulated outside mailbox. It is a Source Bot. Stripe simulation feeds Bot `stripe`. Do not live-connect Gmail or Stripe.
-
-After a wipe, seed the Computer so the desk has invoices, Stripe objects, and a pay pool without a mailbox:
+These come from Rohan's `durable-inbox-ap-persistence` branch. They feed Bot `email` and Bot `stripe`. They are not a sixteenth Bot.
 
 ```bash
-HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer" \
-CFO_EVAL_PHASE=operational \
-PYTHONPATH=.cfo \
-  .cfo/.venv/bin/python .cfo-v2/office/seed_demo.py
+python3 main.py demo-inbox
+python3 main.py simulate-stripe
 ```
 
-That writes `.cfo-v2/office/DEMO-WALKTHROUGH.md` and `computer/runs/demo-seed.json`.
-
-Kernel CLIs still work the same way when `HARNESS_COMPUTER` is set:
-
-```bash
-PYTHONPATH=.cfo HARNESS_COMPUTER="$PWD/.cfo-v2/office/computer" \
-  .cfo/.venv/bin/python .cfo/main.py demo-inbox --reset
-PYTHONPATH=.cfo .cfo/.venv/bin/python .cfo/main.py simulate-stripe
-```
-
-`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`. Missing fields: Email `send_office_outbound` then Handle `world`.
-
-On 8800, open **World** and prompt `Send Acme's September invoice into the finance inbox`. World must compose+send. Sidecar restart is required after compile so new inbox ops appear.
+`demo-inbox` classifies mail, writes the durable AP overlay (`runtime_invoices.json` / Computer `runs/ingestion/overlay.json`), and does not ask a human. Vendor bills Handle `ap` / `prepare`. Remittances Handle `apply` / `apply`.
 
 `simulate-stripe` unpacks payout waterfalls in Python. `invoice_candidates` stays 0. Bot `stripe` still has empty constructor Grants.
 
-## 9. Close demo (honest $12.40)
+## 7. Close demo (honest $12.40)
 
 ```bash
 python3 main.py close-month --month 2026-09 --seed-demo --deterministic

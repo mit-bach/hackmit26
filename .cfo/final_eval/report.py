@@ -18,6 +18,11 @@ PRODUCT_FIXES = [
         "regression_test": "tests/test_final_eval.py::test_multiple_exact_ledger_candidates_are_not_auto_matched",
     },
     {
+        "id": "CASH-PROVIDER-ARRIVED",
+        "behavior_changed": "A provider payout marked AWAITING_BANK becomes MATCH once the statement deposit equals the provider net (fees/refunds already in that net).",
+        "regression_test": "tests/test_final_eval.py::test_awaiting_bank_becomes_match_when_deposit_arrives",
+    },
+    {
         "id": "CASH-FEE-TXN-ID",
         "behavior_changed": "Fee evidence referenced by bank transaction ID is accepted, not only description-text overlap.",
         "regression_test": "tests/test_final_eval.py::test_fee_evidence_matches_on_transaction_id",

@@ -276,18 +276,22 @@ def run_missing_support_payments(
 )
 def run_approval_threshold_invoices(
     *,
+    audit_invoices: list[AuditInvoice] | None = None,
     audit_run_id: str,
     sample_ids: list[str] | None = None,
 ) -> ControlResult:
-    from tools import all_invoices, exception_types_for, load_purchase_order
+    from tools import all_invoices, exception_types_for, load_invoice, load_purchase_order
 
     spec = REGISTRY["AUD-THR-001"][0]
     exceptions: list[ControlException] = []
     tested: list[str] = []
-    invoices = all_invoices()
-    wanted = set(sample_ids) if sample_ids is not None else {item.invoice_id for item in invoices}
-    for invoice in invoices:
-        if invoice.invoice_id not in wanted:
+    population_ids = {item.invoice_id for item in (audit_invoices or [])}
+    operational = {item.invoice_id: item for item in all_invoices()}
+    invoice_ids = population_ids or set(operational)
+    wanted = set(sample_ids) if sample_ids is not None else invoice_ids
+    for invoice_id in sorted(invoice_ids):
+        invoice = operational.get(invoice_id) or load_invoice(invoice_id)
+        if invoice is None or invoice.invoice_id not in wanted:
             continue
         tested.append(invoice.invoice_id)
         types = exception_types_for(invoice.invoice_id)

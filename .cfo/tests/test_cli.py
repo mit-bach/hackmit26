@@ -32,7 +32,10 @@ def test_usage_cli():
     assert "Usage: python main.py INV-001" in result.stdout
     assert "python main.py schedule" in result.stdout
     assert "python main.py ingest" in result.stdout
+    assert "python main.py demo-inbox" in result.stdout
     assert "python main.py integration-demo" in result.stdout
+    assert "python main.py simulate-stripe" in result.stdout
+    assert "python main.py eval-stripe" in result.stdout
     assert "python main.py skills" in result.stdout
     assert "python main.py ar-aging" in result.stdout
     assert "python main.py ar-demo" in result.stdout
@@ -69,6 +72,24 @@ def test_missing_api_key_message():
     )
     assert result.returncode == 1
     assert "OPENAI_API_KEY is not set" in result.stdout
+
+
+def test_demo_inbox_cli_runs_without_api_key():
+    env = {key: value for key, value in os.environ.items() if key != "OPENAI_API_KEY"}
+    env["OPENAI_API_KEY"] = ""
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "main.py"), "demo-inbox", "--reset"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        env=env,
+        check=False,
+    )
+    assert result.returncode == 0
+    assert "Counterparty Message Agent" in result.stdout
+    assert "Finance Inbox Agent" in result.stdout
+    assert "VENDOR_INVOICE" in result.stdout
+    assert "NON_FINANCE" in result.stdout
 
 
 def test_ingest_cli_runs_without_api_key():

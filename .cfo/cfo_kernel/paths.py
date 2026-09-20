@@ -102,6 +102,7 @@ def attach_computer(root: Path) -> Computer:
     (runs / "reporting").mkdir(parents=True, exist_ok=True)
     (runs / "integrations").mkdir(parents=True, exist_ok=True)
     (runs / "cash_traces").mkdir(parents=True, exist_ok=True)
+    (runs / "memory").mkdir(parents=True, exist_ok=True)
 
     _remap_kernel(data, runs)
     bound = Computer(root=computer, data=data, runs=runs, cfo=cfo)
@@ -125,6 +126,7 @@ def _remap_kernel(data: Path, runs: Path) -> None:
     from integrations.providers.base import configure_fixtures
     from invoice_ingestion.extract import configure_ingestion_dir
     from invoice_ingestion.registry import configure_paths as configure_registry
+    from memory.store import configure_paths as configure_memory
     from prepaid.store import configure_paths as configure_prepaid
     from reporting.ledger import configure_data_reporting, configure_paths as configure_reporting_ledger
     from reporting.store import configure_paths as configure_reporting_store
@@ -173,6 +175,7 @@ def _remap_kernel(data: Path, runs: Path) -> None:
     configure_accrual_ledger(runs / "accruals")
     configure_overlay_path(runs / "ingestion" / "overlay.json")
     configure_registry(runs / "ingestion")
+    configure_memory(runs / "memory")
     if configure_inbox is not None:
         configure_inbox(runs / "inbox")
     configure_case_dir(runs / "cash_recon" / "cases")

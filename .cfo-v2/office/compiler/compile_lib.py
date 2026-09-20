@@ -34,7 +34,6 @@ POLICY_FUNS = {"get_company_policies", "find_relevant_policies", "get_prior_case
 SOD_BY_MODULE = {
     "tools": "ap-records",
     "invoice_ingestion.tools": "ingestion",
-    "inbox.tools": "inbox",
     "accrual.tools": "accrual-read",
     "scheduling.tools": "treasury",
     "ar.tools": "ar",
@@ -44,6 +43,8 @@ SOD_BY_MODULE = {
     "bs_recon.tools": "bs-recon",
     "reporting.tools": "reporting",
     "audit.tools": "audit-read",
+    "memory.tools": "memory-read",
+    "inbox.tools": "inbox",
 }
 
 
@@ -185,6 +186,8 @@ def function_args(fn: ast.FunctionDef) -> dict[str, str]:
 def sod_class_for(module: str, qualname: str) -> str:
     if module == "tools" and qualname in POLICY_FUNS:
         return "ap-policy"
+    if module == "memory.tools" and qualname == "get_decision_memories":
+        return "memory-read"
     if module == "audit.tools" and qualname == "get_audit_ground_truth":
         return "audit-eval"
     if module == "accrual.tools" and qualname in {
@@ -195,6 +198,19 @@ def sod_class_for(module: str, qualname: str) -> str:
     return SOD_BY_MODULE.get(module, "kernel")
 
 
+def wrapped_function_tool_name(node: ast.AST) -> str | None:
+    if not isinstance(node, ast.Call):
+        return None
+    if not is_function_tool_decorator(node.func):
+        return None
+    if not node.args:
+        return None
+    first = node.args[0]
+    if isinstance(first, ast.Name):
+        return first.id
+    return None
+
+
 def scan_function_tools(kernel: Path) -> dict[str, CatalogOp]:
     ops: dict[str, CatalogOp] = {}
     for path in sorted(kernel.rglob("tools.py")):
@@ -202,20 +218,43 @@ def scan_function_tools(kernel: Path) -> dict[str, CatalogOp]:
             continue
         module = module_name_for(path, kernel)
         tree = parse_file(path)
+        defs: dict[str, ast.FunctionDef] = {}
         for node in tree.body:
-            if not isinstance(node, ast.FunctionDef):
+            if isinstance(node, ast.FunctionDef):
+                defs[node.name] = node
+                if not any(is_function_tool_decorator(d) for d in node.decorator_list):
+                    continue
+                ref = ToolRef(module, node.name)
+                ops[ref.catalog_id] = CatalogOp(
+                    id=ref.catalog_id,
+                    python=ref.python,
+                    export_name=node.name,
+                    args=function_args(node),
+                    mutability="read",
+                    sod_class=sod_class_for(module, node.name),
+                    eval_only=module == "audit.tools" and node.name == "get_audit_ground_truth",
+                    owner_prefixes=[],
+                )
+        for node in tree.body:
+            if not isinstance(node, ast.Assign) or len(node.targets) != 1:
                 continue
-            if not any(is_function_tool_decorator(d) for d in node.decorator_list):
+            if not isinstance(node.targets[0], ast.Name):
                 continue
-            ref = ToolRef(module, node.name)
+            original = wrapped_function_tool_name(node.value)
+            if original is None or original not in defs:
+                continue
+            ref = ToolRef(module, original)
+            if ref.catalog_id in ops:
+                continue
+            fn = defs[original]
             ops[ref.catalog_id] = CatalogOp(
                 id=ref.catalog_id,
                 python=ref.python,
-                export_name=node.name,
-                args=function_args(node),
+                export_name=fn.name,
+                args=function_args(fn),
                 mutability="read",
-                sod_class=sod_class_for(module, node.name),
-                eval_only=module == "audit.tools" and node.name == "get_audit_ground_truth",
+                sod_class=sod_class_for(module, fn.name),
+                eval_only=False,
                 owner_prefixes=[],
             )
     if not ops:
@@ -308,40 +347,38 @@ def module_to_path(module: str, kernel: Path) -> Path | None:
     return None
 
 
-def local_function_refs(tree: ast.Module, path: Path, kernel: Path) -> dict[str, ToolRef]:
-    module = module_name_for(path, kernel)
-    return {
-        node.name: ToolRef(module, node.name)
-        for node in tree.body
-        if isinstance(node, ast.FunctionDef)
-    }
-
-
-def resolve_tool_ref(
+def canonicalize_tool_ref(
     ref: ToolRef,
     kernel: Path,
-    cache: dict[str, ast.Module],
+    ops: dict[str, CatalogOp],
     seen: set[str] | None = None,
 ) -> ToolRef:
-    """Follow re-exports until the name is a FunctionDef in some tools module."""
-    visited = seen if seen is not None else set()
-    if ref.catalog_id in visited:
+    """Follow re-exports and function_tool() aliases to the Catalog op."""
+    seen = set() if seen is None else seen
+    if ref.catalog_id in ops:
         return ref
-    visited.add(ref.catalog_id)
-    foreign_path = module_to_path(ref.module, kernel)
-    if foreign_path is None:
-        return ref
-    key = str(foreign_path)
-    if key not in cache:
-        cache[key] = parse_file(foreign_path)
-    foreign_tree = cache[key]
-    local_fns = local_function_refs(foreign_tree, foreign_path, kernel)
-    if ref.qualname in local_fns:
-        return local_fns[ref.qualname]
-    foreign_fn_map = import_function_map(foreign_tree)
-    if ref.qualname in foreign_fn_map:
-        return resolve_tool_ref(foreign_fn_map[ref.qualname], kernel, cache, visited)
-    return ref
+    if ref.catalog_id in seen:
+        raise CompileError(f"circular tool re-export {ref.catalog_id}")
+    seen.add(ref.catalog_id)
+    path = module_to_path(ref.module, kernel)
+    if path is None:
+        raise CompileError(f"cannot resolve module {ref.module} for {ref.qualname}")
+    tree = parse_file(path)
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1:
+            target = node.targets[0]
+            if isinstance(target, ast.Name) and target.id == ref.qualname:
+                original = wrapped_function_tool_name(node.value)
+                if original:
+                    return canonicalize_tool_ref(ToolRef(ref.module, original), kernel, ops, seen)
+        if not isinstance(node, ast.ImportFrom) or not node.module:
+            continue
+        for alias in node.names:
+            local = alias.asname or alias.name
+            if local != ref.qualname:
+                continue
+            return canonicalize_tool_ref(ToolRef(node.module, alias.name), kernel, ops, seen)
+    raise CompileError(f"{ref.catalog_id} is not a Catalog op")
 
 
 def eval_tools_expr(
@@ -351,67 +388,58 @@ def eval_tools_expr(
     kernel: Path,
     fn_map: dict[str, ToolRef],
     list_cache: dict[str, list[ToolRef]],
-    cache: dict[str, ast.Module] | None = None,
 ) -> list[ToolRef]:
-    parsed = cache if cache is not None else {}
-
-    def recurse(item: ast.AST, current_tree: ast.Module, current_path: Path, current_fn_map: dict[str, ToolRef]) -> list[ToolRef]:
-        return eval_tools_expr(
-            item, current_tree, current_path, kernel, current_fn_map, list_cache, parsed
-        )
-
     if isinstance(node, ast.List):
         refs: list[ToolRef] = []
         for elt in node.elts:
-            refs.extend(recurse(elt, tree, path, fn_map))
+            refs.extend(eval_tools_expr(elt, tree, path, kernel, fn_map, list_cache))
         return refs
     if isinstance(node, ast.Tuple):
         refs = []
         for elt in node.elts:
-            refs.extend(recurse(elt, tree, path, fn_map))
+            refs.extend(eval_tools_expr(elt, tree, path, kernel, fn_map, list_cache))
         return refs
     if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
-        return recurse(node.left, tree, path, fn_map) + recurse(node.right, tree, path, fn_map)
-    if isinstance(node, ast.Call):
-        func = node.func
-        if isinstance(func, ast.Name) and func.id in {"list", "tuple"} and len(node.args) == 1:
-            return recurse(node.args[0], tree, path, fn_map)
-        raise CompileError(
-            f"{path}: cannot resolve tools= expression Call; implicit all-tools is forbidden"
+        return eval_tools_expr(node.left, tree, path, kernel, fn_map, list_cache) + eval_tools_expr(
+            node.right, tree, path, kernel, fn_map, list_cache
         )
+    if isinstance(node, ast.Call):
+        func_name = node.func.id if isinstance(node.func, ast.Name) else None
+        if func_name in {"list", "tuple"} and node.args:
+            return eval_tools_expr(node.args[0], tree, path, kernel, fn_map, list_cache)
+        original = wrapped_function_tool_name(node)
+        if original:
+            return eval_tools_expr(ast.Name(id=original, ctx=ast.Load()), tree, path, kernel, fn_map, list_cache)
     if isinstance(node, ast.Name):
         if node.id in list_cache:
             return list(list_cache[node.id])
-        local_fns = local_function_refs(tree, path, kernel)
-        if node.id in local_fns:
-            return [local_fns[node.id]]
         bindings = constant_bindings(tree)
         if node.id in bindings:
-            resolved = recurse(bindings[node.id], tree, path, fn_map)
+            resolved = eval_tools_expr(bindings[node.id], tree, path, kernel, fn_map, list_cache)
             list_cache[node.id] = resolved
             return resolved
         if node.id in fn_map:
-            imported = fn_map[node.id]
-            foreign_path = module_to_path(imported.module, kernel)
+            ref = fn_map[node.id]
+            foreign_path = module_to_path(ref.module, kernel)
             if foreign_path is not None:
-                key = str(foreign_path)
-                if key not in parsed:
-                    parsed[key] = parse_file(foreign_path)
-                foreign_tree = parsed[key]
+                foreign_tree = parse_file(foreign_path)
                 foreign_bindings = constant_bindings(foreign_tree)
-                value = foreign_bindings.get(imported.qualname)
-                if isinstance(value, (ast.List, ast.Tuple, ast.BinOp, ast.Call)):
-                    foreign_fn_map = import_function_map(foreign_tree)
+                if ref.qualname in foreign_bindings:
+                    foreign_map = import_function_map(foreign_tree)
                     return eval_tools_expr(
-                        value,
+                        foreign_bindings[ref.qualname],
                         foreign_tree,
                         foreign_path,
                         kernel,
-                        foreign_fn_map,
+                        foreign_map,
                         {},
-                        parsed,
                     )
-            return [resolve_tool_ref(imported, kernel, parsed)]
+            return [ref]
+        local_functions = {
+            item.name for item in tree.body if isinstance(item, ast.FunctionDef)
+        }
+        if node.id in local_functions:
+            return [ToolRef(module_name_for(path, kernel), node.id)]
         raise CompileError(f"{path}: cannot resolve tools name {node.id!r}")
     if isinstance(node, ast.Constant) and node.value is None:
         return []
@@ -514,11 +542,9 @@ def scan_agent_file(
     list_cache: dict[str, list[ToolRef]] = {}
     bindings = constant_bindings(tree)
     for name, value in bindings.items():
-        if isinstance(value, (ast.List, ast.BinOp, ast.Tuple, ast.Call)):
+        if isinstance(value, (ast.List, ast.BinOp, ast.Tuple)):
             try:
-                list_cache[name] = eval_tools_expr(
-                    value, tree, path, kernel, fn_map, list_cache, cache
-                )
+                list_cache[name] = eval_tools_expr(value, tree, path, kernel, fn_map, list_cache)
             except CompileError:
                 continue
     rows: list[tuple[str, list[ToolRef], str, str]] = []
@@ -528,7 +554,7 @@ def scan_agent_file(
         if tools_node is None:
             refs: list[ToolRef] = []
         else:
-            refs = eval_tools_expr(tools_node, tree, path, kernel, fn_map, list_cache, cache)
+            refs = eval_tools_expr(tools_node, tree, path, kernel, fn_map, list_cache)
         rows.append((display, refs, output_type_of(call), str(path.relative_to(kernel))))
     return rows
 
@@ -836,11 +862,12 @@ def compile_catalog(
         seen.add(display)
         op_ids: list[str] = []
         for ref in refs:
-            if ref.catalog_id not in ops:
+            resolved = canonicalize_tool_ref(ref, kernel, ops)
+            if resolved.catalog_id not in ops:
                 raise CompileError(
-                    f"{source}: {display}: tools= item {ref.catalog_id} is not a Catalog op"
+                    f"{source}: {display}: tools= item {resolved.catalog_id} is not a Catalog op"
                 )
-            op_ids.append(ref.catalog_id)
+            op_ids.append(resolved.catalog_id)
         eval_ops = list(op_ids)
         operational_ops = [op_id for op_id in eval_ops if not ops[op_id].eval_only]
         for op_id in operational_ops:

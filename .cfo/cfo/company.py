@@ -9,6 +9,11 @@ from __future__ import annotations
 PERIOD = "2026-09"
 AS_OF = "2026-09-30"
 REPORTING_AS_OF = "2026-09-19"
+COMPANY_ID = "CO-MAXIMOR"
+COMPANY_NAME = "Maximor Demo Corp"
+TRADE_NAME = "Maximor"
+HEADQUARTERS = "Cambridge, MA"
+CURRENCY = "USD"
 
 # Existing operational fixtures already model this company. Do not invent
 # a second set of amounts or IDs for the integration demo.
@@ -37,6 +42,7 @@ WORKFLOW_INVENTORY = {
         "balance-sheet reconciliation",
         "close gating",
         "post-close protection",
+        "prior-period accrual methodology",
     ],
     "reporting": [
         "actuals",
@@ -55,6 +61,10 @@ WORKFLOW_INVENTORY = {
         "independent re-performance",
         "findings",
         "corrections / recurring findings",
+    ],
+    "memory": [
+        "August Stripe payout precedent",
+        "Harbor Electric seasonal accrual methodology",
     ],
 }
 
@@ -79,6 +89,10 @@ FEATURED = {
     "reporting_hosting_overage": "TXN-HOST-SEP-OVERAGE",
     "reporting_supplier": "TXN-SUP-SEP-001",
     "reporting_freight": "TXN-FRT-SEP-EXPEDITE",
+    "harbor_vendor": "Harbor Electric",
+    "harbor_method": "seasonal_prior_year",
+    "harbor_september_amount": 4650.0,
+    "harbor_august_amount": 7800.0,
 }
 
 INTENDED_SEPTEMBER = {
@@ -152,6 +166,13 @@ CHAIN_SPECS = (
         "label": "Ambiguous remittance sent to human review",
         "payment_id": "PAY-AMBIGUOUS",
         "expected_ar": "HUMAN_REVIEW",
+    },
+    {
+        "chain_id": "CHAIN-CLOSE-HARBOR",
+        "label": "Harbor Electric September accrual cites August methodology",
+        "vendor": "Harbor Electric",
+        "expected_method": "seasonal_prior_year",
+        "expected_amount": 4650.0,
     },
 )
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from memory.format import format_lookup_trace, format_precedents
 from memory.hooks import lookup_for_cash
-from memory.models import MemoryEvidence, MemoryQuery
+from memory.models import DecisionMemory, MemoryEvidence, MemoryQuery
 from memory.policy import memory_mode
 from memory.retrieve import lookup_memories, search_memories
 from memory.scenarios import (
@@ -11,6 +11,8 @@ from memory.scenarios import (
     CLOUDCO_SEPTEMBER,
     NORDIC_SEPTEMBER,
     SEPTEMBER_STRIPE,
+    run_harbor_cross_period,
+    run_harbor_period,
     run_prepaid_cross_period,
     run_stripe_contradiction,
     run_stripe_cross_period,
@@ -285,6 +287,8 @@ def test_prior_period_precedent_skill_is_assigned():
     assert "prior-period-precedent" in skills_for("Cash Exception Investigator")
     assert "prior-period-precedent" in skills_for("Prepaid Preparer")
     assert "prior-period-precedent" in skills_for("Exception Investigator")
+    assert "prior-period-precedent" in skills_for("Accrual Agent")
+    assert "prior-period-precedent" in skills_for("Month-End Close Reviewer")
     assert "prior-period-precedent" not in skills_for("AP Preparer")
 
 
@@ -295,6 +299,79 @@ def test_put_memory_is_idempotent():
     assert created_again is False
     assert again.decision_id == record.decision_id
     assert len(load_memories()) == 1
+
+
+def test_harbor_electric_september_reuses_august_methodology():
+    story = run_harbor_cross_period(memory_enabled=True)
+    aug = story["august_trace"]
+    sep = story["september_trace"]
+    assert aug.final_method == "seasonal_prior_year"
+    assert aug.final_amount == 7800
+    assert aug.written_memory_id
+    assert sep.final_method == "seasonal_prior_year"
+    assert sep.final_amount == 4650
+    lookup = sep.memory_lookup
+    assert lookup is not None
+    assert lookup.queried is True
+    assert lookup.precedent_used is True
+    assert lookup.current_evidence_checked is True
+    assert lookup.evidence_supports_precedent is True
+    assert lookup.retrieved
+    assert lookup.retrieved[0] == aug.written_memory_id
+    assert sep.written_memory_id
+    assert sep.written_memory_id != aug.written_memory_id
+    packet = story["september_packet"]
+    assert lookup.retrieved[0] in packet
+    assert "prior decision" in packet.lower() or "PRIOR-PERIOD ACCRUAL" in packet
+    assert "Harbor Electric" in packet
+
+
+def test_harbor_method_shift_is_visible_and_still_correct():
+    story = run_harbor_cross_period(memory_enabled=True, august_method="recent_average")
+    lookup = story["september_trace"].memory_lookup
+    assert story["september_trace"].final_method == "seasonal_prior_year"
+    assert lookup is not None
+    assert lookup.retrieved
+    assert lookup.precedent_used is False
+    assert lookup.current_evidence_checked is True
+    assert lookup.deviation
+    assert "recent_average" in lookup.deviation
+    assert lookup.retrieved[0] in story["september_packet"]
+
+
+def test_harbor_memory_off_still_books_seasonal():
+    story = run_harbor_cross_period(memory_enabled=False)
+    lookup = story["september_trace"].memory_lookup
+    assert story["september_trace"].final_method == "seasonal_prior_year"
+    assert story["september_trace"].final_amount == 4650
+    assert lookup is not None
+    assert lookup.memory_enabled is False
+    assert lookup.queried is False
+    assert lookup.precedent_used is False
+    assert story["september_trace"].written_memory_id
+
+
+def test_harbor_accrual_write_is_idempotent():
+    first_decision, first_trace = run_harbor_period(
+        "2026-08",
+        memory_enabled=True,
+        hide_period_invoices=True,
+        method="seasonal_prior_year",
+        reset=True,
+        run_id="mem-aug-idemp-1",
+    )
+    count = len(load_memories())
+    second_decision, second_trace = run_harbor_period(
+        "2026-08",
+        memory_enabled=True,
+        hide_period_invoices=True,
+        method="seasonal_prior_year",
+        reset=True,
+        run_id="mem-aug-idemp-2",
+    )
+    assert first_decision.estimation_method == second_decision.estimation_method
+    assert len(load_memories()) == count
+    assert first_trace.written_memory_id == second_trace.written_memory_id
 
 
 def test_cash_query_with_memory_off_is_empty():

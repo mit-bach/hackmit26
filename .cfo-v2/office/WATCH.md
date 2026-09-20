@@ -1,6 +1,6 @@
 # Grain § watch later — still open after session 12
 
-Do not “solve” these by adding a seventeenth Bot. Bot `world` already passed Tests A–D. See `design-workshop/dominik/cfo-bot-grain.md` §11.
+Do not “solve” these by adding a sixteenth Bot. See `design-workshop/dominik/cfo-bot-grain.md` §11.
 
 1. **Stripe is not an invoice source.** Bot `stripe` Profile `payout` has no constructor. Grants stay empty. `invoice_candidates` stays 0.
 2. **No bank webhook.** Bot `bank` still exists. Wake is poll.
@@ -13,6 +13,6 @@ Do not “solve” these by adding a seventeenth Bot. Bot `world` already passed
 9. **Prompt-level contradictions** among Display-name instruction blocks. Later pass.
 10. **Harness `ask_user` still exists on the protocol surface.** This Client intercepts it and refuses. Roster `approvalLevel` is `never`. Do not fork Harness to know invoices.
 
-Session 10 also added Routine `period-story` waking Bot `story`. Constitution session 00 listed four Routines. The extra Routine still fires on the owning Bot in Room `books-close` (4 members). It is not a seventeenth Bot.
+Session 10 also added Routine `period-story` waking Bot `story`. Constitution session 00 listed four Routines. The extra Routine still fires on the owning Bot in Room `books-close` (4 members). It is not a sixteenth Bot.
 
-Rohan `durable-inbox-ap-persistence` inbox and Stripe simulation landed as Kernel under Bots `email` and `stripe`. Bot `world` is the simulated outside mailbox (Counterparty Message Agent). Finance Inbox Agent is Email Profile `triage`. Classify stays on Email.
+Rohan `durable-inbox-ap-persistence` inbox and Stripe simulation landed as Kernel under Bots `email` and `stripe`. Finance Inbox Agent and Counterparty Message Agent stay Display names. They are not Roster slugs.

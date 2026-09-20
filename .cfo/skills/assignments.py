@@ -15,33 +15,38 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
         "inbox-triage",
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "Email Invoice Agent": (
         "invoice-source-identification",
         "invoice-field-interpretation",
-        "inbox-triage",
+        "superseded-document-handling",
     ),
     "ERP Invoice Agent": (),
     "Procurement Invoice Agent": ("invoice-source-identification",),
     "Vendor Portal Agent": (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "Employee Submission Agent": (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "Physical Mail / Document Agent": (
         "invoice-source-identification",
         "invoice-field-interpretation",
+        "superseded-document-handling",
     ),
     "EDI / Electronic Invoicing Agent": (),
     "Bank/Card Discovery Agent": ("bank-charge-invoice-discovery",),
-    "AP Preparer": ("three-way-match-analysis",),
+    "AP Preparer": ("three-way-match-analysis", "superseded-document-handling"),
     "Exception Investigator": (
         "three-way-match-analysis",
         "ap-exception-investigation",
         "prior-period-precedent",
+        "superseded-document-handling",
     ),
     "AP Reviewer": (
         "three-way-match-analysis",
@@ -60,6 +65,7 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Accrual Agent": (
         "accrual-evidence-evaluation",
         "accrual-method-selection",
+        "prior-period-precedent",
     ),
     "Payment Scheduler": (
         "payment-prioritization",
@@ -75,16 +81,19 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Cash Reconciliation Preparer": (
         "cash-reconciliation-method-selection",
         "bank-reference-interpretation",
+        "reconciliation-evidence-validation",
     ),
     "Cash Exception Investigator": (
         "reconciliation-exception-investigation",
         "bank-reference-interpretation",
         "prior-period-precedent",
+        "reconciliation-evidence-validation",
     ),
     "Cash Reconciliation Reviewer": (
         "cash-reconciliation-method-selection",
         "reconciliation-exception-investigation",
         "prior-period-precedent",
+        "reconciliation-evidence-validation",
     ),
     "Prepaid Preparer": ("prepaid-expense-accounting", "prior-period-precedent"),
     "Prepaid Reviewer": ("prepaid-expense-accounting", "prior-period-precedent"),
@@ -92,7 +101,7 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
     "Fixed Asset Reviewer": ("fixed-asset-depreciation",),
     "Balance Sheet Reconciliation Preparer": ("balance-sheet-reconciliation",),
     "Balance Sheet Reconciliation Reviewer": ("balance-sheet-reconciliation",),
-    "Month-End Close Reviewer": ("month-end-close-review",),
+    "Month-End Close Reviewer": ("month-end-close-review", "prior-period-precedent"),
     "Close Manager": ("month-end-close-coordination",),
     "Auditor Agent": (
         "audit-sampling-interpretation",
@@ -140,6 +149,9 @@ AGENT_SKILLS: dict[str, tuple[str, ...]] = {
 }
 
 AGENT_ALIASES: dict[str, str] = {
+    "counterparty": "Counterparty Message Agent",
+    "inbox": "Finance Inbox Agent",
+    "finance-inbox": "Finance Inbox Agent",
     "email": "Email Invoice Agent",
     "erp": "ERP Invoice Agent",
     "procurement": "Procurement Invoice Agent",
@@ -185,13 +197,11 @@ AGENT_ALIASES: dict[str, str] = {
     "independent-audit": "Auditor Agent",
     "audit-report": "Audit Report Agent",
     "variance": "Variance Analysis Agent",
-    "flux": "Variance Analysis Agent",
     "reporting-reviewer": "Reporting Reviewer Agent",
     "board": "Board Reporting Agent",
     "forecast": "Cash Forecast Agent",
     "forecast-reviewer": "Forecast Reviewer Agent",
     "forecast-variance": "Forecast Variance Agent",
-    "forecast-miss": "Forecast Variance Agent",
     "sample-ap-ar": "AP/AR Sample Data Agent",
     "sample-cash": "Cash Recon Sample Data Agent",
     "sample-close": "Close Sample Data Agent",
