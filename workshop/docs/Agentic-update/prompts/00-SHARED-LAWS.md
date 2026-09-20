@@ -11,7 +11,7 @@ Computer: `.cfo-v2/office/computer`
 
 You are making this office **deployable and working**. You are not writing a website. You are not restoring V1 `Runner` as the Bot bus. You are not designing a new company.
 
-Corpus (read from disk when your numbered prompt names a file; do not wait for the operator to attach it): `docs/Agentic-update/`. Snapshot date on that corpus: 2026-09-20. **Live disk wins** over the snapshot.
+Corpus (read from disk when your numbered prompt names a file; do not wait for the operator to attach it): `workshop/docs/Agentic-update/`. Snapshot date on that corpus: 2026-09-20. **Live disk wins** over the snapshot.
 
 ---
 
@@ -69,7 +69,7 @@ World is a sixteenth identity that exists as `BOT.md` and instance snapshots. It
 
 ## Grain Tests A–D (new Bots)
 
-Source: `design-workshop/dominik/cfo-bot-grain.md`.
+Source: `workshop/design-workshop/dominik/cfo-bot-grain.md`.
 
 - **A Wake.** Something in the world or the office names this identity (webhook, Routine, Handle to this slug). If the work only ever runs because the same Bot continued its own turn, it is a Profile, not a new Bot.
 - **B Object.** Named owner of one class of record.
@@ -128,7 +128,7 @@ Handoffs:
 
 If AR and cash both interpret the same deposit from scratch, they disagree and close inherits the argument.
 
-Process law: `design-workshop/dominik/cfo-office-processes.md`.
+Process law: `workshop/design-workshop/dominik/cfo-office-processes.md`.
 
 ---
 

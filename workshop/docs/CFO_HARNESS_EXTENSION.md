@@ -6,7 +6,7 @@ This is not Harness. This is not a rewrite of the Python finance engine. This is
 
 Author: design pass. Date: 2026-09-19.
 
-Live-system truth (code wins): [AGENTIC_SYSTEM_WORKFLOW.md](AGENTIC_SYSTEM_WORKFLOW.md). Harness contract: `GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md`. Process shape only: `design-workshop/dominik/cfo-office-processes.md`.
+Live-system truth (code wins): [AGENTIC_SYSTEM_WORKFLOW.md](AGENTIC_SYSTEM_WORKFLOW.md). Harness contract: `workshop/grok-workshop/harness-init/engineers/lark/HARNESS-V2.md`. Process shape only: `workshop/design-workshop/dominik/cfo-office-processes.md`.
 
 ---
 
@@ -684,9 +684,9 @@ Do not start with a new agent count. Do not start with a dashboard.
 - `docs/AGENTIC_SYSTEM_WORKFLOW.md`
 - `docs/AGENTIC_SYSTEM_DIAGRAMS.md`
 - `docs/integrations.md`
-- `design-workshop/dominik/cfo-office-processes.md`
-- `design-workshop/dominik/Data inputs and outputs.md`
-- `GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md`
+- `workshop/design-workshop/dominik/cfo-office-processes.md`
+- `workshop/design-workshop/dominik/Data inputs and outputs.md`
+- `workshop/grok-workshop/harness-init/engineers/lark/HARNESS-V2.md`
 - `skills/assignments.py`, `.cursor/rules/skills.mdc`
 - Constructor files: `agent.py`, `invoice_ingestion/agents.py`, `accrual/agent.py`, `scheduling/agent.py`, `ar/agents.py`, `cash_recon/agent.py`, `prepaid/agent.py`, `fixed_assets/agent.py`, `bs_recon/agent.py`, `close/agents.py`, `reporting/agents.py`, `audit/agent.py`, `sample_data/agents/base.py`
 - `close/gating.py`, `close/checklist.py`, `evaluation/isolation.py`

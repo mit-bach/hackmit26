@@ -82,7 +82,7 @@ One Computer. One `data_root`. Hidden answer keys.
 
 ## Adversarial catalog (plant later, not Bot-readable)
 
-`.cfo-v2/office/sessions/ADVERSARIAL-SCENARIOS.md` and `adversarial-scenarios.index.json`: 109 scenarios, 12 storylines. ADV-CASH-014 is the true explanation of the $12.40. Data-refinement prompt: `design-workshop/dominik/Prompts/DATA-REFINEMENT-CURSOR.md`.
+`.cfo-v2/office/sessions/ADVERSARIAL-SCENARIOS.md` and `adversarial-scenarios.index.json`: 109 scenarios, 12 storylines. ADV-CASH-014 is the true explanation of the $12.40. Data-refinement prompt: `workshop/design-workshop/dominik/Prompts/DATA-REFINEMENT-CURSOR.md`.
 
 ## Honesty for judges
 

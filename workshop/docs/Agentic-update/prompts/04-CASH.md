@@ -20,8 +20,8 @@ Read first, in this order:
 12. `docs/Agentic-update/surfaces/memory-and-learning.md`
 13. `docs/Agentic-update/surfaces/harness-protocol.md`
 14. `docs/Agentic-update/evidence/live-computer-2026-09-20.md`
-15. `design-workshop/dominik/cfo-bot-grain.md`
-16. `design-workshop/dominik/cfo-office-processes.md`
+15. `workshop/design-workshop/dominik/cfo-bot-grain.md`
+16. `workshop/design-workshop/dominik/cfo-office-processes.md`
 17. `.cfo-v2/office/constitution.md`
 18. `.cfo-v2/office/SUPERSEDES.md`
 19. `.cfo-v2/office/bots/cash/BOT.md`

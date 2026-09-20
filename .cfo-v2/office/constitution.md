@@ -8,7 +8,7 @@ Computer root: `.cfo-v2/office/computer`.
 Bind: `HARNESS_COMPUTER=<repo>/.cfo-v2/office/computer`.
 `HARNESS_BOT` is the grain slug (`ctl-pay`, not `bot_ctl_pay`).
 
-This file is the durable copy of the migration Constitution, plus SUPERSEDES, the name map, the fifteen slugs, the id scheme, Rooms, Routines, and slug-map notes. It does not replace `design-workshop/dominik/cfo-bot-grain.md`. Grain remains the test for adding a Bot.
+This file is the durable copy of the migration Constitution, plus SUPERSEDES, the name map, the fifteen slugs, the id scheme, Rooms, Routines, and slug-map notes. It does not replace `workshop/design-workshop/dominik/cfo-bot-grain.md`. Grain remains the test for adding a Bot.
 
 ---
 
@@ -44,9 +44,9 @@ Harness v2 at `.harness/Harness-v2`. Named Bots, one Computer, Handles (accept â
 
 Read and obey:
 
-- `design-workshop/dominik/cfo-bot-grain.md` (Roster grain: 15 Bots, four tests)
+- `workshop/design-workshop/dominik/cfo-bot-grain.md` (Roster grain: 15 Bots, four tests)
 - `docs/CFO_HARNESS_EXTENSION.md` (compiler, grants, sidecar, facade) except every sentence listed in `office/SUPERSEDES.md`
-- `GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md`
+- `workshop/grok-workshop/harness-init/engineers/lark/HARNESS-V2.md`
 - `docs/LAYOUT.md`
 - this file
 

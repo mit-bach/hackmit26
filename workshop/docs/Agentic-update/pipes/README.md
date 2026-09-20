@@ -2,7 +2,7 @@
 
 There are not fifteen features. There are four pipes and one book they all write into.
 
-Process law: `design-workshop/dominik/cfo-office-processes.md`.
+Process law: `workshop/design-workshop/dominik/cfo-office-processes.md`.
 
 This folder analyses each pipe as it exists on the live office, against that process law. Intake is not a fifth pipe. It is the source edge that feeds the four.
 

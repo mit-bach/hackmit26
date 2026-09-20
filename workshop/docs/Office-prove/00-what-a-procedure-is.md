@@ -236,7 +236,7 @@ Kernel source `.cfo/` is shared. A HARD patch to Kernel is seen by every instanc
 
 | Document | Job | This directory’s relation |
 | --- | --- | --- |
-| `docs/Agentic-update/` | What is broken, what is good, novelty fence | Source of INTENDED |
+| `workshop/docs/Agentic-update/` | What is broken, what is good, novelty fence | Source of INTENDED |
 | `docs/Agentic-update/prompts/` | Repair Floor and pipes | Do that first if P0 or a pipe HARD on a missing tool |
 | `.cfo-v2/office/RUN.md` | How to boot | P0 executes it |
 | `.cfo-v2/office/DEMO-DESIGN.md` | Future show world | Not the prove stimulus. World pack on disk is. |

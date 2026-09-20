@@ -1,8 +1,8 @@
 # Website Videos vs Harness Demo
 
-The public site page is `web/src/pages/Videos.tsx`. It renders `VIDEOS` from `web/src/data/videos.ts`. Stake on the page: **“Cards are placeholders until a real file exists.”** None of the six cards have `src` or `embedUrl`. That is correct. Do not fill them with Kernel CLI recordings or prove-desk playback.
+The public site page is `web/src/pages/Videos.tsx`. It renders `VIDEOS` from `web/src/data/videos.ts`. Files live under `web/public/videos/`. Cuts are from `golden-20260920-r1` via `scripts/cut-golden-films.mjs`. Titles follow the tape: no paid Acme, no CLOSED September.
 
-The showcaser for capturing those files is Harness **Tools → Demo** on `golden-20260920-r1`, documented in `09-director.md` and `06-record-and-cut.md`.
+Cinema capture of Tools → Demo: `http://127.0.0.1:8800/?view=demo&source=recording&scene=M&cinema=1&play=1`.
 
 ---
 

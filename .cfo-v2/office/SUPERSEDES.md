@@ -74,4 +74,4 @@ This office’s Roster is `office/computer/harness/roster.json`, system `cfo-age
 
 ## Harness v2 (do not fork)
 
-`GROK-WORKSHOP/harness-init/engineers/lark/HARNESS-V2.md` describes a human gate on the Operator for consequential actions. For this Client, that sentence is VOID at the office layer. Do not edit `.harness/Harness-v2/src` to know what an invoice is. Map `blocked` / concurrence to Verifier slugs in Client code (later sessions). Roster `approvalLevel` for these fifteen Bots is `"never"`.
+`workshop/grok-workshop/harness-init/engineers/lark/HARNESS-V2.md` describes a human gate on the Operator for consequential actions. For this Client, that sentence is VOID at the office layer. Do not edit `.harness/Harness-v2/src` to know what an invoice is. Map `blocked` / concurrence to Verifier slugs in Client code (later sessions). Roster `approvalLevel` for these fifteen Bots is `"never"`.

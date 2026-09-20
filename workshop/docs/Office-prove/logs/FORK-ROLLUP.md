@@ -2,7 +2,10 @@
 
 - **Serve:** `http://127.0.0.1:8801/` computer tree `.cfo-v2/prove-fork/`
 - **Golden:** `http://127.0.0.1:8800/` `.cfo-v2/office/office.json` `currentId` `golden-20260920-r1` (untouched)
-- **Last prove instance:** `prove-20260920-fork-floor-r1` (P0 INTENDED). Next: month instance on this same 8801 office.
+- **Last prove instance:** `prove-20260920-fork-month-r2` (P1-S08 INTENDED after T12 patch). Floor `prove-20260920-fork-floor-r1` is P0 INTENDED. Month-r1 stopped at S08 HARD.
+- **Last step:** P1-S08 email on MSG-INBOX-014. Class **INTENDED** (REJECTED, no Kernel mint, no AP Handle). Prior HARD on r1 was T12 CREATED ING-002; patched copied Kernel only.
+
+## Isolation map
 - **Isolation:** copied Kernel, bots, constitution, World pack, Client, sidecar.bin, operator-config. Harness `src/` not edited. Live catalog mtime unchanged. Live `extensions.json` still Golden Client.
 
 ## Isolation map
@@ -21,7 +24,9 @@
 ## Done list (this fork)
 
 - [x] P0 INTENDED on `prove-20260920-fork-floor-r1`
-- [ ] P1 intake (month instance)
+- [x] P1-S08 injection no longer mints (r2, after fork-only Kernel patch)
+- [ ] P1 remainder (list/clean bill/quote already INTENDED on r1; replay S01–S07 on r2)
+- [ ] P2–P5 pipes
 - [ ] P2–P5 pipes
 - [ ] P6 every Computer SKILL.md
 - [ ] P7 every granted Catalog op

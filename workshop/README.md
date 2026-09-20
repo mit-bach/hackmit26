@@ -2,15 +2,15 @@
 
 Human and agent design notes. Not the run path.
 
-The git root stays sparse. These trees used to sit next to `inbox/` and `ar/`. They live here now. Compatibility links at the repo root (`docs`, `design-workshop`, `Operator-workspace`) still point here.
+| Path | What it is |
+| --- | --- |
+| [`docs/`](docs/) | Product docs, prove, show, website architecture. |
+| [`design-workshop/`](design-workshop/) | Dominik grain/process/web-overhaul. Rohan design under `rohan/`. |
+| [`operator-workspace/`](operator-workspace/) | Dominik operator prompts. Agents do not edit this tree. |
+| [`grok-workshop/`](grok-workshop/) | Harness bring-up notes (was `GROK-WORKSHOP/` at the repo root). |
+| [`scripts/`](scripts/) | Golden-film and memory plant helpers. Repo root is two levels up. |
 
-| Path | What it is | Who |
-| --- | --- | --- |
-| [`docs/`](docs/) | Product docs, prove, show, website architecture. | Rohan: `AGENTIC_SYSTEM_WORKFLOW.md`, `integrations.md`, `reporting.md`, `evaluation.md`. Dominik: `Office-prove/`, `Office-show/`, `Agentic-update/`, `CFO_HARNESS_EXTENSION.md`, `LAYOUT.md`. |
-| [`design-workshop/`](design-workshop/) | Design corpus. | [`dominik/`](design-workshop/dominik/) grain, processes, web-overhaul prompts. [`rohan/`](design-workshop/rohan/) partner design. |
-| [`operator-workspace/`](operator-workspace/) | Dominik’s operator prompts. Agents do not edit this tree. | Dominik |
-
-`GROK-WORKSHOP/` is still at the repo root. A live Grok session writes `harness-init/` (including a facecam recorder). Move it here when that session is idle.
+Rohan wrote `docs/AGENTIC_SYSTEM_WORKFLOW.md`, `integrations.md`, `reporting.md`, `evaluation.md`. Dominik wrote `Office-prove/`, `Office-show/`, `Agentic-update/`.
 
 Start:
 

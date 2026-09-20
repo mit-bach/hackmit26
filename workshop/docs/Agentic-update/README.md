@@ -2,7 +2,7 @@
 
 This directory is source material plus one launch file. Files `01`–`04`, `02b`, `pipes/`, `surfaces/`, and `evidence/` are not prompts. They do not tell a later agent how to implement. They exist so that agent can see what is broken, why it is broken, what still works, and what a finished pipe must be able to do.
 
-The Cursor agent prompts live in `prompts/`. Same spawn shape as `design-workshop/dominik/Prompts/web-overhaul`: read `prompts/00-SHARED-LAWS.md`, then one numbered file. Do not paste this README as the mission. Do not attach the corpus with `@`. The numbered prompt lists every path.
+The Cursor agent prompts live in `prompts/`. Same spawn shape as `workshop/design-workshop/dominik/Prompts/web-overhaul`: read `prompts/00-SHARED-LAWS.md`, then one numbered file. Do not paste this README as the mission. Do not attach the corpus with `@`. The numbered prompt lists every path.
 
 Date of the live snapshot behind this corpus: 2026-09-20.
 
@@ -67,7 +67,7 @@ Read in this order the first time:
 11. `docs/Office-prove/` when Bots must be tasked on instances. That directory is the prove loop, not this corpus.
 12. `docs/Office-show/` when prove has a verdict and you need one golden desk to live a September and record. That is the tape. Prove Wakes are not that tape.
 
-Process law for the four pipes lives in `design-workshop/dominik/cfo-office-processes.md`. Grain law lives in `design-workshop/dominik/cfo-bot-grain.md`. Constitution and SUPERSEDES live under `.cfo-v2/office/`.
+Process law for the four pipes lives in `workshop/design-workshop/dominik/cfo-office-processes.md`. Grain law lives in `workshop/design-workshop/dominik/cfo-bot-grain.md`. Constitution and SUPERSEDES live under `.cfo-v2/office/`.
 
 When two documents disagree, this corpus records the disagreement. It does not pick a silent winner except where grain Tests A–D already picked one.
 

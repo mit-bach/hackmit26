@@ -19,8 +19,8 @@ Read first, in this order:
 11. `docs/Agentic-update/surfaces/other-prompt-layers.md`
 12. `docs/Agentic-update/surfaces/grants-and-tools.md`
 13. `docs/Agentic-update/evidence/live-computer-2026-09-20.md`
-14. `design-workshop/dominik/cfo-bot-grain.md`
-15. `design-workshop/dominik/HARNESS-V2-DEPLOY-PLAN.md`
+14. `workshop/design-workshop/dominik/cfo-bot-grain.md`
+15. `workshop/design-workshop/dominik/HARNESS-V2-DEPLOY-PLAN.md`
 16. `.cfo-v2/office/constitution.md`
 17. `.cfo-v2/office/SUPERSEDES.md`
 18. `.cfo-v2/office/RUN.md`

@@ -1,18 +1,14 @@
 # Repository layout
 
-The git root is the vault and the GitHub face. Hidden directories hold the product.
+Visible at the git root: `README.md`, `web/`, `workshop/`, `package.json`, `vercel.json`, `requirements.txt`.
 
 | Path | Role |
 | --- | --- |
 | `.cfo/` | Python kernel. |
-| `.cfo-v2/` | Harness office (Client system). |
+| `.cfo-v2/` | Harness office. |
 | `.harness/` | Harness v2 runtime. |
 | `web/` | Vite website. Vercel output. |
-| `workshop/` | Notes: product docs, design-workshop, operator-workspace. |
-| `.archive/root-kernel-shadow/` | Leftover root Python. Not imported. |
-| `GROK-WORKSHOP/` | Live harness workshop (still at root). |
-| `main.py`, `demo_web.py` | Shims into `.cfo/`. |
+| `workshop/` | Notes, design, grok-workshop, scripts. |
+| `.archive/` | Leftover root Python. Not imported. |
 
-Compatibility links at the repo root: `docs` → `workshop/docs`, `design-workshop` → `workshop/design-workshop`, `Operator-workspace` → `workshop/operator-workspace`.
-
-See the root [README](../../README.md).
+Kernel CLI: `cd .cfo && python main.py`. Website API: `cd .cfo && python -m demo_web`. Tests: `pytest` from the repo root (`.pytest.ini`).

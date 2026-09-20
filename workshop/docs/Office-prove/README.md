@@ -39,7 +39,7 @@ A third honest state is allowed:
 8. `procedures/` — P0 through P9, in the order that file names.
 9. `logs/` — templates. Write run logs there. Do not write verdicts only in chat.
 
-Corpus for intended function: `docs/Agentic-update/`. Grain: `design-workshop/dominik/cfo-bot-grain.md`. Process: `design-workshop/dominik/cfo-office-processes.md`. Boot: `.cfo-v2/office/RUN.md`.
+Corpus for intended function: `workshop/docs/Agentic-update/`. Grain: `workshop/design-workshop/dominik/cfo-bot-grain.md`. Process: `workshop/design-workshop/dominik/cfo-office-processes.md`. Boot: `.cfo-v2/office/RUN.md`.
 
 ---
 

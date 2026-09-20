@@ -3,7 +3,7 @@
 This guide is a compact map of the implemented HackMIT system. It complements
 the [detailed implementation guide](AGENTIC_SYSTEM_WORKFLOW.md), which remains
 the source of truth, and maps the system to the
-[Maximor challenge](../design-workshop/dominik/Maximor-HackMIT-Track.md).
+[Maximor challenge](../workshop/design-workshop/dominik/Maximor-HackMIT-Track.md).
 
 The system is an **agent-assisted finance operating system** for a synthetic
 company. It connects vendor payments, customer collections, cash

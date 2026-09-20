@@ -4,7 +4,7 @@ Operator: Billy. These are spawn-ready briefs for **separate** Cursor agents. Do
 
 The current office is a Kernel that mostly works, a grain of fifteen Bots, and a bus that is not deployable as the judged product: `--fake` in the runbook, BOT.md off Computer cwd, two Handle stores, AR send `ImportError`, World off the live Roster, AP stub Handles on a marker bill, Stripe costume, close writing `.cfo/runs`. The target is a live Pi office that finishes open items on Handles, with Verifiers concurring and no human in the completion path.
 
-This folder is the launch pack. The source corpus stays in `docs/Agentic-update/` (`01`–`04`, `02b`, `pipes/`, `surfaces/`, `evidence/`). Those files are not prompts. These files are.
+This folder is the launch pack. The source corpus stays in `workshop/docs/Agentic-update/` (`01`–`04`, `02b`, `pipes/`, `surfaces/`, `evidence/`). Those files are not prompts. These files are.
 
 ## Spawn order
 
@@ -46,7 +46,7 @@ If two agents append `roster.json` at the same time, rebase by grain Tests A–D
 
 ## Out of scope for all five
 
-- Fake videos and `web/` redesign (that is `design-workshop/dominik/Prompts/web-overhaul`)
+- Fake videos and `web/` redesign (that is `workshop/design-workshop/dominik/Prompts/web-overhaul`)
 - Resolving $12.40
 - Live SMTP / Gmail / ACH / NetSuite
 - Restoring `Runner` as the Bot bus

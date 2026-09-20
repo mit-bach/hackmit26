@@ -7,7 +7,7 @@ Serve: `http://127.0.0.1:8800/` with `office.json` `currentId` this instance.
 World: Maximor / `CO-MAXIMOR` / USD / August 2026 CLOSED / September OPEN.
 Roster: 16 named Bots. Fake workers off. Transcript detail full. Intercept default `ctl-pay`. Operator never completed a Verifier turn. `$12.40` / `TXN-2026-09-015` still unexplained.
 
-Seq numbers below are from `harness/protocol.jsonl` as of seq **142**. Re-record after more turns and bump CHAPTERS.
+Seq numbers below are from `harness/protocol.jsonl` as of seq **164**. Re-record after more turns and bump CHAPTERS.
 
 ---
 
@@ -55,6 +55,7 @@ Emergent (not in the website cards):
 | E | 78–98 | cash, ctl-cash | Overlay 6 Helios + `$12.40`. ctl-cash review-rec. `$12.40` stays unexplained. |
 | Stripe | 81–102 | stripe, apply | Payout waterfall unpack. Parallel with cash. invoice_candidates 0 on Grants used. |
 | F | 103–142 | close, ctl-books, story | Coordinate. Treatments accrue/prepaid/assets COMPLETE. `bs_recon` BLOCKED. ctl-books **REJECT_CLOSE**. Story flux **UNLOCKED**. Period not CLOSED. |
+| M | 143–164 | close, ctl-books | Harbor Electric memory trail. `memory_read` MEM-HE-2026-08 ($7,800 method). `memory_write` DEC-2026-09-026 **$4,650**. ctl-books **CONCUR_METHOD**. Lock still REJECT_CLOSE. |
 | G | 115–141 | audit | Sample close pack. Did not load ground truth. 11 Kernel finding_ids. Did not fix books. Room ack only on the second wake. |
 
 Operator overlay DMs used: books, email, bank, cash, stripe, plus Routine fires `weekly-pay-run` and `month-end`. Verifiers were never the Operator.
@@ -67,10 +68,10 @@ Operator overlay DMs used: books, email, bank, cash, stripe, plus Routine fires 
 | --- | --- | --- |
 | `invoice-to-close` | Bill → pay → close | Bill → ctl-pay CONCUR → **pay pool empty** → close **BLOCKED** |
 | `stripe-reconciliation` | Payout to bank | Stripe ran; not the Helios/$12.40 spine |
-| `month-end-across-periods` | Harbor Aug vs Sep | Not this run. August is already CLOSED in discovery. One September. |
-| `agent-memory` | Sep recalls Aug | Not demonstrated as a video beat |
-| `bad-invoice` | Northline dup + quote | Quote ignored. HOLDs are Office Depot mismatch, missing POs, PO-101 double-consume. Not Northline. |
-| `control-escalation` | `$12.40` + apply | **This is the tape.** Apply refuse + cash HUMAN_REVIEW + REJECT_CLOSE |
+| `month-end-across-periods` | Harbor Aug vs Sep | Scene M: retrieve August method, September $4,650, lock still BLOCKED |
+| `agent-memory` | Sep recalls Aug | Scene M: `memory_read` / `memory_write` chips on Close and ctl-books |
+| `bad-invoice` | Northline dup + quote | Quote ignored. HOLDs are Office Depot mismatch, missing POs, PO-101 double-consume. Not Northline. Scene B. |
+| `control-escalation` | `$12.40` + apply | **This is the tape.** Apply refuse + cash HUMAN_REVIEW + REJECT_CLOSE. Scene E. |
 
 Do not rewrite those cards to fake a paid Acme or a closed month. Point new files at chapters C, D, E, F, G, B.
 

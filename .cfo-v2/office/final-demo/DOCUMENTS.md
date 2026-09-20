@@ -22,8 +22,8 @@ What to trust, what to ignore, and where the World pack lives. Paths are from th
 | `.cfo-v2/office/RUN.md` | How to boot | Computer data symlink to `world/maximor`. Section 6 still calls inbox “not a sixteenth Bot.” That sentence is stale relative to World. |
 | `docs/evaluation.md` | Maximor Finance Gauntlet | Our Kernel measure. Inspired by Invoice Sandbox, RecBench, APEX, DABstep, AccountingBench. Not those leaderboards. |
 | `docs/demo-capability-gaps.md` | Honest gaps | AP learning, vendor bank-change control, Close Manager SDK, credit-memo lifecycle, graph memory. Still accurate. |
-| `design-workshop/dominik/Maximor-HackMIT-Track.md` | Track brief | Example processes are a starting point. Adversarial holdout is larger. |
-| `design-workshop/dominik/cfo-bot-grain.md` | Grain tests A–D | Adding World required passing those tests. |
+| `workshop/design-workshop/dominik/Maximor-HackMIT-Track.md` | Track brief | Example processes are a starting point. Adversarial holdout is larger. |
+| `workshop/design-workshop/dominik/cfo-bot-grain.md` | Grain tests A–D | Adding World required passing those tests. |
 
 ## World pack files (data, not prose)
 
@@ -48,8 +48,8 @@ Under `.cfo-v2/office/world/maximor/`:
 | --- | --- | --- |
 | `.cfo-v2/office/sessions/ADVERSARIAL-SCENARIOS.md` | Working catalog. 109 scenarios, 12 storylines | Phase B plant spec. Bots never load it. Website holdout tab may use the summary in `SCENARIOS.md`, not this raw file. |
 | `.cfo-v2/office/sessions/adversarial-scenarios.index.json` | Machine index of the catalog | Same rule. |
-| `design-workshop/dominik/Prompts/DATA-REFINEMENT-CURSOR.md` | Prompt that produced the World pack (Phase A) | History. Do not run it as a Bot. |
-| `design-workshop/dominik/Prompts/ADVERSARIAL-PLANT-CURSOR.md` | Paste into a new Cursor session for Phase B | Plants all 109 ADV-* into `world/maximor` through the generator. |
+| `workshop/design-workshop/dominik/Prompts/DATA-REFINEMENT-CURSOR.md` | Prompt that produced the World pack (Phase A) | History. Do not run it as a Bot. |
+| `workshop/design-workshop/dominik/Prompts/ADVERSARIAL-PLANT-CURSOR.md` | Paste into a new Cursor session for Phase B | Plants all 109 ADV-* into `world/maximor` through the generator. |
 | `.cfo-v2/office/sessions/BENCHMARK-IMPORT.md` | Census of gitignored `reference-datasets/` | Invoice Sandbox, APEX, DABstep context, RecBench small. Quality bar, not a second company. |
 | `docs/demo_website_architecture.md` | Partner website design | Routes and Kernel POST map are useful. Stale: fifteen Bots, canonical path `.cfo/data/demo`. Point at `world/maximor` and this folder. |
 | `docs/demo-data.md` | Original pack README | Stale counts ($1M monthly P&L, `data/demo`). Plot IDs are still the plot IDs. |

@@ -43,7 +43,7 @@ Day to day the office is unfinished tickets.
 
 Agents are specialists over these objects. They are not specialists over “finance.”
 
-Process law: `design-workshop/dominik/cfo-office-processes.md`.
+Process law: `workshop/design-workshop/dominik/cfo-office-processes.md`.
 
 ---
 
