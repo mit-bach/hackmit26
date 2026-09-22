@@ -1,0 +1,221 @@
+{
+  "trace_id": "2026-09/20260920T112841Z/harbor_electric",
+  "vendor": "Harbor Electric",
+  "period": "2026-09",
+  "invoice_received": false,
+  "evidence": {
+    "historical_invoices": [
+      {
+        "invoice_id": "HI-HE-2025-08",
+        "service_period": "2025-08",
+        "amount": 7800.0,
+        "description": "August 2025 electricity — peak cooling",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2025-09",
+        "service_period": "2025-09",
+        "amount": 4650.0,
+        "description": "September 2025 electricity — post-summer drop",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2025-10",
+        "service_period": "2025-10",
+        "amount": 3900.0,
+        "description": "October 2025 electricity",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2025-11",
+        "service_period": "2025-11",
+        "amount": 4100.0,
+        "description": "November 2025 electricity",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2025-12",
+        "service_period": "2025-12",
+        "amount": 4800.0,
+        "description": "December 2025 electricity",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-01",
+        "service_period": "2026-01",
+        "amount": 5200.0,
+        "description": "January 2026 electricity — heating",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-02",
+        "service_period": "2026-02",
+        "amount": 4900.0,
+        "description": "February 2026 electricity",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-03",
+        "service_period": "2026-03",
+        "amount": 3800.0,
+        "description": "March 2026 electricity",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-04",
+        "service_period": "2026-04",
+        "amount": 3200.0,
+        "description": "April 2026 electricity",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-05",
+        "service_period": "2026-05",
+        "amount": 4500.0,
+        "description": "May 2026 electricity — cooling starts",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-06",
+        "service_period": "2026-06",
+        "amount": 7200.0,
+        "description": "June 2026 electricity — peak cooling",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-07",
+        "service_period": "2026-07",
+        "amount": 8100.0,
+        "description": "July 2026 electricity — peak cooling",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-HE-2026-08",
+        "service_period": "2026-08",
+        "amount": 7900.0,
+        "description": "August 2026 electricity — peak cooling",
+        "po_id": null
+      }
+    ],
+    "current_invoices": [],
+    "contract": null,
+    "usage": null,
+    "purchase_orders": [],
+    "goods_receipts": []
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": 7900.0,
+      "applicable": true
+    },
+    {
+      "method": "simple_average",
+      "label": "Simple average",
+      "amount": 5783.33,
+      "applicable": true
+    },
+    {
+      "method": "recent_average",
+      "label": "Recent average",
+      "amount": 7733.33,
+      "applicable": true
+    },
+    {
+      "method": "weighted_recent_average",
+      "label": "Weighted recent average",
+      "amount": 6685.71,
+      "applicable": true
+    },
+    {
+      "method": "linear_trend",
+      "label": "Trend projection",
+      "amount": 9573.33,
+      "applicable": true
+    },
+    {
+      "method": "seasonal_prior_year",
+      "label": "Prior-year same month",
+      "amount": 4650.0,
+      "applicable": true
+    },
+    {
+      "method": "contract_commitment",
+      "label": "Contract commitment",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "usage_run_rate",
+      "label": "Usage x contract rate",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "goods_receipt",
+      "label": "Goods receipt",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "purchase_order",
+      "label": "Purchase order",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "conservative_minimum",
+      "label": "Conservative minimum",
+      "amount": 4650.0,
+      "applicable": true
+    }
+  ],
+  "agent_selection": {
+    "decision": "ACCRUE",
+    "method": "seasonal_prior_year",
+    "amount": 4650.0,
+    "confidence": 0.99,
+    "reason": "Same month last year (2025-09) billed 4,650.00."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [],
+  "final_decision": "accrual_required",
+  "final_method": "seasonal_prior_year",
+  "final_amount": 4650.0,
+  "confidence": 0.99,
+  "rationale": "Same month last year (2025-09) billed 4,650.00.",
+  "journal_entry": {
+    "entry_id": "JE-202609-003",
+    "debit_account": "Utilities Expense",
+    "credit_account": "Accrued Expenses",
+    "amount": 4650.0
+  },
+  "accrual_id": "ACC-202609-003",
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T112841Z/discovery/harbor_electric",
+  "expectation_confidence": 0.99,
+  "estimate_confidence": 0.99,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": "seasonal_prior_year",
+  "policy_amount": 4650.0,
+  "policy_agreement": true,
+  "diagnostic_warnings": []
+}

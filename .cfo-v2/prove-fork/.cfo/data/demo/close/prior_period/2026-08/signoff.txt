@@ -1,0 +1,15 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+August 2026 close sign-off
+Period: 2026-08
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: Close Manager
+Reviewer: Month-End Close Reviewer
+Status: COMPLETE
+Prepared: 2026-09-03T16:40:00Z
+
+Period 2026-08 is closed. CLOSE-2026-08. Materiality $1,000. September is the next open period and starts blocked until cash rec completes.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

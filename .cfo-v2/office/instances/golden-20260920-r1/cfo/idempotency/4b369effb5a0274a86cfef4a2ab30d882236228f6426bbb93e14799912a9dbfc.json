@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-INBOX-002",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "02429eebf874f5918acb5f8d23d3a1677568bf02cb56884201a845985ce88e94",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-002",
+      "thread_id": "THR-body-invoice",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_0d22e0f7a028"
+  }
+}

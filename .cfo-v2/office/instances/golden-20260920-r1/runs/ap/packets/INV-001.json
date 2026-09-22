@@ -1,0 +1,38 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "INV-001",
+  "erp_source_record_id": "NS-4410",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "vendor": "Acme Supplies",
+  "amount": 12450,
+  "po_id": "PO-101",
+  "receipt_id": "GR-101",
+  "recommendation": "APPROVE",
+  "proposed_action": "APPROVE",
+  "exception_types": [],
+  "kernel_facts": {
+    "amount_difference": 0,
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "exception_types": []
+  },
+  "evidence_used": [
+    "INV-001",
+    "PO-101",
+    "GR-101",
+    "workspace/books/erp/NS-4410.source.json",
+    "runs/inbox/packets/bill-MSG-ACME-INV-001-INV-001.json"
+  ],
+  "reason": "Reconfirm clean three-way match INV-001 ACM-2026-4410 / PO-101 / GR-101 / 12450. Email MSG-ACME-INV-001 and MSG-INBOX-013 are business duplicates / evidence only — not a second payable. Prior ctl-pay CONCUR at runs/ap/concurrence/INV-001.json. ING-001 ACM-INBOX-1001 held separately (same PO capacity). Do not pay from AP.",
+  "inbox_evidence_only": [
+    "runs/inbox/packets/bill-MSG-ACME-INV-001-INV-001.json"
+  ],
+  "prior_concurrence": "runs/ap/concurrence/INV-001.json",
+  "status_note": "already_prepared_and_concurred"
+}

@@ -1,0 +1,63 @@
+{
+  "object": "unapplied_cash",
+  "payment_id": "PAY-001",
+  "kernel_status": "HUMAN_REVIEW",
+  "as_of": "2026-09-20",
+  "source_packets": [
+    "runs/inbox/packets/remittance-MSG-INBOX-019.json"
+  ],
+  "message_id": "MSG-INBOX-019",
+  "reason": "Competing full-amount explanations on PAY-001 (C1 explicit INV-AR-007 vs C2 exact INV-AR-001). Email MSG-INBOX-019 also cites INV-AR-001 at 8500.00 which does not match payment amount 12000.00. Fail-closed; no AUTO_APPLY.",
+  "ambiguities": [
+    "Competing explanations: C1 INV-AR-007 explicit_invoice 12000 vs C2 INV-AR-001 exact_amount 12000",
+    "Email remittance amount 8500.00 does not equal PAY-001 amount 12000.00"
+  ],
+  "review_question": "Should PAY-001 apply to named remittance INV-AR-007, exact-amount INV-AR-001, or stay unapplied given the 8500.00 email advice?",
+  "applications": [],
+  "proposal": {
+    "payment_id": "PAY-001",
+    "decision": "HUMAN_REVIEW",
+    "applications": [],
+    "confidence": 0.55,
+    "reason": "Two Kernel candidates both fit the full 12000.00 payment exactly (C1 INV-AR-007 from payment remittance text; C2 INV-AR-001 exact outstanding). Email MSG-INBOX-019 names INV-AR-001 at 8500.00, conflicting with both amount and the payment memo. Skill requires HUMAN_REVIEW when explanations are equally exact. Precedent did not affect.",
+    "evidence_used": [
+      "Payment PAY-001 12000.0 USD from Northwind Labs",
+      "Remittance: Payment for INV-AR-007 September platform",
+      "Remittance invoice references: INV-AR-007",
+      "MSG-INBOX-019 body: apply to INV-AR-001 amount 8500.00"
+    ],
+    "ambiguities": [
+      "Competing explanations: C1",
+      "Competing explanations: C2",
+      "Email amount 8500.00 != payment 12000.00"
+    ],
+    "review_question": "Which live invoice should PAY-001 stick to given competing C1/C2 and conflicting email advice?",
+    "precedent_used": [],
+    "precedent_affected": false
+  },
+  "candidates": [
+    {
+      "candidate_id": "C1",
+      "applications": [{"invoice_id": "INV-AR-007", "amount": 12000}],
+      "total_applied": 12000,
+      "unapplied_amount": 0,
+      "match_type": "explicit_invoice",
+      "score": 0.99,
+      "evidence": ["Remittance names INV-AR-007"],
+      "ambiguities": ["Competing explanations: C2"]
+    },
+    {
+      "candidate_id": "C2",
+      "applications": [{"invoice_id": "INV-AR-001", "amount": 12000}],
+      "total_applied": 12000,
+      "unapplied_amount": 0,
+      "match_type": "exact_amount",
+      "score": 0.86,
+      "evidence": ["INV-AR-001 outstanding equals payment 12000.0"],
+      "ambiguities": ["Competing explanations: C1"]
+    }
+  ],
+  "queue_owner": "ctl-cash",
+  "queue_profile": "review-apply",
+  "human_queue": false
+}

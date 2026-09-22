@@ -1,0 +1,16 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+August 2026 operating bank reconciliation
+Period: 2026-08
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: Cash Reconciliation Preparer
+Reviewer: Cash Reconciliation Reviewer
+Status: COMPLETE
+Prepared: 2026-09-03T16:40:00Z
+
+Opening book cash agreed to July close. August deposits and disbursements were sampled against the First National operating statement. Outstanding timing items cleared in the first week of September. No unexplained difference remained at sign-off. September will compare against this pack.
+Identities carried: CASE-001 (Acme alias), AR-PREC-003 (Meridian unlabeled ACH), Harbor Electric methodology CTR-HE-001 / HI-HE-2026-08.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

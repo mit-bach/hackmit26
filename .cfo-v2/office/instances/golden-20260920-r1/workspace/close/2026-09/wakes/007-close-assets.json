@@ -1,0 +1,15 @@
+{
+  "profile": "assets",
+  "slug": "close",
+  "period": "2026-09",
+  "task_id": "depreciation",
+  "status": "COMPLETE",
+  "ops": [
+    "fixed_assets.tools.get_fixed_asset",
+    "fixed_assets.tools.list_fixed_assets",
+    "fixed_assets.tools.get_depreciation_schedule",
+    "fixed_assets.tools.get_capital_candidates"
+  ],
+  "mutatingOps": [],
+  "mark_closed": false
+}

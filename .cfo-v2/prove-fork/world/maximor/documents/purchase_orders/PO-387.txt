@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-387
+PO Number: PO-387
+Issued: 2026-09-07
+Vendor: Timber Components
+Vendor legal name: Timber Components
+Vendor tax ID: 00-0000000
+Authorized amount: 84.26
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+security monitoring hosts billed 2026-09-07
+
+This purchase order is not an invoice. The vendor must bill against PO-387.
+Payment terms follow the vendor master unless this order states otherwise.

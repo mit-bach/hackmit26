@@ -1,0 +1,37 @@
+{
+  "schema": "CashStripeDepositBatch",
+  "period": "2026-09",
+  "receipt_confirmed": true,
+  "paths_received": [
+    "workspace/sources/stripe/po_1MaximorFees.json",
+    "workspace/sources/stripe/po_1MaximorRefunds.json",
+    "workspace/sources/stripe/po_1MaximorDisputes.json"
+  ],
+  "ticks": [
+    {
+      "payout_id": "po_1MaximorFees",
+      "bank_deposit_id": "BANK-po_1MaximorFees",
+      "bank_transaction_id": "TXN-2026-09-019A",
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-019A:GL-CASH-STRIPE-FEES",
+      "disposition": "MATCHED",
+      "packet": "workspace/cash/packets/TXN-2026-09-019A-stripe-po_1MaximorFees.json"
+    },
+    {
+      "payout_id": "po_1MaximorRefunds",
+      "bank_deposit_id": "BANK-po_1MaximorRefunds",
+      "bank_transaction_id": "TXN-2026-09-022S",
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-022S:GL-CASH-STRIPE-REF",
+      "disposition": "MATCHED",
+      "packet": "workspace/cash/packets/TXN-2026-09-022S-stripe-po_1MaximorRefunds.json"
+    },
+    {
+      "payout_id": "po_1MaximorDisputes",
+      "bank_deposit_id": "BANK-po_1MaximorDisputes",
+      "bank_transaction_id": "TXN-2026-09-026S",
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-026S:GL-CASH-STRIPE-DP",
+      "disposition": "MATCHED",
+      "packet": "workspace/cash/packets/TXN-2026-09-026S-stripe-po_1MaximorDisputes.json"
+    }
+  ],
+  "never_ap_invoice": true
+}

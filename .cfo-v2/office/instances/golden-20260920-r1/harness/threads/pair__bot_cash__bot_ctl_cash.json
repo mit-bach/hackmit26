@@ -1,0 +1,65 @@
+{
+  "id": "pair:bot_cash:bot_ctl_cash",
+  "threadId": "pair:bot_cash:bot_ctl_cash",
+  "name": "Cash ↔ ctl-cash",
+  "memberIds": [
+    "bot_cash",
+    "bot_ctl_cash"
+  ],
+  "createdAt": 1789917154442,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_d50f403c-f783-4d6d-b372-89a9fa872d28",
+      "handleId": "h_d50f403c-f783-4d6d-b372-89a9fa872d28",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-rec\n\nCash fail-closed bank-rec packet for material sign-off path.\n\nLine: TXN-2026-09-015 (2026-09 operating wire_credit $12,412.40 NORTHSTAR LLC / CUSTOMER PAYMENT).\nPacket: workspace/cash/packets/TXN-2026-09-015.json\nSource: workspace/bank/lines/TXN-2026-09-015.json\n\nPreparer disposition: HUMAN_REVIEW — candidate_id none.\n- get_pipe_identifier fail_closed: apply/pay have not identified this line.\n- Statement raw_metadata PAY-006 / INV-AR-013 are feed fields only; not used as identity.\n- Kernel get_bank_transaction unknown; get_match_candidates case 2026-09 not_found.\nDo not force MATCHED. Period open on this line until source identity + Kernel candidate.",
+      "at": 1789917154442,
+      "from": {
+        "botId": "bot_cash",
+        "name": "Cash",
+        "color": "red"
+      }
+    },
+    {
+      "id": "pair-result-h_d50f403c-f783-4d6d-b372-89a9fa872d28",
+      "handleId": "h_d50f403c-f783-4d6d-b372-89a9fa872d28",
+      "role": "bot",
+      "kind": "text",
+      "text": "REFUSE bank-rec sign-off for TXN-2026-09-015. Decision path: workspace/cash/packets/ctl-cash-TXN-2026-09-015-decision.json\n\nconcur_matched=false; force_matched=false; leave_unexplained=true; period_reconciled=false on this line.\n\nDefects confirmed on Kernel reads:\n- get_pipe_identifier fail_closed, identifier_present=false (trace k_78f297471c93)\n- get_bank_transaction unknown TXN-2026-09-015 (trace k_31f9c3997913)\n- get_match_candidates case 2026-09 not_found; candidate_id none (trace k_b395ca05fafe)\n- PAY-006 / INV-AR-013 / NORTHSTAR LLC are statement memo/feed only — not apply/pay identity\n\nDo not mark MATCHED. Keep line open until source identity + Kernel candidate. No human asked.",
+      "at": 1789917212233,
+      "from": {
+        "botId": "bot_ctl_cash",
+        "name": "ctl-cash",
+        "color": "pink"
+      }
+    },
+    {
+      "id": "h_09378bfb-c390-4e95-a4eb-77e543bca46b",
+      "handleId": "h_09378bfb-c390-4e95-a4eb-77e543bca46b",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-rec\n\nCash match packets for 2026-09 operating (case runs/cash_recon/cases/2026-09.json).\n\nPrimary:\n1) TXN-2026-09-011 → candidate_id FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE | disposition EXPLAINED_EXCEPTION | fee_evidence ADV-729103 | difference_minor -2500 | packet workspace/cash/packets/TXN-2026-09-011.json | proposed fee journal unposted\n2) TXN-2026-09-015 → candidate_id UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS | disposition HUMAN_REVIEW | difference_minor 1240 stays unexplained | no fee invented | packet workspace/cash/packets/TXN-2026-09-015.json\n\nAlso: 008 GROUPED_MATCH MATCHED; 012A EXACT MATCHED; 012B HUMAN_REVIEW duplicate risk same GL-AR-772; 019A PROVIDER_PAYOUT MATCHED; 025 unmatched HUMAN_REVIEW.\n\nSummary: workspace/cash/packets/2026-09-operating-match-summary.json\nDo not force MATCHED on 015. Period not fully reconciled while 015 unexplained remains.",
+      "at": 1789917547861,
+      "from": {
+        "botId": "bot_cash",
+        "name": "Cash",
+        "color": "red"
+      }
+    },
+    {
+      "id": "pair-result-h_09378bfb-c390-4e95-a4eb-77e543bca46b",
+      "handleId": "h_09378bfb-c390-4e95-a4eb-77e543bca46b",
+      "role": "bot",
+      "kind": "text",
+      "text": "ctl-cash review-rec decision for 2026-09 operating match batch.\n\nDecision path: workspace/cash/packets/ctl-cash-2026-09-operating-decision.json\n(Kernel candidates trace k_8089f0df840f from get_match_candidates case 2026-09.)\n\nPRIMARY:\n1) TXN-2026-09-011 — CONCUR disposition EXPLAINED_EXCEPTION on candidate_id FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE. difference_minor -2500; fee_evidence_ids ADV-729103 present on Kernel candidate. Reject UNEXPLAINED twin. fee_journal_post_authorized=false (proposed journal stays unposted). Packet workspace/cash/packets/TXN-2026-09-011.json.\n\n2) TXN-2026-09-015 — REFUSE MATCHED. Keep UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS; disposition HUMAN_REVIEW; difference_minor 1240 stays unexplained; fee_evidence_ids empty; pipe identifier absent (trace k_1557a8340562). Do not invent fee. Do not force MATCHED. Packet workspace/cash/packets/TXN-2026-09-015.json.\n\nAlso:\n- 008 GROUPED_MATCH — CONCUR MATCHED\n- 012A EXACT — CONCUR MATCHED\n- 012B — REFUSE double-match same GL-AR-772; keep HUMAN_REVIEW\n- 018A/018 — REFUSE; two equal OD EXACT candidates\n- 019A PROVIDER_PAYOUT — CONCUR MATCHED (provider_status MATCH)\n- 025 — REFUSE; no candidate\n\nperiod_reconciled=false. Period not fully RECONCILED while 015 unexplained residual remains. No human asked. next_owner=cash.",
+      "at": 1789917622604,
+      "from": {
+        "botId": "bot_ctl_cash",
+        "name": "ctl-cash",
+        "color": "pink"
+      }
+    }
+  ]
+}

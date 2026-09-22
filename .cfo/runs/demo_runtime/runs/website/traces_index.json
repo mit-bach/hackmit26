@@ -1,52 +1,7 @@
 [
   {
-    "trace_id": "web_1033a1fbd45a",
-    "workflow": "ingest",
-    "ts": "2026-09-20T13:44:24Z"
-  },
-  {
-    "trace_id": "web_886252539333",
-    "workflow": "cash",
-    "ts": "2026-09-20T13:44:24Z"
-  },
-  {
-    "trace_id": "web_31993c046b9f",
-    "workflow": "audit",
-    "ts": "2026-09-20T13:44:46Z"
-  },
-  {
-    "trace_id": "web_c6038f62fd4a",
-    "workflow": "stripe",
-    "ts": "2026-09-20T13:45:30Z"
-  },
-  {
-    "trace_id": "web_e54c94664913",
-    "workflow": "audit",
-    "ts": "2026-09-20T13:46:21Z"
-  },
-  {
-    "trace_id": "web_1225656d4491",
+    "trace_id": "web_12e909d93eeb",
     "workflow": "ap",
-    "ts": "2026-09-20T13:47:17Z"
-  },
-  {
-    "trace_id": "web_882205b48917",
-    "workflow": "ar-collections",
-    "ts": "2026-09-20T13:48:06Z"
-  },
-  {
-    "trace_id": "web_d0eda4e84663",
-    "workflow": "ar-apply",
-    "ts": "2026-09-20T13:48:27Z"
-  },
-  {
-    "trace_id": "web_73b0d1236e0a",
-    "workflow": "stripe",
-    "ts": "2026-09-20T14:14:18Z"
-  },
-  {
-    "trace_id": "web_4ddad74efde5",
-    "workflow": "ingest",
-    "ts": "2026-09-20T14:14:21Z"
+    "ts": "2026-09-20T14:19:02Z"
   }
 ]

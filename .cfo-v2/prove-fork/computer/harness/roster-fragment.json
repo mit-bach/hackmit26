@@ -1,0 +1,53 @@
+{
+  "system": "office-of-the-cfo",
+  "version": "session-06-fragment",
+  "description": "Apply and collect Operator Bots. Merge into the fifteen-Bot roster from session 00. Not examples/cfo-floor.",
+  "computer": "office/computer",
+  "bots": [
+    {
+      "id": "bot_apply",
+      "name": "apply",
+      "slug": "apply",
+      "purpose": "Owns unapplied cash and sticks Kernel-valid remittances to invoices.",
+      "instructions": "Read office/bots/apply/BOT.md. Obey the Constitution. Never ask a human.",
+      "skills": ["cash-application"],
+      "connectors": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_collect",
+      "name": "collect",
+      "slug": "collect",
+      "purpose": "Owns open invoices after application and chooses the next Kernel-allowed chase.",
+      "instructions": "Read office/bots/collect/BOT.md. Obey the Constitution. Never ask a human.",
+      "skills": ["ar-collections-policy"],
+      "connectors": [
+        "ar.tools.get_collection_candidates",
+        "ar.tools.get_collection_invoice_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "approvalLevel": "never"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "room_ar_open_items",
+      "title": "AR open items",
+      "members": ["apply", "collect"]
+    }
+  ],
+  "routines": [
+    {
+      "name": "daily-aging",
+      "bot": "collect",
+      "cadence": "daily",
+      "prompt": "profile: chase\nAging Routine. Run only after apply has drained new deposits for this as-of. If Kernel new_deposits is non-empty, Handle apply. Do not chase.",
+      "conversation": "room:cash"
+    }
+  ]
+}

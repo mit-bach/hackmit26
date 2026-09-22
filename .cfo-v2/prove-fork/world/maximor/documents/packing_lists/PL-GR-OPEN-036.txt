@@ -1,0 +1,11 @@
+Kendall Square Parking
+Packing list
+Ship date: 2026-09-10
+PO Number: PO-OPEN-036
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 036-0910
+
+Contents:
+  - Line GR-OPEN-036 — qty 1
+
+This packing list is not an invoice.

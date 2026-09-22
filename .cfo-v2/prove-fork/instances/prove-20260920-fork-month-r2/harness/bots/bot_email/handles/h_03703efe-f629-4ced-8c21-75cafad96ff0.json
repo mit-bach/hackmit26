@@ -1,0 +1,19 @@
+{
+  "id": "h_03703efe-f629-4ced-8c21-75cafad96ff0",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-003. If it is a vendor bill, extract fields and Handle ap / prepare with the Kernel invoice id. Do not HOLD. Do not match. Do not invent totals. Do not ask_user. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T16:00:25.432Z",
+  "updatedAt": "2026-09-20T16:01:17.122Z",
+  "result": "**MSG-INBOX-003** classified, dispatched, and handed to AP.\n\n| Field | Value |\n| --- | --- |\n| Classification | `VENDOR_INVOICE` |\n| Vendor | Office Depot |\n| Invoice # | OD-INBOX-3003 |\n| PO | PO-104 |\n| Amount | USD **5,000.00** (`500,000` cents) |\n| Dates | invoice 2026-09-18 · due 2026-10-18 |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `CREATE_AP_INVOICE` / **CREATED** |\n| Kernel id | **`ING-002`** |\n| Match (ingest note) | BLOCKED · `material_amount_mismatch` |\n| `forwarded_to_ap` | true |\n| Mutation | true |\n\n### AP handoff\n- **ask_bot → ap** (prepare): accepted, completed  \n- Packet: `runs/ap/packets/ING-002.json`  \n- AP: amount mismatch invoice 5000 vs PO/GR 2100 → preparer **HOLD** (AP-owned; Email did not HOLD/match)\n\nNo invented totals; no `ask_user`.",
+  "resultPaths": [],
+  "seq": 24
+}

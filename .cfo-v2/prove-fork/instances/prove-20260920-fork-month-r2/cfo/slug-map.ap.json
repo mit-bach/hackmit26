@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "comment": "Session 04 fragment for Bot ap only. Session 00 owns the full slug-map. No list-unions. review-match is not a Profile on ap.",
+  "bots": {
+    "ap": {
+      "defaultProfile": "prepare",
+      "profiles": {
+        "prepare": "AP Preparer",
+        "investigate": "Exception Investigator"
+      }
+    }
+  }
+}

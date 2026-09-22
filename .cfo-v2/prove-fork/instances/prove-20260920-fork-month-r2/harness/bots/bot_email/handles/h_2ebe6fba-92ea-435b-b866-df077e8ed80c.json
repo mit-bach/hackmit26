@@ -1,0 +1,19 @@
+{
+  "id": "h_2ebe6fba-92ea-435b-b866-df077e8ed80c",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-ACME-INV-001. If it is a vendor bill, extract fields and Handle ap / prepare with the Kernel invoice id. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not match. Do not call tools.get_case_evidence. Do not invent totals. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:58:03.110Z",
+  "updatedAt": "2026-09-20T15:58:43.779Z",
+  "result": "**MSG-ACME-INV-001** classified and dispatched.\n\n| Field | Value |\n| --- | --- |\n| Classification | `VENDOR_INVOICE` |\n| Selected action | `CREATE_AP_INVOICE` |\n| Vendor | Acme Supplies |\n| Invoice # | ACM-2026-4410 |\n| PO | PO-101 |\n| Amount | USD **12,450.00** (`1,245,000` cents) |\n| Dates | invoice 2026-09-08 · due 2026-09-30 |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action | `ATTACH_SUPPORTING_EVIDENCE` |\n| Status | **`BUSINESS_DUPLICATE`** |\n| Kernel invoice id | **`INV-001`** |\n| Canonical id | **`ING-001`** |\n| Match status | MATCHED (from prior AP record) |\n| Reason codes | `BUSINESS_DUPLICATE`, `EVIDENCE_LINKED` |\n| Ingestion | `already_present_in_ap` |\n| `forwarded_to_ap` | **false** |\n| Mutation | false |\n\nNo new `ap` / prepare Handle: Kernel treated this as provenance merge on existing **INV-001**, not a new bill. Did not match, did not invent totals.",
+  "resultPaths": [],
+  "seq": 11
+}

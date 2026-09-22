@@ -1,0 +1,54 @@
+{
+  "schema": "CashMatchPacket",
+  "transaction_id": "TXN-2026-09-015",
+  "period": "2026-09",
+  "profile": "match",
+  "source_packet": "workspace/bank/lines/TXN-2026-09-015.json",
+  "case_id": "2026-09",
+  "bank_line": {
+    "transaction_id": "TXN-2026-09-015",
+    "date": "2026-09-15",
+    "amount": 12412.4,
+    "amount_minor": 1241240,
+    "currency": "USD",
+    "description": "CUSTOMER PAYMENT NORTHSTAR LLC",
+    "counterparty": "NORTHSTAR LLC",
+    "transaction_type": "wire_credit"
+  },
+  "statement_feed_fields_only": {
+    "payment_id": "PAY-006",
+    "invoice_ids": ["INV-AR-013"],
+    "note": "feed raw_metadata only; not apply/pay identity"
+  },
+  "pipe_identifier": {
+    "identifier_present": false,
+    "fail_closed": true,
+    "reason": "apply/pay have not identified this line. Do not invent the counterparty."
+  },
+  "preparer_selection": {
+    "selected_candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "disposition": "HUMAN_REVIEW",
+    "disposition_source": "kernel_unexplained_residual",
+    "difference_minor": 1240,
+    "fee_evidence_ids": [],
+    "ledger_entry_ids": ["GL-AR-NS"],
+    "evidence_ids": [
+      "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS"
+    ],
+    "reasons": [
+      "Only Kernel candidate is UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS (bank 1241240 vs ledger GL-AR-NS 1240000, difference_minor 1240).",
+      "fee_evidence_ids empty; fee_rejected:no_fee_evidence. Do not invent a $12.40 fee or residual story.",
+      "Northstar residual stays unexplained (operator + skill). Not FEE_NETTED.",
+      "No apply/pay pipe identifier; do not promote PAY-006 / INV-AR-013 / NORTHSTAR memo into identity.",
+      "Do not force MATCHED. Period stays open on this line."
+    ]
+  },
+  "status": "HUMAN_REVIEW",
+  "unexplained_difference_minor": 1240,
+  "handoff": {
+    "to": "ctl-cash",
+    "profile": "review-rec",
+    "path": "workspace/cash/packets/TXN-2026-09-015.json"
+  }
+}

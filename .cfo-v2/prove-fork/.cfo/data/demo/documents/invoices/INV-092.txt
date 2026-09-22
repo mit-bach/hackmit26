@@ -1,0 +1,39 @@
+CleanRoom Janitorial
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@cleanroomjanitoria.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: CLE-2026-09-0093
+Invoice Date: 2026-09-13
+Due Date: 2026-10-13
+PO Number: PO-393
+Payment Terms: net 30
+Currency: USD
+Vendor: CleanRoom Janitorial
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+warehouse consumables billed 2026-09-13       1.00        155.04        155.04
+
+Subtotal                                                                155.04
+Tax                                                                       0.00
+Amount Due                                                              155.04
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice CLE-2026-09-0093 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@cleanroomjanitoria.example

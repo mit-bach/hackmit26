@@ -1,0 +1,19 @@
+{
+  "id": "h_f4d6457f-9091-4f4f-8f77-d7443ddb1fa0",
+  "from": "operator",
+  "to": "bot_bank",
+  "toSlug": "bank",
+  "prompt": "profile: card\nLand unmatched operating-account lines. A charge is not a bill. Handle cash / match. Include TXN-2026-09-015. Do not invent invoices. Do not force MATCHED.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_bank"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:09:55.083Z",
+  "updatedAt": "2026-09-20T15:13:16.648Z",
+  "result": "## Bank land complete\n\n### Poll\n- Kernel card feed (`list_bank_transactions` 2026-09): **0** rows — no invented card charges.\n- Operating account taken from `data/cash_recon/bank_statement.json` (maximor).\n\n### Landed\n- **28** non-`TXN-VOL` 2026-09 operating lines under `workspace/bank/lines/`\n- Index: `workspace/bank/landed/2026-09-operating.json`\n- **TXN-2026-09-015** included: wire credit **$12,412.40**, NORTHSTAR LLC — packet only; **no AP invoice invented**\n\n### Handoff\n- `bot_send_prompt` → **cash** / `match`  \n  Handle `h_73a94d50-6ca0-4590-a2d5-a73df3609fdb` → **completed**\n\n### Cash result (fail-closed)\n- Packet: `workspace/cash/packets/TXN-2026-09-015.json`\n- Status: **HUMAN_REVIEW** — **not MATCHED**\n- No pipe identifier; no bound cash_recon case candidates; did not force match from memo/metadata\n- Cash routing onward to **ctl-cash** / review-rec\n\nPolicy held: charge ≠ bill; no invented invoices; no forced MATCHED.",
+  "resultPaths": [],
+  "seq": 75
+}

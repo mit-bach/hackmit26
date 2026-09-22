@@ -1,0 +1,39 @@
+Figma, Inc.
+760 Market Street, Floor 10
+San Francisco, CA 94102
+Phone +1 415-890-5400   billing@figma.example
+Tax ID 46-5748921
+
+INVOICE
+
+Invoice Number: OPEN-0008
+Invoice Date: 2026-09-09
+Due Date: 2026-10-09
+PO Number: PO-OPEN-008
+Payment Terms: net 30
+Currency: USD
+Vendor: Figma
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    181,097.44    181,097.44
+
+Subtotal                                                            181,097.44
+Tax                                                                       0.00
+Amount Due                                                          181,097.44
+
+Remit to:
+ACH First Republic routing 321081669  account ****0926
+Bank: First Republic  ****0926
+Please include invoice OPEN-0008 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@figma.example

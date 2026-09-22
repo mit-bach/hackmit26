@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-383
+PO Number: PO-383
+Issued: 2026-09-03
+Vendor: Lenovo
+Vendor legal name: Lenovo (United States) Inc.
+Vendor tax ID: 56-2189993
+Authorized amount: 5,401.95
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+premium support billed 2026-09-03
+
+This purchase order is not an invoice. The vendor must bill against PO-383.
+Payment terms follow the vendor master unless this order states otherwise.

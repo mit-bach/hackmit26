@@ -1,0 +1,10 @@
+{
+  "object": "vendor_bill_land",
+  "message_id": "MSG-INBOX-003",
+  "invoice_id": "ING-004",
+  "vendor_invoice_number": "OD-INBOX-3003",
+  "status": "CREATED",
+  "overlay_path": "runs/ingestion/overlay.json",
+  "registry_path": "runs/ingestion/registry.json",
+  "handoff": "ap/prepare"
+}

@@ -1,0 +1,16 @@
+{
+  "system": "cfo-agentic-system",
+  "extraExtensions": [],
+  "clientSkills": false,
+  "spawnPolicy": "lazy",
+  "autoRoutines": false,
+  "provider": "xai",
+  "model": "grok-4.5",
+  "thinkingLevel": "low",
+  "evalPhase": "operational",
+  "features": {
+    "showToolCalls": true,
+    "transcriptVerbosity": "full"
+  },
+  "sidecar": false
+}

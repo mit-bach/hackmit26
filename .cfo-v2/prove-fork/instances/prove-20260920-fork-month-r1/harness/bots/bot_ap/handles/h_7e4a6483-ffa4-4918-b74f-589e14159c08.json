@@ -1,0 +1,21 @@
+{
+  "id": "h_7e4a6483-ffa4-4918-b74f-589e14159c08",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Profile prepare. Safe vendor bill from finance inbox MSG-INBOX-014 after prompt-injection scrub. Kernel id ING-002 (canonical ING-002). Slack Technologies · SLK-INBOX-7007 · 4375 USD · PO-105 · match_status MATCHED. Injection text ignored — not marked paid/approved; bank details unchanged. Packet: workspace/inbox/MSG-INBOX-014.json. Do not pay.",
+  "paths": [
+    "workspace/inbox/MSG-INBOX-014.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:47:25.925Z",
+  "updatedAt": "2026-09-20T15:47:44.912Z",
+  "result": "AP prepare complete for MSG-INBOX-014 / ING-002 (Slack Technologies SLK-INBOX-7007, 4375 USD, PO-105). Injection scrub respected: not paid, bank unchanged. Kernel three-way clean — PO-105 approved 4375, GR-105 full, amount/vendor exact, no duplicates, exception_types []. Packet runs/ap/packets/ING-002.json PreparerRecommendation APPROVE. Handing approve-shaped draft to ctl-pay / review-match. AP does not pay.",
+  "seq": 29
+}

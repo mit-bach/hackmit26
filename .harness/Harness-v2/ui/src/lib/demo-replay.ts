@@ -89,6 +89,24 @@ export interface DemoFrame {
   readonly slug?: string;
   readonly awake: readonly DemoAwakeBot[];
   readonly layout: readonly MosaicCell[];
+  readonly overflow: number;
+  readonly overflowSlugs: readonly string[];
+}
+
+export interface DemoDirector {
+  readonly maxPanes: number;
+  readonly featured: readonly string[];
+  readonly seqFrom: number;
+  readonly seqTo: number;
+}
+
+export interface DemoScene {
+  readonly id: string;
+  readonly title: string;
+  readonly seqFrom: number;
+  readonly seqTo: number;
+  readonly featured: readonly string[];
+  readonly maxPanes: number;
 }
 
 export interface DemoBundle {
@@ -99,10 +117,28 @@ export interface DemoBundle {
   readonly events: readonly ProtocolEvent[];
   readonly transcripts: Readonly<Record<string, readonly TranscriptEntry[]>>;
   readonly activities: Readonly<Record<string, readonly DemoActivity[]>>;
+  readonly scenes?: readonly DemoScene[];
 }
 
 const MIN_PLAY_MS = 80;
 const MAX_PLAY_MS = 900;
+export const MOSAIC_MESSAGE_CAP = 8;
+export const HERO_MESSAGE_CAP = 40;
+export const PANE_CAPS = [1, 2, 4, 6, 9, 16] as const;
+
+export const DEFAULT_DEMO_DIRECTOR: DemoDirector = {
+  maxPanes: 16,
+  featured: [],
+  seqFrom: 0,
+  seqTo: 0,
+};
+
+export const CAMERA_DEMO_DIRECTOR: DemoDirector = {
+  maxPanes: 6,
+  featured: [],
+  seqFrom: 0,
+  seqTo: 0,
+};
 
 function cell(index: number, left: number, top: number, width: number, height: number): MosaicCell {
   return { index, left, top, width, height };
@@ -155,7 +191,86 @@ export function mosaicLayout(count: number): readonly MosaicCell[] {
   if (count === 6) {
     return grid(6, 3);
   }
+  if (count === 8) {
+    return grid(8, 4);
+  }
+  if (count === 9) {
+    return grid(9, 3);
+  }
+  if (count === 10) {
+    return grid(10, 4);
+  }
+  if (count === 12) {
+    return grid(12, 4);
+  }
+  if (count === 16) {
+    return grid(16, 4);
+  }
   return grid(count, Math.ceil(Math.sqrt(count)));
+}
+
+function finiteNumber(value: number, fallback: number): number {
+  return Number.isFinite(value) ? value : fallback;
+}
+
+function clampNumber(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
+
+export function clampDirector(raw: Partial<DemoDirector> | undefined): DemoDirector {
+  const base = DEFAULT_DEMO_DIRECTOR;
+  if (!raw) {
+    return base;
+  }
+  const featured = (raw.featured ?? [])
+    .filter((item): item is string => typeof item === "string")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+  return {
+    maxPanes: clampNumber(Math.round(finiteNumber(raw.maxPanes ?? base.maxPanes, base.maxPanes)), 1, 16),
+    featured,
+    seqFrom: Math.max(0, Math.trunc(finiteNumber(raw.seqFrom ?? 0, 0))),
+    seqTo: Math.max(0, Math.trunc(finiteNumber(raw.seqTo ?? 0, 0))),
+  };
+}
+
+function turnFeatured(turn: DemoOpenTurn, featuredKeys: ReadonlySet<string>): boolean {
+  return (
+    featuredKeys.has(turn.slug.toLowerCase()) ||
+    featuredKeys.has(turn.botId.toLowerCase()) ||
+    featuredKeys.has(turn.name.toLowerCase())
+  );
+}
+
+export function selectCast(
+  turns: readonly DemoOpenTurn[],
+  director: Pick<DemoDirector, "maxPanes" | "featured">,
+): { visible: readonly DemoOpenTurn[]; overflow: readonly DemoOpenTurn[] } {
+  const cap = clampNumber(Math.trunc(director.maxPanes), 1, 16);
+  if (turns.length <= cap) {
+    return { visible: turns, overflow: [] };
+  }
+  const featuredKeys = new Set(
+    director.featured.map((item) => item.trim().toLowerCase()).filter((item) => item.length > 0),
+  );
+  const featured: DemoOpenTurn[] = [];
+  const rest: DemoOpenTurn[] = [];
+  for (const turn of turns) {
+    if (turnFeatured(turn, featuredKeys)) {
+      featured.push(turn);
+    } else {
+      rest.push(turn);
+    }
+  }
+  const combined = [...featured, ...rest];
+  return { visible: combined.slice(0, cap), overflow: combined.slice(cap) };
+}
+
+export function capPaneMessages(rows: readonly TranscriptEntry[], cap: number): readonly TranscriptEntry[] {
+  if (cap <= 0 || rows.length <= cap) {
+    return rows;
+  }
+  return rows.slice(rows.length - cap);
 }
 
 function resolveBot(bots: readonly DemoBotWire[], event: ProtocolEvent): DemoBotWire | undefined {
@@ -282,6 +397,9 @@ export function activityAt(rows: readonly DemoActivity[], iso: string): DemoActi
 }
 
 export function activityLabel(status: DemoPaneStatus, activity?: DemoActivity): string {
+  if (activity?.title && /memory_/.test(activity.title)) {
+    return activity.title;
+  }
   if (activity?.type === "item.started" && activity.title.length > 0) {
     return activity.title;
   }
@@ -299,12 +417,18 @@ function paintFrame(
   seq: number,
   turns: readonly DemoOpenTurn[],
   holding: boolean,
+  director: DemoDirector,
 ): DemoFrame {
-  const visible = bundle.events.filter((event) => event.seq <= seq);
-  const current = visible[visible.length - 1];
-  const layout = mosaicLayout(turns.length);
-  const awake: DemoAwakeBot[] = turns.map((turn) => {
-    const messages = (bundle.transcripts[turn.botId] ?? []).filter((row) => row.seq <= seq);
+  const visibleEvents = bundle.events.filter((event) => event.seq <= seq);
+  const current = visibleEvents[visibleEvents.length - 1];
+  const cast = selectCast(turns, director);
+  const layout = mosaicLayout(cast.visible.length);
+  const messageCap = cast.visible.length <= 1 ? HERO_MESSAGE_CAP : MOSAIC_MESSAGE_CAP;
+  const awake: DemoAwakeBot[] = cast.visible.map((turn) => {
+    const messages = capPaneMessages(
+      (bundle.transcripts[turn.botId] ?? []).filter((row) => row.seq <= seq),
+      messageCap,
+    );
     const lastActivity = activityAt(bundle.activities[turn.botId] ?? [], current?.t ?? "");
     return {
       ...turn,
@@ -324,26 +448,37 @@ function paintFrame(
     slug: current?.slug,
     awake,
     layout,
+    overflow: cast.overflow.length,
+    overflowSlugs: cast.overflow.map((turn) => turn.slug),
   };
 }
 
-export function projectFrame(bundle: DemoBundle, cursorSeq: number): DemoFrame {
+export function projectFrame(
+  bundle: DemoBundle,
+  cursorSeq: number,
+  director: DemoDirector = DEFAULT_DEMO_DIRECTOR,
+): DemoFrame {
   const lastSeq = bundle.lastSeq;
   const seq = Math.max(0, Math.min(cursorSeq, lastSeq));
   const visible = bundle.events.filter((event) => event.seq <= seq);
   const open = foldAwake(bundle.bots, visible);
-  return paintFrame(bundle, seq, open, false);
+  return paintFrame(bundle, seq, open, false, clampDirector(director));
 }
 
-export function projectStageFrame(bundle: DemoBundle, cursorSeq: number): DemoFrame {
+export function projectStageFrame(
+  bundle: DemoBundle,
+  cursorSeq: number,
+  director: DemoDirector = DEFAULT_DEMO_DIRECTOR,
+): DemoFrame {
   const origin = firstAwakeSeq(bundle.events);
+  const camera = clampDirector(director);
   if (origin <= 0 || bundle.lastSeq <= 0) {
-    return projectFrame(bundle, cursorSeq);
+    return projectFrame(bundle, cursorSeq, camera);
   }
   const seq = Math.max(origin, Math.min(cursorSeq, bundle.lastSeq));
   const visible = bundle.events.filter((event) => event.seq <= seq);
   const folded = foldAwakeStage(bundle.bots, visible);
-  return paintFrame(bundle, seq, folded.stage, folded.holding);
+  return paintFrame(bundle, seq, folded.stage, folded.holding, camera);
 }
 
 export function playDelayMs(
@@ -465,6 +600,41 @@ function parseKeyed<T>(value: unknown, parse: (row: unknown) => T | undefined): 
   return out;
 }
 
+function parseScene(raw: unknown): DemoScene | undefined {
+  if (!isRecord(raw)) {
+    return undefined;
+  }
+  const id = asString(raw.id);
+  const title = asString(raw.title);
+  if (!id || !title) {
+    return undefined;
+  }
+  const director = clampDirector({
+    maxPanes: asNumber(raw.maxPanes) ?? CAMERA_DEMO_DIRECTOR.maxPanes,
+    featured: Array.isArray(raw.featured) ? raw.featured.filter((item): item is string => typeof item === "string") : [],
+    seqFrom: asNumber(raw.seqFrom) ?? 0,
+    seqTo: asNumber(raw.seqTo) ?? 0,
+  });
+  return {
+    id,
+    title,
+    seqFrom: director.seqFrom,
+    seqTo: director.seqTo,
+    featured: director.featured,
+    maxPanes: director.maxPanes,
+  };
+}
+
+export function parseDemoScenes(value: unknown): DemoScene[] {
+  if (Array.isArray(value)) {
+    return value.map(parseScene).filter((row): row is DemoScene => row !== undefined);
+  }
+  if (isRecord(value) && Array.isArray(value.scenes)) {
+    return value.scenes.map(parseScene).filter((row): row is DemoScene => row !== undefined);
+  }
+  return [];
+}
+
 export function parseDemoBundle(value: unknown): DemoBundle | undefined {
   if (!isRecord(value) || !Array.isArray(value.events) || !Array.isArray(value.bots)) {
     return undefined;
@@ -481,6 +651,7 @@ export function parseDemoBundle(value: unknown): DemoBundle | undefined {
     events,
     transcripts: parseKeyed(value.transcripts, parseTranscript),
     activities: parseKeyed(value.activities, parseActivityRow),
+    scenes: parseDemoScenes(value.scenes),
   };
 }
 
@@ -513,4 +684,35 @@ export function parseDemoMeta(value: unknown): DemoMetaWire | undefined {
     hasRecording: value.hasRecording === true,
     hasLive: value.hasLive === true,
   };
+}
+
+const DIRECTOR_STORAGE_KEY = "harness-demo-director-v1";
+
+export function loadDirectorSettings(): DemoDirector {
+  if (typeof localStorage === "undefined") {
+    return CAMERA_DEMO_DIRECTOR;
+  }
+  const raw = localStorage.getItem(DIRECTOR_STORAGE_KEY);
+  if (!raw) {
+    return CAMERA_DEMO_DIRECTOR;
+  }
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return CAMERA_DEMO_DIRECTOR;
+    }
+    return clampDirector({ ...CAMERA_DEMO_DIRECTOR, ...(parsed as Partial<DemoDirector>) });
+  } catch (cause) {
+    if (cause instanceof SyntaxError) {
+      return CAMERA_DEMO_DIRECTOR;
+    }
+    throw cause;
+  }
+}
+
+export function saveDirectorSettings(director: DemoDirector): void {
+  if (typeof localStorage === "undefined") {
+    return;
+  }
+  localStorage.setItem(DIRECTOR_STORAGE_KEY, JSON.stringify(clampDirector(director)));
 }

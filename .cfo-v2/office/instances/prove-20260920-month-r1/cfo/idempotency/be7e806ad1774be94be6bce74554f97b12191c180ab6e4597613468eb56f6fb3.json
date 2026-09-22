@@ -1,0 +1,21 @@
+{
+  "key": "inject-MSG-INBOX-008",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "6cd11fe46dbbc2b356e0e897a668df07df6151bf8e499891a07bb9b5bec88fc5",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-008",
+      "thread_id": "THR-quote",
+      "delivered": true,
+      "attachment_hashes": [
+        "32f0d29610342ca19a094463f2fb5a977e79b9afef2af50bdc86c3ebb2108530"
+      ],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_7581ea984249"
+  }
+}

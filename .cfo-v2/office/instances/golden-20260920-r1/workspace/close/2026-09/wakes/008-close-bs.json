@@ -1,0 +1,13 @@
+{
+  "profile": "bs",
+  "slug": "close",
+  "period": "2026-09",
+  "task_id": "bs_recon",
+  "status": "BLOCKED",
+  "ops": [
+    "bs_recon.tools.get_reconciliation_packet",
+    "bs_recon.tools.list_reconciling_items"
+  ],
+  "mutatingOps": [],
+  "mark_closed": false
+}

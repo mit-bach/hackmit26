@@ -1,0 +1,769 @@
+[
+  {
+    "asset_tag": "MX-LPT-4128",
+    "employee_id": "EMP-4128",
+    "serial": "LN-4128",
+    "issued": "2024-01-08"
+  },
+  {
+    "asset_tag": "MX-LPT-1088",
+    "employee_id": "EMP-1088",
+    "serial": "LN-1088",
+    "issued": "2023-04-01"
+  },
+  {
+    "asset_tag": "MX-LPT-3304",
+    "employee_id": "EMP-3304",
+    "serial": "LN-3304",
+    "issued": "2024-06-12"
+  },
+  {
+    "asset_tag": "MX-LPT-3001",
+    "employee_id": "EMP-1001",
+    "serial": "LN-ROLL-001",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3002",
+    "employee_id": "EMP-1002",
+    "serial": "LN-ROLL-002",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3003",
+    "employee_id": "EMP-1003",
+    "serial": "LN-ROLL-003",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3004",
+    "employee_id": "EMP-1004",
+    "serial": "LN-ROLL-004",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3005",
+    "employee_id": "EMP-1005",
+    "serial": "LN-ROLL-005",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3006",
+    "employee_id": "EMP-1006",
+    "serial": "LN-ROLL-006",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3007",
+    "employee_id": "EMP-1007",
+    "serial": "LN-ROLL-007",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3008",
+    "employee_id": "EMP-1008",
+    "serial": "LN-ROLL-008",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3009",
+    "employee_id": "EMP-1009",
+    "serial": "LN-ROLL-009",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3010",
+    "employee_id": "EMP-1010",
+    "serial": "LN-ROLL-010",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3011",
+    "employee_id": "EMP-1011",
+    "serial": "LN-ROLL-011",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3012",
+    "employee_id": "EMP-1012",
+    "serial": "LN-ROLL-012",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3013",
+    "employee_id": "EMP-1013",
+    "serial": "LN-ROLL-013",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3014",
+    "employee_id": "EMP-1014",
+    "serial": "LN-ROLL-014",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3015",
+    "employee_id": "EMP-1015",
+    "serial": "LN-ROLL-015",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3016",
+    "employee_id": "EMP-1016",
+    "serial": "LN-ROLL-016",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3017",
+    "employee_id": "EMP-1017",
+    "serial": "LN-ROLL-017",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3018",
+    "employee_id": "EMP-1018",
+    "serial": "LN-ROLL-018",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3019",
+    "employee_id": "EMP-1019",
+    "serial": "LN-ROLL-019",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3020",
+    "employee_id": "EMP-1020",
+    "serial": "LN-ROLL-020",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3021",
+    "employee_id": "EMP-1021",
+    "serial": "LN-ROLL-021",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3022",
+    "employee_id": "EMP-1022",
+    "serial": "LN-ROLL-022",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3023",
+    "employee_id": "EMP-1023",
+    "serial": "LN-ROLL-023",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3024",
+    "employee_id": "EMP-1024",
+    "serial": "LN-ROLL-024",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3025",
+    "employee_id": "EMP-1025",
+    "serial": "LN-ROLL-025",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3026",
+    "employee_id": "EMP-1026",
+    "serial": "LN-ROLL-026",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3027",
+    "employee_id": "EMP-1027",
+    "serial": "LN-ROLL-027",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3028",
+    "employee_id": "EMP-1028",
+    "serial": "LN-ROLL-028",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3029",
+    "employee_id": "EMP-1029",
+    "serial": "LN-ROLL-029",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3030",
+    "employee_id": "EMP-1030",
+    "serial": "LN-ROLL-030",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3031",
+    "employee_id": "EMP-1031",
+    "serial": "LN-ROLL-031",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3032",
+    "employee_id": "EMP-1032",
+    "serial": "LN-ROLL-032",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3033",
+    "employee_id": "EMP-1033",
+    "serial": "LN-ROLL-033",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3034",
+    "employee_id": "EMP-1034",
+    "serial": "LN-ROLL-034",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3035",
+    "employee_id": "EMP-1035",
+    "serial": "LN-ROLL-035",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3036",
+    "employee_id": "EMP-1036",
+    "serial": "LN-ROLL-036",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3037",
+    "employee_id": "EMP-1037",
+    "serial": "LN-ROLL-037",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3038",
+    "employee_id": "EMP-1038",
+    "serial": "LN-ROLL-038",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3039",
+    "employee_id": "EMP-1039",
+    "serial": "LN-ROLL-039",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3040",
+    "employee_id": "EMP-1040",
+    "serial": "LN-ROLL-040",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3041",
+    "employee_id": "EMP-1041",
+    "serial": "LN-ROLL-041",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3042",
+    "employee_id": "EMP-1042",
+    "serial": "LN-ROLL-042",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3043",
+    "employee_id": "EMP-1043",
+    "serial": "LN-ROLL-043",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3044",
+    "employee_id": "EMP-1044",
+    "serial": "LN-ROLL-044",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3045",
+    "employee_id": "EMP-1045",
+    "serial": "LN-ROLL-045",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3046",
+    "employee_id": "EMP-1046",
+    "serial": "LN-ROLL-046",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3047",
+    "employee_id": "EMP-1047",
+    "serial": "LN-ROLL-047",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3048",
+    "employee_id": "EMP-1048",
+    "serial": "LN-ROLL-048",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3049",
+    "employee_id": "EMP-1049",
+    "serial": "LN-ROLL-049",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3050",
+    "employee_id": "EMP-1050",
+    "serial": "LN-ROLL-050",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3051",
+    "employee_id": "EMP-1051",
+    "serial": "LN-ROLL-051",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3052",
+    "employee_id": "EMP-1052",
+    "serial": "LN-ROLL-052",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3053",
+    "employee_id": "EMP-1053",
+    "serial": "LN-ROLL-053",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3054",
+    "employee_id": "EMP-1054",
+    "serial": "LN-ROLL-054",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3055",
+    "employee_id": "EMP-1055",
+    "serial": "LN-ROLL-055",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3056",
+    "employee_id": "EMP-1056",
+    "serial": "LN-ROLL-056",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3057",
+    "employee_id": "EMP-1057",
+    "serial": "LN-ROLL-057",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3058",
+    "employee_id": "EMP-1058",
+    "serial": "LN-ROLL-058",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3059",
+    "employee_id": "EMP-1059",
+    "serial": "LN-ROLL-059",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3060",
+    "employee_id": "EMP-1060",
+    "serial": "LN-ROLL-060",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3061",
+    "employee_id": "EMP-1061",
+    "serial": "LN-ROLL-061",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3062",
+    "employee_id": "EMP-1062",
+    "serial": "LN-ROLL-062",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3063",
+    "employee_id": "EMP-1063",
+    "serial": "LN-ROLL-063",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3064",
+    "employee_id": "EMP-1064",
+    "serial": "LN-ROLL-064",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3065",
+    "employee_id": "EMP-1065",
+    "serial": "LN-ROLL-065",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3066",
+    "employee_id": "EMP-1066",
+    "serial": "LN-ROLL-066",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3067",
+    "employee_id": "EMP-1067",
+    "serial": "LN-ROLL-067",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3068",
+    "employee_id": "EMP-1068",
+    "serial": "LN-ROLL-068",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3069",
+    "employee_id": "EMP-1069",
+    "serial": "LN-ROLL-069",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3070",
+    "employee_id": "EMP-1070",
+    "serial": "LN-ROLL-070",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3071",
+    "employee_id": "EMP-1071",
+    "serial": "LN-ROLL-071",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3072",
+    "employee_id": "EMP-1072",
+    "serial": "LN-ROLL-072",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3073",
+    "employee_id": "EMP-1073",
+    "serial": "LN-ROLL-073",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3074",
+    "employee_id": "EMP-1074",
+    "serial": "LN-ROLL-074",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3075",
+    "employee_id": "EMP-1075",
+    "serial": "LN-ROLL-075",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3076",
+    "employee_id": "EMP-1076",
+    "serial": "LN-ROLL-076",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3077",
+    "employee_id": "EMP-1077",
+    "serial": "LN-ROLL-077",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3078",
+    "employee_id": "EMP-1078",
+    "serial": "LN-ROLL-078",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3079",
+    "employee_id": "EMP-1079",
+    "serial": "LN-ROLL-079",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3080",
+    "employee_id": "EMP-1080",
+    "serial": "LN-ROLL-080",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3081",
+    "employee_id": "EMP-1081",
+    "serial": "LN-ROLL-081",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3082",
+    "employee_id": "EMP-1082",
+    "serial": "LN-ROLL-082",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3083",
+    "employee_id": "EMP-1083",
+    "serial": "LN-ROLL-083",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3084",
+    "employee_id": "EMP-1084",
+    "serial": "LN-ROLL-084",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3085",
+    "employee_id": "EMP-1085",
+    "serial": "LN-ROLL-085",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3086",
+    "employee_id": "EMP-1086",
+    "serial": "LN-ROLL-086",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3087",
+    "employee_id": "EMP-1087",
+    "serial": "LN-ROLL-087",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3088",
+    "employee_id": "EMP-1088",
+    "serial": "LN-ROLL-088",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3089",
+    "employee_id": "EMP-1089",
+    "serial": "LN-ROLL-089",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3090",
+    "employee_id": "EMP-1090",
+    "serial": "LN-ROLL-090",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3091",
+    "employee_id": "EMP-1091",
+    "serial": "LN-ROLL-091",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3092",
+    "employee_id": "EMP-1092",
+    "serial": "LN-ROLL-092",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3093",
+    "employee_id": "EMP-1093",
+    "serial": "LN-ROLL-093",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3094",
+    "employee_id": "EMP-1094",
+    "serial": "LN-ROLL-094",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3095",
+    "employee_id": "EMP-1095",
+    "serial": "LN-ROLL-095",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3096",
+    "employee_id": "EMP-1096",
+    "serial": "LN-ROLL-096",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3097",
+    "employee_id": "EMP-1097",
+    "serial": "LN-ROLL-097",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3098",
+    "employee_id": "EMP-1098",
+    "serial": "LN-ROLL-098",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3099",
+    "employee_id": "EMP-1099",
+    "serial": "LN-ROLL-099",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3100",
+    "employee_id": "EMP-1100",
+    "serial": "LN-ROLL-100",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3101",
+    "employee_id": "EMP-1101",
+    "serial": "LN-ROLL-101",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3102",
+    "employee_id": "EMP-1102",
+    "serial": "LN-ROLL-102",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3103",
+    "employee_id": "EMP-1103",
+    "serial": "LN-ROLL-103",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3104",
+    "employee_id": "EMP-1104",
+    "serial": "LN-ROLL-104",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3105",
+    "employee_id": "EMP-1105",
+    "serial": "LN-ROLL-105",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3106",
+    "employee_id": "EMP-1106",
+    "serial": "LN-ROLL-106",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  },
+  {
+    "asset_tag": "MX-LPT-3107",
+    "employee_id": "EMP-1107",
+    "serial": "LN-ROLL-107",
+    "issued": "2026-03-18",
+    "rollout": "LEN-ROLL-26"
+  }
+]

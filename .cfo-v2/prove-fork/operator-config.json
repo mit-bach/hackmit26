@@ -1,0 +1,16 @@
+{
+  "spawnPolicy": "fake",
+  "port": 8801,
+  "openBrowser": false,
+  "extraExtensions": [],
+  "clientSkills": true,
+  "features": {
+    "skillAuthoring": true,
+    "showToolCalls": true,
+    "browser": false,
+    "transcriptVerbosity": "full"
+  },
+  "anthropic": {
+    "key": "sk-ant-operator-ui-proof-not-a-real-key-12345678"
+  }
+}

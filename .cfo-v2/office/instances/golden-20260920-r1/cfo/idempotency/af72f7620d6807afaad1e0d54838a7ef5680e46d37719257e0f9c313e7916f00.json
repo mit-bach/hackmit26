@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-INBOX-015",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "a252a9daace56c96a6e3e79c414cb4f919fa91bb0ef2fb4abe7ec75fcfa8baa1",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-015",
+      "thread_id": "THR-unknown-vendor",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_0248f7add436"
+  }
+}

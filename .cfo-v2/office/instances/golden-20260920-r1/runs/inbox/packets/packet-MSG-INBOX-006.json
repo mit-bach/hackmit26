@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-INBOX-006",
+  "classification": "GOODS_RECEIPT",
+  "note": "not a bill",
+  "bill": false
+}

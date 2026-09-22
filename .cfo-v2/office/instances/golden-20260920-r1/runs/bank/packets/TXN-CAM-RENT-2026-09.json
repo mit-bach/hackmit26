@@ -1,0 +1,46 @@
+{
+  "schema": "BankLineLanded",
+  "transaction_id": "TXN-CAM-RENT-2026-09",
+  "period": "2026-09",
+  "source": "operating_account",
+  "bank_line": {
+    "transaction_id": "TXN-CAM-RENT-2026-09",
+    "date": "2026-09-03",
+    "amount": -48000.0,
+    "currency": "USD",
+    "description": "ACH OUT CAMBRIDGE PROPERTY SVC",
+    "reference": "RENT-2026-09",
+    "counterparty": "CAMBRIDGE PROPERTY SVC",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -4800000,
+    "raw_metadata": {
+      "receiving_account_last4": "2190",
+      "vendor_id": "VEND-013"
+    }
+  },
+  "discovery": {
+    "status": "documented_line",
+    "candidate": null,
+    "reasons": [
+      "Operating-account statement line from data/cash_recon/bank_statement.json.",
+      "A charge is not a bill; no AP invoice invented from descriptor.",
+      "Handoff to cash/match for candidate selection. Do not force MATCHED.",
+      "Statement raw_metadata present on feed row; cash/apply own interpretation."
+    ]
+  },
+  "handoff": {
+    "to": "cash",
+    "profile": "match"
+  },
+  "paths": {
+    "statement": "data/cash_recon/bank_statement.json",
+    "packet": "workspace/bank/lines/TXN-CAM-RENT-2026-09.json"
+  },
+  "statement_metadata": {
+    "receiving_account_last4": "2190",
+    "vendor_id": "VEND-013"
+  }
+}

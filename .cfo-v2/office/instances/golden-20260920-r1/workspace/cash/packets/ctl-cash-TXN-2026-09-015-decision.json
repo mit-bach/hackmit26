@@ -1,0 +1,31 @@
+{
+  "object": "bank_rec_concurrence",
+  "verifier": "ctl-cash",
+  "profile": "review-rec",
+  "transaction_id": "TXN-2026-09-015",
+  "period": "2026-09",
+  "decision": "REFUSE",
+  "concur_matched": false,
+  "force_matched": false,
+  "leave_unexplained": true,
+  "kernel_status": "HUMAN_REVIEW",
+  "packet": "workspace/cash/packets/TXN-2026-09-015.json",
+  "source": "workspace/bank/lines/TXN-2026-09-015.json",
+  "defects": [
+    "get_pipe_identifier: identifier_present=false; fail_closed — apply/pay have not identified this line",
+    "get_bank_transaction: unknown bank transaction TXN-2026-09-015",
+    "get_match_candidates case 2026-09: not_found; no candidate_id to copy",
+    "Statement raw_metadata PAY-006 / INV-AR-013 are feed fields only; not pipe identity",
+    "Memo NORTHSTAR LLC is not an economic linkage without Kernel candidate and pipe id"
+  ],
+  "evidence": {
+    "pipe_identifier_trace": "k_78f297471c93",
+    "bank_transaction_trace": "k_31f9c3997913",
+    "match_candidates_trace": "k_b395ca05fafe",
+    "candidate_id": null,
+    "fee_evidence_ids": []
+  },
+  "reason": "Refuse material bank-rec sign-off for TXN-2026-09-015. Kernel does not know the bank transaction, case 2026-09 has no match candidates, and pipe identifier is absent. Coincident dollars or feed metadata cannot tick the line. Do not convert HUMAN_REVIEW to MATCHED. Period stays open on this line until source identity and a Kernel candidate exist. No human asked.",
+  "next_owner": "cash",
+  "period_reconciled": false
+}

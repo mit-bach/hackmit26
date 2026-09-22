@@ -1,0 +1,45 @@
+{
+  "invoice_id": "ING-003",
+  "profile": "prepare",
+  "source": {
+    "message_id": "MSG-INBOX-004",
+    "vendor_invoice_number": "DD-INBOX-4004",
+    "thread_id": "THR-no-po",
+    "forwarded_by": "email"
+  },
+  "kernel_evidence": {
+    "invoice_amount": 1800,
+    "po_id": null,
+    "po_authorized_amount": null,
+    "receipt_id": null,
+    "amount_received": null,
+    "amount_difference": null,
+    "percent_difference": null,
+    "amount_matches": false,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": false,
+    "vendors_are_similar": false,
+    "po_exists": false,
+    "po_approved": false,
+    "receipt_status": "not_applicable",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": ["missing_po"],
+    "days_until_due": 28
+  },
+  "PreparerRecommendation": {
+    "action": "HOLD",
+    "exception_types": ["missing_po"],
+    "evidence_used": [
+      "ING-003",
+      "tools.get_invoice",
+      "tools.get_case_evidence",
+      "tools.find_duplicate_invoices"
+    ],
+    "reason": "Datadog DD-INBOX-4004 bills 1800 with no PO on the document and Kernel po_exists false. Exception missing_po; receipt not_applicable; no duplicates. Cannot three-way match. HOLD until a valid PO is linked or non-PO policy path is investigated under investigate profile. Not APPROVE."
+  },
+  "proposed": "HOLD",
+  "approve_shaped": false,
+  "ctl_pay_handoff": null,
+  "packet_path": "runs/ap/packets/ING-003.json"
+}

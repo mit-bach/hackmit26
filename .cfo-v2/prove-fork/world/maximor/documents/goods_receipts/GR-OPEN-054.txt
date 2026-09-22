@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-054
+PO Number: PO-OPEN-054
+Vendor: Keel Group
+Goods received in full on 2026-09-01
+Packing list attached: PL-GR-OPEN-054
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 187,407.72 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-FLE-2026-03
+PO Number: PO-FLE-2026-03
+Vendor: Freightline Expedite
+Goods received in full on 2026-03-21
+Packing list attached: PL-GR-FLE-2026-03
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 4,884.82 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

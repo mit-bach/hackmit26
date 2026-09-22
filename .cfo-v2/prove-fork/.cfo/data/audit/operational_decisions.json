@@ -1,0 +1,47 @@
+[
+  {
+    "object_id": "INV-010",
+    "object_type": "invoice",
+    "workflow": "ap",
+    "decision": "HOLD",
+    "duplicate_detected": true,
+    "invoice_ids": ["INV-010", "INV-018"],
+    "amount": 1920,
+    "trace_id": "ap/INV-010"
+  },
+  {
+    "object_id": "INV-018",
+    "object_type": "invoice",
+    "workflow": "ap",
+    "decision": "HOLD",
+    "duplicate_detected": true,
+    "invoice_ids": ["INV-018", "INV-010"],
+    "amount": 1920,
+    "trace_id": "ap/INV-018"
+  },
+  {
+    "object_id": "AUD-INV-MISS-1",
+    "object_type": "invoice",
+    "workflow": "ap",
+    "decision": "APPROVE",
+    "duplicate_detected": false,
+    "invoice_ids": ["AUD-INV-MISS-1"],
+    "amount": 8750
+  },
+  {
+    "object_id": "AUD-INV-MISS-2",
+    "object_type": "invoice",
+    "workflow": "ap",
+    "decision": "APPROVE",
+    "duplicate_detected": false,
+    "invoice_ids": ["AUD-INV-MISS-2"],
+    "amount": 8750
+  },
+  {
+    "object_id": "VEND-ACME",
+    "object_type": "vendor",
+    "workflow": "ap",
+    "decision": "APPROVE",
+    "duplicate_detected": false
+  }
+]

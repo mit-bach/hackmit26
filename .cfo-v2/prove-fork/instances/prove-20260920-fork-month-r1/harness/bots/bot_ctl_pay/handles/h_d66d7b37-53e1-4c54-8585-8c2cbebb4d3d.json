@@ -1,0 +1,19 @@
+{
+  "id": "h_d66d7b37-53e1-4c54-8585-8c2cbebb4d3d",
+  "from": "bot_ap",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "profile: review-match\nApprove-shaped AP match packet for INV-001 (Acme Supplies ACM-2026-4410, 12450 USD, PO-101). Path: runs/ap/packets/INV-001.json. Kernel evidence clean three-way; exception_types []. PreparerRecommendation APPROVE. Concur or refuse per Verifier rules. AP does not pay. Please read the packet path and return concurrence result.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ap",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:44:29.566Z",
+  "updatedAt": "2026-09-20T15:46:05.972Z",
+  "result": "CONCUR INV-001. ReviewerDecision path: runs/ctl-pay/decisions/INV-001-review-match.json. Verdict CONCUR action APPROVE under P-001. Kernel get_case_evidence (trace k_dc9bfb892d12) matches packet: three-way clean, exception_types [], must_hold empty, duplicate false. Packet complete. ctl-pay does not pay; bill may enter approved pool only.",
+  "seq": 19
+}

@@ -1,0 +1,52 @@
+{
+  "id": "pair:bot_audit:bot_close",
+  "threadId": "pair:bot_audit:bot_close",
+  "name": "audit ↔ Close",
+  "memberIds": [
+    "bot_audit",
+    "bot_close"
+  ],
+  "createdAt": 1789918179970,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_573dca4b-4e96-418a-b8a9-b7747121e7fc",
+      "handleId": "h_573dca4b-4e96-418a-b8a9-b7747121e7fc",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: interpret\nSample the close pack at workspace/close/2026-09/pack.json. Cite Kernel finding IDs only. Do not load get_audit_ground_truth. Do not fix the books. Never ask a human.",
+      "at": 1789918179970,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_573dca4b-4e96-418a-b8a9-b7747121e7fc",
+      "handleId": "h_573dca4b-4e96-418a-b8a9-b7747121e7fc",
+      "role": "bot",
+      "kind": "text",
+      "text": "Assurance sample complete for workspace/close/2026-09/pack.json (period 2026-09). Pack status BLOCKED / gate_passed false — audit did not fix books and did not concur lock.\n\nKernel run: runs/audit/2026-09-20260920T153114Z.json\nInterpretation: workspace/audit/2026-09/interpretation.json\naudit_run_id: 20260920T153114Z\nsource_records_mutated: false\n\nSampling (Python-owned; seed base 26):\n- SMP-payments-risk_based-26 (3/3)\n- SMP-journal_entries-risk_based-27 (4/4)\n- SMP-approvals-risk_based-28 (5/5)\n- SMP-invoices-risk_based-29 (8/22)\n- SMP-reconciliations-risk_based-30 (7/7)\n\nReportStats: controls_tested=8 passed=1 failed=6 exceptions=1 human_review=0 finding_count=11 reperformance_agreed=4 disagreed=3\ncontrol_results: AUD-RND-001=EXCEPTION AUD-SUP-001=FAIL AUD-THR-001=PASS AUD-PCE-001=FAIL AUD-SOD-001=FAIL AUD-DUP-INV-001=FAIL AUD-DUP-VEND-001=FAIL AUD-REPERF-001=FAIL\n\nKernel finding_ids only:\n- FND-20260920T153114Z-AUD-RND-001-001 (AUD-RND-001 EXCEPTION HIGH)\n- FND-20260920T153114Z-AUD-SUP-001-002 (AUD-SUP-001 FAIL HIGH)\n- FND-20260920T153114Z-AUD-PCE-001-003 (AUD-PCE-001 FAIL CRITICAL)\n- FND-20260920T153114Z-AUD-SOD-001-004 (AUD-SOD-001 FAIL MEDIUM)\n- FND-20260920T153114Z-AUD-SOD-001-005 (AUD-SOD-001 FAIL CRITICAL)\n- FND-20260920T153114Z-AUD-DUP-INV-001-006 (AUD-DUP-INV-001 FAIL HIGH)\n- FND-20260920T153114Z-AUD-DUP-INV-001-007 (AUD-DUP-INV-001 FAIL HIGH)\n- FND-20260920T153114Z-AUD-DUP-VEND-001-008 (AUD-DUP-VEND-001 FAIL MEDIUM)\n- FND-20260920T153114Z-AUD-REPERF-001-009 (AUD-REPERF-001 FAIL MEDIUM)\n- FND-20260920T153114Z-AUD-REPERF-001-010 (AUD-REPERF-001 FAIL MEDIUM)\n- FND-20260920T153114Z-AUD-REPERF-001-011 (AUD-REPERF-001 FAIL MEDIUM)\n\nDone for this Handle. Report profile not started from this peer reply.",
+      "at": 1789918351873,
+      "from": {
+        "botId": "bot_audit",
+        "name": "audit",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "h_9d8941b6-dccd-48a9-9182-8cf43de1c7a5",
+      "handleId": "h_9d8941b6-dccd-48a9-9182-8cf43de1c7a5",
+      "role": "bot",
+      "kind": "text",
+      "text": "close/coordinate 2026-09: ready_tasks empty after host. treatments accrue/prepaid/assets COMPLETE; bs_recon BLOCKED. pack workspace/close/2026-09/pack.json. gate_passed=false. Handled ctl-books/lock → REJECT_CLOSE. story+audit packs queued. Not CLOSED.",
+      "at": 1789918422905,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    }
+  ]
+}

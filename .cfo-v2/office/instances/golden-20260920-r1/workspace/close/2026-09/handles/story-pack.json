@@ -1,0 +1,19 @@
+{
+  "toSlug": "story",
+  "to": "bot_story",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "profile": "flux",
+  "kind": "a2a_handoff",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "prompt": "profile: flux\nNarrate Kernel facts from workspace/close/2026-09/pack.json. lock_status=BLOCKED. If lock_status is not CLOSED, label every number UNLOCKED. Do not start a forecast from unreconciled GL cash. Never ask a human.",
+  "status": "accepted",
+  "done": false,
+  "bus": "harness",
+  "humanQueue": false,
+  "queue_owner": "story",
+  "live_sent": false,
+  "lock_status": "BLOCKED"
+}

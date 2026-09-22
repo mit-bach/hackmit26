@@ -1,0 +1,152 @@
+{
+  "trace_id": "2026-09/20260920T001535Z/helios_hardware",
+  "vendor": "Helios Hardware",
+  "period": "2026-09",
+  "invoice_received": false,
+  "evidence": {
+    "historical_invoices": [],
+    "current_invoices": [],
+    "contract": null,
+    "usage": null,
+    "purchase_orders": [
+      {
+        "po_id": "PO-201",
+        "vendor": "Helios Hardware",
+        "authorized_amount": 6200.0,
+        "description": "Four 42U server racks for the Cambridge colo cage",
+        "status": "approved",
+        "created_date": "2026-09-18",
+        "currency": "USD",
+        "approval_limit": 15000.0,
+        "approver": "Priya Nair"
+      }
+    ],
+    "goods_receipts": [
+      {
+        "receipt_id": "GR-201",
+        "po_id": "PO-201",
+        "received": true,
+        "received_date": "2026-09-22",
+        "amount_received": 6200.0,
+        "quantity_ordered": 4,
+        "quantity_received": 4,
+        "vendor": "Helios Hardware"
+      }
+    ]
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "simple_average",
+      "label": "Simple average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "recent_average",
+      "label": "Recent average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "weighted_recent_average",
+      "label": "Weighted recent average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "linear_trend",
+      "label": "Trend projection",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "seasonal_prior_year",
+      "label": "Prior-year same month",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "contract_commitment",
+      "label": "Contract commitment",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "usage_run_rate",
+      "label": "Usage x contract rate",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "goods_receipt",
+      "label": "Goods receipt",
+      "amount": 6200.0,
+      "applicable": true
+    },
+    {
+      "method": "purchase_order",
+      "label": "Purchase order",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "conservative_minimum",
+      "label": "Conservative minimum",
+      "amount": null,
+      "applicable": false
+    }
+  ],
+  "agent_selection": {
+    "decision": "ACCRUE",
+    "method": "goods_receipt",
+    "amount": 6200.0,
+    "confidence": 1.0,
+    "reason": "Goods received and not invoiced total 6,200.00."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [],
+  "final_decision": "accrual_required",
+  "final_method": "goods_receipt",
+  "final_amount": 6200.0,
+  "confidence": 1.0,
+  "rationale": "Goods received and not invoiced total 6,200.00.",
+  "journal_entry": {
+    "entry_id": "JE-202609-004",
+    "debit_account": "IT Hardware Expense",
+    "credit_account": "Accrued Expenses",
+    "amount": 6200.0
+  },
+  "accrual_id": "ACC-202609-004",
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T001535Z/discovery/helios_hardware",
+  "expectation_confidence": 1.0,
+  "estimate_confidence": 1.0,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": "goods_receipt",
+  "policy_amount": 6200.0,
+  "policy_agreement": true,
+  "diagnostic_warnings": []
+}

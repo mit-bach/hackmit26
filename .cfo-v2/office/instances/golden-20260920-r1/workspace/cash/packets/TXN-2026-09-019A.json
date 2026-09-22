@@ -1,0 +1,34 @@
+{
+  "schema": "CashMatchPacket",
+  "transaction_id": "TXN-2026-09-019A",
+  "bank_deposit_id": "BANK-po_1MaximorFees",
+  "period": "2026-09",
+  "profile": "match",
+  "case_id": "2026-09",
+  "source_stripe_packet": "workspace/sources/stripe/po_1MaximorFees.json",
+  "stripe": {
+    "payout_id": "po_1MaximorFees",
+    "provider": "stripe",
+    "waterfall_status": "MATCH",
+    "invoice_candidates": 0,
+    "never_ap_invoice": true,
+    "actual_payout_minor": 1261000,
+    "bank_deposit_amount": 12610.0
+  },
+  "preparer_selection": {
+    "selected_candidate_id": "EXACT_MATCH:TXN-2026-09-019A:GL-CASH-STRIPE-FEES",
+    "match_type": "EXACT_MATCH",
+    "disposition": "MATCHED",
+    "difference_minor": 0,
+    "ledger_entry_ids": [
+      "GL-CASH-STRIPE-FEES"
+    ],
+    "bank_amount_minor": 1261000,
+    "reasons": [
+      "Stripe waterfall MATCH bank_matched for po_1MaximorFees; invoice_candidates=0; never AP invoice.",
+      "Copied Kernel candidate_id EXACT_MATCH:TXN-2026-09-019A:GL-CASH-STRIPE-FEES (bank TXN-2026-09-019A == ledger GL-CASH-STRIPE-FEES == actual_minor 1261000).",
+      "Stripe bank_deposit_id BANK-po_1MaximorFees maps to statement line TXN-2026-09-019A."
+    ]
+  },
+  "status": "MATCHED"
+}

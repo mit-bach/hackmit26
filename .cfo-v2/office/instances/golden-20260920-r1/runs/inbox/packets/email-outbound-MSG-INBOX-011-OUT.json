@@ -1,0 +1,8 @@
+{
+  "object": "simulated_message",
+  "thread_id": "THR-incomplete",
+  "message_id": "MSG-INBOX-011-OUT",
+  "to_name": "Acme Supplies",
+  "to_address": "billing@acmesupplies.example",
+  "human_queue": false
+}

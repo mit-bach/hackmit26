@@ -1,0 +1,45 @@
+{
+  "profile": "coordinate",
+  "period": "2026-09",
+  "decision": {
+    "period": "2026-09",
+    "next_tasks": [],
+    "blocked_tasks": [
+      "cash",
+      "bs_recon"
+    ],
+    "waiting_on_humans": [
+      "Cash: $12.40 unexplained difference",
+      "AR: $4,500 unmatched customer payment",
+      "Prepaids: missing insurance policy evidence"
+    ],
+    "narrative": "Close is blocked. Fail-closed Kernel statuses remain. Handle ctl-books. Do not mark CLOSED. Do not ask a human.",
+    "can_close": false
+  },
+  "ready_tasks": [],
+  "blocked_tasks": [
+    "cash",
+    "bs_recon"
+  ],
+  "task_statuses": {
+    "ingest": "COMPLETE",
+    "ap": "COMPLETE",
+    "ar": "COMPLETE",
+    "cash": "NEEDS_REVIEW",
+    "accruals": "COMPLETE",
+    "prepaid": "COMPLETE",
+    "depreciation": "COMPLETE",
+    "bs_recon": "BLOCKED",
+    "exceptions": "NOT_STARTED",
+    "final_review": "NOT_STARTED",
+    "mark_closed": "NOT_STARTED"
+  },
+  "gate_passed": false,
+  "period_status": "BLOCKED",
+  "next_action": "handle_ctl_books_lock",
+  "marked_closed": false,
+  "pack_path": "workspace/close/2026-09/pack.json",
+  "gates_path": "workspace/close/2026-09/gates.json",
+  "queue_owner": "ctl-books",
+  "human_queue": false
+}

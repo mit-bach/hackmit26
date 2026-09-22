@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-OPEN-006
+PO Number: PO-OPEN-006
+Issued: 2026-09-07
+Vendor: Datadog
+Vendor legal name: Datadog, Inc.
+Vendor tax ID: 27-2825225
+Authorized amount: 180,823.08
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Open operating payable
+
+This purchase order is not an invoice. The vendor must bill against PO-OPEN-006.
+Payment terms follow the vendor master unless this order states otherwise.

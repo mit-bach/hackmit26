@@ -1,0 +1,71 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "prepare",
+  "source_message_id": "MSG-ACME-INV-001",
+  "canonical_id": "ING-001",
+  "dispatch_status": "BUSINESS_DUPLICATE",
+  "note": "Email dispatch BUSINESS_DUPLICATE/EVIDENCE_LINKED; bill already in Kernel as INV-001. Owning open-bill path from INV-001.",
+  "kernel_evidence": {
+    "invoice": {
+      "invoice_id": "INV-001",
+      "vendor": "Acme Supplies",
+      "po_id": "PO-101",
+      "amount": 12450,
+      "invoice_date": "2026-09-08",
+      "due_date": "2026-09-22",
+      "vendor_invoice_number": "ACM-2026-4410",
+      "description": "Standing desks and monitors",
+      "payment_terms": "2/10 net 30",
+      "early_payment_discount_percent": 2,
+      "early_payment_discount_deadline": "2026-09-18"
+    },
+    "purchase_order": {
+      "po_id": "PO-101",
+      "vendor": "Acme Supplies",
+      "authorized_amount": 12450,
+      "status": "approved",
+      "po_exists": true,
+      "po_is_approved": true
+    },
+    "goods_receipt": {
+      "receipt_id": "GR-101",
+      "po_id": "PO-101",
+      "received": true,
+      "amount_received": 12450,
+      "quantity_ordered": 15,
+      "quantity_received": 15,
+      "receipt_status": "full",
+      "goods_fully_received": true
+    },
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "vendors_are_similar": true,
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": [],
+    "days_until_due": 2,
+    "invoice_dated_before_po": false
+  },
+  "evidence_used": [
+    "INV-001",
+    "PO-101",
+    "GR-101",
+    "MSG-ACME-INV-001"
+  ],
+  "PreparerRecommendation": {
+    "action": "APPROVE",
+    "invoice_id": "INV-001",
+    "exception_types": [],
+    "evidence_used": ["INV-001", "PO-101", "GR-101"],
+    "reason": "Clean three-way match: approved PO-101 authorized_amount 12450 equals invoice amount; vendor Acme Supplies exact match; GR-101 full receipt qty 15/15 amount 12450; Kernel duplicate_detected false and exception_types empty. Email MSG-ACME-INV-001 is BUSINESS_DUPLICATE of INV-001, not a second mint."
+  },
+  "proposed_disposition": "APPROVE",
+  "do_not_pay": true,
+  "next": {
+    "bot": "ctl-pay",
+    "profile": "review-match",
+    "packet": "runs/ap/packets/INV-001.json"
+  }
+}

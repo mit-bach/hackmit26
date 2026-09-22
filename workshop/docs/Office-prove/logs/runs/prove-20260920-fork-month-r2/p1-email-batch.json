@@ -1,0 +1,66 @@
+[
+  {
+    "step": "P1-S03",
+    "message_id": "MSG-INBOX-003",
+    "handleId": "h_03703efe-f629-4ced-8c21-75cafad96ff0",
+    "status": "completed",
+    "result": "**MSG-INBOX-003** classified, dispatched, and handed to AP.\n\n| Field | Value |\n| --- | --- |\n| Classification | `VENDOR_INVOICE` |\n| Vendor | Office Depot |\n| Invoice # | OD-INBOX-3003 |\n| PO | PO-104 |\n| Amount | USD **5,000.00** (`500,000` cents) |\n| Dates | invoice 2026-09-18 \u00b7 due 2026-10-18 |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `CREATE_AP_INVOICE` / **CREATED** |\n| Kernel id | **`ING-002`** |\n| Match (ingest note) | BLOCKED \u00b7 `material_amount_mismatch` |\n| `forwarded_to_ap` | true |\n| Mutation | true |\n\n### AP handoff\n- **ask_bot \u2192 ap** (prepare): accepted, completed  \n- Packet: `runs/ap/packets/ING-002.json`  \n- AP: amount mismatch invoice 5000 vs PO/GR 2100 \u2192 preparer **HOLD** (AP-owned; Email did not HOLD/match)\n\nNo invented totals; no `ask_user`.",
+    "ap_handles": [
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply_handles": [],
+    "t": "2026-09-20T16:01:29Z"
+  },
+  {
+    "step": "P1-S04",
+    "message_id": "MSG-INBOX-004",
+    "handleId": "h_d7ce41f6-c9d5-46cf-95a5-24b75b4f17e8",
+    "status": "completed",
+    "result": "**MSG-INBOX-004** classified, dispatched, and handed to AP.\n\n| Field | Value |\n| --- | --- |\n| Classification | `VENDOR_INVOICE` |\n| Vendor | Datadog |\n| Invoice # | DD-INBOX-4004 |\n| PO | null |\n| Amount | USD **1,800.00** (`180,000` cents) |\n| Dates | invoice 2026-09-18 \u00b7 due 2026-10-18 |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `CREATE_AP_INVOICE` / **CREATED** |\n| Kernel id | **`ING-003`** |\n| Match (ingest note) | NON_PO \u00b7 `missing_po` |\n| `forwarded_to_ap` | true |\n| Mutation | true |\n\n### AP handoff\n- **ask_bot \u2192 ap** (prepare): completed  \n- Packet: `runs/ap/packets/ING-003.json`  \n- AP: missing PO \u2192 preparer **HOLD** (AP-owned; Email did not HOLD/match)\n\nNo invented totals; no `ask_user`.",
+    "ap_handles": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply_handles": [],
+    "t": "2026-09-20T16:02:29Z"
+  },
+  {
+    "step": "P1-S06",
+    "message_id": "MSG-INBOX-007",
+    "handleId": "h_02052088-f13c-4328-b90c-eb88d5d08604",
+    "status": "completed",
+    "result": "**MSG-INBOX-007** classified and dispatched.\n\n| Field | Value |\n| --- | --- |\n| Classification | **`VENDOR_STATEMENT`** |\n| Selected action | `IGNORE` |\n| Rationale | Account statement rather than an invoice |\n| Counterparty | Acme Supplies |\n| Evidence | message:MSG-INBOX-007 |\n| Invoice id | null |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `IGNORE` / **`IGNORED`** |\n| Target | none |\n| `invoice_id` / canonical | null |\n| Mutation | false |\n\nNo AP Handle, no invoice created.",
+    "ap_handles": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply_handles": [],
+    "t": "2026-09-20T16:03:17Z"
+  },
+  {
+    "step": "P1-S07",
+    "message_id": "MSG-INBOX-010",
+    "handleId": "h_9b52d701-2acb-4e73-a59a-98e1b336af9d",
+    "status": "completed",
+    "result": "**MSG-INBOX-010** classified and dispatched.\n\n| Field | Value |\n| --- | --- |\n| Classification | **`NON_FINANCE`** |\n| Selected action | `IGNORE` |\n| Rationale | Looks like a marketing email, not a vendor invoice |\n| Counterparty | People Ops |\n| Evidence | message:MSG-INBOX-010 |\n| Invoice id | null |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `IGNORE` / **`IGNORED`** |\n| Target | none |\n| `invoice_id` / canonical | null |\n| Mutation | false |\n\nNo AP Handle, no invoice created.",
+    "ap_handles": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply_handles": [],
+    "t": "2026-09-20T16:03:41Z"
+  },
+  {
+    "step": "P1-S09",
+    "message_id": "MSG-INBOX-011",
+    "handleId": "h_759ec75c-6dcb-41e4-b06b-8f320df1c15f",
+    "status": "completed",
+    "result": "**MSG-INBOX-011** classified and dispatched.\n\n| Field | Value |\n| --- | --- |\n| Classification | **`UNSUPPORTED_OR_UNRESOLVED`** |\n| Selected action | `REQUEST_MISSING_INFORMATION` |\n| Counterparty | Acme Supplies |\n| Present | currency USD \u00b7 invoice_date 2026-09-18 |\n| **Missing** | `invoice_number`, `amount` |\n| Reason | `MISSING_FIELDS` |\n| Rationale | Invoice language present; required fields missing |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Status | **`NEEDS_INFORMATION`** |\n| Target | `inbox.clarification` |\n| `invoice_id` / canonical | **null** (no complete bill posted) |\n| Mutation | false |\n| Questions | What is the vendor invoice number? \u00b7 What is the amount due, including currency? |\n| Outbound | `MSG-INBOX-011-OUT` on `THR-incomplete` |\n| Packet | `runs/inbox/packets/email-outbound-MSG-INBOX-011-OUT.json` |\n| World handle path | `runs/inbox/handles/email-outbound-MSG-",
+    "ap_handles": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply_handles": [],
+    "t": "2026-09-20T16:09:42Z"
+  }
+]

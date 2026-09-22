@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-046
+PO Number: PO-OPEN-046
+Vendor: Linear App
+Goods received in full on 2026-09-20
+Packing list attached: PL-GR-OPEN-046
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 186,310.28 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

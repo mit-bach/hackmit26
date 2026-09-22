@@ -1,0 +1,93 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "prepare",
+  "source": {
+    "from_bot": "email",
+    "message_id": "MSG-ACME-INV-001",
+    "packet_path": "artifacts/email/handoffs/MSG-ACME-INV-001.json",
+    "dispatch_status": "BUSINESS_DUPLICATE",
+    "note": "Ingest already_present_in_ap; evidence linked. Email does not match."
+  },
+  "kernel_evidence": {
+    "invoice_id": "INV-001",
+    "po_id": "PO-101",
+    "receipt_id": "GR-101",
+    "vendor": "Acme Supplies",
+    "vendor_invoice_number": "ACM-2026-4410",
+    "amount": 12450,
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "amount_matches": true,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": true,
+    "vendors_are_similar": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": [],
+    "days_until_due": 2,
+    "invoice_dated_before_po": false
+  },
+  "tools_confirmed": {
+    "tools.get_invoice": {
+      "found": true,
+      "invoice_id": "INV-001",
+      "traceId": "k_4bacff5533aa"
+    },
+    "tools.get_purchase_order": {
+      "found": true,
+      "po_id": "PO-101",
+      "po_is_approved": true,
+      "traceId": "k_cccacc998fb1"
+    },
+    "tools.get_goods_receipt": {
+      "found": true,
+      "receipt_id": "GR-101",
+      "receipt_status": "full",
+      "goods_fully_received": true,
+      "traceId": "k_759969331065"
+    },
+    "tools.find_duplicate_invoices": {
+      "duplicate_detected": false,
+      "duplicates": [],
+      "traceId": "k_4563c1f0a47c"
+    },
+    "tools.get_case_evidence": {
+      "found": true,
+      "traceId": "k_8d6ac52dee05"
+    }
+  },
+  "PreparerRecommendation": {
+    "invoice_id": "INV-001",
+    "recommendation": "APPROVE",
+    "confidence": 0.9,
+    "reasons": [
+      "Kernel three-way facts are clean: approved PO-101, exact amount 12450, exact vendor Acme Supplies, full GR-101, no duplicate.",
+      "Email BUSINESS_DUPLICATE is ingest already_present_in_ap, not Kernel duplicate_detected."
+    ],
+    "evidence_used": [
+      "INV-001",
+      "PO-101",
+      "GR-101",
+      "message:MSG-ACME-INV-001",
+      "attachment:ACM-2026-4410.pdf"
+    ],
+    "exception_types": []
+  },
+  "proposed": "APPROVE",
+  "next_state": "ctl_pay_concurred_hand_pay",
+  "must_hold": null,
+  "ctl_pay": {
+    "handle_id": "h_60d9dc1a-dbd0-4f18-bf03-dd209c1c06a3",
+    "decision_path": "runs/ctl-pay/review-match/INV-001.json",
+    "decision": "CONCUR APPROVE",
+    "must_hold": null
+  },
+  "handoff": {
+    "to": "pay",
+    "note": "Payable after ctl-pay concurrence; peer Handle is not approval of cash movement",
+    "path": "runs/ap/packets/INV-001.json"
+  }
+}

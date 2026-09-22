@@ -1,0 +1,31 @@
+{
+  "id": "h_0d34307f-09cc-4548-b3da-c0eb8f725d06",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_story",
+  "toSlug": "story",
+  "profile": "flux",
+  "prompt": "profile: flux\nNarrate Kernel facts from workspace/close/2026-09/pack.json. lock_status=BLOCKED. If lock_status is not CLOSED, label every number UNLOCKED. Do not start a forecast from unreconciled GL cash. Never ask a human.",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_story"
+  },
+  "createdAt": "2026-09-20T15:28:48Z",
+  "updatedAt": "2026-09-20T15:28:48Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "story",
+    "profile": "flux"
+  },
+  "lock_status": "BLOCKED",
+  "live_sent": false
+}

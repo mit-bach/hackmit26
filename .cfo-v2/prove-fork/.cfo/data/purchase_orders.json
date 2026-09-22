@@ -1,0 +1,222 @@
+[
+  {
+    "po_id": "PO-101",
+    "vendor": "Acme Supplies",
+    "authorized_amount": 12450,
+    "description": "Office equipment for the Cambridge workspace",
+    "status": "approved",
+    "created_date": "2026-09-02",
+    "currency": "USD",
+    "approval_limit": 25000,
+    "approver": "Jordan Hale"
+  },
+  {
+    "po_id": "PO-102",
+    "vendor": "Amazon Web Services",
+    "authorized_amount": 8320,
+    "description": "September 2026 AWS usage commitment",
+    "status": "approved",
+    "created_date": "2026-09-01",
+    "currency": "USD",
+    "approval_limit": 20000,
+    "approver": "Priya Nair"
+  },
+  {
+    "po_id": "PO-103",
+    "vendor": "Datadog",
+    "authorized_amount": 15000,
+    "description": "Pro monitoring platform annual subscription, 50 hosts",
+    "status": "approved",
+    "created_date": "2026-09-01",
+    "currency": "USD",
+    "approval_limit": 25000,
+    "approver": "Marcus Chen"
+  },
+  {
+    "po_id": "PO-104",
+    "vendor": "Office Depot",
+    "authorized_amount": 3280,
+    "description": "Eight ergonomic task chairs",
+    "status": "approved",
+    "created_date": "2026-09-04",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Elena Vasquez"
+  },
+  {
+    "po_id": "PO-105",
+    "vendor": "Slack Technologies",
+    "authorized_amount": 4375,
+    "description": "Business+ plan, 50 users, annual",
+    "status": "approved",
+    "created_date": "2026-09-01",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Sam Okonkwo"
+  },
+  {
+    "po_id": "PO-106",
+    "vendor": "Google Cloud",
+    "authorized_amount": 9180,
+    "description": "September 2026 GCP usage — BigQuery, GKE, and Cloud Storage",
+    "status": "approved",
+    "created_date": "2026-09-01",
+    "currency": "USD",
+    "approval_limit": 20000,
+    "approver": "Priya Nair"
+  },
+  {
+    "po_id": "PO-107",
+    "vendor": "Figma",
+    "authorized_amount": 2448,
+    "description": "Organization plan, 16 editor seats, annual",
+    "status": "approved",
+    "created_date": "2026-09-03",
+    "currency": "USD",
+    "approval_limit": 5000,
+    "approver": "Elena Vasquez"
+  },
+  {
+    "po_id": "PO-108",
+    "vendor": "Zoom Video Communications",
+    "authorized_amount": 1599,
+    "description": "Webinar add-on, 500-attendee capacity, annual",
+    "status": "approved",
+    "created_date": "2026-09-02",
+    "currency": "USD",
+    "approval_limit": 5000,
+    "approver": "Sam Okonkwo"
+  },
+  {
+    "po_id": "PO-109",
+    "vendor": "GitHub",
+    "authorized_amount": 21000,
+    "description": "GitHub Enterprise Cloud — 100 seats, annual",
+    "status": "approved",
+    "created_date": "2026-09-01",
+    "currency": "USD",
+    "approval_limit": 50000,
+    "approver": "Jordan Hale"
+  },
+  {
+    "po_id": "PO-110",
+    "vendor": "Notion Labs",
+    "authorized_amount": 1920,
+    "description": "Notion Plus, 20 members, annual workspace subscription",
+    "status": "approved",
+    "created_date": "2026-09-03",
+    "currency": "USD",
+    "approval_limit": 5000,
+    "approver": "Marcus Chen"
+  },
+  {
+    "po_id": "PO-111",
+    "vendor": "Stripe",
+    "authorized_amount": 10000,
+    "description": "Billing infrastructure professional services engagement",
+    "status": "approved",
+    "created_date": "2026-09-05",
+    "currency": "USD",
+    "approval_limit": 15000,
+    "approver": "Priya Nair"
+  },
+  {
+    "po_id": "PO-112",
+    "vendor": "Snowflake",
+    "authorized_amount": 10000,
+    "description": "On-demand compute credits for Q3 analytics workloads",
+    "status": "approved",
+    "created_date": "2026-09-06",
+    "currency": "USD",
+    "approval_limit": 15000,
+    "approver": "Marcus Chen"
+  },
+  {
+    "po_id": "PO-113",
+    "vendor": "Microsoft",
+    "authorized_amount": 4000,
+    "description": "Microsoft 365 E3 licenses, 20 users, pretax",
+    "status": "approved",
+    "created_date": "2026-09-02",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Elena Vasquez"
+  },
+  {
+    "po_id": "PO-114",
+    "vendor": "Datadog",
+    "authorized_amount": 7200,
+    "description": "Additional APM and log-ingestion hosts — 20 extra hosts, annual",
+    "status": "approved",
+    "created_date": "2026-09-08",
+    "currency": "USD",
+    "approval_limit": 15000,
+    "approver": "Marcus Chen"
+  },
+  {
+    "po_id": "PO-115",
+    "vendor": "Office Depot",
+    "authorized_amount": 6400,
+    "description": "Eight electric standing desks for the new engineering bay",
+    "status": "approved",
+    "created_date": "2026-09-09",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Sam Okonkwo"
+  },
+  {
+    "po_id": "PO-117",
+    "vendor": "Acme Supplies",
+    "authorized_amount": 5500,
+    "description": "Printer toner, paper, and break-room supplies for HQ",
+    "status": "approved",
+    "created_date": "2026-09-07",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Jordan Hale"
+  },
+  {
+    "po_id": "PO-119",
+    "vendor": "Office Depot",
+    "authorized_amount": 18000,
+    "description": "Ten 27-inch 4K monitors for the design studio",
+    "status": "approved",
+    "created_date": "2026-09-10",
+    "currency": "USD",
+    "approval_limit": 25000,
+    "approver": "Elena Vasquez"
+  },
+  {
+    "po_id": "PO-120",
+    "vendor": "Salesforce",
+    "authorized_amount": 36000,
+    "description": "Sales Cloud Enterprise, 40 seats, annual",
+    "status": "pending_approval",
+    "created_date": "2026-09-11",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Sam Okonkwo"
+  },
+  {
+    "po_id": "PO-201",
+    "vendor": "Helios Hardware",
+    "authorized_amount": 6200,
+    "description": "Four 42U server racks for the Cambridge colo cage",
+    "status": "approved",
+    "created_date": "2026-09-18",
+    "currency": "USD",
+    "approval_limit": 15000,
+    "approver": "Priya Nair"
+  },
+  {
+    "po_id": "PO-202",
+    "vendor": "NewForge Consulting",
+    "authorized_amount": 4000,
+    "description": "Exploratory advisory — scope not confirmed, no work accepted",
+    "status": "draft",
+    "created_date": "2026-09-28",
+    "currency": "USD",
+    "approval_limit": 10000,
+    "approver": "Jordan Hale"
+  }
+]

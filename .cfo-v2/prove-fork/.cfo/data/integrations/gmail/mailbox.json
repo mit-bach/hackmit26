@@ -1,0 +1,79 @@
+{
+  "watch": {"historyId": "1000", "expiration": "1760000000000"},
+  "history": [
+    {
+      "id": "2000",
+      "messagesAdded": [{"message": {"id": "MSG-GMAIL-001", "threadId": "T-GMAIL-001"}}]
+    },
+    {
+      "id": "3000",
+      "messagesAdded": [{"message": {"id": "MSG-GMAIL-QUOTE", "threadId": "T-GMAIL-QUOTE"}}]
+    },
+    {
+      "id": "4000",
+      "messagesAdded": [{"message": {"id": "MSG-GMAIL-MKT", "threadId": "T-GMAIL-MKT"}}]
+    },
+    {
+      "id": "5000",
+      "messagesAdded": [{"message": {"id": "MSG-GMAIL-SEEN", "threadId": "T-GMAIL-001"}}]
+    }
+  ],
+  "messages": [
+    {
+      "id": "MSG-GMAIL-001",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "no-reply@amazon.com",
+      "subject": "Your AWS invoice INV-9001 is ready",
+      "sent_at": "2026-09-12T09:14:00Z",
+      "body": "Amazon Web Services has issued invoice INV-9001 for September usage. The PDF is attached.",
+      "thread_uri": "gmail://MSG-GMAIL-001",
+      "attachments": [
+        {
+          "attachment_id": "ATT-GMAIL-001",
+          "filename": "aws-september.pdf",
+          "content_type": "application/pdf",
+          "path": "files/aws_inv_9001.txt"
+        }
+      ]
+    },
+    {
+      "id": "MSG-GMAIL-QUOTE",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "sales@acmesupplies.example",
+      "subject": "Quote Q-8891 for additional standing desks",
+      "sent_at": "2026-09-09T11:40:00Z",
+      "body": "Please find our quotation. This is not a request for payment until you issue a PO.",
+      "attachments": [
+        {
+          "attachment_id": "ATT-GMAIL-QUOTE",
+          "filename": "Q-8891-quote.pdf",
+          "path": "files/acme_quote.txt"
+        }
+      ]
+    },
+    {
+      "id": "MSG-GMAIL-MKT",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "news@slack.com",
+      "subject": "New Slack AI features — limited time for Business+ customers",
+      "sent_at": "2026-09-08T16:02:00Z",
+      "body": "Upgrade your workspace with Slack AI. Unsubscribe from marketing emails at any time. This newsletter is not an invoice.",
+      "attachments": []
+    },
+    {
+      "id": "MSG-GMAIL-SEEN",
+      "mailbox": "ap@hackmit-cfo.example",
+      "from": "no-reply@amazon.com",
+      "subject": "Fwd: Your AWS invoice INV-9001 is ready",
+      "sent_at": "2026-09-12T10:00:00Z",
+      "body": "Forward of the same AWS invoice INV-9001.",
+      "attachments": [
+        {
+          "attachment_id": "ATT-GMAIL-SEEN",
+          "filename": "aws-september.pdf",
+          "path": "files/aws_inv_9001.txt"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "h_fa5459fa-0ada-4ad1-b28f-bcdc15013eea",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "profile": "chase",
+  "prompt": "profile: chase\nReview ar for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_collect"
+  },
+  "createdAt": "2026-09-20T15:28:48Z",
+  "updatedAt": "2026-09-20T15:28:48Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "collect",
+    "profile": "chase"
+  },
+  "live_sent": false,
+  "task_id": "ar"
+}

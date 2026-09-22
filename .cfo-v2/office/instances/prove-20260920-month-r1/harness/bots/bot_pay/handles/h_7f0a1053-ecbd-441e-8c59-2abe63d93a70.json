@@ -1,0 +1,22 @@
+{
+  "id": "h_7f0a1053-ecbd-441e-8c59-2abe63d93a70",
+  "from": "bot_ap",
+  "to": "bot_pay",
+  "toSlug": "pay",
+  "prompt": "Open bill INV-001 is Kernel-allowed and ctl-pay review-match CONCUR APPROVE.\n\nPacket: runs/ap/packets/INV-001.json\nctl-pay decision: runs/ctl-pay/review-match/INV-001.json\nVendor Acme Supplies, ACM-2026-4410, PO-101, USD 12450.\n\nEligible for weekly payment-run draft pool. AP does not pay. This peer Handle is not cash approval.",
+  "paths": [
+    "runs/ap/packets/INV-001.json",
+    "runs/ctl-pay/review-match/INV-001.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ap",
+    "toId": "bot_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:42:05.352Z",
+  "updatedAt": "2026-09-20T14:42:54.999Z",
+  "result": "Acknowledged. INV-001 (Acme Supplies, ACM-2026-4410, PO-101, USD 12450) accepted into the approved payment pool.\n\nPool record: runs/pay/approved-pool/INV-001.json\nSource packet: runs/ap/packets/INV-001.json\nctl-pay review-match: runs/ctl-pay/review-match/INV-001.json (CONCUR APPROVE)\n\nThis peer Handle is not cash approval and not pay-run release. No money moved. Weekly draft under Profile schedule will Kernel-net candidates and Handle to ctl-pay / review-pay before any expected outflows.",
+  "seq": 27
+}

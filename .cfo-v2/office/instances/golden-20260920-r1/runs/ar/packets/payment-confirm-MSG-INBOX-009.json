@@ -1,0 +1,11 @@
+{
+  "object": "payment_confirmation_notice",
+  "message_id": "MSG-INBOX-009",
+  "source_packet": "runs/inbox/packets/payment-MSG-INBOX-009.json",
+  "counterparty": "Acme Supplies",
+  "body_summary": "Payment received for ACM-2026-4410",
+  "status": "NO_AR_PAYMENT",
+  "reason": "Vendor/AP payment confirmation, not customer remittance. No Kernel payment_id. Apply does not invent amounts or stick AP bill refs to AR.",
+  "related_context": "ACM-2026-4410 / INV-001 AP path; not AR unapplied cash",
+  "human_queue": false
+}

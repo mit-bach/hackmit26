@@ -1,0 +1,19 @@
+{
+  "id": "h_04672449-cd47-49ed-ac1a-8737b20d1fe3",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-008 only. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. If it is a quote or not a bill, do not Handle ap and do not create an invoice. Do not classify other messages. Do not ask_user. Stop after this message.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:41:46.776Z",
+  "updatedAt": "2026-09-20T14:41:54.224Z",
+  "result": "### MSG-INBOX-008 only\n\n**Classify:** `CONTRACT_OR_QUOTE` · action `IGNORE` · confidence 0.9  \n**Rationale:** Document is a quote/estimate (`Q-INBOX-8891.pdf`), not an invoice.  \n**Counterparty:** Acme Supplies · currency USD · quote date 2026-10-01 · no invoice number / PO / amount_cents  \n\n**Dispatch:** `IGNORE` · status `IGNORED` · `invoice_id: null` · `mutation: false` · no workflow  \n\nNo AP Handle. No invoice created. No other messages. No `ask_user`.",
+  "resultPaths": [],
+  "seq": 20
+}

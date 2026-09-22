@@ -1,0 +1,30 @@
+{
+  "id": "h_acb346f8-ae04-466f-a542-031cb3224778",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_audit",
+  "toSlug": "audit",
+  "profile": "interpret",
+  "prompt": "profile: interpret\nSample the close pack at workspace/close/2026-09/pack.json. Cite Kernel finding IDs only. Do not load get_audit_ground_truth. Do not fix the books. Never ask a human.",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_audit"
+  },
+  "createdAt": "2026-09-20T15:28:49Z",
+  "updatedAt": "2026-09-20T15:28:49Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "audit",
+    "profile": "interpret"
+  },
+  "live_sent": false
+}

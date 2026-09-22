@@ -1,0 +1,188 @@
+{
+  "trace_id": "2026-09/20260920T141648Z/helios_hardware",
+  "vendor": "Helios Hardware",
+  "period": "2026-09",
+  "invoice_received": false,
+  "evidence": {
+    "historical_invoices": [],
+    "current_invoices": [],
+    "contract": null,
+    "usage": null,
+    "purchase_orders": [
+      {
+        "po_id": "PO-201",
+        "vendor": "Helios Hardware",
+        "authorized_amount": 6200.0,
+        "description": "Four 42U server racks for the Cambridge colo cage",
+        "status": "approved",
+        "created_date": "2026-09-18",
+        "currency": "USD",
+        "approval_limit": 15000.0,
+        "approver": "Priya Nair"
+      }
+    ],
+    "goods_receipts": [
+      {
+        "receipt_id": "GR-201",
+        "po_id": "PO-201",
+        "received": true,
+        "received_date": "2026-09-22",
+        "amount_received": 6200.0,
+        "quantity_ordered": 4,
+        "quantity_received": 4,
+        "vendor": "Helios Hardware"
+      }
+    ]
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "simple_average",
+      "label": "Simple average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "recent_average",
+      "label": "Recent average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "weighted_recent_average",
+      "label": "Weighted recent average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "linear_trend",
+      "label": "Trend projection",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "seasonal_prior_year",
+      "label": "Prior-year same month",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "contract_commitment",
+      "label": "Contract commitment",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "usage_run_rate",
+      "label": "Usage x contract rate",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "goods_receipt",
+      "label": "Goods receipt",
+      "amount": 6200.0,
+      "applicable": true
+    },
+    {
+      "method": "purchase_order",
+      "label": "Purchase order",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "conservative_minimum",
+      "label": "Conservative minimum",
+      "amount": null,
+      "applicable": false
+    }
+  ],
+  "agent_selection": {
+    "decision": "ACCRUE",
+    "method": "goods_receipt",
+    "amount": 6200.0,
+    "confidence": 1.0,
+    "reason": "Goods received and not invoiced total 6,200.00."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [],
+  "final_decision": "accrual_required",
+  "final_method": "goods_receipt",
+  "final_amount": 6200.0,
+  "confidence": 1.0,
+  "rationale": "Goods received and not invoiced total 6,200.00.",
+  "journal_entry": {
+    "entry_id": "JE-202609-004",
+    "debit_account": "IT Hardware Expense",
+    "credit_account": "Accrued Expenses",
+    "amount": 6200.0
+  },
+  "accrual_id": "ACC-202609-004",
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T141648Z/discovery/helios_hardware",
+  "expectation_confidence": 1.0,
+  "estimate_confidence": 1.0,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "8f02a4c234d7d6873663c2bd502206a8d2db6936681fe6c712822543b1ad5e51",
+        "injected": true
+      },
+      {
+        "name": "prior-period-precedent",
+        "path": "skills/prior-period-precedent/SKILL.md",
+        "content_hash": "1d5aeffa0b27f2c94895e7e1712c050df0b43bf9f667fbd88a779a03a10890fe",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": "goods_receipt",
+  "policy_amount": 6200.0,
+  "policy_agreement": true,
+  "diagnostic_warnings": [],
+  "memory_lookup": {
+    "queried": true,
+    "memory_enabled": true,
+    "query": {
+      "workflow": "month_end_close",
+      "entity_type": "vendor",
+      "entity_id": "helios hardware",
+      "situation_type": "accrual_methodology",
+      "tags": [
+        "month_end_close",
+        "accrual",
+        "helios hardware"
+      ],
+      "accounting_category": "accrual",
+      "prior_to_period": "2026-09",
+      "exclude_period": "2026-09",
+      "limit": 5
+    },
+    "retrieved": [],
+    "precedents": [],
+    "precedent_used": false,
+    "precedent_relevance": null,
+    "current_evidence_checked": true,
+    "evidence_supports_precedent": null,
+    "deviation": null,
+    "decision": "goods_receipt",
+    "investigation_steps": 12,
+    "skipped_hypotheses": []
+  },
+  "written_memory_id": "DEC-2026-09-028"
+}

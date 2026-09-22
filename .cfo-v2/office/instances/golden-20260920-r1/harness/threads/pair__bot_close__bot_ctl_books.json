@@ -1,0 +1,65 @@
+{
+  "id": "pair:bot_close:bot_ctl_books",
+  "threadId": "pair:bot_close:bot_ctl_books",
+  "name": "Close ↔ ctl-books",
+  "memberIds": [
+    "bot_close",
+    "bot_ctl_books"
+  ],
+  "createdAt": 1789918155462,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_e75065cf-3cc6-47ee-8deb-0246d22cd282",
+      "handleId": "h_e75065cf-3cc6-47ee-8deb-0246d22cd282",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: lock\nRead evaluate_close_gates for 2026-09 at workspace/close/2026-09/gates.json and coordinate-decision.json.\nPack is workspace/close/2026-09/pack.json. gate_passed=false. period_status=BLOCKED.\nblocked: cash $12.40 unexplained (TXN-2026-09-015), AR unmatched $4500, prepaids missing insurance evidence, bs_recon BLOCKED.\nDo not mark CLOSED. Kernel close.month_end is the only lock door. Never ask a human.",
+      "at": 1789918155462,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_e75065cf-3cc6-47ee-8deb-0246d22cd282",
+      "handleId": "h_e75065cf-3cc6-47ee-8deb-0246d22cd282",
+      "role": "bot",
+      "kind": "text",
+      "text": "FinalCloseVerdict REJECT_CLOSE for 2026-09. gate_passed=false; period_status=BLOCKED; do not mark CLOSED.\n\nevaluate_close_gates (workspace/close/2026-09/gates.json): passed=false. Blockers: cash/bs_recon/exceptions incomplete; all required BS recs MISSING not SIGNED_OFF; REV-2026-09-CASH-TXN-2026-09-015 ($12.40 unexplained — not timing, not force-match); REV-2026-09-AR-PAY-CLOSE-4500 ($4500 unmatched); REV-2026-09-PREPAID-PRE-INS-MISSING (Northshore policy evidence); evidence_complete=false.\n\ncoordinate-decision.json: can_close=false; blocked_tasks cash, bs_recon.\n\nVerdict path: workspace/close/2026-09/ctl-books-lock-verdict.json. Kernel close.month_end is the only lock door; ctl-books will not flip lock while gates fail. No human asked.",
+      "at": 1789918172855,
+      "from": {
+        "botId": "bot_ctl_books",
+        "name": "ctl-books",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "h_375cb129-3b10-4e27-be03-37dbf18d402e",
+      "handleId": "h_375cb129-3b10-4e27-be03-37dbf18d402e",
+      "role": "bot",
+      "kind": "text",
+      "text": "close/coordinate 2026-09: ready_tasks empty after host. treatments accrue/prepaid/assets COMPLETE; bs_recon BLOCKED. pack workspace/close/2026-09/pack.json. gate_passed=false. Handled ctl-books/lock → REJECT_CLOSE. story+audit packs queued. Not CLOSED.",
+      "at": 1789918241508,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_c0ffee02-a11e-4b0b-9d1c-0ff1ce000002",
+      "handleId": "h_c0ffee02-a11e-4b0b-9d1c-0ff1ce000002",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-method\nclose/Harbor Electric 2026-09 method check only. Not a lock.\n\nAugust MEM-HE-2026-08: seasonal_prior_year $7,800.\nCurrent evidence: same vendor, missing bill, September 2025 $4,650. Proposed DEC-2026-09-026 seasonal_prior_year $4,650. Do not paste $7,800.\n\nLock REJECT_CLOSE still stands. $12.40 unexplained. Not CLOSED.",
+      "at": 1789918616080,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    }
+  ]
+}

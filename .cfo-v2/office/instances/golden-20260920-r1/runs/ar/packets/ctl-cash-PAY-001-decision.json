@@ -1,0 +1,27 @@
+{
+  "object": "cash_application_concurrence",
+  "verifier": "ctl-cash",
+  "profile": "review-apply",
+  "payment_id": "PAY-001",
+  "decision": "REFUSE",
+  "kernel_status": "HUMAN_REVIEW",
+  "concur_apply": false,
+  "convert_to_auto_apply": false,
+  "leave_unapplied": true,
+  "as_of": "2026-09-20",
+  "packet": "runs/ar/packets/apply-PAY-001.json",
+  "source_packets": [
+    "runs/inbox/packets/remittance-MSG-INBOX-019.json"
+  ],
+  "defects": [
+    "Kernel status HUMAN_REVIEW — Verifier cannot convert to AUTO_APPLY",
+    "Competing full-amount explanations: C1 INV-AR-007 explicit_invoice 12000 vs C2 INV-AR-001 exact_amount 12000",
+    "Email MSG-INBOX-019 cites INV-AR-001 at 8500.00 which does not equal payment 12000.00",
+    "Payment wire remittance names INV-AR-007; email names INV-AR-001 — identity of target invoice conflicted"
+  ],
+  "candidates_reviewed": ["C1", "C2"],
+  "kernel_facts_trace": "k_db1163c82792",
+  "reason": "Refuse material cash application for PAY-001. Packet is complete enough to decide, but Kernel already fail-closed as HUMAN_REVIEW with two equally exact full-amount candidates and a third conflicting email amount. Concurrence would rubber-stamp an ambiguous stick. Cash stays unapplied on apply's object. No AUTO_APPLY. No human asked.",
+  "next_owner": "apply",
+  "applications_authorized": []
+}

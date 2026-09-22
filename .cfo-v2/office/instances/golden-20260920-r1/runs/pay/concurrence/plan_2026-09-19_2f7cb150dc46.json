@@ -1,0 +1,36 @@
+{
+  "contract": "PaymentAuditResult",
+  "profile": "review-pay",
+  "source_bot": "ctl-pay",
+  "plan_id": "plan_2026-09-19_2f7cb150dc46",
+  "draft_path": "workspace/pay/plans/plan_2026-09-19_2f7cb150dc46.json",
+  "decision": "CONCUR",
+  "as_of_date": "2026-09-19",
+  "pay_this_week": [],
+  "defer": [],
+  "proposed_ids": [],
+  "total_payout": 0.0,
+  "reserve_ok": true,
+  "cash_check": {
+    "trace_id": "k_10d3b51b7c21",
+    "as_of_date": "2026-09-19",
+    "bank_balance": 14857217.18,
+    "minimum_cash_reserve": 100000,
+    "spendable_cash": 6374925.74,
+    "cash_after_payments_from_packet": 6474925.74,
+    "matches_packet": true
+  },
+  "treasury_policies_cited": ["P-012", "P-013", "P-014", "P-015", "P-016"],
+  "treasury_trace_id": "k_c065f6b62a1c",
+  "hold_invoices_in_pay_this_week": false,
+  "executed": false,
+  "self_approved": false,
+  "fail_closed": true,
+  "fail_closed_reason": "empty_pool",
+  "did_rebuild_plan": false,
+  "reason": "Packet complete. Kernel net already applied: empty approved pool / candidates, pay_this_week=[], total_payout=0, reserve_ok=true. Independent get_cash_position confirms spendable_cash=6374925.74 and minimum reserve 100000 intact with zero payout. No HOLD invoices scheduled. Fail-closed empty run is releaseable; no ACH/wire. ctl-pay CONCUR. Does not execute.",
+  "next": {
+    "to": "pay",
+    "note": "Concurrence path runs/pay/concurrence/plan_2026-09-19_2f7cb150dc46.json. Pay may close the empty run without money movement."
+  }
+}

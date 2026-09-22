@@ -1,0 +1,19 @@
+{
+  "id": "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Vendor bill from finance inbox MSG-INBOX-004. Kernel invoice id ING-003 (canonical ING-003). Datadog DD-INBOX-4004; no PO on document. Profile: prepare. Email classified VENDOR_INVOICE and dispatch CREATED; forwarded_to_ap true. Email did not match or HOLD. Ingest noted match_status NON_PO (missing_po) — AP owns match. Please prepare on ING-003.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T16:02:05.247Z",
+  "updatedAt": "2026-09-20T16:02:21.832Z",
+  "result": "AP prepare complete on ING-003 (DD-INBOX-4004 / Datadog, MSG-INBOX-004). Packet: runs/ap/packets/ING-003.json. Kernel: missing_po — invoice 1800, po_id null, no PO/GR, receipt not_applicable, no duplicates. PreparerRecommendation HOLD (not approve-shaped; no ctl-pay handoff). Email intake acknowledged; AP owns the hold.",
+  "seq": 31
+}

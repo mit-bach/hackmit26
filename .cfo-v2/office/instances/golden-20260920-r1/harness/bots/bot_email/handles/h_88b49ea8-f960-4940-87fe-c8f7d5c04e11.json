@@ -1,0 +1,19 @@
+{
+  "id": "h_88b49ea8-f960-4940-87fe-c8f7d5c04e11",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nThe September finance inbox is on this Computer. Classify. Vendor bills Handle ap / prepare. Remittances Handle apply / apply. Quotes, statements, newsletters, and injection are not bills. Do not match. Do not pay. Do not ask a human.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:50:40.396Z",
+  "updatedAt": "2026-09-20T15:04:09.826Z",
+  "result": "## Finance inbox triage complete\n\n19 threads classified. No matching, no pay, no human asks. Packets under `runs/inbox/packets/`. Summary: `runs/inbox/packets/email-triage-summary-2026-09-20.json`.\n\n### Vendor bills → AP / prepare\n| Message | Result | Invoice |\n|---|---|---|\n| MSG-ACME-INV-001 | Business duplicate / evidence | INV-001 |\n| MSG-INBOX-001 | Created | **ING-001** ACM-INBOX-1001 |\n| MSG-INBOX-002 | Created | **ING-003** FIG-INBOX-2002 |\n| MSG-INBOX-003 | Created | **ING-004** OD-INBOX-3003 |\n| MSG-INBOX-004 | Created | **ING-005** DD-INBOX-4004 |\n| MSG-INBOX-013 | Dup of ING-001 | ING-001 |\n| MSG-INBOX-014 | Created; injection ignored | **ING-006** SLK-INBOX-7007 |\n| MSG-INBOX-015 | Created; unknown vendor | **ING-002** NIM-INBOX-8008 |\n| MSG-INBOX-011-R1 | Vendor reply after missing-info | Dup → ING-001 |\n\nAP prepare (`runs/ap/summary/inbox-prepare-2026-09-20.json`): HOLD on ING-001..005; APPROVE path for ING-006 → ctl-pay; INV-001 already APPROVE.\n\n### Remittance / payment → Apply\n- **MSG-INBOX-019** remittance (Northwind → INV-AR-001, 8500)  \n- **MSG-INBOX-009** payment confirmation (Acme / ACM-2026-4410)  \nHandoff to Apply is **still running** (`h_0e0c0f3b…`).\n\n### Not bills (packets only / ignore)\nPO, GR, statement, quote, lunch newsletter, credit memo (no path), binary parse failure, Pinnacle warehouse hold.\n\n### Missing info\nMSG-INBOX-011 → outbound + World vendor reply with full ACM-INBOX-1001 fields → linked as provenance on ING-001.\n\nOverlay/registry: `runs/ingestion/overlay.json`, `runs/ingestion/registry.json`.",
+  "resultPaths": [],
+  "seq": 45
+}

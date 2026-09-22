@@ -1,0 +1,46 @@
+{
+  "invoice_id": "ING-002",
+  "profile": "prepare",
+  "source": {
+    "message_id": "MSG-INBOX-003",
+    "vendor_invoice_number": "OD-INBOX-3003",
+    "thread_id": "THR-price-mismatch",
+    "forwarded_by": "email"
+  },
+  "kernel_evidence": {
+    "invoice_amount": 5000,
+    "po_id": "PO-104",
+    "po_authorized_amount": 2100,
+    "receipt_id": "GR-104",
+    "amount_received": 2100,
+    "amount_difference": 2900,
+    "percent_difference": 1.381,
+    "amount_matches": false,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": true,
+    "vendors_are_similar": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": ["material_amount_mismatch"],
+    "days_until_due": 28
+  },
+  "PreparerRecommendation": {
+    "action": "HOLD",
+    "exception_types": ["material_amount_mismatch"],
+    "evidence_used": [
+      "ING-002",
+      "PO-104",
+      "GR-104",
+      "tools.get_case_evidence",
+      "tools.find_duplicate_invoices"
+    ],
+    "reason": "Office Depot OD-INBOX-3003 bills 5000 against approved PO-104 / GR-104 at 2100 (diff 2900, ~138%). Kernel flags material_amount_mismatch; not within tolerance. Vendor matches; receipt full; no duplicate. Do not APPROVE. Hold pending corrected invoice or PO change — investigate if needed under investigate profile."
+  },
+  "proposed": "HOLD",
+  "approve_shaped": false,
+  "ctl_pay_handoff": null,
+  "packet_path": "runs/ap/packets/ING-002.json"
+}

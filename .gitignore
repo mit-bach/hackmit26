@@ -1,5 +1,6 @@
 .obsidian
 .venv/
+**/.venv/
 .cfo/.venv/
 __pycache__/
 *.pyc

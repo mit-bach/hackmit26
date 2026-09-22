@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-376
+PO Number: PO-376
+Issued: 2026-09-23
+Vendor: Driftwood Group
+Vendor legal name: Driftwood Group
+Vendor tax ID: 00-0000000
+Authorized amount: 476.04
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+SaaS workspace add-on billed 2026-09-23
+
+This purchase order is not an invoice. The vendor must bill against PO-376.
+Payment terms follow the vendor master unless this order states otherwise.

@@ -1,0 +1,23 @@
+{
+  "vendor": "Harbor Electric",
+  "period": "2026-09",
+  "retrieved": {
+    "decision_id": "MEM-HE-2026-08",
+    "period": "2026-08",
+    "method": "seasonal_prior_year",
+    "amount": 7800,
+    "source": "memory/topics/harbor-electric.md"
+  },
+  "current": {
+    "decision_id": "DEC-2026-09-026",
+    "method": "seasonal_prior_year",
+    "amount": 4650,
+    "comparable": "HI-HE-2025-09",
+    "pasted_prior_amount": false,
+    "accrual_id": "ACC-202609-003",
+    "journal_id": "JE-202609-003"
+  },
+  "ctl_books": "CONCUR_METHOD",
+  "lock": "REJECT_CLOSE",
+  "period_status": "BLOCKED"
+}

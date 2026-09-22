@@ -1,0 +1,31 @@
+{
+  "id": "h_4051740d-2405-4c68-abe4-ff451a5a2ffc",
+  "from": "bot_stripe",
+  "fromSlug": "stripe",
+  "to": "bot_cash",
+  "toSlug": "cash",
+  "profile": "match",
+  "prompt": "profile: match\nProcessor deposit for po_1MaximorDisputes at workspace/sources/stripe/po_1MaximorDisputes.json. Waterfall already unpacked in Kernel. invoice_candidates is 0. Tick the bank deposit. Do not mint an AP invoice.",
+  "paths": [
+    "workspace/sources/stripe/po_1MaximorDisputes.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_stripe",
+    "toId": "bot_cash"
+  },
+  "createdAt": "2026-09-20T15:18:37Z",
+  "updatedAt": "2026-09-20T15:18:37Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "cash",
+    "profile": "match"
+  },
+  "payoutId": "po_1MaximorDisputes",
+  "invoice_candidates": 0
+}

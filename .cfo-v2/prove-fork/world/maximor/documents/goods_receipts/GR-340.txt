@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-340
+PO Number: PO-340
+Vendor: Echo Services
+Goods received in full on 2026-09-14
+Packing list attached: PL-GR-340
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 210.78 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

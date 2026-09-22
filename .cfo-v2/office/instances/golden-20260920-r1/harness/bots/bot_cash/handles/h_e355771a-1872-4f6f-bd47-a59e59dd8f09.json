@@ -1,0 +1,31 @@
+{
+  "id": "h_e355771a-1872-4f6f-bd47-a59e59dd8f09",
+  "from": "bot_stripe",
+  "fromSlug": "stripe",
+  "to": "bot_cash",
+  "toSlug": "cash",
+  "profile": "match",
+  "prompt": "profile: match\nProcessor deposit for po_1MaximorRefunds at workspace/sources/stripe/po_1MaximorRefunds.json. Waterfall already unpacked in Kernel. invoice_candidates is 0. Tick the bank deposit. Do not mint an AP invoice.",
+  "paths": [
+    "workspace/sources/stripe/po_1MaximorRefunds.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_stripe",
+    "toId": "bot_cash"
+  },
+  "createdAt": "2026-09-20T15:18:36Z",
+  "updatedAt": "2026-09-20T15:18:36Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "cash",
+    "profile": "match"
+  },
+  "payoutId": "po_1MaximorRefunds",
+  "invoice_candidates": 0
+}

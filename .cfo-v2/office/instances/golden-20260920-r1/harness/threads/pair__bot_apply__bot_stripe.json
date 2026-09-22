@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_apply:bot_stripe",
+  "threadId": "pair:bot_apply:bot_stripe",
+  "name": "Apply ↔ Stripe",
+  "memberIds": [
+    "bot_apply",
+    "bot_stripe"
+  ],
+  "createdAt": 1789917788663,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_ae2ec075-712b-4cb2-887e-566e16d67d7b",
+      "handleId": "h_ae2ec075-712b-4cb2-887e-566e16d67d7b",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: apply\n\nSeptember Stripe charge-level facts — Kernel waterfall MATCH. invoice_candidates is 0. Do not apply cash in Bot stripe.\n\nPaths:\n- workspace/sources/stripe/po_1MaximorFees.json charges ORD-2101 ($8000), ORD-2102 ($5000); fee -390\n- workspace/sources/stripe/po_1MaximorRefunds.json charge ORD-2201 ($4000); refund re_2201 (-500); fee -120\n- workspace/sources/stripe/po_1MaximorDisputes.json charge ORD-2301 ($6000); dispute dp_2301 (-750); fee -180\n\nLand AR application from charge lines. Confirm receipt of paths.",
+      "at": 1789917788663,
+      "from": {
+        "botId": "bot_stripe",
+        "name": "Stripe",
+        "color": "blue"
+      }
+    },
+    {
+      "id": "pair-result-h_ae2ec075-712b-4cb2-887e-566e16d67d7b",
+      "handleId": "h_ae2ec075-712b-4cb2-887e-566e16d67d7b",
+      "role": "bot",
+      "kind": "text",
+      "text": "Apply confirms receipt of September Stripe charge-level paths.\n\nPaths received:\n- workspace/sources/stripe/po_1MaximorFees.json (ORD-2101 8000, ORD-2102 5000; fee -390; waterfall MATCH)\n- workspace/sources/stripe/po_1MaximorRefunds.json (ORD-2201 4000; re_2201 -500; fee -120; MATCH)\n- workspace/sources/stripe/po_1MaximorDisputes.json (ORD-2301 6000; dp_2301 -750; fee -180; MATCH)\n\ninvoice_candidates=0 respected (never AP). Apply did not stick cash in Bot stripe.\n\nAR land status: UNAPPLIED_NO_PAYMENT for all four charge ids. Kernel has no CustomerPayment for ORD-2101/2102/2201/2301 (get_cash_application_facts unknown). Apply does not invent payment tickets or invoice applications. No AUTO_APPLY. No post.\n\nPacket: runs/ar/packets/stripe-charges-2026-09.json\nBank deposits remain cash/match objects (BANK-po_1Maximor*).",
+      "at": 1789917892829,
+      "from": {
+        "botId": "bot_apply",
+        "name": "Apply",
+        "color": "coral"
+      }
+    }
+  ]
+}

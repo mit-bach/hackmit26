@@ -1,0 +1,39 @@
+Acme Supplies LLC
+22 Harbor Street
+Quincy, MA 02169
+Phone +1 617-555-0199   ap@acmesuppliesllc.example
+Tax ID 04-9982104
+
+INVOICE
+
+Invoice Number: ACM-2026-09-0073
+Invoice Date: 2026-09-20
+Due Date: 2026-10-20
+PO Number: PO-373
+Payment Terms: net 30
+Currency: USD
+Vendor: Acme Supplies LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+usage overage block billed 2026-09-20         1.00         30.65         30.65
+
+Subtotal                                                                 30.65
+Tax                                                                       0.00
+Amount Due                                                               30.65
+
+Remit to:
+Wire Harbor Trust routing 011001234  account ****8802
+Bank: Harbor Trust  ****8802
+Please include invoice ACM-2026-09-0073 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: ap@acmesuppliesllc.example

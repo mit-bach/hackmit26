@@ -1,0 +1,25 @@
+{
+  "vendor": "Harbor Electric",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": false,
+  "missing_bill_candidate": true,
+  "expectation_confidence": 0.99,
+  "signals": [
+    {
+      "type": "monthly_cadence",
+      "detail": "Invoices received in each of the previous 13 months",
+      "confidence": 0.99
+    },
+    {
+      "type": "seasonal_prior_year",
+      "detail": "Same month last year (2025-09) was invoiced",
+      "confidence": 0.8
+    }
+  ],
+  "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+  "discovery_trace_id": "2026-09/20260920T001801Z/discovery/harbor_electric",
+  "current_invoice_ids": [],
+  "indicative_amount": 4650.0,
+  "indicative_method": "seasonal_prior_year"
+}

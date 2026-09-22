@@ -10,10 +10,14 @@ import {
   DemoRecordingMissingError,
   demoMeta,
   loadDemoBundle,
+  loadDemoScenes,
+  parseDemoScenes,
   parseDemoSourceQuery,
-  projectFrame,
+  parseDirectorQuery,
+  projectStageFrame,
   recordDemoSession,
   removeDemoRecording,
+  saveDemoScenes,
 } from "../demo-replay.ts";
 import { computerSkillsRoot, piRpcLogPath, piRuntimePath, protocolLogPath, rosterPath } from "../paths.ts";
 import { readProtocol, searchProtocol } from "../protocol-log.ts";
@@ -1126,13 +1130,23 @@ export function handleDeskCompat(
     try {
       const bundle = loadDemoBundle(computerRoot, parseDemoSourceQuery(url.searchParams.get("source")));
       const seq = Number(url.searchParams.get("seq") ?? "0");
-      return { status: 200, body: projectFrame(bundle, Number.isFinite(seq) ? seq : 0) };
+      const director = parseDirectorQuery(url.searchParams);
+      return { status: 200, body: projectStageFrame(bundle, Number.isFinite(seq) ? seq : 0, director) };
     } catch (cause) {
       if (cause instanceof DemoRecordingMissingError) {
         return { status: 404, body: { error: cause.message } };
       }
       throw cause;
     }
+  }
+
+  if (method === "GET" && path === "/api/demo/scenes") {
+    return { status: 200, body: { scenes: loadDemoScenes(computerRoot) } };
+  }
+
+  if ((method === "PUT" || method === "POST") && path === "/api/demo/scenes") {
+    const scenes = isRecord(body) ? body.scenes : body;
+    return { status: 200, body: { scenes: saveDemoScenes(computerRoot, parseDemoScenes(scenes)) } };
   }
 
   if (method === "GET" && path === "/api/demo") {

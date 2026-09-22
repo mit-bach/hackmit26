@@ -1,0 +1,311 @@
+{
+  "period": "2026-09",
+  "status": "BLOCKED",
+  "marked_closed": false,
+  "lock_door": "close.month_end",
+  "test_packet": "close.orchestrator.run_cfo_close",
+  "gate_passed": false,
+  "blocked_on": [
+    "Required tasks incomplete: cash, bs_recon, exceptions",
+    "Cash reconciliation is MISSING, not SIGNED_OFF",
+    "Accounts Receivable reconciliation is MISSING, not SIGNED_OFF",
+    "Accounts Payable reconciliation is MISSING, not SIGNED_OFF",
+    "Accrued Expenses reconciliation is MISSING, not SIGNED_OFF",
+    "Prepaid Expenses reconciliation is MISSING, not SIGNED_OFF",
+    "Fixed Assets reconciliation is MISSING, not SIGNED_OFF",
+    "Accumulated Depreciation reconciliation is MISSING, not SIGNED_OFF",
+    "Blocking review items: REV-2026-09-CASH-TXN-2026-09-015, REV-2026-09-AR-PAY-CLOSE-4500, REV-2026-09-PREPAID-PRE-INS-MISSING",
+    "PRE-INS-MISSING missing Northshore policy evidence",
+    "NewForge Consulting: insufficient accrual evidence",
+    "Cash: $12.40 unexplained difference",
+    "AR: $4,500 unmatched customer payment",
+    "Prepaids: missing insurance policy evidence"
+  ],
+  "wakes": [
+    {
+      "profile": "coordinate",
+      "slug": "close",
+      "period": "2026-09",
+      "path": "workspace/close/2026-09/wakes/000-coordinate.json",
+      "ops": [],
+      "mutatingOps": [],
+      "mark_closed": false,
+      "office_live_catalog_caller": false
+    },
+    {
+      "profile": "accrue",
+      "slug": "close",
+      "period": "2026-09",
+      "task_id": "accruals",
+      "status": "COMPLETE",
+      "ops": [
+        "accrual.tools.get_expected_invoices",
+        "accrual.tools.get_current_period_invoices",
+        "accrual.tools.get_vendor_invoice_history",
+        "accrual.tools.get_purchase_orders",
+        "accrual.tools.get_goods_receipts",
+        "accrual.tools.get_vendor_contract",
+        "accrual.tools.get_vendor_usage",
+        "accrual.tools.get_estimate_candidates",
+        "accrual.tools.compute_accrual_estimate",
+        "accrual.tools.create_accrual",
+        "accrual.tools.get_open_accruals",
+        "accrual.tools.reconcile_accrual_with_invoice"
+      ],
+      "mutatingOps": [
+        "accrual.tools.create_accrual",
+        "accrual.tools.reconcile_accrual_with_invoice"
+      ],
+      "mark_closed": false
+    },
+    {
+      "profile": "prepaid",
+      "slug": "close",
+      "period": "2026-09",
+      "task_id": "prepaid",
+      "status": "COMPLETE",
+      "ops": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule"
+      ],
+      "mutatingOps": [],
+      "mark_closed": false
+    },
+    {
+      "profile": "assets",
+      "slug": "close",
+      "period": "2026-09",
+      "task_id": "depreciation",
+      "status": "COMPLETE",
+      "ops": [
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates"
+      ],
+      "mutatingOps": [],
+      "mark_closed": false
+    },
+    {
+      "profile": "bs",
+      "slug": "close",
+      "period": "2026-09",
+      "task_id": "bs_recon",
+      "status": "BLOCKED",
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "mutatingOps": [],
+      "mark_closed": false
+    }
+  ],
+  "handles": [
+    {
+      "toSlug": "email",
+      "to": "bot_email",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "invoice",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: invoice\nReview ingest for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "email",
+      "live_sent": false
+    },
+    {
+      "toSlug": "ctl-pay",
+      "to": "bot_ctl_pay",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "review-match",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: review-match\nReview ap for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "ctl-pay",
+      "live_sent": false
+    },
+    {
+      "toSlug": "collect",
+      "to": "bot_collect",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "chase",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: chase\nReview ar for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "collect",
+      "live_sent": false
+    },
+    {
+      "toSlug": "ctl-cash",
+      "to": "bot_ctl_cash",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "review-rec",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: review-rec\nReview cash for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "ctl-cash",
+      "live_sent": false
+    },
+    {
+      "toSlug": "ctl-books",
+      "to": "bot_ctl_books",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "review-treatment",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: review-treatment\nReview prepaid for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "ctl-books",
+      "live_sent": false
+    },
+    {
+      "toSlug": "ctl-books",
+      "to": "bot_ctl_books",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "review-assets",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: review-assets\nReview depreciation for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "ctl-books",
+      "live_sent": false
+    },
+    {
+      "toSlug": "ctl-books",
+      "to": "bot_ctl_books",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "review-bs",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: review-bs\nReview bs_recon for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "ctl-books",
+      "live_sent": false
+    },
+    {
+      "toSlug": "ctl-books",
+      "to": "bot_ctl_books",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "lock",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json",
+        "workspace/close/2026-09/gates.json"
+      ],
+      "prompt": "profile: lock\nRead evaluate_close_gates for 2026-09 at workspace/close/2026-09/gates.json. Pack is workspace/close/2026-09/pack.json. gate_passed=False. Do not mark CLOSED. Kernel close.month_end is the only lock door. Never ask a human.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "ctl-books",
+      "live_sent": false,
+      "gate_passed": false,
+      "lock_door": "close.month_end",
+      "can_mark_closed": false
+    },
+    {
+      "toSlug": "story",
+      "to": "bot_story",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "flux",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: flux\nNarrate Kernel facts from workspace/close/2026-09/pack.json. lock_status=BLOCKED. If lock_status is not CLOSED, label every number UNLOCKED. Do not start a forecast from unreconciled GL cash. Never ask a human.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "story",
+      "live_sent": false,
+      "lock_status": "BLOCKED"
+    },
+    {
+      "toSlug": "audit",
+      "to": "bot_audit",
+      "from": "bot_close",
+      "fromSlug": "close",
+      "profile": "interpret",
+      "kind": "a2a_handoff",
+      "paths": [
+        "workspace/close/2026-09/pack.json"
+      ],
+      "prompt": "profile: interpret\nSample the close pack at workspace/close/2026-09/pack.json. Cite Kernel finding IDs only. Do not load get_audit_ground_truth. Do not fix the books. Never ask a human.",
+      "status": "accepted",
+      "done": false,
+      "bus": "harness",
+      "humanQueue": false,
+      "queue_owner": "audit",
+      "live_sent": false
+    }
+  ],
+  "pack_path": "workspace/close/2026-09/pack.json",
+  "profiles_worn": [
+    "coordinate",
+    "accrue",
+    "prepaid",
+    "assets",
+    "bs"
+  ],
+  "live_handles": true,
+  "runs_dir": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/golden-20260920-r1/runs/month_end",
+  "computer_root": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/golden-20260920-r1",
+  "harness_computer": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/golden-20260920-r1",
+  "live_handle_ids": {
+    "ctl-books-lock": "h_e75065cf-3cc6-47ee-8deb-0246d22cd282",
+    "story-flux": "h_4c24772c-c31e-4e32-9034-9d1f0efa2904",
+    "audit-interpret": "h_573dca4b-4e96-418a-b8a9-b7747121e7fc"
+  },
+  "coordinate_decision": "workspace/close/2026-09/coordinate-decision.json",
+  "ctl_books_verdict": "workspace/close/2026-09/ctl-books-lock-verdict.json"
+}

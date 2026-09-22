@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-PIN-HOLD-01",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "a37bfa4e8fd0e13135f56ace50fbca053c46febfce0f322a66a650f454391618",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-PIN-HOLD-01",
+      "thread_id": "THR-pinnacle-hold",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_4678132f3851"
+  }
+}

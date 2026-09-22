@@ -1,0 +1,8 @@
+{
+  "object": "payment_confirmation",
+  "message_id": "MSG-INBOX-009",
+  "thread_id": "THR-payment-confirmation",
+  "counterparty": "Acme Supplies",
+  "body_summary": "Payment received for ACM-2026-4410",
+  "handoff": "apply/apply"
+}

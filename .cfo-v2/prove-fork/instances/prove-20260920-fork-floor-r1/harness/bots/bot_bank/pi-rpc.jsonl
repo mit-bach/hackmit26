@@ -1,0 +1,2 @@
+{"type":"extension_ui_request","id":"a36b3efc-4540-4629-83c9-369b5c55691a","method":"setStatus","statusKey":"harness","statusText":"bot:bank"}
+{"type":"response","command":"set_thinking_level","success":true}

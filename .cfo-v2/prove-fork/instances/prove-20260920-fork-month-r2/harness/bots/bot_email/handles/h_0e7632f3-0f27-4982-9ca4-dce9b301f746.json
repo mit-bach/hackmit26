@@ -1,0 +1,19 @@
+{
+  "id": "h_0e7632f3-0f27-4982-9ca4-dce9b301f746",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nList finance inbox candidates. Classify nothing yet. Call inbox.tools.list_inbox_threads then inbox.tools.get_inbox_message for MSG-ACME-INV-001. Do not classify. Do not dispatch. Do not ask_user. Stop after the list/get returns.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:56:41.451Z",
+  "updatedAt": "2026-09-20T15:57:13.423Z",
+  "result": "**List + get only** (no classify, no dispatch).\n\n### Threads (15)\n| Thread | Message(s) |\n| --- | --- |\n| THR-acme-inv001 | MSG-ACME-INV-001 |\n| THR-price-mismatch | MSG-INBOX-003 |\n| THR-no-po | MSG-INBOX-004 |\n| THR-quote | MSG-INBOX-008 |\n| THR-vendor-statement | MSG-INBOX-007 |\n| THR-non-finance | MSG-INBOX-010 |\n| THR-prompt-injection | MSG-INBOX-014 |\n| THR-incomplete | MSG-INBOX-011 |\n| THR-unknown-vendor | MSG-INBOX-015 |\n| THR-credit-memo | MSG-INBOX-016 |\n| THR-malformed | MSG-INBOX-018 |\n| THR-remittance | MSG-INBOX-019 |\n| THR-body-invoice | MSG-INBOX-002 |\n| THR-purchase-order | MSG-INBOX-005 |\n| THR-goods-receipt | MSG-INBOX-006 |\n\n### MSG-ACME-INV-001\n| Field | Value |\n| --- | --- |\n| Thread | THR-acme-inv001 |\n| From | Acme Supplies `<billing@acmesupplies.example>` |\n| To | ap@hackmit-cfo.example |\n| Subject | Invoice ACM-2026-4410 from Acme Supplies |\n| Body | Please process the attached vendor invoice for PO-101. |\n| Sent/received | 2026-09-18T10:00:00Z |\n| Attachment | `ACM-2026-4410.pdf` — INV ACM-2026-4410, PO-101, date 2026-09-08, due 2026-09-30, USD 12,450.00 |\n\nStopped here as requested.",
+  "resultPaths": [],
+  "seq": 7
+}

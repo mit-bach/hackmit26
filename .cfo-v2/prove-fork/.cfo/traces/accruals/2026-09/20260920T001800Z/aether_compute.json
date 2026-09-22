@@ -1,0 +1,182 @@
+{
+  "trace_id": "2026-09/20260920T001800Z/aether_compute",
+  "vendor": "Aether Compute",
+  "period": "2026-09",
+  "invoice_received": false,
+  "evidence": {
+    "historical_invoices": [
+      {
+        "invoice_id": "HI-AE-2026-03",
+        "service_period": "2026-03",
+        "amount": 9200.0,
+        "description": "March compute and storage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AE-2026-04",
+        "service_period": "2026-04",
+        "amount": 9800.0,
+        "description": "April compute and storage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AE-2026-05",
+        "service_period": "2026-05",
+        "amount": 10400.0,
+        "description": "May compute and storage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AE-2026-06",
+        "service_period": "2026-06",
+        "amount": 11100.0,
+        "description": "June compute and storage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AE-2026-07",
+        "service_period": "2026-07",
+        "amount": 11400.0,
+        "description": "July compute and storage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AE-2026-08",
+        "service_period": "2026-08",
+        "amount": 12250.0,
+        "description": "August compute and storage",
+        "po_id": null
+      }
+    ],
+    "current_invoices": [],
+    "contract": null,
+    "usage": {
+      "vendor": "Aether Compute",
+      "period": "2026-09",
+      "metric": "gb_hours",
+      "quantity": 142000.0,
+      "unit_price": 0.08345,
+      "currency": "USD",
+      "partial_period": false,
+      "as_of": "2026-09-30",
+      "description": "September metered compute and storage — rate back to committed pricing"
+    },
+    "purchase_orders": [],
+    "goods_receipts": []
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": 12250.0,
+      "applicable": true
+    },
+    {
+      "method": "simple_average",
+      "label": "Simple average",
+      "amount": 10691.67,
+      "applicable": true
+    },
+    {
+      "method": "recent_average",
+      "label": "Recent average",
+      "amount": 11583.33,
+      "applicable": true
+    },
+    {
+      "method": "weighted_recent_average",
+      "label": "Weighted recent average",
+      "amount": 11185.71,
+      "applicable": true
+    },
+    {
+      "method": "linear_trend",
+      "label": "Trend projection",
+      "amount": 12766.67,
+      "applicable": true
+    },
+    {
+      "method": "seasonal_prior_year",
+      "label": "Prior-year same month",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "contract_commitment",
+      "label": "Contract commitment",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "usage_run_rate",
+      "label": "Usage x contract rate",
+      "amount": 11849.9,
+      "applicable": true
+    },
+    {
+      "method": "goods_receipt",
+      "label": "Goods receipt",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "purchase_order",
+      "label": "Purchase order",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "conservative_minimum",
+      "label": "Conservative minimum",
+      "amount": 10691.67,
+      "applicable": true
+    }
+  ],
+  "agent_selection": {
+    "decision": "ACCRUE",
+    "method": "usage_run_rate",
+    "amount": 11849.9,
+    "confidence": 0.99,
+    "reason": "142,000 gb_hours × 0.08345 = 11,849.90."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [],
+  "final_decision": "accrual_required",
+  "final_method": "usage_run_rate",
+  "final_amount": 11849.9,
+  "confidence": 0.99,
+  "rationale": "142,000 gb_hours × 0.08345 = 11,849.90.",
+  "journal_entry": {
+    "entry_id": "JE-202609-001",
+    "debit_account": "Cloud Infrastructure Expense",
+    "credit_account": "Accrued Expenses",
+    "amount": 11849.9
+  },
+  "accrual_id": "ACC-202609-001",
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T001800Z/discovery/aether_compute",
+  "expectation_confidence": 0.99,
+  "estimate_confidence": 0.99,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": "usage_run_rate",
+  "policy_amount": 11849.9,
+  "policy_agreement": true,
+  "diagnostic_warnings": []
+}

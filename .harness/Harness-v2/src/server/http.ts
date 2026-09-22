@@ -171,7 +171,8 @@ async function applyOfficeSelect(live: LiveOffice, nextRoot: string): Promise<vo
     return;
   }
   const previous = live.computerRoot;
-  await stopRuntime(live, { keepSidecar: true });
+  // Sidecar binds HARNESS_COMPUTER. Keep it only on the same Computer, never across desks.
+  await stopRuntime(live);
   resetOmbLiveChain();
   try {
     live.computerRoot = resolved;

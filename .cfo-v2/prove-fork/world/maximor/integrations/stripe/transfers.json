@@ -1,0 +1,81 @@
+[
+  {
+    "transfer_id": "tr_mpr_2025-10",
+    "destination": "acct_1MaximorProc",
+    "amount": 16440.18,
+    "date": "2025-10-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2025-11",
+    "destination": "acct_1MaximorProc",
+    "amount": 16880.22,
+    "date": "2025-11-30"
+  },
+  {
+    "transfer_id": "tr_mpr_2025-12",
+    "destination": "acct_1MaximorProc",
+    "amount": 17220.4,
+    "date": "2025-12-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-01",
+    "destination": "acct_1MaximorProc",
+    "amount": 17640.18,
+    "date": "2026-01-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-02",
+    "destination": "acct_1MaximorProc",
+    "amount": 17880.44,
+    "date": "2026-02-28"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-03",
+    "destination": "acct_1MaximorProc",
+    "amount": 18120.18,
+    "date": "2026-03-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-04",
+    "destination": "acct_1MaximorProc",
+    "amount": 18440.22,
+    "date": "2026-04-30"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-05",
+    "destination": "acct_1MaximorProc",
+    "amount": 18680.18,
+    "date": "2026-05-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-06",
+    "destination": "acct_1MaximorProc",
+    "amount": 18820.4,
+    "date": "2026-06-30"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-07",
+    "destination": "acct_1MaximorProc",
+    "amount": 19120.18,
+    "date": "2026-07-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-08",
+    "destination": "acct_1MaximorProc",
+    "amount": 17211.2,
+    "date": "2026-08-31"
+  },
+  {
+    "transfer_id": "tr_mpr_2026-09",
+    "destination": "acct_1MaximorProc",
+    "amount": 18206.4,
+    "date": "2026-09-30"
+  },
+  {
+    "transfer_id": "tr_mpr_win_4419",
+    "destination": "acct_1MaximorProc",
+    "amount": 18440.0,
+    "date": "2026-08-22",
+    "dispute_id": "dsp_win_4419"
+  }
+]

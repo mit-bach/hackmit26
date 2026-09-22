@@ -1,0 +1,22 @@
+{
+  "contract": "SourceAgentOutput",
+  "profile": "erp-invoice",
+  "source_bot": "books",
+  "classification": "period_lock_state_read",
+  "handoff": { "to": "close", "profile": "coordinate", "when": "lock-state" },
+  "company_id": "CO-MAXIMOR",
+  "currency": "USD",
+  "locks": {
+    "2026-08": {
+      "status": "CLOSED",
+      "close_id": "CLOSE-2026-08",
+      "closed_at": "2026-09-03T18:00:00Z",
+      "path": "data/close/prior_period/2026-08/pack.json"
+    },
+    "2026-09": {
+      "status": "OPEN",
+      "note": "September is the open period. Final close review blocked on cash rec elsewhere; Books does not lock."
+    }
+  },
+  "books_note": "Read-only lock state. No period lock write. No close."
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "expected_outflows",
+  "source": "pay",
+  "after": "ctl-pay/review-pay",
+  "plan_id": "plan_2026-09-19_2f7cb150dc46",
+  "as_of_date": "2026-09-19",
+  "wires": [],
+  "total_payout": 0.0,
+  "reserve_ok": true,
+  "executed": false,
+  "note": "Empty fail-closed pool; ctl-pay CONCUR; no identified wires; no cash Handle required.",
+  "concurrence_path": "runs/pay/concurrence/plan_2026-09-19_2f7cb150dc46.json"
+}

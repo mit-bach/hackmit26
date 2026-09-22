@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-FLE-2026-01
+PO Number: PO-FLE-2026-01
+Issued: 2026-01-21
+Vendor: Freightline Expedite
+Vendor legal name: Freightline Expedite LLC
+Vendor tax ID: 04-6612290
+Authorized amount: 4,884.82
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Accessorial fuel and liftgate
+
+This purchase order is not an invoice. The vendor must bill against PO-FLE-2026-01.
+Payment terms follow the vendor master unless this order states otherwise.

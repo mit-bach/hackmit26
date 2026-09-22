@@ -2245,5 +2245,287 @@
     "entity_name": "Stripe",
     "accounting_category": "cash",
     "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-025",
+    "period": "2026-09",
+    "workflow": "month_end_close",
+    "entity_type": "vendor",
+    "entity_id": "aether compute",
+    "situation_type": "accrual_methodology",
+    "situation_summary": "Aether Compute missing-bill accrual for 2026-09 used usage_run_rate (11,849.90).",
+    "evidence": [
+      {
+        "kind": "accrual",
+        "label": "ACC-202609-001",
+        "amount": 11849.9,
+        "amount_minor": null,
+        "reference": "usage_run_rate",
+        "details": {}
+      },
+      {
+        "kind": "evidence",
+        "label": "142,000 gb_hours \u00d7 0.08345 = 11,849.90.",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "usage_run_rate",
+    "reasoning_summary": "142,000 gb_hours \u00d7 0.08345 = 11,849.90.",
+    "accounting_treatment": "usage_run_rate",
+    "outcome": "accrual_required",
+    "reusable_precedent": "Aether Compute recurring or seasonal missing bills may reuse usage_run_rate; confirm current invoices, usage, and whether a recent average is still misleading.",
+    "source_trace_ids": [
+      "2026-09/20260920T141648Z/aether_compute"
+    ],
+    "created_at": "2026-09-20T14:16:48Z",
+    "tags": [
+      "month_end_close",
+      "accrual",
+      "aether compute",
+      "usage_run_rate",
+      "seasonal"
+    ],
+    "idempotency_key": "50b7cd4b9bc640ba60ea08ec019e99701e83123750036502f358406ff19198d2",
+    "entity_name": "Aether Compute",
+    "accounting_category": "accrual",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-026",
+    "period": "2026-09",
+    "workflow": "month_end_close",
+    "entity_type": "vendor",
+    "entity_id": "cleanspace facilities",
+    "situation_type": "accrual_methodology",
+    "situation_summary": "CleanSpace Facilities missing-bill accrual for 2026-09 used contract_commitment (2,400.00).",
+    "evidence": [
+      {
+        "kind": "accrual",
+        "label": "ACC-202609-002",
+        "amount": 2400.0,
+        "amount_minor": null,
+        "reference": "contract_commitment",
+        "details": {}
+      },
+      {
+        "kind": "evidence",
+        "label": "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence.",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "contract_commitment",
+    "reasoning_summary": "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence.",
+    "accounting_treatment": "contract_commitment",
+    "outcome": "accrual_required",
+    "reusable_precedent": "CleanSpace Facilities recurring or seasonal missing bills may reuse contract_commitment; confirm current invoices, usage, and whether a recent average is still misleading.",
+    "source_trace_ids": [
+      "2026-09/20260920T141648Z/cleanspace_facilities"
+    ],
+    "created_at": "2026-09-20T14:16:48Z",
+    "tags": [
+      "month_end_close",
+      "accrual",
+      "cleanspace facilities",
+      "contract_commitment",
+      "seasonal"
+    ],
+    "idempotency_key": "fa1dcece06398a3cb36c39d13982c6038741941dbd45aaeae29dc830370a69e7",
+    "entity_name": "CleanSpace Facilities",
+    "accounting_category": "accrual",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-027",
+    "period": "2026-09",
+    "workflow": "month_end_close",
+    "entity_type": "vendor",
+    "entity_id": "harbor electric",
+    "situation_type": "accrual_methodology",
+    "situation_summary": "Harbor Electric missing-bill accrual for 2026-09 used seasonal_prior_year (4,650.00).",
+    "evidence": [
+      {
+        "kind": "accrual",
+        "label": "ACC-202609-003",
+        "amount": 4650.0,
+        "amount_minor": null,
+        "reference": "seasonal_prior_year",
+        "details": {}
+      },
+      {
+        "kind": "evidence",
+        "label": "Same month last year (2025-09) billed 4,650.00.",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "seasonal_prior_year",
+    "reasoning_summary": "Same month last year (2025-09) billed 4,650.00.",
+    "accounting_treatment": "seasonal_prior_year",
+    "outcome": "accrual_required",
+    "reusable_precedent": "Harbor Electric recurring or seasonal missing bills may reuse seasonal_prior_year; confirm current invoices, usage, and whether a recent average is still misleading.",
+    "source_trace_ids": [
+      "2026-09/20260920T141648Z/harbor_electric"
+    ],
+    "created_at": "2026-09-20T14:16:48Z",
+    "tags": [
+      "month_end_close",
+      "accrual",
+      "harbor electric",
+      "seasonal_prior_year",
+      "seasonal"
+    ],
+    "idempotency_key": "4d7cc9eb2c70c4e9471f161781f2ea9184c2c9175945f02f569424690c2f75c9",
+    "entity_name": "Harbor Electric",
+    "accounting_category": "accrual",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-028",
+    "period": "2026-09",
+    "workflow": "month_end_close",
+    "entity_type": "vendor",
+    "entity_id": "helios hardware",
+    "situation_type": "accrual_methodology",
+    "situation_summary": "Helios Hardware missing-bill accrual for 2026-09 used goods_receipt (6,200.00).",
+    "evidence": [
+      {
+        "kind": "accrual",
+        "label": "ACC-202609-004",
+        "amount": 6200.0,
+        "amount_minor": null,
+        "reference": "goods_receipt",
+        "details": {}
+      },
+      {
+        "kind": "evidence",
+        "label": "Goods received and not invoiced total 6,200.00.",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "goods_receipt",
+    "reasoning_summary": "Goods received and not invoiced total 6,200.00.",
+    "accounting_treatment": "goods_receipt",
+    "outcome": "accrual_required",
+    "reusable_precedent": "Helios Hardware recurring or seasonal missing bills may reuse goods_receipt; confirm current invoices, usage, and whether a recent average is still misleading.",
+    "source_trace_ids": [
+      "2026-09/20260920T141648Z/helios_hardware"
+    ],
+    "created_at": "2026-09-20T14:16:48Z",
+    "tags": [
+      "month_end_close",
+      "accrual",
+      "helios hardware",
+      "goods_receipt",
+      "seasonal"
+    ],
+    "idempotency_key": "f589b198c519f304d6845d311c3050aaba376148f224c279dcb8e9f3262d2ce7",
+    "entity_name": "Helios Hardware",
+    "accounting_category": "accrual",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-029",
+    "period": "2026-09",
+    "workflow": "month_end_close",
+    "entity_type": "vendor",
+    "entity_id": "lindholm & ruiz llp",
+    "situation_type": "accrual_methodology",
+    "situation_summary": "Lindholm & Ruiz LLP missing-bill accrual for 2026-09 used contract_commitment (8,500.00).",
+    "evidence": [
+      {
+        "kind": "accrual",
+        "label": "ACC-202609-005",
+        "amount": 8500.0,
+        "amount_minor": null,
+        "reference": "contract_commitment",
+        "details": {}
+      },
+      {
+        "kind": "evidence",
+        "label": "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence.",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "contract_commitment",
+    "reasoning_summary": "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence.",
+    "accounting_treatment": "contract_commitment",
+    "outcome": "accrual_required",
+    "reusable_precedent": "Lindholm & Ruiz LLP recurring or seasonal missing bills may reuse contract_commitment; confirm current invoices, usage, and whether a recent average is still misleading.",
+    "source_trace_ids": [
+      "2026-09/20260920T141648Z/lindholm_ruiz_llp"
+    ],
+    "created_at": "2026-09-20T14:16:48Z",
+    "tags": [
+      "month_end_close",
+      "accrual",
+      "lindholm & ruiz llp",
+      "contract_commitment",
+      "seasonal"
+    ],
+    "idempotency_key": "10015abd72ab3a217d56d092d1047cd3361f34d2910901ebe9bca1a9d018ff1b",
+    "entity_name": "Lindholm & Ruiz LLP",
+    "accounting_category": "accrual",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-030",
+    "period": "2026-09",
+    "workflow": "month_end_close",
+    "entity_type": "vendor",
+    "entity_id": "pulse recruiting",
+    "situation_type": "accrual_methodology",
+    "situation_summary": "Pulse Recruiting missing-bill accrual for 2026-09 used contract_commitment (15,000.00).",
+    "evidence": [
+      {
+        "kind": "accrual",
+        "label": "ACC-202609-006",
+        "amount": 15000.0,
+        "amount_minor": null,
+        "reference": "contract_commitment",
+        "details": {}
+      },
+      {
+        "kind": "evidence",
+        "label": "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence.",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "contract_commitment",
+    "reasoning_summary": "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence.",
+    "accounting_treatment": "contract_commitment",
+    "outcome": "accrual_required",
+    "reusable_precedent": "Pulse Recruiting recurring or seasonal missing bills may reuse contract_commitment; confirm current invoices, usage, and whether a recent average is still misleading.",
+    "source_trace_ids": [
+      "2026-09/20260920T141648Z/pulse_recruiting"
+    ],
+    "created_at": "2026-09-20T14:16:48Z",
+    "tags": [
+      "month_end_close",
+      "accrual",
+      "pulse recruiting",
+      "contract_commitment",
+      "seasonal"
+    ],
+    "idempotency_key": "5ca1f3fa6699623ad27913c41128ce6613e165e0ddd88fadfbbab63a4c775210",
+    "entity_name": "Pulse Recruiting",
+    "accounting_category": "accrual",
+    "support_count": 1
   }
 ]

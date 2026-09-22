@@ -1,0 +1,8 @@
+{
+  "object": "customer_remittance",
+  "message_id": "MSG-INBOX-019",
+  "thread_id": "THR-remittance",
+  "counterparty": "Northwind Labs",
+  "body_summary": "apply payment to INV-AR-001 amount 8500.00",
+  "handoff": "apply/apply"
+}

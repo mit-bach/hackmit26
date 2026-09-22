@@ -1,0 +1,23 @@
+{
+  "id": "h_4c24772c-c31e-4e32-9034-9d1f0efa2904",
+  "from": "bot_close",
+  "to": "bot_story",
+  "toSlug": "story",
+  "prompt": "profile: flux\nNarrate Kernel facts from workspace/close/2026-09/pack.json. lock_status=BLOCKED. Label every number UNLOCKED. Do not start a forecast from unreconciled GL cash. Never ask a human.",
+  "paths": [
+    "workspace/close/2026-09/pack.json",
+    "workspace/close/2026-09/gates.json",
+    "workspace/close/2026-09/coordinate-decision.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_story"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:29:38.609Z",
+  "updatedAt": "2026-09-20T15:31:09.377Z",
+  "result": "Flux UNLOCKED draft done for 2026-09.\n\nPaths:\n- workspace/story/2026-09/wake.json\n- workspace/story/2026-09/flux.json\n\nFacts (all numbers UNLOCKED; lock_status=BLOCKED; marked_closed=false; gate_passed=false):\n- Revenue UNLOCKED 0 | prior UNLOCKED 0 | VAR-2026-09-revenue reconciled, not material (metric:revenue:2026-09).\n- Gross margin pct UNLOCKED 0 | VAR-2026-09-gross_margin_pct (metric:gross_margin_pct:2026-09).\n- Operating income UNLOCKED 0 | VAR-2026-09-operating_income (metric:operating_income:2026-09).\n- GL cash UNLOCKED 14,882,410.18 vs prior UNLOCKED 480,000; variance UNLOCKED +14,402,410.18 fully unexplained residual (metric:cash:2026-09; variance:VAR-2026-09-cash). NOT trusted cash.\n- AR UNLOCKED 41,260,000 (metric:ar:2026-09); AP UNLOCKED 18,420,000 (metric:ap:2026-09).\n\nClose blockers cited from pack: cash NEEDS_REVIEW (UNLOCKED $12.40 / TXN-2026-09-015); AR unmatched UNLOCKED $4,500 (PAY-CLOSE-4500); PRE-INS-MISSING; NewForge accrual evidence; bs_recon BLOCKED; all BS recons MISSING; queue_owner ctl-books.\n\nForecast: REFUSED — will not start 13-week from unreconciled GL cash. No forecast Handle issued.\n\nStory does not move money or own lock. audit may sample flux.json.",
+  "seq": 125
+}

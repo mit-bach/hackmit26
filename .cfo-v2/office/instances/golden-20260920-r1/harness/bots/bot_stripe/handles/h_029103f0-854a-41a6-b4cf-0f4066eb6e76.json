@@ -1,0 +1,19 @@
+{
+  "id": "h_029103f0-854a-41a6-b4cf-0f4066eb6e76",
+  "from": "operator",
+  "to": "bot_stripe",
+  "toSlug": "stripe",
+  "prompt": "profile: payout\nUnpack the simulated processor payout waterfall for September. Charges go to apply. The deposit goes to cash. Do not produce an invoice candidate. Do not ask a human.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_stripe"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:14:18.400Z",
+  "updatedAt": "2026-09-20T15:26:07.213Z",
+  "result": "## September processor waterfall — done\n\nKernel recorded **3 Stripe payouts** (Maximor sim). **`invoice_candidates`: 0** on every call. No `InvoiceCandidate`. No human ask.\n\n| Payout | Arrival | Gross | Offsets | Fees | Expected = actual | Status |\n|--------|---------|-------|---------|------|-------------------|--------|\n| `po_1MaximorFees` | 2026-09-19 | 13,000 | — | −390 | **12,610** (1,261,000 minor) | **MATCH** |\n| `po_1MaximorRefunds` | 2026-09-22 | 4,000 | refund −500 | −120 | **3,380** (338,000) | **MATCH** |\n| `po_1MaximorDisputes` | 2026-09-26 | 6,000 | dispute −750 | −180 | **5,070** (507,000) | **MATCH** |\n\n### Packets (Computer)\n- `workspace/sources/stripe/po_1MaximorFees.json`\n- `workspace/sources/stripe/po_1MaximorRefunds.json`\n- `workspace/sources/stripe/po_1MaximorDisputes.json`\n\n### Handoffs\n- **cash / match** (`h_d6901d81-…`): deposits **MATCHED** to `TXN-2026-09-019A`, `022S`, `026S` — batch `workspace/cash/packets/2026-09-stripe-maximor-deposits.json`\n- **apply / apply** (`h_ae2ec075-…`): charge facts received; AR land **UNAPPLIED_NO_PAYMENT** (no CustomerPayment tickets yet) — `runs/ar/packets/stripe-charges-2026-09.json`\n\nNo waterfall break → no `ctl-cash`. Deposits owned by cash; charges owned by apply.",
+  "resultPaths": [],
+  "seq": 102
+}

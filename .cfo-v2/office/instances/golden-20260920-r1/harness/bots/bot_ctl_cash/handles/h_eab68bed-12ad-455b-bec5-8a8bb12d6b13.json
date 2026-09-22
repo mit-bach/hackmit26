@@ -1,0 +1,31 @@
+{
+  "id": "h_eab68bed-12ad-455b-bec5-8a8bb12d6b13",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_ctl_cash",
+  "toSlug": "ctl-cash",
+  "profile": "review-rec",
+  "prompt": "profile: review-rec\nReview cash for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_cash"
+  },
+  "createdAt": "2026-09-20T15:28:48Z",
+  "updatedAt": "2026-09-20T15:28:48Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "ctl-cash",
+    "profile": "review-rec"
+  },
+  "live_sent": false,
+  "task_id": "cash"
+}

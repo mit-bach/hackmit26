@@ -1,0 +1,2206 @@
+{
+  "period": "2026-09",
+  "vendors_reviewed": 9,
+  "accruals_created": [
+    {
+      "vendor": "Aether Compute",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 11849.9,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "usage_run_rate",
+      "evidence": [
+        "142,000 gb_hours × 0.08345 = 11,849.90."
+      ],
+      "reasoning_summary": "142,000 gb_hours × 0.08345 = 11,849.90.",
+      "expense_account": "Cloud Infrastructure Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-001",
+        "period": "2026-09",
+        "vendor": "Aether Compute",
+        "memo": "Accrue Aether Compute expense for 2026-09 via usage_run_rate",
+        "debit": {
+          "account": "Cloud Infrastructure Expense",
+          "amount": 11849.9
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 11849.9
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-001",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-001",
+      "trace_id": "2026-09/20260920T001748Z/aether_compute",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/aether_compute"
+    },
+    {
+      "vendor": "CleanSpace Facilities",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 2400.0,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "contract_commitment",
+      "evidence": [
+        "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence."
+      ],
+      "reasoning_summary": "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence.",
+      "expense_account": "Facilities Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-002",
+        "period": "2026-09",
+        "vendor": "CleanSpace Facilities",
+        "memo": "Accrue CleanSpace Facilities expense for 2026-09 via contract_commitment",
+        "debit": {
+          "account": "Facilities Expense",
+          "amount": 2400.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 2400.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-002",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-002",
+      "trace_id": "2026-09/20260920T001748Z/cleanspace_facilities",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/cleanspace_facilities"
+    },
+    {
+      "vendor": "Harbor Electric",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 4650.0,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "seasonal_prior_year",
+      "evidence": [
+        "Same month last year (2025-09) billed 4,650.00."
+      ],
+      "reasoning_summary": "Same month last year (2025-09) billed 4,650.00.",
+      "expense_account": "Utilities Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-003",
+        "period": "2026-09",
+        "vendor": "Harbor Electric",
+        "memo": "Accrue Harbor Electric expense for 2026-09 via seasonal_prior_year",
+        "debit": {
+          "account": "Utilities Expense",
+          "amount": 4650.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 4650.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-003",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-003",
+      "trace_id": "2026-09/20260920T001748Z/harbor_electric",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/harbor_electric"
+    },
+    {
+      "vendor": "Helios Hardware",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 6200.0,
+      "currency": "USD",
+      "confidence": 1.0,
+      "estimation_method": "goods_receipt",
+      "evidence": [
+        "Goods received and not invoiced total 6,200.00."
+      ],
+      "reasoning_summary": "Goods received and not invoiced total 6,200.00.",
+      "expense_account": "IT Hardware Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-004",
+        "period": "2026-09",
+        "vendor": "Helios Hardware",
+        "memo": "Accrue Helios Hardware expense for 2026-09 via goods_receipt",
+        "debit": {
+          "account": "IT Hardware Expense",
+          "amount": 6200.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 6200.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-004",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-004",
+      "trace_id": "2026-09/20260920T001748Z/helios_hardware",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/helios_hardware"
+    },
+    {
+      "vendor": "Lindholm & Ruiz LLP",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 8500.0,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "contract_commitment",
+      "evidence": [
+        "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence."
+      ],
+      "reasoning_summary": "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence.",
+      "expense_account": "Legal Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-005",
+        "period": "2026-09",
+        "vendor": "Lindholm & Ruiz LLP",
+        "memo": "Accrue Lindholm & Ruiz LLP expense for 2026-09 via contract_commitment",
+        "debit": {
+          "account": "Legal Expense",
+          "amount": 8500.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 8500.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-005",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-005",
+      "trace_id": "2026-09/20260920T001748Z/lindholm_ruiz_llp",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/lindholm_ruiz_llp"
+    },
+    {
+      "vendor": "Pulse Recruiting",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 15000.0,
+      "currency": "USD",
+      "confidence": 0.97,
+      "estimation_method": "contract_commitment",
+      "evidence": [
+        "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence."
+      ],
+      "reasoning_summary": "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence.",
+      "expense_account": "Recruiting Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-006",
+        "period": "2026-09",
+        "vendor": "Pulse Recruiting",
+        "memo": "Accrue Pulse Recruiting expense for 2026-09 via contract_commitment",
+        "debit": {
+          "account": "Recruiting Expense",
+          "amount": 15000.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 15000.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-006",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-006",
+      "trace_id": "2026-09/20260920T001748Z/pulse_recruiting",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/pulse_recruiting"
+    }
+  ],
+  "no_accrual_needed": [
+    {
+      "vendor": "Amazon Web Services",
+      "period": "2026-09",
+      "status": "no_accrual_needed",
+      "estimated_amount": null,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": null,
+      "evidence": [
+        "2 distinct current-period invoices received (INV-002, INV-016). The expected period obligation is treated as satisfied.",
+        "Invoices received in each of the previous 5 months"
+      ],
+      "reasoning_summary": "Current-period invoice already received (INV-002, INV-016). No accrual.",
+      "expense_account": "",
+      "journal_entry": null,
+      "accrual_id": null,
+      "trace_id": "2026-09/20260920T001748Z/amazon_web_services",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/amazon_web_services"
+    },
+    {
+      "vendor": "Orbit Analytics",
+      "period": "2026-09",
+      "status": "no_accrual_needed",
+      "estimated_amount": null,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": null,
+      "evidence": [
+        "Invoices received in each of the previous 5 months",
+        "Monthly contract CTR-OA-001 for $3,100.00"
+      ],
+      "reasoning_summary": "Current-period invoice already received (HI-OA-2026-09). No accrual.",
+      "expense_account": "",
+      "journal_entry": null,
+      "accrual_id": null,
+      "trace_id": "2026-09/20260920T001748Z/orbit_analytics",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/orbit_analytics"
+    }
+  ],
+  "uncertain_items": [
+    {
+      "vendor": "NewForge Consulting",
+      "period": "2026-09",
+      "status": "insufficient_evidence",
+      "estimated_amount": null,
+      "currency": "USD",
+      "confidence": 0.25,
+      "estimation_method": null,
+      "evidence": [
+        "Time-and-materials contract with no monthly commitment",
+        "PO-202 is draft; no goods receipt"
+      ],
+      "reasoning_summary": "Weak evidence only; do not assume the expense was incurred.",
+      "expense_account": "",
+      "journal_entry": null,
+      "accrual_id": null,
+      "trace_id": "2026-09/20260920T001748Z/newforge_consulting",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/newforge_consulting"
+    }
+  ],
+  "total_accrued_expense": 48599.9,
+  "traces": [
+    {
+      "trace_id": "2026-09/20260920T001748Z/amazon_web_services",
+      "vendor": "Amazon Web Services",
+      "period": "2026-09",
+      "invoice_received": true,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-AWS-2026-04",
+            "service_period": "2026-04",
+            "amount": 7900.0,
+            "description": "April 2026 AWS usage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AWS-2026-05",
+            "service_period": "2026-05",
+            "amount": 8100.0,
+            "description": "May 2026 AWS usage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AWS-2026-06",
+            "service_period": "2026-06",
+            "amount": 8050.0,
+            "description": "June 2026 AWS usage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AWS-2026-07",
+            "service_period": "2026-07",
+            "amount": 8200.0,
+            "description": "July 2026 AWS usage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AWS-2026-08",
+            "service_period": "2026-08",
+            "amount": 8280.0,
+            "description": "August 2026 AWS usage",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [
+          {
+            "invoice_id": "INV-002",
+            "service_period": "2026-09",
+            "amount": 8320.0,
+            "description": "September 2026 compute, storage, and data-transfer usage",
+            "po_id": "PO-102"
+          },
+          {
+            "invoice_id": "INV-016",
+            "service_period": "2026-09",
+            "amount": 2775.0,
+            "description": "Unplanned September data-transfer overage — no purchase order was opened",
+            "po_id": null
+          }
+        ],
+        "contract": null,
+        "usage": null,
+        "purchase_orders": [
+          {
+            "po_id": "PO-102",
+            "vendor": "Amazon Web Services",
+            "authorized_amount": 8320.0,
+            "description": "September 2026 AWS usage commitment",
+            "status": "approved",
+            "created_date": "2026-09-01",
+            "currency": "USD",
+            "approval_limit": 20000.0,
+            "approver": "Priya Nair"
+          }
+        ],
+        "goods_receipts": [
+          {
+            "receipt_id": "GR-102",
+            "po_id": "PO-102",
+            "received": true,
+            "received_date": "2026-09-01",
+            "amount_received": 8320.0,
+            "quantity_ordered": 1,
+            "quantity_received": 1,
+            "vendor": "Amazon Web Services"
+          }
+        ]
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": null,
+          "applicable": false
+        }
+      ],
+      "agent_selection": {
+        "decision": "SKIP",
+        "method": null,
+        "amount": null,
+        "confidence": 0.99,
+        "reason": "Expected monthly expense already invoiced via 2 distinct bills (INV-002, INV-016)."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [
+        "invoice_already_received"
+      ],
+      "final_decision": "no_accrual_needed",
+      "final_method": null,
+      "final_amount": null,
+      "confidence": 0.99,
+      "rationale": "Current-period invoice already received (INV-002, INV-016). No accrual.",
+      "journal_entry": null,
+      "accrual_id": null,
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/amazon_web_services",
+      "expectation_confidence": 0.99,
+      "estimate_confidence": 0.99,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": null,
+      "policy_amount": null,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/orbit_analytics",
+      "vendor": "Orbit Analytics",
+      "period": "2026-09",
+      "invoice_received": true,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-OA-2026-04",
+            "service_period": "2026-04",
+            "amount": 3100.0,
+            "description": "Orbit Analytics Pro — April",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-OA-2026-05",
+            "service_period": "2026-05",
+            "amount": 3100.0,
+            "description": "Orbit Analytics Pro — May",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-OA-2026-06",
+            "service_period": "2026-06",
+            "amount": 3100.0,
+            "description": "Orbit Analytics Pro — June",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-OA-2026-07",
+            "service_period": "2026-07",
+            "amount": 3100.0,
+            "description": "Orbit Analytics Pro — July",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-OA-2026-08",
+            "service_period": "2026-08",
+            "amount": 3100.0,
+            "description": "Orbit Analytics Pro — August",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [
+          {
+            "invoice_id": "HI-OA-2026-09",
+            "service_period": "2026-09",
+            "amount": 3100.0,
+            "description": "Orbit Analytics Pro — September (already received)",
+            "po_id": null
+          }
+        ],
+        "contract": {
+          "contract_id": "CTR-OA-001",
+          "vendor": "Orbit Analytics",
+          "start_date": "2026-01-01",
+          "end_date": "2026-12-31",
+          "billing_cadence": "monthly",
+          "amount": 3100.0,
+          "currency": "USD",
+          "expense_account": "Software Subscription Expense",
+          "billed_in_arrears": false,
+          "monthly_minimum": 3100.0,
+          "description": "Orbit Analytics Pro subscription. Invoiced at the start of each month."
+        },
+        "usage": null,
+        "purchase_orders": [],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": null,
+          "applicable": false
+        }
+      ],
+      "agent_selection": {
+        "decision": "SKIP",
+        "method": null,
+        "amount": null,
+        "confidence": 0.99,
+        "reason": "Expected monthly expense already invoiced (HI-OA-2026-09)."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [
+        "invoice_already_received"
+      ],
+      "final_decision": "no_accrual_needed",
+      "final_method": null,
+      "final_amount": null,
+      "confidence": 0.99,
+      "rationale": "Current-period invoice already received (HI-OA-2026-09). No accrual.",
+      "journal_entry": null,
+      "accrual_id": null,
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/orbit_analytics",
+      "expectation_confidence": 0.99,
+      "estimate_confidence": 0.99,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": null,
+      "policy_amount": null,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/aether_compute",
+      "vendor": "Aether Compute",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-AE-2026-03",
+            "service_period": "2026-03",
+            "amount": 9200.0,
+            "description": "March compute and storage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AE-2026-04",
+            "service_period": "2026-04",
+            "amount": 9800.0,
+            "description": "April compute and storage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AE-2026-05",
+            "service_period": "2026-05",
+            "amount": 10400.0,
+            "description": "May compute and storage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AE-2026-06",
+            "service_period": "2026-06",
+            "amount": 11100.0,
+            "description": "June compute and storage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AE-2026-07",
+            "service_period": "2026-07",
+            "amount": 11400.0,
+            "description": "July compute and storage",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-AE-2026-08",
+            "service_period": "2026-08",
+            "amount": 12250.0,
+            "description": "August compute and storage",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [],
+        "contract": null,
+        "usage": {
+          "vendor": "Aether Compute",
+          "period": "2026-09",
+          "metric": "gb_hours",
+          "quantity": 142000.0,
+          "unit_price": 0.08345,
+          "currency": "USD",
+          "partial_period": false,
+          "as_of": "2026-09-30",
+          "description": "September metered compute and storage — rate back to committed pricing"
+        },
+        "purchase_orders": [],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": 12250.0,
+          "applicable": true
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": 10691.67,
+          "applicable": true
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": 11583.33,
+          "applicable": true
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": 11185.71,
+          "applicable": true
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": 12766.67,
+          "applicable": true
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": 11849.9,
+          "applicable": true
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": 10691.67,
+          "applicable": true
+        }
+      ],
+      "agent_selection": {
+        "decision": "ACCRUE",
+        "method": "usage_run_rate",
+        "amount": 11849.9,
+        "confidence": 0.99,
+        "reason": "142,000 gb_hours × 0.08345 = 11,849.90."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "accrual_required",
+      "final_method": "usage_run_rate",
+      "final_amount": 11849.9,
+      "confidence": 0.99,
+      "rationale": "142,000 gb_hours × 0.08345 = 11,849.90.",
+      "journal_entry": {
+        "entry_id": "JE-202609-001",
+        "debit_account": "Cloud Infrastructure Expense",
+        "credit_account": "Accrued Expenses",
+        "amount": 11849.9
+      },
+      "accrual_id": "ACC-202609-001",
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/aether_compute",
+      "expectation_confidence": 0.99,
+      "estimate_confidence": 0.99,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": "usage_run_rate",
+      "policy_amount": 11849.9,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/cleanspace_facilities",
+      "vendor": "CleanSpace Facilities",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-CS-2026-04",
+            "service_period": "2026-04",
+            "amount": 2390.0,
+            "description": "Monthly office cleaning — April",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-CS-2026-05",
+            "service_period": "2026-05",
+            "amount": 2400.0,
+            "description": "Monthly office cleaning — May",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-CS-2026-06",
+            "service_period": "2026-06",
+            "amount": 2410.0,
+            "description": "Monthly office cleaning — June",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-CS-2026-07",
+            "service_period": "2026-07",
+            "amount": 2395.0,
+            "description": "Monthly office cleaning — July",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-CS-2026-08",
+            "service_period": "2026-08",
+            "amount": 2405.0,
+            "description": "Monthly office cleaning — August",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [],
+        "contract": {
+          "contract_id": "CTR-CS-001",
+          "vendor": "CleanSpace Facilities",
+          "start_date": "2026-01-01",
+          "end_date": "2026-12-31",
+          "billing_cadence": "monthly",
+          "amount": 2400.0,
+          "currency": "USD",
+          "expense_account": "Facilities Expense",
+          "billed_in_arrears": true,
+          "monthly_minimum": 2400.0,
+          "description": "Nightly office cleaning for the Cambridge workspace. Fixed monthly fee billed in arrears."
+        },
+        "usage": null,
+        "purchase_orders": [],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": 2405.0,
+          "applicable": true
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": 2400.0,
+          "applicable": true
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": 2403.33,
+          "applicable": true
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": 2401.67,
+          "applicable": true
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": 2407.5,
+          "applicable": true
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": 2400.0,
+          "applicable": true
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": 2400.0,
+          "applicable": true
+        }
+      ],
+      "agent_selection": {
+        "decision": "ACCRUE",
+        "method": "contract_commitment",
+        "amount": 2400.0,
+        "confidence": 0.99,
+        "reason": "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "accrual_required",
+      "final_method": "contract_commitment",
+      "final_amount": 2400.0,
+      "confidence": 0.99,
+      "rationale": "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence.",
+      "journal_entry": {
+        "entry_id": "JE-202609-002",
+        "debit_account": "Facilities Expense",
+        "credit_account": "Accrued Expenses",
+        "amount": 2400.0
+      },
+      "accrual_id": "ACC-202609-002",
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/cleanspace_facilities",
+      "expectation_confidence": 0.99,
+      "estimate_confidence": 0.99,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": "contract_commitment",
+      "policy_amount": 2400.0,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/harbor_electric",
+      "vendor": "Harbor Electric",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-HE-2025-08",
+            "service_period": "2025-08",
+            "amount": 7800.0,
+            "description": "August 2025 electricity — peak cooling",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2025-09",
+            "service_period": "2025-09",
+            "amount": 4650.0,
+            "description": "September 2025 electricity — post-summer drop",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2025-10",
+            "service_period": "2025-10",
+            "amount": 3900.0,
+            "description": "October 2025 electricity",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2025-11",
+            "service_period": "2025-11",
+            "amount": 4100.0,
+            "description": "November 2025 electricity",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2025-12",
+            "service_period": "2025-12",
+            "amount": 4800.0,
+            "description": "December 2025 electricity",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-01",
+            "service_period": "2026-01",
+            "amount": 5200.0,
+            "description": "January 2026 electricity — heating",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-02",
+            "service_period": "2026-02",
+            "amount": 4900.0,
+            "description": "February 2026 electricity",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-03",
+            "service_period": "2026-03",
+            "amount": 3800.0,
+            "description": "March 2026 electricity",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-04",
+            "service_period": "2026-04",
+            "amount": 3200.0,
+            "description": "April 2026 electricity",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-05",
+            "service_period": "2026-05",
+            "amount": 4500.0,
+            "description": "May 2026 electricity — cooling starts",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-06",
+            "service_period": "2026-06",
+            "amount": 7200.0,
+            "description": "June 2026 electricity — peak cooling",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-07",
+            "service_period": "2026-07",
+            "amount": 8100.0,
+            "description": "July 2026 electricity — peak cooling",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-HE-2026-08",
+            "service_period": "2026-08",
+            "amount": 7900.0,
+            "description": "August 2026 electricity — peak cooling",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [],
+        "contract": null,
+        "usage": null,
+        "purchase_orders": [],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": 7900.0,
+          "applicable": true
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": 5783.33,
+          "applicable": true
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": 7733.33,
+          "applicable": true
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": 6685.71,
+          "applicable": true
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": 9573.33,
+          "applicable": true
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": 4650.0,
+          "applicable": true
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": 4650.0,
+          "applicable": true
+        }
+      ],
+      "agent_selection": {
+        "decision": "ACCRUE",
+        "method": "seasonal_prior_year",
+        "amount": 4650.0,
+        "confidence": 0.99,
+        "reason": "Same month last year (2025-09) billed 4,650.00."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "accrual_required",
+      "final_method": "seasonal_prior_year",
+      "final_amount": 4650.0,
+      "confidence": 0.99,
+      "rationale": "Same month last year (2025-09) billed 4,650.00.",
+      "journal_entry": {
+        "entry_id": "JE-202609-003",
+        "debit_account": "Utilities Expense",
+        "credit_account": "Accrued Expenses",
+        "amount": 4650.0
+      },
+      "accrual_id": "ACC-202609-003",
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/harbor_electric",
+      "expectation_confidence": 0.99,
+      "estimate_confidence": 0.99,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": "seasonal_prior_year",
+      "policy_amount": 4650.0,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/helios_hardware",
+      "vendor": "Helios Hardware",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [],
+        "current_invoices": [],
+        "contract": null,
+        "usage": null,
+        "purchase_orders": [
+          {
+            "po_id": "PO-201",
+            "vendor": "Helios Hardware",
+            "authorized_amount": 6200.0,
+            "description": "Four 42U server racks for the Cambridge colo cage",
+            "status": "approved",
+            "created_date": "2026-09-18",
+            "currency": "USD",
+            "approval_limit": 15000.0,
+            "approver": "Priya Nair"
+          }
+        ],
+        "goods_receipts": [
+          {
+            "receipt_id": "GR-201",
+            "po_id": "PO-201",
+            "received": true,
+            "received_date": "2026-09-22",
+            "amount_received": 6200.0,
+            "quantity_ordered": 4,
+            "quantity_received": 4,
+            "vendor": "Helios Hardware"
+          }
+        ]
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": 6200.0,
+          "applicable": true
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": null,
+          "applicable": false
+        }
+      ],
+      "agent_selection": {
+        "decision": "ACCRUE",
+        "method": "goods_receipt",
+        "amount": 6200.0,
+        "confidence": 1.0,
+        "reason": "Goods received and not invoiced total 6,200.00."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "accrual_required",
+      "final_method": "goods_receipt",
+      "final_amount": 6200.0,
+      "confidence": 1.0,
+      "rationale": "Goods received and not invoiced total 6,200.00.",
+      "journal_entry": {
+        "entry_id": "JE-202609-004",
+        "debit_account": "IT Hardware Expense",
+        "credit_account": "Accrued Expenses",
+        "amount": 6200.0
+      },
+      "accrual_id": "ACC-202609-004",
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/helios_hardware",
+      "expectation_confidence": 1.0,
+      "estimate_confidence": 1.0,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": "goods_receipt",
+      "policy_amount": 6200.0,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/lindholm_ruiz_llp",
+      "vendor": "Lindholm & Ruiz LLP",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-LR-2026-04",
+            "service_period": "2026-04",
+            "amount": 8500.0,
+            "description": "Monthly general-counsel retainer — April",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-LR-2026-05",
+            "service_period": "2026-05",
+            "amount": 8500.0,
+            "description": "Monthly general-counsel retainer — May",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-LR-2026-06",
+            "service_period": "2026-06",
+            "amount": 8500.0,
+            "description": "Monthly general-counsel retainer — June",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-LR-2026-07",
+            "service_period": "2026-07",
+            "amount": 8500.0,
+            "description": "Monthly general-counsel retainer — July",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-LR-2026-08",
+            "service_period": "2026-08",
+            "amount": 8500.0,
+            "description": "Monthly general-counsel retainer — August",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [],
+        "contract": {
+          "contract_id": "CTR-LR-001",
+          "vendor": "Lindholm & Ruiz LLP",
+          "start_date": "2026-04-01",
+          "end_date": "2027-03-31",
+          "billing_cadence": "monthly",
+          "amount": 8500.0,
+          "currency": "USD",
+          "expense_account": "Legal Expense",
+          "billed_in_arrears": true,
+          "monthly_minimum": 8500.0,
+          "description": "General-counsel retainer. $8,500 each month, invoiced on the 5th of the following month."
+        },
+        "usage": null,
+        "purchase_orders": [],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": 8500.0,
+          "applicable": true
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": 8500.0,
+          "applicable": true
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": 8500.0,
+          "applicable": true
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": 8500.0,
+          "applicable": true
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": 8500.0,
+          "applicable": true
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": 8500.0,
+          "applicable": true
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": 8500.0,
+          "applicable": true
+        }
+      ],
+      "agent_selection": {
+        "decision": "ACCRUE",
+        "method": "contract_commitment",
+        "amount": 8500.0,
+        "confidence": 0.99,
+        "reason": "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "accrual_required",
+      "final_method": "contract_commitment",
+      "final_amount": 8500.0,
+      "confidence": 0.99,
+      "rationale": "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence.",
+      "journal_entry": {
+        "entry_id": "JE-202609-005",
+        "debit_account": "Legal Expense",
+        "credit_account": "Accrued Expenses",
+        "amount": 8500.0
+      },
+      "accrual_id": "ACC-202609-005",
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/lindholm_ruiz_llp",
+      "expectation_confidence": 0.99,
+      "estimate_confidence": 0.99,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": "contract_commitment",
+      "policy_amount": 8500.0,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/newforge_consulting",
+      "vendor": "NewForge Consulting",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-NF-2026-01",
+            "service_period": "2026-01",
+            "amount": 12000.0,
+            "description": "One-off strategy workshop — not a recurring engagement",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [],
+        "contract": {
+          "contract_id": "CTR-NF-001",
+          "vendor": "NewForge Consulting",
+          "start_date": "2026-01-01",
+          "end_date": "2026-12-31",
+          "billing_cadence": "as_needed",
+          "amount": null,
+          "currency": "USD",
+          "expense_account": "Professional Services Expense",
+          "billed_in_arrears": true,
+          "monthly_minimum": 0.0,
+          "description": "Time-and-materials advisory. No monthly commitment. Invoice only after accepted work."
+        },
+        "usage": null,
+        "purchase_orders": [
+          {
+            "po_id": "PO-202",
+            "vendor": "NewForge Consulting",
+            "authorized_amount": 4000.0,
+            "description": "Exploratory advisory — scope not confirmed, no work accepted",
+            "status": "draft",
+            "created_date": "2026-09-28",
+            "currency": "USD",
+            "approval_limit": 10000.0,
+            "approver": "Jordan Hale"
+          }
+        ],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": null,
+          "applicable": false
+        }
+      ],
+      "agent_selection": {
+        "decision": "INSUFFICIENT_EVIDENCE",
+        "method": null,
+        "amount": null,
+        "confidence": 0.25,
+        "reason": "Weak evidence only; do not assume the expense was incurred."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "insufficient_evidence",
+      "final_method": null,
+      "final_amount": null,
+      "confidence": 0.25,
+      "rationale": "Weak evidence only; do not assume the expense was incurred.",
+      "journal_entry": null,
+      "accrual_id": null,
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/newforge_consulting",
+      "expectation_confidence": 0.25,
+      "estimate_confidence": 0.25,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": null,
+      "policy_amount": null,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    },
+    {
+      "trace_id": "2026-09/20260920T001748Z/pulse_recruiting",
+      "vendor": "Pulse Recruiting",
+      "period": "2026-09",
+      "invoice_received": false,
+      "evidence": {
+        "historical_invoices": [
+          {
+            "invoice_id": "HI-PR-2025-12",
+            "service_period": "2025-12",
+            "amount": 15000.0,
+            "description": "Q4 2025 retained search fee",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-PR-2026-03",
+            "service_period": "2026-03",
+            "amount": 15000.0,
+            "description": "Q1 2026 retained search fee",
+            "po_id": null
+          },
+          {
+            "invoice_id": "HI-PR-2026-06",
+            "service_period": "2026-06",
+            "amount": 15000.0,
+            "description": "Q2 2026 retained search fee",
+            "po_id": null
+          }
+        ],
+        "current_invoices": [],
+        "contract": {
+          "contract_id": "CTR-PR-001",
+          "vendor": "Pulse Recruiting",
+          "start_date": "2025-10-01",
+          "end_date": "2026-12-31",
+          "billing_cadence": "quarterly",
+          "amount": 15000.0,
+          "currency": "USD",
+          "expense_account": "Recruiting Expense",
+          "billed_in_arrears": true,
+          "monthly_minimum": 0.0,
+          "description": "Retained executive search. $15,000 due at each quarter-end (Mar / Jun / Sep / Dec)."
+        },
+        "usage": null,
+        "purchase_orders": [],
+        "goods_receipts": []
+      },
+      "candidate_estimates": [
+        {
+          "method": "last_invoice",
+          "label": "Last invoice",
+          "amount": 15000.0,
+          "applicable": true
+        },
+        {
+          "method": "simple_average",
+          "label": "Simple average",
+          "amount": 15000.0,
+          "applicable": true
+        },
+        {
+          "method": "recent_average",
+          "label": "Recent average",
+          "amount": 15000.0,
+          "applicable": true
+        },
+        {
+          "method": "weighted_recent_average",
+          "label": "Weighted recent average",
+          "amount": 15000.0,
+          "applicable": true
+        },
+        {
+          "method": "linear_trend",
+          "label": "Trend projection",
+          "amount": 15000.0,
+          "applicable": true
+        },
+        {
+          "method": "seasonal_prior_year",
+          "label": "Prior-year same month",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "contract_commitment",
+          "label": "Contract commitment",
+          "amount": 15000.0,
+          "applicable": true
+        },
+        {
+          "method": "usage_run_rate",
+          "label": "Usage x contract rate",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "goods_receipt",
+          "label": "Goods receipt",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "purchase_order",
+          "label": "Purchase order",
+          "amount": null,
+          "applicable": false
+        },
+        {
+          "method": "conservative_minimum",
+          "label": "Conservative minimum",
+          "amount": 15000.0,
+          "applicable": true
+        }
+      ],
+      "agent_selection": {
+        "decision": "ACCRUE",
+        "method": "contract_commitment",
+        "amount": 15000.0,
+        "confidence": 0.97,
+        "reason": "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence."
+      },
+      "validation_errors": [],
+      "safety_rules_triggered": [],
+      "final_decision": "accrual_required",
+      "final_method": "contract_commitment",
+      "final_amount": 15000.0,
+      "confidence": 0.97,
+      "rationale": "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence.",
+      "journal_entry": {
+        "entry_id": "JE-202609-006",
+        "debit_account": "Recruiting Expense",
+        "credit_account": "Accrued Expenses",
+        "amount": 15000.0
+      },
+      "accrual_id": "ACC-202609-006",
+      "tools_called": [],
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/pulse_recruiting",
+      "expectation_confidence": 0.97,
+      "estimate_confidence": 0.97,
+      "agent": {
+        "role": "Accrual Agent",
+        "skills": [
+          {
+            "name": "accrual-evidence-evaluation",
+            "path": "skills/accrual-evidence-evaluation/SKILL.md",
+            "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+            "injected": true
+          },
+          {
+            "name": "accrual-method-selection",
+            "path": "skills/accrual-method-selection/SKILL.md",
+            "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+            "injected": true
+          }
+        ],
+        "load_errors": []
+      },
+      "policy_method": "contract_commitment",
+      "policy_amount": 15000.0,
+      "policy_agreement": true,
+      "diagnostic_warnings": []
+    }
+  ],
+  "discovery": {
+    "period": "2026-09",
+    "results": [
+      {
+        "vendor": "Aether Compute",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 0.99,
+        "signals": [
+          {
+            "type": "monthly_cadence",
+            "detail": "Invoices received in each of the previous 6 months",
+            "confidence": 0.99
+          },
+          {
+            "type": "usage",
+            "detail": "Usage recorded for 2026-09",
+            "confidence": 0.9
+          }
+        ],
+        "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/aether_compute",
+        "current_invoice_ids": [],
+        "indicative_amount": 11849.9,
+        "indicative_method": "usage_run_rate"
+      },
+      {
+        "vendor": "Amazon Web Services",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": true,
+        "missing_bill_candidate": false,
+        "expectation_confidence": 0.99,
+        "signals": [
+          {
+            "type": "multiple_current_invoices",
+            "detail": "2 distinct current-period invoices received (INV-002, INV-016). The expected period obligation is treated as satisfied.",
+            "confidence": 0.99
+          },
+          {
+            "type": "monthly_cadence",
+            "detail": "Invoices received in each of the previous 5 months",
+            "confidence": 0.95
+          }
+        ],
+        "reason": "Expected monthly expense already invoiced via 2 distinct bills (INV-002, INV-016).",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/amazon_web_services",
+        "current_invoice_ids": [
+          "INV-002",
+          "INV-016"
+        ],
+        "indicative_amount": null,
+        "indicative_method": null
+      },
+      {
+        "vendor": "CleanSpace Facilities",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 0.99,
+        "signals": [
+          {
+            "type": "monthly_cadence",
+            "detail": "Invoices received in each of the previous 5 months",
+            "confidence": 0.95
+          },
+          {
+            "type": "recurring_contract",
+            "detail": "Monthly contract CTR-CS-001 for $2,400.00",
+            "confidence": 0.99
+          }
+        ],
+        "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/cleanspace_facilities",
+        "current_invoice_ids": [],
+        "indicative_amount": 2400.0,
+        "indicative_method": "contract_commitment"
+      },
+      {
+        "vendor": "Harbor Electric",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 0.99,
+        "signals": [
+          {
+            "type": "monthly_cadence",
+            "detail": "Invoices received in each of the previous 13 months",
+            "confidence": 0.99
+          },
+          {
+            "type": "seasonal_prior_year",
+            "detail": "Same month last year (2025-09) was invoiced",
+            "confidence": 0.8
+          }
+        ],
+        "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/harbor_electric",
+        "current_invoice_ids": [],
+        "indicative_amount": 4650.0,
+        "indicative_method": "seasonal_prior_year"
+      },
+      {
+        "vendor": "Helios Hardware",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 1.0,
+        "signals": [
+          {
+            "type": "goods_receipt",
+            "detail": "Goods received under PO-201 (GR-201)",
+            "confidence": 1.0
+          }
+        ],
+        "reason": "Goods received this period and no matching invoice.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/helios_hardware",
+        "current_invoice_ids": [],
+        "indicative_amount": 6200.0,
+        "indicative_method": "goods_receipt"
+      },
+      {
+        "vendor": "Lindholm & Ruiz LLP",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 0.99,
+        "signals": [
+          {
+            "type": "monthly_cadence",
+            "detail": "Invoices received in each of the previous 5 months",
+            "confidence": 0.95
+          },
+          {
+            "type": "recurring_contract",
+            "detail": "Monthly contract CTR-LR-001 for $8,500.00",
+            "confidence": 0.99
+          }
+        ],
+        "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/lindholm_ruiz_llp",
+        "current_invoice_ids": [],
+        "indicative_amount": 8500.0,
+        "indicative_method": "contract_commitment"
+      },
+      {
+        "vendor": "NewForge Consulting",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 0.25,
+        "signals": [
+          {
+            "type": "as_needed_contract",
+            "detail": "Time-and-materials contract with no monthly commitment",
+            "confidence": 0.2
+          },
+          {
+            "type": "draft_purchase_order",
+            "detail": "PO-202 is draft; no goods receipt",
+            "confidence": 0.25
+          }
+        ],
+        "reason": "Weak evidence only; do not assume the expense was incurred.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/newforge_consulting",
+        "current_invoice_ids": [],
+        "indicative_amount": null,
+        "indicative_method": null
+      },
+      {
+        "vendor": "Orbit Analytics",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": true,
+        "missing_bill_candidate": false,
+        "expectation_confidence": 0.99,
+        "signals": [
+          {
+            "type": "monthly_cadence",
+            "detail": "Invoices received in each of the previous 5 months",
+            "confidence": 0.95
+          },
+          {
+            "type": "recurring_contract",
+            "detail": "Monthly contract CTR-OA-001 for $3,100.00",
+            "confidence": 0.99
+          }
+        ],
+        "reason": "Expected monthly expense already invoiced (HI-OA-2026-09).",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/orbit_analytics",
+        "current_invoice_ids": [
+          "HI-OA-2026-09"
+        ],
+        "indicative_amount": null,
+        "indicative_method": null
+      },
+      {
+        "vendor": "Pulse Recruiting",
+        "period": "2026-09",
+        "expense_expected": true,
+        "invoice_received": false,
+        "missing_bill_candidate": true,
+        "expectation_confidence": 0.97,
+        "signals": [
+          {
+            "type": "quarterly_cadence",
+            "detail": "Quarterly billing pattern; 09 is a quarter-end month",
+            "confidence": 0.93
+          },
+          {
+            "type": "recurring_contract",
+            "detail": "Quarterly contract CTR-PR-001 for $15,000.00",
+            "confidence": 0.97
+          }
+        ],
+        "reason": "Quarterly recurring vendor with no 2026-09 invoice.",
+        "discovery_trace_id": "2026-09/20260920T001748Z/discovery/pulse_recruiting",
+        "current_invoice_ids": [],
+        "indicative_amount": 15000.0,
+        "indicative_method": "contract_commitment"
+      }
+    ],
+    "expected_count": 9,
+    "invoices_received_count": 2,
+    "missing_count": 7,
+    "discovery_run_id": "20260920T001748Z"
+  },
+  "ranked_missing": [
+    {
+      "vendor": "Pulse Recruiting",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 15000.0,
+      "currency": "USD",
+      "confidence": 0.97,
+      "estimation_method": "contract_commitment",
+      "evidence": [
+        "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence."
+      ],
+      "reasoning_summary": "Contract CTR-PR-001 commits 15,000.00 on a quarterly cadence.",
+      "expense_account": "Recruiting Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-006",
+        "period": "2026-09",
+        "vendor": "Pulse Recruiting",
+        "memo": "Accrue Pulse Recruiting expense for 2026-09 via contract_commitment",
+        "debit": {
+          "account": "Recruiting Expense",
+          "amount": 15000.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 15000.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-006",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-006",
+      "trace_id": "2026-09/20260920T001748Z/pulse_recruiting",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/pulse_recruiting"
+    },
+    {
+      "vendor": "Aether Compute",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 11849.9,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "usage_run_rate",
+      "evidence": [
+        "142,000 gb_hours × 0.08345 = 11,849.90."
+      ],
+      "reasoning_summary": "142,000 gb_hours × 0.08345 = 11,849.90.",
+      "expense_account": "Cloud Infrastructure Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-001",
+        "period": "2026-09",
+        "vendor": "Aether Compute",
+        "memo": "Accrue Aether Compute expense for 2026-09 via usage_run_rate",
+        "debit": {
+          "account": "Cloud Infrastructure Expense",
+          "amount": 11849.9
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 11849.9
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-001",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-001",
+      "trace_id": "2026-09/20260920T001748Z/aether_compute",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/aether_compute"
+    },
+    {
+      "vendor": "Lindholm & Ruiz LLP",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 8500.0,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "contract_commitment",
+      "evidence": [
+        "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence."
+      ],
+      "reasoning_summary": "Contract CTR-LR-001 commits 8,500.00 on a monthly cadence.",
+      "expense_account": "Legal Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-005",
+        "period": "2026-09",
+        "vendor": "Lindholm & Ruiz LLP",
+        "memo": "Accrue Lindholm & Ruiz LLP expense for 2026-09 via contract_commitment",
+        "debit": {
+          "account": "Legal Expense",
+          "amount": 8500.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 8500.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-005",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-005",
+      "trace_id": "2026-09/20260920T001748Z/lindholm_ruiz_llp",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/lindholm_ruiz_llp"
+    },
+    {
+      "vendor": "Helios Hardware",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 6200.0,
+      "currency": "USD",
+      "confidence": 1.0,
+      "estimation_method": "goods_receipt",
+      "evidence": [
+        "Goods received and not invoiced total 6,200.00."
+      ],
+      "reasoning_summary": "Goods received and not invoiced total 6,200.00.",
+      "expense_account": "IT Hardware Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-004",
+        "period": "2026-09",
+        "vendor": "Helios Hardware",
+        "memo": "Accrue Helios Hardware expense for 2026-09 via goods_receipt",
+        "debit": {
+          "account": "IT Hardware Expense",
+          "amount": 6200.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 6200.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-004",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-004",
+      "trace_id": "2026-09/20260920T001748Z/helios_hardware",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/helios_hardware"
+    },
+    {
+      "vendor": "Harbor Electric",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 4650.0,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "seasonal_prior_year",
+      "evidence": [
+        "Same month last year (2025-09) billed 4,650.00."
+      ],
+      "reasoning_summary": "Same month last year (2025-09) billed 4,650.00.",
+      "expense_account": "Utilities Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-003",
+        "period": "2026-09",
+        "vendor": "Harbor Electric",
+        "memo": "Accrue Harbor Electric expense for 2026-09 via seasonal_prior_year",
+        "debit": {
+          "account": "Utilities Expense",
+          "amount": 4650.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 4650.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-003",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-003",
+      "trace_id": "2026-09/20260920T001748Z/harbor_electric",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/harbor_electric"
+    },
+    {
+      "vendor": "CleanSpace Facilities",
+      "period": "2026-09",
+      "status": "accrual_required",
+      "estimated_amount": 2400.0,
+      "currency": "USD",
+      "confidence": 0.99,
+      "estimation_method": "contract_commitment",
+      "evidence": [
+        "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence."
+      ],
+      "reasoning_summary": "Contract CTR-CS-001 commits 2,400.00 on a monthly cadence.",
+      "expense_account": "Facilities Expense",
+      "journal_entry": {
+        "entry_id": "JE-202609-002",
+        "period": "2026-09",
+        "vendor": "CleanSpace Facilities",
+        "memo": "Accrue CleanSpace Facilities expense for 2026-09 via contract_commitment",
+        "debit": {
+          "account": "Facilities Expense",
+          "amount": 2400.0
+        },
+        "credit": {
+          "account": "Accrued Expenses",
+          "amount": 2400.0
+        },
+        "entry_type": "accrual",
+        "related_accrual_id": "ACC-202609-002",
+        "created_at": "2026-09-20T00:17:48Z"
+      },
+      "accrual_id": "ACC-202609-002",
+      "trace_id": "2026-09/20260920T001748Z/cleanspace_facilities",
+      "discovery_trace_id": "2026-09/20260920T001748Z/discovery/cleanspace_facilities"
+    }
+  ],
+  "trace_dir": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/traces/accruals/2026-09/20260920T001748Z",
+  "trace_path": null
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_85e0188d-9257-42c6-b227-7c7316cc5ad8",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-ACME-INV-001. If it is a vendor bill, extract fields and Handle ap / prepare with the Kernel invoice id. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not match. Do not call tools.get_case_evidence. Do not invent totals. Do not ask_user. One Profile this turn: inbox.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:39:36.979Z",
+  "updatedAt": "2026-09-20T14:40:55.697Z",
+  "result": "### Classification (`inbox.tools.classify_inbox_message`)\n- **MSG-ACME-INV-001** → `VENDOR_INVOICE`\n- **Action:** `CREATE_AP_INVOICE` (confidence 0.9)\n- Fields: Acme Supplies · ACM-2026-4410 · PO-101 · 2026-09-08 / due 2026-09-30 · **USD 12,450** (1,245,000¢)\n- Missing fields: none\n\n### Extract (`inbox.tools.extract_inbox_invoice`)\n- Same amounts from attachment `ACM-2026-4410.pdf` (confidence 0.86). No invented totals.\n\n### Dispatch (`inbox.tools.dispatch_inbox_action`)\n- Status **`BUSINESS_DUPLICATE`** / already present in AP\n- Kernel ids: **`INV-001`** · canonical `ING-001`\n- Action: `ATTACH_SUPPORTING_EVIDENCE` · `mutation: false` · not re-forwarded as new bill\n\n### Handle → AP prepare\n- Packet: `artifacts/email/handoffs/MSG-ACME-INV-001.json`\n- AP: `tools.get_invoice` **found** INV-001; case evidence clean (no amount diff, PO approved, GR-101 full)\n- AP next: **await_ctl_pay_review_match** (APPROVE recommendation); packet `runs/ap/packets/INV-001.json`\n\nNo match by Email. No `get_case_evidence` from this Bot. No `ask_user`. Profile stayed **inbox**.",
+  "resultPaths": [],
+  "seq": 16
+}

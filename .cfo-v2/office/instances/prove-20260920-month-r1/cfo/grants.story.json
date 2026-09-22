@@ -1,0 +1,49 @@
+{
+  "version": "1",
+  "comment": "Session 10 fragment. Compiler (session 01) is the SoT. Reporting Reviewer Agent and Forecast Reviewer Agent are not mapped onto Bot story. All ops are reporting.tools read. No mutating finance Catalog ops.",
+  "byDisplayName": {
+    "Variance Analysis Agent": {
+      "ops": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_variance_trace"
+      ],
+      "skills": ["financial-variance-analysis"],
+      "outputType": "VarianceAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Cash Forecast Agent": {
+      "ops": [
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks"
+      ],
+      "skills": [
+        "cash-forecasting",
+        "ar-cash-forecasting"
+      ],
+      "outputType": "ForecastAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Forecast Variance Agent": {
+      "ops": [
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks"
+      ],
+      "skills": ["forecast-vs-actual-interpretation"],
+      "outputType": "ForecastVarianceAgentResult",
+      "source": "reporting/agents.py"
+    },
+    "Board Reporting Agent": {
+      "ops": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_cash_forecast"
+      ],
+      "skills": ["board-financial-reporting"],
+      "outputType": "BoardAgentResult",
+      "source": "reporting/agents.py"
+    }
+  }
+}

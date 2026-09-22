@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-109
+PO Number: PO-109
+Issued: 2026-09-18
+Vendor: Northwind Phantom LLC
+Vendor legal name: Northwind Phantom LLC
+Vendor tax ID: 23-9911004
+Authorized amount: 50,000.00
+Currency: USD
+Approver: USR-PREP-02
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Manual new-vendor engagement
+
+This purchase order is not an invoice. The vendor must bill against PO-109.
+Payment terms follow the vendor master unless this order states otherwise.

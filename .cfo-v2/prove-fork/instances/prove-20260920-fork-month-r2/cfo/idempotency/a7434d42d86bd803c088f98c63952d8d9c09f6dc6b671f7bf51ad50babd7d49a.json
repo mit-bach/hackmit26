@@ -1,0 +1,19 @@
+{
+  "key": "fork-r2-MSG-INBOX-019",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "32940e57f48d9fc401494d37c4c340a97a1a4c5cef4104ea69ca99efd54644c2",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-019",
+      "thread_id": "THR-remittance",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_5a827ccf4440"
+  }
+}

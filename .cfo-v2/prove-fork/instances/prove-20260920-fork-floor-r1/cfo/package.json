@@ -1,0 +1,18 @@
+{
+  "name": "cfo-agentic-system",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Client-system door onto Harness v2: catalog compiler output, Grants, Pi facade.",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.json && node --test dist/extensions/facade.test.js"
+  },
+  "dependencies": {
+    "typebox": "^1.3.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  }
+}

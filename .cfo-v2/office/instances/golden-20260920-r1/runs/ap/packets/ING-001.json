@@ -1,0 +1,35 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "ING-001",
+  "vendor_invoice_number": "ACM-INBOX-1001",
+  "vendor": "Acme Supplies",
+  "amount": 12450,
+  "po_id": "PO-101",
+  "receipt_id": "GR-101",
+  "recommendation": "HOLD",
+  "proposed_action": "HOLD",
+  "exception_types": [],
+  "kernel_facts": {
+    "amount_difference": 0,
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "exception_types": []
+  },
+  "evidence_used": [
+    "ING-001",
+    "PO-101",
+    "GR-101",
+    "INV-001",
+    "runs/inbox/packets/bill-MSG-INBOX-001-ING-001.json",
+    "runs/ingestion/overlay.json"
+  ],
+  "reason": "Kernel three-way on ING-001 alone is clean (PO-101/GR-101/12450 exact, no vendor+number duplicate). HOLD nonetheless: PO-101 authorized_amount 12450 is already the live match for INV-001 ACM-2026-4410 (same vendor, same PO, full GR-101). ACM-INBOX-1001 is a different invoice number so Kernel duplicate_detected is false, but approving both would double-consume one PO. Not inventing exception_types. Email MSG-INBOX-013 is business-dup provenance on this key. Do not pay.",
+  "related_live_payable": "INV-001",
+  "inbox_path": "runs/inbox/packets/bill-MSG-INBOX-001-ING-001.json"
+}

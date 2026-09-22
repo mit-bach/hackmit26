@@ -1,0 +1,40 @@
+[
+  {
+    "record_id": "NS-4410",
+    "period": "2026-09",
+    "system": "NetSuite",
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "V-ACME",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-30",
+    "currency": "USD",
+    "subtotal": 12450.0,
+    "tax": 0.0,
+    "total": 12450.0,
+    "po_number": "PO-101",
+    "description": "Standing desks, monitors, and office peripherals for the Cambridge workspace",
+    "line_items": [
+      {"description": "Cambridge workspace equipment", "amount": 12450.0}
+    ]
+  },
+  {
+    "record_id": "SAP-7782",
+    "period": "2026-09",
+    "system": "SAP",
+    "vendor_name": "Snowflake",
+    "vendor_id": "V-SNOW",
+    "invoice_number": "SNOW-ERP-SEP26",
+    "invoice_date": "2026-09-20",
+    "due_date": "2026-10-20",
+    "currency": "USD",
+    "subtotal": 2100.0,
+    "tax": 0.0,
+    "total": 2100.0,
+    "po_number": null,
+    "description": "On-demand compute credits — mid-September true-up",
+    "line_items": [
+      {"description": "Compute credit true-up", "amount": 2100.0}
+    ]
+  }
+]

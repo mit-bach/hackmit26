@@ -1,0 +1,22 @@
+{
+  "message_id": "MSG-ACME-INV-001",
+  "thread_id": "THR-acme-inv001",
+  "classification": "VENDOR_INVOICE",
+  "selected_action": "CREATE_AP_INVOICE",
+  "dispatch_status": "BUSINESS_DUPLICATE",
+  "kernel_invoice_id": "INV-001",
+  "canonical_id": "ING-001",
+  "duplicate_of": "INV-001",
+  "vendor": "Acme Supplies",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "invoice_date": "2026-09-08",
+  "due_date": "2026-09-30",
+  "currency": "USD",
+  "amount": 12450,
+  "po_id": "PO-101",
+  "document": "ACM-2026-4410.pdf",
+  "document_hash": "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560",
+  "match_status": "MATCHED",
+  "forwarded_to_ap": false,
+  "note": "Dispatch linked evidence; bill already present in AP overlay as INV-001."
+}

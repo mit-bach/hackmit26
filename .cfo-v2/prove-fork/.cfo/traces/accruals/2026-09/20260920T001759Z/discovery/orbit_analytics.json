@@ -1,0 +1,27 @@
+{
+  "vendor": "Orbit Analytics",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": true,
+  "missing_bill_candidate": false,
+  "expectation_confidence": 0.99,
+  "signals": [
+    {
+      "type": "monthly_cadence",
+      "detail": "Invoices received in each of the previous 5 months",
+      "confidence": 0.95
+    },
+    {
+      "type": "recurring_contract",
+      "detail": "Monthly contract CTR-OA-001 for $3,100.00",
+      "confidence": 0.99
+    }
+  ],
+  "reason": "Expected monthly expense already invoiced (HI-OA-2026-09).",
+  "discovery_trace_id": "2026-09/20260920T001759Z/discovery/orbit_analytics",
+  "current_invoice_ids": [
+    "HI-OA-2026-09"
+  ],
+  "indicative_amount": null,
+  "indicative_method": null
+}

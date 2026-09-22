@@ -1,0 +1,11 @@
+Walnut Works
+Packing list
+Ship date: 2026-09-16
+PO Number: PO-342
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 342-0916
+
+Contents:
+  - Line GR-342 — qty 1
+
+This packing list is not an invoice.

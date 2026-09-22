@@ -94,11 +94,49 @@ def remember_payout(payout: ProviderPayout) -> ProviderPayout:
     return payout
 
 
+def _ensure_loaded() -> None:
+    """Hydrate process memory from STATE_PATH once if empty (Computer runs overlay)."""
+    if _payouts or _events:
+        return
+    if not STATE_PATH.exists():
+        return
+    try:
+        raw = json.loads(STATE_PATH.read_text())
+    except Exception:
+        return
+    for row in raw.get("events") or []:
+        try:
+            ev = WebhookEvent.model_validate(row)
+            _events[(ev.provider, ev.provider_event_id)] = ev
+        except Exception:
+            continue
+    for row in raw.get("payouts") or []:
+        try:
+            po = ProviderPayout.model_validate(row)
+            _payouts[po.payout_id] = po
+        except Exception:
+            continue
+    for row in raw.get("reconciliations") or []:
+        try:
+            rb = ReconciliationBreakdown.model_validate(row)
+            _reconciliations[rb.payout_id] = rb
+        except Exception:
+            continue
+    for key, val in (raw.get("bank_deposits") or {}).items():
+        if isinstance(val, dict):
+            _bank_deposits[str(key)] = val
+    _gmail_history.update({str(k): str(v) for k, v in (raw.get("gmail_history") or {}).items()})
+    _outlook_subs.update({str(k): v for k, v in (raw.get("outlook_subscriptions") or {}).items() if isinstance(v, dict)})
+    _sync_cursors.update({str(k): str(v) for k, v in (raw.get("sync_cursors") or {}).items()})
+
+
 def get_payout(payout_id: str) -> ProviderPayout | None:
+    _ensure_loaded()
     return _payouts.get(payout_id)
 
 
 def all_payouts() -> list[ProviderPayout]:
+    _ensure_loaded()
     return list(_payouts.values())
 
 

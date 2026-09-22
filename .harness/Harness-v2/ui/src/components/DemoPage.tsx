@@ -27,6 +27,7 @@ import {
   revealText,
   savePlaybackSettings,
   showMsForBeat,
+  showMsForSeq,
   stepBeat,
   timelineTotalMs,
   type DemoMessageReveal,
@@ -34,9 +35,17 @@ import {
 } from "@/lib/demo-playback";
 import {
   parseDemoBundle,
+  parseDemoScenes,
+  CAMERA_DEMO_DIRECTOR,
+  PANE_CAPS,
+  clampDirector,
+  loadDirectorSettings,
+  saveDirectorSettings,
   type DemoAwakeBot,
   type DemoBundle,
   type DemoColor,
+  type DemoDirector,
+  type DemoScene,
   type MosaicCell,
   type TranscriptEntry,
 } from "@/lib/demo-replay";
@@ -62,7 +71,31 @@ function isUserLine(row: TranscriptEntry): boolean {
 }
 
 function isResultLine(row: TranscriptEntry): boolean {
-  return row.kind === "handoff.done" || row.kind === "result" || row.kind.endsWith(".done");
+  return row.kind === "handoff.done" || row.kind === "result" || row.kind === "tool.result" || row.kind.endsWith(".done");
+}
+
+function isToolCall(row: TranscriptEntry): boolean {
+  return row.kind === "tool.call";
+}
+
+function parseDemoQuery(): {
+  source: "auto" | "live" | "recording";
+  cinema: boolean;
+  scene: string;
+  play: boolean;
+} {
+  if (typeof window === "undefined") {
+    return { source: "auto", cinema: false, scene: "", play: false };
+  }
+  const params = new URLSearchParams(window.location.search);
+  const raw = params.get("source");
+  const source = raw === "live" || raw === "recording" || raw === "auto" ? raw : "auto";
+  return {
+    source,
+    cinema: params.get("cinema") === "1" || params.get("cinema") === "true",
+    scene: params.get("scene") ?? "",
+    play: params.get("play") === "1" || params.get("play") === "true",
+  };
 }
 
 function displayText(row: TranscriptEntry): string {
@@ -107,26 +140,44 @@ function nearestChip(speed: number): number {
   return SPEED_CHIPS.reduce((best, item) => (Math.abs(item - speed) < Math.abs(best - speed) ? item : best), SPEED_CHIPS[0]);
 }
 
+function isTextEntryTarget(target: EventTarget | null): boolean {
+  if (target instanceof HTMLTextAreaElement) {
+    return true;
+  }
+  if (target instanceof HTMLInputElement) {
+    return target.type !== "range" && target.type !== "button" && target.type !== "checkbox" && target.type !== "radio";
+  }
+  return target instanceof HTMLElement && target.isContentEditable;
+}
+
 export function DemoPage(): React.ReactElement {
   const { dispatch } = useStore();
+  const boot = useMemo(() => parseDemoQuery(), []);
   const [bundle, setBundle] = useState<DemoBundle | null>(null);
-  const [source, setSource] = useState<"auto" | "live" | "recording">("auto");
+  const [source, setSource] = useState<"auto" | "live" | "recording">(boot.source);
   const [showMs, setShowMs] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [cinema, setCinema] = useState(boot.cinema);
   const [settings, setSettings] = useState<DemoPlaybackSettings>(() => loadPlaybackSettings());
+  const [director, setDirectorState] = useState<DemoDirector>(() => loadDirectorSettings());
+  const [sceneId, setSceneId] = useState(boot.scene || "full");
+  const [sceneTitle, setSceneTitle] = useState("");
+  const [sceneBusy, setSceneBusy] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [recordBusy, setRecordBusy] = useState(false);
+  const [seqDraft, setSeqDraft] = useState("");
   const playingRef = useRef(false);
   const totalRef = useRef(0);
+  const bootedRef = useRef(false);
 
   const load = useCallback(async (nextSource: "auto" | "live" | "recording"): Promise<void> => {
     setBusy(true);
     setError(null);
     try {
       const path = nextSource === "auto" ? "/api/demo" : `/api/demo?source=${nextSource}`;
-      const body: unknown = await api(path);
+      const body: unknown = await api(path, { timeoutMs: 20_000 });
       const parsed = parseDemoBundle(body);
       if (!parsed) {
         setError(t("demo.err.parse"));
@@ -148,10 +199,10 @@ export function DemoPage(): React.ReactElement {
     void load(source);
   }, [load, source]);
 
-  const beats = useMemo(() => (bundle ? collectBeats(bundle) : []), [bundle]);
+  const beats = useMemo(() => (bundle ? collectBeats(bundle, director) : []), [bundle, director]);
   const playhead = useMemo(
-    () => (bundle ? projectPlayhead(bundle, showMs, settings) : null),
-    [bundle, showMs, settings],
+    () => (bundle ? projectPlayhead(bundle, showMs, settings, director) : null),
+    [bundle, director, showMs, settings],
   );
   const frame = playhead?.frame;
   const totalMs = playhead?.totalMs ?? 0;
@@ -159,6 +210,68 @@ export function DemoPage(): React.ReactElement {
   const lastSeq = bundle?.lastSeq ?? 0;
   playingRef.current = playing;
   totalRef.current = totalMs;
+
+  const patchDirector = useCallback((partial: Partial<DemoDirector>): void => {
+    const next = clampDirector({ ...director, ...partial });
+    saveDirectorSettings(next);
+    setDirectorState(next);
+    if (partial.seqFrom !== undefined || partial.seqTo !== undefined) {
+      setShowMs(0);
+      setPlaying(false);
+    }
+  }, [director]);
+
+  const applyScene = useCallback((scene: DemoScene | "full"): void => {
+    if (scene === "full") {
+      const next = clampDirector({ ...director, seqFrom: 0, seqTo: 0 });
+      saveDirectorSettings(next);
+      setDirectorState(next);
+      setSceneId("full");
+      setShowMs(0);
+      setPlaying(false);
+      return;
+    }
+    const next = clampDirector({
+      maxPanes: scene.maxPanes,
+      featured: scene.featured,
+      seqFrom: scene.seqFrom,
+      seqTo: scene.seqTo,
+    });
+    saveDirectorSettings(next);
+    setDirectorState(next);
+    setSceneId(scene.id);
+    setShowMs(0);
+    setPlaying(false);
+  }, [director]);
+
+  useEffect(() => {
+    if (!bundle || bootedRef.current) {
+      return;
+    }
+    bootedRef.current = true;
+    if (boot.scene && boot.scene !== "full") {
+      const scene = (bundle.scenes ?? []).find((item) => item.id === boot.scene);
+      if (scene) {
+        applyScene(scene);
+      }
+    }
+    if (boot.play) {
+      setPlaying(true);
+    }
+  }, [applyScene, boot.play, boot.scene, bundle]);
+
+  useEffect(() => {
+    if (!cinema) {
+      return;
+    }
+    const onKey = (event: KeyboardEvent): void => {
+      if (event.key === "Escape") {
+        setCinema(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [cinema]);
 
   const patchSettings = useCallback((partial: Partial<DemoPlaybackSettings>): void => {
     const next = clampPlaybackSettings({ ...settings, ...partial });
@@ -205,7 +318,15 @@ export function DemoPage(): React.ReactElement {
       }
     };
     raf = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(raf);
+    const interval = window.setInterval(() => {
+      if (playingRef.current) {
+        tick(performance.now());
+      }
+    }, 50);
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.clearInterval(interval);
+    };
   }, [playing]);
 
   const togglePlay = useCallback((): void => {
@@ -228,7 +349,7 @@ export function DemoPage(): React.ReactElement {
         return;
       }
       const target = event.target;
-      const typing = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
+      const typing = isTextEntryTarget(target);
       if (event.key === "Escape") {
         event.preventDefault();
         if (settingsOpen) {
@@ -258,6 +379,18 @@ export function DemoPage(): React.ReactElement {
         setPlaying(false);
         const previous = stepBeat(beats, playhead?.beatIndex ?? -1, -1);
         setShowMs(showMsForBeat(beats, previous, settings));
+        return;
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        setPlaying(false);
+        setShowMs(0);
+        return;
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        setPlaying(false);
+        setShowMs(totalRef.current);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -278,12 +411,46 @@ export function DemoPage(): React.ReactElement {
     }
   };
 
+  const saveScene = async (): Promise<void> => {
+    if (!bundle) {
+      return;
+    }
+    const title = sceneTitle.trim() || `Cut ${director.seqFrom || 0}–${director.seqTo || bundle.lastSeq}`;
+    const nextScene: DemoScene = {
+      id: `cut-${Date.now()}`,
+      title,
+      seqFrom: director.seqFrom,
+      seqTo: director.seqTo,
+      featured: director.featured,
+      maxPanes: director.maxPanes,
+    };
+    setSceneBusy(true);
+    setError(null);
+    try {
+      const body: unknown = await api("/api/demo/scenes", {
+        method: "PUT",
+        body: JSON.stringify({ scenes: [...(bundle.scenes ?? []), nextScene] }),
+      });
+      const scenes = parseDemoScenes(body);
+      setBundle({ ...bundle, scenes: scenes.length > 0 ? scenes : [...(bundle.scenes ?? []), nextScene] });
+      setSceneId(nextScene.id);
+      setSceneTitle("");
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause));
+    } finally {
+      setSceneBusy(false);
+    }
+  };
+
   const originMs = beats[0]?.wallMs ?? 0;
   const modeSpeed = settings.timing === "wall" ? settings.wallSpeed : settings.beatSpeed;
   const chip = nearestChip(modeSpeed);
+  const chapter = (bundle?.scenes ?? []).find((item) => item.id === sceneId);
+  const chapterLabel = chapter?.title ?? (sceneId === "full" ? t("demo.director.full") : sceneId);
 
   return (
-    <main className="flex h-full min-w-0 flex-1 flex-col bg-app">
+    <main className={cn("flex h-full min-w-0 flex-1 flex-col bg-app", cinema && "demo-cinema")} data-cinema={cinema ? "true" : "false"}>
+      {cinema ? null : (
       <div className="flex items-center gap-3 border-b border-hairline/40 px-4 py-2.5">
         <button
           type="button"
@@ -319,6 +486,32 @@ export function DemoPage(): React.ReactElement {
             onClick={() => setSource("recording")}
           />
         </div>
+        <label className="flex items-center gap-1 text-[12px] text-ink-secondary">
+          <span className="hidden sm:inline">{t("demo.director.scene")}</span>
+          <select
+            value={sceneId}
+            aria-label={t("demo.director.scene")}
+            onChange={(event) => {
+              const value = event.target.value;
+              if (value === "full") {
+                applyScene("full");
+                return;
+              }
+              const scene = (bundle?.scenes ?? []).find((item) => item.id === value);
+              if (scene) {
+                applyScene(scene);
+              }
+            }}
+            className="max-w-[10rem] rounded-md border border-hairline/40 bg-raised px-2 py-1 text-[12px] text-ink"
+          >
+            <option value="full">{t("demo.director.full")}</option>
+            {(bundle?.scenes ?? []).map((scene) => (
+              <option key={scene.id} value={scene.id}>
+                {scene.title}
+              </option>
+            ))}
+          </select>
+        </label>
         <button
           type="button"
           onClick={() => void recordNow()}
@@ -328,7 +521,15 @@ export function DemoPage(): React.ReactElement {
           <Disc3 size={14} />
           {recordBusy ? t("demo.recording") : t("demo.record")}
         </button>
+        <button
+          type="button"
+          onClick={() => setCinema((value) => !value)}
+          className="rounded-lg bg-control px-3 py-1.5 text-[13px] text-ink hover:bg-raised-hover"
+        >
+          {t("demo.cinema")}
+        </button>
       </div>
+      )}
 
       <div className="relative min-h-0 flex-1">
         {busy && !bundle ? (
@@ -341,7 +542,7 @@ export function DemoPage(): React.ReactElement {
             <div className="max-w-md text-[13px] text-ink-secondary">{t("demo.empty.hint")}</div>
           </div>
         ) : frame ? (
-          <div className="relative h-full w-full" data-demo-playing={playing ? "true" : "false"} data-demo-timing={settings.timing} data-demo-held={frame.awake.some((pane) => pane.held) ? "true" : "false"}>
+          <div className="relative h-full w-full" data-demo-playing={playing ? "true" : "false"} data-demo-timing={settings.timing} data-demo-held={frame.awake.some((pane) => pane.held) ? "true" : "false"} data-demo-overflow={frame.overflow}>
             {frame.awake.length === 0 && lastSeq === 0 ? (
               <WipeStage lastSeq={lastSeq} caption={caption(frame)} />
             ) : null}
@@ -353,6 +554,20 @@ export function DemoPage(): React.ReactElement {
               showTimestamps={settings.showTimestamps}
               originMs={originMs}
             />
+            {frame.overflow > 0 && !cinema ? (
+              <div className="absolute right-3 top-3 z-10 rounded-full bg-raised/90 px-2.5 py-1 text-[11px] text-ink-secondary">
+                {t("demo.overflow", { count: frame.overflow })}
+              </div>
+            ) : null}
+            {cinema ? (
+              <div className="demo-cinema-card pointer-events-none absolute inset-x-0 bottom-0 z-20 px-8 pb-8 pt-24">
+                <div className="text-[13px] tracking-[0.18em] text-ink-secondary uppercase">{t("demo.cinema.kicker")}</div>
+                <div className="mt-1 text-[28px] font-semibold text-ink">{chapterLabel}</div>
+                <div className="mt-2 max-w-4xl text-[15px] leading-snug text-ink-secondary">
+                  {frame ? caption(frame) : ""}
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
         {error && bundle ? (
@@ -362,6 +577,7 @@ export function DemoPage(): React.ReactElement {
         ) : null}
       </div>
 
+      {cinema ? null : (
       <div className="border-t border-hairline/40 px-4 py-3">
         <div className="mb-2 flex items-center gap-3">
           <button
@@ -412,6 +628,41 @@ export function DemoPage(): React.ReactElement {
           <div className="text-[12px] tabular-nums text-ink-secondary">
             {formatShowClock(showMs)} / {formatShowClock(totalMs)}
           </div>
+          <div className="text-[12px] tabular-nums text-ink-secondary">
+            {t("demo.seq", { seq: playhead?.seq ?? 0, last: lastSeq })}
+          </div>
+          <form
+            className="flex items-center gap-1"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const seq = Number(seqDraft);
+              if (!Number.isFinite(seq) || beats.length === 0) {
+                return;
+              }
+              setPlaying(false);
+              setShowMs(showMsForSeq(beats, seq, settings));
+            }}
+          >
+            <input
+              type="number"
+              inputMode="numeric"
+              min={0}
+              max={Math.max(lastSeq, 0)}
+              step={1}
+              value={seqDraft}
+              onChange={(event) => setSeqDraft(event.target.value)}
+              onFocus={() => setPlaying(false)}
+              aria-label={t("demo.seqJump")}
+              placeholder={t("demo.seqJump")}
+              className="w-20 rounded-md border border-hairline/40 bg-raised px-2 py-1 text-[12px] tabular-nums text-ink"
+            />
+            <button
+              type="submit"
+              className="rounded-md px-2 py-1 text-[12px] text-ink-secondary hover:bg-raised hover:text-ink"
+            >
+              {t("demo.seqJumpGo")}
+            </button>
+          </form>
           <button
             type="button"
             onClick={() => setSettingsOpen((value) => !value)}
@@ -432,39 +683,75 @@ export function DemoPage(): React.ReactElement {
           step={0.001}
           value={progress}
           aria-label={t("demo.slider")}
+          aria-valuetext={t("demo.seq", { seq: playhead?.seq ?? 0, last: lastSeq })}
           onChange={(event) => {
             setPlaying(false);
             setShowMs(Number(event.target.value) * totalMs);
           }}
-          className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-raised accent-[var(--accent)]"
+          className="demo-timeline w-full"
         />
         {settingsOpen ? (
           <PlaybackSettings
             settings={settings}
+            director={director}
+            bots={bundle?.bots ?? []}
+            lastSeq={lastSeq}
+            sceneTitle={sceneTitle}
+            sceneBusy={sceneBusy}
             onChange={patchSettings}
+            onDirector={patchDirector}
+            onSceneTitle={setSceneTitle}
+            onSaveScene={() => void saveScene()}
             onReset={() => {
               savePlaybackSettings(DEFAULT_DEMO_PLAYBACK);
               const kept = totalMs > 0 ? showMs / totalMs : 0;
               setSettings(DEFAULT_DEMO_PLAYBACK);
-              const nextTotal = bundle ? projectPlayhead(bundle, 0, DEFAULT_DEMO_PLAYBACK).totalMs : 0;
+              const nextTotal = bundle ? projectPlayhead(bundle, 0, DEFAULT_DEMO_PLAYBACK, director).totalMs : 0;
               setShowMs(kept * nextTotal);
+            }}
+            onResetDirector={() => {
+              saveDirectorSettings(CAMERA_DEMO_DIRECTOR);
+              setDirectorState(CAMERA_DEMO_DIRECTOR);
+              setSceneId("full");
+              setShowMs(0);
+              setPlaying(false);
             }}
           />
         ) : null}
       </div>
+      )}
     </main>
   );
 }
 
 function PlaybackSettings({
   settings,
+  director,
+  bots,
+  lastSeq,
+  sceneTitle,
+  sceneBusy,
   onChange,
+  onDirector,
+  onSceneTitle,
+  onSaveScene,
   onReset,
+  onResetDirector,
 }: {
   settings: DemoPlaybackSettings;
+  director: DemoDirector;
+  bots: readonly { id: string; slug: string; name: string }[];
+  lastSeq: number;
+  sceneTitle: string;
+  sceneBusy: boolean;
   onChange: (partial: Partial<DemoPlaybackSettings>) => void;
+  onDirector: (partial: Partial<DemoDirector>) => void;
+  onSceneTitle: (value: string) => void;
+  onSaveScene: () => void;
   onReset: () => void;
+  onResetDirector: () => void;
 }): React.ReactElement {
+  const featured = new Set(director.featured.map((item) => item.toLowerCase()));
   return (
     <div className="mt-3 grid gap-3 rounded-xl border border-hairline/40 bg-raised/40 p-3 md:grid-cols-2">
       <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-2">
@@ -578,6 +865,100 @@ function PlaybackSettings({
         display={`${(settings.lingerMs / 1000).toFixed(2)}s`}
         onChange={(value) => onChange({ lingerMs: value })}
       />
+      <div className="md:col-span-2 mt-1 flex flex-wrap items-center justify-between gap-2 border-t border-hairline/30 pt-3">
+        <div className="text-[12px] font-semibold text-ink">{t("demo.director.title")}</div>
+        <button
+          type="button"
+          onClick={onResetDirector}
+          className="flex items-center gap-1 rounded-md px-2 py-1 text-[12px] text-ink-secondary hover:bg-raised hover:text-ink"
+        >
+          <RotateCcw size={12} />
+          {t("demo.settings.resetDirector")}
+        </button>
+      </div>
+      <div className="md:col-span-2">
+        <div className="mb-1 text-[11px] text-ink-secondary">{t("demo.director.panes")}</div>
+        <div className="flex flex-wrap gap-1">
+          {PANE_CAPS.map((count) => (
+            <button
+              key={count}
+              type="button"
+              onClick={() => onDirector({ maxPanes: count })}
+              className={cn(
+                "rounded-md px-2 py-1 text-[12px] tabular-nums",
+                director.maxPanes === count ? "bg-app text-ink" : "text-ink-secondary hover:bg-raised",
+              )}
+            >
+              {count}
+            </button>
+          ))}
+        </div>
+      </div>
+      <label className="block">
+        <div className="mb-1 text-[11px] text-ink-secondary">{t("demo.director.from")}</div>
+        <input
+          type="number"
+          min={0}
+          max={Math.max(lastSeq, 0)}
+          value={director.seqFrom}
+          onChange={(event) => onDirector({ seqFrom: Number(event.target.value) })}
+          className="w-full rounded-md border border-hairline/40 bg-app px-2 py-1 text-[12px] tabular-nums text-ink"
+        />
+      </label>
+      <label className="block">
+        <div className="mb-1 text-[11px] text-ink-secondary">{t("demo.director.to")}</div>
+        <input
+          type="number"
+          min={0}
+          max={Math.max(lastSeq, 0)}
+          value={director.seqTo}
+          onChange={(event) => onDirector({ seqTo: Number(event.target.value) })}
+          className="w-full rounded-md border border-hairline/40 bg-app px-2 py-1 text-[12px] tabular-nums text-ink"
+        />
+      </label>
+      <div className="md:col-span-2">
+        <div className="mb-1 text-[11px] text-ink-secondary">{t("demo.director.featured")}</div>
+        <div className="flex flex-wrap gap-1">
+          {bots.map((bot) => {
+            const active = featured.has(bot.slug.toLowerCase()) || featured.has(bot.id.toLowerCase());
+            return (
+              <button
+                key={bot.id}
+                type="button"
+                onClick={() => {
+                  const next = active
+                    ? director.featured.filter((item) => item.toLowerCase() !== bot.slug.toLowerCase() && item.toLowerCase() !== bot.id.toLowerCase())
+                    : [...director.featured, bot.slug];
+                  onDirector({ featured: next });
+                }}
+                className={cn(
+                  "rounded-md px-2 py-1 text-[12px]",
+                  active ? "bg-app text-ink" : "text-ink-secondary hover:bg-raised",
+                )}
+              >
+                {bot.slug}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="md:col-span-2 flex flex-wrap items-center gap-2">
+        <input
+          type="text"
+          value={sceneTitle}
+          onChange={(event) => onSceneTitle(event.target.value)}
+          placeholder={t("demo.director.titleField")}
+          className="min-w-[12rem] flex-1 rounded-md border border-hairline/40 bg-app px-2 py-1 text-[12px] text-ink"
+        />
+        <button
+          type="button"
+          onClick={onSaveScene}
+          disabled={sceneBusy}
+          className="rounded-md bg-control px-3 py-1.5 text-[12px] text-ink hover:bg-raised-hover disabled:opacity-50"
+        >
+          {sceneBusy ? t("demo.director.saving") : t("demo.director.save")}
+        </button>
+      </div>
     </div>
   );
 }
@@ -834,6 +1215,16 @@ function DemoBubble({
 }): React.ReactElement {
   const { text, streaming } = streamedCopy(row, reveal);
   const stamp = showTimestamps ? formatStamp(row.t, originMs) : "";
+  if (isToolCall(row)) {
+    return (
+      <div className="flex justify-center">
+        <div className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-[12px] font-medium text-accent">
+          {text}
+          {streaming ? <span className="demo-stream-caret" aria-hidden="true" /> : null}
+        </div>
+      </div>
+    );
+  }
   if (isUserLine(row)) {
     return (
       <div className="flex flex-col items-end gap-1">

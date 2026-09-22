@@ -1,0 +1,21 @@
+{
+  "key": "golden-dump-MSG-INBOX-001",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "69628e0fd48c109314f41241e09da05988681c5a726019d268ede3544f5736fd",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-001",
+      "thread_id": "THR-clean-attachment",
+      "delivered": true,
+      "attachment_hashes": [
+        "e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7"
+      ],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_be109e08bafc"
+  }
+}

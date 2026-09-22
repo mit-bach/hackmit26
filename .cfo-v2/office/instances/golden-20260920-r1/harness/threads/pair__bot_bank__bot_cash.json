@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_bank:bot_cash",
+  "threadId": "pair:bot_bank:bot_cash",
+  "name": "Bank ↔ Cash",
+  "memberIds": [
+    "bot_bank",
+    "bot_cash"
+  ],
+  "createdAt": 1789917099611,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_73a94d50-6ca0-4590-a2d5-a73df3609fdb",
+      "handleId": "h_73a94d50-6ca0-4590-a2d5-a73df3609fdb",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: match\nBank landed unmatched 2026-09 operating-account lines. A charge is not a bill. Do not invent invoices. Do not force MATCHED.\n\nPrimary packet (required): workspace/bank/lines/TXN-2026-09-015.json\nLanded index: workspace/bank/landed/2026-09-operating.json\nAll line packets: workspace/bank/lines/ (28 non-VOL operating lines for 2026-09)\nStatement source: data/cash_recon/bank_statement.json\n\nTXN-2026-09-015: wire_credit $12,412.40 NORTHSTAR LLC / CUSTOMER PAYMENT. Statement raw_metadata names PAY-006 / INV-AR-013 (feed fields only). Choose among Kernel candidates; fail closed if none.",
+      "at": 1789917099611,
+      "from": {
+        "botId": "bot_bank",
+        "name": "Bank",
+        "color": "purple"
+      }
+    },
+    {
+      "id": "pair-result-h_73a94d50-6ca0-4590-a2d5-a73df3609fdb",
+      "handleId": "h_73a94d50-6ca0-4590-a2d5-a73df3609fdb",
+      "role": "bot",
+      "kind": "text",
+      "text": "TXN-2026-09-015 match complete (fail-closed).\n\nPacket: workspace/cash/packets/TXN-2026-09-015.json\n\nResult: HUMAN_REVIEW — no MATCHED.\n- get_pipe_identifier: identifier_present=false (apply/pay have not identified this line). Fail closed; did not invent counterparty from NORTHSTAR LLC memo or feed raw_metadata PAY-006 / INV-AR-013.\n- get_bank_transaction: unknown bank transaction TXN-2026-09-015\n- get_match_candidates case_id 2026-09: not_found (bound case missing)\n- candidate_id: none. Do not force MATCHED.\n\nRouting packet to ctl-cash / review-rec for sign-off path. Period stays open on this line until apply/pay identity + Kernel candidate exist.",
+      "at": 1789917140504,
+      "from": {
+        "botId": "bot_cash",
+        "name": "Cash",
+        "color": "red"
+      }
+    }
+  ]
+}

@@ -15,6 +15,8 @@ import { searchAgents } from "./search.ts";
 import { sendPrompt } from "./send.ts";
 import { loadOperatorConfig, piEnvFromConfig, type SpawnPolicy } from "./server/operator-config.ts";
 import { startServer } from "./server/http.ts";
+import { resolveServeComputer } from "./server/office-instances.ts";
+import { demoMeta, loadDemoScenes, recordDemoSession } from "./demo-replay.ts";
 import { wipeRuntime } from "./wipe.ts";
 
 function takeOption(args: readonly string[], name: string): string | undefined {
@@ -70,6 +72,8 @@ Commands:
   protocol [--computer DIR] [query]
   routine <name> [--computer DIR]
   floor [--computer DIR]
+  demo record|meta|scenes [--computer DIR]
+        Snapshot protocol.jsonl to harness/demo/latest (no HTTP).
 
 Load harness/client.json on the Computer for extra -e, sidecar, spawn, and model.
 wipe drops session files (inboxes, Handles, transcripts, receipts) and keeps roster.
@@ -257,6 +261,24 @@ The Operator shell is a loopback SPA on the same process as the JSON API.
     process.stdout.write("Or headless: harness serve --computer <dir>\n");
     process.stdout.write("--fake is a protocol demo (echo workers). It is not live Pi.\n");
     return;
+  }
+
+  if (cmd === "demo") {
+    const action = positional(rest)[0] ?? "meta";
+    const root = resolveServeComputer(computerRoot);
+    if (action === "record") {
+      process.stdout.write(`${JSON.stringify(recordDemoSession(root), null, 2)}\n`);
+      return;
+    }
+    if (action === "meta") {
+      process.stdout.write(`${JSON.stringify(demoMeta(root), null, 2)}\n`);
+      return;
+    }
+    if (action === "scenes") {
+      process.stdout.write(`${JSON.stringify({ scenes: loadDemoScenes(root) }, null, 2)}\n`);
+      return;
+    }
+    throw new Error("usage: harness demo record|meta|scenes [--computer DIR]");
   }
 
   if (cmd === "handle") {

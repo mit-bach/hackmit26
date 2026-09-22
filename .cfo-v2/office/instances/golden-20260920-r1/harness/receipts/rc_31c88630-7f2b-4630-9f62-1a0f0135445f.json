@@ -1,0 +1,10 @@
+{
+  "id": "rc_31c88630-7f2b-4630-9f62-1a0f0135445f",
+  "name": "month-end",
+  "bot": "close",
+  "handleId": "h_f1e8bdf6-9fea-4326-a661-7077aafebf84",
+  "status": "completed",
+  "at": "2026-09-20T15:26:57.084Z",
+  "updatedAt": "2026-09-20T15:35:33.874Z",
+  "result": "## Period completeness `2026-09` (coordinate)\n\n**Profile:** `coordinate` only (no Catalog ops). Kernel host `run_close_host` wrote the pack under this Computer.\n\n### `ready_tasks`\nEmpty after the host pass. No further self-Wake for `accrue` / `prepaid` / `assets` / `bs`.\n\n| Task | Status |\n| --- | --- |\n| ingest, ap, ar, accruals, prepaid, depreciation | COMPLETE |\n| cash | NEEDS_REVIEW |\n| bs_recon | BLOCKED |\n| exceptions, final_review, mark_closed | NOT_STARTED |\n\n### Fail-closed (expected demo)\n- Cash unexplained **$12.40** (`TXN-2026-09-015`) — not timing\n- AR unmatched **$4,500**\n- Prepaids: missing insurance policy evidence  \n- `gate_passed=false` · `period_status=BLOCKED` · **not CLOSED**\n\n### Pack / runs\n- `workspace/close/2026-09/pack.json`\n- `workspace/close/2026-09/gates.json`\n- `workspace/close/2026-09/coordinate-decision.json`\n- `workspace/close/2026-09/host-run.json`\n- `runs/month_end/` (period state, schedules, journals)\n\n### Handles (live)\n| To | Result |\n| --- | --- |\n| `ctl-books` / `lock` | **REJECT_CLOSE** → `workspace/close/2026-09/ctl-books-lock-verdict.json` |\n| `story` / `flux` | UNLOCKED draft → `workspace/story/2026-09/flux.json` (forecast refused) |\n| `audit` / `interpret` | Sample done → `workspace/audit/2026-09/interpretation.json` |\n\nQueue owner remains **ctl-books**. Lock door stays **`close.month_end`**. No human asked."
+}

@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-CAM-RENT-2026-07
+PO Number: PO-CAM-RENT-2026-07
+Issued: 2026-07-01
+Vendor: Cambridge Properties
+Vendor legal name: Cambridge Properties LLC
+Vendor tax ID: 04-4418820
+Authorized amount: 48,000.00
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Cambridge HQ rent
+
+This purchase order is not an invoice. The vendor must bill against PO-CAM-RENT-2026-07.
+Payment terms follow the vendor master unless this order states otherwise.

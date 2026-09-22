@@ -1,0 +1,509 @@
+{
+  "ok": true,
+  "trace_id": "web_12e909d93eeb",
+  "workflow": "ap",
+  "ts": "2026-09-20T14:19:02Z",
+  "completed_at": "2026-09-20T14:19:02Z",
+  "status": "completed",
+  "bots": [
+    "ap",
+    "ctl-pay"
+  ],
+  "record_ids": [
+    "INV-006"
+  ],
+  "live_llm": false,
+  "result": {
+    "summary": "Maximor received a bill from Shadow Vendor LLC (INV-006) for $8,750.00. Records that mattered: INV-006. Records that were not treated as valid evidence: INV-006. The same vendor invoice number is already on the books, so this copy is a duplicate rather than a new payable. No new accounts-payable balance was created. Elsewhere in the office: The payment queue will not include this copy. The cash forecast will not treat it as a new outflow. Month-end close will not add a second payable.",
+    "decision": {
+      "invoice_id": "INV-006",
+      "vendor": "Shadow Vendor LLC",
+      "amount": 8750.0,
+      "decision": "HOLD",
+      "exceptions": [
+        "duplicate"
+      ],
+      "source": "ap_policy",
+      "trace_path": null,
+      "ap_decision_id": "ap-policy/INV-006"
+    },
+    "evidence": {
+      "invoice_id": "INV-006",
+      "invoice": {
+        "invoice_id": "INV-006",
+        "vendor": "Shadow Vendor LLC",
+        "po_id": "PO-118",
+        "amount": 8750.0,
+        "invoice_date": "2026-09-16",
+        "due_date": "2026-10-16",
+        "vendor_invoice_number": "SV-999001",
+        "description": "Shadow consulting original",
+        "payment_terms": "net 30",
+        "early_payment_discount_percent": 0.0,
+        "early_payment_discount_deadline": null,
+        "late_fee_percent": 0.0,
+        "vendor_priority": "normal",
+        "source_message_id": null,
+        "source_thread_id": null,
+        "source_trace_id": null,
+        "source_attachment_hashes": []
+      },
+      "purchase_order": {
+        "po_id": "PO-118",
+        "vendor": "Shadow Vendor LLC",
+        "authorized_amount": 8750.0,
+        "description": "Shadow consulting",
+        "status": "approved",
+        "created_date": "2026-09-10",
+        "currency": "USD",
+        "approval_limit": 20000.0,
+        "approver": "Jordan Hale"
+      },
+      "goods_receipt": {
+        "receipt_id": "GR-118",
+        "po_id": "PO-118",
+        "received": true,
+        "received_date": "2026-09-12",
+        "amount_received": 8750.0,
+        "quantity_ordered": 1,
+        "quantity_received": 1
+      },
+      "amount_difference": 0.0,
+      "percent_difference": 0.0,
+      "amount_matches": true,
+      "within_amount_tolerance": false,
+      "vendor_exact_match": true,
+      "vendors_are_similar": true,
+      "po_exists": true,
+      "po_approved": true,
+      "receipt_status": "full",
+      "duplicate_detected": true,
+      "duplicate_invoice_ids": [
+        "INV-007"
+      ],
+      "exception_types": [
+        "duplicate"
+      ],
+      "days_until_due": 26,
+      "invoice_dated_before_po": false
+    },
+    "record_ids": [
+      "INV-006"
+    ],
+    "explanation": {
+      "what_happened": "Maximor received a bill from Shadow Vendor LLC (INV-006) for $8,750.00.",
+      "records_that_mattered": [
+        "INV-006"
+      ],
+      "records_rejected": [
+        "INV-006"
+      ],
+      "why": "The same vendor invoice number is already on the books, so this copy is a duplicate rather than a new payable.",
+      "books_change": "No new accounts-payable balance was created.",
+      "other_workflows": [
+        "The payment queue will not include this copy.",
+        "The cash forecast will not treat it as a new outflow.",
+        "Month-end close will not add a second payable."
+      ],
+      "prior_decision": null,
+      "uncertainty": null,
+      "narrative": "Maximor received a bill from Shadow Vendor LLC (INV-006) for $8,750.00. Records that mattered: INV-006. Records that were not treated as valid evidence: INV-006. The same vendor invoice number is already on the books, so this copy is a duplicate rather than a new payable. No new accounts-payable balance was created. Elsewhere in the office: The payment queue will not include this copy. The cash forecast will not treat it as a new outflow. Month-end close will not add a second payable."
+    },
+    "naive": "A naive system would treat this as a new vendor bill, add it to the payment queue, reduce projected cash, and book another payable. Maximor stopped that chain.",
+    "lineage": {
+      "record_id": "INV-006",
+      "title": "Invoice INV-006 from Shadow Vendor LLC",
+      "vendor": "Shadow Vendor LLC",
+      "amount": 8750.0,
+      "received": "Maximor received invoice Shadow Vendor LLC (INV-006) for $8,750.00, dated 2026-09-16.",
+      "decision": "Held as a duplicate",
+      "why": "The same vendor invoice number is already on the books, so this copy is not a new payable.",
+      "changed": [
+        "Accounts payable did not create a second payable.",
+        "The payment queue will not include this copy.",
+        "The cash forecast will not treat it as a new outflow.",
+        "Close will not add a second vendor balance.",
+        "Audit keeps the duplicate hold as evidence."
+      ],
+      "correct": true,
+      "exceptions": [
+        "duplicate"
+      ],
+      "paid": false,
+      "consistency": {
+        "ok": true,
+        "invoice_id": "INV-006",
+        "vendor": "Shadow Vendor LLC",
+        "amount": 8750.0,
+        "exceptions": [
+          "duplicate"
+        ],
+        "approved": false,
+        "payable": false,
+        "pay_eligible": false,
+        "already_paid": false,
+        "agreements": [
+          "ap_duplicate_hold",
+          "payment_queue_excluded"
+        ],
+        "disagreements": [],
+        "shared_state": true
+      },
+      "steps": [
+        {
+          "role": "ap_invoice",
+          "title": "Invoice recognized",
+          "record_id": "INV-006",
+          "detail": "Shadow Vendor LLC (INV-006)"
+        },
+        {
+          "role": "purchase_order",
+          "title": "Purchase order match",
+          "record_id": "PO-118",
+          "detail": "PO-118"
+        },
+        {
+          "role": "goods_receipt",
+          "title": "Receiving record",
+          "record_id": "PO-118",
+          "detail": "Receiving checked"
+        }
+      ],
+      "purchase_order": "PO-118",
+      "purchase_order_label": "Purchase order PO-118 for Shadow Vendor LLC"
+    },
+    "consistency": {
+      "ok": true,
+      "invoice_id": "INV-006",
+      "vendor": "Shadow Vendor LLC",
+      "amount": 8750.0,
+      "exceptions": [
+        "duplicate"
+      ],
+      "approved": false,
+      "payable": false,
+      "pay_eligible": false,
+      "already_paid": false,
+      "agreements": [
+        "ap_duplicate_hold",
+        "payment_queue_excluded"
+      ],
+      "disagreements": [],
+      "shared_state": true
+    },
+    "stages": [
+      {
+        "id": "facts",
+        "label": "Gather invoice, purchase order, and delivery record",
+        "status": "completed",
+        "detail": "this looks like a second copy of a bill already on the books"
+      },
+      {
+        "id": "prepare",
+        "label": "Check whether the bill is safe to pay",
+        "status": "completed",
+        "bot": "ap"
+      },
+      {
+        "id": "investigate",
+        "label": "Investigate why the bill does not line up",
+        "status": "completed",
+        "bot": "ap"
+      },
+      {
+        "id": "concur",
+        "label": "Independently recheck the payables decision",
+        "status": "completed",
+        "bot": "ctl-pay",
+        "detail": "HOLD"
+      }
+    ],
+    "handoffs": [
+      {
+        "display_name": "AP Preparer",
+        "slug": "ap",
+        "profile": "prepare",
+        "bot_id": "bot_ap"
+      },
+      {
+        "display_name": "Exception Investigator",
+        "slug": "ap",
+        "profile": "investigate",
+        "bot_id": "bot_ap"
+      },
+      {
+        "display_name": "AP Reviewer",
+        "slug": "ctl-pay",
+        "profile": "review-match",
+        "bot_id": "bot_ctl_pay"
+      },
+      {
+        "display_name": "AP Approver"
+      },
+      {
+        "display_name": "AP Audit"
+      }
+    ],
+    "downstream": {
+      "payment_pool": false,
+      "forecast": false,
+      "close": true,
+      "audit": true
+    },
+    "io": {
+      "inputs": {
+        "document_a": {
+          "artifact_id": "INV-006",
+          "kind": "invoice",
+          "title": "INV-006 \u00b7 Shadow Vendor LLC",
+          "source_path": "invoices.json#INV-006",
+          "record": {
+            "invoice_id": "INV-006",
+            "vendor": "Shadow Vendor LLC",
+            "po_id": "PO-118",
+            "amount": 8750.0,
+            "invoice_date": "2026-09-16",
+            "due_date": "2026-10-16",
+            "vendor_invoice_number": "SV-999001",
+            "description": "Shadow consulting original",
+            "payment_terms": "net 30",
+            "early_payment_discount_percent": 0.0,
+            "early_payment_discount_deadline": null,
+            "late_fee_percent": 0.0,
+            "vendor_priority": "normal",
+            "source_message_id": null,
+            "source_thread_id": null,
+            "source_trace_id": null,
+            "source_attachment_hashes": []
+          },
+          "provenance": [
+            {
+              "id": "PO-118",
+              "kind": "purchase_order"
+            }
+          ],
+          "source_emails": []
+        },
+        "document_b": {
+          "artifact_id": "INV-007",
+          "kind": "invoice",
+          "title": "INV-007 \u00b7 Shadow Vendor LLC",
+          "source_path": "invoices.json#INV-007",
+          "record": {
+            "invoice_id": "INV-007",
+            "vendor": "Shadow Vendor LLC",
+            "po_id": "PO-118",
+            "amount": 8750.0,
+            "invoice_date": "2026-09-16",
+            "due_date": "2026-10-16",
+            "vendor_invoice_number": "SV-999001",
+            "description": "Shadow consulting duplicate submission",
+            "payment_terms": "net 30",
+            "early_payment_discount_percent": 0.0,
+            "early_payment_discount_deadline": null,
+            "late_fee_percent": 0.0,
+            "vendor_priority": "normal",
+            "source_message_id": null,
+            "source_thread_id": null,
+            "source_trace_id": null,
+            "source_attachment_hashes": []
+          },
+          "provenance": [
+            {
+              "id": "PO-118",
+              "kind": "purchase_order"
+            }
+          ],
+          "source_emails": []
+        },
+        "comparison": {
+          "vendor_match": true,
+          "invoice_number_match": true,
+          "amount_match": true,
+          "date_match": true,
+          "po_match": true,
+          "vendor": "Shadow Vendor LLC",
+          "vendor_invoice_number": "SV-999001",
+          "amount": 8750.0,
+          "invoice_date": "2026-09-16",
+          "document_a": "INV-006",
+          "document_b": "INV-007"
+        }
+      },
+      "outputs": {
+        "decision": "HOLD",
+        "source": "ap_policy",
+        "exceptions": [
+          "duplicate"
+        ],
+        "duplicate_detected": true,
+        "invoice": {
+          "artifact_id": "INV-006",
+          "kind": "invoice",
+          "title": "INV-006 \u00b7 Shadow Vendor LLC",
+          "source_path": "invoices.json#INV-006",
+          "record": {
+            "invoice_id": "INV-006",
+            "vendor": "Shadow Vendor LLC",
+            "po_id": "PO-118",
+            "amount": 8750.0,
+            "invoice_date": "2026-09-16",
+            "due_date": "2026-10-16",
+            "vendor_invoice_number": "SV-999001",
+            "description": "Shadow consulting original",
+            "payment_terms": "net 30",
+            "early_payment_discount_percent": 0.0,
+            "early_payment_discount_deadline": null,
+            "late_fee_percent": 0.0,
+            "vendor_priority": "normal",
+            "source_message_id": null,
+            "source_thread_id": null,
+            "source_trace_id": null,
+            "source_attachment_hashes": []
+          },
+          "provenance": [
+            {
+              "id": "PO-118",
+              "kind": "purchase_order"
+            }
+          ],
+          "source_emails": []
+        },
+        "three_way": {
+          "invoice": {
+            "artifact_id": "INV-006",
+            "kind": "invoice",
+            "title": "INV-006 \u00b7 Shadow Vendor LLC",
+            "source_path": "invoices.json#INV-006",
+            "record": {
+              "invoice_id": "INV-006",
+              "vendor": "Shadow Vendor LLC",
+              "po_id": "PO-118",
+              "amount": 8750.0,
+              "invoice_date": "2026-09-16",
+              "due_date": "2026-10-16",
+              "vendor_invoice_number": "SV-999001",
+              "description": "Shadow consulting original",
+              "payment_terms": "net 30",
+              "early_payment_discount_percent": 0.0,
+              "early_payment_discount_deadline": null,
+              "late_fee_percent": 0.0,
+              "vendor_priority": "normal",
+              "source_message_id": null,
+              "source_thread_id": null,
+              "source_trace_id": null,
+              "source_attachment_hashes": []
+            },
+            "provenance": [
+              {
+                "id": "PO-118",
+                "kind": "purchase_order"
+              }
+            ],
+            "source_emails": []
+          },
+          "purchase_order": {
+            "artifact_id": "PO-118",
+            "kind": "purchase_order",
+            "title": "PO-118 \u00b7 Shadow Vendor LLC",
+            "source_path": "purchase_orders.json#PO-118",
+            "record": {
+              "po_id": "PO-118",
+              "vendor": "Shadow Vendor LLC",
+              "authorized_amount": 8750.0,
+              "description": "Shadow consulting",
+              "status": "approved",
+              "created_date": "2026-09-10",
+              "currency": "USD",
+              "approval_limit": 20000.0,
+              "approver": "Jordan Hale"
+            },
+            "provenance": [
+              {
+                "id": "PO-118",
+                "kind": "purchase_order"
+              }
+            ]
+          },
+          "goods_receipt": {
+            "artifact_id": "GR-118",
+            "kind": "goods_receipt",
+            "title": "GR-118 \u00b7 PO-118",
+            "source_path": "goods_receipts.json#GR-118",
+            "record": {
+              "receipt_id": "GR-118",
+              "po_id": "PO-118",
+              "received": true,
+              "received_date": "2026-09-12",
+              "amount_received": 8750.0,
+              "quantity_ordered": 1,
+              "quantity_received": 1
+            },
+            "provenance": [
+              {
+                "id": "PO-118",
+                "kind": "purchase_order"
+              }
+            ]
+          }
+        },
+        "after": {
+          "invoice_id": "INV-006",
+          "vendor": "Shadow Vendor LLC",
+          "amount": 8750.0,
+          "match_status": "exception",
+          "duplicate_status": "duplicate",
+          "exceptions": [
+            "duplicate"
+          ],
+          "payment_state": "open",
+          "accounting_status": "posted",
+          "linked_payments": [],
+          "linked_journals": [
+            "JE-AP-INV-006"
+          ],
+          "po_id": "PO-118"
+        },
+        "linked_payments": [],
+        "linked_journals": [
+          "JE-AP-INV-006"
+        ]
+      },
+      "before": {
+        "invoice_id": "INV-006",
+        "vendor": "Shadow Vendor LLC",
+        "amount": 8750.0,
+        "match_status": "exception",
+        "duplicate_status": "duplicate",
+        "exceptions": [
+          "duplicate"
+        ],
+        "payment_state": "open",
+        "accounting_status": "posted",
+        "linked_payments": [],
+        "linked_journals": [
+          "JE-AP-INV-006"
+        ],
+        "po_id": "PO-118"
+      },
+      "after": {
+        "invoice_id": "INV-006",
+        "vendor": "Shadow Vendor LLC",
+        "amount": 8750.0,
+        "match_status": "exception",
+        "duplicate_status": "duplicate",
+        "exceptions": [
+          "duplicate"
+        ],
+        "payment_state": "open",
+        "accounting_status": "posted",
+        "linked_payments": [],
+        "linked_journals": [
+          "JE-AP-INV-006"
+        ],
+        "po_id": "PO-118"
+      },
+      "explanation": "Maximor received a bill from Shadow Vendor LLC (INV-006) for $8,750.00. Records that mattered: INV-006. Records that were not treated as valid evidence: INV-006. The same vendor invoice number is already on the books, so this copy is a duplicate rather than a new payable. No new accounts-payable balance was created. Elsewhere in the office: The payment queue will not include this copy. The cash forecast will not treat it as a new outflow. Month-end close will not add a second payable."
+    }
+  }
+}

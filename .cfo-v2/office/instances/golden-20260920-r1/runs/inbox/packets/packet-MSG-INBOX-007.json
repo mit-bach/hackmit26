@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-INBOX-007",
+  "classification": "VENDOR_STATEMENT",
+  "note": "ignored",
+  "bill": false
+}

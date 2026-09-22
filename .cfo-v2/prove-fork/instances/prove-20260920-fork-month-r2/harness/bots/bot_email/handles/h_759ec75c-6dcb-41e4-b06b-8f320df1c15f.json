@@ -1,0 +1,19 @@
+{
+  "id": "h_759ec75c-6dcb-41e4-b06b-8f320df1c15f",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-011. Fields may be incomplete. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not invent missing invoice fields. Do not post a complete bill from guesses. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T16:04:04.490Z",
+  "updatedAt": "2026-09-20T16:08:36.505Z",
+  "result": "**MSG-INBOX-011** classified and dispatched.\n\n| Field | Value |\n| --- | --- |\n| Classification | **`UNSUPPORTED_OR_UNRESOLVED`** |\n| Selected action | `REQUEST_MISSING_INFORMATION` |\n| Counterparty | Acme Supplies |\n| Present | currency USD · invoice_date 2026-09-18 |\n| **Missing** | `invoice_number`, `amount` |\n| Reason | `MISSING_FIELDS` |\n| Rationale | Invoice language present; required fields missing |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Status | **`NEEDS_INFORMATION`** |\n| Target | `inbox.clarification` |\n| `invoice_id` / canonical | **null** (no complete bill posted) |\n| Mutation | false |\n| Questions | What is the vendor invoice number? · What is the amount due, including currency? |\n| Outbound | `MSG-INBOX-011-OUT` on `THR-incomplete` |\n| Packet | `runs/inbox/packets/email-outbound-MSG-INBOX-011-OUT.json` |\n| World handle path | `runs/inbox/handles/email-outbound-MSG-INBOX-011-OUT-world.json` |\n\n### World\n- **ask_bot → world** (vendor profile): accepted (`h_a0aa7019-…`); peer was still running at last check — no invented fields, no complete bill from guesses, no `ask_user`.",
+  "resultPaths": [],
+  "seq": 48
+}

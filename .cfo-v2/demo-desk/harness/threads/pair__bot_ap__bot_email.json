@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_email",
+  "threadId": "pair:bot_ap:bot_email",
+  "name": "AP ↔ Email",
+  "memberIds": [
+    "bot_ap",
+    "bot_email"
+  ],
+  "createdAt": 1789915201299,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_0692676b-d228-449c-8144-b391e2eaf7b4",
+      "handleId": "h_0692676b-d228-449c-8144-b391e2eaf7b4",
+      "role": "bot",
+      "kind": "text",
+      "text": "Prepare open bill for Kernel invoice INV-001 (vendor Acme Supplies, ACM-2026-4410, PO-101, USD 12450). Source MSG-ACME-INV-001. Packet path: artifacts/email/handoffs/MSG-ACME-INV-001.json. Ingest status BUSINESS_DUPLICATE / already_present_in_ap; evidence linked. Email does not match. Use Profile prepare. Confirm tools.get_invoice finds INV-001 and your next state.",
+      "at": 1789915201299,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_0692676b-d228-449c-8144-b391e2eaf7b4",
+      "handleId": "h_0692676b-d228-449c-8144-b391e2eaf7b4",
+      "role": "bot",
+      "kind": "text",
+      "text": "AP prepare complete for INV-001.\n\ntools.get_invoice: found=true (Acme Supplies, ACM-2026-4410, PO-101, USD 12450). Trace k_4bacff5533aa.\n\nKernel get_case_evidence: exception_types=[], amount_difference=0, vendor_exact_match=true, po_approved=true, receipt_status=full (GR-101), duplicate_detected=false. Email BUSINESS_DUPLICATE/already_present_in_ap is ingest status only — not a Kernel AP duplicate. Email does not match.\n\nPreparerRecommendation: APPROVE (confidence 0.9). Packet: runs/ap/packets/INV-001.json\n\nNext state: await_ctl_pay_review_match — approve-shaped Handle sent to ctl-pay / review-match. AP does not pay; bill not in pay pool until ctl-pay concurs and Kernel still allows.",
+      "at": 1789915248959,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-337
+PO Number: PO-337
+Vendor: Northline Fabrication
+Goods received in full on 2026-09-11
+Packing list attached: PL-GR-337
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 77.39 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

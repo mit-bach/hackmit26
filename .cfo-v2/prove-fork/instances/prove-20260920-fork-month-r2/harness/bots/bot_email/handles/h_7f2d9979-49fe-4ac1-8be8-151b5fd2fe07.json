@@ -1,0 +1,20 @@
+{
+  "id": "h_7f2d9979-49fe-4ac1-8be8-151b5fd2fe07",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-015. Vendor may be unknown. If it is still a bill, extract fields and Handle ap / prepare with the Kernel invoice id. Do not create a vendor master. Do not match. Do not ask_user. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "failed",
+  "createdAt": "2026-09-20T16:17:23.238Z",
+  "updatedAt": "2026-09-20T16:18:20.328Z",
+  "result": "Connection error.",
+  "resultPaths": [],
+  "seq": 53,
+  "error": "Connection error."
+}

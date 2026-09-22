@@ -1,0 +1,19 @@
+{
+  "key": "fork-inject-MSG-INBOX-005",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "cd197df16d853f1c23b2baabe10a482045095c58b10952e818d05c682942257d",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-005",
+      "thread_id": "THR-purchase-order",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_9afb56d67664"
+  }
+}

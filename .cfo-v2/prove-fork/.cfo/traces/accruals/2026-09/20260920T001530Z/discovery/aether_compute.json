@@ -1,0 +1,25 @@
+{
+  "vendor": "Aether Compute",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": false,
+  "missing_bill_candidate": true,
+  "expectation_confidence": 0.99,
+  "signals": [
+    {
+      "type": "monthly_cadence",
+      "detail": "Invoices received in each of the previous 6 months",
+      "confidence": 0.99
+    },
+    {
+      "type": "usage",
+      "detail": "Usage recorded for 2026-09",
+      "confidence": 0.9
+    }
+  ],
+  "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+  "discovery_trace_id": "2026-09/20260920T001530Z/discovery/aether_compute",
+  "current_invoice_ids": [],
+  "indicative_amount": 11849.9,
+  "indicative_method": "usage_run_rate"
+}

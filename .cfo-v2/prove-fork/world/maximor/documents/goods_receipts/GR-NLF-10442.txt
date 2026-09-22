@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-NLF-10442
+PO Number: PO-NLF-10442
+Vendor: North Line Fab Inc
+Goods received in full on 2026-03-18
+Packing list attached: PL-GR-NLF-10442
+Quantity ordered: 14
+Quantity received: 14
+Amount received: 18,424.62 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

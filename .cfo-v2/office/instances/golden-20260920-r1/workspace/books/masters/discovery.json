@@ -1,0 +1,69 @@
+{
+  "profile": "erp-invoice",
+  "entity": {
+    "company_id": "CO-MAXIMOR",
+    "legal_name": "Maximor Demo Corp",
+    "trade_name": "Maximor",
+    "currency": "USD",
+    "headquarters": "Cambridge, MA",
+    "fiscal_year_start_month": 1,
+    "operating_bank_id": "BANK-OPERATING",
+    "stripe_account_id": "acct_maximor_demo",
+    "ap_open_books": 18420000.0,
+    "ar_open_books": 41260000.0,
+    "active_vendors": 340
+  },
+  "vendor_master": {
+    "path": "data/vendors.json",
+    "count": 340,
+    "sample": [
+      {
+        "vendor_id": "VEND-001",
+        "name": "Acme Supplies",
+        "legal_name": "Acme Supplies, Inc.",
+        "status": "active",
+        "payment_terms": "2/10 net 30",
+        "currency": "USD"
+      }
+    ]
+  },
+  "customer_master": {
+    "path": "data/customers.json",
+    "count": 17,
+    "customers": [
+      "CUST-001 Northwind Labs",
+      "CUST-002 Helios Analytics",
+      "CUST-003 Acme Industrial",
+      "CUST-004 Brightline Media",
+      "CUST-005 Quiet Harbor",
+      "CUST-006 Pinnacle Retail",
+      "CUST-007 Atlas Robotics",
+      "CUST-008 Lumen Labs",
+      "CUST-009 Northstar LLC",
+      "CUST-010 Meridian Health",
+      "CUST-011 Beacon Biotech",
+      "CUST-012 Copperline Logistics",
+      "CUST-013 Summit Civic",
+      "CUST-014 Redwood Clinics",
+      "CUST-015 Ironclad Software",
+      "CUST-IC-EU Maximor EU BV",
+      "CUST-NSC-01 Northstar Settlement Co"
+    ]
+  },
+  "period_lock_state": {
+    "2026-08": "CLOSED",
+    "close_id_2026-08": "CLOSE-2026-08",
+    "2026-09": "OPEN",
+    "note": "Books reads lock state only; does not flip lock."
+  },
+  "erp_bills_period_2026-09": {
+    "count": 1,
+    "record_ids": ["NS-4410"]
+  },
+  "open_customer_invoices": {
+    "path": "workspace/books/ar/open_invoices.json",
+    "count": 99,
+    "outstanding_total_usd": 41260000.0
+  },
+  "open_ap_note": "AP open bills are owned by Bot ap after prepare; ERP vendorBill NS-4410 landed under workspace/books/erp/."
+}

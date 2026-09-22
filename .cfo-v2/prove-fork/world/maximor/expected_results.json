@@ -1,0 +1,2198 @@
+{
+  "period": "2026-09",
+  "seed": 42,
+  "ap_exceptions": {
+    "INV-003": [
+      "partial_receipt"
+    ],
+    "INV-004": [
+      "material_amount_mismatch"
+    ],
+    "INV-005": [
+      "goods_not_received"
+    ],
+    "INV-006": [
+      "duplicate"
+    ],
+    "INV-007": [
+      "duplicate"
+    ],
+    "INV-008": [
+      "po_not_approved"
+    ],
+    "INV-009": [
+      "approval_limit_exceeded"
+    ],
+    "INV-010": [
+      "goods_not_received"
+    ]
+  },
+  "reconciliation_statuses": {
+    "TXN-2026-09-018A": "MATCHED",
+    "TXN-2026-09-008": "MATCHED",
+    "TXN-2026-09-011": "EXPLAINED_EXCEPTION",
+    "TXN-2026-09-015": "EXCEPTION_OPEN",
+    "TXN-2026-09-012B": "HUMAN_REVIEW"
+  },
+  "audit_findings": [
+    {
+      "finding_id": "EXP-AUD-DUP-VEND",
+      "control_id": "AUD-DUP-VEND-001",
+      "population_item_id": "VEND-001",
+      "expected_result": "FAIL",
+      "expected_reason_code": "DUPLICATE_VENDOR",
+      "source_ids": [
+        "VEND-001",
+        "VEND-001-DUP"
+      ]
+    },
+    {
+      "finding_id": "EXP-AUD-DUP-INV",
+      "control_id": "AUD-DUP-INV-001",
+      "population_item_id": "INV-006",
+      "expected_result": "FAIL",
+      "expected_reason_code": "DUPLICATE_INVOICE",
+      "source_ids": [
+        "INV-006",
+        "INV-007"
+      ]
+    },
+    {
+      "finding_id": "EXP-AUD-ROUND",
+      "control_id": "AUD-RND-001",
+      "population_item_id": "PAY-AP-009",
+      "expected_result": "FAIL",
+      "expected_reason_code": "ROUND_NUMBER",
+      "source_ids": [
+        "PAY-AP-009",
+        "INV-009"
+      ]
+    },
+    {
+      "finding_id": "EXP-AUD-PCE",
+      "control_id": "AUD-PCE-001",
+      "population_item_id": "JE-POST-CLOSE-001",
+      "expected_result": "FAIL",
+      "expected_reason_code": "UNAUTHORIZED_POST_CLOSE_ENTRY",
+      "source_ids": [
+        "JE-POST-CLOSE-001"
+      ]
+    },
+    {
+      "finding_id": "EXP-AUD-SOD",
+      "control_id": "AUD-SOD-001",
+      "population_item_id": "APR-INV-SELF",
+      "expected_result": "FAIL",
+      "expected_reason_code": "SELF_APPROVAL",
+      "source_ids": [
+        "APR-INV-SELF",
+        "INV-009"
+      ]
+    },
+    {
+      "finding_id": "EXP-AUD-HOLD",
+      "control_id": "AUD-SOD-001",
+      "population_item_id": "PAY-AP-010",
+      "expected_result": "FAIL",
+      "expected_reason_code": "SELF_APPROVAL",
+      "source_ids": [
+        "PAY-AP-010",
+        "INV-010"
+      ]
+    }
+  ],
+  "close_blockers": [
+    "TXN-2026-09-015",
+    "TASK-CASH",
+    "TASK-FINAL"
+  ],
+  "gross_margin_drivers": [
+    "TXN-SUP-SEP-001",
+    "TXN-FRT-SEP-001",
+    "TXN-REV-SEP-001",
+    "TXN-HOST-SEP-001"
+  ],
+  "forecast_miss_drivers": [
+    "INV-AR-014",
+    "INV-012",
+    "PR-2026-10-02",
+    "po_1MaximorFees",
+    "BNK-UNX-001"
+  ],
+  "storylines": [
+    "STORY-CLEAN",
+    "STORY-RESOLVED",
+    "STORY-UNRESOLVED"
+  ],
+  "adversarial_holdout": [
+    {
+      "id": "ADV-VM-001",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "RELATED_PARTY_VENDOR",
+      "stealth": 5,
+      "magnitude": "$187,412.18 cumulative",
+      "record_ids": [
+        "VEND-KIS-01",
+        "EMP-4128",
+        "EIN 87-2144091",
+        "bank ****4419"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-KIS-01",
+        "employee_master:EMP-4128",
+        "vendor_bank:VEND-KIS-01:011000138:4419",
+        "ap_invoices:INV-KIS-2025-11 through INV-KIS-2026-09",
+        "gl:2000-AP",
+        "gl:6000-Operating"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-002",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "NEAR_DUPLICATE_VENDOR",
+      "stealth": 4,
+      "magnitude": "$94,618.40",
+      "record_ids": [
+        "VEND-NLF-02 vs VEND-003",
+        "440 D Street vs 438 D Street"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-003",
+        "vendor_master:VEND-NLF-02",
+        "ap_invoices:INV-NLF-02-*",
+        "purchase_orders:PO-NLF-02-*",
+        "bank:TXN-NLF-02-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-003",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "NEAR_DUPLICATE_VENDOR",
+      "stealth": 4,
+      "magnitude": "$41,206.88",
+      "record_ids": [
+        "VEND-NLF-03",
+        "CAM-DOCK-4",
+        "combined with VEND-NLF-02 above Hale limit"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-NLF-03",
+        "ap_invoices:INV-NLF-03-*",
+        "purchase_orders:PO-NLF-03-*",
+        "goods_receipts:GR-NLF-03-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-004",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "BANK_INSTRUMENT_DRIFT",
+      "stealth": 5,
+      "magnitude": "$62,118.90 after 2026-06-12",
+      "record_ids": [
+        "VEND-KIS-01 account 4401\u21924419",
+        "EMP-4128 payroll account 4419"
+      ],
+      "plant_objects": [
+        "vendor_bank_history:VEND-KIS-01",
+        "vendor_master.change_memo",
+        "bank_statement.receiving_account on TXN-KIS-* after 2026-06-12",
+        "payroll_direct_deposit:EMP-4128"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-001",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "PO_SPLIT_UNDER_LIMIT",
+      "stealth": 5,
+      "magnitude": "$72,400.18 April cluster; $348,206.40 across five months",
+      "record_ids": [
+        "PO-KIS-4601",
+        "PO-WBT-4602",
+        "PO-KIS-4603 and monthly siblings"
+      ],
+      "plant_objects": [
+        "purchase_orders:PO-KIS-4601",
+        "purchase_orders:PO-WBT-4602",
+        "purchase_orders:PO-KIS-4603",
+        "ap_invoices:INV-KIS-4601",
+        "ap_invoices:INV-WBT-4602",
+        "ap_invoices:INV-KIS-4603",
+        "goods_receipts:GR-KIS-4601",
+        "goods_receipts:GR-WBT-4602",
+        "goods_receipts:GR-KIS-4603"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-002",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "CROSS_VENDOR_INVOICE_NUMBER",
+      "stealth": 3,
+      "magnitude": "$18,406.22 + $18,424.62",
+      "record_ids": [
+        "INV-KIS-10442",
+        "INV-NLF-10442",
+        "number KIS-10442"
+      ],
+      "plant_objects": [
+        "ap_invoices:INV-KIS-10442",
+        "ap_invoices:INV-NLF-10442",
+        "ingestion:files/KIS-10442.pdf",
+        "ingestion:files/NLF-10442.pdf"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-003",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "GR_QUANTITY_OVERSTATEMENT",
+      "stealth": 5,
+      "magnitude": "$28,614.80 shrink JEs covering 9,412 units",
+      "record_ids": [
+        "GR-KIS-*",
+        "CC-CAM-A14-*",
+        "JE-SHRINK-YYYY-MM",
+        "EMP-6722"
+      ],
+      "plant_objects": [
+        "goods_receipts:GR-KIS-*",
+        "cycle_counts:CC-CAM-A14-2025-12 through CC-CAM-A14-2026-09",
+        "inventory:1400-Inventory",
+        "warehouse:CAM-BIN-A14",
+        "employee_master:EMP-6722"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-004",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "STANDING_PO_OVERCONSUMED",
+      "stealth": 3,
+      "magnitude": "$2,618.47 vs $300 authorized",
+      "record_ids": [
+        "PO-KIS-FRT-STANDING",
+        "INV-KIS-FRT-*"
+      ],
+      "plant_objects": [
+        "purchase_orders:PO-KIS-FRT-STANDING",
+        "ap_invoices:INV-KIS-FRT-2025-11 through INV-KIS-FRT-2026-09",
+        "company_policies:P-008",
+        "company_policies:P-009"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-005",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "GR_BEFORE_AUTHORIZATION",
+      "stealth": 3,
+      "magnitude": "$19,406.50",
+      "record_ids": [
+        "PO-KIS-4812 2026-08-14",
+        "GR-KIS-4812 2026-08-11",
+        "INV-KIS-4812"
+      ],
+      "plant_objects": [
+        "purchase_orders:PO-KIS-4812",
+        "goods_receipts:GR-KIS-4812",
+        "ap_invoices:INV-KIS-4812",
+        "close/tasks August TASK-AP"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-006",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "RELATED_PARTY_REMITTANCE",
+      "stealth": 4,
+      "magnitude": "$48,046.18",
+      "record_ids": [
+        "INV-WBT-2026-07",
+        "INV-WBT-2026-08",
+        "18 Ware Street"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-WBT-01",
+        "ap_invoices:INV-WBT-2026-07",
+        "ap_invoices:INV-WBT-2026-08",
+        "ingestion:files/INV-WBT-2026-07.pdf",
+        "bank:TXN-WBT-2026-07"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-001",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "RELATED_PARTY_REMITTANCE",
+      "stealth": 5,
+      "magnitude": "September function-green, combined $72,188.20 vs $18,000 budget",
+      "record_ids": [
+        "INV-KIS-2026-09-*",
+        "TXN-KIS-2026-09-16",
+        "FC-MRO-KIS",
+        "AUD-SAMP-KIS-08"
+      ],
+      "plant_objects": [
+        "ap_invoices:INV-KIS-*",
+        "bank:TXN-KIS-*",
+        "reporting/forecast_lines:FC-MRO-KIS",
+        "audit/invoices sample item AUD-SAMP-KIS-08",
+        "reporting/budget MRO_industrial"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-007",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "RELATED_PARTY_VENDOR",
+      "stealth": 4,
+      "magnitude": "sample PASS, population $187,412.18",
+      "record_ids": [
+        "AUD-SAMP-KIS-08",
+        "VEND-KIS-01"
+      ],
+      "plant_objects": [
+        "audit/invoices:AUD-SAMP-KIS-08",
+        "audit/policy.json round_number.ordinary_recurring_max",
+        "ap_invoices:INV-KIS-2026-02-08"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-011",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "NEAR_DUPLICATE_VENDOR",
+      "stealth": 4,
+      "magnitude": "$29,418.66",
+      "record_ids": [
+        "VEND-HES-01 vs VEND-015",
+        "ACC-HE-2026-09 untouched"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-015",
+        "vendor_master:VEND-HES-01",
+        "ap_invoices:INV-HES-*",
+        "close/accruals:ACC-HE-2026-09",
+        "vendor_contracts:CTR-HE-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-014",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "RESIDUAL_UNPLUGGED",
+      "stealth": 5,
+      "magnitude": "$12.40 on TXN-2026-09-015 which is 0.1 percent of $12,400.00; $86,418.60 plugged 2025-11..2026-08",
+      "record_ids": [
+        "INV-AR-013",
+        "PAY-006",
+        "TXN-2026-09-015",
+        "GL-AR-NS",
+        "JE-REC-PLUG-*"
+      ],
+      "plant_objects": [
+        "ar_invoices:INV-AR-013",
+        "ar_payments:PAY-006",
+        "bank:TXN-2026-09-015",
+        "gl:GL-AR-NS",
+        "close/tasks:TASK-CASH",
+        "historical_ar:INV-NS-*",
+        "bank_archive:TXN-NS-*-residual"
+      ],
+      "must_remain_unmatched": [
+        "TXN-2026-09-015"
+      ]
+    },
+    {
+      "id": "ADV-CASH-008",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "REC_PLUG_NET_ZERO",
+      "stealth": 5,
+      "magnitude": "$86,418.60 across 11 months",
+      "record_ids": [
+        "JE-REC-PLUG-2025-11..JE-REC-PLUG-2026-08",
+        "6950-Cash-Over-Short",
+        "USR-JE-04"
+      ],
+      "plant_objects": [
+        "gl:JE-REC-PLUG-2025-11 through JE-REC-PLUG-2026-08",
+        "gl:6950-Cash-Over-Short",
+        "close/journal_entries",
+        "employee_master:EMP-1088"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-009",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "RELATED_PARTY_REMITTANCE",
+      "stealth": 4,
+      "magnitude": "$86,418.60",
+      "record_ids": [
+        "VEND-CLR-01",
+        "INV-CLR-*",
+        "PAY-CLR-*",
+        "CTR-CLR-001 vs actuals"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-CLR-01",
+        "ap_invoices:INV-CLR-2025-12 through INV-CLR-2026-08",
+        "bank:TXN-CLR-*",
+        "canonical/vendor_payments:PAY-CLR-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-010",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "REC_PLUG_NET_ZERO",
+      "stealth": 4,
+      "magnitude": "throughput $86,418.60 vs ending $12.18",
+      "record_ids": [
+        "6950-Cash-Over-Short"
+      ],
+      "plant_objects": [
+        "reporting/ledger_seed:6950-Cash-Over-Short",
+        "close/materiality.json",
+        "gl:JE-REC-PLUG-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-011",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "UNAPPLIED_CASH_PARK",
+      "stealth": 4,
+      "magnitude": "$1,121.06 aged in 1030",
+      "record_ids": [
+        "1030-Undeposited-Funds",
+        "including TXN-2026-09-015 residual"
+      ],
+      "plant_objects": [
+        "gl:1030-Undeposited-Funds",
+        "bank:undeposited_batch_refs",
+        "close/tasks:TASK-CASH"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-012",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "RELATED_PARTY_REMITTANCE",
+      "stealth": 5,
+      "magnitude": "$8,406.00 refunds vs $8,388.20 residuals",
+      "record_ids": [
+        "CUST-NSC-01",
+        "REF-NSC-*",
+        "CUST-009"
+      ],
+      "plant_objects": [
+        "ar_customers:CUST-NSC-01",
+        "bank:TXN-NSC-REF-*",
+        "gl:6900-Misc-Expense",
+        "ar_customers:CUST-009"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-013",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "REMITTANCE_RATE_RESIDUAL",
+      "stealth": 4,
+      "magnitude": "0.10 percent instruction vs 0 percent policy",
+      "record_ids": [
+        "northstar_wire.pdf",
+        "meridian_wire.pdf",
+        "lumen_wire.pdf"
+      ],
+      "plant_objects": [
+        "ingestion:customer_instructions/northstar_wire.pdf",
+        "ingestion:customer_instructions/meridian_wire.pdf",
+        "ingestion:customer_instructions/lumen_wire.pdf",
+        "ar_customers:CUST-009",
+        "ar_customers:CUST-010",
+        "ar_customers:CUST-008"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-013",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "REMITTANCE_RATE_RESIDUAL",
+      "stealth": 4,
+      "magnitude": "September extras $48.62 Meridian + $31.10 Lumen plus $12.40 Northstar",
+      "record_ids": [
+        "PAY-MER-2026-09",
+        "PAY-LUM-2026-09",
+        "PAY-006"
+      ],
+      "plant_objects": [
+        "ar_payments:PAY-MER-2025-12 through PAY-MER-2026-09",
+        "ar_payments:PAY-LUM-2026-01 through PAY-LUM-2026-09",
+        "ar_invoices:INV-AR-MER-*",
+        "ar_invoices:INV-AR-LUM-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-008",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "RESIDUAL_UNPLUGGED",
+      "stealth": 4,
+      "magnitude": "August plugged $7,206.18, September unplugged $12.40 (and $92.12 population)",
+      "record_ids": [
+        "JE-REC-PLUG-2026-08 vs missing JE-REC-PLUG-2026-09",
+        "TASK-CASH"
+      ],
+      "plant_objects": [
+        "audit/periods:2026-08",
+        "close/journal_entries:JE-REC-PLUG-2026-08",
+        "close/tasks:TASK-CASH",
+        "close/tasks:TASK-FINAL"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-007",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "REMITTANCE_RATE_RESIDUAL",
+      "stealth": 3,
+      "magnitude": "$86,418.60 cash-in never in 4000-Revenue",
+      "record_ids": [
+        "6950 vs 4000",
+        "VEND-CLR-01"
+      ],
+      "plant_objects": [
+        "reporting/actuals",
+        "reporting/ledger_seed:4000-Revenue",
+        "gl:6950-Cash-Over-Short",
+        "reporting/budget"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-003",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "RESIDUAL_UNPLUGGED",
+      "stealth": 5,
+      "magnitude": "$12.40 visible, $86,418.60 historical, forecast miss ~$7,187.60",
+      "record_ids": [
+        "TXN-2026-09-015",
+        "TASK-CASH",
+        "INV-CLR-2026-08",
+        "FC-OTHER-IN"
+      ],
+      "plant_objects": [
+        "bank:TXN-2026-09-015",
+        "close/tasks:TASK-CASH",
+        "vendor_master:VEND-CLR-01",
+        "reporting/forecast_lines:FC-OTHER-IN",
+        "gl:6950-Cash-Over-Short"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-008",
+      "storyline": "SL-ADV-RESIDUAL",
+      "reason_code": "REC_PLUG_NET_ZERO",
+      "stealth": 3,
+      "magnitude": "August rec PASS with unexplained methodology",
+      "record_ids": [
+        "REC-AUG-PLUG",
+        "REC-NS-1240"
+      ],
+      "plant_objects": [
+        "audit/reconciliations:REC-AUG-PLUG",
+        "audit/reconciliations:REC-NS-1240",
+        "gl:JE-REC-PLUG-2026-08"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-001",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "GHOST_EMPLOYEE",
+      "stealth": 5,
+      "magnitude": "$146,309.45 gross",
+      "record_ids": [
+        "EMP-8891",
+        "PR-2026-09-25",
+        "vacant manager seat West Warehouse"
+      ],
+      "plant_objects": [
+        "payroll_register:EMP-8891",
+        "employee_master:EMP-8891",
+        "reporting/payroll:PR-2026-09-25",
+        "gl:JE-PAYROLL-2026-08",
+        "gl:JE-PAYROLL-2026-09",
+        "org_chart:West Warehouse"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-002",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "GHOST_EMPLOYEE",
+      "stealth": 4,
+      "magnitude": "$0 IT assets, $0 badges, $146,309.45 payroll",
+      "record_ids": [
+        "EMP-8891"
+      ],
+      "plant_objects": [
+        "badge_access:EMP-8891",
+        "it_assets:MX-LPT-*",
+        "fixed_assets:laptop population",
+        "okta_export:EMP-8891"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-003",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "GHOST_EMPLOYEE",
+      "stealth": 3,
+      "magnitude": "employer FICA $11,192.65 on top of gross",
+      "record_ids": [
+        "941 filings",
+        "EMP-8891"
+      ],
+      "plant_objects": [
+        "payroll_tax:941-2025-Q2 through 941-2026-Q3",
+        "bank:TXN-941-*",
+        "gl:6200-Benefits"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-004",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "PAYROLL_VENDOR_BANK_COLLISION",
+      "stealth": 5,
+      "magnitude": "$146,309.45 payroll + $28,800.00 AP",
+      "record_ids": [
+        "EMP-8891",
+        "VEND-HAL-01",
+        "routing 211370545 account ****9022"
+      ],
+      "plant_objects": [
+        "payroll_direct_deposit:EMP-8891",
+        "vendor_bank:VEND-HAL-01",
+        "ap_invoices:INV-HAL-*",
+        "bank:TXN-HAL-*",
+        "bank:TXN-PAYROLL-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-005",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "CONTRACTOR_W2_DOUBLE_DIP",
+      "stealth": 4,
+      "magnitude": "$18,400.00 1099 on top of W-2",
+      "record_ids": [
+        "CTR-HALYARD-1099",
+        "EMP-8891",
+        "INV-HAL-WKND-*"
+      ],
+      "plant_objects": [
+        "contractors:CTR-HALYARD-1099",
+        "ap_invoices:INV-HAL-WKND-*",
+        "payroll_register:EMP-8891",
+        "gl:5400-Contractors"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-006",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "GHOST_EMPLOYEE",
+      "stealth": 3,
+      "magnitude": "0 direct reports, 6 orphans",
+      "record_ids": [
+        "EMP-8891",
+        "org_chart West Warehouse"
+      ],
+      "plant_objects": [
+        "org_chart:West Warehouse",
+        "employee_master:EMP-2290",
+        "employee_master:EMP-8891"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-007",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "GHOST_EMPLOYEE",
+      "stealth": 3,
+      "magnitude": "$4,500.06 of PR-2026-10-02 miss after supported OT",
+      "record_ids": [
+        "PR-2026-10-02",
+        "ACT-PAYROLL-HIGH",
+        "EMP-8891",
+        "OT-2026-10-02"
+      ],
+      "plant_objects": [
+        "reporting/payroll:PR-2026-10-02",
+        "reporting/actuals:ACT-PAYROLL-HIGH",
+        "payroll_register:2026-10-02"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PAY-008",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "TERMINATED_EMPLOYEE_PAID",
+      "stealth": 4,
+      "magnitude": "$23,947.30",
+      "record_ids": [
+        "EMP-2290",
+        "USR-PR-01",
+        "last_day 2026-03-31"
+      ],
+      "plant_objects": [
+        "employee_master:EMP-2290",
+        "payroll_register:EMP-2290",
+        "employee_master:EMP-5510",
+        "badge_access:EMP-2290 last 2026-03-30"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-007",
+      "storyline": "SL-ADV-HALYARD",
+      "reason_code": "RELATED_PARTY_VENDOR",
+      "stealth": 3,
+      "magnitude": "$28,800.00 standing janitorial",
+      "record_ids": [
+        "VEND-HAL-01",
+        "PO-HAL-STANDING",
+        "no West campus in facilities_registry"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-HAL-01",
+        "vendor_contracts:CTR-HAL-01",
+        "ap_invoices:INV-HAL-2025-05 through INV-HAL-2026-09",
+        "purchase_orders:PO-HAL-STANDING"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PRE-001",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "PREPAID_AMORT_MISPOSTED",
+      "stealth": 5,
+      "magnitude": "$100,000 parked in 1220 after 20 months; $0 P&L",
+      "record_ids": [
+        "PRE-SFT-002",
+        "JE-PRE-OIC-*",
+        "1220-Prepaid-Other",
+        "VEND-OIC-01"
+      ],
+      "plant_objects": [
+        "close/prepaids:PRE-SFT-002",
+        "close/prepaids:PRE-SFT-001",
+        "gl:JE-PRE-OIC-*",
+        "gl:1220-Prepaid-Other",
+        "vendor_master:VEND-OIC-01",
+        "ap_invoices:INV-OIC-2025-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PRE-002",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "AMORT_REVERSAL_PAIR",
+      "stealth": 5,
+      "magnitude": "$30,000 moved to 1350",
+      "record_ids": [
+        "JE-PRE-OIC-EXP-*",
+        "JE-PRE-OIC-REV-*",
+        "1350-Other-Receivable"
+      ],
+      "plant_objects": [
+        "gl:JE-PRE-OIC-EXP-2026-03 through 2026-08",
+        "gl:JE-PRE-OIC-REV-2026-03 through 2026-08",
+        "gl:1350-Other-Receivable"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PRE-003",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "PREPAID_AMORT_MISPOSTED",
+      "stealth": 3,
+      "magnitude": "$9,300 remaining after policy end 2026-03-31",
+      "record_ids": [
+        "PRE-INS-RIDER",
+        "VEND-HBP-01"
+      ],
+      "plant_objects": [
+        "close/prepaids:PRE-INS-RIDER",
+        "vendor_master:VEND-HBP-01",
+        "ap_invoices:INV-HBP-2026-01",
+        "close/prepaids:PRE-INS-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PRE-004",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "NEAR_DUPLICATE_VENDOR",
+      "stealth": 4,
+      "magnitude": "$180,000",
+      "record_ids": [
+        "VEND-OIC-01 vs VEND-012",
+        "PO-OIC-001",
+        "INV-OIC-2025-01"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-012",
+        "vendor_master:VEND-OIC-01",
+        "vendor_contracts:CTR-OIC-001",
+        "vendor_contracts:DOC-SFT-2025"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PRE-005",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "PREPAID_AMORT_MISPOSTED",
+      "stealth": 3,
+      "magnitude": "GL prepaid accounts exceed demo schedule by $189,300.00",
+      "record_ids": [
+        "TASK-PREPAID",
+        "PRE-SFT-002",
+        "PRE-INS-RIDER",
+        "1220",
+        "1350"
+      ],
+      "plant_objects": [
+        "close/tasks:TASK-PREPAID",
+        "close/prepaids",
+        "gl:1200-Prepaid-Software",
+        "gl:1210-Prepaid-Insurance",
+        "gl:1220-Prepaid-Other"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PRE-006",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "NEAR_DUPLICATE_VENDOR",
+      "stealth": 2,
+      "magnitude": "$18,600.00",
+      "record_ids": [
+        "VEND-HBP-01 vs VEND-011",
+        "INV-HBP-2026-01"
+      ],
+      "plant_objects": [
+        "ap_invoices:INV-HBP-2026-01",
+        "vendor_master:VEND-HBP-01",
+        "vendor_master:VEND-011",
+        "bank:TXN-HBP-2026-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-003",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "PREPAID_AMORT_MISPOSTED",
+      "stealth": 4,
+      "magnitude": "TASK-PREPAID blocked on 1220/1350, not on PRE-SFT-001",
+      "record_ids": [
+        "TASK-PREPAID",
+        "1220",
+        "1350"
+      ],
+      "plant_objects": [
+        "close/tasks:TASK-PREPAID",
+        "close/prepaids:PRE-SFT-001",
+        "close/prepaids:PRE-INS-001",
+        "close/prepaids:PRE-SFT-002"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-FA-004",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "CAPITALIZED_UNRECEIVED",
+      "stealth": 4,
+      "magnitude": "$96,000 implementation with no serial",
+      "record_ids": [
+        "FA-OIC-IMPL",
+        "INV-OIC-2025-01",
+        "FA-DELL-001 untouched"
+      ],
+      "plant_objects": [
+        "close/fixed_assets:FA-OIC-IMPL",
+        "ap_invoices:INV-OIC-2025-01",
+        "gl:JE-FA-OIC-*",
+        "close/fixed_assets:FA-DELL-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-006",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "PREPAID_AMORT_MISPOSTED",
+      "stealth": 3,
+      "magnitude": "$40,000 FYTD addback with no GL expense",
+      "record_ids": [
+        "board_pack EBITDA_addbacks",
+        "PRE-SFT-002"
+      ],
+      "plant_objects": [
+        "reporting/board_pack:EBITDA_addbacks",
+        "reporting/actuals",
+        "close/prepaids:PRE-SFT-002"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-001",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 5,
+      "magnitude": "$412,880.00 misapplied stock",
+      "record_ids": [
+        "PAY-LAP-*",
+        "USR-APPLY-02",
+        "CUST-005",
+        "CUST-002",
+        "CUST-006"
+      ],
+      "plant_objects": [
+        "ar_payments:PAY-LAP-*",
+        "ar_invoices:INV-AR-QH-*",
+        "ar_invoices:INV-AR-HE-*",
+        "ar_invoices:INV-AR-PIN-*",
+        "ar_precedents",
+        "employee_master:EMP-3304"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-002",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 4,
+      "magnitude": "$88,400.00",
+      "record_ids": [
+        "PAY-LAP-2026-09-12",
+        "INV-AR-HE-4412 left open",
+        "INV-AR-PIN-2208 closed"
+      ],
+      "plant_objects": [
+        "ar_payments:PAY-LAP-2026-09-12",
+        "ingestion:remittance/PAY-LAP-2026-09-12.txt",
+        "ar_invoices:INV-AR-HE-4412",
+        "ar_invoices:INV-AR-PIN-2208"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-003",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "UNAPPLIED_CASH_PARK",
+      "stealth": 4,
+      "magnitude": "$36,208.40 ending; $25,791.60 reused",
+      "record_ids": [
+        "1110-AR-Unapplied",
+        "CUST-005",
+        "PAY-UNAPP-*"
+      ],
+      "plant_objects": [
+        "gl:1110-AR-Unapplied",
+        "ar_payments:PAY-UNAPP-*",
+        "ar_ledger:unapplied_subledger"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-004",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 3,
+      "magnitude": "aging understates Quiet Harbor 90+ by $170,000.00",
+      "record_ids": [
+        "CUST-005 aging snapshot vs remittance-faithful rebuild"
+      ],
+      "plant_objects": [
+        "ar_invoices aging snapshot 2026-09-20",
+        "ar_customers:CUST-005",
+        "reporting/balances ar"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-005",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 3,
+      "magnitude": "38 Friday 18:12\u201319:04 applications",
+      "record_ids": [
+        "USR-APPLY-02 timestamps"
+      ],
+      "plant_objects": [
+        "ar_payments.applied_at",
+        "employee_master:EMP-3304",
+        "harness traces if present, else ledger timestamps"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-006",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 4,
+      "magnitude": "$25,000.00 INV-AR-014 timing vs application",
+      "record_ids": [
+        "INV-AR-014",
+        "BNK-AR-FC-001",
+        "PAY-LAP-QH-SEP-PRE",
+        "PAY-014-OCT"
+      ],
+      "plant_objects": [
+        "ar_invoices:INV-AR-014",
+        "reporting/actuals:ACT-DELAY-AR",
+        "bank:BNK-AR-FC-001",
+        "ar_payments:PAY-LAP-QH-SEP-PRE",
+        "ar_payments:PAY-014-OCT"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-007",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 4,
+      "magnitude": "$12,640.00 credit with no return",
+      "record_ids": [
+        "CM-HE-088",
+        "INV-AR-HE-4390",
+        "USR-APPLY-02"
+      ],
+      "plant_objects": [
+        "ar_credit_memos:CM-HE-088",
+        "ar_invoices:INV-AR-HE-4390",
+        "gl:4100-Contra-Revenue-Returns"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-003",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 4,
+      "magnitude": "batch MATCHED, exploded mismatch $412,880.00",
+      "record_ids": [
+        "BATCH-AR-*",
+        "PAY-LAP-*"
+      ],
+      "plant_objects": [
+        "bank:BATCH-AR-*",
+        "cash_recon/ledger AR cash",
+        "ar_payments:PAY-LAP-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-002",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "FORECAST_BIAS_FROM_AR",
+      "stealth": 4,
+      "magnitude": "$91,800.00 week of 2026-09-21",
+      "record_ids": [
+        "forecast_lines AR vs remittance-faithful rebuild"
+      ],
+      "plant_objects": [
+        "reporting/forecast_weeks",
+        "reporting/forecast_lines AR",
+        "ar_payments.applied_at vs bank.date"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-006",
+      "storyline": "SL-ADV-LAPPING",
+      "reason_code": "AR_LAPPING",
+      "stealth": 5,
+      "magnitude": "function-green, population $412,880.00",
+      "record_ids": [
+        "PAY-LAP-*",
+        "BATCH-AR-2026-09-12",
+        "forecast week 2026-09-21"
+      ],
+      "plant_objects": [
+        "ar_payments:PAY-LAP-*",
+        "bank:BATCH-AR-*",
+        "reporting/forecast_lines",
+        "audit/payments sample"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-008",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "BILL_AND_HOLD",
+      "stealth": 5,
+      "magnitude": "$2,400,000.00 revenue; $1,104,000.00 COGS",
+      "record_ids": [
+        "INV-AR-PIN-BH-01",
+        "WT-BH-01",
+        "CAM-WH-01",
+        "CUST-006"
+      ],
+      "plant_objects": [
+        "ar_invoices:INV-AR-PIN-BH-01",
+        "inventory:CAM-WH-01 bins PIN-BH-*",
+        "gl:4000-Revenue",
+        "gl:1400-Inventory",
+        "gl:5200-Supplier",
+        "warehouse_locations:CAM-WH-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-009",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "CHANNEL_STUFFING",
+      "stealth": 4,
+      "magnitude": "$2,400,000.00",
+      "record_ids": [
+        "DOC-SL-PIN-2026-09-28 para 4",
+        "P-REV-001",
+        "INV-AR-PIN-BH-01"
+      ],
+      "plant_objects": [
+        "close/source_documents:DOC-SL-PIN-2026-09-28",
+        "ar_invoices:INV-AR-PIN-BH-01",
+        "company_policies revenue recognition (new plant P-REV-001)"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-010",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "REVENUE_CUTOFF",
+      "stealth": 4,
+      "magnitude": "$1,180,000.00",
+      "record_ids": [
+        "INV-AR-ATL-PF-01",
+        "PO-ATL-8841",
+        "ASN missing at Sep 30"
+      ],
+      "plant_objects": [
+        "ar_invoices:INV-AR-ATL-PF-01",
+        "gl:JE-REV-ATL-PF-01",
+        "purchase_orders customer-side:PO-ATL-8841 dated 2026-10-02 (after invoice)"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-011",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "BILL_AND_HOLD",
+      "stealth": 4,
+      "magnitude": "floor over perpetual $1,611,400.00 at cost",
+      "record_ids": [
+        "CC-CAM-WH-01-2026-09-30",
+        "INV-AR-PIN-BH-01",
+        "INV-AR-ATL-PF-01"
+      ],
+      "plant_objects": [
+        "inventory:1400-Inventory",
+        "cycle_counts:CC-CAM-WH-01-2026-09-30",
+        "gl:5200-Supplier"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-012",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "CHANNEL_STUFFING",
+      "stealth": 5,
+      "magnitude": "$2,400,000.00 at risk of October credit",
+      "record_ids": [
+        "MSG-PIN-HOLD-01",
+        "CM-PIN-OCT-01 (October context)",
+        "INV-AR-PIN-BH-01"
+      ],
+      "plant_objects": [
+        "inbox:MSG-PIN-HOLD-01",
+        "later_ar:CM-PIN-OCT-01",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-004",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "REVENUE_CUTOFF",
+      "stealth": 4,
+      "magnitude": "$3,580,000.00",
+      "record_ids": [
+        "JE-REV-CUTOFF-01",
+        "JE-REV-CUTOFF-02",
+        "2026-09-30T23:47:00Z"
+      ],
+      "plant_objects": [
+        "canonical/journal_entries:JE-REV-CUTOFF-01",
+        "canonical/journal_entries:JE-REV-CUTOFF-02",
+        "close/journal_entries",
+        "employee_master:EMP-1190"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-003",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "CHANNEL_STUFFING",
+      "stealth": 3,
+      "magnitude": "stuffed revenue hid ~2.6 GM points",
+      "record_ids": [
+        "INV-AR-PIN-BH-01",
+        "INV-AR-ATL-PF-01",
+        "vs TXN-SUP-SEP-001 cost story"
+      ],
+      "plant_objects": [
+        "reporting/actuals product GM",
+        "gross_margin_drivers remaining TXN-SUP-SEP-001 etc.",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-008",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "FORECAST_BIAS_FROM_AR",
+      "stealth": 4,
+      "magnitude": "$2,400,000.00 in week 2026-10-05 vs due 2026-12-28",
+      "record_ids": [
+        "FC-PIN-BH",
+        "INV-AR-PIN-BH-01"
+      ],
+      "plant_objects": [
+        "reporting/forecast_weeks:2026-10-05",
+        "reporting/forecast_lines:FC-PIN-BH",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-001",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "PROCESSOR_FEE_OVERSTATEMENT",
+      "stealth": 5,
+      "magnitude": "$214,660.18 span; $18,206.40 in 2026-09",
+      "record_ids": [
+        "CTR-STRIPE-001",
+        "6600-Processor-Fees vs Stripe fee lines",
+        "po_1MaximorFees kept"
+      ],
+      "plant_objects": [
+        "vendor_contracts:CTR-STRIPE-001",
+        "integrations/stripe/charges",
+        "integrations/stripe/balance_transactions",
+        "gl:6600-Processor-Fees",
+        "integrations/stripe/payouts:po_1MaximorFees"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-002",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "CONNECTED_ACCOUNT_SKIM",
+      "stealth": 5,
+      "magnitude": "$214,660.18",
+      "record_ids": [
+        "acct_1MaximorProc",
+        "tr_mpr_*",
+        "EMP-4402",
+        "absent from vendor_master"
+      ],
+      "plant_objects": [
+        "integrations/stripe/transfers:tr_mpr_*",
+        "integrations/stripe/connected_account:acct_1MaximorProc",
+        "vendor_master (absent VEND-MPR-01)",
+        "bank (no separate bank line; netted in payout)"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-003",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "PROCESSOR_FEE_OVERSTATEMENT",
+      "stealth": 3,
+      "magnitude": "payout MATCHED $12,610.00; fee GL still high on the densified population",
+      "record_ids": [
+        "po_1MaximorFees",
+        "TXN-2026-09-019A"
+      ],
+      "plant_objects": [
+        "integrations/stripe/payouts:po_1MaximorFees",
+        "bank:TXN-2026-09-019A",
+        "integrations/stripe/bank_deposits"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-004",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "PROCESSOR_FEE_OVERSTATEMENT",
+      "stealth": 4,
+      "magnitude": "$6,208.00 extra refund fees",
+      "record_ids": [
+        "po_1MaximorRefunds kept",
+        "densified refunds",
+        "6600"
+      ],
+      "plant_objects": [
+        "integrations/stripe/refunds",
+        "integrations/stripe/payouts:po_1MaximorRefunds",
+        "gl:6600-Processor-Fees",
+        "bank:TXN-2026-09-022S"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-005",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "PROCESSOR_FEE_OVERSTATEMENT",
+      "stealth": 4,
+      "magnitude": "blend memo hides Stripe 50 bps",
+      "record_ids": [
+        "JE-FEE-BLEND-*",
+        "CTR-STRIPE-001 vs CTR-ADYEN-001"
+      ],
+      "plant_objects": [
+        "integrations/adyen (sampled sim)",
+        "gl:JE-FEE-BLEND-*",
+        "vendor_contracts:CTR-STRIPE-001",
+        "vendor_contracts:CTR-ADYEN-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-006",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "CONNECTED_ACCOUNT_SKIM",
+      "stealth": 4,
+      "magnitude": "$18,440.00 won dispute",
+      "record_ids": [
+        "dsp_win_4419",
+        "tr_mpr_win_4419",
+        "po_1MaximorDisputes kept as the other dispute story"
+      ],
+      "plant_objects": [
+        "integrations/stripe/disputes:dsp_win_4419",
+        "integrations/stripe/transfers:tr_mpr_win_4419",
+        "gl:4000-Revenue",
+        "gl:6600-Processor-Fees",
+        "payouts:po_1MaximorDisputes"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-007",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "SELF_APPROVAL_ALIAS",
+      "stealth": 3,
+      "magnitude": "processor recs 12 months",
+      "record_ids": [
+        "REC-STRIPE-*",
+        "USR-STRIPE-01",
+        "EMP-4402"
+      ],
+      "plant_objects": [
+        "audit/reconciliations:REC-STRIPE-*",
+        "employee_master:EMP-4402",
+        "audit/approvals"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-PROC-008",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "CONNECTED_ACCOUNT_SKIM",
+      "stealth": 4,
+      "magnitude": "$22,400.00 labeled reserve release",
+      "record_ids": [
+        "TXN-STRIPE-RESERVE-REL",
+        "acct_1MaximorProc",
+        "6600 credit"
+      ],
+      "plant_objects": [
+        "bank:TXN-STRIPE-RESERVE-REL",
+        "integrations/stripe/transfers",
+        "gl:6600-Processor-Fees",
+        "reporting/actuals:ACT-UNEXPECTED kept on BNK-UNX-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-004",
+      "storyline": "SL-ADV-PROCESSOR",
+      "reason_code": "CONNECTED_ACCOUNT_SKIM",
+      "stealth": 3,
+      "magnitude": "teaching delta $1,184.22 on the famous payout day; population $214,660.18",
+      "record_ids": [
+        "po_1MaximorFees",
+        "ACT-STRIPE-LOW",
+        "tr_mpr_2026-09-19"
+      ],
+      "plant_objects": [
+        "reporting/actuals:ACT-STRIPE-LOW",
+        "payouts:po_1MaximorFees",
+        "bank:TXN-2026-09-019A",
+        "transfers:tr_mpr_2026-09-19"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-001",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "FAKE_INTERCOMPANY",
+      "stealth": 5,
+      "magnitude": "$4,851,220.00",
+      "record_ids": [
+        "1300-Due-From-Affiliate",
+        "CUST-IC-EU",
+        "missing legal_entity"
+      ],
+      "plant_objects": [
+        "gl:1300-Due-From-Affiliate",
+        "ar_customers:CUST-IC-EU",
+        "close/tasks:TASK-BS",
+        "legal_entity_register (absent Maximor EU BV)"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-002",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "NET_ZERO_JE_PAIR",
+      "stealth": 5,
+      "magnitude": "cash out $2,200,000.00 across pairs; 1300 residual growth",
+      "record_ids": [
+        "JE-IC-TU-*",
+        "JE-IC-CLR-*",
+        "2100",
+        "1300"
+      ],
+      "plant_objects": [
+        "gl:JE-IC-TU-*",
+        "gl:JE-IC-CLR-*",
+        "gl:2100-Due-To-Affiliate",
+        "gl:1300-Due-From-Affiliate",
+        "bank:TXN-MRH-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-005",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "FAKE_INTERCOMPANY",
+      "stealth": 4,
+      "magnitude": "$2,200,000.00 wires",
+      "record_ids": [
+        "TXN-MRH-*",
+        "memo IC SWEEP EU",
+        "EIN 83-6612045"
+      ],
+      "plant_objects": [
+        "bank:TXN-MRH-2025-12 through TXN-MRH-2026-08",
+        "vendor_master (no VEND-MRH-01 on master \u2014 plant the name only on the bank line, optional hidden vendor file for the plant team)",
+        "gl:1000-Cash"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-008",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "FAKE_INTERCOMPANY",
+      "stealth": 3,
+      "magnitude": "$2,200,000.00 bank-only counterparty",
+      "record_ids": [
+        "TXN-MRH-*",
+        "vendor_master miss"
+      ],
+      "plant_objects": [
+        "vendor_master",
+        "bank:TXN-MRH-*",
+        "canonical/vendor_payments"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-002",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "FAKE_INTERCOMPANY",
+      "stealth": 5,
+      "magnitude": "$4,851,220.00 receivable, $2,200,000.00 cash gone",
+      "record_ids": [
+        "1300",
+        "TXN-MRH-*",
+        "FC-IC-IN",
+        "JE-IC-TU-2026-08 + JE-IC-CLR-2026-08"
+      ],
+      "plant_objects": [
+        "close/tasks:TASK-BS",
+        "bank:TXN-MRH-*",
+        "reporting/forecast_lines:FC-IC-IN",
+        "audit/journal_entries:JE-IC-TU-2026-08"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-004",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "FORECAST_BIAS_FROM_AR",
+      "stealth": 4,
+      "magnitude": "$500,000.00 week 2026-11-02",
+      "record_ids": [
+        "FC-IC-IN",
+        "1300"
+      ],
+      "plant_objects": [
+        "reporting/forecast_lines:FC-IC-IN",
+        "reporting/forecast_weeks:2026-11-02",
+        "gl:1300-Due-From-Affiliate"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-002",
+      "storyline": "SL-ADV-MERRIMACK",
+      "reason_code": "NET_ZERO_JE_PAIR",
+      "stealth": 4,
+      "magnitude": "sample PASS, pair FAIL $472,400.00 cash",
+      "record_ids": [
+        "AUD-SAMP-IC-08",
+        "JE-IC-CLR-2026-08"
+      ],
+      "plant_objects": [
+        "audit/journal_entries:AUD-SAMP-IC-08",
+        "gl:JE-IC-TU-2026-08",
+        "gl:JE-IC-CLR-2026-08"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AR-014",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "ROUND_TRIP_COUNTERPARTY",
+      "stealth": 3,
+      "magnitude": "AR $419,800.00 FYTD through Aug",
+      "record_ids": [
+        "INV-AR-BLM-*",
+        "CUST-004",
+        "14 Fayette Street"
+      ],
+      "plant_objects": [
+        "ar_customers:CUST-004",
+        "ar_invoices:INV-AR-BLM-2025-09 through INV-AR-BLM-2026-09",
+        "ar_payments:PAY-BLM-*",
+        "gl:4000-Revenue"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-007",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "ROUND_TRIP_COUNTERPARTY",
+      "stealth": 4,
+      "magnitude": "AP $444,400.00 FYTD through Aug",
+      "record_ids": [
+        "VEND-BLS-01",
+        "CUST-004",
+        "14 Fayette Street",
+        "EINs 27-9081144 vs 27-9081101"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-BLS-01",
+        "ap_invoices:INV-BLS-*",
+        "purchase_orders:PO-BLS-STANDING",
+        "purchase_orders:PO-BLS-SPLIT-*",
+        "employee_master:EMP-3310"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-006",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "ROUND_TRIP_COUNTERPARTY",
+      "stealth": 4,
+      "magnitude": "net cash out $26,400.00 through Aug",
+      "record_ids": [
+        "TXN-BLM-IN-*",
+        "TXN-BLS-OUT-*"
+      ],
+      "plant_objects": [
+        "bank:TXN-BLM-IN-*",
+        "bank:TXN-BLS-OUT-*",
+        "cash_recon"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-005",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "ROUND_TRIP_COUNTERPARTY",
+      "stealth": 3,
+      "magnitude": "YTD revenue +$419,800 and opex +$444,400",
+      "record_ids": [
+        "CUST-004",
+        "VEND-BLS-01"
+      ],
+      "plant_objects": [
+        "reporting/actuals revenue",
+        "reporting/actuals opex marketing",
+        "gl:4000-Revenue",
+        "gl:6000-Operating"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-003",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "ROUND_TRIP_COUNTERPARTY",
+      "stealth": 5,
+      "magnitude": "address join 14 Fayette Street",
+      "record_ids": [
+        "CUST-004",
+        "VEND-BLS-01",
+        "EMP-3310"
+      ],
+      "plant_objects": [
+        "audit/vendors:VEND-BLS-01",
+        "ar_customers:CUST-004",
+        "vendor_master.address",
+        "ar_customers.address (new field in densify)"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-004",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "ROUND_TRIP_COUNTERPARTY",
+      "stealth": 4,
+      "magnitude": "four greens, net $2,200.00 per month out",
+      "record_ids": [
+        "CUST-004",
+        "VEND-BLS-01"
+      ],
+      "plant_objects": [
+        "ar_invoices:INV-AR-BLM-*",
+        "ap_invoices:INV-BLS-*",
+        "bank:TXN-BLM-IN-*",
+        "bank:TXN-BLS-OUT-*",
+        "reporting/actuals"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-009",
+      "storyline": "SL-ADV-BRIGHTLINE",
+      "reason_code": "NEAR_DUPLICATE_VENDOR",
+      "stealth": 2,
+      "magnitude": "created_by EMP-4128, economics with EMP-3310",
+      "record_ids": [
+        "VEND-BLS-01"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-BLS-01",
+        "employee_master:EMP-4128",
+        "employee_master:EMP-3310"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-VM-010",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "BANK_INSTRUMENT_DRIFT",
+      "stealth": 5,
+      "magnitude": "$192,000.00 rent Jun\u2013Sep at transposed account",
+      "record_ids": [
+        "VEND-013 44552109\u219244552190",
+        "VEND-CPS-01",
+        "EMP-2201",
+        "CTR-CAM-001"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-013",
+        "vendor_bank_history:VEND-013",
+        "vendor_master:VEND-CPS-01",
+        "employee_master:EMP-2201",
+        "bank:TXN-CAM-RENT-* after 2026-05-22"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-008",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "CAM_TRUEUP_ORPHAN",
+      "stealth": 4,
+      "magnitude": "$126,408.22 monthly CAM plus $18,200.00 annual CAM",
+      "record_ids": [
+        "INV-CPS-*",
+        "INV-CAM-CAM-2026",
+        "CTR-CAM-001"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-CPS-01",
+        "ap_invoices:INV-CPS-*",
+        "vendor_contracts:CTR-CAM-001",
+        "purchase_orders:PO-CPS-CAM"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-009",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "CAM_TRUEUP_ORPHAN",
+      "stealth": 3,
+      "magnitude": "extra $8,000.00 June+August",
+      "record_ids": [
+        "INV-CPS-RENT-2026-06",
+        "INV-CPS-RENT-2026-08"
+      ],
+      "plant_objects": [
+        "ap_invoices:INV-CAM-RENT-2026-06",
+        "ap_invoices:INV-CPS-RENT-2026-06",
+        "ap_invoices:INV-CAM-RENT-2026-08",
+        "ap_invoices:INV-CPS-RENT-2026-08"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-007",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "BANK_INSTRUMENT_DRIFT",
+      "stealth": 3,
+      "magnitude": "$48,000.00 monthly after May",
+      "record_ids": [
+        "TXN-CAM-RENT-*",
+        "counterparty CAMBRIDGE PROPERTY SVC",
+        "last4 2190"
+      ],
+      "plant_objects": [
+        "bank:TXN-CAM-RENT-2026-06 through 2026-09",
+        "ap_invoices:INV-CAM-RENT-*",
+        "vendor_master:VEND-013"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-005",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "CAM_TRUEUP_ORPHAN",
+      "stealth": 3,
+      "magnitude": "~$48,000.00 double occupancy",
+      "record_ids": [
+        "ACC-CAM-2026-09",
+        "INV-CAM-RENT-2026-09",
+        "PRE-CAM-Q3",
+        "ACC-HE-2026-09 untouched"
+      ],
+      "plant_objects": [
+        "close/accruals:ACC-CAM-2026-09",
+        "close/prepaids:PRE-CAM-Q3",
+        "ap_invoices:INV-CAM-RENT-2026-09",
+        "gl:6300-Occupancy"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-004",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "BANK_INSTRUMENT_DRIFT",
+      "stealth": 5,
+      "magnitude": "sample PASS on name, FAIL on account 44552190",
+      "record_ids": [
+        "VEND-013",
+        "lease lockbox 44552109"
+      ],
+      "plant_objects": [
+        "audit/vendors:VEND-013",
+        "vendor_bank_history:VEND-013",
+        "bank:TXN-CAM-RENT-*",
+        "audit/policy.json"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-005",
+      "storyline": "SL-ADV-CAMBRIDGE",
+      "reason_code": "BANK_INSTRUMENT_DRIFT",
+      "stealth": 4,
+      "magnitude": "rent diversion $192,000 plus CAM $126,408.22 plus stipend $18,000.00 span",
+      "record_ids": [
+        "EMP-2201",
+        "VEND-013",
+        "VEND-CPS-01",
+        "ALLW-CHO"
+      ],
+      "plant_objects": [
+        "payroll_register:ALLW-CHO",
+        "ap_invoices:INV-CPS-*",
+        "bank:TXN-CAM-RENT-*",
+        "close/accruals:ACC-CAM-2026-09",
+        "employee_master:EMP-2201"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-006",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "NET_ZERO_JE_PAIR",
+      "stealth": 5,
+      "magnitude": "$186,420.18 parked 2026-08-31, still open",
+      "record_ids": [
+        "JE-CASH-PARK-2026-08",
+        "DIT-FAKE-0831",
+        "1030",
+        "1000"
+      ],
+      "plant_objects": [
+        "gl:JE-CASH-PARK-2026-03",
+        "gl:JE-CASH-PARK-2026-05",
+        "gl:JE-CASH-PARK-2026-08",
+        "gl:JE-CASH-UNPARK-2026-04",
+        "gl:JE-CASH-UNPARK-2026-06",
+        "gl:1030-Undeposited-Funds",
+        "gl:1000-Cash",
+        "cash_recon/balances"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-007",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "NET_ZERO_JE_PAIR",
+      "stealth": 4,
+      "magnitude": "$186,420.18 unpark without bank",
+      "record_ids": [
+        "JE-CASH-UNPARK-2026-04",
+        "JE-CASH-UNPARK-2026-06 vs GL-AP-HE timing kept"
+      ],
+      "plant_objects": [
+        "gl:JE-CASH-UNPARK-2026-04",
+        "gl:JE-CASH-UNPARK-2026-06",
+        "bank_statement April and June 1st-3rd"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-009",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "NET_ZERO_JE_PAIR",
+      "stealth": 4,
+      "magnitude": "$84,000.00 payroll expense moved to 1350",
+      "record_ids": [
+        "JE-PR-SHIFT-2026-08",
+        "JE-PR-AR-2026-08",
+        "1350"
+      ],
+      "plant_objects": [
+        "gl:JE-PR-ACC-2026-08",
+        "gl:JE-PR-SHIFT-2026-08",
+        "gl:JE-PR-AR-2026-08",
+        "gl:2200-Payroll-Accrual",
+        "gl:1350-Other-Receivable",
+        "reporting/payroll"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CLOSE-010",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "EFFECTIVE_DATE_MISMATCH",
+      "stealth": 5,
+      "magnitude": "$41,206.18 posted after August close without post_close flag",
+      "record_ids": [
+        "JE-AUG-LATE-01",
+        "CLOSE-2026-08",
+        "Westbrook"
+      ],
+      "plant_objects": [
+        "canonical/journal_entries:JE-AUG-LATE-01",
+        "audit/periods:2026-08 close_timestamp",
+        "gl:JE-POST-CLOSE-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-001",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "SELF_APPROVAL_ALIAS",
+      "stealth": 4,
+      "magnitude": "USR-REV-04 is not a person",
+      "record_ids": [
+        "JE-REC-PLUG-*",
+        "JE-IC-*",
+        "JE-CASH-PARK-*",
+        "USR-JE-04"
+      ],
+      "plant_objects": [
+        "audit/approvals",
+        "employee_master",
+        "directory:USR-REV-04",
+        "gl posters USR-JE-04"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-005",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "SELF_APPROVAL_ALIAS",
+      "stealth": 5,
+      "magnitude": "EMP-1088 as USR-JE-04 and USR-NA-VOSS",
+      "record_ids": [
+        "JE-PRE-OIC-REV-*",
+        "JE-IC-TU-2026-05",
+        "JE-IC-TU-2026-07"
+      ],
+      "plant_objects": [
+        "employee_master:EMP-1088",
+        "user_map:USR-JE-04",
+        "user_map:USR-NA-VOSS",
+        "gl:JE-PRE-OIC-EXP-*",
+        "gl:JE-PRE-OIC-REV-*"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-FA-001",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "CAPITALIZED_UNRECEIVED",
+      "stealth": 5,
+      "magnitude": "$154,214.00 untagged",
+      "record_ids": [
+        "FA-LEN-ROLL-26",
+        "GR-LEN-ROLL",
+        "107 of 168 MX-LPT tags",
+        "VEND-020"
+      ],
+      "plant_objects": [
+        "close/fixed_assets:FA-LEN-ROLL-26",
+        "ap_invoices:INV-LEN-ROLL-26",
+        "goods_receipts:GR-LEN-ROLL",
+        "it_assets:MX-LPT-*",
+        "close/fixed_assets:FA-DELL-001",
+        "vendor_master:VEND-020"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-FA-003",
+      "storyline": "SL-ADV-CLOSECOSMETIC",
+      "reason_code": "CAPITALIZED_UNRECEIVED",
+      "stealth": 3,
+      "magnitude": "extra dep $25,701.48",
+      "record_ids": [
+        "JE-FA-LEN-*",
+        "FA-LEN-ROLL-26"
+      ],
+      "plant_objects": [
+        "runs/month_end/depreciation_schedule:FA-LEN-ROLL-26",
+        "gl:JE-FA-LEN-*",
+        "close/fixed_assets:FA-LEN-ROLL-26"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-010",
+      "storyline": "SL-ADV-FREIGHT",
+      "reason_code": "FREIGHT_SURCHARGE_SKIM",
+      "stealth": 3,
+      "magnitude": "$61,288.40",
+      "record_ids": [
+        "VEND-FLE-01 vs VEND-019",
+        "INV-FLE-*",
+        "PO-FLE-ACC"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-FLE-01",
+        "vendor_master:VEND-019",
+        "ap_invoices:INV-FLE-*",
+        "reporting:TXN-FRT-SEP-001"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-001",
+      "storyline": "SL-ADV-FREIGHT",
+      "reason_code": "FREIGHT_SURCHARGE_SKIM",
+      "stealth": 3,
+      "magnitude": "~90 ACH items $61,288.40",
+      "record_ids": [
+        "TXN-FLE-*"
+      ],
+      "plant_objects": [
+        "bank:TXN-FLE-*",
+        "ap_invoices:INV-FLE-*",
+        "cash_recon"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-CASH-002",
+      "storyline": "SL-ADV-FREIGHT",
+      "reason_code": "FREIGHT_SURCHARGE_SKIM",
+      "stealth": 4,
+      "magnitude": "mixed grouped ACH $26,412.40 and $25,118.62",
+      "record_ids": [
+        "TXN-MIX-2026-07-16",
+        "TXN-MIX-2026-08-20",
+        "EMP-4128"
+      ],
+      "plant_objects": [
+        "bank:TXN-MIX-2026-07-16",
+        "bank:TXN-MIX-2026-08-20",
+        "canonical/vendor_payments",
+        "bank:TXN-2026-09-008"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-RPT-001",
+      "storyline": "SL-ADV-FREIGHT",
+      "reason_code": "FREIGHT_SURCHARGE_SKIM",
+      "stealth": 4,
+      "magnitude": "~40 bps; September $12,440.18",
+      "record_ids": [
+        "INV-FLE-2026-09-*",
+        "CTR-FRL-001",
+        "not TXN-FRT-SEP-001"
+      ],
+      "plant_objects": [
+        "reporting/actuals freight",
+        "vendor_contracts:CTR-FRL-001",
+        "ap_invoices:INV-FLE-*",
+        "gross_margin_drivers (untouched)"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-007",
+      "storyline": "SL-ADV-FREIGHT",
+      "reason_code": "FREIGHT_SURCHARGE_SKIM",
+      "stealth": 4,
+      "magnitude": "$61,288.40 plus pointer to VEND-KIS-01 $187,412.18",
+      "record_ids": [
+        "VEND-FLE-01",
+        "VEND-KIS-01",
+        "EMP-4128"
+      ],
+      "plant_objects": [
+        "vendor_master:VEND-FLE-01",
+        "vendor_master:VEND-KIS-01",
+        "bank:TXN-MIX-*",
+        "reporting/actuals freight"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AUDIT-006",
+      "storyline": "SL-ADV-FREIGHT",
+      "reason_code": "FREIGHT_SURCHARGE_SKIM",
+      "stealth": 3,
+      "magnitude": "Logistics sample PASS, Expedite population $61,288.40",
+      "record_ids": [
+        "VEND-019 sample vs VEND-FLE-01"
+      ],
+      "plant_objects": [
+        "audit/invoices freight sample",
+        "ap_invoices:INV-FLE-*",
+        "audit/policy.json"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-011",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "RELATED_PARTY_REMITTANCE",
+      "stealth": 3,
+      "magnitude": "$482.12 discount clawback on INV-KIS-0618",
+      "record_ids": [
+        "PAY-KIS-DISC",
+        "PAY-KIS-GROSS-BAL",
+        "INV-001 untouched"
+      ],
+      "plant_objects": [
+        "ap_invoices:INV-KIS-0618",
+        "canonical/vendor_payments:PAY-KIS-DISC",
+        "canonical/vendor_payments:PAY-KIS-GROSS-BAL",
+        "gl:discount income",
+        "bank:TXN-KIS-0618",
+        "bank:TXN-KIS-0702"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-AP-012",
+      "storyline": "SL-ADV-ORBIT",
+      "reason_code": "PREPAID_AMORT_MISPOSTED",
+      "stealth": 2,
+      "magnitude": "$15,000.00 Q4 service expensed 2026-09-30",
+      "record_ids": [
+        "INV-OIC-PREBILL",
+        "VEND-OIC-01"
+      ],
+      "plant_objects": [
+        "ap_invoices:INV-OIC-PREBILL",
+        "close/prepaids (missing this item)",
+        "gl:6000-Operating",
+        "vendor_master:VEND-OIC-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-FA-002",
+      "storyline": "SL-ADV-PINNACLE",
+      "reason_code": "BILL_AND_HOLD",
+      "stealth": 3,
+      "magnitude": "consignment cage vs $2,400,000.00 sale",
+      "record_ids": [
+        "CAM-WH-01-CAGE-B",
+        "P-INV-001",
+        "INV-AR-PIN-BH-01"
+      ],
+      "plant_objects": [
+        "warehouse_locations:CAM-WH-01-CAGE-B",
+        "company_policies:P-INV-001",
+        "inventory:PIN-BH SKUs",
+        "ar_invoices:INV-AR-PIN-BH-01"
+      ],
+      "must_remain_unmatched": []
+    },
+    {
+      "id": "ADV-MIX-008",
+      "storyline": "SL-ADV-KESTREL",
+      "reason_code": "MIXED_SABBATICAL_SURFACE",
+      "stealth": 5,
+      "magnitude": "$12.40 + $146,309.45 + $187,412.18 + $4,851,220.00",
+      "record_ids": [
+        "TXN-2026-09-015",
+        "EMP-8891",
+        "VEND-KIS-01",
+        "1300"
+      ],
+      "plant_objects": [
+        "bank:TXN-2026-09-015",
+        "payroll_register:EMP-8891",
+        "vendor_master:VEND-KIS-01",
+        "gl:1300-Due-From-Affiliate",
+        "close/tasks:TASK-CASH",
+        "close/tasks:TASK-BS",
+        "close/tasks:TASK-PREPAID"
+      ],
+      "must_remain_unmatched": []
+    }
+  ]
+}

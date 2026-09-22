@@ -1,5 +1,5 @@
 {
-  "currentId": "prove-20260920-floor-r1",
+  "currentId": "golden-20260920-r1",
   "instances": [
     {
       "id": "live",
@@ -8,22 +8,22 @@
       "createdAt": "2026-09-20T11:38:39.579Z"
     },
     {
-      "id": "fresh-protocol",
-      "name": "fresh-protocol",
-      "computerRel": "instances/fresh-protocol",
-      "createdAt": "2026-09-20T11:40:07.497Z"
-    },
-    {
-      "id": "protocol-proof",
-      "name": "protocol-proof",
-      "computerRel": "instances/protocol-proof",
-      "createdAt": "2026-09-20T11:48:53.740Z"
-    },
-    {
       "id": "prove-20260920-floor-r1",
       "name": "prove-20260920-floor-r1",
       "computerRel": "instances/prove-20260920-floor-r1",
-      "createdAt": "2026-09-20T14:16:16.273Z"
+      "createdAt": "2026-09-20T14:25:32.774Z"
+    },
+    {
+      "id": "prove-20260920-month-r1",
+      "name": "prove-20260920-month-r1",
+      "computerRel": "instances/prove-20260920-month-r1",
+      "createdAt": "2026-09-20T14:35:37.906Z"
+    },
+    {
+      "id": "golden-20260920-r1",
+      "name": "golden-20260920-r1",
+      "computerRel": "instances/golden-20260920-r1",
+      "createdAt": "2026-09-20T14:45:18.051Z"
     }
   ]
 }

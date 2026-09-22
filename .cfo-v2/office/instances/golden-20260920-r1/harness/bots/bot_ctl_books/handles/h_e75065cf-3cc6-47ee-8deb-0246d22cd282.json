@@ -1,0 +1,23 @@
+{
+  "id": "h_e75065cf-3cc6-47ee-8deb-0246d22cd282",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "profile: lock\nRead evaluate_close_gates for 2026-09 at workspace/close/2026-09/gates.json and coordinate-decision.json.\nPack is workspace/close/2026-09/pack.json. gate_passed=false. period_status=BLOCKED.\nblocked: cash $12.40 unexplained (TXN-2026-09-015), AR unmatched $4500, prepaids missing insurance evidence, bs_recon BLOCKED.\nDo not mark CLOSED. Kernel close.month_end is the only lock door. Never ask a human.",
+  "paths": [
+    "workspace/close/2026-09/pack.json",
+    "workspace/close/2026-09/gates.json",
+    "workspace/close/2026-09/coordinate-decision.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:29:15.462Z",
+  "updatedAt": "2026-09-20T15:29:33.314Z",
+  "result": "FinalCloseVerdict REJECT_CLOSE for 2026-09. gate_passed=false; period_status=BLOCKED; do not mark CLOSED.\n\nevaluate_close_gates (workspace/close/2026-09/gates.json): passed=false. Blockers: cash/bs_recon/exceptions incomplete; all required BS recs MISSING not SIGNED_OFF; REV-2026-09-CASH-TXN-2026-09-015 ($12.40 unexplained — not timing, not force-match); REV-2026-09-AR-PAY-CLOSE-4500 ($4500 unmatched); REV-2026-09-PREPAID-PRE-INS-MISSING (Northshore policy evidence); evidence_complete=false.\n\ncoordinate-decision.json: can_close=false; blocked_tasks cash, bs_recon.\n\nVerdict path: workspace/close/2026-09/ctl-books-lock-verdict.json. Kernel close.month_end is the only lock door; ctl-books will not flip lock while gates fail. No human asked.",
+  "seq": 109
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "CashMatchPacket",
+  "transaction_id": "TXN-2026-09-011",
+  "period": "2026-09",
+  "profile": "match",
+  "source_packet": "workspace/bank/lines/TXN-2026-09-011.json",
+  "case_id": "2026-09",
+  "bank_line": {
+    "transaction_id": "TXN-2026-09-011",
+    "date": "2026-09-11",
+    "amount": -10025.0,
+    "amount_minor": -1002500,
+    "currency": "USD",
+    "description": "WIRE TRANSFER INTL REF 729103",
+    "reference": "729103",
+    "transaction_type": "wire_debit"
+  },
+  "pipe_identifier": {
+    "identifier_present": false,
+    "fail_closed_note": "apply/pay packets empty for this wire; selection uses Kernel fee-netted candidate only, not a memo counterparty claim"
+  },
+  "preparer_selection": {
+    "selected_candidate_id": "FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE",
+    "rejected_candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-011:GL-AP-WIRE",
+    "match_type": "FEE_NETTED",
+    "disposition": "EXPLAINED_EXCEPTION",
+    "disposition_source": "kernel_match_type",
+    "difference_minor": -2500,
+    "fee_evidence_ids": ["ADV-729103"],
+    "ledger_entry_ids": ["GL-AP-WIRE"],
+    "evidence_ids": [
+      "ADV-729103",
+      "FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE"
+    ],
+    "reasons": [
+      "Kernel candidate FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE copies bank -1002500 vs ledger GL-AP-WIRE -1000000.",
+      "Fee residual -2500 explained only by Kernel fee_evidence_ids ADV-729103 (wire_correspondent $25, reference 729103).",
+      "Rejected UNEXPLAINED_DIFFERENCE twin: fee evidence present so residual is not unexplained.",
+      "Proposed bank-fee journal stays unposted (posted=false) until Verifier + Kernel allow.",
+      "Did not invent residual or scrape HELIOS / PAY-AP-017 from feed as identity."
+    ],
+    "proposed_adjusting_entries_posted": false
+  },
+  "status": "EXPLAINED_EXCEPTION",
+  "handoff": {
+    "to": "ctl-cash",
+    "profile": "review-rec",
+    "path": "workspace/cash/packets/TXN-2026-09-011.json"
+  }
+}

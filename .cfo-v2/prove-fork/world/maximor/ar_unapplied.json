@@ -1,0 +1,9 @@
+[
+  {
+    "customer_id": "CUST-005",
+    "account": "1110-AR-Unapplied",
+    "in_amount": 62000.0,
+    "out_amount": 25791.6,
+    "ending": 36208.4
+  }
+]

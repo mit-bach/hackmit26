@@ -1,0 +1,16 @@
+{
+  "from": "email",
+  "to": "world",
+  "toSlug": "world",
+  "profile": "vendor",
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "prompt": "profile: vendor\nFinance asked Pinnacle Retail operations for missing invoice fields in thread THR-pinnacle-hold. get_inbox_thread then reply_in_thread as that vendor. Do not send_office_outbound. Do not dispatch.",
+  "paths": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/golden-20260920-r1/runs/inbox/packets/email-outbound-MSG-PIN-HOLD-01-OUT.json"
+  ],
+  "queueOwner": "world",
+  "humanQueue": false,
+  "idempotencyKey": "email:outbound:MSG-PIN-HOLD-01-OUT",
+  "createdAt": "2026-09-20T14:51:51Z"
+}

@@ -1,0 +1,47 @@
+{
+  "period": "2026-09",
+  "all_required_tasks_complete": false,
+  "all_required_bs_recs_signed_off": false,
+  "no_blocking_reviews": false,
+  "evidence_complete": false,
+  "journal_safeguards_pass": true,
+  "blockers": [
+    "Required tasks incomplete: cash, bs_recon, exceptions",
+    "Cash reconciliation is MISSING, not SIGNED_OFF",
+    "Accounts Receivable reconciliation is MISSING, not SIGNED_OFF",
+    "Accounts Payable reconciliation is MISSING, not SIGNED_OFF",
+    "Accrued Expenses reconciliation is MISSING, not SIGNED_OFF",
+    "Prepaid Expenses reconciliation is MISSING, not SIGNED_OFF",
+    "Fixed Assets reconciliation is MISSING, not SIGNED_OFF",
+    "Accumulated Depreciation reconciliation is MISSING, not SIGNED_OFF",
+    "Blocking review items: REV-2026-09-CASH-TXN-2026-09-015, REV-2026-09-AR-PAY-CLOSE-4500, REV-2026-09-PREPAID-PRE-INS-MISSING",
+    "PRE-INS-MISSING missing Northshore policy evidence"
+  ],
+  "task_status": {
+    "ingest": "COMPLETE",
+    "ap": "COMPLETE",
+    "ar": "COMPLETE",
+    "cash": "NEEDS_REVIEW",
+    "accruals": "COMPLETE",
+    "prepaid": "COMPLETE",
+    "depreciation": "COMPLETE",
+    "bs_recon": "BLOCKED",
+    "exceptions": "NOT_STARTED",
+    "final_review": "NOT_STARTED",
+    "mark_closed": "NOT_STARTED"
+  },
+  "recon_status": {
+    "Cash": "MISSING",
+    "Accounts Receivable": "MISSING",
+    "Accounts Payable": "MISSING",
+    "Accrued Expenses": "MISSING",
+    "Prepaid Expenses": "MISSING",
+    "Fixed Assets": "MISSING",
+    "Accumulated Depreciation": "MISSING"
+  },
+  "journal_findings": [],
+  "evidence_gaps": [
+    "PRE-INS-MISSING missing Northshore policy evidence"
+  ],
+  "passed": false
+}

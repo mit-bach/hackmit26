@@ -1,0 +1,106 @@
+{
+  "schema": "CashPeriodMatchSummary",
+  "period": "2026-09",
+  "profile": "match",
+  "case_id": "2026-09",
+  "case_path": "runs/cash_recon/cases/2026-09.json",
+  "landed_index": "workspace/bank/landed/2026-09-operating.json",
+  "policy": [
+    "Copy Kernel candidate_ids only",
+    "FEE_NETTED only with fee_evidence_ids",
+    "TXN-2026-09-015 unexplained residual stays unexplained",
+    "Do not invent residuals or force MATCHED"
+  ],
+  "selections": [
+    {
+      "transaction_id": "TXN-2026-09-011",
+      "candidate_id": "FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE",
+      "match_type": "FEE_NETTED",
+      "disposition": "EXPLAINED_EXCEPTION",
+      "fee_evidence_ids": ["ADV-729103"],
+      "difference_minor": -2500,
+      "packet": "workspace/cash/packets/TXN-2026-09-011.json"
+    },
+    {
+      "transaction_id": "TXN-2026-09-015",
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "disposition": "HUMAN_REVIEW",
+      "fee_evidence_ids": [],
+      "difference_minor": 1240,
+      "packet": "workspace/cash/packets/TXN-2026-09-015.json",
+      "note": "stays unexplained; no invented fee"
+    },
+    {
+      "transaction_id": "TXN-2026-09-008",
+      "candidate_id": "GROUPED_MATCH:TXN-2026-09-008:GL-AP-203,GL-AP-201,GL-AP-202",
+      "match_type": "GROUPED_MATCH",
+      "disposition": "MATCHED",
+      "difference_minor": 0
+    },
+    {
+      "transaction_id": "TXN-2026-09-012A",
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-012A:GL-AR-772",
+      "match_type": "EXACT_MATCH",
+      "disposition": "MATCHED",
+      "difference_minor": 0
+    },
+    {
+      "transaction_id": "TXN-2026-09-012B",
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-012B:GL-AR-772",
+      "match_type": "EXACT_MATCH",
+      "disposition": "HUMAN_REVIEW",
+      "difference_minor": 0,
+      "note": "Same ledger GL-AR-772 as 012A; possible duplicate refund — do not double-match"
+    },
+    {
+      "transaction_id": "TXN-2026-09-018A",
+      "bank_alias_in_case": "TXN-2026-09-018",
+      "candidate_id": null,
+      "disposition": "HUMAN_REVIEW",
+      "note": "Two equal EXACT_MATCH candidates GL-AP-OD-1 and GL-AP-OD-2; equally plausible — ctl-cash"
+    },
+    {
+      "transaction_id": "TXN-2026-09-019A",
+      "candidate_id": "PROVIDER_PAYOUT:TXN-2026-09-019A:GL-CASH-STRIPE",
+      "match_type": "PROVIDER_PAYOUT",
+      "disposition": "MATCHED",
+      "provider_status": "MATCH",
+      "difference_minor": 0
+    },
+    {
+      "transaction_id": "TXN-2026-09-025",
+      "candidate_id": null,
+      "disposition": "HUMAN_REVIEW",
+      "note": "In case bank with no Kernel candidate (unmatched bank class)"
+    }
+  ],
+  "landed_without_case_candidate": [
+    "TXN-2026-09-020H",
+    "TXN-2026-09-020R",
+    "BNK-AP-012",
+    "TXN-AR-PAY-001",
+    "TXN-2026-09-028",
+    "TXN-2026-09-021",
+    "BNK-UNX-001",
+    "TXN-2026-09-022S",
+    "TXN-2026-09-026S",
+    "TXN-MER-2026-09",
+    "TXN-LUM-2026-09",
+    "TXN-INV-KIS-FRT-2026-08",
+    "TXN-KIS-2026-09-16",
+    "TXN-INV-HAL-WKND-2026-08",
+    "TXN-PAY-LAP-2026-09-12",
+    "TXN-PAY-LAP-QH-SEP-PRE",
+    "BATCH-AR-2026-09-12",
+    "TXN-STRIPE-RESERVE-REL",
+    "TXN-CAM-RENT-2026-09",
+    "TXN-FLE-2026-08"
+  ],
+  "landed_without_case_note": "No Kernel candidate_id to copy; fail-closed document only — do not invent matches from memos.",
+  "ctl_cash_queue": [
+    "workspace/cash/packets/TXN-2026-09-011.json",
+    "workspace/cash/packets/TXN-2026-09-015.json",
+    "workspace/cash/packets/2026-09-operating-match-summary.json"
+  ]
+}

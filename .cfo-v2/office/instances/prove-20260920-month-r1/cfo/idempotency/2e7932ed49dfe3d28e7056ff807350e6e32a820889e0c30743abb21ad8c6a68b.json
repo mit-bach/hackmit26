@@ -1,0 +1,19 @@
+{
+  "key": "inject-MSG-INBOX-011",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "e753aff23675ea6dbec2b1eccada1f35e3fd3aa3159abb64460e124aa2a43642",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-011",
+      "thread_id": "THR-incomplete",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_8cc49c3c65b2"
+  }
+}

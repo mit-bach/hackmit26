@@ -1,0 +1,39 @@
+Google LLC
+1600 Amphitheatre Parkway
+Mountain View, CA 94043
+Phone +1 650-253-0000   billing@cloud.google.example
+Tax ID 77-0493581
+
+INVOICE
+
+Invoice Number: OPEN-0009
+Invoice Date: 2026-09-10
+Due Date: 2026-10-10
+PO Number: PO-OPEN-009
+Payment Terms: net 30
+Currency: USD
+Vendor: Google Cloud
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    181,234.62    181,234.62
+
+Subtotal                                                            181,234.62
+Tax                                                                       0.00
+Amount Due                                                          181,234.62
+
+Remit to:
+ACH Citi routing 021000089  account ****6006
+Bank: Citibank  ****6006
+Please include invoice OPEN-0009 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@cloud.google.example

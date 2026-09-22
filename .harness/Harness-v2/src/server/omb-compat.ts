@@ -918,6 +918,10 @@ export async function handleOmbCompat(
       return { status: 400, body: { error: "Harness Bots have one transcript.jsonl, not threads" } };
     }
 
+    if (method === "POST" && (rest === "/spawn" || rest === "/kill")) {
+      return handleOperatorApi(method, path, url, body, ctx);
+    }
+
     if (method !== "GET") {
       return { status: 404, body: { error: `unknown bot route ${rest || "/"}` } };
     }

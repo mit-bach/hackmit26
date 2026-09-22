@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-INBOX-004",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "573a042d32933737c9bf1f92eb52635d00b2b5a23e962f8f089b6f85c0c3e071",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-004",
+      "thread_id": "THR-no-po",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_83c44f7071e1"
+  }
+}

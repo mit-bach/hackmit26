@@ -1,0 +1,19 @@
+{
+  "id": "h_9b52d701-2acb-4e73-a59a-98e1b336af9d",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-010. It may be non-finance mail. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not Handle ap. Do not create an invoice. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T16:03:23.893Z",
+  "updatedAt": "2026-09-20T16:03:31.705Z",
+  "result": "**MSG-INBOX-010** classified and dispatched.\n\n| Field | Value |\n| --- | --- |\n| Classification | **`NON_FINANCE`** |\n| Selected action | `IGNORE` |\n| Rationale | Looks like a marketing email, not a vendor invoice |\n| Counterparty | People Ops |\n| Evidence | message:MSG-INBOX-010 |\n| Invoice id | null |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `IGNORE` / **`IGNORED`** |\n| Target | none |\n| `invoice_id` / canonical | null |\n| Mutation | false |\n\nNo AP Handle, no invoice created.",
+  "resultPaths": [],
+  "seq": 42
+}

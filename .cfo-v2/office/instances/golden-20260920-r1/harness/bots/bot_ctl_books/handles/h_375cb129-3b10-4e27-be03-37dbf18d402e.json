@@ -1,0 +1,19 @@
+{
+  "id": "h_375cb129-3b10-4e27-be03-37dbf18d402e",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "close/coordinate 2026-09: ready_tasks empty after host. treatments accrue/prepaid/assets COMPLETE; bs_recon BLOCKED. pack workspace/close/2026-09/pack.json. gate_passed=false. Handled ctl-books/lock → REJECT_CLOSE. story+audit packs queued. Not CLOSED.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "books-close"
+  },
+  "kind": "group_post",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:30:41.508Z",
+  "updatedAt": "2026-09-20T15:31:06.026Z",
+  "result": "Room `books-close` post timed out on host lock twice; stance is unchanged.\n\n**ctl-books:** `REJECT_CLOSE` for 2026-09 still stands (`gate_passed=false`, not CLOSED). Verdict: `workspace/close/2026-09/ctl-books-lock-verdict.json`.",
+  "resultPaths": [],
+  "seq": 124
+}

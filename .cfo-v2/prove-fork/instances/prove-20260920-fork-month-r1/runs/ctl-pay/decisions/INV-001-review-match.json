@@ -1,0 +1,24 @@
+{
+  "decision_type": "ReviewerDecision",
+  "profile": "review-match",
+  "invoice_id": "INV-001",
+  "packet": "runs/ap/packets/INV-001.json",
+  "verdict": "CONCUR",
+  "action": "APPROVE",
+  "policy_ids": ["P-001"],
+  "kernel_trace_id": "k_dc9bfb892d12",
+  "must_hold": [],
+  "exception_types": [],
+  "evidence_reperformed": {
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "amount_difference": 0
+  },
+  "reason": "Kernel get_case_evidence confirms clean three-way match for INV-001: approved PO-101 authorized_amount 12450 equals invoice; vendor Acme Supplies exact match; GR-101 full receipt 15/15 amount 12450; duplicate_detected false; exception_types empty. Packet complete with PreparerRecommendation APPROVE. Policy P-001 may_approve. No must_hold. Concur APPROVE into approved pool only; ctl-pay does not pay.",
+  "do_not_pay": true,
+  "concurrence_by": "ctl-pay",
+  "packet_completeness": "complete"
+}

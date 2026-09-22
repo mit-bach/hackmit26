@@ -1,0 +1,156 @@
+{
+  "trace_id": "2026-09/20260920T001532Z/newforge_consulting",
+  "vendor": "NewForge Consulting",
+  "period": "2026-09",
+  "invoice_received": false,
+  "evidence": {
+    "historical_invoices": [
+      {
+        "invoice_id": "HI-NF-2026-01",
+        "service_period": "2026-01",
+        "amount": 12000.0,
+        "description": "One-off strategy workshop — not a recurring engagement",
+        "po_id": null
+      }
+    ],
+    "current_invoices": [],
+    "contract": {
+      "contract_id": "CTR-NF-001",
+      "vendor": "NewForge Consulting",
+      "start_date": "2026-01-01",
+      "end_date": "2026-12-31",
+      "billing_cadence": "as_needed",
+      "amount": null,
+      "currency": "USD",
+      "expense_account": "Professional Services Expense",
+      "billed_in_arrears": true,
+      "monthly_minimum": 0.0,
+      "description": "Time-and-materials advisory. No monthly commitment. Invoice only after accepted work."
+    },
+    "usage": null,
+    "purchase_orders": [
+      {
+        "po_id": "PO-202",
+        "vendor": "NewForge Consulting",
+        "authorized_amount": 4000.0,
+        "description": "Exploratory advisory — scope not confirmed, no work accepted",
+        "status": "draft",
+        "created_date": "2026-09-28",
+        "currency": "USD",
+        "approval_limit": 10000.0,
+        "approver": "Jordan Hale"
+      }
+    ],
+    "goods_receipts": []
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "simple_average",
+      "label": "Simple average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "recent_average",
+      "label": "Recent average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "weighted_recent_average",
+      "label": "Weighted recent average",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "linear_trend",
+      "label": "Trend projection",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "seasonal_prior_year",
+      "label": "Prior-year same month",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "contract_commitment",
+      "label": "Contract commitment",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "usage_run_rate",
+      "label": "Usage x contract rate",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "goods_receipt",
+      "label": "Goods receipt",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "purchase_order",
+      "label": "Purchase order",
+      "amount": null,
+      "applicable": false
+    },
+    {
+      "method": "conservative_minimum",
+      "label": "Conservative minimum",
+      "amount": null,
+      "applicable": false
+    }
+  ],
+  "agent_selection": {
+    "decision": "INSUFFICIENT_EVIDENCE",
+    "method": null,
+    "amount": null,
+    "confidence": 0.25,
+    "reason": "Weak evidence only; do not assume the expense was incurred."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [],
+  "final_decision": "insufficient_evidence",
+  "final_method": null,
+  "final_amount": null,
+  "confidence": 0.25,
+  "rationale": "Weak evidence only; do not assume the expense was incurred.",
+  "journal_entry": null,
+  "accrual_id": null,
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T001532Z/discovery/newforge_consulting",
+  "expectation_confidence": 0.25,
+  "estimate_confidence": 0.25,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "7f6a1bcb9418c2c50311096cbe7c4b144eb0737640bd0b663e3e339c7f1828a6",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": null,
+  "policy_amount": null,
+  "policy_agreement": true,
+  "diagnostic_warnings": []
+}

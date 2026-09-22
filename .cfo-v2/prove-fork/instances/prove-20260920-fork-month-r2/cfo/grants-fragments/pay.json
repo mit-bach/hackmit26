@@ -1,0 +1,30 @@
+{
+  "version": "1",
+  "byDisplayName": {
+    "Payment Scheduler": {
+      "ops": [
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_approved_pool",
+        "scheduling.tools.get_payment_candidates",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "outputType": "PaymentPlan",
+      "bot": "pay",
+      "profile": "schedule",
+      "mustNot": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence",
+        "accrual.tools.create_accrual",
+        "audit.tools.get_audit_ground_truth"
+      ]
+    }
+  },
+  "note": "Payment Audit is not a Grant on Bot pay. ctl-pay / review-pay is a different slug."
+}

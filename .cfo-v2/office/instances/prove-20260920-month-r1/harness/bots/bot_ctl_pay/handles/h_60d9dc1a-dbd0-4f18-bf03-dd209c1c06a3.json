@@ -1,0 +1,21 @@
+{
+  "id": "h_60d9dc1a-dbd0-4f18-bf03-dd209c1c06a3",
+  "from": "bot_ap",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "profile: review-match\n\nAP prepare APPROVE for open bill INV-001 (Acme Supplies, ACM-2026-4410, PO-101, USD 12450).\nPacket path: runs/ap/packets/INV-001.json\nKernel evidence: exception_types=[], amount_matches, vendor_exact_match, po_approved, receipt_status=full, duplicate_detected=false.\nPlease review-match / concur. AP does not pay.",
+  "paths": [
+    "runs/ap/packets/INV-001.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ap",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:40:48.541Z",
+  "updatedAt": "2026-09-20T14:41:57.303Z",
+  "result": "CONCUR APPROVE on INV-001 (review-match).\n\nDecision path: runs/ctl-pay/review-match/INV-001.json\nPacket: runs/ap/packets/INV-001.json\n\nKernel re-performance via get_case_evidence (k_27dcbaf68b2c): amount_matches, vendor_exact_match, po_approved PO-101, receipt_status=full GR-101, duplicate_detected=false, exception_types=[], must_hold=null. P-001 may_approve. Packet complete with PreparerRecommendation APPROVE.\n\nEmail BUSINESS_DUPLICATE = ingest already_present_in_ap only; not P-002. Prior CASE-001 not needed (exact vendor). ctl-pay does not pay.",
+  "seq": 21
+}

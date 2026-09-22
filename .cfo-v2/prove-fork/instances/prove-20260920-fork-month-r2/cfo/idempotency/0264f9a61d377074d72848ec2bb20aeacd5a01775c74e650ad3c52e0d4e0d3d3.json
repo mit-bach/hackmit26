@@ -1,0 +1,21 @@
+{
+  "key": "fork-r2-MSG-INBOX-018",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "095d4aac81764042387f54d7208569dfbfd1cf621048098d3d5a691a1f207d8f",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-018",
+      "thread_id": "THR-malformed",
+      "delivered": true,
+      "attachment_hashes": [
+        "379fc74f20396ce71ace51b81187dbffe5d19a459e990c65147afdfd10dcab63"
+      ],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_7436165025b3"
+  }
+}

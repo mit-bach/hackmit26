@@ -1,0 +1,34 @@
+{
+  "id": "h_4e503d13-e55d-4262-aef3-99cde7a1e09b",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "profile": "lock",
+  "prompt": "profile: lock\nRead evaluate_close_gates for 2026-09 at workspace/close/2026-09/gates.json. Pack is workspace/close/2026-09/pack.json. gate_passed=False. Do not mark CLOSED. Kernel close.month_end is the only lock door. Never ask a human.",
+  "paths": [
+    "workspace/close/2026-09/pack.json",
+    "workspace/close/2026-09/gates.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "createdAt": "2026-09-20T15:28:48Z",
+  "updatedAt": "2026-09-20T15:28:48Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "ctl-books",
+    "profile": "lock"
+  },
+  "gate_passed": false,
+  "lock_door": "close.month_end",
+  "can_mark_closed": false,
+  "live_sent": false
+}

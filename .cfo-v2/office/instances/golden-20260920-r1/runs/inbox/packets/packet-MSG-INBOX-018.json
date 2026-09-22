@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-INBOX-018",
+  "classification": "UNSUPPORTED_OR_UNRESOLVED",
+  "note": "parse failure binary",
+  "bill": false
+}

@@ -1,0 +1,28 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "ING-005",
+  "vendor_invoice_number": "DD-INBOX-4004",
+  "vendor": "Datadog",
+  "amount": 1800,
+  "po_id": null,
+  "recommendation": "HOLD",
+  "proposed_action": "HOLD",
+  "exception_types": ["missing_po"],
+  "kernel_facts": {
+    "po_exists": false,
+    "po_approved": false,
+    "receipt_status": "not_applicable",
+    "amount_matches": false,
+    "vendor_exact_match": false,
+    "duplicate_detected": false,
+    "exception_types": ["missing_po"]
+  },
+  "evidence_used": [
+    "ING-005",
+    "runs/inbox/packets/bill-MSG-INBOX-004-ING-005.json"
+  ],
+  "reason": "Kernel exception_types missing_po. No PO on bill; no receipt path. HOLD. Do not pay.",
+  "inbox_path": "runs/inbox/packets/bill-MSG-INBOX-004-ING-005.json"
+}

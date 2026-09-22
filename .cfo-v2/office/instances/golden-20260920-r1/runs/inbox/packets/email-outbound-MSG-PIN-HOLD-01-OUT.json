@@ -1,0 +1,8 @@
+{
+  "object": "simulated_message",
+  "thread_id": "THR-pinnacle-hold",
+  "message_id": "MSG-PIN-HOLD-01-OUT",
+  "to_name": "Pinnacle Retail operations",
+  "to_address": "ops@pinnacle.example",
+  "human_queue": false
+}

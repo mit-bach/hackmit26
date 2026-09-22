@@ -1,0 +1,38 @@
+[
+  {
+    "vendor_id": "VEND-KIS-01",
+    "effective_date": "2025-11-03",
+    "routing": "011000138",
+    "account": "10004401",
+    "account_last4": "4401",
+    "memo": "initial setup",
+    "changed_by": "USR-VM-04"
+  },
+  {
+    "vendor_id": "VEND-KIS-01",
+    "effective_date": "2026-06-12",
+    "routing": "011000138",
+    "account": "10004419",
+    "account_last4": "4419",
+    "memo": "normalize ACH formatting / strip spaces",
+    "changed_by": "USR-VM-04"
+  },
+  {
+    "vendor_id": "VEND-013",
+    "effective_date": "2021-08-01",
+    "routing": "011000390",
+    "account": "44552109",
+    "account_last4": "2109",
+    "memo": "lease lockbox",
+    "changed_by": "USR-APPR-01"
+  },
+  {
+    "vendor_id": "VEND-013",
+    "effective_date": "2026-05-22",
+    "routing": "011000390",
+    "account": "44552190",
+    "account_last4": "2190",
+    "memo": "normalize ACH formatting / strip spaces",
+    "changed_by": "USR-FAC-01"
+  }
+]

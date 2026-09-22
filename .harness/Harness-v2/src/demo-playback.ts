@@ -1,4 +1,12 @@
-import { projectStageFrame, type DemoAwakeBot, type DemoBundle, type DemoFrame } from "./demo-replay.ts";
+import {
+  clampDirector,
+  DEFAULT_DEMO_DIRECTOR,
+  projectStageFrame,
+  type DemoAwakeBot,
+  type DemoBundle,
+  type DemoDirector,
+  type DemoFrame,
+} from "./demo-replay.ts";
 import type { TranscriptEntry } from "./types.ts";
 
 export type DemoTimingMode = "beat" | "wall";
@@ -101,10 +109,19 @@ export function revealKey(botId: string, row: Pick<TranscriptEntry, "seq" | "kin
   return `${botId}:${row.seq}:${row.kind}`;
 }
 
-export function collectBeats(bundle: DemoBundle): DemoBeat[] {
+export function collectBeats(
+  bundle: DemoBundle,
+  director: DemoDirector = DEFAULT_DEMO_DIRECTOR,
+): DemoBeat[] {
+  const camera = clampDirector(director);
+  const from = camera.seqFrom;
+  const to = camera.seqTo > 0 ? camera.seqTo : Number.POSITIVE_INFINITY;
   const rows: Array<Omit<DemoBeat, "index">> = [];
   for (const bot of bundle.bots) {
     for (const entry of bundle.transcripts[bot.id] ?? []) {
+      if (entry.seq < from || entry.seq > to) {
+        continue;
+      }
       const parsed = Date.parse(entry.t);
       rows.push({
         seq: entry.seq,
@@ -319,12 +336,14 @@ export function projectPlayhead(
   bundle: DemoBundle,
   showMs: number,
   settings: DemoPlaybackSettings,
+  director: DemoDirector = DEFAULT_DEMO_DIRECTOR,
 ): DemoPlayhead {
-  const beats = collectBeats(bundle);
+  const camera = clampDirector(director);
+  const beats = collectBeats(bundle, camera);
   const totalMs = timelineTotalMs(beats, settings);
   const clamped = clamp(showMs, 0, Math.max(0, totalMs));
   const cursor = cursorAt(beats, clamped, settings);
-  const frame = projectStageFrame(bundle, cursor.seq);
+  const frame = projectStageFrame(bundle, cursor.seq, camera);
   const painted = applyReveals(frame, beats, cursor, settings);
   return {
     showMs: clamped,
@@ -362,4 +381,24 @@ export function showMsForBeat(beats: readonly DemoBeat[], beatIndex: number, set
   const marks = buildWallMarks(beats, settings);
   const mark = marks.find((item) => item.beatIndex === beatIndex);
   return mark?.showMs ?? 0;
+}
+
+/** Land on the last beat whose protocol seq is still at or before `seq`. */
+export function showMsForSeq(
+  beats: readonly DemoBeat[],
+  seq: number,
+  settings: DemoPlaybackSettings,
+): number {
+  if (beats.length === 0) {
+    return 0;
+  }
+  const target = Number.isFinite(seq) ? Math.trunc(seq) : 0;
+  let found = beats[0]!;
+  for (const beat of beats) {
+    if (beat.seq > target) {
+      break;
+    }
+    found = beat;
+  }
+  return showMsForBeat(beats, found.index, settings);
 }

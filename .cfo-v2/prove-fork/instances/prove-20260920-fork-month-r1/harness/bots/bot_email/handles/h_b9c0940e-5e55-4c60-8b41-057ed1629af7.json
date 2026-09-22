@@ -1,0 +1,19 @@
+{
+  "id": "h_b9c0940e-5e55-4c60-8b41-057ed1629af7",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-008. If it is a quote or not a bill, IGNORE it. Do not Handle ap. Do not create an invoice. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:45:54.504Z",
+  "updatedAt": "2026-09-20T15:46:05.811Z",
+  "result": "### MSG-INBOX-008 — done (inbox only)\n\n**Classify**\n- `CONTRACT_OR_QUOTE` → **`IGNORE`** (0.9)\n- Acme Supplies · quote **Q-INBOX-8891** · promotional “invoice-ready” catalog, not a request for payment\n- Rationale: document is a quote/estimate, not an invoice\n\n**Dispatch**\n- Action **IGNORE** · status **IGNORED**\n- `invoice_id`: null · `canonical_id`: null · `mutation`: false\n- No AP Handle · no invoice created\n\nPacket: `workspace/inbox/MSG-INBOX-008.json`",
+  "resultPaths": [],
+  "seq": 18
+}

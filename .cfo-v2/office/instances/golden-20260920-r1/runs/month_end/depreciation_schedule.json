@@ -1,0 +1,52 @@
+[
+  {
+    "asset_id": "FA-LAP-001",
+    "period": "2026-09",
+    "beginning_book_value": 17500.0,
+    "depreciation_amount": 500.0,
+    "ending_book_value": 17000.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-016",
+    "posted_in_period": "2026-09"
+  },
+  {
+    "asset_id": "FA-MCH-001",
+    "period": "2026-09",
+    "beginning_book_value": 105600.0,
+    "depreciation_amount": 1800.0,
+    "ending_book_value": 103800.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-017",
+    "posted_in_period": "2026-09"
+  },
+  {
+    "asset_id": "FA-SRV-024",
+    "period": "2026-09",
+    "beginning_book_value": 24000.0,
+    "depreciation_amount": 1000.0,
+    "ending_book_value": 23000.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-018",
+    "posted_in_period": "2026-09"
+  },
+  {
+    "asset_id": "FA-INT-001",
+    "period": "2026-09",
+    "beginning_book_value": 36666.66,
+    "depreciation_amount": 1666.67,
+    "ending_book_value": 34999.99,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-019",
+    "posted_in_period": "2026-09"
+  },
+  {
+    "asset_id": "FA-025",
+    "period": "2026-09",
+    "beginning_book_value": 60000.0,
+    "depreciation_amount": 1500.0,
+    "ending_book_value": 58500.0,
+    "status": "posted",
+    "journal_entry_id": "JE-202609-020",
+    "posted_in_period": "2026-09"
+  }
+]

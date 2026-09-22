@@ -1,0 +1,19 @@
+{
+  "id": "h_451868bb-794e-4edf-9ff6-1595dc41d8c2",
+  "from": "bot_ap",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "profile: review-match\nApprove-shaped AP match packet for ING-002 (Slack Technologies SLK-INBOX-7007, 4375 USD, PO-105). Path: runs/ap/packets/ING-002.json. Source MSG-INBOX-014 after prompt-injection scrub (instructions ignored). Kernel evidence clean three-way; exception_types []. PreparerRecommendation APPROVE. Concur or refuse per Verifier rules. AP does not pay.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ap",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:47:45.048Z",
+  "updatedAt": "2026-09-20T15:48:07.213Z",
+  "result": "CONCUR ING-002. ReviewerDecision path: runs/ctl-pay/decisions/ING-002-review-match.json. Verdict CONCUR action APPROVE under P-001. Kernel get_case_evidence (trace k_48a72ac8f33f) matches packet: three-way clean PO-105/GR-105/4375, exception_types [], must_hold empty, duplicate false. Injection scrub noted (not paid; bank unchanged); ignored as non-evidence. Packet complete. ctl-pay does not pay; bill may enter approved pool only.",
+  "seq": 35
+}

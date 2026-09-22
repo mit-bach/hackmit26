@@ -1,0 +1,15 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+August 2026 AR subledger tie
+Period: 2026-08
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: Cash Application Agent
+Reviewer: Cash Application Reviewer
+Status: COMPLETE
+Prepared: 2026-09-03T16:40:00Z
+
+AR aging at August 31 agreed to 1100-AR. Atlas batch-payer pattern recorded as AR-PREC-001 / AR-PREC-004. Quiet Harbor remained past due; no cash applied.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

@@ -11,10 +11,38 @@
     "extra": {
       "status": "COMPLETE"
     },
-    "created_at": "2026-09-20T02:21:02Z"
+    "created_at": "2026-09-20T14:16:47Z"
   },
   {
     "link_id": "LNK-0002",
+    "source_document_id": "DOC-DELL-R760",
+    "transaction_id": "INV-021",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "ap",
+    "review_id": "",
+    "extra": {
+      "kind": "capital_invoice"
+    },
+    "created_at": "2026-09-20T14:16:47Z"
+  },
+  {
+    "link_id": "LNK-0003",
+    "source_document_id": "DOC-DELL-R760",
+    "transaction_id": "INV-021-DUP",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "ap",
+    "review_id": "",
+    "extra": {
+      "kind": "capital_invoice"
+    },
+    "created_at": "2026-09-20T14:16:47Z"
+  },
+  {
+    "link_id": "LNK-0004",
     "source_document_id": "",
     "transaction_id": "",
     "journal_entry_id": "",
@@ -23,12 +51,12 @@
     "close_task_id": "ap",
     "review_id": "",
     "extra": {
-      "status": "FAILED"
+      "status": "COMPLETE"
     },
-    "created_at": "2026-09-20T02:21:02Z"
+    "created_at": "2026-09-20T14:16:47Z"
   },
   {
-    "link_id": "LNK-0003",
+    "link_id": "LNK-0005",
     "source_document_id": "",
     "transaction_id": "",
     "journal_entry_id": "",
@@ -39,10 +67,10 @@
     "extra": {
       "status": "COMPLETE"
     },
-    "created_at": "2026-09-20T02:21:02Z"
+    "created_at": "2026-09-20T14:16:47Z"
   },
   {
-    "link_id": "LNK-0004",
+    "link_id": "LNK-0006",
     "source_document_id": "",
     "transaction_id": "",
     "journal_entry_id": "",
@@ -51,8 +79,355 @@
     "close_task_id": "cash",
     "review_id": "",
     "extra": {
-      "status": "FAILED"
+      "status": "NEEDS_REVIEW"
     },
-    "created_at": "2026-09-20T02:21:02Z"
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0007",
+    "source_document_id": "",
+    "transaction_id": "",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "accruals",
+    "review_id": "",
+    "extra": {
+      "status": "COMPLETE"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0008",
+    "source_document_id": "DOC-INS-2026",
+    "transaction_id": "TXN-PRE-INS-001",
+    "journal_entry_id": "JE-202609-001",
+    "account_id": "Insurance Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-INS-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0009",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-002",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2025-10"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0010",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-003",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2025-11"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0011",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-004",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2025-12"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0012",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-005",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-01"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0013",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-006",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-02"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0014",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-007",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-03"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0015",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-008",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-04"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0016",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-009",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-05"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0017",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-010",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-06"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0018",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-011",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-07"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0019",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-012",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-08"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0020",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "journal_entry_id": "JE-202609-013",
+    "account_id": "Software Subscription Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0021",
+    "source_document_id": "DOC-RENT-2026",
+    "transaction_id": "TXN-PRE-RENT-001",
+    "journal_entry_id": "JE-202609-014",
+    "account_id": "Rent Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "prepaid_id": "PRE-RENT-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0022",
+    "source_document_id": "",
+    "transaction_id": "",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "prepaid",
+    "review_id": "",
+    "extra": {
+      "status": "COMPLETE"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0023",
+    "source_document_id": "DOC-DELL-R760",
+    "transaction_id": "INV-021",
+    "journal_entry_id": "JE-202609-015",
+    "account_id": "Computer Equipment",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "asset_id": "FA-025",
+      "kind": "capitalization"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0024",
+    "source_document_id": "DOC-LAPTOP-FLEET",
+    "transaction_id": "TXN-FA-LAP-001",
+    "journal_entry_id": "JE-202609-016",
+    "account_id": "Depreciation Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "asset_id": "FA-LAP-001",
+      "kind": "depreciation",
+      "period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0025",
+    "source_document_id": "DOC-MACH-120",
+    "transaction_id": "TXN-FA-MCH-001",
+    "journal_entry_id": "JE-202609-017",
+    "account_id": "Depreciation Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "asset_id": "FA-MCH-001",
+      "kind": "depreciation",
+      "period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0026",
+    "source_document_id": "DOC-SERVER-24K",
+    "transaction_id": "TXN-FA-SRV-024",
+    "journal_entry_id": "JE-202609-018",
+    "account_id": "Depreciation Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "asset_id": "FA-SRV-024",
+      "kind": "depreciation",
+      "period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:48Z"
+  },
+  {
+    "link_id": "LNK-0027",
+    "source_document_id": "DOC-SOFT-CAP",
+    "transaction_id": "TXN-FA-INT-001",
+    "journal_entry_id": "JE-202609-019",
+    "account_id": "Amortization Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "asset_id": "FA-INT-001",
+      "kind": "depreciation",
+      "period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:49Z"
+  },
+  {
+    "link_id": "LNK-0028",
+    "source_document_id": "DOC-DELL-R760",
+    "transaction_id": "INV-021",
+    "journal_entry_id": "JE-202609-020",
+    "account_id": "Depreciation Expense",
+    "reconciliation_id": "",
+    "close_task_id": "",
+    "review_id": "",
+    "extra": {
+      "asset_id": "FA-025",
+      "kind": "depreciation",
+      "period": "2026-09"
+    },
+    "created_at": "2026-09-20T14:16:49Z"
+  },
+  {
+    "link_id": "LNK-0029",
+    "source_document_id": "",
+    "transaction_id": "",
+    "journal_entry_id": "",
+    "account_id": "",
+    "reconciliation_id": "",
+    "close_task_id": "depreciation",
+    "review_id": "",
+    "extra": {
+      "status": "COMPLETE"
+    },
+    "created_at": "2026-09-20T14:16:49Z"
   }
 ]

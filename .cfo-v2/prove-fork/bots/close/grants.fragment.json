@@ -1,0 +1,148 @@
+{
+  "version": "1",
+  "slug": "close",
+  "note": "Different Grants per Profile. Never union. create_accrual stays on accrue only. Close Manager tools=[]. Reviewer twins belong to ctl-books (session 09).",
+  "byProfile": {
+    "accrue": {
+      "displayName": "Accrual Agent",
+      "ops": [
+        "accrual.tools.get_expected_invoices",
+        "accrual.tools.get_current_period_invoices",
+        "accrual.tools.get_vendor_invoice_history",
+        "accrual.tools.get_purchase_orders",
+        "accrual.tools.get_goods_receipts",
+        "accrual.tools.get_vendor_contract",
+        "accrual.tools.get_vendor_usage",
+        "accrual.tools.get_estimate_candidates",
+        "accrual.tools.compute_accrual_estimate",
+        "accrual.tools.create_accrual",
+        "accrual.tools.get_open_accruals",
+        "accrual.tools.reconcile_accrual_with_invoice"
+      ],
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection"
+      ],
+      "outputType": "AccrualDecision"
+    },
+    "prepaid": {
+      "displayName": "Prepaid Preparer",
+      "ops": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule"
+      ],
+      "skills": [
+        "prepaid-expense-accounting"
+      ],
+      "outputType": "PrepaidDecision"
+    },
+    "assets": {
+      "displayName": "Fixed Asset Preparer",
+      "ops": [
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates"
+      ],
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "outputType": "AssetDecision"
+    },
+    "bs": {
+      "displayName": "Balance Sheet Reconciliation Preparer",
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "outputType": "ReconDecision"
+    },
+    "coordinate": {
+      "displayName": "Close Manager",
+      "ops": [],
+      "skills": [
+        "month-end-close-coordination"
+      ],
+      "outputType": "CloseManagerDecision"
+    }
+  },
+  "byDisplayName": {
+    "Accrual Agent": {
+      "ops": [
+        "accrual.tools.get_expected_invoices",
+        "accrual.tools.get_current_period_invoices",
+        "accrual.tools.get_vendor_invoice_history",
+        "accrual.tools.get_purchase_orders",
+        "accrual.tools.get_goods_receipts",
+        "accrual.tools.get_vendor_contract",
+        "accrual.tools.get_vendor_usage",
+        "accrual.tools.get_estimate_candidates",
+        "accrual.tools.compute_accrual_estimate",
+        "accrual.tools.create_accrual",
+        "accrual.tools.get_open_accruals",
+        "accrual.tools.reconcile_accrual_with_invoice"
+      ],
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection"
+      ],
+      "outputType": "AccrualDecision",
+      "bot": "close",
+      "profile": "accrue"
+    },
+    "Prepaid Preparer": {
+      "ops": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule"
+      ],
+      "skills": [
+        "prepaid-expense-accounting"
+      ],
+      "outputType": "PrepaidDecision",
+      "bot": "close",
+      "profile": "prepaid"
+    },
+    "Fixed Asset Preparer": {
+      "ops": [
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates"
+      ],
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "outputType": "AssetDecision",
+      "bot": "close",
+      "profile": "assets"
+    },
+    "Balance Sheet Reconciliation Preparer": {
+      "ops": [
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "outputType": "ReconDecision",
+      "bot": "close",
+      "profile": "bs"
+    },
+    "Close Manager": {
+      "ops": [],
+      "skills": [
+        "month-end-close-coordination"
+      ],
+      "outputType": "CloseManagerDecision",
+      "bot": "close",
+      "profile": "coordinate"
+    }
+  }
+}

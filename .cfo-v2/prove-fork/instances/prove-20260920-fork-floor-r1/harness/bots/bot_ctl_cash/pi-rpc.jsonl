@@ -1,0 +1,2 @@
+{"type":"extension_ui_request","id":"0c36248f-1f9d-43a2-8b4d-8583bf4a39f5","method":"setStatus","statusKey":"harness","statusText":"bot:ctl-cash"}
+{"type":"response","command":"set_thinking_level","success":true}

@@ -1,0 +1,25 @@
+{
+  "vendor": "CleanSpace Facilities",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": false,
+  "missing_bill_candidate": true,
+  "expectation_confidence": 0.99,
+  "signals": [
+    {
+      "type": "monthly_cadence",
+      "detail": "Invoices received in each of the previous 5 months",
+      "confidence": 0.95
+    },
+    {
+      "type": "recurring_contract",
+      "detail": "Monthly contract CTR-CS-001 for $2,400.00",
+      "confidence": 0.99
+    }
+  ],
+  "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+  "discovery_trace_id": "2026-09/20260920T002548Z/discovery/cleanspace_facilities",
+  "current_invoice_ids": [],
+  "indicative_amount": 2400.0,
+  "indicative_method": "contract_commitment"
+}

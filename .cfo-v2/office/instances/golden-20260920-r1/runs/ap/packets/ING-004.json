@@ -1,0 +1,36 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "ING-004",
+  "vendor_invoice_number": "OD-INBOX-3003",
+  "vendor": "Office Depot",
+  "amount": 5000,
+  "po_id": "PO-104",
+  "receipt_id": "GR-104",
+  "recommendation": "HOLD",
+  "proposed_action": "HOLD",
+  "exception_types": ["material_amount_mismatch"],
+  "kernel_facts": {
+    "amount_difference": 2900,
+    "percent_difference": 1.381,
+    "amount_matches": false,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": true,
+    "po_exists": true,
+    "po_approved": true,
+    "po_authorized_amount": 2100,
+    "receipt_status": "full",
+    "amount_received": 2100,
+    "duplicate_detected": false,
+    "exception_types": ["material_amount_mismatch"]
+  },
+  "evidence_used": [
+    "ING-004",
+    "PO-104",
+    "GR-104",
+    "runs/inbox/packets/bill-MSG-INBOX-003-ING-004.json"
+  ],
+  "reason": "Kernel material_amount_mismatch: invoice 5000 vs PO-104 authorized 2100 and GR-104 received 2100 (diff 2900). Vendor exact. Not within tolerance. HOLD — do not approve overage. Do not pay.",
+  "inbox_path": "runs/inbox/packets/bill-MSG-INBOX-003-ING-004.json"
+}

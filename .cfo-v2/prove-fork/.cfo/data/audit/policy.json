@@ -1,0 +1,40 @@
+{
+  "round_number": {
+    "divisors": [100, 1000, 10000],
+    "min_amount": 100,
+    "high_risk_min_amount": 10000,
+    "ordinary_recurring_max": 500,
+    "ordinary_recurring_divisors": [100],
+    "elevate_manual_new_vendor": true
+  },
+  "sod": {
+    "rules": [
+      {
+        "rule_id": "SOD-001",
+        "object_types": ["invoice", "invoice_approval", "payment"],
+        "forbidden_pairs": [["requester_id", "approver_id"], ["initiator_id", "approver_id"]],
+        "policy_reference": "SOD-P-001",
+        "description": "Requester or payment initiator cannot be the final approver."
+      },
+      {
+        "rule_id": "SOD-002",
+        "object_types": ["journal", "journal_entry"],
+        "forbidden_pairs": [["preparer_id", "approver_id"]],
+        "policy_reference": "SOD-P-002",
+        "description": "Journal preparer cannot approve the same entry."
+      },
+      {
+        "rule_id": "SOD-003",
+        "object_types": ["invoice", "invoice_approval", "journal", "journal_entry"],
+        "forbidden_pairs": [["preparer_id", "reviewer_id"], ["requester_id", "reviewer_id"]],
+        "policy_reference": "SOD-P-003",
+        "description": "Independent review is required when a reviewer is assigned."
+      }
+    ]
+  },
+  "severity": {
+    "material_amount": 10000,
+    "critical_amount": 50000,
+    "recon_tolerance": 0.01
+  }
+}

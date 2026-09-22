@@ -1,0 +1,21 @@
+{
+  "key": "inject-MSG-INBOX-003",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "1ae45e88c6e84ab6a81b5065e6f3d8872d3f70b0a7fb0af47f636b2cdb4d0137",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-003",
+      "thread_id": "THR-price-mismatch",
+      "delivered": true,
+      "attachment_hashes": [
+        "02872fbefbe725920375ac606fee66197cbf6ae442796bc109b684f01e9e574e"
+      ],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_4a5dd9fe9ff7"
+  }
+}

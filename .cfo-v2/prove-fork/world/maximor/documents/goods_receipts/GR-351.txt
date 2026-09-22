@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-351
+PO Number: PO-351
+Vendor: Staples Business Advantage
+Goods received in full on 2026-09-25
+Packing list attached: PL-GR-351
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 12,600.17 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

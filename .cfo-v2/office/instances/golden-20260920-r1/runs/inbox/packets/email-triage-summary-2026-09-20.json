@@ -1,0 +1,114 @@
+{
+  "bot": "email",
+  "profile": "inbox",
+  "period": "2026-09",
+  "threads": 19,
+  "actions": [
+    {
+      "msg": "MSG-ACME-INV-001",
+      "cls": "VENDOR_INVOICE",
+      "action": "dup evidence INV-001"
+    },
+    {
+      "msg": "MSG-INBOX-001",
+      "cls": "VENDOR_INVOICE",
+      "action": "CREATE ING-001 \u2192 ap HOLD"
+    },
+    {
+      "msg": "MSG-INBOX-002",
+      "cls": "VENDOR_INVOICE",
+      "action": "CREATE ING-003 \u2192 ap HOLD"
+    },
+    {
+      "msg": "MSG-INBOX-003",
+      "cls": "VENDOR_INVOICE",
+      "action": "CREATE ING-004 \u2192 ap HOLD"
+    },
+    {
+      "msg": "MSG-INBOX-004",
+      "cls": "VENDOR_INVOICE",
+      "action": "CREATE ING-005 \u2192 ap HOLD"
+    },
+    {
+      "msg": "MSG-INBOX-005",
+      "cls": "PURCHASE_ORDER",
+      "action": "packet only"
+    },
+    {
+      "msg": "MSG-INBOX-006",
+      "cls": "GOODS_RECEIPT",
+      "action": "packet only"
+    },
+    {
+      "msg": "MSG-INBOX-007",
+      "cls": "VENDOR_STATEMENT",
+      "action": "IGNORE"
+    },
+    {
+      "msg": "MSG-INBOX-008",
+      "cls": "CONTRACT_OR_QUOTE",
+      "action": "IGNORE"
+    },
+    {
+      "msg": "MSG-INBOX-009",
+      "cls": "PAYMENT_CONFIRMATION",
+      "action": "apply handoff"
+    },
+    {
+      "msg": "MSG-INBOX-010",
+      "cls": "NON_FINANCE",
+      "action": "IGNORE"
+    },
+    {
+      "msg": "MSG-INBOX-011",
+      "cls": "NEEDS_INFO",
+      "action": "outbound+world; R1 dup ING-001"
+    },
+    {
+      "msg": "MSG-INBOX-013",
+      "cls": "VENDOR_INVOICE",
+      "action": "BUSINESS_DUPLICATE ING-001"
+    },
+    {
+      "msg": "MSG-INBOX-014",
+      "cls": "VENDOR_INVOICE",
+      "action": "CREATE ING-006 injection ignored \u2192 ap APPROVE/ctl-pay"
+    },
+    {
+      "msg": "MSG-INBOX-015",
+      "cls": "VENDOR_INVOICE",
+      "action": "CREATE ING-002 unknown vendor \u2192 ap HOLD"
+    },
+    {
+      "msg": "MSG-INBOX-016",
+      "cls": "CREDIT_MEMO",
+      "action": "unsupported path packet"
+    },
+    {
+      "msg": "MSG-INBOX-018",
+      "cls": "UNSUPPORTED",
+      "action": "PARSE_FAILURE packet"
+    },
+    {
+      "msg": "MSG-INBOX-019",
+      "cls": "CUSTOMER_REMITTANCE",
+      "action": "apply handoff"
+    },
+    {
+      "msg": "MSG-PIN-HOLD-01",
+      "cls": "INTERNAL hold notice",
+      "action": "not a bill packet"
+    }
+  ],
+  "paths": {
+    "overlay": "runs/ingestion/overlay.json",
+    "registry": "runs/ingestion/registry.json",
+    "packets": "runs/inbox/packets/",
+    "ap_summary": "runs/ap/summary/inbox-prepare-2026-09-20.json"
+  },
+  "did_not": [
+    "match",
+    "pay",
+    "ask_human"
+  ]
+}

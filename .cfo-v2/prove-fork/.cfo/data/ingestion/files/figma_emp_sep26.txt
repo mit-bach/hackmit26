@@ -1,0 +1,16 @@
+FIGMA
+INVOICE
+
+Invoice Number: FIG-EMP-SEP26
+Invoice Date: 2026-09-19
+Due Date: 2026-10-19
+Vendor: Figma
+Bill To: Office of the CFO
+
+Two additional Organization editor seats, September add-on
+Quantity: 2
+Unit Price: 156.00
+Subtotal: 312.00
+Tax: 0.00
+Total Due: 312.00
+Currency: USD

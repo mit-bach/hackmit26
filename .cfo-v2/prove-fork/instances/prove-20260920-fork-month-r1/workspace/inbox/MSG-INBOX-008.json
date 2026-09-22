@@ -1,0 +1,12 @@
+{
+  "message_id": "MSG-INBOX-008",
+  "thread_id": "THR-quote",
+  "classification": "CONTRACT_OR_QUOTE",
+  "selected_action": "IGNORE",
+  "counterparty_name": "Acme Supplies",
+  "document": "Q-INBOX-8891.pdf",
+  "quote_number": "Q-INBOX-8891",
+  "rationale": "Document is a quote/estimate, not an invoice",
+  "handled_ap": false,
+  "invoice_created": false
+}

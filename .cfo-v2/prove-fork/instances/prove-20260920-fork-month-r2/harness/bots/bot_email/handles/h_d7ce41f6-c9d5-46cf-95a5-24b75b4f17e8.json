@@ -1,0 +1,19 @@
+{
+  "id": "h_d7ce41f6-c9d5-46cf-95a5-24b75b4f17e8",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-004. If it is a vendor bill, extract fields and Handle ap / prepare with the Kernel invoice id. Do not HOLD. Do not match. Do not invent totals. Do not ask_user. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T16:01:56.866Z",
+  "updatedAt": "2026-09-20T16:02:26.553Z",
+  "result": "**MSG-INBOX-004** classified, dispatched, and handed to AP.\n\n| Field | Value |\n| --- | --- |\n| Classification | `VENDOR_INVOICE` |\n| Vendor | Datadog |\n| Invoice # | DD-INBOX-4004 |\n| PO | null |\n| Amount | USD **1,800.00** (`180,000` cents) |\n| Dates | invoice 2026-09-18 · due 2026-10-18 |\n\n### Dispatch\n| Field | Value |\n| --- | --- |\n| Action / status | `CREATE_AP_INVOICE` / **CREATED** |\n| Kernel id | **`ING-003`** |\n| Match (ingest note) | NON_PO · `missing_po` |\n| `forwarded_to_ap` | true |\n| Mutation | true |\n\n### AP handoff\n- **ask_bot → ap** (prepare): completed  \n- Packet: `runs/ap/packets/ING-003.json`  \n- AP: missing PO → preparer **HOLD** (AP-owned; Email did not HOLD/match)\n\nNo invented totals; no `ask_user`.",
+  "resultPaths": [],
+  "seq": 34
+}

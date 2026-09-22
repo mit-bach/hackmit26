@@ -1,0 +1,65 @@
+{
+  "id": "pair:bot_ap:bot_email",
+  "threadId": "pair:bot_ap:bot_email",
+  "name": "AP ↔ Email",
+  "memberIds": [
+    "bot_ap",
+    "bot_email"
+  ],
+  "createdAt": 1789920037204,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_5e862b97-50b2-449f-8ed0-878811cb2071",
+      "handleId": "h_5e862b97-50b2-449f-8ed0-878811cb2071",
+      "role": "bot",
+      "kind": "text",
+      "text": "Vendor bill from finance inbox MSG-INBOX-003. Kernel invoice id ING-002 (canonical ING-002). Office Depot OD-INBOX-3003 / PO-104. Profile: prepare. Email classified VENDOR_INVOICE and dispatch CREATED; forwarded_to_ap true. Email did not match or HOLD. Ingest noted match_status BLOCKED (material_amount_mismatch) — AP owns match. Please prepare on ING-002.",
+      "at": 1789920037204,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_5e862b97-50b2-449f-8ed0-878811cb2071",
+      "handleId": "h_5e862b97-50b2-449f-8ed0-878811cb2071",
+      "role": "bot",
+      "kind": "text",
+      "text": "AP prepare complete on ING-002 (OD-INBOX-3003 / PO-104, MSG-INBOX-003). Packet: runs/ap/packets/ING-002.json. Kernel: material_amount_mismatch — invoice 5000 vs PO/GR 2100 (diff 2900, outside tolerance). Vendor match, full receipt GR-104, no duplicates. PreparerRecommendation HOLD (not approve-shaped; no ctl-pay handoff). Email intake acknowledged; AP owns the hold.",
+      "at": 1789920071665,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814",
+      "handleId": "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814",
+      "role": "bot",
+      "kind": "text",
+      "text": "Vendor bill from finance inbox MSG-INBOX-004. Kernel invoice id ING-003 (canonical ING-003). Datadog DD-INBOX-4004; no PO on document. Profile: prepare. Email classified VENDOR_INVOICE and dispatch CREATED; forwarded_to_ap true. Email did not match or HOLD. Ingest noted match_status NON_PO (missing_po) — AP owns match. Please prepare on ING-003.",
+      "at": 1789920125247,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814",
+      "handleId": "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814",
+      "role": "bot",
+      "kind": "text",
+      "text": "AP prepare complete on ING-003 (DD-INBOX-4004 / Datadog, MSG-INBOX-004). Packet: runs/ap/packets/ING-003.json. Kernel: missing_po — invoice 1800, po_id null, no PO/GR, receipt not_applicable, no duplicates. PreparerRecommendation HOLD (not approve-shaped; no ctl-pay handoff). Email intake acknowledged; AP owns the hold.",
+      "at": 1789920141496,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

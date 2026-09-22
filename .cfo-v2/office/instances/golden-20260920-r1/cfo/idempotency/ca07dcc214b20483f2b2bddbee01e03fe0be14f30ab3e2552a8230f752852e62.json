@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-INBOX-007",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "18248ccf12468928c4ca9b7419dc0529218cf3ef37e210022cb35a521372bf59",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-007",
+      "thread_id": "THR-vendor-statement",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_f551d9941403"
+  }
+}

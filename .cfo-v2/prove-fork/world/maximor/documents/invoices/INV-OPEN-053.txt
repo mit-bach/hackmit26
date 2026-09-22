@@ -1,0 +1,39 @@
+Harbor Studio
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@harborstudio.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: OPEN-0053
+Invoice Date: 2026-09-27
+Due Date: 2026-10-27
+PO Number: PO-OPEN-053
+Payment Terms: net 30
+Currency: USD
+Vendor: Harbor Studio
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    187,270.54    187,270.54
+
+Subtotal                                                            187,270.54
+Tax                                                                       0.00
+Amount Due                                                          187,270.54
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice OPEN-0053 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@harborstudio.example

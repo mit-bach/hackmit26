@@ -1,0 +1,18 @@
+{
+  "toSlug": "audit",
+  "to": "bot_audit",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "profile": "interpret",
+  "kind": "a2a_handoff",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "prompt": "profile: interpret\nSample the close pack at workspace/close/2026-09/pack.json. Cite Kernel finding IDs only. Do not load get_audit_ground_truth. Do not fix the books. Never ask a human.",
+  "status": "accepted",
+  "done": false,
+  "bus": "harness",
+  "humanQueue": false,
+  "queue_owner": "audit",
+  "live_sent": false
+}

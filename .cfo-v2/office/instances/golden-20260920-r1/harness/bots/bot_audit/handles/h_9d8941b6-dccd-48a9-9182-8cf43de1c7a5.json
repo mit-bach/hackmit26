@@ -1,0 +1,19 @@
+{
+  "id": "h_9d8941b6-dccd-48a9-9182-8cf43de1c7a5",
+  "from": "bot_close",
+  "to": "bot_audit",
+  "toSlug": "audit",
+  "prompt": "close/coordinate 2026-09: ready_tasks empty after host. treatments accrue/prepaid/assets COMPLETE; bs_recon BLOCKED. pack workspace/close/2026-09/pack.json. gate_passed=false. Handled ctl-books/lock → REJECT_CLOSE. story+audit packs queued. Not CLOSED.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "books-close"
+  },
+  "kind": "group_post",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:33:42.905Z",
+  "updatedAt": "2026-09-20T15:34:25.817Z",
+  "result": "**Room `books-close` (from close):** coordinate noted.\n\n- Treatments COMPLETE; **bs_recon BLOCKED**; **gate_passed=false**; **Not CLOSED**; ctl-books lock **REJECT_CLOSE** — consistent with pack.\n- Audit assurance already on disk: `audit_run_id` **20260920T153114Z**, **11** Kernel finding IDs → `workspace/audit/2026-09/interpretation.json`, `runs/audit/2026-09-20260920T153114Z.json`.\n- No books fix, no lock concurrence from audit.\n- `room_post` could not append (host lock held by live `pi`); Operator notified.",
+  "resultPaths": [],
+  "seq": 141
+}

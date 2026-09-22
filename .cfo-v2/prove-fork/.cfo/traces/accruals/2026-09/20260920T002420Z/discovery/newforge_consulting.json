@@ -1,0 +1,25 @@
+{
+  "vendor": "NewForge Consulting",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": false,
+  "missing_bill_candidate": true,
+  "expectation_confidence": 0.25,
+  "signals": [
+    {
+      "type": "as_needed_contract",
+      "detail": "Time-and-materials contract with no monthly commitment",
+      "confidence": 0.2
+    },
+    {
+      "type": "draft_purchase_order",
+      "detail": "PO-202 is draft; no goods receipt",
+      "confidence": 0.25
+    }
+  ],
+  "reason": "Weak evidence only; do not assume the expense was incurred.",
+  "discovery_trace_id": "2026-09/20260920T002420Z/discovery/newforge_consulting",
+  "current_invoice_ids": [],
+  "indicative_amount": null,
+  "indicative_method": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ctl_pay:bot_pay",
+  "threadId": "pair:bot_ctl_pay:bot_pay",
+  "name": "ctl-pay ↔ Pay",
+  "memberIds": [
+    "bot_ctl_pay",
+    "bot_pay"
+  ],
+  "createdAt": 1789916877756,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_64ae57ad-63f2-4463-80d5-86d44b3e2a9e",
+      "handleId": "h_64ae57ad-63f2-4463-80d5-86d44b3e2a9e",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-pay\nReview the payment-run draft at workspace/pay/plans/plan_2026-09-19_2f7cb150dc46.json.\n\nKernel fail-closed empty pool:\n- get_approved_pool count=0 (trace k_c5889aae2951)\n- get_payment_candidates count=0 (trace k_25a17c330b74)\n- proposed_ids=[] pay_this_week=[] total_payout=0\n- cash as_of 2026-09-19 spendable_cash=6374925.74 cash_after_payments=6474925.74 reserve_ok=true\n- executed=false self_approved=false\n\nConcur only if Kernel reserve_ok is true and the packet is complete.\nDo not rebuild the plan. Do not execute ACH or wire. Do not ask a human.\nReply with your review-pay decision path and CONCUR/REFUSE.",
+      "at": 1789916877756,
+      "from": {
+        "botId": "bot_pay",
+        "name": "Pay",
+        "color": "green"
+      }
+    },
+    {
+      "id": "pair-result-h_64ae57ad-63f2-4463-80d5-86d44b3e2a9e",
+      "handleId": "h_64ae57ad-63f2-4463-80d5-86d44b3e2a9e",
+      "role": "bot",
+      "kind": "text",
+      "text": "CONCUR on payment-run draft plan_2026-09-19_2f7cb150dc46 (review-pay).\n\ndecision: CONCUR\ncontract: PaymentAuditResult\npath: runs/pay/concurrence/plan_2026-09-19_2f7cb150dc46.json\ndraft: workspace/pay/plans/plan_2026-09-19_2f7cb150dc46.json\n\nChecks:\n- Packet complete; did not rebuild plan; did not call get_approved_pool / get_payment_candidates\n- get_cash_position (k_10d3b51b7c21): spendable_cash=6374925.74 matches draft; min reserve 100000\n- get_treasury_policies (k_c065f6b62a1c): P-012..P-016 cited\n- reserve_ok=true, pay_this_week=[], total_payout=0, no HOLD in pay set\n- executed=false, self_approved=false, fail_closed empty_pool\n\nEmpty fail-closed run is releaseable. ctl-pay does not ACH/wire. You may close without money movement.",
+      "at": 1789916908217,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    }
+  ]
+}

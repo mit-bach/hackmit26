@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_email:bot_world",
+  "threadId": "pair:bot_email:bot_world",
+  "name": "Email ↔ World",
+  "memberIds": [
+    "bot_email",
+    "bot_world"
+  ],
+  "createdAt": 1789916096739,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_6832d5e7-15ae-482c-862f-e389b5b1df05",
+      "handleId": "h_6832d5e7-15ae-482c-862f-e389b5b1df05",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: vendor\nFinance asked Acme Supplies for missing invoice fields in thread THR-incomplete. get_inbox_thread then reply_in_thread as that vendor. Paths: runs/inbox/packets/email-outbound-MSG-INBOX-011-OUT.json and runs/inbox/handles/email-outbound-MSG-INBOX-011-OUT-world.json. Do not send_office_outbound. Do not dispatch.",
+      "at": 1789916096739,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_6832d5e7-15ae-482c-862f-e389b5b1df05",
+      "handleId": "h_6832d5e7-15ae-482c-862f-e389b5b1df05",
+      "role": "bot",
+      "kind": "text",
+      "text": "Done as vendor Acme Supplies (billing@acmesupplies.example) on THR-incomplete.\n\n- get_inbox_thread: MSG-INBOX-011 (incomplete body) + MSG-INBOX-011-OUT (missing invoice # and amount due).\n- reply_in_thread: message_id MSG-INBOX-011-R1, in_reply_to MSG-INBOX-011-OUT.\n  Supplied vendor invoice number ACM-INBOX-1001, amount due 12450.00 USD, date 2026-09-18, due 2026-10-18, PO-101.\n- Did not call send_office_outbound or dispatch.\n\nThread ready for your triage/classify.",
+      "at": 1789916203027,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    }
+  ]
+}

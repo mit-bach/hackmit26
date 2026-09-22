@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-INBOX-009",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "4d7ab00fcdd279904a558c02329734d12ffde35cf54fd33bcb55c95c25f26b3b",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-009",
+      "thread_id": "THR-payment-confirmation",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_ea53f92ae572"
+  }
+}

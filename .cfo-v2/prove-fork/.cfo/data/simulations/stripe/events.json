@@ -1,0 +1,3099 @@
+[
+  {
+    "id": "evt_ch_str_001_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_001",
+        "object": "payment_intent",
+        "amount": 100000,
+        "amount_received": 100000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_001",
+        "object": "charge",
+        "amount": 100000,
+        "amount_captured": 100000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_001",
+        "balance_transaction": "txn_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788537600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "in_transit",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788541200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "paid",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_002a_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788883200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_002a",
+        "object": "payment_intent",
+        "amount": 100000,
+        "amount_received": 100000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "latest_charge": "ch_str_002a",
+        "description": "INV-STR-002A Helios workspace A",
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-002A",
+          "order_id": "INV-STR-002A"
+        },
+        "created": 1788883200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_002a_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788883210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_002a",
+        "object": "charge",
+        "amount": 100000,
+        "amount_captured": 100000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "payment_intent": "pi_str_002a",
+        "balance_transaction": "txn_str_002a",
+        "description": "INV-STR-002A Helios workspace A",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Helios Analytics"
+        },
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-002A",
+          "order_id": "INV-STR-002A"
+        },
+        "created": 1788883200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_002b_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788883200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_002b",
+        "object": "payment_intent",
+        "amount": 150000,
+        "amount_received": 150000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "latest_charge": "ch_str_002b",
+        "description": "INV-STR-002B Helios workspace B AMEX",
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-002B",
+          "order_id": "INV-STR-002B"
+        },
+        "created": 1788883200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_002b_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788883210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_002b",
+        "object": "charge",
+        "amount": 150000,
+        "amount_captured": 150000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "payment_intent": "pi_str_002b",
+        "balance_transaction": "txn_str_002b",
+        "description": "INV-STR-002B Helios workspace B AMEX",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Helios Analytics"
+        },
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-002B",
+          "order_id": "INV-STR-002B"
+        },
+        "created": 1788883200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_002c_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788883200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_002c",
+        "object": "payment_intent",
+        "amount": 50000,
+        "amount_received": 50000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "latest_charge": "ch_str_002c",
+        "description": "INV-STR-002C Helios add-on seats",
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-002C",
+          "order_id": "INV-STR-002C"
+        },
+        "created": 1788883200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_002c_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788883210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_002c",
+        "object": "charge",
+        "amount": 50000,
+        "amount_captured": 50000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "payment_intent": "pi_str_002c",
+        "balance_transaction": "txn_str_002c",
+        "description": "INV-STR-002C Helios add-on seats",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Helios Analytics"
+        },
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-002C",
+          "order_id": "INV-STR-002C"
+        },
+        "created": 1788883200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_002_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788969600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_002",
+        "object": "payout",
+        "amount": 291185,
+        "currency": "usd",
+        "arrival_date": 1788969600,
+        "status": "in_transit",
+        "created": 1788969600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_002_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788973200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_002",
+        "object": "payout",
+        "amount": 291185,
+        "currency": "usd",
+        "arrival_date": 1788969600,
+        "status": "paid",
+        "created": 1788969600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_003a_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789056000,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_003a",
+        "object": "payment_intent",
+        "amount": 60000,
+        "amount_received": 60000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_003a",
+        "description": "INV-STR-003A Northwind analytics pack",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-003A",
+          "order_id": "INV-STR-003A"
+        },
+        "created": 1789056000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_003a_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789056010,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_003a",
+        "object": "charge",
+        "amount": 60000,
+        "amount_captured": 60000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_003a",
+        "balance_transaction": "txn_str_003a",
+        "description": "INV-STR-003A Northwind analytics pack",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-003A",
+          "order_id": "INV-STR-003A"
+        },
+        "created": 1789056000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_003b_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789056000,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_003b",
+        "object": "payment_intent",
+        "amount": 40000,
+        "amount_received": 40000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_pinnacle",
+        "latest_charge": "ch_str_003b",
+        "description": "INV-STR-003B Pinnacle POS module",
+        "metadata": {
+          "customer_name": "Pinnacle Retail",
+          "invoice_id": "INV-STR-003B",
+          "order_id": "INV-STR-003B"
+        },
+        "created": 1789056000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_003b_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789056010,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_003b",
+        "object": "charge",
+        "amount": 40000,
+        "amount_captured": 40000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_pinnacle",
+        "payment_intent": "pi_str_003b",
+        "balance_transaction": "txn_str_003b",
+        "description": "INV-STR-003B Pinnacle POS module",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Pinnacle Retail"
+        },
+        "metadata": {
+          "customer_name": "Pinnacle Retail",
+          "invoice_id": "INV-STR-003B",
+          "order_id": "INV-STR-003B"
+        },
+        "created": 1789056000
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_003_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789142400,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_003",
+        "object": "payout",
+        "amount": 97040,
+        "currency": "usd",
+        "arrival_date": 1789142400,
+        "status": "in_transit",
+        "created": 1789142400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_003_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789146000,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_003",
+        "object": "payout",
+        "amount": 97040,
+        "currency": "usd",
+        "arrival_date": 1789142400,
+        "status": "paid",
+        "created": 1789142400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_004_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789142400,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_004",
+        "object": "payment_intent",
+        "amount": 50000,
+        "amount_received": 50000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_acme",
+        "latest_charge": "ch_str_004",
+        "description": "INV-STR-004 Acme spare parts",
+        "metadata": {
+          "customer_name": "Acme Industrial",
+          "invoice_id": "INV-STR-004",
+          "order_id": "INV-STR-004"
+        },
+        "created": 1789142400
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_004_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789142410,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_004",
+        "object": "charge",
+        "amount": 50000,
+        "amount_captured": 50000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_acme",
+        "payment_intent": "pi_str_004",
+        "balance_transaction": "txn_str_004",
+        "description": "INV-STR-004 Acme spare parts",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Acme Industrial"
+        },
+        "metadata": {
+          "customer_name": "Acme Industrial",
+          "invoice_id": "INV-STR-004",
+          "order_id": "INV-STR-004"
+        },
+        "created": 1789142400
+      }
+    }
+  },
+  {
+    "id": "evt_re_str_004",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789142400,
+    "type": "refund.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "re_str_004",
+        "object": "refund",
+        "amount": 10000,
+        "currency": "usd",
+        "charge": "ch_str_004",
+        "payment_intent": "pi_str_004",
+        "balance_transaction": "txn_str_004_re",
+        "status": "succeeded",
+        "reason": "requested_by_customer",
+        "metadata": {
+          "invoice_id": "INV-STR-004"
+        },
+        "created": 1789142400
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_004_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789228800,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_004",
+        "object": "payout",
+        "amount": 38520,
+        "currency": "usd",
+        "arrival_date": 1789228800,
+        "status": "in_transit",
+        "created": 1789228800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_004_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789232400,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_004",
+        "object": "payout",
+        "amount": 38520,
+        "currency": "usd",
+        "arrival_date": 1789228800,
+        "status": "paid",
+        "created": 1789228800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_005_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789228800,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_005",
+        "object": "payment_intent",
+        "amount": 75000,
+        "amount_received": 75000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_acme",
+        "latest_charge": "ch_str_005",
+        "description": "INV-STR-005 Acme tooling",
+        "metadata": {
+          "customer_name": "Acme Industrial",
+          "invoice_id": "INV-STR-005",
+          "order_id": "INV-STR-005"
+        },
+        "created": 1789228800
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_005_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789228810,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_005",
+        "object": "charge",
+        "amount": 75000,
+        "amount_captured": 75000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_acme",
+        "payment_intent": "pi_str_005",
+        "balance_transaction": "txn_str_005",
+        "description": "INV-STR-005 Acme tooling",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Acme Industrial"
+        },
+        "metadata": {
+          "customer_name": "Acme Industrial",
+          "invoice_id": "INV-STR-005",
+          "order_id": "INV-STR-005"
+        },
+        "created": 1789228800
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_005a_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789488000,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_005a",
+        "object": "payout",
+        "amount": 72795,
+        "currency": "usd",
+        "arrival_date": 1789488000,
+        "status": "in_transit",
+        "created": 1789488000,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_005a_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789491600,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_005a",
+        "object": "payout",
+        "amount": 72795,
+        "currency": "usd",
+        "arrival_date": 1789488000,
+        "status": "paid",
+        "created": 1789488000,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_re_str_005",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "refund.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "re_str_005",
+        "object": "refund",
+        "amount": 75000,
+        "currency": "usd",
+        "charge": "ch_str_005",
+        "payment_intent": "pi_str_005",
+        "balance_transaction": "txn_str_005_re",
+        "status": "succeeded",
+        "reason": "requested_by_customer",
+        "metadata": {
+          "invoice_id": "INV-STR-005"
+        },
+        "created": 1790092800
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_005b_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_005b",
+        "object": "payout",
+        "amount": -75000,
+        "currency": "usd",
+        "arrival_date": 1790092800,
+        "status": "in_transit",
+        "created": 1790092800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_005b_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790096400,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_005b",
+        "object": "payout",
+        "amount": -75000,
+        "currency": "usd",
+        "arrival_date": 1790092800,
+        "status": "paid",
+        "created": 1790092800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_006_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789488000,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_006",
+        "object": "payment_intent",
+        "amount": 80000,
+        "amount_received": 80000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_orbit",
+        "latest_charge": "ch_str_006",
+        "description": "INV-STR-006 Orbit implementation",
+        "metadata": {
+          "customer_name": "Orbit Health",
+          "invoice_id": "INV-STR-006",
+          "order_id": "INV-STR-006"
+        },
+        "created": 1789488000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_006_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789488010,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_006",
+        "object": "charge",
+        "amount": 80000,
+        "amount_captured": 80000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_orbit",
+        "payment_intent": "pi_str_006",
+        "balance_transaction": "txn_str_006",
+        "description": "INV-STR-006 Orbit implementation",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Orbit Health"
+        },
+        "metadata": {
+          "customer_name": "Orbit Health",
+          "invoice_id": "INV-STR-006",
+          "order_id": "INV-STR-006"
+        },
+        "created": 1789488000
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_006a_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789574400,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_006a",
+        "object": "payout",
+        "amount": 77650,
+        "currency": "usd",
+        "arrival_date": 1789574400,
+        "status": "in_transit",
+        "created": 1789574400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_006a_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789578000,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_006a",
+        "object": "payout",
+        "amount": 77650,
+        "currency": "usd",
+        "arrival_date": 1789574400,
+        "status": "paid",
+        "created": 1789574400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_dp_str_006",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438400,
+    "type": "charge.dispute.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "dp_str_006",
+        "object": "dispute",
+        "amount": 80000,
+        "currency": "usd",
+        "charge": "ch_str_006",
+        "payment_intent": "pi_str_006",
+        "reason": "fraudulent",
+        "status": "lost",
+        "fee": 1500,
+        "created": 1790438400,
+        "balance_transactions": [
+          {
+            "id": "txn_str_006_dp",
+            "object": "balance_transaction",
+            "amount": -80000,
+            "fee": 0,
+            "net": -80000,
+            "currency": "usd",
+            "type": "dispute",
+            "description": "Chargeback INV-STR-006",
+            "payout": "po_str_006b",
+            "created": 1790438400,
+            "fee_details": [],
+            "source": "dp_str_006"
+          },
+          {
+            "id": "txn_str_006_dp_fee",
+            "object": "balance_transaction",
+            "amount": -1500,
+            "fee": 0,
+            "net": -1500,
+            "currency": "usd",
+            "type": "stripe_fee",
+            "description": "Dispute fee",
+            "payout": "po_str_006b",
+            "created": 1790438400,
+            "fee_details": [],
+            "source": "dp_str_006"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_006b_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438400,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_006b",
+        "object": "payout",
+        "amount": -81500,
+        "currency": "usd",
+        "arrival_date": 1790438400,
+        "status": "in_transit",
+        "created": 1790438400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_006b_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790442000,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_006b",
+        "object": "payout",
+        "amount": -81500,
+        "currency": "usd",
+        "arrival_date": 1790438400,
+        "status": "paid",
+        "created": 1790438400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_007_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789574400,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_007",
+        "object": "payment_intent",
+        "amount": 200000,
+        "amount_received": 200000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_lumen",
+        "latest_charge": "ch_str_007",
+        "description": "INV-STR-007 Lumen international",
+        "metadata": {
+          "customer_name": "Lumen Labs",
+          "invoice_id": "INV-STR-007",
+          "order_id": "INV-STR-007"
+        },
+        "created": 1789574400
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_007_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789574410,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_007",
+        "object": "charge",
+        "amount": 200000,
+        "amount_captured": 200000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_lumen",
+        "payment_intent": "pi_str_007",
+        "balance_transaction": "txn_str_007",
+        "description": "INV-STR-007 Lumen international",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Lumen Labs"
+        },
+        "metadata": {
+          "customer_name": "Lumen Labs",
+          "invoice_id": "INV-STR-007",
+          "order_id": "INV-STR-007"
+        },
+        "created": 1789574400
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_007_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789747200,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_007",
+        "object": "payout",
+        "amount": 192800,
+        "currency": "usd",
+        "arrival_date": 1789747200,
+        "status": "in_transit",
+        "created": 1789747200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_007_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789750800,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_007",
+        "object": "payout",
+        "amount": 192800,
+        "currency": "usd",
+        "arrival_date": 1789747200,
+        "status": "paid",
+        "created": 1789747200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_001",
+        "object": "payment_intent",
+        "amount": 100000,
+        "amount_received": 100000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_001",
+        "object": "charge",
+        "amount": 100000,
+        "amount_captured": 100000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_001",
+        "balance_transaction": "txn_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788537600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "in_transit",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788541200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "paid",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788541200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "paid",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_001",
+        "object": "payment_intent",
+        "amount": 100000,
+        "amount_received": 100000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_001",
+        "object": "charge",
+        "amount": 100000,
+        "amount_captured": 100000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_001",
+        "balance_transaction": "txn_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788537600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "in_transit",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_010_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789747200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_010",
+        "object": "payment_intent",
+        "amount": 125000,
+        "amount_received": 125000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_pinnacle",
+        "latest_charge": "ch_str_010",
+        "description": "Pinnacle autumn restock",
+        "metadata": {
+          "customer_name": "Pinnacle Retail",
+          "customer_id": "CUST-006"
+        },
+        "created": 1789747200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_010_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789747210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_010",
+        "object": "charge",
+        "amount": 125000,
+        "amount_captured": 125000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_pinnacle",
+        "payment_intent": "pi_str_010",
+        "balance_transaction": "txn_str_010",
+        "description": "Pinnacle autumn restock",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Pinnacle Retail"
+        },
+        "metadata": {
+          "customer_name": "Pinnacle Retail",
+          "customer_id": "CUST-006"
+        },
+        "created": 1789747200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_010_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789920000,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_010",
+        "object": "payout",
+        "amount": 121345,
+        "currency": "usd",
+        "arrival_date": 1789920000,
+        "status": "in_transit",
+        "created": 1789920000,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_010_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789923600,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_010",
+        "object": "payout",
+        "amount": 121345,
+        "currency": "usd",
+        "arrival_date": 1789920000,
+        "status": "paid",
+        "created": 1789920000,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_011_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789920000,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_011",
+        "object": "payment_intent",
+        "amount": 90000,
+        "amount_received": 90000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_brightline",
+        "latest_charge": "ch_str_011",
+        "description": "Q3 analytics retainer",
+        "metadata": {
+          "customer_name": "Brightline Media",
+          "customer_id": "CUST-004"
+        },
+        "created": 1789920000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_011_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789920010,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_011",
+        "object": "charge",
+        "amount": 90000,
+        "amount_captured": 90000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_brightline",
+        "payment_intent": "pi_str_011",
+        "balance_transaction": "txn_str_011",
+        "description": "Q3 analytics retainer",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Brightline Media"
+        },
+        "metadata": {
+          "customer_name": "Brightline Media",
+          "customer_id": "CUST-004"
+        },
+        "created": 1789920000
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_011_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_011",
+        "object": "payout",
+        "amount": 87360,
+        "currency": "usd",
+        "arrival_date": 1790092800,
+        "status": "in_transit",
+        "created": 1790092800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_011_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790096400,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_011",
+        "object": "payout",
+        "amount": 87360,
+        "currency": "usd",
+        "arrival_date": 1790092800,
+        "status": "paid",
+        "created": 1790092800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_012a_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_012a",
+        "object": "payment_intent",
+        "amount": 70000,
+        "amount_received": 70000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "latest_charge": "ch_str_012a",
+        "description": "INV-STR-012A Helios refundable workshop",
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-012A",
+          "order_id": "INV-STR-012A"
+        },
+        "created": 1790092800
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_012a_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092810,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_012a",
+        "object": "charge",
+        "amount": 70000,
+        "amount_captured": 70000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "payment_intent": "pi_str_012a",
+        "balance_transaction": "txn_str_012a",
+        "description": "INV-STR-012A Helios refundable workshop",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Helios Analytics"
+        },
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-012A",
+          "order_id": "INV-STR-012A"
+        },
+        "created": 1790092800
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_012b_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_012b",
+        "object": "payment_intent",
+        "amount": 30000,
+        "amount_received": 30000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "latest_charge": "ch_str_012b",
+        "description": "INV-STR-012B Helios extra seats",
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-012B",
+          "order_id": "INV-STR-012B"
+        },
+        "created": 1790092800
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_012b_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092810,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_012b",
+        "object": "charge",
+        "amount": 30000,
+        "amount_captured": 30000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_helios",
+        "payment_intent": "pi_str_012b",
+        "balance_transaction": "txn_str_012b",
+        "description": "INV-STR-012B Helios extra seats",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Helios Analytics"
+        },
+        "metadata": {
+          "customer_name": "Helios Analytics",
+          "invoice_id": "INV-STR-012B",
+          "order_id": "INV-STR-012B"
+        },
+        "created": 1790092800
+      }
+    }
+  },
+  {
+    "id": "evt_re_str_012",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "refund.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "re_str_012",
+        "object": "refund",
+        "amount": 20000,
+        "currency": "usd",
+        "charge": "ch_str_012a",
+        "payment_intent": "pi_str_012a",
+        "balance_transaction": "txn_str_012_re",
+        "status": "succeeded",
+        "reason": "requested_by_customer",
+        "metadata": {
+          "invoice_id": "INV-STR-012A"
+        },
+        "created": 1790092800
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_012_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790265600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_012",
+        "object": "payout",
+        "amount": 77040,
+        "currency": "usd",
+        "arrival_date": 1790265600,
+        "status": "in_transit",
+        "created": 1790265600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_012_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790269200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_012",
+        "object": "payout",
+        "amount": 77040,
+        "currency": "usd",
+        "arrival_date": 1790265600,
+        "status": "paid",
+        "created": 1790265600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_013a_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790265600,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_013a",
+        "object": "payment_intent",
+        "amount": 55000,
+        "amount_received": 55000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_orbit",
+        "latest_charge": "ch_str_013a",
+        "description": "INV-STR-013A Orbit monitoring",
+        "metadata": {
+          "customer_name": "Orbit Health",
+          "invoice_id": "INV-STR-013A",
+          "order_id": "INV-STR-013A"
+        },
+        "created": 1790265600
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_013a_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790265610,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_013a",
+        "object": "charge",
+        "amount": 55000,
+        "amount_captured": 55000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_orbit",
+        "payment_intent": "pi_str_013a",
+        "balance_transaction": "txn_str_013a",
+        "description": "INV-STR-013A Orbit monitoring",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Orbit Health"
+        },
+        "metadata": {
+          "customer_name": "Orbit Health",
+          "invoice_id": "INV-STR-013A",
+          "order_id": "INV-STR-013A"
+        },
+        "created": 1790265600
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_013b_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790265600,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_013b",
+        "object": "payment_intent",
+        "amount": 25000,
+        "amount_received": 25000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_orbit",
+        "latest_charge": "ch_str_013b",
+        "description": "INV-STR-013B Orbit alerts pack",
+        "metadata": {
+          "customer_name": "Orbit Health",
+          "invoice_id": "INV-STR-013B",
+          "order_id": "INV-STR-013B"
+        },
+        "created": 1790265600
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_013b_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790265610,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_013b",
+        "object": "charge",
+        "amount": 25000,
+        "amount_captured": 25000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_orbit",
+        "payment_intent": "pi_str_013b",
+        "balance_transaction": "txn_str_013b",
+        "description": "INV-STR-013B Orbit alerts pack",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Orbit Health"
+        },
+        "metadata": {
+          "customer_name": "Orbit Health",
+          "invoice_id": "INV-STR-013B",
+          "order_id": "INV-STR-013B"
+        },
+        "created": 1790265600
+      }
+    }
+  },
+  {
+    "id": "evt_dp_str_013",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790265600,
+    "type": "charge.dispute.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "dp_str_013",
+        "object": "dispute",
+        "amount": 25000,
+        "currency": "usd",
+        "charge": "ch_str_013b",
+        "payment_intent": "pi_str_013b",
+        "reason": "fraudulent",
+        "status": "lost",
+        "fee": 1500,
+        "created": 1790265600,
+        "balance_transactions": [
+          {
+            "id": "txn_str_013_dp",
+            "object": "balance_transaction",
+            "amount": -25000,
+            "fee": 0,
+            "net": -25000,
+            "currency": "usd",
+            "type": "dispute",
+            "description": "Chargeback INV-STR-013B",
+            "payout": "po_str_013",
+            "created": 1790265600,
+            "fee_details": [],
+            "source": "dp_str_013"
+          },
+          {
+            "id": "txn_str_013_dp_fee",
+            "object": "balance_transaction",
+            "amount": -1500,
+            "fee": 0,
+            "net": -1500,
+            "currency": "usd",
+            "type": "stripe_fee",
+            "description": "Dispute fee",
+            "payout": "po_str_013",
+            "created": 1790265600,
+            "fee_details": [],
+            "source": "dp_str_013"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_013_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790352000,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_013",
+        "object": "payout",
+        "amount": 51120,
+        "currency": "usd",
+        "arrival_date": 1790352000,
+        "status": "in_transit",
+        "created": 1790352000,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_013_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790355600,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_013",
+        "object": "payout",
+        "amount": 51120,
+        "currency": "usd",
+        "arrival_date": 1790352000,
+        "status": "paid",
+        "created": 1790352000,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_014_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790352000,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_014",
+        "object": "payment_intent",
+        "amount": 1240000,
+        "amount_received": 1240000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northstar",
+        "latest_charge": "ch_str_014",
+        "description": "INV-STR-014 Northstar platform",
+        "metadata": {
+          "customer_name": "Northstar LLC",
+          "invoice_id": "INV-STR-014",
+          "order_id": "INV-STR-014"
+        },
+        "created": 1790352000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_014_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790352010,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_014",
+        "object": "charge",
+        "amount": 1240000,
+        "amount_captured": 1240000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northstar",
+        "payment_intent": "pi_str_014",
+        "balance_transaction": "txn_str_014",
+        "description": "INV-STR-014 Northstar platform",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northstar LLC"
+        },
+        "metadata": {
+          "customer_name": "Northstar LLC",
+          "invoice_id": "INV-STR-014",
+          "order_id": "INV-STR-014"
+        },
+        "created": 1790352000
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_014_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438400,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_014",
+        "object": "payout",
+        "amount": 1204010,
+        "currency": "usd",
+        "arrival_date": 1790438400,
+        "status": "in_transit",
+        "created": 1790438400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_014_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790442000,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_014",
+        "object": "payout",
+        "amount": 1204010,
+        "currency": "usd",
+        "arrival_date": 1790438400,
+        "status": "paid",
+        "created": 1790438400,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_015_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790697600,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_015",
+        "object": "payment_intent",
+        "amount": 220000,
+        "amount_received": 220000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_015",
+        "description": "INV-STR-015 Late September expansion",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-015",
+          "order_id": "INV-STR-015"
+        },
+        "created": 1790697600
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_015_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790697610,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_015",
+        "object": "charge",
+        "amount": 220000,
+        "amount_captured": 220000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_015",
+        "balance_transaction": "txn_str_015",
+        "description": "INV-STR-015 Late September expansion",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-015",
+          "order_id": "INV-STR-015"
+        },
+        "created": 1790697600
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_015_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790956800,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_015",
+        "object": "payout",
+        "amount": 213590,
+        "currency": "usd",
+        "arrival_date": 1790956800,
+        "status": "in_transit",
+        "created": 1790956800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_015_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790960400,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_015",
+        "object": "payout",
+        "amount": 213590,
+        "currency": "usd",
+        "arrival_date": 1790956800,
+        "status": "paid",
+        "created": 1790956800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_016_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438400,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_016",
+        "object": "payment_intent",
+        "amount": 60000,
+        "amount_received": 60000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "latest_charge": "ch_str_016",
+        "description": "INV-STR-016 Harbor partial",
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "invoice_id": "INV-STR-016",
+          "order_id": "INV-STR-016"
+        },
+        "created": 1790438400
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_016_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438410,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_016",
+        "object": "charge",
+        "amount": 60000,
+        "amount_captured": 60000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "payment_intent": "pi_str_016",
+        "balance_transaction": "txn_str_016",
+        "description": "INV-STR-016 Harbor partial",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Harbor Electric"
+        },
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "invoice_id": "INV-STR-016",
+          "order_id": "INV-STR-016"
+        },
+        "created": 1790438400
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_016_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790611200,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_016",
+        "object": "payout",
+        "amount": 58230,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "in_transit",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_016_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790614800,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_016",
+        "object": "payout",
+        "amount": 58230,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "paid",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_pi_str_017_fail",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789833600,
+    "type": "payment_intent.payment_failed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_017_fail",
+        "object": "payment_intent",
+        "amount": 64000,
+        "amount_received": 0,
+        "currency": "usd",
+        "status": "requires_payment_method",
+        "customer": "cus_str_summit",
+        "latest_charge": null,
+        "description": "INV-STR-017 failed card",
+        "metadata": {
+          "invoice_id": "INV-STR-017",
+          "customer_name": "Summit Logistics"
+        },
+        "created": 1789833600
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_017_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789920000,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_017",
+        "object": "payment_intent",
+        "amount": 64000,
+        "amount_received": 64000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_summit",
+        "latest_charge": "ch_str_017",
+        "description": "INV-STR-017 Summit retry shipment",
+        "metadata": {
+          "customer_name": "Summit Logistics",
+          "invoice_id": "INV-STR-017",
+          "order_id": "INV-STR-017"
+        },
+        "created": 1789920000
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_017_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1789920010,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_017",
+        "object": "charge",
+        "amount": 64000,
+        "amount_captured": 64000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_summit",
+        "payment_intent": "pi_str_017",
+        "balance_transaction": "txn_str_017",
+        "description": "INV-STR-017 Summit retry shipment",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Summit Logistics"
+        },
+        "metadata": {
+          "customer_name": "Summit Logistics",
+          "invoice_id": "INV-STR-017",
+          "order_id": "INV-STR-017"
+        },
+        "created": 1789920000
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_017_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790092800,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_017",
+        "object": "payout",
+        "amount": 62114,
+        "currency": "usd",
+        "arrival_date": 1790092800,
+        "status": "in_transit",
+        "created": 1790092800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_017_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790096400,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_017",
+        "object": "payout",
+        "amount": 62114,
+        "currency": "usd",
+        "arrival_date": 1790092800,
+        "status": "paid",
+        "created": 1790092800,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_020_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790524800,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_020",
+        "object": "payment_intent",
+        "amount": 33000,
+        "amount_received": 33000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_orion",
+        "latest_charge": "ch_str_020",
+        "description": "Unmatched Stripe charge",
+        "metadata": {
+          "customer_name": "Orion Freight"
+        },
+        "created": 1790524800
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_020_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790524810,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_020",
+        "object": "charge",
+        "amount": 33000,
+        "amount_captured": 33000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_orion",
+        "payment_intent": "pi_str_020",
+        "balance_transaction": "txn_str_020",
+        "description": "Unmatched Stripe charge",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Orion Freight"
+        },
+        "metadata": {
+          "customer_name": "Orion Freight"
+        },
+        "created": 1790524800
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_020_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790611200,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_020",
+        "object": "payout",
+        "amount": 32013,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "in_transit",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_020_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790614800,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_020",
+        "object": "payout",
+        "amount": 32013,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "paid",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_001",
+        "object": "payment_intent",
+        "amount": 100000,
+        "amount_received": 100000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_001",
+        "object": "charge",
+        "amount": 100000,
+        "amount_captured": 100000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_001",
+        "balance_transaction": "txn_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788537600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "in_transit",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788541200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "paid",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_018_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790611200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_018",
+        "object": "payment_intent",
+        "amount": 88000,
+        "amount_received": 88000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_atlas",
+        "latest_charge": "ch_str_018",
+        "description": "monthly platform fee",
+        "metadata": {
+          "customer_name": "Atlas Systems",
+          "customer_id": "CUST-010"
+        },
+        "created": 1790611200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_018_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790611210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_018",
+        "object": "charge",
+        "amount": 88000,
+        "amount_captured": 88000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_atlas",
+        "payment_intent": "pi_str_018",
+        "balance_transaction": "txn_str_018",
+        "description": "monthly platform fee",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Atlas Systems"
+        },
+        "metadata": {
+          "customer_name": "Atlas Systems",
+          "customer_id": "CUST-010"
+        },
+        "created": 1790611200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_018_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790697600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_018",
+        "object": "payout",
+        "amount": 85418,
+        "currency": "usd",
+        "arrival_date": 1790697600,
+        "status": "in_transit",
+        "created": 1790697600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_018_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790701200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_018",
+        "object": "payout",
+        "amount": 85418,
+        "currency": "usd",
+        "arrival_date": 1790697600,
+        "status": "paid",
+        "created": 1790697600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_019_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438400,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_019",
+        "object": "payment_intent",
+        "amount": 110000,
+        "amount_received": 110000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "latest_charge": "ch_str_019",
+        "description": "INV-STR-019 Harbor overpayment",
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "invoice_id": "INV-STR-019",
+          "order_id": "INV-STR-019"
+        },
+        "created": 1790438400
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_019_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438410,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_019",
+        "object": "charge",
+        "amount": 110000,
+        "amount_captured": 110000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "payment_intent": "pi_str_019",
+        "balance_transaction": "txn_str_019",
+        "description": "INV-STR-019 Harbor overpayment",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Harbor Electric"
+        },
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "invoice_id": "INV-STR-019",
+          "order_id": "INV-STR-019"
+        },
+        "created": 1790438400
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_019_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790611200,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_019",
+        "object": "payout",
+        "amount": 106780,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "in_transit",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_019_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790614800,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_019",
+        "object": "payout",
+        "amount": 106780,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "paid",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_021a_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438400,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_021a",
+        "object": "payment_intent",
+        "amount": 40000,
+        "amount_received": 40000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "latest_charge": "ch_str_021a",
+        "description": "INV-STR-021 Harbor installment 1",
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "customer_id": "CUST-012",
+          "invoice_id": "INV-STR-021",
+          "order_id": "INV-STR-021"
+        },
+        "created": 1790438400
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_021a_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790438410,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_021a",
+        "object": "charge",
+        "amount": 40000,
+        "amount_captured": 40000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "payment_intent": "pi_str_021a",
+        "balance_transaction": "txn_str_021a",
+        "description": "INV-STR-021 Harbor installment 1",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Harbor Electric"
+        },
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "customer_id": "CUST-012",
+          "invoice_id": "INV-STR-021",
+          "order_id": "INV-STR-021"
+        },
+        "created": 1790438400
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_021b_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790524800,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_021b",
+        "object": "payment_intent",
+        "amount": 60000,
+        "amount_received": 60000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "latest_charge": "ch_str_021b",
+        "description": "INV-STR-021 Harbor installment 2",
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "customer_id": "CUST-012",
+          "invoice_id": "INV-STR-021",
+          "order_id": "INV-STR-021"
+        },
+        "created": 1790524800
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_021b_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790524810,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_021b",
+        "object": "charge",
+        "amount": 60000,
+        "amount_captured": 60000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_harbor",
+        "payment_intent": "pi_str_021b",
+        "balance_transaction": "txn_str_021b",
+        "description": "INV-STR-021 Harbor installment 2",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Harbor Electric"
+        },
+        "metadata": {
+          "customer_name": "Harbor Electric",
+          "customer_id": "CUST-012",
+          "invoice_id": "INV-STR-021",
+          "order_id": "INV-STR-021"
+        },
+        "created": 1790524800
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_021_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790611200,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_021",
+        "object": "payout",
+        "amount": 97040,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "in_transit",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_021_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1790614800,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_021",
+        "object": "payout",
+        "amount": 97040,
+        "currency": "usd",
+        "arrival_date": 1790611200,
+        "status": "paid",
+        "created": 1790611200,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_pi",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451200,
+    "type": "payment_intent.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "pi_str_001",
+        "object": "payment_intent",
+        "amount": 100000,
+        "amount_received": 100000,
+        "currency": "usd",
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "latest_charge": "ch_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_ch_str_001_ch",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788451210,
+    "type": "charge.succeeded",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "ch_str_001",
+        "object": "charge",
+        "amount": 100000,
+        "amount_captured": 100000,
+        "amount_refunded": 0,
+        "currency": "usd",
+        "paid": true,
+        "status": "succeeded",
+        "customer": "cus_str_northwind",
+        "payment_intent": "pi_str_001",
+        "balance_transaction": "txn_str_001",
+        "description": "INV-STR-001 September platform subscription",
+        "refunded": false,
+        "disputed": false,
+        "billing_details": {
+          "name": "Northwind Labs"
+        },
+        "metadata": {
+          "customer_name": "Northwind Labs",
+          "invoice_id": "INV-STR-001",
+          "order_id": "INV-STR-001"
+        },
+        "created": 1788451200
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_created",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788537600,
+    "type": "payout.created",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "in_transit",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  },
+  {
+    "id": "evt_po_str_001_recon",
+    "object": "event",
+    "api_version": "2025-08-27.basil",
+    "created": 1788541200,
+    "type": "payout.reconciliation_completed",
+    "livemode": false,
+    "data": {
+      "object": {
+        "id": "po_str_001",
+        "object": "payout",
+        "amount": 97070,
+        "currency": "usd",
+        "arrival_date": 1788537600,
+        "status": "paid",
+        "created": 1788537600,
+        "method": "standard",
+        "type": "bank_account",
+        "statement_descriptor": "STRIPE PAYOUT"
+      }
+    }
+  }
+]

@@ -1,0 +1,168 @@
+[
+  {
+    "vendor_id": "VEND-001",
+    "vendor_name": "Acme Supplies",
+    "first_seen": "2024-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-001-DUP",
+    "vendor_name": "Acme Supplies LLC",
+    "first_seen": "2026-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-002",
+    "vendor_name": "Amazon Web Services",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-003",
+    "vendor_name": "Northline Fabrication",
+    "first_seen": "2023-04-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-004",
+    "vendor_name": "Office Depot",
+    "first_seen": "2023-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-005",
+    "vendor_name": "Helios Hardware",
+    "first_seen": "2023-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-006",
+    "vendor_name": "Datadog",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-007",
+    "vendor_name": "Slack Technologies",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-008",
+    "vendor_name": "Figma",
+    "first_seen": "2023-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-009",
+    "vendor_name": "Google Cloud",
+    "first_seen": "2022-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-010",
+    "vendor_name": "Northwind Phantom LLC",
+    "first_seen": "2026-09-15",
+    "status": "active",
+    "unusual": true
+  },
+  {
+    "vendor_id": "VEND-011",
+    "vendor_name": "Hartford Insurance",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-012",
+    "vendor_name": "Orbit Analytics",
+    "first_seen": "2024-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-014",
+    "vendor_name": "Dell Technologies",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-015",
+    "vendor_name": "Harbor Electric",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-016",
+    "vendor_name": "Lindholm & Ruiz LLP",
+    "first_seen": "2024-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-017",
+    "vendor_name": "GitHub",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-018",
+    "vendor_name": "Shadow Vendor LLC",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-019",
+    "vendor_name": "Freightline Logistics",
+    "first_seen": "2023-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-020",
+    "vendor_name": "Lenovo",
+    "first_seen": "2024-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-021",
+    "vendor_name": "Misc Supplies",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-HO",
+    "vendor_name": "Pinecrest Chemicals",
+    "first_seen": "2024-03-01",
+    "status": "active"
+  },
+  {
+    "vendor_id": "VEND-HO-DUP",
+    "vendor_name": "Pinecrest Chemicals LLC",
+    "first_seen": "2026-09-04",
+    "status": "active"
+  }
+]

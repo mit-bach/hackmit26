@@ -1,0 +1,2 @@
+{"type":"extension_ui_request","id":"93f6bc8c-7278-4385-a6b3-134ed3db0702","method":"setStatus","statusKey":"harness","statusText":"bot:pay"}
+{"type":"response","command":"set_thinking_level","success":true}

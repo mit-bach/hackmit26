@@ -1,0 +1,31 @@
+{
+  "id": "h_86d014d2-3638-47a8-9bf1-2bd3bdc1cede",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "profile": "review-assets",
+  "prompt": "profile: review-assets\nReview depreciation for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "createdAt": "2026-09-20T15:28:48Z",
+  "updatedAt": "2026-09-20T15:28:48Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "ctl-books",
+    "profile": "review-assets"
+  },
+  "live_sent": false,
+  "task_id": "depreciation"
+}

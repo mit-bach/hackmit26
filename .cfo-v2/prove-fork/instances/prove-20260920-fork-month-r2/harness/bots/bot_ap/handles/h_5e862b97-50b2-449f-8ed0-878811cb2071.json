@@ -1,0 +1,19 @@
+{
+  "id": "h_5e862b97-50b2-449f-8ed0-878811cb2071",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Vendor bill from finance inbox MSG-INBOX-003. Kernel invoice id ING-002 (canonical ING-002). Office Depot OD-INBOX-3003 / PO-104. Profile: prepare. Email classified VENDOR_INVOICE and dispatch CREATED; forwarded_to_ap true. Email did not match or HOLD. Ingest noted match_status BLOCKED (material_amount_mismatch) — AP owns match. Please prepare on ING-002.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T16:00:37.204Z",
+  "updatedAt": "2026-09-20T16:01:11.932Z",
+  "result": "AP prepare complete on ING-002 (OD-INBOX-3003 / PO-104, MSG-INBOX-003). Packet: runs/ap/packets/ING-002.json. Kernel: material_amount_mismatch — invoice 5000 vs PO/GR 2100 (diff 2900, outside tolerance). Vendor match, full receipt GR-104, no duplicates. PreparerRecommendation HOLD (not approve-shaped; no ctl-pay handoff). Email intake acknowledged; AP owns the hold.",
+  "seq": 21
+}

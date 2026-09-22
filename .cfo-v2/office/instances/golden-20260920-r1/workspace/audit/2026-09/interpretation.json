@@ -1,0 +1,800 @@
+{
+  "profile": "interpret",
+  "outputType": "AuditorInterpretation",
+  "audit_run_id": "20260920T153114Z",
+  "period": "2026-09",
+  "close_pack": "workspace/close/2026-09/pack.json",
+  "close_pack_status": "BLOCKED",
+  "gate_passed": false,
+  "interpretation": {
+    "audit_run_id": "20260920T153114Z",
+    "what_was_tested": [
+      "AUD-RND-001",
+      "AUD-SUP-001",
+      "AUD-THR-001",
+      "AUD-PCE-001",
+      "AUD-SOD-001",
+      "AUD-DUP-INV-001",
+      "AUD-DUP-VEND-001",
+      "AUD-REPERF-001"
+    ],
+    "populations": {
+      "payments": 3,
+      "journal_entries": 4,
+      "approvals": 5,
+      "invoices": 22,
+      "reconciliations": 7
+    },
+    "sampling_methods": [
+      "payments:risk_based",
+      "journal_entries:risk_based",
+      "approvals:risk_based",
+      "invoices:risk_based",
+      "reconciliations:risk_based"
+    ],
+    "evidence_examined": [
+      "APR-AUD-002",
+      "APR-AUD-005",
+      "AUD-INV-MISS-1",
+      "AUD-INV-MISS-2",
+      "INV-AR-AUD-002",
+      "INV-AUD-ACCRUAL-BAD",
+      "INV-AUD-NEW-001",
+      "INV-AUD-SELF-001",
+      "JE-AUD-003",
+      "PAY-AR-AUD-002",
+      "PAY-AUD-002",
+      "VEND-ACME",
+      "VEND-ACME-DUP",
+      "source:AUD-BNK-002",
+      "source:AUD-LED-002"
+    ],
+    "deterministic_tests": [
+      "AUD-RND-001",
+      "AUD-SUP-001",
+      "AUD-THR-001",
+      "AUD-PCE-001",
+      "AUD-SOD-001",
+      "AUD-DUP-INV-001",
+      "AUD-DUP-VEND-001",
+      "AUD-REPERF-001"
+    ],
+    "reperformance_summary": [
+      "REC-AUD-AGREE:AGREE",
+      "REC-AUD-DISAGREE:DISAGREE",
+      "REC-AUD-STRIPE:AGREE",
+      "REC-AUD-ACCRUAL-AGREE:AGREE",
+      "REC-AUD-ACCRUAL-DISAGREE:DISAGREE",
+      "REC-AUD-AR-AGREE:AGREE",
+      "REC-AUD-AR-DISAGREE:DISAGREE"
+    ],
+    "findings": [
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-RND-001-001",
+        "result": "EXCEPTION",
+        "severity": "HIGH",
+        "severity_rationale": "Round-number manual payment to a new vendor above the material threshold.",
+        "human_follow_up": "Investigate PAY-AUD-002 against AUD-RND-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-SUP-001-002",
+        "result": "FAIL",
+        "severity": "HIGH",
+        "severity_rationale": "Payment record is marked missing supporting documents.",
+        "human_follow_up": "Investigate PAY-AUD-002 against AUD-SUP-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-PCE-001-003",
+        "result": "FAIL",
+        "severity": "CRITICAL",
+        "severity_rationale": "Unauthorized post-close entry of 15000.0 exceeds the material threshold of 10000.00.",
+        "human_follow_up": "Investigate JE-AUD-003 against AUD-PCE-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-SOD-001-004",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Requester/preparer and approver IDs are the same in violation of SOD policy.",
+        "human_follow_up": "Investigate APR-AUD-002 against AUD-SOD-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-SOD-001-005",
+        "result": "FAIL",
+        "severity": "CRITICAL",
+        "severity_rationale": "Self-approval on a payment or journal above the critical-amount threshold.",
+        "human_follow_up": "Investigate APR-AUD-005 against AUD-SOD-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+        "result": "FAIL",
+        "severity": "HIGH",
+        "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+        "human_follow_up": "Investigate AUD-INV-MISS-1 against AUD-DUP-INV-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+        "result": "FAIL",
+        "severity": "HIGH",
+        "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+        "human_follow_up": "Investigate AUD-INV-MISS-2 against AUD-DUP-INV-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Two vendor master records collapse to the same normalized legal-name key.",
+        "human_follow_up": "Investigate VEND-ACME against AUD-DUP-VEND-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-009",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+        "human_follow_up": "Investigate REC-AUD-DISAGREE against AUD-REPERF-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-010",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+        "human_follow_up": "Investigate REC-AUD-ACCRUAL-DISAGREE against AUD-REPERF-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-011",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+        "human_follow_up": "Investigate REC-AUD-AR-DISAGREE against AUD-REPERF-001."
+      }
+    ],
+    "human_follow_up": [
+      "Investigate PAY-AUD-002 against AUD-RND-001.",
+      "Investigate PAY-AUD-002 against AUD-SUP-001.",
+      "Investigate JE-AUD-003 against AUD-PCE-001.",
+      "Investigate APR-AUD-002 against AUD-SOD-001.",
+      "Investigate APR-AUD-005 against AUD-SOD-001.",
+      "Investigate AUD-INV-MISS-1 against AUD-DUP-INV-001.",
+      "Investigate AUD-INV-MISS-2 against AUD-DUP-INV-001.",
+      "Investigate VEND-ACME against AUD-DUP-VEND-001.",
+      "Investigate REC-AUD-DISAGREE against AUD-REPERF-001.",
+      "Investigate REC-AUD-ACCRUAL-DISAGREE against AUD-REPERF-001.",
+      "Investigate REC-AUD-AR-DISAGREE against AUD-REPERF-001.",
+      "JE-AUD-004 posted  vs close 2026-10-03T18:00:00Z \u2192 HUMAN_REVIEW.",
+      "Incomplete identities for SOD-001 (requester_id/approver_id)."
+    ]
+  },
+  "stats": {
+    "period": "2026-09",
+    "audit_run_id": "20260920T153114Z",
+    "scope": [
+      "AUD-RND-001",
+      "AUD-SUP-001",
+      "AUD-THR-001",
+      "AUD-PCE-001",
+      "AUD-SOD-001",
+      "AUD-DUP-INV-001",
+      "AUD-DUP-VEND-001",
+      "AUD-REPERF-001"
+    ],
+    "populations": {
+      "payments": 3,
+      "journal_entries": 4,
+      "approvals": 5,
+      "invoices": 22,
+      "reconciliations": 7
+    },
+    "sampling": [
+      {
+        "sample_id": "SMP-payments-risk_based-26",
+        "population": "payments",
+        "method": "risk_based",
+        "seed": 26,
+        "sample_size": 3,
+        "population_size": 3,
+        "sampled_ids": [
+          "PAY-AUD-002",
+          "PAY-AUD-003",
+          "PAY-AUD-001"
+        ]
+      },
+      {
+        "sample_id": "SMP-journal_entries-risk_based-27",
+        "population": "journal_entries",
+        "method": "risk_based",
+        "seed": 27,
+        "sample_size": 4,
+        "population_size": 4,
+        "sampled_ids": [
+          "JE-AUD-003",
+          "JE-AUD-002",
+          "JE-AUD-004",
+          "JE-AUD-001"
+        ]
+      },
+      {
+        "sample_id": "SMP-approvals-risk_based-28",
+        "population": "approvals",
+        "method": "risk_based",
+        "seed": 28,
+        "sample_size": 5,
+        "population_size": 5,
+        "sampled_ids": [
+          "APR-AUD-005",
+          "APR-AUD-002",
+          "APR-AUD-001",
+          "APR-AUD-004",
+          "APR-AUD-003"
+        ]
+      },
+      {
+        "sample_id": "SMP-invoices-risk_based-29",
+        "population": "invoices",
+        "method": "risk_based",
+        "seed": 29,
+        "sample_size": 8,
+        "population_size": 22,
+        "sampled_ids": [
+          "INV-020",
+          "INV-009",
+          "INV-019",
+          "INV-003",
+          "INV-001",
+          "INV-011",
+          "AUD-INV-MISS-1",
+          "AUD-INV-MISS-2"
+        ]
+      },
+      {
+        "sample_id": "SMP-reconciliations-risk_based-30",
+        "population": "reconciliations",
+        "method": "risk_based",
+        "seed": 30,
+        "sample_size": 7,
+        "population_size": 7,
+        "sampled_ids": [
+          "REC-AUD-ACCRUAL-DISAGREE",
+          "REC-AUD-AR-DISAGREE",
+          "REC-AUD-DISAGREE",
+          "REC-AUD-STRIPE",
+          "REC-AUD-AR-AGREE",
+          "REC-AUD-AGREE",
+          "REC-AUD-ACCRUAL-AGREE"
+        ]
+      }
+    ],
+    "controls_tested": 8,
+    "passed": 1,
+    "failed": 6,
+    "exceptions": 1,
+    "human_review": 0,
+    "not_tested": 0,
+    "finding_count": 11,
+    "unresolved_count": 2,
+    "reperformance_count": 7,
+    "reperformance_agreed": 4,
+    "reperformance_disagreed": 3,
+    "finding_ids": [
+      "FND-20260920T153114Z-AUD-RND-001-001",
+      "FND-20260920T153114Z-AUD-SUP-001-002",
+      "FND-20260920T153114Z-AUD-PCE-001-003",
+      "FND-20260920T153114Z-AUD-SOD-001-004",
+      "FND-20260920T153114Z-AUD-SOD-001-005",
+      "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+      "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+      "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+      "FND-20260920T153114Z-AUD-REPERF-001-009",
+      "FND-20260920T153114Z-AUD-REPERF-001-010",
+      "FND-20260920T153114Z-AUD-REPERF-001-011"
+    ],
+    "control_results": {
+      "AUD-RND-001": "EXCEPTION",
+      "AUD-SUP-001": "FAIL",
+      "AUD-THR-001": "PASS",
+      "AUD-PCE-001": "FAIL",
+      "AUD-SOD-001": "FAIL",
+      "AUD-DUP-INV-001": "FAIL",
+      "AUD-DUP-VEND-001": "FAIL",
+      "AUD-REPERF-001": "FAIL"
+    }
+  },
+  "finding_ids": [
+    "FND-20260920T153114Z-AUD-RND-001-001",
+    "FND-20260920T153114Z-AUD-SUP-001-002",
+    "FND-20260920T153114Z-AUD-PCE-001-003",
+    "FND-20260920T153114Z-AUD-SOD-001-004",
+    "FND-20260920T153114Z-AUD-SOD-001-005",
+    "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+    "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+    "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+    "FND-20260920T153114Z-AUD-REPERF-001-009",
+    "FND-20260920T153114Z-AUD-REPERF-001-010",
+    "FND-20260920T153114Z-AUD-REPERF-001-011"
+  ],
+  "source_records_mutated": false,
+  "kernel_run_path": "runs/audit/2026-09-20260920T153114Z.json",
+  "samples": [
+    {
+      "sample_id": "SMP-payments-risk_based-26",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "payments",
+      "population_size": 3,
+      "eligible_ids": [
+        "PAY-AUD-001",
+        "PAY-AUD-002",
+        "PAY-AUD-003"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 26,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 3,
+      "sampled_ids": [
+        "PAY-AUD-002",
+        "PAY-AUD-003",
+        "PAY-AUD-001"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "PAY-AUD-002": 18.0,
+        "PAY-AUD-003": 2.0,
+        "PAY-AUD-001": 0.0
+      }
+    },
+    {
+      "sample_id": "SMP-journal_entries-risk_based-27",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "journal_entries",
+      "population_size": 4,
+      "eligible_ids": [
+        "JE-AUD-001",
+        "JE-AUD-002",
+        "JE-AUD-003",
+        "JE-AUD-004"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 27,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 4,
+      "sampled_ids": [
+        "JE-AUD-003",
+        "JE-AUD-002",
+        "JE-AUD-004",
+        "JE-AUD-001"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "JE-AUD-003": 15.5,
+        "JE-AUD-002": 7.0,
+        "JE-AUD-004": 1.5,
+        "JE-AUD-001": 0.0
+      }
+    },
+    {
+      "sample_id": "SMP-approvals-risk_based-28",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "approvals",
+      "population_size": 5,
+      "eligible_ids": [
+        "APR-AUD-001",
+        "APR-AUD-002",
+        "APR-AUD-003",
+        "APR-AUD-004",
+        "APR-AUD-005"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 28,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 5,
+      "sampled_ids": [
+        "APR-AUD-005",
+        "APR-AUD-002",
+        "APR-AUD-001",
+        "APR-AUD-004",
+        "APR-AUD-003"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "APR-AUD-005": 12.0,
+        "APR-AUD-002": 4.0,
+        "APR-AUD-001": 0.0,
+        "APR-AUD-004": 0.0,
+        "APR-AUD-003": 0.0
+      }
+    },
+    {
+      "sample_id": "SMP-invoices-risk_based-29",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "invoices",
+      "population_size": 22,
+      "eligible_ids": [
+        "INV-001",
+        "INV-002",
+        "INV-003",
+        "INV-004",
+        "INV-005",
+        "INV-006",
+        "INV-007",
+        "INV-008",
+        "INV-009",
+        "INV-010",
+        "INV-011",
+        "INV-012",
+        "INV-013",
+        "INV-014",
+        "INV-015",
+        "INV-016",
+        "INV-017",
+        "INV-018",
+        "INV-019",
+        "INV-020",
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 29,
+      "risk_criteria": [
+        "duplicate",
+        "large_dollar",
+        "control_failure"
+      ],
+      "sample_size": 8,
+      "sampled_ids": [
+        "INV-020",
+        "INV-009",
+        "INV-019",
+        "INV-003",
+        "INV-001",
+        "INV-011",
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "INV-020": 6.6,
+        "INV-009": 5.1,
+        "INV-019": 4.8,
+        "INV-003": 4.5,
+        "INV-001": 4.245,
+        "INV-011": 4.025,
+        "AUD-INV-MISS-1": 4.0,
+        "AUD-INV-MISS-2": 4.0
+      }
+    },
+    {
+      "sample_id": "SMP-reconciliations-risk_based-30",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "reconciliations",
+      "population_size": 7,
+      "eligible_ids": [
+        "REC-AUD-AGREE",
+        "REC-AUD-DISAGREE",
+        "REC-AUD-STRIPE",
+        "REC-AUD-ACCRUAL-AGREE",
+        "REC-AUD-ACCRUAL-DISAGREE",
+        "REC-AUD-AR-AGREE",
+        "REC-AUD-AR-DISAGREE"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 30,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 7,
+      "sampled_ids": [
+        "REC-AUD-ACCRUAL-DISAGREE",
+        "REC-AUD-AR-DISAGREE",
+        "REC-AUD-DISAGREE",
+        "REC-AUD-STRIPE",
+        "REC-AUD-AR-AGREE",
+        "REC-AUD-AGREE",
+        "REC-AUD-ACCRUAL-AGREE"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "REC-AUD-ACCRUAL-DISAGREE": 8.0,
+        "REC-AUD-AR-DISAGREE": 8.0,
+        "REC-AUD-DISAGREE": 8.0,
+        "REC-AUD-STRIPE": 4.8421,
+        "REC-AUD-AR-AGREE": 0.0,
+        "REC-AUD-AGREE": 0.0,
+        "REC-AUD-ACCRUAL-AGREE": 0.0
+      }
+    }
+  ],
+  "findings_summary": [
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-RND-001-001",
+      "control_id": "AUD-RND-001",
+      "result": "EXCEPTION",
+      "severity": "HIGH",
+      "severity_rationale": "Round-number manual payment to a new vendor above the material threshold.",
+      "title": "Round-number payments: PAY-AUD-002",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "PAY-AUD-002",
+        "INV-AUD-NEW-001",
+        "APR-AUD-005"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-SUP-001-002",
+      "control_id": "AUD-SUP-001",
+      "result": "FAIL",
+      "severity": "HIGH",
+      "severity_rationale": "Payment record is marked missing supporting documents.",
+      "title": "Missing payment support: PAY-AUD-002",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "PAY-AUD-002",
+        "INV-AUD-NEW-001"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-PCE-001-003",
+      "control_id": "AUD-PCE-001",
+      "result": "FAIL",
+      "severity": "CRITICAL",
+      "severity_rationale": "Unauthorized post-close entry of 15000.0 exceeds the material threshold of 10000.00.",
+      "title": "Post-close journal entries: JE-AUD-003",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "JE-AUD-003"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-SOD-001-004",
+      "control_id": "AUD-SOD-001",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Requester/preparer and approver IDs are the same in violation of SOD policy.",
+      "title": "Self-approval / segregation of duties: APR-AUD-002",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "APR-AUD-002",
+        "INV-AUD-SELF-001"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-SOD-001-005",
+      "control_id": "AUD-SOD-001",
+      "result": "FAIL",
+      "severity": "CRITICAL",
+      "severity_rationale": "Self-approval on a payment or journal above the critical-amount threshold.",
+      "title": "Self-approval / segregation of duties: APR-AUD-005",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "APR-AUD-005",
+        "PAY-AUD-002"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+      "control_id": "AUD-DUP-INV-001",
+      "result": "FAIL",
+      "severity": "HIGH",
+      "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+      "title": "Duplicate invoice: AUD-INV-MISS-1",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+      "control_id": "AUD-DUP-INV-001",
+      "result": "FAIL",
+      "severity": "HIGH",
+      "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+      "title": "Duplicate invoice: AUD-INV-MISS-2",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "AUD-INV-MISS-2",
+        "AUD-INV-MISS-1"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+      "control_id": "AUD-DUP-VEND-001",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Two vendor master records collapse to the same normalized legal-name key.",
+      "title": "Duplicate vendor: VEND-ACME",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "VEND-ACME",
+        "VEND-ACME-DUP"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-009",
+      "control_id": "AUD-REPERF-001",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+      "title": "Reconciliation re-performance: REC-AUD-DISAGREE",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "source:AUD-BNK-002",
+        "source:AUD-LED-002"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-010",
+      "control_id": "AUD-REPERF-001",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+      "title": "Reconciliation re-performance: REC-AUD-ACCRUAL-DISAGREE",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "INV-AUD-ACCRUAL-BAD"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-011",
+      "control_id": "AUD-REPERF-001",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+      "title": "Reconciliation re-performance: REC-AUD-AR-DISAGREE",
+      "status": "OPEN",
+      "human_follow_up": null,
+      "related_ids": [
+        "PAY-AR-AUD-002",
+        "INV-AR-AUD-002"
+      ]
+    }
+  ],
+  "control_results": {
+    "AUD-RND-001": "EXCEPTION",
+    "AUD-SUP-001": "FAIL",
+    "AUD-THR-001": "PASS",
+    "AUD-PCE-001": "FAIL",
+    "AUD-SOD-001": "FAIL",
+    "AUD-DUP-INV-001": "FAIL",
+    "AUD-DUP-VEND-001": "FAIL",
+    "AUD-REPERF-001": "FAIL"
+  },
+  "reperformance": [
+    {
+      "reconciliation_id": "REC-AUD-AGREE",
+      "agreed": true,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [],
+      "tolerance": 0.01
+    },
+    {
+      "reconciliation_id": "REC-AUD-DISAGREE",
+      "agreed": false,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [
+        "match_type EXACT_MATCH vs UNEXPLAINED_DIFFERENCE",
+        "status MATCHED vs HUMAN_REVIEW",
+        "difference 0.0 vs -34.56"
+      ],
+      "tolerance": 0.01
+    },
+    {
+      "reconciliation_id": "REC-AUD-STRIPE",
+      "agreed": true,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [],
+      "tolerance": 0.01
+    },
+    {
+      "reconciliation_id": "REC-AUD-ACCRUAL-AGREE",
+      "agreed": true,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [],
+      "tolerance": 0.01
+    },
+    {
+      "reconciliation_id": "REC-AUD-ACCRUAL-DISAGREE",
+      "agreed": false,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [
+        "estimation_error 0.0 vs 200.0"
+      ],
+      "tolerance": 0.01
+    },
+    {
+      "reconciliation_id": "REC-AUD-AR-AGREE",
+      "agreed": true,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [],
+      "tolerance": 0.01
+    },
+    {
+      "reconciliation_id": "REC-AUD-AR-DISAGREE",
+      "agreed": false,
+      "used_original_as_input": false,
+      "original_status": null,
+      "independent_status": null,
+      "differences": [
+        "invoices ['INV-AR-AUD-001'] vs ['INV-AR-AUD-002']"
+      ],
+      "tolerance": 0.01
+    }
+  ],
+  "sampling_notes": "Python risk_based samples with seeds 26-30; reviewer can re-run seed 26 to recover IDs. Residual unsampled risk is coverage only (invoices 8/22 sampled).",
+  "pack_context": {
+    "note": "Close pack status BLOCKED; gates failed. Assurance does not fix books or concur lock. Kernel period tool reports CLOSED separately from pack marked_closed=false."
+  }
+}

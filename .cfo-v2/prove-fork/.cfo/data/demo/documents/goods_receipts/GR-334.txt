@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-334
+PO Number: PO-334
+Vendor: FedEx
+Goods received in full on 2026-09-08
+Packing list attached: PL-GR-334
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 1,760.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

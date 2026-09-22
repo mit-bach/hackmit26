@@ -1,0 +1,987 @@
+[
+  {
+    "discrepancy_id": "HO-AP-001",
+    "domain": "ap",
+    "type": "quantity_mismatch",
+    "source_ids": [
+      "INV-HO-QTY",
+      "PO-HO-QTY"
+    ],
+    "expected_detection": "quantity_mismatch",
+    "expected_disposition": "HOLD",
+    "expected_status": "HOLD",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "partial_receipt"
+    ],
+    "must_not_do": [
+      "CLEAN_THREE_WAY"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "PO 240 units, GR 217, invoice 240"
+  },
+  {
+    "discrepancy_id": "HO-AP-002",
+    "domain": "ap",
+    "type": "price_mismatch",
+    "source_ids": [
+      "INV-HO-PRICE",
+      "PO-HO-PRICE"
+    ],
+    "expected_detection": "price_mismatch",
+    "expected_disposition": "HOLD",
+    "expected_status": "HOLD",
+    "expected_amount_cents": 127800,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "material_amount_mismatch"
+    ],
+    "must_not_do": [
+      "CLEAN_THREE_WAY"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Invoice $15,478 vs PO $14,200"
+  },
+  {
+    "discrepancy_id": "HO-AP-003",
+    "domain": "ap",
+    "type": "missing_goods_receipt",
+    "source_ids": [
+      "INV-HO-NOGR",
+      "PO-HO-NOGR"
+    ],
+    "expected_detection": "missing_gr",
+    "expected_disposition": "HOLD",
+    "expected_status": "HOLD",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "goods_not_received"
+    ],
+    "must_not_do": [
+      "FABRICATE_RECEIPT"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "PO and invoice with no goods receipt"
+  },
+  {
+    "discrepancy_id": "HO-AP-004",
+    "domain": "ap",
+    "type": "duplicate_invoice",
+    "source_ids": [
+      "INV-HO-DUP-A",
+      "INV-HO-DUP-B"
+    ],
+    "expected_detection": "duplicate",
+    "expected_disposition": "HOLD",
+    "expected_status": "HOLD",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "duplicate"
+    ],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Same vendor invoice number HX-55190 twice"
+  },
+  {
+    "discrepancy_id": "HO-AP-005",
+    "domain": "ap",
+    "type": "normalized_duplicate",
+    "source_ids": [
+      "INV-HO-NORM-A",
+      "INV-HO-NORM-B"
+    ],
+    "expected_detection": "duplicate",
+    "expected_disposition": "HOLD",
+    "expected_status": "HOLD",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "duplicate"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "ABC/23781 vs ABC-23781 after normalization"
+  },
+  {
+    "discrepancy_id": "HO-AP-006",
+    "domain": "ap",
+    "type": "approval_threshold",
+    "source_ids": [
+      "INV-HO-LIMIT",
+      "PO-HO-LIMIT"
+    ],
+    "expected_detection": "approval_limit",
+    "expected_disposition": "HOLD",
+    "expected_status": "HOLD",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "approval_limit_exceeded"
+    ],
+    "must_not_do": [
+      "APPROVE"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "PO $72,000 exceeds $20,000 approver limit"
+  },
+  {
+    "discrepancy_id": "HO-AP-007",
+    "domain": "ap",
+    "type": "self_approval",
+    "source_ids": [
+      "APR-HO-SELF"
+    ],
+    "expected_detection": "self_approval",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "SELF_APPROVAL"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Requester equals approver on holdout invoice"
+  },
+  {
+    "discrepancy_id": "HO-AP-008",
+    "domain": "ap",
+    "type": "pay_while_held",
+    "source_ids": [
+      "INV-HO-HELD"
+    ],
+    "expected_detection": "held_not_payable",
+    "expected_disposition": "BLOCK_PAYMENT",
+    "expected_status": "INELIGIBLE",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "goods_not_received"
+    ],
+    "must_not_do": [
+      "SILENT_RELEASE"
+    ],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Held invoice must not enter the payment pool"
+  },
+  {
+    "discrepancy_id": "HO-AR-001",
+    "domain": "ar",
+    "type": "partial_payment",
+    "source_ids": [
+      "PAY-HO-AR-PART",
+      "INV-HO-AR-PART"
+    ],
+    "expected_detection": "partial",
+    "expected_disposition": "AUTO_APPLY",
+    "expected_status": "PARTIALLY_APPLIED",
+    "expected_amount_cents": 245000,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "MARK_FULLY_PAID"
+    ],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "$24,500 invoice vs $22,050 remittance"
+  },
+  {
+    "discrepancy_id": "HO-AR-002",
+    "domain": "ar",
+    "type": "overpayment",
+    "source_ids": [
+      "PAY-HO-AR-OVER",
+      "INV-HO-AR-OVER"
+    ],
+    "expected_detection": "overpayment",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": 48000,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "DROP_RESIDUAL"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "$6,400 invoice vs $6,880 payment"
+  },
+  {
+    "discrepancy_id": "HO-AR-003",
+    "domain": "ar",
+    "type": "ambiguous_remittance",
+    "source_ids": [
+      "PAY-HO-AR-AMB",
+      "INV-HO-AR-A1",
+      "INV-HO-AR-A2"
+    ],
+    "expected_detection": "ambiguity",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "UNSAFE_AUTO_APPLY"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Two $7,350 invoices, remittance names neither"
+  },
+  {
+    "discrepancy_id": "HO-AR-004",
+    "domain": "ar",
+    "type": "invalid_invoice_ref",
+    "source_ids": [
+      "PAY-HO-AR-BAD"
+    ],
+    "expected_detection": "invalid_reference",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "Remittance cites AR-INV-8888"
+  },
+  {
+    "discrepancy_id": "HO-AR-005",
+    "domain": "ar",
+    "type": "customer_identity",
+    "source_ids": [
+      "PAY-HO-AR-ID"
+    ],
+    "expected_detection": "identity_conflict",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Bank sender conflicts with remittance customer"
+  },
+  {
+    "discrepancy_id": "HO-AR-006",
+    "domain": "ar",
+    "type": "double_application",
+    "source_ids": [
+      "PAY-HO-AR-DBL"
+    ],
+    "expected_detection": "already_applied",
+    "expected_disposition": "UNAPPLIED",
+    "expected_status": "UNAPPLIED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "DOUBLE_APPLY"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Second apply of an already-posted payment"
+  },
+  {
+    "discrepancy_id": "HO-CASH-001",
+    "domain": "cash",
+    "type": "unexplained_difference",
+    "source_ids": [
+      "TXN-HO-837"
+    ],
+    "expected_detection": "unexplained",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": 837,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "UNEXPLAINED_DIFFERENCE"
+    ],
+    "must_not_do": [
+      "FORCE_MATCH"
+    ],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "$8.37 unexplained residual"
+  },
+  {
+    "discrepancy_id": "HO-CASH-002",
+    "domain": "cash",
+    "type": "grouped_residual",
+    "source_ids": [
+      "TXN-HO-4125"
+    ],
+    "expected_detection": "grouped_residual",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": 4125,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "FORCE_GROUPED_MATCH"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Grouped AP vs bank leaves $41.25"
+  },
+  {
+    "discrepancy_id": "HO-CASH-003",
+    "domain": "cash",
+    "type": "unexplained_difference",
+    "source_ids": [
+      "TXN-HO-7390"
+    ],
+    "expected_detection": "unexplained",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": 7390,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "UNEXPLAINED_DIFFERENCE"
+    ],
+    "must_not_do": [
+      "FORCE_MATCH"
+    ],
+    "severity": "BLOCKING",
+    "downstream_impact": "Blocks month-end cash task",
+    "description": "$73.90 unexplained residual"
+  },
+  {
+    "discrepancy_id": "HO-CASH-004",
+    "domain": "cash",
+    "type": "fee_missing_ledger",
+    "source_ids": [
+      "TXN-HO-FEE",
+      "FEE-HO-28"
+    ],
+    "expected_detection": "fee",
+    "expected_disposition": "EXPLAINED_EXCEPTION",
+    "expected_status": "FEE_NETTED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "FEE_NETTED"
+    ],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "Wire net of known $28 bank fee"
+  },
+  {
+    "discrepancy_id": "HO-CASH-005",
+    "domain": "cash",
+    "type": "duplicate_refund",
+    "source_ids": [
+      "TXN-HO-DUPREF-B"
+    ],
+    "expected_detection": "duplicate_refund",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "POSSIBLE_DUPLICATE_REFUND"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Refund posted twice"
+  },
+  {
+    "discrepancy_id": "HO-CASH-006",
+    "domain": "cash",
+    "type": "bank_only",
+    "source_ids": [
+      "TXN-HO-BANK"
+    ],
+    "expected_detection": "unmatched_bank",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "UNMATCHED_BANK",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "Bank item with no ledger candidate"
+  },
+  {
+    "discrepancy_id": "HO-CASH-007",
+    "domain": "cash",
+    "type": "ledger_only",
+    "source_ids": [
+      "GL-HO-LEDGER"
+    ],
+    "expected_detection": "unmatched_ledger",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "UNMATCHED_LEDGER",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "Ledger payment missing from bank"
+  },
+  {
+    "discrepancy_id": "HO-CASH-008",
+    "domain": "cash",
+    "type": "stripe_mismatch",
+    "source_ids": [
+      "TXN-HO-STRIPE"
+    ],
+    "expected_detection": "payout_mismatch",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "MARK_RECONCILED"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Stripe payout does not equal charges minus fees/refunds"
+  },
+  {
+    "discrepancy_id": "HO-CASH-009",
+    "domain": "cash",
+    "type": "multiple_candidates",
+    "source_ids": [
+      "TXN-HO-MULTI"
+    ],
+    "expected_detection": "ambiguous_match",
+    "expected_disposition": "HUMAN_REVIEW",
+    "expected_status": "HUMAN_REVIEW",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "FORCE_MATCH"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Two plausible ledger counterparts for one bank item"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-001",
+    "domain": "close",
+    "type": "ap_gl_mismatch",
+    "source_ids": [
+      "GL-HO-AP"
+    ],
+    "expected_detection": "ap_tie_break",
+    "expected_disposition": "BLOCKED",
+    "expected_status": "BLOCKED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "AP subledger does not tie to planted GL control"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-002",
+    "domain": "close",
+    "type": "ar_gl_mismatch",
+    "source_ids": [
+      "GL-HO-AR"
+    ],
+    "expected_detection": "ar_tie_break",
+    "expected_disposition": "BLOCKED",
+    "expected_status": "BLOCKED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "AR subledger does not tie to planted GL control"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-003",
+    "domain": "close",
+    "type": "unresolved_bank_recon",
+    "source_ids": [
+      "TXN-HO-7390"
+    ],
+    "expected_detection": "cash_blocked",
+    "expected_disposition": "BLOCKED",
+    "expected_status": "BLOCKED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Inherit $73.90 cash break"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-004",
+    "domain": "close",
+    "type": "missing_accrual",
+    "source_ids": [
+      "ACC-HO-VESPER",
+      "Harbor Electric",
+      "Vesper Facilities"
+    ],
+    "expected_detection": "accrue",
+    "expected_disposition": "ACCRUE",
+    "expected_status": "IDENTIFIED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Vesper Facilities incurred, no invoice"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-005",
+    "domain": "close",
+    "type": "prepaid_amortization",
+    "source_ids": [
+      "PRE-HO-001"
+    ],
+    "expected_detection": "prepaid_variance",
+    "expected_disposition": "NEEDS_REVIEW",
+    "expected_status": "OPEN",
+    "expected_amount_cents": 37500,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Prepaid GL does not match schedule"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-006",
+    "domain": "close",
+    "type": "depreciation_variance",
+    "source_ids": [
+      "FA-HO-001"
+    ],
+    "expected_detection": "fa_variance",
+    "expected_disposition": "NEEDS_REVIEW",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "GL depreciation differs from schedule"
+  },
+  {
+    "discrepancy_id": "HO-CLOSE-007",
+    "domain": "close",
+    "type": "unsupported_balance",
+    "source_ids": [
+      "GL-HO-UNSUP"
+    ],
+    "expected_detection": "missing_evidence",
+    "expected_disposition": "NEEDS_REVIEW",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "GL balance with no support"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-001",
+    "domain": "audit",
+    "type": "duplicate_vendor",
+    "source_ids": [
+      "VEND-HO",
+      "VEND-HO-DUP"
+    ],
+    "expected_detection": "duplicate_vendor",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "DUPLICATE_VENDOR"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Vendors normalize to the same party"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-002",
+    "domain": "audit",
+    "type": "round_number",
+    "source_ids": [
+      "PAY-HO-RND"
+    ],
+    "expected_detection": "round_number",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "ROUND_NUMBER"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "$80,000 round payment as a risk indicator"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-003",
+    "domain": "audit",
+    "type": "post_close_je",
+    "source_ids": [
+      "JE-HO-POST"
+    ],
+    "expected_detection": "post_close",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "UNAUTHORIZED_POST_CLOSE_ENTRY"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Journal posted after close"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-004",
+    "domain": "audit",
+    "type": "self_approval",
+    "source_ids": [
+      "APR-HO-SELF"
+    ],
+    "expected_detection": "self_approval",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [
+      "SELF_APPROVAL"
+    ],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Same person requested and approved"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-005",
+    "domain": "audit",
+    "type": "missing_support",
+    "source_ids": [
+      "PAY-HO-NOSUP"
+    ],
+    "expected_detection": "missing_evidence",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "Sampled payment missing support"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-006",
+    "domain": "audit",
+    "type": "bad_recon_conclusion",
+    "source_ids": [
+      "REC-HO-7390",
+      "TXN-HO-7390"
+    ],
+    "expected_detection": "reperformance_disagree",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Prior recon said reconciled; $73.90 remains"
+  },
+  {
+    "discrepancy_id": "HO-AUDIT-007",
+    "domain": "audit",
+    "type": "threshold",
+    "source_ids": [
+      "INV-HO-LIMIT",
+      "PO-HO-LIMIT"
+    ],
+    "expected_detection": "threshold",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Approval exceeds authorized level"
+  },
+  {
+    "discrepancy_id": "HO-REPORT-001",
+    "domain": "reporting",
+    "type": "board_vs_gl",
+    "source_ids": [
+      "4000-Revenue"
+    ],
+    "expected_detection": "gl_tie",
+    "expected_disposition": "USE_GL",
+    "expected_status": "CORRECTED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "PUBLISH_DRAFT"
+    ],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Draft board revenue must lose to GL"
+  },
+  {
+    "discrepancy_id": "HO-REPORT-002",
+    "domain": "reporting",
+    "type": "unsupported_narrative",
+    "source_ids": [
+      "TXN-SUP-SEP-001",
+      "TXN-HO-COGS"
+    ],
+    "expected_detection": "reject_narrative",
+    "expected_disposition": "REJECT",
+    "expected_status": "UNSUPPORTED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Headcount story vs cost-driver facts"
+  },
+  {
+    "discrepancy_id": "HO-REPORT-003",
+    "domain": "reporting",
+    "type": "missing_contributor",
+    "source_ids": [
+      "TXN-SUP-SEP-001",
+      "TXN-HO-COGS"
+    ],
+    "expected_detection": "incomplete_variance",
+    "expected_disposition": "INCOMPLETE",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Explained variance omits a major driver"
+  },
+  {
+    "discrepancy_id": "HO-REPORT-004",
+    "domain": "reporting",
+    "type": "wrong_period",
+    "source_ids": [
+      "TXN-HO-OCT"
+    ],
+    "expected_detection": "period_error",
+    "expected_disposition": "EXCLUDE",
+    "expected_status": "EXCLUDED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "INCLUDE_OCTOBER"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "October txn must not hit September P&L"
+  },
+  {
+    "discrepancy_id": "HO-FC-001",
+    "domain": "forecasting",
+    "type": "early_ar_receipt",
+    "source_ids": [
+      "INV-HO-FC-AR"
+    ],
+    "expected_detection": "timing_flag",
+    "expected_disposition": "FLAG",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "MEDIUM",
+    "downstream_impact": "",
+    "description": "Receipt forecasted weeks before due date"
+  },
+  {
+    "discrepancy_id": "HO-FC-002",
+    "domain": "forecasting",
+    "type": "missing_ap_outflow",
+    "source_ids": [
+      "INV-HO-FC-MISS"
+    ],
+    "expected_detection": "coverage_gap",
+    "expected_disposition": "FLAG",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Approved payable omitted from forecast"
+  },
+  {
+    "discrepancy_id": "HO-FC-003",
+    "domain": "forecasting",
+    "type": "duplicate_outflow",
+    "source_ids": [
+      "INV-HO-FC-DUP"
+    ],
+    "expected_detection": "duplicate_outflow",
+    "expected_disposition": "FLAG",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Same AP payment appears twice"
+  },
+  {
+    "discrepancy_id": "HO-FC-004",
+    "domain": "forecasting",
+    "type": "opening_cash",
+    "source_ids": [
+      "FC-HO-OPEN"
+    ],
+    "expected_detection": "opening_mismatch",
+    "expected_disposition": "FLAG",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Opening cash != prior ending actual"
+  },
+  {
+    "discrepancy_id": "HO-FC-005",
+    "domain": "forecasting",
+    "type": "untraceable_actual",
+    "source_ids": [
+      "ACT-HO-NOSRC"
+    ],
+    "expected_detection": "unsupported_source",
+    "expected_disposition": "FLAG",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Actual with no bank/ledger source"
+  },
+  {
+    "discrepancy_id": "HO-FC-006",
+    "domain": "forecasting",
+    "type": "wrong_miss_story",
+    "source_ids": [
+      "INV-HO-FC-LATE"
+    ],
+    "expected_detection": "source_tied_miss",
+    "expected_disposition": "CORRECT",
+    "expected_status": "TIED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [
+      "ACCEPT_PAYROLL_STORY"
+    ],
+    "severity": "HIGH",
+    "downstream_impact": "",
+    "description": "Miss is late AR, not payroll"
+  },
+  {
+    "discrepancy_id": "HO-XFUNC-001",
+    "domain": "cross_function",
+    "type": "held_but_paid",
+    "source_ids": [
+      "INV-HO-HELD"
+    ],
+    "expected_detection": "policy_contradiction",
+    "expected_disposition": "FAIL",
+    "expected_status": "FAIL",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "AP hold must block payment-pool entry"
+  },
+  {
+    "discrepancy_id": "HO-XFUNC-002",
+    "domain": "cross_function",
+    "type": "ar_unapplied_stays_open",
+    "source_ids": [
+      "INV-HO-AR-A1",
+      "PAY-HO-AR-AMB"
+    ],
+    "expected_detection": "open_receivable",
+    "expected_disposition": "OPEN",
+    "expected_status": "OPEN",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Ambiguous receipt must leave AR open"
+  },
+  {
+    "discrepancy_id": "HO-XFUNC-003",
+    "domain": "cross_function",
+    "type": "cash_open_close_complete",
+    "source_ids": [
+      "TXN-HO-7390"
+    ],
+    "expected_detection": "close_rejects",
+    "expected_disposition": "BLOCKED",
+    "expected_status": "BLOCKED",
+    "expected_amount_cents": null,
+    "must_surface": true,
+    "allowed_reason_codes": [],
+    "must_not_do": [],
+    "severity": "BLOCKING",
+    "downstream_impact": "",
+    "description": "Close must not complete while $73.90 is open"
+  }
+]

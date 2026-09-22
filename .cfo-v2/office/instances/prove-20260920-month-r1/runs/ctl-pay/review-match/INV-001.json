@@ -1,0 +1,41 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "review-match",
+  "from_bot": "ctl-pay",
+  "packet_path": "runs/ap/packets/INV-001.json",
+  "ReviewerDecision": {
+    "invoice_id": "INV-001",
+    "decision": "CONCUR",
+    "concur_with": "APPROVE",
+    "confidence": 0.95,
+    "reasons": [
+      "Kernel get_case_evidence confirms exact three-way match: PO-101 approved, amount 12450 exact (diff 0), vendor Acme Supplies exact, GR-101 full (15/15), duplicate_detected false, exception_types empty, must_hold null.",
+      "Packet complete: preparer APPROVE, tools_confirmed traces present, proposed APPROVE allowed under P-001.",
+      "Email BUSINESS_DUPLICATE is ingest already_present_in_ap, not Kernel duplicate; P-002 does not apply.",
+      "Prior CASE-001 (vendor_mismatch alias) not required; current vendor_exact_match true. Precedent does not override and is not needed."
+    ],
+    "policies_applied": [
+      "P-001",
+      "P-010",
+      "P-011"
+    ],
+    "evidence_used": [
+      "tools.get_case_evidence:k_27dcbaf68b2c",
+      "INV-001",
+      "PO-101",
+      "GR-101",
+      "runs/ap/packets/INV-001.json"
+    ],
+    "refuse_reasons": [],
+    "must_hold": null
+  },
+  "kernel_reperformance": {
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "exception_types": [],
+    "amount": 12450
+  }
+}

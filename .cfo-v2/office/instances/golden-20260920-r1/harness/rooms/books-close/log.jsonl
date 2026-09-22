@@ -1,0 +1,2 @@
+{"t":"2026-09-20T15:29:40.972Z","from":"bot_close","text":"close/coordinate 2026-09: ready_tasks empty after host. treatments accrue/prepaid/assets COMPLETE; bs_recon BLOCKED. pack workspace/close/2026-09/pack.json. gate_passed=false. Handled ctl-books/lock → REJECT_CLOSE. story+audit packs queued. Not CLOSED.","mentions":[],"kind":"post"}
+{"t":"2026-09-20T15:30:41.258Z","from":"harness","text":"close still busy, round continued","mentions":[],"kind":"chip"}

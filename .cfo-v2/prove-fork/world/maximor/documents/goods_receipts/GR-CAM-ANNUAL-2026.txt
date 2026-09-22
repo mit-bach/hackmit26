@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-CAM-ANNUAL-2026
+PO Number: PO-CAM-ANNUAL-2026
+Vendor: Cambridge Properties
+Goods received in full on 2026-03-31
+Packing list attached: PL-GR-CAM-ANNUAL-2026
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 18,200.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

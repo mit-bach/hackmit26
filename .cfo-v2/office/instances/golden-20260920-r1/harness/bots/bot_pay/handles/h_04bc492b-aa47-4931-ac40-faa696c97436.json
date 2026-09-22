@@ -1,0 +1,19 @@
+{
+  "id": "h_04bc492b-aa47-4931-ac40-faa696c97436",
+  "from": "harness",
+  "to": "bot_pay",
+  "toSlug": "pay",
+  "prompt": "profile: schedule\nRun this week's payment-run draft.\nLoad pool and cash with Catalog ops. Choose among Kernel candidates only.\nStop after you return PaymentPlan invoice IDs. Kernel apply_cash_and_policy_net binds amounts.\nWrite the netted plan path. bot_send_prompt to ctl-pay with profile: review-pay. Await the Handle.\nAfter ctl-pay concurs, identified outflows Handle cash with executed false.\nDo not ask a human. Do not execute ACH. Do not breach the reserve.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "pay"
+  },
+  "kind": "routine",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:06:05.302Z",
+  "updatedAt": "2026-09-20T15:09:27.704Z",
+  "result": "**Weekly payment-run draft complete (fail-closed empty pool).**\n\n| Item | Result |\n|------|--------|\n| Kernel pool | `get_approved_pool` / `get_payment_candidates` **count=0** |\n| Proposed IDs | `[]` |\n| Plan | `workspace/pay/plans/plan_2026-09-19_2f7cb150dc46.json` |\n| Totals | `total_payout=0`, `cash_after=6474925.74`, `reserve_ok=true` |\n| ctl-pay | **CONCUR** → `runs/pay/concurrence/plan_2026-09-19_2f7cb150dc46.json` |\n| Outflows | none (empty wires); `workspace/cash/expected-outflows/plan_2026-09-19_2f7cb150dc46.json` `executed=false` |\n| ACH | not executed |\n\nNote: world seed data under `data/approved_pool.json` is not the Kernel pool path (`runs/approved_pool.json`). Kernel empty → fail-closed; no reserve breach.",
+  "resultPaths": [],
+  "seq": 62
+}

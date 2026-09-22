@@ -1,0 +1,103 @@
+{
+  "object": "bank_rec_period_concurrence",
+  "verifier": "ctl-cash",
+  "profile": "review-rec",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "case_path": "runs/cash_recon/cases/2026-09.json",
+  "summary_packet": "workspace/cash/packets/2026-09-operating-match-summary.json",
+  "period_reconciled": false,
+  "period_status": "OPEN_UNEXPLAINED_REMAINS",
+  "kernel_match_candidates_trace": "k_8089f0df840f",
+  "note_on_lookups": "get_bank_transaction / get_ledger_entry / get_candidate / get_fee_evidence return unknown for these ids in this bind; authoritative candidate set is get_match_candidates(case_id=2026-09).",
+  "line_decisions": [
+    {
+      "transaction_id": "TXN-2026-09-011",
+      "decision": "CONCUR",
+      "concur_disposition": "EXPLAINED_EXCEPTION",
+      "candidate_id": "FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE",
+      "match_type": "FEE_NETTED",
+      "difference_minor": -2500,
+      "fee_evidence_ids": ["ADV-729103"],
+      "fee_journal_post_authorized": false,
+      "reason": "Kernel match_candidates includes FEE_NETTED with fee_evidence_ids ADV-729103 and difference_minor -2500. Preparer correctly rejected UNEXPLAINED twin. Pipe identifier absent is acceptable for fee-netted wire when Kernel already typed FEE_NETTED with fee id. Proposed bank-fee journal stays unposted (ctl-cash does not post).",
+      "packet": "workspace/cash/packets/TXN-2026-09-011.json"
+    },
+    {
+      "transaction_id": "TXN-2026-09-015",
+      "decision": "REFUSE",
+      "concur_matched": false,
+      "force_matched": false,
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "disposition_kept": "HUMAN_REVIEW",
+      "difference_minor": 1240,
+      "fee_evidence_ids": [],
+      "leave_unexplained": true,
+      "pipe_identifier_present": false,
+      "pipe_trace": "k_1557a8340562",
+      "reason": "Kernel only offers UNEXPLAINED_DIFFERENCE with fee_rejected:no_fee_evidence. Residual 1240 stays unexplained. Do not invent fee. Do not force MATCHED. apply/pay identifier absent; feed PAY-006/INV-AR-013/NORTHSTAR not identity. Period cannot be RECONCILED while this residual remains.",
+      "packet": "workspace/cash/packets/TXN-2026-09-015.json"
+    },
+    {
+      "transaction_id": "TXN-2026-09-008",
+      "decision": "CONCUR",
+      "concur_matched": true,
+      "candidate_id": "GROUPED_MATCH:TXN-2026-09-008:GL-AP-203,GL-AP-201,GL-AP-202",
+      "disposition": "MATCHED",
+      "difference_minor": 0,
+      "reason": "Kernel GROUPED_MATCH difference_minor 0; copy candidate_id only."
+    },
+    {
+      "transaction_id": "TXN-2026-09-012A",
+      "decision": "CONCUR",
+      "concur_matched": true,
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-012A:GL-AR-772",
+      "disposition": "MATCHED",
+      "difference_minor": 0,
+      "reason": "Kernel EXACT_MATCH difference_minor 0."
+    },
+    {
+      "transaction_id": "TXN-2026-09-012B",
+      "decision": "REFUSE",
+      "concur_matched": false,
+      "candidate_id": "EXACT_MATCH:TXN-2026-09-012B:GL-AR-772",
+      "disposition_kept": "HUMAN_REVIEW",
+      "reason": "Same ledger GL-AR-772 as 012A; duplicate refund risk. Do not double-match."
+    },
+    {
+      "transaction_id": "TXN-2026-09-018A",
+      "bank_alias_in_case": "TXN-2026-09-018",
+      "decision": "REFUSE",
+      "concur_matched": false,
+      "candidate_id": null,
+      "disposition_kept": "HUMAN_REVIEW",
+      "reason": "Two equal EXACT_MATCH candidates GL-AP-OD-1 and GL-AP-OD-2; no single winner."
+    },
+    {
+      "transaction_id": "TXN-2026-09-019A",
+      "decision": "CONCUR",
+      "concur_matched": true,
+      "candidate_id": "PROVIDER_PAYOUT:TXN-2026-09-019A:GL-CASH-STRIPE",
+      "disposition": "MATCHED",
+      "provider_status": "MATCH",
+      "difference_minor": 0,
+      "reason": "Kernel PROVIDER_PAYOUT provider_status MATCH difference_minor 0."
+    },
+    {
+      "transaction_id": "TXN-2026-09-025",
+      "decision": "REFUSE",
+      "concur_matched": false,
+      "candidate_id": null,
+      "disposition_kept": "HUMAN_REVIEW",
+      "reason": "No Kernel candidate_id; unmatched bank class."
+    }
+  ],
+  "landed_without_case": "Fail-closed document only; no invented matches from memos (see summary landed_without_case_candidate).",
+  "overall": {
+    "primary_011": "CONCUR EXPLAINED_EXCEPTION FEE_NETTED; fee journal unposted",
+    "primary_015": "REFUSE MATCHED; unexplained 1240 remains",
+    "period_signoff": "REFUSE full period RECONCILED"
+  },
+  "next_owner": "cash"
+}

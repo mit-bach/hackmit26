@@ -112,6 +112,10 @@ export {
   loadDemoBundle,
   recordDemoSession,
   demoMeta,
+  selectCast,
+  clampDirector,
+  loadDemoScenes,
+  saveDemoScenes,
 } from "./demo-replay.ts";
 export {
   DEFAULT_DEMO_PLAYBACK,

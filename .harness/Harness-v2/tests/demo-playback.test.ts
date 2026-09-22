@@ -12,6 +12,7 @@ import {
   projectPlayhead,
   revealText,
   showMsForBeat,
+  showMsForSeq,
   timelineTotalMs,
 } from "../src/demo-playback.ts";
 import type { DemoBundle } from "../src/demo-replay.ts";
@@ -105,6 +106,15 @@ test("revealText is grapheme-safe", () => {
   assert.equal(revealText("hello", 0), "");
   assert.equal(revealText("hello", 1), "hello");
   assert.equal(revealText("👍👍👍", 0.2), "👍");
+});
+
+test("showMsForSeq lands on the last beat at or before that protocol seq", () => {
+  const beats = collectBeats(sampleBundle());
+  const settings = clampPlaybackSettings({ timing: "beat", beatMs: 1000, beatSpeed: 1, leadMs: 0 });
+  assert.equal(cursorAt(beats, showMsForSeq(beats, 2, settings), settings).seq, 2);
+  assert.equal(cursorAt(beats, showMsForSeq(beats, 3, settings), settings).seq, 2);
+  assert.equal(cursorAt(beats, showMsForSeq(beats, 5, settings), settings).seq, 5);
+  assert.equal(cursorAt(beats, showMsForSeq(beats, 99, settings), settings).seq, 5);
 });
 
 test("beat timeline is lead plus one slot per transcript line", () => {
@@ -288,4 +298,14 @@ test("playhead never drops to an empty stage after the first send", () => {
     const head = projectPlayhead(bundle, show, settings);
     assert.ok(head.frame.awake.length >= 1, `empty stage at ${show}ms seq ${head.seq}`);
   }
+});
+
+test("collectBeats and playhead honor director in/out seq", () => {
+  const bundle = sampleBundle();
+  const cut = collectBeats(bundle, { maxPanes: 6, featured: [], seqFrom: 4, seqTo: 5 });
+  assert.ok(cut.every((beat) => beat.seq >= 4 && beat.seq <= 5));
+  assert.ok(cut.length < collectBeats(bundle).length);
+  const settings = clampPlaybackSettings({ timing: "beat", beatMs: 400, leadMs: 0, stream: false });
+  const head = projectPlayhead(bundle, 0, settings, { maxPanes: 6, featured: ["ap"], seqFrom: 4, seqTo: 5 });
+  assert.ok(head.seq >= 4);
 });

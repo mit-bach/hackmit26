@@ -1,0 +1,15 @@
+{
+  "profile": "prepaid",
+  "slug": "close",
+  "period": "2026-09",
+  "task_id": "prepaid",
+  "status": "COMPLETE",
+  "ops": [
+    "prepaid.tools.get_prepaid",
+    "prepaid.tools.list_prepaids",
+    "prepaid.tools.get_prepaid_treatment_candidates",
+    "prepaid.tools.get_prepaid_schedule"
+  ],
+  "mutatingOps": [],
+  "mark_closed": false
+}

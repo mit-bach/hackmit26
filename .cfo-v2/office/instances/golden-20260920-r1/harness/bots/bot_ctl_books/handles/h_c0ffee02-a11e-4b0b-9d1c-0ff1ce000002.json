@@ -1,0 +1,22 @@
+{
+  "id": "h_c0ffee02-a11e-4b0b-9d1c-0ff1ce000002",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "profile: review-method\nclose/Harbor Electric 2026-09 method check only. Not a lock.\n\nAugust MEM-HE-2026-08: seasonal_prior_year $7,800.\nCurrent evidence: same vendor, missing bill, September 2025 $4,650. Proposed DEC-2026-09-026 seasonal_prior_year $4,650. Do not paste $7,800.\n\nLock REJECT_CLOSE still stands. $12.40 unexplained. Not CLOSED.",
+  "paths": [
+    "workspace/close/2026-09/harbor-memory.json"
+  ],
+  "conversation": {
+    "kind": "dm"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:36:56.040Z",
+  "updatedAt": "2026-09-20T15:37:15.220Z",
+  "result": "**ctl-books:** Harbor Electric method check only.\n\nAugust MEM-HE-2026-08 `seasonal_prior_year` $7,800 is precedent, not a posted number.\nCurrent evidence supports the same method at **$4,650** (DEC-2026-09-026).\n\n**CONCUR_METHOD**. Lock **REJECT_CLOSE** still stands (`gate_passed=false`, `$12.40` unexplained). Not CLOSED.",
+  "resultPaths": [
+    "workspace/close/2026-09/ctl-books-harbor-method.json"
+  ],
+  "seq": 162
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "document_id": "DOC-SCAN-QUOTE",
+    "period": "2026-09",
+    "origin": "mailroom_scan",
+    "filename": "quote-q8891.pdf",
+    "content_type": "application/pdf",
+    "text": "QUOTATION Q-8891. This is not an invoice.",
+    "received_date": "2026-09-09"
+  }
+]

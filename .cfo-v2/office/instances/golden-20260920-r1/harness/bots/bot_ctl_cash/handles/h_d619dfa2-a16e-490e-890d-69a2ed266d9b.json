@@ -1,0 +1,22 @@
+{
+  "id": "h_d619dfa2-a16e-490e-890d-69a2ed266d9b",
+  "from": "bot_apply",
+  "to": "bot_ctl_cash",
+  "toSlug": "ctl-cash",
+  "prompt": "profile: review-apply\nConcur or refuse cash application for PAY-001. Packet path is the evidence. Kernel status is HUMAN_REVIEW. Competing C1 INV-AR-007 vs C2 INV-AR-001; email MSG-INBOX-019 cites INV-AR-001 at 8500.00 vs payment 12000.00. Do not AUTO_APPLY past Kernel refuse. Do not ask a human.\nPacket: runs/ar/packets/apply-PAY-001.json\nSource: runs/inbox/packets/remittance-MSG-INBOX-019.json\n",
+  "paths": [
+    "runs/ar/packets/apply-PAY-001.json",
+    "runs/inbox/packets/remittance-MSG-INBOX-019.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_apply",
+    "toId": "bot_ctl_cash"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:04:41.635Z",
+  "updatedAt": "2026-09-20T15:05:22.673Z",
+  "result": "REFUSE cash application for PAY-001. Decision path: runs/ar/packets/ctl-cash-PAY-001-decision.json\n\nconcur_apply=false; convert_to_auto_apply=false; leave_unapplied=true.\n\nDefects: (1) Kernel status HUMAN_REVIEW — ctl-cash cannot convert to AUTO_APPLY. (2) Competing full-amount candidates C1 INV-AR-007 explicit_invoice 12000 vs C2 INV-AR-001 exact_amount 12000. (3) Email MSG-INBOX-019 names INV-AR-001 at 8500.00 ≠ payment 12000.00; wire remittance names INV-AR-007. Packet complete; identification not unique. Keep PAY-001 unapplied. No human asked. Kernel facts trace k_db1163c82792.",
+  "seq": 51
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_d50f403c-f783-4d6d-b372-89a9fa872d28",
+  "from": "bot_cash",
+  "to": "bot_ctl_cash",
+  "toSlug": "ctl-cash",
+  "prompt": "profile: review-rec\n\nCash fail-closed bank-rec packet for material sign-off path.\n\nLine: TXN-2026-09-015 (2026-09 operating wire_credit $12,412.40 NORTHSTAR LLC / CUSTOMER PAYMENT).\nPacket: workspace/cash/packets/TXN-2026-09-015.json\nSource: workspace/bank/lines/TXN-2026-09-015.json\n\nPreparer disposition: HUMAN_REVIEW — candidate_id none.\n- get_pipe_identifier fail_closed: apply/pay have not identified this line.\n- Statement raw_metadata PAY-006 / INV-AR-013 are feed fields only; not used as identity.\n- Kernel get_bank_transaction unknown; get_match_candidates case 2026-09 not_found.\nDo not force MATCHED. Period open on this line until source identity + Kernel candidate.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_cash",
+    "toId": "bot_ctl_cash"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:12:34.442Z",
+  "updatedAt": "2026-09-20T15:13:32.676Z",
+  "result": "REFUSE bank-rec sign-off for TXN-2026-09-015. Decision path: workspace/cash/packets/ctl-cash-TXN-2026-09-015-decision.json\n\nconcur_matched=false; force_matched=false; leave_unexplained=true; period_reconciled=false on this line.\n\nDefects confirmed on Kernel reads:\n- get_pipe_identifier fail_closed, identifier_present=false (trace k_78f297471c93)\n- get_bank_transaction unknown TXN-2026-09-015 (trace k_31f9c3997913)\n- get_match_candidates case 2026-09 not_found; candidate_id none (trace k_b395ca05fafe)\n- PAY-006 / INV-AR-013 / NORTHSTAR LLC are statement memo/feed only — not apply/pay identity\n\nDo not mark MATCHED. Keep line open until source identity + Kernel candidate. No human asked.",
+  "seq": 76
+}

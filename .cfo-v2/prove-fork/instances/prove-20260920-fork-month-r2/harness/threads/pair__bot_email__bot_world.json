@@ -1,0 +1,26 @@
+{
+  "id": "pair:bot_email:bot_world",
+  "threadId": "pair:bot_email:bot_world",
+  "name": "Email ↔ World",
+  "memberIds": [
+    "bot_email",
+    "bot_world"
+  ],
+  "createdAt": 1789920255668,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_a0aa7019-ee75-4e83-842f-961098df76e0",
+      "handleId": "h_a0aa7019-ee75-4e83-842f-961098df76e0",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: vendor\nFinance asked Acme Supplies for missing invoice fields in thread THR-incomplete. get_inbox_thread then reply_in_thread as that vendor. Do not send_office_outbound. Do not dispatch.\nPaths: runs/inbox/handles/email-outbound-MSG-INBOX-011-OUT-world.json · runs/inbox/packets/email-outbound-MSG-INBOX-011-OUT.json",
+      "at": 1789920255668,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    }
+  ]
+}

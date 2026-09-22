@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_cash:bot_stripe",
+  "threadId": "pair:bot_cash:bot_stripe",
+  "name": "Cash ↔ Stripe",
+  "memberIds": [
+    "bot_cash",
+    "bot_stripe"
+  ],
+  "createdAt": 1789917663954,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_d6901d81-bd89-4368-bb27-86e3b6478f7f",
+      "handleId": "h_d6901d81-bd89-4368-bb27-86e3b6478f7f",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: match\n\nSeptember Stripe processor deposits — Kernel waterfall already MATCH. invoice_candidates is 0. Never AP invoice.\n\nPaths:\n- workspace/sources/stripe/po_1MaximorFees.json (BANK-po_1MaximorFees, $12,610.00 actual_minor 1261000)\n- workspace/sources/stripe/po_1MaximorRefunds.json (BANK-po_1MaximorRefunds, $3,380.00 actual_minor 338000)\n- workspace/sources/stripe/po_1MaximorDisputes.json (BANK-po_1MaximorDisputes, $5,070.00 actual_minor 507000)\n\nPlease tick these bank deposits on your match profile. Do not mint an AP invoice. Confirm receipt of paths.",
+      "at": 1789917663954,
+      "from": {
+        "botId": "bot_stripe",
+        "name": "Stripe",
+        "color": "blue"
+      }
+    },
+    {
+      "id": "pair-result-h_d6901d81-bd89-4368-bb27-86e3b6478f7f",
+      "handleId": "h_d6901d81-bd89-4368-bb27-86e3b6478f7f",
+      "role": "bot",
+      "kind": "text",
+      "text": "Receipt confirmed for Stripe September Maximor deposit paths:\n- workspace/sources/stripe/po_1MaximorFees.json\n- workspace/sources/stripe/po_1MaximorRefunds.json\n- workspace/sources/stripe/po_1MaximorDisputes.json\n\nMatch ticks (profile match). Never AP invoice. invoice_candidates=0 respected.\n\n| payout | stripe bank_deposit_id | statement bank_txn | candidate_id | disposition |\n| po_1MaximorFees | BANK-po_1MaximorFees | TXN-2026-09-019A | EXACT_MATCH:TXN-2026-09-019A:GL-CASH-STRIPE-FEES | MATCHED (1261000) |\n| po_1MaximorRefunds | BANK-po_1MaximorRefunds | TXN-2026-09-022S | EXACT_MATCH:TXN-2026-09-022S:GL-CASH-STRIPE-REF | MATCHED (338000) |\n| po_1MaximorDisputes | BANK-po_1MaximorDisputes | TXN-2026-09-026S | EXACT_MATCH:TXN-2026-09-026S:GL-CASH-STRIPE-DP | MATCHED (507000) |\n\nKernel waterfall already MATCH; cash copied EXACT_MATCH candidate_ids (difference_minor 0). Did not mint AP invoices. Charges remain apply's.\n\nBatch packet: workspace/cash/packets/2026-09-stripe-maximor-deposits.json",
+      "at": 1789917847231,
+      "from": {
+        "botId": "bot_cash",
+        "name": "Cash",
+        "color": "red"
+      }
+    }
+  ]
+}

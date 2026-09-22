@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-HAL-WKND-2026-05
+PO Number: PO-HAL-WKND-2026-05
+Vendor: Halyard Facilities LLC
+Goods received in full on 2026-05-28
+Packing list attached: PL-GR-HAL-WKND-2026-05
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 2,300.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

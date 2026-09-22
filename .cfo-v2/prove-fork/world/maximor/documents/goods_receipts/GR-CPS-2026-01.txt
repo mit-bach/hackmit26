@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-CPS-2026-01
+PO Number: PO-CPS-2026-01
+Vendor: Cambridge Property Services
+Goods received in full on 2026-01-15
+Packing list attached: PL-GR-CPS-2026-01
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 8,510.40 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

@@ -1,0 +1,21 @@
+{
+  "key": "golden-dump-MSG-INBOX-013",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "7eb8d7c5615d4de799e227a0428ddb91a8d6b597240c883c375f15d6e102409a",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-013",
+      "thread_id": "THR-business-dup",
+      "delivered": true,
+      "attachment_hashes": [
+        "e14645e5c5abe42fe3ab75b6b13648c44eebfd4b91c1157ab92afb234eb43bd7"
+      ],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_5378b10c7b91"
+  }
+}

@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-201
+PO Number: PO-201
+Issued: 2026-09-01
+Vendor: Northline Fabrication
+Vendor legal name: Northline Fabrication Corp.
+Vendor tax ID: 04-5510298
+Authorized amount: 5,000.00
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Fabrication NF-201
+
+This purchase order is not an invoice. The vendor must bill against PO-201.
+Payment terms follow the vendor master unless this order states otherwise.

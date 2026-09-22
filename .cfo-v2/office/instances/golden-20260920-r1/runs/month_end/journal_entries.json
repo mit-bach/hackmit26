@@ -1,0 +1,421 @@
+[
+  {
+    "entry_id": "JE-202609-001",
+    "period": "2026-09",
+    "memo": "Amortize PRE-INS-001 Annual commercial property and liability policy for 2026-09",
+    "debit_account": "Insurance Expense",
+    "credit_account": "Prepaid Insurance",
+    "debit": 1000.0,
+    "credit": 1000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-INS-001:2026-09",
+    "source_document_id": "DOC-INS-2026",
+    "transaction_id": "TXN-PRE-INS-001",
+    "evidence_refs": [
+      "DOC-INS-2026"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-INS-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:45Z"
+  },
+  {
+    "entry_id": "JE-202609-002",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2025-10",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2025-10",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2025-10"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-003",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2025-11",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2025-11",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2025-11"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-004",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2025-12",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2025-12",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2025-12"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-005",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-01",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-01",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-01"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-006",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-02",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-02",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-02"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-007",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-03",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-03",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-03"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-008",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-04",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-04",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-04"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-009",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-05",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-05",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-05"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-010",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-06",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-06",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-06"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-011",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-07",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-07",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-07"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-012",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-08",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-08",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-08"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-013",
+    "period": "2026-09",
+    "memo": "Amortize PRE-SFT-001 Analytics platform subscription covering October through September for 2026-09",
+    "debit_account": "Software Subscription Expense",
+    "credit_account": "Prepaid Software",
+    "debit": 2000.0,
+    "credit": 2000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-SFT-001:2026-09",
+    "source_document_id": "DOC-SFT-2025",
+    "transaction_id": "TXN-PRE-SFT-001",
+    "evidence_refs": [
+      "DOC-SFT-2025"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-SFT-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:46Z"
+  },
+  {
+    "entry_id": "JE-202609-014",
+    "period": "2026-09",
+    "memo": "Amortize PRE-RENT-001 Office rent paid three months in advance for 2026-09",
+    "debit_account": "Rent Expense",
+    "credit_account": "Prepaid Rent",
+    "debit": 6000.0,
+    "credit": 6000.0,
+    "entry_type": "prepaid_amortization",
+    "idempotency_key": "prepaid:PRE-RENT-001:2026-09",
+    "source_document_id": "DOC-RENT-2026",
+    "transaction_id": "TXN-PRE-RENT-001",
+    "evidence_refs": [
+      "DOC-RENT-2026"
+    ],
+    "related_ids": {
+      "prepaid_id": "PRE-RENT-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  },
+  {
+    "entry_id": "JE-202609-015",
+    "period": "2026-09",
+    "memo": "Capitalize FA-025 PowerEdge R760 server cluster for production",
+    "debit_account": "Computer Equipment",
+    "credit_account": "Accounts Payable",
+    "debit": 60000.0,
+    "credit": 60000.0,
+    "entry_type": "fixed_asset_capitalization",
+    "idempotency_key": "fa-capital:FA-025",
+    "source_document_id": "DOC-DELL-R760",
+    "transaction_id": "INV-021",
+    "evidence_refs": [
+      "DOC-DELL-R760"
+    ],
+    "related_ids": {
+      "asset_id": "FA-025"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  },
+  {
+    "entry_id": "JE-202609-016",
+    "period": "2026-09",
+    "memo": "Depreciate FA-LAP-001 Laptop fleet for new hires for 2026-09",
+    "debit_account": "Depreciation Expense",
+    "credit_account": "Accumulated Depreciation - Equipment",
+    "debit": 500.0,
+    "credit": 500.0,
+    "entry_type": "depreciation",
+    "idempotency_key": "fa-depr:FA-LAP-001:2026-09",
+    "source_document_id": "DOC-LAPTOP-FLEET",
+    "transaction_id": "TXN-FA-LAP-001",
+    "evidence_refs": [
+      "DOC-LAPTOP-FLEET"
+    ],
+    "related_ids": {
+      "asset_id": "FA-LAP-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  },
+  {
+    "entry_id": "JE-202609-017",
+    "period": "2026-09",
+    "memo": "Depreciate FA-MCH-001 CNC machinery for 2026-09",
+    "debit_account": "Depreciation Expense",
+    "credit_account": "Accumulated Depreciation - Machinery",
+    "debit": 1800.0,
+    "credit": 1800.0,
+    "entry_type": "depreciation",
+    "idempotency_key": "fa-depr:FA-MCH-001:2026-09",
+    "source_document_id": "DOC-MACH-120",
+    "transaction_id": "TXN-FA-MCH-001",
+    "evidence_refs": [
+      "DOC-MACH-120"
+    ],
+    "related_ids": {
+      "asset_id": "FA-MCH-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  },
+  {
+    "entry_id": "JE-202609-018",
+    "period": "2026-09",
+    "memo": "Depreciate FA-SRV-024 Server equipment for 2026-09",
+    "debit_account": "Depreciation Expense",
+    "credit_account": "Accumulated Depreciation - Equipment",
+    "debit": 1000.0,
+    "credit": 1000.0,
+    "entry_type": "depreciation",
+    "idempotency_key": "fa-depr:FA-SRV-024:2026-09",
+    "source_document_id": "DOC-SERVER-24K",
+    "transaction_id": "TXN-FA-SRV-024",
+    "evidence_refs": [
+      "DOC-SERVER-24K"
+    ],
+    "related_ids": {
+      "asset_id": "FA-SRV-024",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  },
+  {
+    "entry_id": "JE-202609-019",
+    "period": "2026-09",
+    "memo": "Amortize FA-INT-001 Capitalized internal-use software for 2026-09",
+    "debit_account": "Amortization Expense",
+    "credit_account": "Accumulated Amortization - Software",
+    "debit": 1666.67,
+    "credit": 1666.67,
+    "entry_type": "intangible_amortization",
+    "idempotency_key": "fa-depr:FA-INT-001:2026-09",
+    "source_document_id": "DOC-SOFT-CAP",
+    "transaction_id": "TXN-FA-INT-001",
+    "evidence_refs": [
+      "DOC-SOFT-CAP"
+    ],
+    "related_ids": {
+      "asset_id": "FA-INT-001",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  },
+  {
+    "entry_id": "JE-202609-020",
+    "period": "2026-09",
+    "memo": "Depreciate FA-025 PowerEdge R760 server cluster for production for 2026-09",
+    "debit_account": "Depreciation Expense",
+    "credit_account": "Accumulated Depreciation - Equipment",
+    "debit": 1500.0,
+    "credit": 1500.0,
+    "entry_type": "depreciation",
+    "idempotency_key": "fa-depr:FA-025:2026-09",
+    "source_document_id": "DOC-DELL-R760",
+    "transaction_id": "INV-021",
+    "evidence_refs": [
+      "DOC-DELL-R760"
+    ],
+    "related_ids": {
+      "asset_id": "FA-025",
+      "service_period": "2026-09"
+    },
+    "created_at": "2026-09-20T15:28:47Z"
+  }
+]

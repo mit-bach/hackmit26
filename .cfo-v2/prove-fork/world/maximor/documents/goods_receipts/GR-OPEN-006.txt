@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-006
+PO Number: PO-OPEN-006
+Vendor: Datadog
+Goods received in full on 2026-09-07
+Packing list attached: PL-GR-OPEN-006
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 180,823.08 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

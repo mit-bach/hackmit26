@@ -1,0 +1,54 @@
+{
+  "schema": "BankLineLanded",
+  "transaction_id": "TXN-2026-09-008",
+  "period": "2026-09",
+  "source": "operating_account",
+  "bank_line": {
+    "transaction_id": "TXN-2026-09-008",
+    "date": "2026-09-08",
+    "amount": -18500.0,
+    "currency": "USD",
+    "description": "ACH OUT NORTHLINE FAB",
+    "reference": "",
+    "counterparty": "Northline Fabrication",
+    "transaction_type": "ach_debit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -1850000,
+    "raw_metadata": {
+      "payment_id": "PAY-AP-NORTHLINE",
+      "invoice_ids": [
+        "INV-014",
+        "INV-015",
+        "INV-016"
+      ]
+    }
+  },
+  "discovery": {
+    "status": "documented_line",
+    "candidate": null,
+    "reasons": [
+      "Operating-account statement line from data/cash_recon/bank_statement.json.",
+      "A charge is not a bill; no AP invoice invented from descriptor.",
+      "Handoff to cash/match for candidate selection. Do not force MATCHED.",
+      "Statement raw_metadata present on feed row; cash/apply own interpretation."
+    ]
+  },
+  "handoff": {
+    "to": "cash",
+    "profile": "match"
+  },
+  "paths": {
+    "statement": "data/cash_recon/bank_statement.json",
+    "packet": "workspace/bank/lines/TXN-2026-09-008.json"
+  },
+  "statement_metadata": {
+    "payment_id": "PAY-AP-NORTHLINE",
+    "invoice_ids": [
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ]
+  }
+}

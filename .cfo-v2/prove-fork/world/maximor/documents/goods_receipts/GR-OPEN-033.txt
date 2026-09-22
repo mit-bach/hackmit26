@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-033
+PO Number: PO-OPEN-033
+Vendor: Comcast Business
+Goods received in full on 2026-09-07
+Packing list attached: PL-GR-OPEN-033
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 184,526.94 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

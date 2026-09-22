@@ -1,0 +1,65 @@
+{
+  "id": "pair:bot_ap:bot_ctl_pay",
+  "threadId": "pair:bot_ap:bot_ctl_pay",
+  "name": "AP ↔ ctl-pay",
+  "memberIds": [
+    "bot_ap",
+    "bot_ctl_pay"
+  ],
+  "createdAt": 1789919069566,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_d66d7b37-53e1-4c54-8585-8c2cbebb4d3d",
+      "handleId": "h_d66d7b37-53e1-4c54-8585-8c2cbebb4d3d",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-match\nApprove-shaped AP match packet for INV-001 (Acme Supplies ACM-2026-4410, 12450 USD, PO-101). Path: runs/ap/packets/INV-001.json. Kernel evidence clean three-way; exception_types []. PreparerRecommendation APPROVE. Concur or refuse per Verifier rules. AP does not pay. Please read the packet path and return concurrence result.",
+      "at": 1789919069566,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "pair-result-h_d66d7b37-53e1-4c54-8585-8c2cbebb4d3d",
+      "handleId": "h_d66d7b37-53e1-4c54-8585-8c2cbebb4d3d",
+      "role": "bot",
+      "kind": "text",
+      "text": "CONCUR INV-001. ReviewerDecision path: runs/ctl-pay/decisions/INV-001-review-match.json. Verdict CONCUR action APPROVE under P-001. Kernel get_case_evidence (trace k_dc9bfb892d12) matches packet: three-way clean, exception_types [], must_hold empty, duplicate false. Packet complete. ctl-pay does not pay; bill may enter approved pool only.",
+      "at": 1789919165055,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    },
+    {
+      "id": "h_451868bb-794e-4edf-9ff6-1595dc41d8c2",
+      "handleId": "h_451868bb-794e-4edf-9ff6-1595dc41d8c2",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-match\nApprove-shaped AP match packet for ING-002 (Slack Technologies SLK-INBOX-7007, 4375 USD, PO-105). Path: runs/ap/packets/ING-002.json. Source MSG-INBOX-014 after prompt-injection scrub (instructions ignored). Kernel evidence clean three-way; exception_types []. PreparerRecommendation APPROVE. Concur or refuse per Verifier rules. AP does not pay.",
+      "at": 1789919265048,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "pair-result-h_451868bb-794e-4edf-9ff6-1595dc41d8c2",
+      "handleId": "h_451868bb-794e-4edf-9ff6-1595dc41d8c2",
+      "role": "bot",
+      "kind": "text",
+      "text": "CONCUR ING-002. ReviewerDecision path: runs/ctl-pay/decisions/ING-002-review-match.json. Verdict CONCUR action APPROVE under P-001. Kernel get_case_evidence (trace k_48a72ac8f33f) matches packet: three-way clean PO-105/GR-105/4375, exception_types [], must_hold empty, duplicate false. Injection scrub noted (not paid; bank unchanged); ignored as non-evidence. Packet complete. ctl-pay does not pay; bill may enter approved pool only.",
+      "at": 1789919286901,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    }
+  ]
+}

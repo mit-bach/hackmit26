@@ -1,0 +1,19 @@
+{
+  "id": "h_0e0c0f3b-2266-49ae-bbe5-e48258da7dc1",
+  "from": "bot_email",
+  "to": "bot_apply",
+  "toSlug": "apply",
+  "prompt": "profile: apply\nEmail routed AR/cash notices (do not invent amounts beyond packet text).\n\n1) Customer remittance: runs/inbox/packets/remittance-MSG-INBOX-019.json — Northwind Labs, apply to INV-AR-001, amount 8500.00 stated in message MSG-INBOX-019.\n\n2) Payment confirmation (not a new bill): runs/inbox/packets/payment-MSG-INBOX-009.json — Acme payment received for ACM-2026-4410 / related to INV-001 context.\n\nLand unapplied or stick Kernel-valid remittances. Reply with paths and status.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_apply"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:54:56.140Z",
+  "updatedAt": "2026-09-20T15:04:42.644Z",
+  "result": "Apply status for your AR/cash routing.\n\n1) remittance-MSG-INBOX-019 (Northwind Labs / INV-AR-001 / 8500.00 stated):\n- Linked Kernel payment: PAY-001 (Northwind Labs, 12000.00, memo INV-AR-007).\n- Decision: HUMAN_REVIEW (fail-closed). Competing Kernel candidates C1 INV-AR-007 explicit vs C2 INV-AR-001 exact; email amount 8500.00 does not match payment 12000.00. No AUTO_APPLY.\n- Packet: runs/ar/packets/apply-PAY-001.json\n- Handed to ctl-cash / review-apply (async).\n\n2) payment-MSG-INBOX-009 (Acme ACM-2026-4410 confirmation):\n- Status: NO_AR_PAYMENT. Vendor payment confirmation, not customer remittance. No Kernel payment_id; apply did not invent stick.\n- Packet: runs/ar/packets/payment-confirm-MSG-INBOX-009.json\n\nPaths and status above. Apply did not dun.",
+  "seq": 47
+}

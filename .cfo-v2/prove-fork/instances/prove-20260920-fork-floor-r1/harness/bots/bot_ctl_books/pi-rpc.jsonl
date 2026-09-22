@@ -1,0 +1,2 @@
+{"type":"extension_ui_request","id":"ce3a9b1c-fc69-40ee-874e-3be6ac22c049","method":"setStatus","statusKey":"harness","statusText":"bot:ctl-books"}
+{"type":"response","command":"set_thinking_level","success":true}

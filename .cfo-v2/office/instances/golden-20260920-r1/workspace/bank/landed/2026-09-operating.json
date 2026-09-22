@@ -1,0 +1,47 @@
+{
+  "period": "2026-09",
+  "account": "operating_account",
+  "count": 28,
+  "transaction_ids": [
+    "TXN-2026-09-018A",
+    "TXN-2026-09-008",
+    "TXN-2026-09-011",
+    "TXN-2026-09-020H",
+    "TXN-2026-09-020R",
+    "BNK-AP-012",
+    "TXN-AR-PAY-001",
+    "TXN-2026-09-015",
+    "TXN-2026-09-028",
+    "TXN-2026-09-012A",
+    "TXN-2026-09-012B",
+    "TXN-2026-09-025",
+    "TXN-2026-09-021",
+    "BNK-UNX-001",
+    "TXN-2026-09-019A",
+    "TXN-2026-09-022S",
+    "TXN-2026-09-026S",
+    "TXN-MER-2026-09",
+    "TXN-LUM-2026-09",
+    "TXN-INV-KIS-FRT-2026-08",
+    "TXN-KIS-2026-09-16",
+    "TXN-INV-HAL-WKND-2026-08",
+    "TXN-PAY-LAP-2026-09-12",
+    "TXN-PAY-LAP-QH-SEP-PRE",
+    "BATCH-AR-2026-09-12",
+    "TXN-STRIPE-RESERVE-REL",
+    "TXN-CAM-RENT-2026-09",
+    "TXN-FLE-2026-08"
+  ],
+  "required_included": true,
+  "invoice_ingestion_poll": {
+    "list_bank_transactions_2026-09_count": 0,
+    "note": "Kernel card/ingestion feed empty for maximor; landed from cash_recon statement."
+  },
+  "policy": [
+    "A charge is not a bill.",
+    "Do not invent invoices.",
+    "Do not force MATCHED.",
+    "Documented operating lines -> cash/match."
+  ],
+  "line_dir": "workspace/bank/lines"
+}

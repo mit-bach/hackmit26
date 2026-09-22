@@ -1,0 +1,39 @@
+Lenovo (United States) Inc.
+8001 Development Drive
+Morrisville, NC 27560
+Phone +1 855-253-6686   billing@lenovo.example
+Tax ID 56-2189993
+
+INVOICE
+
+Invoice Number: OPEN-0016
+Invoice Date: 2026-09-17
+Due Date: 2026-10-17
+PO Number: PO-OPEN-016
+Payment Terms: net 30
+Currency: USD
+Vendor: Lenovo
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    182,194.88    182,194.88
+
+Subtotal                                                            182,194.88
+Tax                                                                       0.00
+Amount Due                                                          182,194.88
+
+Remit to:
+ACH Bank of America routing 053000196  account ****LV01
+Bank: Bank of America  ****LV01
+Please include invoice OPEN-0016 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@lenovo.example

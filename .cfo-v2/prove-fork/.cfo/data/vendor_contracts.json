@@ -1,0 +1,67 @@
+[
+  {
+    "contract_id": "CTR-CS-001",
+    "vendor": "CleanSpace Facilities",
+    "start_date": "2026-01-01",
+    "end_date": "2026-12-31",
+    "billing_cadence": "monthly",
+    "amount": 2400,
+    "currency": "USD",
+    "expense_account": "Facilities Expense",
+    "billed_in_arrears": true,
+    "monthly_minimum": 2400,
+    "description": "Nightly office cleaning for the Cambridge workspace. Fixed monthly fee billed in arrears."
+  },
+  {
+    "contract_id": "CTR-LR-001",
+    "vendor": "Lindholm & Ruiz LLP",
+    "start_date": "2026-04-01",
+    "end_date": "2027-03-31",
+    "billing_cadence": "monthly",
+    "amount": 8500,
+    "currency": "USD",
+    "expense_account": "Legal Expense",
+    "billed_in_arrears": true,
+    "monthly_minimum": 8500,
+    "description": "General-counsel retainer. $8,500 each month, invoiced on the 5th of the following month."
+  },
+  {
+    "contract_id": "CTR-PR-001",
+    "vendor": "Pulse Recruiting",
+    "start_date": "2025-10-01",
+    "end_date": "2026-12-31",
+    "billing_cadence": "quarterly",
+    "amount": 15000,
+    "currency": "USD",
+    "expense_account": "Recruiting Expense",
+    "billed_in_arrears": true,
+    "monthly_minimum": 0,
+    "description": "Retained executive search. $15,000 due at each quarter-end (Mar / Jun / Sep / Dec)."
+  },
+  {
+    "contract_id": "CTR-OA-001",
+    "vendor": "Orbit Analytics",
+    "start_date": "2026-01-01",
+    "end_date": "2026-12-31",
+    "billing_cadence": "monthly",
+    "amount": 3100,
+    "currency": "USD",
+    "expense_account": "Software Subscription Expense",
+    "billed_in_arrears": false,
+    "monthly_minimum": 3100,
+    "description": "Orbit Analytics Pro subscription. Invoiced at the start of each month."
+  },
+  {
+    "contract_id": "CTR-NF-001",
+    "vendor": "NewForge Consulting",
+    "start_date": "2026-01-01",
+    "end_date": "2026-12-31",
+    "billing_cadence": "as_needed",
+    "amount": null,
+    "currency": "USD",
+    "expense_account": "Professional Services Expense",
+    "billed_in_arrears": true,
+    "monthly_minimum": 0,
+    "description": "Time-and-materials advisory. No monthly commitment. Invoice only after accepted work."
+  }
+]

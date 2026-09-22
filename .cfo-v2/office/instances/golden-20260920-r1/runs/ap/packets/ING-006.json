@@ -1,0 +1,37 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "ING-006",
+  "vendor_invoice_number": "SLK-INBOX-7007",
+  "vendor": "Slack Technologies",
+  "amount": 4375,
+  "po_id": "PO-105",
+  "receipt_id": "GR-105",
+  "recommendation": "APPROVE",
+  "proposed_action": "APPROVE",
+  "exception_types": [],
+  "kernel_facts": {
+    "amount_difference": 0,
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "exception_types": []
+  },
+  "evidence_used": [
+    "ING-006",
+    "PO-105",
+    "GR-105",
+    "runs/inbox/packets/bill-MSG-INBOX-014-ING-006.json"
+  ],
+  "reason": "Clean three-way match: Slack Technologies exact, PO-105 approved 4375, GR-105 full, amount exact, no duplicate, exception_types empty. Prompt-injection content in source thread ignored; Kernel structured facts only. Propose APPROVE for ctl-pay review-match. Do not pay until concurrence.",
+  "inbox_path": "runs/inbox/packets/bill-MSG-INBOX-014-ING-006.json",
+  "next_handoff": {
+    "to": "ctl-pay",
+    "profile": "review-match",
+    "path": "runs/ap/packets/ING-006.json"
+  }
+}

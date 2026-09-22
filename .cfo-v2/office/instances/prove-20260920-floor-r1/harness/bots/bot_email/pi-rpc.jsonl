@@ -1,0 +1,2 @@
+{"type":"extension_ui_request","id":"3a104a71-eb31-43f7-ad93-f9f84639ae41","method":"setStatus","statusKey":"harness","statusText":"bot:email"}
+{"type":"response","command":"set_thinking_level","success":true}

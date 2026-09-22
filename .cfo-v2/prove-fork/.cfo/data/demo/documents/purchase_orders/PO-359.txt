@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-359
+PO Number: PO-359
+Issued: 2026-09-06
+Vendor: Office Depot
+Vendor legal name: Office Depot, LLC
+Vendor tax ID: 59-2663954
+Authorized amount: 10,801.04
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+premium support billed 2026-09-06
+
+This purchase order is not an invoice. The vendor must bill against PO-359.
+Payment terms follow the vendor master unless this order states otherwise.

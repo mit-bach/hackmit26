@@ -1,0 +1,50 @@
+{
+  "schema": "BankLineLanded",
+  "transaction_id": "TXN-AR-PAY-001",
+  "period": "2026-09",
+  "source": "operating_account",
+  "bank_line": {
+    "transaction_id": "TXN-AR-PAY-001",
+    "date": "2026-09-29",
+    "amount": 12000.0,
+    "currency": "USD",
+    "description": "WIRE IN NORTHWIND LABS INV AR 007",
+    "reference": "WIRE-NW-9921",
+    "counterparty": "NORTHWIND LABS",
+    "transaction_type": "wire_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 1200000,
+    "raw_metadata": {
+      "payment_id": "PAY-001",
+      "invoice_ids": [
+        "INV-AR-007"
+      ]
+    }
+  },
+  "discovery": {
+    "status": "documented_line",
+    "candidate": null,
+    "reasons": [
+      "Operating-account statement line from data/cash_recon/bank_statement.json.",
+      "A charge is not a bill; no AP invoice invented from descriptor.",
+      "Handoff to cash/match for candidate selection. Do not force MATCHED.",
+      "Statement raw_metadata present on feed row; cash/apply own interpretation."
+    ]
+  },
+  "handoff": {
+    "to": "cash",
+    "profile": "match"
+  },
+  "paths": {
+    "statement": "data/cash_recon/bank_statement.json",
+    "packet": "workspace/bank/lines/TXN-AR-PAY-001.json"
+  },
+  "statement_metadata": {
+    "payment_id": "PAY-001",
+    "invoice_ids": [
+      "INV-AR-007"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "key": "fork-inject-MSG-INBOX-016",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "a702209889e895d6199bf74cac37baa7d8ee73fb51ebea3e90a1b569372afef5",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-016",
+      "thread_id": "THR-credit-memo",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_ca00f61baaa3"
+  }
+}

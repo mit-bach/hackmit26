@@ -1,0 +1,121 @@
+{
+  "result_type": "VarianceAgentResult",
+  "period": "2026-09",
+  "lock_status": "BLOCKED",
+  "status": "UNLOCKED_DRAFT",
+  "comparison_period": "2026-08",
+  "kernel_trace_ids": [
+    "k_82ffbfc57558",
+    "k_3b929db9f444",
+    "k_aac73616dbcf",
+    "k_4752bdbef13f",
+    "k_5690cbbc56b8"
+  ],
+  "headline": "Period 2026-09 is BLOCKED (close pack not closed). P&L lines read zero vs prior; GL cash is material and unreconciled. Every figure below is UNLOCKED.",
+  "metrics_unlocked": {
+    "revenue": {
+      "current": "UNLOCKED 0",
+      "prior": "UNLOCKED 0",
+      "evidence": ["metric:revenue:2026-09", "variance:VAR-2026-09-revenue"]
+    },
+    "gross_margin_pct": {
+      "current": "UNLOCKED 0",
+      "prior": "UNLOCKED 0",
+      "evidence": ["metric:gross_margin_pct:2026-09", "variance:VAR-2026-09-gross_margin_pct"]
+    },
+    "operating_income": {
+      "current": "UNLOCKED 0",
+      "prior": "UNLOCKED 0",
+      "evidence": ["metric:operating_income:2026-09", "variance:VAR-2026-09-operating_income"]
+    },
+    "cash_gl": {
+      "current": "UNLOCKED 14882410.18",
+      "prior": "UNLOCKED 480000",
+      "dollar_variance": "UNLOCKED +14402410.18",
+      "unexplained_residual": "UNLOCKED +14402410.18",
+      "trusted_cash": false,
+      "evidence": ["metric:cash:2026-09", "variance:VAR-2026-09-cash"]
+    },
+    "ar": {
+      "current": "UNLOCKED 41260000",
+      "evidence": ["metric:ar:2026-09"]
+    },
+    "ap": {
+      "current": "UNLOCKED 18420000",
+      "evidence": ["metric:ap:2026-09"]
+    }
+  },
+  "variances": [
+    {
+      "variance_id": "VAR-2026-09-revenue",
+      "metric": "revenue",
+      "reconciled": true,
+      "material": false,
+      "variance": "UNLOCKED 0",
+      "unexplained_amount": "UNLOCKED 0",
+      "contributors": [],
+      "narrative": "revenue moved from UNLOCKED 0 to UNLOCKED 0. No material unexplained residual.",
+      "evidence_refs": ["metric:revenue:2026-09", "variance:VAR-2026-09-revenue"]
+    },
+    {
+      "variance_id": "VAR-2026-09-gross_margin_pct",
+      "metric": "gross_margin_pct",
+      "reconciled": true,
+      "material": false,
+      "variance": "UNLOCKED 0",
+      "unexplained_amount": "UNLOCKED 0",
+      "contributors": [],
+      "narrative": "gross_margin_pct moved from UNLOCKED 0 to UNLOCKED 0. No material unexplained residual.",
+      "evidence_refs": ["metric:gross_margin_pct:2026-09", "variance:VAR-2026-09-gross_margin_pct"]
+    },
+    {
+      "variance_id": "VAR-2026-09-operating_income",
+      "metric": "operating_income",
+      "reconciled": true,
+      "material": false,
+      "variance": "UNLOCKED 0",
+      "unexplained_amount": "UNLOCKED 0",
+      "contributors": [],
+      "narrative": "operating_income moved from UNLOCKED 0 to UNLOCKED 0. No material unexplained residual.",
+      "evidence_refs": ["metric:operating_income:2026-09", "variance:VAR-2026-09-operating_income"]
+    },
+    {
+      "variance_id": "VAR-2026-09-cash",
+      "metric": "cash",
+      "reconciled": true,
+      "material": true,
+      "variance": "UNLOCKED +14402410.18",
+      "unexplained_amount": "UNLOCKED +14402410.18",
+      "contributors": [],
+      "narrative": "GL cash moved from UNLOCKED 480000 to UNLOCKED 14882410.18 (UNLOCKED +14402410.18). Residual left unexplained; no supported transaction contributors from Kernel. This is not trusted cash.",
+      "evidence_refs": ["metric:cash:2026-09", "variance:VAR-2026-09-cash"]
+    }
+  ],
+  "budget_context_unlocked": {
+    "note": "Budget comparisons present on Kernel metrics; period lock BLOCKED so labeled UNLOCKED only.",
+    "revenue_vs_budget": {
+      "current": "UNLOCKED 0",
+      "budget": "UNLOCKED 31140000",
+      "dollar_variance": "UNLOCKED -31140000",
+      "evidence": ["metric:revenue:2026-09", "metric:revenue:budget:2026-09"]
+    },
+    "operating_income_vs_budget": {
+      "current": "UNLOCKED 0",
+      "budget": "UNLOCKED 490000",
+      "dollar_variance": "UNLOCKED -490000",
+      "evidence": ["metric:operating_income:2026-09", "metric:operating_income:budget:2026-09"]
+    }
+  },
+  "close_blockers_cited": [
+    "Cash: UNLOCKED $12.40 unexplained difference (TXN-2026-09-015 / REV-2026-09-CASH-TXN-2026-09-015)",
+    "AR: UNLOCKED $4,500 unmatched customer payment (PAY-CLOSE-4500 / REV-2026-09-AR-PAY-CLOSE-4500)",
+    "Prepaids: missing insurance policy evidence (PRE-INS-MISSING / REV-2026-09-PREPAID-PRE-INS-MISSING)",
+    "NewForge Consulting: insufficient accrual evidence",
+    "BS recons MISSING; cash task NEEDS_REVIEW; bs_recon BLOCKED"
+  ],
+  "forecast_handoff": {
+    "started": false,
+    "reason": "REFUSED: trusted cash missing; GL cash unreconciled; lock_status BLOCKED. Do not start 13-week forecast from unreconciled GL cash."
+  },
+  "narrative": "UNLOCKED draft for 2026-09. Revenue UNLOCKED 0 (metric:revenue:2026-09; variance:VAR-2026-09-revenue), gross margin UNLOCKED 0 (metric:gross_margin_pct:2026-09), operating income UNLOCKED 0 (metric:operating_income:2026-09). GL cash UNLOCKED 14,882,410.18 vs prior UNLOCKED 480,000 with unexplained residual UNLOCKED +14,402,410.18 (metric:cash:2026-09; variance:VAR-2026-09-cash) — not trusted cash. Close pack status BLOCKED; gate_passed false; queue_owner ctl-books. Forecast not started."
+}

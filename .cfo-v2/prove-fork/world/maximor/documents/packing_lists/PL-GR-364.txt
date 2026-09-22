@@ -1,0 +1,11 @@
+Quarry Works
+Packing list
+Ship date: 2026-09-11
+PO Number: PO-364
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 364-0911
+
+Contents:
+  - Line GR-364 — qty 1
+
+This packing list is not an invoice.

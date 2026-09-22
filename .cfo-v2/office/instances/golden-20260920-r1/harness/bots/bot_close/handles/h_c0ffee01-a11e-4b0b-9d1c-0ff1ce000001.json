@@ -1,0 +1,20 @@
+{
+  "id": "h_c0ffee01-a11e-4b0b-9d1c-0ff1ce000001",
+  "from": "operator",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "profile: prior-period-precedent\nHarbor Electric September 2026 bill has not arrived. Electricity was used.\nRetrieve the August Harbor decision from this Bot's Memory.\nRe-check current GR / contract / usage. Do not paste August's $7,800.\nWrite the September decision. Handle ctl-books for the method check only.\nDo not mark CLOSED. Cash $12.40 remains unexplained. Never ask a human.",
+  "paths": [],
+  "conversation": {
+    "kind": "dm"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:36:40.080Z",
+  "updatedAt": "2026-09-20T15:37:18.820Z",
+  "result": "## Harbor Electric memory (2026-09)\n\nRetrieved **MEM-HE-2026-08**: August used `seasonal_prior_year` at **$7,800** (August 2025 peak cooling).\n\nRe-checked current evidence. Same vendor, missing bill, usage still supports the method. September 2025 billed **$4,650**. Do not paste $7,800.\n\nWrote **DEC-2026-09-026** → `memory/topics/harbor-electric.md`. Accrual **ACC-202609-003** / JE-202609-003 already on the pack.\n\nctl-books: **CONCUR_METHOD**. Lock remains **REJECT_CLOSE**. Period **not CLOSED**.",
+  "resultPaths": [
+    "workspace/close/2026-09/harbor-memory.json"
+  ],
+  "seq": 164
+}

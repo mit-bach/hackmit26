@@ -1,0 +1,22 @@
+{
+  "from_bot": "email",
+  "message_id": "MSG-ACME-INV-001",
+  "thread_id": "THR-acme-inv001",
+  "classification": "VENDOR_INVOICE",
+  "selected_action": "CREATE_AP_INVOICE",
+  "kernel_invoice_id": "INV-001",
+  "canonical_id": "ING-001",
+  "dispatch_status": "BUSINESS_DUPLICATE",
+  "duplicate_of": "INV-001",
+  "vendor": "Acme Supplies",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "po_id": "PO-101",
+  "invoice_date": "2026-09-08",
+  "due_date": "2026-09-30",
+  "currency": "USD",
+  "amount": 12450,
+  "amount_cents": 1245000,
+  "evidence_refs": ["message:MSG-ACME-INV-001", "attachment:ACM-2026-4410.pdf"],
+  "document": "ACM-2026-4410.pdf",
+  "note": "Ingest already present in AP; evidence linked. Email does not match. AP prepare owns the open bill."
+}

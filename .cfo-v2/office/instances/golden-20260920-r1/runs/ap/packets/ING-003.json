@@ -1,0 +1,30 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "ING-003",
+  "vendor_invoice_number": "FIG-INBOX-2002",
+  "vendor": "Figma",
+  "amount": 2448,
+  "po_id": "PO-107",
+  "recommendation": "HOLD",
+  "proposed_action": "HOLD",
+  "exception_types": ["missing_po", "goods_not_received"],
+  "kernel_facts": {
+    "po_exists": false,
+    "po_approved": false,
+    "purchase_order": null,
+    "goods_receipt": null,
+    "receipt_status": "missing",
+    "amount_matches": false,
+    "vendor_exact_match": false,
+    "duplicate_detected": false,
+    "exception_types": ["missing_po", "goods_not_received"]
+  },
+  "evidence_used": [
+    "ING-003",
+    "runs/inbox/packets/bill-MSG-INBOX-002-ING-003.json"
+  ],
+  "reason": "Invoice cites PO-107 but Kernel purchase_order is null (missing_po) and receipt_status missing (goods_not_received). No three-way match possible. HOLD. Do not pay.",
+  "inbox_path": "runs/inbox/packets/bill-MSG-INBOX-002-ING-003.json"
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "CashMatchPacket",
+  "transaction_id": "TXN-2026-09-008",
+  "period": "2026-09",
+  "profile": "match",
+  "case_id": "2026-09",
+  "source_packet": "workspace/bank/lines/TXN-2026-09-008.json",
+  "preparer_selection": {
+    "selected_candidate_id": "GROUPED_MATCH:TXN-2026-09-008:GL-AP-203,GL-AP-201,GL-AP-202",
+    "match_type": "GROUPED_MATCH",
+    "disposition": "MATCHED",
+    "difference_minor": 0,
+    "fee_evidence_ids": [],
+    "reasons": [
+      "Copied Kernel candidate_id GROUPED_MATCH:TXN-2026-09-008:GL-AP-203,GL-AP-201,GL-AP-202"
+    ]
+  },
+  "status": "MATCHED"
+}

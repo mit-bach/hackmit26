@@ -1,0 +1,10 @@
+{
+  "object": "vendor_bill_land",
+  "message_id": "MSG-ACME-INV-001",
+  "invoice_id": "INV-001",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "status": "BUSINESS_DUPLICATE",
+  "overlay_path": "runs/ingestion/overlay.json",
+  "registry_path": "runs/ingestion/registry.json",
+  "handoff": "ap/prepare"
+}

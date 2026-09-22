@@ -1,0 +1,35 @@
+[
+  {
+    "live": false,
+    "type": "balancePlatform.transfer.created",
+    "environment": "test",
+    "data": {
+      "id": "3JZKT2B4N7Q1P8R5S6T0",
+      "amount": {"currency": "USD", "value": 8421000},
+      "category": "bank",
+      "direction": "outgoing",
+      "reference": "ADYEN-PAYOUT-SEP26",
+      "status": "received",
+      "type": "bankTransfer",
+      "creationDate": "2026-09-18T16:02:11+00:00",
+      "reason": "approved"
+    }
+  },
+  {
+    "live": false,
+    "type": "balancePlatform.transfer.updated",
+    "environment": "test",
+    "data": {
+      "id": "3JZKT2B4N7Q1P8R5S6T0",
+      "amount": {"currency": "USD", "value": 8421000},
+      "category": "bank",
+      "direction": "outgoing",
+      "reference": "ADYEN-PAYOUT-SEP26",
+      "status": "booked",
+      "type": "bankTransfer",
+      "creationDate": "2026-09-18T16:02:11+00:00",
+      "valueDate": "2026-09-19T00:00:00+00:00",
+      "reason": "approved"
+    }
+  }
+]

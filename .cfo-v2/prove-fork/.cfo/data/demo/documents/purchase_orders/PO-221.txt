@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-221
+PO Number: PO-221
+Issued: 2026-09-01
+Vendor: Dell Technologies
+Vendor legal name: Dell Marketing L.P.
+Vendor tax ID: 74-2616805
+Authorized amount: 60,000.00
+Currency: USD
+Approver: Marcus Chen
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+PowerEdge R760 cluster
+
+This purchase order is not an invoice. The vendor must bill against PO-221.
+Payment terms follow the vendor master unless this order states otherwise.

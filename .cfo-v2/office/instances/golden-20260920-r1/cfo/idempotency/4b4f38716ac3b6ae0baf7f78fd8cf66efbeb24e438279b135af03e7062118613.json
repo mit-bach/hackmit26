@@ -1,0 +1,19 @@
+{
+  "key": "email:outbound:MSG-INBOX-011:v1",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "0e732288125dcc4a28ff0153de0eb8ee387173aa298353735604f60f1c80d9eb",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-011",
+      "thread_id": "THR-incomplete",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_77044cd34b1e"
+  }
+}

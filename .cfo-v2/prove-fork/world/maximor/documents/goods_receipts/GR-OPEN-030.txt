@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-030
+PO Number: PO-OPEN-030
+Vendor: FedEx
+Goods received in full on 2026-09-04
+Packing list attached: PL-GR-OPEN-030
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 184,115.40 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

@@ -1,0 +1,10 @@
+{
+  "id": "rc_8d76a6b1-0154-4f49-888d-9caef78c2f2f",
+  "name": "weekly-pay-run",
+  "bot": "pay",
+  "handleId": "h_04bc492b-aa47-4931-ac40-faa696c97436",
+  "status": "completed",
+  "at": "2026-09-20T15:06:05.247Z",
+  "updatedAt": "2026-09-20T15:09:27.855Z",
+  "result": "**Weekly payment-run draft complete (fail-closed empty pool).**\n\n| Item | Result |\n|------|--------|\n| Kernel pool | `get_approved_pool` / `get_payment_candidates` **count=0** |\n| Proposed IDs | `[]` |\n| Plan | `workspace/pay/plans/plan_2026-09-19_2f7cb150dc46.json` |\n| Totals | `total_payout=0`, `cash_after=6474925.74`, `reserve_ok=true` |\n| ctl-pay | **CONCUR** → `runs/pay/concurrence/plan_2026-09-19_2f7cb150dc46.json` |\n| Outflows | none (empty wires); `workspace/cash/expected-outflows/plan_2026-09-19_2f7cb150dc46.json` `executed=false` |\n| ACH | not executed |\n\nNote: world seed data under `data/approved_pool.json` is not the Kernel pool path (`runs/approved_pool.json`). Kernel empty → fail-closed; no reserve breach."
+}

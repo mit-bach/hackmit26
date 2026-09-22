@@ -1,0 +1,2582 @@
+{
+  "company": "Maximor Demo Corp",
+  "schema_version": "2026.09-cfo-demo-capabilities-1",
+  "skill_registry": "skills/README.md",
+  "skill_assignments": "skills/assignments.py",
+  "agents": [
+    {
+      "agent": "Counterparty Message Agent",
+      "skills": [],
+      "functionalities": [
+        "inbox.counterparty_to_ap"
+      ],
+      "required_inputs": [
+        "message envelope",
+        "optional attachment"
+      ],
+      "expected_outputs": [
+        "canonical AP invoice or structured notice",
+        "classification",
+        "registered action",
+        "trace"
+      ],
+      "workflows": [
+        "inbox.workflow.handoff"
+      ],
+      "entrypoints": [
+        "python main.py demo-inbox"
+      ]
+    },
+    {
+      "agent": "Finance Inbox Agent",
+      "skills": [
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "inbox.counterparty_to_ap"
+      ],
+      "required_inputs": [
+        "message envelope",
+        "optional attachment"
+      ],
+      "expected_outputs": [
+        "canonical AP invoice or structured notice",
+        "classification",
+        "registered action",
+        "trace"
+      ],
+      "workflows": [
+        "inbox.workflow.handoff"
+      ],
+      "entrypoints": [
+        "python main.py demo-inbox"
+      ]
+    },
+    {
+      "agent": "Email Invoice Agent",
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "ingestion.classify_document",
+        "evaluation.finance_gauntlet"
+      ],
+      "required_inputs": [
+        "production workflows",
+        "public fixtures",
+        "source record",
+        "subject/filename/text"
+      ],
+      "expected_outputs": [
+        "canonical invoice identity",
+        "classification",
+        "cross-workflow consistency",
+        "extracted fields",
+        "family rates",
+        "memory-on vs memory-off",
+        "scorecard"
+      ],
+      "workflows": [
+        "evals.maximor_finance_gauntlet.runner.run_gauntlet",
+        "invoice_ingestion.workflow.ingest_invoices"
+      ],
+      "entrypoints": [
+        "python main.py eval-gauntlet",
+        "python main.py ingest 2026-09"
+      ]
+    },
+    {
+      "agent": "ERP Invoice Agent",
+      "skills": [],
+      "functionalities": [
+        "ingestion.structured_parse"
+      ],
+      "required_inputs": [
+        "erp.json / edi_documents.json"
+      ],
+      "expected_outputs": [
+        "InvoiceCandidate"
+      ],
+      "workflows": [
+        "invoice_ingestion.sources"
+      ],
+      "entrypoints": [
+        "python -m invoice_ingestion.demo"
+      ]
+    },
+    {
+      "agent": "Procurement Invoice Agent",
+      "skills": [
+        "invoice-source-identification"
+      ],
+      "functionalities": [
+        "ingestion.classify_document"
+      ],
+      "required_inputs": [
+        "source record",
+        "subject/filename/text"
+      ],
+      "expected_outputs": [
+        "canonical invoice identity",
+        "classification",
+        "extracted fields"
+      ],
+      "workflows": [
+        "invoice_ingestion.workflow.ingest_invoices"
+      ],
+      "entrypoints": [
+        "python main.py ingest 2026-09"
+      ]
+    },
+    {
+      "agent": "Vendor Portal Agent",
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "ingestion.classify_document"
+      ],
+      "required_inputs": [
+        "source record",
+        "subject/filename/text"
+      ],
+      "expected_outputs": [
+        "canonical invoice identity",
+        "classification",
+        "extracted fields"
+      ],
+      "workflows": [
+        "invoice_ingestion.workflow.ingest_invoices"
+      ],
+      "entrypoints": [
+        "python main.py ingest 2026-09"
+      ]
+    },
+    {
+      "agent": "Employee Submission Agent",
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "ingestion.classify_document"
+      ],
+      "required_inputs": [
+        "source record",
+        "subject/filename/text"
+      ],
+      "expected_outputs": [
+        "canonical invoice identity",
+        "classification",
+        "extracted fields"
+      ],
+      "workflows": [
+        "invoice_ingestion.workflow.ingest_invoices"
+      ],
+      "entrypoints": [
+        "python main.py ingest 2026-09"
+      ]
+    },
+    {
+      "agent": "Physical Mail / Document Agent",
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "ingestion.classify_document"
+      ],
+      "required_inputs": [
+        "source record",
+        "subject/filename/text"
+      ],
+      "expected_outputs": [
+        "canonical invoice identity",
+        "classification",
+        "extracted fields"
+      ],
+      "workflows": [
+        "invoice_ingestion.workflow.ingest_invoices"
+      ],
+      "entrypoints": [
+        "python main.py ingest 2026-09"
+      ]
+    },
+    {
+      "agent": "EDI / Electronic Invoicing Agent",
+      "skills": [],
+      "functionalities": [
+        "ingestion.structured_parse"
+      ],
+      "required_inputs": [
+        "erp.json / edi_documents.json"
+      ],
+      "expected_outputs": [
+        "InvoiceCandidate"
+      ],
+      "workflows": [
+        "invoice_ingestion.sources"
+      ],
+      "entrypoints": [
+        "python -m invoice_ingestion.demo"
+      ]
+    },
+    {
+      "agent": "Bank/Card Discovery Agent",
+      "skills": [
+        "bank-charge-invoice-discovery"
+      ],
+      "functionalities": [
+        "ingestion.bank_card_discovery"
+      ],
+      "required_inputs": [
+        "bank/card charge",
+        "supporting documents"
+      ],
+      "expected_outputs": [
+        "invoice_found | invoice_missing"
+      ],
+      "workflows": [
+        "invoice_ingestion.sources"
+      ],
+      "entrypoints": [
+        "python main.py ingest 2026-09"
+      ]
+    },
+    {
+      "agent": "Stripe Payout Agent",
+      "skills": [],
+      "functionalities": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "workflows": [],
+      "entrypoints": []
+    },
+    {
+      "agent": "AP Preparer",
+      "skills": [
+        "three-way-match-analysis",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "ap.three_way_match",
+        "evaluation.finance_gauntlet"
+      ],
+      "required_inputs": [
+        "PO",
+        "goods receipt",
+        "invoice_id",
+        "policies",
+        "prior_cases",
+        "production workflows",
+        "public fixtures"
+      ],
+      "expected_outputs": [
+        "APPROVE | HOLD",
+        "cross-workflow consistency",
+        "evidence",
+        "exception types",
+        "family rates",
+        "memory-on vs memory-off",
+        "scorecard"
+      ],
+      "workflows": [
+        "evals.maximor_finance_gauntlet.runner.run_gauntlet",
+        "workflow.run_ap_workflow"
+      ],
+      "entrypoints": [
+        "python main.py INV-001",
+        "python main.py eval-gauntlet"
+      ]
+    },
+    {
+      "agent": "Exception Investigator",
+      "skills": [
+        "ap-exception-investigation",
+        "prior-period-precedent",
+        "superseded-document-handling"
+      ],
+      "functionalities": [
+        "ap.three_way_match",
+        "memory.cross_period"
+      ],
+      "required_inputs": [
+        "PO",
+        "current-period evidence",
+        "goods receipt",
+        "invoice_id",
+        "policies",
+        "prior decision memory",
+        "prior_cases"
+      ],
+      "expected_outputs": [
+        "APPROVE | HOLD",
+        "evidence",
+        "exception types",
+        "precedent_used on later-period trace",
+        "retrieved decision_id"
+      ],
+      "workflows": [
+        "memory.store / cash_recon.workflow / prepaid.workflow / tools.get_prior_cases",
+        "workflow.run_ap_workflow"
+      ],
+      "entrypoints": [
+        "python main.py INV-001",
+        "python main.py memory-demo --story stripe"
+      ]
+    },
+    {
+      "agent": "AP Reviewer",
+      "skills": [
+        "prior-period-precedent"
+      ],
+      "functionalities": [
+        "ap.three_way_match"
+      ],
+      "required_inputs": [
+        "PO",
+        "goods receipt",
+        "invoice_id",
+        "policies",
+        "prior_cases"
+      ],
+      "expected_outputs": [
+        "APPROVE | HOLD",
+        "evidence",
+        "exception types"
+      ],
+      "workflows": [
+        "workflow.run_ap_workflow"
+      ],
+      "entrypoints": [
+        "python main.py INV-001"
+      ]
+    },
+    {
+      "agent": "AP Approver",
+      "skills": [
+        "prior-period-precedent"
+      ],
+      "functionalities": [
+        "ap.three_way_match"
+      ],
+      "required_inputs": [
+        "PO",
+        "goods receipt",
+        "invoice_id",
+        "policies",
+        "prior_cases"
+      ],
+      "expected_outputs": [
+        "APPROVE | HOLD",
+        "evidence",
+        "exception types"
+      ],
+      "workflows": [
+        "workflow.run_ap_workflow"
+      ],
+      "entrypoints": [
+        "python main.py INV-001"
+      ]
+    },
+    {
+      "agent": "AP Audit",
+      "skills": [],
+      "functionalities": [
+        "ap.three_way_match"
+      ],
+      "required_inputs": [
+        "PO",
+        "goods receipt",
+        "invoice_id",
+        "policies",
+        "prior_cases"
+      ],
+      "expected_outputs": [
+        "APPROVE | HOLD",
+        "evidence",
+        "exception types"
+      ],
+      "workflows": [
+        "workflow.run_ap_workflow"
+      ],
+      "entrypoints": [
+        "python main.py INV-001"
+      ]
+    },
+    {
+      "agent": "Accrual Agent",
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection",
+        "prior-period-precedent"
+      ],
+      "functionalities": [
+        "close.accruals",
+        "evaluation.finance_gauntlet"
+      ],
+      "required_inputs": [
+        "POs",
+        "contracts",
+        "historical invoices",
+        "production workflows",
+        "public fixtures",
+        "usage"
+      ],
+      "expected_outputs": [
+        "ACCRUE | SKIP | INSUFFICIENT_EVIDENCE",
+        "JE",
+        "cross-workflow consistency",
+        "family rates",
+        "memory-on vs memory-off",
+        "scorecard"
+      ],
+      "workflows": [
+        "accrual.workflow.run_accrual_workflow",
+        "evals.maximor_finance_gauntlet.runner.run_gauntlet"
+      ],
+      "entrypoints": [
+        "python accrue.py 2026-09",
+        "python main.py eval-gauntlet"
+      ]
+    },
+    {
+      "agent": "Payment Scheduler",
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "functionalities": [
+        "ap.payment_scheduling"
+      ],
+      "required_inputs": [
+        "approved_pool",
+        "cash_position"
+      ],
+      "expected_outputs": [
+        "defer",
+        "metrics",
+        "pay_this_week"
+      ],
+      "workflows": [
+        "scheduling.workflow.run_schedule_workflow"
+      ],
+      "entrypoints": [
+        "python main.py schedule --seed-demo"
+      ]
+    },
+    {
+      "agent": "Payment Audit",
+      "skills": [],
+      "functionalities": [
+        "ap.payment_scheduling"
+      ],
+      "required_inputs": [
+        "approved_pool",
+        "cash_position"
+      ],
+      "expected_outputs": [
+        "defer",
+        "metrics",
+        "pay_this_week"
+      ],
+      "workflows": [
+        "scheduling.workflow.run_schedule_workflow"
+      ],
+      "entrypoints": [
+        "python main.py schedule --seed-demo"
+      ]
+    },
+    {
+      "agent": "Collections Agent",
+      "skills": [
+        "ar-collections-policy"
+      ],
+      "functionalities": [
+        "ar.aging_collections"
+      ],
+      "required_inputs": [
+        "ar_invoices",
+        "as_of_date"
+      ],
+      "expected_outputs": [
+        "aging bucket",
+        "collection action"
+      ],
+      "workflows": [
+        "ar.workflow.run_aging / run_collections"
+      ],
+      "entrypoints": [
+        "python main.py ar-aging --as-of 2026-09-30"
+      ]
+    },
+    {
+      "agent": "Cash Application Agent",
+      "skills": [
+        "cash-application"
+      ],
+      "functionalities": [
+        "ar.cash_application",
+        "memory.cross_period"
+      ],
+      "required_inputs": [
+        "current-period evidence",
+        "open invoices",
+        "payment_id",
+        "precedents",
+        "prior decision memory"
+      ],
+      "expected_outputs": [
+        "AUTO_APPLY | HUMAN_REVIEW | UNAPPLIED",
+        "precedent_used on later-period trace",
+        "retrieved decision_id",
+        "selected invoices"
+      ],
+      "workflows": [
+        "ar.workflow.run_cash_apply",
+        "memory.store / cash_recon.workflow / prepaid.workflow / tools.get_prior_cases"
+      ],
+      "entrypoints": [
+        "python main.py ar-cash-apply PAY-001",
+        "python main.py memory-demo --story stripe"
+      ]
+    },
+    {
+      "agent": "Cash Application Reviewer",
+      "skills": [
+        "cash-application"
+      ],
+      "functionalities": [
+        "ar.cash_application",
+        "memory.self_improvement"
+      ],
+      "required_inputs": [
+        "human correction",
+        "open invoices",
+        "payment_id",
+        "precedents"
+      ],
+      "expected_outputs": [
+        "AUTO_APPLY | HUMAN_REVIEW | UNAPPLIED",
+        "later retrieval",
+        "selected invoices",
+        "updated precedent"
+      ],
+      "workflows": [
+        "ar.ledger.record_human_application",
+        "ar.workflow.run_cash_apply"
+      ],
+      "entrypoints": [
+        "python main.py ar-cash-apply PAY-001",
+        "python main.py ar-review-correct PAY-005 ..."
+      ]
+    },
+    {
+      "agent": "Cash Reconciliation Preparer",
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "bank-reference-interpretation",
+        "reconciliation-evidence-validation"
+      ],
+      "functionalities": [
+        "cash.bank_reconciliation",
+        "cash.stripe_reconciliation",
+        "evaluation.finance_gauntlet"
+      ],
+      "required_inputs": [
+        "balance transactions",
+        "bank deposit",
+        "bank_statement",
+        "cash ledger",
+        "fee evidence",
+        "production workflows",
+        "public fixtures",
+        "stripe payouts"
+      ],
+      "expected_outputs": [
+        "MATCHED | EXPLAINED_EXCEPTION | HUMAN_REVIEW | OUTSTANDING_TIMING_ITEM",
+        "PROVIDER_PAYOUT",
+        "cross-workflow consistency",
+        "family rates",
+        "memory-on vs memory-off",
+        "scorecard",
+        "tied payout arithmetic"
+      ],
+      "workflows": [
+        "cash_recon.workflow.run_cash_reconciliation",
+        "evals.maximor_finance_gauntlet.runner.run_gauntlet",
+        "integrations.cash.reconcile_payout + cash_recon"
+      ],
+      "entrypoints": [
+        "python main.py eval-gauntlet",
+        "python main.py reconcile-cash --month 2026-09 --seed-demo",
+        "python main.py stripe-demo"
+      ]
+    },
+    {
+      "agent": "Cash Exception Investigator",
+      "skills": [
+        "reconciliation-exception-investigation",
+        "bank-reference-interpretation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
+      ],
+      "functionalities": [
+        "cash.bank_reconciliation",
+        "memory.cross_period"
+      ],
+      "required_inputs": [
+        "bank_statement",
+        "cash ledger",
+        "current-period evidence",
+        "fee evidence",
+        "prior decision memory"
+      ],
+      "expected_outputs": [
+        "MATCHED | EXPLAINED_EXCEPTION | HUMAN_REVIEW | OUTSTANDING_TIMING_ITEM",
+        "precedent_used on later-period trace",
+        "retrieved decision_id"
+      ],
+      "workflows": [
+        "cash_recon.workflow.run_cash_reconciliation",
+        "memory.store / cash_recon.workflow / prepaid.workflow / tools.get_prior_cases"
+      ],
+      "entrypoints": [
+        "python main.py memory-demo --story stripe",
+        "python main.py reconcile-cash --month 2026-09 --seed-demo"
+      ]
+    },
+    {
+      "agent": "Cash Reconciliation Reviewer",
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "reconciliation-exception-investigation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation"
+      ],
+      "functionalities": [
+        "cash.bank_reconciliation"
+      ],
+      "required_inputs": [
+        "bank_statement",
+        "cash ledger",
+        "fee evidence"
+      ],
+      "expected_outputs": [
+        "MATCHED | EXPLAINED_EXCEPTION | HUMAN_REVIEW | OUTSTANDING_TIMING_ITEM"
+      ],
+      "workflows": [
+        "cash_recon.workflow.run_cash_reconciliation"
+      ],
+      "entrypoints": [
+        "python main.py reconcile-cash --month 2026-09 --seed-demo"
+      ]
+    },
+    {
+      "agent": "Prepaid Preparer",
+      "skills": [
+        "prepaid-expense-accounting",
+        "prior-period-precedent"
+      ],
+      "functionalities": [
+        "close.prepaids",
+        "memory.cross_period"
+      ],
+      "required_inputs": [
+        "current-period evidence",
+        "prepaid item",
+        "prior decision memory",
+        "service period"
+      ],
+      "expected_outputs": [
+        "monthly JE",
+        "precedent_used on later-period trace",
+        "remaining balance",
+        "retrieved decision_id",
+        "schedule"
+      ],
+      "workflows": [
+        "memory.store / cash_recon.workflow / prepaid.workflow / tools.get_prior_cases",
+        "prepaid.workflow.run_prepaid_workflow"
+      ],
+      "entrypoints": [
+        "python close.py prepaid --period 2026-09",
+        "python main.py memory-demo --story stripe"
+      ]
+    },
+    {
+      "agent": "Prepaid Reviewer",
+      "skills": [
+        "prepaid-expense-accounting",
+        "prior-period-precedent"
+      ],
+      "functionalities": [
+        "close.prepaids"
+      ],
+      "required_inputs": [
+        "prepaid item",
+        "service period"
+      ],
+      "expected_outputs": [
+        "monthly JE",
+        "remaining balance",
+        "schedule"
+      ],
+      "workflows": [
+        "prepaid.workflow.run_prepaid_workflow"
+      ],
+      "entrypoints": [
+        "python close.py prepaid --period 2026-09"
+      ]
+    },
+    {
+      "agent": "Fixed Asset Preparer",
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "functionalities": [
+        "close.fixed_assets"
+      ],
+      "required_inputs": [
+        "capital invoice / asset register"
+      ],
+      "expected_outputs": [
+        "JE",
+        "NBV",
+        "straight-line schedule"
+      ],
+      "workflows": [
+        "fixed_assets.workflow.run_depreciation_workflow"
+      ],
+      "entrypoints": [
+        "python close.py depreciate --period 2026-09"
+      ]
+    },
+    {
+      "agent": "Fixed Asset Reviewer",
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "functionalities": [
+        "close.fixed_assets"
+      ],
+      "required_inputs": [
+        "capital invoice / asset register"
+      ],
+      "expected_outputs": [
+        "JE",
+        "NBV",
+        "straight-line schedule"
+      ],
+      "workflows": [
+        "fixed_assets.workflow.run_depreciation_workflow"
+      ],
+      "entrypoints": [
+        "python close.py depreciate --period 2026-09"
+      ]
+    },
+    {
+      "agent": "Balance Sheet Reconciliation Preparer",
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "functionalities": [
+        "close.balance_sheet_recs"
+      ],
+      "required_inputs": [
+        "ledger balances",
+        "subledger evidence"
+      ],
+      "expected_outputs": [
+        "tie / exception / needs review"
+      ],
+      "workflows": [
+        "bs_recon.workflow.run_balance_sheet_reconciliations"
+      ],
+      "entrypoints": [
+        "python main.py close 2026-09"
+      ]
+    },
+    {
+      "agent": "Balance Sheet Reconciliation Reviewer",
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "functionalities": [
+        "close.balance_sheet_recs"
+      ],
+      "required_inputs": [
+        "ledger balances",
+        "subledger evidence"
+      ],
+      "expected_outputs": [
+        "tie / exception / needs review"
+      ],
+      "workflows": [
+        "bs_recon.workflow.run_balance_sheet_reconciliations"
+      ],
+      "entrypoints": [
+        "python main.py close 2026-09"
+      ]
+    },
+    {
+      "agent": "Month-End Close Reviewer",
+      "skills": [
+        "month-end-close-review",
+        "prior-period-precedent"
+      ],
+      "functionalities": [
+        "close.month_end",
+        "orchestration.cfo"
+      ],
+      "required_inputs": [
+        "AP/AR/cash/accrual/prepaid/asset task statuses",
+        "broad objective / period"
+      ],
+      "expected_outputs": [
+        "BLOCKED | CLOSED",
+        "blockers",
+        "internally consistent close + cash + reporting result"
+      ],
+      "workflows": [
+        "cfo.scenario.run_cfo_scenario",
+        "close.month_end.run_month_end"
+      ],
+      "entrypoints": [
+        "python main.py cfo-demo",
+        "python main.py demo-close"
+      ]
+    },
+    {
+      "agent": "Close Manager",
+      "skills": [
+        "month-end-close-coordination"
+      ],
+      "functionalities": [
+        "close.month_end",
+        "orchestration.cfo"
+      ],
+      "required_inputs": [
+        "AP/AR/cash/accrual/prepaid/asset task statuses",
+        "broad objective / period"
+      ],
+      "expected_outputs": [
+        "BLOCKED | CLOSED",
+        "blockers",
+        "internally consistent close + cash + reporting result"
+      ],
+      "workflows": [
+        "cfo.scenario.run_cfo_scenario",
+        "close.month_end.run_month_end"
+      ],
+      "entrypoints": [
+        "python main.py cfo-demo",
+        "python main.py demo-close"
+      ]
+    },
+    {
+      "agent": "Auditor Agent",
+      "skills": [
+        "audit-sampling-interpretation",
+        "control-testing-interpretation",
+        "reconciliation-reperformance-review",
+        "segregation-of-duties-interpretation"
+      ],
+      "functionalities": [
+        "audit.controls",
+        "evaluation.finance_gauntlet"
+      ],
+      "required_inputs": [
+        "operational populations",
+        "planted exceptions",
+        "production workflows",
+        "public fixtures"
+      ],
+      "expected_outputs": [
+        "cross-workflow consistency",
+        "family rates",
+        "findings",
+        "memory-on vs memory-off",
+        "reperformance",
+        "samples",
+        "scorecard"
+      ],
+      "workflows": [
+        "audit.workflow.run_audit",
+        "evals.maximor_finance_gauntlet.runner.run_gauntlet"
+      ],
+      "entrypoints": [
+        "python main.py audit --period 2026-09 --seed 26",
+        "python main.py eval-gauntlet"
+      ]
+    },
+    {
+      "agent": "Audit Report Agent",
+      "skills": [
+        "audit-finding-writing"
+      ],
+      "functionalities": [
+        "audit.controls"
+      ],
+      "required_inputs": [
+        "operational populations",
+        "planted exceptions"
+      ],
+      "expected_outputs": [
+        "findings",
+        "reperformance",
+        "samples"
+      ],
+      "workflows": [
+        "audit.workflow.run_audit"
+      ],
+      "entrypoints": [
+        "python main.py audit --period 2026-09 --seed 26"
+      ]
+    },
+    {
+      "agent": "Variance Analysis Agent",
+      "skills": [
+        "financial-variance-analysis"
+      ],
+      "functionalities": [
+        "reporting.variance_board"
+      ],
+      "required_inputs": [
+        "comparison period",
+        "reporting ledger"
+      ],
+      "expected_outputs": [
+        "board pack",
+        "statements",
+        "variance drivers"
+      ],
+      "workflows": [
+        "reporting.workflow.run_reporting_workflow"
+      ],
+      "entrypoints": [
+        "python main.py demo-reporting"
+      ]
+    },
+    {
+      "agent": "Reporting Reviewer Agent",
+      "skills": [
+        "financial-variance-analysis",
+        "board-financial-reporting"
+      ],
+      "functionalities": [
+        "reporting.variance_board"
+      ],
+      "required_inputs": [
+        "comparison period",
+        "reporting ledger"
+      ],
+      "expected_outputs": [
+        "board pack",
+        "statements",
+        "variance drivers"
+      ],
+      "workflows": [
+        "reporting.workflow.run_reporting_workflow"
+      ],
+      "entrypoints": [
+        "python main.py demo-reporting"
+      ]
+    },
+    {
+      "agent": "Board Reporting Agent",
+      "skills": [
+        "board-financial-reporting"
+      ],
+      "functionalities": [
+        "reporting.variance_board"
+      ],
+      "required_inputs": [
+        "comparison period",
+        "reporting ledger"
+      ],
+      "expected_outputs": [
+        "board pack",
+        "statements",
+        "variance drivers"
+      ],
+      "workflows": [
+        "reporting.workflow.run_reporting_workflow"
+      ],
+      "entrypoints": [
+        "python main.py demo-reporting"
+      ]
+    },
+    {
+      "agent": "Cash Forecast Agent",
+      "skills": [
+        "cash-forecasting",
+        "ar-cash-forecasting"
+      ],
+      "functionalities": [
+        "forecast.thirteen_week"
+      ],
+      "required_inputs": [
+        "AP pool",
+        "AR invoices",
+        "opening cash",
+        "payroll"
+      ],
+      "expected_outputs": [
+        "13 weeks",
+        "miss drivers"
+      ],
+      "workflows": [
+        "reporting.forecast / reporting.workflow"
+      ],
+      "entrypoints": [
+        "python main.py cash-forecast --as-of 2026-09-30 --weeks 13"
+      ]
+    },
+    {
+      "agent": "Forecast Reviewer Agent",
+      "skills": [
+        "cash-forecasting",
+        "ar-cash-forecasting",
+        "forecast-vs-actual-interpretation"
+      ],
+      "functionalities": [
+        "forecast.thirteen_week"
+      ],
+      "required_inputs": [
+        "AP pool",
+        "AR invoices",
+        "opening cash",
+        "payroll"
+      ],
+      "expected_outputs": [
+        "13 weeks",
+        "miss drivers"
+      ],
+      "workflows": [
+        "reporting.forecast / reporting.workflow"
+      ],
+      "entrypoints": [
+        "python main.py cash-forecast --as-of 2026-09-30 --weeks 13"
+      ]
+    },
+    {
+      "agent": "Forecast Variance Agent",
+      "skills": [
+        "forecast-vs-actual-interpretation"
+      ],
+      "functionalities": [
+        "forecast.thirteen_week"
+      ],
+      "required_inputs": [
+        "AP pool",
+        "AR invoices",
+        "opening cash",
+        "payroll"
+      ],
+      "expected_outputs": [
+        "13 weeks",
+        "miss drivers"
+      ],
+      "workflows": [
+        "reporting.forecast / reporting.workflow"
+      ],
+      "entrypoints": [
+        "python main.py cash-forecast --as-of 2026-09-30 --weeks 13"
+      ]
+    },
+    {
+      "agent": "AP/AR Sample Data Agent",
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "functionalities": [
+        "sample_data.generation"
+      ],
+      "required_inputs": [
+        "period",
+        "seed"
+      ],
+      "expected_outputs": [
+        "data/demo pack",
+        "expected_results",
+        "manifest"
+      ],
+      "workflows": [
+        "sample_data.orchestrator.generate_sample_data"
+      ],
+      "entrypoints": [
+        "python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo"
+      ]
+    },
+    {
+      "agent": "Cash Recon Sample Data Agent",
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "functionalities": [
+        "sample_data.generation"
+      ],
+      "required_inputs": [
+        "period",
+        "seed"
+      ],
+      "expected_outputs": [
+        "data/demo pack",
+        "expected_results",
+        "manifest"
+      ],
+      "workflows": [
+        "sample_data.orchestrator.generate_sample_data"
+      ],
+      "entrypoints": [
+        "python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo"
+      ]
+    },
+    {
+      "agent": "Close Sample Data Agent",
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "functionalities": [
+        "sample_data.generation"
+      ],
+      "required_inputs": [
+        "period",
+        "seed"
+      ],
+      "expected_outputs": [
+        "data/demo pack",
+        "expected_results",
+        "manifest"
+      ],
+      "workflows": [
+        "sample_data.orchestrator.generate_sample_data"
+      ],
+      "entrypoints": [
+        "python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo"
+      ]
+    },
+    {
+      "agent": "Audit Controls Sample Data Agent",
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "functionalities": [
+        "sample_data.generation"
+      ],
+      "required_inputs": [
+        "period",
+        "seed"
+      ],
+      "expected_outputs": [
+        "data/demo pack",
+        "expected_results",
+        "manifest"
+      ],
+      "workflows": [
+        "sample_data.orchestrator.generate_sample_data"
+      ],
+      "entrypoints": [
+        "python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo"
+      ]
+    },
+    {
+      "agent": "Reporting Forecasting Sample Data Agent",
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "functionalities": [
+        "sample_data.generation"
+      ],
+      "required_inputs": [
+        "period",
+        "seed"
+      ],
+      "expected_outputs": [
+        "data/demo pack",
+        "expected_results",
+        "manifest"
+      ],
+      "workflows": [
+        "sample_data.orchestrator.generate_sample_data"
+      ],
+      "entrypoints": [
+        "python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "accrual-evidence-evaluation",
+      "description": "Judges whether period-end evidence supports accruing a missing vendor invoice, skipping because the bill already arrived, or returning insufficient evidence. Use during month-end close for one vendor.",
+      "status": "extracted",
+      "path": "skills/accrual-evidence-evaluation/SKILL.md",
+      "used_by": [
+        "Accrual Agent"
+      ]
+    },
+    {
+      "name": "accrual-method-selection",
+      "description": "Selects the most defensible accrual estimation method from Python-computed candidates. Use after evidence shows an unbilled expense should be accrued.",
+      "status": "extracted",
+      "path": "skills/accrual-method-selection/SKILL.md",
+      "used_by": [
+        "Accrual Agent"
+      ]
+    },
+    {
+      "name": "ap-exception-investigation",
+      "description": "Explains how this vendor's mess differs from Kernel exception_types. Use when prepare returned INVESTIGATE or exception_types is non-empty.",
+      "status": "extracted",
+      "path": "skills/ap-exception-investigation/SKILL.md",
+      "used_by": [
+        "Exception Investigator"
+      ]
+    },
+    {
+      "name": "ar-cash-forecasting",
+      "description": "Interpret a Python receivable schedule for a 13-week cash forecast. Use when judging collection timing, disputed invoices, promises to pay, and uncertain cash.",
+      "status": "new",
+      "path": "skills/ar-cash-forecasting/SKILL.md",
+      "used_by": [
+        "Cash Forecast Agent",
+        "Forecast Reviewer Agent"
+      ]
+    },
+    {
+      "name": "ar-collections-policy",
+      "description": "Chooses the next collections action from Kernel aging and contact facts. Use when Bot collect wakes on the aging Routine after apply has drained deposits for that as-of.",
+      "status": "extracted",
+      "path": "skills/ar-collections-policy/SKILL.md",
+      "used_by": [
+        "Collections Agent"
+      ]
+    },
+    {
+      "name": "audit-finding-writing",
+      "description": "Write audit findings from Kernel ReportStats without inventing counts, IDs, or severity.",
+      "status": "new",
+      "path": "skills/audit-finding-writing/SKILL.md",
+      "used_by": [
+        "Audit Report Agent"
+      ]
+    },
+    {
+      "name": "audit-sampling-interpretation",
+      "description": "Interpret a Python-selected audit sample without choosing transactions or changing the seed.",
+      "status": "new",
+      "path": "skills/audit-sampling-interpretation/SKILL.md",
+      "used_by": [
+        "Auditor Agent"
+      ]
+    },
+    {
+      "name": "balance-sheet-reconciliation",
+      "description": "Classifies ledger-versus-evidence differences using Python packets. Use for cash, AR, AP, accruals, prepaids, and fixed-asset sign-off.",
+      "status": "new",
+      "path": "skills/balance-sheet-reconciliation/SKILL.md",
+      "used_by": [
+        "Balance Sheet Reconciliation Preparer",
+        "Balance Sheet Reconciliation Reviewer"
+      ]
+    },
+    {
+      "name": "bank-charge-invoice-discovery",
+      "description": "Treats bank and corporate-card charges as non-invoices and recovers an invoice candidate only when supporting invoice documentation exists. Use when inspecting card or bank transactions for missing vendor bills.",
+      "status": "extracted",
+      "path": "skills/bank-charge-invoice-discovery/SKILL.md",
+      "used_by": [
+        "Bank/Card Discovery Agent"
+      ]
+    },
+    {
+      "name": "bank-reference-interpretation",
+      "description": "Read messy bank memos and processor payout labels. Do not invent invoice numbers or counterparties. Memory is color, not fee evidence.",
+      "status": "new",
+      "path": "skills/bank-reference-interpretation/SKILL.md",
+      "used_by": [
+        "Cash Reconciliation Preparer",
+        "Cash Exception Investigator"
+      ]
+    },
+    {
+      "name": "board-financial-reporting",
+      "description": "Write a compact board narrative from Kernel facts. Unlocked drafts label every number UNLOCKED.",
+      "status": "new",
+      "path": "skills/board-financial-reporting/SKILL.md",
+      "used_by": [
+        "Reporting Reviewer Agent",
+        "Board Reporting Agent"
+      ]
+    },
+    {
+      "name": "cash-application",
+      "description": "Chooses among Kernel remittance-match candidates for one customer payment. Use when Bot apply wakes on a remittance path, including an ambiguous or material deposit.",
+      "status": "extracted",
+      "path": "skills/cash-application/SKILL.md",
+      "used_by": [
+        "Cash Application Agent",
+        "Cash Application Reviewer"
+      ]
+    },
+    {
+      "name": "cash-forecasting",
+      "description": "Interpret a Python 13-week cash forecast built from AP, AR, and payroll lines. Use when judging timing risk, holds, or low-confidence collections.",
+      "status": "new",
+      "path": "skills/cash-forecasting/SKILL.md",
+      "used_by": [
+        "Cash Forecast Agent",
+        "Forecast Reviewer Agent"
+      ]
+    },
+    {
+      "name": "cash-reconciliation-method-selection",
+      "description": "Choose a Kernel candidate_id for a bank line. Trust apply/pay identifiers. Do not invent fees or replay match_type taxonomy.",
+      "status": "new",
+      "path": "skills/cash-reconciliation-method-selection/SKILL.md",
+      "used_by": [
+        "Cash Reconciliation Preparer",
+        "Cash Reconciliation Reviewer"
+      ]
+    },
+    {
+      "name": "control-testing-interpretation",
+      "description": "Interpret deterministic control results as PASS, FAIL, EXCEPTION, HUMAN_REVIEW, or NOT_TESTED without rewriting source records.",
+      "status": "new",
+      "path": "skills/control-testing-interpretation/SKILL.md",
+      "used_by": [
+        "Auditor Agent"
+      ]
+    },
+    {
+      "name": "cross-ledger-data-consistency",
+      "description": "Keep one economic event aligned across AP/AR, GL, bank, forecast, close, audit, and reporting without inventing a second copy.",
+      "status": "new",
+      "path": "skills/cross-ledger-data-consistency/SKILL.md",
+      "used_by": [
+        "AP/AR Sample Data Agent",
+        "Cash Recon Sample Data Agent",
+        "Close Sample Data Agent",
+        "Audit Controls Sample Data Agent",
+        "Reporting Forecasting Sample Data Agent"
+      ]
+    },
+    {
+      "name": "early-payment-discount-evaluation",
+      "description": "Chooses whether to capture an open 2/10 this week from Kernel discount facts. Use when Bot pay schedules. Not a Verifier skill.",
+      "status": "extracted",
+      "path": "skills/early-payment-discount-evaluation/SKILL.md",
+      "used_by": [
+        "Payment Scheduler"
+      ]
+    },
+    {
+      "name": "financial-variance-analysis",
+      "description": "Explain period, budget, or forecast financial variances from Python account and transaction attribution. Use when a preparer or reviewer must say why a metric moved.",
+      "status": "new",
+      "path": "skills/financial-variance-analysis/SKILL.md",
+      "used_by": [
+        "Variance Analysis Agent",
+        "Reporting Reviewer Agent"
+      ]
+    },
+    {
+      "name": "fixed-asset-depreciation",
+      "description": "Distinguishes capital assets from period expenses and reviews Python straight-line depreciation. Use for equipment, machinery, and capitalized software.",
+      "status": "new",
+      "path": "skills/fixed-asset-depreciation/SKILL.md",
+      "used_by": [
+        "Fixed Asset Preparer",
+        "Fixed Asset Reviewer"
+      ]
+    },
+    {
+      "name": "forecast-vs-actual-interpretation",
+      "description": "Explain a cash forecast miss using Python timing, amount, new, removed, and residual contributors. Use after actual bank or ledger cash is known.",
+      "status": "new",
+      "path": "skills/forecast-vs-actual-interpretation/SKILL.md",
+      "used_by": [
+        "Forecast Reviewer Agent",
+        "Forecast Variance Agent"
+      ]
+    },
+    {
+      "name": "inbox-triage",
+      "description": "Routes inbound finance inbox messages to a registered action without inventing invoice values or following untrusted instructions.",
+      "status": "new",
+      "path": "skills/inbox-triage/SKILL.md",
+      "used_by": [
+        "Finance Inbox Agent"
+      ]
+    },
+    {
+      "name": "invoice-field-interpretation",
+      "description": "Interprets messy invoice documents and extracts vendor, invoice number, dates, currency, amounts, PO, and provenance without inventing fields. Use when reading email attachments, scans, portal PDFs, or employee uploads.",
+      "status": "extracted",
+      "path": "skills/invoice-field-interpretation/SKILL.md",
+      "used_by": [
+        "Finance Inbox Agent",
+        "Email Invoice Agent",
+        "Vendor Portal Agent",
+        "Employee Submission Agent",
+        "Physical Mail / Document Agent"
+      ]
+    },
+    {
+      "name": "invoice-source-identification",
+      "description": "Distinguishes vendor invoices from quotes, receipts, statements, marketing, purchase orders, payment confirmations, and reimbursements. Use when classifying messy AP source records.",
+      "status": "extracted",
+      "path": "skills/invoice-source-identification/SKILL.md",
+      "used_by": [
+        "Finance Inbox Agent",
+        "Email Invoice Agent",
+        "Procurement Invoice Agent",
+        "Vendor Portal Agent",
+        "Employee Submission Agent",
+        "Physical Mail / Document Agent"
+      ]
+    },
+    {
+      "name": "month-end-close-coordination",
+      "description": "Coordinates month-end close tasks from Kernel ready_tasks without inventing balances or marking CLOSED.",
+      "status": "new",
+      "path": "skills/month-end-close-coordination/SKILL.md",
+      "used_by": [
+        "Close Manager"
+      ]
+    },
+    {
+      "name": "month-end-close-review",
+      "description": "Reads close gates and refuses lock when evaluate_close_gates failed. Cannot mark CLOSED.",
+      "status": "new",
+      "path": "skills/month-end-close-review/SKILL.md",
+      "used_by": [
+        "Month-End Close Reviewer"
+      ]
+    },
+    {
+      "name": "payment-prioritization",
+      "description": "Chooses among Kernel payment candidates for this week's draft. Use when Bot pay wears Profile schedule. Not a Verifier skill.",
+      "status": "extracted",
+      "path": "skills/payment-prioritization/SKILL.md",
+      "used_by": [
+        "Payment Scheduler"
+      ]
+    },
+    {
+      "name": "prepaid-expense-accounting",
+      "description": "Chooses among Python prepaid treatments (immediate expense, straight-line monthly, daily proration) using service-period evidence. Use when a payment covers future months.",
+      "status": "new",
+      "path": "skills/prepaid-expense-accounting/SKILL.md",
+      "used_by": [
+        "Prepaid Preparer",
+        "Prepaid Reviewer"
+      ]
+    },
+    {
+      "name": "prior-period-precedent",
+      "description": "Reuse a prior-period treatment only when current evidence still supports it.",
+      "status": "new",
+      "path": "skills/prior-period-precedent/SKILL.md",
+      "used_by": [
+        "Exception Investigator",
+        "AP Reviewer",
+        "AP Approver",
+        "Accrual Agent",
+        "Cash Exception Investigator",
+        "Cash Reconciliation Reviewer",
+        "Prepaid Preparer",
+        "Prepaid Reviewer",
+        "Month-End Close Reviewer"
+      ]
+    },
+    {
+      "name": "reconciliation-evidence-validation",
+      "description": "Accept a bank-to-ledger tick only when Kernel evidence and pipe identifiers support it. Coincident amounts are not enough.",
+      "status": "new",
+      "path": "skills/reconciliation-evidence-validation/SKILL.md",
+      "used_by": [
+        "Cash Reconciliation Preparer",
+        "Cash Exception Investigator",
+        "Cash Reconciliation Reviewer"
+      ]
+    },
+    {
+      "name": "reconciliation-exception-investigation",
+      "description": "Investigate unmatched cash without inventing a story. Memory of payout labels cannot override missing fee evidence.",
+      "status": "new",
+      "path": "skills/reconciliation-exception-investigation/SKILL.md",
+      "used_by": [
+        "Cash Exception Investigator",
+        "Cash Reconciliation Reviewer"
+      ]
+    },
+    {
+      "name": "reconciliation-reperformance-review",
+      "description": "Compare an independent Python re-performance to the original reconciliation without using the original conclusion as an input.",
+      "status": "new",
+      "path": "skills/reconciliation-reperformance-review/SKILL.md",
+      "used_by": [
+        "Auditor Agent"
+      ]
+    },
+    {
+      "name": "segregation-of-duties-interpretation",
+      "description": "Interpret a Python segregation-of-duties failure using identity IDs and the configured policy, including business impact and follow-up.",
+      "status": "new",
+      "path": "skills/segregation-of-duties-interpretation/SKILL.md",
+      "used_by": [
+        "Auditor Agent"
+      ]
+    },
+    {
+      "name": "superseded-document-handling",
+      "description": "Distinguishes original invoices from revisions, voids, credit memos, and duplicate copies so only the live payable remains.",
+      "status": "new",
+      "path": "skills/superseded-document-handling/SKILL.md",
+      "used_by": [
+        "Finance Inbox Agent",
+        "Email Invoice Agent",
+        "Vendor Portal Agent",
+        "Employee Submission Agent",
+        "Physical Mail / Document Agent",
+        "AP Preparer",
+        "Exception Investigator"
+      ]
+    },
+    {
+      "name": "synthetic-finance-scenario-design",
+      "description": "Choose among approved finance scenario templates so one economic event can be instantiated consistently across AP, cash, close, audit, and reporting.",
+      "status": "new",
+      "path": "skills/synthetic-finance-scenario-design/SKILL.md",
+      "used_by": [
+        "AP/AR Sample Data Agent",
+        "Cash Recon Sample Data Agent",
+        "Close Sample Data Agent",
+        "Audit Controls Sample Data Agent",
+        "Reporting Forecasting Sample Data Agent"
+      ]
+    },
+    {
+      "name": "three-way-match-analysis",
+      "description": "Interprets Kernel three-way facts when the packet is messy or uncertain. Does not restate must_hold. Use when preparing an open bill.",
+      "status": "extracted",
+      "path": "skills/three-way-match-analysis/SKILL.md",
+      "used_by": [
+        "AP Preparer"
+      ]
+    }
+  ],
+  "skill_names": [
+    "accrual-evidence-evaluation",
+    "accrual-method-selection",
+    "ap-exception-investigation",
+    "ar-cash-forecasting",
+    "ar-collections-policy",
+    "audit-finding-writing",
+    "audit-sampling-interpretation",
+    "balance-sheet-reconciliation",
+    "bank-charge-invoice-discovery",
+    "bank-reference-interpretation",
+    "board-financial-reporting",
+    "cash-application",
+    "cash-forecasting",
+    "cash-reconciliation-method-selection",
+    "control-testing-interpretation",
+    "cross-ledger-data-consistency",
+    "early-payment-discount-evaluation",
+    "financial-variance-analysis",
+    "fixed-asset-depreciation",
+    "forecast-vs-actual-interpretation",
+    "inbox-triage",
+    "invoice-field-interpretation",
+    "invoice-source-identification",
+    "month-end-close-coordination",
+    "month-end-close-review",
+    "payment-prioritization",
+    "prepaid-expense-accounting",
+    "prior-period-precedent",
+    "reconciliation-evidence-validation",
+    "reconciliation-exception-investigation",
+    "reconciliation-reperformance-review",
+    "segregation-of-duties-interpretation",
+    "superseded-document-handling",
+    "synthetic-finance-scenario-design",
+    "three-way-match-analysis"
+  ],
+  "capabilities": [
+    {
+      "capability_id": "inbox.counterparty_to_ap",
+      "name": "Gmail-like finance inbox with two-agent handoff",
+      "agents": [
+        "Counterparty Message Agent",
+        "Finance Inbox Agent"
+      ],
+      "skills": [
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "workflow": "inbox.workflow.handoff",
+      "entrypoint": "python main.py demo-inbox",
+      "required_inputs": [
+        "message envelope",
+        "optional attachment"
+      ],
+      "expected_outputs": [
+        "classification",
+        "registered action",
+        "canonical AP invoice or structured notice",
+        "trace"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-INBOX-001",
+        "SCN-INBOX-002",
+        "SCN-INBOX-003",
+        "SCN-INBOX-004",
+        "SCN-INBOX-005",
+        "SCN-INBOX-006",
+        "SCN-INBOX-007",
+        "SCN-INBOX-008",
+        "SCN-INBOX-009",
+        "SCN-INBOX-010",
+        "SCN-INBOX-011",
+        "SCN-INBOX-012",
+        "SCN-INBOX-013",
+        "SCN-INBOX-014",
+        "SCN-INBOX-015",
+        "SCN-INBOX-016",
+        "SCN-INBOX-017",
+        "SCN-INBOX-018"
+      ]
+    },
+    {
+      "capability_id": "ingestion.classify_document",
+      "name": "Invoice / document classification",
+      "agents": [
+        "Email Invoice Agent",
+        "Vendor Portal Agent",
+        "Employee Submission Agent",
+        "Physical Mail / Document Agent",
+        "Procurement Invoice Agent"
+      ],
+      "skills": [
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "workflow": "invoice_ingestion.workflow.ingest_invoices",
+      "entrypoint": "python main.py ingest 2026-09",
+      "required_inputs": [
+        "source record",
+        "subject/filename/text"
+      ],
+      "expected_outputs": [
+        "classification",
+        "extracted fields",
+        "canonical invoice identity"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-ING-001",
+        "SCN-ING-002",
+        "SCN-ING-003",
+        "SCN-ING-004",
+        "SCN-ING-005",
+        "SCN-ING-006",
+        "SCN-ING-007",
+        "SCN-ING-008",
+        "SCN-ING-009",
+        "SCN-ING-010",
+        "SCN-AP-012"
+      ]
+    },
+    {
+      "capability_id": "ingestion.structured_parse",
+      "name": "Structured ERP / Coupa / EDI parse",
+      "agents": [
+        "ERP Invoice Agent",
+        "EDI / Electronic Invoicing Agent"
+      ],
+      "skills": [],
+      "workflow": "invoice_ingestion.sources",
+      "entrypoint": "python -m invoice_ingestion.demo",
+      "required_inputs": [
+        "erp.json / edi_documents.json"
+      ],
+      "expected_outputs": [
+        "InvoiceCandidate"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-ING-001",
+        "SCN-ING-010"
+      ]
+    },
+    {
+      "capability_id": "ingestion.bank_card_discovery",
+      "name": "Recover invoice from a bank/card charge only with supporting docs",
+      "agents": [
+        "Bank/Card Discovery Agent"
+      ],
+      "skills": [
+        "bank-charge-invoice-discovery"
+      ],
+      "workflow": "invoice_ingestion.sources",
+      "entrypoint": "python main.py ingest 2026-09",
+      "required_inputs": [
+        "bank/card charge",
+        "supporting documents"
+      ],
+      "expected_outputs": [
+        "invoice_found | invoice_missing"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-AP-012"
+      ]
+    },
+    {
+      "capability_id": "ap.three_way_match",
+      "name": "Three-way match and AP approve/hold",
+      "agents": [
+        "AP Preparer",
+        "Exception Investigator",
+        "AP Reviewer",
+        "AP Approver",
+        "AP Audit"
+      ],
+      "skills": [
+        "three-way-match-analysis",
+        "ap-exception-investigation"
+      ],
+      "workflow": "workflow.run_ap_workflow",
+      "entrypoint": "python main.py INV-001",
+      "required_inputs": [
+        "invoice_id",
+        "PO",
+        "goods receipt",
+        "policies",
+        "prior_cases"
+      ],
+      "expected_outputs": [
+        "APPROVE | HOLD",
+        "exception types",
+        "evidence"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-AP-001",
+        "SCN-AP-002",
+        "SCN-AP-003",
+        "SCN-AP-004",
+        "SCN-AP-005",
+        "SCN-AP-006",
+        "SCN-AP-007",
+        "SCN-AP-008",
+        "SCN-AP-013"
+      ]
+    },
+    {
+      "capability_id": "ap.payment_scheduling",
+      "name": "Weekly payment prioritization",
+      "agents": [
+        "Payment Scheduler",
+        "Payment Audit"
+      ],
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "workflow": "scheduling.workflow.run_schedule_workflow",
+      "entrypoint": "python main.py schedule --seed-demo",
+      "required_inputs": [
+        "approved_pool",
+        "cash_position"
+      ],
+      "expected_outputs": [
+        "pay_this_week",
+        "defer",
+        "metrics"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-AP-009",
+        "SCN-AP-010",
+        "SCN-AP-011"
+      ]
+    },
+    {
+      "capability_id": "ar.aging_collections",
+      "name": "AR aging and collections",
+      "agents": [
+        "Collections Agent"
+      ],
+      "skills": [
+        "ar-collections-policy"
+      ],
+      "workflow": "ar.workflow.run_aging / run_collections",
+      "entrypoint": "python main.py ar-aging --as-of 2026-09-30",
+      "required_inputs": [
+        "ar_invoices",
+        "as_of_date"
+      ],
+      "expected_outputs": [
+        "aging bucket",
+        "collection action"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-AR-001",
+        "SCN-AR-002",
+        "SCN-AR-003",
+        "SCN-AR-004",
+        "SCN-AR-005",
+        "SCN-AR-012"
+      ]
+    },
+    {
+      "capability_id": "ar.cash_application",
+      "name": "Cash application including ambiguous remittances",
+      "agents": [
+        "Cash Application Agent",
+        "Cash Application Reviewer"
+      ],
+      "skills": [
+        "cash-application"
+      ],
+      "workflow": "ar.workflow.run_cash_apply",
+      "entrypoint": "python main.py ar-cash-apply PAY-001",
+      "required_inputs": [
+        "payment_id",
+        "open invoices",
+        "precedents"
+      ],
+      "expected_outputs": [
+        "AUTO_APPLY | HUMAN_REVIEW | UNAPPLIED",
+        "selected invoices"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-AR-006",
+        "SCN-AR-007",
+        "SCN-AR-008",
+        "SCN-AR-009",
+        "SCN-AR-010",
+        "SCN-AR-011",
+        "SCN-AR-013"
+      ]
+    },
+    {
+      "capability_id": "cash.bank_reconciliation",
+      "name": "Bank / cash ledger reconciliation",
+      "agents": [
+        "Cash Reconciliation Preparer",
+        "Cash Exception Investigator",
+        "Cash Reconciliation Reviewer"
+      ],
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "reconciliation-exception-investigation",
+        "bank-reference-interpretation",
+        "reconciliation-evidence-validation"
+      ],
+      "workflow": "cash_recon.workflow.run_cash_reconciliation",
+      "entrypoint": "python main.py reconcile-cash --month 2026-09 --seed-demo",
+      "required_inputs": [
+        "bank_statement",
+        "cash ledger",
+        "fee evidence"
+      ],
+      "expected_outputs": [
+        "MATCHED | EXPLAINED_EXCEPTION | HUMAN_REVIEW | OUTSTANDING_TIMING_ITEM"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CASH-001",
+        "SCN-CASH-002",
+        "SCN-CASH-003",
+        "SCN-CASH-004",
+        "SCN-CASH-005",
+        "SCN-CASH-006",
+        "SCN-CASH-007",
+        "SCN-CASH-008",
+        "SCN-CASH-009",
+        "SCN-CASH-010",
+        "SCN-CASH-011",
+        "SCN-CASH-012"
+      ]
+    },
+    {
+      "capability_id": "cash.stripe_reconciliation",
+      "name": "Stripe payout reconciliation",
+      "agents": [
+        "Cash Reconciliation Preparer"
+      ],
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "reconciliation-evidence-validation"
+      ],
+      "workflow": "integrations.cash.reconcile_payout + cash_recon",
+      "entrypoint": "python main.py stripe-demo",
+      "required_inputs": [
+        "stripe payouts",
+        "balance transactions",
+        "bank deposit"
+      ],
+      "expected_outputs": [
+        "PROVIDER_PAYOUT",
+        "tied payout arithmetic"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CASH-009",
+        "SCN-CASH-010",
+        "SCN-CASH-011"
+      ]
+    },
+    {
+      "capability_id": "close.accruals",
+      "name": "Missing-bill accruals",
+      "agents": [
+        "Accrual Agent"
+      ],
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection"
+      ],
+      "workflow": "accrual.workflow.run_accrual_workflow",
+      "entrypoint": "python accrue.py 2026-09",
+      "required_inputs": [
+        "historical invoices",
+        "contracts",
+        "usage",
+        "POs"
+      ],
+      "expected_outputs": [
+        "ACCRUE | SKIP | INSUFFICIENT_EVIDENCE",
+        "JE"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CLOSE-001",
+        "SCN-CLOSE-002",
+        "SCN-MEM-004"
+      ]
+    },
+    {
+      "capability_id": "close.prepaids",
+      "name": "Prepaid amortization",
+      "agents": [
+        "Prepaid Preparer",
+        "Prepaid Reviewer"
+      ],
+      "skills": [
+        "prepaid-expense-accounting"
+      ],
+      "workflow": "prepaid.workflow.run_prepaid_workflow",
+      "entrypoint": "python close.py prepaid --period 2026-09",
+      "required_inputs": [
+        "prepaid item",
+        "service period"
+      ],
+      "expected_outputs": [
+        "schedule",
+        "monthly JE",
+        "remaining balance"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CLOSE-003",
+        "SCN-CLOSE-004",
+        "SCN-CLOSE-009"
+      ]
+    },
+    {
+      "capability_id": "close.fixed_assets",
+      "name": "Fixed-asset depreciation",
+      "agents": [
+        "Fixed Asset Preparer",
+        "Fixed Asset Reviewer"
+      ],
+      "skills": [
+        "fixed-asset-depreciation"
+      ],
+      "workflow": "fixed_assets.workflow.run_depreciation_workflow",
+      "entrypoint": "python close.py depreciate --period 2026-09",
+      "required_inputs": [
+        "capital invoice / asset register"
+      ],
+      "expected_outputs": [
+        "straight-line schedule",
+        "NBV",
+        "JE"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CLOSE-005"
+      ]
+    },
+    {
+      "capability_id": "close.balance_sheet_recs",
+      "name": "Balance-sheet substantiation",
+      "agents": [
+        "Balance Sheet Reconciliation Preparer",
+        "Balance Sheet Reconciliation Reviewer"
+      ],
+      "skills": [
+        "balance-sheet-reconciliation"
+      ],
+      "workflow": "bs_recon.workflow.run_balance_sheet_reconciliations",
+      "entrypoint": "python main.py close 2026-09",
+      "required_inputs": [
+        "ledger balances",
+        "subledger evidence"
+      ],
+      "expected_outputs": [
+        "tie / exception / needs review"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CLOSE-007",
+        "SCN-CLOSE-008",
+        "SCN-CLOSE-009",
+        "SCN-CLOSE-010"
+      ]
+    },
+    {
+      "capability_id": "close.month_end",
+      "name": "Month-end close coordination and gating",
+      "agents": [
+        "Month-End Close Reviewer",
+        "Close Manager"
+      ],
+      "skills": [
+        "month-end-close-review",
+        "month-end-close-coordination"
+      ],
+      "workflow": "close.month_end.run_month_end",
+      "entrypoint": "python main.py demo-close",
+      "required_inputs": [
+        "AP/AR/cash/accrual/prepaid/asset task statuses"
+      ],
+      "expected_outputs": [
+        "BLOCKED | CLOSED",
+        "blockers"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CLOSE-011",
+        "SCN-CLOSE-012",
+        "SCN-CLOSE-013",
+        "SCN-CLOSE-015",
+        "SCN-CLOSE-016",
+        "SCN-CFO-001"
+      ],
+      "notes": "Close Manager SDK agent is defined; production coordination uses deterministic_coordinate()."
+    },
+    {
+      "capability_id": "audit.controls",
+      "name": "Independent audit sampling and control testing",
+      "agents": [
+        "Auditor Agent",
+        "Audit Report Agent"
+      ],
+      "skills": [
+        "audit-sampling-interpretation",
+        "control-testing-interpretation",
+        "reconciliation-reperformance-review",
+        "segregation-of-duties-interpretation",
+        "audit-finding-writing"
+      ],
+      "workflow": "audit.workflow.run_audit",
+      "entrypoint": "python main.py audit --period 2026-09 --seed 26",
+      "required_inputs": [
+        "operational populations",
+        "planted exceptions"
+      ],
+      "expected_outputs": [
+        "findings",
+        "samples",
+        "reperformance"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-AUDIT-001",
+        "SCN-AUDIT-002",
+        "SCN-AUDIT-003",
+        "SCN-AUDIT-004",
+        "SCN-AUDIT-005",
+        "SCN-AUDIT-006",
+        "SCN-AUDIT-007",
+        "SCN-AUDIT-008",
+        "SCN-AUDIT-009",
+        "SCN-AUDIT-010",
+        "SCN-AUDIT-011",
+        "SCN-AUDIT-012",
+        "SCN-AUDIT-013"
+      ]
+    },
+    {
+      "capability_id": "reporting.variance_board",
+      "name": "Variance analysis and board reporting",
+      "agents": [
+        "Variance Analysis Agent",
+        "Reporting Reviewer Agent",
+        "Board Reporting Agent"
+      ],
+      "skills": [
+        "financial-variance-analysis",
+        "board-financial-reporting"
+      ],
+      "workflow": "reporting.workflow.run_reporting_workflow",
+      "entrypoint": "python main.py demo-reporting",
+      "required_inputs": [
+        "reporting ledger",
+        "comparison period"
+      ],
+      "expected_outputs": [
+        "statements",
+        "variance drivers",
+        "board pack"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-REPORT-001",
+        "SCN-REPORT-002"
+      ]
+    },
+    {
+      "capability_id": "forecast.thirteen_week",
+      "name": "13-week cash forecast and forecast-vs-actual",
+      "agents": [
+        "Cash Forecast Agent",
+        "Forecast Reviewer Agent",
+        "Forecast Variance Agent"
+      ],
+      "skills": [
+        "cash-forecasting",
+        "ar-cash-forecasting",
+        "forecast-vs-actual-interpretation"
+      ],
+      "workflow": "reporting.forecast / reporting.workflow",
+      "entrypoint": "python main.py cash-forecast --as-of 2026-09-30 --weeks 13",
+      "required_inputs": [
+        "AP pool",
+        "AR invoices",
+        "payroll",
+        "opening cash"
+      ],
+      "expected_outputs": [
+        "13 weeks",
+        "miss drivers"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-REPORT-003",
+        "SCN-REPORT-004",
+        "SCN-REPORT-005",
+        "SCN-REPORT-006",
+        "SCN-REPORT-007",
+        "SCN-REPORT-008",
+        "SCN-CFO-002"
+      ]
+    },
+    {
+      "capability_id": "memory.cross_period",
+      "name": "Cross-period precedent retrieval",
+      "agents": [
+        "Exception Investigator",
+        "Cash Exception Investigator",
+        "Prepaid Preparer",
+        "Cash Application Agent"
+      ],
+      "skills": [
+        "prior-period-precedent",
+        "ap-exception-investigation",
+        "cash-application"
+      ],
+      "workflow": "memory.store / cash_recon.workflow / prepaid.workflow / tools.get_prior_cases",
+      "entrypoint": "python main.py memory-demo --story stripe",
+      "required_inputs": [
+        "prior decision memory",
+        "current-period evidence"
+      ],
+      "expected_outputs": [
+        "retrieved decision_id",
+        "precedent_used on later-period trace"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-MEM-001",
+        "SCN-MEM-002",
+        "SCN-MEM-003",
+        "SCN-MEM-004"
+      ]
+    },
+    {
+      "capability_id": "memory.self_improvement",
+      "name": "Learn from structured correction",
+      "agents": [
+        "Cash Application Reviewer"
+      ],
+      "skills": [
+        "cash-application"
+      ],
+      "workflow": "ar.ledger.record_human_application",
+      "entrypoint": "python main.py ar-review-correct PAY-005 ...",
+      "required_inputs": [
+        "human correction"
+      ],
+      "expected_outputs": [
+        "updated precedent",
+        "later retrieval"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-LEARN-001",
+        "LH-SELF-CORRECT"
+      ],
+      "notes": "Harbor Electric actual bills reverse the open accrual. AR still writes human-sourced cash-application precedents."
+    },
+    {
+      "capability_id": "evaluation.finance_gauntlet",
+      "name": "Maximor Finance Gauntlet",
+      "agents": [
+        "Auditor Agent",
+        "Email Invoice Agent",
+        "Cash Reconciliation Preparer",
+        "Accrual Agent",
+        "AP Preparer"
+      ],
+      "skills": [
+        "invoice-source-identification",
+        "superseded-document-handling",
+        "reconciliation-evidence-validation",
+        "prior-period-precedent",
+        "cross-ledger-data-consistency"
+      ],
+      "workflow": "evals.maximor_finance_gauntlet.runner.run_gauntlet",
+      "entrypoint": "python main.py eval-gauntlet",
+      "required_inputs": [
+        "public fixtures",
+        "production workflows"
+      ],
+      "expected_outputs": [
+        "scorecard",
+        "family rates",
+        "memory-on vs memory-off",
+        "cross-workflow consistency"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "document-trap",
+        "self-correction",
+        "stripe-to-books"
+      ]
+    },
+    {
+      "capability_id": "orchestration.cfo",
+      "name": "Whole-company CFO orchestration",
+      "agents": [
+        "Close Manager",
+        "Month-End Close Reviewer"
+      ],
+      "skills": [
+        "month-end-close-coordination"
+      ],
+      "workflow": "cfo.scenario.run_cfo_scenario",
+      "entrypoint": "python main.py cfo-demo",
+      "required_inputs": [
+        "broad objective / period"
+      ],
+      "expected_outputs": [
+        "internally consistent close + cash + reporting result"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": [
+        "SCN-CFO-001",
+        "SCN-CFO-002",
+        "SCN-HAND-001",
+        "SCN-HAND-002"
+      ]
+    },
+    {
+      "capability_id": "sample_data.generation",
+      "name": "Synthetic company generation",
+      "agents": [
+        "AP/AR Sample Data Agent",
+        "Cash Recon Sample Data Agent",
+        "Close Sample Data Agent",
+        "Audit Controls Sample Data Agent",
+        "Reporting Forecasting Sample Data Agent"
+      ],
+      "skills": [
+        "synthetic-finance-scenario-design",
+        "cross-ledger-data-consistency"
+      ],
+      "workflow": "sample_data.orchestrator.generate_sample_data",
+      "entrypoint": "python main.py generate-sample-data --seed 42 --month 2026-09 --output data/demo",
+      "required_inputs": [
+        "seed",
+        "period"
+      ],
+      "expected_outputs": [
+        "data/demo pack",
+        "manifest",
+        "expected_results"
+      ],
+      "status": "IMPLEMENTED_AND_TESTED",
+      "scenario_ids": []
+    }
+  ],
+  "tools": {
+    "tools.py": [
+      "get_invoice",
+      "get_purchase_order",
+      "get_goods_receipt",
+      "find_duplicate_invoices",
+      "get_case_evidence",
+      "get_company_policies",
+      "find_relevant_policies",
+      "get_prior_cases",
+      "get_decision_memories"
+    ],
+    "ar/tools.py": [
+      "get_collection_candidates",
+      "get_collection_invoice_facts",
+      "get_cash_application_facts",
+      "get_ar_precedents",
+      "get_ar_customer",
+      "get_ar_close_snapshot"
+    ],
+    "accrual/tools.py": [
+      "get_expected_invoices",
+      "get_estimate_candidates",
+      "get_decision_memories",
+      "create_accrual",
+      "reconcile_accrual_with_invoice"
+    ],
+    "cash_recon/tools.py": [
+      "get_bank_transaction",
+      "get_ledger_entry",
+      "get_fee_evidence",
+      "get_match_candidates",
+      "get_candidate",
+      "get_decision_memories"
+    ],
+    "scheduling/tools.py": [
+      "get_cash_position",
+      "get_approved_pool",
+      "get_payment_candidates",
+      "get_treasury_policies"
+    ],
+    "prepaid/tools.py": [
+      "get_prepaid",
+      "list_prepaids",
+      "get_prepaid_treatment_candidates",
+      "get_prepaid_schedule",
+      "get_decision_memories"
+    ],
+    "fixed_assets/tools.py": [
+      "get_fixed_asset",
+      "list_fixed_assets",
+      "get_depreciation_schedule",
+      "get_capital_candidates"
+    ],
+    "bs_recon/tools.py": [
+      "get_reconciliation_packet",
+      "list_reconciling_items",
+      "list_period_reconciliations"
+    ],
+    "audit/tools.py": [
+      "get_audit_period",
+      "get_audit_payments",
+      "get_audit_journals",
+      "get_operational_decisions"
+    ],
+    "reporting/tools.py": [
+      "get_period_metrics",
+      "get_variance_facts",
+      "get_cash_forecast",
+      "get_forecast_snapshot"
+    ],
+    "invoice_ingestion/tools.py": [
+      "list/get source records",
+      "find_related_invoice"
+    ],
+    "inbox/tools.py": [
+      "compose_counterparty_message",
+      "send_inbox_message",
+      "reply_in_thread",
+      "get_inbox_message",
+      "classify_inbox_message",
+      "dispatch_inbox_action"
+    ]
+  },
+  "entrypoints": [
+    {
+      "command": "python main.py INV-001",
+      "workflow": "run_ap_workflow",
+      "mutates": "approved_pool + AP trace"
+    },
+    {
+      "command": "python main.py schedule --seed-demo",
+      "workflow": "run_schedule_workflow",
+      "mutates": "schedule trace only"
+    },
+    {
+      "command": "python main.py ingest 2026-09",
+      "workflow": "ingest_invoices",
+      "mutates": "in-memory canonical registry"
+    },
+    {
+      "command": "python main.py demo-inbox",
+      "workflow": "inbox.workflow.handoff",
+      "mutates": "inbox traces + AP overlay"
+    },
+    {
+      "command": "python main.py accrue 2026-09",
+      "workflow": "run_accrual_workflow",
+      "mutates": "accrual journals"
+    },
+    {
+      "command": "python main.py ar-aging --as-of 2026-09-30",
+      "workflow": "run_aging",
+      "mutates": "runs/ar state"
+    },
+    {
+      "command": "python main.py ar-collections --as-of 2026-09-30",
+      "workflow": "run_collections",
+      "mutates": "runs/ar traces"
+    },
+    {
+      "command": "python main.py ar-cash-apply PAY-001",
+      "workflow": "run_cash_apply",
+      "mutates": "AR balances"
+    },
+    {
+      "command": "python main.py reconcile-cash --month 2026-09 --seed-demo",
+      "workflow": "run_cash_reconciliation",
+      "mutates": "cash traces"
+    },
+    {
+      "command": "python main.py demo-close",
+      "workflow": "run_month_end",
+      "mutates": "month_end state + journals"
+    },
+    {
+      "command": "python main.py audit --period 2026-09 --seed 26",
+      "workflow": "run_audit",
+      "mutates": "audit run artifacts"
+    },
+    {
+      "command": "python main.py demo-reporting",
+      "workflow": "run_reporting_workflow",
+      "mutates": "reporting snapshots"
+    },
+    {
+      "command": "python main.py cash-forecast --as-of 2026-09-30 --weeks 13",
+      "workflow": "reporting cash forecast",
+      "mutates": "forecast snapshots"
+    },
+    {
+      "command": "python main.py cfo-demo",
+      "workflow": "run_cfo_scenario",
+      "mutates": "shared close/AR/cash/reporting state"
+    },
+    {
+      "command": "python main.py generate-sample-data --output data/demo",
+      "workflow": "generate_sample_data",
+      "mutates": "data/demo canonical pack"
+    },
+    {
+      "command": "python main.py evaluate-cfo --data-root data/demo --all",
+      "workflow": "CFOEvaluationRunner",
+      "mutates": "runs/evaluation only"
+    },
+    {
+      "command": "python -m evals.demo_company",
+      "workflow": "run_demo_company_eval",
+      "mutates": "runs/demo_eval only"
+    },
+    {
+      "command": "python main.py memory-demo --story stripe",
+      "workflow": "memory.scenarios.run_stripe_cross_period",
+      "mutates": "runs/memory/decisions.json + cash traces"
+    },
+    {
+      "command": "python main.py eval-memory",
+      "workflow": "memory.eval.run_memory_evaluation",
+      "mutates": "runs/memory_eval only"
+    },
+    {
+      "command": "python main.py eval-gauntlet",
+      "workflow": "run_gauntlet",
+      "mutates": "runs/evals/maximor_finance_gauntlet*.json"
+    }
+  ],
+  "persistence": {
+    "canonical_demo": "data/demo",
+    "runtime_copy": "runs/demo_runtime",
+    "eval_runs": "runs/demo_eval",
+    "gauntlet": "evals/maximor_finance_gauntlet",
+    "gauntlet_answers": "evals/maximor_finance_gauntlet/private_answers",
+    "operational_runs": [
+      "runs/ar",
+      "runs/month_end",
+      "runs/cash_recon",
+      "runs/audit",
+      "runs/reporting",
+      "runs/inbox"
+    ],
+    "memory": [
+      "runs/memory/decisions.json",
+      "data/demo/prior_cases.json",
+      "data/demo/ar_precedents.json",
+      "data/demo/memory_events.json"
+    ]
+  },
+  "memory_mechanisms": {
+    "prior_cases": "Static AP seed; read by investigator/reviewer/approver. Not appended from new AP decisions.",
+    "ar_precedents": "Seed plus human corrections via ar.ledger._learn_precedent.",
+    "decision_memory": "Canonical cross-period DecisionMemory in runs/memory/decisions.json. Written after reusable cash, prepaid, and AP exception decisions; retrieved by structured match before later-period decisions.",
+    "identity_links": "close/context provenance, not a semantic graph DB.",
+    "self_improvement": "PARTIAL \u2014 AR human corrections plus organizational decision memory writes."
+  },
+  "integrations": [
+    "stripe",
+    "adyen",
+    "gmail",
+    "outlook",
+    "xero",
+    "coupa",
+    "netsuite"
+  ],
+  "mutating_workflows": [
+    "run_ap_workflow (pool on APPROVE)",
+    "ingest_invoices (in-memory registry)",
+    "run_accrual_workflow / create_accrual",
+    "run_cash_apply / record_human_application",
+    "run_month_end / prepaid / depreciation / post_journal",
+    "run_cash_reconciliation (traces; proposed journals not auto-posted)",
+    "run_audit (audit artifacts only)"
+  ]
+}

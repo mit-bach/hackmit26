@@ -1,0 +1,20 @@
+{
+  "vendor": "Helios Hardware",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": false,
+  "missing_bill_candidate": true,
+  "expectation_confidence": 1.0,
+  "signals": [
+    {
+      "type": "goods_receipt",
+      "detail": "Goods received under PO-201 (GR-201)",
+      "confidence": 1.0
+    }
+  ],
+  "reason": "Goods received this period and no matching invoice.",
+  "discovery_trace_id": "2026-09/20260920T001541Z/discovery/helios_hardware",
+  "current_invoice_ids": [],
+  "indicative_amount": 6200.0,
+  "indicative_method": "goods_receipt"
+}

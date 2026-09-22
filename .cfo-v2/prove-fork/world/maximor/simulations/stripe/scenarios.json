@@ -1,0 +1,300 @@
+[
+  {
+    "scenario_id": "stripe_simple_payment",
+    "title": "Simple payment",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_001_pi",
+      "evt_ch_str_001_ch",
+      "evt_po_str_001_created",
+      "evt_po_str_001_recon"
+    ],
+    "input_condition": "Customer invoice $1,000; Stripe fee $29.30; net $970.70."
+  },
+  {
+    "scenario_id": "stripe_payout_multiple_payments",
+    "title": "One payout containing several payments",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_002a_pi",
+      "evt_ch_str_002a_ch",
+      "evt_ch_str_002b_pi",
+      "evt_ch_str_002b_ch",
+      "evt_ch_str_002c_pi",
+      "evt_ch_str_002c_ch",
+      "evt_po_str_002_created",
+      "evt_po_str_002_recon"
+    ],
+    "input_condition": "Three Helios payments with nets $970.70, $1,455.95, $485.20 in one payout."
+  },
+  {
+    "scenario_id": "stripe_many_txns_one_deposit",
+    "title": "Several balance transactions to one bank deposit",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_003a_pi",
+      "evt_ch_str_003a_ch",
+      "evt_ch_str_003b_pi",
+      "evt_ch_str_003b_ch",
+      "evt_po_str_003_created",
+      "evt_po_str_003_recon"
+    ],
+    "input_condition": "Two customers' charges settle in one Stripe payout / bank deposit."
+  },
+  {
+    "scenario_id": "stripe_refund_before_payout",
+    "title": "Refund before payout",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_004_pi",
+      "evt_ch_str_004_ch",
+      "evt_re_str_004",
+      "evt_po_str_004_created",
+      "evt_po_str_004_recon"
+    ],
+    "input_condition": "$500 charge, $100 refund before payout."
+  },
+  {
+    "scenario_id": "stripe_refund_after_payout",
+    "title": "Refund after original payout",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_005_pi",
+      "evt_ch_str_005_ch",
+      "evt_po_str_005a_created",
+      "evt_po_str_005a_recon",
+      "evt_re_str_005",
+      "evt_po_str_005b_created",
+      "evt_po_str_005b_recon"
+    ],
+    "input_condition": "Original $750 sale already paid out; later full refund reduces a future payout."
+  },
+  {
+    "scenario_id": "stripe_chargeback",
+    "title": "Chargeback / dispute",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_006_pi",
+      "evt_ch_str_006_ch",
+      "evt_po_str_006a_created",
+      "evt_po_str_006a_recon",
+      "evt_dp_str_006",
+      "evt_po_str_006b_created",
+      "evt_po_str_006b_recon"
+    ],
+    "input_condition": "$800 payment later charged back plus $15 dispute fee."
+  },
+  {
+    "scenario_id": "stripe_fee_variation",
+    "title": "Fee variation",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_007_pi",
+      "evt_ch_str_007_ch",
+      "evt_po_str_007_created",
+      "evt_po_str_007_recon"
+    ],
+    "input_condition": "International / AMEX effective fee $72.00 on $2,000, not 2.9%+$0.30."
+  },
+  {
+    "scenario_id": "stripe_duplicate_event",
+    "title": "Duplicate webhook",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_001_pi",
+      "evt_ch_str_001_ch",
+      "evt_po_str_001_created",
+      "evt_po_str_001_recon"
+    ],
+    "input_condition": "Exact same payout.reconciliation_completed event delivered twice."
+  },
+  {
+    "scenario_id": "stripe_out_of_order",
+    "title": "Events delivered out of order",
+    "difficulty": "hard",
+    "event_ids": [
+      "evt_po_str_001_recon",
+      "evt_ch_str_001_pi",
+      "evt_ch_str_001_ch",
+      "evt_po_str_001_created"
+    ],
+    "input_condition": "Payout event arrives before charge and before balance-transaction release."
+  },
+  {
+    "scenario_id": "stripe_missing_metadata",
+    "title": "Missing invoice metadata",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_010_pi",
+      "evt_ch_str_010_ch",
+      "evt_po_str_010_created",
+      "evt_po_str_010_recon"
+    ],
+    "input_condition": "Stripe payment has no internal invoice ID; unique $1,250 Pinnacle invoice."
+  },
+  {
+    "scenario_id": "stripe_ambiguous_invoice",
+    "title": "Ambiguous invoice match",
+    "difficulty": "hard",
+    "event_ids": [
+      "evt_ch_str_011_pi",
+      "evt_ch_str_011_ch",
+      "evt_po_str_011_created",
+      "evt_po_str_011_recon"
+    ],
+    "input_condition": "Brightline has two $900 invoices; description is Q3 analytics retainer."
+  },
+  {
+    "scenario_id": "stripe_payout_with_refund",
+    "title": "Combined payout with refund",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_012a_pi",
+      "evt_ch_str_012a_ch",
+      "evt_ch_str_012b_pi",
+      "evt_ch_str_012b_ch",
+      "evt_re_str_012",
+      "evt_po_str_012_created",
+      "evt_po_str_012_recon"
+    ],
+    "input_condition": "Two successful charges plus a $200 refund in one payout."
+  },
+  {
+    "scenario_id": "stripe_payout_with_dispute",
+    "title": "Combined payout with dispute",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_013a_pi",
+      "evt_ch_str_013a_ch",
+      "evt_ch_str_013b_pi",
+      "evt_ch_str_013b_ch",
+      "evt_dp_str_013",
+      "evt_po_str_013_created",
+      "evt_po_str_013_recon"
+    ],
+    "input_condition": "Successful charges plus a $250 chargeback and $15 fee in one payout."
+  },
+  {
+    "scenario_id": "stripe_bank_discrepancy_1240",
+    "title": "Bank deposit differs from payout",
+    "difficulty": "hard",
+    "event_ids": [
+      "evt_ch_str_014_pi",
+      "evt_ch_str_014_ch",
+      "evt_po_str_014_created",
+      "evt_po_str_014_recon"
+    ],
+    "input_condition": "Northstar Stripe payout bank deposit is short $12.40."
+  },
+  {
+    "scenario_id": "stripe_cross_period_timing",
+    "title": "Cross-period settlement",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_015_pi",
+      "evt_ch_str_015_ch",
+      "evt_po_str_015_created",
+      "evt_po_str_015_recon"
+    ],
+    "input_condition": "Late-September charge settles in an October payout."
+  },
+  {
+    "scenario_id": "stripe_partial_payment",
+    "title": "Partial payment against one invoice",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_016_pi",
+      "evt_ch_str_016_ch",
+      "evt_po_str_016_created",
+      "evt_po_str_016_recon"
+    ],
+    "input_condition": "$600 Stripe payment against $1,800 Harbor invoice."
+  },
+  {
+    "scenario_id": "stripe_failed_then_retry",
+    "title": "Failed payment then successful retry",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_pi_str_017_fail",
+      "evt_ch_str_017_pi",
+      "evt_ch_str_017_ch",
+      "evt_po_str_017_created",
+      "evt_po_str_017_recon"
+    ],
+    "input_condition": "Card fails, then the same invoice is paid on retry."
+  },
+  {
+    "scenario_id": "stripe_unmatched_order",
+    "title": "Stripe charge with no internal order",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_020_pi",
+      "evt_ch_str_020_ch",
+      "evt_po_str_020_created",
+      "evt_po_str_020_recon"
+    ],
+    "input_condition": "Orion Freight Stripe charge has no corresponding internal invoice."
+  },
+  {
+    "scenario_id": "stripe_bank_before_payout",
+    "title": "Bank record arrives before Stripe payout",
+    "difficulty": "hard",
+    "event_ids": [
+      "evt_ch_str_001_pi",
+      "evt_ch_str_001_ch",
+      "evt_po_str_001_created",
+      "evt_po_str_001_recon"
+    ],
+    "input_condition": "Bank deposit is visible before the payout webhook."
+  },
+  {
+    "scenario_id": "stripe_cross_period_memory",
+    "title": "Prior-period Stripe context improves a later match",
+    "difficulty": "hard",
+    "event_ids": [
+      "evt_ch_str_018_pi",
+      "evt_ch_str_018_ch",
+      "evt_po_str_018_created",
+      "evt_po_str_018_recon"
+    ],
+    "input_condition": "Atlas has two $880 September invoices; metadata missing; August Stripe precedent is monthly platform fee."
+  },
+  {
+    "scenario_id": "stripe_overpayment",
+    "title": "Overpayment residual",
+    "difficulty": "medium",
+    "event_ids": [
+      "evt_ch_str_019_pi",
+      "evt_ch_str_019_ch",
+      "evt_po_str_019_created",
+      "evt_po_str_019_recon"
+    ],
+    "input_condition": "$1,100 Stripe payment against $950 named invoice."
+  },
+  {
+    "scenario_id": "stripe_multiple_payments_one_invoice",
+    "title": "Multiple Stripe payments against one invoice",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_021a_pi",
+      "evt_ch_str_021a_ch",
+      "evt_ch_str_021b_pi",
+      "evt_ch_str_021b_ch",
+      "evt_po_str_021_created",
+      "evt_po_str_021_recon"
+    ],
+    "input_condition": "Harbor invoice $1,000 paid as two Stripe charges ($400 then $600) in one payout."
+  },
+  {
+    "scenario_id": "stripe_payout_before_bank",
+    "title": "Payout event arrives before the bank deposit",
+    "difficulty": "easy",
+    "event_ids": [
+      "evt_ch_str_001_pi",
+      "evt_ch_str_001_ch",
+      "evt_po_str_001_created",
+      "evt_po_str_001_recon"
+    ],
+    "input_condition": "Stripe payout webhook is processed before the company bank deposit is loaded."
+  }
+]

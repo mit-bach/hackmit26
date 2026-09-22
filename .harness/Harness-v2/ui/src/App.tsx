@@ -58,6 +58,12 @@ function Shell(): React.ReactElement {
     setLocale(language || globalThis.navigator?.language);
     setLocaleEpoch((epoch) => epoch + 1);
   }, [language]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("view") === "demo") {
+      dispatch({ type: "showDemo" });
+    }
+  }, [dispatch]);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const group = state.groups.find((item) => item.id === state.selectedId);

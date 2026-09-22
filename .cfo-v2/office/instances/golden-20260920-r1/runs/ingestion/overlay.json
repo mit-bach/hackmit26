@@ -1,0 +1,151 @@
+{
+  "invoices": [
+    {
+      "invoice_id": "ING-001",
+      "vendor": "Acme Supplies",
+      "po_id": "PO-101",
+      "amount": 12450.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "ACM-INBOX-1001",
+      "description": "Acme Supplies ACM-INBOX-1001",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-001",
+      "source_thread_id": "THR-body-invoice",
+      "source_trace_id": "INBOX-MSG-INBOX-002",
+      "source_attachment_hashes": [
+        "99f47875dc66458e755efa584eb857c1a46d135061a580cb5fb6efc8df77d220"
+      ]
+    },
+    {
+      "invoice_id": "INV-001",
+      "vendor": "Acme Supplies",
+      "po_id": "PO-101",
+      "amount": 12450.0,
+      "invoice_date": "2026-09-08",
+      "due_date": "2026-09-22",
+      "vendor_invoice_number": "ACM-2026-4410",
+      "description": "Standing desks and monitors",
+      "payment_terms": "2/10 net 30",
+      "early_payment_discount_percent": 2.0,
+      "early_payment_discount_deadline": "2026-09-18",
+      "late_fee_percent": 1.5,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-ACME-INV-001",
+      "source_thread_id": "THR-acme-inv001",
+      "source_trace_id": "INBOX-MSG-ACME-INV-001",
+      "source_attachment_hashes": [
+        "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560"
+      ]
+    },
+    {
+      "invoice_id": "ING-002",
+      "vendor": "Nimbus Analytics LLC",
+      "po_id": null,
+      "amount": 990.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "NIM-INBOX-8008",
+      "description": "Nimbus Analytics LLC NIM-INBOX-8008",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-015",
+      "source_thread_id": "THR-prompt-injection",
+      "source_trace_id": "INBOX-MSG-INBOX-014",
+      "source_attachment_hashes": [
+        "632f72aa9d557c94b1517a2ac627872e09fa32397f172f6d95a04e06080619b6"
+      ]
+    },
+    {
+      "invoice_id": "ING-003",
+      "vendor": "Figma",
+      "po_id": "PO-107",
+      "amount": 2448.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "FIG-INBOX-2002",
+      "description": "Figma FIG-INBOX-2002",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-002",
+      "source_thread_id": "THR-body-invoice",
+      "source_trace_id": "INBOX-MSG-INBOX-002",
+      "source_attachment_hashes": [
+        "99f47875dc66458e755efa584eb857c1a46d135061a580cb5fb6efc8df77d220"
+      ]
+    },
+    {
+      "invoice_id": "ING-004",
+      "vendor": "Office Depot",
+      "po_id": "PO-104",
+      "amount": 5000.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "OD-INBOX-3003",
+      "description": "Office Depot OD-INBOX-3003",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-003",
+      "source_thread_id": "THR-price-mismatch",
+      "source_trace_id": "INBOX-MSG-INBOX-003",
+      "source_attachment_hashes": [
+        "02872fbefbe725920375ac606fee66197cbf6ae442796bc109b684f01e9e574e"
+      ]
+    },
+    {
+      "invoice_id": "ING-005",
+      "vendor": "Datadog",
+      "po_id": null,
+      "amount": 1800.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "DD-INBOX-4004",
+      "description": "Datadog DD-INBOX-4004",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-004",
+      "source_thread_id": "THR-no-po",
+      "source_trace_id": "INBOX-MSG-INBOX-004",
+      "source_attachment_hashes": [
+        "7884e52c5f2a4d4d2f6647460ff515ba8ac8b82ab8cdd2803e3904ba8d973588"
+      ]
+    },
+    {
+      "invoice_id": "ING-006",
+      "vendor": "Slack Technologies",
+      "po_id": "PO-105",
+      "amount": 4375.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "SLK-INBOX-7007",
+      "description": "Slack Technologies SLK-INBOX-7007",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-014",
+      "source_thread_id": "THR-prompt-injection",
+      "source_trace_id": "INBOX-MSG-INBOX-014",
+      "source_attachment_hashes": [
+        "632f72aa9d557c94b1517a2ac627872e09fa32397f172f6d95a04e06080619b6"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "key": "world:reply:THR-incomplete:MSG-INBOX-011-OUT",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "885c7f513ab48b96ab9af0e4e9b4eb5fe2950a87c618da9f4772e35e6bb07b75",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-011-R1",
+      "thread_id": "THR-incomplete",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_65c250f45b49"
+  }
+}

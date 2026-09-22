@@ -1,0 +1,38 @@
+{
+  "schema": "BankLineLanded",
+  "transaction_id": "TXN-2026-09-012A",
+  "period": "2026-09",
+  "source": "operating_account",
+  "bank_line": {
+    "transaction_id": "TXN-2026-09-012A",
+    "date": "2026-09-12",
+    "amount": -250.0,
+    "currency": "USD",
+    "description": "REFUND CARD 8892",
+    "reference": "8892",
+    "counterparty": "LUMEN LABS",
+    "transaction_type": "card_refund",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": -25000,
+    "raw_metadata": {}
+  },
+  "discovery": {
+    "status": "documented_line",
+    "candidate": null,
+    "reasons": [
+      "Operating-account statement line from data/cash_recon/bank_statement.json.",
+      "A charge is not a bill; no AP invoice invented from descriptor.",
+      "Handoff to cash/match for candidate selection. Do not force MATCHED."
+    ]
+  },
+  "handoff": {
+    "to": "cash",
+    "profile": "match"
+  },
+  "paths": {
+    "statement": "data/cash_recon/bank_statement.json",
+    "packet": "workspace/bank/lines/TXN-2026-09-012A.json"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-PIN-HOLD-01",
+  "classification": "INTERNAL_REQUEST",
+  "note": "warehouse hold notice not a bill; no missing invoice fields",
+  "bill": false
+}

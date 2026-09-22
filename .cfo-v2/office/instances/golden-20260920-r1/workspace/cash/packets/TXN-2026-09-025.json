@@ -1,0 +1,19 @@
+{
+  "schema": "CashMatchPacket",
+  "transaction_id": "TXN-2026-09-025",
+  "period": "2026-09",
+  "profile": "match",
+  "case_id": "2026-09",
+  "source_packet": "workspace/bank/lines/TXN-2026-09-025.json",
+  "preparer_selection": {
+    "selected_candidate_id": null,
+    "match_type": null,
+    "disposition": "HUMAN_REVIEW",
+    "difference_minor": null,
+    "fee_evidence_ids": [],
+    "reasons": [
+      "No Kernel candidate on case bank line"
+    ]
+  },
+  "status": "HUMAN_REVIEW"
+}

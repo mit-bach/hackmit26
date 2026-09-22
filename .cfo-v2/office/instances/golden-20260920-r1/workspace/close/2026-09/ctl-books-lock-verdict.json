@@ -1,0 +1,22 @@
+{
+  "bot": "ctl-books",
+  "profile": "lock",
+  "period": "2026-09",
+  "verdict": "REJECT_CLOSE",
+  "gate_passed": false,
+  "period_status": "BLOCKED",
+  "marked_closed": false,
+  "reasons": [
+    "evaluate_close_gates.passed=false",
+    "Cash $12.40 unexplained (TXN-2026-09-015 / REV-2026-09-CASH-TXN-2026-09-015); not timing; not force-matched",
+    "AR unmatched $4500 (REV-2026-09-AR-PAY-CLOSE-4500)",
+    "Prepaids missing Northshore policy evidence (PRE-INS-MISSING / REV-2026-09-PREPAID-PRE-INS-MISSING)",
+    "bs_recon BLOCKED; all required BS recs MISSING not SIGNED_OFF",
+    "Required tasks incomplete: cash NEEDS_REVIEW, bs_recon BLOCKED, exceptions NOT_STARTED, final_review NOT_STARTED",
+    "coordinate can_close=false"
+  ],
+  "gates_path": "workspace/close/2026-09/gates.json",
+  "coordinate_path": "workspace/close/2026-09/coordinate-decision.json",
+  "pack_path": "workspace/close/2026-09/pack.json",
+  "kernel_note": "Only close.month_end can mark CLOSED; ctl-books cannot. APPROVE_CLOSE ignored while gates fail."
+}

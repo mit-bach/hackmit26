@@ -1,0 +1,2391 @@
+{
+  "audit_run_id": "20260920T153114Z",
+  "period": "2026-09",
+  "started_at": "2026-09-20T15:31:14Z",
+  "scope": [
+    "AUD-RND-001",
+    "AUD-SUP-001",
+    "AUD-THR-001",
+    "AUD-PCE-001",
+    "AUD-SOD-001",
+    "AUD-DUP-INV-001",
+    "AUD-DUP-VEND-001",
+    "AUD-REPERF-001"
+  ],
+  "samples": [
+    {
+      "sample_id": "SMP-payments-risk_based-26",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "payments",
+      "population_size": 3,
+      "eligible_ids": [
+        "PAY-AUD-001",
+        "PAY-AUD-002",
+        "PAY-AUD-003"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 26,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 3,
+      "sampled_ids": [
+        "PAY-AUD-002",
+        "PAY-AUD-003",
+        "PAY-AUD-001"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "PAY-AUD-002": 18.0,
+        "PAY-AUD-003": 2.0,
+        "PAY-AUD-001": 0.0
+      }
+    },
+    {
+      "sample_id": "SMP-journal_entries-risk_based-27",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "journal_entries",
+      "population_size": 4,
+      "eligible_ids": [
+        "JE-AUD-001",
+        "JE-AUD-002",
+        "JE-AUD-003",
+        "JE-AUD-004"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 27,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 4,
+      "sampled_ids": [
+        "JE-AUD-003",
+        "JE-AUD-002",
+        "JE-AUD-004",
+        "JE-AUD-001"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "JE-AUD-003": 15.5,
+        "JE-AUD-002": 7.0,
+        "JE-AUD-004": 1.5,
+        "JE-AUD-001": 0.0
+      }
+    },
+    {
+      "sample_id": "SMP-approvals-risk_based-28",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "approvals",
+      "population_size": 5,
+      "eligible_ids": [
+        "APR-AUD-001",
+        "APR-AUD-002",
+        "APR-AUD-003",
+        "APR-AUD-004",
+        "APR-AUD-005"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 28,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 5,
+      "sampled_ids": [
+        "APR-AUD-005",
+        "APR-AUD-002",
+        "APR-AUD-001",
+        "APR-AUD-004",
+        "APR-AUD-003"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "APR-AUD-005": 12.0,
+        "APR-AUD-002": 4.0,
+        "APR-AUD-001": 0.0,
+        "APR-AUD-004": 0.0,
+        "APR-AUD-003": 0.0
+      }
+    },
+    {
+      "sample_id": "SMP-invoices-risk_based-29",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "invoices",
+      "population_size": 22,
+      "eligible_ids": [
+        "INV-001",
+        "INV-002",
+        "INV-003",
+        "INV-004",
+        "INV-005",
+        "INV-006",
+        "INV-007",
+        "INV-008",
+        "INV-009",
+        "INV-010",
+        "INV-011",
+        "INV-012",
+        "INV-013",
+        "INV-014",
+        "INV-015",
+        "INV-016",
+        "INV-017",
+        "INV-018",
+        "INV-019",
+        "INV-020",
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 29,
+      "risk_criteria": [
+        "duplicate",
+        "large_dollar",
+        "control_failure"
+      ],
+      "sample_size": 8,
+      "sampled_ids": [
+        "INV-020",
+        "INV-009",
+        "INV-019",
+        "INV-003",
+        "INV-001",
+        "INV-011",
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "INV-020": 6.6,
+        "INV-009": 5.1,
+        "INV-019": 4.8,
+        "INV-003": 4.5,
+        "INV-001": 4.245,
+        "INV-011": 4.025,
+        "AUD-INV-MISS-1": 4.0,
+        "AUD-INV-MISS-2": 4.0
+      }
+    },
+    {
+      "sample_id": "SMP-reconciliations-risk_based-30",
+      "audit_run_id": "20260920T153114Z",
+      "population_name": "reconciliations",
+      "population_size": 7,
+      "eligible_ids": [
+        "REC-AUD-AGREE",
+        "REC-AUD-DISAGREE",
+        "REC-AUD-STRIPE",
+        "REC-AUD-ACCRUAL-AGREE",
+        "REC-AUD-ACCRUAL-DISAGREE",
+        "REC-AUD-AR-AGREE",
+        "REC-AUD-AR-DISAGREE"
+      ],
+      "sampling_method": "risk_based",
+      "seed": 30,
+      "risk_criteria": [
+        "large_dollar",
+        "round_number",
+        "duplicate",
+        "manual_journal",
+        "posted_after_close",
+        "self_approval",
+        "unusual_vendor",
+        "reconciliation_exception",
+        "missing_support",
+        "late_posting",
+        "new_vendor",
+        "control_failure"
+      ],
+      "sample_size": 7,
+      "sampled_ids": [
+        "REC-AUD-ACCRUAL-DISAGREE",
+        "REC-AUD-AR-DISAGREE",
+        "REC-AUD-DISAGREE",
+        "REC-AUD-STRIPE",
+        "REC-AUD-AR-AGREE",
+        "REC-AUD-AGREE",
+        "REC-AUD-ACCRUAL-AGREE"
+      ],
+      "timestamp": "2026-09-20T15:31:14Z",
+      "period": "2026-09",
+      "risk_scores": {
+        "REC-AUD-ACCRUAL-DISAGREE": 8.0,
+        "REC-AUD-AR-DISAGREE": 8.0,
+        "REC-AUD-DISAGREE": 8.0,
+        "REC-AUD-STRIPE": 4.8421,
+        "REC-AUD-AR-AGREE": 0.0,
+        "REC-AUD-AGREE": 0.0,
+        "REC-AUD-ACCRUAL-AGREE": 0.0
+      }
+    }
+  ],
+  "controls": [
+    {
+      "control_id": "AUD-RND-001",
+      "control_name": "Round-number payments",
+      "control_description": "Flag payments whose amount is divisible by a configured round-number divisor, then classify using vendor and source context.",
+      "control_type": "preventive",
+      "population": "payments",
+      "test_method": "deterministic_threshold",
+      "policy_reference": "AUD-RND",
+      "result": "EXCEPTION",
+      "evidence": [],
+      "exceptions": [
+        {
+          "object_id": "PAY-AUD-002",
+          "object_type": "payment",
+          "result": "EXCEPTION",
+          "detail": "PAY-AUD-002 amount 50000.00 is divisible by [100.0, 1000.0, 10000.0] (SUSPICIOUS_ROUND).",
+          "facts": {
+            "payment_id": "PAY-AUD-002",
+            "amount": 50000.0,
+            "round_number_divisors": [
+              100.0,
+              1000.0,
+              10000.0
+            ],
+            "vendor": "Northwind Phantom LLC",
+            "vendor_id": "VEND-NEWCO",
+            "vendor_first_seen": "2026-09-15",
+            "new_vendor": true,
+            "payment_method": "wire",
+            "manual": true,
+            "source": "manual",
+            "recurring": false,
+            "invoice_ids": [
+              "INV-AUD-NEW-001"
+            ],
+            "approval_ids": [
+              "APR-AUD-005"
+            ],
+            "classification": "SUSPICIOUS_ROUND",
+            "ordinary": false
+          },
+          "evidence_ids": [
+            "PAY-AUD-002",
+            "INV-AUD-NEW-001",
+            "APR-AUD-005"
+          ],
+          "related_ids": {
+            "payments": [
+              "PAY-AUD-002"
+            ],
+            "invoices": [
+              "INV-AUD-NEW-001"
+            ],
+            "vendors": [
+              "VEND-NEWCO"
+            ],
+            "approvals": [
+              "APR-AUD-005"
+            ]
+          },
+          "monetary_exposure": 50000.0
+        },
+        {
+          "object_id": "PAY-AUD-003",
+          "object_type": "payment",
+          "result": "PASS",
+          "detail": "PAY-AUD-003 amount 100.00 is divisible by [100.0] (ORDINARY_ROUND).",
+          "facts": {
+            "payment_id": "PAY-AUD-003",
+            "amount": 100.0,
+            "round_number_divisors": [
+              100.0
+            ],
+            "vendor": "Figma",
+            "vendor_id": "VEND-FIGMA",
+            "vendor_first_seen": "2023-03-01",
+            "new_vendor": false,
+            "payment_method": "card",
+            "manual": false,
+            "source": "automated",
+            "recurring": true,
+            "invoice_ids": [
+              "INV-AUD-FIGMA-001"
+            ],
+            "approval_ids": [
+              "APR-AUD-001"
+            ],
+            "classification": "ORDINARY_ROUND",
+            "ordinary": true
+          },
+          "evidence_ids": [
+            "PAY-AUD-003",
+            "INV-AUD-FIGMA-001",
+            "APR-AUD-001"
+          ],
+          "related_ids": {
+            "payments": [
+              "PAY-AUD-003"
+            ],
+            "invoices": [
+              "INV-AUD-FIGMA-001"
+            ],
+            "vendors": [
+              "VEND-FIGMA"
+            ],
+            "approvals": [
+              "APR-AUD-001"
+            ]
+          },
+          "monetary_exposure": 100.0
+        }
+      ],
+      "tested_ids": [
+        "PAY-AUD-001",
+        "PAY-AUD-002",
+        "PAY-AUD-003"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {
+        "divisors": [
+          100.0,
+          1000.0,
+          10000.0
+        ]
+      }
+    },
+    {
+      "control_id": "AUD-SUP-001",
+      "control_name": "Missing payment support",
+      "control_description": "Flag payments whose source record marks supporting documents as missing.",
+      "control_type": "detective",
+      "population": "payments",
+      "test_method": "deterministic_attribute",
+      "policy_reference": "AUD-SUP",
+      "result": "FAIL",
+      "evidence": [],
+      "exceptions": [
+        {
+          "object_id": "PAY-AUD-002",
+          "object_type": "payment",
+          "result": "FAIL",
+          "detail": "PAY-AUD-002 is marked missing_support in the payment record.",
+          "facts": {
+            "payment_id": "PAY-AUD-002",
+            "missing_support": true,
+            "invoice_ids": [
+              "INV-AUD-NEW-001"
+            ]
+          },
+          "evidence_ids": [
+            "PAY-AUD-002",
+            "INV-AUD-NEW-001"
+          ],
+          "related_ids": {
+            "payments": [
+              "PAY-AUD-002"
+            ],
+            "invoices": [
+              "INV-AUD-NEW-001"
+            ]
+          },
+          "monetary_exposure": 50000.0
+        }
+      ],
+      "tested_ids": [
+        "PAY-AUD-001",
+        "PAY-AUD-002",
+        "PAY-AUD-003"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {}
+    },
+    {
+      "control_id": "AUD-THR-001",
+      "control_name": "Approval threshold violation",
+      "control_description": "Independently re-test whether a PO's authorized amount exceeds the approver's documented limit.",
+      "control_type": "detective",
+      "population": "invoices",
+      "test_method": "deterministic_threshold",
+      "policy_reference": "AUD-THR",
+      "result": "PASS",
+      "evidence": [],
+      "exceptions": [],
+      "tested_ids": [],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {}
+    },
+    {
+      "control_id": "AUD-PCE-001",
+      "control_name": "Post-close journal entries",
+      "control_description": "Detect journal entries posted after the accounting period was closed. Authorization must be structured, not inferred from memo text.",
+      "control_type": "detective",
+      "population": "journal_entries",
+      "test_method": "deterministic_cutoff",
+      "policy_reference": "AUD-PCE",
+      "result": "FAIL",
+      "evidence": [],
+      "exceptions": [
+        {
+          "object_id": "JE-AUD-002",
+          "object_type": "journal_entry",
+          "result": "PASS",
+          "detail": "JE-AUD-002 posted 2026-10-04T12:00:00Z vs close 2026-10-03T18:00:00Z → AUTHORIZED_POST_CLOSE_ADJUSTMENT.",
+          "facts": {
+            "journal_entry_id": "JE-AUD-002",
+            "accounting_period": "2026-09",
+            "close_timestamp": "2026-10-03T18:00:00Z",
+            "close_status": "CLOSED",
+            "posting_timestamp": "2026-10-04T12:00:00Z",
+            "effective_date": "2026-09-30",
+            "poster": "USR-JE-02",
+            "authorization_id": "AUTH-PCE-001",
+            "authorized": true,
+            "authorization_policy": "PCE-AUTH-001",
+            "reason": "Authorized post-close true-up",
+            "classification": "AUTHORIZED_POST_CLOSE_ADJUSTMENT",
+            "linked_source_records": [
+              "ACC-202609-AETHER"
+            ]
+          },
+          "evidence_ids": [
+            "JE-AUD-002",
+            "APR-AUD-004",
+            "AUTH-PCE-001"
+          ],
+          "related_ids": {
+            "journals": [
+              "JE-AUD-002"
+            ],
+            "approvals": [
+              "APR-AUD-004"
+            ]
+          },
+          "monetary_exposure": 250.1
+        },
+        {
+          "object_id": "JE-AUD-003",
+          "object_type": "journal_entry",
+          "result": "FAIL",
+          "detail": "JE-AUD-003 posted 2026-10-05T09:00:00Z vs close 2026-10-03T18:00:00Z → UNAUTHORIZED_POST_CLOSE_ENTRY.",
+          "facts": {
+            "journal_entry_id": "JE-AUD-003",
+            "accounting_period": "2026-09",
+            "close_timestamp": "2026-10-03T18:00:00Z",
+            "close_status": "CLOSED",
+            "posting_timestamp": "2026-10-05T09:00:00Z",
+            "effective_date": "2026-09-30",
+            "poster": "USR-JE-03",
+            "authorization_id": null,
+            "authorized": false,
+            "authorization_policy": null,
+            "reason": "Late adjustment after close",
+            "classification": "UNAUTHORIZED_POST_CLOSE_ENTRY",
+            "linked_source_records": [
+              "PAY-AUD-002"
+            ]
+          },
+          "evidence_ids": [
+            "JE-AUD-003"
+          ],
+          "related_ids": {
+            "journals": [
+              "JE-AUD-003"
+            ],
+            "approvals": []
+          },
+          "monetary_exposure": 15000.0
+        },
+        {
+          "object_id": "JE-AUD-004",
+          "object_type": "journal_entry",
+          "result": "HUMAN_REVIEW",
+          "detail": "JE-AUD-004 posted  vs close 2026-10-03T18:00:00Z → HUMAN_REVIEW.",
+          "facts": {
+            "journal_entry_id": "JE-AUD-004",
+            "accounting_period": "2026-09",
+            "close_timestamp": "2026-10-03T18:00:00Z",
+            "close_status": "CLOSED",
+            "posting_timestamp": "",
+            "effective_date": "2026-09-29",
+            "poster": "USR-JE-04",
+            "authorization_id": null,
+            "authorized": false,
+            "authorization_policy": null,
+            "reason": "Missing posting timestamp",
+            "classification": "HUMAN_REVIEW",
+            "linked_source_records": []
+          },
+          "evidence_ids": [
+            "JE-AUD-004"
+          ],
+          "related_ids": {
+            "journals": [
+              "JE-AUD-004"
+            ],
+            "approvals": []
+          },
+          "monetary_exposure": 880.0
+        }
+      ],
+      "tested_ids": [
+        "JE-AUD-001",
+        "JE-AUD-002",
+        "JE-AUD-003",
+        "JE-AUD-004"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {
+        "period": "2026-09",
+        "close_status": "CLOSED",
+        "close_timestamp": "2026-10-03T18:00:00Z"
+      }
+    },
+    {
+      "control_id": "AUD-SOD-001",
+      "control_name": "Self-approval / segregation of duties",
+      "control_description": "Compare requester, preparer, reviewer, and approver IDs against a configurable SOD policy.",
+      "control_type": "preventive",
+      "population": "approvals",
+      "test_method": "deterministic_identity_compare",
+      "policy_reference": "SOD-P-001",
+      "result": "FAIL",
+      "evidence": [],
+      "exceptions": [
+        {
+          "object_id": "APR-AUD-002",
+          "object_type": "invoice",
+          "result": "FAIL",
+          "detail": "SOD-001: requester_id and approver_id share identity USR-PREP-02.",
+          "facts": {
+            "object_id": "INV-AUD-SELF-001",
+            "object_type": "invoice",
+            "requester_id": "USR-PREP-02",
+            "preparer_id": "USR-PREP-02",
+            "reviewer_id": "USR-REV-02",
+            "approver_id": "USR-PREP-02",
+            "initiator_id": null,
+            "violated_rule": "SOD-001",
+            "policy_reference": "SOD-P-001",
+            "matched_identity": "USR-PREP-02"
+          },
+          "evidence_ids": [
+            "APR-AUD-002",
+            "INV-AUD-SELF-001"
+          ],
+          "related_ids": {
+            "approvals": [
+              "APR-AUD-002"
+            ],
+            "invoices": [
+              "INV-AUD-SELF-001"
+            ],
+            "payments": [],
+            "journals": []
+          },
+          "monetary_exposure": 4200.0
+        },
+        {
+          "object_id": "APR-AUD-003",
+          "object_type": "invoice",
+          "result": "HUMAN_REVIEW",
+          "detail": "Incomplete identities for SOD-001 (requester_id/approver_id).",
+          "facts": {
+            "object_id": "INV-AUD-INCOMPLETE-001",
+            "object_type": "invoice",
+            "requester_id": "USR-PREP-03",
+            "preparer_id": "USR-PREP-03",
+            "reviewer_id": "USR-REV-03",
+            "approver_id": null,
+            "initiator_id": null,
+            "violated_rule": null,
+            "policy_reference": "SOD-P-001",
+            "missing_fields": [
+              "approver_id"
+            ]
+          },
+          "evidence_ids": [
+            "APR-AUD-003",
+            "INV-AUD-INCOMPLETE-001"
+          ],
+          "related_ids": {
+            "approvals": [
+              "APR-AUD-003"
+            ]
+          },
+          "monetary_exposure": 775.0
+        },
+        {
+          "object_id": "APR-AUD-005",
+          "object_type": "payment",
+          "result": "FAIL",
+          "detail": "SOD-001: initiator_id and approver_id share identity USR-PAY-01.",
+          "facts": {
+            "object_id": "PAY-AUD-002",
+            "object_type": "payment",
+            "requester_id": null,
+            "preparer_id": null,
+            "reviewer_id": null,
+            "approver_id": "USR-PAY-01",
+            "initiator_id": "USR-PAY-01",
+            "violated_rule": "SOD-001",
+            "policy_reference": "SOD-P-001",
+            "matched_identity": "USR-PAY-01"
+          },
+          "evidence_ids": [
+            "APR-AUD-005",
+            "PAY-AUD-002"
+          ],
+          "related_ids": {
+            "approvals": [
+              "APR-AUD-005"
+            ],
+            "invoices": [],
+            "payments": [
+              "PAY-AUD-002"
+            ],
+            "journals": []
+          },
+          "monetary_exposure": 50000.0
+        }
+      ],
+      "tested_ids": [
+        "APR-AUD-001",
+        "APR-AUD-002",
+        "APR-AUD-003",
+        "APR-AUD-004",
+        "APR-AUD-005"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {}
+    },
+    {
+      "control_id": "AUD-DUP-INV-001",
+      "control_name": "Duplicate invoice",
+      "control_description": "Reuse existing AP duplicate-invoice detection and compare the independent result to the operational AP decision.",
+      "control_type": "detective",
+      "population": "invoices",
+      "test_method": "reuse_existing_detector",
+      "policy_reference": "P-002",
+      "result": "FAIL",
+      "evidence": [
+        "P-002",
+        "tools.has_duplicate_vendor_invoice_number"
+      ],
+      "exceptions": [
+        {
+          "object_id": "AUD-INV-MISS-1",
+          "object_type": "invoice",
+          "result": "FAIL",
+          "detail": "Audit fixture invoice AUD-INV-MISS-1 shares vendor invoice SV-999001 with ['AUD-INV-MISS-2'], but the operational workflow recorded decision=APPROVE with duplicate_detected=False.",
+          "facts": {
+            "duplicate_candidates": [
+              "AUD-INV-MISS-2"
+            ],
+            "vendor_invoice_number": "SV-999001",
+            "operational_decision": "APPROVE",
+            "operational_duplicate_detected": false,
+            "independent_duplicate_detected": true,
+            "canonical_key": "shadowvendor:SV999001"
+          },
+          "evidence_ids": [
+            "AUD-INV-MISS-1",
+            "AUD-INV-MISS-2"
+          ],
+          "related_ids": {
+            "invoices": [
+              "AUD-INV-MISS-1",
+              "AUD-INV-MISS-2"
+            ],
+            "vendors": [
+              "VEND-SHADOW"
+            ]
+          },
+          "monetary_exposure": 8750.0
+        },
+        {
+          "object_id": "AUD-INV-MISS-2",
+          "object_type": "invoice",
+          "result": "FAIL",
+          "detail": "Audit fixture invoice AUD-INV-MISS-2 shares vendor invoice SV-999001 with ['AUD-INV-MISS-1'], but the operational workflow recorded decision=APPROVE with duplicate_detected=False.",
+          "facts": {
+            "duplicate_candidates": [
+              "AUD-INV-MISS-1"
+            ],
+            "vendor_invoice_number": "SV-999001",
+            "operational_decision": "APPROVE",
+            "operational_duplicate_detected": false,
+            "independent_duplicate_detected": true,
+            "canonical_key": "shadowvendor:SV999001"
+          },
+          "evidence_ids": [
+            "AUD-INV-MISS-2",
+            "AUD-INV-MISS-1"
+          ],
+          "related_ids": {
+            "invoices": [
+              "AUD-INV-MISS-2",
+              "AUD-INV-MISS-1"
+            ],
+            "vendors": [
+              "VEND-SHADOW"
+            ]
+          },
+          "monetary_exposure": 8750.0
+        }
+      ],
+      "tested_ids": [
+        "INV-001",
+        "INV-002",
+        "INV-003",
+        "INV-004",
+        "INV-005",
+        "INV-006",
+        "INV-007",
+        "INV-008",
+        "INV-009",
+        "INV-010",
+        "INV-011",
+        "INV-012",
+        "INV-013",
+        "INV-014",
+        "INV-015",
+        "INV-016",
+        "INV-017",
+        "INV-018",
+        "INV-019",
+        "INV-020",
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {}
+    },
+    {
+      "control_id": "AUD-DUP-VEND-001",
+      "control_name": "Duplicate vendor",
+      "control_description": "Group vendor master records with the existing normalize_vendor key used by AP identity.",
+      "control_type": "detective",
+      "population": "vendors",
+      "test_method": "reuse_existing_normalizer",
+      "policy_reference": "P-006",
+      "result": "FAIL",
+      "evidence": [
+        "tools.normalize_vendor"
+      ],
+      "exceptions": [
+        {
+          "object_id": "VEND-ACME",
+          "object_type": "vendor",
+          "result": "FAIL",
+          "detail": "Vendor VEND-ACME (Acme Supplies) shares normalized key 'acmesupply' with ['VEND-ACME-DUP'].",
+          "facts": {
+            "normalized_key": "acmesupply",
+            "duplicate_candidates": [
+              "VEND-ACME-DUP"
+            ],
+            "operational_duplicate_detected": false
+          },
+          "evidence_ids": [
+            "VEND-ACME",
+            "VEND-ACME-DUP"
+          ],
+          "related_ids": {
+            "vendors": [
+              "VEND-ACME",
+              "VEND-ACME-DUP"
+            ]
+          },
+          "monetary_exposure": null
+        }
+      ],
+      "tested_ids": [
+        "VEND-ACME",
+        "VEND-ACME-DUP",
+        "VEND-NEWCO",
+        "VEND-FIGMA",
+        "VEND-AWS",
+        "VEND-SHADOW"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {}
+    },
+    {
+      "control_id": "AUD-REPERF-001",
+      "control_name": "Reconciliation re-performance",
+      "control_description": "Independently re-run existing reconciliation engines and compare to the original recorded result.",
+      "control_type": "reperformance",
+      "population": "reconciliations",
+      "test_method": "independent_recompute",
+      "policy_reference": "AUD-REPERF",
+      "result": "FAIL",
+      "evidence": [],
+      "exceptions": [
+        {
+          "object_id": "REC-AUD-DISAGREE",
+          "object_type": "reconciliation",
+          "result": "FAIL",
+          "detail": "match_type EXACT_MATCH vs UNEXPLAINED_DIFFERENCE; status MATCHED vs HUMAN_REVIEW; difference 0.0 vs -34.56",
+          "facts": {
+            "original_result": {
+              "match_type": "EXACT_MATCH",
+              "status": "MATCHED",
+              "bank_amount": -1234.56,
+              "ledger_amount": -1234.56,
+              "difference": 0.0,
+              "bank_transaction_ids": [
+                "AUD-BNK-002"
+              ],
+              "ledger_entry_ids": [
+                "AUD-LED-002"
+              ]
+            },
+            "independent_result": {
+              "match_type": "UNEXPLAINED_DIFFERENCE",
+              "status": "HUMAN_REVIEW",
+              "bank_amount": -1234.56,
+              "ledger_amount": -1200.0,
+              "difference": -34.56,
+              "bank_transaction_ids": [
+                "AUD-BNK-002"
+              ],
+              "ledger_entry_ids": [
+                "AUD-LED-002"
+              ],
+              "candidate_id": "UNEXPLAINED_DIFFERENCE:AUD-BNK-002:AUD-LED-002",
+              "source_inputs": {
+                "period": "2026-09",
+                "bank_ids": [
+                  "AUD-BNK-002"
+                ],
+                "ledger_ids": [
+                  "AUD-LED-002"
+                ],
+                "bank_amount": -1234.56,
+                "ledger_amount": -1200.0
+              }
+            },
+            "used_original_as_input": false,
+            "tolerance": 0.01,
+            "recon_type": "bank_ledger"
+          },
+          "evidence_ids": [
+            "source:AUD-BNK-002",
+            "source:AUD-LED-002"
+          ],
+          "related_ids": {
+            "reconciliations": [
+              "REC-AUD-DISAGREE"
+            ]
+          },
+          "monetary_exposure": 34.56
+        },
+        {
+          "object_id": "REC-AUD-ACCRUAL-DISAGREE",
+          "object_type": "reconciliation",
+          "result": "FAIL",
+          "detail": "estimation_error 0.0 vs 200.0",
+          "facts": {
+            "original_result": {
+              "estimated_amount": 5000.0,
+              "actual_amount": 5200.0,
+              "estimation_error": 0.0
+            },
+            "independent_result": {
+              "estimated_amount": 5000.0,
+              "actual_amount": 5200.0,
+              "estimation_error": 200.0,
+              "difference": 200.0,
+              "source_inputs": {
+                "estimated_amount": 5000.0,
+                "actual_amount": 5200.0
+              }
+            },
+            "used_original_as_input": false,
+            "tolerance": 0.01,
+            "recon_type": "accrual"
+          },
+          "evidence_ids": [
+            "INV-AUD-ACCRUAL-BAD"
+          ],
+          "related_ids": {
+            "reconciliations": [
+              "REC-AUD-ACCRUAL-DISAGREE"
+            ]
+          },
+          "monetary_exposure": 200.0
+        },
+        {
+          "object_id": "REC-AUD-AR-DISAGREE",
+          "object_type": "reconciliation",
+          "result": "FAIL",
+          "detail": "invoices ['INV-AR-AUD-001'] vs ['INV-AR-AUD-002']",
+          "facts": {
+            "original_result": {
+              "decision": "AUTO_APPLY",
+              "invoice_ids": [
+                "INV-AR-AUD-001"
+              ],
+              "difference": 0
+            },
+            "independent_result": {
+              "decision": "AUTO_APPLY",
+              "invoice_ids": [
+                "INV-AR-AUD-002"
+              ],
+              "difference": 0,
+              "confidence": 0.91,
+              "source_inputs": {
+                "payment_id": "PAY-AR-AUD-002",
+                "payment_amount": 900.0,
+                "remittance_text": "no invoice mentioned",
+                "candidate_count": 1
+              }
+            },
+            "used_original_as_input": false,
+            "tolerance": 0.01,
+            "recon_type": "ar_cash"
+          },
+          "evidence_ids": [
+            "PAY-AR-AUD-002",
+            "INV-AR-AUD-002"
+          ],
+          "related_ids": {
+            "reconciliations": [
+              "REC-AUD-AR-DISAGREE"
+            ]
+          },
+          "monetary_exposure": 0.0
+        }
+      ],
+      "tested_ids": [
+        "REC-AUD-AGREE",
+        "REC-AUD-DISAGREE",
+        "REC-AUD-STRIPE",
+        "REC-AUD-ACCRUAL-AGREE",
+        "REC-AUD-ACCRUAL-DISAGREE",
+        "REC-AUD-AR-AGREE",
+        "REC-AUD-AR-DISAGREE"
+      ],
+      "audit_run_id": "20260920T153114Z",
+      "facts": {}
+    }
+  ],
+  "reperformance": [
+    {
+      "record_id": "RPF-REC-AUD-AGREE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-AGREE",
+      "recon_type": "bank_ledger",
+      "source_ids": [
+        "AUD-BNK-001",
+        "AUD-LED-001"
+      ],
+      "original_result": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_amount": -2500.0,
+        "ledger_amount": -2500.0,
+        "difference": 0.0,
+        "bank_transaction_ids": [
+          "AUD-BNK-001"
+        ],
+        "ledger_entry_ids": [
+          "AUD-LED-001"
+        ]
+      },
+      "independent_result": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_amount": -2500.0,
+        "ledger_amount": -2500.0,
+        "difference": 0.0,
+        "bank_transaction_ids": [
+          "AUD-BNK-001"
+        ],
+        "ledger_entry_ids": [
+          "AUD-LED-001"
+        ],
+        "candidate_id": "EXACT_MATCH:AUD-BNK-001:AUD-LED-001",
+        "source_inputs": {
+          "period": "2026-09",
+          "bank_ids": [
+            "AUD-BNK-001"
+          ],
+          "ledger_ids": [
+            "AUD-LED-001"
+          ],
+          "bank_amount": -2500.0,
+          "ledger_amount": -2500.0
+        }
+      },
+      "differences": [],
+      "tolerance": 0.01,
+      "agreed": true,
+      "result": "PASS",
+      "evidence_trace": [
+        "source:AUD-BNK-001",
+        "source:AUD-LED-001"
+      ],
+      "used_original_as_input": false
+    },
+    {
+      "record_id": "RPF-REC-AUD-DISAGREE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-DISAGREE",
+      "recon_type": "bank_ledger",
+      "source_ids": [
+        "AUD-BNK-002",
+        "AUD-LED-002"
+      ],
+      "original_result": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_amount": -1234.56,
+        "ledger_amount": -1234.56,
+        "difference": 0.0,
+        "bank_transaction_ids": [
+          "AUD-BNK-002"
+        ],
+        "ledger_entry_ids": [
+          "AUD-LED-002"
+        ]
+      },
+      "independent_result": {
+        "match_type": "UNEXPLAINED_DIFFERENCE",
+        "status": "HUMAN_REVIEW",
+        "bank_amount": -1234.56,
+        "ledger_amount": -1200.0,
+        "difference": -34.56,
+        "bank_transaction_ids": [
+          "AUD-BNK-002"
+        ],
+        "ledger_entry_ids": [
+          "AUD-LED-002"
+        ],
+        "candidate_id": "UNEXPLAINED_DIFFERENCE:AUD-BNK-002:AUD-LED-002",
+        "source_inputs": {
+          "period": "2026-09",
+          "bank_ids": [
+            "AUD-BNK-002"
+          ],
+          "ledger_ids": [
+            "AUD-LED-002"
+          ],
+          "bank_amount": -1234.56,
+          "ledger_amount": -1200.0
+        }
+      },
+      "differences": [
+        "match_type EXACT_MATCH vs UNEXPLAINED_DIFFERENCE",
+        "status MATCHED vs HUMAN_REVIEW",
+        "difference 0.0 vs -34.56"
+      ],
+      "tolerance": 0.01,
+      "agreed": false,
+      "result": "FAIL",
+      "evidence_trace": [
+        "source:AUD-BNK-002",
+        "source:AUD-LED-002"
+      ],
+      "used_original_as_input": false
+    },
+    {
+      "record_id": "RPF-REC-AUD-STRIPE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-STRIPE",
+      "recon_type": "stripe_payout",
+      "source_ids": [
+        "AUD-BNK-STRIPE",
+        "AUD-LED-STRIPE"
+      ],
+      "original_result": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_amount": 18420.55,
+        "ledger_amount": 18420.55,
+        "difference": 0.0,
+        "bank_transaction_ids": [
+          "AUD-BNK-STRIPE"
+        ],
+        "ledger_entry_ids": [
+          "AUD-LED-STRIPE"
+        ]
+      },
+      "independent_result": {
+        "match_type": "EXACT_MATCH",
+        "status": "MATCHED",
+        "bank_amount": 18420.55,
+        "ledger_amount": 18420.55,
+        "difference": 0.0,
+        "bank_transaction_ids": [
+          "AUD-BNK-STRIPE"
+        ],
+        "ledger_entry_ids": [
+          "AUD-LED-STRIPE"
+        ],
+        "candidate_id": "EXACT_MATCH:AUD-BNK-STRIPE:AUD-LED-STRIPE",
+        "source_inputs": {
+          "period": "2026-09",
+          "bank_ids": [
+            "AUD-BNK-STRIPE"
+          ],
+          "ledger_ids": [
+            "AUD-LED-STRIPE"
+          ],
+          "bank_amount": 18420.55,
+          "ledger_amount": 18420.55
+        }
+      },
+      "differences": [],
+      "tolerance": 0.01,
+      "agreed": true,
+      "result": "PASS",
+      "evidence_trace": [
+        "source:AUD-BNK-STRIPE",
+        "source:AUD-LED-STRIPE"
+      ],
+      "used_original_as_input": false
+    },
+    {
+      "record_id": "RPF-REC-AUD-ACCRUAL-AGREE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-ACCRUAL-AGREE",
+      "recon_type": "accrual",
+      "source_ids": [
+        "Aether Compute",
+        "INV-AETHER-OCT"
+      ],
+      "original_result": {
+        "estimated_amount": 11849.9,
+        "actual_amount": 12100.0,
+        "estimation_error": 250.1
+      },
+      "independent_result": {
+        "estimated_amount": 11849.9,
+        "actual_amount": 12100.0,
+        "estimation_error": 250.1,
+        "difference": 250.1,
+        "source_inputs": {
+          "estimated_amount": 11849.9,
+          "actual_amount": 12100.0
+        }
+      },
+      "differences": [],
+      "tolerance": 0.01,
+      "agreed": true,
+      "result": "PASS",
+      "evidence_trace": [
+        "INV-AETHER-OCT"
+      ],
+      "used_original_as_input": false
+    },
+    {
+      "record_id": "RPF-REC-AUD-ACCRUAL-DISAGREE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-ACCRUAL-DISAGREE",
+      "recon_type": "accrual",
+      "source_ids": [
+        "Shadow Vendor LLC",
+        "INV-AUD-ACCRUAL-BAD"
+      ],
+      "original_result": {
+        "estimated_amount": 5000.0,
+        "actual_amount": 5200.0,
+        "estimation_error": 0.0
+      },
+      "independent_result": {
+        "estimated_amount": 5000.0,
+        "actual_amount": 5200.0,
+        "estimation_error": 200.0,
+        "difference": 200.0,
+        "source_inputs": {
+          "estimated_amount": 5000.0,
+          "actual_amount": 5200.0
+        }
+      },
+      "differences": [
+        "estimation_error 0.0 vs 200.0"
+      ],
+      "tolerance": 0.01,
+      "agreed": false,
+      "result": "FAIL",
+      "evidence_trace": [
+        "INV-AUD-ACCRUAL-BAD"
+      ],
+      "used_original_as_input": false
+    },
+    {
+      "record_id": "RPF-REC-AUD-AR-AGREE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-AR-AGREE",
+      "recon_type": "ar_cash",
+      "source_ids": [
+        "PAY-AR-AUD-001",
+        "INV-AR-AUD-001"
+      ],
+      "original_result": {
+        "decision": "AUTO_APPLY",
+        "invoice_ids": [
+          "INV-AR-AUD-001"
+        ],
+        "difference": 0
+      },
+      "independent_result": {
+        "decision": "AUTO_APPLY",
+        "invoice_ids": [
+          "INV-AR-AUD-001"
+        ],
+        "difference": 0,
+        "confidence": 0.96,
+        "source_inputs": {
+          "payment_id": "PAY-AR-AUD-001",
+          "payment_amount": 1800.0,
+          "remittance_text": "INV-AR-AUD-001",
+          "candidate_count": 1
+        }
+      },
+      "differences": [],
+      "tolerance": 0.01,
+      "agreed": true,
+      "result": "PASS",
+      "evidence_trace": [
+        "PAY-AR-AUD-001",
+        "INV-AR-AUD-001"
+      ],
+      "used_original_as_input": false
+    },
+    {
+      "record_id": "RPF-REC-AUD-AR-DISAGREE",
+      "audit_run_id": "20260920T153114Z",
+      "reconciliation_id": "REC-AUD-AR-DISAGREE",
+      "recon_type": "ar_cash",
+      "source_ids": [
+        "PAY-AR-AUD-002",
+        "INV-AR-AUD-002"
+      ],
+      "original_result": {
+        "decision": "AUTO_APPLY",
+        "invoice_ids": [
+          "INV-AR-AUD-001"
+        ],
+        "difference": 0
+      },
+      "independent_result": {
+        "decision": "AUTO_APPLY",
+        "invoice_ids": [
+          "INV-AR-AUD-002"
+        ],
+        "difference": 0,
+        "confidence": 0.91,
+        "source_inputs": {
+          "payment_id": "PAY-AR-AUD-002",
+          "payment_amount": 900.0,
+          "remittance_text": "no invoice mentioned",
+          "candidate_count": 1
+        }
+      },
+      "differences": [
+        "invoices ['INV-AR-AUD-001'] vs ['INV-AR-AUD-002']"
+      ],
+      "tolerance": 0.01,
+      "agreed": false,
+      "result": "FAIL",
+      "evidence_trace": [
+        "PAY-AR-AUD-002",
+        "INV-AR-AUD-002"
+      ],
+      "used_original_as_input": false
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-RND-001-001",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-RND-001",
+      "title": "Round-number payments: PAY-AUD-002",
+      "description": "PAY-AUD-002 amount 50000.00 is divisible by [100.0, 1000.0, 10000.0] (SUSPICIOUS_ROUND).",
+      "affected_object_type": "payment",
+      "affected_object_ids": [
+        "PAY-AUD-002"
+      ],
+      "evidence_ids": [
+        "PAY-AUD-002",
+        "INV-AUD-NEW-001",
+        "APR-AUD-005"
+      ],
+      "condition_observed": "PAY-AUD-002 amount 50000.00 is divisible by [100.0, 1000.0, 10000.0] (SUSPICIOUS_ROUND).",
+      "expected_policy": "AUD-RND",
+      "result": "EXCEPTION",
+      "severity": "HIGH",
+      "severity_rationale": "Round-number manual payment to a new vendor above the material threshold.",
+      "monetary_exposure": 50000.0,
+      "recommended_follow_up": "Investigate PAY-AUD-002 against AUD-RND-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "PAY-AUD-002",
+        "INV-AUD-NEW-001",
+        "APR-AUD-005"
+      ],
+      "sample_id": "SMP-payments-risk_based-26",
+      "test_id": "20260920T153114Z:AUD-RND-001",
+      "issue_key": "AUD-RND-001:PAY-AUD-002",
+      "facts": {
+        "payment_id": "PAY-AUD-002",
+        "amount": 50000.0,
+        "round_number_divisors": [
+          100.0,
+          1000.0,
+          10000.0
+        ],
+        "vendor": "Northwind Phantom LLC",
+        "vendor_id": "VEND-NEWCO",
+        "vendor_first_seen": "2026-09-15",
+        "new_vendor": true,
+        "payment_method": "wire",
+        "manual": true,
+        "source": "manual",
+        "recurring": false,
+        "invoice_ids": [
+          "INV-AUD-NEW-001"
+        ],
+        "approval_ids": [
+          "APR-AUD-005"
+        ],
+        "classification": "SUSPICIOUS_ROUND",
+        "ordinary": false
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [
+        "PAY-AUD-002"
+      ],
+      "invoice_ids": [
+        "INV-AUD-NEW-001"
+      ],
+      "vendor_ids": [
+        "VEND-NEWCO"
+      ],
+      "approval_ids": [
+        "APR-AUD-005"
+      ],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-SUP-001-002",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-SUP-001",
+      "title": "Missing payment support: PAY-AUD-002",
+      "description": "PAY-AUD-002 is marked missing_support in the payment record.",
+      "affected_object_type": "payment",
+      "affected_object_ids": [
+        "PAY-AUD-002"
+      ],
+      "evidence_ids": [
+        "PAY-AUD-002",
+        "INV-AUD-NEW-001"
+      ],
+      "condition_observed": "PAY-AUD-002 is marked missing_support in the payment record.",
+      "expected_policy": "AUD-SUP",
+      "result": "FAIL",
+      "severity": "HIGH",
+      "severity_rationale": "Payment record is marked missing supporting documents.",
+      "monetary_exposure": 50000.0,
+      "recommended_follow_up": "Investigate PAY-AUD-002 against AUD-SUP-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "PAY-AUD-002",
+        "INV-AUD-NEW-001"
+      ],
+      "sample_id": "SMP-payments-risk_based-26",
+      "test_id": "20260920T153114Z:AUD-SUP-001",
+      "issue_key": "AUD-SUP-001:PAY-AUD-002",
+      "facts": {
+        "payment_id": "PAY-AUD-002",
+        "missing_support": true,
+        "invoice_ids": [
+          "INV-AUD-NEW-001"
+        ]
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [
+        "PAY-AUD-002"
+      ],
+      "invoice_ids": [
+        "INV-AUD-NEW-001"
+      ],
+      "vendor_ids": [],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-PCE-001-003",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-PCE-001",
+      "title": "Post-close journal entries: JE-AUD-003",
+      "description": "JE-AUD-003 posted 2026-10-05T09:00:00Z vs close 2026-10-03T18:00:00Z → UNAUTHORIZED_POST_CLOSE_ENTRY.",
+      "affected_object_type": "journal_entry",
+      "affected_object_ids": [
+        "JE-AUD-003"
+      ],
+      "evidence_ids": [
+        "JE-AUD-003"
+      ],
+      "condition_observed": "JE-AUD-003 posted 2026-10-05T09:00:00Z vs close 2026-10-03T18:00:00Z → UNAUTHORIZED_POST_CLOSE_ENTRY.",
+      "expected_policy": "AUD-PCE",
+      "result": "FAIL",
+      "severity": "CRITICAL",
+      "severity_rationale": "Unauthorized post-close entry of 15000.0 exceeds the material threshold of 10000.00.",
+      "monetary_exposure": 15000.0,
+      "recommended_follow_up": "Investigate JE-AUD-003 against AUD-PCE-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "JE-AUD-003"
+      ],
+      "sample_id": "SMP-journal_entries-risk_based-27",
+      "test_id": "20260920T153114Z:AUD-PCE-001",
+      "issue_key": "AUD-PCE-001:JE-AUD-003",
+      "facts": {
+        "journal_entry_id": "JE-AUD-003",
+        "accounting_period": "2026-09",
+        "close_timestamp": "2026-10-03T18:00:00Z",
+        "close_status": "CLOSED",
+        "posting_timestamp": "2026-10-05T09:00:00Z",
+        "effective_date": "2026-09-30",
+        "poster": "USR-JE-03",
+        "authorization_id": null,
+        "authorized": false,
+        "authorization_policy": null,
+        "reason": "Late adjustment after close",
+        "classification": "UNAUTHORIZED_POST_CLOSE_ENTRY",
+        "linked_source_records": [
+          "PAY-AUD-002"
+        ]
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [],
+      "vendor_ids": [],
+      "approval_ids": [],
+      "journal_entry_ids": [
+        "JE-AUD-003"
+      ],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-SOD-001-004",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-SOD-001",
+      "title": "Self-approval / segregation of duties: APR-AUD-002",
+      "description": "SOD-001: requester_id and approver_id share identity USR-PREP-02.",
+      "affected_object_type": "invoice",
+      "affected_object_ids": [
+        "APR-AUD-002"
+      ],
+      "evidence_ids": [
+        "APR-AUD-002",
+        "INV-AUD-SELF-001"
+      ],
+      "condition_observed": "SOD-001: requester_id and approver_id share identity USR-PREP-02.",
+      "expected_policy": "SOD-P-001",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Requester/preparer and approver IDs are the same in violation of SOD policy.",
+      "monetary_exposure": 4200.0,
+      "recommended_follow_up": "Investigate APR-AUD-002 against AUD-SOD-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "APR-AUD-002",
+        "INV-AUD-SELF-001"
+      ],
+      "sample_id": "SMP-approvals-risk_based-28",
+      "test_id": "20260920T153114Z:AUD-SOD-001",
+      "issue_key": "AUD-SOD-001:APR-AUD-002",
+      "facts": {
+        "object_id": "INV-AUD-SELF-001",
+        "object_type": "invoice",
+        "requester_id": "USR-PREP-02",
+        "preparer_id": "USR-PREP-02",
+        "reviewer_id": "USR-REV-02",
+        "approver_id": "USR-PREP-02",
+        "initiator_id": null,
+        "violated_rule": "SOD-001",
+        "policy_reference": "SOD-P-001",
+        "matched_identity": "USR-PREP-02"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [
+        "INV-AUD-SELF-001"
+      ],
+      "vendor_ids": [],
+      "approval_ids": [
+        "APR-AUD-002"
+      ],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-SOD-001-005",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-SOD-001",
+      "title": "Self-approval / segregation of duties: APR-AUD-005",
+      "description": "SOD-001: initiator_id and approver_id share identity USR-PAY-01.",
+      "affected_object_type": "payment",
+      "affected_object_ids": [
+        "APR-AUD-005"
+      ],
+      "evidence_ids": [
+        "APR-AUD-005",
+        "PAY-AUD-002"
+      ],
+      "condition_observed": "SOD-001: initiator_id and approver_id share identity USR-PAY-01.",
+      "expected_policy": "SOD-P-001",
+      "result": "FAIL",
+      "severity": "CRITICAL",
+      "severity_rationale": "Self-approval on a payment or journal above the critical-amount threshold.",
+      "monetary_exposure": 50000.0,
+      "recommended_follow_up": "Investigate APR-AUD-005 against AUD-SOD-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "APR-AUD-005",
+        "PAY-AUD-002"
+      ],
+      "sample_id": "SMP-approvals-risk_based-28",
+      "test_id": "20260920T153114Z:AUD-SOD-001",
+      "issue_key": "AUD-SOD-001:APR-AUD-005",
+      "facts": {
+        "object_id": "PAY-AUD-002",
+        "object_type": "payment",
+        "requester_id": null,
+        "preparer_id": null,
+        "reviewer_id": null,
+        "approver_id": "USR-PAY-01",
+        "initiator_id": "USR-PAY-01",
+        "violated_rule": "SOD-001",
+        "policy_reference": "SOD-P-001",
+        "matched_identity": "USR-PAY-01"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [
+        "PAY-AUD-002"
+      ],
+      "invoice_ids": [],
+      "vendor_ids": [],
+      "approval_ids": [
+        "APR-AUD-005"
+      ],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-DUP-INV-001",
+      "title": "Duplicate invoice: AUD-INV-MISS-1",
+      "description": "Audit fixture invoice AUD-INV-MISS-1 shares vendor invoice SV-999001 with ['AUD-INV-MISS-2'], but the operational workflow recorded decision=APPROVE with duplicate_detected=False.",
+      "affected_object_type": "invoice",
+      "affected_object_ids": [
+        "AUD-INV-MISS-1"
+      ],
+      "evidence_ids": [
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "condition_observed": "Audit fixture invoice AUD-INV-MISS-1 shares vendor invoice SV-999001 with ['AUD-INV-MISS-2'], but the operational workflow recorded decision=APPROVE with duplicate_detected=False.",
+      "expected_policy": "P-002",
+      "result": "FAIL",
+      "severity": "HIGH",
+      "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+      "monetary_exposure": 8750.0,
+      "recommended_follow_up": "Investigate AUD-INV-MISS-1 against AUD-DUP-INV-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "sample_id": "SMP-invoices-risk_based-29",
+      "test_id": "20260920T153114Z:AUD-DUP-INV-001",
+      "issue_key": "AUD-DUP-INV-001:AUD-INV-MISS-1",
+      "facts": {
+        "duplicate_candidates": [
+          "AUD-INV-MISS-2"
+        ],
+        "vendor_invoice_number": "SV-999001",
+        "operational_decision": "APPROVE",
+        "operational_duplicate_detected": false,
+        "independent_duplicate_detected": true,
+        "canonical_key": "shadowvendor:SV999001"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [
+        "AUD-INV-MISS-1",
+        "AUD-INV-MISS-2"
+      ],
+      "vendor_ids": [
+        "VEND-SHADOW"
+      ],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-DUP-INV-001",
+      "title": "Duplicate invoice: AUD-INV-MISS-2",
+      "description": "Audit fixture invoice AUD-INV-MISS-2 shares vendor invoice SV-999001 with ['AUD-INV-MISS-1'], but the operational workflow recorded decision=APPROVE with duplicate_detected=False.",
+      "affected_object_type": "invoice",
+      "affected_object_ids": [
+        "AUD-INV-MISS-2"
+      ],
+      "evidence_ids": [
+        "AUD-INV-MISS-2",
+        "AUD-INV-MISS-1"
+      ],
+      "condition_observed": "Audit fixture invoice AUD-INV-MISS-2 shares vendor invoice SV-999001 with ['AUD-INV-MISS-1'], but the operational workflow recorded decision=APPROVE with duplicate_detected=False.",
+      "expected_policy": "P-002",
+      "result": "FAIL",
+      "severity": "HIGH",
+      "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+      "monetary_exposure": 8750.0,
+      "recommended_follow_up": "Investigate AUD-INV-MISS-2 against AUD-DUP-INV-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "AUD-INV-MISS-2",
+        "AUD-INV-MISS-1"
+      ],
+      "sample_id": "SMP-invoices-risk_based-29",
+      "test_id": "20260920T153114Z:AUD-DUP-INV-001",
+      "issue_key": "AUD-DUP-INV-001:AUD-INV-MISS-2",
+      "facts": {
+        "duplicate_candidates": [
+          "AUD-INV-MISS-1"
+        ],
+        "vendor_invoice_number": "SV-999001",
+        "operational_decision": "APPROVE",
+        "operational_duplicate_detected": false,
+        "independent_duplicate_detected": true,
+        "canonical_key": "shadowvendor:SV999001"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [
+        "AUD-INV-MISS-2",
+        "AUD-INV-MISS-1"
+      ],
+      "vendor_ids": [
+        "VEND-SHADOW"
+      ],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-DUP-VEND-001",
+      "title": "Duplicate vendor: VEND-ACME",
+      "description": "Vendor VEND-ACME (Acme Supplies) shares normalized key 'acmesupply' with ['VEND-ACME-DUP'].",
+      "affected_object_type": "vendor",
+      "affected_object_ids": [
+        "VEND-ACME"
+      ],
+      "evidence_ids": [
+        "VEND-ACME",
+        "VEND-ACME-DUP"
+      ],
+      "condition_observed": "Vendor VEND-ACME (Acme Supplies) shares normalized key 'acmesupply' with ['VEND-ACME-DUP'].",
+      "expected_policy": "P-006",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Two vendor master records collapse to the same normalized legal-name key.",
+      "monetary_exposure": null,
+      "recommended_follow_up": "Investigate VEND-ACME against AUD-DUP-VEND-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "VEND-ACME",
+        "VEND-ACME-DUP"
+      ],
+      "sample_id": null,
+      "test_id": "20260920T153114Z:AUD-DUP-VEND-001",
+      "issue_key": "AUD-DUP-VEND-001:VEND-ACME",
+      "facts": {
+        "normalized_key": "acmesupply",
+        "duplicate_candidates": [
+          "VEND-ACME-DUP"
+        ],
+        "operational_duplicate_detected": false
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [],
+      "vendor_ids": [
+        "VEND-ACME",
+        "VEND-ACME-DUP"
+      ],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": []
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-009",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-REPERF-001",
+      "title": "Reconciliation re-performance: REC-AUD-DISAGREE",
+      "description": "match_type EXACT_MATCH vs UNEXPLAINED_DIFFERENCE; status MATCHED vs HUMAN_REVIEW; difference 0.0 vs -34.56",
+      "affected_object_type": "reconciliation",
+      "affected_object_ids": [
+        "REC-AUD-DISAGREE"
+      ],
+      "evidence_ids": [
+        "source:AUD-BNK-002",
+        "source:AUD-LED-002"
+      ],
+      "condition_observed": "match_type EXACT_MATCH vs UNEXPLAINED_DIFFERENCE; status MATCHED vs HUMAN_REVIEW; difference 0.0 vs -34.56",
+      "expected_policy": "AUD-REPERF",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+      "monetary_exposure": 34.56,
+      "recommended_follow_up": "Investigate REC-AUD-DISAGREE against AUD-REPERF-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "source:AUD-BNK-002",
+        "source:AUD-LED-002"
+      ],
+      "sample_id": "SMP-reconciliations-risk_based-30",
+      "test_id": "20260920T153114Z:AUD-REPERF-001",
+      "issue_key": "AUD-REPERF-001:REC-AUD-DISAGREE",
+      "facts": {
+        "original_result": {
+          "match_type": "EXACT_MATCH",
+          "status": "MATCHED",
+          "bank_amount": -1234.56,
+          "ledger_amount": -1234.56,
+          "difference": 0.0,
+          "bank_transaction_ids": [
+            "AUD-BNK-002"
+          ],
+          "ledger_entry_ids": [
+            "AUD-LED-002"
+          ]
+        },
+        "independent_result": {
+          "match_type": "UNEXPLAINED_DIFFERENCE",
+          "status": "HUMAN_REVIEW",
+          "bank_amount": -1234.56,
+          "ledger_amount": -1200.0,
+          "difference": -34.56,
+          "bank_transaction_ids": [
+            "AUD-BNK-002"
+          ],
+          "ledger_entry_ids": [
+            "AUD-LED-002"
+          ],
+          "candidate_id": "UNEXPLAINED_DIFFERENCE:AUD-BNK-002:AUD-LED-002",
+          "source_inputs": {
+            "period": "2026-09",
+            "bank_ids": [
+              "AUD-BNK-002"
+            ],
+            "ledger_ids": [
+              "AUD-LED-002"
+            ],
+            "bank_amount": -1234.56,
+            "ledger_amount": -1200.0
+          }
+        },
+        "used_original_as_input": false,
+        "tolerance": 0.01,
+        "recon_type": "bank_ledger"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [],
+      "vendor_ids": [],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": [
+        "REC-AUD-DISAGREE"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-010",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-REPERF-001",
+      "title": "Reconciliation re-performance: REC-AUD-ACCRUAL-DISAGREE",
+      "description": "estimation_error 0.0 vs 200.0",
+      "affected_object_type": "reconciliation",
+      "affected_object_ids": [
+        "REC-AUD-ACCRUAL-DISAGREE"
+      ],
+      "evidence_ids": [
+        "INV-AUD-ACCRUAL-BAD"
+      ],
+      "condition_observed": "estimation_error 0.0 vs 200.0",
+      "expected_policy": "AUD-REPERF",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+      "monetary_exposure": 200.0,
+      "recommended_follow_up": "Investigate REC-AUD-ACCRUAL-DISAGREE against AUD-REPERF-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "INV-AUD-ACCRUAL-BAD"
+      ],
+      "sample_id": "SMP-reconciliations-risk_based-30",
+      "test_id": "20260920T153114Z:AUD-REPERF-001",
+      "issue_key": "AUD-REPERF-001:REC-AUD-ACCRUAL-DISAGREE",
+      "facts": {
+        "original_result": {
+          "estimated_amount": 5000.0,
+          "actual_amount": 5200.0,
+          "estimation_error": 0.0
+        },
+        "independent_result": {
+          "estimated_amount": 5000.0,
+          "actual_amount": 5200.0,
+          "estimation_error": 200.0,
+          "difference": 200.0,
+          "source_inputs": {
+            "estimated_amount": 5000.0,
+            "actual_amount": 5200.0
+          }
+        },
+        "used_original_as_input": false,
+        "tolerance": 0.01,
+        "recon_type": "accrual"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [],
+      "vendor_ids": [],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": [
+        "REC-AUD-ACCRUAL-DISAGREE"
+      ]
+    },
+    {
+      "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-011",
+      "audit_run_id": "20260920T153114Z",
+      "control_id": "AUD-REPERF-001",
+      "title": "Reconciliation re-performance: REC-AUD-AR-DISAGREE",
+      "description": "invoices ['INV-AR-AUD-001'] vs ['INV-AR-AUD-002']",
+      "affected_object_type": "reconciliation",
+      "affected_object_ids": [
+        "REC-AUD-AR-DISAGREE"
+      ],
+      "evidence_ids": [
+        "PAY-AR-AUD-002",
+        "INV-AR-AUD-002"
+      ],
+      "condition_observed": "invoices ['INV-AR-AUD-001'] vs ['INV-AR-AUD-002']",
+      "expected_policy": "AUD-REPERF",
+      "result": "FAIL",
+      "severity": "MEDIUM",
+      "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+      "monetary_exposure": 0.0,
+      "recommended_follow_up": "Investigate REC-AUD-AR-DISAGREE against AUD-REPERF-001.",
+      "owner": null,
+      "status": "OPEN",
+      "source_trace_ids": [
+        "PAY-AR-AUD-002",
+        "INV-AR-AUD-002"
+      ],
+      "sample_id": "SMP-reconciliations-risk_based-30",
+      "test_id": "20260920T153114Z:AUD-REPERF-001",
+      "issue_key": "AUD-REPERF-001:REC-AUD-AR-DISAGREE",
+      "facts": {
+        "original_result": {
+          "decision": "AUTO_APPLY",
+          "invoice_ids": [
+            "INV-AR-AUD-001"
+          ],
+          "difference": 0
+        },
+        "independent_result": {
+          "decision": "AUTO_APPLY",
+          "invoice_ids": [
+            "INV-AR-AUD-002"
+          ],
+          "difference": 0,
+          "confidence": 0.91,
+          "source_inputs": {
+            "payment_id": "PAY-AR-AUD-002",
+            "payment_amount": 900.0,
+            "remittance_text": "no invoice mentioned",
+            "candidate_count": 1
+          }
+        },
+        "used_original_as_input": false,
+        "tolerance": 0.01,
+        "recon_type": "ar_cash"
+      },
+      "recurring": false,
+      "prior_correction_id": null,
+      "payment_ids": [],
+      "invoice_ids": [],
+      "vendor_ids": [],
+      "approval_ids": [],
+      "journal_entry_ids": [],
+      "reconciliation_ids": [
+        "REC-AUD-AR-DISAGREE"
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "object_id": "JE-AUD-004",
+      "object_type": "journal_entry",
+      "result": "HUMAN_REVIEW",
+      "detail": "JE-AUD-004 posted  vs close 2026-10-03T18:00:00Z → HUMAN_REVIEW.",
+      "facts": {
+        "journal_entry_id": "JE-AUD-004",
+        "accounting_period": "2026-09",
+        "close_timestamp": "2026-10-03T18:00:00Z",
+        "close_status": "CLOSED",
+        "posting_timestamp": "",
+        "effective_date": "2026-09-29",
+        "poster": "USR-JE-04",
+        "authorization_id": null,
+        "authorized": false,
+        "authorization_policy": null,
+        "reason": "Missing posting timestamp",
+        "classification": "HUMAN_REVIEW",
+        "linked_source_records": []
+      },
+      "evidence_ids": [
+        "JE-AUD-004"
+      ],
+      "related_ids": {
+        "journals": [
+          "JE-AUD-004"
+        ],
+        "approvals": []
+      },
+      "monetary_exposure": 880.0
+    },
+    {
+      "object_id": "APR-AUD-003",
+      "object_type": "invoice",
+      "result": "HUMAN_REVIEW",
+      "detail": "Incomplete identities for SOD-001 (requester_id/approver_id).",
+      "facts": {
+        "object_id": "INV-AUD-INCOMPLETE-001",
+        "object_type": "invoice",
+        "requester_id": "USR-PREP-03",
+        "preparer_id": "USR-PREP-03",
+        "reviewer_id": "USR-REV-03",
+        "approver_id": null,
+        "initiator_id": null,
+        "violated_rule": null,
+        "policy_reference": "SOD-P-001",
+        "missing_fields": [
+          "approver_id"
+        ]
+      },
+      "evidence_ids": [
+        "APR-AUD-003",
+        "INV-AUD-INCOMPLETE-001"
+      ],
+      "related_ids": {
+        "approvals": [
+          "APR-AUD-003"
+        ]
+      },
+      "monetary_exposure": 775.0
+    }
+  ],
+  "stats": {
+    "period": "2026-09",
+    "audit_run_id": "20260920T153114Z",
+    "scope": [
+      "AUD-RND-001",
+      "AUD-SUP-001",
+      "AUD-THR-001",
+      "AUD-PCE-001",
+      "AUD-SOD-001",
+      "AUD-DUP-INV-001",
+      "AUD-DUP-VEND-001",
+      "AUD-REPERF-001"
+    ],
+    "populations": {
+      "payments": 3,
+      "journal_entries": 4,
+      "approvals": 5,
+      "invoices": 22,
+      "reconciliations": 7
+    },
+    "sampling": [
+      {
+        "sample_id": "SMP-payments-risk_based-26",
+        "population": "payments",
+        "method": "risk_based",
+        "seed": 26,
+        "sample_size": 3,
+        "population_size": 3,
+        "sampled_ids": [
+          "PAY-AUD-002",
+          "PAY-AUD-003",
+          "PAY-AUD-001"
+        ]
+      },
+      {
+        "sample_id": "SMP-journal_entries-risk_based-27",
+        "population": "journal_entries",
+        "method": "risk_based",
+        "seed": 27,
+        "sample_size": 4,
+        "population_size": 4,
+        "sampled_ids": [
+          "JE-AUD-003",
+          "JE-AUD-002",
+          "JE-AUD-004",
+          "JE-AUD-001"
+        ]
+      },
+      {
+        "sample_id": "SMP-approvals-risk_based-28",
+        "population": "approvals",
+        "method": "risk_based",
+        "seed": 28,
+        "sample_size": 5,
+        "population_size": 5,
+        "sampled_ids": [
+          "APR-AUD-005",
+          "APR-AUD-002",
+          "APR-AUD-001",
+          "APR-AUD-004",
+          "APR-AUD-003"
+        ]
+      },
+      {
+        "sample_id": "SMP-invoices-risk_based-29",
+        "population": "invoices",
+        "method": "risk_based",
+        "seed": 29,
+        "sample_size": 8,
+        "population_size": 22,
+        "sampled_ids": [
+          "INV-020",
+          "INV-009",
+          "INV-019",
+          "INV-003",
+          "INV-001",
+          "INV-011",
+          "AUD-INV-MISS-1",
+          "AUD-INV-MISS-2"
+        ]
+      },
+      {
+        "sample_id": "SMP-reconciliations-risk_based-30",
+        "population": "reconciliations",
+        "method": "risk_based",
+        "seed": 30,
+        "sample_size": 7,
+        "population_size": 7,
+        "sampled_ids": [
+          "REC-AUD-ACCRUAL-DISAGREE",
+          "REC-AUD-AR-DISAGREE",
+          "REC-AUD-DISAGREE",
+          "REC-AUD-STRIPE",
+          "REC-AUD-AR-AGREE",
+          "REC-AUD-AGREE",
+          "REC-AUD-ACCRUAL-AGREE"
+        ]
+      }
+    ],
+    "controls_tested": 8,
+    "passed": 1,
+    "failed": 6,
+    "exceptions": 1,
+    "human_review": 0,
+    "not_tested": 0,
+    "finding_count": 11,
+    "unresolved_count": 2,
+    "reperformance_count": 7,
+    "reperformance_agreed": 4,
+    "reperformance_disagreed": 3,
+    "finding_ids": [
+      "FND-20260920T153114Z-AUD-RND-001-001",
+      "FND-20260920T153114Z-AUD-SUP-001-002",
+      "FND-20260920T153114Z-AUD-PCE-001-003",
+      "FND-20260920T153114Z-AUD-SOD-001-004",
+      "FND-20260920T153114Z-AUD-SOD-001-005",
+      "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+      "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+      "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+      "FND-20260920T153114Z-AUD-REPERF-001-009",
+      "FND-20260920T153114Z-AUD-REPERF-001-010",
+      "FND-20260920T153114Z-AUD-REPERF-001-011"
+    ],
+    "control_results": {
+      "AUD-RND-001": "EXCEPTION",
+      "AUD-SUP-001": "FAIL",
+      "AUD-THR-001": "PASS",
+      "AUD-PCE-001": "FAIL",
+      "AUD-SOD-001": "FAIL",
+      "AUD-DUP-INV-001": "FAIL",
+      "AUD-DUP-VEND-001": "FAIL",
+      "AUD-REPERF-001": "FAIL"
+    }
+  },
+  "interpretation": {
+    "audit_run_id": "20260920T153114Z",
+    "what_was_tested": [
+      "AUD-RND-001",
+      "AUD-SUP-001",
+      "AUD-THR-001",
+      "AUD-PCE-001",
+      "AUD-SOD-001",
+      "AUD-DUP-INV-001",
+      "AUD-DUP-VEND-001",
+      "AUD-REPERF-001"
+    ],
+    "populations": {
+      "payments": 3,
+      "journal_entries": 4,
+      "approvals": 5,
+      "invoices": 22,
+      "reconciliations": 7
+    },
+    "sampling_methods": [
+      "payments:risk_based",
+      "journal_entries:risk_based",
+      "approvals:risk_based",
+      "invoices:risk_based",
+      "reconciliations:risk_based"
+    ],
+    "evidence_examined": [
+      "APR-AUD-002",
+      "APR-AUD-005",
+      "AUD-INV-MISS-1",
+      "AUD-INV-MISS-2",
+      "INV-AR-AUD-002",
+      "INV-AUD-ACCRUAL-BAD",
+      "INV-AUD-NEW-001",
+      "INV-AUD-SELF-001",
+      "JE-AUD-003",
+      "PAY-AR-AUD-002",
+      "PAY-AUD-002",
+      "VEND-ACME",
+      "VEND-ACME-DUP",
+      "source:AUD-BNK-002",
+      "source:AUD-LED-002"
+    ],
+    "deterministic_tests": [
+      "AUD-RND-001",
+      "AUD-SUP-001",
+      "AUD-THR-001",
+      "AUD-PCE-001",
+      "AUD-SOD-001",
+      "AUD-DUP-INV-001",
+      "AUD-DUP-VEND-001",
+      "AUD-REPERF-001"
+    ],
+    "reperformance_summary": [
+      "REC-AUD-AGREE:AGREE",
+      "REC-AUD-DISAGREE:DISAGREE",
+      "REC-AUD-STRIPE:AGREE",
+      "REC-AUD-ACCRUAL-AGREE:AGREE",
+      "REC-AUD-ACCRUAL-DISAGREE:DISAGREE",
+      "REC-AUD-AR-AGREE:AGREE",
+      "REC-AUD-AR-DISAGREE:DISAGREE"
+    ],
+    "findings": [
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-RND-001-001",
+        "result": "EXCEPTION",
+        "severity": "HIGH",
+        "severity_rationale": "Round-number manual payment to a new vendor above the material threshold.",
+        "human_follow_up": "Investigate PAY-AUD-002 against AUD-RND-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-SUP-001-002",
+        "result": "FAIL",
+        "severity": "HIGH",
+        "severity_rationale": "Payment record is marked missing supporting documents.",
+        "human_follow_up": "Investigate PAY-AUD-002 against AUD-SUP-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-PCE-001-003",
+        "result": "FAIL",
+        "severity": "CRITICAL",
+        "severity_rationale": "Unauthorized post-close entry of 15000.0 exceeds the material threshold of 10000.00.",
+        "human_follow_up": "Investigate JE-AUD-003 against AUD-PCE-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-SOD-001-004",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Requester/preparer and approver IDs are the same in violation of SOD policy.",
+        "human_follow_up": "Investigate APR-AUD-002 against AUD-SOD-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-SOD-001-005",
+        "result": "FAIL",
+        "severity": "CRITICAL",
+        "severity_rationale": "Self-approval on a payment or journal above the critical-amount threshold.",
+        "human_follow_up": "Investigate APR-AUD-005 against AUD-SOD-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-006",
+        "result": "FAIL",
+        "severity": "HIGH",
+        "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+        "human_follow_up": "Investigate AUD-INV-MISS-1 against AUD-DUP-INV-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-DUP-INV-001-007",
+        "result": "FAIL",
+        "severity": "HIGH",
+        "severity_rationale": "Operational AP missed a duplicate vendor invoice number that Python independently detected.",
+        "human_follow_up": "Investigate AUD-INV-MISS-2 against AUD-DUP-INV-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-DUP-VEND-001-008",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Two vendor master records collapse to the same normalized legal-name key.",
+        "human_follow_up": "Investigate VEND-ACME against AUD-DUP-VEND-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-009",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+        "human_follow_up": "Investigate REC-AUD-DISAGREE against AUD-REPERF-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-010",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+        "human_follow_up": "Investigate REC-AUD-ACCRUAL-DISAGREE against AUD-REPERF-001."
+      },
+      {
+        "finding_id": "FND-20260920T153114Z-AUD-REPERF-001-011",
+        "result": "FAIL",
+        "severity": "MEDIUM",
+        "severity_rationale": "Independent re-performance disagrees with the original reconciliation.",
+        "human_follow_up": "Investigate REC-AUD-AR-DISAGREE against AUD-REPERF-001."
+      }
+    ],
+    "human_follow_up": [
+      "Investigate PAY-AUD-002 against AUD-RND-001.",
+      "Investigate PAY-AUD-002 against AUD-SUP-001.",
+      "Investigate JE-AUD-003 against AUD-PCE-001.",
+      "Investigate APR-AUD-002 against AUD-SOD-001.",
+      "Investigate APR-AUD-005 against AUD-SOD-001.",
+      "Investigate AUD-INV-MISS-1 against AUD-DUP-INV-001.",
+      "Investigate AUD-INV-MISS-2 against AUD-DUP-INV-001.",
+      "Investigate VEND-ACME against AUD-DUP-VEND-001.",
+      "Investigate REC-AUD-DISAGREE against AUD-REPERF-001.",
+      "Investigate REC-AUD-ACCRUAL-DISAGREE against AUD-REPERF-001.",
+      "Investigate REC-AUD-AR-DISAGREE against AUD-REPERF-001.",
+      "JE-AUD-004 posted  vs close 2026-10-03T18:00:00Z → HUMAN_REVIEW.",
+      "Incomplete identities for SOD-001 (requester_id/approver_id)."
+    ]
+  },
+  "report_text": "INDEPENDENT AUDIT REPORT — 2026-09\nAudit run: 20260920T153114Z\n\nSCOPE\n- AUD-RND-001\n- AUD-SUP-001\n- AUD-THR-001\n- AUD-PCE-001\n- AUD-SOD-001\n- AUD-DUP-INV-001\n- AUD-DUP-VEND-001\n- AUD-REPERF-001\n\nPOPULATIONS EXAMINED\n- payments: 3\n- journal_entries: 4\n- approvals: 5\n- invoices: 22\n- reconciliations: 7\n\nSAMPLING METHODOLOGY\n- payments: risk_based seed=26 3/3 → PAY-AUD-002, PAY-AUD-003, PAY-AUD-001\n- journal_entries: risk_based seed=27 4/4 → JE-AUD-003, JE-AUD-002, JE-AUD-004, JE-AUD-001\n- approvals: risk_based seed=28 5/5 → APR-AUD-005, APR-AUD-002, APR-AUD-001, APR-AUD-004, APR-AUD-003\n- invoices: risk_based seed=29 8/22 → INV-020, INV-009, INV-019, INV-003, INV-001, INV-011, AUD-INV-MISS-1, AUD-INV-MISS-2\n- reconciliations: risk_based seed=30 7/7 → REC-AUD-ACCRUAL-DISAGREE, REC-AUD-AR-DISAGREE, REC-AUD-DISAGREE, REC-AUD-STRIPE, REC-AUD-AR-AGREE, REC-AUD-AGREE, REC-AUD-ACCRUAL-AGREE\n\nCONTROLS TESTED\n- AUD-RND-001  Round-number payments  EXCEPTION  tested=3\n- AUD-SUP-001  Missing payment support  FAIL  tested=3\n- AUD-THR-001  Approval threshold violation  PASS  tested=0\n- AUD-PCE-001  Post-close journal entries  FAIL  tested=4\n- AUD-SOD-001  Self-approval / segregation of duties  FAIL  tested=5\n- AUD-DUP-INV-001  Duplicate invoice  FAIL  tested=22\n- AUD-DUP-VEND-001  Duplicate vendor  FAIL  tested=6\n- AUD-REPERF-001  Reconciliation re-performance  FAIL  tested=7\n\nRESULTS\nPassed: 1\nFailed: 6\nExceptions: 1\nHuman review: 0\nNot tested: 0\nFindings: 11\nUnresolved items: 2\n\nRECONCILIATION RE-PERFORMANCE\nAgreed: 4\nDisagreed: 3\n- REC-AUD-AGREE  bank_ledger  AGREE  PASS  tolerance=0.01  used_original_as_input=false\n  evidence: source:AUD-BNK-001, source:AUD-LED-001\n- REC-AUD-DISAGREE  bank_ledger  DISAGREE  FAIL  tolerance=0.01  used_original_as_input=false\n  differences: match_type EXACT_MATCH vs UNEXPLAINED_DIFFERENCE; status MATCHED vs HUMAN_REVIEW; difference 0.0 vs -34.56\n  evidence: source:AUD-BNK-002, source:AUD-LED-002\n- REC-AUD-STRIPE  stripe_payout  AGREE  PASS  tolerance=0.01  used_original_as_input=false\n  evidence: source:AUD-BNK-STRIPE, source:AUD-LED-STRIPE\n- REC-AUD-ACCRUAL-AGREE  accrual  AGREE  PASS  tolerance=0.01  used_original_as_input=false\n  evidence: INV-AETHER-OCT\n- REC-AUD-ACCRUAL-DISAGREE  accrual  DISAGREE  FAIL  tolerance=0.01  used_original_as_input=false\n  differences: estimation_error 0.0 vs 200.0\n  evidence: INV-AUD-ACCRUAL-BAD\n- REC-AUD-AR-AGREE  ar_cash  AGREE  PASS  tolerance=0.01  used_original_as_input=false\n  evidence: PAY-AR-AUD-001, INV-AR-AUD-001\n- REC-AUD-AR-DISAGREE  ar_cash  DISAGREE  FAIL  tolerance=0.01  used_original_as_input=false\n  differences: invoices ['INV-AR-AUD-001'] vs ['INV-AR-AUD-002']\n  evidence: PAY-AR-AUD-002, INV-AR-AUD-002\n\nFINDINGS\n- FND-20260920T153114Z-AUD-RND-001-001  HIGH  EXCEPTION  AUD-RND-001\n  Round-number payments: PAY-AUD-002\n  objects: PAY-AUD-002\n  evidence: PAY-AUD-002, INV-AUD-NEW-001, APR-AUD-005\n  exposure: $50,000.00\n  follow-up: Investigate PAY-AUD-002 against AUD-RND-001.\n  issue: AUD-RND-001:PAY-AUD-002\n  severity rationale: Round-number manual payment to a new vendor above the material threshold.\n- FND-20260920T153114Z-AUD-SUP-001-002  HIGH  FAIL  AUD-SUP-001\n  Missing payment support: PAY-AUD-002\n  objects: PAY-AUD-002\n  evidence: PAY-AUD-002, INV-AUD-NEW-001\n  exposure: $50,000.00\n  follow-up: Investigate PAY-AUD-002 against AUD-SUP-001.\n  issue: AUD-SUP-001:PAY-AUD-002\n  severity rationale: Payment record is marked missing supporting documents.\n- FND-20260920T153114Z-AUD-PCE-001-003  CRITICAL  FAIL  AUD-PCE-001\n  Post-close journal entries: JE-AUD-003\n  objects: JE-AUD-003\n  evidence: JE-AUD-003\n  exposure: $15,000.00\n  follow-up: Investigate JE-AUD-003 against AUD-PCE-001.\n  issue: AUD-PCE-001:JE-AUD-003\n  severity rationale: Unauthorized post-close entry of 15000.0 exceeds the material threshold of 10000.00.\n- FND-20260920T153114Z-AUD-SOD-001-004  MEDIUM  FAIL  AUD-SOD-001\n  Self-approval / segregation of duties: APR-AUD-002\n  objects: APR-AUD-002\n  evidence: APR-AUD-002, INV-AUD-SELF-001\n  exposure: $4,200.00\n  follow-up: Investigate APR-AUD-002 against AUD-SOD-001.\n  issue: AUD-SOD-001:APR-AUD-002\n  severity rationale: Requester/preparer and approver IDs are the same in violation of SOD policy.\n- FND-20260920T153114Z-AUD-SOD-001-005  CRITICAL  FAIL  AUD-SOD-001\n  Self-approval / segregation of duties: APR-AUD-005\n  objects: APR-AUD-005\n  evidence: APR-AUD-005, PAY-AUD-002\n  exposure: $50,000.00\n  follow-up: Investigate APR-AUD-005 against AUD-SOD-001.\n  issue: AUD-SOD-001:APR-AUD-005\n  severity rationale: Self-approval on a payment or journal above the critical-amount threshold.\n- FND-20260920T153114Z-AUD-DUP-INV-001-006  HIGH  FAIL  AUD-DUP-INV-001\n  Duplicate invoice: AUD-INV-MISS-1\n  objects: AUD-INV-MISS-1\n  evidence: AUD-INV-MISS-1, AUD-INV-MISS-2\n  exposure: $8,750.00\n  follow-up: Investigate AUD-INV-MISS-1 against AUD-DUP-INV-001.\n  issue: AUD-DUP-INV-001:AUD-INV-MISS-1\n  severity rationale: Operational AP missed a duplicate vendor invoice number that Python independently detected.\n- FND-20260920T153114Z-AUD-DUP-INV-001-007  HIGH  FAIL  AUD-DUP-INV-001\n  Duplicate invoice: AUD-INV-MISS-2\n  objects: AUD-INV-MISS-2\n  evidence: AUD-INV-MISS-2, AUD-INV-MISS-1\n  exposure: $8,750.00\n  follow-up: Investigate AUD-INV-MISS-2 against AUD-DUP-INV-001.\n  issue: AUD-DUP-INV-001:AUD-INV-MISS-2\n  severity rationale: Operational AP missed a duplicate vendor invoice number that Python independently detected.\n- FND-20260920T153114Z-AUD-DUP-VEND-001-008  MEDIUM  FAIL  AUD-DUP-VEND-001\n  Duplicate vendor: VEND-ACME\n  objects: VEND-ACME\n  evidence: VEND-ACME, VEND-ACME-DUP\n  exposure: n/a\n  follow-up: Investigate VEND-ACME against AUD-DUP-VEND-001.\n  issue: AUD-DUP-VEND-001:VEND-ACME\n  severity rationale: Two vendor master records collapse to the same normalized legal-name key.\n- FND-20260920T153114Z-AUD-REPERF-001-009  MEDIUM  FAIL  AUD-REPERF-001\n  Reconciliation re-performance: REC-AUD-DISAGREE\n  objects: REC-AUD-DISAGREE\n  evidence: source:AUD-BNK-002, source:AUD-LED-002\n  exposure: $34.56\n  follow-up: Investigate REC-AUD-DISAGREE against AUD-REPERF-001.\n  issue: AUD-REPERF-001:REC-AUD-DISAGREE\n  severity rationale: Independent re-performance disagrees with the original reconciliation.\n- FND-20260920T153114Z-AUD-REPERF-001-010  MEDIUM  FAIL  AUD-REPERF-001\n  Reconciliation re-performance: REC-AUD-ACCRUAL-DISAGREE\n  objects: REC-AUD-ACCRUAL-DISAGREE\n  evidence: INV-AUD-ACCRUAL-BAD\n  exposure: $200.00\n  follow-up: Investigate REC-AUD-ACCRUAL-DISAGREE against AUD-REPERF-001.\n  issue: AUD-REPERF-001:REC-AUD-ACCRUAL-DISAGREE\n  severity rationale: Independent re-performance disagrees with the original reconciliation.\n- FND-20260920T153114Z-AUD-REPERF-001-011  MEDIUM  FAIL  AUD-REPERF-001\n  Reconciliation re-performance: REC-AUD-AR-DISAGREE\n  objects: REC-AUD-AR-DISAGREE\n  evidence: PAY-AR-AUD-002, INV-AR-AUD-002\n  exposure: $0.00\n  follow-up: Investigate REC-AUD-AR-DISAGREE against AUD-REPERF-001.\n  issue: AUD-REPERF-001:REC-AUD-AR-DISAGREE\n  severity rationale: Independent re-performance disagrees with the original reconciliation.\n\nUNRESOLVED ITEMS\n- JE-AUD-004  HUMAN_REVIEW  JE-AUD-004 posted  vs close 2026-10-03T18:00:00Z → HUMAN_REVIEW.\n- APR-AUD-003  HUMAN_REVIEW  Incomplete identities for SOD-001 (requester_id/approver_id).\n\nEVIDENCE REFERENCES\nFinding IDs: FND-20260920T153114Z-AUD-RND-001-001, FND-20260920T153114Z-AUD-SUP-001-002, FND-20260920T153114Z-AUD-PCE-001-003, FND-20260920T153114Z-AUD-SOD-001-004, FND-20260920T153114Z-AUD-SOD-001-005, FND-20260920T153114Z-AUD-DUP-INV-001-006, FND-20260920T153114Z-AUD-DUP-INV-001-007, FND-20260920T153114Z-AUD-DUP-VEND-001-008, FND-20260920T153114Z-AUD-REPERF-001-009, FND-20260920T153114Z-AUD-REPERF-001-010, FND-20260920T153114Z-AUD-REPERF-001-011\nTrace: (in-memory)\nSource records mutated: false",
+  "metrics": null,
+  "agents": [
+    {
+      "role": "Auditor Agent",
+      "skills": [
+        {
+          "name": "audit-sampling-interpretation",
+          "path": "skills/audit-sampling-interpretation/SKILL.md",
+          "content_hash": "4327ce69d7d50b282f4b199675d80c568394282ae01e8463711e9c137caa8462",
+          "injected": true
+        },
+        {
+          "name": "control-testing-interpretation",
+          "path": "skills/control-testing-interpretation/SKILL.md",
+          "content_hash": "8be607139c80119da320e27238d9bff2274ffc62366260a0974a480013817d86",
+          "injected": true
+        },
+        {
+          "name": "reconciliation-reperformance-review",
+          "path": "skills/reconciliation-reperformance-review/SKILL.md",
+          "content_hash": "d57aaab309619bf696cb441a898a7948f8ba523739bca009462e4ab0f79a3867",
+          "injected": true
+        },
+        {
+          "name": "segregation-of-duties-interpretation",
+          "path": "skills/segregation-of-duties-interpretation/SKILL.md",
+          "content_hash": "3ea1e70a49c79183ed1656b404633416665b18095e5a152eca383e0a967b53b0",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    },
+    {
+      "role": "Audit Report Agent",
+      "skills": [
+        {
+          "name": "audit-finding-writing",
+          "path": "skills/audit-finding-writing/SKILL.md",
+          "content_hash": "d4d91090655148bd9458167d0e8cf7c7ed7b04a89a55b2b54788349411ff95c0",
+          "injected": true
+        }
+      ],
+      "load_errors": []
+    }
+  ],
+  "used_agent": false,
+  "trace_path": "../.cfo-v2/office/instances/golden-20260920-r1/runs/audit/2026-09-20260920T153114Z.json",
+  "source_records_mutated": false
+}

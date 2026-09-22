@@ -1,0 +1,16 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+September 2026 operating bank reconciliation
+Period: 2026-09
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: Cash Reconciliation Preparer
+Reviewer: Cash Reconciliation Reviewer
+Status: BLOCKED
+Prepared: 2026-09-03T16:40:00Z
+
+Most September items match, including the Acme ACH TXN-2026-09-018A, the Northline grouped disbursement TXN-2026-09-008, and the Helios wire TXN-2026-09-011 which is $25 net of FEE-729103.
+Open item: bank TXN-2026-09-015 posts $12,412.40 from Northstar LLC; ledger GL-AR-NS / PAY-006 / INV-AR-013 remains $12,400.00. Difference $12.40. No fee advice supports the gap. TASK-CASH stays blocked. Do not force a match.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

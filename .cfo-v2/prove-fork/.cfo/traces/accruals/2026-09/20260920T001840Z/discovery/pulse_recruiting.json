@@ -1,0 +1,25 @@
+{
+  "vendor": "Pulse Recruiting",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": false,
+  "missing_bill_candidate": true,
+  "expectation_confidence": 0.97,
+  "signals": [
+    {
+      "type": "quarterly_cadence",
+      "detail": "Quarterly billing pattern; 09 is a quarter-end month",
+      "confidence": 0.93
+    },
+    {
+      "type": "recurring_contract",
+      "detail": "Quarterly contract CTR-PR-001 for $15,000.00",
+      "confidence": 0.97
+    }
+  ],
+  "reason": "Quarterly recurring vendor with no 2026-09 invoice.",
+  "discovery_trace_id": "2026-09/20260920T001840Z/discovery/pulse_recruiting",
+  "current_invoice_ids": [],
+  "indicative_amount": 15000.0,
+  "indicative_method": "contract_commitment"
+}

@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-INBOX-016",
+  "classification": "CREDIT_MEMO",
+  "note": "unsupported credit path",
+  "bill": false
+}

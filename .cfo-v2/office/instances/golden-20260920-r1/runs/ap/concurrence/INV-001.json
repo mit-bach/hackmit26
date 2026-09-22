@@ -1,0 +1,38 @@
+{
+  "contract": "ReviewerDecision",
+  "profile": "review-match",
+  "source_bot": "ctl-pay",
+  "invoice_id": "INV-001",
+  "erp_source_record_id": "NS-4410",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "packet_path": "runs/ap/packets/INV-001.json",
+  "decision": "CONCUR",
+  "proposed_action": "APPROVE",
+  "exception_types": [],
+  "must_hold": [],
+  "kernel_evidence": {
+    "trace_id": "k_d5efcaec2e8a",
+    "amount": 12450,
+    "amount_matches": true,
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "vendor_exact_match": true,
+    "po_id": "PO-101",
+    "po_approved": true,
+    "receipt_id": "GR-101",
+    "receipt_status": "full",
+    "duplicate_detected": false
+  },
+  "policies_applied": ["P-001"],
+  "prior_cases_noted": [
+    {
+      "case_id": "CASE-001",
+      "note": "Historical Acme alias case; not required here — current vendor is exact match Acme Supplies."
+    }
+  ],
+  "reason": "Kernel get_case_evidence confirms clean three-way match for INV-001: PO-101 approved, amount 12450 exact, vendor Acme Supplies exact, GR-101 full receipt, no duplicates, exception_types empty. Packet complete with PreparerRecommendation APPROVE. P-001 may_approve conditions met. No must_hold. ctl-pay CONCUR on APPROVE. Does not pay; pool entry still requires Kernel allow.",
+  "next": {
+    "to": "ap",
+    "note": "Concurrence path runs/ap/concurrence/INV-001.json. AP may advance Kernel-allowed status; pay owns draft later."
+  }
+}

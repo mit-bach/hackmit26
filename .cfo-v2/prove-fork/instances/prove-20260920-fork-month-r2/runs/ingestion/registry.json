@@ -1,0 +1,210 @@
+{
+  "canonicals": [
+    {
+      "canonical_id": "ING-001",
+      "vendor": "Acme Supplies",
+      "vendor_id": "Acme Supplies",
+      "vendor_invoice_number": "ACM-2026-4410",
+      "invoice_date": "2026-09-08",
+      "due_date": "2026-09-30",
+      "currency": "USD",
+      "amount": 12450.0,
+      "subtotal": 12450.0,
+      "tax": 0.0,
+      "po_id": "PO-101",
+      "description": "Acme Supplies ACM-2026-4410",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-ACME-INV-001",
+          "source_uri": "inbox://THR-acme-inv001/MSG-ACME-INV-001",
+          "agent": "Email Invoice Agent",
+          "document_hash": "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560"
+        }
+      ],
+      "document_hash": "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Acme Supplies",
+          "value": "Acme Supplies"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: ACM-2026-4410",
+          "value": "ACM-2026-4410"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-08",
+          "value": "2026-09-08"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 12450.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [],
+      "already_in_ap_inbox": true,
+      "existing_ap_invoice_id": "INV-001",
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "acmesupply:ACM20264410",
+      "ingestion_status": "already_present_in_ap",
+      "provenance_added": false,
+      "new_this_run": true
+    },
+    {
+      "canonical_id": "ING-002",
+      "vendor": "Office Depot",
+      "vendor_id": "Office Depot",
+      "vendor_invoice_number": "OD-INBOX-3003",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "currency": "USD",
+      "amount": 5000.0,
+      "subtotal": 5000.0,
+      "tax": 0.0,
+      "po_id": "PO-104",
+      "description": "Office Depot OD-INBOX-3003",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-003",
+          "source_uri": "inbox://THR-price-mismatch/MSG-INBOX-003",
+          "agent": "Email Invoice Agent",
+          "document_hash": "02872fbefbe725920375ac606fee66197cbf6ae442796bc109b684f01e9e574e"
+        }
+      ],
+      "document_hash": "02872fbefbe725920375ac606fee66197cbf6ae442796bc109b684f01e9e574e",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Office Depot",
+          "value": "Office Depot"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: OD-INBOX-3003",
+          "value": "OD-INBOX-3003"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 5000.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "officedepot:ODINBOX3003",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    },
+    {
+      "canonical_id": "ING-003",
+      "vendor": "Datadog",
+      "vendor_id": "Datadog",
+      "vendor_invoice_number": "DD-INBOX-4004",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "currency": "USD",
+      "amount": 1800.0,
+      "subtotal": 1800.0,
+      "tax": 0.0,
+      "po_id": null,
+      "description": "Datadog DD-INBOX-4004",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-004",
+          "source_uri": "inbox://THR-no-po/MSG-INBOX-004",
+          "agent": "Email Invoice Agent",
+          "document_hash": "7884e52c5f2a4d4d2f6647460ff515ba8ac8b82ab8cdd2803e3904ba8d973588"
+        }
+      ],
+      "document_hash": "7884e52c5f2a4d4d2f6647460ff515ba8ac8b82ab8cdd2803e3904ba8d973588",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Datadog",
+          "value": "Datadog"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: DD-INBOX-4004",
+          "value": "DD-INBOX-4004"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 1800.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [
+        "missing_po"
+      ],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "datadog:DDINBOX4004",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    }
+  ],
+  "index": {
+    "invoice:acmesupply:ACM20264410": "ING-001",
+    "hash:71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560": "ING-001",
+    "source:email:MSG-ACME-INV-001": "ING-001",
+    "invoice:officedepot:ODINBOX3003": "ING-002",
+    "hash:02872fbefbe725920375ac606fee66197cbf6ae442796bc109b684f01e9e574e": "ING-002",
+    "source:email:MSG-INBOX-003": "ING-002",
+    "invoice:datadog:DDINBOX4004": "ING-003",
+    "hash:7884e52c5f2a4d4d2f6647460ff515ba8ac8b82ab8cdd2803e3904ba8d973588": "ING-003",
+    "source:email:MSG-INBOX-004": "ING-003"
+  },
+  "handed_off": [
+    "ING-002",
+    "ING-003"
+  ]
+}

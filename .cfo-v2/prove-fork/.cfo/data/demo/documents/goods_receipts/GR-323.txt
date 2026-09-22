@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-323
+PO Number: PO-323
+Vendor: Slack Technologies
+Goods received in full on 2026-09-24
+Packing list attached: PL-GR-323
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 72.78 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

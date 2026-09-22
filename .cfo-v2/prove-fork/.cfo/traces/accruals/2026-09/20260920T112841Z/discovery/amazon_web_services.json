@@ -1,0 +1,28 @@
+{
+  "vendor": "Amazon Web Services",
+  "period": "2026-09",
+  "expense_expected": true,
+  "invoice_received": true,
+  "missing_bill_candidate": false,
+  "expectation_confidence": 0.99,
+  "signals": [
+    {
+      "type": "multiple_current_invoices",
+      "detail": "2 distinct current-period invoices received (INV-002, INV-016). The expected period obligation is treated as satisfied.",
+      "confidence": 0.99
+    },
+    {
+      "type": "monthly_cadence",
+      "detail": "Invoices received in each of the previous 5 months",
+      "confidence": 0.95
+    }
+  ],
+  "reason": "Expected monthly expense already invoiced via 2 distinct bills (INV-002, INV-016).",
+  "discovery_trace_id": "2026-09/20260920T112841Z/discovery/amazon_web_services",
+  "current_invoice_ids": [
+    "INV-002",
+    "INV-016"
+  ],
+  "indicative_amount": null,
+  "indicative_method": null
+}

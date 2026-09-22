@@ -1,0 +1,21 @@
+{
+  "key": "fork-r2-MSG-ACME-INV-001",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "a0ae04433d3c91ec756a278ca41c7000881bf03457b61918006ce437337ce11e",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-ACME-INV-001",
+      "thread_id": "THR-acme-inv001",
+      "delivered": true,
+      "attachment_hashes": [
+        "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560"
+      ],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_e90dfe368e8a"
+  }
+}

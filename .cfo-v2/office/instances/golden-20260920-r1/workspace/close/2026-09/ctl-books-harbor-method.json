@@ -1,0 +1,17 @@
+{
+  "bot": "ctl-books",
+  "profile": "review-method",
+  "period": "2026-09",
+  "verdict": "CONCUR_METHOD",
+  "lock": "REJECT_CLOSE",
+  "gate_passed": false,
+  "method": "seasonal_prior_year",
+  "amount": 4650,
+  "prior_decision_id": "MEM-HE-2026-08",
+  "current_decision_id": "DEC-2026-09-026",
+  "reasons": [
+    "Same method as August after re-check of current usage and contract",
+    "Amount is September 2025 $4,650, not August's $7,800",
+    "Lock still REJECT_CLOSE: $12.40 unexplained"
+  ]
+}

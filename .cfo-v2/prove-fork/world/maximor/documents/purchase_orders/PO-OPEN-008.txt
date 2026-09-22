@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-OPEN-008
+PO Number: PO-OPEN-008
+Issued: 2026-09-09
+Vendor: Figma
+Vendor legal name: Figma, Inc.
+Vendor tax ID: 46-5748921
+Authorized amount: 181,097.44
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Open operating payable
+
+This purchase order is not an invoice. The vendor must bill against PO-OPEN-008.
+Payment terms follow the vendor master unless this order states otherwise.

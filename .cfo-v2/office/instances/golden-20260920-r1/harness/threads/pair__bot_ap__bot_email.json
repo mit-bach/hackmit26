@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_email",
+  "threadId": "pair:bot_ap:bot_email",
+  "name": "AP ↔ Email",
+  "memberIds": [
+    "bot_ap",
+    "bot_email"
+  ],
+  "createdAt": 1789916004070,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_1bbae265-b2c2-4c34-87e5-51248c31eced",
+      "handleId": "h_1bbae265-b2c2-4c34-87e5-51248c31eced",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: prepare\nFinance inbox vendor bills landed. Process each open bill (do not pay). Overlay: runs/ingestion/overlay.json. Registry: runs/ingestion/registry.json.\n\nBills:\n- ING-001 ACM-INBOX-1001 Acme 12450 path runs/inbox/packets/bill-MSG-INBOX-001-ING-001.json\n- ING-002 NIM-INBOX-8008 Nimbus 990 path runs/inbox/packets/bill-MSG-INBOX-015-ING-002.json\n- ING-003 FIG-INBOX-2002 Figma 2448 path runs/inbox/packets/bill-MSG-INBOX-002-ING-003.json\n- ING-004 OD-INBOX-3003 Office Depot 5000 path runs/inbox/packets/bill-MSG-INBOX-003-ING-004.json\n- ING-005 DD-INBOX-4004 Datadog 1800 path runs/inbox/packets/bill-MSG-INBOX-004-ING-005.json\n- ING-006 SLK-INBOX-7007 Slack 4375 (injection ignored) path runs/inbox/packets/bill-MSG-INBOX-014-ING-006.json\n- INV-001 ACM-2026-4410 already present; MSG-ACME-INV-001 and MSG-INBOX-013 are business duplicates / evidence only path runs/inbox/packets/bill-MSG-ACME-INV-001-INV-001.json\n\nReply with packet paths written and proposed actions.",
+      "at": 1789916004070,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_1bbae265-b2c2-4c34-87e5-51248c31eced",
+      "handleId": "h_1bbae265-b2c2-4c34-87e5-51248c31eced",
+      "role": "bot",
+      "kind": "text",
+      "text": "AP prepare complete (do not pay). Overlay/registry consumed. Summary: runs/ap/summary/inbox-prepare-2026-09-20.json\n\nPackets + proposed_action:\n- runs/ap/packets/ING-001.json → HOLD (ACM-INBOX-1001; Kernel clean alone but PO-101 already live on INV-001 ACM-2026-4410 — would double-consume PO; not a Kernel vendor+number dup)\n- runs/ap/packets/ING-002.json → HOLD (NIM-INBOX-8008; exception_types: missing_po; unknown vendor)\n- runs/ap/packets/ING-003.json → HOLD (FIG-INBOX-2002; missing_po + goods_not_received; PO-107 not in Kernel)\n- runs/ap/packets/ING-004.json → HOLD (OD-INBOX-3003; material_amount_mismatch 5000 vs PO/GR 2100)\n- runs/ap/packets/ING-005.json → HOLD (DD-INBOX-4004; missing_po)\n- runs/ap/packets/ING-006.json → APPROVE (SLK-INBOX-7007; clean PO-105/GR-105; injection ignored) — handed ctl-pay review-match\n- runs/ap/packets/INV-001.json → APPROVE (ACM-2026-4410 already present; MSG-ACME-INV-001 / MSG-INBOX-013 evidence only; prior concurrence runs/ap/concurrence/INV-001.json)\n\nAP does not release cash.",
+      "at": 1789916090304,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

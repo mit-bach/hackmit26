@@ -1,0 +1,1039 @@
+[
+  {
+    "scenario_id": "stripe_simple_payment",
+    "expected_classification": "charge",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-001"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_001"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_001"
+    ],
+    "expected_payout_id": "po_str_001",
+    "expected_bank_transaction_id": "BANK-STR-001",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2930,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97070,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97070,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      },
+      {
+        "entry_type": "processor_fee",
+        "amount_cents": 2930
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-001",
+      "ch_str_001",
+      "po_str_001",
+      "BANK-STR-001"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Customer invoice $1,000; Stripe fee $29.30; net $970.70.",
+    "expected_behavior": "Match INV-STR-001, book fee separately, reconcile payout to bank."
+  },
+  {
+    "scenario_id": "stripe_payout_multiple_payments",
+    "expected_classification": "payout_bundle",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-002A",
+      "INV-STR-002B",
+      "INV-STR-002C"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_002a",
+      "PAY-STR-CH_STR_002b",
+      "PAY-STR-CH_STR_002c"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_002a",
+      "txn_str_002b",
+      "txn_str_002c"
+    ],
+    "expected_payout_id": "po_str_002",
+    "expected_bank_transaction_id": "BANK-STR-002",
+    "gross_amount_cents": 300000,
+    "fee_amount_cents": 8815,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 291185,
+    "expected_ar_effect_cents": -300000,
+    "expected_cash_effect_cents": 291185,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 300000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "po_str_002",
+      "INV-STR-002A",
+      "INV-STR-002B",
+      "INV-STR-002C"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Three Helios payments with nets $970.70, $1,455.95, $485.20 in one payout.",
+    "expected_behavior": "Do not require payout == one invoice; reconcile the bundle."
+  },
+  {
+    "scenario_id": "stripe_many_txns_one_deposit",
+    "expected_classification": "payout_bundle",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-003A",
+      "INV-STR-003B"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_003a",
+      "PAY-STR-CH_STR_003b"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_003a",
+      "txn_str_003b"
+    ],
+    "expected_payout_id": "po_str_003",
+    "expected_bank_transaction_id": "BANK-STR-003",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2960,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97040,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97040,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "po_str_003",
+      "BANK-STR-003"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Two customers' charges settle in one Stripe payout / bank deposit.",
+    "expected_behavior": "Aggregate by payout membership and match the deposit."
+  },
+  {
+    "scenario_id": "stripe_refund_before_payout",
+    "expected_classification": "refund",
+    "expected_workflow": "ar_refund",
+    "expected_customer_invoice_ids": [
+      "INV-STR-004"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_004"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_004",
+      "txn_str_004_re"
+    ],
+    "expected_payout_id": "po_str_004",
+    "expected_bank_transaction_id": "BANK-STR-004",
+    "gross_amount_cents": 50000,
+    "fee_amount_cents": 1480,
+    "refund_amount_cents": 10000,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 38520,
+    "expected_ar_effect_cents": -40000,
+    "expected_cash_effect_cents": 38520,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 50000
+      },
+      {
+        "entry_type": "refund",
+        "amount_cents": 10000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-004",
+      "re_str_004",
+      "po_str_004"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "$500 charge, $100 refund before payout.",
+    "expected_behavior": "Keep original payment, book refund separately, reconcile reduced net."
+  },
+  {
+    "scenario_id": "stripe_refund_after_payout",
+    "expected_classification": "refund_after_payout",
+    "expected_workflow": "ar_refund",
+    "expected_customer_invoice_ids": [
+      "INV-STR-005"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_005"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_005",
+      "txn_str_005_re"
+    ],
+    "expected_payout_id": "po_str_005b",
+    "expected_bank_transaction_id": "BANK-STR-005B",
+    "gross_amount_cents": 75000,
+    "fee_amount_cents": 2205,
+    "refund_amount_cents": 75000,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": -75000,
+    "expected_ar_effect_cents": 0,
+    "expected_cash_effect_cents": -75000,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 75000
+      },
+      {
+        "entry_type": "refund",
+        "amount_cents": 75000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "po_str_005a",
+      "po_str_005b",
+      "re_str_005"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Original $750 sale already paid out; later full refund reduces a future payout.",
+    "expected_behavior": "Refund payout differs from sale payout; history preserved."
+  },
+  {
+    "scenario_id": "stripe_chargeback",
+    "expected_classification": "dispute",
+    "expected_workflow": "ar_dispute",
+    "expected_customer_invoice_ids": [
+      "INV-STR-006"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_006"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_006",
+      "txn_str_006_dp",
+      "txn_str_006_dp_fee"
+    ],
+    "expected_payout_id": "po_str_006b",
+    "expected_bank_transaction_id": "BANK-STR-006B",
+    "gross_amount_cents": 80000,
+    "fee_amount_cents": 1500,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 80000,
+    "expected_net_cents": -81500,
+    "expected_ar_effect_cents": -80000,
+    "expected_cash_effect_cents": -81500,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 80000
+      },
+      {
+        "entry_type": "dispute",
+        "amount_cents": 80000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": "stripe_dispute",
+    "expected_context_links": [
+      "dp_str_006",
+      "INV-STR-006",
+      "po_str_006b"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "$800 payment later charged back plus $15 dispute fee.",
+    "expected_behavior": "Do not treat the cash reduction as an unexplained bank break."
+  },
+  {
+    "scenario_id": "stripe_fee_variation",
+    "expected_classification": "charge",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-007"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_007"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_007"
+    ],
+    "expected_payout_id": "po_str_007",
+    "expected_bank_transaction_id": "BANK-STR-007",
+    "gross_amount_cents": 200000,
+    "fee_amount_cents": 7200,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 192800,
+    "expected_ar_effect_cents": -200000,
+    "expected_cash_effect_cents": 192800,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 200000
+      },
+      {
+        "entry_type": "processor_fee",
+        "amount_cents": 7200
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-007",
+      "po_str_007"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "International / AMEX effective fee $72.00 on $2,000, not 2.9%+$0.30.",
+    "expected_behavior": "Use source fee facts; do not hard-code a universal rate."
+  },
+  {
+    "scenario_id": "stripe_duplicate_event",
+    "expected_classification": "duplicate",
+    "expected_workflow": "idempotency",
+    "expected_customer_invoice_ids": [
+      "INV-STR-001"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_001"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_001"
+    ],
+    "expected_payout_id": "po_str_001",
+    "expected_bank_transaction_id": "BANK-STR-001",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2930,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97070,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97070,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": "duplicate_event",
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "evt_po_str_001_recon"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": true,
+    "uses_precedent": false,
+    "input_condition": "Exact same payout.reconciliation_completed event delivered twice.",
+    "expected_behavior": "Idempotent: no second payment, journal, or reconciliation."
+  },
+  {
+    "scenario_id": "stripe_out_of_order",
+    "expected_classification": "charge",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-001"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_001"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_001"
+    ],
+    "expected_payout_id": "po_str_001",
+    "expected_bank_transaction_id": "BANK-STR-001",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2930,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97070,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97070,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "po_str_001",
+      "ch_str_001"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Payout event arrives before charge and before balance-transaction release.",
+    "expected_behavior": "Eventually reach the correct canonical payout and AR state."
+  },
+  {
+    "scenario_id": "stripe_missing_metadata",
+    "expected_classification": "charge",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-010"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_010"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_010"
+    ],
+    "expected_payout_id": "po_str_010",
+    "expected_bank_transaction_id": "BANK-STR-010",
+    "gross_amount_cents": 125000,
+    "fee_amount_cents": 3655,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 121345,
+    "expected_ar_effect_cents": -125000,
+    "expected_cash_effect_cents": 121345,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 125000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-010"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Stripe payment has no internal invoice ID; unique $1,250 Pinnacle invoice.",
+    "expected_behavior": "Match from customer + amount + description, not ID lookup alone."
+  },
+  {
+    "scenario_id": "stripe_ambiguous_invoice",
+    "expected_classification": "charge",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-011A"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_011"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_011"
+    ],
+    "expected_payout_id": "po_str_011",
+    "expected_bank_transaction_id": "BANK-STR-011",
+    "gross_amount_cents": 90000,
+    "fee_amount_cents": 2640,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 87360,
+    "expected_ar_effect_cents": -90000,
+    "expected_cash_effect_cents": 87360,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 90000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-011A"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Brightline has two $900 invoices; description is Q3 analytics retainer.",
+    "expected_behavior": "Use description context; do not pick an arbitrary invoice."
+  },
+  {
+    "scenario_id": "stripe_payout_with_refund",
+    "expected_classification": "payout_bundle",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-012A",
+      "INV-STR-012B"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_012a",
+      "PAY-STR-CH_STR_012b"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_012a",
+      "txn_str_012b",
+      "txn_str_012_re"
+    ],
+    "expected_payout_id": "po_str_012",
+    "expected_bank_transaction_id": "BANK-STR-012",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2960,
+    "refund_amount_cents": 20000,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 77040,
+    "expected_ar_effect_cents": -80000,
+    "expected_cash_effect_cents": 77040,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      },
+      {
+        "entry_type": "refund",
+        "amount_cents": 20000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "po_str_012",
+      "re_str_012"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Two successful charges plus a $200 refund in one payout.",
+    "expected_behavior": "Bank amount is not the sum of gross sales."
+  },
+  {
+    "scenario_id": "stripe_payout_with_dispute",
+    "expected_classification": "payout_bundle",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-013A",
+      "INV-STR-013B"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_013a",
+      "PAY-STR-CH_STR_013b"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_013a",
+      "txn_str_013b",
+      "txn_str_013_dp",
+      "txn_str_013_dp_fee"
+    ],
+    "expected_payout_id": "po_str_013",
+    "expected_bank_transaction_id": "BANK-STR-013",
+    "gross_amount_cents": 80000,
+    "fee_amount_cents": 3880,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 25000,
+    "expected_net_cents": 51120,
+    "expected_ar_effect_cents": -80000,
+    "expected_cash_effect_cents": 51120,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 80000
+      },
+      {
+        "entry_type": "dispute",
+        "amount_cents": 25000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": "stripe_dispute",
+    "expected_context_links": [
+      "po_str_013",
+      "dp_str_013"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Successful charges plus a $250 chargeback and $15 fee in one payout.",
+    "expected_behavior": "Net settlement includes the dispute; not an unexplained break."
+  },
+  {
+    "scenario_id": "stripe_bank_discrepancy_1240",
+    "expected_classification": "bank_mismatch",
+    "expected_workflow": "cash_reconciliation_exception",
+    "expected_customer_invoice_ids": [
+      "INV-STR-014"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_014"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_014"
+    ],
+    "expected_payout_id": "po_str_014",
+    "expected_bank_transaction_id": "BANK-STR-014",
+    "gross_amount_cents": 1240000,
+    "fee_amount_cents": 35990,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 1204010,
+    "expected_ar_effect_cents": -1240000,
+    "expected_cash_effect_cents": 1202770,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 1240000
+      }
+    ],
+    "expected_reconciliation_status": "MISMATCH",
+    "expected_close_effect": "BLOCK_CLOSE",
+    "expected_exception_code": "bank_amount_differs_from_stripe_payout",
+    "expected_audit_finding": "unexplained_1240_difference",
+    "expected_context_links": [
+      "po_str_014",
+      "BANK-STR-014",
+      "INV-STR-014"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Northstar Stripe payout bank deposit is short $12.40.",
+    "expected_behavior": "Identify the exact mismatch; do not invent an explanation; block close."
+  },
+  {
+    "scenario_id": "stripe_cross_period_timing",
+    "expected_classification": "timing",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-015"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_015"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_015"
+    ],
+    "expected_payout_id": "po_str_015",
+    "expected_bank_transaction_id": "BANK-STR-015",
+    "gross_amount_cents": 220000,
+    "fee_amount_cents": 6410,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 213590,
+    "expected_ar_effect_cents": -220000,
+    "expected_cash_effect_cents": 213590,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 220000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-015",
+      "po_str_015"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-10",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Late-September charge settles in an October payout.",
+    "expected_behavior": "September AR history stays correct; cash timing follows October settlement."
+  },
+  {
+    "scenario_id": "stripe_partial_payment",
+    "expected_classification": "partial",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-016"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_016"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_016"
+    ],
+    "expected_payout_id": "po_str_016",
+    "expected_bank_transaction_id": "BANK-STR-016",
+    "gross_amount_cents": 60000,
+    "fee_amount_cents": 1770,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 58230,
+    "expected_ar_effect_cents": -60000,
+    "expected_cash_effect_cents": 58230,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 60000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-016"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "$600 Stripe payment against $1,800 Harbor invoice.",
+    "expected_behavior": "Partial apply; invoice remains open for the residual."
+  },
+  {
+    "scenario_id": "stripe_failed_then_retry",
+    "expected_classification": "charge",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-017"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_017"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_017"
+    ],
+    "expected_payout_id": "po_str_017",
+    "expected_bank_transaction_id": "BANK-STR-017",
+    "gross_amount_cents": 64000,
+    "fee_amount_cents": 1886,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 62114,
+    "expected_ar_effect_cents": -64000,
+    "expected_cash_effect_cents": 62114,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 64000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-017"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Card fails, then the same invoice is paid on retry.",
+    "expected_behavior": "Failed intent posts no cash; retry applies once."
+  },
+  {
+    "scenario_id": "stripe_unmatched_order",
+    "expected_classification": "unmatched",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_020"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_020"
+    ],
+    "expected_payout_id": "po_str_020",
+    "expected_bank_transaction_id": "BANK-STR-020",
+    "gross_amount_cents": 33000,
+    "fee_amount_cents": 987,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 32013,
+    "expected_ar_effect_cents": 0,
+    "expected_cash_effect_cents": 32013,
+    "expected_gl_entries": [],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "ch_str_020"
+    ],
+    "expected_cash_decision": "UNAPPLIED",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Orion Freight Stripe charge has no corresponding internal invoice.",
+    "expected_behavior": "Leave cash unapplied; do not invent an order."
+  },
+  {
+    "scenario_id": "stripe_bank_before_payout",
+    "expected_classification": "timing",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-001"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_001"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_001"
+    ],
+    "expected_payout_id": "po_str_001",
+    "expected_bank_transaction_id": "BANK-STR-001",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2930,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97070,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97070,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "BANK-STR-001",
+      "po_str_001"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Bank deposit is visible before the payout webhook.",
+    "expected_behavior": "Eventually match using payout membership once Stripe arrives."
+  },
+  {
+    "scenario_id": "stripe_cross_period_memory",
+    "expected_classification": "charge",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-018B"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_018"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_018"
+    ],
+    "expected_payout_id": "po_str_018",
+    "expected_bank_transaction_id": "BANK-STR-018",
+    "gross_amount_cents": 88000,
+    "fee_amount_cents": 2582,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 85418,
+    "expected_ar_effect_cents": -88000,
+    "expected_cash_effect_cents": 85418,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 88000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-018B",
+      "AR-PREC-STR-ATLAS-AUG"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": true,
+    "input_condition": "Atlas has two $880 September invoices; metadata missing; August Stripe precedent is monthly platform fee.",
+    "expected_behavior": "Use prior-period Stripe precedent plus description; do not overwrite current facts."
+  },
+  {
+    "scenario_id": "stripe_overpayment",
+    "expected_classification": "overpayment",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-019"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_019"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_019"
+    ],
+    "expected_payout_id": "po_str_019",
+    "expected_bank_transaction_id": "BANK-STR-019",
+    "gross_amount_cents": 110000,
+    "fee_amount_cents": 3220,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 106780,
+    "expected_ar_effect_cents": 0,
+    "expected_cash_effect_cents": 106780,
+    "expected_gl_entries": [],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-019"
+    ],
+    "expected_cash_decision": "HUMAN_REVIEW",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "$1,100 Stripe payment against $950 named invoice.",
+    "expected_behavior": "Do not drop the residual; send overpayment to human review."
+  },
+  {
+    "scenario_id": "stripe_multiple_payments_one_invoice",
+    "expected_classification": "partial",
+    "expected_workflow": "ar_cash_application",
+    "expected_customer_invoice_ids": [
+      "INV-STR-021"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_021a",
+      "PAY-STR-CH_STR_021b"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_021a",
+      "txn_str_021b"
+    ],
+    "expected_payout_id": "po_str_021",
+    "expected_bank_transaction_id": "BANK-STR-021",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2960,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97040,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97040,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "INV-STR-021",
+      "ch_str_021a",
+      "ch_str_021b",
+      "po_str_021"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Harbor invoice $1,000 paid as two Stripe charges ($400 then $600) in one payout.",
+    "expected_behavior": "Apply both gross payments to INV-STR-021; bank cash is net of both fees."
+  },
+  {
+    "scenario_id": "stripe_payout_before_bank",
+    "expected_classification": "timing",
+    "expected_workflow": "stripe_payout_reconciliation",
+    "expected_customer_invoice_ids": [
+      "INV-STR-001"
+    ],
+    "expected_payment_ids": [
+      "PAY-STR-CH_STR_001"
+    ],
+    "expected_balance_transaction_ids": [
+      "txn_str_001"
+    ],
+    "expected_payout_id": "po_str_001",
+    "expected_bank_transaction_id": "BANK-STR-001",
+    "gross_amount_cents": 100000,
+    "fee_amount_cents": 2930,
+    "refund_amount_cents": 0,
+    "dispute_amount_cents": 0,
+    "expected_net_cents": 97070,
+    "expected_ar_effect_cents": -100000,
+    "expected_cash_effect_cents": 97070,
+    "expected_gl_entries": [
+      {
+        "entry_type": "cash_receipt",
+        "amount_cents": 100000
+      },
+      {
+        "entry_type": "processor_fee",
+        "amount_cents": 2930
+      }
+    ],
+    "expected_reconciliation_status": "MATCH",
+    "expected_close_effect": "CLEAR",
+    "expected_exception_code": null,
+    "expected_audit_finding": null,
+    "expected_context_links": [
+      "po_str_001",
+      "BANK-STR-001",
+      "INV-STR-001"
+    ],
+    "expected_cash_decision": "AUTO_APPLY",
+    "expected_settlement_period": "2026-09",
+    "expected_duplicate_suppressed": false,
+    "uses_precedent": false,
+    "input_condition": "Stripe payout webhook is processed before the company bank deposit is loaded.",
+    "expected_behavior": "Payout composition is known first; bank later matches 97070 cents."
+  }
+]

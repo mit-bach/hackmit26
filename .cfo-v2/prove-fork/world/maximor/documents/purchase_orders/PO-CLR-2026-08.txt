@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-CLR-2026-08
+PO Number: PO-CLR-2026-08
+Issued: 2026-08-08
+Vendor: Clearing Solutions LLC
+Vendor legal name: Clearing Solutions LLC
+Vendor tax ID: 85-2201988
+Authorized amount: 17,014.22
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Bank rec consulting true-up
+
+This purchase order is not an invoice. The vendor must bill against PO-CLR-2026-08.
+Payment terms follow the vendor master unless this order states otherwise.

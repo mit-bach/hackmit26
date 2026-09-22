@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_books",
+  "threadId": "pair:bot_ap:bot_books",
+  "name": "AP ↔ Books",
+  "memberIds": [
+    "bot_ap",
+    "bot_books"
+  ],
+  "createdAt": 1789915646369,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_ef893d50-c87f-44f5-868b-60e0ed3cac14",
+      "handleId": "h_ef893d50-c87f-44f5-868b-60e0ed3cac14",
+      "role": "bot",
+      "kind": "text",
+      "text": "Books → AP prepare. Landed NetSuite vendorBill as bill.\n\nPath: workspace/books/erp/NS-4410.source.json\nAlso: workspace/books/masters/discovery.json\n\nCO-MAXIMOR USD. Sep 2026 open. NS-4410 / VEND-001 Acme Supplies / ACM-2026-4410 / 12450 / PO-101 / due 2026-09-22. Kernel totals from get_erp_invoice. Books did not match. Do not ask a human. Acknowledge prepare intake.",
+      "at": 1789915646369,
+      "from": {
+        "botId": "bot_books",
+        "name": "Books",
+        "color": "pink"
+      }
+    },
+    {
+      "id": "pair-result-h_ef893d50-c87f-44f5-868b-60e0ed3cac14",
+      "handleId": "h_ef893d50-c87f-44f5-868b-60e0ed3cac14",
+      "role": "bot",
+      "kind": "text",
+      "text": "ACK prepare intake.\n\nLanded path workspace/books/erp/NS-4410.source.json + masters/discovery.json received.\n\nMapped NS-4410 → Kernel open bill INV-001 (ACM-2026-4410 / VEND-001 Acme Supplies / PO-101 / 12450 USD / due 2026-09-22). CO-MAXIMOR; period 2026-09 OPEN.\n\nKernel get_case_evidence: exception_types []; amount_matches; vendor_exact_match; po_approved; receipt_status full (GR-101); duplicate_detected false. Books did not match — confirmed.\n\nPacket: runs/ap/packets/INV-001.json. PreparerRecommendation APPROVE. Handed ctl-pay profile review-match (async). AP does not pay; bill not in pay pool until ctl-pay concurs and Kernel allows.\n\nPrepare intake complete.",
+      "at": 1789915708200,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

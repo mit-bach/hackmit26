@@ -1,0 +1,18 @@
+{
+  "toSlug": "ctl-books",
+  "to": "bot_ctl_books",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "profile": "review-bs",
+  "kind": "a2a_handoff",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "prompt": "profile: review-bs\nReview bs_recon for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+  "status": "accepted",
+  "done": false,
+  "bus": "harness",
+  "humanQueue": false,
+  "queue_owner": "ctl-books",
+  "live_sent": false
+}

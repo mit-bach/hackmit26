@@ -1,0 +1,3 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_88bcbd793be8", "ts": "2026-09-20T15:34:53Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_440dc015bb5c", "ts": "2026-09-20T15:35:40Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_224db965f05c", "ts": "2026-09-20T15:36:43Z"}

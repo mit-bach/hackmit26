@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-021
+PO Number: PO-OPEN-021
+Vendor: Okta
+Goods received in full on 2026-09-22
+Packing list attached: PL-GR-OPEN-021
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 182,880.78 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

@@ -1,0 +1,21 @@
+{
+  "id": "h_a0aa7019-ee75-4e83-842f-961098df76e0",
+  "from": "bot_email",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: vendor\nFinance asked Acme Supplies for missing invoice fields in thread THR-incomplete. get_inbox_thread then reply_in_thread as that vendor. Do not send_office_outbound. Do not dispatch.\nPaths: runs/inbox/handles/email-outbound-MSG-INBOX-011-OUT-world.json · runs/inbox/packets/email-outbound-MSG-INBOX-011-OUT.json",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_world"
+  },
+  "kind": "a2a_handoff",
+  "status": "failed",
+  "createdAt": "2026-09-20T16:04:15.668Z",
+  "updatedAt": "2026-09-20T16:10:19.696Z",
+  "result": "Looking at incomplete case in messages.json",
+  "resultPaths": [],
+  "seq": 49,
+  "error": "did not call ask_bot to reply; assistant text is not the pair thread"
+}

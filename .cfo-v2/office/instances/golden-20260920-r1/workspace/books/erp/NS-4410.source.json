@@ -1,0 +1,59 @@
+{
+  "contract": "SourceAgentOutput",
+  "profile": "erp-invoice",
+  "source_bot": "books",
+  "classification": "invoice",
+  "reason": "NetSuite vendorBill with vendor, invoice number, dates, PO, and amount due. Structured ERP record; not a quote/receipt/statement.",
+  "system": "NetSuite",
+  "document_kind": "vendorBill",
+  "handoff": { "to": "ap", "profile": "prepare", "when": "bill" },
+  "record_id": "NS-4410",
+  "period": "2026-09",
+  "python_parse": {
+    "record_id": "NS-4410",
+    "period": "2026-09",
+    "system": "NetSuite",
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "subtotal": 12450,
+    "tax": 0,
+    "total": 12450,
+    "po_number": "PO-101",
+    "description": "Standing desks and monitors — same economic event as INV-001"
+  },
+  "candidate": {
+    "source": "erp",
+    "source_system": "NetSuite",
+    "source_record_id": "NS-4410",
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "vendor_invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "amount": 12450,
+    "subtotal": 12450,
+    "tax": 0,
+    "po_number": "PO-101",
+    "description": "Standing desks and monitors — same economic event as INV-001",
+    "company_id": "CO-MAXIMOR",
+    "period": "2026-09"
+  },
+  "vendor_master_ref": {
+    "vendor_id": "VEND-001",
+    "name": "Acme Supplies",
+    "payment_terms": "2/10 net 30",
+    "status": "active"
+  },
+  "po_ref": {
+    "po_id": "PO-101",
+    "vendor": "Acme Supplies",
+    "authorized_amount": 12450.0,
+    "status": "approved"
+  },
+  "books_note": "Kernel totals copied from get_erp_invoice. No remap. Books does not match or pay."
+}

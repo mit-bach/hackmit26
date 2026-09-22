@@ -1,0 +1,66 @@
+{
+  "object": "stripe_charge_level_apply",
+  "as_of": "2026-09-20",
+  "from": "stripe",
+  "profile": "apply",
+  "waterfall_status": "MATCH",
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "source_paths": [
+    "workspace/sources/stripe/po_1MaximorFees.json",
+    "workspace/sources/stripe/po_1MaximorRefunds.json",
+    "workspace/sources/stripe/po_1MaximorDisputes.json"
+  ],
+  "receipt_confirmed": true,
+  "decision": "UNAPPLIED",
+  "reason": "Charge-level payout packets received and waterfall MATCH acknowledged. Kernel get_cash_application_facts has no CustomerPayment for ORD-2101, ORD-2102, ORD-2201, ORD-2301 (or PAY-STR-ORD-*). Apply does not invent payment tickets, customers, or invoice sticks. invoice_candidates=0 is respected (never AP bill). Fees/refunds/disputes noted only; no AR post without a Kernel payment_id and candidate set.",
+  "charges": [
+    {
+      "payout_id": "po_1MaximorFees",
+      "charge_id": "ORD-2101",
+      "amount": 8000.0,
+      "currency": "USD",
+      "kernel_payment_id": null,
+      "status": "UNAPPLIED_NO_PAYMENT"
+    },
+    {
+      "payout_id": "po_1MaximorFees",
+      "charge_id": "ORD-2102",
+      "amount": 5000.0,
+      "currency": "USD",
+      "kernel_payment_id": null,
+      "status": "UNAPPLIED_NO_PAYMENT"
+    },
+    {
+      "payout_id": "po_1MaximorRefunds",
+      "charge_id": "ORD-2201",
+      "amount": 4000.0,
+      "currency": "USD",
+      "kernel_payment_id": null,
+      "status": "UNAPPLIED_NO_PAYMENT",
+      "related": [{"line_type": "refund", "reference": "re_2201", "amount": -500.0}]
+    },
+    {
+      "payout_id": "po_1MaximorDisputes",
+      "charge_id": "ORD-2301",
+      "amount": 6000.0,
+      "currency": "USD",
+      "kernel_payment_id": null,
+      "status": "UNAPPLIED_NO_PAYMENT",
+      "related": [{"line_type": "dispute", "reference": "dp_2301", "amount": -750.0}]
+    }
+  ],
+  "fees_noted": [
+    {"payout_id": "po_1MaximorFees", "amount": -390.0},
+    {"payout_id": "po_1MaximorRefunds", "amount": -120.0},
+    {"payout_id": "po_1MaximorDisputes", "amount": -180.0}
+  ],
+  "bank_deposits_owned_by_cash": [
+    "BANK-po_1MaximorFees",
+    "BANK-po_1MaximorRefunds",
+    "BANK-po_1MaximorDisputes"
+  ],
+  "posted": false,
+  "human_queue": false,
+  "precedent_affected": false
+}

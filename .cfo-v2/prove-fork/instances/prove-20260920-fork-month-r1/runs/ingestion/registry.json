@@ -1,0 +1,141 @@
+{
+  "canonicals": [
+    {
+      "canonical_id": "ING-001",
+      "vendor": "Acme Supplies",
+      "vendor_id": "Acme Supplies",
+      "vendor_invoice_number": "ACM-2026-4410",
+      "invoice_date": "2026-09-08",
+      "due_date": "2026-09-30",
+      "currency": "USD",
+      "amount": 12450.0,
+      "subtotal": 12450.0,
+      "tax": 0.0,
+      "po_id": "PO-101",
+      "description": "Acme Supplies ACM-2026-4410",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-ACME-INV-001",
+          "source_uri": "inbox://THR-acme-inv001/MSG-ACME-INV-001",
+          "agent": "Email Invoice Agent",
+          "document_hash": "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560"
+        }
+      ],
+      "document_hash": "71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Acme Supplies",
+          "value": "Acme Supplies"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: ACM-2026-4410",
+          "value": "ACM-2026-4410"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-08",
+          "value": "2026-09-08"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 12450.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [],
+      "already_in_ap_inbox": true,
+      "existing_ap_invoice_id": "INV-001",
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "acmesupply:ACM20264410",
+      "ingestion_status": "already_present_in_ap",
+      "provenance_added": false,
+      "new_this_run": true
+    },
+    {
+      "canonical_id": "ING-002",
+      "vendor": "Slack Technologies",
+      "vendor_id": "Slack Technologies",
+      "vendor_invoice_number": "SLK-INBOX-7007",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "currency": "USD",
+      "amount": 4375.0,
+      "subtotal": 4375.0,
+      "tax": 0.0,
+      "po_id": "PO-105",
+      "description": "Slack Technologies SLK-INBOX-7007",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-014",
+          "source_uri": "inbox://THR-prompt-injection/MSG-INBOX-014",
+          "agent": "Email Invoice Agent",
+          "document_hash": "632f72aa9d557c94b1517a2ac627872e09fa32397f172f6d95a04e06080619b6"
+        }
+      ],
+      "document_hash": "632f72aa9d557c94b1517a2ac627872e09fa32397f172f6d95a04e06080619b6",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Slack Technologies",
+          "value": "Slack Technologies"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: SLK-INBOX-7007",
+          "value": "SLK-INBOX-7007"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 4375.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": false,
+      "ap_invoice_id": null,
+      "ap_result": null,
+      "canonical_key": "slacktechnology:SLKINBOX7007",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    }
+  ],
+  "index": {
+    "invoice:acmesupply:ACM20264410": "ING-001",
+    "hash:71fa822e65baf8d218224f635ef43d5f97ad874b82dc98b7c2bda74898b6b560": "ING-001",
+    "source:email:MSG-ACME-INV-001": "ING-001",
+    "invoice:slacktechnology:SLKINBOX7007": "ING-002",
+    "hash:632f72aa9d557c94b1517a2ac627872e09fa32397f172f6d95a04e06080619b6": "ING-002",
+    "source:email:MSG-INBOX-014": "ING-002"
+  },
+  "handed_off": [
+    "ING-002"
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "version": "1",
+  "ops": [
+    {
+      "id": "audit.tools.get_audit_period",
+      "python": "audit.tools:get_audit_period",
+      "exportName": "get_audit_period",
+      "args": {"period": "string"},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_payments",
+      "python": "audit.tools:get_audit_payments",
+      "exportName": "get_audit_payments",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_journals",
+      "python": "audit.tools:get_audit_journals",
+      "exportName": "get_audit_journals",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_approvals",
+      "python": "audit.tools:get_audit_approvals",
+      "exportName": "get_audit_approvals",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_vendors",
+      "python": "audit.tools:get_audit_vendors",
+      "exportName": "get_audit_vendors",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_invoices",
+      "python": "audit.tools:get_audit_invoices",
+      "exportName": "get_audit_invoices",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_operational_decisions",
+      "python": "audit.tools:get_operational_decisions",
+      "exportName": "get_operational_decisions",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_planted_reconciliations",
+      "python": "audit.tools:get_planted_reconciliations",
+      "exportName": "get_planted_reconciliations",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_policy",
+      "python": "audit.tools:get_audit_policy",
+      "exportName": "get_audit_policy",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_ground_truth",
+      "python": "audit.tools:get_audit_ground_truth",
+      "exportName": "get_audit_ground_truth",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-eval",
+      "evalOnly": true,
+      "ownerPrefixes": []
+    }
+  ]
+}

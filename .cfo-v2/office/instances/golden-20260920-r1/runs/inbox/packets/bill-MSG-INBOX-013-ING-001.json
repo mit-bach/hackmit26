@@ -1,0 +1,10 @@
+{
+  "object": "vendor_bill_land",
+  "message_id": "MSG-INBOX-013",
+  "invoice_id": "ING-001",
+  "vendor_invoice_number": "ACM-INBOX-1001",
+  "status": "BUSINESS_DUPLICATE",
+  "overlay_path": "runs/ingestion/overlay.json",
+  "registry_path": "runs/ingestion/registry.json",
+  "handoff": "ap/prepare"
+}

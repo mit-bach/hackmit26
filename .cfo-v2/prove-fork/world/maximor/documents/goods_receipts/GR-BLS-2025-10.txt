@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-BLS-2025-10
+PO Number: PO-BLS-2025-10
+Vendor: Brightline Studio LLC
+Goods received in full on 2025-10-14
+Packing list attached: PL-GR-BLS-2025-10
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 37,033.33 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

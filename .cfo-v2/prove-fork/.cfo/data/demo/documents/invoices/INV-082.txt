@@ -1,0 +1,39 @@
+Lenovo (United States) Inc.
+8001 Development Drive
+Morrisville, NC 27560
+Phone +1 855-253-6686   billing@lenovo.example
+Tax ID 56-2189993
+
+INVOICE
+
+Invoice Number: LEN-2026-09-0083
+Invoice Date: 2026-09-03
+Due Date: 2026-10-03
+PO Number: PO-383
+Payment Terms: net 30
+Currency: USD
+Vendor: Lenovo
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+premium support billed 2026-09-03             1.00      5,401.95      5,401.95
+
+Subtotal                                                              5,401.95
+Tax                                                                       0.00
+Amount Due                                                            5,401.95
+
+Remit to:
+ACH Bank of America routing 053000196  account ****LV01
+Bank: Bank of America  ****LV01
+Please include invoice LEN-2026-09-0083 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@lenovo.example

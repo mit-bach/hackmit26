@@ -1,0 +1,18 @@
+{
+  "toSlug": "ctl-cash",
+  "to": "bot_ctl_cash",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "profile": "review-rec",
+  "kind": "a2a_handoff",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "prompt": "profile: review-rec\nReview cash for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+  "status": "accepted",
+  "done": false,
+  "bus": "harness",
+  "humanQueue": false,
+  "queue_owner": "ctl-cash",
+  "live_sent": false
+}

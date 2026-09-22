@@ -1,0 +1,19 @@
+{
+  "id": "h_a9d2c7c7-6f00-402b-819a-5a6542f0b315",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nCall tools.get_invoice for Kernel id INV-001 that exists in the World pack.\nDo not approve. Do not Handle ctl-pay. Stop after the tool returns.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:36:37.008Z",
+  "updatedAt": "2026-09-20T15:36:54.333Z",
+  "result": "**tools.get_invoice** (`INV-001`) — ok\n\n| Field | Value |\n|--------|--------|\n| invoice_id | INV-001 |\n| vendor | Acme Supplies |\n| po_id | PO-101 |\n| amount | 12450 |\n| invoice_date | 2026-09-08 |\n| due_date | 2026-09-22 |\n| vendor_invoice_number | ACM-2026-4410 |\n| description | Standing desks and monitors |\n| payment_terms | 2/10 net 30 |\n| early_payment_discount_percent | 2 |\n| early_payment_discount_deadline | 2026-09-18 |\n| late_fee_percent | 1.5 |\n| vendor_priority | normal |\n\n`found: true`. No approve. No ctl-pay. Stopped.",
+  "resultPaths": [],
+  "seq": 4
+}

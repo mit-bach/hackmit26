@@ -1,0 +1,39 @@
+Freightline Logistics, Inc.
+1200 Port Boulevard
+Newark, NJ 07114
+Phone +1 973-555-4412   billing@freightline.example
+Tax ID 22-3301988
+
+INVOICE
+
+Invoice Number: INV-FRT-SEP-001-VIN
+Invoice Date: 2026-09-28
+Due Date: 2026-10-15
+PO Number: (none)
+Payment Terms: net 21
+Currency: USD
+Vendor: Freightline Logistics
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Standard inbound freight                      1.00     20,000.00     20,000.00
+
+Subtotal                                                             20,000.00
+Tax                                                                       0.00
+Amount Due                                                           20,000.00
+
+Remit to:
+ACH PNC routing 031207607  account ****FR01
+Bank: PNC Bank  ****FR01
+Please include invoice INV-FRT-SEP-001-VIN on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@freightline.example

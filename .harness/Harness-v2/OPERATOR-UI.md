@@ -20,7 +20,7 @@ Entry: `ui/src/main.tsx` → `App`. Loopback `GET /api/auth/session` authenticat
 | Inspector | Protocol / Handles / Transcript | `InspectorPanel.tsx` | `GET /api/threads/:id/events` ← `protocol.jsonl` + Handle files + `transcript.jsonl` |
 | Routines | Calendar / list / logs | `RoutinesPage.tsx` (`RoutineCalendarPage.tsx`) | `GET/POST/PATCH/DELETE /api/routines` → `roster.routines`; runs ← `receipts/` |
 | Protocol | Office-wide log + search | `ProtocolPage.tsx` | `GET /api/protocol?query=` ← `protocol.jsonl` |
-| Demo | Replay protocol from wipe; awake Bots spawn mosaic panes | `DemoPage.tsx` | `GET /api/demo` ← `protocol.jsonl` + transcripts; `POST /api/demo/record` → `harness/demo/latest/` |
+| Demo | Replay protocol from wipe; director camera (cast, seq in/out, scenes) | `DemoPage.tsx` | `GET /api/demo` ← protocol + transcripts; `POST /api/demo/record`; `GET/PUT /api/demo/scenes`; `GET /api/demo/frame` |
 | Search | Jump to a message / Handle | `CommandPalette.tsx`, `SearchResults.tsx`, `ChatFindBar.tsx` | `GET /api/search?q=` |
 | Computer | Shared cwd tree + file edit | `ComputerPanel.tsx` | `GET /api/computer/tree`, `GET/PUT /api/computer/file` ← `workspace/` + `harness/` |
 | Bot settings | Overview, identity, skills, memory, routines, approvals | `BotSettingsDialog.tsx` + `bot-settings/*` | PATCH bot → `roster.json`; skills → `Computer/skills/<name>/SKILL.md`; memory → `harness/bots/<id>/memory/` |

@@ -1,0 +1,234 @@
+{
+  "period": "2026-09",
+  "results": [
+    {
+      "vendor": "Aether Compute",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 0.99,
+      "signals": [
+        {
+          "type": "monthly_cadence",
+          "detail": "Invoices received in each of the previous 6 months",
+          "confidence": 0.99
+        },
+        {
+          "type": "usage",
+          "detail": "Usage recorded for 2026-09",
+          "confidence": 0.9
+        }
+      ],
+      "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/aether_compute",
+      "current_invoice_ids": [],
+      "indicative_amount": 11849.9,
+      "indicative_method": "usage_run_rate"
+    },
+    {
+      "vendor": "Amazon Web Services",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": true,
+      "missing_bill_candidate": false,
+      "expectation_confidence": 0.99,
+      "signals": [
+        {
+          "type": "multiple_current_invoices",
+          "detail": "2 distinct current-period invoices received (INV-002, INV-016). The expected period obligation is treated as satisfied.",
+          "confidence": 0.99
+        },
+        {
+          "type": "monthly_cadence",
+          "detail": "Invoices received in each of the previous 5 months",
+          "confidence": 0.95
+        }
+      ],
+      "reason": "Expected monthly expense already invoiced via 2 distinct bills (INV-002, INV-016).",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/amazon_web_services",
+      "current_invoice_ids": [
+        "INV-002",
+        "INV-016"
+      ],
+      "indicative_amount": null,
+      "indicative_method": null
+    },
+    {
+      "vendor": "CleanSpace Facilities",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 0.99,
+      "signals": [
+        {
+          "type": "monthly_cadence",
+          "detail": "Invoices received in each of the previous 5 months",
+          "confidence": 0.95
+        },
+        {
+          "type": "recurring_contract",
+          "detail": "Monthly contract CTR-CS-001 for $2,400.00",
+          "confidence": 0.99
+        }
+      ],
+      "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/cleanspace_facilities",
+      "current_invoice_ids": [],
+      "indicative_amount": 2400.0,
+      "indicative_method": "contract_commitment"
+    },
+    {
+      "vendor": "Harbor Electric",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 0.99,
+      "signals": [
+        {
+          "type": "monthly_cadence",
+          "detail": "Invoices received in each of the previous 13 months",
+          "confidence": 0.99
+        },
+        {
+          "type": "seasonal_prior_year",
+          "detail": "Same month last year (2025-09) was invoiced",
+          "confidence": 0.8
+        }
+      ],
+      "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/harbor_electric",
+      "current_invoice_ids": [],
+      "indicative_amount": 4650.0,
+      "indicative_method": "seasonal_prior_year"
+    },
+    {
+      "vendor": "Helios Hardware",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 1.0,
+      "signals": [
+        {
+          "type": "goods_receipt",
+          "detail": "Goods received under PO-201 (GR-201)",
+          "confidence": 1.0
+        }
+      ],
+      "reason": "Goods received this period and no matching invoice.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/helios_hardware",
+      "current_invoice_ids": [],
+      "indicative_amount": 6200.0,
+      "indicative_method": "goods_receipt"
+    },
+    {
+      "vendor": "Lindholm & Ruiz LLP",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 0.99,
+      "signals": [
+        {
+          "type": "monthly_cadence",
+          "detail": "Invoices received in each of the previous 5 months",
+          "confidence": 0.95
+        },
+        {
+          "type": "recurring_contract",
+          "detail": "Monthly contract CTR-LR-001 for $8,500.00",
+          "confidence": 0.99
+        }
+      ],
+      "reason": "Monthly recurring vendor with no 2026-09 invoice.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/lindholm_ruiz_llp",
+      "current_invoice_ids": [],
+      "indicative_amount": 8500.0,
+      "indicative_method": "contract_commitment"
+    },
+    {
+      "vendor": "NewForge Consulting",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 0.25,
+      "signals": [
+        {
+          "type": "as_needed_contract",
+          "detail": "Time-and-materials contract with no monthly commitment",
+          "confidence": 0.2
+        },
+        {
+          "type": "draft_purchase_order",
+          "detail": "PO-202 is draft; no goods receipt",
+          "confidence": 0.25
+        }
+      ],
+      "reason": "Weak evidence only; do not assume the expense was incurred.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/newforge_consulting",
+      "current_invoice_ids": [],
+      "indicative_amount": null,
+      "indicative_method": null
+    },
+    {
+      "vendor": "Orbit Analytics",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": true,
+      "missing_bill_candidate": false,
+      "expectation_confidence": 0.99,
+      "signals": [
+        {
+          "type": "monthly_cadence",
+          "detail": "Invoices received in each of the previous 5 months",
+          "confidence": 0.95
+        },
+        {
+          "type": "recurring_contract",
+          "detail": "Monthly contract CTR-OA-001 for $3,100.00",
+          "confidence": 0.99
+        }
+      ],
+      "reason": "Expected monthly expense already invoiced (HI-OA-2026-09).",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/orbit_analytics",
+      "current_invoice_ids": [
+        "HI-OA-2026-09"
+      ],
+      "indicative_amount": null,
+      "indicative_method": null
+    },
+    {
+      "vendor": "Pulse Recruiting",
+      "period": "2026-09",
+      "expense_expected": true,
+      "invoice_received": false,
+      "missing_bill_candidate": true,
+      "expectation_confidence": 0.97,
+      "signals": [
+        {
+          "type": "quarterly_cadence",
+          "detail": "Quarterly billing pattern; 09 is a quarter-end month",
+          "confidence": 0.93
+        },
+        {
+          "type": "recurring_contract",
+          "detail": "Quarterly contract CTR-PR-001 for $15,000.00",
+          "confidence": 0.97
+        }
+      ],
+      "reason": "Quarterly recurring vendor with no 2026-09 invoice.",
+      "discovery_trace_id": "2026-09/20260920T001930Z/discovery/pulse_recruiting",
+      "current_invoice_ids": [],
+      "indicative_amount": 15000.0,
+      "indicative_method": "contract_commitment"
+    }
+  ],
+  "expected_count": 9,
+  "invoices_received_count": 2,
+  "missing_count": 7,
+  "discovery_run_id": "20260920T001930Z"
+}

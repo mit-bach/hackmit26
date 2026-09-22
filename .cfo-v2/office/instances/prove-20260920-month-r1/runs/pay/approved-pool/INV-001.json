@@ -1,0 +1,23 @@
+{
+  "invoice_id": "INV-001",
+  "status": "in_approved_pool",
+  "source": {
+    "from_bot": "ap",
+    "packet_path": "runs/ap/packets/INV-001.json",
+    "ctl_pay_review_match": "runs/ctl-pay/review-match/INV-001.json",
+    "ctl_pay_decision": "CONCUR APPROVE"
+  },
+  "vendor": "Acme Supplies",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "po_id": "PO-101",
+  "currency": "USD",
+  "amount": 12450,
+  "days_until_due": 2,
+  "notes": [
+    "AP match complete; ctl-pay review-match CONCUR APPROVE.",
+    "Peer Handle is not cash approval and not pay-run release.",
+    "Eligible for next weekly payment-run draft under Profile schedule.",
+    "Pay does not move money; draft will Handle to ctl-pay / review-pay."
+  ],
+  "received_at": "2026-09-20T14:42:00Z"
+}

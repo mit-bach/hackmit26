@@ -1,0 +1,19 @@
+{
+  "id": "h_e23fbca4-1cb8-4aac-a421-f345a70939e0",
+  "from": "operator",
+  "to": "bot_books",
+  "toSlug": "books",
+  "prompt": "profile: erp-invoice\nMaximor Demo Corp. CO-MAXIMOR. USD. August 2026 is CLOSED. September 2026 is open.\nDiscover company, vendor master, customer master, open bills, open invoices, and lock state.\nLand ERP bills that are bills. Handle ap / prepare. Handle collect only with open customer invoices after you have named them. Do not dun. Do not match. Do not close. Do not ask a human.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:46:00.389Z",
+  "updatedAt": "2026-09-20T14:49:59.546Z",
+  "result": "## Discovery (CO-MAXIMOR · USD)\n\n| Item | State |\n| --- | --- |\n| Company | Maximor Demo Corp (`CO-MAXIMOR`), Cambridge, USD |\n| Vendor master | `data/vendors.json` — **340** active-scale vendors (e.g. `VEND-001` Acme Supplies) |\n| Customer master | `data/customers.json` — **17** named customers (CUST-001…015, CUST-IC-EU, CUST-NSC-01) |\n| Lock | **2026-08 CLOSED** (`CLOSE-2026-08`); **2026-09 OPEN** (read only; no lock write) |\n| ERP bills (2026-09) | **1**: `NS-4410` NetSuite vendorBill |\n| Open customer invoices | **99** OPEN/PAST_DUE; roster total **34,811,818.00** USD |\n\nPaths: `workspace/books/masters/discovery.json`, `workspace/books/lock/period_lock_state.json`\n\n## Landed ERP bill → AP prepare\n\n- `workspace/books/erp/NS-4410.source.json`  \n  Acme / `ACM-2026-4410` / **12,450** / PO-101 / due 2026-09-22 (Kernel `get_erp_invoice`; no remap, no match)\n- **AP ACK**: mapped to open bill **INV-001**; packet `runs/ap/packets/INV-001.json`; PreparerRecommendation APPROVE → ctl-pay review-match. Books did not match/pay.\n\n## Open AR → Collect (named only, no dun)\n\n- `workspace/books/ar/open_invoices.json` — full named roster of 99\n- **Collect ACK**: roster intake only; **no chase/dun** on this handoff\n\nNot done: match, dun, period close, human ask.",
+  "resultPaths": [],
+  "seq": 18
+}

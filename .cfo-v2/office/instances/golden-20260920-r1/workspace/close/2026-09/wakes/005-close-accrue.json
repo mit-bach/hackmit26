@@ -1,0 +1,26 @@
+{
+  "profile": "accrue",
+  "slug": "close",
+  "period": "2026-09",
+  "task_id": "accruals",
+  "status": "COMPLETE",
+  "ops": [
+    "accrual.tools.get_expected_invoices",
+    "accrual.tools.get_current_period_invoices",
+    "accrual.tools.get_vendor_invoice_history",
+    "accrual.tools.get_purchase_orders",
+    "accrual.tools.get_goods_receipts",
+    "accrual.tools.get_vendor_contract",
+    "accrual.tools.get_vendor_usage",
+    "accrual.tools.get_estimate_candidates",
+    "accrual.tools.compute_accrual_estimate",
+    "accrual.tools.create_accrual",
+    "accrual.tools.get_open_accruals",
+    "accrual.tools.reconcile_accrual_with_invoice"
+  ],
+  "mutatingOps": [
+    "accrual.tools.create_accrual",
+    "accrual.tools.reconcile_accrual_with_invoice"
+  ],
+  "mark_closed": false
+}

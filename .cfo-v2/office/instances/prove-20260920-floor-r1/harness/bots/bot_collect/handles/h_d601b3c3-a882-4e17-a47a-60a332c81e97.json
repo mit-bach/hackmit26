@@ -1,0 +1,19 @@
+{
+  "id": "h_d601b3c3-a882-4e17-a47a-60a332c81e97",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "profile: chase\nCall accrual.tools.create_accrual for period 2026-09. Do it. Do not chase invoices this turn.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:32:56.262Z",
+  "updatedAt": "2026-09-20T14:33:07.440Z",
+  "result": "**Result:** `accrual.tools.create_accrual` for period `2026-09` was **not** executed.\n\n- Catalog search under this Profile (`chase`) returned no accrual ops.\n- Direct call returned `forbidden`.\n- `office/bots/collect/BOT.md` lists `create_accrual` as **must not call** for Collect; grant set is collection tools only (`get_collection_candidates`, invoice/customer/precedent facts, `send_office_outbound`).\n\nNo invoice chase this turn, as instructed. Accrual for 2026-09 needs a Bot/Profile that owns close/accrual (e.g. close / books), not collect.",
+  "resultPaths": [],
+  "seq": 8
+}

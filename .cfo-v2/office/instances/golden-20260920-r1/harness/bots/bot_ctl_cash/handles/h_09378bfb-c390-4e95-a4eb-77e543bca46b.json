@@ -1,0 +1,19 @@
+{
+  "id": "h_09378bfb-c390-4e95-a4eb-77e543bca46b",
+  "from": "bot_cash",
+  "to": "bot_ctl_cash",
+  "toSlug": "ctl-cash",
+  "prompt": "profile: review-rec\n\nCash match packets for 2026-09 operating (case runs/cash_recon/cases/2026-09.json).\n\nPrimary:\n1) TXN-2026-09-011 → candidate_id FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE | disposition EXPLAINED_EXCEPTION | fee_evidence ADV-729103 | difference_minor -2500 | packet workspace/cash/packets/TXN-2026-09-011.json | proposed fee journal unposted\n2) TXN-2026-09-015 → candidate_id UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS | disposition HUMAN_REVIEW | difference_minor 1240 stays unexplained | no fee invented | packet workspace/cash/packets/TXN-2026-09-015.json\n\nAlso: 008 GROUPED_MATCH MATCHED; 012A EXACT MATCHED; 012B HUMAN_REVIEW duplicate risk same GL-AR-772; 019A PROVIDER_PAYOUT MATCHED; 025 unmatched HUMAN_REVIEW.\n\nSummary: workspace/cash/packets/2026-09-operating-match-summary.json\nDo not force MATCHED on 015. Period not fully reconciled while 015 unexplained remains.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_cash",
+    "toId": "bot_ctl_cash"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:19:07.861Z",
+  "updatedAt": "2026-09-20T15:20:22.851Z",
+  "result": "ctl-cash review-rec decision for 2026-09 operating match batch.\n\nDecision path: workspace/cash/packets/ctl-cash-2026-09-operating-decision.json\n(Kernel candidates trace k_8089f0df840f from get_match_candidates case 2026-09.)\n\nPRIMARY:\n1) TXN-2026-09-011 — CONCUR disposition EXPLAINED_EXCEPTION on candidate_id FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE. difference_minor -2500; fee_evidence_ids ADV-729103 present on Kernel candidate. Reject UNEXPLAINED twin. fee_journal_post_authorized=false (proposed journal stays unposted). Packet workspace/cash/packets/TXN-2026-09-011.json.\n\n2) TXN-2026-09-015 — REFUSE MATCHED. Keep UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS; disposition HUMAN_REVIEW; difference_minor 1240 stays unexplained; fee_evidence_ids empty; pipe identifier absent (trace k_1557a8340562). Do not invent fee. Do not force MATCHED. Packet workspace/cash/packets/TXN-2026-09-015.json.\n\nAlso:\n- 008 GROUPED_MATCH — CONCUR MATCHED\n- 012A EXACT — CONCUR MATCHED\n- 012B — REFUSE double-match same GL-AR-772; keep HUMAN_REVIEW\n- 018A/018 — REFUSE; two equal OD EXACT candidates\n- 019A PROVIDER_PAYOUT — CONCUR MATCHED (provider_status MATCH)\n- 025 — REFUSE; no candidate\n\nperiod_reconciled=false. Period not fully RECONCILED while 015 unexplained residual remains. No human asked. next_owner=cash.",
+  "seq": 87
+}

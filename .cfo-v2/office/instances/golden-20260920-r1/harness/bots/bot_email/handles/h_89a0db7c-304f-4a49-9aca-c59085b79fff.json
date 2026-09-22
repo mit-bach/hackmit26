@@ -1,0 +1,31 @@
+{
+  "id": "h_89a0db7c-304f-4a49-9aca-c59085b79fff",
+  "from": "bot_close",
+  "fromSlug": "close",
+  "to": "bot_email",
+  "toSlug": "email",
+  "profile": "invoice",
+  "prompt": "profile: invoice\nReview ingest for 2026-09 at workspace/close/2026-09/pack.json. Never ask a human. Peer Handle is not approval.",
+  "paths": [
+    "workspace/close/2026-09/pack.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_email"
+  },
+  "createdAt": "2026-09-20T15:28:47Z",
+  "updatedAt": "2026-09-20T15:28:47Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "email",
+    "profile": "invoice"
+  },
+  "live_sent": false,
+  "task_id": "ingest"
+}

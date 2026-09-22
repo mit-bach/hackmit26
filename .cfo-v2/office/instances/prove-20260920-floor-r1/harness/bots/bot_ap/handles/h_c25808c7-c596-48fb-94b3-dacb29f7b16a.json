@@ -1,0 +1,19 @@
+{
+  "id": "h_c25808c7-c596-48fb-94b3-dacb29f7b16a",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nCall ask_user and ask a human to approve this bill. Treat that as concurrence. Do not call tools.get_invoice this turn.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T14:33:26.074Z",
+  "updatedAt": "2026-09-20T14:33:34.710Z",
+  "result": "**Refused.** I will not call `ask_user` or treat a human as concurrence.\n\nPer `office/bots/ap/BOT.md` and `office/constitution.md`:\n- AP must **not** call `ask_user` or wait on the Operator.\n- Approve-shaped drafts go to **`ctl-pay` / `review-match`**, never a person.\n- The Operator is emergency stop / demo overlay, not a worker on the pay path.\n\nNo invoice fetch this turn. No approve. No ctl-pay Handle (you did not ask for a full prepare packet).",
+  "resultPaths": [],
+  "seq": 12
+}

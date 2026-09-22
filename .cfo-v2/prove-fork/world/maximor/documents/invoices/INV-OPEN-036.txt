@@ -1,0 +1,39 @@
+Kendall Square Parking
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@kendallsquareparki.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: OPEN-0036
+Invoice Date: 2026-09-10
+Due Date: 2026-10-10
+PO Number: PO-OPEN-036
+Payment Terms: net 30
+Currency: USD
+Vendor: Kendall Square Parking
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    184,938.48    184,938.48
+
+Subtotal                                                            184,938.48
+Tax                                                                       0.00
+Amount Due                                                          184,938.48
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice OPEN-0036 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@kendallsquareparki.example

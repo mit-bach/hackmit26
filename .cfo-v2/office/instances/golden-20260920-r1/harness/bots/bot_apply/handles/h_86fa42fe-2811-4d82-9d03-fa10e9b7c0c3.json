@@ -1,0 +1,31 @@
+{
+  "id": "h_86fa42fe-2811-4d82-9d03-fa10e9b7c0c3",
+  "from": "bot_stripe",
+  "fromSlug": "stripe",
+  "to": "bot_apply",
+  "toSlug": "apply",
+  "profile": "apply",
+  "prompt": "profile: apply\nCharge-level facts for po_1MaximorRefunds at workspace/sources/stripe/po_1MaximorRefunds.json. Do not apply cash in Bot stripe. invoice_candidates is 0.",
+  "paths": [
+    "workspace/sources/stripe/po_1MaximorRefunds.json"
+  ],
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "done": false,
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_stripe",
+    "toId": "bot_apply"
+  },
+  "createdAt": "2026-09-20T15:18:36Z",
+  "updatedAt": "2026-09-20T15:18:36Z",
+  "bus": "harness",
+  "op": "bot_send_prompt",
+  "humanQueue": false,
+  "queue": {
+    "owner": "apply",
+    "profile": "apply"
+  },
+  "payoutId": "po_1MaximorRefunds",
+  "invoice_candidates": 0
+}

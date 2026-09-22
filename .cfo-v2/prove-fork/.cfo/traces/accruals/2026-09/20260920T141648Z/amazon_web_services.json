@@ -1,0 +1,176 @@
+{
+  "trace_id": "2026-09/20260920T141648Z/amazon_web_services",
+  "vendor": "Amazon Web Services",
+  "period": "2026-09",
+  "invoice_received": true,
+  "evidence": {
+    "historical_invoices": [
+      {
+        "invoice_id": "HI-AWS-2026-04",
+        "service_period": "2026-04",
+        "amount": 7900.0,
+        "description": "April 2026 AWS usage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AWS-2026-05",
+        "service_period": "2026-05",
+        "amount": 8100.0,
+        "description": "May 2026 AWS usage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AWS-2026-06",
+        "service_period": "2026-06",
+        "amount": 8050.0,
+        "description": "June 2026 AWS usage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AWS-2026-07",
+        "service_period": "2026-07",
+        "amount": 8200.0,
+        "description": "July 2026 AWS usage",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-AWS-2026-08",
+        "service_period": "2026-08",
+        "amount": 8280.0,
+        "description": "August 2026 AWS usage",
+        "po_id": null
+      }
+    ],
+    "current_invoices": [
+      {
+        "invoice_id": "INV-002",
+        "service_period": "2026-09",
+        "amount": 8320.0,
+        "description": "September 2026 compute, storage, and data-transfer usage",
+        "po_id": "PO-102"
+      },
+      {
+        "invoice_id": "INV-016",
+        "service_period": "2026-09",
+        "amount": 2775.0,
+        "description": "Unplanned September data-transfer overage — no purchase order was opened",
+        "po_id": null
+      }
+    ],
+    "contract": null,
+    "usage": null,
+    "purchase_orders": [
+      {
+        "po_id": "PO-102",
+        "vendor": "Amazon Web Services",
+        "authorized_amount": 8320.0,
+        "description": "September 2026 AWS usage commitment",
+        "status": "approved",
+        "created_date": "2026-09-01",
+        "currency": "USD",
+        "approval_limit": 20000.0,
+        "approver": "Priya Nair"
+      }
+    ],
+    "goods_receipts": [
+      {
+        "receipt_id": "GR-102",
+        "po_id": "PO-102",
+        "received": true,
+        "received_date": "2026-09-01",
+        "amount_received": 8320.0,
+        "quantity_ordered": 1,
+        "quantity_received": 1,
+        "vendor": "Amazon Web Services"
+      }
+    ]
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": null,
+      "applicable": false
+    }
+  ],
+  "agent_selection": {
+    "decision": "SKIP",
+    "method": null,
+    "amount": null,
+    "confidence": 0.99,
+    "reason": "Expected monthly expense already invoiced via 2 distinct bills (INV-002, INV-016)."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [
+    "invoice_already_received"
+  ],
+  "final_decision": "no_accrual_needed",
+  "final_method": null,
+  "final_amount": null,
+  "confidence": 0.99,
+  "rationale": "Current-period invoice already received (INV-002, INV-016). No accrual.",
+  "journal_entry": null,
+  "accrual_id": null,
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T141648Z/discovery/amazon_web_services",
+  "expectation_confidence": 0.99,
+  "estimate_confidence": 0.99,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "8f02a4c234d7d6873663c2bd502206a8d2db6936681fe6c712822543b1ad5e51",
+        "injected": true
+      },
+      {
+        "name": "prior-period-precedent",
+        "path": "skills/prior-period-precedent/SKILL.md",
+        "content_hash": "1d5aeffa0b27f2c94895e7e1712c050df0b43bf9f667fbd88a779a03a10890fe",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": null,
+  "policy_amount": null,
+  "policy_agreement": true,
+  "diagnostic_warnings": [],
+  "memory_lookup": {
+    "queried": true,
+    "memory_enabled": true,
+    "query": {
+      "workflow": "month_end_close",
+      "entity_type": "vendor",
+      "entity_id": "amazon web services",
+      "situation_type": "accrual_methodology",
+      "tags": [
+        "month_end_close",
+        "accrual",
+        "amazon web services"
+      ],
+      "accounting_category": "accrual",
+      "prior_to_period": "2026-09",
+      "exclude_period": "2026-09",
+      "limit": 5
+    },
+    "retrieved": [],
+    "precedents": [],
+    "precedent_used": false,
+    "precedent_relevance": null,
+    "current_evidence_checked": true,
+    "evidence_supports_precedent": null,
+    "deviation": null,
+    "decision": "no_accrual_needed",
+    "investigation_steps": 12,
+    "skipped_hypotheses": []
+  },
+  "written_memory_id": null
+}

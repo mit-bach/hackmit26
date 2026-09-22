@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-INBOX-008",
+  "classification": "CONTRACT_OR_QUOTE",
+  "note": "ignored",
+  "bill": false
+}

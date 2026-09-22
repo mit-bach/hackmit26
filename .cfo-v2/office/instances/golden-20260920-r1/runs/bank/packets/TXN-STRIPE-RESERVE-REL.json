@@ -1,0 +1,44 @@
+{
+  "schema": "BankLineLanded",
+  "transaction_id": "TXN-STRIPE-RESERVE-REL",
+  "period": "2026-09",
+  "source": "operating_account",
+  "bank_line": {
+    "transaction_id": "TXN-STRIPE-RESERVE-REL",
+    "date": "2026-09-27",
+    "amount": 22400.0,
+    "currency": "USD",
+    "description": "ACH IN STRIPE RESERVE RELEASE",
+    "reference": "TXN-STRIPE-RESERVE-REL",
+    "counterparty": "STRIPE RESERVE RELEASE",
+    "transaction_type": "ach_credit",
+    "source": "operating_account",
+    "provider": null,
+    "period": "2026-09",
+    "amount_minor": 2240000,
+    "raw_metadata": {
+      "plant": true
+    }
+  },
+  "discovery": {
+    "status": "documented_line",
+    "candidate": null,
+    "reasons": [
+      "Operating-account statement line from data/cash_recon/bank_statement.json.",
+      "A charge is not a bill; no AP invoice invented from descriptor.",
+      "Handoff to cash/match for candidate selection. Do not force MATCHED.",
+      "Statement raw_metadata present on feed row; cash/apply own interpretation."
+    ]
+  },
+  "handoff": {
+    "to": "cash",
+    "profile": "match"
+  },
+  "paths": {
+    "statement": "data/cash_recon/bank_statement.json",
+    "packet": "workspace/bank/lines/TXN-STRIPE-RESERVE-REL.json"
+  },
+  "statement_metadata": {
+    "plant": true
+  }
+}

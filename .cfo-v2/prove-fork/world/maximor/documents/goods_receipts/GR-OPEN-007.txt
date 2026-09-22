@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-007
+PO Number: PO-OPEN-007
+Vendor: Slack Technologies
+Goods received in full on 2026-09-08
+Packing list attached: PL-GR-OPEN-007
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 180,960.26 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

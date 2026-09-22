@@ -8,6 +8,8 @@ Python owns amounts. A model chooses among Kernel candidates. It does not invent
 
 Simulated data only. There is no live Stripe, Gmail, Outlook, or ERP write-back in this demo.
 
+**Phase B planted, holdout private.** Catalog plants live in the World pack registers. Scoring answers stay in `expected_results.json` `adversarial_holdout`. Bots must not load that file.
+
 ## How to read status
 
 | Status | Meaning |
@@ -46,8 +48,13 @@ Agents do not create Maximor. They discover registers that already exist.
 | Limited follow-through | October 2026 (Harbor Electric / legal bills, forecast actuals) |
 | Bank | `BANK-OPERATING` |
 | Stripe (simulated) | `acct_maximor_demo` |
-
-Target economics for later adversarial plants: about **$372.4M** annual run-rate, 340 vendors, 2,840 W-2 staff. The World pack is denser than the old 29-invoice toy. It is not yet that $372M company. See [WORLD.md](WORLD.md).
+| Annual run-rate | $372,400,000.00 |
+| August 2026 revenue | $30,820,000.00 |
+| September 2026 revenue | $31,140,000.00 |
+| W-2 headcount | 2,840 |
+| 1099 contractors | 412 |
+| Active vendors | 340 |
+| Operating cash 2026-09-30 | $14,882,410.18 |
 
 ## Bots
 
@@ -91,8 +98,8 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 
 | ID | Capability | Now | Next | Planted cases |
 | --- | --- | --- | --- | --- |
-| `inbox.counterparty_to_ap` | World role-plays a vendor or customer and delivers mail. Email classifies and dispatches. | Kernel-live (compose, send, reply, classify, dispatch). Office: World package and inbox tools exist. Roster on disk omits `world`. | Put World back on the roster. Wire `email/outbound` → World, `collect/dun` → World, `world/delivered` → Email `triage`. Run this at inbox scale, not two seeded messages. | 17 inbox messages (`MSG-INBOX-001` …). Quote, statement, newsletter, duplicate copy, prompt-injection, remittance, credit memo. |
-| `ingestion.classify_document` | Tell a vendor invoice from a quote, PO, receipt, statement, marketing, or duplicate copy. Extract fields without inventing amounts. | Kernel-live. Email Bot is office-live for classify. | Invoice-Sandbox-grade PDFs on more vendors. Hide answer keys. | `SCN-ING-001` … `SCN-ING-010`, `SCN-AP-012`. 10 ingestion emails plus 385 document files. |
+| `inbox.counterparty_to_ap` | World role-plays a vendor or customer and delivers mail. Email classifies and dispatches. | Kernel-live (compose, send, reply, classify, dispatch). Office: World package and inbox tools exist. Roster on disk omits `world`. | Put World back on the roster. Wire `email/outbound` → World, `collect/dun` → World, `world/delivered` → Email `triage`. Run this at inbox scale, not two seeded messages. | 17 inbox messages (`MSG-INBOX-001` …) plus simulated `MSG-PIN-HOLD-01`. Quote, statement, newsletter, duplicate copy, prompt-injection, remittance, credit memo. |
+| `ingestion.classify_document` | Tell a vendor invoice from a quote, PO, receipt, statement, marketing, or duplicate copy. Extract fields without inventing amounts. | Kernel-live. Email Bot is office-live for classify. | Invoice-Sandbox-grade PDFs on more vendors. Hide answer keys. | `SCN-ING-001` … `SCN-ING-010`, `SCN-AP-012`. 10 ingestion emails plus 1,239 document files. |
 | `ingestion.structured_parse` | Parse ERP / Coupa / EDI into an invoice candidate. | Kernel-live. Books Bot lands structured sources. | Keep simulated. No NetSuite post. | `SCN-ING-001`, `SCN-ING-010`. |
 | `ingestion.bank_card_discovery` | A card charge is not a bill. Recover an invoice only when supporting documents exist. | Kernel-live. Bank Bot is office-live. | — | `SCN-AP-012`. |
 
@@ -100,10 +107,10 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 
 | ID | Capability | Now | Next | Planted cases |
 | --- | --- | --- | --- | --- |
-| `ap.three_way_match` | Match invoice to PO and goods receipt. APPROVE or HOLD with exception types. | Kernel-live. AP Bot office-live. ctl-pay concurs. | Quiet near-duplicate vendors and PO splits from the adversarial catalog, after Phase B plant. | `INV-001` clean. `INV-003` qty. `INV-004` price. `INV-005` missing GR. `INV-006` duplicate. `INV-021` August alias precedent. |
+| `ap.three_way_match` | Match invoice to PO and goods receipt. APPROVE or HOLD with exception types. | Kernel-live. AP Bot office-live. ctl-pay concurs. | Quiet near-duplicate vendors and PO splits exist as ordinary AP rows. Do not script detective answers into Bot prompts. | `INV-001` clean. `INV-003` qty. `INV-004` price. `INV-005` missing GR. `INV-006` duplicate. `INV-021` August alias precedent. |
 | `ap.payment_scheduling` | Rank the approved pool for this week. Capture 2/10 when cash allows. Skip held bills. | Kernel-live. Pay Bot office-live. ctl-pay concurs release. | — | `SCN-AP-009` eligible. `SCN-AP-010` not due. `SCN-AP-011` discount. |
 | `ap.self_improvement` | Write a vendor alias into operational AP memory so the next similar bill can retrieve it. Precedent cannot override a live `must_hold`. | **Kernel-live.** `prior_cases.json` remains a seed, not the happy path. Not office-live Pi on 8800. | Keep the store on the Computer. Do not make a human edit the seed file. | Runtime alias pair (INV-LEARN class). `INV-021` August seed still exists. |
-| `ap.vendor_bank_change` | Flag a vendor payment-instruction change. | **Not built.** Vendor master now has bank fields. There is no control engine. | Build the control. Adversarial plants need those fields. | Vendor `bank_routing` / `bank_account` exist on 52 vendors. |
+| `ap.vendor_bank_change` | Flag a vendor payment-instruction change. | **Not built.** Vendor master now has bank fields. There is no control engine. | Build the control. Adversarial plants need those fields. | Vendor `bank_routing` / `bank_account` exist on 340 vendors. Change dates and boring memos exist. There is still no control engine. |
 
 ### AR
 
@@ -117,7 +124,7 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 
 | ID | Capability | Now | Next | Planted cases |
 | --- | --- | --- | --- | --- |
-| `cash.bank_reconciliation` | Match bank to ledger only when evidence supports it: exact, grouped ACH, fee-netted, timing, duplicate, unexplained. Trust apply/pay identifiers; do not re-guess the counterparty. | Kernel-live. Cash Bot office-live. ctl-cash sign-off. Identifier trust is Kernel + test. Harness Handle cash → ctl-cash exists as a host path. Trusted cash packet exists; close Handle only when Kernel allows. **Not RecBench office-live.** | RecBench-style difficulty already sampled on volume lines. Plant ADV residual explanation without renaming `TXN-2026-09-015`. | `TXN-2026-09-018A` exact. Grouped ACH. `TXN-2026-09-011` FEE_NETTED. **`TXN-2026-09-015` $12.40 unexplained. Close stays blocked.** |
+| `cash.bank_reconciliation` | Match bank to ledger only when evidence supports it: exact, grouped ACH, fee-netted, timing, duplicate, unexplained. Trust apply/pay identifiers; do not re-guess the counterparty. | Kernel-live. Cash Bot office-live. ctl-cash sign-off. Identifier trust is Kernel + test. Harness Handle cash → ctl-cash exists as a host path. Trusted cash packet exists; close Handle only when Kernel allows. **Not RecBench office-live.** | RecBench-style difficulty already sampled on volume lines. Do not rename `TXN-2026-09-015`. | `TXN-2026-09-018A` exact. Grouped ACH. `TXN-2026-09-011` FEE_NETTED. **`TXN-2026-09-015` $12.40 unmatched. Close stays blocked.** |
 | `cash.stripe_reconciliation` | Unpack charges − fees − refunds − disputes = bank deposit. | Kernel-live on simulated Stripe. Constructor **Stripe Payout Agent** + compiled Grants. `invoice_candidates` stays 0. Demo payouts in the pack: 3. | Use the sim pack as Stripe Bot world. Sample DABstep volume behind it. Never live keys in the judged demo. Not RecBench office-live. | `SCN-CASH-009` … `011`. |
 
 ### Close
@@ -125,8 +132,8 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 | ID | Capability | Now | Next | Planted cases |
 | --- | --- | --- | --- | --- |
 | `close.accruals` | Accrue missing bills from history, contract, usage, POs. ACCRUE / SKIP / INSUFFICIENT. | Kernel-live. Close Bot office-live. Harbor Electric is the memory thread. | Wire October actual-bill reversal into the default path. Deterministic planted IDs. | `SCN-CLOSE-001`, `SCN-CLOSE-002`, `SCN-MEM-004`. |
-| `close.prepaids` | Spread prepaid software / insurance over the service period. | Kernel-live. | Adversarial Orbit prepaid that never hits P&L is holdout. | `SCN-CLOSE-003`, `004`, `009`. |
-| `close.fixed_assets` | Capital vs expense. Straight-line depreciation. | Kernel-live. Dell `INV-018` capitalized on the same identity. | Missing-asset holdout (`SL-ADV-CLOSECOSMETIC`). | `SCN-CLOSE-005`. |
+| `close.prepaids` | Spread prepaid software / insurance over the service period. | Kernel-live. | — | `SCN-CLOSE-003`, `004`, `009`. Extra prepaid rows exist in close registers. |
+| `close.fixed_assets` | Capital vs expense. Straight-line depreciation. | Kernel-live. Dell `INV-018` capitalized on the same identity. | — | `SCN-CLOSE-005`. Quiet laptop-rollout units sit on the same Lenovo identity. |
 | `close.balance_sheet_recs` | Tie cash, AP, AR, accruals, prepaids, assets to evidence. | Kernel-live. | — | `SCN-CLOSE-006` … `010`. |
 | `close.month_end` | Coordinate tasks. Gate the lock. Stay BLOCKED on a material unexplained difference. | Kernel-live. Close Manager SDK path is **partial** (`deterministic_coordinate()` in production). ctl-books owns lock. | Live Close Manager when `live=True`. Do not delete the $12.40 to “close” the month. | `SCN-CLOSE-011`, `015`, `SCN-CFO-001`. |
 
@@ -134,13 +141,13 @@ Each row is one thing the function can do. **Now** is honest about Kernel vs off
 
 | ID | Capability | Now | Next | Planted cases |
 | --- | --- | --- | --- | --- |
-| `audit.controls` | Independent sample, re-perform, control test, write findings. Must not use operational conclusions as inputs. | Kernel-live. Audit Bot office-live. Loud decoys are planted (Acme LLC dup, $50k round wire, labeled post-close JE). | Detective work on stealth holdout: near-duplicate vendors, ghost payroll, 0.1% residual, lapping. Do not retell the loud decoys as the impressive find. | `SCN-AUDIT-001` … `013`. |
-| `reporting.variance_board` | Explain GM 64% → 61% from source txs. Board pack from the GL. | Kernel-live. Story Bot office-live. | Keep the loud GM move as a decoy once quieter theft is planted. | `SCN-REPORT-001`, `002`. |
+| `audit.controls` | Independent sample, re-perform, control test, write findings. Must not use operational conclusions as inputs. | Kernel-live. Audit Bot office-live. Loud decoys are planted (Acme LLC dup, $50k round wire, labeled post-close JE). | Detective work that joins vendor master, payroll DFI, and trailing residuals. Do not retell the loud decoys as the impressive find. Do not load `adversarial_holdout`. | `SCN-AUDIT-001` … `013`. |
+| `reporting.variance_board` | Explain GM 64% → 61% from source txs. Board pack from the GL. | Kernel-live. Story Bot office-live. | Keep the loud GM move as a decoy. | `SCN-REPORT-001`, `002`. |
 | `forecast.thirteen_week` | Build 13 weeks from AP, AR, payroll. Explain a miss when actuals land. | Kernel-live. | — | Quiet Harbor late (`INV-AR-014`). `SCN-REPORT-003` … `008`. `SCN-CFO-002`. |
 | `memory.cross_period` | Retrieve August precedent. Reuse a treatment only when current evidence still supports it. | Kernel-live for AP alias, Stripe pattern, Harbor method, Atlas batch payer. | Semantic graph / RAG is **not built**. Identity links are provenance, not a graph DB. | `SCN-MEM-001` … `004`. |
 | `orchestration.cfo` | One September run: intake → AP/AR/cash → close blocked → story. | Kernel-live via `run_cfo_scenario`. Office proof is live Pi Handles on 8800, not the 97% Kernel number. | Two-hour LM-speed operator script, after data and World are stable. Not scoped in this folder yet. | `SCN-CFO-001`, `SCN-HAND-001`, `SCN-HAND-002`. |
 | `evaluation.finance_gauntlet` | Same production workflows, public fixtures, hidden gold. Memory on vs off. Shared state on vs off. | Kernel-live. Last core pack cited in `docs/evaluation.md`: 42/42 memory on; shared-state off drops cross-workflow consistency 100% → 50%. | Keep as **our** measure. Caption: Kernel, not the office. | Families: document traps, cash rec, anti-hack, multi-step, rubric close, consistency, long horizon, recovery. |
-| `sample_data.generation` | Deterministic Maximor generator. | Kernel-live. World pack is its output (seed 42, September 2026). | Phase B plants from the adversarial catalog into these registers. | Manifest `validation: PASS`. |
+| `sample_data.generation` | Deterministic Maximor generator. | Kernel-live. World pack is its output (seed 42, September 2026). | — | Manifest `validation: PASS`. |
 
 ## Show path (public)
 
@@ -150,7 +157,7 @@ These three threads are the consistent plot. The website should draw them on eve
 2. **STORY-RESOLVED** — Helios `INV-017`. Bank `TXN-2026-09-011` is $25 over books. `FEE-729103` supports FEE_NETTED. Close accepts the explained exception.
 3. **STORY-UNRESOLVED** — Northstar `INV-AR-013` / `PAY-006` books $12,400.00. Bank `TXN-2026-09-015` is $12,412.40. No fee evidence. Close stays **BLOCKED**.
 
-Do not resolve the $12.40 in the judged demo. The holdout catalog explains it as a 0.1% remittance residual (`ADV-CASH-014` / `SL-ADV-RESIDUAL`). That explanation is not in operational books yet.
+Do not resolve the $12.40 in the judged demo. Operational files do not name a reason code. Scoring answers stay in `expected_results.json` `adversarial_holdout`.
 
 Loud Kernel audit toys stay as decoys: `VEND-001-DUP`, `PAY-AP-009` $50,000 round wire, `JE-POST-CLOSE-001`, GM 64% → 61%.
 
@@ -158,11 +165,10 @@ Loud Kernel audit toys stay as decoys: `VEND-001-DUP`, `PAY-AP-009` $50,000 roun
 
 These are real next steps. They are not current UI states.
 
-1. **Adversarial detective audit.** 109 scenarios, 12 storylines, 30 stealth-5. Designed. Not planted. After Phase B, audit must find quiet theft that started during the CFO sabbatical, before this agentic office was installed. See [SCENARIOS.md](SCENARIOS.md) holdout section. Full plant spec: `office/sessions/ADVERSARIAL-SCENARIOS.md` (Bots must never load it).
+1. **Adversarial detective audit.** 109 scenarios, 12 storylines, 30 stealth-5. Plants are in the World pack. Hidden answers stay in `adversarial_holdout`. See [SCENARIOS.md](SCENARIOS.md) holdout section. Full plant spec: `office/sessions/ADVERSARIAL-SCENARIOS.md` (Bots must never load it).
 2. **World mailbox at full scale.** Every outbound AP/collections mail gets a persona reply. Operator can talk to World on 8800. Reattach roster + Handles.
-3. **Preexisting $300–450M registers.** Trailing AP, GL, bank, payroll, processor files already have volume hooks (`holdout/round2_hooks.json`). Scale table is not in `company.json` yet (52 vendors, not 340).
-4. **Two-hour demo script.** After the books are the books we want. Density of LM-speed messages, not a 10-minute slide. Not written yet.
-5. **Vendor bank-change control and AP learning.** Still not built. Do not show fake findings.
+3. **Two-hour demo script.** Density of LM-speed messages, not a 10-minute slide. Not written yet.
+4. **Vendor bank-change control and AP learning.** Still not built. Do not show fake findings.
 
 ## What we will not claim
 
@@ -170,7 +176,7 @@ These are real next steps. They are not current UI states.
 - Live Gmail, live Stripe, live NetSuite.
 - `HUMAN_REVIEW` as a person in the chair.
 - Semantic context-graph memory we do not have.
-- Adversarial storylines as already visible in the GL.
+- Adversarial storyline IDs or holdout reason codes as already visible in the GL.
 
 ## Skills
 

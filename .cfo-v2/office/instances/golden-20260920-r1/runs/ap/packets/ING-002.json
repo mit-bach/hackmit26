@@ -1,0 +1,29 @@
+{
+  "contract": "PreparerRecommendation",
+  "profile": "prepare",
+  "source_bot": "ap",
+  "invoice_id": "ING-002",
+  "vendor_invoice_number": "NIM-INBOX-8008",
+  "vendor": "Nimbus Analytics LLC",
+  "amount": 990,
+  "po_id": null,
+  "recommendation": "HOLD",
+  "proposed_action": "HOLD",
+  "exception_types": ["missing_po"],
+  "kernel_facts": {
+    "po_exists": false,
+    "po_approved": false,
+    "vendor_exact_match": false,
+    "vendors_are_similar": false,
+    "receipt_status": "not_applicable",
+    "duplicate_detected": false,
+    "exception_types": ["missing_po"]
+  },
+  "evidence_used": [
+    "ING-002",
+    "runs/inbox/packets/bill-MSG-INBOX-015-ING-002.json",
+    "runs/ingestion/registry.json"
+  ],
+  "reason": "Kernel exception_types missing_po. No PO, no receipt. Vendor Nimbus Analytics LLC not exact/similar to master (registry warning unknown_vendor). Blocking control obvious — HOLD. Do not invent vendor master or PO. Do not pay.",
+  "inbox_path": "runs/inbox/packets/bill-MSG-INBOX-015-ING-002.json"
+}

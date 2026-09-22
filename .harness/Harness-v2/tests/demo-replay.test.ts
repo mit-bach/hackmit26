@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { test } from "node:test";
 
 import {
+  CAMERA_DEMO_DIRECTOR,
   DemoRecordingMissingError,
   botsFromRoster,
   demoMeta,
@@ -11,15 +12,18 @@ import {
   firstAwakeSeq,
   hasDemoRecording,
   loadDemoBundle,
+  loadDemoScenes,
   mosaicLayout,
   playDelayMs,
   projectFrame,
   projectStageFrame,
   recordDemoSession,
   removeDemoRecording,
+  saveDemoScenes,
+  selectCast,
 } from "../src/demo-replay.ts";
 import { harnessPackageRoot } from "../src/pkg.ts";
-import { protocolLogPath, seqPath, transcriptPath } from "../src/paths.ts";
+import { protocolLogPath, seqPath, transcriptPath, piRuntimePath } from "../src/paths.ts";
 import { startServer } from "../src/server/http.ts";
 import { parseProtocolEvent } from "../src/protocol-log.ts";
 import { appendTranscript } from "../src/transcript.ts";
@@ -88,7 +92,16 @@ test("mosaicLayout paints 1 full, 3 half-plus-stack, 4 quad", () => {
   assert.equal(five[2]?.top, 50);
   assert.equal(mosaicLayout(6).length, 6);
   assert.equal(mosaicLayout(9).length, 9);
+  assert.equal(mosaicLayout(10).length, 10);
   assert.equal(mosaicLayout(15).length, 15);
+  assert.equal(mosaicLayout(16).length, 16);
+  for (const cell of mosaicLayout(10)) {
+    assert.ok(cell.width > 0);
+    assert.ok(cell.height > 0);
+  }
+  const ten = mosaicLayout(10);
+  assert.equal(ten[0]?.width, 25);
+  assert.equal(mosaicLayout(16)[15]?.left, 75);
 });
 
 test("foldAwake wakes on turn.start and sleeps on turn.end", () => {
@@ -302,6 +315,25 @@ test("GET /api/demo and POST /api/demo/record serve the protocol cursor", async 
     };
     assert.equal(meta.hasRecording, true);
     assert.equal(meta.source, "recording");
+    const scenesPut = await fetch(`${started.url}/api/demo/scenes`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        scenes: [{ id: "two", title: "Two panes", seqFrom: 1, seqTo: 2, featured: ["alpha"], maxPanes: 2 }],
+      }),
+    });
+    assert.equal(scenesPut.status, 200);
+    const scenesGet = (await (await fetch(`${started.url}/api/demo/scenes`)).json()) as {
+      scenes: readonly { id: string }[];
+    };
+    assert.equal(scenesGet.scenes[0]?.id, "two");
+    const camera = (await (await fetch(`${started.url}/api/demo/frame?seq=2&maxPanes=1&featured=beta`)).json()) as {
+      awake: readonly { slug: string }[];
+      overflow: number;
+    };
+    assert.equal(camera.awake.length, 1);
+    assert.equal(camera.awake[0]?.slug, "beta");
+    assert.equal(camera.overflow, 1);
   } finally {
     await started.stop();
   }
@@ -361,4 +393,109 @@ test("CFO V2 office protocol folds Email then Email+AP", () => {
   }
   const meta = demoMeta(computer, "live");
   assert.ok(meta.lastSeq >= (events[events.length - 1]?.seq ?? 0));
+});
+
+test("selectCast keeps featured Bots and reports overflow", () => {
+  const bots = [
+    ...sampleBots(),
+    { id: "bot_close", slug: "close", name: "Close", purpose: "lock", color: "green" as const },
+    { id: "bot_story", slug: "story", name: "Story", purpose: "gm", color: "coral" as const },
+    { id: "bot_audit", slug: "audit", name: "Audit", purpose: "sample", color: "yellow" as const },
+    { id: "bot_ctl_pay", slug: "ctl-pay", name: "ctl-pay", purpose: "review", color: "red" as const },
+    { id: "bot_books", slug: "books", name: "Books", purpose: "erp", color: "teal" as const },
+    { id: "bot_apply", slug: "apply", name: "Apply", purpose: "cash", color: "blue" as const },
+  ];
+  const events = bots.map((bot, index) => ev(index + 1, "turn.start", bot.id, bot.slug));
+  const awake = foldAwake(bots, events);
+  assert.equal(awake.length, 10);
+  const cast = selectCast(awake, { maxPanes: 6, featured: ["ctl-pay", "audit"] });
+  assert.equal(cast.visible.length, 6);
+  assert.equal(cast.overflow.length, 4);
+  assert.equal(cast.visible[0]?.slug, "ctl-pay");
+  assert.ok(cast.visible.some((row) => row.slug === "audit"));
+  const frame = projectFrame(
+    {
+      source: "live",
+      lastSeq: 10,
+      bots,
+      events,
+      transcripts: {},
+      activities: {},
+    },
+    10,
+    { ...CAMERA_DEMO_DIRECTOR, maxPanes: 6, featured: ["ctl-pay"] },
+  );
+  assert.equal(frame.awake.length, 6);
+  assert.equal(frame.overflow, 4);
+  assert.equal(frame.layout.length, 6);
+  assert.equal(frame.awake[0]?.slug, "ctl-pay");
+});
+
+test("recordDemoSession does not scan pi-runtime.jsonl", () => {
+  const computer = makeComputer();
+  writeProtocol(computer, [
+    ev(1, "send.accepted", "bot_alpha", "alpha", { handleId: "h_a", text: "hello alpha" }),
+    ev(2, "turn.start", "bot_alpha", "alpha", { handleId: "h_a", text: "hello alpha" }),
+    ev(3, "turn.end", "bot_alpha", "alpha", { handleId: "h_a", text: "ok" }),
+  ]);
+  appendTranscript(computer, "bot_alpha", {
+    seq: 2,
+    t: "2026-09-20T04:00:02.000Z",
+    kind: "turn.start",
+    text: "wake from operator: hello alpha",
+    handleId: "h_a",
+    from: "operator",
+    to: "bot_alpha",
+  });
+  writeFileSync(piRuntimePath(computer, "bot_alpha"), `${"{\"type\":\"noise\"}\n".repeat(80_000)}`);
+  const started = Date.now();
+  const recorded = recordDemoSession(computer);
+  assert.ok(Date.now() - started < 3_000, "record scanned pi-runtime");
+  assert.equal(recorded.lastSeq, 3);
+  const live = loadDemoBundle(computer, "live");
+  assert.equal(live.activities.bot_alpha?.[0]?.type, "turn.started");
+  const scenes = saveDemoScenes(computer, [
+    {
+      id: "alpha",
+      title: "Alpha wake",
+      seqFrom: 1,
+      seqTo: 3,
+      featured: ["alpha"],
+      maxPanes: 1,
+    },
+  ]);
+  assert.equal(loadDemoScenes(computer)[0]?.id, "alpha");
+  assert.equal(scenes[0]?.maxPanes, 1);
+});
+
+test("live demo maps memory_read transcript rows onto activity chips", () => {
+  const computer = makeComputer();
+  writeProtocol(computer, [
+    ev(1, "send.accepted", "bot_alpha", "alpha", { handleId: "h_mem", text: "recall Harbor" }),
+    ev(2, "turn.start", "bot_alpha", "alpha", { handleId: "h_mem", text: "recall Harbor" }),
+    ev(3, "tool.call", "bot_alpha", "alpha", { handleId: "h_mem", text: "memory_read path=MEMORY.md" }),
+  ]);
+  appendTranscript(computer, "bot_alpha", {
+    seq: 2,
+    t: "2026-09-20T04:00:02.000Z",
+    kind: "turn.start",
+    text: "wake from operator: recall Harbor",
+    handleId: "h_mem",
+    from: "operator",
+    to: "bot_alpha",
+  });
+  appendTranscript(computer, "bot_alpha", {
+    seq: 3,
+    t: "2026-09-20T04:00:03.000Z",
+    kind: "tool.call",
+    text: "memory_read path=MEMORY.md",
+    handleId: "h_mem",
+    from: "bot_alpha",
+    to: "bot_alpha",
+  });
+  const live = loadDemoBundle(computer, "live");
+  assert.ok(live.activities.bot_alpha?.some((row) => row.title === "memory_read"));
+  const frame = projectFrame(live, 3);
+  const alpha = frame.awake.find((row) => row.slug === "alpha");
+  assert.equal(alpha?.activity, "memory_read");
 });

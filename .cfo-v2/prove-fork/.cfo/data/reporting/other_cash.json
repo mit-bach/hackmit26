@@ -1,0 +1,16 @@
+[
+  {
+    "source_id": "RENT-2026-10",
+    "expected_date": "2026-10-01",
+    "amount": -15000,
+    "confidence": 0.99,
+    "rationale": "Cambridge office rent"
+  },
+  {
+    "source_id": "INS-2026-10",
+    "expected_date": "2026-10-15",
+    "amount": -4200,
+    "confidence": 0.9,
+    "rationale": "Quarterly insurance installment"
+  }
+]

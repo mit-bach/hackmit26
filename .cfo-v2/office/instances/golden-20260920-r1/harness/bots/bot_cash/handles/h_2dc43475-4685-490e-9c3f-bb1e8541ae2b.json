@@ -1,0 +1,19 @@
+{
+  "id": "h_2dc43475-4685-490e-9c3f-bb1e8541ae2b",
+  "from": "operator",
+  "to": "bot_cash",
+  "toSlug": "cash",
+  "prompt": "profile: match\nWork unmatched operating lines including TXN-2026-09-011 and TXN-2026-09-015.\nCopy Kernel candidate_ids. FEE_NETTED only with fee evidence. TXN-2026-09-015 stays unexplained. Do not invent residuals. Do not ask a human.",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_cash"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:14:17.268Z",
+  "updatedAt": "2026-09-20T15:21:51.294Z",
+  "result": "## 2026-09 operating match (case `2026-09`)\n\nBound case: `runs/cash_recon/cases/2026-09.json`. Copied Kernel `candidate_id`s only.\n\n### Primary (per your brief)\n\n| Line | candidate_id | Disposition |\n| --- | --- | --- |\n| **TXN-2026-09-011** | `FEE_NETTED:TXN-2026-09-011:GL-AP-WIRE` | **EXPLAINED_EXCEPTION** — fee `ADV-729103` ($25 / −2500 minor). Journal **unposted**. |\n| **TXN-2026-09-015** | `UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS` | **HUMAN_REVIEW** — difference_minor **1240 stays unexplained**. No fee invented. Not MATCHED. |\n\nPackets: `workspace/cash/packets/TXN-2026-09-011.json`, `…/TXN-2026-09-015.json`  \nSummary: `workspace/cash/packets/2026-09-operating-match-summary.json`\n\n### Other case-covered lines\n\n- **008** → `GROUPED_MATCH:…GL-AP-203,GL-AP-201,GL-AP-202` MATCHED  \n- **012A** → `EXACT_MATCH:…GL-AR-772` MATCHED  \n- **012B** → HUMAN_REVIEW (same GL as 012A; no double-match)  \n- **019A** → `PROVIDER_PAYOUT:…GL-CASH-STRIPE` MATCHED  \n- **025** → no candidate → HUMAN_REVIEW  \n- **018** twin OD EXACTs → HUMAN_REVIEW  \n\n~20 landed lines have **no** Kernel candidate → documented fail-closed only (no memo matches).\n\n### ctl-cash / review-rec\n\nDecision: `workspace/cash/packets/ctl-cash-2026-09-operating-decision.json`  \n- **CONCUR** 011 EXPLAINED_EXCEPTION (fee journal still not authorized to post)  \n- **REFUSE** MATCHED on **015**; residual open  \n- **period_reconciled=false** while 015 unexplained remains",
+  "resultPaths": [],
+  "seq": 91
+}

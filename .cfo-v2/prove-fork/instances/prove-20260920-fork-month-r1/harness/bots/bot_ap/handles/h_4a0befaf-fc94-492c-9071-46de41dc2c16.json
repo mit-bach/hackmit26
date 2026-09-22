@@ -1,0 +1,21 @@
+{
+  "id": "h_4a0befaf-fc94-492c-9071-46de41dc2c16",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Profile prepare. Vendor bill from finance inbox MSG-ACME-INV-001 already in Kernel as INV-001 (canonical ING-001, vendor invoice ACM-2026-4410, Acme Supplies, amount 12450 USD, PO-101). Dispatch status BUSINESS_DUPLICATE / EVIDENCE_LINKED — not a new mint. Packet: workspace/inbox/MSG-ACME-INV-001.json. Do not pay. Own the open bill path from INV-001.",
+  "paths": [
+    "workspace/inbox/MSG-ACME-INV-001.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:43:42.876Z",
+  "updatedAt": "2026-09-20T15:44:20.179Z",
+  "result": "AP prepare complete for MSG-ACME-INV-001 / INV-001. Confirmed BUSINESS_DUPLICATE — no new mint. Kernel three-way clean: PO-101 approved 12450, GR-101 full, amount/vendor exact, no duplicates, exception_types []. Packet runs/ap/packets/INV-001.json with PreparerRecommendation APPROVE. Handing approve-shaped draft to ctl-pay / review-match. AP does not pay.",
+  "seq": 9
+}

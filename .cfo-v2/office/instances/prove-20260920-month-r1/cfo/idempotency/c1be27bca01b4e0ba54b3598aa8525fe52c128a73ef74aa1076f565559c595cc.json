@@ -1,0 +1,19 @@
+{
+  "key": "inject-MSG-INBOX-010",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "e25f8d1e3c9ab3d5589a952fec95c3902e569dabfb9c3bb8ed4a28fef133da44",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-010",
+      "thread_id": "THR-non-finance",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_afc276aad7db"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_dac3f26b-8b5b-4c00-b3f0-79c0556637db",
+  "from": "bot_close",
+  "to": "bot_story",
+  "toSlug": "story",
+  "prompt": "close/coordinate 2026-09: ready_tasks empty after host. treatments accrue/prepaid/assets COMPLETE; bs_recon BLOCKED. pack workspace/close/2026-09/pack.json. gate_passed=false. Handled ctl-books/lock → REJECT_CLOSE. story+audit packs queued. Not CLOSED.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "books-close"
+  },
+  "kind": "group_post",
+  "status": "completed",
+  "createdAt": "2026-09-20T15:31:50.829Z",
+  "updatedAt": "2026-09-20T15:32:44.929Z",
+  "result": "**Room `books-close` (close/coordinate)** — noted; no rework needed.\n\n- **ctl-books:** `REJECT_CLOSE` · `gate_passed=false` · period **not CLOSED**\n- **Story flux:** already written — `workspace/story/2026-09/flux.json` (all figures **UNLOCKED**)\n- **Forecast:** still **REFUSED** (GL cash not trusted)\n- **Board:** not started until lock **CLOSED** + trusted cash\n\n`room_post` hit `host.lock` timeout twice (likely this wake holds the host). Status sent to Operator instead.",
+  "resultPaths": [],
+  "seq": 135
+}

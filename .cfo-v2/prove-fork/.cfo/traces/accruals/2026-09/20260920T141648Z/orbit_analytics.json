@@ -1,0 +1,158 @@
+{
+  "trace_id": "2026-09/20260920T141648Z/orbit_analytics",
+  "vendor": "Orbit Analytics",
+  "period": "2026-09",
+  "invoice_received": true,
+  "evidence": {
+    "historical_invoices": [
+      {
+        "invoice_id": "HI-OA-2026-04",
+        "service_period": "2026-04",
+        "amount": 3100.0,
+        "description": "Orbit Analytics Pro — April",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-OA-2026-05",
+        "service_period": "2026-05",
+        "amount": 3100.0,
+        "description": "Orbit Analytics Pro — May",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-OA-2026-06",
+        "service_period": "2026-06",
+        "amount": 3100.0,
+        "description": "Orbit Analytics Pro — June",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-OA-2026-07",
+        "service_period": "2026-07",
+        "amount": 3100.0,
+        "description": "Orbit Analytics Pro — July",
+        "po_id": null
+      },
+      {
+        "invoice_id": "HI-OA-2026-08",
+        "service_period": "2026-08",
+        "amount": 3100.0,
+        "description": "Orbit Analytics Pro — August",
+        "po_id": null
+      }
+    ],
+    "current_invoices": [
+      {
+        "invoice_id": "HI-OA-2026-09",
+        "service_period": "2026-09",
+        "amount": 3100.0,
+        "description": "Orbit Analytics Pro — September (already received)",
+        "po_id": null
+      }
+    ],
+    "contract": {
+      "contract_id": "CTR-OA-001",
+      "vendor": "Orbit Analytics",
+      "start_date": "2026-01-01",
+      "end_date": "2026-12-31",
+      "billing_cadence": "monthly",
+      "amount": 3100.0,
+      "currency": "USD",
+      "expense_account": "Software Subscription Expense",
+      "billed_in_arrears": false,
+      "monthly_minimum": 3100.0,
+      "description": "Orbit Analytics Pro subscription. Invoiced at the start of each month."
+    },
+    "usage": null,
+    "purchase_orders": [],
+    "goods_receipts": []
+  },
+  "candidate_estimates": [
+    {
+      "method": "last_invoice",
+      "label": "Last invoice",
+      "amount": null,
+      "applicable": false
+    }
+  ],
+  "agent_selection": {
+    "decision": "SKIP",
+    "method": null,
+    "amount": null,
+    "confidence": 0.99,
+    "reason": "Expected monthly expense already invoiced (HI-OA-2026-09)."
+  },
+  "validation_errors": [],
+  "safety_rules_triggered": [
+    "invoice_already_received"
+  ],
+  "final_decision": "no_accrual_needed",
+  "final_method": null,
+  "final_amount": null,
+  "confidence": 0.99,
+  "rationale": "Current-period invoice already received (HI-OA-2026-09). No accrual.",
+  "journal_entry": null,
+  "accrual_id": null,
+  "tools_called": [],
+  "discovery_trace_id": "2026-09/20260920T141648Z/discovery/orbit_analytics",
+  "expectation_confidence": 0.99,
+  "estimate_confidence": 0.99,
+  "agent": {
+    "role": "Accrual Agent",
+    "skills": [
+      {
+        "name": "accrual-evidence-evaluation",
+        "path": "skills/accrual-evidence-evaluation/SKILL.md",
+        "content_hash": "734f712665b4d77fd6dab08fb553bba2e5a7259c8a5fd529afd2fc33a9c0852d",
+        "injected": true
+      },
+      {
+        "name": "accrual-method-selection",
+        "path": "skills/accrual-method-selection/SKILL.md",
+        "content_hash": "8f02a4c234d7d6873663c2bd502206a8d2db6936681fe6c712822543b1ad5e51",
+        "injected": true
+      },
+      {
+        "name": "prior-period-precedent",
+        "path": "skills/prior-period-precedent/SKILL.md",
+        "content_hash": "1d5aeffa0b27f2c94895e7e1712c050df0b43bf9f667fbd88a779a03a10890fe",
+        "injected": true
+      }
+    ],
+    "load_errors": []
+  },
+  "policy_method": null,
+  "policy_amount": null,
+  "policy_agreement": true,
+  "diagnostic_warnings": [],
+  "memory_lookup": {
+    "queried": true,
+    "memory_enabled": true,
+    "query": {
+      "workflow": "month_end_close",
+      "entity_type": "vendor",
+      "entity_id": "orbit analytics",
+      "situation_type": "accrual_methodology",
+      "tags": [
+        "month_end_close",
+        "accrual",
+        "orbit analytics"
+      ],
+      "accounting_category": "accrual",
+      "prior_to_period": "2026-09",
+      "exclude_period": "2026-09",
+      "limit": 5
+    },
+    "retrieved": [],
+    "precedents": [],
+    "precedent_used": false,
+    "precedent_relevance": null,
+    "current_evidence_checked": true,
+    "evidence_supports_precedent": null,
+    "deviation": null,
+    "decision": "no_accrual_needed",
+    "investigation_steps": 12,
+    "skipped_hypotheses": []
+  },
+  "written_memory_id": null
+}

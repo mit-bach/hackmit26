@@ -1,0 +1,119 @@
+[
+  {
+    "id": "txn_ORD-2101",
+    "object": "balance_transaction",
+    "amount": 800000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-2101",
+    "payout": "po_1MaximorFees",
+    "source": {
+      "id": "ORD-2101",
+      "object": "charge"
+    }
+  },
+  {
+    "id": "txn_ORD-2102",
+    "object": "balance_transaction",
+    "amount": 500000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-2102",
+    "payout": "po_1MaximorFees",
+    "source": {
+      "id": "ORD-2102",
+      "object": "charge"
+    }
+  },
+  {
+    "id": "txn_fee-fees",
+    "object": "balance_transaction",
+    "amount": -39000,
+    "currency": "usd",
+    "type": "stripe_fee",
+    "description": "fee-fees",
+    "payout": "po_1MaximorFees",
+    "source": {
+      "id": "fee-fees",
+      "object": "stripe_fee"
+    }
+  },
+  {
+    "id": "txn_ORD-2201",
+    "object": "balance_transaction",
+    "amount": 400000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-2201",
+    "payout": "po_1MaximorRefunds",
+    "source": {
+      "id": "ORD-2201",
+      "object": "charge"
+    }
+  },
+  {
+    "id": "txn_re_2201",
+    "object": "balance_transaction",
+    "amount": -50000,
+    "currency": "usd",
+    "type": "refund",
+    "description": "re_2201",
+    "payout": "po_1MaximorRefunds",
+    "source": {
+      "id": "re_2201",
+      "object": "refund"
+    }
+  },
+  {
+    "id": "txn_fee-ref",
+    "object": "balance_transaction",
+    "amount": -12000,
+    "currency": "usd",
+    "type": "stripe_fee",
+    "description": "fee-ref",
+    "payout": "po_1MaximorRefunds",
+    "source": {
+      "id": "fee-ref",
+      "object": "stripe_fee"
+    }
+  },
+  {
+    "id": "txn_ORD-2301",
+    "object": "balance_transaction",
+    "amount": 600000,
+    "currency": "usd",
+    "type": "charge",
+    "description": "ORD-2301",
+    "payout": "po_1MaximorDisputes",
+    "source": {
+      "id": "ORD-2301",
+      "object": "charge"
+    }
+  },
+  {
+    "id": "txn_dp_2301",
+    "object": "balance_transaction",
+    "amount": -75000,
+    "currency": "usd",
+    "type": "dispute",
+    "description": "dp_2301",
+    "payout": "po_1MaximorDisputes",
+    "source": {
+      "id": "dp_2301",
+      "object": "dispute"
+    }
+  },
+  {
+    "id": "txn_fee-dp",
+    "object": "balance_transaction",
+    "amount": -18000,
+    "currency": "usd",
+    "type": "stripe_fee",
+    "description": "fee-dp",
+    "payout": "po_1MaximorDisputes",
+    "source": {
+      "id": "fee-dp",
+      "object": "stripe_fee"
+    }
+  }
+]

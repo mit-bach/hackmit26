@@ -1,0 +1,8 @@
+{
+  "version": "1",
+  "bots": {
+    "audit": {
+      "writePrefixes": ["workspace/audit/", "runs/audit/"]
+    }
+  }
+}

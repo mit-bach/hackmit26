@@ -1,0 +1,14 @@
+MICROSOFT
+Azure Invoice
+
+Invoice Number: MS-AZURE-926-441
+Invoice Date: 2026-09-14
+Due Date: 2026-10-14
+Vendor: Microsoft
+Account: Azure subscription E3-9026
+
+Azure consumption — September 2026
+Subtotal: 1,750.00
+Tax: 140.00
+Amount Due: 1,890.00
+Currency: USD

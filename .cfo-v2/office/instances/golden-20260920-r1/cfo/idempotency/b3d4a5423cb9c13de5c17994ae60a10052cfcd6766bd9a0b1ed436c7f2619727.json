@@ -1,0 +1,19 @@
+{
+  "key": "golden-dump-MSG-INBOX-006",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "79369d552d429163a7ac8d936723f95aeddbccc226155196fb3731d1da651d9e",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-006",
+      "thread_id": "THR-goods-receipt",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_ca5bcddee4d1"
+  }
+}

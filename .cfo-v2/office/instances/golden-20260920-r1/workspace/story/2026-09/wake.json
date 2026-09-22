@@ -1,0 +1,15 @@
+{
+  "period": "2026-09",
+  "profile": "flux",
+  "lock_status": "BLOCKED",
+  "close_pack_path": "workspace/close/2026-09/pack.json",
+  "gates_path": "workspace/close/2026-09/gates.json",
+  "coordinate_path": "workspace/close/2026-09/coordinate-decision.json",
+  "close_id": "20260920T152842Z",
+  "marked_closed": false,
+  "gate_passed": false,
+  "queue_owner": "ctl-books",
+  "trusted_cash": false,
+  "forecast_may_start": false,
+  "note": "Period not CLOSED. All narrative amounts labeled UNLOCKED. Do not start 13-week forecast from unreconciled GL cash."
+}

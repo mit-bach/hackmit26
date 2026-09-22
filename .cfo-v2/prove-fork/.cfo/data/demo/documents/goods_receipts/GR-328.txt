@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-328
+PO Number: PO-328
+Vendor: Adyen NV
+Goods received in full on 2026-09-02
+Packing list attached: PL-GR-328
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 191.43 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

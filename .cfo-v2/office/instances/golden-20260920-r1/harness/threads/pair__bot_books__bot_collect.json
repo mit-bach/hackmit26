@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_books:bot_collect",
+  "threadId": "pair:bot_books:bot_collect",
+  "name": "Books ↔ Collect",
+  "memberIds": [
+    "bot_books",
+    "bot_collect"
+  ],
+  "createdAt": 1789915713004,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_ca8094c0-ef5f-4fef-b28b-1d5002f97ecc",
+      "handleId": "h_ca8094c0-ef5f-4fef-b28b-1d5002f97ecc",
+      "role": "bot",
+      "kind": "text",
+      "text": "Books → Collect chase (open invoices only). Do not dun from this handoff.\n\nNamed open customer invoices: workspace/books/ar/open_invoices.json\nDiscovery: workspace/books/masters/discovery.json\nCompany CO-MAXIMOR USD. 99 open/past_due AR invoices; outstanding_total 34811818.00 on the named roster (books AR open headline 41260000 on company.json).\n\nCustomer master named (17): CUST-001 Northwind Labs through CUST-015 Ironclad Software, CUST-IC-EU Maximor EU BV, CUST-NSC-01 Northstar Settlement Co.\n\nBooks does not chase or dun. Acknowledge roster intake only.",
+      "at": 1789915713004,
+      "from": {
+        "botId": "bot_books",
+        "name": "Books",
+        "color": "pink"
+      }
+    },
+    {
+      "id": "pair-result-h_ca8094c0-ef5f-4fef-b28b-1d5002f97ecc",
+      "handleId": "h_ca8094c0-ef5f-4fef-b28b-1d5002f97ecc",
+      "role": "bot",
+      "kind": "text",
+      "text": "Collect acknowledges roster intake only.\n\nReceived:\n- Named open customer invoices: workspace/books/ar/open_invoices.json\n- Discovery: workspace/books/masters/discovery.json\n- Company CO-MAXIMOR USD; 99 open/past_due AR invoices; outstanding_total 34811818.00 on named roster (books AR open headline 41260000 on company.json)\n- Customer master named (17): CUST-001 Northwind Labs through CUST-015 Ironclad Software, CUST-IC-EU Maximor EU BV, CUST-NSC-01 Northstar Settlement Co.\n\nBooks does not chase or dun — noted. Collect will not dun from this handoff. No chase action taken on this acknowledgment. Collect owns aging after apply; dunning only via send_office_outbound then World when policy warrants, separate from this intake.",
+      "at": 1789915720476,
+      "from": {
+        "botId": "bot_collect",
+        "name": "Collect",
+        "color": "yellow"
+      }
+    }
+  ]
+}

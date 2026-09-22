@@ -1,0 +1,120 @@
+{
+  "scenes": [
+    {
+      "id": "A",
+      "title": "Onboard Maximor",
+      "seqFrom": 1,
+      "seqTo": 18,
+      "featured": [
+        "books",
+        "ap",
+        "collect"
+      ],
+      "maxPanes": 4
+    },
+    {
+      "id": "C",
+      "title": "INV-001 to ctl-pay",
+      "seqFrom": 4,
+      "seqTo": 21,
+      "featured": [
+        "ap",
+        "ctl-pay",
+        "books"
+      ],
+      "maxPanes": 4
+    },
+    {
+      "id": "B",
+      "title": "Inbox traps and HOLDs",
+      "seqFrom": 22,
+      "seqTo": 45,
+      "featured": [
+        "email",
+        "ap",
+        "ctl-pay"
+      ],
+      "maxPanes": 4
+    },
+    {
+      "id": "apply",
+      "title": "Apply refuse PAY-001",
+      "seqFrom": 34,
+      "seqTo": 51,
+      "featured": [
+        "apply",
+        "ctl-cash"
+      ],
+      "maxPanes": 2
+    },
+    {
+      "id": "D",
+      "title": "Empty weekly pay-run",
+      "seqFrom": 53,
+      "seqTo": 62,
+      "featured": [
+        "pay",
+        "ctl-pay"
+      ],
+      "maxPanes": 2
+    },
+    {
+      "id": "E",
+      "title": "12.40 unexplained",
+      "seqFrom": 63,
+      "seqTo": 98,
+      "featured": [
+        "bank",
+        "cash",
+        "ctl-cash"
+      ],
+      "maxPanes": 4
+    },
+    {
+      "id": "stripe",
+      "title": "Stripe payout unpack",
+      "seqFrom": 81,
+      "seqTo": 102,
+      "featured": [
+        "stripe",
+        "apply",
+        "cash"
+      ],
+      "maxPanes": 4
+    },
+    {
+      "id": "F",
+      "title": "Close BLOCKED / story UNLOCKED",
+      "seqFrom": 103,
+      "seqTo": 142,
+      "featured": [
+        "close",
+        "ctl-books",
+        "story"
+      ],
+      "maxPanes": 4
+    },
+    {
+      "id": "G",
+      "title": "Audit sample, no ground truth",
+      "seqFrom": 115,
+      "seqTo": 141,
+      "featured": [
+        "audit",
+        "close"
+      ],
+      "maxPanes": 2
+    },
+    {
+      "id": "M",
+      "title": "Harbor memory Aug→Sep",
+      "seqFrom": 143,
+      "seqTo": 164,
+      "featured": [
+        "close",
+        "ctl-books"
+      ],
+      "maxPanes": 2
+    }
+  ]
+}

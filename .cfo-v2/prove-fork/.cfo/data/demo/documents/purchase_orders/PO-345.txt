@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-345
+PO Number: PO-345
+Issued: 2026-09-19
+Vendor: Figma
+Vendor legal name: Figma, Inc.
+Vendor tax ID: 46-5748921
+Authorized amount: 39.93
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+warehouse consumables billed 2026-09-19
+
+This purchase order is not an invoice. The vendor must bill against PO-345.
+Payment terms follow the vendor master unless this order states otherwise.

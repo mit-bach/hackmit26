@@ -1,0 +1,7 @@
+{
+  "object": "inbox_packet",
+  "message_id": "MSG-INBOX-005",
+  "classification": "PURCHASE_ORDER",
+  "note": "not a bill",
+  "bill": false
+}
