@@ -1,0 +1,22 @@
+{
+  "op": "accrual.tools.create_accrual",
+  "args": {
+    "vendor": "Lindholm & Ruiz LLP",
+    "period": "2026-09",
+    "method": "contract_commitment",
+    "confidence": 0.99,
+    "evidence": [
+      "CTR-LR-001 monthly $8500",
+      "stable invoice history",
+      "no 2026-09 invoice"
+    ],
+    "reasoning_summary": "Monthly legal retainer per contract. ctl-books CONCUR."
+  },
+  "fromSlug": "close",
+  "fromProfile": "accrue",
+  "verifier": "ctl-books",
+  "verifierProfile": "review-treatment",
+  "idempotencyKey": "accrual-2026-09-lindholm",
+  "createdAt": "2026-09-24T21:34:14.650Z",
+  "humanQueue": false
+}

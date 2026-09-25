@@ -1,0 +1,39 @@
+Orbit Insights Corp
+Workbar Boston, 50 Milk Street
+Boston, MA 02109
+Phone +1 617-555-4410   billing@orbitinsights.example
+Tax ID 04-8824410
+
+INVOICE
+
+Invoice Number: OIC-2025-01
+Invoice Date: 2025-01-06
+Due Date: 2025-02-05
+PO Number: PO-OIC-001
+Payment Terms: net 30
+Currency: USD
+Vendor: Orbit Insights Corp
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+36-month platform plus implementation. SKU    1.00    276,000.00    276,000.00
+
+Subtotal                                                            276,000.00
+Tax                                                                       0.00
+Amount Due                                                          276,000.00
+
+Remit to:
+ACH Santander routing 011075150  account ****4410
+Bank: Santander  ****4410
+Please include invoice OIC-2025-01 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@orbitinsights.example

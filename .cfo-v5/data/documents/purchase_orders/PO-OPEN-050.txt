@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-OPEN-050
+PO Number: PO-OPEN-050
+Issued: 2026-09-24
+Vendor: Walnut Works
+Vendor legal name: Walnut Works
+Vendor tax ID: 00-0000000
+Authorized amount: 186,859.00
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Open operating payable
+
+This purchase order is not an invoice. The vendor must bill against PO-OPEN-050.
+Payment terms follow the vendor master unless this order states otherwise.

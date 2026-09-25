@@ -1,0 +1,184 @@
+{
+  "reconciliation_id": "REC-079",
+  "period": "2026-09",
+  "match_type": "EXACT_MATCH",
+  "status": "MATCHED",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-VOL-2026-09-061",
+      "date": "2026-09-06",
+      "amount": -1010.37,
+      "currency": "USD",
+      "description": "ACH OUT PAGAYA COFFEE SERVICE",
+      "reference": "ACH-0061",
+      "counterparty": "PAGAYA COFFEE SERVICE",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -101037,
+      "raw_metadata": {
+        "volume": true,
+        "difficulty": "exact",
+        "vendor_id": "VEND-038"
+      }
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-VOL-2026-09-061",
+      "date": "2026-09-06",
+      "amount": -1010.37,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Pagaya Coffee Service",
+      "reference": "ACH-0061",
+      "description": "Books Pagaya Coffee Service 2026-09-06",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -101037,
+      "raw_metadata": {
+        "volume": true,
+        "bank_id": "TXN-VOL-2026-09-061"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-VOL-2026-09-061:GL-VOL-2026-09-061",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-VOL-2026-09-061"
+      ],
+      "ledger_entry_ids": [
+        "GL-VOL-2026-09-061"
+      ],
+      "bank_amount": -1010.37,
+      "ledger_amount": -1010.37,
+      "difference": 0.0,
+      "bank_amount_minor": -101037,
+      "ledger_amount_minor": -101037,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.35,
+      "evidence": [
+        "amount:-101037",
+        "bank_date:2026-09-06",
+        "ledger_date:2026-09-06",
+        "counterparty_overlap:0.50",
+        "bank_reference:ACH-0061",
+        "ledger_reference:ACH-0061"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -101037,
+    "ledger_amount_minor": -101037,
+    "difference_minor": 0,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "EXACT_MATCH:TXN-VOL-2026-09-061:GL-VOL-2026-09-061",
+    "selected_candidate_id": "EXACT_MATCH:TXN-VOL-2026-09-061:GL-VOL-2026-09-061",
+    "disposition": "MATCHED",
+    "confidence": 1.0,
+    "reasons": [
+      "Bank TXN-VOL-2026-09-061 equals ledger GL-VOL-2026-09-061 at -$1,010.37."
+    ],
+    "evidence_used": [
+      "amount:-101037",
+      "bank_date:2026-09-06",
+      "ledger_date:2026-09-06",
+      "counterparty_overlap:0.50",
+      "bank_reference:ACH-0061",
+      "ledger_reference:ACH-0061"
+    ],
+    "review_question": null
+  },
+  "investigation": null,
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": false,
+    "reasons": []
+  },
+  "reviewer": {
+    "case_id": "EXACT_MATCH:TXN-VOL-2026-09-061:GL-VOL-2026-09-061",
+    "reviewer_status": "CONFIRMED",
+    "disposition": "MATCHED",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Python validation passed"
+    ],
+    "arithmetic_ok": true,
+    "human_review": false
+  },
+  "final": {
+    "reconciliation_id": "REC-079",
+    "period": "2026-09",
+    "match_key": "6cee44813132bd1a",
+    "bank_transaction_ids": [
+      "TXN-VOL-2026-09-061"
+    ],
+    "ledger_entry_ids": [
+      "GL-VOL-2026-09-061"
+    ],
+    "match_type": "EXACT_MATCH",
+    "bank_amount": -1010.37,
+    "ledger_amount": -1010.37,
+    "difference": 0.0,
+    "bank_amount_minor": -101037,
+    "ledger_amount_minor": -101037,
+    "difference_minor": 0,
+    "confidence": 1.0,
+    "status": "MATCHED",
+    "explanation": "Bank TXN-VOL-2026-09-061 equals ledger GL-VOL-2026-09-061 at -$1,010.37.",
+    "evidence": [
+      "amount:-101037",
+      "bank_date:2026-09-06",
+      "ledger_date:2026-09-06",
+      "counterparty_overlap:0.50",
+      "bank_reference:ACH-0061",
+      "ledger_reference:ACH-0061"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "CONFIRMED",
+    "human_review": false,
+    "candidate_id": "EXACT_MATCH:TXN-VOL-2026-09-061:GL-VOL-2026-09-061",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -101037,
+      "ledger_amount_minor": -101037,
+      "difference_minor": 0,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": false,
+  "evidence": [
+    "amount:-101037",
+    "bank_date:2026-09-06",
+    "ledger_date:2026-09-06",
+    "counterparty_overlap:0.50",
+    "bank_reference:ACH-0061",
+    "ledger_reference:ACH-0061"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "memory_lookup": null,
+  "written_memory_id": null,
+  "trace_path": null
+}

@@ -1,0 +1,2 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_21e56693a7ad", "ts": "2026-09-24T21:58:00Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_000ba2ba29aa", "ts": "2026-09-24T21:58:00Z"}

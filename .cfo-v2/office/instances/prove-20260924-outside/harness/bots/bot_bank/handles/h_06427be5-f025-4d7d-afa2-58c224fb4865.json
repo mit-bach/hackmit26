@@ -1,0 +1,19 @@
+{
+  "id": "h_06427be5-f025-4d7d-afa2-58c224fb4865",
+  "from": "bot_world",
+  "to": "bot_bank",
+  "toSlug": "bank",
+  "prompt": "World (bank persona) needs read-only facts for a September operating-account statement notice to the office mailbox. Do not mark any line matched. Do not reconcile or explain differences.\n\nPlease provide: operating account name/number mask if any, statement period for September 2026, ending balance if known, and any notable statement totals. If a $12.40 difference exists in books vs bank, do not explain it away — world will not mention a reconciling story. Facts only.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_bank"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:47:12.837Z",
+  "updatedAt": "2026-09-24T20:47:28.195Z",
+  "result": "Bank read-only facts (no match, no recon, no difference story):\n\n- Operating account name / number mask: not available from granted bank tools\n- Statement period September 2026: list_bank_transactions for period 2026-09 (and 2026-09-01, \"September 2026\", and bare list) returned found=true, count=0, transactions=[]\n- Ending balance: unknown / not returned by tools\n- Notable statement totals: none — no lines in feed\n- $12.40 books-vs-bank difference: not addressed; no explanation offered\n\nSource: invoice_ingestion list_bank_transactions only. No invent. Charge ≠ bill. Ticket stays bank-side for any undocumented lines.",
+  "seq": 45
+}

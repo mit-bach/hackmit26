@@ -1,0 +1,39 @@
+Freightline Expedite LLC
+400 Port Road
+Newark, NJ 07114
+Phone +1 973-555-2290   billing@freightlineexpedite.example
+Tax ID 04-6612290
+
+INVOICE
+
+Invoice Number: FLE-2026-03-X
+Invoice Date: 2026-03-21
+Due Date: 2026-04-05
+PO Number: PO-FLE-2026-03
+Payment Terms: net 21
+Currency: USD
+Vendor: Freightline Expedite
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Accessorial fuel and liftgate. SKU            1.00      4,884.82      4,884.82
+
+Subtotal                                                              4,884.82
+Tax                                                                       0.00
+Amount Due                                                            4,884.82
+
+Remit to:
+ACH PNC routing 031207607  account ****2290
+Bank: PNC Bank  ****2290
+Please include invoice FLE-2026-03-X on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@freightlineexpedite.example

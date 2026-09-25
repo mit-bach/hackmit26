@@ -1,0 +1,24 @@
+{
+  "message_id": "MSG-INBOX-018",
+  "thread_id": "THR-malformed",
+  "classification": "UNSUPPORTED_OR_UNRESOLVED",
+  "selected_action": "REQUEST_MISSING_INFORMATION",
+  "dispatch_status": "PARSE_FAILURE",
+  "invoice_id": null,
+  "ready_for_payment": false,
+  "mutation": false,
+  "reason_codes": [
+    "PARSE_FAILURE",
+    "UNSUPPORTED_ATTACHMENT",
+    "MISSING_FIELDS"
+  ],
+  "missing_fields": [
+    "invoice_number",
+    "amount",
+    "invoice_date",
+    "currency"
+  ],
+  "attachment": "payload.bin (application/octet-stream, content null)",
+  "note": "Malformed binary attachment; fail closed. No AP invoice invented. No pay path.",
+  "clarification": null
+}

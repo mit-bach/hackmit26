@@ -1,0 +1,11 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_f287da6e7aa2", "ts": "2026-09-24T21:04:51Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_candidates", "profile": "chase", "slug": "collect", "traceId": "k_bac06d938942", "ts": "2026-09-24T21:05:02Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_invoice_facts", "profile": "chase", "slug": "collect", "traceId": "k_281b249b3c6b", "ts": "2026-09-24T21:05:06Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_precedents", "profile": "chase", "slug": "collect", "traceId": "k_311cfc92804f", "ts": "2026-09-24T21:05:06Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_9f8040a40506", "ts": "2026-09-24T21:05:06Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.send_office_outbound", "profile": "chase", "slug": "collect", "traceId": "k_505103ce295b", "ts": "2026-09-24T21:05:21Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.get_inbox_thread", "profile": "vendor", "slug": "world", "traceId": "k_940545c09fa2", "ts": "2026-09-24T21:05:42Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.list_world_personas", "profile": "vendor", "slug": "world", "traceId": "k_60e83099c1bb", "ts": "2026-09-24T21:05:42Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.list_inbox_messages", "profile": "vendor", "slug": "world", "traceId": "k_3c05a9474701", "ts": "2026-09-24T21:05:42Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.reply_in_thread", "profile": "vendor", "slug": "world", "traceId": "k_167cca854f05", "ts": "2026-09-24T21:05:53Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.send_office_outbound", "profile": "chase", "slug": "collect", "traceId": "k_3bd8999c876b", "ts": "2026-09-24T21:06:11Z"}

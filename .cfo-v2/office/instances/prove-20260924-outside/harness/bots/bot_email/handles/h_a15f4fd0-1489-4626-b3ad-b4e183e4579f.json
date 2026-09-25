@@ -1,0 +1,19 @@
+{
+  "id": "h_a15f4fd0-1489-4626-b3ad-b4e183e4579f",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Inbound counterparty mail delivered for triage (profile triage).\n\nBank: First National Operating <notices@firstnational.example>\nTo: ap@hackmit-cfo.example\nSubject: September 2026 operating account statement available\nmessage_id: msg-fno-stmt-2026-09\nthread_id: thr-fno-stmt-2026-09\ncase_id: STMT-OP-2026-09\n\nThis is a bank statement availability notice for the operating account, period 2026-09-01 through 2026-09-30. It is NOT a vendor bill / invoice. No payment requested. No bank lines matched by world. Do not invent a reconciling story for any dollar difference.\n\ndelivered=true via send_inbox_message. Please classify. World stays on thr-fno-stmt-2026-09 until classification completes.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:47:48.365Z",
+  "updatedAt": "2026-09-24T20:48:02.523Z",
+  "result": "Classification complete for msg-fno-stmt-2026-09 / thr-fno-stmt-2026-09 / case STMT-OP-2026-09.\n\nResult:\n- classification: bank_notice (bank statement availability)\n- selected_action: TRACE_ONLY\n- candidate: null — not a vendor bill/invoice; no CREATE_AP_INVOICE\n- payment requested: no\n- bank line matching: not performed; no lines supplied by world; no reconciling story invented for any dollar difference\n- extracted: First National Operating; operating account statement available for 2026-09-01 through 2026-09-30\n- packet: workspace/email/packets/msg-fno-stmt-2026-09.json\n- handoff: none (informational notice only; cash/bank recon own actual statements and lines when presented)\n\nWorld may close triage wait on this thread.",
+  "seq": 51
+}

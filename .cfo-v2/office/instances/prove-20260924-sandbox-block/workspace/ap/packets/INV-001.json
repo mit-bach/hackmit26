@@ -1,0 +1,64 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "prepare",
+  "source": {
+    "landing_ref": "NS-4410",
+    "erp_doc": "vendorBill",
+    "books_paths_named": [
+      "workspace/books/packets/NS-4410.source.json",
+      "workspace/books/packets/NS-4410.netsuite-vendorBill.json",
+      "workspace/books/notes/NS-4410.landing.md"
+    ],
+    "vendor_id": "VEND-001",
+    "vendor_invoice_number": "ACM-2026-4410",
+    "period": "2026-09"
+  },
+  "kernel_evidence": {
+    "trace_ids": [
+      "k_5a9c182bb11c",
+      "k_1da08993bf19",
+      "k_a9d0747ebc4d",
+      "k_09cad048dd7e",
+      "k_946ae6bbee65"
+    ],
+    "invoice_id": "INV-001",
+    "vendor": "Acme Supplies",
+    "po_id": "PO-101",
+    "amount": 12450,
+    "currency": "USD",
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "amount_matches": true,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": true,
+    "vendors_are_similar": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "goods_receipt_id": "GR-101",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": [],
+    "days_until_due": -2,
+    "invoice_dated_before_po": false
+  },
+  "PreparerRecommendation": {
+    "recommendation": "APPROVE",
+    "exception_types": [],
+    "evidence_used": [
+      "INV-001",
+      "PO-101",
+      "GR-101",
+      "VEND-001",
+      "ACM-2026-4410"
+    ],
+    "reason": "Kernel three-way facts are clean for Acme Supplies ACM-2026-4410 (INV-001): exact vendor match, approved PO-101 at 12450 USD, full GR-101 receipt of 15/15 qty and 12450 amount received, zero amount difference, no duplicates, empty exception_types. NS-4410 NetSuite vendorBill landing aligns with INV-001. Due date 2026-09-22 is past (days_until_due -2) but that is not a Kernel match exception. Recommend APPROVE for ctl-pay review-match only; AP does not pay."
+  },
+  "proposed_action": "APPROVE",
+  "must_hold_pending": true,
+  "handoff": {
+    "to": "ctl-pay",
+    "profile": "review-match",
+    "packet_path": "workspace/ap/packets/INV-001.json"
+  }
+}

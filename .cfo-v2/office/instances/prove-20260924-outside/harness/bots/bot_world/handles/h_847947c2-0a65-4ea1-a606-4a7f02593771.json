@@ -1,0 +1,19 @@
+{
+  "id": "h_847947c2-0a65-4ea1-a606-4a7f02593771",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: bank\nYou are the bank on the operating account. Send the office a notice about the September statement. It is not a vendor bill. Stay until email has classified it. Do not mark any line matched. Do not explain away a twelve dollar forty cent difference.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:47:04.327Z",
+  "updatedAt": "2026-09-24T20:48:11.755Z",
+  "result": "**First National Operating — done**\n\nSeptember operating-account statement notice delivered and classified. No lines matched. No $12.40 story.\n\n| Field | Value |\n| --- | --- |\n| Bank | First National Operating `notices@firstnational.example` |\n| Notice | September 2026 statement available (01–30 Sep) |\n| Type | Bank statement notice only — **not** a vendor bill |\n| Payment | None requested |\n| Thread | `thr-fno-stmt-2026-09` |\n| message_id | `msg-fno-stmt-2026-09` |\n| case_id | `STMT-OP-2026-09` |\n\n**Email:** `bank_notice` → `TRACE_ONLY` (no AP invoice, no match, no reconciling narrative). Packet: `workspace/email/packets/msg-fno-stmt-2026-09.json`.",
+  "resultPaths": [],
+  "seq": 54
+}

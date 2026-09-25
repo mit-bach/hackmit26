@@ -1,0 +1,2197 @@
+[
+  {
+    "payment_id": "PAY-AP-001",
+    "invoice_ids": [
+      "INV-001"
+    ],
+    "vendor": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "payment_date": "2026-09-18",
+    "amount_minor": 1245000,
+    "method": "ach",
+    "bank_reference": "8391",
+    "description": "Vendor payment INV-001",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-AP-NORTHLINE",
+    "invoice_ids": [
+      "INV-014",
+      "INV-015",
+      "INV-016"
+    ],
+    "vendor": "Northline Fabrication",
+    "vendor_id": "VEND-003",
+    "payment_date": "2026-09-08",
+    "amount_minor": 1850000,
+    "method": "ach",
+    "bank_reference": "",
+    "description": "Grouped Northline disbursement",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-AP-017",
+    "invoice_ids": [
+      "INV-017"
+    ],
+    "vendor": "Helios Hardware",
+    "vendor_id": "VEND-005",
+    "payment_date": "2026-09-11",
+    "amount_minor": 1000000,
+    "method": "wire",
+    "bank_reference": "729103",
+    "description": "International vendor wire",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-AP-010",
+    "invoice_ids": [
+      "INV-010"
+    ],
+    "vendor": "Office Depot",
+    "vendor_id": "VEND-004",
+    "payment_date": "2026-09-20",
+    "amount_minor": 328000,
+    "method": "ach",
+    "bank_reference": "",
+    "description": "Released while invoice on hold",
+    "on_hold_invoice": true,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-AP-009",
+    "invoice_ids": [
+      "INV-009"
+    ],
+    "vendor": "Northwind Phantom LLC",
+    "vendor_id": "VEND-010",
+    "payment_date": "2026-09-20",
+    "amount_minor": 5000000,
+    "method": "wire",
+    "bank_reference": "",
+    "description": "Manual wire to a new vendor",
+    "on_hold_invoice": false,
+    "round_number": true,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-AP-012",
+    "invoice_ids": [
+      "INV-012"
+    ],
+    "vendor": "GitHub",
+    "vendor_id": "VEND-017",
+    "payment_date": "2026-09-23",
+    "amount_minor": 2100000,
+    "method": "ach",
+    "bank_reference": "",
+    "description": "Paid earlier than the deferred forecast week",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-APPR-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2025-12",
+    "invoice_ids": [
+      "INV-CLR-2025-12"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2025-12-20",
+    "amount_minor": 684218,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2025-12",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-01",
+    "invoice_ids": [
+      "INV-CLR-2026-01"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-01-20",
+    "amount_minor": 712040,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-01",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-02",
+    "invoice_ids": [
+      "INV-CLR-2026-02"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-02-20",
+    "amount_minor": 745522,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-02",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-03",
+    "invoice_ids": [
+      "INV-CLR-2026-03"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-03-20",
+    "amount_minor": 768890,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-03",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-04",
+    "invoice_ids": [
+      "INV-CLR-2026-04"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-04-20",
+    "amount_minor": 791244,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-04",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-05",
+    "invoice_ids": [
+      "INV-CLR-2026-05"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-05-20",
+    "amount_minor": 821466,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-05",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-06",
+    "invoice_ids": [
+      "INV-CLR-2026-06"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-06-20",
+    "amount_minor": 842018,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-06",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CLR-2026-07",
+    "invoice_ids": [
+      "INV-CLR-2026-07"
+    ],
+    "vendor": "Clearing Solutions LLC",
+    "vendor_id": "VEND-CLR-01",
+    "payment_date": "2026-07-20",
+    "amount_minor": 854422,
+    "method": "ach",
+    "bank_reference": "TXN-CLR-2026-07",
+    "description": "ACH Clearing Solutions LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-JE-04",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2025-11",
+    "invoice_ids": [
+      "INV-KIS-2025-11"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2025-11-20",
+    "amount_minor": 1420618,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2025-11",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2025-12",
+    "invoice_ids": [
+      "INV-KIS-2025-12"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2025-12-20",
+    "amount_minor": 1488040,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2025-12",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-01",
+    "invoice_ids": [
+      "INV-KIS-2026-01"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-01-20",
+    "amount_minor": 1522022,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-01",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-02",
+    "invoice_ids": [
+      "INV-KIS-2026-02-08"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-02-20",
+    "amount_minor": 1588018,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-02",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-03",
+    "invoice_ids": [
+      "INV-KIS-2026-03"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-03-20",
+    "amount_minor": 1624044,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-03",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-04",
+    "invoice_ids": [
+      "INV-KIS-2026-04"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-04-20",
+    "amount_minor": 1682062,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-04",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-05",
+    "invoice_ids": [
+      "INV-KIS-2026-05"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-05-20",
+    "amount_minor": 1742018,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-05",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-06",
+    "invoice_ids": [
+      "INV-KIS-2026-06"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-06-20",
+    "amount_minor": 1462506,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-06",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-07",
+    "invoice_ids": [
+      "INV-KIS-2026-07"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-07-20",
+    "amount_minor": 1783196,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-07",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-2026-08",
+    "invoice_ids": [
+      "INV-KIS-4812"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-08-26",
+    "amount_minor": 1940650,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-2026-08",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-KIS-10442",
+    "invoice_ids": [
+      "INV-KIS-10442"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-03-30",
+    "amount_minor": 1840622,
+    "method": "ach",
+    "bank_reference": "TXN-KIS-10442",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-10442",
+    "invoice_ids": [
+      "INV-NLF-10442"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-03-30",
+    "amount_minor": 1842462,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-10442",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-01",
+    "invoice_ids": [
+      "INV-NLF-02-2026-01"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-01-28",
+    "amount_minor": 984018,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-01",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-02",
+    "invoice_ids": [
+      "INV-NLF-02-2026-02"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-02-28",
+    "amount_minor": 1012040,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-02",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-03",
+    "invoice_ids": [
+      "INV-NLF-02-2026-03"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-03-28",
+    "amount_minor": 1044022,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-03",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-04",
+    "invoice_ids": [
+      "INV-NLF-02-2026-04"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-04-28",
+    "amount_minor": 1088018,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-04",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-05",
+    "invoice_ids": [
+      "INV-NLF-02-2026-05"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-05-28",
+    "amount_minor": 1122044,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-05",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-06",
+    "invoice_ids": [
+      "INV-NLF-02-2026-06"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-06-28",
+    "amount_minor": 1080522,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-06",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-07",
+    "invoice_ids": [
+      "INV-NLF-02-2026-07"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-07-28",
+    "amount_minor": 1040618,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-07",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-NLF-02-2026-08",
+    "invoice_ids": [
+      "INV-NLF-02-2026-08"
+    ],
+    "vendor": "North Line Fab Inc",
+    "vendor_id": "VEND-NLF-02",
+    "payment_date": "2026-08-28",
+    "amount_minor": 1044040,
+    "method": "ach",
+    "bank_reference": "TXN-NLF-02-2026-08",
+    "description": "ACH North Line Fab Inc",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-02",
+    "invoice_ids": [
+      "INV-NLF-03-2026-02"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-03-01",
+    "amount_minor": 448022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-02",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-03",
+    "invoice_ids": [
+      "INV-NLF-03-2026-03"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-03-29",
+    "amount_minor": 462018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-03",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-04",
+    "invoice_ids": [
+      "INV-NLF-03-2026-04"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-04-29",
+    "amount_minor": 471044,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-04",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-05",
+    "invoice_ids": [
+      "INV-NLF-03-2026-05"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-05-29",
+    "amount_minor": 488018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-05",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-06",
+    "invoice_ids": [
+      "INV-NLF-03-2026-06"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-06-29",
+    "amount_minor": 501022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-06",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-07",
+    "invoice_ids": [
+      "INV-NLF-03-2026-07"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-07-29",
+    "amount_minor": 512040,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-07",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-NLF-03-2026-08",
+    "invoice_ids": [
+      "INV-NLF-03-2026-08"
+    ],
+    "vendor": "NLF Industrial Components",
+    "vendor_id": "VEND-NLF-03",
+    "payment_date": "2026-08-29",
+    "amount_minor": 518418,
+    "method": "ach",
+    "bank_reference": "TXN-INV-NLF-03-2026-08",
+    "description": "ACH NLF Industrial Components",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-4601",
+    "invoice_ids": [
+      "INV-KIS-4601"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-04-20",
+    "amount_minor": 2488044,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-4601",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-WBT-4602",
+    "invoice_ids": [
+      "INV-WBT-4602"
+    ],
+    "vendor": "Westbrook Tooling",
+    "vendor_id": "VEND-WBT-01",
+    "payment_date": "2026-04-21",
+    "amount_minor": 2410618,
+    "method": "ach",
+    "bank_reference": "TXN-INV-WBT-4602",
+    "description": "ACH Westbrook Tooling",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-4603",
+    "invoice_ids": [
+      "INV-KIS-4603"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-04-22",
+    "amount_minor": 2341356,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-4603",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-WBT-2026-07",
+    "invoice_ids": [
+      "INV-WBT-2026-07"
+    ],
+    "vendor": "Westbrook Tooling",
+    "vendor_id": "VEND-WBT-01",
+    "payment_date": "2026-07-24",
+    "amount_minor": 2410618,
+    "method": "ach",
+    "bank_reference": "TXN-WBT-2026-07",
+    "description": "ACH Westbrook Tooling",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-WBT-2026-08",
+    "invoice_ids": [
+      "INV-WBT-2026-08"
+    ],
+    "vendor": "Westbrook Tooling",
+    "vendor_id": "VEND-WBT-01",
+    "payment_date": "2026-08-24",
+    "amount_minor": 2394000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-WBT-2026-08",
+    "description": "ACH Westbrook Tooling",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2025-11",
+    "invoice_ids": [
+      "INV-KIS-FRT-2025-11"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2025-12-04",
+    "amount_minor": 22018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2025-11",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2025-12",
+    "invoice_ids": [
+      "INV-KIS-FRT-2025-12"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-01-03",
+    "amount_minor": 22840,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2025-12",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-01",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-01"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-02-03",
+    "amount_minor": 23222,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-01",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-02",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-02"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-03-06",
+    "amount_minor": 23818,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-02",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-03",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-03"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-04-03",
+    "amount_minor": 24044,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-03",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-04",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-04"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-05-04",
+    "amount_minor": 24218,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-04",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-05",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-05"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-06-03",
+    "amount_minor": 24422,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-05",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-06",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-06"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-07-04",
+    "amount_minor": 24618,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-06",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-07",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-07"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-08-03",
+    "amount_minor": 24840,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-07",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-FRT-2026-08",
+    "invoice_ids": [
+      "INV-KIS-FRT-2026-08"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-09-03",
+    "amount_minor": 24818,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-FRT-2026-08",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-KIS-0618",
+    "invoice_ids": [
+      "INV-KIS-0618"
+    ],
+    "vendor": "Kestrel Industrial Supply LLC",
+    "vendor_id": "VEND-KIS-01",
+    "payment_date": "2026-06-30",
+    "amount_minor": 2410618,
+    "method": "ach",
+    "bank_reference": "TXN-INV-KIS-0618",
+    "description": "ACH Kestrel Industrial Supply LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-02",
+    "invoice_ids": [
+      "INV-HES-2026-02"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-03-03",
+    "amount_minor": 321840,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-02",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-03",
+    "invoice_ids": [
+      "INV-HES-2026-03"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-03-31",
+    "amount_minor": 344022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-03",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-04",
+    "invoice_ids": [
+      "INV-HES-2026-04"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-05-01",
+    "amount_minor": 361018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-04",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-05",
+    "invoice_ids": [
+      "INV-HES-2026-05"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-05-31",
+    "amount_minor": 382044,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-05",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-06",
+    "invoice_ids": [
+      "INV-HES-2026-06"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-07-01",
+    "amount_minor": 368818,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-06",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-07",
+    "invoice_ids": [
+      "INV-HES-2026-07"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-07-31",
+    "amount_minor": 391022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-07",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HES-2026-08",
+    "invoice_ids": [
+      "INV-HES-2026-08"
+    ],
+    "vendor": "Harbor Electric Services",
+    "vendor_id": "VEND-HES-01",
+    "payment_date": "2026-08-31",
+    "amount_minor": 384018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HES-2026-08",
+    "description": "ACH Harbor Electric Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2025-10",
+    "invoice_ids": [
+      "INV-HAL-2025-10"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2025-10-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2025-10",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2025-11",
+    "invoice_ids": [
+      "INV-HAL-2025-11"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2025-11-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2025-11",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2025-12",
+    "invoice_ids": [
+      "INV-HAL-2025-12"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2025-12-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2025-12",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-01",
+    "invoice_ids": [
+      "INV-HAL-2026-01"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-01-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-01",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-02",
+    "invoice_ids": [
+      "INV-HAL-2026-02"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-02-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-02",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-03",
+    "invoice_ids": [
+      "INV-HAL-2026-03"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-03-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-03",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-04",
+    "invoice_ids": [
+      "INV-HAL-2026-04"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-04-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-04",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-05",
+    "invoice_ids": [
+      "INV-HAL-2026-05"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-05-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-05",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-06",
+    "invoice_ids": [
+      "INV-HAL-2026-06"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-06-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-06",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-07",
+    "invoice_ids": [
+      "INV-HAL-2026-07"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-07-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-07",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HAL-2026-08",
+    "invoice_ids": [
+      "INV-HAL-2026-08"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-08-17",
+    "amount_minor": 240000,
+    "method": "ach",
+    "bank_reference": "TXN-HAL-2026-08",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-01",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-01"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-02-09",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-01",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-02",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-02"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-03-12",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-02",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-03",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-03"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-04-09",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-03",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-04",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-04"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-05-10",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-04",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-05",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-05"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-06-09",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-05",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-06",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-06"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-07-10",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-06",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-07",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-07"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-08-09",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-07",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-HAL-WKND-2026-08",
+    "invoice_ids": [
+      "INV-HAL-WKND-2026-08"
+    ],
+    "vendor": "Halyard Facilities LLC",
+    "vendor_id": "VEND-HAL-01",
+    "payment_date": "2026-09-09",
+    "amount_minor": 230000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-HAL-WKND-2026-08",
+    "description": "ACH Halyard Facilities LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-OIC-2025-01",
+    "invoice_ids": [
+      "INV-OIC-2025-01"
+    ],
+    "vendor": "Orbit Insights Corp",
+    "vendor_id": "VEND-OIC-01",
+    "payment_date": "2025-01-18",
+    "amount_minor": 27600000,
+    "method": "ach",
+    "bank_reference": "TXN-OIC-2025-01",
+    "description": "ACH Orbit Insights Corp",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-HBP-2026-01",
+    "invoice_ids": [
+      "INV-HBP-2026-01"
+    ],
+    "vendor": "Hartford Brokerage Partners",
+    "vendor_id": "VEND-HBP-01",
+    "payment_date": "2026-01-20",
+    "amount_minor": 1860000,
+    "method": "ach",
+    "bank_reference": "TXN-HBP-2026-01",
+    "description": "ACH Hartford Brokerage Partners",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2025-09",
+    "invoice_ids": [
+      "INV-BLS-2025-09"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2025-09-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2025-09",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2025-10",
+    "invoice_ids": [
+      "INV-BLS-2025-10"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2025-10-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2025-10",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2025-11",
+    "invoice_ids": [
+      "INV-BLS-2025-11"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2025-11-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2025-11",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2025-12",
+    "invoice_ids": [
+      "INV-BLS-2025-12"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2025-12-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2025-12",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-01",
+    "invoice_ids": [
+      "INV-BLS-2026-01"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-01-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-01",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-02",
+    "invoice_ids": [
+      "INV-BLS-2026-02"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-02-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-02",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-03",
+    "invoice_ids": [
+      "INV-BLS-2026-03"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-03-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-03",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-04",
+    "invoice_ids": [
+      "INV-BLS-2026-04"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-04-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-04",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-05",
+    "invoice_ids": [
+      "INV-BLS-2026-05"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-05-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-05",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-06",
+    "invoice_ids": [
+      "INV-BLS-2026-06"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-06-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-06",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-07",
+    "invoice_ids": [
+      "INV-BLS-2026-07"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-07-26",
+    "amount_minor": 3703333,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-07",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-BLS-2026-08",
+    "invoice_ids": [
+      "INV-BLS-2026-08"
+    ],
+    "vendor": "Brightline Studio LLC",
+    "vendor_id": "VEND-BLS-01",
+    "payment_date": "2026-08-26",
+    "amount_minor": 3703337,
+    "method": "ach",
+    "bank_reference": "TXN-BLS-OUT-2026-08",
+    "description": "ACH Brightline Studio LLC",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CAM-RENT-2026-06",
+    "invoice_ids": [
+      "INV-CAM-RENT-2026-06"
+    ],
+    "vendor": "Cambridge Properties",
+    "vendor_id": "VEND-013",
+    "payment_date": "2026-06-13",
+    "amount_minor": 4800000,
+    "method": "ach",
+    "bank_reference": "TXN-CAM-RENT-2026-06",
+    "description": "ACH Cambridge Properties",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CAM-RENT-2026-07",
+    "invoice_ids": [
+      "INV-CAM-RENT-2026-07"
+    ],
+    "vendor": "Cambridge Properties",
+    "vendor_id": "VEND-013",
+    "payment_date": "2026-07-13",
+    "amount_minor": 4800000,
+    "method": "ach",
+    "bank_reference": "TXN-CAM-RENT-2026-07",
+    "description": "ACH Cambridge Properties",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-CAM-RENT-2026-08",
+    "invoice_ids": [
+      "INV-CAM-RENT-2026-08"
+    ],
+    "vendor": "Cambridge Properties",
+    "vendor_id": "VEND-013",
+    "payment_date": "2026-08-13",
+    "amount_minor": 4800000,
+    "method": "ach",
+    "bank_reference": "TXN-CAM-RENT-2026-08",
+    "description": "ACH Cambridge Properties",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-07",
+    "invoice_ids": [
+      "INV-CPS-2025-07"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2025-07-27",
+    "amount_minor": 842718,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2025-07",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-08",
+    "invoice_ids": [
+      "INV-CPS-2025-08"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2025-08-27",
+    "amount_minor": 841022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2025-08",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-09",
+    "invoice_ids": [
+      "INV-CPS-2025-09"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2025-09-27",
+    "amount_minor": 839044,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2025-09",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-10",
+    "invoice_ids": [
+      "INV-CPS-2025-10"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2025-10-27",
+    "amount_minor": 844018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2025-10",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-11",
+    "invoice_ids": [
+      "INV-CPS-2025-11"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2025-11-27",
+    "amount_minor": 846022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2025-11",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2025-12",
+    "invoice_ids": [
+      "INV-CPS-2025-12"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2025-12-27",
+    "amount_minor": 848818,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2025-12",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-01",
+    "invoice_ids": [
+      "INV-CPS-2026-01"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-01-27",
+    "amount_minor": 851040,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-01",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-02",
+    "invoice_ids": [
+      "INV-CPS-2026-02"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-02-27",
+    "amount_minor": 852018,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-02",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-03",
+    "invoice_ids": [
+      "INV-CPS-2026-03"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-03-27",
+    "amount_minor": 849022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-03",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-04",
+    "invoice_ids": [
+      "INV-CPS-2026-04"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-04-27",
+    "amount_minor": 850618,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-04",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-05",
+    "invoice_ids": [
+      "INV-CPS-2026-05"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-05-27",
+    "amount_minor": 851840,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-05",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-06",
+    "invoice_ids": [
+      "INV-CPS-2026-06"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-06-27",
+    "amount_minor": 852218,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-06",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-07",
+    "invoice_ids": [
+      "INV-CPS-2026-07"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-07-27",
+    "amount_minor": 853022,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-07",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-2026-08",
+    "invoice_ids": [
+      "INV-CPS-2026-08"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-08-27",
+    "amount_minor": 854418,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-2026-08",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CAM-CAM-2026",
+    "invoice_ids": [
+      "INV-CAM-CAM-2026"
+    ],
+    "vendor": "Cambridge Properties",
+    "vendor_id": "VEND-013",
+    "payment_date": "2026-04-12",
+    "amount_minor": 1820000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CAM-CAM-2026",
+    "description": "ACH Cambridge Properties",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-RENT-2026-06",
+    "invoice_ids": [
+      "INV-CPS-RENT-2026-06"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-06-14",
+    "amount_minor": 400000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-RENT-2026-06",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-CPS-RENT-2026-08",
+    "invoice_ids": [
+      "INV-CPS-RENT-2026-08"
+    ],
+    "vendor": "Cambridge Property Services",
+    "vendor_id": "VEND-CPS-01",
+    "payment_date": "2026-08-14",
+    "amount_minor": 400000,
+    "method": "ach",
+    "bank_reference": "TXN-INV-CPS-RENT-2026-08",
+    "description": "ACH Cambridge Property Services",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-LEN-ROLL-26",
+    "invoice_ids": [
+      "INV-LEN-ROLL-26"
+    ],
+    "vendor": "Lenovo",
+    "vendor_id": "VEND-020",
+    "payment_date": "2026-03-30",
+    "amount_minor": 42472080,
+    "method": "ach",
+    "bank_reference": "TXN-INV-LEN-ROLL-26",
+    "description": "ACH Lenovo",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2025-11",
+    "invoice_ids": [
+      "INV-FLE-2025-11"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2025-12-03",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2025-11",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2025-12",
+    "invoice_ids": [
+      "INV-FLE-2025-12"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-01-02",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2025-12",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-01",
+    "invoice_ids": [
+      "INV-FLE-2026-01"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-02-02",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-01",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-02",
+    "invoice_ids": [
+      "INV-FLE-2026-02"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-03-05",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-02",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-03",
+    "invoice_ids": [
+      "INV-FLE-2026-03"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-04-02",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-03",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-04",
+    "invoice_ids": [
+      "INV-FLE-2026-04"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-05-03",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-04",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-05",
+    "invoice_ids": [
+      "INV-FLE-2026-05"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-06-02",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-05",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-06",
+    "invoice_ids": [
+      "INV-FLE-2026-06"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-07-03",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-06",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-07",
+    "invoice_ids": [
+      "INV-FLE-2026-07"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-08-02",
+    "amount_minor": 488482,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-07",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-FLE-2026-08",
+    "invoice_ids": [
+      "INV-FLE-2026-08"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-09-02",
+    "amount_minor": 488484,
+    "method": "ach",
+    "bank_reference": "TXN-FLE-2026-08",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  },
+  {
+    "payment_id": "PAY-INV-FLE-0716",
+    "invoice_ids": [
+      "INV-FLE-0716"
+    ],
+    "vendor": "Freightline Expedite",
+    "vendor_id": "VEND-FLE-01",
+    "payment_date": "2026-07-28",
+    "amount_minor": 153196,
+    "method": "ach",
+    "bank_reference": "TXN-INV-FLE-0716",
+    "description": "ACH Freightline Expedite",
+    "on_hold_invoice": false,
+    "round_number": false,
+    "initiator_id": "USR-PAY-01",
+    "approver_id": "USR-PAY-01"
+  }
+]

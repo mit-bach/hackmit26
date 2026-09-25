@@ -1,0 +1,17 @@
+{
+  "message_id": "MSG-INBOX-016",
+  "thread_id": "THR-credit-memo",
+  "classification": "CREDIT_MEMO",
+  "selected_action": "ROUTE_TO_EXISTING_WORKFLOW",
+  "dispatch_status": "UNSUPPORTED",
+  "invoice_id": null,
+  "ready_for_payment": false,
+  "reason_codes": [
+    "UNSUPPORTED_ACTION",
+    "CREDIT_MEMO_PATH_UNAVAILABLE"
+  ],
+  "counterparty_name": "Acme Supplies",
+  "subject": "Credit memo CM-INBOX-100",
+  "note": "Credit memo CM-INBOX-100 for returned goods $200.00. Not a vendor invoice; not payable; no AP invoice created; not handed to pay-run.",
+  "mutation": false
+}

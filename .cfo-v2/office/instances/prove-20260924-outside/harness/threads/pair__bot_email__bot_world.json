@@ -1,0 +1,91 @@
+{
+  "id": "pair:bot_email:bot_world",
+  "threadId": "pair:bot_email:bot_world",
+  "name": "Email ↔ World",
+  "memberIds": [
+    "bot_email",
+    "bot_world"
+  ],
+  "createdAt": 1790282619392,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_43857e4b-5d18-4b3d-9b3c-025e256e2e0b",
+      "handleId": "h_43857e4b-5d18-4b3d-9b3c-025e256e2e0b",
+      "role": "bot",
+      "kind": "text",
+      "text": "Inbound counterparty mail delivered for triage (profile triage).\n\nVendor: Acme Supplies <billing@acmesupplies.example>\nTo: ap@hackmit-cfo.example\nSubject: Invoice ACM-2026-4410 — September / PO 101\nmessage_id: msg-acme-acm-2026-4410\nthread_id: thr-acme-acm-2026-4410\ncase_id: ACM-2026-4410\n\nSeptember invoice ACM-2026-4410 for $12,450.00 on PO 101. Vendor states goods under PO 101 were shipped and delivered. Please classify and process. World stays on this invoice thread until classification is done.\n\nDelivered=true via send_inbox_message.",
+      "at": 1790282619392,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_43857e4b-5d18-4b3d-9b3c-025e256e2e0b",
+      "handleId": "h_43857e4b-5d18-4b3d-9b3c-025e256e2e0b",
+      "role": "bot",
+      "kind": "text",
+      "text": "Classified and processed inbound mail for case ACM-2026-4410 / msg-acme-acm-2026-4410.\n\nResult:\n- classification: invoice (VENDOR_INVOICE)\n- selected_action: CREATE_AP_INVOICE\n- reason: Attachment ACM-2026-4410.pdf is a vendor request for payment with vendor Acme Supplies, invoice number ACM-2026-4410, invoice date 2026-09-08, due date 2026-09-22, currency USD, amount due 12450.00, PO PO-101.\n- catalog source: MSG-E-INV-001 / ATT-E-001\n- packet path: workspace/email/packets/MSG-E-INV-001.json\n- candidate: vendor=Acme Supplies, invoice_number=ACM-2026-4410, amount_due=12450.00 USD, po=PO-101\n- handoff: AP prepare notified with packet path (invoice lookup packet written on Computer)\n\nWorld can close triage wait on this thread for classification. AP owns the open bill next.",
+      "at": 1790282661214,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_5930b3e1-21e5-43d9-a0f8-f6cceeb9f3ec",
+      "handleId": "h_5930b3e1-21e5-43d9-a0f8-f6cceeb9f3ec",
+      "role": "bot",
+      "kind": "text",
+      "text": "Inbound counterparty mail delivered for triage (profile triage).\n\nCustomer: Northwind Labs <ap@northwind.example> (CUST-001)\nTo: ar@hackmit-cfo.example\nSubject: Payment plan — INV-AR-007\nmessage_id: msg-northwind-pay-intent-inv-ar-007\nthread_id: thr-northwind-inv-ar-007\ncase_id: INV-AR-007\n\nCustomer payment-intent note (not a bank confirmation): will pay full $12,000.00 on INV-AR-007 by ACH on 2026-09-30. No dispute. Mentions other open INV-AR-001 and INV-AR-022 remain on their due dates.\n\ndelivered=true via send_inbox_message. Please classify. World stays on thr-northwind-inv-ar-007 until classification completes and will answer any follow-up on that thread. Do not apply cash from world.",
+      "at": 1790282736392,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_5930b3e1-21e5-43d9-a0f8-f6cceeb9f3ec",
+      "handleId": "h_5930b3e1-21e5-43d9-a0f8-f6cceeb9f3ec",
+      "role": "bot",
+      "kind": "text",
+      "text": "Classification complete for msg-northwind-pay-intent-inv-ar-007 / thr-northwind-inv-ar-007 / case INV-AR-007.\n\nResult:\n- classification: customer_payment_intent (payment plan / promise-to-pay note)\n- selected_action: ROUTE_COLLECT_NOTE\n- candidate: null (not a vendor invoice; not CREATE_AP_INVOICE)\n- not payment_confirmation: money has not moved yet\n- not customer_remittance: no remittance advice tying received cash to invoices\n- cash application: NOT performed (per instruction; no bank line to apply)\n- extracted: customer Northwind Labs CUST-001; INV-AR-007 full 12000.00 USD by ACH on 2026-09-30; no dispute; INV-AR-001 and INV-AR-022 stay on due dates\n- packet: workspace/email/packets/msg-northwind-pay-intent-inv-ar-007.json\n- notified: collect (collections awareness only)\n\nWorld may close triage wait on this thread. Follow-ups on thr-northwind-inv-ar-007 still welcome; email will not invent a payment or apply cash from this note.",
+      "at": 1790282788564,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_a15f4fd0-1489-4626-b3ad-b4e183e4579f",
+      "handleId": "h_a15f4fd0-1489-4626-b3ad-b4e183e4579f",
+      "role": "bot",
+      "kind": "text",
+      "text": "Inbound counterparty mail delivered for triage (profile triage).\n\nBank: First National Operating <notices@firstnational.example>\nTo: ap@hackmit-cfo.example\nSubject: September 2026 operating account statement available\nmessage_id: msg-fno-stmt-2026-09\nthread_id: thr-fno-stmt-2026-09\ncase_id: STMT-OP-2026-09\n\nThis is a bank statement availability notice for the operating account, period 2026-09-01 through 2026-09-30. It is NOT a vendor bill / invoice. No payment requested. No bank lines matched by world. Do not invent a reconciling story for any dollar difference.\n\ndelivered=true via send_inbox_message. Please classify. World stays on thr-fno-stmt-2026-09 until classification completes.",
+      "at": 1790282868365,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_a15f4fd0-1489-4626-b3ad-b4e183e4579f",
+      "handleId": "h_a15f4fd0-1489-4626-b3ad-b4e183e4579f",
+      "role": "bot",
+      "kind": "text",
+      "text": "Classification complete for msg-fno-stmt-2026-09 / thr-fno-stmt-2026-09 / case STMT-OP-2026-09.\n\nResult:\n- classification: bank_notice (bank statement availability)\n- selected_action: TRACE_ONLY\n- candidate: null — not a vendor bill/invoice; no CREATE_AP_INVOICE\n- payment requested: no\n- bank line matching: not performed; no lines supplied by world; no reconciling story invented for any dollar difference\n- extracted: First National Operating; operating account statement available for 2026-09-01 through 2026-09-30\n- packet: workspace/email/packets/msg-fno-stmt-2026-09.json\n- handoff: none (informational notice only; cash/bank recon own actual statements and lines when presented)\n\nWorld may close triage wait on this thread.",
+      "at": 1790282882327,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    }
+  ]
+}

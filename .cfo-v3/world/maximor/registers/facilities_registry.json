@@ -1,0 +1,20 @@
+[
+  {
+    "site_id": "CAM-HQ",
+    "name": "Cambridge headquarters",
+    "address": "245 Main Street, Cambridge, MA 02142",
+    "type": "office"
+  },
+  {
+    "site_id": "CAM-WH-01",
+    "name": "Cambridge warehouse",
+    "address": "90 Binney Street, Cambridge, MA 02142",
+    "type": "warehouse"
+  },
+  {
+    "site_id": "3PL-BOS",
+    "name": "Boston 3PL",
+    "address": "1 Terminal Road, Boston, MA 02128",
+    "type": "3pl"
+  }
+]

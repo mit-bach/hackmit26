@@ -1,0 +1,19 @@
+{
+  "id": "h_4cd13bba-fcb0-411b-81b5-5fc0e3276037",
+  "from": "operator",
+  "to": "bot_books",
+  "toSlug": "books",
+  "prompt": "profile: erp-invoice\nMaximor Demo Corp. Land the NetSuite vendor bill NS-4410 on your desk. Do not match it. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T19:37:38.637Z",
+  "updatedAt": "2026-09-24T19:38:28.164Z",
+  "result": "Landed NetSuite vendorBill **NS-4410** as `erp-invoice`. Python-mapped fields used as-is; no remapping.\n\n- Path: `workspace/books/erp-invoice/NS-4410.json`\n- Vendor Acme Supplies (`VEND-001`), invoice `ACM-2026-4410`, 2026-09-08 / due 2026-09-22, **12450 USD**, `PO-101`\n- Handoff to **ap / prepare** (handle `h_434fa6be-9ce3-46f4-a429-567d3f866edb`) — completed\n\nAP put the bill on **HOLD**: Kernel `get_invoice` / `get_case_evidence` are `found=false`; PO-101 and GR-101 exist. No match, no pay pool, no ctl-pay. Period not closed.",
+  "resultPaths": [],
+  "seq": 8
+}

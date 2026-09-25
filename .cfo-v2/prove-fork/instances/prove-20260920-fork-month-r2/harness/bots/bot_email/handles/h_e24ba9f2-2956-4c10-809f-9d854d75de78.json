@@ -1,0 +1,19 @@
+{
+  "id": "h_e24ba9f2-2956-4c10-809f-9d854d75de78",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-018. It may be malformed. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Fail closed. Do not invent an invoice. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:36:34.365Z",
+  "updatedAt": "2026-09-24T17:36:49.514Z",
+  "result": "### MSG-INBOX-018 done (fail closed)\n\n| Step | Result |\n| --- | --- |\n| **Message** | Unknown Sender · “Invoice attached” · body “See the binary payload.” · att `payload.bin` (octet-stream, **content null**) |\n| **Classify** | **`UNSUPPORTED_OR_UNRESOLVED`** → `REQUEST_MISSING_INFORMATION` (conf 0.3) |\n| **Reasons** | `UNSUPPORTED_ATTACHMENT` · `PARSE_FAILURE` · `MISSING_FIELDS` (invoice_number, amount, invoice_date, currency) |\n| **Dispatch** | **`PARSE_FAILURE`** · `invoice_id` **null** · **no mutation** · `ready_for_payment: false` · clarification null |\n| **Invented invoice** | None |\n| **AP / pay handoff** | None |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-018.json` |",
+  "resultPaths": [],
+  "seq": 68
+}

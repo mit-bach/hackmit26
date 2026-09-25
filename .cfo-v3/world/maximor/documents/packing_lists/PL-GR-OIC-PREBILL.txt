@@ -1,0 +1,11 @@
+Orbit Insights Corp
+Packing list
+Ship date: 2026-09-30
+PO Number: PO-OIC-PREBILL
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO ILL-0930
+
+Contents:
+  - Line GR-OIC-PREBILL — qty 1
+
+This packing list is not an invoice.

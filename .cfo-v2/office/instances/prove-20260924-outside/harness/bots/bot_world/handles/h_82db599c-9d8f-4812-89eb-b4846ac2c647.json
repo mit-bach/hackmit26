@@ -1,0 +1,19 @@
+{
+  "id": "h_82db599c-9d8f-4812-89eb-b4846ac2c647",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: customer\nYou are Northwind Labs. You owe an open invoice. Write the office what you will pay and when. Stay in that thread until email has classified your note. Then answer whatever they ask next. Do not apply cash. Do not close the month.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:44:35.551Z",
+  "updatedAt": "2026-09-24T20:46:45.747Z",
+  "result": "**Northwind Labs — done**\n\nPayment-intent note delivered and classified. No cash applied. No period close.\n\n| Field | Value |\n| --- | --- |\n| Customer | Northwind Labs (CUST-001) `ap@northwind.example` |\n| Invoice | **INV-AR-007** |\n| Amount | **$12,000.00** full |\n| When | **ACH on 2026-09-30** (due date; on_time habit) |\n| Dispute | None |\n| Thread | `thr-northwind-inv-ar-007` |\n| message_id | `msg-northwind-pay-intent-inv-ar-007` |\n\nAlso noted (not paid in this note): INV-AR-001 $12k due 2026-10-15; INV-AR-022 $6.4k due 2026-10-22.\n\n**Email:** `customer_payment_intent` → `ROUTE_COLLECT_NOTE` (not remittance / not payment confirmation). Collect notified for awareness only. Packet: `workspace/email/packets/msg-northwind-pay-intent-inv-ar-007.json`.\n\nNo finance follow-up on the thread yet. World stays ready on `thr-northwind-inv-ar-007` if they ask next.",
+  "resultPaths": [],
+  "seq": 38
+}

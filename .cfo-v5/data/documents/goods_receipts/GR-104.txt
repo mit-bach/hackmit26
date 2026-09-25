@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-104
+PO Number: PO-104
+Vendor: Office Depot
+Goods received in full on 2026-09-13
+Packing list attached: PL-GR-104
+Quantity ordered: 10
+Quantity received: 10
+Amount received: 2,100.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

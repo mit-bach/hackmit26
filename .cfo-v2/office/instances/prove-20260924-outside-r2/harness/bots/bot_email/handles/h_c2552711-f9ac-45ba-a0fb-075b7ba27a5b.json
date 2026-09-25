@@ -1,0 +1,19 @@
+{
+  "id": "h_c2552711-f9ac-45ba-a0fb-075b7ba27a5b",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Inbound vendor mail delivered for triage (profile: triage).\n\nPath: workspace/world/packets/acm-2026-4410-confirm.md\nmessage_id: msg-acme-acm-2026-4410-confirm-001\nthread_id: thr-acme-acm-2026-4410\nsender: Acme Supplies <billing@acmesupplies.example>\nsubject: Re: Invoice ACM-2026-4410 / PO 101\n\nPlease classify this counterparty confirmation of invoice ACM-2026-4410 ($12,450, PO 101, goods received). World does not pay. Reply with classification outcome.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:52:04.322Z",
+  "updatedAt": "2026-09-24T20:52:38.759Z",
+  "result": "Triage complete for msg-acme-acm-2026-4410-confirm-001 (thread thr-acme-acm-2026-4410).\n\nClassification: not_invoice / vendor_invoice_confirmation\nselected_action: NONE (no CREATE_AP_INVOICE)\ncandidate: null\nconfidence: high\n\nIdentifiers referenced only (not minted): vendor Acme Supplies; invoice ACM-2026-4410; amount $12,450; PO 101; goods received affirmed by counterparty.\n\nReason: Vendor reply confirming an existing invoice and PO/goods status. Not a new payable, not a remittance, not payment_confirmation of cash received. World does not pay. No handoff to ap or apply.\n\nPacket: workspace/email/packets/acm-2026-4410-confirm-triage.md",
+  "seq": 5
+}

@@ -1,0 +1,73 @@
+{
+  "schema": "cfo.source_agent.output.v1",
+  "output_type": "SourceAgentOutput",
+  "profile": "erp-invoice",
+  "agent": "ERP Invoice Agent",
+  "source_id": "NS-4410",
+  "source_type": "netsuite_vendor_bill",
+  "system": "NetSuite",
+  "period": "2026-09",
+  "classification": {
+    "label": "invoice",
+    "reason": "NetSuite vendorBill NS-4410 is a structured ERP AP bill with vendor, invoice number, dates, and amount due."
+  },
+  "python_parse": {
+    "record_id": "NS-4410",
+    "period": "2026-09",
+    "system": "NetSuite",
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "subtotal": 12450,
+    "tax": 0,
+    "total": 12450,
+    "po_number": "PO-101",
+    "description": "Standing desks and monitors — same economic event as INV-001"
+  },
+  "python_parse_error": null,
+  "candidate": {
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "subtotal": 12450,
+    "tax": 0,
+    "total": 12450,
+    "amount_due": 12450,
+    "po_number": "PO-101",
+    "description": "Standing desks and monitors — same economic event as INV-001",
+    "source_type": "netsuite_vendor_bill",
+    "source_id": "NS-4410",
+    "source_system": "NetSuite",
+    "document_type": "vendorBill",
+    "extraction_confidence": 1.0,
+    "provenance": {
+      "kernel_ops": [
+        "invoice_ingestion.tools.list_erp_invoice_records",
+        "invoice_ingestion.tools.get_erp_invoice"
+      ],
+      "trace_ids": [
+        "k_3a995c745d38",
+        "k_54e9cca2fbed"
+      ]
+    }
+  },
+  "handoff": {
+    "to": "ap",
+    "profile": "prepare",
+    "action": "prepare",
+    "match": false,
+    "pay": false,
+    "close": false
+  },
+  "notes": [
+    "Python/kernel structured fields copied as-is; no remap.",
+    "Do not three-way match on this Bot.",
+    "Do not close the period."
+  ]
+}

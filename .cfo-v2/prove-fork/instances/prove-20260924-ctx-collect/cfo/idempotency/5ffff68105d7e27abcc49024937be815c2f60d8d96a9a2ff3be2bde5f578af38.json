@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-inv-ar-019",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "8698a7eb08425a8a037f44bb27a04a23e6dfd6c53f29224295834b7d6d30eac5",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "cust-reply-inv-ar-019",
+      "thread_id": "col-inv-ar-019",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_2c7369eb9c7b"
+  }
+}

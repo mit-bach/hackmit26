@@ -1,0 +1,19 @@
+{
+  "id": "h_f2a0ce45-0eef-4ea5-b14f-da17f31b573c",
+  "from": "bot_world",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "World needs facts only (read): open AR invoices for customer Northwind Labs (CUST-001, ap@northwindlabs.example). Please list open invoice numbers, amounts due, due dates, and any dunning thread ids if present. Do not dun and do not apply cash — world will send a customer payment-intent note.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_collect"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:44:44.636Z",
+  "updatedAt": "2026-09-24T20:45:16.330Z",
+  "result": "Facts only (as of 2026-09-24). Customer: Northwind Labs (CUST-001). Master billing email on file: ap@northwind.example (not ap@northwindlabs.example). No dunning has been sent; AR precedents empty; no dunning/thread ids.\n\nOpen AR invoices (all CURRENT / not past due; dispute NONE; collection_status NONE; reminder_count 0; last_collection_contact null):\n\n1. INV-AR-001 — outstanding 12000.00 (original 12000.00) — due_date 2026-10-15 — days_past_due 0 — aging CURRENT — status OPEN\n2. INV-AR-007 — outstanding 12000.00 (original 12000.00) — due_date 2026-09-30 — days_past_due 0 — aging CURRENT — status OPEN\n3. INV-AR-022 — outstanding 6400.00 (original 6400.00) — due_date 2026-10-22 — days_past_due 0 — aging CURRENT — status OPEN\n\nTotal open outstanding: 30400.00 USD.\n\nI did not dun and did not apply cash.",
+  "seq": 19
+}

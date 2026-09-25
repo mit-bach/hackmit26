@@ -1,0 +1,19 @@
+{
+  "key": "send-fno-stmt-2026-09",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "93890cf011aad70ffabbcb7394d8860ddebe599497dc5ad9b34445fa31a497a8",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-fno-stmt-2026-09",
+      "thread_id": "thr-fno-stmt-2026-09",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_ed9df737106c"
+  }
+}

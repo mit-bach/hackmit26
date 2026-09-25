@@ -181,9 +181,11 @@ def classify_message(message: MessageEnvelope) -> InboxClassification:
         action = "REJECT_UNSAFE_REQUEST"
         if classification not in {"VENDOR_INVOICE"}:
             classification = "UNSUPPORTED_OR_UNRESOLVED" if classification == "UNSUPPORTED_OR_UNRESOLVED" else classification
-    if has_prompt_injection(message) and classification != "VENDOR_INVOICE" and action != "CREATE_AP_INVOICE":
-        if not looks_like_invoice_text(blob):
-            action = "REJECT_UNSAFE_REQUEST"
+    if has_prompt_injection(message):
+        # Injection that looks like a bill must not mint AP. Flags are not enough.
+        action = "REJECT_UNSAFE_REQUEST"
+        if classification == "VENDOR_INVOICE":
+            classification = "UNSUPPORTED_OR_UNRESOLVED"
 
     confidence = 0.9
     if classification == "UNSUPPORTED_OR_UNRESOLVED":

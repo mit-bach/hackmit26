@@ -1,0 +1,19 @@
+{
+  "id": "h_652ee41e-5f51-45ff-885e-23e7061b8c67",
+  "from": "operator",
+  "to": "bot_books",
+  "toSlug": "books",
+  "prompt": "profile: procurement\nList procurement records and get one if any exist. Do not match. Do not lock. Do not ask_user. One Profile: procurement.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:54:16.275Z",
+  "updatedAt": "2026-09-24T17:54:26.584Z",
+  "result": "**Procurement list (profile `procurement`):** count **2**\n\n| record_id | system | document_type | vendor |\n| --- | --- | --- | --- |\n| `COUPA-INV-013` | Coupa | invoice | Office Depot |\n| `ZIP-PO-ONLY` | Zip | purchase_request | Office Depot |\n\n**Get one:** `COUPA-INV-013` (invoice)\n\n- vendor: Office Depot (`VEND-004`)\n- invoice_number: `OD-DISC-2100`\n- dates: 2026-09-14 / due 2026-10-14\n- USD subtotal/total **2100**, tax 0\n- po_number: `PO-104`\n- period: 2026-09\n- note: same economic event as INV-013\n\nNo match, no period lock, no invent.",
+  "resultPaths": [],
+  "seq": 159
+}

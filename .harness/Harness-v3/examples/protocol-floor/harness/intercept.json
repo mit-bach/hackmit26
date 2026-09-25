@@ -1,0 +1,10 @@
+{
+  "default": {
+    "kind": "operator"
+  },
+  "bots": {
+    "bot_alpha": {
+      "kind": "operator"
+    }
+  }
+}

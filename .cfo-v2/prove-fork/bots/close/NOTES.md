@@ -8,7 +8,7 @@ Profile `coordinate` (Close Manager) has `tools=[]`. That is honest. Coordinatio
 
 ## T5 — Computer `runs`
 
-When `HARNESS_COMPUTER` is set, `close.host.run_close_host` writes `$HARNESS_COMPUTER/runs/month_end` (period pack, prepaid, FA, BS, journals, identity links) and `$HARNESS_COMPUTER/workspace/close/<period>/`. RUN.md close demo exports that env. The Kernel shim still chdirs into `.cfo/` for imports; that chdir is not the office destination.
+When `HARNESS_COMPUTER` is set, `close.host.run_close_host` writes `$HARNESS_COMPUTER/runs/month_end` (period pack, prepaid, FA, BS, journals, identity links) and `$HARNESS_COMPUTER/workspace/close/packets/<period>.json`. RUN.md close demo exports that env. The Kernel shim still chdirs into `.cfo/` for imports; that chdir is not the office destination.
 
 ## T3 — lock reads gates
 

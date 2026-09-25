@@ -1,0 +1,19 @@
+{
+  "key": "col-send-inv-ar-he-4412",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "afdbd97dbc7f36fa3d4264334d962db61ab5316572d48477651a1842b91a3e74",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-msg-inv-ar-he-4412",
+      "thread_id": "col-inv-ar-he-4412",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_3abd8a3c4f9e"
+  }
+}

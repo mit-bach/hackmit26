@@ -1,0 +1,19 @@
+{
+  "id": "h_70627919-307e-40ca-a83c-9e9c2af8b047",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-002. It may be a bill in the body with no attachment. If Kernel can see a bill, Handle ap / prepare with the Kernel invoice id. If fields are incomplete, do not invent them. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not match. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:38:20.240Z",
+  "updatedAt": "2026-09-24T17:38:54.644Z",
+  "result": "### MSG-INBOX-002 done\n\n| Step | Result |\n| --- | --- |\n| **Message** | Figma · body-only bill (no attachment) · **FIG-INBOX-2002** · PO-107 · **USD 2,448.00** |\n| **Classify** | **`VENDOR_INVOICE`** → `CREATE_AP_INVOICE` (conf 0.9) · fields complete |\n| **Dispatch** | **CREATED** · Kernel id **`ING-005`** · match `EXCEPTION` (`missing_po`, `goods_not_received`) |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-002.json` |\n| **Handle → ap / prepare** | ACK `ING-005`; prepare `runs/ap/packets/ING-005.json`; HOLD; **not matched** |",
+  "resultPaths": [],
+  "seq": 86
+}

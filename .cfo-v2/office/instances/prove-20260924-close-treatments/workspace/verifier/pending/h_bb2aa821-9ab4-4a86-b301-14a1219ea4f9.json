@@ -1,0 +1,14 @@
+{
+  "id": "h_bb2aa821-9ab4-4a86-b301-14a1219ea4f9",
+  "status": "accepted",
+  "done": false,
+  "op": "accrual.tools.create_accrual",
+  "toSlug": "ctl-books",
+  "profile": "review-treatment",
+  "fromSlug": "close",
+  "packetPath": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/workspace/verifier/ctl-books/h_50c51ee6-c022-4d26-933d-1dcd5cc5afb2.json",
+  "handleStore": "harness",
+  "handlePath": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/harness/bots/bot_ctl_books/handles/h_bb2aa821-9ab4-4a86-b301-14a1219ea4f9.json",
+  "humanQueue": false,
+  "createdAt": "2026-09-24T21:18:56.746Z"
+}

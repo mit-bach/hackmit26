@@ -1,0 +1,15 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+September 2026 AP subledger tie
+Period: 2026-09
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: AP Preparer
+Reviewer: AP Reviewer
+Status: COMPLETE
+Prepared: 2026-09-03T16:40:00Z
+
+INV-001 three-way match to PO-101 / GR-101. Held items remain INV-003 through INV-010 as listed in the AP exceptions file. Dell INV-018 capitalized. Hartford INV-019 prepaid.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

@@ -1,0 +1,19 @@
+{
+  "id": "h_81441798-2454-4f65-b6b7-c76dbda7af0d",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "Operator check for collect",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:50.744Z",
+  "updatedAt": "2026-09-24T23:35:54.372Z",
+  "result": "Collect bot here — I own open invoices still owed after cash application (chase / dunning).\n\nReady for a chase step or status check. On wake I’ll load collection candidates via the kernel; if new deposits exist I hold for apply; otherwise I send an allowed dunning note and complete with `SENT` or `HOLD`.",
+  "resultPaths": [],
+  "seq": 124
+}

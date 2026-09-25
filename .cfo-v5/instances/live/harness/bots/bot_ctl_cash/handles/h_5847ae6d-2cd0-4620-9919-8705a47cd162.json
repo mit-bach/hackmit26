@@ -1,0 +1,19 @@
+{
+  "id": "h_5847ae6d-2cd0-4620-9919-8705a47cd162",
+  "from": "operator",
+  "to": "bot_ctl_cash",
+  "toSlug": "ctl-cash",
+  "prompt": "Operator check for ctl-cash",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ctl_cash"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:53.773Z",
+  "updatedAt": "2026-09-24T23:35:56.220Z",
+  "result": "ctl-cash here. Ready for review-rec or review-apply. Send a packet or item when you want a CONCUR/REFUSE.",
+  "resultPaths": [],
+  "seq": 128
+}

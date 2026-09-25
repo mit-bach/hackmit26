@@ -1,0 +1,19 @@
+{
+  "id": "h_15e8cf18-03a6-4c6e-af4d-0aeea1493e92",
+  "from": "bot_ap",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "profile: review-match\nOpen bill INV-001 match packet is APPROVE-shaped at runs/ap/packets/INV-001.json.\nThree-way match clean: INV-001 / PO-101 / GR-101 amount 12450, vendor Acme Supplies exact, PO approved, GR full, no duplicates, exception_types [].\nReview and concur or refuse. You own concurrence. AP does not pay.\nReply with your review outcome for INV-001 and what must happen next.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ap",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:00:18.466Z",
+  "updatedAt": "2026-09-24T18:00:56.722Z",
+  "result": "CONCUR on INV-001 review-match.\n\ndecision: CONCUR / proposed_action APPROVE\ncontract: ReviewerDecision\npath: runs/ap/concurrence/INV-001.json\nalso: runs/ap/decisions/INV-001-review-match.json\npacket: runs/ap/packets/INV-001.json\n\nKernel get_case_evidence (trace k_cc7d905d4005): amount 12450 exact vs PO-101 authorized_amount and GR-101 amount_received; vendor Acme Supplies exact; PO approved; GR full 15/15; duplicate_detected false; exception_types []; must_hold empty. Policies: P-001 may_approve (P-011/P-012 cited). Prior CASE-001 alias not needed (exact vendor). Packet complete; preparer APPROVE allowed. Past due days_until_due -2 is not a match hold.\n\nctl-pay does not pay. You may advance Kernel-allowed match status into the approved pool path per your grain. Payment-run release needs a separate review-pay wake from pay. Not a rubber stamp of human review.",
+  "seq": 5
+}

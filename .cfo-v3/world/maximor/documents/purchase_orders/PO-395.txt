@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-395
+PO Number: PO-395
+Issued: 2026-09-15
+Vendor: GitHub
+Vendor legal name: GitHub, Inc.
+Vendor tax ID: 94-3394628
+Authorized amount: 73.30
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+security monitoring hosts billed 2026-09-15
+
+This purchase order is not an invoice. The vendor must bill against PO-395.
+Payment terms follow the vendor master unless this order states otherwise.

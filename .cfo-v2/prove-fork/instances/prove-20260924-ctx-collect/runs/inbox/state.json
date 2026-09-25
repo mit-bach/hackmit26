@@ -1,0 +1,439 @@
+{
+  "messages": [
+    {
+      "message_id": "col-msg-inv-ar-003",
+      "thread_id": "col-inv-ar-003",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@heliosanalytics.example"
+      ],
+      "subject": "Overdue: INV-AR-003 outstanding $24,000.00",
+      "body_text": "Hello Helios Analytics AP,\n\nInvoice INV-AR-003 remains outstanding for $24,000.00. It was due 2026-08-20 and is 41 days past due as of 2026-09-30.\n\nPlease remit payment or confirm the expected date and any PO reference you need on the remittance.\n\nThank you,\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:01:00Z",
+      "received_at": "2026-09-30T16:01:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-003",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Helios Analytics AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-004",
+      "thread_id": "col-inv-ar-004",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@brightline.example"
+      ],
+      "subject": "Final notice: INV-AR-004 outstanding $31,000.00",
+      "body_text": "Hello Brightline Media AP,\n\nFinal notice: invoice INV-AR-004 remains outstanding for $31,000.00. It was due 2026-07-15 and is 77 days past due as of 2026-09-30.\n\nPlease pay the current outstanding of $31,000.00 immediately or reply with a firm pay date.\n\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:02:00Z",
+      "received_at": "2026-09-30T16:02:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-004",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Brightline Media AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-019",
+      "thread_id": "col-inv-ar-019",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@summit.example"
+      ],
+      "subject": "Overdue: INV-AR-019 outstanding $7,200.00",
+      "body_text": "Hello Summit Civic AP,\n\nInvoice INV-AR-019 remains outstanding for $7,200.00. It was due 2026-08-14 and is 47 days past due as of 2026-09-30.\n\nPlease remit payment or confirm a pay date.\n\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:05:00Z",
+      "received_at": "2026-09-30T16:05:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-019",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Summit Civic AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-018",
+      "thread_id": "col-inv-ar-018",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@copperline.example"
+      ],
+      "subject": "Gentle reminder: INV-AR-018 outstanding $9,600.00",
+      "body_text": "Hello Copperline Logistics AP,\n\nGentle reminder that invoice INV-AR-018 remains outstanding for $9,600.00. It was due 2026-09-19 and is 11 days past due as of 2026-09-30.\n\nPlease include this invoice on your next payment run.\n\nThank you,\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:04:00Z",
+      "received_at": "2026-09-30T16:04:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-018",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Copperline Logistics AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-002",
+      "thread_id": "col-inv-ar-002",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@acmeindustrial.example"
+      ],
+      "subject": "Gentle reminder: INV-AR-002 outstanding $8,500.00",
+      "body_text": "Hello Acme Industrial AP,\n\nThis is a gentle reminder that invoice INV-AR-002 remains outstanding for $8,500.00. It was due 2026-09-10 and is 20 days past due as of 2026-09-30.\n\nYou typically batch payments; please include this invoice in your next run.\n\nThank you,\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:00:00Z",
+      "received_at": "2026-09-30T16:00:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-002",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Acme Industrial AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-005",
+      "thread_id": "col-inv-ar-005",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@quietharbor.example"
+      ],
+      "subject": "Final notice: INV-AR-005 outstanding $45,000.00",
+      "body_text": "Hello Quiet Harbor AP,\n\nFinal notice after prior reminders: invoice INV-AR-005 remains outstanding for $45,000.00. It was due 2026-05-01 and is 152 days past due as of 2026-09-30. Last contact 2026-09-01.\n\nPlease remit $45,000.00 immediately or we will request internal review for reserve/write-off.\n\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:03:00Z",
+      "received_at": "2026-09-30T16:03:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-005",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Quiet Harbor AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-025",
+      "thread_id": "col-inv-ar-025",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@brightline.example"
+      ],
+      "subject": "Final notice: INV-AR-025 outstanding $27,500.00",
+      "body_text": "Hello Brightline Media AP,\n\nFinal notice: invoice INV-AR-025 remains outstanding for $27,500.00. It was due 2026-06-01 and is 121 days past due as of 2026-09-30.\n\nPlease pay $27,500.00 immediately or reply with a firm pay date. We also have INV-AR-004 at $31,000.00 still open.\n\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:08:00Z",
+      "received_at": "2026-09-30T16:08:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-025",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Brightline Media AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-024",
+      "thread_id": "col-inv-ar-024",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@atlasrobotics.example"
+      ],
+      "subject": "Gentle reminder: INV-AR-024 outstanding $8,900.00",
+      "body_text": "Hello Atlas Robotics AP,\n\nGentle reminder that invoice INV-AR-024 remains outstanding for $8,900.00. It was due 2026-09-27 and is 3 days past due as of 2026-09-30.\n\nPlease include it in your next batch if not already released.\n\nThank you,\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:07:00Z",
+      "received_at": "2026-09-30T16:07:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-024",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Atlas Robotics AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-020",
+      "thread_id": "col-inv-ar-020",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@redwood.example"
+      ],
+      "subject": "Final notice: INV-AR-020 outstanding $15,800.00",
+      "body_text": "Hello Redwood Clinics AP,\n\nFinal notice: invoice INV-AR-020 remains outstanding for $15,800.00. It was due 2026-07-10 and is 82 days past due as of 2026-09-30.\n\nYou are a strategic batch payer; please include this $15,800.00 in the next batch or reply with a firm date.\n\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:06:00Z",
+      "received_at": "2026-09-30T16:06:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-020",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Redwood Clinics AP"
+      }
+    },
+    {
+      "message_id": "col-msg-inv-ar-he-4412",
+      "thread_id": "col-inv-ar-he-4412",
+      "in_reply_to": null,
+      "sender_name": "Maximor Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@heliosanalytics.example"
+      ],
+      "subject": "Gentle reminder: INV-AR-HE-4412 outstanding $91,200.00",
+      "body_text": "Hello Helios Analytics AP,\n\nGentle reminder that invoice INV-AR-HE-4412 remains outstanding for $91,200.00. It was due 2026-09-14 and is 16 days past due as of 2026-09-30.\n\nPlease remit $91,200.00 or confirm the expected date. INV-AR-003 for $24,000.00 is also past due.\n\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:09:00Z",
+      "received_at": "2026-09-30T16:09:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-he-4412",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Helios Analytics AP"
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-002",
+      "thread_id": "col-inv-ar-002",
+      "in_reply_to": "col-msg-inv-ar-002",
+      "sender_name": "Acme Industrial AP",
+      "sender_address": "ap@acmeindustrial.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-002",
+      "body_text": "Hello Collections,\n\nThis is Accounts Payable at Acme Industrial. We received your 2026-09-30 notice on INV-AR-002 for $8,500.00.\n\nThe invoice is in our next batch. We typically settle about eight days after notice. Wire for the full $8,500.00 is scheduled for 2026-10-08. Remittance will cite INV-AR-002.\n\nRegards,\nAP \u2014 Acme Industrial\nap@acmeindustrial.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:00:00Z",
+      "received_at": "2026-09-30T16:00:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-002",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-004",
+      "thread_id": "col-inv-ar-004",
+      "in_reply_to": "col-msg-inv-ar-004",
+      "sender_name": "Brightline Media AP",
+      "sender_address": "ap@brightline.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-004",
+      "body_text": "Hello Collections,\n\nBrightline Media AP \u2014 we have your 2026-09-30 notice on INV-AR-004 for $31,000.00.\n\nThis invoice is approved. Payment of $31,000.00 is queued for 2026-10-12. Remittance will cite INV-AR-004.\n\nBrightline Media AP\nap@brightlinemedia.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:02:00Z",
+      "received_at": "2026-09-30T16:02:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-004",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-018",
+      "thread_id": "col-inv-ar-018",
+      "in_reply_to": "col-msg-inv-ar-018",
+      "sender_name": "Copperline Logistics AP",
+      "sender_address": "ap@copperline.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-018",
+      "body_text": "Hello Collections,\n\nCopperline Logistics AP confirming INV-AR-018 for $9,600.00 from your 2026-09-30 notice.\n\nInvoice is matched. Full $9,600.00 will go out 2026-10-07. Remittance will cite INV-AR-018.\n\nCopperline Logistics AP\nap@copperlinelogistics.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:04:00Z",
+      "received_at": "2026-09-30T16:04:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-018",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-019",
+      "thread_id": "col-inv-ar-019",
+      "in_reply_to": "col-msg-inv-ar-019",
+      "sender_name": "Summit Civic AP",
+      "sender_address": "ap@summit.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-019",
+      "body_text": "Hello Collections,\n\nSummit Civic AP \u2014 we have your 2026-09-30 notice on INV-AR-019 for $7,200.00.\n\nCouncil warrant is on the next cycle. We expect to pay $7,200.00 around 2026-10-16. Remittance will cite INV-AR-019.\n\nSummit Civic AP\nap@summitcivic.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:05:00Z",
+      "received_at": "2026-09-30T16:05:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-019",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-025",
+      "thread_id": "col-inv-ar-025",
+      "in_reply_to": "col-msg-inv-ar-025",
+      "sender_name": "Brightline Media AP",
+      "sender_address": "ap@brightline.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-025",
+      "body_text": "Hello Collections,\n\nBrightline Media AP \u2014 second notice thread on INV-AR-025 for $27,500.00 dated 2026-09-30.\n\nINV-AR-025 is approved separately from INV-AR-004. Payment of $27,500.00 is queued for 2026-10-12. Remittance will cite INV-AR-025.\n\nBrightline Media AP\nap@brightlinemedia.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:08:00Z",
+      "received_at": "2026-09-30T16:08:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-025",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-005",
+      "thread_id": "col-inv-ar-005",
+      "in_reply_to": "col-msg-inv-ar-005",
+      "sender_name": "Quiet Harbor AP",
+      "sender_address": "ap@quietharbor.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-005",
+      "body_text": "Hello Collections,\n\nQuiet Harbor AP received your 2026-09-30 notice on INV-AR-005 for $45,000.00.\n\nWe acknowledge the balance. Treasury will release $45,000.00 around 2026-10-18. Please hold further dunning until then. Remittance will cite INV-AR-005.\n\nQuiet Harbor AP\nap@quietharbor.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:03:00Z",
+      "received_at": "2026-09-30T16:03:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-005",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-020",
+      "thread_id": "col-inv-ar-020",
+      "in_reply_to": "col-msg-inv-ar-020",
+      "sender_name": "Redwood Clinics AP",
+      "sender_address": "ap@redwood.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-020",
+      "body_text": "Hello Collections,\n\nRedwood Clinics AP confirming your 2026-09-30 notice on INV-AR-020 for $15,800.00.\n\nThis will be in our next batch, typically about four days. Wire for $15,800.00 is set for 2026-10-04. Remittance will cite INV-AR-020.\n\nRedwood Clinics AP\nap@redwoodclinics.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:06:00Z",
+      "received_at": "2026-09-30T16:06:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-020",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-003",
+      "thread_id": "col-inv-ar-003",
+      "in_reply_to": "col-msg-inv-ar-003",
+      "sender_name": "Helios Analytics AP",
+      "sender_address": "ap@heliosanalytics.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-003",
+      "body_text": "Hello Collections,\n\nHelios Analytics AP confirming receipt of your 2026-09-30 dunning on INV-AR-003 for $24,000.00.\n\nCash is tight this cycle. We will pay the full $24,000.00 on or about 2026-10-24 (our usual ~24-day lag). Please do not escalate before that date. Remittance will cite INV-AR-003.\n\nHelios Analytics AP\nap@heliosanalytics.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:01:00Z",
+      "received_at": "2026-09-30T16:01:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-003",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-024",
+      "thread_id": "col-inv-ar-024",
+      "in_reply_to": "col-msg-inv-ar-024",
+      "sender_name": "Atlas Robotics AP",
+      "sender_address": "ap@atlasrobotics.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-024",
+      "body_text": "Hello Collections,\n\nAtlas Robotics AP received your 2026-09-30 notice on INV-AR-024 for $8,900.00.\n\nBatch payment of $8,900.00 is scheduled 2026-10-03. Remittance will cite INV-AR-024.\n\nAtlas Robotics AP\nap@atlasrobotics.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:07:00Z",
+      "received_at": "2026-09-30T16:07:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-024",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "cust-reply-inv-ar-he-4412",
+      "thread_id": "col-inv-ar-he-4412",
+      "in_reply_to": "col-msg-inv-ar-he-4412",
+      "sender_name": "Helios Analytics AP",
+      "sender_address": "ap@heliosanalytics.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Past due invoice INV-AR-HE-4412",
+      "body_text": "Hello Collections,\n\nHelios Analytics AP confirming your 2026-09-30 notice on INV-AR-HE-4412 for $91,200.00.\n\nWe acknowledge the large balance. Full $91,200.00 will follow our chronic lag, target 2026-10-24, separate from INV-AR-003. Please do not escalate before that date. Remittance will cite INV-AR-HE-4412.\n\nHelios Analytics AP\nap@heliosanalytics.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:09:00Z",
+      "received_at": "2026-09-30T16:09:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "col-msg-inv-ar-he-4412",
+      "metadata": {
+        "reply": true
+      }
+    }
+  ],
+  "outcomes": {},
+  "invoice_ids": [],
+  "canonicals": [],
+  "notices": [],
+  "traces": []
+}

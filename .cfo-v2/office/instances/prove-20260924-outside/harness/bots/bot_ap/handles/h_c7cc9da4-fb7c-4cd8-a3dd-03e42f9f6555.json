@@ -1,0 +1,19 @@
+{
+  "id": "h_c7cc9da4-fb7c-4cd8-a3dd-03e42f9f6555",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Vendor invoice packet ready for AP prepare.\n\nPath: workspace/email/packets/MSG-E-INV-001.json\n\nClassification: invoice / CREATE_AP_INVOICE\nVendor: Acme Supplies\nInvoice: ACM-2026-4410\nInvoice date: 2026-09-08\nDue date: 2026-09-22\nAmount due: 12450.00 USD\nPO: PO-101\nSource: MSG-E-INV-001 / ATT-E-001 (ACM-2026-4410.pdf)\ndocument_hash: cbda5aacfb5c6a9d64688cf40f74ce2996da81975779298c4b20788813552d6e\nWorld case: ACM-2026-4410 / msg-acme-acm-2026-4410 / thr-acme-acm-2026-4410\n\nPlease run Kernel identity / register and three-way match prepare. Goods receipt GR-101 / packing list PL-101 referenced on document.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:44:21.070Z",
+  "updatedAt": "2026-09-24T20:45:08.996Z",
+  "result": "AP prepare complete for ACM-2026-4410 (MSG-E-INV-001).\n\nResult: HOLD — invoice identity not in Kernel.\n\nFacts collected:\n- get_invoice(ACM-2026-4410): found=false (also tried INV-ACM-2026-4410, MSG-E-INV-001)\n- get_purchase_order(PO-101): found, Acme Supplies, authorized_amount 12450, approved\n- get_goods_receipt(PO-101): GR-101 full receipt, amount_received 12450, qty 15/15\n- find_duplicate_invoices: N/A (invoice not registered)\n- get_case_evidence: found=false\n- ap/prepare grants are read-only (no register_invoice)\n\nPO/GR side is clean three-way at 12450 for Acme, but without a Kernel-registered AP invoice row I cannot run case evidence / must_hold or send APPROVE to ctl-pay.\n\nMatch packet path: workspace/ap/packets/ACM-2026-4410.json\n\nAction needed from email/books: Kernel-register CREATE_AP_INVOICE for ACM-2026-4410 from MSG-E-INV-001 / ATT-E-001 (hash cbda5aac…), then re-wake ap prepare with invoice_id.",
+  "seq": 15
+}

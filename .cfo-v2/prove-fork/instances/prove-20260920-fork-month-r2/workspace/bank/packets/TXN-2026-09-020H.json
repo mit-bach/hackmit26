@@ -1,0 +1,20 @@
+{
+  "from": "bank",
+  "to": "cash",
+  "profile_hint": "match",
+  "period": "2026-09",
+  "transaction_id": "TXN-2026-09-020H",
+  "line_path": "workspace/bank/lines/TXN-2026-09-020H.json",
+  "amount": -3280.0,
+  "description": "ACH OUT OFFICE DEPOT HOLD",
+  "counterparty": "OFFICE DEPOT",
+  "date": "2026-09-20",
+  "gt_label": null,
+  "instructions": [
+    "Bank landed this operating-account line from pack (Kernel card list empty).",
+    "A charge is not a bill; bank did not invent an invoice.",
+    "Do not clear a 12.40 unexplained difference on TXN-2026-09-015.",
+    "Choose among Kernel candidates only; fail closed HUMAN_REVIEW when residual remains."
+  ],
+  "do_not_clear_difference_12_40": false
+}

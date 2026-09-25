@@ -1,0 +1,25 @@
+{
+  "message_id": "MSG-INBOX-015",
+  "thread_id": "THR-unknown-vendor",
+  "classification": "VENDOR_INVOICE",
+  "selected_action": "CREATE_AP_INVOICE",
+  "invoice_id": "ING-004",
+  "canonical_id": "ING-004",
+  "vendor_name": "Nimbus Analytics LLC",
+  "vendor_id": null,
+  "invoice_number": "NIM-INBOX-8008",
+  "amount_cents": 99000,
+  "currency": "USD",
+  "invoice_date": "2026-09-18",
+  "due_date": "2026-10-18",
+  "reason_codes": [
+    "AP_INVOICE_CREATED",
+    "UNKNOWN_VENDOR"
+  ],
+  "match_status": "NON_PO",
+  "validation_warnings": [
+    "unknown_vendor:Nimbus Analytics LLC",
+    "missing_po"
+  ],
+  "note": "Unknown vendor; no vendor master created. Bill landed as ING-004 for AP prepare."
+}

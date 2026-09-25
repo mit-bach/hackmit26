@@ -1,0 +1,19 @@
+{
+  "id": "h_6635928e-b071-4478-8dfc-ec63d79dd35f",
+  "from": "bot_stripe",
+  "to": "bot_apply",
+  "toSlug": "apply",
+  "prompt": "profile: apply\nCharge-level facts from Stripe payouts. invoice_candidates=0. Do not apply in Bot stripe. Never AP invoice.\n\nPaths:\n- workspace/stripe/charges/po_1MaximorFees.json — ORD-2101 800000, ORD-2102 500000 minor; fee fee-fees -39000\n- workspace/stripe/charges/po_1MaximorRefunds.json — ORD-2201 400000; refund re_2201 -50000; fee fee-ref -12000\n- workspace/stripe/charges/po_1MaximorDisputes.json — ORD-2301 600000; chargeback dp_2301 -75000; fee fee-dp -18000\nAlso full packets under workspace/sources/stripe/.\n\nConfirm receipt and next apply action on open invoices.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_stripe",
+    "toId": "bot_apply"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:51:00.796Z",
+  "updatedAt": "2026-09-24T17:51:22.238Z",
+  "result": "Receipt confirmed for Stripe charge-level facts (never AP invoice; apply not done in stripe).\n\nPayouts seen:\n- po_1MaximorFees: ORD-2101 800000, ORD-2102 500000 minor; fee-fees -39000; invoice_candidates=0\n- po_1MaximorRefunds: ORD-2201 400000; re_2201 -50000; fee-ref -12000; invoice_candidates=0\n- po_1MaximorDisputes: ORD-2301 600000; dp_2301 -75000; fee-dp -18000; invoice_candidates=0\n\nKernel get_cash_application_facts on payout/charge ids → all Unknown payment, zero candidates. No CashApplicationProposal; nothing posted to open invoices. Processor fees/refunds/chargebacks are not applied as AR cash here.\n\nStatus: runs/ar/packets/stripe-payouts-apply-status.json. Next action: idle until Kernel surfaces an AR payment with candidates (bank/remittance path). Do not invent applications from ORD-* alone.",
+  "seq": 133
+}

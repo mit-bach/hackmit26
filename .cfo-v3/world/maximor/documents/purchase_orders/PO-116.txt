@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-116
+PO Number: PO-116
+Issued: 2026-09-12
+Vendor: GitHub
+Vendor legal name: GitHub, Inc.
+Vendor tax ID: 94-3394628
+Authorized amount: 21,000.00
+Currency: USD
+Approver: Marcus Chen
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Enterprise seats
+
+This purchase order is not an invoice. The vendor must bill against PO-116.
+Payment terms follow the vendor master unless this order states otherwise.

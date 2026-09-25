@@ -1,0 +1,39 @@
+Ginkgo Partners
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@ginkgopartners.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: GIN-2026-09-0039
+Invoice Date: 2026-09-13
+Due Date: 2026-10-13
+PO Number: PO-339
+Payment Terms: net 30
+Currency: USD
+Vendor: Ginkgo Partners
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+security monitoring hosts billed 2026-09-13    1.00         48.65         48.65
+
+Subtotal                                                                 48.65
+Tax                                                                       0.00
+Amount Due                                                               48.65
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice GIN-2026-09-0039 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@ginkgopartners.example

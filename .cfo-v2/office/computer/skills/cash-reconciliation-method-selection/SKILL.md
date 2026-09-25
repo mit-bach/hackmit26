@@ -12,15 +12,15 @@ Pick one Kernel `candidate_id` for an unmatched bank line, or send the line to `
 
 ## When to Use
 
-Wear this as Bot `cash` Profile `match` after `get_match_candidates` returns. Do not use it to rebuild the candidate engine.
+Wear this as Bot `cash` Profile `match` after the case evidence returns. Do not use it to rebuild the candidate engine.
 
 ## Inputs / Evidence
 
-Authoritative Kernel fields: `candidate_id`, `match_type`, `difference_minor`, `fee_evidence_ids`, `provider_status`. Authoritative pipe fields: `get_pipe_identifier`. Bank description is a memo, not an identity. Memory of a processor payout label is color. It is not fee evidence.
+Authoritative Kernel fields: `candidate_id`, `match_type`, `difference_minor`, `fee_evidence_ids`, `provider_status`. Authoritative pipe fields: the identifier apply or pay already wrote. Bank description is a memo, not an identity. Memory of a processor payout label is color. It is not fee evidence.
 
 ## Procedure
 
-Call `get_pipe_identifier`. If apply or pay already named the counterparty, copy that identity and pick the candidate that uses it. Do not pick a second customer or vendor because the memo is messy. If the identifier is missing, fail closed. Handle `ctl-cash`. Do not scrape a name from the description to look done.
+Load the match candidates and the pipe identifier. If apply or pay already named the counterparty, copy that identity and pick the candidate that uses it. Do not pick a second customer or vendor because the memo is messy. If the identifier is missing, fail closed. Handle `ctl-cash`. Do not scrape a name from the description to look done.
 
 Copy amounts by citing `candidate_id`. If the residual has no Kernel fee evidence, leave it unexplained.
 

@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-HAL-WKND-2026-06
+PO Number: PO-HAL-WKND-2026-06
+Issued: 2026-06-28
+Vendor: Halyard Facilities LLC
+Vendor legal name: Halyard Facilities LLC
+Vendor tax ID: 88-2204419
+Authorized amount: 2,300.00
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Weekend coverage 1099
+
+This purchase order is not an invoice. The vendor must bill against PO-HAL-WKND-2026-06.
+Payment terms follow the vendor master unless this order states otherwise.

@@ -1,0 +1,39 @@
+Datadog, Inc.
+620 8th Avenue, 45th Floor
+New York, NY 10018
+Phone +1 866-329-4466   billing@datadog.example
+Tax ID 27-2825225
+
+INVOICE
+
+Invoice Number: OPEN-0006
+Invoice Date: 2026-09-07
+Due Date: 2026-10-07
+PO Number: PO-OPEN-006
+Payment Terms: net 30
+Currency: USD
+Vendor: Datadog
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    180,823.08    180,823.08
+
+Subtotal                                                            180,823.08
+Tax                                                                       0.00
+Amount Due                                                          180,823.08
+
+Remit to:
+ACH Chase routing 021000021  account ****9021
+Bank: JPMorgan Chase  ****9021
+Please include invoice OPEN-0006 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@datadog.example

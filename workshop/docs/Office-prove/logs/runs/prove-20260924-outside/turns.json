@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "world",
+    "status": "completed",
+    "handle": "h_c718fddc-f5c1-41fa-b2c7-17f3f8ca5e91",
+    "result": "**Acme Supplies \u2014 done**\n\nInbound mail delivered and classified by email.\n\n| Field | Value |\n| --- | --- |\n| Invoice | **ACM-2026-4410** |\n| Amount | **$12,450.00** USD |\n| PO | **101** / PO-101 |\n| Goods | Shipped and delivered (vendor confirmation in body) |\n| From | Acme Supplies `<billing@acmesupplies.example>` |\n| To | `ap@hackmit-cfo.example` |\n| message_id | `msg-acme-acm-2026-4410` |\n| thread_id | `thr-acme-acm-2026-4410` |\n\n**Email triage:** `VENDOR_INVOICE` \u2192 `CREATE_AP_INVOICE`  \nPack"
+  },
+  {
+    "slug": "world",
+    "status": "completed",
+    "handle": "h_82db599c-9d8f-4812-89eb-b4846ac2c647",
+    "result": "**Northwind Labs \u2014 done**\n\nPayment-intent note delivered and classified. No cash applied. No period close.\n\n| Field | Value |\n| --- | --- |\n| Customer | Northwind Labs (CUST-001) `ap@northwind.example` |\n| Invoice | **INV-AR-007** |\n| Amount | **$12,000.00** full |\n| When | **ACH on 2026-09-30** (due date; on_time habit) |\n| Dispute | None |\n| Thread | `thr-northwind-inv-ar-007` |\n| message_id | `msg-northwind-pay-intent-inv-ar-007` |\n\nAlso noted (not paid in this note): INV-AR-001 $12k due 2026"
+  },
+  {
+    "slug": "world",
+    "status": "completed",
+    "handle": "h_847947c2-0a65-4ea1-a606-4a7f02593771",
+    "result": "**First National Operating \u2014 done**\n\nSeptember operating-account statement notice delivered and classified. No lines matched. No $12.40 story.\n\n| Field | Value |\n| --- | --- |\n| Bank | First National Operating `notices@firstnational.example` |\n| Notice | September 2026 statement available (01\u201330 Sep) |\n| Type | Bank statement notice only \u2014 **not** a vendor bill |\n| Payment | None requested |\n| Thread | `thr-fno-stmt-2026-09` |\n| message_id | `msg-fno-stmt-2026-09` |\n| case_id | `STMT-OP-2026-09`"
+  },
+  {
+    "slug": "email",
+    "status": "completed",
+    "handle": "h_3e4b6245-d4e1-431d-b363-1be0edfed36b",
+    "result": "## Classification summary (already triaged; no match / pay / close)\n\n### 1. Acme Supplies \u2014 **vendor bill \u2192 AP**\n| | |\n| --- | --- |\n| **Ids** | World `msg-acme-acm-2026-4410` \u2192 catalog `MSG-E-INV-001` / `ATT-E-001` |\n| **Class** | `invoice` / CREATE_AP_INVOICE |\n| **Fields** | Acme Supplies \u00b7 **ACM-2026-4410** \u00b7 2026-09-08 \u00b7 due 2026-09-22 \u00b7 **$12,450.00 USD** \u00b7 PO-101 |\n| **Packet** | `workspace/email/packets/MSG-E-INV-001.json` |\n| **Handoff** | **ap** (prepare). ERP identity via books: **NS-"
+  }
+]

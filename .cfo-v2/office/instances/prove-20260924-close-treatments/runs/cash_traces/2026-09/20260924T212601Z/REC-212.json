@@ -1,0 +1,262 @@
+{
+  "reconciliation_id": "REC-212",
+  "period": "2026-09",
+  "match_type": "UNEXPLAINED_DIFFERENCE",
+  "status": "HUMAN_REVIEW",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-LUM-2026-09",
+      "date": "2026-09-23",
+      "amount": 31131.1,
+      "currency": "USD",
+      "description": "ACH IN LUMEN LABS INV-AR-LUM-2026-09",
+      "reference": "TXN-LUM-2026-09",
+      "counterparty": "LUMEN LABS PBC",
+      "transaction_type": "ach_credit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": 3113110,
+      "raw_metadata": {
+        "plant": true
+      }
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-TXN-LUM-2026-09",
+      "date": "2026-09-23",
+      "amount": 31100.0,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "LUMEN LABS PBC",
+      "reference": "TXN-LUM-2026-09",
+      "description": "ACH IN LUMEN LABS INV-AR-LUM-2026-09",
+      "entry_type": "ar_receipt",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": 3110000,
+      "raw_metadata": {
+        "bank_id": "TXN-LUM-2026-09"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-LUM-2026-09:GL-TXN-LUM-2026-09",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-LUM-2026-09"
+      ],
+      "ledger_entry_ids": [
+        "GL-TXN-LUM-2026-09"
+      ],
+      "bank_amount": 31131.1,
+      "ledger_amount": 31100.0,
+      "difference": 31.1,
+      "bank_amount_minor": 3113110,
+      "ledger_amount_minor": 3110000,
+      "difference_minor": 3110,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:3113110",
+        "ledger_amount:3110000",
+        "difference:3110",
+        "rounding_rejected:difference_not_one_cent",
+        "fee_rejected:no_fee_evidence",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": 3113110,
+    "ledger_amount_minor": 3110000,
+    "difference_minor": 3110,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-LUM-2026-09:GL-TXN-LUM-2026-09",
+    "selected_candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-LUM-2026-09:GL-TXN-LUM-2026-09",
+    "disposition": "HUMAN_REVIEW",
+    "confidence": 0.2,
+    "reasons": [
+      "Unexplained difference: $31.10"
+    ],
+    "evidence_used": [
+      "bank_amount:3113110",
+      "ledger_amount:3110000",
+      "difference:3110",
+      "rounding_rejected:difference_not_one_cent",
+      "fee_rejected:no_fee_evidence",
+      "no_fx_evidence",
+      "no_partial_payment_remittance"
+    ],
+    "review_question": "Requires human review"
+  },
+  "investigation": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-LUM-2026-09:GL-TXN-LUM-2026-09",
+    "issues_investigated": [
+      "UNEXPLAINED_DIFFERENCE",
+      "fee",
+      "rounding",
+      "foreign_exchange",
+      "partial_payment",
+      "duplicate_or_missing",
+      "timing_difference"
+    ],
+    "findings": [
+      "Unexplained difference: $31.10",
+      "Checked fee, rounding, FX, partial payment, duplicate/missing entry, and timing. No evidence supports an explanation.",
+      "Checked fee, rounding, FX, partial payment, duplicate/missing entry, and timing against current evidence."
+    ],
+    "supported_explanations": [],
+    "unsupported_hypotheses": [
+      "fee",
+      "rounding",
+      "foreign_exchange",
+      "partial_payment",
+      "duplicate_or_missing",
+      "timing_difference"
+    ],
+    "recommendation": "HUMAN_REVIEW",
+    "confidence": 0.2,
+    "human_review": true,
+    "evidence_used": [
+      "bank_amount:3113110",
+      "ledger_amount:3110000",
+      "difference:3110",
+      "rounding_rejected:difference_not_one_cent",
+      "fee_rejected:no_fee_evidence",
+      "no_fx_evidence",
+      "no_partial_payment_remittance"
+    ]
+  },
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": true,
+    "reasons": [
+      "unexplained_difference",
+      "requires_human_review"
+    ]
+  },
+  "reviewer": {
+    "case_id": "UNEXPLAINED_DIFFERENCE:TXN-LUM-2026-09:GL-TXN-LUM-2026-09",
+    "reviewer_status": "HUMAN_REVIEW",
+    "disposition": "HUMAN_REVIEW",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "unexplained_difference",
+      "requires_human_review"
+    ],
+    "arithmetic_ok": true,
+    "human_review": true
+  },
+  "final": {
+    "reconciliation_id": "REC-212",
+    "period": "2026-09",
+    "match_key": "b78138224e8946cb",
+    "bank_transaction_ids": [
+      "TXN-LUM-2026-09"
+    ],
+    "ledger_entry_ids": [
+      "GL-TXN-LUM-2026-09"
+    ],
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "bank_amount": 31131.1,
+    "ledger_amount": 31100.0,
+    "difference": 31.1,
+    "bank_amount_minor": 3113110,
+    "ledger_amount_minor": 3110000,
+    "difference_minor": 3110,
+    "confidence": 0.2,
+    "status": "HUMAN_REVIEW",
+    "explanation": "Unexplained difference: $31.10",
+    "evidence": [
+      "bank_amount:3113110",
+      "ledger_amount:3110000",
+      "difference:3110",
+      "rounding_rejected:difference_not_one_cent",
+      "fee_rejected:no_fee_evidence",
+      "no_fx_evidence",
+      "no_partial_payment_remittance"
+    ],
+    "control_findings": [
+      "UNEXPLAINED_DIFFERENCE"
+    ],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "HUMAN_REVIEW",
+    "human_review": true,
+    "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-LUM-2026-09:GL-TXN-LUM-2026-09",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": 3113110,
+      "ledger_amount_minor": 3110000,
+      "difference_minor": 3110,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": true,
+  "evidence": [
+    "bank_amount:3113110",
+    "ledger_amount:3110000",
+    "difference:3110",
+    "rounding_rejected:difference_not_one_cent",
+    "fee_rejected:no_fee_evidence",
+    "no_fx_evidence",
+    "no_partial_payment_remittance"
+  ],
+  "control_findings": [
+    "UNEXPLAINED_DIFFERENCE"
+  ],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "memory_lookup": {
+    "queried": true,
+    "memory_enabled": true,
+    "query": {
+      "workflow": "cash_reconciliation",
+      "entity_type": null,
+      "entity_id": null,
+      "situation_type": null,
+      "tags": [
+        "cash_reconciliation",
+        "unexplained_difference"
+      ],
+      "accounting_category": null,
+      "prior_to_period": "2026-09",
+      "exclude_period": "2026-09",
+      "limit": 5
+    },
+    "retrieved": [],
+    "precedents": [],
+    "precedent_used": false,
+    "precedent_relevance": null,
+    "current_evidence_checked": true,
+    "evidence_supports_precedent": null,
+    "deviation": null,
+    "decision": "HUMAN_REVIEW",
+    "investigation_steps": 13,
+    "skipped_hypotheses": []
+  },
+  "written_memory_id": null,
+  "trace_path": null
+}

@@ -1,0 +1,22 @@
+{
+  "op": "accrual.tools.create_accrual",
+  "args": {
+    "vendor": "Aether Compute",
+    "period": "2026-09",
+    "method": "usage_run_rate",
+    "confidence": 0.95,
+    "evidence": [
+      "usage 142000 gb_hours @ 0.08345",
+      "monthly cadence 6 months",
+      "no 2026-09 invoice"
+    ],
+    "reasoning_summary": "Kernel usage_run_rate; ctl-books CONCUR"
+  },
+  "fromSlug": "close",
+  "fromProfile": "accrue",
+  "verifier": "ctl-books",
+  "verifierProfile": "review-treatment",
+  "idempotencyKey": "accrual-2026-09-aether-compute",
+  "createdAt": "2026-09-24T21:37:49.723Z",
+  "humanQueue": false
+}

@@ -1,0 +1,14 @@
+{
+  "id": "pay:INV-001",
+  "workflow": "pay_run",
+  "step": "schedule",
+  "owner": "pay",
+  "facts": {
+    "invoice_id": "INV-001",
+    "amount": 12450,
+    "po_id": "PO-101",
+    "receipt_id": "GR-101"
+  },
+  "pendingWrite": null,
+  "history": []
+}

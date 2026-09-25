@@ -1,0 +1,43 @@
+{
+  "invoice_id": "ACM-2026-4410",
+  "profile": "prepare",
+  "source_packet": "workspace/email/packets/MSG-E-INV-001.json",
+  "status": "BLOCKED_IDENTITY",
+  "reason": "Kernel get_invoice returned found=false; no register_invoice grant on ap/prepare. Cannot invent invoice row.",
+  "po": {
+    "po_id": "PO-101",
+    "vendor": "Acme Supplies",
+    "authorized_amount": 12450,
+    "status": "approved",
+    "po_exists": true,
+    "po_is_approved": true
+  },
+  "goods_receipt": {
+    "receipt_id": "GR-101",
+    "po_id": "PO-101",
+    "received": true,
+    "amount_received": 12450,
+    "quantity_ordered": 15,
+    "quantity_received": 15,
+    "receipt_status": "full",
+    "goods_fully_received": true
+  },
+  "email_claimed": {
+    "vendor": "Acme Supplies",
+    "invoice": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "amount_due": 12450.0,
+    "currency": "USD",
+    "po": "PO-101",
+    "document_hash": "cbda5aacfb5c6a9d64688cf40f74ce2996da81975779298c4b20788813552d6e",
+    "source": "MSG-E-INV-001 / ATT-E-001"
+  },
+  "PreparerRecommendation": {
+    "recommendation": "HOLD",
+    "exception_types": ["INVOICE_NOT_REGISTERED"],
+    "evidence_used": ["PO-101", "GR-101", "MSG-E-INV-001"],
+    "reason": "PO-101 and GR-101 are clean full match at 12450 USD for Acme Supplies, but Kernel has no invoice ACM-2026-4410. AP prepare cannot APPROVE without registered invoice identity and case evidence."
+  },
+  "proposed_action": "HOLD"
+}

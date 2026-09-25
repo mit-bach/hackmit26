@@ -60,6 +60,84 @@
         "name": "AP",
         "color": "cyan"
       }
+    },
+    {
+      "id": "h_1b8778d1-8d37-44db-9833-6e0a246ae509",
+      "handleId": "h_1b8778d1-8d37-44db-9833-6e0a246ae509",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: prepare\nEmail landed vendor bill MSG-INBOX-015 as Kernel invoice ING-004 (NIM-INBOX-8008, Nimbus Analytics LLC, USD 990.00). Vendor may be unknown — do not create vendor master from this handoff. Prepare only; do not match; do not pay. Packet path: runs/inbox/packets/MSG-INBOX-015.json. Acknowledge invoice_id ING-004 found.",
+      "at": 1790271293565,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_1b8778d1-8d37-44db-9833-6e0a246ae509",
+      "handleId": "h_1b8778d1-8d37-44db-9833-6e0a246ae509",
+      "role": "bot",
+      "kind": "text",
+      "text": "ACK invoice_id ING-004 found (tools.get_invoice ok). Source MSG-INBOX-015 / NIM-INBOX-8008 / Nimbus Analytics LLC / USD 990.00. Prepare only: packet runs/ap/packets/ING-004.json. Kernel exception_types missing_po; unknown vendor (vendor_id null); no vendor master created. proposed HOLD; not matched; not paid; no ctl-pay handoff.",
+      "at": 1790271315664,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "h_28d4cb35-3699-4932-9196-41acc1505c9f",
+      "handleId": "h_28d4cb35-3699-4932-9196-41acc1505c9f",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: prepare\nEmail landed body-only vendor bill MSG-INBOX-002 as Kernel invoice ING-005 (FIG-INBOX-2002, Figma, PO-107, USD 2448.00). Packet: runs/inbox/packets/MSG-INBOX-002.json. Prepare only; do not match; do not pay. Acknowledge invoice_id ING-005 found.",
+      "at": 1790271516727,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_28d4cb35-3699-4932-9196-41acc1505c9f",
+      "handleId": "h_28d4cb35-3699-4932-9196-41acc1505c9f",
+      "role": "bot",
+      "kind": "text",
+      "text": "ACK invoice_id ING-005 found (tools.get_invoice ok). Source MSG-INBOX-002 / FIG-INBOX-2002 / Figma / PO-107 cited / USD 2448.00 (body-only). Prepare only: packet runs/ap/packets/ING-005.json. Kernel exception_types missing_po + goods_not_received (po_exists false despite PO-107 on invoice; receipt_status missing). No duplicates. proposed HOLD; not matched; not paid; no ctl-pay handoff.",
+      "at": 1790271531486,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "h_0d77bcdd-37ba-4750-b856-cb06e0638cbe",
+      "handleId": "h_0d77bcdd-37ba-4750-b856-cb06e0638cbe",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: prepare\nEmail landed vendor reply MSG-INBOX-011R on THR-incomplete (completes MSG-INBOX-011 missing fields) as Kernel invoice ING-006 (ACM-INBOX-5005, Acme Supplies, USD 1245.00). Packet: runs/inbox/packets/MSG-INBOX-011R.json. Prepare only; do not match; do not pay. Acknowledge invoice_id ING-006 found.",
+      "at": 1790271729001,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_0d77bcdd-37ba-4750-b856-cb06e0638cbe",
+      "handleId": "h_0d77bcdd-37ba-4750-b856-cb06e0638cbe",
+      "role": "bot",
+      "kind": "text",
+      "text": "ACK invoice_id ING-006 found (tools.get_invoice ok). Source MSG-INBOX-011R on THR-incomplete (completes MSG-INBOX-011) / ACM-INBOX-5005 / Acme Supplies / USD 1245.00. Prepare only: packet runs/ap/packets/ING-006.json. Kernel exception_types missing_po; receipt not_applicable; no duplicates; days_until_due -6. proposed HOLD; not matched; not paid; no ctl-pay handoff.",
+      "at": 1790271741501,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
     }
   ]
 }

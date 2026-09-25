@@ -1,0 +1,22 @@
+{
+  "op": "accrual.tools.create_accrual",
+  "args": {
+    "vendor": "CleanSpace Facilities",
+    "period": "2026-09",
+    "method": "contract_commitment",
+    "confidence": 0.99,
+    "evidence": [
+      "CTR-CS-001 monthly $2400",
+      "5-month billing cadence",
+      "no 2026-09 invoice"
+    ],
+    "reasoning_summary": "Fixed monthly contract commitment; invoice not yet received. ctl-books CONCUR."
+  },
+  "fromSlug": "close",
+  "fromProfile": "accrue",
+  "verifier": "ctl-books",
+  "verifierProfile": "review-treatment",
+  "idempotencyKey": "accrual-2026-09-cleanspace",
+  "createdAt": "2026-09-24T21:34:14.609Z",
+  "humanQueue": false
+}

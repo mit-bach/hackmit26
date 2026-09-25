@@ -1,0 +1,63 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "prepare",
+  "source": {
+    "erp_system": "NetSuite",
+    "record_id": "NS-4410",
+    "vendor_invoice_number": "ACM-2026-4410",
+    "operator_wake": true,
+    "note": "Open bill INV-001 prepare under operator DM; same economic event as NS-4410 / ING-001."
+  },
+  "kernel_evidence": {
+    "invoice_amount": 12450,
+    "po_id": "PO-101",
+    "po_authorized_amount": 12450,
+    "receipt_id": "GR-101",
+    "amount_received": 12450,
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "amount_matches": true,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": true,
+    "vendors_are_similar": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": [],
+    "days_until_due": -2,
+    "invoice_dated_before_po": false
+  },
+  "policies": {
+    "loaded": false,
+    "note": "Profile prepare grant has no policy Catalog ops; policy tools reserved for investigate."
+  },
+  "PreparerRecommendation": {
+    "action": "APPROVE",
+    "exception_types": [],
+    "evidence_used": [
+      "INV-001",
+      "PO-101",
+      "GR-101",
+      "tools.get_invoice",
+      "tools.get_case_evidence",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices"
+    ],
+    "reason": "INV-001 Acme Supplies ACM-2026-4410 USD 12450. PO-101 approved authorized 12450 (Jordan Hale). GR-101 full received 12450 qty 15/15. amount_matches diff 0; vendor_exact_match; duplicate_detected false; exception_types []. Clean three-way match. Propose APPROVE for ctl-pay review-match. ap does not pay or concur."
+  },
+  "proposed": "APPROVE",
+  "approve_shaped": true,
+  "ctl_pay_handoff": {
+    "status": "terminal",
+    "verifier": "ctl-pay",
+    "profile": "review-match",
+    "outcome": "ALLOW",
+    "action": "APPROVE",
+    "must_hold": [],
+    "decision_path": "runs/ap/decisions/INV-001-review-match.json"
+  },
+  "packet_path": "runs/ap/packets/INV-001.json"
+}

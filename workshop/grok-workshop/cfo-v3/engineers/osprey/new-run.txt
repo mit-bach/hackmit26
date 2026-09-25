@@ -1,0 +1,15 @@
+▶ Verifier concurrence binds the call's arguments
+  ✔ CONCUR on args A does not unlock args B with the same idempotency_key (166.871458ms)
+  ✔ the args A packet the Verifier reads is not overwritten by an args B call (118.292ms)
+  ✔ a pending record without an argument hash does not unlock (142.930209ms)
+  ✔ object key order does not change the argument hash (104.116292ms)
+✔ Verifier concurrence binds the call's arguments (533.100625ms)
+ℹ tests 4
+ℹ suites 1
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 964.509042
+exit 0

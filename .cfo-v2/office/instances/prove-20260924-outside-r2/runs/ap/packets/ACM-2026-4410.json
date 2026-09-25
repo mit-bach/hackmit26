@@ -1,0 +1,76 @@
+{
+  "invoice_id": "ACM-2026-4410",
+  "profile": "prepare",
+  "source_handoff": "workspace/email/packets/acm-2026-4410-thread-ap-handoff.md",
+  "thread_id": "thr-acme-acm-2026-4410",
+  "vendor_claimed": {
+    "vendor": "Acme Supplies",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "amount": 12450.0,
+    "currency": "USD",
+    "po_ref": "101",
+    "goods_received_affirmed_by_vendor": true,
+    "document_hash": "3f55dbd11a7578250ae9e1400be162c527995f3f5e0f0467910e702450307cec",
+    "source_messages": [
+      "msg-acme-acm-2026-4410-confirm-001",
+      "msg-acme-acm-2026-4410-invoice-date-001"
+    ],
+    "attachment_pdf": false
+  },
+  "kernel_lookups": {
+    "get_invoice": {
+      "invoice_id": "ACM-2026-4410",
+      "found": false,
+      "traceId": "k_0e266be41fda"
+    },
+    "find_duplicate_invoices": {
+      "found": false,
+      "traceId": "k_2600c433a599"
+    },
+    "get_case_evidence": {
+      "found": false,
+      "traceId": "k_f0e8ab5a9f81"
+    },
+    "get_purchase_order": {
+      "po_id": "PO-101",
+      "found": true,
+      "vendor": "Acme Supplies",
+      "authorized_amount": 12450,
+      "status": "approved",
+      "currency": "USD",
+      "traceId": "k_6420db0a3ace"
+    },
+    "get_goods_receipt": {
+      "po_id": "PO-101",
+      "found": true,
+      "receipt_id": "GR-101",
+      "receipt_status": "full",
+      "goods_fully_received": true,
+      "amount_received": 12450,
+      "received_date": "2026-09-05",
+      "traceId": "k_b04a248ceae0"
+    }
+  },
+  "exception_types": [
+    "INVOICE_NOT_IN_KERNEL"
+  ],
+  "PreparerRecommendation": {
+    "recommendation": "HOLD",
+    "reason": "Thread fields are complete (vendor Acme Supplies, ACM-2026-4410, date 2026-09-08, $12450 USD, PO 101, GR affirmed) and PO-101/GR-101 align at 12450 full receipt, but tools.get_invoice and get_case_evidence both return not found. No Kernel open bill exists to three-way match. AP prepare cannot mint a Kernel invoice id. Email dual-intake did not register a canonical payable (inbox invoice_ids empty; initial triage selected no CREATE_AP_INVOICE). HOLD until a single Kernel invoice record exists; then re-wake prepare. Do not APPROVE. No ctl-pay review-match.",
+    "evidence_used": [
+      "PO-101",
+      "GR-101",
+      "thr-acme-acm-2026-4410",
+      "msg-acme-acm-2026-4410-confirm-001",
+      "msg-acme-acm-2026-4410-invoice-date-001",
+      "document_hash:3f55dbd11a7578250ae9e1400be162c527995f3f5e0f0467910e702450307cec"
+    ],
+    "proposed_action": "HOLD",
+    "approve_shaped": false,
+    "handoff_ctl_pay": false
+  },
+  "must_hold_context": {
+    "note": "Kernel must_hold cannot run without a found invoice/case. Effective hold: missing open bill record."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_6b9f18fb-3881-4502-acc7-410b185434bf",
+  "from": "bot_collect",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "Checking in: please confirm you have posted customer replies on all 10 collection threads listed, and paste a one-line result per invoice (promise/dispute/pay timing/silence).",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_collect",
+    "toId": "bot_world"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:27:25.006Z",
+  "updatedAt": "2026-09-24T18:27:57.353Z",
+  "result": "Confirmed: all 10 customer replies posted (no remittance, no cash apply).\n1. INV-AR-002 Acme — promise, next AP batch ~8 days, $8500\n2. INV-AR-003 Helios — pay timing, chronic late 3–4 weeks, $24000\n3. INV-AR-004 Brightline — promise mixed ~12 days, $31000 (not disputing)\n4. INV-AR-005 Quiet Harbor — pay timing, not this week ~18 days, $45000\n5. INV-AR-018 Copperline — promise ACH next week ~7 days, $9600\n6. INV-AR-019 Summit Civic — pay timing civic queue ~16 days, $7200\n7. INV-AR-020 Redwood Clinics — promise next batch ~4 days, $15800\n8. INV-AR-024 Atlas Robotics — promise weekly batch ~3 days, $8900\n9. INV-AR-025 Brightline — promise mixed ~12 days, $27500\n10. INV-AR-HE-4412 Helios — pay timing ~24 days, $91200 not disputed\nIds: msg-collect-INV-AR-002-r1, 003-r1, 004-r1, 005-r1, 018-r1, 019-r1, 020-r1, 024-r1, 025-r1, HE-4412-r1. No silence.",
+  "seq": 11
+}

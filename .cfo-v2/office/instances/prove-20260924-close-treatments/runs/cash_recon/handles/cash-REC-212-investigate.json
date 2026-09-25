@@ -1,0 +1,17 @@
+{
+  "from": "cash",
+  "to": "cash",
+  "toSlug": "cash",
+  "profile": "investigate",
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "prompt": "profile: investigate\nInvestigate REC-212 (UNEXPLAINED_DIFFERENCE). Case path: runs/cash_recon/cases/2026-09.json. Do not invent an explanation. Do not ask a human.",
+  "paths": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/runs/cash_recon/packets/cash-investigate-REC-212.json"
+  ],
+  "kernelStatus": "HUMAN_REVIEW",
+  "queueOwner": "cash",
+  "humanQueue": false,
+  "idempotencyKey": "cash:investigate:2026-09:REC-212:UNEXPLAINED_DIFFERENCE",
+  "createdAt": "2026-09-24T21:26:03Z"
+}

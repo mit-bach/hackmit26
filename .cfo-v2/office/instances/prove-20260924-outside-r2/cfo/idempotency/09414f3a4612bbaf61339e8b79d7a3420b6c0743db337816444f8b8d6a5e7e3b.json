@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-acme-acm-2026-4410-invoice-date-001",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "e4f0d42f454767b0b627820adf31407b2f5d8dc0b4017f5ba61cb4c2fcca51c5",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-acme-acm-2026-4410-invoice-date-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_cee56effb1a4"
+  }
+}

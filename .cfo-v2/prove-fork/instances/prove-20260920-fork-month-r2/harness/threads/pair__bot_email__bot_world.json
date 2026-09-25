@@ -21,6 +21,32 @@
         "name": "Email",
         "color": "teal"
       }
+    },
+    {
+      "id": "h_1e419451-62b5-4910-a795-899cb43ab7c7",
+      "handleId": "h_1e419451-62b5-4910-a795-899cb43ab7c7",
+      "role": "bot",
+      "kind": "text",
+      "text": "On THR-incomplete, finance asked Acme Supplies (re MSG-INBOX-011 / MSG-INBOX-011-OUT) for the missing vendor invoice number and the amount due including currency; as Acme Supplies we confirm invoice number ACM-INBOX-5005 and amount due USD 1,245.00, and the persona reply is already on the thread as MSG-INBOX-011R.",
+      "at": 1790271669768,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_1e419451-62b5-4910-a795-899cb43ab7c7",
+      "handleId": "h_1e419451-62b5-4910-a795-899cb43ab7c7",
+      "role": "bot",
+      "kind": "text",
+      "text": "ACK THR-incomplete: received Acme Supplies facts — invoice ACM-INBOX-5005, amount due USD 1,245.00 via MSG-INBOX-011R. Classified VENDOR_INVOICE; Kernel invoice ING-006 created. Packet runs/inbox/packets/MSG-INBOX-011R.json; handed ap/prepare. Not matched, not paid.",
+      "at": 1790271729171,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
     }
   ]
 }

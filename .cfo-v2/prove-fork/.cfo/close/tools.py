@@ -60,7 +60,7 @@ def _packet_payload(period: str) -> dict:
 
     computer_env = os.environ.get("HARNESS_COMPUTER")
     computer = Path(computer_env) if computer_env else default_computer_root()
-    pack_rel = f"workspace/close/{period}/pack.json"
+    pack_rel = f"workspace/close/packets/{period}.json"
     pack_path = computer / pack_rel
     pack = None
     if pack_path.is_file():

@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-copperline-inv-ar-018",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "01a58d6661031a00c45e93d494d4d6161849cfcf7e530c0b34c6643247ff07b4",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-copperline-inv-ar-018-reply",
+      "thread_id": "col-copperline-inv-ar-018",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_75a401612394"
+  }
+}

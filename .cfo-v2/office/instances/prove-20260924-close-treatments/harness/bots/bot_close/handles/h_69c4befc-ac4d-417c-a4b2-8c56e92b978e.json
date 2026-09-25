@@ -1,0 +1,19 @@
+{
+  "id": "h_69c4befc-ac4d-417c-a4b2-8c56e92b978e",
+  "from": "operator",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "profile: accrue\nSeptember 2026. Book accruals only where the evidence supports them. Do not invent amounts. Do not mark the month closed. Do not clear the unexplained $12.40.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_close"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:14:55.654Z",
+  "updatedAt": "2026-09-24T21:22:38.737Z",
+  "result": "## September 2026 accruals (Profile `accrue`)\n\n### Booked decisions (Kernel amounts only; `ctl-books` **CONCUR** on all six)\n\n| Vendor | Status | Method | Amount | Expense account |\n|--------|--------|--------|--------|-----------------|\n| Aether Compute | `accrual_required` | `usage_run_rate` | **11,849.90** | Cloud Infrastructure Expense |\n| CleanSpace Facilities | `accrual_required` | `contract_commitment` | **2,400.00** | Facilities Expense |\n| Clearing Solutions LLC | `accrual_required` | `simple_average` | **9,632.44** | Operating Expense |\n| Harbor Electric | `accrual_required` | `seasonal_prior_year` | **4,650.00** | Utilities Expense |\n| Lindholm & Ruiz LLP | `accrual_required` | `contract_commitment` | **8,500.00** | Legal Expense |\n| Pulse Recruiting | `accrual_required` | `contract_commitment` | **15,000.00** | Recruiting Expense |\n\n### Not accrued\n- **NewForge Consulting** — `insufficient_evidence` (as-needed T&M; no applicable Kernel candidates).\n- All other expected vendors already have current-period invoices → `no_accrual_needed`.\n\n### Method notes\n- **Harbor Electric**: Kernel `naive_recent_average_is_misleading=true` → seasonal prior year ($4,650), not summer peaks.\n- **Clearing Solutions**: August $17,014.22 outlier → `simple_average` over `recent_average` / `last_invoice`.\n\n### Boundaries held\n- Period **not** marked closed / locked.\n- Unexplained **$12.40** not cleared or relabeled.\n- No invented amounts.\n\n### Pack\n`workspace/close/packets/2026-09.json`\n\n### Platform blocker (posts not on ledger yet)\n`create_accrual` still returns `verifier_required` and mints a new `handleId` each time. `ctl-books` has stamped **CONCUR** on the Handle files, but Client `call_connected_tool` passes `handleId=null` into `gateConsequentialCall`, so `completedHandleAllowsOp` never unlocks the retry. `get_open_accruals` for 2026-09 is still **count: 0**.\n\nUnlock needs Client wiring so the retry passes the CONCUR’d `handleId` (as in `facade.test.ts`), or an equivalent non-Bot runner. Verifier substance is done; Kernel journal lines are not.",
+  "resultPaths": [],
+  "seq": 118
+}

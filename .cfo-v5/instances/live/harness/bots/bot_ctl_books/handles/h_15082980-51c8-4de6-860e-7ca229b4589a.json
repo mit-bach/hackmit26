@@ -1,0 +1,19 @@
+{
+  "id": "h_15082980-51c8-4de6-860e-7ca229b4589a",
+  "from": "operator",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Operator check for ctl-books",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ctl_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.397Z",
+  "updatedAt": "2026-09-24T23:33:29.728Z",
+  "result": "ctl-books here. Ready for review-treatment, review-assets, review-bs, or lock. Look for reasons to refuse; decisions are CONCUR or REFUSE via complete_step.",
+  "resultPaths": [],
+  "seq": 42
+}

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-112
+PO Number: PO-112
+Vendor: GitHub
+Goods received in full on 2026-09-01
+Packing list attached: PL-GR-112
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 21,000.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

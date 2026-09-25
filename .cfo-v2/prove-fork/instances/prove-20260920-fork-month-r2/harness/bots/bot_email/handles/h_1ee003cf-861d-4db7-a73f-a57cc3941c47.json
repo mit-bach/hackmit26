@@ -1,0 +1,19 @@
+{
+  "id": "h_1ee003cf-861d-4db7-a73f-a57cc3941c47",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-016. It may be a credit memo, not a payable bill. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not put it in a pay-run. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:36:04.273Z",
+  "updatedAt": "2026-09-24T17:36:20.843Z",
+  "result": "### MSG-INBOX-016 done\n\n| Step | Result |\n| --- | --- |\n| **Message** | Acme Supplies · “Credit memo CM-INBOX-100” · body: credit note $200 returned goods · **“This is not an invoice.”** |\n| **Classify** | **`CREDIT_MEMO`** → `ROUTE_TO_EXISTING_WORKFLOW` (conf 0.9) |\n| **Reason** | `CREDIT_MEMO_PATH_UNAVAILABLE` — not a vendor invoice |\n| **Dispatch** | **`UNSUPPORTED`** · `invoice_id` null · **`ready_for_payment: false`** · **no mutation** |\n| **Pay-run** | Not queued |\n| **AP handoff** | None (not a bill) |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-016.json` |",
+  "resultPaths": [],
+  "seq": 64
+}

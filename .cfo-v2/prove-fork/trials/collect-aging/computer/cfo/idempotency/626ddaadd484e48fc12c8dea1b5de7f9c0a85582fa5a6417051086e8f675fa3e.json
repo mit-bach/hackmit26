@@ -1,0 +1,19 @@
+{
+  "key": "col-inv-ar-002-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "24313a747c1b26bcb99c172e907b8b55ab1f0eed908abaa1c0755dad26371f45",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-inv-ar-002-20260930",
+      "thread_id": "col-acme-inv-ar-002",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_34cea0ceb32e"
+  }
+}

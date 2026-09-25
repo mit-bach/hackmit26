@@ -1,0 +1,37 @@
+{
+  "source_agent": "email",
+  "profile": "triage",
+  "classification": "bank_notice",
+  "document_type": "bank_statement_availability",
+  "selected_action": "TRACE_ONLY",
+  "confidence": 0.95,
+  "classification_reason": "First National Operating notice that September 2026 operating account statement is available; period 2026-09-01 through 2026-09-30. Not a vendor invoice; no payment requested; no bank lines to match from this message.",
+  "message_id": "msg-fno-stmt-2026-09",
+  "thread_id": "thr-fno-stmt-2026-09",
+  "case_id": "STMT-OP-2026-09",
+  "from": "notices@firstnational.example",
+  "to": "ap@hackmit-cfo.example",
+  "subject": "September 2026 operating account statement available",
+  "candidate": null,
+  "extracted": {
+    "bank": "First National Operating",
+    "account_type": "operating",
+    "period_start": "2026-09-01",
+    "period_end": "2026-09-30",
+    "period": "2026-09"
+  },
+  "missing_fields": [],
+  "reason_codes": [
+    "NOT_VENDOR_INVOICE",
+    "BANK_STATEMENT_AVAILABILITY",
+    "NO_PAYMENT_REQUESTED",
+    "NO_BANK_LINE_MATCH"
+  ],
+  "dispatch_target": null,
+  "do_not": [
+    "create_ap_invoice",
+    "apply_cash",
+    "match_bank_lines",
+    "invent_reconciling_story"
+  ]
+}

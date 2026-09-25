@@ -1,0 +1,39 @@
+Hartford Brokerage Partners LLC
+1 Hartford Plaza
+Hartford, CT 06103
+Phone +1 860-555-1188   billing@hartfordbrokerage.example
+Tax ID 06-2291188
+
+INVOICE
+
+Invoice Number: HBP-2026-01
+Invoice Date: 2026-01-08
+Due Date: 2026-02-07
+PO Number: PO-HBP-2026-01
+Payment Terms: net 30
+Currency: USD
+Vendor: Hartford Brokerage Partners
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Cyber rider. SKU                              1.00     18,600.00     18,600.00
+
+Subtotal                                                             18,600.00
+Tax                                                                       0.00
+Amount Due                                                           18,600.00
+
+Remit to:
+ACH Hartford routing 011900445  account ****1188
+Bank: Hartford Bank  ****1188
+Please include invoice HBP-2026-01 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@hartfordbrokerage.example

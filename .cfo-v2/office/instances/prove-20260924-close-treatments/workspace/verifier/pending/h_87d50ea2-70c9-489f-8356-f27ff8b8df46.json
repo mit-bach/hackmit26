@@ -1,0 +1,14 @@
+{
+  "id": "h_87d50ea2-70c9-489f-8356-f27ff8b8df46",
+  "status": "accepted",
+  "done": false,
+  "op": "accrual.tools.create_accrual",
+  "toSlug": "ctl-books",
+  "profile": "review-treatment",
+  "fromSlug": "close",
+  "packetPath": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/workspace/verifier/ctl-books/accrual-2026-09-aether-compute.json",
+  "handleStore": "harness",
+  "handlePath": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/harness/bots/bot_ctl_books/handles/h_87d50ea2-70c9-489f-8356-f27ff8b8df46.json",
+  "humanQueue": false,
+  "createdAt": "2026-09-24T21:36:35.822Z"
+}

@@ -1,0 +1,11 @@
+Timber Components
+Packing list
+Ship date: 2026-09-07
+PO Number: PO-387
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 387-0907
+
+Contents:
+  - Line GR-387 — qty 1
+
+This packing list is not an invoice.

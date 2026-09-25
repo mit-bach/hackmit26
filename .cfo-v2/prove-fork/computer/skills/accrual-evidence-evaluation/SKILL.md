@@ -28,7 +28,7 @@ Load evidence with tools; do not invent it:
 
 1. Load current-period invoices first. If an invoice for the period already exists, no accrual is needed.
 2. Look for a reliable signal that work or goods were incurred this period: usage, an active contract cadence, a goods receipt, or a fresh recurring billing history.
-3. Call get_estimate_candidates. Those amounts and applicability flags are authoritative.
+3. Load the Kernel estimate candidates. Those amounts and applicability flags are authoritative.
 4. If evidence is weak, do not stretch a stale or unrelated number into an accrual.
 5. Accrue only when the expense was probably incurred this period and the invoice is missing.
 

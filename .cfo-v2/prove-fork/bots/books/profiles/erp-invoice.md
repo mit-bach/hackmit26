@@ -8,7 +8,7 @@ A Xero webhook or NetSuite vendorBill sync wakes this Bot with Profile `erp-invo
 
 ## Do
 
-1. Call `get_erp_invoice(record_id)` or read the Kernel packet for the webhook fetch.
+1. Open the ERP invoice for that record id, or read the Kernel packet for the webhook fetch.
 2. Map vendor, invoice number, dates, amounts, and PO from the structured record. Python parse wins. Do not remap filled fields.
 3. Do not perform three-way matching.
 4. Xero ACCPAY / NetSuite vendorBill: write the path, `bot_send_prompt` to `ap` / `prepare`.

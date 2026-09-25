@@ -14,7 +14,7 @@ Return `PreparerRecommendation`. Keep that Pydantic contract. Do not invent a pa
 
 ## Procedure
 
-1. Read the Wake path. Call `tools.get_case_evidence` for that `invoice_id`.
+1. Read the Wake path. Load the case evidence for that `invoice_id`.
 2. Copy `exception_types` from Kernel. Do not invent exceptions.
 3. Load invoice, PO, receipt, and duplicates only as needed to cite record IDs.
 4. Recommend:

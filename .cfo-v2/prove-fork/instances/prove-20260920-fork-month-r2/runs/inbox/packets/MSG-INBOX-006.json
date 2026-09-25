@@ -1,0 +1,16 @@
+{
+  "message_id": "MSG-INBOX-006",
+  "thread_id": "THR-goods-receipt",
+  "classification": "GOODS_RECEIPT",
+  "selected_action": "RECORD_GOODS_RECEIPT",
+  "dispatch_status": "ROUTED",
+  "po_number": "PO-108",
+  "counterparty_name": "Warehouse",
+  "invoice_id": null,
+  "ready_for_payment": false,
+  "mutation": false,
+  "reason_codes": [
+    "ROUTED_GOODS_RECEIPT"
+  ],
+  "note": "Goods receipt / packing list, not a vendor invoice. Not placed in pay pool. No AP bill created."
+}

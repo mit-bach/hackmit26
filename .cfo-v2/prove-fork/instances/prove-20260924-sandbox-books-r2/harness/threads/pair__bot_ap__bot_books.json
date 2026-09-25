@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_books",
+  "threadId": "pair:bot_ap:bot_books",
+  "name": "AP ↔ Books",
+  "memberIds": [
+    "bot_ap",
+    "bot_books"
+  ],
+  "createdAt": 1790278960221,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_6ec89bf2-2ff6-4d39-b5cc-507e81d2fb61",
+      "handleId": "h_6ec89bf2-2ff6-4d39-b5cc-507e81d2fb61",
+      "role": "bot",
+      "kind": "text",
+      "text": "prepare: NetSuite vendorBill NS-4410 landed by books (erp-invoice). Packet path: workspace/books/packets/NS-4410.json. Do not treat this as match-from-books. Source_id NS-4410. Vendor Acme Supplies VEND-001, invoice ACM-2026-4410, total 12450 USD, PO-101, period 2026-09.",
+      "at": 1790278960221,
+      "from": {
+        "botId": "bot_books",
+        "name": "Books",
+        "color": "pink"
+      }
+    },
+    {
+      "id": "pair-result-h_6ec89bf2-2ff6-4d39-b5cc-507e81d2fb61",
+      "handleId": "h_6ec89bf2-2ff6-4d39-b5cc-507e81d2fb61",
+      "role": "bot",
+      "kind": "text",
+      "text": "HOLD on NS-4410 / ACM-2026-4410. Kernel get_invoice and get_case_evidence both return not found for NS-4410 and ACM-2026-4410. Not treated as match-from-books. PO-101 is approved (12450 USD) and GR-101 is full; that does not create a payable. Packet: workspace/ap/packets/ACM-2026-4410.json. No ctl-pay handoff. Will Handle email for missing AP invoice record.",
+      "at": 1790278999481,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

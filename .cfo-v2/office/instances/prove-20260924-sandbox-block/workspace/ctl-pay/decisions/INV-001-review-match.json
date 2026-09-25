@@ -1,0 +1,28 @@
+{
+  "type": "ReviewerDecision",
+  "invoice_id": "INV-001",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "vendor": "Acme Supplies",
+  "po_id": "PO-101",
+  "decision": "CONCUR",
+  "recommended_action": "APPROVE",
+  "amount": 12450,
+  "currency": "USD",
+  "profile": "review-match",
+  "kernel_facts": {
+    "exception_types": [],
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "amount_matches": true,
+    "vendor_exact_match": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "receipt_id": "GR-101",
+    "duplicate_detected": false,
+    "must_hold": []
+  },
+  "policies_applied": ["P-001"],
+  "reason": "Kernel evidence shows exact three-way match: approved PO-101 for 12450 USD, full GR-101 (15/15), exact vendor match Acme Supplies, amount_difference 0, no duplicate, empty exception_types. No must_hold policy applies. PreparerRecommendation APPROVE is consistent with P-001. Concurrence is match approval only, not payment-run release.",
+  "trace_ids": ["k_f2109810cbbd", "k_55afa4133215"],
+  "reviewer": "ctl-pay"
+}

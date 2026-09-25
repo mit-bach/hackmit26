@@ -1,0 +1,13 @@
+{
+  "contract": "ReviewerDecision",
+  "invoice_id": "INV-001",
+  "profile": "review-match",
+  "bot": "ctl-pay",
+  "decision": "CONCUR",
+  "proposed_action": "APPROVE",
+  "packet_path": "runs/ap/packets/INV-001.json",
+  "concurrence_path": "runs/ap/concurrence/INV-001.json",
+  "reason": "Kernel evidence and P-001 exact three-way match; CONCUR on preparer APPROVE.",
+  "must_hold": false,
+  "exception_types": []
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "comment": "Session 07 fragment for Bot cash only. Session 00 owns the full slug-map. No list-unions. review-rec is not a Profile on cash.",
+  "bots": {
+    "cash": {
+      "defaultProfile": "match",
+      "profiles": {
+        "match": "Cash Reconciliation Preparer",
+        "investigate": "Cash Exception Investigator"
+      }
+    }
+  }
+}

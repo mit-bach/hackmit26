@@ -1,0 +1,34 @@
+{
+  "version": "1",
+  "comment": "Session 07 fragment. Compiler (session 01) is the SoT. Cash Reconciliation Reviewer is not mapped onto Bot cash.",
+  "byDisplayName": {
+    "Cash Reconciliation Preparer": {
+      "ops": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "bank-reference-interpretation"
+      ],
+      "outputType": "PreparerSelection"
+    },
+    "Cash Exception Investigator": {
+      "ops": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate"
+      ],
+      "skills": [
+        "reconciliation-exception-investigation",
+        "bank-reference-interpretation"
+      ],
+      "outputType": "InvestigationNote"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "invoice_id": "ING-006",
+  "profile": "prepare",
+  "source": {
+    "message_id": "MSG-INBOX-011R",
+    "prior_message_id": "MSG-INBOX-011",
+    "in_reply_to": "MSG-INBOX-011-OUT",
+    "vendor_invoice_number": "ACM-INBOX-5005",
+    "thread_id": "THR-incomplete",
+    "forwarded_by": "email",
+    "note": "Vendor reply completed missing fields; MSG-INBOX-011 superseded by 011R for intake."
+  },
+  "kernel_evidence": {
+    "invoice_amount": 1245,
+    "po_id": null,
+    "po_authorized_amount": null,
+    "receipt_id": null,
+    "amount_received": null,
+    "amount_difference": null,
+    "percent_difference": null,
+    "amount_matches": false,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": false,
+    "vendors_are_similar": false,
+    "po_exists": false,
+    "po_approved": false,
+    "receipt_status": "not_applicable",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": ["missing_po"],
+    "days_until_due": -6
+  },
+  "PreparerRecommendation": {
+    "action": "HOLD",
+    "exception_types": ["missing_po"],
+    "evidence_used": [
+      "ING-006",
+      "tools.get_invoice",
+      "tools.get_case_evidence",
+      "tools.find_duplicate_invoices",
+      "runs/inbox/packets/MSG-INBOX-011R.json"
+    ],
+    "reason": "ING-006 found. Acme Supplies ACM-INBOX-5005 bills USD 1245.00 from vendor reply MSG-INBOX-011R completing THR-incomplete (supersedes incomplete MSG-INBOX-011). Kernel: po_exists false, receipt not_applicable, no duplicates, exception_types missing_po; days_until_due -6. Prepare complete; not three-way matched; not APPROVE; not pay. HOLD."
+  },
+  "proposed": "HOLD",
+  "approve_shaped": false,
+  "ctl_pay_handoff": null,
+  "packet_path": "runs/ap/packets/ING-006.json"
+}

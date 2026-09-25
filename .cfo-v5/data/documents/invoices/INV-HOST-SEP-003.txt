@@ -1,0 +1,39 @@
+Amazon Web Services, Inc.
+410 Terry Avenue North
+Seattle, WA 98109
+Phone +1 206-266-1000   billing@aws.amazon.example
+Tax ID 91-1646860
+
+INVOICE
+
+Invoice Number: INV-HOST-SEP-003-VIN
+Invoice Date: 2026-09-28
+Due Date: 2026-10-15
+PO Number: (none)
+Payment Terms: net 30
+Currency: USD
+Vendor: Amazon Web Services
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+AWS unplanned hosting overage                 1.00     15,000.00     15,000.00
+
+Subtotal                                                             15,000.00
+Tax                                                                       0.00
+Amount Due                                                           15,000.00
+
+Remit to:
+ACH Wells Fargo routing 121000248  account ****2910
+Bank: Wells Fargo  ****2910
+Please include invoice INV-HOST-SEP-003-VIN on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@aws.amazon.example

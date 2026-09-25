@@ -1,0 +1,39 @@
+GitHub, Inc.
+88 Colin P. Kelly Jr. Street
+San Francisco, CA 94107
+Phone +1 877-437-7443   billing@github.example
+Tax ID 94-3394628
+
+INVOICE
+
+Invoice Number: GIT-2026-09-0095
+Invoice Date: 2026-09-15
+Due Date: 2026-10-15
+PO Number: PO-395
+Payment Terms: net 30
+Currency: USD
+Vendor: GitHub
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+security monitoring hosts billed 2026-09-15    1.00         73.30         73.30
+
+Subtotal                                                                 73.30
+Tax                                                                       0.00
+Amount Due                                                               73.30
+
+Remit to:
+ACH Wells Fargo routing 121042882  account ****1002
+Bank: Wells Fargo  ****1002
+Please include invoice GIT-2026-09-0095 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@github.example

@@ -1,0 +1,17 @@
+{
+  "currentId": "live",
+  "instances": [
+    {
+      "id": "live",
+      "name": "Live",
+      "computerRel": "instances/live",
+      "createdAt": "2026-09-24T00:00:00Z"
+    },
+    {
+      "id": "prove-engine",
+      "name": "Engine proof",
+      "computerRel": "instances/prove/engine",
+      "createdAt": "2026-09-24T00:00:00Z"
+    }
+  ]
+}

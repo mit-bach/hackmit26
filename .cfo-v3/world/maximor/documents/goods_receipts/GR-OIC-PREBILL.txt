@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OIC-PREBILL
+PO Number: PO-OIC-PREBILL
+Vendor: Orbit Insights Corp
+Goods received in full on 2026-09-30
+Packing list attached: PL-GR-OIC-PREBILL
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 15,000.00 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

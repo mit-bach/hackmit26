@@ -1,0 +1,36 @@
+{
+  "transaction_id": "TXN-2026-09-015",
+  "date": "2026-09-15",
+  "amount": 12412.4,
+  "currency": "USD",
+  "description": "CUSTOMER PAYMENT NORTHSTAR LLC",
+  "counterparty": "NORTHSTAR LLC",
+  "transaction_type": "wire_credit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "",
+  "raw_metadata": {
+    "payment_id": "PAY-006",
+    "invoice_ids": [
+      "INV-AR-013"
+    ]
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "UNEXPLAINED_DIFFERENCE",
+  "gt_label": {
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "disposition": "HUMAN_REVIEW",
+    "ledger_ids": [
+      "GL-AR-NS"
+    ],
+    "difference": 12.4
+  },
+  "path": "workspace/bank/lines/TXN-2026-09-015.json"
+}

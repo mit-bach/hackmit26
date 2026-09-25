@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-CLR-2026-07
+PO Number: PO-CLR-2026-07
+Vendor: Clearing Solutions LLC
+Goods received in full on 2026-07-08
+Packing list attached: PL-GR-CLR-2026-07
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 8,544.22 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

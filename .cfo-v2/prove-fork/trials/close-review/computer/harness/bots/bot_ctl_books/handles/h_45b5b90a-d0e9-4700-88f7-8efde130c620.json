@@ -1,0 +1,19 @@
+{
+  "id": "h_45b5b90a-d0e9-4700-88f7-8efde130c620",
+  "from": "operator",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "profile: lock\nMaximor Demo Corp, September 2026 is still open. You are the close reviewer. Decide whether this month can lock. Do not mark it closed. Do not clear the unexplained bank difference. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ctl_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:11:22.300Z",
+  "updatedAt": "2026-09-24T18:11:33.809Z",
+  "result": "**FinalCloseVerdict: REJECT_CLOSE**\n\nFinance API (not host files):\n\n- `get_close_gates` period `2026-09`: `found: false`, `gate_passed: false`, `passed: false`, `period_status: MISSING`, `lock_status: OPEN`. Blockers: `no close state; cannot lock`. `can_mark_closed: false`. Door remains `close.month_end`.\n- `get_close_packet` period `2026-09`: `found: false`, `pack: null`, `pack_path: \"\"`, `marked_closed: false`. Packet is incomplete.\n\nCONCUR / `APPROVE_CLOSE` is not allowed while gates fail. I did not call period lock, did not mark CLOSED, did not relabel or clear any bank difference, and did not ask a person. Kernel still would refuse lock until close state exists and `evaluate_close_gates` passes.",
+  "resultPaths": [],
+  "seq": 3
+}

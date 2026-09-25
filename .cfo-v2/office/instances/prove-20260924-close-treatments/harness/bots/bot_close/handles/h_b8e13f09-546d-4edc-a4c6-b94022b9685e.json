@@ -1,0 +1,19 @@
+{
+  "id": "h_b8e13f09-546d-4edc-a4c6-b94022b9685e",
+  "from": "operator",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "profile: accrue\nSeptember 2026. The estimates you already reviewed that require an accrual are not booked yet. Book those amounts from the estimate. Do not invent a figure. Do not mark the month closed. Do not clear the unexplained $12.40.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_close"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:31:35.580Z",
+  "updatedAt": "2026-09-24T21:38:22.728Z",
+  "result": "Retrying `bot_send_prompt` for the unlock path.## Accrual booking — 2026-09 (`accrue`)\n\n### Booked intent (Kernel amounts only; `ctl-books` CONCUR on pair thread)\n\n| Vendor | Method | Amount | Expense account | Status |\n|--------|--------|--------|-----------------|--------|\n| Aether Compute | `usage_run_rate` | **11,849.90** | Cloud Infrastructure Expense | CONCUR; write still parked |\n| CleanSpace Facilities | `contract_commitment` | **2,400.00** | Facilities Expense | CONCUR; write still parked |\n| Clearing Solutions LLC | `recent_average` | **11,326.21** | Operating Expense | CONCUR; write still parked |\n| Harbor Electric | `seasonal_prior_year` | **4,650.00** | Utilities Expense | CONCUR; write still parked |\n| Lindholm & Ruiz LLP | `contract_commitment` | **8,500.00** | Legal Expense | CONCUR; write still parked |\n| Pulse Recruiting | `contract_commitment` | **15,000.00** | Recruiting Expense | CONCUR; write still parked |\n\n**Not accrued:** NewForge Consulting — weak as-needed T&M only → `insufficient_evidence`.\n\n### What I did not do\n- Invented no figures (all from `get_estimate_candidates` / indicative methods).\n- Did **not** mark the month closed.\n- Did **not** clear unexplained **$12.40**.\n\n### Blocker on ledger commit\n`create_accrual` returns `verifier_required` → `ctl-books` / `review-treatment`. Pair-thread CONCUR is on disk for unlock handles:\n\n- `h_6c062928-…` aether  \n- `h_29fcb227-…` cleanspace  \n- `h_efe7f061-…` clearing  \n- `h_321a287c-…` harbor  \n- `h_3bb0a19e-…` lindholm  \n- `h_f5796a0d-…` pulse  \n\nHarness unlock needs a **second** `create_accrual` with that `handleId`. This Profile’s `call_connected_tool` only exposes `name` / `args` / `idempotency_key` (no `handle_id`), and `bot_send_prompt` is not enabled here—so each retry parks a **new** handle instead of committing. `ctl-books` cannot call `create_accrual` (verifier slug forbidden).\n\n**Host fix needed:** optional `handle_id` on `call_connected_tool` passed into `callConnectedTool`’s 5th argument; then re-call the six ops with the CONCUR handle ids above and the same idempotency keys.\n\nOpen accruals count was **0** before these parks; until the host passes `handle_id`, Kernel will not post the JE lines.",
+  "resultPaths": [],
+  "seq": 247
+}

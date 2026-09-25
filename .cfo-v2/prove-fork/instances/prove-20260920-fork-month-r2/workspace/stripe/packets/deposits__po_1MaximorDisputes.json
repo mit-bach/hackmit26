@@ -1,0 +1,14 @@
+{
+  "object": "processor_deposit",
+  "payout_id": "po_1MaximorDisputes",
+  "bank_deposit_id": "BANK-po_1MaximorDisputes",
+  "amount": 5070.0,
+  "currency": "USD",
+  "arrival_date": "2026-09-26",
+  "expected_payout_minor": 507000,
+  "actual_payout_minor": 507000,
+  "waterfall_status": "MATCH",
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "source_packet": "workspace/sources/stripe/po_1MaximorDisputes.json"
+}

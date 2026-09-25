@@ -15,7 +15,7 @@ Return `ForecastVarianceAgentResult`. Keep that Pydantic contract. Fields: `narr
 ## Procedure
 
 1. Read the Wake path. The miss explanation is Kernel `compare_forecast_to_actuals` already written on that path. Do not rebuild it.
-2. Call `reporting.tools.get_forecast_snapshot` for the `forecast_id`. Call `reporting.tools.get_forecast_checks`. Arithmetic errors are `INSUFFICIENT`.
+2. Load the forecast snapshot for the `forecast_id`. Load the forecast checks. Arithmetic errors are `INSUFFICIENT`.
 3. Keep Python classes separate: timing, amount, new/unforecast, removed/cancelled, unexplained.
 4. Cite source ids (`INV-…`, `PR-…`, `BNK-…`) and the `fva:` analysis id. A late receipt stays timing. Do not rename it as a new customer.
 5. Leave the residual unexplained. Do not invent a counterparty for it.

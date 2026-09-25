@@ -1,0 +1,19 @@
+{
+  "id": "h_636e6537-ba09-43a3-b43b-ce971c37397a",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-005. It may be a purchase order, not a bill to pay. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not put a PO in the pay pool. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:39:05.343Z",
+  "updatedAt": "2026-09-24T17:39:21.200Z",
+  "result": "### MSG-INBOX-005 done\n\n| Step | Result |\n| --- | --- |\n| **Classify** | **`PURCHASE_ORDER`** → `ROUTE_TO_EXISTING_WORKFLOW` (conf 0.9) |\n| **Doc** | **PO-108** · Slack Technologies |\n| **Dispatch** | **`ROUTED`** · `ROUTED_PURCHASE_ORDER` / `PURCHASE_ORDER_NOT_INVOICE` |\n| **Invoice / pay pool** | **None** · `invoice_id` null · `ready_for_payment: false` · no mutation |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-005.json` |",
+  "resultPaths": [],
+  "seq": 90
+}

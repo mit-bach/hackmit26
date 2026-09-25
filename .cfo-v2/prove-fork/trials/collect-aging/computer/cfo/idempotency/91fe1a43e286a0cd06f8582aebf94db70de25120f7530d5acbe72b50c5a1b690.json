@@ -1,0 +1,19 @@
+{
+  "key": "col-inv-ar-020-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "d97967fb0b32ab933ee41d190db8f88044023b6a68d84752e7309f19945e10f4",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-inv-ar-020-20260930",
+      "thread_id": "col-redwood-inv-ar-020",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_4ed2191e1841"
+  }
+}

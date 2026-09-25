@@ -1,0 +1,212 @@
+{
+  "output_type": "AuditorInterpretation",
+  "period": "2026-09",
+  "close": {
+    "status": "CLOSED",
+    "close_id": "CLOSE-2026-09",
+    "close_timestamp": "2026-10-03T18:00:00Z",
+    "closed_by": "agent:close-orchestrator"
+  },
+  "source_records_mutated": false,
+  "kernel_run": {
+    "status": "NOT_AVAILABLE",
+    "note": "Connected Catalog exposes only audit read getters. No sample, control-test, reperformance, or ReportStats op returned on this Profile. No Kernel finding_id values exist to cite. Sentences that would require a finding_id are omitted."
+  },
+  "report_stats": null,
+  "policy_refs_observed": {
+    "sod": ["SOD-001", "SOD-002", "SOD-003", "SOD-P-001", "SOD-P-002", "SOD-P-003"],
+    "severity": {
+      "material_amount": 10000,
+      "critical_amount": 50000,
+      "recon_tolerance": 0.01
+    },
+    "round_number": {
+      "divisors": [100, 1000, 10000],
+      "min_amount": 100,
+      "high_risk_min_amount": 10000
+    }
+  },
+  "populations_read": {
+    "approvals": 5,
+    "planted_reconciliations": 3,
+    "operational_decisions": 6,
+    "vendors_returned": "full_list_via_get_audit_vendors",
+    "payments_returned": "full_list_via_get_audit_payments",
+    "invoices": "getter_available_not_re_enumerated_this_packet",
+    "journals": "getter_available_not_re_enumerated_this_packet"
+  },
+  "sampling": {
+    "status": "NOT_PERFORMED_BY_KERNEL_ON_THIS_PROFILE",
+    "note": "No SampleRecord with population size, method, seed, or sampled_ids was returned. Interpreter does not invent a sample."
+  },
+  "control_results": [],
+  "findings": [],
+  "finding_ids": [],
+  "observations_without_kernel_finding_id": [
+    {
+      "observation_class": "sod_identity_pair",
+      "policy_rule": "SOD-001",
+      "policy_reference": "SOD-P-001",
+      "object_type": "invoice",
+      "object_id": "INV-009",
+      "approval_id": "APR-INV-SELF",
+      "compared_fields": ["requester_id", "preparer_id", "approver_id"],
+      "identity_ids": {
+        "requester_id": "USR-PREP-02",
+        "preparer_id": "USR-PREP-02",
+        "reviewer_id": "USR-REV-02",
+        "approver_id": "USR-PREP-02"
+      },
+      "amount_as_recorded": 50000,
+      "condition": "On APR-INV-SELF for INV-009, requester_id, preparer_id, and approver_id are all USR-PREP-02. SOD-001 / SOD-P-001 forbids requester_id equal to approver_id on invoice approvals.",
+      "kernel_result_code": null,
+      "finding_id": null,
+      "severity_from_kernel": null
+    },
+    {
+      "observation_class": "sod_identity_pair",
+      "policy_rule": "SOD-001",
+      "policy_reference": "SOD-P-001",
+      "object_type": "payment",
+      "object_id": "PAY-AP-009",
+      "approval_id": "APR-PAY-009",
+      "compared_fields": ["initiator_id", "approver_id"],
+      "identity_ids": {
+        "initiator_id": "USR-PAY-01",
+        "approver_id": "USR-PAY-01"
+      },
+      "amount_as_recorded": 50000,
+      "condition": "On APR-PAY-009 / PAY-AP-009, initiator_id and approver_id are both USR-PAY-01. SOD-001 / SOD-P-001 forbids initiator_id equal to approver_id on payments. Payment also records missing_support true and vendor_id VEND-010 (unusual true, first_seen 2026-09-15).",
+      "kernel_result_code": null,
+      "finding_id": null,
+      "severity_from_kernel": null
+    },
+    {
+      "observation_class": "sod_identity_pair",
+      "policy_rule": "SOD-001",
+      "policy_reference": "SOD-P-001",
+      "object_type": "payment",
+      "object_id": "PAY-AP-010",
+      "approval_id": "APR-PAY-010",
+      "compared_fields": ["initiator_id", "approver_id"],
+      "identity_ids": {
+        "initiator_id": "USR-PAY-01",
+        "approver_id": "USR-PAY-01"
+      },
+      "amount_as_recorded": 3280,
+      "condition": "On APR-PAY-010 / PAY-AP-010, initiator_id and approver_id are both USR-PAY-01. Payment description records release while invoice on hold; missing_support true; linked invoice_ids [INV-010]. Operational decision on INV-010 is HOLD.",
+      "kernel_result_code": null,
+      "finding_id": null,
+      "severity_from_kernel": null
+    },
+    {
+      "observation_class": "sod_contrast_pass_candidate",
+      "policy_rule": "SOD-001",
+      "object_type": "invoice",
+      "object_id": "INV-001",
+      "approval_id": "APR-INV-001",
+      "identity_ids": {
+        "requester_id": "USR-PREP-01",
+        "preparer_id": "USR-PREP-01",
+        "reviewer_id": "USR-REV-01",
+        "approver_id": "USR-APPR-01"
+      },
+      "condition": "APR-INV-001 shows distinct approver_id USR-APPR-01 versus requester/preparer USR-PREP-01. Linked payment PAY-AP-001 has initiator_id USR-PAY-01 and approver_id USR-APPR-01 (distinct). No Kernel PASS code attached.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "sod_contrast_pass_candidate",
+      "policy_rule": "SOD-002",
+      "object_type": "journal",
+      "object_id": "JE-AP-INV-001",
+      "approval_id": "APR-JE-001",
+      "identity_ids": {
+        "preparer_id": "USR-JE-01",
+        "reviewer_id": "USR-REV-04",
+        "approver_id": "USR-JE-02"
+      },
+      "condition": "APR-JE-001 preparer_id USR-JE-01 differs from approver_id USR-JE-02 (SOD-002 pair). No Kernel PASS code attached.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "operational_hold_duplicate",
+      "object_ids": ["INV-006", "INV-007"],
+      "condition": "Operational decisions record HOLD with duplicate_detected true on both INV-006 and INV-007, each listing the other invoice_id. Workflow already held the pair; without a Kernel control result this is coverage context, not a graded finding.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "payment_approval_linkage",
+      "object_id": "PAY-AP-NORTHLINE",
+      "amount_as_recorded": 18500,
+      "condition": "PAY-AP-NORTHLINE approval_ids is empty; initiator_id USR-PAY-01; approver_id USR-APPR-01; invoice_ids INV-014, INV-015, INV-016. No Kernel control result or finding_id.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "payment_approval_linkage",
+      "object_id": "PAY-AP-017",
+      "amount_as_recorded": 10000,
+      "condition": "PAY-AP-017 (wire, Helios Hardware) approval_ids is empty; linked recon REC-FEE-017 original_match_type FEE_NETTED, original_difference -25, original_status EXPLAINED_EXCEPTION.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "reconciliation_status",
+      "reconciliation_id": "REC-CLEAN-001",
+      "original_match_type": "EXACT_MATCH",
+      "original_status": "MATCHED",
+      "original_difference": 0,
+      "planted_error": false,
+      "used_original_as_input": null,
+      "independent_reperformance": null,
+      "condition": "Planted recon record shows EXACT_MATCH / MATCHED for PAY-AP-001 / INV-001. No independent ReperformanceRecord was returned by Catalog; reperformance agreement cannot be asserted.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "reconciliation_status",
+      "reconciliation_id": "REC-FEE-017",
+      "original_match_type": "FEE_NETTED",
+      "original_status": "EXPLAINED_EXCEPTION",
+      "original_difference": -25,
+      "planted_error": false,
+      "condition": "Original workflow recorded fee-netted exception of -25 on PAY-AP-017. No independent reperformance payload.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "reconciliation_status",
+      "reconciliation_id": "REC-NS-1240",
+      "original_match_type": "UNEXPLAINED_DIFFERENCE",
+      "original_status": "HUMAN_REVIEW",
+      "original_difference": 12.4,
+      "planted_error": true,
+      "operational_decision": "HUMAN_REVIEW",
+      "human_follow_up": "Copy of Kernel/ops status HUMAN_REVIEW on REC-NS-1240 remains fail-closed on the object; not opened as an Operator queue by audit.",
+      "condition": "REC-NS-1240 original_status HUMAN_REVIEW with UNEXPLAINED_DIFFERENCE 12.4 (bank 12412.4 vs ledger 12400), payment_id PAY-006, invoice_ids INV-AR-013. planted_error true on the recon record. No Kernel finding_id. Status stays HUMAN_REVIEW.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "vendor_master_signal",
+      "vendor_ids": ["VEND-001", "VEND-001-DUP", "VEND-001-ALIAS"],
+      "condition": "Vendor master lists VEND-001 Acme Supplies, VEND-001-DUP Acme Supplies LLC (first_seen 2026-09-01), and VEND-001-ALIAS Acme Supply Co. Loud decoy class; not elevated as product finding without Kernel control result.",
+      "finding_id": null
+    },
+    {
+      "observation_class": "vendor_master_signal",
+      "vendor_id": "VEND-010",
+      "condition": "VEND-010 Northwind Phantom LLC unusual true, first_seen 2026-09-15; linked to PAY-AP-009 / INV-009. Context only without Kernel finding_id.",
+      "finding_id": null
+    }
+  ],
+  "interpretation_summary": {
+    "period_closed": true,
+    "kernel_findings_cited": 0,
+    "findings_written": 0,
+    "reason_no_graded_findings": "Audit-finding-writing requires Kernel finding_id and ReportStats. This Profile's Catalog only returned population getters. Observations above restate structured identities, decisions, and recon fields without inventing finding IDs, severities, or counts.",
+    "human_review_handling": "REC-NS-1240 HUMAN_REVIEW retained on the reconciliation object; not ticketed to Operator.",
+    "next_step": "When a Kernel audit run with finding_ids and ReportStats is available under runs/audit/, re-interpret and hand off profile report."
+  },
+  "handoff": {
+    "target_bot": "audit",
+    "target_profile": "report",
+    "packet_path": "workspace/audit/packets/2026-09-interpretation.json",
+    "blocked_reason": "ReportStats and finding_ids absent; report profile would have zero Kernel-backed findings to narrate."
+  }
+}

@@ -1,0 +1,84 @@
+▶ Verifier concurrence binds the call's arguments
+  ✖ CONCUR on args A does not unlock args B with the same idempotency_key (117.703ms)
+  ✖ the args A packet the Verifier reads is not overwritten by an args B call (119.467416ms)
+  ✖ a pending record without an argument hash does not unlock (105.01125ms)
+  ✔ object key order does not change the argument hash (116.655875ms)
+✖ Verifier concurrence binds the call's arguments (460.130291ms)
+ℹ tests 4
+ℹ suites 1
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 858.649209
+
+✖ failing tests:
+
+test at extensions/verifier-args.test.ts:175:3
+✖ CONCUR on args A does not unlock args B with the same idempotency_key (117.703ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'sidecar_unavailable'
+  - 'verifier_required'
+  
+      at interceptHandleId (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-args.test.ts:151:10)
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-args.test.ts:183:23)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'sidecar_unavailable',
+    expected: 'verifier_required',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at extensions/verifier-args.test.ts:202:3
+✖ the args A packet the Verifier reads is not overwritten by an args B call (119.467416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   amount: 900000,
+  -   amount: 1000,
+      lines: [
+        {
+          account: '6000',
+          memo: 'rent'
+        }
+  
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-args.test.ts:213:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { vendor: 'Acme', amount: 900000, lines: [ [Object] ] },
+    expected: { vendor: 'Acme', amount: 1000, lines: [ [Object] ] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at extensions/verifier-args.test.ts:219:3
+✖ a pending record without an argument hash does not unlock (105.01125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'sidecar_unavailable'
+  - 'verifier_required'
+  
+      at interceptHandleId (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-args.test.ts:151:10)
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-args.test.ts:230:23)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'sidecar_unavailable',
+    expected: 'verifier_required',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+exit 1

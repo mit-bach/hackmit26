@@ -1,0 +1,19 @@
+{
+  "id": "h_83cd666b-5dee-485e-a37c-67dc5149adee",
+  "from": "operator",
+  "to": "bot_bank",
+  "toSlug": "bank",
+  "prompt": "Operator check for bank",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_bank"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.034Z",
+  "updatedAt": "2026-09-24T23:33:29.490Z",
+  "result": "Bank bot here — owning bank lines and corporate-card charges. Ready for land steps or other bank work. What do you need?",
+  "resultPaths": [],
+  "seq": 40
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "deposit_id": "BANK-po_1MaximorFees",
+    "payout_id": "po_1MaximorFees",
+    "amount": 12610.0,
+    "currency": "USD",
+    "description": "STRIPE PAYOUT",
+    "posted_on": "2026-09-19"
+  },
+  {
+    "deposit_id": "BANK-po_1MaximorRefunds",
+    "payout_id": "po_1MaximorRefunds",
+    "amount": 3380.0,
+    "currency": "USD",
+    "description": "STRIPE PAYOUT",
+    "posted_on": "2026-09-22"
+  },
+  {
+    "deposit_id": "BANK-po_1MaximorDisputes",
+    "payout_id": "po_1MaximorDisputes",
+    "amount": 5070.0,
+    "currency": "USD",
+    "description": "STRIPE PAYOUT",
+    "posted_on": "2026-09-26"
+  }
+]

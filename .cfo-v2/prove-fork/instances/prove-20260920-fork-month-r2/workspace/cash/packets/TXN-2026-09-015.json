@@ -1,0 +1,43 @@
+{
+  "bot": "cash",
+  "profile": "match",
+  "period": "2026-09",
+  "transaction_id": "TXN-2026-09-015",
+  "bank_line_path": "workspace/bank/lines/TXN-2026-09-015.json",
+  "bank_packet_path": "workspace/bank/packets/TXN-2026-09-015.json",
+  "amount": 12412.4,
+  "currency": "USD",
+  "description": "CUSTOMER PAYMENT NORTHSTAR LLC",
+  "counterparty_memo_only": "NORTHSTAR LLC",
+  "kernel": {
+    "get_bank_transaction": "unknown bank transaction TXN-2026-09-015",
+    "get_match_candidates_case_2026-09": "not_found",
+    "get_pipe_identifier": {
+      "identifier_present": false,
+      "fail_closed": true,
+      "reason": "apply/pay have not identified this line. Do not invent the counterparty."
+    },
+    "invoice_ingestion_list_count": 0
+  },
+  "gt_label_from_bank": {
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "disposition": "HUMAN_REVIEW",
+    "ledger_ids": ["GL-AR-NS"],
+    "difference": 12.4
+  },
+  "decision": {
+    "status": "HUMAN_REVIEW",
+    "match_type": "UNEXPLAINED_DIFFERENCE",
+    "difference_retained": 12.4,
+    "cleared_difference": false,
+    "forced_matched": false,
+    "reason": "Kernel has no bank row and no case candidates for TXN-2026-09-015. Pipe identifier absent (apply/pay). Bank packet cites UNEXPLAINED_DIFFERENCE 12.40 vs GL-AR-NS. Cash does not invent amounts or clear the residual."
+  },
+  "next": {
+    "owner": "ctl-cash",
+    "profile": "review-rec",
+    "action": "fail-closed period residual; do not sign RECONCILED while 12.40 UNEXPLAINED_DIFFERENCE remains",
+    "also": "apply may later identify PAY-006 / INV-AR-013 if source objects land; until then residual stays open"
+  },
+  "ack_to_bank": "paths acknowledged; status HUMAN_REVIEW / UNEXPLAINED_DIFFERENCE 12.40 retained"
+}

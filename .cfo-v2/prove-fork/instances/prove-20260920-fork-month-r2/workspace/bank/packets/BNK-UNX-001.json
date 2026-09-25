@@ -1,0 +1,20 @@
+{
+  "from": "bank",
+  "to": "cash",
+  "profile_hint": "match",
+  "period": "2026-09",
+  "transaction_id": "BNK-UNX-001",
+  "line_path": "workspace/bank/lines/BNK-UNX-001.json",
+  "amount": -800.0,
+  "description": "MONTHLY ACCOUNT ANALYSIS FEE",
+  "counterparty": "FIRST NATIONAL",
+  "date": "2026-09-24",
+  "gt_label": null,
+  "instructions": [
+    "Bank landed this operating-account line from pack (Kernel card list empty).",
+    "A charge is not a bill; bank did not invent an invoice.",
+    "Do not clear a 12.40 unexplained difference on TXN-2026-09-015.",
+    "Choose among Kernel candidates only; fail closed HUMAN_REVIEW when residual remains."
+  ],
+  "do_not_clear_difference_12_40": false
+}

@@ -1,0 +1,12 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-219",
+  "candidate_id": "UNMATCHED_BANK:TXN-CAM-RENT-2026-09:-",
+  "match_type": "UNMATCHED_BANK",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference_minor": -4800000,
+  "queue_owner": "cash",
+  "human_queue": false
+}

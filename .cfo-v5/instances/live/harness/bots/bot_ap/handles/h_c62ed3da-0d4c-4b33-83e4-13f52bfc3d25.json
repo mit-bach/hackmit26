@@ -1,0 +1,19 @@
+{
+  "id": "h_c62ed3da-0d4c-4b33-83e4-13f52bfc3d25",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Operator check for ap",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.125Z",
+  "updatedAt": "2026-09-24T23:35:33.468Z",
+  "result": "**ap status**\n\n- **Identity:** Bot `ap` — open bills (three-way match, hold, exception investigation).\n- **Last item wake:** `bill:INV-009` / step `investigate` (handle `h_9d3272cd-…`).\n- **Outcome:** Blocked. Engine error `unknown item bill:INV-009` — no `runs/items/bill-INV-009.json`. Connected reads and `complete_step` all fail the same way. Cannot write that path from this sandbox (EPERM).\n- **What exists:** `runs/items/` has `bill-INV-001` (through match → review-match → pay), not INV-009.\n- **Memory:** `sandboxes/ap/memory/MEMORY.md` only notes Acme Supplies ACM- layout precedent.\n- **Idle otherwise:** No other open bill item owned by ap right now.\n\n**Unblock:** Seed ledger row `bill:INV-009` (workflow `open_bill`, owner `ap`, step `investigate`, `facts.invoice_id`) and re-wake investigate; then I’ll load case evidence / policies / priors and complete with APPROVE or HOLD.",
+  "resultPaths": [],
+  "seq": 82
+}

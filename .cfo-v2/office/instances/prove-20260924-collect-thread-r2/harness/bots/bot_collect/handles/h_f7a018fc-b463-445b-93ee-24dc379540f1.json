@@ -1,0 +1,19 @@
+{
+  "id": "h_f7a018fc-b463-445b-93ee-24dc379540f1",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "profile: chase\nMaximor Demo Corp, as of September 30, 2026. Work one overdue customer invoice. If the customer may be contacted, write them. When they answer, write back about what is still unpaid. An acknowledgement is not done. Do not apply their cash. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:04:52.001Z",
+  "updatedAt": "2026-09-24T21:06:26.184Z",
+  "result": "## Collections — Maximor Demo Corp as of 2026-09-30\n\n**Invoice worked:** `INV-AR-005` — Quiet Harbor Holdings (`CUST-005`)\n\n| Field | Value |\n|--------|--------|\n| Outstanding | **$45,000.00** (full original) |\n| Due | 2026-05-01 |\n| Days past due | **152** (90+) |\n| Prior contact | 3 reminders; last 2026-09-01 |\n| Blocks | None (no dispute, cooldown, or open promise before this turn) |\n| Behavior | chronic_late; on-time 22%; risk `collections` |\n\n**Decision:** `SEND_FINAL_NOTICE` (Kernel allowed; no blocked actions). Did **not** apply cash or close the period.\n\n### Mail (delivered)\n1. **Final notice** → `ap@quietharbor.example`  \n   `msg-collect-INV-AR-005-final-20260930` on `thread-collect-INV-AR-005-20260930`\n2. **World/customer reply**  \n   `msg-world-INV-AR-005-reply-20260930` — balance accepted, **not disputed**, no remittance in flight; **firm ACH promise for full $45,000 on 2026-10-10**, ref `INV-AR-005`\n3. **Collections follow-up** (not a bare ack)  \n   `msg-collect-INV-AR-005-ack-promise-20260930` — restated **still unpaid $45,000.00**, promise logged, escalation held through **2026-10-10**, cash application still required when funds land\n\n**Still open after this turn:** INV-AR-005 remains **$45,000.00** past due until remittance is received and **apply** sticks it. Other overdue candidates (Helios, Brightline, Redwood, etc.) were not chased this turn.",
+  "resultPaths": [],
+  "seq": 8
+}

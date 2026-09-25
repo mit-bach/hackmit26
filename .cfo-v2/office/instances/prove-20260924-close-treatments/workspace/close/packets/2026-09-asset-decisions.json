@@ -1,0 +1,88 @@
+{
+  "period": "2026-09",
+  "profile": "assets",
+  "output_type": "AssetDecision",
+  "lock_status": "OPEN",
+  "notes": [
+    "No invented cost or useful life",
+    "Do not mark CLOSED",
+    "Unexplained $12.40 not cleared",
+    "Depreciation amounts copied from Kernel get_depreciation_schedule",
+    "No accrual booked on this turn"
+  ],
+  "capital_candidates": [
+    {
+      "candidate_id": "INV-018",
+      "vendor": "Dell Technologies",
+      "amount": 60000,
+      "invoice_date": "2026-09-05",
+      "python_capitalize": true,
+      "duplicate_asset_ids": ["FA-DELL-001"],
+      "decision": "duplicate_review",
+      "do_not_create_second_asset": true,
+      "reasoning": "Vendor Dell Technologies + cost 60000 + acquisition 2026-09-05 already on register as FA-DELL-001. Kernel duplicate_asset_ids lists FA-DELL-001. Escalate; do not silent-add a second asset even though python_capitalize is true."
+    }
+  ],
+  "register_decisions": [
+    {
+      "asset_id": "FA-DELL-001",
+      "decision": "capitalize",
+      "vendor": "Dell Technologies",
+      "cost": 60000,
+      "salvage_value": 6000,
+      "depreciable_basis": 54000,
+      "useful_life_months": 36,
+      "placed_in_service_date": "2026-09-05",
+      "acquisition_date": "2026-09-05",
+      "method": "straight_line",
+      "sep_2026_depreciation": 1500.0,
+      "beginning_book_value": 60000,
+      "ending_book_value": 58500,
+      "evidence_refs": ["INV-018", "DOC-DELL-R760"],
+      "source_document_id": "INV-018",
+      "status": "active",
+      "depreciate_this_period": true,
+      "reasoning": "Already on register; placed in service 2026-09-05 so first month depreciation applies. Kernel Sep line 1500.00. Matches capital candidate INV-018 — keep single register entry."
+    },
+    {
+      "asset_id": "FA-OIC-IMPL",
+      "decision": "capitalize",
+      "vendor": "Orbit Insights Corp",
+      "cost": 96000,
+      "salvage_value": 0,
+      "depreciable_basis": 96000,
+      "useful_life_months": 36,
+      "placed_in_service_date": "2025-01-06",
+      "method": "straight_line",
+      "sep_2026_depreciation": 2666.67,
+      "beginning_book_value": 42666.6,
+      "ending_book_value": 39999.93,
+      "evidence_refs": [],
+      "source_document_id": "INV-OIC-2025-01",
+      "status": "active",
+      "depreciate_this_period": true,
+      "reasoning": "Active tangible asset in service since 2025-01-06. Kernel Sep depreciation 2666.67. evidence_refs empty but source_document_id present. Continue SL schedule; do not invent cost."
+    },
+    {
+      "asset_id": "FA-LEN-ROLL-26",
+      "decision": "capitalize",
+      "vendor": "Lenovo",
+      "cost": 424720.8,
+      "salvage_value": 0,
+      "depreciable_basis": 424720.8,
+      "useful_life_months": 36,
+      "placed_in_service_date": "2026-03-18",
+      "method": "straight_line",
+      "sep_2026_depreciation": 11797.8,
+      "beginning_book_value": 353934,
+      "ending_book_value": 342136.2,
+      "evidence_refs": [],
+      "source_document_id": "INV-LEN-ROLL-26",
+      "status": "active",
+      "depreciate_this_period": true,
+      "reasoning": "Laptop rollout in service since 2026-03-18. Kernel Sep depreciation 11797.80. Continue SL schedule."
+    }
+  ],
+  "sep_2026_depreciation_total": 15964.47,
+  "sep_2026_depreciation_total_detail": "1500 + 2666.67 + 11797.80 = 15964.47 (sum of Kernel lines; not independently recomputed for booking authority)"
+}

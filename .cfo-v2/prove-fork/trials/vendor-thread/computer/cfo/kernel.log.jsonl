@@ -1,0 +1,6 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_d46d7fa1963d", "ts": "2026-09-20T15:31:59Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_1c6924e272b6", "ts": "2026-09-24T18:11:07Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.list_world_personas", "profile": "vendor", "slug": "world", "traceId": "k_fcdf55f62079", "ts": "2026-09-24T18:11:29Z"}
+{"botId": "bot_world", "error": "invalid_args", "handleId": "", "ok": false, "op": "inbox.tools.compose_counterparty_message", "profile": "vendor", "slug": "world", "traceId": "k_8b00184c5abf", "ts": "2026-09-24T18:11:35Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.compose_counterparty_message", "profile": "vendor", "slug": "world", "traceId": "k_66fa331a8980", "ts": "2026-09-24T18:12:01Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.send_inbox_message", "profile": "vendor", "slug": "world", "traceId": "k_4c77985535d6", "ts": "2026-09-24T18:12:06Z"}

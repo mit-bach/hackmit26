@@ -1,0 +1,41 @@
+{
+  "invoice_id": "ACM-2026-4410",
+  "source_id": "NS-4410",
+  "vendor_id": "VEND-001",
+  "vendor_name": "Acme Supplies",
+  "po_id": "PO-101",
+  "period": "2026-09",
+  "profile": "prepare",
+  "kernel_evidence": {
+    "get_invoice_NS-4410": {"found": false, "error": "Invoice NS-4410 was not found."},
+    "get_invoice_ACM-2026-4410": {"found": false, "error": "Invoice ACM-2026-4410 was not found. Do not invent invoice data."},
+    "get_case_evidence_NS-4410": {"found": false, "error": "Invoice NS-4410 was not found."},
+    "get_purchase_order_PO-101": {
+      "found": true,
+      "po_id": "PO-101",
+      "vendor": "Acme Supplies",
+      "authorized_amount": 12450,
+      "status": "approved",
+      "po_exists": true,
+      "po_is_approved": true
+    },
+    "get_goods_receipt_PO-101": {
+      "found": true,
+      "receipt_id": "GR-101",
+      "receipt_status": "full",
+      "goods_fully_received": true,
+      "amount_received": 12450,
+      "quantity_ordered": 15,
+      "quantity_received": 15
+    }
+  },
+  "exception_types": ["MISSING_INVOICE_RECORD"],
+  "PreparerRecommendation": {
+    "proposal": "HOLD",
+    "reason": "Books landed vendorBill NS-4410 (ACM-2026-4410, Acme Supplies, 12450 USD, PO-101) but Kernel get_invoice and get_case_evidence return not found. Cannot match or approve without a live AP invoice record. PO-101 is approved and GR-101 is full; those facts do not create a payable. Handle email for missing AP invoice ingest. Do not treat as match-from-books.",
+    "evidence_used": ["PO-101", "GR-101"],
+    "exception_types": ["MISSING_INVOICE_RECORD"]
+  },
+  "proposed": "HOLD",
+  "must_hold": true
+}

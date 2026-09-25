@@ -1,0 +1,26 @@
+{
+  "from": "bank",
+  "to": "cash",
+  "profile_hint": "match",
+  "period": "2026-09",
+  "transaction_id": "TXN-2026-09-011",
+  "line_path": "workspace/bank/lines/TXN-2026-09-011.json",
+  "amount": -10025.0,
+  "description": "WIRE TRANSFER INTL REF 729103",
+  "counterparty": "HELIOS HARDWARE",
+  "date": "2026-09-11",
+  "gt_label": {
+    "match_type": "FEE_NETTED",
+    "disposition": "EXPLAINED_EXCEPTION",
+    "ledger_ids": [
+      "GL-AP-WIRE"
+    ]
+  },
+  "instructions": [
+    "Bank landed this operating-account line from pack (Kernel card list empty).",
+    "A charge is not a bill; bank did not invent an invoice.",
+    "Do not clear a 12.40 unexplained difference on TXN-2026-09-015.",
+    "Choose among Kernel candidates only; fail closed HUMAN_REVIEW when residual remains."
+  ],
+  "do_not_clear_difference_12_40": false
+}

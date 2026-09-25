@@ -1,0 +1,19 @@
+{
+  "id": "h_9f044697-bb4f-44af-9d66-5c39e4a77f74",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Profile: review-treatment. September 2026 prepaid PrepaidDecision pack at workspace/close/packets/2026-09-prepaid-decisions.json.\n\nPlease CONCUR or refuse each:\n\n1. PRE-SFT-001 Orbit Analytics — straight_line_monthly, Sep $2,000 (INV-020 / DOC-SFT-2025)\n2. PRE-INS-001 Hartford Insurance — straight_line_monthly, Sep $1,000 (INV-019 / DOC-INS-2026)\n3. PRE-SFT-002 Orbit Insights Corp — daily_prorate, Sep $4,927.01 (partial first/last month; INV-OIC-2025-01 / CTR-OIC-001)\n4. PRE-INS-RIDER Hartford Brokerage Partners — straight_line_monthly method historically correct, but no Sep amortization (service ended 2026-03-31; schedule only Jan–Mar $6,200)\n5. PRE-CAM-Q3 Cambridge Properties — straight_line_monthly, Sep $16,000 (INV-CAM-RENT-2026-07 present; evidence_refs empty)\n\nAmounts copied from Kernel get_prepaid_schedule. No accrual booked this turn. Do not lock period. Do not clear $12.40. Return first-line CONCUR if all acceptable.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:23:28.141Z",
+  "updatedAt": "2026-09-24T21:23:48.659Z",
+  "result": "CONCUR\n\nPrepaidReview — 2026-09 PrepaidDecision pack (workspace/close/packets/2026-09-prepaid-decisions.json). Kernel candidates/schedules checked; amounts not reinvented.\n\n1. PRE-SFT-001 Orbit Analytics — CONCUR\n   Method straight_line_monthly; Sep $2,000. Full calendar months; SLM applicable $2,000; immediate_expense N/A. Evidence INV-020 / DOC-SFT-2025. Schedule 2026-09 amount 2000 matches.\n\n2. PRE-INS-001 Hartford Insurance — CONCUR\n   Method straight_line_monthly; Sep $1,000. Full-month policy window; Kernel SLM $1,000. Evidence INV-019 / DOC-INS-2026. Schedule 2026-09 amount 1000 matches.\n\n3. PRE-SFT-002 Orbit Insights Corp — CONCUR\n   Method daily_prorate; Sep $4,927.01. Kernel flags partial first/last month — daily stronger than SLM $4,864.86. Evidence INV-OIC-2025-01 / CTR-OIC-001. Schedule 2026-09 daily line 4927.01 (30 days) matches.\n\n4. PRE-INS-RIDER Hartford Brokerage Partners — CONCUR\n   Method straight_line_monthly historically correct; period_action no_amortization_this_period. Service ended 2026-03-31; Kernel schedule only Jan–Mar @ $6,200 each; no 2026-09 line. Do not amortize after service end.\n\n5. PRE-CAM-Q3 Cambridge Properties — CONCUR\n   Method straight_line_monthly; Sep $16,000. Jul–Sep full months; Kernel SLM $16,000. source_document_id INV-CAM-RENT-2026-07 present (evidence_refs array empty on master and schedule — noted, not a missing source id). Schedule 2026-09 amount 16000 matches.\n\nBoundaries: no lock; $12.40 not cleared; no accrual on this turn. Kernel owns posting.\n\nVerdict: CONCUR all five.",
+  "seq": 125
+}

@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-redwood-inv-ar-020",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "70f23e0152a975e329f68840c9c2c353aff2d44d0b2569a0af67df2f754281c8",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-redwood-inv-ar-020-reply",
+      "thread_id": "col-redwood-inv-ar-020",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_44de9ad3f9f5"
+  }
+}

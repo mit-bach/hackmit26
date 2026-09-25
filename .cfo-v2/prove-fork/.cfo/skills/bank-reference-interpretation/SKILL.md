@@ -16,7 +16,7 @@ Wear this when a bank description is truncated, uses a trade name, or looks like
 
 ## Inputs / Evidence
 
-Bank description, reference, and counterparty fields. Ledger counterparty and invoice/reference. `get_pipe_identifier`. This Bot's Memory of how this processor usually labels a deposit. Python overlap scores.
+Bank description, reference, and counterparty fields. Ledger counterparty and invoice/reference. the pipe identifier. This Bot's Memory of how this processor usually labels a deposit. Python overlap scores.
 
 ## Procedure
 

@@ -16,7 +16,7 @@ Wear this as Bot `cash` Profile `investigate` when the preparer could not confir
 
 ## Inputs / Evidence
 
-The unmatched bank line, Kernel candidates, `get_fee_evidence`, `get_pipe_identifier`, and this Bot's Memory of processor payout labels. Precedent is color. It cannot override a live missing fee id.
+The unmatched bank line, Kernel candidates, fee evidence, the pipe identifier, and this Bot's Memory of processor payout labels. Precedent is color. It cannot override a live missing fee id.
 
 ## Procedure
 

@@ -1,0 +1,25 @@
+{
+  "message_id": "MSG-INBOX-019",
+  "thread_id": "THR-remittance",
+  "classification": "CUSTOMER_REMITTANCE",
+  "selected_action": "RECORD_CUSTOMER_REMITTANCE",
+  "dispatch_status": "ROUTED",
+  "reason_codes": [
+    "ROUTED_REMITTANCE"
+  ],
+  "payment_identity": {
+    "source": "inbox_remittance",
+    "message_id": "MSG-INBOX-019",
+    "thread_id": "THR-remittance",
+    "customer_name": "Northwind Labs",
+    "customer_id_hint": "CUST-001",
+    "invoice_reference": "INV-AR-001",
+    "amount": 8500.0,
+    "currency": "USD",
+    "remittance_text": "Please apply this payment to INV-AR-001."
+  },
+  "invoice_id": null,
+  "ready_for_payment": false,
+  "mutation": false,
+  "note": "Customer remittance advice only. Not a vendor bill. Email does not apply cash. Hand to apply/apply with payment_identity.message_id MSG-INBOX-019."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_6ec195e2-5054-4328-8de0-45cb9d73b23f",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: vendor\nYou are Acme Supplies. Finance already asked, on thread THR-incomplete, for the missing invoice number and the amount due on MSG-INBOX-011. Reply to email on the pair thread in one paragraph: name THR-incomplete, say what they asked, and give those two facts as the vendor. Do not dispatch the finance inbox. Do not send as finance. Do not ask_user.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:40:27.211Z",
+  "updatedAt": "2026-09-24T17:42:19.075Z",
+  "result": "**Done as Acme Supplies**\n\n- **Mailbox:** `reply_in_thread` on **THR-incomplete** → **MSG-INBOX-011R** (invoice **ACM-INBOX-5005**, amount due **USD 1,245.00**).\n- **Pair thread → email:** one-paragraph vendor answer; email ACK’d, classified `VENDOR_INVOICE`, Kernel invoice **ING-006**, packet `runs/inbox/packets/MSG-INBOX-011R.json`, handed **ap/prepare**. No finance outbound, no dispatch from world, no `ask_user`.",
+  "resultPaths": [],
+  "seq": 106
+}

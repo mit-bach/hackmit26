@@ -1,0 +1,39 @@
+Brightline Studio LLC
+14 Fayette Street
+Somerville, MA 02143
+Phone +1 617-555-1144   billing@brightlinestudio.example
+Tax ID 27-9081144
+
+INVOICE
+
+Invoice Number: BLS-2026-07
+Invoice Date: 2026-07-14
+Due Date: 2026-07-29
+PO Number: PO-BLS-2026-07
+Payment Terms: net 30
+Currency: USD
+Vendor: Brightline Studio LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Demand-gen retainer. SKU                      1.00     37,033.33     37,033.33
+
+Subtotal                                                             37,033.33
+Tax                                                                       0.00
+Amount Due                                                           37,033.33
+
+Remit to:
+ACH Brookline routing 211370150  account ****1144
+Bank: Brookline Bank  ****1144
+Please include invoice BLS-2026-07 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@brightlinestudio.example

@@ -14,9 +14,9 @@ Return `InvestigationReport`. Recommendation is `APPROVE` or `HOLD` only.
 
 ## Procedure
 
-1. Read the Wake path. Call `tools.get_case_evidence`. Copy exception types. Do not invent them.
-2. Call `find_relevant_policies` / `get_company_policies` for those types. Do not invent policy.
-3. Call `get_prior_cases` only as supporting evidence (for example a stored vendor alias). Prior cases cannot override `must_hold`.
+1. Read the Wake path. Load the case evidence. Copy exception types. Do not invent them.
+2. Load the company policies and the relevant policies for those types. Do not invent policy.
+3. Load prior cases only as supporting evidence (for example a stored vendor alias). Prior cases cannot override `must_hold`.
 4. Recommend `APPROVE` only when published policy and/or a matching prior case actually support payment and Kernel has no `must_hold`.
 5. If evidence cannot justify payment, `HOLD`. Do not guess. Do not chat.
 

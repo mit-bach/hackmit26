@@ -1,0 +1,52 @@
+{
+  "id": "pair:bot_ctl_pay:bot_pay",
+  "threadId": "pair:bot_ctl_pay:bot_pay",
+  "name": "ctl-pay ↔ Pay",
+  "memberIds": [
+    "bot_ctl_pay",
+    "bot_pay"
+  ],
+  "createdAt": 1790273055119,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_1c49dc30-237d-4bff-92e1-12c96a2ac903",
+      "handleId": "h_1c49dc30-237d-4bff-92e1-12c96a2ac903",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-pay\nReview the payment-run draft at workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json.\nConcur only if Kernel reserve_ok is true and the packet is complete.\nDo not rebuild the plan. Do not execute ACH or wire. Do not ask a human.\nProposed invoice IDs (Kernel candidates only): INV-001. plan_id plan_2026-09-19_d1e2549ae6c2.",
+      "at": 1790273055119,
+      "from": {
+        "botId": "bot_pay",
+        "name": "Pay",
+        "color": "green"
+      }
+    },
+    {
+      "id": "pair-result-h_1c49dc30-237d-4bff-92e1-12c96a2ac903",
+      "handleId": "h_1c49dc30-237d-4bff-92e1-12c96a2ac903",
+      "role": "bot",
+      "kind": "text",
+      "text": "CONCUR on plan_2026-09-19_d1e2549ae6c2 (review-pay).\n\ndecision: CONCUR / proposed_action RELEASE\ncontract: PaymentAuditResult\npath: runs/pay/concurrence/plan_2026-09-19_d1e2549ae6c2.json\npacket: workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json\n\nreserve_ok: true (packet + Kernel get_cash_position k_a6f8ad53a1aa)\nproposed_ids: INV-001 only; total_payout 12450.0 within spendable_cash 6374925.74\npolicies: P-012–P-016 (treasury k_c94d0b0eeafc)\nmust_hold: false; executed/self_approved false\nctl-pay does not execute ACH/wire. Your object to release under Kernel rules.",
+      "at": 1790273087549,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    },
+    {
+      "id": "h_17bf0e2e-4d6f-4976-978f-5ea6d93aa019",
+      "handleId": "h_17bf0e2e-4d6f-4976-978f-5ea6d93aa019",
+      "role": "bot",
+      "kind": "text",
+      "text": "PaymentPlan plan_2026-09-19_d1e2549ae6c2 written. pay_this_week: INV-001. ctl-pay CONCUR. cash expected outflows executed=false.",
+      "at": 1790273198684,
+      "from": {
+        "botId": "bot_pay",
+        "name": "Pay",
+        "color": "green"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "pair:bot_ap:bot_pay",
+  "threadId": "pair:bot_ap:bot_pay",
+  "name": "AP ↔ Pay",
+  "memberIds": [
+    "bot_ap",
+    "bot_pay"
+  ],
+  "createdAt": 1790273112615,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_8276a1ec-ab2e-4930-a16d-95e301f10b74",
+      "handleId": "h_8276a1ec-ab2e-4930-a16d-95e301f10b74",
+      "role": "bot",
+      "kind": "text",
+      "text": "PaymentPlan plan_2026-09-19_d1e2549ae6c2 written. pay_this_week: INV-001. ctl-pay CONCUR. cash expected outflows executed=false.",
+      "at": 1790273112615,
+      "from": {
+        "botId": "bot_pay",
+        "name": "Pay",
+        "color": "green"
+      }
+    }
+  ]
+}

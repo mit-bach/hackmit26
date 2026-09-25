@@ -1,0 +1,1243 @@
+{
+  "version": "1",
+  "ops": [
+    {
+      "id": "accrual.tools.compute_accrual_estimate",
+      "python": "accrual.tools:compute_accrual_estimate",
+      "exportName": "compute_accrual_estimate",
+      "args": {
+        "vendor": "string",
+        "period": "string",
+        "method": "EstimationMethod"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.create_accrual",
+      "python": "accrual.tools:create_accrual",
+      "exportName": "create_accrual",
+      "args": {
+        "vendor": "string",
+        "period": "string",
+        "method": "EstimationMethod",
+        "confidence": "number",
+        "evidence": "list",
+        "reasoning_summary": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/accrual/"
+      ]
+    },
+    {
+      "id": "accrual.tools.get_current_period_invoices",
+      "python": "accrual.tools:get_current_period_invoices",
+      "exportName": "get_current_period_invoices",
+      "args": {
+        "period": "string",
+        "vendor": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_estimate_candidates",
+      "python": "accrual.tools:get_estimate_candidates",
+      "exportName": "get_estimate_candidates",
+      "args": {
+        "vendor": "string",
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_expected_invoices",
+      "python": "accrual.tools:get_expected_invoices",
+      "exportName": "get_expected_invoices",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_goods_receipts",
+      "python": "accrual.tools:get_goods_receipts",
+      "exportName": "get_goods_receipts",
+      "args": {
+        "vendor": "string",
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_open_accruals",
+      "python": "accrual.tools:get_open_accruals",
+      "exportName": "get_open_accruals",
+      "args": {
+        "period": "string",
+        "vendor": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_purchase_orders",
+      "python": "accrual.tools:get_purchase_orders",
+      "exportName": "get_purchase_orders",
+      "args": {
+        "vendor": "string",
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_vendor_contract",
+      "python": "accrual.tools:get_vendor_contract",
+      "exportName": "get_vendor_contract",
+      "args": {
+        "vendor": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_vendor_invoice_history",
+      "python": "accrual.tools:get_vendor_invoice_history",
+      "exportName": "get_vendor_invoice_history",
+      "args": {
+        "vendor": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.get_vendor_usage",
+      "python": "accrual.tools:get_vendor_usage",
+      "exportName": "get_vendor_usage",
+      "args": {
+        "vendor": "string",
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "accrual-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "accrual.tools.reconcile_accrual_with_invoice",
+      "python": "accrual.tools:reconcile_accrual_with_invoice",
+      "exportName": "reconcile_accrual_with_invoice",
+      "args": {
+        "accrual_id": "string",
+        "invoice_id": "string",
+        "actual_amount": "number"
+      },
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/accrual/"
+      ]
+    },
+    {
+      "id": "ar.tools.get_ar_close_snapshot",
+      "python": "ar.tools:get_ar_close_snapshot",
+      "exportName": "get_ar_close_snapshot",
+      "args": {
+        "as_of": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ar",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "ar.tools.get_ar_customer",
+      "python": "ar.tools:get_ar_customer",
+      "exportName": "get_ar_customer",
+      "args": {
+        "customer_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ar",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "ar.tools.get_ar_precedents",
+      "python": "ar.tools:get_ar_precedents",
+      "exportName": "get_ar_precedents",
+      "args": {
+        "customer_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ar",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "ar.tools.get_cash_application_facts",
+      "python": "ar.tools:get_cash_application_facts",
+      "exportName": "get_cash_application_facts",
+      "args": {
+        "payment_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ar",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "ar.tools.get_collection_candidates",
+      "python": "ar.tools:get_collection_candidates",
+      "exportName": "get_collection_candidates",
+      "args": {
+        "as_of": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ar",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "ar.tools.get_collection_invoice_facts",
+      "python": "ar.tools:get_collection_invoice_facts",
+      "exportName": "get_collection_invoice_facts",
+      "args": {
+        "invoice_id": "string",
+        "as_of": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ar",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_approvals",
+      "python": "audit.tools:get_audit_approvals",
+      "exportName": "get_audit_approvals",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_ground_truth",
+      "python": "audit.tools:get_audit_ground_truth",
+      "exportName": "get_audit_ground_truth",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-eval",
+      "evalOnly": true,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_invoices",
+      "python": "audit.tools:get_audit_invoices",
+      "exportName": "get_audit_invoices",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_journals",
+      "python": "audit.tools:get_audit_journals",
+      "exportName": "get_audit_journals",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_payments",
+      "python": "audit.tools:get_audit_payments",
+      "exportName": "get_audit_payments",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_period",
+      "python": "audit.tools:get_audit_period",
+      "exportName": "get_audit_period",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_policy",
+      "python": "audit.tools:get_audit_policy",
+      "exportName": "get_audit_policy",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_audit_vendors",
+      "python": "audit.tools:get_audit_vendors",
+      "exportName": "get_audit_vendors",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_operational_decisions",
+      "python": "audit.tools:get_operational_decisions",
+      "exportName": "get_operational_decisions",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "audit.tools.get_planted_reconciliations",
+      "python": "audit.tools:get_planted_reconciliations",
+      "exportName": "get_planted_reconciliations",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "audit-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "bs_recon.tools.get_reconciliation_packet",
+      "python": "bs_recon.tools:get_reconciliation_packet",
+      "exportName": "get_reconciliation_packet",
+      "args": {
+        "period": "string",
+        "account_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "bs-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "bs_recon.tools.list_period_reconciliations",
+      "python": "bs_recon.tools:list_period_reconciliations",
+      "exportName": "list_period_reconciliations",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "bs-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "bs_recon.tools.list_reconciling_items",
+      "python": "bs_recon.tools:list_reconciling_items",
+      "exportName": "list_reconciling_items",
+      "args": {
+        "period": "string",
+        "account_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "bs-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_bank_transaction",
+      "python": "cash_recon.tools:get_bank_transaction",
+      "exportName": "cfo_cash_recon_get_bank_transaction",
+      "args": {
+        "transaction_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "cash-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_candidate",
+      "python": "cash_recon.tools:get_candidate",
+      "exportName": "get_candidate",
+      "args": {
+        "candidate_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "cash-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_fee_evidence",
+      "python": "cash_recon.tools:get_fee_evidence",
+      "exportName": "get_fee_evidence",
+      "args": {
+        "evidence_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "cash-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_ledger_entry",
+      "python": "cash_recon.tools:get_ledger_entry",
+      "exportName": "get_ledger_entry",
+      "args": {
+        "entry_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "cash-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_match_candidates",
+      "python": "cash_recon.tools:get_match_candidates",
+      "exportName": "get_match_candidates",
+      "args": {
+        "case_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "cash-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "cash_recon.tools.get_pipe_identifier",
+      "python": "cash_recon.tools:get_pipe_identifier",
+      "exportName": "get_pipe_identifier",
+      "args": {
+        "bank_transaction_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "cash-recon",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "close.tools.get_close_gates",
+      "python": "close.tools:get_close_gates",
+      "exportName": "get_close_gates",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "close-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "close.tools.get_close_packet",
+      "python": "close.tools:get_close_packet",
+      "exportName": "get_close_packet",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "close-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "fixed_assets.tools.get_capital_candidates",
+      "python": "fixed_assets.tools:get_capital_candidates",
+      "exportName": "get_capital_candidates",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "fixed-assets",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "fixed_assets.tools.get_depreciation_schedule",
+      "python": "fixed_assets.tools:get_depreciation_schedule",
+      "exportName": "get_depreciation_schedule",
+      "args": {
+        "asset_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "fixed-assets",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "fixed_assets.tools.get_fixed_asset",
+      "python": "fixed_assets.tools:get_fixed_asset",
+      "exportName": "get_fixed_asset",
+      "args": {
+        "asset_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "fixed-assets",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "fixed_assets.tools.list_fixed_assets",
+      "python": "fixed_assets.tools:list_fixed_assets",
+      "exportName": "list_fixed_assets",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "fixed-assets",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.classify_inbox_message",
+      "python": "inbox.tools:classify_inbox_message",
+      "exportName": "classify_inbox_message",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.compose_counterparty_message",
+      "python": "inbox.tools:compose_counterparty_message",
+      "exportName": "compose_counterparty_message",
+      "args": {
+        "case_id": "string",
+        "message_id": "string",
+        "thread_id": "string",
+        "sender_name": "string",
+        "sender_address": "string",
+        "subject": "string",
+        "body_text": "string",
+        "sent_at": "string",
+        "received_at": "string",
+        "in_reply_to": "string",
+        "correlation_id": "string",
+        "recipient": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.dispatch_inbox_action",
+      "python": "inbox.tools:dispatch_inbox_action",
+      "exportName": "dispatch_inbox_action",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.extract_inbox_invoice",
+      "python": "inbox.tools:extract_inbox_invoice",
+      "exportName": "extract_inbox_invoice",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.get_inbox_attachment",
+      "python": "inbox.tools:get_inbox_attachment",
+      "exportName": "get_inbox_attachment",
+      "args": {
+        "message_id": "string",
+        "filename": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.get_inbox_message",
+      "python": "inbox.tools:get_inbox_message",
+      "exportName": "get_inbox_message",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.get_inbox_thread",
+      "python": "inbox.tools:get_inbox_thread",
+      "exportName": "get_inbox_thread",
+      "args": {
+        "thread_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.list_inbox_messages",
+      "python": "inbox.tools:list_inbox_messages",
+      "exportName": "list_inbox_messages",
+      "args": {
+        "thread_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.list_inbox_threads",
+      "python": "inbox.tools:list_inbox_threads",
+      "exportName": "list_inbox_threads",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.list_world_personas",
+      "python": "inbox.tools:list_world_personas",
+      "exportName": "list_world_personas",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "inbox.tools.reply_in_thread",
+      "python": "inbox.tools:reply_in_thread",
+      "exportName": "reply_in_thread",
+      "args": {
+        "thread_id": "string",
+        "in_reply_to": "string",
+        "message_id": "string",
+        "body_text": "string",
+        "subject": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/inbox/"
+      ]
+    },
+    {
+      "id": "inbox.tools.send_inbox_message",
+      "python": "inbox.tools:send_inbox_message",
+      "exportName": "send_inbox_message",
+      "args": {
+        "envelope_json": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/inbox/"
+      ]
+    },
+    {
+      "id": "inbox.tools.send_office_outbound",
+      "python": "inbox.tools:send_office_outbound",
+      "exportName": "send_office_outbound",
+      "args": {
+        "thread_id": "string",
+        "message_id": "string",
+        "to_name": "string",
+        "to_address": "string",
+        "subject": "string",
+        "body_text": "string",
+        "from_address": "string",
+        "from_name": "string",
+        "in_reply_to": "string",
+        "sent_at": "string"
+      },
+      "mutability": "write-local",
+      "sodClass": "inbox",
+      "evalOnly": false,
+      "ownerPrefixes": [
+        "runs/inbox/"
+      ]
+    },
+    {
+      "id": "integrations.tools.get_payout_waterfall",
+      "python": "integrations.tools:get_payout_waterfall",
+      "exportName": "get_payout_waterfall",
+      "args": {
+        "payout_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "processor-payout",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "integrations.tools.get_processor_payout",
+      "python": "integrations.tools:get_processor_payout",
+      "exportName": "get_processor_payout",
+      "args": {
+        "payout_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "processor-payout",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "integrations.tools.list_processor_payouts",
+      "python": "integrations.tools:list_processor_payouts",
+      "exportName": "list_processor_payouts",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "processor-payout",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.find_related_invoice",
+      "python": "invoice_ingestion.tools:find_related_invoice",
+      "exportName": "find_related_invoice",
+      "args": {
+        "transaction_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_bank_transaction",
+      "python": "invoice_ingestion.tools:get_bank_transaction",
+      "exportName": "cfo_invoice_ingestion_get_bank_transaction",
+      "args": {
+        "transaction_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_edi_document",
+      "python": "invoice_ingestion.tools:get_edi_document",
+      "exportName": "get_edi_document",
+      "args": {
+        "document_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_email",
+      "python": "invoice_ingestion.tools:get_email",
+      "exportName": "get_email",
+      "args": {
+        "message_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_email_attachment",
+      "python": "invoice_ingestion.tools:get_email_attachment",
+      "exportName": "get_email_attachment",
+      "args": {
+        "message_id": "string",
+        "attachment_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_employee_submission",
+      "python": "invoice_ingestion.tools:get_employee_submission",
+      "exportName": "get_employee_submission",
+      "args": {
+        "submission_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_erp_invoice",
+      "python": "invoice_ingestion.tools:get_erp_invoice",
+      "exportName": "get_erp_invoice",
+      "args": {
+        "record_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_mail_document",
+      "python": "invoice_ingestion.tools:get_mail_document",
+      "exportName": "get_mail_document",
+      "args": {
+        "document_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_procurement_record",
+      "python": "invoice_ingestion.tools:get_procurement_record",
+      "exportName": "get_procurement_record",
+      "args": {
+        "record_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.get_vendor_portal_document",
+      "python": "invoice_ingestion.tools:get_vendor_portal_document",
+      "exportName": "get_vendor_portal_document",
+      "args": {
+        "document_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_bank_transactions",
+      "python": "invoice_ingestion.tools:list_bank_transactions",
+      "exportName": "list_bank_transactions",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_edi_documents",
+      "python": "invoice_ingestion.tools:list_edi_documents",
+      "exportName": "list_edi_documents",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_email_candidates",
+      "python": "invoice_ingestion.tools:list_email_candidates",
+      "exportName": "list_email_candidates",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_employee_submissions",
+      "python": "invoice_ingestion.tools:list_employee_submissions",
+      "exportName": "list_employee_submissions",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_erp_invoice_records",
+      "python": "invoice_ingestion.tools:list_erp_invoice_records",
+      "exportName": "list_erp_invoice_records",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_mail_documents",
+      "python": "invoice_ingestion.tools:list_mail_documents",
+      "exportName": "list_mail_documents",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_procurement_records",
+      "python": "invoice_ingestion.tools:list_procurement_records",
+      "exportName": "list_procurement_records",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "invoice_ingestion.tools.list_vendor_portal_documents",
+      "python": "invoice_ingestion.tools:list_vendor_portal_documents",
+      "exportName": "list_vendor_portal_documents",
+      "args": {
+        "period": "string",
+        "vendor": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ingestion",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "memory.tools.get_decision_memories",
+      "python": "memory.tools:get_decision_memories",
+      "exportName": "get_decision_memories",
+      "args": {
+        "workflow": "string",
+        "entity_id": "string",
+        "situation_type": "string",
+        "period": "string",
+        "entity_type": "string"
+      },
+      "mutability": "read",
+      "sodClass": "memory-read",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "prepaid.tools.get_prepaid",
+      "python": "prepaid.tools:get_prepaid",
+      "exportName": "get_prepaid",
+      "args": {
+        "prepaid_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "prepaid",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "prepaid.tools.get_prepaid_schedule",
+      "python": "prepaid.tools:get_prepaid_schedule",
+      "exportName": "get_prepaid_schedule",
+      "args": {
+        "prepaid_id": "string",
+        "method": "string"
+      },
+      "mutability": "read",
+      "sodClass": "prepaid",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "prepaid.tools.get_prepaid_treatment_candidates",
+      "python": "prepaid.tools:get_prepaid_treatment_candidates",
+      "exportName": "get_prepaid_treatment_candidates",
+      "args": {
+        "prepaid_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "prepaid",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "prepaid.tools.list_prepaids",
+      "python": "prepaid.tools:list_prepaids",
+      "exportName": "list_prepaids",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "prepaid",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_cash_forecast",
+      "python": "reporting.tools:get_cash_forecast",
+      "exportName": "get_cash_forecast",
+      "args": {
+        "as_of": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_forecast_checks",
+      "python": "reporting.tools:get_forecast_checks",
+      "exportName": "get_forecast_checks",
+      "args": {
+        "forecast_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_forecast_snapshot",
+      "python": "reporting.tools:get_forecast_snapshot",
+      "exportName": "get_forecast_snapshot",
+      "args": {
+        "forecast_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_period_metrics",
+      "python": "reporting.tools:get_period_metrics",
+      "exportName": "get_period_metrics",
+      "args": {
+        "period": "string",
+        "comparison_period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_trusted_cash_status",
+      "python": "reporting.tools:get_trusted_cash_status",
+      "exportName": "get_trusted_cash_status",
+      "args": {
+        "period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_variance_facts",
+      "python": "reporting.tools:get_variance_facts",
+      "exportName": "get_variance_facts",
+      "args": {
+        "metric": "string",
+        "period": "string",
+        "comparison_period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "reporting.tools.get_variance_trace",
+      "python": "reporting.tools:get_variance_trace",
+      "exportName": "get_variance_trace",
+      "args": {
+        "metric": "string",
+        "period": "string",
+        "comparison_period": "string"
+      },
+      "mutability": "read",
+      "sodClass": "reporting",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "scheduling.tools.get_approved_pool",
+      "python": "scheduling.tools:get_approved_pool",
+      "exportName": "get_approved_pool",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "treasury",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "scheduling.tools.get_cash_position",
+      "python": "scheduling.tools:get_cash_position",
+      "exportName": "get_cash_position",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "treasury",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "scheduling.tools.get_payment_candidates",
+      "python": "scheduling.tools:get_payment_candidates",
+      "exportName": "get_payment_candidates",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "treasury",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "scheduling.tools.get_treasury_policies",
+      "python": "scheduling.tools:get_treasury_policies",
+      "exportName": "get_treasury_policies",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "treasury",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.find_duplicate_invoices",
+      "python": "tools:find_duplicate_invoices",
+      "exportName": "find_duplicate_invoices",
+      "args": {
+        "invoice_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-records",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.find_relevant_policies",
+      "python": "tools:find_relevant_policies",
+      "exportName": "find_relevant_policies",
+      "args": {
+        "exception_type": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-policy",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.get_case_evidence",
+      "python": "tools:get_case_evidence",
+      "exportName": "get_case_evidence",
+      "args": {
+        "invoice_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-records",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.get_company_policies",
+      "python": "tools:get_company_policies",
+      "exportName": "get_company_policies",
+      "args": {},
+      "mutability": "read",
+      "sodClass": "ap-policy",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.get_goods_receipt",
+      "python": "tools:get_goods_receipt",
+      "exportName": "get_goods_receipt",
+      "args": {
+        "po_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-records",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.get_invoice",
+      "python": "tools:get_invoice",
+      "exportName": "get_invoice",
+      "args": {
+        "invoice_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-records",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.get_prior_cases",
+      "python": "tools:get_prior_cases",
+      "exportName": "get_prior_cases",
+      "args": {
+        "exception_type": "string",
+        "vendor": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-policy",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    },
+    {
+      "id": "tools.get_purchase_order",
+      "python": "tools:get_purchase_order",
+      "exportName": "get_purchase_order",
+      "args": {
+        "po_id": "string"
+      },
+      "mutability": "read",
+      "sodClass": "ap-records",
+      "evalOnly": false,
+      "ownerPrefixes": []
+    }
+  ]
+}

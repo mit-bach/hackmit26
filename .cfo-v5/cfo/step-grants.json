@@ -1,0 +1,219 @@
+{
+  "ap": {
+    "match": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "tools.get_case_evidence"
+    ],
+    "investigate": [
+      "tools.get_invoice",
+      "tools.get_purchase_order",
+      "tools.get_goods_receipt",
+      "tools.find_duplicate_invoices",
+      "tools.get_case_evidence",
+      "tools.get_company_policies",
+      "tools.find_relevant_policies",
+      "tools.get_prior_cases",
+      "memory.tools.get_decision_memories"
+    ]
+  },
+  "ctl-pay": {
+    "review-match": [
+      "tools.get_case_evidence",
+      "tools.get_company_policies",
+      "tools.find_relevant_policies",
+      "tools.get_prior_cases"
+    ],
+    "review-pay": [
+      "scheduling.tools.get_cash_position",
+      "scheduling.tools.get_treasury_policies"
+    ]
+  },
+  "pay": {
+    "schedule": [
+      "scheduling.tools.get_cash_position",
+      "scheduling.tools.get_approved_pool",
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_treasury_policies"
+    ]
+  },
+  "email": {
+    "triage": [
+      "inbox.tools.get_inbox_message",
+      "inbox.tools.get_inbox_attachment",
+      "inbox.tools.classify_inbox_message",
+      "inbox.tools.extract_inbox_invoice",
+      "inbox.tools.dispatch_inbox_action",
+      "inbox.tools.list_inbox_threads",
+      "inbox.tools.list_inbox_messages",
+      "inbox.tools.get_inbox_thread",
+      "inbox.tools.send_office_outbound"
+    ]
+  },
+  "books": {
+    "capture": [
+      "invoice_ingestion.tools.list_erp_invoice_records",
+      "invoice_ingestion.tools.get_erp_invoice",
+      "invoice_ingestion.tools.list_procurement_records",
+      "invoice_ingestion.tools.get_procurement_record",
+      "invoice_ingestion.tools.list_edi_documents",
+      "invoice_ingestion.tools.get_edi_document"
+    ]
+  },
+  "world": {
+    "reply": [
+      "inbox.tools.compose_counterparty_message",
+      "inbox.tools.send_inbox_message",
+      "inbox.tools.reply_in_thread",
+      "inbox.tools.list_inbox_threads",
+      "inbox.tools.list_inbox_messages",
+      "inbox.tools.get_inbox_thread",
+      "inbox.tools.list_world_personas"
+    ]
+  },
+  "stripe": {
+    "unpack": [
+      "integrations.tools.list_processor_payouts",
+      "integrations.tools.get_processor_payout",
+      "integrations.tools.get_payout_waterfall"
+    ]
+  },
+  "bank": {
+    "land": [
+      "invoice_ingestion.tools.list_bank_transactions",
+      "invoice_ingestion.tools.get_bank_transaction",
+      "invoice_ingestion.tools.find_related_invoice"
+    ]
+  },
+  "cash": {
+    "reconcile": [
+      "cash_recon.tools.get_bank_transaction",
+      "cash_recon.tools.get_ledger_entry",
+      "cash_recon.tools.get_fee_evidence",
+      "cash_recon.tools.get_match_candidates",
+      "cash_recon.tools.get_candidate",
+      "cash_recon.tools.get_pipe_identifier",
+      "memory.tools.get_decision_memories"
+    ]
+  },
+  "ctl-cash": {
+    "review-rec": [
+      "cash_recon.tools.get_bank_transaction",
+      "cash_recon.tools.get_ledger_entry",
+      "cash_recon.tools.get_fee_evidence",
+      "cash_recon.tools.get_match_candidates",
+      "cash_recon.tools.get_candidate",
+      "cash_recon.tools.get_pipe_identifier",
+      "memory.tools.get_decision_memories"
+    ],
+    "review-apply": [
+      "ar.tools.get_cash_application_facts",
+      "ar.tools.get_ar_customer",
+      "ar.tools.get_ar_precedents"
+    ]
+  },
+  "apply": {
+    "apply": [
+      "ar.tools.get_cash_application_facts",
+      "ar.tools.get_ar_customer",
+      "ar.tools.get_ar_precedents"
+    ]
+  },
+  "collect": {
+    "chase": [
+      "ar.tools.get_collection_candidates",
+      "ar.tools.get_collection_invoice_facts",
+      "ar.tools.get_ar_customer",
+      "ar.tools.get_ar_precedents",
+      "inbox.tools.send_office_outbound"
+    ]
+  },
+  "close": {
+    "accrue": [
+      "accrual.tools.get_expected_invoices",
+      "accrual.tools.get_current_period_invoices",
+      "accrual.tools.get_vendor_invoice_history",
+      "accrual.tools.get_purchase_orders",
+      "accrual.tools.get_goods_receipts",
+      "accrual.tools.get_vendor_contract",
+      "accrual.tools.get_vendor_usage",
+      "accrual.tools.get_estimate_candidates",
+      "accrual.tools.compute_accrual_estimate",
+      "memory.tools.get_decision_memories",
+      "accrual.tools.create_accrual",
+      "accrual.tools.get_open_accruals",
+      "accrual.tools.reconcile_accrual_with_invoice"
+    ],
+    "prepaid": [
+      "prepaid.tools.get_prepaid",
+      "prepaid.tools.list_prepaids",
+      "prepaid.tools.get_prepaid_treatment_candidates",
+      "prepaid.tools.get_prepaid_schedule",
+      "memory.tools.get_decision_memories"
+    ],
+    "assets": [
+      "fixed_assets.tools.get_fixed_asset",
+      "fixed_assets.tools.list_fixed_assets",
+      "fixed_assets.tools.get_depreciation_schedule",
+      "fixed_assets.tools.get_capital_candidates"
+    ],
+    "bs": [
+      "bs_recon.tools.get_reconciliation_packet",
+      "bs_recon.tools.list_reconciling_items"
+    ]
+  },
+  "ctl-books": {
+    "review-treatment": [
+      "prepaid.tools.get_prepaid",
+      "prepaid.tools.list_prepaids",
+      "prepaid.tools.get_prepaid_treatment_candidates",
+      "prepaid.tools.get_prepaid_schedule",
+      "memory.tools.get_decision_memories"
+    ],
+    "review-assets": [
+      "fixed_assets.tools.get_fixed_asset",
+      "fixed_assets.tools.list_fixed_assets",
+      "fixed_assets.tools.get_depreciation_schedule",
+      "fixed_assets.tools.get_capital_candidates"
+    ],
+    "review-bs": [
+      "bs_recon.tools.get_reconciliation_packet",
+      "bs_recon.tools.list_reconciling_items"
+    ],
+    "lock": [
+      "close.tools.get_close_gates",
+      "close.tools.get_close_packet"
+    ]
+  },
+  "story": {
+    "flux": [
+      "reporting.tools.get_period_metrics",
+      "reporting.tools.get_variance_facts",
+      "reporting.tools.get_variance_trace"
+    ],
+    "forecast": [
+      "reporting.tools.get_cash_forecast",
+      "reporting.tools.get_forecast_snapshot",
+      "reporting.tools.get_forecast_checks",
+      "reporting.tools.get_trusted_cash_status",
+      "reporting.tools.get_period_metrics",
+      "reporting.tools.get_variance_facts"
+    ]
+  },
+  "audit": {
+    "interpret": [
+      "audit.tools.get_audit_period",
+      "audit.tools.get_audit_payments",
+      "audit.tools.get_audit_journals",
+      "audit.tools.get_audit_approvals",
+      "audit.tools.get_audit_vendors",
+      "audit.tools.get_audit_invoices",
+      "audit.tools.get_operational_decisions",
+      "audit.tools.get_planted_reconciliations",
+      "audit.tools.get_audit_policy"
+    ],
+    "report": []
+  }
+}

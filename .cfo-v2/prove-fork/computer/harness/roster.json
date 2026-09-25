@@ -9,7 +9,7 @@
       "name": "Email",
       "slug": "email",
       "purpose": "Owns messages and attachments: vendor invoices and customer remittances.",
-      "instructions": "Read office/bots/email/BOT.md and obey office/constitution.md. You land and classify mail. Outbound missing-info uses send_office_outbound then Handle world. Never ask a human. Do not match, pay, apply, or accrue.",
+      "instructions": "You land and classify mail. Outbound missing-info uses send_office_outbound then Handle world. Never ask a human. Do not match, pay, apply, or accrue.",
       "skills": [
         "invoice-source-identification",
         "invoice-field-interpretation",
@@ -30,7 +30,7 @@
       "name": "Stripe",
       "slug": "stripe",
       "purpose": "Owns processor payouts, fees, refunds, and chargebacks.",
-      "instructions": "Read office/bots/stripe/BOT.md and obey office/constitution.md. Wear Stripe Payout Agent. Unpack the Kernel waterfall. invoice_candidates stays 0. Never ask a human. Do not produce InvoiceCandidate.",
+      "instructions": "Wear Stripe Payout Agent. Unpack the Kernel waterfall. invoice_candidates stays 0. Never ask a human. Do not produce InvoiceCandidate.",
       "skills": [],
       "connectors": [
         "stripe",
@@ -46,7 +46,7 @@
       "name": "Bank",
       "slug": "bank",
       "purpose": "Owns bank lines and corporate-card charges.",
-      "instructions": "Read office/bots/bank/BOT.md and obey office/constitution.md. You land bank and card lines. Never ask a human. A charge is not a bill. Do not invent invoices.",
+      "instructions": "You land bank and card lines. Never ask a human. A charge is not a bill. Do not invent invoices.",
       "skills": [
         "bank-charge-invoice-discovery"
       ],
@@ -60,7 +60,7 @@
       "name": "Books",
       "slug": "books",
       "purpose": "Owns GL, subledgers, vendor and customer master, POs, and period-lock state (read).",
-      "instructions": "Read office/bots/books/BOT.md and obey office/constitution.md. You land books records. Never ask a human. Do not close the period.",
+      "instructions": "You land books records. Never ask a human. Do not close the period.",
       "skills": [
         "invoice-source-identification"
       ],
@@ -77,7 +77,7 @@
       "name": "World",
       "slug": "world",
       "purpose": "Owns simulated counterparty messages: the outside world's mailbox.",
-      "instructions": "Read office/bots/world/BOT.md and obey office/constitution.md. You role-play vendors, customers, banks, and employees. Never ask a human. Do not write AP. Do not dispatch the finance inbox. Simulated mail only.",
+      "instructions": "You role-play vendors, customers, banks, and employees. Never ask a human. Do not write AP. Do not dispatch the finance inbox. Simulated mail only.",
       "skills": [],
       "connectors": [
         "inbox.tools.compose_counterparty_message",
@@ -95,7 +95,7 @@
       "name": "AP",
       "slug": "ap",
       "purpose": "Owns open bills: three-way match, hold, and exception investigation; does not pay or concur.",
-      "instructions": "Read office/bots/ap/BOT.md and obey office/constitution.md. You own open bills. Never ask a human. Approve-shaped drafts Handle ctl-pay / review-match. You do not release cash.",
+      "instructions": "You own open bills. Never ask a human. Approve-shaped drafts Handle ctl-pay / review-match. You do not release cash.",
       "skills": [
         "three-way-match-analysis",
         "ap-exception-investigation",
@@ -116,7 +116,7 @@
       "name": "Pay",
       "slug": "pay",
       "purpose": "Owns the weekly payment-run draft over the approved pool; does not match bills or move money.",
-      "instructions": "Read office/bots/pay/BOT.md. Obey office/constitution.md. You own the payment-run draft. You do not own three-way match. You do not move money. Never ask a human. Handle every draft to ctl-pay / review-pay. Await the Handle. Peer Handle is not approval.",
+      "instructions": "You own the payment-run draft. You do not own three-way match. You do not move money. Never ask a human. Handle every draft to ctl-pay / review-pay. Await the Handle. Peer Handle is not approval.",
       "skills": [
         "payment-prioritization",
         "early-payment-discount-evaluation"
@@ -134,7 +134,7 @@
       "name": "Apply",
       "slug": "apply",
       "purpose": "Owns unapplied cash and sticks Kernel-valid remittances to invoices.",
-      "instructions": "Read office/bots/apply/BOT.md and obey office/constitution.md. You own unapplied cash. Never ask a human. Fail-closed HUMAN_REVIEW Handles ctl-cash / review-apply. Do not dun. Do not post past Kernel refuse.",
+      "instructions": "You own unapplied cash. Never ask a human. Fail-closed HUMAN_REVIEW Handles ctl-cash / review-apply. Do not dun. Do not post past Kernel refuse.",
       "skills": [
         "cash-application"
       ],
@@ -150,7 +150,7 @@
       "name": "Collect",
       "slug": "collect",
       "purpose": "Owns open invoices still owed after application.",
-      "instructions": "Read office/bots/collect/BOT.md and obey office/constitution.md. You own aging after apply has drained deposits. Never ask a human. Dunning is send_office_outbound then Handle world. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
+      "instructions": "You own aging after apply has drained deposits. Never ask a human. Dunning is send_office_outbound then Handle world. If new deposits remain, Handle apply. Handle write-off or reserve to ctl-pay.",
       "skills": [
         "ar-collections-policy"
       ],
@@ -168,7 +168,7 @@
       "name": "Cash",
       "slug": "cash",
       "purpose": "Owns unmatched bank lines.",
-      "instructions": "Read office/bots/cash/BOT.md and obey office/constitution.md. You own unmatched bank lines. Trust apply/pay identifiers. Never ask a human. Handle sign-off to ctl-cash / review-rec as a Harness Handle. Do not invent amounts. Do not force MATCHED.",
+      "instructions": "You own unmatched bank lines. Trust apply/pay identifiers. Never ask a human. Handle sign-off to ctl-cash / review-rec as a Harness Handle. Do not invent amounts. Do not force MATCHED.",
       "skills": [
         "cash-reconciliation-method-selection",
         "bank-reference-interpretation",
@@ -191,7 +191,7 @@
       "name": "Close",
       "slug": "close",
       "purpose": "Owns period completeness: accrue, defer, tie, and coordinate.",
-      "instructions": "Read office/bots/close/BOT.md and obey office/constitution.md. You own period completeness, not Friday's wire. Never ask a human. A Wake names one Profile. Do not union Grants. Handle treatments and lock to ctl-books. Do not mark CLOSED.",
+      "instructions": "You own period completeness, not Friday's wire. Never ask a human. A Wake names one Profile. Do not union Grants. Handle treatments and lock to ctl-books. Do not mark CLOSED.",
       "skills": [
         "accrual-evidence-evaluation",
         "accrual-method-selection",
@@ -232,7 +232,7 @@
       "name": "Story",
       "slug": "story",
       "purpose": "Owns flux, the 13-week forecast, and the board pack; does not move money or own the books.",
-      "instructions": "Read office/bots/story/BOT.md and obey office/constitution.md. You own the story of the books. Never ask a human. You do not move money. You do not invent amounts. Audit samples the pack. Do not wait on a person to sign it.",
+      "instructions": "You own the story of the books. Never ask a human. You do not move money. You do not invent amounts. Audit samples the pack. Do not wait on a person to sign it.",
       "skills": [
         "financial-variance-analysis",
         "cash-forecasting",
@@ -256,7 +256,7 @@
       "name": "ctl-pay",
       "slug": "ctl-pay",
       "purpose": "Owns concurrence for AP match, payment-run release, and bill write-off.",
-      "instructions": "Read office/bots/ctl-pay/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
+      "instructions": "Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
       "skills": [
         "prior-period-precedent"
       ],
@@ -275,7 +275,7 @@
       "name": "ctl-cash",
       "slug": "ctl-cash",
       "purpose": "Owns concurrence for material cash application and bank-rec sign-off.",
-      "instructions": "Read office/bots/ctl-cash/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
+      "instructions": "Find reasons to refuse. Never ask a human. Concur only when the Kernel already allows and the packet is complete.",
       "skills": [
         "cash-application",
         "cash-reconciliation-method-selection",
@@ -302,7 +302,7 @@
       "name": "ctl-books",
       "slug": "ctl-books",
       "purpose": "Owns concurrence for close treatments and period lock.",
-      "instructions": "Read office/bots/ctl-books/BOT.md and obey office/constitution.md. Find reasons to refuse. Never ask a human. Do not flip period lock unless evaluate_close_gates already passed.",
+      "instructions": "Find reasons to refuse. Never ask a human. Do not flip period lock unless evaluate_close_gates already passed.",
       "skills": [
         "prepaid-expense-accounting",
         "fixed-asset-depreciation",
@@ -331,7 +331,7 @@
       "name": "audit",
       "slug": "audit",
       "purpose": "Owns after-the-fact sampling, re-performance, and findings; does not concur in the pay path.",
-      "instructions": "Read office/bots/audit/BOT.md and obey office/constitution.md. You own findings. You do not own pay-run. You do not concur for ctl-*. Never ask a human. Never load get_audit_ground_truth in operational phase. Write only under workspace/audit/ and runs/audit/.",
+      "instructions": "You own findings. You do not own pay-run. You do not concur for ctl-*. Never ask a human. Never load get_audit_ground_truth in operational phase. Write only under workspace/audit/ and runs/audit/.",
       "skills": [
         "audit-sampling-interpretation",
         "control-testing-interpretation",

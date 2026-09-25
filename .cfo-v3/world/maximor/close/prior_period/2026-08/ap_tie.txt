@@ -1,0 +1,15 @@
+MAXIMOR DEMO CORP
+Office of the CFO  ·  Month-end workpaper
+
+August 2026 AP subledger tie
+Period: 2026-08
+Entity: CO-MAXIMOR   Currency: USD
+Preparer: AP Preparer
+Reviewer: AP Reviewer
+Status: COMPLETE
+Prepared: 2026-09-03T16:40:00Z
+
+AP trial balance agrees to account 2000-AP. Sampled invoices include the Acme Supply Co. alias later reused as INV-021. No held invoices were released.
+
+Tickmarks:  ✓  tied to subledger    △  agreed to bank    ※  identity carried from source document
+This workpaper does not authorize a journal. Postings live on the numbered JE identities.

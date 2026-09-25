@@ -1,0 +1,19 @@
+{
+  "key": "send-northwind-pay-intent-inv-ar-007",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "874e015a2998ef050b6aa7f03e9d6f1e1bcc1527ded47ecdcb25ccc72c0a3d1a",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-northwind-pay-intent-inv-ar-007",
+      "thread_id": "thr-northwind-inv-ar-007",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_97cbcd7e32cb"
+  }
+}

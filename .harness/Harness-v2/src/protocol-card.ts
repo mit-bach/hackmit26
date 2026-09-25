@@ -3,7 +3,7 @@
  * session jsonl, so this card is written next to the session files and also
  * injected on every wake.
  */
-import { writeFileSync } from "node:fs";
+import { existsSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 import { ensureDir } from "./fs.ts";
@@ -62,6 +62,9 @@ These tools are always registered on a bound Bot. Never say they are missing, di
 `;
 
 export function persistProtocolCard(computerRoot: string, botId?: string): void {
+  if (existsSync(join(computerRoot, "sandboxes"))) {
+    return;
+  }
   const cardPath = protocolCardPath(computerRoot);
   ensureDir(dirname(cardPath));
   writeFileSync(cardPath, PROTOCOL_CARD);

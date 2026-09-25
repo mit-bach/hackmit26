@@ -1,0 +1,19 @@
+{
+  "key": "collect-INV-AR-005-promise-ack-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "4de8d6e47e2fccdbd4243f095964eb15878cf77d0a953b31571a48788c9ea93d",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-collect-INV-AR-005-ack-promise-20260930",
+      "thread_id": "thread-collect-INV-AR-005-20260930",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_3bd8999c876b"
+  }
+}

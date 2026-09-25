@@ -1,0 +1,34 @@
+{
+  "transaction_id": "TXN-2026-09-019A",
+  "date": "2026-09-19",
+  "amount": 12610.0,
+  "currency": "USD",
+  "description": "STRIPE PAYOUT po_1MaximorFees",
+  "counterparty": "STRIPE",
+  "transaction_type": "payout",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "po_1MaximorFees",
+  "raw_metadata": {
+    "payout_id": "po_1MaximorFees",
+    "provider": "stripe"
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "matched_in_gt",
+  "gt_label": {
+    "match_type": "PROVIDER_PAYOUT",
+    "disposition": "MATCHED",
+    "ledger_ids": [
+      "GL-CASH-STRIPE-FEES"
+    ],
+    "provider": "stripe"
+  },
+  "path": "workspace/bank/lines/TXN-2026-09-019A.json"
+}

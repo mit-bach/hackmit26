@@ -1,0 +1,16 @@
+{
+  "from": "email",
+  "to": "world",
+  "toSlug": "world",
+  "profile": "vendor",
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "prompt": "profile: vendor\nFinance asked Acme Supplies for missing invoice fields in thread thr-acme-acm-2026-4410. get_inbox_thread then reply_in_thread as that vendor. Do not send_office_outbound. Do not dispatch.",
+  "paths": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-outside-r2/runs/inbox/packets/email-outbound-msg-acme-acm-2026-4410-confirm-001-OUT.json"
+  ],
+  "queueOwner": "world",
+  "humanQueue": false,
+  "idempotencyKey": "email:outbound:msg-acme-acm-2026-4410-confirm-001-OUT",
+  "createdAt": "2026-09-24T21:00:00Z"
+}

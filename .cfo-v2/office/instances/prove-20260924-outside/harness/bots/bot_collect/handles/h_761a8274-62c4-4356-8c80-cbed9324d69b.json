@@ -1,0 +1,19 @@
+{
+  "id": "h_761a8274-62c4-4356-8c80-cbed9324d69b",
+  "from": "bot_email",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "FYI customer payment-intent note (not cash, not remittance). Do not apply cash.\n\nPath: workspace/email/packets/msg-northwind-pay-intent-inv-ar-007.json\n\nCustomer: Northwind Labs (CUST-001) <ap@northwind.example>\nSubject: Payment plan — INV-AR-007\nmessage_id: msg-northwind-pay-intent-inv-ar-007\nthread_id: thr-northwind-inv-ar-007\ncase_id: INV-AR-007\n\nPromise: pay full $12,000.00 on INV-AR-007 by ACH on 2026-09-30. No dispute. Other open INV-AR-001 and INV-AR-022 remain on their due dates.\n\nEmail classification: customer_payment_intent / ROUTE_COLLECT_NOTE. candidate=null. Apply not notified.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_collect"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:46:28.284Z",
+  "updatedAt": "2026-09-24T20:46:42.920Z",
+  "result": "Acknowledged. Collect owns this customer_payment_intent / ROUTE_COLLECT_NOTE.\n\nRecorded for CUST-001 Northwind Labs / INV-AR-007:\n- message_id msg-northwind-pay-intent-inv-ar-007\n- thread_id thr-northwind-inv-ar-007\n- Promise: full $12,000.00 ACH on 2026-09-30; no dispute\n- Path retained: workspace/email/packets/msg-northwind-pay-intent-inv-ar-007.json\n- INV-AR-001 and INV-AR-022 unchanged (no promise)\n\nWill not apply cash from this note (not a remittance). Will not dun INV-AR-007 while the 2026-09-30 promise is open. Apply stays out unless a real deposit arrives.",
+  "seq": 35
+}

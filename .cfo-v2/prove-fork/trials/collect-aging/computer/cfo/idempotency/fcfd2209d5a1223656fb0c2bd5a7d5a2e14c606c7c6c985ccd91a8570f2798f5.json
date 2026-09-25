@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-acme-inv-ar-002",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "94762d1eeb8e0c32714c1a66e4e3be11d878afe3b493591689e6cd0f63187e92",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-acme-inv-ar-002-reply",
+      "thread_id": "col-acme-inv-ar-002",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_3b28bc9ee895"
+  }
+}

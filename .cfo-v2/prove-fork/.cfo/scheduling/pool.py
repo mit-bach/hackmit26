@@ -23,11 +23,67 @@ def candidates_from_pool() -> list[PaymentCandidate]:
     return candidates
 
 
-def load_pool() -> list[dict]:
-    if not POOL_PATH.exists():
+def _rows_from_review_match() -> list[dict]:
+    """Office ctl-pay writes a decision file. The host never calls commit_to_pay_pool.
+
+    A CONCUR with allowed true and an empty must_hold list is the pool row.
+    HOLD decisions stay out.
+    """
+    root = POOL_PATH.parent / "ap" / "decisions"
+    if not root.exists():
         return []
-    raw = json.loads(POOL_PATH.read_text())
-    return raw if isinstance(raw, list) else []
+    rows: list[dict] = []
+    for path in sorted(root.glob("*-review-match.json")):
+        try:
+            payload = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(payload, dict):
+            continue
+        review = payload.get("ReviewerDecision")
+        if isinstance(review, dict):
+            decision = review.get("decision")
+            allowed = review.get("allowed")
+            holds = review.get("must_hold")
+        else:
+            decision = payload.get("decision")
+            allowed = payload.get("allowed", True)
+            holds = payload.get("must_hold")
+        if decision != "CONCUR" or allowed is False:
+            continue
+        if holds not in (None, False, [], ()):
+            continue
+        invoice_id = payload.get("invoice_id")
+        if not isinstance(invoice_id, str) or not invoice_id:
+            continue
+        invoice = load_invoice(invoice_id)
+        if invoice is None:
+            continue
+        rows.append(
+            {
+                "invoice_id": invoice_id,
+                "vendor": invoice.vendor,
+                "amount": invoice.amount,
+                "approval_source": "ctl_pay",
+                "confidence": None,
+                "added_at": "",
+            }
+        )
+    return rows
+
+
+def load_pool() -> list[dict]:
+    rows: list[dict] = []
+    if POOL_PATH.exists():
+        raw = json.loads(POOL_PATH.read_text())
+        if isinstance(raw, list):
+            rows = raw
+    seen = {row.get("invoice_id") for row in rows if isinstance(row, dict)}
+    for extra in _rows_from_review_match():
+        if extra["invoice_id"] not in seen:
+            rows.append(extra)
+            seen.add(extra["invoice_id"])
+    return rows
 
 
 def save_pool(rows: list[dict]) -> None:

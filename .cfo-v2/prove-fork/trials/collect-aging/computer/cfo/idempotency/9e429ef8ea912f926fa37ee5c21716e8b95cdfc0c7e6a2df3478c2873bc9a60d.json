@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-helios-inv-ar-he-4412",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "e26d9828d4a1886ac9e44de0f0fea22edbbc8ca9d0630303a78d07b5aada3504",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-helios-inv-ar-he-4412-reply",
+      "thread_id": "col-helios-inv-ar-he-4412",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_26489e9398d1"
+  }
+}

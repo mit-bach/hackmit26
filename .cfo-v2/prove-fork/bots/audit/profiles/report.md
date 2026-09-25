@@ -25,6 +25,6 @@ If `ReportStats` or finding IDs are missing, refuse the narrative. Do not estima
 
 Do not call Catalog ops. There are none on this Grant.
 Do not union Auditor Agent reads onto this turn.
-Do not load `get_audit_ground_truth`.
+Do not load the audit answer key.
 Do not change severity the Kernel already assigned.
 Do not write outside `workspace/audit/` and `runs/audit/`.

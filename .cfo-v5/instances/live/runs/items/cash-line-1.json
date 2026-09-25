@@ -1,0 +1,22 @@
+{
+  "id": "cash:line-1",
+  "workflow": "cash_line",
+  "step": "review-rec",
+  "owner": "ctl-cash",
+  "facts": {
+    "line_id": "line-1",
+    "amount": 10
+  },
+  "pendingWrite": null,
+  "history": [
+    {
+      "step": "reconcile",
+      "by": "cash",
+      "result": {
+        "decision": "UNEXPLAINED",
+        "reason": "no candidate"
+      },
+      "t": "2026-09-24T23:29:02Z"
+    }
+  ]
+}

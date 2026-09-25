@@ -1,0 +1,19 @@
+{
+  "key": "send-acme-sep-101",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "2dc17053f2c2883e9a3357a2d38675ab96ec90f60239252fc910cd43d21f0efe",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-ACME-SEP-101",
+      "thread_id": "THR-ACME-SEP-101",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_4c77985535d6"
+  }
+}

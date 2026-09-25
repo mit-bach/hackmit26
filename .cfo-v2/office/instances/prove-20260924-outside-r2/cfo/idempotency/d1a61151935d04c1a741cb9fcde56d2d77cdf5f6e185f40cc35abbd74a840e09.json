@@ -1,0 +1,19 @@
+{
+  "key": "world-send-acm-2026-4410-confirm-001",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "f59bb6519fef1cb8a42ea82f0871ecabdd587ab91c17699af6947d4b48d2f72d",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-acme-acm-2026-4410-confirm-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_8cd01773f3ad"
+  }
+}

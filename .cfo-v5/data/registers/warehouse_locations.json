@@ -1,0 +1,21 @@
+[
+  {
+    "location_id": "CAM-BIN-A14",
+    "site_id": "CAM-WH-01",
+    "bin": "A14",
+    "sku_prefix": "KIS-MRO-7"
+  },
+  {
+    "location_id": "CAM-WH-01-CAGE-B",
+    "site_id": "CAM-WH-01",
+    "bin": "CAGE-B",
+    "consignment_customer": "CUST-006",
+    "label": "consignment hold"
+  },
+  {
+    "location_id": "CAM-DOCK-4",
+    "site_id": "CAM-WH-01",
+    "bin": "DOCK-4",
+    "sku_prefix": "NLF"
+  }
+]

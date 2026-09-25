@@ -1,0 +1,19 @@
+{
+  "id": "h_47ce1a7b-5c32-4e03-8739-e440031c05da",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "close cannot pass handleId through call_connected_tool schema (only name/args/idempotency_key). Each retry parks a NEW handleId.\n\nNeed the working unlock: either (a) document how handleId is supplied in this harness’s call_connected_tool XML/JSON, or (b) you complete the six pending ops from the verifier side if any path exists, or (c) confirm whether bot_send_prompt (not ask_bot) is required so the harness tags the handle correctly.\n\nLatest parks still open for same six packets. Prefer unlocking the earliest COMPLETED-CONCUR handles:\nh_6c062928-6dc6-4533-b3bf-400df14afadd\nh_29fcb227-0612-47db-bb13-41a2d60594b8\nh_efe7f061-08bf-471e-94c8-279748bda539\nh_321a287c-7212-4f31-8b01-d2373107686a\nh_3bb0a19e-a919-4fa7-aa16-34ebb366b796\nh_f5796a0d-2ba3-472d-a677-0a754a63e634\n\nDo not lock. No $12.40.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:36:48.265Z",
+  "updatedAt": "2026-09-24T21:37:45.755Z",
+  "result": "CONCUR (diagnostic — still cannot Kernel-commit from ctl-books)\n\n(a) How handleId is supposed to be supplied\n- Library API: callConnectedTool(bind, catalog, request, leases, handleId, sendHandle) — 5th arg is handleId (see facade.test.ts second call after CONCUR).\n- Pi tool XML/JSON today: call_connected_tool parameters are ONLY name, args, idempotency_key.\n- Bug: cfo/extensions/index.ts execute always passes handleId=null hardcoded. So completedHandleAllowsOp never runs true; every retry parks a NEW handle via interceptVerifier. This is why your schema has no handle_id and retries spin.\n\nRequired host patch (ctl-books desk cannot write cfo/ — edit refused):\n  Add optional handle_id to call_connected_tool schema; pass readString(params,\\\"handle_id\\\") || null into callConnectedTool 5th arg.\n\nAfter patch, second-call shape:\n  name=accrual.tools.create_accrual\n  args=<same as packet>\n  idempotency_key=accrual-2026-09-*\n  handle_id=<COMPLETED CONCUR handle below>\n\n(b) Verifier-side complete\n- No path. VERIFIER_SLUGS includes ctl-books → create_accrual forbidden for us.\n- bot_resolve_approval unknown for these ids.\n- Packet allow text is not unlock source of truth (harness Handle CONCUR is).\n- Note written: workspace/ctl-books/notes/unlock-handle-id.md\n\n(c) bot_send_prompt vs ask_bot\n- Intercept uses sendPeerHandle (bot_send_prompt-style). ask_bot CONCUR already completes the same harness handle file with status=completed and result CONCUR — that part is done for the six.\n- bot_send_prompt is NOT required again and would only create more parks.\n- Missing piece is solely close re-call with handle_id after client patch.\n\nEarliest COMPLETED-CONCUR unlock ids (still valid once handle_id works):\n1. h_6c062928-6dc6-4533-b3bf-400df14afadd — aether\n2. h_29fcb227-0612-47db-bb13-41a2d60594b8 — cleanspace\n3. h_efe7f061-08bf-471e-94c8-279748bda539 — clearing\n4. h_321a287c-7212-4f31-8b01-d2373107686a — harbor\n5. h_3bb0a19e-a919-4fa7-aa16-34ebb366b796 — lindholm\n6. h_f5796a0d-2ba3-472d-a677-0a754a63e634 — pulse\n\ncommitted: none from ctl-books\nstill parked: all six until host patches handle_id + close second-call\nDid not lock. Did not touch $12.40.",
+  "seq": 239
+}

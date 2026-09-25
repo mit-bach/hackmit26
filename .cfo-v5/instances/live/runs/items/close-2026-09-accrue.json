@@ -1,0 +1,22 @@
+{
+  "id": "close:2026-09-accrue",
+  "workflow": "month_end",
+  "step": "review-treatment",
+  "owner": "ctl-books",
+  "facts": {
+    "period": "2026-09"
+  },
+  "pendingWrite": null,
+  "history": [
+    {
+      "step": "accrue",
+      "by": "close",
+      "result": {
+        "decision": "PROPOSE",
+        "reason": "invoice missing",
+        "evidence_used": []
+      },
+      "t": "2026-09-24T23:29:02Z"
+    }
+  ]
+}

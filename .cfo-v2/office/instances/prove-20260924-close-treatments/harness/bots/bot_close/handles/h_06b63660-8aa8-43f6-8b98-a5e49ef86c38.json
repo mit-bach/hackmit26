@@ -1,0 +1,19 @@
+{
+  "id": "h_06b63660-8aa8-43f6-8b98-a5e49ef86c38",
+  "from": "operator",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "profile: assets\nSeptember 2026. Review fixed assets and depreciation. Do not invent cost. Do not mark the month closed. Do not clear the unexplained $12.40.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_close"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:24:20.229Z",
+  "updatedAt": "2026-09-24T21:25:44.308Z",
+  "result": "## September 2026 fixed assets (Profile `assets`)\n\nKernel costs/schedules only. **No invented cost. Period not closed. $12.40 not cleared.**  \n`ctl-books` / `review-assets`: **CONCUR** all decisions.\n\n### Capital candidate\n| Candidate | Vendor | Amount | Python flag | Decision |\n|-----------|--------|--------|-------------|----------|\n| **INV-018** | Dell Technologies | $60,000 | `python_capitalize: true` | **`duplicate_review`** |\n\nSame vendor + cost + acquisition date **2026-09-05** already on the register as **FA-DELL-001**. Kernel `duplicate_asset_ids: [\"FA-DELL-001\"]`. **Do not add a second asset.**\n\n### Register — September depreciation (Kernel SL)\n| Asset | Description | Cost | Sep dep | Beg BV → End BV | In service |\n|-------|-------------|------|---------|-----------------|------------|\n| **FA-DELL-001** | PowerEdge R760 | 60,000 (salvage 6,000; basis 54,000) | **1,500.00** | 60,000 → 58,500 | 2026-09-05 |\n| **FA-OIC-IMPL** | Orbit Insights implementation | 96,000 | **2,666.67** | 42,666.60 → 39,999.93 | 2025-01-06 |\n| **FA-LEN-ROLL-26** | Lenovo laptop rollout | 424,720.80 | **11,797.80** | 353,934.00 → 342,136.20 | 2026-03-18 |\n\n**Sep depreciation total (sum of Kernel lines): $15,964.47**\n\nAll three are in service in September (Dell placed in service this month), so depreciation is allowed. No period-before-PIS issue.\n\n### Notes\n- FA-OIC-IMPL / FA-LEN-ROLL-26 have empty `evidence_refs` but hold `source_document_id` (`INV-OIC-2025-01`, `INV-LEN-ROLL-26`).\n- Kernel owns posting; this profile only classified and copied schedule amounts.\n\n### Pack\n`workspace/close/packets/2026-09-asset-decisions.json`",
+  "resultPaths": [],
+  "seq": 138
+}

@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-quietharbor-inv-ar-005",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "cb7848b8b0684466b2d154b55574d6c24a90d884e8dc167fb67e6be28f2fd4c2",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-quietharbor-inv-ar-005-reply",
+      "thread_id": "col-quietharbor-inv-ar-005",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_5f7deae188c2"
+  }
+}

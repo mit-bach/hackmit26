@@ -1,0 +1,39 @@
+NLF Industrial Components
+440 D Street, Suite B
+Boston, MA 02210
+Phone +1 617-555-4403   ar@nlfindustrial.example
+Tax ID 04-7712288
+
+INVOICE
+
+Invoice Number: NLF3-2026-08
+Invoice Date: 2026-08-17
+Due Date: 2026-09-16
+PO Number: PO-NLF-03-2026-08
+Payment Terms: net 30
+Currency: USD
+Vendor: NLF Industrial Components
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Dock 4 components. SKU                        1.00      5,184.18      5,184.18
+
+Subtotal                                                              5,184.18
+Tax                                                                       0.00
+Amount Due                                                            5,184.18
+
+Remit to:
+ACH Citizens routing 011500120  account ****4403
+Bank: Citizens Bank  ****4403
+Please include invoice NLF3-2026-08 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: ar@nlfindustrial.example

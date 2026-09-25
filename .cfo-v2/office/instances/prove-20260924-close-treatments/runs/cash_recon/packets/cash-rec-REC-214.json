@@ -1,0 +1,18 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-214",
+  "candidate_id": "POSSIBLE_DUPLICATE_REFUND:TXN-2026-09-012B:-",
+  "match_type": "POSSIBLE_DUPLICATE_REFUND",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference": -250.0,
+  "difference_minor": -25000,
+  "explanation": "Possible duplicate refund TXN-2026-09-012B; one counterpart was already matched.",
+  "control_findings": [
+    "POSSIBLE_DUPLICATE_REFUND"
+  ],
+  "proposed_adjusting_entries_posted": false,
+  "queue_owner": "ctl-cash",
+  "human_queue": false
+}

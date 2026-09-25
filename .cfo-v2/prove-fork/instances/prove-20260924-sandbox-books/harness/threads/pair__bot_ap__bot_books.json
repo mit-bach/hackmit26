@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_books",
+  "threadId": "pair:bot_ap:bot_books",
+  "name": "AP ↔ Books",
+  "memberIds": [
+    "bot_ap",
+    "bot_books"
+  ],
+  "createdAt": 1790278679037,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_434fa6be-9ce3-46f4-a429-567d3f866edb",
+      "handleId": "h_434fa6be-9ce3-46f4-a429-567d3f866edb",
+      "role": "bot",
+      "kind": "text",
+      "text": "prepare: NetSuite vendorBill NS-4410 landed by books (erp-invoice). Path: workspace/books/erp-invoice/NS-4410.json. Vendor Acme Supplies VEND-001, invoice ACM-2026-4410, date 2026-09-08, due 2026-09-22, total 12450 USD, PO-101. Python parse won. Books did not match and did not close the period.",
+      "at": 1790278679037,
+      "from": {
+        "botId": "bot_books",
+        "name": "Books",
+        "color": "pink"
+      }
+    },
+    {
+      "id": "pair-result-h_434fa6be-9ce3-46f4-a429-567d3f866edb",
+      "handleId": "h_434fa6be-9ce3-46f4-a429-567d3f866edb",
+      "role": "bot",
+      "kind": "text",
+      "text": "HOLD on NS-4410 / ACM-2026-4410. Kernel get_invoice and get_case_evidence both return found=false (tried NS-4410 and ACM-2026-4410). PO-101 and GR-101 exist, approved, full receipt 12450 USD. Packet written at runs/ap/packets/NS-4410.json (desk: workspace/ap). No APPROVE and no ctl-pay handoff. Invoice is not in the AP ledger so I cannot match or put it in the pay pool. Books did not close the period; that remains with you. If the bill is ingested later, wake AP prepare again with the live invoice_id.",
+      "at": 1790278703962,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

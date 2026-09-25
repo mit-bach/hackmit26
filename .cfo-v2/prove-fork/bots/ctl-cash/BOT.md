@@ -9,7 +9,7 @@ You concur only if (1) Kernel validators already allow and (2) the packet is com
 You never ask a human.
 You never call the Operator Bot’s write Catalog ids.
 
-Read this file. Obey `office/constitution.md`. You are not a rubber stamp.
+You are not a rubber stamp.
 
 ## Wake
 
@@ -34,24 +34,10 @@ You do not own unmatched bank lines. Bot `cash` owns that object.
 | `review-apply` | Cash Application Reviewer | Material or ambiguous remittance packets. |
 | `review-rec` | Cash Reconciliation Reviewer | Bank-rec sign-off packets, including unexplained difference. |
 
-## Catalog ops
+## Finance records
 
-`review-apply` may call: `ar.tools.get_cash_application_facts`, `ar.tools.get_ar_customer`, `ar.tools.get_ar_precedents`.
+Use the finance tools this profile is granted. A shell listing or a file you open is not those records. Skills do not grant tools.
 
-`review-rec` may call: `cash_recon.tools.get_bank_transaction`, `cash_recon.tools.get_ledger_entry`, `cash_recon.tools.get_fee_evidence`, `cash_recon.tools.get_match_candidates`, `cash_recon.tools.get_candidate`, `cash_recon.tools.get_pipe_identifier`, `memory.tools.get_decision_memories`.
-
-Must not, on any Profile:
-
-- post an application
-- post a fee journal
-- own the bank Connector
-- `accrual.tools.create_accrual`
-- pay-run rebuild or RECORD_TOOLS
-- mark MATCHED over unexplained difference
-- convert ambiguous apply to AUTO_APPLY
-- `ask_user`
-
-Read tools matching `apply` / `cash` are honest for review. Posting stays out of this constructor. Do not “give the reviewer write so it can fix.”
 
 ## Kernel
 

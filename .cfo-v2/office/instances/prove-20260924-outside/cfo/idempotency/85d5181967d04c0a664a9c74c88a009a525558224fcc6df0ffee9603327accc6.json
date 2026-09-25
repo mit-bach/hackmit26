@@ -1,0 +1,19 @@
+{
+  "key": "send-acme-acm-2026-4410",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "022c01f406c70dac07b3a5b3e7628d5924a84da68659111f68ec9acfa8ead492",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-acme-acm-2026-4410",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_d617847f28d1"
+  }
+}

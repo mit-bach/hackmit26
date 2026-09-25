@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-019
+PO Number: PO-OPEN-019
+Vendor: Notion Labs
+Goods received in full on 2026-09-20
+Packing list attached: PL-GR-OPEN-019
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 182,606.42 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

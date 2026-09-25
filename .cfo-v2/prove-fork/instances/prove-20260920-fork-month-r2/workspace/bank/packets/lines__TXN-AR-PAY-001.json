@@ -1,0 +1,35 @@
+{
+  "transaction_id": "TXN-AR-PAY-001",
+  "date": "2026-09-29",
+  "amount": 12000.0,
+  "currency": "USD",
+  "description": "WIRE IN NORTHWIND LABS INV AR 007",
+  "counterparty": "NORTHWIND LABS",
+  "transaction_type": "wire_credit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "WIRE-NW-9921",
+  "raw_metadata": {
+    "payment_id": "PAY-001",
+    "invoice_ids": [
+      "INV-AR-007"
+    ]
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "matched_in_gt",
+  "gt_label": {
+    "match_type": "EXACT_MATCH",
+    "disposition": "MATCHED",
+    "ledger_ids": [
+      "GL-AR-PAY-001"
+    ]
+  },
+  "path": "workspace/bank/lines/TXN-AR-PAY-001.json"
+}

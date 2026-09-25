@@ -1,0 +1,624 @@
+[
+  {
+    "id": "ch_str_001",
+    "object": "charge",
+    "amount": 100000,
+    "amount_captured": 100000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_northwind",
+    "payment_intent": "pi_str_001",
+    "balance_transaction": "txn_str_001",
+    "description": "INV-STR-001 September platform subscription",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Northwind Labs"
+    },
+    "metadata": {
+      "customer_name": "Northwind Labs",
+      "invoice_id": "INV-STR-001",
+      "order_id": "INV-STR-001"
+    },
+    "created": 1788451200
+  },
+  {
+    "id": "ch_str_002a",
+    "object": "charge",
+    "amount": 100000,
+    "amount_captured": 100000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "payment_intent": "pi_str_002a",
+    "balance_transaction": "txn_str_002a",
+    "description": "INV-STR-002A Helios workspace A",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Helios Analytics"
+    },
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002A",
+      "order_id": "INV-STR-002A"
+    },
+    "created": 1788883200
+  },
+  {
+    "id": "ch_str_002b",
+    "object": "charge",
+    "amount": 150000,
+    "amount_captured": 150000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "payment_intent": "pi_str_002b",
+    "balance_transaction": "txn_str_002b",
+    "description": "INV-STR-002B Helios workspace B AMEX",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Helios Analytics"
+    },
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002B",
+      "order_id": "INV-STR-002B"
+    },
+    "created": 1788883200
+  },
+  {
+    "id": "ch_str_002c",
+    "object": "charge",
+    "amount": 50000,
+    "amount_captured": 50000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "payment_intent": "pi_str_002c",
+    "balance_transaction": "txn_str_002c",
+    "description": "INV-STR-002C Helios add-on seats",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Helios Analytics"
+    },
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002C",
+      "order_id": "INV-STR-002C"
+    },
+    "created": 1788883200
+  },
+  {
+    "id": "ch_str_003a",
+    "object": "charge",
+    "amount": 60000,
+    "amount_captured": 60000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_northwind",
+    "payment_intent": "pi_str_003a",
+    "balance_transaction": "txn_str_003a",
+    "description": "INV-STR-003A Northwind analytics pack",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Northwind Labs"
+    },
+    "metadata": {
+      "customer_name": "Northwind Labs",
+      "invoice_id": "INV-STR-003A",
+      "order_id": "INV-STR-003A"
+    },
+    "created": 1789056000
+  },
+  {
+    "id": "ch_str_003b",
+    "object": "charge",
+    "amount": 40000,
+    "amount_captured": 40000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_pinnacle",
+    "payment_intent": "pi_str_003b",
+    "balance_transaction": "txn_str_003b",
+    "description": "INV-STR-003B Pinnacle POS module",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Pinnacle Retail"
+    },
+    "metadata": {
+      "customer_name": "Pinnacle Retail",
+      "invoice_id": "INV-STR-003B",
+      "order_id": "INV-STR-003B"
+    },
+    "created": 1789056000
+  },
+  {
+    "id": "ch_str_004",
+    "object": "charge",
+    "amount": 50000,
+    "amount_captured": 50000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_acme",
+    "payment_intent": "pi_str_004",
+    "balance_transaction": "txn_str_004",
+    "description": "INV-STR-004 Acme spare parts",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Acme Industrial"
+    },
+    "metadata": {
+      "customer_name": "Acme Industrial",
+      "invoice_id": "INV-STR-004",
+      "order_id": "INV-STR-004"
+    },
+    "created": 1789142400
+  },
+  {
+    "id": "ch_str_005",
+    "object": "charge",
+    "amount": 75000,
+    "amount_captured": 75000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_acme",
+    "payment_intent": "pi_str_005",
+    "balance_transaction": "txn_str_005",
+    "description": "INV-STR-005 Acme tooling",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Acme Industrial"
+    },
+    "metadata": {
+      "customer_name": "Acme Industrial",
+      "invoice_id": "INV-STR-005",
+      "order_id": "INV-STR-005"
+    },
+    "created": 1789228800
+  },
+  {
+    "id": "ch_str_006",
+    "object": "charge",
+    "amount": 80000,
+    "amount_captured": 80000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_orbit",
+    "payment_intent": "pi_str_006",
+    "balance_transaction": "txn_str_006",
+    "description": "INV-STR-006 Orbit implementation",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Orbit Health"
+    },
+    "metadata": {
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-006",
+      "order_id": "INV-STR-006"
+    },
+    "created": 1789488000
+  },
+  {
+    "id": "ch_str_007",
+    "object": "charge",
+    "amount": 200000,
+    "amount_captured": 200000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_lumen",
+    "payment_intent": "pi_str_007",
+    "balance_transaction": "txn_str_007",
+    "description": "INV-STR-007 Lumen international",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Lumen Labs"
+    },
+    "metadata": {
+      "customer_name": "Lumen Labs",
+      "invoice_id": "INV-STR-007",
+      "order_id": "INV-STR-007"
+    },
+    "created": 1789574400
+  },
+  {
+    "id": "ch_str_010",
+    "object": "charge",
+    "amount": 125000,
+    "amount_captured": 125000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_pinnacle",
+    "payment_intent": "pi_str_010",
+    "balance_transaction": "txn_str_010",
+    "description": "Pinnacle autumn restock",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Pinnacle Retail"
+    },
+    "metadata": {
+      "customer_name": "Pinnacle Retail",
+      "customer_id": "CUST-006"
+    },
+    "created": 1789747200
+  },
+  {
+    "id": "ch_str_011",
+    "object": "charge",
+    "amount": 90000,
+    "amount_captured": 90000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_brightline",
+    "payment_intent": "pi_str_011",
+    "balance_transaction": "txn_str_011",
+    "description": "Q3 analytics retainer",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Brightline Media"
+    },
+    "metadata": {
+      "customer_name": "Brightline Media",
+      "customer_id": "CUST-004"
+    },
+    "created": 1789920000
+  },
+  {
+    "id": "ch_str_012a",
+    "object": "charge",
+    "amount": 70000,
+    "amount_captured": 70000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "payment_intent": "pi_str_012a",
+    "balance_transaction": "txn_str_012a",
+    "description": "INV-STR-012A Helios refundable workshop",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Helios Analytics"
+    },
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-012A",
+      "order_id": "INV-STR-012A"
+    },
+    "created": 1790092800
+  },
+  {
+    "id": "ch_str_012b",
+    "object": "charge",
+    "amount": 30000,
+    "amount_captured": 30000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "payment_intent": "pi_str_012b",
+    "balance_transaction": "txn_str_012b",
+    "description": "INV-STR-012B Helios extra seats",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Helios Analytics"
+    },
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-012B",
+      "order_id": "INV-STR-012B"
+    },
+    "created": 1790092800
+  },
+  {
+    "id": "ch_str_013a",
+    "object": "charge",
+    "amount": 55000,
+    "amount_captured": 55000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_orbit",
+    "payment_intent": "pi_str_013a",
+    "balance_transaction": "txn_str_013a",
+    "description": "INV-STR-013A Orbit monitoring",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Orbit Health"
+    },
+    "metadata": {
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-013A",
+      "order_id": "INV-STR-013A"
+    },
+    "created": 1790265600
+  },
+  {
+    "id": "ch_str_013b",
+    "object": "charge",
+    "amount": 25000,
+    "amount_captured": 25000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_orbit",
+    "payment_intent": "pi_str_013b",
+    "balance_transaction": "txn_str_013b",
+    "description": "INV-STR-013B Orbit alerts pack",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Orbit Health"
+    },
+    "metadata": {
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-013B",
+      "order_id": "INV-STR-013B"
+    },
+    "created": 1790265600
+  },
+  {
+    "id": "ch_str_014",
+    "object": "charge",
+    "amount": 1240000,
+    "amount_captured": 1240000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_northstar",
+    "payment_intent": "pi_str_014",
+    "balance_transaction": "txn_str_014",
+    "description": "INV-STR-014 Northstar platform",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Northstar LLC"
+    },
+    "metadata": {
+      "customer_name": "Northstar LLC",
+      "invoice_id": "INV-STR-014",
+      "order_id": "INV-STR-014"
+    },
+    "created": 1790352000
+  },
+  {
+    "id": "ch_str_015",
+    "object": "charge",
+    "amount": 220000,
+    "amount_captured": 220000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_northwind",
+    "payment_intent": "pi_str_015",
+    "balance_transaction": "txn_str_015",
+    "description": "INV-STR-015 Late September expansion",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Northwind Labs"
+    },
+    "metadata": {
+      "customer_name": "Northwind Labs",
+      "invoice_id": "INV-STR-015",
+      "order_id": "INV-STR-015"
+    },
+    "created": 1790697600
+  },
+  {
+    "id": "ch_str_016",
+    "object": "charge",
+    "amount": 60000,
+    "amount_captured": 60000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "payment_intent": "pi_str_016",
+    "balance_transaction": "txn_str_016",
+    "description": "INV-STR-016 Harbor partial",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Harbor Electric"
+    },
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "invoice_id": "INV-STR-016",
+      "order_id": "INV-STR-016"
+    },
+    "created": 1790438400
+  },
+  {
+    "id": "ch_str_017",
+    "object": "charge",
+    "amount": 64000,
+    "amount_captured": 64000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_summit",
+    "payment_intent": "pi_str_017",
+    "balance_transaction": "txn_str_017",
+    "description": "INV-STR-017 Summit retry shipment",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Summit Logistics"
+    },
+    "metadata": {
+      "customer_name": "Summit Logistics",
+      "invoice_id": "INV-STR-017",
+      "order_id": "INV-STR-017"
+    },
+    "created": 1789920000
+  },
+  {
+    "id": "ch_str_018",
+    "object": "charge",
+    "amount": 88000,
+    "amount_captured": 88000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_atlas",
+    "payment_intent": "pi_str_018",
+    "balance_transaction": "txn_str_018",
+    "description": "monthly platform fee",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Atlas Systems"
+    },
+    "metadata": {
+      "customer_name": "Atlas Systems",
+      "customer_id": "CUST-010"
+    },
+    "created": 1790611200
+  },
+  {
+    "id": "ch_str_019",
+    "object": "charge",
+    "amount": 110000,
+    "amount_captured": 110000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "payment_intent": "pi_str_019",
+    "balance_transaction": "txn_str_019",
+    "description": "INV-STR-019 Harbor overpayment",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Harbor Electric"
+    },
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "invoice_id": "INV-STR-019",
+      "order_id": "INV-STR-019"
+    },
+    "created": 1790438400
+  },
+  {
+    "id": "ch_str_020",
+    "object": "charge",
+    "amount": 33000,
+    "amount_captured": 33000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_orion",
+    "payment_intent": "pi_str_020",
+    "balance_transaction": "txn_str_020",
+    "description": "Unmatched Stripe charge",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Orion Freight"
+    },
+    "metadata": {
+      "customer_name": "Orion Freight"
+    },
+    "created": 1790524800
+  },
+  {
+    "id": "ch_str_021a",
+    "object": "charge",
+    "amount": 40000,
+    "amount_captured": 40000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "payment_intent": "pi_str_021a",
+    "balance_transaction": "txn_str_021a",
+    "description": "INV-STR-021 Harbor installment 1",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Harbor Electric"
+    },
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "customer_id": "CUST-012",
+      "invoice_id": "INV-STR-021",
+      "order_id": "INV-STR-021"
+    },
+    "created": 1790438400
+  },
+  {
+    "id": "ch_str_021b",
+    "object": "charge",
+    "amount": 60000,
+    "amount_captured": 60000,
+    "amount_refunded": 0,
+    "currency": "usd",
+    "paid": true,
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "payment_intent": "pi_str_021b",
+    "balance_transaction": "txn_str_021b",
+    "description": "INV-STR-021 Harbor installment 2",
+    "refunded": false,
+    "disputed": false,
+    "billing_details": {
+      "name": "Harbor Electric"
+    },
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "customer_id": "CUST-012",
+      "invoice_id": "INV-STR-021",
+      "order_id": "INV-STR-021"
+    },
+    "created": 1790524800
+  }
+]

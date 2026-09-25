@@ -346,13 +346,37 @@
         "office_outbound": true,
         "to_name": "Acme Supplies"
       }
+    },
+    {
+      "message_id": "MSG-INBOX-011R",
+      "thread_id": "THR-incomplete",
+      "in_reply_to": "MSG-INBOX-011-OUT",
+      "sender_name": "Acme Supplies",
+      "sender_address": "billing@acmesupplies.example",
+      "recipient_addresses": [
+        "ap@hackmit-cfo.example"
+      ],
+      "subject": "Re: Invoice from Acme Supplies",
+      "body_text": "Invoice Number: ACM-INBOX-5005\nAmount Due: 1,245.00\nInvoice Date: 2026-09-18\nVendor: Acme Supplies\nCurrency: USD\n",
+      "body_html": null,
+      "sent_at": "2026-09-18T10:00:00Z",
+      "received_at": "2026-09-18T10:00:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "MSG-INBOX-011-OUT",
+      "metadata": {
+        "reply": true
+      }
     }
   ],
   "outcomes": {},
   "invoice_ids": [
     "INV-001",
     "ING-002",
-    "ING-003"
+    "ING-003",
+    "ING-004",
+    "ING-005",
+    "ING-006"
   ],
   "canonicals": [
     {
@@ -545,6 +569,200 @@
       "ingestion_status": "new_invoice",
       "provenance_added": false,
       "new_this_run": true
+    },
+    {
+      "canonical_id": "ING-004",
+      "vendor": "Nimbus Analytics LLC",
+      "vendor_id": null,
+      "vendor_invoice_number": "NIM-INBOX-8008",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "currency": "USD",
+      "amount": 990.0,
+      "subtotal": 990.0,
+      "tax": 0.0,
+      "po_id": null,
+      "description": "Nimbus Analytics LLC NIM-INBOX-8008",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-015",
+          "source_uri": "inbox://THR-unknown-vendor/MSG-INBOX-015",
+          "agent": "Email Invoice Agent",
+          "document_hash": "bbc7819e3b924e48cdc80a2229754edc3f15e4a3feccd57dda306126a297e630"
+        }
+      ],
+      "document_hash": "bbc7819e3b924e48cdc80a2229754edc3f15e4a3feccd57dda306126a297e630",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Nimbus Analytics LLC",
+          "value": "Nimbus Analytics LLC"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: NIM-INBOX-8008",
+          "value": "NIM-INBOX-8008"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 990.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [
+        "unknown_vendor:Nimbus Analytics LLC",
+        "missing_po"
+      ],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": true,
+      "ap_invoice_id": "ING-004",
+      "ap_result": "AP exceptions=['missing_po']",
+      "canonical_key": "nimbuanalytic:NIMINBOX8008",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    },
+    {
+      "canonical_id": "ING-005",
+      "vendor": "Figma",
+      "vendor_id": "Figma",
+      "vendor_invoice_number": "FIG-INBOX-2002",
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "currency": "USD",
+      "amount": 2448.0,
+      "subtotal": 2448.0,
+      "tax": 0.0,
+      "po_id": "PO-107",
+      "description": "Figma FIG-INBOX-2002",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-002",
+          "source_uri": "inbox://THR-body-invoice/MSG-INBOX-002",
+          "agent": "Email Invoice Agent",
+          "document_hash": "99f47875dc66458e755efa584eb857c1a46d135061a580cb5fb6efc8df77d220"
+        }
+      ],
+      "document_hash": "99f47875dc66458e755efa584eb857c1a46d135061a580cb5fb6efc8df77d220",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Figma",
+          "value": "Figma"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: FIG-INBOX-2002",
+          "value": "FIG-INBOX-2002"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 2448.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": true,
+      "ap_invoice_id": "ING-005",
+      "ap_result": "AP exceptions=['missing_po', 'goods_not_received']",
+      "canonical_key": "figma:FIGINBOX2002",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
+    },
+    {
+      "canonical_id": "ING-006",
+      "vendor": "Acme Supplies",
+      "vendor_id": "Acme Supplies",
+      "vendor_invoice_number": "ACM-INBOX-5005",
+      "invoice_date": "2026-09-18",
+      "due_date": null,
+      "currency": "USD",
+      "amount": 1245.0,
+      "subtotal": null,
+      "tax": null,
+      "po_id": null,
+      "description": "Acme Supplies ACM-INBOX-5005",
+      "line_items": [],
+      "sources": [
+        {
+          "source_type": "email",
+          "source_id": "MSG-INBOX-011R",
+          "source_uri": "inbox://THR-incomplete/MSG-INBOX-011R",
+          "agent": "Email Invoice Agent",
+          "document_hash": "3e7c58fe254ee2461f04b28a1d76f59ac88045223d8e2204deabb490a19eaafe"
+        }
+      ],
+      "document_hash": "3e7c58fe254ee2461f04b28a1d76f59ac88045223d8e2204deabb490a19eaafe",
+      "evidence": [
+        {
+          "field": "vendor",
+          "source": "email.text",
+          "text": "Acme Supplies",
+          "value": "Acme Supplies"
+        },
+        {
+          "field": "vendor_invoice_number",
+          "source": "email.text",
+          "text": "Invoice Number: ACM-INBOX-5005",
+          "value": "ACM-INBOX-5005"
+        },
+        {
+          "field": "invoice_date",
+          "source": "email.text",
+          "text": "2026-09-18",
+          "value": "2026-09-18"
+        },
+        {
+          "field": "amount",
+          "source": "email.text",
+          "text": null,
+          "value": 1245.0
+        }
+      ],
+      "validation_status": "valid",
+      "validation_errors": [],
+      "warnings": [
+        "missing_po"
+      ],
+      "already_in_ap_inbox": false,
+      "existing_ap_invoice_id": null,
+      "forwarded_to_ap": true,
+      "ap_invoice_id": "ING-006",
+      "ap_result": "AP exceptions=['missing_po']",
+      "canonical_key": "acmesupply:ACMINBOX5005",
+      "ingestion_status": "new_invoice",
+      "provenance_added": false,
+      "new_this_run": true
     }
   ],
   "notices": [
@@ -585,6 +803,44 @@
         "What is the vendor invoice number?",
         "What is the amount due, including currency?"
       ]
+    },
+    {
+      "kind": "unsupported",
+      "message_id": "MSG-INBOX-016",
+      "classification": "CREDIT_MEMO"
+    },
+    {
+      "kind": "remittance",
+      "message_id": "MSG-INBOX-019",
+      "thread_id": "THR-remittance",
+      "classification": "CUSTOMER_REMITTANCE",
+      "counterparty": "Northwind Labs",
+      "invoice_number": null,
+      "po_number": null,
+      "amount_cents": null,
+      "amount": null
+    },
+    {
+      "kind": "purchase_order",
+      "message_id": "MSG-INBOX-005",
+      "thread_id": "THR-purchase-order",
+      "classification": "PURCHASE_ORDER",
+      "counterparty": "Slack Technologies",
+      "invoice_number": null,
+      "po_number": "PO-108",
+      "amount_cents": null,
+      "amount": null
+    },
+    {
+      "kind": "goods_receipt",
+      "message_id": "MSG-INBOX-006",
+      "thread_id": "THR-goods-receipt",
+      "classification": "GOODS_RECEIPT",
+      "counterparty": "Warehouse",
+      "invoice_number": null,
+      "po_number": "PO-108",
+      "amount_cents": null,
+      "amount": null
     }
   ],
   "traces": []

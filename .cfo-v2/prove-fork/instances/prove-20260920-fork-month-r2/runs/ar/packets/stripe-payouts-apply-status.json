@@ -1,0 +1,43 @@
+{
+  "from_bot": "apply",
+  "routed_from": "stripe",
+  "payouts": [
+    {
+      "payout_id": "po_1MaximorFees",
+      "charges": ["ORD-2101", "ORD-2102"],
+      "amounts_minor": {"ORD-2101": 800000, "ORD-2102": 500000},
+      "fees_minor": -39000,
+      "invoice_candidates_from_stripe": 0
+    },
+    {
+      "payout_id": "po_1MaximorRefunds",
+      "charges": ["ORD-2201"],
+      "amounts_minor": {"ORD-2201": 400000},
+      "refunds_minor": {"re_2201": -50000},
+      "fees_minor": -12000,
+      "invoice_candidates_from_stripe": 0
+    },
+    {
+      "payout_id": "po_1MaximorDisputes",
+      "charges": ["ORD-2301"],
+      "amounts_minor": {"ORD-2301": 600000},
+      "chargebacks_minor": {"dp_2301": -75000},
+      "fees_minor": -18000,
+      "invoice_candidates_from_stripe": 0
+    }
+  ],
+  "kernel": {
+    "queried_payment_ids": [
+      "po_1MaximorFees",
+      "ORD-2101",
+      "po_1MaximorRefunds",
+      "po_1MaximorDisputes"
+    ],
+    "result": "all unknown payment — zero candidates"
+  },
+  "decision": "NO_KERNEL_CANDIDATES",
+  "proposal": null,
+  "posted": false,
+  "never_ap_invoice": true,
+  "note": "Receipt confirmed. Stripe invoice_candidates=0; Kernel has no AR payment rows for these payout/charge ids. Apply does not invent invoice applications from processor order ids. Fees/refunds/chargebacks are not cash-application to open AR invoices. No dun. Idle until Kernel exposes remittance candidates (e.g. bank deposit or AR-linked payment)."
+}

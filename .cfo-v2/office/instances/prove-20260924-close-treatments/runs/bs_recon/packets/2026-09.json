@@ -1,0 +1,236 @@
+{
+  "period": "2026-09",
+  "packets": [
+    {
+      "account_id": "Cash",
+      "account_name": "Cash",
+      "period": "2026-09",
+      "ledger_balance": 14925593.06,
+      "evidence_balance": 14925500.94,
+      "ledger_source": "cash_recon.ledger_ending",
+      "evidence_source": "cash_recon.bank_statement + fee evidence",
+      "evidence_refs": [
+        "cash_recon:2026-09",
+        "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/runs/cash_recon/2026-09-20260924T212601Z.json"
+      ],
+      "reconciling_items": [
+        {
+          "item_id": "REC-211",
+          "description": "Unexplained difference: $12.40",
+          "amount": 12.4,
+          "source": "cash_recon",
+          "expected_resolution_date": null,
+          "classification": "unexplained_difference",
+          "status": "open",
+          "evidence_refs": [
+            "bank_amount:1241240",
+            "ledger_amount:1240000",
+            "difference:1240",
+            "rounding_rejected:difference_not_one_cent",
+            "fee_rejected:no_fee_evidence",
+            "no_fx_evidence",
+            "no_partial_payment_remittance"
+          ]
+        },
+        {
+          "item_id": "REC-212",
+          "description": "Unexplained difference: $31.10",
+          "amount": 31.1,
+          "source": "cash_recon",
+          "expected_resolution_date": null,
+          "classification": "unexplained_difference",
+          "status": "open",
+          "evidence_refs": [
+            "bank_amount:3113110",
+            "ledger_amount:3110000",
+            "difference:3110",
+            "rounding_rejected:difference_not_one_cent",
+            "fee_rejected:no_fee_evidence",
+            "no_fx_evidence",
+            "no_partial_payment_remittance"
+          ]
+        },
+        {
+          "item_id": "REC-213",
+          "description": "Unexplained difference: $48.62",
+          "amount": 48.62,
+          "source": "cash_recon",
+          "expected_resolution_date": null,
+          "classification": "unexplained_difference",
+          "status": "open",
+          "evidence_refs": [
+            "bank_amount:4866862",
+            "ledger_amount:4862000",
+            "difference:4862",
+            "rounding_rejected:difference_not_one_cent",
+            "fee_rejected:no_fee_evidence",
+            "no_fx_evidence",
+            "no_partial_payment_remittance"
+          ]
+        }
+      ],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": false,
+      "calculations": {
+        "opening_bank": 14857217.18,
+        "opening_ledger": 14857217.18,
+        "unexplained_difference": 92.12,
+        "outstanding_timing": 2100.0,
+        "human_review_count": 15,
+        "period_status": "OPEN"
+      }
+    },
+    {
+      "account_id": "Accounts Receivable",
+      "account_name": "Accounts Receivable",
+      "period": "2026-09",
+      "ledger_balance": 34811818.0,
+      "evidence_balance": 34811818.0,
+      "ledger_source": "AR control account (subledger plus unapplied cash)",
+      "evidence_source": "ar_invoices.json outstanding customer invoices",
+      "evidence_refs": [
+        "data/ar_invoices.json"
+      ],
+      "reconciling_items": [],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": false,
+      "calculations": {
+        "subledger_outstanding": 34811818.0,
+        "unapplied_cash": 85312.4,
+        "snapshot_total_ar": 34811818.0
+      }
+    },
+    {
+      "account_id": "Accounts Payable",
+      "account_name": "Accounts Payable",
+      "period": "2026-09",
+      "ledger_balance": 18114192.84,
+      "evidence_balance": 18114192.84,
+      "ledger_source": "AP inbox unpaid invoices",
+      "evidence_source": "data/invoices.json vendor bills",
+      "evidence_refs": [
+        "data/invoices.json"
+      ],
+      "reconciling_items": [],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": false,
+      "calculations": {
+        "unpaid_inbox": 18114192.84
+      }
+    },
+    {
+      "account_id": "Accrued Expenses",
+      "account_name": "Accrued Expenses",
+      "period": "2026-09",
+      "ledger_balance": 0.0,
+      "evidence_balance": 0.0,
+      "ledger_source": "accrual journal credits to Accrued Expenses",
+      "evidence_source": "open accrual schedules plus later_invoices.json",
+      "evidence_refs": [],
+      "reconciling_items": [],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": false,
+      "calculations": {
+        "open_accrual_count": 0,
+        "open_accrual_total": 0.0
+      }
+    },
+    {
+      "account_id": "Prepaid Expenses",
+      "account_name": "Prepaid Expenses",
+      "period": "2026-09",
+      "ledger_balance": 282600.0,
+      "evidence_balance": 234600.0,
+      "ledger_source": "remaining prepaid schedules",
+      "evidence_source": "prepaid contracts with source documents",
+      "evidence_refs": [
+        "INV-020",
+        "INV-019",
+        "INV-OIC-2025-01",
+        "INV-HBP-2026-01",
+        "INV-CAM-RENT-2026-07"
+      ],
+      "reconciling_items": [
+        {
+          "item_id": "PRE-MISSING",
+          "description": "Prepaids: missing insurance policy evidence",
+          "amount": 48000.0,
+          "source": "prepaid.register",
+          "expected_resolution_date": null,
+          "classification": "missing_evidence",
+          "status": "open",
+          "evidence_refs": [
+            "PRE-CAM-Q3"
+          ]
+        }
+      ],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": true,
+      "calculations": {
+        "remaining_by_account": {
+          "Prepaid Software": 24000.0,
+          "Prepaid Insurance": 12000.0,
+          "1200-Prepaid-Software": 180000.0,
+          "1210-Prepaid-Insurance": 18600.0,
+          "1220-Prepaid-Other": 48000.0
+        },
+        "missing_amount": 48000.0
+      }
+    },
+    {
+      "account_id": "Fixed Assets",
+      "account_name": "Fixed Assets",
+      "period": "2026-09",
+      "ledger_balance": 580720.8,
+      "evidence_balance": 580720.8,
+      "ledger_source": "asset register + capitalization journals",
+      "evidence_source": "data/close/fixed_assets.json and INV-021",
+      "evidence_refs": [
+        "INV-018",
+        "INV-OIC-2025-01",
+        "INV-LEN-ROLL-26"
+      ],
+      "reconciling_items": [],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": false,
+      "calculations": {
+        "register_cost": 580720.8,
+        "accumulated_depreciation": 0.0,
+        "net_book_value": 580720.8,
+        "posted_capitalizations": 0.0,
+        "posted_depreciation_lines": 0,
+        "created_at": "2026-09-24T21:26:16Z",
+        "seed_cost": 580720.8,
+        "gl_cost": 580720.8
+      }
+    },
+    {
+      "account_id": "Accumulated Depreciation",
+      "account_name": "Accumulated Depreciation",
+      "period": "2026-09",
+      "ledger_balance": 0.0,
+      "evidence_balance": 0.0,
+      "ledger_source": "posted depreciation journals",
+      "evidence_source": "depreciation roll-forward",
+      "evidence_refs": [
+        "fixed_assets.depreciation_schedule"
+      ],
+      "reconciling_items": [],
+      "stale_evidence": false,
+      "duplicate_support": false,
+      "missing_evidence": false,
+      "calculations": {
+        "beginning": 0.0,
+        "current_depreciation": 0.0,
+        "ending": 0.0,
+        "tied": true
+      }
+    }
+  ]
+}

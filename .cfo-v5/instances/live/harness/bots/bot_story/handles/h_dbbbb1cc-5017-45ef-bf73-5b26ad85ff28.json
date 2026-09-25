@@ -1,0 +1,19 @@
+{
+  "id": "h_dbbbb1cc-5017-45ef-bf73-5b26ad85ff28",
+  "from": "operator",
+  "to": "bot_story",
+  "toSlug": "story",
+  "prompt": "Operator check for story",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_story"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:51.120Z",
+  "updatedAt": "2026-09-24T23:35:53.984Z",
+  "result": "Ready — Bot `story`. I own flux, the 13-week forecast, and the board pack.\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 122
+}

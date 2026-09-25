@@ -1,0 +1,27 @@
+{
+  "message_id": "MSG-INBOX-002",
+  "thread_id": "THR-body-invoice",
+  "classification": "VENDOR_INVOICE",
+  "selected_action": "CREATE_AP_INVOICE",
+  "dispatch_status": "CREATED",
+  "invoice_id": "ING-005",
+  "canonical_id": "ING-005",
+  "vendor_name": "Figma",
+  "vendor_id": "Figma",
+  "invoice_number": "FIG-INBOX-2002",
+  "po_number": "PO-107",
+  "amount_cents": 244800,
+  "currency": "USD",
+  "invoice_date": "2026-09-18",
+  "due_date": "2026-10-18",
+  "source": "body_text_no_attachment",
+  "match_status": "EXCEPTION",
+  "match_exceptions": [
+    "missing_po",
+    "goods_not_received"
+  ],
+  "reason_codes": [
+    "AP_INVOICE_CREATED"
+  ],
+  "note": "Body invoice only; no attachment. Email does not match. Hand to ap/prepare."
+}

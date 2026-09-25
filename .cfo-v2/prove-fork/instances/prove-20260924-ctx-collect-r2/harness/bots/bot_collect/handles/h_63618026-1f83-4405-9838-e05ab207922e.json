@@ -1,0 +1,19 @@
+{
+  "id": "h_63618026-1f83-4405-9838-e05ab207922e",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "profile: chase\nMaximor Demo Corp, September 2026. Customer invoices are still open. You own collections. Work the aging. Do not apply their cash. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:23:18.679Z",
+  "updatedAt": "2026-09-24T18:28:26.117Z",
+  "result": "As-of **2026-09-30** collections is done for the post-apply aging. Ten past-due invoices, no Kernel blocks, no cash applied.\n\n| Invoice | Customer | Outstanding | DPD | Action | Customer reply |\n|---|---|---:|---:|---|---|\n| INV-AR-002 | Acme Industrial | $8,500 | 20 | SEND_GENTLE | Promise ~8 days (batch) |\n| INV-AR-024 | Atlas Robotics | $8,900 | 3 | SEND_GENTLE | Next weekly batch ~3 days |\n| INV-AR-018 | Copperline | $9,600 | 11 | SEND_GENTLE | ACH next week ~7 days |\n| INV-AR-HE-4412 | Helios | $91,200 | 16 | SEND_GENTLE | Timing ~24 days, not disputed |\n| INV-AR-003 | Helios | $24,000 | 41 | SEND_OVERDUE | 3–4 weeks |\n| INV-AR-019 | Summit Civic | $7,200 | 47 | SEND_OVERDUE | Civic queue ~16 days |\n| INV-AR-020 | Redwood Clinics | $15,800 | 82 | SEND_OVERDUE | Next batch ~4 days |\n| INV-AR-004 | Brightline | $31,000 | 77 | SEND_FINAL | Promise ~12 days |\n| INV-AR-025 | Brightline | $27,500 | 121 | SEND_FINAL | Promise ~12 days |\n| INV-AR-005 | Quiet Harbor | $45,000 | 152 | SEND_FINAL | ~18 days, not this week |\n\nMail left `collections@hackmit-cfo.example` (`delivered: true`). World answered on all 10 threads. Nothing sent to ctl-pay. Next chase: **HOLD_CONTACT** while those timings are open.",
+  "resultPaths": [],
+  "seq": 13
+}

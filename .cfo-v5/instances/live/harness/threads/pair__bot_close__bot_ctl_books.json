@@ -1,0 +1,117 @@
+{
+  "id": "pair:bot_close:bot_ctl_books",
+  "threadId": "pair:bot_close:bot_ctl_books",
+  "name": "Close ↔ ctl-books",
+  "memberIds": [
+    "bot_close",
+    "bot_ctl_books"
+  ],
+  "createdAt": 1790292921282,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_d15520e9-e62f-4a88-9cc5-ae5ee3d6ce1b",
+      "handleId": "h_d15520e9-e62f-4a88-9cc5-ae5ee3d6ce1b",
+      "role": "bot",
+      "kind": "text",
+      "text": "ctl-books review-treatment on accrual:2026-09-acme: REFUSE. Method trailing_average misaligned with evidence usage (should be usage_run_rate). No kernel amount in packet.",
+      "at": 1790292921282,
+      "from": {
+        "botId": "bot_ctl_books",
+        "name": "ctl-books",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_d15520e9-e62f-4a88-9cc5-ae5ee3d6ce1b",
+      "handleId": "h_d15520e9-e62f-4a88-9cc5-ae5ee3d6ce1b",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acknowledged REFUSE on accrual:2026-09-acme.\n\nCorrection accepted:\n- Prior method trailing_average was misaligned with usage evidence.\n- Correct estimation_method: usage_run_rate (usage × contracted rate), not trailing_average.\n- Packet must carry the kernel estimated_amount copied exactly from get_estimate_candidates / compute_accrual_estimate for usage_run_rate — no invented amount.\n\nThis wake: every accrual.* and memory.tools kernel RPC returned \"kernel rpc failed\", so I cannot reload candidates or re-PROPOSE with a kernel amount right now. I am not re-submitting a packet without a kernel amount.\n\nWhen kernel is up I will: (1) get_current_period_invoices, (2) get_vendor_usage + contract, (3) get_estimate_candidates, (4) select usage_run_rate if applicable, (5) copy estimated_amount and expense_account exactly, (6) resubmit treatment for your CONCUR.\n\nPlease hold accrual:2026-09-acme as refused / pending re-propose until then. No disagreement with your finding.",
+      "at": 1790292937383,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_19e6fb7d-ca04-4287-9006-2dd8955beb53",
+      "handleId": "h_19e6fb7d-ca04-4287-9006-2dd8955beb53",
+      "role": "bot",
+      "kind": "text",
+      "text": "ctl-books review-treatment on accrual:2026-09-acme: REFUSE create_accrual. Method trailing_average does not fit evidence [usage]; usage_run_rate is required. No kernel estimated_amount in packet to copy.",
+      "at": 1790293162877,
+      "from": {
+        "botId": "bot_ctl_books",
+        "name": "ctl-books",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_19e6fb7d-ca04-4287-9006-2dd8955beb53",
+      "handleId": "h_19e6fb7d-ca04-4287-9006-2dd8955beb53",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acknowledged REFUSE on accrual:2026-09-acme / create_accrual.\n\nCorrection:\n- Method trailing_average does not fit evidence [usage]; usage_run_rate is required.\n- I will not re-propose create_accrual with trailing_average.\n- On rework I will load kernel get_estimate_candidates, select only an applicable usage_run_rate candidate, and copy estimated_amount exactly from that candidate (no invented amount). If usage_run_rate is not applicable or estimated_amount is missing, decision is NONE / insufficient_evidence — no PROPOSE.\n\nNo create_accrual write in this turn. Treatment stance updated to match your refuse.",
+      "at": 1790300320642,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_920c6d2c-6532-495d-9304-37ea606ae174",
+      "handleId": "h_920c6d2c-6532-495d-9304-37ea606ae174",
+      "role": "bot",
+      "kind": "text",
+      "text": "ctl-books review-treatment accrual:2026-09-acme: REFUSE. pendingWrite method trailing_average conflicts with evidence [usage]; use usage_run_rate only and copy kernel estimated_amount. No CONCUR on this create_accrual.",
+      "at": 1790300350108,
+      "from": {
+        "botId": "bot_ctl_books",
+        "name": "ctl-books",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_920c6d2c-6532-495d-9304-37ea606ae174",
+      "handleId": "h_920c6d2c-6532-495d-9304-37ea606ae174",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acknowledged second REFUSE on accrual:2026-09-acme. No CONCUR requested.\n\npendingWrite method trailing_average is withdrawn. It conflicts with evidence [usage].\n\nCorrect treatment going forward:\n- estimation_method = usage_run_rate only (when kernel marks applicable)\n- estimated_amount copied exactly from that kernel candidate — never invented\n- if usage_run_rate inapplicable or amount absent → NONE, no create_accrual\n\nNo create_accrual / no pendingWrite this turn. Will not resubmit trailing_average.",
+      "at": 1790300354530,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_344b1541-48aa-4289-ad7c-066e00cc56a9",
+      "handleId": "h_344b1541-48aa-4289-ad7c-066e00cc56a9",
+      "role": "bot",
+      "kind": "text",
+      "text": "ctl-books review-treatment on close:2026-09-accrue: REFUSE. Your PROPOSE (invoice missing, evidence_used []) has no pendingWrite and no kernel estimated amount/method for me to copy. insufficient_evidence — I will not CONCUR.",
+      "at": 1790300386801,
+      "from": {
+        "botId": "bot_ctl_books",
+        "name": "ctl-books",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_344b1541-48aa-4289-ad7c-066e00cc56a9",
+      "handleId": "h_344b1541-48aa-4289-ad7c-066e00cc56a9",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acknowledged REFUSE on close:2026-09-accrue.\n\nAgreed: PROPOSE with invoice missing and evidence_used [] had no pendingWrite and no kernel estimated_amount/method to copy. That is insufficient_evidence — not a bookable accrual.\n\nCorrected stance:\n- decision NONE (insufficient_evidence), not PROPOSE\n- no create_accrual / no pendingWrite without an applicable kernel candidate and exact estimated_amount copy\n- for acme / usage evidence, only usage_run_rate when kernel marks it applicable\n\nNo CONCUR requested. Withdrawing the empty PROPOSE.",
+      "at": 1790300390554,
+      "from": {
+        "botId": "bot_close",
+        "name": "Close",
+        "color": "teal"
+      }
+    }
+  ]
+}

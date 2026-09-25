@@ -1,0 +1,23 @@
+{
+  "id": "h_0dbd9e26-0724-480f-ad72-d94b19df0244",
+  "from": "harness",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "[harness wake]\nkind: item_step\nitem: bill:INV-001\nstep: review-match\npacket: runs/items/bill-INV-001.json",
+  "paths": [
+    "runs/items/bill-INV-001.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "failed",
+  "createdAt": "2026-09-24T23:28:57.424Z",
+  "updatedAt": "2026-09-24T23:34:34.708Z",
+  "result": "Pi finished this turn with no assistant text",
+  "resultPaths": [],
+  "seq": 67,
+  "error": "did not call ask_bot to reply; assistant text is not the pair thread"
+}

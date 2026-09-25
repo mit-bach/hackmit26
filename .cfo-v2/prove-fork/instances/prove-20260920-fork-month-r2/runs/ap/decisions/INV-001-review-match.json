@@ -1,0 +1,34 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "review-match",
+  "packet_path": "runs/ap/packets/INV-001.json",
+  "ReviewerDecision": {
+    "decision": "CONCUR",
+    "allowed": true,
+    "action": "APPROVE",
+    "must_hold": [],
+    "exception_types": [],
+    "policies_applied": ["P-001", "P-011", "P-012"],
+    "evidence_used": [
+      "tools.get_case_evidence",
+      "tools.get_company_policies",
+      "tools.get_prior_cases",
+      "runs/ap/packets/INV-001.json"
+    ],
+    "kernel_facts": {
+      "amount_matches": true,
+      "amount_difference": 0,
+      "vendor_exact_match": true,
+      "po_exists": true,
+      "po_approved": true,
+      "receipt_status": "full",
+      "duplicate_detected": false,
+      "exception_types": [],
+      "days_until_due": -2
+    },
+    "reason": "Kernel three-way match clean under P-001: approved PO-101, exact amount 12450, exact vendor Acme Supplies, full GR-101, no duplicates, exception_types []. Packet complete with PreparerRecommendation APPROVE. No must_hold. days_until_due -2 is past due (pay-run timing), not a match block. Prior CASE-001 is alias precedent only; not needed here. CONCUR APPROVE.",
+    "refuse_reasons": []
+  },
+  "ctl_pay": "bot_ctl_pay",
+  "outcome": "allow"
+}

@@ -1,0 +1,94 @@
+[
+  {
+    "user_id": "USR-VM-04",
+    "emp_id": "EMP-4128",
+    "role": "ap_vendor_master"
+  },
+  {
+    "user_id": "USR-PREP-04",
+    "emp_id": "EMP-4128",
+    "role": "ap_preparer"
+  },
+  {
+    "user_id": "USR-JE-04",
+    "emp_id": "EMP-1088",
+    "role": "assistant_controller"
+  },
+  {
+    "user_id": "USR-NA-VOSS",
+    "emp_id": "EMP-1088",
+    "role": "assistant_controller"
+  },
+  {
+    "user_id": "USR-REV-04",
+    "emp_id": "",
+    "role": "distribution_list",
+    "display": "rev-approvals@maximor.example"
+  },
+  {
+    "user_id": "USR-REV-05",
+    "emp_id": "EMP-1190",
+    "role": "revenue"
+  },
+  {
+    "user_id": "USR-APPLY-02",
+    "emp_id": "EMP-3304",
+    "role": "cash_apply"
+  },
+  {
+    "user_id": "USR-FAC-01",
+    "emp_id": "EMP-2201",
+    "role": "facilities"
+  },
+  {
+    "user_id": "USR-WH-2290",
+    "emp_id": "EMP-2290",
+    "role": "warehouse"
+  },
+  {
+    "user_id": "USR-GR-01",
+    "emp_id": "EMP-6722",
+    "role": "receiving"
+  },
+  {
+    "user_id": "USR-STRIPE-01",
+    "emp_id": "EMP-4402",
+    "role": "processor"
+  },
+  {
+    "user_id": "USR-PR-01",
+    "emp_id": "EMP-5510",
+    "role": "payroll"
+  },
+  {
+    "user_id": "USR-APPR-HALE",
+    "emp_id": "EMP-0901",
+    "role": "po_approver",
+    "limit": 25000.0
+  },
+  {
+    "user_id": "USR-APPR-NAIR",
+    "emp_id": "EMP-0902",
+    "role": "po_approver"
+  },
+  {
+    "user_id": "USR-APPR-CHEN",
+    "emp_id": "EMP-0903",
+    "role": "po_approver"
+  },
+  {
+    "user_id": "USR-APPR-VASQ",
+    "emp_id": "EMP-0904",
+    "role": "po_approver"
+  },
+  {
+    "user_id": "USR-MKT-01",
+    "emp_id": "EMP-3310",
+    "role": "marketing"
+  },
+  {
+    "user_id": "USR-JE-02",
+    "emp_id": "EMP-1088",
+    "role": "journal_approver_stamp"
+  }
+]

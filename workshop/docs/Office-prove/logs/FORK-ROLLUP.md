@@ -3,7 +3,7 @@
 - **Serve:** `http://127.0.0.1:8801/` computer tree `.cfo-v2/prove-fork/`
 - **Golden:** `http://127.0.0.1:8800/` `.cfo-v2/office/office.json` `currentId` `golden-20260920-r1` (untouched)
 - **Last prove instance:** `prove-20260920-fork-month-r2` (P1-S08 INTENDED after T12 patch). Floor `prove-20260920-fork-floor-r1` is P0 INTENDED. Month-r1 stopped at S08 HARD.
-- **Last step:** P1-S08 email on MSG-INBOX-014. Class **INTENDED** (REJECTED, no Kernel mint, no AP Handle). Prior HARD on r1 was T12 CREATED ING-002; patched copied Kernel only.
+- **Last step:** P1 through S09 on r2. S03/S04/S05/S06/S07/S09 INTENDED. S02 SOFT (duplicate attach, no AP Handle). S16 world SOFT (status line, pair thread empty). S11 transport fail, retry after 8801 restart. Injection still REJECTED.
 
 ## Isolation map
 - **Isolation:** copied Kernel, bots, constitution, World pack, Client, sidecar.bin, operator-config. Harness `src/` not edited. Live catalog mtime unchanged. Live `extensions.json` still Golden Client.

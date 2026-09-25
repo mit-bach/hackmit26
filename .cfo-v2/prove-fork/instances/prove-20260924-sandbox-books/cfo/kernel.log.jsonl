@@ -1,0 +1,8 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_2135f151abfd", "ts": "2026-09-24T19:37:38Z"}
+{"botId": "bot_books", "error": null, "handleId": "", "ok": true, "op": "invoice_ingestion.tools.get_erp_invoice", "profile": "erp-invoice", "slug": "books", "traceId": "k_c521481844a8", "ts": "2026-09-24T19:37:46Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_24b1ac2cc25d", "ts": "2026-09-24T19:38:05Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_case_evidence", "profile": "prepare", "slug": "ap", "traceId": "k_bebc4def252a", "ts": "2026-09-24T19:38:08Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_fad81184c379", "ts": "2026-09-24T19:38:08Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_purchase_order", "profile": "prepare", "slug": "ap", "traceId": "k_088c278c494d", "ts": "2026-09-24T19:38:08Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.find_duplicate_invoices", "profile": "prepare", "slug": "ap", "traceId": "k_e950eb7c0cba", "ts": "2026-09-24T19:38:08Z"}
+{"botId": "bot_ap", "error": null, "handleId": "", "ok": true, "op": "tools.get_goods_receipt", "profile": "prepare", "slug": "ap", "traceId": "k_387c7cf9dd11", "ts": "2026-09-24T19:38:08Z"}

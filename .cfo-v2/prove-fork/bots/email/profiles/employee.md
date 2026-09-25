@@ -8,7 +8,7 @@ An employee upload, Slack drop, or shared-drive file wakes this Bot with Profile
 
 ## Do
 
-1. Call `get_employee_submission(submission_id)`.
+1. Open that employee submission by its id.
 2. Classify. Vendor invoices may arrive this way. Receipts and reimbursements are not invoices.
 3. If not an invoice, `candidate` is null. Short factual reason.
 4. Write the Computer path. If it is a vendor bill, `bot_send_prompt` to `ap` / `prepare`. Await the Handle.

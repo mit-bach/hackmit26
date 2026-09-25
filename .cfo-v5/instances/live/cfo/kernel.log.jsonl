@@ -1,0 +1,4 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_4f1f76504db5", "ts": "2026-09-25T01:41:49Z"}
+{"botId": "kernel-host", "error": null, "handleId": "engine", "ok": true, "op": "kernel.bill_facts", "profile": "sidecar", "slug": "_host", "traceId": "k_6101f7e70d69", "ts": "2026-09-25T01:42:00Z"}
+{"botId": "kernel-host", "error": null, "handleId": "engine", "ok": true, "op": "kernel.bill_facts", "profile": "sidecar", "slug": "_host", "traceId": "k_32d9065c7e91", "ts": "2026-09-25T01:42:00Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_ebfe4cf180bb", "ts": "2026-09-25T01:42:06Z"}

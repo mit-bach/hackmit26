@@ -1,0 +1,19 @@
+{
+  "id": "h_f6c0b759-66da-412d-b9b5-1294e2eec99b",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nOpen bill INV-001. Load the invoice, the PO, the goods receipt, duplicates, case evidence, and policies.\nPropose APPROVE or HOLD. You do not pay. You do not concur.\nIf the packet is APPROVE-shaped, Handle ctl-pay / review-match and wait until that Handle is terminal.\nIf HOLD, do not enter the pay pool.\nWrite the pair-thread reply as a paragraph that names INV-001, what you found, and what ctl-pay must do next.\nDo not ask_user.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:56:31.448Z",
+  "updatedAt": "2026-09-24T17:57:35.502Z",
+  "result": "**INV-001 — prepare complete; ctl-pay terminal ALLOW.**\n\nLoaded invoice INV-001 (Acme Supplies, ACM-2026-4410, USD 12,450, PO-101), case evidence, PO-101 (approved, authorized 12,450, Jordan Hale), GR-101 (full, 15/15, amount received 12,450), and duplicates (none). Policy Catalog ops are not on Profile `prepare`; ctl-pay applied P-001 / P-011 / P-012 on review-match. Kernel: `amount_matches` diff 0, `vendor_exact_match`, `po_exists`+`po_approved`, `receipt_status` full, `exception_types` [], `days_until_due` −2 (past-due timing only).\n\n**Propose: APPROVE** (ap does not pay or concur).\n\n**ctl-pay / review-match (terminal):** CONCUR ALLOW · `must_hold` [] · decision `runs/ap/decisions/INV-001-review-match.json`. Match concurrence is done; ctl-pay does not pay. Next step for cash is Bot **pay** over the approved pool when a pay run is built — not ap.\n\n**Packet:** `runs/ap/packets/INV-001.json`",
+  "resultPaths": [],
+  "seq": 168
+}

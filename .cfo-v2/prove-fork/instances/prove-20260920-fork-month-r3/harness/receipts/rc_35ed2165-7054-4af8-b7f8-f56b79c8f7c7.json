@@ -1,0 +1,10 @@
+{
+  "id": "rc_35ed2165-7054-4af8-b7f8-f56b79c8f7c7",
+  "name": "weekly-pay-run",
+  "bot": "pay",
+  "handleId": "h_4842261a-8ee9-400a-b8fb-0464ace7909c",
+  "status": "completed",
+  "at": "2026-09-24T18:03:09.092Z",
+  "updatedAt": "2026-09-24T18:07:19.066Z",
+  "result": "**Weekly payment-run draft complete**\n\n| Item | Detail |\n|------|--------|\n| **Plan** | `workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json` |\n| **pay_this_week** | **INV-001** (Acme Supplies) |\n| **Kernel net** | total_payout **12450.00**, cash_after **6,462,475.74**, **reserve_ok: true** |\n| **Rationale** | Only approved-pool candidate; due 2026-09-22 within 7-day horizon; 2/10 closed (no early discount); spendable 6,374,925.74 covers it without reserve breach |\n| **ctl-pay** | **CONCUR / RELEASE** (`h_1c49dc30`) → `runs/pay/concurrence/plan_2026-09-19_d1e2549ae6c2.json` |\n| **cash** | Expected outflows `workspace/cash/expected-outflows/plan_2026-09-19_d1e2549ae6c2.json`, **executed: false** (acknowledged `h_2a981c58`) |\n\nNo ACH/wire. No human ask. Amounts follow Catalog + `apply_cash_and_policy_net` arithmetic; only Kernel candidate IDs proposed."
+}

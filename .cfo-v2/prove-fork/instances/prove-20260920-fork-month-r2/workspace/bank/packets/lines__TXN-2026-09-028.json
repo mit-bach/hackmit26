@@ -1,0 +1,26 @@
+{
+  "transaction_id": "TXN-2026-09-028",
+  "date": "2026-09-28",
+  "amount": 37400.0,
+  "currency": "USD",
+  "description": "WIRE IN ATLAS ROBOTICS",
+  "counterparty": "ATLAS ROBOTICS",
+  "transaction_type": "wire_credit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "WIRE-ATL-374",
+  "raw_metadata": {
+    "payment_id": "PAY-003"
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "unmatched_open",
+  "gt_label": null,
+  "path": "workspace/bank/lines/TXN-2026-09-028.json"
+}

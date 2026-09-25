@@ -1,0 +1,19 @@
+{
+  "id": "h_0dd3c945-c167-49cc-8be6-67e15be91b2d",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Inbound bank mail delivered for triage (profile: triage).\n\nPath: workspace/world/packets/fnb-stmt-2026-09-operating.md\nmessage_id: msg-fnb-stmt-2026-09-operating-001\nthread_id: thr-fnb-stmt-2026-09-operating\nsender: First National Operating <notices@firstnational.example>\nsubject: September 2026 statement available — Operating Account BANK-OPERATING\n\nBank statement availability notice for operating account BANK-OPERATING, period 2026-09. Not a vendor bill. World did not mark any line matched and left the $12.40 difference unexplained. Please classify and reply with outcome.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:55:38.527Z",
+  "updatedAt": "2026-09-24T20:55:48.709Z",
+  "result": "Triage complete for msg-fnb-stmt-2026-09-operating-001 (thread thr-fnb-stmt-2026-09-operating).\n\nClassification: not_invoice / bank_statement_notice\ninbox_type: BANK_NOTICE\nselected_action: NONE\ncandidate: null\nconfidence: high\n\nIdentifiers referenced only: First National Operating; account BANK-OPERATING; period 2026-09. World note retained: $12.40 difference unexplained; no lines marked matched.\n\nReason: Statement availability notice for the operating account. Not a vendor bill, not remittance, not payment confirmation of AP. No CREATE_AP_INVOICE. No handoff to ap or apply. Email does not perform bank-rec or explain the $12.40 difference.\n\nPacket: workspace/email/packets/fnb-stmt-2026-09-operating-triage.md",
+  "seq": 25
+}

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-056
+PO Number: PO-OPEN-056
+Vendor: Quarry Services
+Goods received in full on 2026-09-03
+Packing list attached: PL-GR-OPEN-056
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 187,682.08 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

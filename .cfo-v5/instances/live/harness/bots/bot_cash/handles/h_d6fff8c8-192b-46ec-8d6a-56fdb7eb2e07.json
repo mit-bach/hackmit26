@@ -1,0 +1,19 @@
+{
+  "id": "h_d6fff8c8-192b-46ec-8d6a-56fdb7eb2e07",
+  "from": "operator",
+  "to": "bot_cash",
+  "toSlug": "cash",
+  "prompt": "Operator check for cash",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_cash"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.250Z",
+  "updatedAt": "2026-09-24T23:33:29.789Z",
+  "result": "Ready as **cash** — I own unmatched bank lines and the reconcile step (MATCHED / EXPLAINED / UNEXPLAINED).\n\nSend a bound case or ask what you need (status, method, review handoff).",
+  "resultPaths": [],
+  "seq": 43
+}

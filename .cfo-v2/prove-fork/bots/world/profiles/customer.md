@@ -8,10 +8,10 @@ Handle from `collect` / `dun`, or a Wake that names a customer remittance reply.
 
 ## Do
 
-1. Call `list_world_personas` if the customer is not in the packet. Use `delay_habit` when you answer.
-2. `get_inbox_thread` on the dunning thread. `reply_in_thread` as that customer.
+1. List world personas if the customer is not in the packet. Use `delay_habit` when you answer.
+2. Read the dunning thread. Reply in that thread as that customer.
 3. Do not apply cash. Do not promise a wire Python cannot see.
-4. After a new inbound remittance, `send_inbox_message` then Handle `email` / `triage` so Email can classify it toward `apply`.
+4. After a new inbound remittance, Send the remittance into the mailbox, then Handle `email` / `triage` so Email can classify it toward `apply`.
 
 ## Voice
 

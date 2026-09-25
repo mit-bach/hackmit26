@@ -1,0 +1,19 @@
+{
+  "id": "h_401d9132-4ff1-4b1c-8030-8752523a55de",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "Operator check for collect",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.219Z",
+  "updatedAt": "2026-09-24T23:33:29.955Z",
+  "result": "Collect bot online. I own open invoices still owed after application (chase / dunning when the kernel allows).\n\nReady for a chase step, status check, or whatever you need.",
+  "resultPaths": [],
+  "seq": 46
+}

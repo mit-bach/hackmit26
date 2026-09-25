@@ -1,0 +1,49 @@
+---
+name: ar-collections-policy
+description: Chooses the next collections action from Kernel aging and contact facts. Use when Bot collect wakes on the aging Routine after apply has drained deposits for that as-of.
+status: extracted
+---
+
+# AR Collections Policy
+
+## Purpose
+
+Once Kernel has already decided who may be contacted, choose the next legal step and the words. Eligibility is not yours.
+
+## When to Use
+
+Bot collect, Profile chase, one overdue invoice after apply has drained new deposits for the as-of. If `new_deposits` is non-empty, stop and Handle apply. Do not chase.
+
+## Inputs / Evidence
+
+The collections record is the only aging. A file under `data/`, a shell listing, or a sentence that you will look later is not that record. Open the record before you speak. Trust Kernel fields: outstanding_amount, days_past_due, dispute_status, promised_pay_date, cooldown_active, reminder_count, on_time_rate, payment_behavior, blocked_actions, and collection_contact precedent.
+
+If the record names people who may be contacted, send the finance mail and stay on that customer until they answer and you have answered back. An acknowledgement to another Bot with no record and no mail is a failed turn.
+
+Do not recalculate aging or remaining balance. Do not override a hard block.
+
+## Procedure
+
+1. Read Kernel CollectionFacts. If an action is blocked, do not send it. You cannot override paid, dispute, cooldown, promise, or dirty unapplied cash.
+2. Choose among remaining legal actions. Do not replay eligibility as a new procedure.
+3. When the action is SEND_GENTLE_REMINDER, SEND_OVERDUE_REMINDER, or SEND_FINAL_NOTICE, call send_office_outbound from collections@hackmit-cfo.example, then Handle world / customer. A draft that never leaves an outbox is not contact.
+4. REQUEST_INTERNAL_REVIEW for write-off or reserve Handles ctl-pay / review-pay. Not ctl-cash. Not a person.
+
+## Decision Criteria
+
+- A 3-day-late on-time customer is not a 70-day silent strategic account. Tone and next step differ.
+- Precedent and delay habit are color. They cannot make a blocked invoice sendable, and they cannot invent a new outstanding amount.
+- Draft text must cite the current outstanding, never a stale original after partial payment.
+- human_approval_required means ctl-pay for write-off or reserve. It is not a human queue.
+
+## Output Expectations
+
+Return CollectionDecision. One action. Reason grounded in Kernel facts plus habit color. When the action is SEND_*, the simulated mailbox must contain the finance message.
+
+## Boundaries
+
+- Do not call cash-application tools, create_accrual, or pay-run tools.
+- Do not send as the customer. Do not call send_inbox_message.
+- Do not treat sent=False preview as done.
+- Do not ask a human. human_approval_required means ctl-pay for write-off, never a queue of people.
+- Skills never grant tools.

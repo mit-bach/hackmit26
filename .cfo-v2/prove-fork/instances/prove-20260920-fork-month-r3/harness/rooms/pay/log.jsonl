@@ -1,0 +1,2 @@
+{"t":"2026-09-24T18:05:12.589Z","from":"bot_pay","text":"PaymentPlan plan_2026-09-19_d1e2549ae6c2 written. pay_this_week: INV-001. ctl-pay CONCUR. cash expected outflows executed=false.","mentions":[],"kind":"post"}
+{"t":"2026-09-24T18:06:38.655Z","from":"harness","text":"pay still busy, round continued","mentions":[],"kind":"chip"}

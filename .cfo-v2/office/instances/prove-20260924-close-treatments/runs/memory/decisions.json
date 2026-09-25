@@ -1,0 +1,287 @@
+[
+  {
+    "decision_id": "DEC-2026-09-001",
+    "period": "2026-09",
+    "workflow": "cash_reconciliation",
+    "entity_type": "payment_provider",
+    "entity_id": "stripe",
+    "situation_type": "payout_difference",
+    "situation_summary": "Stripe payout was lower than gross receipts; difference 0.00 matched processor reductions.",
+    "evidence": [
+      {
+        "kind": "match_evidence",
+        "label": "provider:stripe",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "payout_id:po_1MaximorFees",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "provider_status:MATCH",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "expected_payout:1261000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "actual_payout:1261000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "bank_matched:True",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "bank_deposit",
+        "label": "bank_deposit",
+        "amount": 12610.0,
+        "amount_minor": 1261000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "ledger_entry",
+        "label": "ledger_gross_or_net",
+        "amount": 12610.0,
+        "amount_minor": 1261000,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "reconcile payout net of fees and chargebacks",
+    "reasoning_summary": "Bank deposit equals the processor net. Gross receipts minus fees, chargebacks, and refunds explain the difference exactly.",
+    "accounting_treatment": "net_payout_fees_and_chargebacks",
+    "outcome": "MATCHED",
+    "reusable_precedent": "Stripe payouts may arrive net of processing fees and chargebacks",
+    "source_trace_ids": [
+      "REC-001"
+    ],
+    "created_at": "2026-09-24T21:26:01Z",
+    "tags": [
+      "stripe",
+      "payout_difference",
+      "fees",
+      "chargebacks",
+      "cash_reconciliation"
+    ],
+    "idempotency_key": "f918b25c81b24cb3af316dec16a136b7d4db6cebe0149324f38dd874f0251d7e",
+    "entity_name": "Stripe",
+    "accounting_category": "cash",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-002",
+    "period": "2026-09",
+    "workflow": "cash_reconciliation",
+    "entity_type": "payment_provider",
+    "entity_id": "stripe",
+    "situation_type": "payout_difference",
+    "situation_summary": "Stripe payout was lower than gross receipts; difference 0.00 matched processor reductions.",
+    "evidence": [
+      {
+        "kind": "match_evidence",
+        "label": "provider:stripe",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "payout_id:po_1MaximorRefunds",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "provider_status:MATCH",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "expected_payout:338000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "actual_payout:338000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "bank_matched:True",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "bank_deposit",
+        "label": "bank_deposit",
+        "amount": 3380.0,
+        "amount_minor": 338000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "ledger_entry",
+        "label": "ledger_gross_or_net",
+        "amount": 3380.0,
+        "amount_minor": 338000,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "reconcile payout net of fees and chargebacks",
+    "reasoning_summary": "Bank deposit equals the processor net. Gross receipts minus fees, chargebacks, and refunds explain the difference exactly.",
+    "accounting_treatment": "net_payout_fees_and_chargebacks",
+    "outcome": "MATCHED",
+    "reusable_precedent": "Stripe payouts may arrive net of processing fees and chargebacks",
+    "source_trace_ids": [
+      "REC-002"
+    ],
+    "created_at": "2026-09-24T21:26:01Z",
+    "tags": [
+      "stripe",
+      "payout_difference",
+      "fees",
+      "chargebacks",
+      "cash_reconciliation"
+    ],
+    "idempotency_key": "ed92ca89a1c9e4771016be9e5ddb255c85b45acd750fa6ccc7bbff4a7b2fe456",
+    "entity_name": "Stripe",
+    "accounting_category": "cash",
+    "support_count": 1
+  },
+  {
+    "decision_id": "DEC-2026-09-003",
+    "period": "2026-09",
+    "workflow": "cash_reconciliation",
+    "entity_type": "payment_provider",
+    "entity_id": "stripe",
+    "situation_type": "payout_difference",
+    "situation_summary": "Stripe payout was lower than gross receipts; difference 0.00 matched processor reductions.",
+    "evidence": [
+      {
+        "kind": "match_evidence",
+        "label": "provider:stripe",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "payout_id:po_1MaximorDisputes",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "provider_status:MATCH",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "expected_payout:507000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "actual_payout:507000",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "match_evidence",
+        "label": "bank_matched:True",
+        "amount": null,
+        "amount_minor": null,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "bank_deposit",
+        "label": "bank_deposit",
+        "amount": 5070.0,
+        "amount_minor": 507000,
+        "reference": null,
+        "details": {}
+      },
+      {
+        "kind": "ledger_entry",
+        "label": "ledger_gross_or_net",
+        "amount": 5070.0,
+        "amount_minor": 507000,
+        "reference": null,
+        "details": {}
+      }
+    ],
+    "decision": "reconcile payout net of fees and chargebacks",
+    "reasoning_summary": "Bank deposit equals the processor net. Gross receipts minus fees, chargebacks, and refunds explain the difference exactly.",
+    "accounting_treatment": "net_payout_fees_and_chargebacks",
+    "outcome": "MATCHED",
+    "reusable_precedent": "Stripe payouts may arrive net of processing fees and chargebacks",
+    "source_trace_ids": [
+      "REC-003"
+    ],
+    "created_at": "2026-09-24T21:26:01Z",
+    "tags": [
+      "stripe",
+      "payout_difference",
+      "fees",
+      "chargebacks",
+      "cash_reconciliation"
+    ],
+    "idempotency_key": "f7d41ea7ad41d9d74b317e706ca922088b56edf2994c86e1e7602cb768f231b8",
+    "entity_name": "Stripe",
+    "accounting_category": "cash",
+    "support_count": 1
+  }
+]

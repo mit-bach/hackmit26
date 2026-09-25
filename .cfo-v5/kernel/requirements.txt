@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pydantic
+openai-agents==0.22.3
+stripe

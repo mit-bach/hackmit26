@@ -1,0 +1,19 @@
+{
+  "id": "h_0d77bcdd-37ba-4750-b856-cb06e0638cbe",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nEmail landed vendor reply MSG-INBOX-011R on THR-incomplete (completes MSG-INBOX-011 missing fields) as Kernel invoice ING-006 (ACM-INBOX-5005, Acme Supplies, USD 1245.00). Packet: runs/inbox/packets/MSG-INBOX-011R.json. Prepare only; do not match; do not pay. Acknowledge invoice_id ING-006 found.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:42:09.001Z",
+  "updatedAt": "2026-09-24T17:42:21.595Z",
+  "result": "ACK invoice_id ING-006 found (tools.get_invoice ok). Source MSG-INBOX-011R on THR-incomplete (completes MSG-INBOX-011) / ACM-INBOX-5005 / Acme Supplies / USD 1245.00. Prepare only: packet runs/ap/packets/ING-006.json. Kernel exception_types missing_po; receipt not_applicable; no duplicates; days_until_due -6. proposed HOLD; not matched; not paid; no ctl-pay handoff.",
+  "seq": 107
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_9d3272cd-19b3-4686-b101-87a047bbeac8",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "[harness wake]\nkind: item_step\nitem: bill:INV-009\nstep: investigate\npacket: runs/items/bill-INV-009.json",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:29.831Z",
+  "updatedAt": "2026-09-24T23:35:29.316Z",
+  "result": "**INV-009 investigate blocked**\n\nKernel/engine both return `unknown item bill:INV-009`. There is no ledger row at `runs/items/bill-INV-009.json` (only `bill-INV-001` and related items exist under `runs/items/`).\n\nFrom this seat I cannot create that file (EPERM outside `sandboxes/ap/`), so `get_case_evidence`, policies, and `complete_step` all fail the same way.\n\nPlease seed the open_bill item (owner `ap`, step `investigate`, `facts.invoice_id: INV-009`) and re-wake. Then I can run the investigate path and return APPROVE or HOLD from live facts.",
+  "resultPaths": [],
+  "seq": 80
+}

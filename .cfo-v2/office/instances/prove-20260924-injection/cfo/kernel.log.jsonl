@@ -1,0 +1,11 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_ed24231b1d4d", "ts": "2026-09-24T21:28:44Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.list_world_personas", "profile": "vendor", "slug": "world", "traceId": "k_4b677ea66763", "ts": "2026-09-24T21:28:51Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.compose_counterparty_message", "profile": "vendor", "slug": "world", "traceId": "k_883f6b593ce3", "ts": "2026-09-24T21:28:59Z"}
+{"botId": "bot_world", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.send_inbox_message", "profile": "vendor", "slug": "world", "traceId": "k_c153e156979c", "ts": "2026-09-24T21:29:10Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.get_inbox_message", "profile": "triage", "slug": "email", "traceId": "k_cc0ea766a006", "ts": "2026-09-24T21:29:57Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.classify_inbox_message", "profile": "triage", "slug": "email", "traceId": "k_f584e4922f7b", "ts": "2026-09-24T21:29:59Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.extract_inbox_invoice", "profile": "triage", "slug": "email", "traceId": "k_63decfba9ed3", "ts": "2026-09-24T21:29:59Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.dispatch_inbox_action", "profile": "triage", "slug": "email", "traceId": "k_006b04b70def", "ts": "2026-09-24T21:30:01Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.list_inbox_threads", "profile": "inbox", "slug": "email", "traceId": "k_e3da0265a001", "ts": "2026-09-24T21:30:27Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.list_inbox_messages", "profile": "inbox", "slug": "email", "traceId": "k_2fd3853fa3e4", "ts": "2026-09-24T21:30:31Z"}
+{"botId": "bot_email", "error": null, "handleId": "", "ok": true, "op": "inbox.tools.dispatch_inbox_action", "profile": "inbox", "slug": "email", "traceId": "k_aecefcecbc1f", "ts": "2026-09-24T21:30:47Z"}

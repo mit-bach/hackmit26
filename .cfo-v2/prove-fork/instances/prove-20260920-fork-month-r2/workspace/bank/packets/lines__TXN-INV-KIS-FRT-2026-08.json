@@ -1,0 +1,32 @@
+{
+  "transaction_id": "TXN-INV-KIS-FRT-2026-08",
+  "date": "2026-09-03",
+  "amount": -248.18,
+  "currency": "USD",
+  "description": "ACH OUT KESTREL INDUSTRIAL SUPPLY LLC",
+  "counterparty": "KESTREL INDUSTRIAL SUPPLY LLC",
+  "transaction_type": "ach_debit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "TXN-INV-KIS-FRT-2026-08",
+  "raw_metadata": {
+    "plant": true
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "matched_in_gt",
+  "gt_label": {
+    "match_type": "EXACT_MATCH",
+    "disposition": "MATCHED",
+    "ledger_ids": [
+      "GL-TXN-INV-KIS-FRT-2026-08"
+    ]
+  },
+  "path": "workspace/bank/lines/TXN-INV-KIS-FRT-2026-08.json"
+}

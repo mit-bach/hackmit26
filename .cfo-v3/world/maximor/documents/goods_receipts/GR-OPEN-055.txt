@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-055
+PO Number: PO-OPEN-055
+Vendor: Nimbus Systems
+Goods received in full on 2026-09-02
+Packing list attached: PL-GR-OPEN-055
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 187,544.90 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

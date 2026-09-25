@@ -1,0 +1,43 @@
+{
+  "source_id": "NS-4410",
+  "classification": "invoice",
+  "reason": "NetSuite vendorBill NS-4410 for Acme Supplies ACM-2026-4410; structured ERP record mapped without remap. Same economic event as existing AP INV-001.",
+  "confidence": 1.0,
+  "candidate": {
+    "source_type": "erp",
+    "source_id": "NS-4410",
+    "source_uri": "netsuite://vendorBill/NS-4410",
+    "vendor": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "vendor_invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "subtotal": 12450.0,
+    "tax": 0.0,
+    "amount": 12450.0,
+    "po_id": "PO-101",
+    "line_items": [],
+    "extraction_confidence": 1.0,
+    "evidence": [
+      {"field": "vendor", "source": "netsuite.vendorBill", "text": "Acme Supplies", "value": "Acme Supplies"},
+      {"field": "vendor_invoice_number", "source": "netsuite.vendorBill", "text": "ACM-2026-4410", "value": "ACM-2026-4410"},
+      {"field": "invoice_date", "source": "netsuite.vendorBill", "text": "2026-09-08", "value": "2026-09-08"},
+      {"field": "due_date", "source": "netsuite.vendorBill", "text": "2026-09-22", "value": "2026-09-22"},
+      {"field": "amount", "source": "netsuite.vendorBill", "text": null, "value": 12450.0},
+      {"field": "po_id", "source": "netsuite.vendorBill", "text": "PO-101", "value": "PO-101"}
+    ],
+    "source_context": {
+      "system": "NetSuite",
+      "record_id": "NS-4410",
+      "period": "2026-09",
+      "description": "Standing desks and monitors — same economic event as INV-001",
+      "existing_ap_invoice_id": "INV-001"
+    },
+    "classification": "invoice",
+    "classification_reason": "NetSuite vendorBill"
+  },
+  "warnings": [
+    "Kernel ingestion registry already has ACM-2026-4410 as ING-001 / AP INV-001; ERP source is additional provenance, not a new bill."
+  ]
+}

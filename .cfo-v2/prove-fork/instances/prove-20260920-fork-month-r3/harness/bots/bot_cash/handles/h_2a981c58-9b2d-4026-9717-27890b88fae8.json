@@ -1,0 +1,19 @@
+{
+  "id": "h_2a981c58-9b2d-4026-9717-27890b88fae8",
+  "from": "bot_pay",
+  "to": "bot_cash",
+  "toSlug": "cash",
+  "prompt": "profile: match\nIdentified AP wires after ctl-pay/review-pay concurrence. Packet: workspace/cash/expected-outflows/plan_2026-09-19_d1e2549ae6c2.json. Do not treat as posted cash. Pay did not execute ACH. executed false. plan_id plan_2026-09-19_d1e2549ae6c2. Wires: INV-001 amount 12450.0 Acme Supplies.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_pay",
+    "toId": "bot_cash"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:04:56.429Z",
+  "updatedAt": "2026-09-24T18:05:08.649Z",
+  "result": "Acknowledged. Cash recorded expected outflows from plan_2026-09-19_d1e2549ae6c2 at workspace/cash/expected-outflows/plan_2026-09-19_d1e2549ae6c2.json. INV-001 Acme Supplies 12450.0 outflow. executed=false — not treated as posted cash; will only use as identifier when a matching bank debit appears. No MATCH forced.",
+  "seq": 19
+}

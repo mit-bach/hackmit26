@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-KIS-4601
+PO Number: PO-KIS-4601
+Issued: 2026-04-08
+Vendor: Kestrel Industrial Supply LLC
+Vendor legal name: Kestrel Industrial Supply LLC
+Vendor tax ID: 87-2144091
+Authorized amount: 24,880.44
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+KIS-MRO-7 April cell A
+
+This purchase order is not an invoice. The vendor must bill against PO-KIS-4601.
+Payment terms follow the vendor master unless this order states otherwise.

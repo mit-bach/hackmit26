@@ -1,0 +1,19 @@
+{
+  "id": "h_84b97194-e4a3-458b-93ae-5477e7528c60",
+  "from": "harness",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "[harness wake]\nkind: item_step\nitem: accrual:2026-09-acme\nstep: review-treatment\npacket: runs/items/accrual-2026-09-acme.json",
+  "paths": [
+    "runs/items/accrual-2026-09-acme.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "createdAt": "2026-09-25T01:32:51.357Z",
+  "updatedAt": "2026-09-25T01:32:51.357Z"
+}

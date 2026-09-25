@@ -1,0 +1,27 @@
+▶ cfo facade bind
+  ✔ AP Preparer grants differ from AP Approver (1.901208ms)
+  ✔ ctl-pay id uses underscores and cannot see AP RECORD_TOOLS (1.085084ms)
+  ✔ ap / prepare cannot see create_accrual (1.657709ms)
+  ✔ audit / interpret in operational phase cannot see get_audit_ground_truth (0.774209ms)
+  ✔ close / accrue consequential write routes to ctl-books, not ask_user (33.949583ms)
+  ✔ refuses a union slug-map list (0.244709ms)
+  ✔ stripe payout binds to Stripe Payout Agent and sees only payout reads (0.771292ms)
+  ✔ skill names intersect roster when roster is nonempty (0.091834ms)
+  ✔ reads profile from wake text and replaces, never unions (0.862ms)
+  ✔ ctl-pay cannot hold RECORD_TOOLS, pay-run rebuild, or create_accrual (0.837458ms)
+  ✔ ctl-books cannot create_accrual on lock or review-treatment (0.583625ms)
+  ✔ completed Verifier Handle lets a consequential op past intercept (76.132042ms)
+  ✔ a Client-only CONCUR file does not unlock a Kernel op (74.788875ms)
+  ✔ BOT.md and system.md are readable from Computer cwd (0.146334ms)
+  ✔ intercept collect write-off owner is ctl-pay (0.244208ms)
+  ✔ pending index records the Harness Handle path (31.179333ms)
+✔ cfo facade bind (226.543125ms)
+ℹ tests 16
+ℹ suites 1
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 385.730084
+exit 0

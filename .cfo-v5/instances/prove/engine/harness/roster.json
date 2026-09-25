@@ -1,0 +1,446 @@
+{
+  "system": "cfo-agentic-system",
+  "version": "5",
+  "description": "Office of the CFO. Sixteen standing Bots. ctl-pay, ctl-cash, and ctl-books record a structured decision. The kernel gate is the control.",
+  "computer": ".",
+  "bots": [
+    {
+      "id": "bot_email",
+      "name": "Email",
+      "slug": "email",
+      "purpose": "Owns messages and attachments: vendor invoices and customer remittances.",
+      "instructions": "You are Bot `email`. You own messages and attachments: vendor invoices and customer remittances. The channel on the item (`email`, `employee`, `portal`, or `document`) comes from the source event.",
+      "skills": [
+        "inbox-triage",
+        "invoice-source-identification",
+        "invoice-field-interpretation",
+        "superseded-document-handling"
+      ],
+      "connectors": [
+        "inbox.tools.get_inbox_message",
+        "inbox.tools.get_inbox_attachment",
+        "inbox.tools.classify_inbox_message",
+        "inbox.tools.extract_inbox_invoice",
+        "inbox.tools.dispatch_inbox_action",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.send_office_outbound"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_stripe",
+      "name": "Stripe",
+      "slug": "stripe",
+      "purpose": "Owns processor payouts, fees, refunds, and chargebacks.",
+      "instructions": "You are Bot `stripe`. You own processor payouts, fees, refunds, and chargebacks.",
+      "skills": [],
+      "connectors": [
+        "integrations.tools.list_processor_payouts",
+        "integrations.tools.get_processor_payout",
+        "integrations.tools.get_payout_waterfall"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_bank",
+      "name": "Bank",
+      "slug": "bank",
+      "purpose": "Owns bank lines and corporate-card charges.",
+      "instructions": "You are Bot `bank`. You own bank lines and corporate-card charges. A charge is not a bill.",
+      "skills": [
+        "bank-charge-invoice-discovery"
+      ],
+      "connectors": [
+        "invoice_ingestion.tools.list_bank_transactions",
+        "invoice_ingestion.tools.get_bank_transaction",
+        "invoice_ingestion.tools.find_related_invoice"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_books",
+      "name": "Books",
+      "slug": "books",
+      "purpose": "Owns GL, subledgers, vendor and customer master, POs, and period-lock state.",
+      "instructions": "You are Bot `books`. You own GL, subledgers, vendor and customer master, purchase orders, and period-lock state. The source field on the item is `erp`, `procurement`, or `edi`, chosen by the event.",
+      "skills": [
+        "invoice-source-identification"
+      ],
+      "connectors": [
+        "invoice_ingestion.tools.list_erp_invoice_records",
+        "invoice_ingestion.tools.get_erp_invoice",
+        "invoice_ingestion.tools.list_procurement_records",
+        "invoice_ingestion.tools.get_procurement_record",
+        "invoice_ingestion.tools.list_edi_documents",
+        "invoice_ingestion.tools.get_edi_document"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_world",
+      "name": "World",
+      "slug": "world",
+      "purpose": "Owns simulated counterparty messages: the outside world's mailbox.",
+      "instructions": "You are Bot `world`. You own simulated counterparty messages. You role-play a vendor, a customer, a bank, or an employee. The counterparty type is a field on the item.",
+      "skills": [],
+      "connectors": [
+        "inbox.tools.compose_counterparty_message",
+        "inbox.tools.send_inbox_message",
+        "inbox.tools.reply_in_thread",
+        "inbox.tools.list_inbox_threads",
+        "inbox.tools.list_inbox_messages",
+        "inbox.tools.get_inbox_thread",
+        "inbox.tools.list_world_personas"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ap",
+      "name": "AP",
+      "slug": "ap",
+      "purpose": "Owns open bills: three-way match, hold, and exception investigation.",
+      "instructions": "You are Bot `ap`. You own open bills: three-way match, hold, and exception investigation.\n\nA long session has already seen earlier bills, so ap is not independent of itself. Independence is `ctl-pay`.",
+      "skills": [
+        "three-way-match-analysis",
+        "superseded-document-handling",
+        "ap-exception-investigation",
+        "prior-period-precedent"
+      ],
+      "connectors": [
+        "tools.get_invoice",
+        "tools.get_purchase_order",
+        "tools.get_goods_receipt",
+        "tools.find_duplicate_invoices",
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases",
+        "memory.tools.get_decision_memories"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_pay",
+      "name": "Pay",
+      "slug": "pay",
+      "purpose": "Owns the weekly payment-run draft over the approved pool.",
+      "instructions": "You are Bot `pay`. You own the weekly payment-run draft. You do not own three-way match.",
+      "skills": [
+        "payment-prioritization",
+        "early-payment-discount-evaluation"
+      ],
+      "connectors": [
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_approved_pool",
+        "scheduling.tools.get_payment_candidates",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_apply",
+      "name": "Apply",
+      "slug": "apply",
+      "purpose": "Owns unapplied cash and sticks kernel-valid remittances to invoices.",
+      "instructions": "You are Bot `apply`. You own unapplied cash. You stick a kernel-valid remittance to invoices.",
+      "skills": [
+        "cash-application"
+      ],
+      "connectors": [
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_collect",
+      "name": "Collect",
+      "slug": "collect",
+      "purpose": "Owns open invoices still owed after application.",
+      "instructions": "You are Bot `collect`. You own open invoices still owed after application.",
+      "skills": [
+        "ar-collections-policy"
+      ],
+      "connectors": [
+        "ar.tools.get_collection_candidates",
+        "ar.tools.get_collection_invoice_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents",
+        "inbox.tools.send_office_outbound"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_cash",
+      "name": "Cash",
+      "slug": "cash",
+      "purpose": "Owns unmatched bank lines.",
+      "instructions": "You are Bot `cash`. You own unmatched bank lines. Trust an identifier that apply or pay already named.",
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "bank-reference-interpretation",
+        "reconciliation-evidence-validation",
+        "reconciliation-exception-investigation",
+        "prior-period-precedent"
+      ],
+      "connectors": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate",
+        "cash_recon.tools.get_pipe_identifier",
+        "memory.tools.get_decision_memories"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_close",
+      "name": "Close",
+      "slug": "close",
+      "purpose": "Owns period completeness: accrue, defer, depreciate, and balance-sheet tie-out.",
+      "instructions": "You are Bot `close`. You own period completeness. The month-end workflow names one step. You do not union the steps in one turn.",
+      "skills": [
+        "accrual-evidence-evaluation",
+        "accrual-method-selection",
+        "prior-period-precedent",
+        "prepaid-expense-accounting",
+        "fixed-asset-depreciation",
+        "balance-sheet-reconciliation"
+      ],
+      "connectors": [
+        "accrual.tools.get_expected_invoices",
+        "accrual.tools.get_current_period_invoices",
+        "accrual.tools.get_vendor_invoice_history",
+        "accrual.tools.get_purchase_orders",
+        "accrual.tools.get_goods_receipts",
+        "accrual.tools.get_vendor_contract",
+        "accrual.tools.get_vendor_usage",
+        "accrual.tools.get_estimate_candidates",
+        "accrual.tools.compute_accrual_estimate",
+        "memory.tools.get_decision_memories",
+        "accrual.tools.create_accrual",
+        "accrual.tools.get_open_accruals",
+        "accrual.tools.reconcile_accrual_with_invoice",
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule",
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates",
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_story",
+      "name": "Story",
+      "slug": "story",
+      "purpose": "Owns flux, the 13-week forecast, and the board pack.",
+      "instructions": "You are Bot `story`. You own flux, the 13-week forecast, and the board pack. You do not move money and you do not own the books.",
+      "skills": [
+        "financial-variance-analysis",
+        "cash-forecasting",
+        "ar-cash-forecasting",
+        "forecast-vs-actual-interpretation",
+        "board-financial-reporting"
+      ],
+      "connectors": [
+        "reporting.tools.get_period_metrics",
+        "reporting.tools.get_variance_facts",
+        "reporting.tools.get_variance_trace",
+        "reporting.tools.get_cash_forecast",
+        "reporting.tools.get_forecast_snapshot",
+        "reporting.tools.get_forecast_checks",
+        "reporting.tools.get_trusted_cash_status"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ctl_pay",
+      "name": "ctl-pay",
+      "slug": "ctl-pay",
+      "purpose": "Records the structured decision on a matched bill and on a payment-run draft.",
+      "instructions": "You are Bot `ctl-pay`. You record a structured decision on a matched bill and on a payment-run draft. Look for reasons to refuse. A missing packet is a refuse.",
+      "skills": [
+        "prior-period-precedent"
+      ],
+      "connectors": [
+        "tools.get_case_evidence",
+        "tools.get_company_policies",
+        "tools.find_relevant_policies",
+        "tools.get_prior_cases",
+        "scheduling.tools.get_cash_position",
+        "scheduling.tools.get_treasury_policies"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ctl_cash",
+      "name": "ctl-cash",
+      "slug": "ctl-cash",
+      "purpose": "Records the structured decision on a cash reconciliation and on a cash application.",
+      "instructions": "You are Bot `ctl-cash`. You record a structured decision on a bank reconciliation and on a cash application. Look for reasons to refuse.",
+      "skills": [
+        "cash-reconciliation-method-selection",
+        "reconciliation-exception-investigation",
+        "prior-period-precedent",
+        "reconciliation-evidence-validation",
+        "cash-application"
+      ],
+      "connectors": [
+        "cash_recon.tools.get_bank_transaction",
+        "cash_recon.tools.get_ledger_entry",
+        "cash_recon.tools.get_fee_evidence",
+        "cash_recon.tools.get_match_candidates",
+        "cash_recon.tools.get_candidate",
+        "cash_recon.tools.get_pipe_identifier",
+        "memory.tools.get_decision_memories",
+        "ar.tools.get_cash_application_facts",
+        "ar.tools.get_ar_customer",
+        "ar.tools.get_ar_precedents"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_ctl_books",
+      "name": "ctl-books",
+      "slug": "ctl-books",
+      "purpose": "Records the structured decision on a close treatment and on the period lock.",
+      "instructions": "You are Bot `ctl-books`. You record a structured decision on a close treatment and on the period lock. Look for reasons to refuse.",
+      "skills": [
+        "prepaid-expense-accounting",
+        "prior-period-precedent",
+        "fixed-asset-depreciation",
+        "balance-sheet-reconciliation",
+        "month-end-close-review"
+      ],
+      "connectors": [
+        "prepaid.tools.get_prepaid",
+        "prepaid.tools.list_prepaids",
+        "prepaid.tools.get_prepaid_treatment_candidates",
+        "prepaid.tools.get_prepaid_schedule",
+        "memory.tools.get_decision_memories",
+        "fixed_assets.tools.get_fixed_asset",
+        "fixed_assets.tools.list_fixed_assets",
+        "fixed_assets.tools.get_depreciation_schedule",
+        "fixed_assets.tools.get_capital_candidates",
+        "bs_recon.tools.get_reconciliation_packet",
+        "bs_recon.tools.list_reconciling_items",
+        "close.tools.get_close_gates",
+        "close.tools.get_close_packet"
+      ],
+      "approvalLevel": "never"
+    },
+    {
+      "id": "bot_audit",
+      "name": "audit",
+      "slug": "audit",
+      "purpose": "Owns after-the-fact sampling, re-performance, and the finding draft.",
+      "instructions": "You are Bot `audit`. You own after-the-fact sampling, re-performance, and the finding draft. You do not record the pay, cash, or books decision.",
+      "skills": [
+        "audit-sampling-interpretation",
+        "control-testing-interpretation",
+        "reconciliation-reperformance-review",
+        "segregation-of-duties-interpretation"
+      ],
+      "connectors": [
+        "audit.tools.get_audit_period",
+        "audit.tools.get_audit_payments",
+        "audit.tools.get_audit_journals",
+        "audit.tools.get_audit_approvals",
+        "audit.tools.get_audit_vendors",
+        "audit.tools.get_audit_invoices",
+        "audit.tools.get_operational_decisions",
+        "audit.tools.get_planted_reconciliations",
+        "audit.tools.get_audit_policy"
+      ],
+      "approvalLevel": "never"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "intake",
+      "title": "Intake",
+      "members": [
+        "email",
+        "stripe",
+        "bank",
+        "books",
+        "world"
+      ]
+    },
+    {
+      "id": "pay",
+      "title": "Pay",
+      "members": [
+        "ap",
+        "pay",
+        "ctl-pay"
+      ]
+    },
+    {
+      "id": "cash",
+      "title": "Cash",
+      "members": [
+        "apply",
+        "collect",
+        "cash",
+        "ctl-cash"
+      ]
+    },
+    {
+      "id": "books-close",
+      "title": "Books close",
+      "members": [
+        "close",
+        "ctl-books",
+        "story",
+        "audit"
+      ]
+    }
+  ],
+  "routines": [
+    {
+      "name": "weekly-pay-run",
+      "bot": "pay",
+      "cadence": "weekly",
+      "prompt": "Open the payment-run item at step schedule. Read kernel facts with call_connected_tool. Finish with complete_step. The engine moves the item.",
+      "conversation": "room:pay"
+    },
+    {
+      "name": "daily-aging",
+      "bot": "collect",
+      "cadence": "daily",
+      "prompt": "Open the collections item at step chase. Read kernel facts with call_connected_tool. Finish with complete_step. The engine moves the item.",
+      "conversation": "room:cash"
+    },
+    {
+      "name": "month-end",
+      "bot": "close",
+      "cadence": "monthly",
+      "prompt": "Open the month-end item at the step the wake names. Read kernel facts with call_connected_tool. Finish with complete_step. The engine moves the item.",
+      "conversation": "room:books-close"
+    },
+    {
+      "name": "period-story",
+      "bot": "story",
+      "cadence": "monthly",
+      "prompt": "Open the story item at the step the wake names. Read kernel facts with call_connected_tool. Finish with complete_step.",
+      "conversation": "room:books-close"
+    },
+    {
+      "name": "post-close-assurance",
+      "bot": "audit",
+      "cadence": "monthly",
+      "prompt": "Open the audit item at step interpret. Read kernel facts with call_connected_tool. Finish with complete_step. The engine continues report on this Bot.",
+      "conversation": "room:books-close"
+    }
+  ]
+}

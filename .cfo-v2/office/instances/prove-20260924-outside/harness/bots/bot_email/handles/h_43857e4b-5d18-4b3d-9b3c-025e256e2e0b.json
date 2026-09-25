@@ -1,0 +1,19 @@
+{
+  "id": "h_43857e4b-5d18-4b3d-9b3c-025e256e2e0b",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Inbound counterparty mail delivered for triage (profile triage).\n\nVendor: Acme Supplies <billing@acmesupplies.example>\nTo: ap@hackmit-cfo.example\nSubject: Invoice ACM-2026-4410 — September / PO 101\nmessage_id: msg-acme-acm-2026-4410\nthread_id: thr-acme-acm-2026-4410\ncase_id: ACM-2026-4410\n\nSeptember invoice ACM-2026-4410 for $12,450.00 on PO 101. Vendor states goods under PO 101 were shipped and delivered. Please classify and process. World stays on this invoice thread until classification is done.\n\nDelivered=true via send_inbox_message.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:43:39.392Z",
+  "updatedAt": "2026-09-24T20:44:21.296Z",
+  "result": "Classified and processed inbound mail for case ACM-2026-4410 / msg-acme-acm-2026-4410.\n\nResult:\n- classification: invoice (VENDOR_INVOICE)\n- selected_action: CREATE_AP_INVOICE\n- reason: Attachment ACM-2026-4410.pdf is a vendor request for payment with vendor Acme Supplies, invoice number ACM-2026-4410, invoice date 2026-09-08, due date 2026-09-22, currency USD, amount due 12450.00, PO PO-101.\n- catalog source: MSG-E-INV-001 / ATT-E-001\n- packet path: workspace/email/packets/MSG-E-INV-001.json\n- candidate: vendor=Acme Supplies, invoice_number=ACM-2026-4410, amount_due=12450.00 USD, po=PO-101\n- handoff: AP prepare notified with packet path (invoice lookup packet written on Computer)\n\nWorld can close triage wait on this thread for classification. AP owns the open bill next.",
+  "seq": 6
+}

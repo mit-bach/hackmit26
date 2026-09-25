@@ -1,0 +1,41 @@
+Amazon Web Services, Inc.
+410 Terry Avenue North
+Seattle, WA 98109
+Phone +1 206-266-1000   billing@aws.amazon.example
+Tax ID 91-1646860
+
+INVOICE
+
+Invoice Number: AWS-3844-2910
+Invoice Date: 2026-09-05
+Due Date: 2026-09-22
+PO Number: PO-102
+Payment Terms: net 30
+Currency: USD
+Vendor: Amazon Web Services
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+EC2 compute — September 2026                  1.00      6,120.00      6,120.00
+S3 storage and requests                       1.00      1,480.00      1,480.00
+Data transfer outbound                        1.00        720.00        720.00
+
+Subtotal                                                              8,320.00
+Tax                                                                       0.00
+Amount Due                                                            8,320.00
+
+Remit to:
+ACH Wells Fargo routing 121000248  account ****2910
+Bank: Wells Fargo  ****2910
+Please include invoice AWS-3844-2910 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@aws.amazon.example

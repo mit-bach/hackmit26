@@ -16,7 +16,7 @@ Wear this when preparing or reviewing a cash tick, including fee-netted and unex
 
 ## Inputs / Evidence
 
-Authoritative: Kernel `candidate_id`, `difference_minor`, `fee_evidence_ids`, `provider_status`, and `get_pipe_identifier`. Bank description and payout-label Memory may support a reading. They cannot create a fee id.
+Authoritative: Kernel `candidate_id`, `difference_minor`, `fee_evidence_ids`, `provider_status`, and the pipe identifier. Bank description and payout-label Memory may support a reading. They cannot create a fee id.
 
 ## Procedure
 

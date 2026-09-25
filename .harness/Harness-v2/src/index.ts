@@ -30,7 +30,13 @@ export {
   overlayOperatorConfig,
   clientRuntimePath,
 } from "./client-runtime.ts";
-export { startSidecar, readSidecarPort, sidecarHealthy } from "./sidecar.ts";
+export {
+  applyServeComputerEnv,
+  readSidecarPort,
+  resolveCfoKernel,
+  sidecarHealthy,
+  startSidecar,
+} from "./sidecar.ts";
 export { loadRoster, saveRoster, findBot, requireBot, findRoom, findRoutine, parseRoster } from "./roster.ts";
 export { sendPrompt } from "./send.ts";
 export { askPeer, parseAskPeer, resolvePeer, executeFakeTurn, tryOperatorAskHandoff, sendBotMessage, replyPeerMessage } from "./ask-peer.ts";

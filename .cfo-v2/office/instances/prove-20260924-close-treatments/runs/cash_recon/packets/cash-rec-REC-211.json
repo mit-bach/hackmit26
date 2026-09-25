@@ -1,0 +1,18 @@
+{
+  "object": "unmatched_bank_line",
+  "period": "2026-09",
+  "case_id": "2026-09",
+  "reconciliation_id": "REC-211",
+  "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-2026-09-015:GL-AR-NS",
+  "match_type": "UNEXPLAINED_DIFFERENCE",
+  "kernel_status": "HUMAN_REVIEW",
+  "difference": 12.4,
+  "difference_minor": 1240,
+  "explanation": "Unexplained difference: $12.40",
+  "control_findings": [
+    "UNEXPLAINED_DIFFERENCE"
+  ],
+  "proposed_adjusting_entries_posted": false,
+  "queue_owner": "ctl-cash",
+  "human_queue": false
+}

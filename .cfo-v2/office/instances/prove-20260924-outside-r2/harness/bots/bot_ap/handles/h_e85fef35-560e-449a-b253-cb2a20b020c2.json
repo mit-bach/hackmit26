@@ -1,0 +1,19 @@
+{
+  "id": "h_e85fef35-560e-449a-b253-cb2a20b020c2",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "AP prepare handoff from email inbox.\n\nPath: workspace/email/packets/acm-2026-4410-thread-ap-handoff.md\nThread thr-acme-acm-2026-4410 complete fields:\n- vendor Acme Supplies\n- invoice ACM-2026-4410\n- invoice_date 2026-09-08 (from msg-acme-acm-2026-4410-invoice-date-001)\n- amount $12,450.00 USD\n- PO 101\n- goods received affirmed\n\nSource messages: msg-acme-acm-2026-4410-confirm-001 + date reply. No attachment PDF. document_hash on confirm body: 3f55dbd11a7578250ae9e1400be162c527995f3f5e0f0467910e702450307cec\n\nDo not mint a second Kernel id if ACM-2026-4410 already exists. Email does not match, pay, or close.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:58:49.408Z",
+  "updatedAt": "2026-09-24T20:59:50.916Z",
+  "result": "AP prepare complete for ACM-2026-4410 (path workspace/email/packets/acm-2026-4410-thread-ap-handoff.md).\n\nResult: HOLD — no approve-shaped draft, no ctl-pay handoff.\n\nPacket: workspace/ap/packets/ACM-2026-4410.json (copy runs/ap/packets/ACM-2026-4410.json)\n\nKernel facts:\n- get_invoice(ACM-2026-4410): not found (k_0e266be41fda). Did not mint a second id.\n- get_case_evidence: not found.\n- get_purchase_order(PO-101): found, Acme Supplies, authorized_amount 12450, approved.\n- get_goods_receipt(PO-101): GR-101 full, amount_received 12450, received_date 2026-09-05.\n- Thread fields you sent (vendor, number, 2026-09-08, 12450 USD, PO 101, GR affirmed, hash 3f55dbd1…) are noted on the packet only.\n\nBlocker: no Kernel open bill / canonical invoice_id. Inbox state still has invoice_ids []. Initial confirm triage selected not_invoice / no CREATE_AP_INVOICE. AP prepare grants are read-only match tools — cannot register the payable.\n\nNeed from email: complete dual-intake so get_invoice finds one canonical ACM-2026-4410 (CREATE_AP / extract path you own). Then re-handoff ap prepare on the packet path. Until then bill stays HOLD.",
+  "seq": 45
+}

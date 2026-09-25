@@ -37,6 +37,7 @@ web/node_modules/
 Harness/node_modules/
 Harness/.pi/
 .harness/**/node_modules/
+.harness/**/node_modules
 .harness/**/.pi/
 harness-impl/
 .archive/**/__pycache__/
@@ -51,3 +52,5 @@ harness-impl/
 *.tmp.*
 *.lock
 **/pi-session/
+**/pi-rpc.jsonl
+**/pi-runtime.jsonl

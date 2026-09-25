@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-363
+PO Number: PO-363
+Issued: 2026-09-10
+Vendor: Teak Studio
+Vendor legal name: Teak Studio
+Vendor tax ID: 00-0000000
+Authorized amount: 13.56
+Currency: USD
+Approver: Jordan Hale
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+security monitoring hosts billed 2026-09-10
+
+This purchase order is not an invoice. The vendor must bill against PO-363.
+Payment terms follow the vendor master unless this order states otherwise.

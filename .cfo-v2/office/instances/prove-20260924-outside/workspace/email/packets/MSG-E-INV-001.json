@@ -1,0 +1,61 @@
+{
+  "source_agent": "email",
+  "profile": "triage",
+  "classification": "invoice",
+  "classification_reason": "Vendor invoice ACM-2026-4410 with vendor, invoice number, date, amount due, currency, and PO.",
+  "selected_action": "CREATE_AP_INVOICE",
+  "message_id": "MSG-E-INV-001",
+  "world_message_id": "msg-acme-acm-2026-4410",
+  "thread_id": "thr-acme-acm-2026-4410",
+  "case_id": "ACM-2026-4410",
+  "from": "billing@acmesupplies.example",
+  "to": "ap@maximor.example",
+  "subject": "Invoice ACM-2026-4410 from Acme Supplies",
+  "sent_at": "2026-09-08T10:00:00Z",
+  "attachment": {
+    "attachment_id": "ATT-E-001",
+    "filename": "ACM-2026-4410.pdf",
+    "document_hash": "cbda5aacfb5c6a9d64688cf40f74ce2996da81975779298c4b20788813552d6e",
+    "page_refs": ["page 1"]
+  },
+  "candidate": {
+    "vendor_name": "Acme Supplies",
+    "vendor_tax_id": "04-2218891",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "po_number": "PO-101",
+    "payment_terms": "2/10 net 30",
+    "subtotal": "12450.00",
+    "tax": "0.00",
+    "amount_due": "12450.00",
+    "line_items": [
+      {
+        "description": "Apex standing desk, maple, 72-inch",
+        "qty": "10.00",
+        "unit": "890.00",
+        "amount": "8900.00"
+      },
+      {
+        "description": "27-inch 4K monitor, height-adjust arm",
+        "qty": "10.00",
+        "unit": "355.00",
+        "amount": "3550.00"
+      }
+    ],
+    "source_type": "email",
+    "source_id": "MSG-E-INV-001",
+    "source_uri": "email://MSG-E-INV-001/ATT-E-001",
+    "filename": "ACM-2026-4410.pdf",
+    "document_hash": "cbda5aacfb5c6a9d64688cf40f74ce2996da81975779298c4b20788813552d6e",
+    "extraction_confidence": 0.95,
+    "evidence": {
+      "invoice_number": "Invoice Number: ACM-2026-4410",
+      "invoice_date": "Invoice Date: 2026-09-08",
+      "amount_due": "Amount Due 12,450.00",
+      "po_number": "PO Number: PO-101",
+      "vendor": "Vendor: Acme Supplies"
+    }
+  }
+}

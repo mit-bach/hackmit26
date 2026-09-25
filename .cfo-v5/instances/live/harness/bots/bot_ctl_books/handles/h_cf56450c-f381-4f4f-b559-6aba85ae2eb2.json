@@ -1,0 +1,19 @@
+{
+  "id": "h_cf56450c-f381-4f4f-b559-6aba85ae2eb2",
+  "from": "operator",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Operator check for ctl-books",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ctl_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:37:44.436Z",
+  "updatedAt": "2026-09-24T23:38:33.407Z",
+  "result": "Bot **ctl-books** here — online and ready.\n\nI record structured decisions on close treatments and the period lock:\n- **review-treatment** — accrue / prepaid proposals  \n- **review-assets** — fixed-asset / depreciation  \n- **review-bs** — balance-sheet tie-outs  \n- **lock** — period lock (CONCUR only when gates pass; kernel does the lock)\n\nI look for reasons to **REFUSE**. No write ops from me; kernel facts via connected tools only.\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 145
+}

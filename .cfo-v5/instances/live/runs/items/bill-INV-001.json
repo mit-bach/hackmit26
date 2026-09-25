@@ -1,0 +1,41 @@
+{
+  "id": "bill:INV-001",
+  "workflow": "open_bill",
+  "step": "review-match",
+  "owner": "ctl-pay",
+  "facts": {
+    "invoice_id": "INV-001",
+    "amount": 12450,
+    "po_id": "PO-101",
+    "receipt_id": "GR-101"
+  },
+  "pendingWrite": null,
+  "history": [
+    {
+      "step": "match",
+      "by": "ap",
+      "result": {
+        "decision": "APPROVE",
+        "reason": "clean three-way match",
+        "evidence_used": [
+          "PO-101",
+          "GR-101"
+        ]
+      },
+      "t": "2026-09-24T23:28:59Z"
+    },
+    {
+      "step": "review-match",
+      "by": "ctl-pay",
+      "result": {
+        "decision": "CONCUR",
+        "reason": "kernel allows the match",
+        "evidence_used": [
+          "PO-101"
+        ]
+      },
+      "t": "2026-09-24T23:29:01Z"
+    }
+  ],
+  "terminal": "emitted"
+}

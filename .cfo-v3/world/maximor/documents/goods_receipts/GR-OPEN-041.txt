@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-041
+PO Number: PO-OPEN-041
+Vendor: Palo Alto Networks
+Goods received in full on 2026-09-15
+Packing list attached: PL-GR-OPEN-041
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 185,624.38 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

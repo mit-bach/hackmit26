@@ -1,0 +1,19 @@
+{
+  "id": "h_dbc63460-c92d-4b77-a9ff-c4dfc5bff077",
+  "from": "operator",
+  "to": "bot_cash",
+  "toSlug": "cash",
+  "prompt": "Operator check for cash",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_cash"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:50.818Z",
+  "updatedAt": "2026-09-24T23:36:40.901Z",
+  "result": "**Cash check — status**\n\n| Area | State |\n|------|--------|\n| **Bound case** | None (`item` / `step` null) |\n| **Reconcile step** | Not active — no bank line loaded |\n| **Catalog ops** | Available: bank tx, ledger entry, fee evidence, match candidates, candidate, pipe identifier, decision memories |\n| **Kernel read** | `get_bank_transaction` failed (no bound case / RPC) |\n| **Memory** | `MEMORY.md` has precedents scaffold only (no account/processor keys yet) |\n\n**Role reminder:** I own unmatched bank lines. On a bound `reconcile` step I load evidence via kernel tools, pick one `candidate_id` (trust apply/pay identifiers), and `complete_step` with `MATCHED` / `EXPLAINED` / `UNEXPLAINED` — no memo scraping, no invented fees.\n\nTo run a real tick, bind a bank line / case and wake cash on `reconcile`. If you want something else (queue glance, memory precedent, peer handoff), say which.",
+  "resultPaths": [],
+  "seq": 131
+}

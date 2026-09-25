@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-332
+PO Number: PO-332
+Vendor: Driftwood Works
+Goods received in full on 2026-09-06
+Packing list attached: PL-GR-332
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 253.95 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

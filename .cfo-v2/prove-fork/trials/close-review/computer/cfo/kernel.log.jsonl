@@ -1,0 +1,4 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_d46d7fa1963d", "ts": "2026-09-20T15:31:59Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_f8d0d01907d8", "ts": "2026-09-24T18:11:07Z"}
+{"botId": "bot_ctl_books", "error": null, "handleId": "", "ok": true, "op": "close.tools.get_close_packet", "profile": "lock", "slug": "ctl-books", "traceId": "k_57a550b8b513", "ts": "2026-09-24T18:11:29Z"}
+{"botId": "bot_ctl_books", "error": null, "handleId": "", "ok": true, "op": "close.tools.get_close_gates", "profile": "lock", "slug": "ctl-books", "traceId": "k_1debdf1187ba", "ts": "2026-09-24T18:11:29Z"}

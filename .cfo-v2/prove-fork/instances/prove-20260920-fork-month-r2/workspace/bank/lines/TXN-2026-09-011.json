@@ -1,0 +1,32 @@
+{
+  "transaction_id": "TXN-2026-09-011",
+  "date": "2026-09-11",
+  "amount": -10025.0,
+  "currency": "USD",
+  "description": "WIRE TRANSFER INTL REF 729103",
+  "counterparty": "HELIOS HARDWARE",
+  "transaction_type": "wire_debit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "729103",
+  "raw_metadata": {
+    "payment_id": "PAY-AP-017"
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "FEE_NETTED",
+  "gt_label": {
+    "match_type": "FEE_NETTED",
+    "disposition": "EXPLAINED_EXCEPTION",
+    "ledger_ids": [
+      "GL-AP-WIRE"
+    ]
+  },
+  "path": "workspace/bank/lines/TXN-2026-09-011.json"
+}

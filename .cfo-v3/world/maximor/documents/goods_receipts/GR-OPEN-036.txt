@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-036
+PO Number: PO-OPEN-036
+Vendor: Kendall Square Parking
+Goods received in full on 2026-09-10
+Packing list attached: PL-GR-OPEN-036
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 184,938.48 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

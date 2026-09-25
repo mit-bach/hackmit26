@@ -1,0 +1,37 @@
+cfo-catalog compile ok  phase=operational
+  catalog ops: 101
+  display names: 41
+  wrote /Users/dominikbach/olympus/hackmit/hackmit26/workshop/grok-workshop/cfo-v3/engineers/kestrel/compile-out/catalog.json
+  wrote /Users/dominikbach/olympus/hackmit/hackmit26/workshop/grok-workshop/cfo-v3/engineers/kestrel/compile-out/grants.json (operational)
+  wrote /Users/dominikbach/olympus/hackmit/hackmit26/workshop/grok-workshop/cfo-v3/engineers/kestrel/compile-out/grants.eval.json (evaluation)
+  AP Preparer ops:
+    tools.get_invoice
+    tools.get_purchase_order
+    tools.get_goods_receipt
+    tools.find_duplicate_invoices
+    tools.get_case_evidence
+  AP Approver ops:
+    tools.get_case_evidence
+    tools.get_company_policies
+    tools.find_relevant_policies
+    tools.get_prior_cases
+  AP Preparer == AP Approver: no
+  Auditor Agent get_audit_ground_truth operational: omitted
+  Auditor Agent get_audit_ground_truth evaluation: ['audit.tools.get_audit_ground_truth']
+  grant diff vs previous compile:
+{
+  "addedDisplayNames": [],
+  "removedDisplayNames": [
+    "AP/AR Sample Data Agent",
+    "Audit Controls Sample Data Agent",
+    "Cash Recon Sample Data Agent",
+    "Close Sample Data Agent",
+    "Reporting Forecasting Sample Data Agent"
+  ],
+  "ops": {}
+}
+  warning: AGENT_SKILLS has 'AP/AR Sample Data Agent' with no Agent() constructor
+  warning: AGENT_SKILLS has 'Audit Controls Sample Data Agent' with no Agent() constructor
+  warning: AGENT_SKILLS has 'Cash Recon Sample Data Agent' with no Agent() constructor
+  warning: AGENT_SKILLS has 'Close Sample Data Agent' with no Agent() constructor
+  warning: AGENT_SKILLS has 'Reporting Forecasting Sample Data Agent' with no Agent() constructor

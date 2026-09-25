@@ -1,0 +1,440 @@
+[
+  {
+    "id": "pi_str_001",
+    "object": "payment_intent",
+    "amount": 100000,
+    "amount_received": 100000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_northwind",
+    "latest_charge": "ch_str_001",
+    "description": "INV-STR-001 September platform subscription",
+    "metadata": {
+      "customer_name": "Northwind Labs",
+      "invoice_id": "INV-STR-001",
+      "order_id": "INV-STR-001"
+    },
+    "created": 1788451200
+  },
+  {
+    "id": "pi_str_002a",
+    "object": "payment_intent",
+    "amount": 100000,
+    "amount_received": 100000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "latest_charge": "ch_str_002a",
+    "description": "INV-STR-002A Helios workspace A",
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002A",
+      "order_id": "INV-STR-002A"
+    },
+    "created": 1788883200
+  },
+  {
+    "id": "pi_str_002b",
+    "object": "payment_intent",
+    "amount": 150000,
+    "amount_received": 150000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "latest_charge": "ch_str_002b",
+    "description": "INV-STR-002B Helios workspace B AMEX",
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002B",
+      "order_id": "INV-STR-002B"
+    },
+    "created": 1788883200
+  },
+  {
+    "id": "pi_str_002c",
+    "object": "payment_intent",
+    "amount": 50000,
+    "amount_received": 50000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "latest_charge": "ch_str_002c",
+    "description": "INV-STR-002C Helios add-on seats",
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-002C",
+      "order_id": "INV-STR-002C"
+    },
+    "created": 1788883200
+  },
+  {
+    "id": "pi_str_003a",
+    "object": "payment_intent",
+    "amount": 60000,
+    "amount_received": 60000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_northwind",
+    "latest_charge": "ch_str_003a",
+    "description": "INV-STR-003A Northwind analytics pack",
+    "metadata": {
+      "customer_name": "Northwind Labs",
+      "invoice_id": "INV-STR-003A",
+      "order_id": "INV-STR-003A"
+    },
+    "created": 1789056000
+  },
+  {
+    "id": "pi_str_003b",
+    "object": "payment_intent",
+    "amount": 40000,
+    "amount_received": 40000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_pinnacle",
+    "latest_charge": "ch_str_003b",
+    "description": "INV-STR-003B Pinnacle POS module",
+    "metadata": {
+      "customer_name": "Pinnacle Retail",
+      "invoice_id": "INV-STR-003B",
+      "order_id": "INV-STR-003B"
+    },
+    "created": 1789056000
+  },
+  {
+    "id": "pi_str_004",
+    "object": "payment_intent",
+    "amount": 50000,
+    "amount_received": 50000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_acme",
+    "latest_charge": "ch_str_004",
+    "description": "INV-STR-004 Acme spare parts",
+    "metadata": {
+      "customer_name": "Acme Industrial",
+      "invoice_id": "INV-STR-004",
+      "order_id": "INV-STR-004"
+    },
+    "created": 1789142400
+  },
+  {
+    "id": "pi_str_005",
+    "object": "payment_intent",
+    "amount": 75000,
+    "amount_received": 75000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_acme",
+    "latest_charge": "ch_str_005",
+    "description": "INV-STR-005 Acme tooling",
+    "metadata": {
+      "customer_name": "Acme Industrial",
+      "invoice_id": "INV-STR-005",
+      "order_id": "INV-STR-005"
+    },
+    "created": 1789228800
+  },
+  {
+    "id": "pi_str_006",
+    "object": "payment_intent",
+    "amount": 80000,
+    "amount_received": 80000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_orbit",
+    "latest_charge": "ch_str_006",
+    "description": "INV-STR-006 Orbit implementation",
+    "metadata": {
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-006",
+      "order_id": "INV-STR-006"
+    },
+    "created": 1789488000
+  },
+  {
+    "id": "pi_str_007",
+    "object": "payment_intent",
+    "amount": 200000,
+    "amount_received": 200000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_lumen",
+    "latest_charge": "ch_str_007",
+    "description": "INV-STR-007 Lumen international",
+    "metadata": {
+      "customer_name": "Lumen Labs",
+      "invoice_id": "INV-STR-007",
+      "order_id": "INV-STR-007"
+    },
+    "created": 1789574400
+  },
+  {
+    "id": "pi_str_010",
+    "object": "payment_intent",
+    "amount": 125000,
+    "amount_received": 125000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_pinnacle",
+    "latest_charge": "ch_str_010",
+    "description": "Pinnacle autumn restock",
+    "metadata": {
+      "customer_name": "Pinnacle Retail",
+      "customer_id": "CUST-006"
+    },
+    "created": 1789747200
+  },
+  {
+    "id": "pi_str_011",
+    "object": "payment_intent",
+    "amount": 90000,
+    "amount_received": 90000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_brightline",
+    "latest_charge": "ch_str_011",
+    "description": "Q3 analytics retainer",
+    "metadata": {
+      "customer_name": "Brightline Media",
+      "customer_id": "CUST-004"
+    },
+    "created": 1789920000
+  },
+  {
+    "id": "pi_str_012a",
+    "object": "payment_intent",
+    "amount": 70000,
+    "amount_received": 70000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "latest_charge": "ch_str_012a",
+    "description": "INV-STR-012A Helios refundable workshop",
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-012A",
+      "order_id": "INV-STR-012A"
+    },
+    "created": 1790092800
+  },
+  {
+    "id": "pi_str_012b",
+    "object": "payment_intent",
+    "amount": 30000,
+    "amount_received": 30000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_helios",
+    "latest_charge": "ch_str_012b",
+    "description": "INV-STR-012B Helios extra seats",
+    "metadata": {
+      "customer_name": "Helios Analytics",
+      "invoice_id": "INV-STR-012B",
+      "order_id": "INV-STR-012B"
+    },
+    "created": 1790092800
+  },
+  {
+    "id": "pi_str_013a",
+    "object": "payment_intent",
+    "amount": 55000,
+    "amount_received": 55000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_orbit",
+    "latest_charge": "ch_str_013a",
+    "description": "INV-STR-013A Orbit monitoring",
+    "metadata": {
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-013A",
+      "order_id": "INV-STR-013A"
+    },
+    "created": 1790265600
+  },
+  {
+    "id": "pi_str_013b",
+    "object": "payment_intent",
+    "amount": 25000,
+    "amount_received": 25000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_orbit",
+    "latest_charge": "ch_str_013b",
+    "description": "INV-STR-013B Orbit alerts pack",
+    "metadata": {
+      "customer_name": "Orbit Health",
+      "invoice_id": "INV-STR-013B",
+      "order_id": "INV-STR-013B"
+    },
+    "created": 1790265600
+  },
+  {
+    "id": "pi_str_014",
+    "object": "payment_intent",
+    "amount": 1240000,
+    "amount_received": 1240000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_northstar",
+    "latest_charge": "ch_str_014",
+    "description": "INV-STR-014 Northstar platform",
+    "metadata": {
+      "customer_name": "Northstar LLC",
+      "invoice_id": "INV-STR-014",
+      "order_id": "INV-STR-014"
+    },
+    "created": 1790352000
+  },
+  {
+    "id": "pi_str_015",
+    "object": "payment_intent",
+    "amount": 220000,
+    "amount_received": 220000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_northwind",
+    "latest_charge": "ch_str_015",
+    "description": "INV-STR-015 Late September expansion",
+    "metadata": {
+      "customer_name": "Northwind Labs",
+      "invoice_id": "INV-STR-015",
+      "order_id": "INV-STR-015"
+    },
+    "created": 1790697600
+  },
+  {
+    "id": "pi_str_016",
+    "object": "payment_intent",
+    "amount": 60000,
+    "amount_received": 60000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "latest_charge": "ch_str_016",
+    "description": "INV-STR-016 Harbor partial",
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "invoice_id": "INV-STR-016",
+      "order_id": "INV-STR-016"
+    },
+    "created": 1790438400
+  },
+  {
+    "id": "pi_str_017",
+    "object": "payment_intent",
+    "amount": 64000,
+    "amount_received": 64000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_summit",
+    "latest_charge": "ch_str_017",
+    "description": "INV-STR-017 Summit retry shipment",
+    "metadata": {
+      "customer_name": "Summit Logistics",
+      "invoice_id": "INV-STR-017",
+      "order_id": "INV-STR-017"
+    },
+    "created": 1789920000
+  },
+  {
+    "id": "pi_str_018",
+    "object": "payment_intent",
+    "amount": 88000,
+    "amount_received": 88000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_atlas",
+    "latest_charge": "ch_str_018",
+    "description": "monthly platform fee",
+    "metadata": {
+      "customer_name": "Atlas Systems",
+      "customer_id": "CUST-010"
+    },
+    "created": 1790611200
+  },
+  {
+    "id": "pi_str_019",
+    "object": "payment_intent",
+    "amount": 110000,
+    "amount_received": 110000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "latest_charge": "ch_str_019",
+    "description": "INV-STR-019 Harbor overpayment",
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "invoice_id": "INV-STR-019",
+      "order_id": "INV-STR-019"
+    },
+    "created": 1790438400
+  },
+  {
+    "id": "pi_str_020",
+    "object": "payment_intent",
+    "amount": 33000,
+    "amount_received": 33000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_orion",
+    "latest_charge": "ch_str_020",
+    "description": "Unmatched Stripe charge",
+    "metadata": {
+      "customer_name": "Orion Freight"
+    },
+    "created": 1790524800
+  },
+  {
+    "id": "pi_str_021a",
+    "object": "payment_intent",
+    "amount": 40000,
+    "amount_received": 40000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "latest_charge": "ch_str_021a",
+    "description": "INV-STR-021 Harbor installment 1",
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "customer_id": "CUST-012",
+      "invoice_id": "INV-STR-021",
+      "order_id": "INV-STR-021"
+    },
+    "created": 1790438400
+  },
+  {
+    "id": "pi_str_021b",
+    "object": "payment_intent",
+    "amount": 60000,
+    "amount_received": 60000,
+    "currency": "usd",
+    "status": "succeeded",
+    "customer": "cus_str_harbor",
+    "latest_charge": "ch_str_021b",
+    "description": "INV-STR-021 Harbor installment 2",
+    "metadata": {
+      "customer_name": "Harbor Electric",
+      "customer_id": "CUST-012",
+      "invoice_id": "INV-STR-021",
+      "order_id": "INV-STR-021"
+    },
+    "created": 1790524800
+  },
+  {
+    "id": "pi_str_017_fail",
+    "object": "payment_intent",
+    "amount": 64000,
+    "amount_received": 0,
+    "currency": "usd",
+    "status": "requires_payment_method",
+    "customer": "cus_str_summit",
+    "latest_charge": null,
+    "description": "INV-STR-017 failed card",
+    "metadata": {
+      "invoice_id": "INV-STR-017",
+      "customer_name": "Summit Logistics"
+    },
+    "created": 1789833600
+  }
+]

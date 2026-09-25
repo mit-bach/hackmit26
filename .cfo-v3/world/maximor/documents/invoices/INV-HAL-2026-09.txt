@@ -1,0 +1,39 @@
+Halyard Facilities LLC
+12 Industrial Park
+Reno, NV 89502
+Phone +1 775-555-9022   billing@halyardfacilities.example
+Tax ID 88-2204419
+
+INVOICE
+
+Invoice Number: HAL-2026-09
+Invoice Date: 2026-09-05
+Due Date: 2026-09-20
+PO Number: PO-HAL-2026-09
+Payment Terms: net 30
+Currency: USD
+Vendor: Halyard Facilities LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+West campus janitorial. SKU                   1.00      2,400.00      2,400.00
+
+Subtotal                                                              2,400.00
+Tax                                                                       0.00
+Amount Due                                                            2,400.00
+
+Remit to:
+ACH routing 211370545  account ****9022
+Bank: Wells Fargo  ****9022
+Please include invoice HAL-2026-09 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@halyardfacilities.example

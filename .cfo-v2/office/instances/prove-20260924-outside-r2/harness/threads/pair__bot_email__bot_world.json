@@ -1,0 +1,117 @@
+{
+  "id": "pair:bot_email:bot_world",
+  "threadId": "pair:bot_email:bot_world",
+  "name": "Email ↔ World",
+  "memberIds": [
+    "bot_email",
+    "bot_world"
+  ],
+  "createdAt": 1790283124322,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_c2552711-f9ac-45ba-a0fb-075b7ba27a5b",
+      "handleId": "h_c2552711-f9ac-45ba-a0fb-075b7ba27a5b",
+      "role": "bot",
+      "kind": "text",
+      "text": "Inbound vendor mail delivered for triage (profile: triage).\n\nPath: workspace/world/packets/acm-2026-4410-confirm.md\nmessage_id: msg-acme-acm-2026-4410-confirm-001\nthread_id: thr-acme-acm-2026-4410\nsender: Acme Supplies <billing@acmesupplies.example>\nsubject: Re: Invoice ACM-2026-4410 / PO 101\n\nPlease classify this counterparty confirmation of invoice ACM-2026-4410 ($12,450, PO 101, goods received). World does not pay. Reply with classification outcome.",
+      "at": 1790283124322,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_c2552711-f9ac-45ba-a0fb-075b7ba27a5b",
+      "handleId": "h_c2552711-f9ac-45ba-a0fb-075b7ba27a5b",
+      "role": "bot",
+      "kind": "text",
+      "text": "Triage complete for msg-acme-acm-2026-4410-confirm-001 (thread thr-acme-acm-2026-4410).\n\nClassification: not_invoice / vendor_invoice_confirmation\nselected_action: NONE (no CREATE_AP_INVOICE)\ncandidate: null\nconfidence: high\n\nIdentifiers referenced only (not minted): vendor Acme Supplies; invoice ACM-2026-4410; amount $12,450; PO 101; goods received affirmed by counterparty.\n\nReason: Vendor reply confirming an existing invoice and PO/goods status. Not a new payable, not a remittance, not payment_confirmation of cash received. World does not pay. No handoff to ap or apply.\n\nPacket: workspace/email/packets/acm-2026-4410-confirm-triage.md",
+      "at": 1790283158558,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_12f65e17-5fb0-431b-98fc-c0557b916225",
+      "handleId": "h_12f65e17-5fb0-431b-98fc-c0557b916225",
+      "role": "bot",
+      "kind": "text",
+      "text": "Inbound customer mail delivered for triage (profile: triage).\n\nPath: workspace/world/packets/northwind-inv-ar-001-pay-note.md\nmessage_id: msg-northwind-inv-ar-001-pay-note-001\nthread_id: thr-northwind-inv-ar-001-pay-note\nsender: Northwind Labs <ap@northwindlabs.example>\nsubject: Payment schedule — INV-AR-001\n\nCustomer payment *commitment* only: will pay full $12,000.00 on INV-AR-001 by ACH on 2026-10-14. Not remittance of cash already sent. World does not apply cash. Please classify and reply with outcome.",
+      "at": 1790283240678,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_12f65e17-5fb0-431b-98fc-c0557b916225",
+      "handleId": "h_12f65e17-5fb0-431b-98fc-c0557b916225",
+      "role": "bot",
+      "kind": "text",
+      "text": "Triage complete for msg-northwind-inv-ar-001-pay-note-001 (thread thr-northwind-inv-ar-001-pay-note).\n\nClassification: not_invoice / customer_payment_commitment\ninbox_type: payment schedule note (not CUSTOMER_REMITTANCE)\nselected_action: NONE\ncandidate: null\nconfidence: high\n\nIdentifiers referenced only: customer Northwind Labs; invoice INV-AR-001; amount $12,000.00; ACH; promised pay date 2026-10-14.\n\nReason: Customer payment commitment/schedule only — will pay full amount later. Not remittance of cash already sent. Not a vendor invoice. Not payment_confirmation of funds received. World does not apply cash. No handoff to apply or ap.\n\nPacket: workspace/email/packets/northwind-inv-ar-001-pay-note-triage.md",
+      "at": 1790283250967,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_0dd3c945-c167-49cc-8be6-67e15be91b2d",
+      "handleId": "h_0dd3c945-c167-49cc-8be6-67e15be91b2d",
+      "role": "bot",
+      "kind": "text",
+      "text": "Inbound bank mail delivered for triage (profile: triage).\n\nPath: workspace/world/packets/fnb-stmt-2026-09-operating.md\nmessage_id: msg-fnb-stmt-2026-09-operating-001\nthread_id: thr-fnb-stmt-2026-09-operating\nsender: First National Operating <notices@firstnational.example>\nsubject: September 2026 statement available — Operating Account BANK-OPERATING\n\nBank statement availability notice for operating account BANK-OPERATING, period 2026-09. Not a vendor bill. World did not mark any line matched and left the $12.40 difference unexplained. Please classify and reply with outcome.",
+      "at": 1790283338527,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    },
+    {
+      "id": "pair-result-h_0dd3c945-c167-49cc-8be6-67e15be91b2d",
+      "handleId": "h_0dd3c945-c167-49cc-8be6-67e15be91b2d",
+      "role": "bot",
+      "kind": "text",
+      "text": "Triage complete for msg-fnb-stmt-2026-09-operating-001 (thread thr-fnb-stmt-2026-09-operating).\n\nClassification: not_invoice / bank_statement_notice\ninbox_type: BANK_NOTICE\nselected_action: NONE\ncandidate: null\nconfidence: high\n\nIdentifiers referenced only: First National Operating; account BANK-OPERATING; period 2026-09. World note retained: $12.40 difference unexplained; no lines marked matched.\n\nReason: Statement availability notice for the operating account. Not a vendor bill, not remittance, not payment confirmation of AP. No CREATE_AP_INVOICE. No handoff to ap or apply. Email does not perform bank-rec or explain the $12.40 difference.\n\nPacket: workspace/email/packets/fnb-stmt-2026-09-operating-triage.md",
+      "at": 1790283348533,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "h_04b437c9-7b83-4f4a-8a19-41c2c52db196",
+      "handleId": "h_04b437c9-7b83-4f4a-8a19-41c2c52db196",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: vendor\nFinance asked Acme Supplies for missing invoice fields in thread thr-acme-acm-2026-4410. get_inbox_thread then reply_in_thread as that vendor. Do not send_office_outbound. Do not dispatch.\n\nOutbound delivered: msg-acme-acm-2026-4410-confirm-001-OUT from ap@hackmit-cfo.example asking for invoice date (YYYY-MM-DD) on ACM-2026-4410 ($12,450, PO 101).\nPacket path: runs/inbox/packets/email-outbound-msg-acme-acm-2026-4410-confirm-001-OUT.json",
+      "at": 1790283468625,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_04b437c9-7b83-4f4a-8a19-41c2c52db196",
+      "handleId": "h_04b437c9-7b83-4f4a-8a19-41c2c52db196",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acme Supplies replied in thr-acme-acm-2026-4410.\n\nmessage_id: msg-acme-acm-2026-4410-invoice-date-001\nin_reply_to: msg-acme-acm-2026-4410-confirm-001-OUT\nsender: billing@acmesupplies.example (via reply_in_thread)\n\nMissing field answer:\n- invoice_date: 2026-09-08 (YYYY-MM-DD)\n\nAlso reconfirmed ACM-2026-4410 / $12,450.00 / PO 101 / goods received.\n\nWorld did not send_office_outbound and did not dispatch. Please continue triage/classification on the vendor reply.",
+      "at": 1790283506370,
+      "from": {
+        "botId": "bot_world",
+        "name": "World",
+        "color": "orange"
+      }
+    }
+  ]
+}

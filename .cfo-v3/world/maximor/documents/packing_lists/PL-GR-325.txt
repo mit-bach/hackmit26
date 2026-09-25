@@ -1,0 +1,11 @@
+Alder Components
+Packing list
+Ship date: 2026-09-26
+PO Number: PO-325
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 325-0926
+
+Contents:
+  - Line GR-325 — qty 1
+
+This packing list is not an invoice.

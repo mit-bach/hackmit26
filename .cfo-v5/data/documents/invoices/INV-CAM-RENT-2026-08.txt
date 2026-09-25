@@ -1,0 +1,39 @@
+Cambridge Properties LLC
+1 Kendall Square
+Cambridge, MA 02139
+Phone +1 617-555-2109   billing@cambridgeproperties.example
+Tax ID 04-4418820
+
+INVOICE
+
+Invoice Number: CAM-RENT-2026-08
+Invoice Date: 2026-08-01
+Due Date: 2026-08-05
+PO Number: PO-CAM-RENT-2026-08
+Payment Terms: net 5
+Currency: USD
+Vendor: Cambridge Properties
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Cambridge HQ rent. SKU                        1.00     48,000.00     48,000.00
+
+Subtotal                                                             48,000.00
+Tax                                                                       0.00
+Amount Due                                                           48,000.00
+
+Remit to:
+ACH routing 011000390  account ****2190
+Bank: First National Bank  ****2190
+Please include invoice CAM-RENT-2026-08 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@cambridgeproperties.example

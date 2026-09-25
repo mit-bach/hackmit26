@@ -1,0 +1,28 @@
+{
+  "messages": [
+    {
+      "message_id": "MSG-ACME-SEP-101",
+      "thread_id": "THR-ACME-SEP-101",
+      "in_reply_to": null,
+      "sender_name": "Acme Supplies",
+      "sender_address": "billing@acmesupplies.example",
+      "recipient_addresses": [
+        "ap@office.local"
+      ],
+      "subject": "Invoice INV-SEP-101 \u2014 September shipment against PO 101",
+      "body_text": "Hello AP,\n\nPlease find our September invoice for goods shipped against purchase order 101.\n\nInvoice number: INV-SEP-101\nPurchase order: 101\nAmount due: 12450.00 USD\nPeriod: September\n\nPlease confirm the invoice number, the billed amount, and whether the goods were received so we can keep this invoice current.\n\nThank you,\nBilling\nAcme Supplies\nbilling@acmesupplies.example",
+      "body_html": null,
+      "sent_at": "2026-09-30T12:00:00Z",
+      "received_at": "2026-09-30T12:00:00Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "CORR-ACME-SEP-101",
+      "metadata": {}
+    }
+  ],
+  "outcomes": {},
+  "invoice_ids": [],
+  "canonicals": [],
+  "notices": [],
+  "traces": []
+}

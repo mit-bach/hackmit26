@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_cash:bot_pay",
+  "threadId": "pair:bot_cash:bot_pay",
+  "name": "Cash ↔ Pay",
+  "memberIds": [
+    "bot_cash",
+    "bot_pay"
+  ],
+  "createdAt": 1790273096429,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_2a981c58-9b2d-4026-9717-27890b88fae8",
+      "handleId": "h_2a981c58-9b2d-4026-9717-27890b88fae8",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: match\nIdentified AP wires after ctl-pay/review-pay concurrence. Packet: workspace/cash/expected-outflows/plan_2026-09-19_d1e2549ae6c2.json. Do not treat as posted cash. Pay did not execute ACH. executed false. plan_id plan_2026-09-19_d1e2549ae6c2. Wires: INV-001 amount 12450.0 Acme Supplies.",
+      "at": 1790273096429,
+      "from": {
+        "botId": "bot_pay",
+        "name": "Pay",
+        "color": "green"
+      }
+    },
+    {
+      "id": "pair-result-h_2a981c58-9b2d-4026-9717-27890b88fae8",
+      "handleId": "h_2a981c58-9b2d-4026-9717-27890b88fae8",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acknowledged. Cash recorded expected outflows from plan_2026-09-19_d1e2549ae6c2 at workspace/cash/expected-outflows/plan_2026-09-19_d1e2549ae6c2.json. INV-001 Acme Supplies 12450.0 outflow. executed=false — not treated as posted cash; will only use as identifier when a matching bank debit appears. No MATCH forced.",
+      "at": 1790273108588,
+      "from": {
+        "botId": "bot_cash",
+        "name": "Cash",
+        "color": "red"
+      }
+    }
+  ]
+}

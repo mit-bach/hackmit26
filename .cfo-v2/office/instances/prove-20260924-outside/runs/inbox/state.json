@@ -1,0 +1,66 @@
+{
+  "messages": [
+    {
+      "message_id": "msg-acme-acm-2026-4410",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "in_reply_to": null,
+      "sender_name": "Acme Supplies",
+      "sender_address": "billing@acmesupplies.example",
+      "recipient_addresses": [
+        "ap@hackmit-cfo.example"
+      ],
+      "subject": "Invoice ACM-2026-4410 \u2014 September / PO 101",
+      "body_text": "Hello AP team,\n\nPlease find our September invoice for your records.\n\nInvoice number: ACM-2026-4410\nPurchase order: 101\nAmount due: $12,450.00\nPeriod: September 2026\n\nGoods under PO 101 were shipped and delivered; please confirm receipt on your side. Payment terms Net 30 from invoice date.\n\nRemit to Acme Supplies \u2014 billing desk.\n\nThank you,\nAcme Supplies Billing\nbilling@acmesupplies.example",
+      "body_html": null,
+      "sent_at": "2026-09-18T10:00:00Z",
+      "received_at": "2026-09-18T10:00:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-acme-acm-2026-4410",
+      "metadata": {}
+    },
+    {
+      "message_id": "msg-northwind-pay-intent-inv-ar-007",
+      "thread_id": "thr-northwind-inv-ar-007",
+      "in_reply_to": null,
+      "sender_name": "Northwind Labs",
+      "sender_address": "ap@northwind.example",
+      "recipient_addresses": [
+        "ar@hackmit-cfo.example"
+      ],
+      "subject": "Payment plan \u2014 INV-AR-007",
+      "body_text": "Hello Accounts Receivable,\n\nThis is Northwind Labs AP (CUST-001).\n\nWe acknowledge open invoice INV-AR-007 for $12,000.00 USD, due 2026-09-30.\n\nWe will pay the full $12,000.00 on INV-AR-007 by ACH on 2026-09-30 (on our due-date cycle). No dispute on this invoice.\n\nOur other open items (INV-AR-001 $12,000.00 due 2026-10-15 and INV-AR-022 $6,400.00 due 2026-10-22) remain scheduled for their due dates; this note covers INV-AR-007 only.\n\nPlease reply if you need a remittance advice format or bank reference once the ACH posts.\n\nRegards,\nNorthwind Labs \u2014 Accounts Payable\nap@northwind.example",
+      "body_html": null,
+      "sent_at": "2026-09-18T10:00:00Z",
+      "received_at": "2026-09-18T10:00:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-northwind-pay-intent-inv-ar-007",
+      "metadata": {}
+    },
+    {
+      "message_id": "msg-fno-stmt-2026-09",
+      "thread_id": "thr-fno-stmt-2026-09",
+      "in_reply_to": null,
+      "sender_name": "First National Operating",
+      "sender_address": "notices@firstnational.example",
+      "recipient_addresses": [
+        "ap@hackmit-cfo.example"
+      ],
+      "subject": "September 2026 operating account statement available",
+      "body_text": "Treasury / Controllership,\n\nThis notice is from First National Operating regarding your commercial operating account.\n\nYour monthly account statement for the period 01 September 2026 through 30 September 2026 is now available. This is a bank statement notice only. It is not an invoice, and no payment is requested.\n\nPlease retrieve the statement through online banking or your usual statement delivery channel and retain it with your September cash records.\n\nIf your internal books do not tie to the statement figures, route any difference through your normal bank-reconciliation process. Do not treat this message as a vendor bill or as confirmation that any individual bank line has been matched.\n\nQuestions on statement access: notices@firstnational.example\n\nFirst National Operating\nAccount Services\nnotices@firstnational.example",
+      "body_html": null,
+      "sent_at": "2026-09-18T10:00:00Z",
+      "received_at": "2026-09-18T10:00:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-fno-stmt-2026-09",
+      "metadata": {}
+    }
+  ],
+  "outcomes": {},
+  "invoice_ids": [],
+  "canonicals": [],
+  "notices": [],
+  "traces": []
+}

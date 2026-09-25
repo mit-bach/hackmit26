@@ -1,0 +1,19 @@
+{
+  "id": "h_e8425fcd-3eff-4c99-bea0-9990bbdf9b01",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "profile: chase\nMaximor Demo Corp, September 2026. Northwind Labs still has one open invoice. You own collections for that invoice. If they may be contacted, write them. When they answer, write back about what is still open. An acknowledgement is not done. Do not apply their cash. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:02:51.053Z",
+  "updatedAt": "2026-09-24T21:03:36.285Z",
+  "result": "**Northwind Labs — collections record (as-of 2026-09-30)**\n\n| Field | Value |\n|--------|--------|\n| Customer | Northwind Labs (`CUST-001`) |\n| Invoice | `INV-AR-001` |\n| Outstanding | **$12,000** (of $12,000 original) |\n| Due date | **2026-10-15** |\n| Days past due | **0** |\n| Aging | **CURRENT** |\n| Status | OPEN, no dispute, no cooldown, no promise |\n| Behavior | Strategic; on-time 98%; avg late 0 days |\n| On collection candidate list? | **No** (Kernel only surfaces overdue) |\n\n**Decision: `NO_ACTION`**\n\nThey still have one open invoice, but it is **not overdue**. Kernel allows contact only after eligibility on aging; this invoice is not eligible for `SEND_GENTLE_REMINDER` / overdue / final notice.\n\n- No outbound mail from `collections@hackmit-cfo.example`\n- No Handle to `world` / customer\n- Did not apply cash\n- Did not touch close / period lock\n- Did not ask a person\n\n**Still open:** `INV-AR-001` for **$12,000**, due **2026-10-15**. Next chase window is after that due date if it remains unpaid and apply has drained deposits for the then as-of.\n\nIf you want chase on a different as-of (after 2026-10-15) or another customer on the overdue list, say which.",
+  "resultPaths": [],
+  "seq": 3
+}

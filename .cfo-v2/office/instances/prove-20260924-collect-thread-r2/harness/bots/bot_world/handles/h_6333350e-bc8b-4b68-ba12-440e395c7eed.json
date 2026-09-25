@@ -1,0 +1,19 @@
+{
+  "id": "h_6333350e-bc8b-4b68-ba12-440e395c7eed",
+  "from": "bot_collect",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "Profile: customer. You are Quiet Harbor Holdings AP (ap@quietharbor.example) replying to Maximor Demo Corp Collections final notice.\n\nThread: thread-collect-INV-AR-005-20260930\nTheir message_id: msg-collect-INV-AR-005-final-20260930\nFrom: collections@hackmit-cfo.example\nSubject: Final notice: INV-AR-005 outstanding $45,000.00 — due May 1, 2026\n\nInvoice INV-AR-005, outstanding $45,000.00, 152 days past due as of 2026-09-30. They ask for immediate remittance or a firm pay date, or dispute/remittance detail.\n\nReply in-character as the customer on this thread using your inbox tools (send as customer, not office outbound). One substantive reply about payment intent, dispute, or status of INV-AR-005. Do not apply cash. Do not write AP books.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_collect",
+    "toId": "bot_world"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:05:33.847Z",
+  "updatedAt": "2026-09-24T21:05:59.469Z",
+  "result": "Quiet Harbor Holdings AP (ap@quietharbor.example) replied on thread-collect-INV-AR-005-20260930 to msg-collect-INV-AR-005-final-20260930.\n\nReply message_id: msg-world-INV-AR-005-reply-20260930\nSubject: Re: Final notice: INV-AR-005 outstanding $45,000.00 — due May 1, 2026\n\nSubstance:\n- Not disputing INV-AR-005; balance $45,000.00 confirmed valid and still open on their books.\n- No remittance already in flight.\n- Firm payment promise: full $45,000.00 by ACH on Friday, October 10, 2026, reference INV-AR-005.\n- Asked to hold further escalation until that date; will use updated ACH/wire instructions if Collections provides them.\n\nWorld did not apply cash or write books. Delivered via reply_in_thread only.",
+  "seq": 5
+}

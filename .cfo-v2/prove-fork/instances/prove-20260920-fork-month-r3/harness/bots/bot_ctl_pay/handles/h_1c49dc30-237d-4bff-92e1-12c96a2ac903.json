@@ -1,0 +1,19 @@
+{
+  "id": "h_1c49dc30-237d-4bff-92e1-12c96a2ac903",
+  "from": "bot_pay",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "profile: review-pay\nReview the payment-run draft at workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json.\nConcur only if Kernel reserve_ok is true and the packet is complete.\nDo not rebuild the plan. Do not execute ACH or wire. Do not ask a human.\nProposed invoice IDs (Kernel candidates only): INV-001. plan_id plan_2026-09-19_d1e2549ae6c2.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_pay",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:04:15.119Z",
+  "updatedAt": "2026-09-24T18:04:47.593Z",
+  "result": "CONCUR on plan_2026-09-19_d1e2549ae6c2 (review-pay).\n\ndecision: CONCUR / proposed_action RELEASE\ncontract: PaymentAuditResult\npath: runs/pay/concurrence/plan_2026-09-19_d1e2549ae6c2.json\npacket: workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json\n\nreserve_ok: true (packet + Kernel get_cash_position k_a6f8ad53a1aa)\nproposed_ids: INV-001 only; total_payout 12450.0 within spendable_cash 6374925.74\npolicies: P-012–P-016 (treasury k_c94d0b0eeafc)\nmust_hold: false; executed/self_approved false\nctl-pay does not execute ACH/wire. Your object to release under Kernel rules.",
+  "seq": 13
+}

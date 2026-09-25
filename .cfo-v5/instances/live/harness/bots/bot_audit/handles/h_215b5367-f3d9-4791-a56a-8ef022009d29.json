@@ -1,0 +1,19 @@
+{
+  "id": "h_215b5367-f3d9-4791-a56a-8ef022009d29",
+  "from": "operator",
+  "to": "bot_audit",
+  "toSlug": "audit",
+  "prompt": "Operator check for audit",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_audit"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.427Z",
+  "updatedAt": "2026-09-24T23:34:21.809Z",
+  "result": "Audit bot online. I own after-the-fact sampling, re-performance, and finding drafts (not pay/cash/books decisions).\n\nReady for an interpret/report cycle or other audit work—send a period or item when you want me to pull kernel facts and sample.",
+  "resultPaths": [],
+  "seq": 64
+}

@@ -1,0 +1,18 @@
+{
+  "version": "1",
+  "bots": {
+    "apply": {
+      "defaultProfile": "apply",
+      "profiles": {
+        "apply": "Cash Application Agent"
+      }
+    },
+    "collect": {
+      "defaultProfile": "chase",
+      "profiles": {
+        "chase": "Collections Agent"
+      }
+    }
+  },
+  "comment": "Session 06 slug-map fragment. Cash Application Reviewer is ctl-cash / review-apply in session 09. Do not union apply and chase."
+}

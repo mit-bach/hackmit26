@@ -1,0 +1,19 @@
+{
+  "id": "h_e36b1121-b3bb-45c7-9a22-f8bee0747e17",
+  "from": "operator",
+  "to": "bot_books",
+  "toSlug": "books",
+  "prompt": "profile: erp-invoice\nMaximor Demo Corp. Land the NetSuite vendor bill NS-4410 on your desk. Do not match it. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T19:42:19.901Z",
+  "updatedAt": "2026-09-24T19:43:22.675Z",
+  "result": "Landed NetSuite vendorBill **NS-4410** (erp-invoice). Did not match, close, or ask a person.\n\n- Record: Acme Supplies `VEND-001`, invoice `ACM-2026-4410`, 2026-09-08, due 2026-09-22, **12450 USD**, PO-101, period 2026-09.\n- Packet: `workspace/books/packets/NS-4410.json`\n- Handoff: `ap` / `prepare` (`h_6ec89bf2-2ff6-4d39-b5cc-507e81d2fb61`) — AP held (Kernel invoice/case not found; no ctl-pay).",
+  "resultPaths": [],
+  "seq": 8
+}

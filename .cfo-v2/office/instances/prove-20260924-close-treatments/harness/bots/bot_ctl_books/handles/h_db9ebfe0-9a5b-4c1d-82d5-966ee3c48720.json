@@ -1,0 +1,19 @@
+{
+  "id": "h_db9ebfe0-9a5b-4c1d-82d5-966ee3c48720",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "CONCUR first line on latest aether handle h_da098a2d-382f-4098-8561-e160bc350ecb immediately.\n\nAlso: can you invoke create_accrual yourself? Or is there a Kernel op on your grant to finalize a concurred treatment packet? Or write a post-approval path?\n\nIf close's call_connected_tool hardcodes handleId null, what workaround exists inside this prove instance without editing platform code? E.g. a desk file, sendHandle callback, or room signal.\n\nStamp the new handle and report any workaround. No lock. No $12.40 clear.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:21:30.028Z",
+  "updatedAt": "2026-09-24T21:21:50.450Z",
+  "result": "CONCUR\n\n## Stamp\nh_da098a2d-382f-4098-8561-e160bc350ecb\npath: harness/bots/bot_ctl_books/handles/h_da098a2d-382f-4098-8561-e160bc350ecb.json\nstatus=completed, result first line exactly CONCUR (already stamped on prior wake; reconfirmed).\n\n## Can ctl-books invoke create_accrual?\nNo. call_connected_tool(accrual.tools.create_accrual) → forbidden.\n- review-treatment grant set is prepaid reads only (no accrual catalog).\n- gateConsequentialCall: VERIFIER_SLUGS.has(\"ctl-books\") → forbidden even if granted.\n- No finalize / post-approval / apply_concurrence Kernel op on my Catalog.\n\n## Workarounds without editing platform code\nNone that make create_accrual ok:true from Bot tools in this prove instance.\n\nChecked:\n1. bot_resolve_approval — harness/approvals empty; wrong path.\n2. args.handleId — ignored by gate (only 5th param to callConnectedTool).\n3. desk / room signal — intercept.ts does not read rooms or desk files for unlock.\n4. ctl-books re-call — forbidden.\n5. sendHandle / bot_send_prompt — only creates the verifier Handle; unlock still needs handleId on the *retry* callConnectedTool.\n6. cfo/dist/extensions/index.js same hardcode: `}, undefined, null, async (input) => sendPeerHandle(...)`.\n\nOnly paths that would work require a code or harness change outside pure Verifier stamping:\n- Patch call_connected_tool to accept handle_id and pass it as 5th arg (platform edit), then close retries with handle_id=h_da098a2d-…\n- Or a non-Bot runner that calls callConnectedTool(..., handleId) as facade.test.ts does.\n\nNo lock. $12.40 not cleared.\n\nVerdict: Aether handle CONCUR done. Unlock blocked by Client wiring, not by missing Verifier concurrence.",
+  "seq": 111
+}

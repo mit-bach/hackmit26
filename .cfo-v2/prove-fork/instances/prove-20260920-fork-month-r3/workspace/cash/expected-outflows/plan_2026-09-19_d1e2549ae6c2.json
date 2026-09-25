@@ -1,0 +1,26 @@
+{
+  "kind": "expected_outflows",
+  "source": "pay",
+  "after": "ctl-pay/review-pay",
+  "plan_id": "plan_2026-09-19_d1e2549ae6c2",
+  "as_of_date": "2026-09-19",
+  "wires": [
+    {
+      "invoice_id": "INV-001",
+      "amount": 12450.0,
+      "vendor": "Acme Supplies",
+      "direction": "outflow",
+      "capture_discount": false
+    }
+  ],
+  "total_payout": 12450.0,
+  "reserve_ok": true,
+  "executed": false,
+  "concurrence": {
+    "passed": true,
+    "decision": "CONCUR",
+    "proposed_action": "RELEASE",
+    "path": "runs/pay/concurrence/plan_2026-09-19_d1e2549ae6c2.json",
+    "handle": "h_1c49dc30-237d-4bff-92e1-12c96a2ac903"
+  }
+}

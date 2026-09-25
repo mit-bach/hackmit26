@@ -1,0 +1,19 @@
+{
+  "id": "h_248a4cdc-7234-4cbd-9981-b5f0f19144b5",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Triage inbound vendor mail. delivered=true message_id=MSG-ACME-SEP-101 thread_id=THR-ACME-SEP-101 from Acme Supplies billing@acmesupplies.example. Packet path: handoffs/world-to-email-acme-sep-101.md. Classify only. Do not pay. Do not close the month. Stay on INV-SEP-101 / PO 101 / 12450.00 until invoice number, amount, and goods-received are confirmed.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:12:15.673Z",
+  "updatedAt": "2026-09-24T18:12:33.498Z",
+  "result": "Open item MSG-ACME-SEP-101 / THR-ACME-SEP-101 from Acme Supplies (billing@acmesupplies.example), packet handoffs/world-to-email-acme-sep-101.md. Classified as VENDOR_INVOICE (invoice): subject and packet name Invoice INV-SEP-101 against PO 101 for 12450.00 USD, September shipment; required invoice fields present as declared (vendor, invoice number, amount). Not marketing, quote, statement, receipt, or payment confirmation. Kernel inbox tools were not granted this turn so no CREATE_AP_INVOICE dispatch and no canonical id minted. Clean on classification only. Next finance fact: keep this thread on INV-SEP-101 / PO 101 / 12450.00 until invoice number, amount, and goods-received are confirmed; do not pay and do not close the month.",
+  "seq": 5
+}

@@ -1,0 +1,2382 @@
+[
+  {
+    "vendor_id": "VEND-001",
+    "vendor_name": "Acme Supplies",
+    "first_seen": "2024-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-001-DUP",
+    "vendor_name": "Acme Supplies LLC",
+    "first_seen": "2026-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-001-ALIAS",
+    "vendor_name": "Acme Supply Co.",
+    "first_seen": "2024-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-002",
+    "vendor_name": "Amazon Web Services",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-003",
+    "vendor_name": "Northline Fabrication",
+    "first_seen": "2023-04-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-004",
+    "vendor_name": "Office Depot",
+    "first_seen": "2023-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-005",
+    "vendor_name": "Helios Hardware",
+    "first_seen": "2023-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-006",
+    "vendor_name": "Datadog",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-007",
+    "vendor_name": "Slack Technologies",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-008",
+    "vendor_name": "Figma",
+    "first_seen": "2023-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-009",
+    "vendor_name": "Google Cloud",
+    "first_seen": "2022-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-010",
+    "vendor_name": "Northwind Phantom LLC",
+    "first_seen": "2026-09-15",
+    "status": "active",
+    "unusual": true
+  },
+  {
+    "vendor_id": "VEND-011",
+    "vendor_name": "Hartford Insurance",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-012",
+    "vendor_name": "Orbit Analytics",
+    "first_seen": "2024-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-013",
+    "vendor_name": "Cambridge Properties",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-014",
+    "vendor_name": "Dell Technologies",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-015",
+    "vendor_name": "Harbor Electric",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-016",
+    "vendor_name": "Lindholm & Ruiz LLP",
+    "first_seen": "2024-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-017",
+    "vendor_name": "GitHub",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-018",
+    "vendor_name": "Shadow Vendor LLC",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-019",
+    "vendor_name": "Freightline Logistics",
+    "first_seen": "2023-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-020",
+    "vendor_name": "Lenovo",
+    "first_seen": "2024-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-021",
+    "vendor_name": "Misc Supplies",
+    "first_seen": "2023-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-022",
+    "vendor_name": "Twilio",
+    "first_seen": "2022-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-023",
+    "vendor_name": "Notion Labs",
+    "first_seen": "2023-02-14",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-024",
+    "vendor_name": "Snowflake",
+    "first_seen": "2023-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-025",
+    "vendor_name": "Okta",
+    "first_seen": "2022-09-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-026",
+    "vendor_name": "CrowdStrike",
+    "first_seen": "2023-01-20",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-027",
+    "vendor_name": "Zoom Video",
+    "first_seen": "2021-11-02",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-028",
+    "vendor_name": "Atlassian",
+    "first_seen": "2022-03-08",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-029",
+    "vendor_name": "Cloudflare",
+    "first_seen": "2023-05-19",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-030",
+    "vendor_name": "Northline Fab Group",
+    "first_seen": "2025-11-02",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-031",
+    "vendor_name": "Helios Hardware Supply",
+    "first_seen": "2026-01-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-032",
+    "vendor_name": "Harbor Power & Light",
+    "first_seen": "2024-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-033",
+    "vendor_name": "Staples Business Advantage",
+    "first_seen": "2021-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-034",
+    "vendor_name": "FedEx",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-035",
+    "vendor_name": "ADP",
+    "first_seen": "2020-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-036",
+    "vendor_name": "WeWork Cambridge",
+    "first_seen": "2022-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-037",
+    "vendor_name": "Comcast Business",
+    "first_seen": "2021-03-15",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-038",
+    "vendor_name": "Pagaya Coffee Service",
+    "first_seen": "2023-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-039",
+    "vendor_name": "CleanRoom Janitorial",
+    "first_seen": "2022-01-10",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-040",
+    "vendor_name": "Kendall Square Parking",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-041",
+    "vendor_name": "HubSpot",
+    "first_seen": "2022-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-042",
+    "vendor_name": "Stripe Processing",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-043",
+    "vendor_name": "Adyen NV",
+    "first_seen": "2024-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-044",
+    "vendor_name": "DocuSign",
+    "first_seen": "2022-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-045",
+    "vendor_name": "Palo Alto Networks",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-046",
+    "vendor_name": "Boston Edison Steam",
+    "first_seen": "2021-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-047",
+    "vendor_name": "Carta",
+    "first_seen": "2023-08-12",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-048",
+    "vendor_name": "Gusto Payroll",
+    "first_seen": "2022-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-049",
+    "vendor_name": "Vanta",
+    "first_seen": "2024-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-050",
+    "vendor_name": "Linear App",
+    "first_seen": "2024-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-051",
+    "vendor_name": "Northwood Supply",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-052",
+    "vendor_name": "Quince Labs",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-053",
+    "vendor_name": "Teak Partners",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-054",
+    "vendor_name": "Walnut Works",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-055",
+    "vendor_name": "Beacon Components",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-056",
+    "vendor_name": "Echo Network",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-057",
+    "vendor_name": "Harbor Studio",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-058",
+    "vendor_name": "Keel Group",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-059",
+    "vendor_name": "Nimbus Systems",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-060",
+    "vendor_name": "Quarry Services",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-061",
+    "vendor_name": "Timber Supply",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-062",
+    "vendor_name": "Wharf Labs",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-063",
+    "vendor_name": "Alder Partners",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-064",
+    "vendor_name": "Driftwood Works",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-065",
+    "vendor_name": "Ginkgo Components",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-066",
+    "vendor_name": "Juniper Network",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-067",
+    "vendor_name": "Northwood Studio",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-068",
+    "vendor_name": "Quince Group",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-069",
+    "vendor_name": "Teak Systems",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-070",
+    "vendor_name": "Walnut Services",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-071",
+    "vendor_name": "Beacon Supply",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-072",
+    "vendor_name": "Echo Labs",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-073",
+    "vendor_name": "Harbor Partners",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-074",
+    "vendor_name": "Keel Works",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-075",
+    "vendor_name": "Nimbus Components",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-076",
+    "vendor_name": "Quarry Network",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-077",
+    "vendor_name": "Timber Studio",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-078",
+    "vendor_name": "Wharf Group",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-079",
+    "vendor_name": "Alder Systems",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-080",
+    "vendor_name": "Driftwood Services",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-081",
+    "vendor_name": "Ginkgo Supply",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-082",
+    "vendor_name": "Juniper Labs",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-083",
+    "vendor_name": "Northwood Partners",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-084",
+    "vendor_name": "Quince Works",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-085",
+    "vendor_name": "Teak Components",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-086",
+    "vendor_name": "Walnut Network",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-087",
+    "vendor_name": "Beacon Studio",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-088",
+    "vendor_name": "Echo Group",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-089",
+    "vendor_name": "Harbor Systems",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-090",
+    "vendor_name": "Keel Services",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-091",
+    "vendor_name": "Nimbus Supply",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-092",
+    "vendor_name": "Quarry Labs",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-093",
+    "vendor_name": "Timber Partners",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-094",
+    "vendor_name": "Wharf Works",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-095",
+    "vendor_name": "Alder Components",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-096",
+    "vendor_name": "Driftwood Network",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-097",
+    "vendor_name": "Ginkgo Studio",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-098",
+    "vendor_name": "Juniper Group",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-099",
+    "vendor_name": "Northwood Systems",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-100",
+    "vendor_name": "Quince Services",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-101",
+    "vendor_name": "Teak Supply",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-102",
+    "vendor_name": "Walnut Labs",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-103",
+    "vendor_name": "Beacon Partners",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-104",
+    "vendor_name": "Echo Works",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-105",
+    "vendor_name": "Harbor Components",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-106",
+    "vendor_name": "Keel Network",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-107",
+    "vendor_name": "Nimbus Studio",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-108",
+    "vendor_name": "Quarry Group",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-109",
+    "vendor_name": "Timber Systems",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-110",
+    "vendor_name": "Wharf Services",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-111",
+    "vendor_name": "Alder Supply",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-112",
+    "vendor_name": "Driftwood Labs",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-113",
+    "vendor_name": "Ginkgo Partners",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-114",
+    "vendor_name": "Juniper Works",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-115",
+    "vendor_name": "Northwood Components",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-116",
+    "vendor_name": "Quince Network",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-117",
+    "vendor_name": "Teak Studio",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-118",
+    "vendor_name": "Walnut Group",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-119",
+    "vendor_name": "Beacon Systems",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-120",
+    "vendor_name": "Echo Services",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-121",
+    "vendor_name": "Harbor Supply",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-122",
+    "vendor_name": "Keel Labs",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-123",
+    "vendor_name": "Nimbus Partners",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-124",
+    "vendor_name": "Quarry Works",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-125",
+    "vendor_name": "Timber Components",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-126",
+    "vendor_name": "Wharf Network",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-127",
+    "vendor_name": "Alder Studio",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-128",
+    "vendor_name": "Driftwood Group",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-129",
+    "vendor_name": "Ginkgo Systems",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-130",
+    "vendor_name": "Juniper Services",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-131",
+    "vendor_name": "Northwood Supply",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-132",
+    "vendor_name": "Quince Labs",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-133",
+    "vendor_name": "Teak Partners",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-134",
+    "vendor_name": "Walnut Works",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-135",
+    "vendor_name": "Beacon Components",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-136",
+    "vendor_name": "Echo Network",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-137",
+    "vendor_name": "Harbor Studio",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-138",
+    "vendor_name": "Keel Group",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-139",
+    "vendor_name": "Nimbus Systems",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-140",
+    "vendor_name": "Quarry Services",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-141",
+    "vendor_name": "Timber Supply",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-142",
+    "vendor_name": "Wharf Labs",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-143",
+    "vendor_name": "Alder Partners",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-144",
+    "vendor_name": "Driftwood Works",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-145",
+    "vendor_name": "Ginkgo Components",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-146",
+    "vendor_name": "Juniper Network",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-147",
+    "vendor_name": "Northwood Studio",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-148",
+    "vendor_name": "Quince Group",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-149",
+    "vendor_name": "Teak Systems",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-150",
+    "vendor_name": "Walnut Services",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-151",
+    "vendor_name": "Beacon Supply",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-152",
+    "vendor_name": "Echo Labs",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-153",
+    "vendor_name": "Harbor Partners",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-154",
+    "vendor_name": "Keel Works",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-155",
+    "vendor_name": "Nimbus Components",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-156",
+    "vendor_name": "Quarry Network",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-157",
+    "vendor_name": "Timber Studio",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-158",
+    "vendor_name": "Wharf Group",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-159",
+    "vendor_name": "Alder Systems",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-160",
+    "vendor_name": "Driftwood Services",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-161",
+    "vendor_name": "Ginkgo Supply",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-162",
+    "vendor_name": "Juniper Labs",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-163",
+    "vendor_name": "Northwood Partners",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-164",
+    "vendor_name": "Quince Works",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-165",
+    "vendor_name": "Teak Components",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-166",
+    "vendor_name": "Walnut Network",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-167",
+    "vendor_name": "Beacon Studio",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-168",
+    "vendor_name": "Echo Group",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-169",
+    "vendor_name": "Harbor Systems",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-170",
+    "vendor_name": "Keel Services",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-171",
+    "vendor_name": "Nimbus Supply",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-172",
+    "vendor_name": "Quarry Labs",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-173",
+    "vendor_name": "Timber Partners",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-174",
+    "vendor_name": "Wharf Works",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-175",
+    "vendor_name": "Alder Components",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-176",
+    "vendor_name": "Driftwood Network",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-177",
+    "vendor_name": "Ginkgo Studio",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-178",
+    "vendor_name": "Juniper Group",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-179",
+    "vendor_name": "Northwood Systems",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-180",
+    "vendor_name": "Quince Services",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-181",
+    "vendor_name": "Teak Supply",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-182",
+    "vendor_name": "Walnut Labs",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-183",
+    "vendor_name": "Beacon Partners",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-184",
+    "vendor_name": "Echo Works",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-185",
+    "vendor_name": "Harbor Components",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-186",
+    "vendor_name": "Keel Network",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-187",
+    "vendor_name": "Nimbus Studio",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-188",
+    "vendor_name": "Quarry Group",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-189",
+    "vendor_name": "Timber Systems",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-190",
+    "vendor_name": "Wharf Services",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-191",
+    "vendor_name": "Alder Supply",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-192",
+    "vendor_name": "Driftwood Labs",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-193",
+    "vendor_name": "Ginkgo Partners",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-194",
+    "vendor_name": "Juniper Works",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-195",
+    "vendor_name": "Northwood Components",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-196",
+    "vendor_name": "Quince Network",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-197",
+    "vendor_name": "Teak Studio",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-198",
+    "vendor_name": "Walnut Group",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-199",
+    "vendor_name": "Beacon Systems",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-200",
+    "vendor_name": "Echo Services",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-201",
+    "vendor_name": "Harbor Supply",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-202",
+    "vendor_name": "Keel Labs",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-203",
+    "vendor_name": "Nimbus Partners",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-204",
+    "vendor_name": "Quarry Works",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-205",
+    "vendor_name": "Timber Components",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-206",
+    "vendor_name": "Wharf Network",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-207",
+    "vendor_name": "Alder Studio",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-208",
+    "vendor_name": "Driftwood Group",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-209",
+    "vendor_name": "Ginkgo Systems",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-210",
+    "vendor_name": "Juniper Services",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-211",
+    "vendor_name": "Northwood Supply",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-212",
+    "vendor_name": "Quince Labs",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-213",
+    "vendor_name": "Teak Partners",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-214",
+    "vendor_name": "Walnut Works",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-215",
+    "vendor_name": "Beacon Components",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-216",
+    "vendor_name": "Echo Network",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-217",
+    "vendor_name": "Harbor Studio",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-218",
+    "vendor_name": "Keel Group",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-219",
+    "vendor_name": "Nimbus Systems",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-220",
+    "vendor_name": "Quarry Services",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-221",
+    "vendor_name": "Timber Supply",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-222",
+    "vendor_name": "Wharf Labs",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-223",
+    "vendor_name": "Alder Partners",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-224",
+    "vendor_name": "Driftwood Works",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-225",
+    "vendor_name": "Ginkgo Components",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-226",
+    "vendor_name": "Juniper Network",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-227",
+    "vendor_name": "Northwood Studio",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-228",
+    "vendor_name": "Quince Group",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-229",
+    "vendor_name": "Teak Systems",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-230",
+    "vendor_name": "Walnut Services",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-231",
+    "vendor_name": "Beacon Supply",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-232",
+    "vendor_name": "Echo Labs",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-233",
+    "vendor_name": "Harbor Partners",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-234",
+    "vendor_name": "Keel Works",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-235",
+    "vendor_name": "Nimbus Components",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-236",
+    "vendor_name": "Quarry Network",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-237",
+    "vendor_name": "Timber Studio",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-238",
+    "vendor_name": "Wharf Group",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-239",
+    "vendor_name": "Alder Systems",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-240",
+    "vendor_name": "Driftwood Services",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-241",
+    "vendor_name": "Ginkgo Supply",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-242",
+    "vendor_name": "Juniper Labs",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-243",
+    "vendor_name": "Northwood Partners",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-244",
+    "vendor_name": "Quince Works",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-245",
+    "vendor_name": "Teak Components",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-246",
+    "vendor_name": "Walnut Network",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-247",
+    "vendor_name": "Beacon Studio",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-248",
+    "vendor_name": "Echo Group",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-249",
+    "vendor_name": "Harbor Systems",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-250",
+    "vendor_name": "Keel Services",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-251",
+    "vendor_name": "Nimbus Supply",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-252",
+    "vendor_name": "Quarry Labs",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-253",
+    "vendor_name": "Timber Partners",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-254",
+    "vendor_name": "Wharf Works",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-255",
+    "vendor_name": "Alder Components",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-256",
+    "vendor_name": "Driftwood Network",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-257",
+    "vendor_name": "Ginkgo Studio",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-258",
+    "vendor_name": "Juniper Group",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-259",
+    "vendor_name": "Northwood Systems",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-260",
+    "vendor_name": "Quince Services",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-261",
+    "vendor_name": "Teak Supply",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-262",
+    "vendor_name": "Walnut Labs",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-263",
+    "vendor_name": "Beacon Partners",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-264",
+    "vendor_name": "Echo Works",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-265",
+    "vendor_name": "Harbor Components",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-266",
+    "vendor_name": "Keel Network",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-267",
+    "vendor_name": "Nimbus Studio",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-268",
+    "vendor_name": "Quarry Group",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-269",
+    "vendor_name": "Timber Systems",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-270",
+    "vendor_name": "Wharf Services",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-271",
+    "vendor_name": "Alder Supply",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-272",
+    "vendor_name": "Driftwood Labs",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-273",
+    "vendor_name": "Ginkgo Partners",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-274",
+    "vendor_name": "Juniper Works",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-275",
+    "vendor_name": "Northwood Components",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-276",
+    "vendor_name": "Quince Network",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-277",
+    "vendor_name": "Teak Studio",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-278",
+    "vendor_name": "Walnut Group",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-279",
+    "vendor_name": "Beacon Systems",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-280",
+    "vendor_name": "Echo Services",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-281",
+    "vendor_name": "Harbor Supply",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-282",
+    "vendor_name": "Keel Labs",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-283",
+    "vendor_name": "Nimbus Partners",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-284",
+    "vendor_name": "Quarry Works",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-285",
+    "vendor_name": "Timber Components",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-286",
+    "vendor_name": "Wharf Network",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-287",
+    "vendor_name": "Alder Studio",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-288",
+    "vendor_name": "Driftwood Group",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-289",
+    "vendor_name": "Ginkgo Systems",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-290",
+    "vendor_name": "Juniper Services",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-291",
+    "vendor_name": "Northwood Supply",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-292",
+    "vendor_name": "Quince Labs",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-293",
+    "vendor_name": "Teak Partners",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-294",
+    "vendor_name": "Walnut Works",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-295",
+    "vendor_name": "Beacon Components",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-296",
+    "vendor_name": "Echo Network",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-297",
+    "vendor_name": "Harbor Studio",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-298",
+    "vendor_name": "Keel Group",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-299",
+    "vendor_name": "Nimbus Systems",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-300",
+    "vendor_name": "Quarry Services",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-301",
+    "vendor_name": "Timber Supply",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-302",
+    "vendor_name": "Wharf Labs",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-303",
+    "vendor_name": "Alder Partners",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-304",
+    "vendor_name": "Driftwood Works",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-305",
+    "vendor_name": "Ginkgo Components",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-306",
+    "vendor_name": "Juniper Network",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-307",
+    "vendor_name": "Northwood Studio",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-308",
+    "vendor_name": "Quince Group",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-309",
+    "vendor_name": "Teak Systems",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-310",
+    "vendor_name": "Walnut Services",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-311",
+    "vendor_name": "Beacon Supply",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-312",
+    "vendor_name": "Echo Labs",
+    "first_seen": "2021-02-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-313",
+    "vendor_name": "Harbor Partners",
+    "first_seen": "2022-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-314",
+    "vendor_name": "Keel Works",
+    "first_seen": "2023-04-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-315",
+    "vendor_name": "Nimbus Components",
+    "first_seen": "2024-05-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-316",
+    "vendor_name": "Quarry Network",
+    "first_seen": "2025-06-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-317",
+    "vendor_name": "Timber Studio",
+    "first_seen": "2020-07-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-318",
+    "vendor_name": "Wharf Group",
+    "first_seen": "2021-08-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-319",
+    "vendor_name": "Alder Systems",
+    "first_seen": "2022-09-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-320",
+    "vendor_name": "Driftwood Services",
+    "first_seen": "2023-10-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-321",
+    "vendor_name": "Ginkgo Supply",
+    "first_seen": "2024-11-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-322",
+    "vendor_name": "Juniper Labs",
+    "first_seen": "2025-12-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-323",
+    "vendor_name": "Northwood Partners",
+    "first_seen": "2020-01-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-KIS-01",
+    "vendor_name": "Kestrel Industrial Supply LLC",
+    "first_seen": "2025-11-03",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-NLF-02",
+    "vendor_name": "North Line Fab Inc",
+    "first_seen": "2026-01-14",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-NLF-03",
+    "vendor_name": "NLF Industrial Components",
+    "first_seen": "2026-02-02",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-WBT-01",
+    "vendor_name": "Westbrook Tooling",
+    "first_seen": "2026-03-20",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-HAL-01",
+    "vendor_name": "Halyard Facilities LLC",
+    "first_seen": "2025-04-20",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-CLR-01",
+    "vendor_name": "Clearing Solutions LLC",
+    "first_seen": "2025-11-20",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-BLS-01",
+    "vendor_name": "Brightline Studio LLC",
+    "first_seen": "2025-09-04",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-CPS-01",
+    "vendor_name": "Cambridge Property Services",
+    "first_seen": "2025-07-08",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-HES-01",
+    "vendor_name": "Harbor Electric Services",
+    "first_seen": "2026-02-03",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-OIC-01",
+    "vendor_name": "Orbit Insights Corp",
+    "first_seen": "2025-01-06",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-FLE-01",
+    "vendor_name": "Freightline Expedite",
+    "first_seen": "2025-11-10",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-HBP-01",
+    "vendor_name": "Hartford Brokerage Partners",
+    "first_seen": "2026-01-08",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-Z900",
+    "vendor_name": "Northeast Industrial 901",
+    "first_seen": "2023-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-Z901",
+    "vendor_name": "Northeast Industrial 902",
+    "first_seen": "2023-03-01",
+    "status": "active",
+    "unusual": false
+  },
+  {
+    "vendor_id": "VEND-Z902",
+    "vendor_name": "Northeast Industrial 903",
+    "first_seen": "2023-03-01",
+    "status": "active",
+    "unusual": false
+  }
+]

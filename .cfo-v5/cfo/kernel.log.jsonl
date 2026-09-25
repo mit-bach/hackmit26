@@ -1,0 +1,17 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_15ac5f8bca47", "ts": "2026-09-24T23:04:31Z"}
+{"botId": "bot_ap", "error": null, "handleId": "h_proofk", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_2fa4378e838e", "ts": "2026-09-24T23:04:31Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_78d294858161", "ts": "2026-09-24T23:11:21Z"}
+{"botId": "bot_ap", "error": null, "handleId": "h_proofs", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_b807699a2527", "ts": "2026-09-24T23:11:21Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_093dc2d6277e", "ts": "2026-09-24T23:31:40Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_996b3942c923", "ts": "2026-09-24T23:33:50Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_bea7b7aac75f", "ts": "2026-09-24T23:34:26Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_dba8965bca0c", "ts": "2026-09-24T23:34:37Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_f103ff3a1419", "ts": "2026-09-24T23:35:06Z"}
+{"botId": "bot_ctl_pay", "error": "forbidden", "handleId": "", "ok": false, "op": "tools.get_case_evidence", "profile": "", "slug": "", "traceId": "k_afde0a18df05", "ts": "2026-09-24T23:35:16Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_5070e5c6db2b", "ts": "2026-09-24T23:38:27Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_a07352913bb1", "ts": "2026-09-24T23:39:20Z"}
+{"botId": "", "error": "forbidden", "handleId": "", "ok": false, "op": "tools.get_case_evidence", "profile": "", "slug": "", "traceId": "k_b0acdb38961d", "ts": "2026-09-24T23:39:20Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_9da9868f0303", "ts": "2026-09-25T01:35:05Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_93f89d617762", "ts": "2026-09-25T01:38:33Z"}
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_7c5bf7d388b2", "ts": "2026-09-25T01:39:02Z"}
+{"botId": "bot_ap", "error": null, "handleId": "h_ui", "ok": true, "op": "tools.get_invoice", "profile": "prepare", "slug": "ap", "traceId": "k_d6dd4c956e6e", "ts": "2026-09-25T01:39:02Z"}

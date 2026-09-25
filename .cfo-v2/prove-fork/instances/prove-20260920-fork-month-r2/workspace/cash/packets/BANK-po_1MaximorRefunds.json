@@ -1,0 +1,24 @@
+{
+  "bot": "cash",
+  "profile": "match",
+  "period": "2026-09",
+  "object": "processor_deposit_tick",
+  "payout_id": "po_1MaximorRefunds",
+  "bank_deposit_id": "BANK-po_1MaximorRefunds",
+  "amount": 3380.0,
+  "currency": "USD",
+  "arrival_date": "2026-09-22",
+  "stripe_deposit_path": "workspace/stripe/deposits/po_1MaximorRefunds.json",
+  "stripe_source_path": "workspace/sources/stripe/po_1MaximorRefunds.json",
+  "waterfall_status": "MATCH",
+  "expected_payout_minor": 338000,
+  "actual_payout_minor": 338000,
+  "difference": 0,
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "decision": {
+    "status": "MATCHED_PROCESSOR_DEPOSIT",
+    "action": "tick_bank_deposit_only",
+    "mint_ap_invoice": false
+  }
+}

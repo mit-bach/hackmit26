@@ -1,0 +1,19 @@
+{
+  "id": "h_6fd2f395-ac25-408a-8bf9-89c1c7a6a1c5",
+  "from": "operator",
+  "to": "bot_apply",
+  "toSlug": "apply",
+  "prompt": "Operator check for apply",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_apply"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.186Z",
+  "updatedAt": "2026-09-24T23:34:31.612Z",
+  "result": "**Apply bot — operator check**\n\n**Identity:** `apply` — unapplied cash; stick kernel-valid remittances to invoices.\n\n**Catalog (this step):**\n- `ar.tools.get_cash_application_facts` (read)\n- `ar.tools.get_ar_customer` (read)\n- `ar.tools.get_ar_precedents` (read)\n\n**Memory:** `sandboxes/apply/memory/MEMORY.md` — precedents header only; no customer/processor keys yet.\n\n**Live facts:** `get_cash_application_facts` → **kernel RPC failed** (no payment/candidates loaded).\n\n**Decision posture (when facts work):** Copy a kernel candidate only → `AUTO_APPLY` if unique/strong, else `HUMAN_REVIEW` / `UNAPPLIED`; step closes `PROPOSE` or `HOLD`. No invented invoices/amounts; no dunning.\n\nNo active apply item/step in this wake. Re-run when a remittance path is queued or kernel is up if you want a full proposal pass.",
+  "resultPaths": [],
+  "seq": 65
+}

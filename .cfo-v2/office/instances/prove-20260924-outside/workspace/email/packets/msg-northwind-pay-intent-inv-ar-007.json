@@ -1,0 +1,36 @@
+{
+  "source_agent": "email",
+  "profile": "triage",
+  "classification": "customer_payment_intent",
+  "document_type": "payment_plan_note",
+  "selected_action": "ROUTE_COLLECT_NOTE",
+  "confidence": 0.92,
+  "classification_reason": "Customer Northwind Labs states intent to pay INV-AR-007 in full $12000.00 by ACH on 2026-09-30; not a bank confirmation, not remittance advice, no cash to apply.",
+  "message_id": "msg-northwind-pay-intent-inv-ar-007",
+  "thread_id": "thr-northwind-inv-ar-007",
+  "case_id": "INV-AR-007",
+  "from": "ap@northwind.example",
+  "customer_id": "CUST-001",
+  "customer_name": "Northwind Labs",
+  "to": "ar@hackmit-cfo.example",
+  "subject": "Payment plan — INV-AR-007",
+  "candidate": null,
+  "extracted": {
+    "invoice_numbers": ["INV-AR-007"],
+    "mentioned_open_invoices": ["INV-AR-001", "INV-AR-022"],
+    "promised_amount": "12000.00",
+    "currency": "USD",
+    "method": "ACH",
+    "promised_pay_date": "2026-09-30",
+    "dispute": false
+  },
+  "missing_fields": [],
+  "reason_codes": [
+    "NOT_VENDOR_INVOICE",
+    "NOT_PAYMENT_CONFIRMATION",
+    "NOT_REMITTANCE_ADVICE",
+    "NO_CASH_APPLY"
+  ],
+  "dispatch_target": "collect",
+  "do_not": ["apply_cash", "create_ap_invoice", "mark_paid"]
+}

@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { applyAttachEnv } from "../client-attach.ts";
@@ -11,6 +11,7 @@ import { liveStatus } from "../lane-state.ts";
 import { piRpcLogPath, piRuntimePath, piSessionDir } from "../paths.ts";
 import { extensionEntryPath, extraExtensionArgs } from "../pkg.ts";
 import { findBot, loadRoster } from "../roster.ts";
+import { sandboxesEnabled, seatbeltProfilePath } from "../seatbelt.ts";
 import { cadenceToMs, fireRoutine } from "../routines.ts";
 import type { EventBus } from "./bus.ts";
 import { ombAdoptLeaf, ombChainParent } from "./omb-compat.ts";
@@ -229,15 +230,32 @@ function spawnBot(
   if (model) {
     args.push("--model", model);
   }
-  const child = spawn(process.execPath, args, {
-    cwd: computerRoot,
-    env: {
-      ...env,
-      HARNESS_BOT: slug,
-      HARNESS_COMPUTER: computerRoot,
-    },
-    stdio: ["pipe", "pipe", "pipe"],
-  });
+  const root = resolve(computerRoot);
+  const jailed = sandboxesEnabled(root);
+  const cwd = jailed ? join(root, "sandboxes", slug) : root;
+  const childEnv = {
+    ...env,
+    HARNESS_BOT: slug,
+    HARNESS_COMPUTER: root,
+  };
+  let child: ChildProcess;
+  if (jailed) {
+    if (process.platform !== "darwin") {
+      throw new Error("sandboxes/ jail requires sandbox-exec on darwin");
+    }
+    const profile = seatbeltProfilePath(root, slug, botId);
+    child = spawn("sandbox-exec", ["-f", profile, "--", process.execPath, ...args], {
+      cwd,
+      env: childEnv,
+      stdio: ["pipe", "pipe", "pipe"],
+    });
+  } else {
+    child = spawn(process.execPath, args, {
+      cwd,
+      env: childEnv,
+      stdio: ["pipe", "pipe", "pipe"],
+    });
+  }
   attachStdout(computerRoot, child, slug, botId, bus);
   const thinking = env.HARNESS_PI_THINKING?.trim();
   if (thinking) {

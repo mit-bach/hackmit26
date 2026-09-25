@@ -1,0 +1,49 @@
+{
+  "invoice_id": "INV-001",
+  "profile": "prepare",
+  "vendor": "Acme Supplies",
+  "po_id": "PO-101",
+  "receipt_id": "GR-101",
+  "vendor_invoice_number": "ACM-2026-4410",
+  "amount": 12450,
+  "currency": "USD",
+  "kernel_evidence": {
+    "amount_difference": 0,
+    "percent_difference": 0,
+    "amount_matches": true,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": true,
+    "vendors_are_similar": true,
+    "po_exists": true,
+    "po_approved": true,
+    "receipt_status": "full",
+    "goods_fully_received": true,
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": [],
+    "days_until_due": -2,
+    "invoice_dated_before_po": false
+  },
+  "evidence_used": [
+    "INV-001",
+    "PO-101",
+    "GR-101",
+    "tools.get_invoice",
+    "tools.get_purchase_order",
+    "tools.get_goods_receipt",
+    "tools.find_duplicate_invoices",
+    "tools.get_case_evidence"
+  ],
+  "PreparerRecommendation": {
+    "proposal": "APPROVE",
+    "reason": "Clean three-way match: invoice INV-001 amount 12450 equals PO-101 authorized_amount and GR-101 amount_received; vendor Acme Supplies exact match; PO approved; goods fully received (15/15); no duplicates; exception_types empty. Prepare profile has no policy-grant ops; no Kernel exception to investigate. Past due (days_until_due -2) does not create a match exception.",
+    "exception_types": []
+  },
+  "proposed_action": "APPROVE",
+  "must_hold_note": "Kernel must_hold runs after preparer; AP cannot override. Packet is APPROVE-shaped for ctl-pay review-match.",
+  "next": {
+    "bot": "ctl-pay",
+    "profile": "review-match",
+    "packet_path": "runs/ap/packets/INV-001.json"
+  }
+}

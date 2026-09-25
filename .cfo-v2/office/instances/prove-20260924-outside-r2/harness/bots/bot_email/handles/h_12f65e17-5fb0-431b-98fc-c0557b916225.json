@@ -1,0 +1,19 @@
+{
+  "id": "h_12f65e17-5fb0-431b-98fc-c0557b916225",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Inbound customer mail delivered for triage (profile: triage).\n\nPath: workspace/world/packets/northwind-inv-ar-001-pay-note.md\nmessage_id: msg-northwind-inv-ar-001-pay-note-001\nthread_id: thr-northwind-inv-ar-001-pay-note\nsender: Northwind Labs <ap@northwindlabs.example>\nsubject: Payment schedule — INV-AR-001\n\nCustomer payment *commitment* only: will pay full $12,000.00 on INV-AR-001 by ACH on 2026-10-14. Not remittance of cash already sent. World does not apply cash. Please classify and reply with outcome.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:54:00.536Z",
+  "updatedAt": "2026-09-24T20:54:11.177Z",
+  "result": "Triage complete for msg-northwind-inv-ar-001-pay-note-001 (thread thr-northwind-inv-ar-001-pay-note).\n\nClassification: not_invoice / customer_payment_commitment\ninbox_type: payment schedule note (not CUSTOMER_REMITTANCE)\nselected_action: NONE\ncandidate: null\nconfidence: high\n\nIdentifiers referenced only: customer Northwind Labs; invoice INV-AR-001; amount $12,000.00; ACH; promised pay date 2026-10-14.\n\nReason: Customer payment commitment/schedule only — will pay full amount later. Not remittance of cash already sent. Not a vendor invoice. Not payment_confirmation of funds received. World does not apply cash. No handoff to apply or ap.\n\nPacket: workspace/email/packets/northwind-inv-ar-001-pay-note-triage.md",
+  "seq": 15
+}

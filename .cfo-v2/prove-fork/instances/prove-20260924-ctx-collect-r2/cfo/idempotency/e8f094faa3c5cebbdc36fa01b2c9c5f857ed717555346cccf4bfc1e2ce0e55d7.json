@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-INV-AR-HE-4412-r1",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "61c629c8b026635eeab825ce8e9a61c4a5580c3e8ab53b658cae679f0ebe1e77",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-collect-INV-AR-HE-4412-r1",
+      "thread_id": "thr-collect-INV-AR-HE-4412",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_fb0f77e3f391"
+  }
+}

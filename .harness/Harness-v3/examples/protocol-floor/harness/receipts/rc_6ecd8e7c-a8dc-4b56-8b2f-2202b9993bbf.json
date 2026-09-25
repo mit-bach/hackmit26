@@ -1,0 +1,10 @@
+{
+  "id": "rc_6ecd8e7c-a8dc-4b56-8b2f-2202b9993bbf",
+  "name": "morning-brief",
+  "bot": "beta",
+  "handleId": "h_08beeafe-e3f0-473e-8a09-47df60b77756",
+  "status": "completed",
+  "at": "2026-09-20T02:43:03.410Z",
+  "updatedAt": "2026-09-20T02:43:03.648Z",
+  "result": "[beta] Write a two-line status into workspace/brief.md"
+}

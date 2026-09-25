@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-382
+PO Number: PO-382
+Vendor: Keel Services
+Goods received in full on 2026-09-02
+Packing list attached: PL-GR-382
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 441.82 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

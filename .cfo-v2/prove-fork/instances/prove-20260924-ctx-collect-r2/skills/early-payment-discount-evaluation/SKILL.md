@@ -1,0 +1,1 @@
+/Users/dominikbach/olympus/hackmit/hackmit26/.cfo/skills/early-payment-discount-evaluation/SKILL.md

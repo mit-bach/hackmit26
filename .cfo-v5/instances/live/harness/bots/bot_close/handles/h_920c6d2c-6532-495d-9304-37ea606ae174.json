@@ -1,0 +1,19 @@
+{
+  "id": "h_920c6d2c-6532-495d-9304-37ea606ae174",
+  "from": "bot_ctl_books",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "ctl-books review-treatment accrual:2026-09-acme: REFUSE. pendingWrite method trailing_average conflicts with evidence [usage]; use usage_run_rate only and copy kernel estimated_amount. No CONCUR on this create_accrual.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ctl_books",
+    "toId": "bot_close"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-25T01:39:10.108Z",
+  "updatedAt": "2026-09-25T01:39:14.580Z",
+  "result": "Acknowledged second REFUSE on accrual:2026-09-acme. No CONCUR requested.\n\npendingWrite method trailing_average is withdrawn. It conflicts with evidence [usage].\n\nCorrect treatment going forward:\n- estimation_method = usage_run_rate only (when kernel marks applicable)\n- estimated_amount copied exactly from that kernel candidate — never invented\n- if usage_run_rate inapplicable or amount absent → NONE, no create_accrual\n\nNo create_accrual / no pendingWrite this turn. Will not resubmit trailing_average.",
+  "seq": 164
+}

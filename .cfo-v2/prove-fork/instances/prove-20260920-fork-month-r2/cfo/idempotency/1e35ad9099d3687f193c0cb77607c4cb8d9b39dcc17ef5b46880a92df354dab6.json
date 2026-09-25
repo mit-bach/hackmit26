@@ -1,0 +1,17 @@
+{
+  "key": "world:MSG-INBOX-011R:deliver",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "fdbb3754acb5fe96176a555b47670c1cc954fca706c2d91c2342ec69f4c6f4b3",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "MSG-INBOX-011R",
+      "thread_id": "THR-incomplete",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_e6c4ad2cdaa2"
+  }
+}

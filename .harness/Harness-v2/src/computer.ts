@@ -1,4 +1,5 @@
 import { existsSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
 import { applyClientAttach, loadClientRuntime } from "./client-runtime.ts";
 import { ensureDir, writeJsonAtomic } from "./fs.ts";
@@ -21,6 +22,7 @@ import {
 } from "./paths.ts";
 import { persistProtocolCard } from "./protocol-card.ts";
 import { loadRoster } from "./roster.ts";
+import { ensureSandboxLayout } from "./sandbox.ts";
 import type { Roster } from "./types.ts";
 
 export function initComputer(computerRoot: string, roster?: Roster): Roster {
@@ -40,7 +42,12 @@ export function initComputer(computerRoot: string, roster?: Roster): Roster {
     writeJsonAtomic(interceptPath(computerRoot), { default: { kind: "operator" }, bots: {} });
   }
   seedVerifierIntercept(computerRoot);
+  const boundSlug = process.env.HARNESS_BOT?.trim();
+  const jailed = existsSync(join(computerRoot, "sandboxes"));
   for (const bot of loaded.bots) {
+    if (jailed && boundSlug && bot.slug !== boundSlug) {
+      continue;
+    }
     ensureDir(botDir(computerRoot, bot.id));
     ensureDir(handleDir(computerRoot, bot.id));
     ensureDir(memoryDir(computerRoot, bot.id));
@@ -59,5 +66,9 @@ export function initComputer(computerRoot: string, roster?: Roster): Roster {
   for (const room of loaded.rooms) {
     ensureDir(roomDir(computerRoot, room.id));
   }
+  ensureSandboxLayout(
+    computerRoot,
+    loaded.bots.map((bot) => bot.slug),
+  );
   return loaded;
 }

@@ -1,0 +1,19 @@
+{
+  "key": "col-inv-ar-019-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "ca97e41e19b9de5d7d4aef316b9a3f36c9e23d1563967df64bdc5180653ed218",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-inv-ar-019-20260930",
+      "thread_id": "col-summit-inv-ar-019",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_bfc0ca260338"
+  }
+}

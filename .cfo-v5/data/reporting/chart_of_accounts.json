@@ -1,0 +1,324 @@
+[
+  {
+    "account_id": "4000-Revenue",
+    "name": "Revenue",
+    "account_class": "revenue",
+    "aliases": [
+      "Revenue"
+    ]
+  },
+  {
+    "account_id": "5100-Hosting",
+    "name": "Cloud Hosting",
+    "account_class": "cogs",
+    "aliases": [
+      "Hosting"
+    ]
+  },
+  {
+    "account_id": "5200-Supplier",
+    "name": "Supplier COGS",
+    "account_class": "cogs",
+    "aliases": []
+  },
+  {
+    "account_id": "5300-Freight",
+    "name": "Freight",
+    "account_class": "cogs",
+    "aliases": []
+  },
+  {
+    "account_id": "5400-Other-COGS",
+    "name": "Other COGS",
+    "account_class": "cogs",
+    "aliases": []
+  },
+  {
+    "account_id": "6000-Operating",
+    "name": "Operating Expenses",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6100-Payroll",
+    "name": "Payroll",
+    "account_class": "opex",
+    "aliases": [
+      "Payroll"
+    ]
+  },
+  {
+    "account_id": "1000-Cash",
+    "name": "Cash",
+    "account_class": "cash",
+    "aliases": [
+      "Cash"
+    ]
+  },
+  {
+    "account_id": "1100-AR",
+    "name": "Accounts Receivable",
+    "account_class": "ar",
+    "aliases": []
+  },
+  {
+    "account_id": "2000-AP",
+    "name": "Accounts Payable",
+    "account_class": "ap",
+    "aliases": []
+  },
+  {
+    "account_id": "1010-Payroll-Imprest",
+    "name": "Payroll imprest",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1020-Stripe-Clearing",
+    "name": "Stripe clearing",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1030-Undeposited-Funds",
+    "name": "Undeposited funds",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1110-AR-Unapplied",
+    "name": "AR unapplied cash",
+    "account_class": "ar",
+    "aliases": []
+  },
+  {
+    "account_id": "1200-Prepaid-Software",
+    "name": "Prepaid software",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1210-Prepaid-Insurance",
+    "name": "Prepaid insurance",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1220-Prepaid-Other",
+    "name": "Prepaid other",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1300-Due-From-Affiliate",
+    "name": "Due from affiliate",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1350-Other-Receivable",
+    "name": "Other receivable",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1400-Inventory",
+    "name": "Inventory",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1500-PPE",
+    "name": "Property plant and equipment",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1510-Accum-Dep",
+    "name": "Accumulated depreciation",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2100-Due-To-Affiliate",
+    "name": "Due to affiliate",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2200-Payroll-Accrual",
+    "name": "Payroll accrual",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2300-Deferred-Revenue",
+    "name": "Deferred revenue",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "4100-Contra-Revenue-Returns",
+    "name": "Contra revenue returns",
+    "account_class": "revenue",
+    "aliases": []
+  },
+  {
+    "account_id": "5400-Contractors",
+    "name": "Contractors",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6200-Benefits",
+    "name": "Benefits",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6300-Occupancy",
+    "name": "Occupancy",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6400-Professional-Fees",
+    "name": "Professional fees",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6500-Bank-Fees",
+    "name": "Bank fees",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6600-Processor-Fees",
+    "name": "Processor fees",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6900-Misc-Expense",
+    "name": "Miscellaneous expense",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6950-Cash-Over-Short",
+    "name": "Cash over short",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "1010-Payroll-Cash",
+    "name": "Payroll cash",
+    "account_class": "cash",
+    "aliases": [
+      "1010-Payroll-Imprest"
+    ]
+  },
+  {
+    "account_id": "1020-Reserve-Cash",
+    "name": "Reserve cash",
+    "account_class": "cash",
+    "aliases": []
+  },
+  {
+    "account_id": "1200-Prepaid",
+    "name": "Prepaid assets",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "1500-FixedAssets",
+    "name": "Computer equipment",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "2100-Accrued",
+    "name": "Accrued expenses",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "6200-Facilities",
+    "name": "Facilities",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "6300-Software",
+    "name": "Software subscriptions",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Utilities Expense",
+    "name": "Utilities",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Legal Expense",
+    "name": "Legal",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Insurance Expense",
+    "name": "Insurance",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Depreciation Expense",
+    "name": "Depreciation",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Software Subscription Expense",
+    "name": "Software amortization",
+    "account_class": "opex",
+    "aliases": []
+  },
+  {
+    "account_id": "Prepaid Insurance",
+    "name": "Prepaid insurance",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Prepaid Software",
+    "name": "Prepaid software",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Computer Equipment",
+    "name": "Computer equipment",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Accumulated Depreciation - Equipment",
+    "name": "Accumulated depreciation",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Accrued Expenses",
+    "name": "Accrued expenses",
+    "account_class": "other",
+    "aliases": []
+  },
+  {
+    "account_id": "Consulting Expense",
+    "name": "Consulting",
+    "account_class": "opex",
+    "aliases": []
+  }
+]

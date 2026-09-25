@@ -1,0 +1,43 @@
+{
+  "object": "processor_payout",
+  "payout_id": "po_1MaximorRefunds",
+  "provider": "stripe",
+  "invoice_candidates": 0,
+  "waterfall_status": "MATCH",
+  "bank_deposit_id": "BANK-po_1MaximorRefunds",
+  "bank_deposit_amount": 3380.0,
+  "bank_deposit_currency": "USD",
+  "arrival_date": "2026-09-22",
+  "expected_payout_minor": 338000,
+  "actual_payout_minor": 338000,
+  "difference": 0,
+  "never_ap_invoice": true,
+  "charge_ids": [
+    "ORD-2201"
+  ],
+  "charges": [
+    {
+      "source_object_id": "ORD-2201",
+      "amount_minor": 400000,
+      "line_type": "charge",
+      "category": "gross"
+    }
+  ],
+  "fees": [
+    {
+      "source_object_id": "fee-ref",
+      "amount_minor": -12000,
+      "line_type": "stripe_fee"
+    }
+  ],
+  "refunds": [
+    {
+      "source_object_id": "re_2201",
+      "amount_minor": -50000,
+      "line_type": "refund"
+    }
+  ],
+  "chargebacks": [],
+  "next_owner_deposit": "cash",
+  "next_owner_charges": "apply"
+}

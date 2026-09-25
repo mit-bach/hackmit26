@@ -29,15 +29,10 @@ Tickets you own: one books record (ERP bill, procurement document, EDI document,
 
 Default Profile: `erp-invoice`.
 
-## Catalog ops
+## Finance records
 
-**erp-invoice** (must): `invoice_ingestion.tools.list_erp_invoice_records`, `invoice_ingestion.tools.get_erp_invoice`
+Use the finance tools this profile is granted. A shell listing or a file you open is not those records. Skills do not grant tools.
 
-**procurement** (must): `invoice_ingestion.tools.list_procurement_records`, `invoice_ingestion.tools.get_procurement_record`
-
-**edi** (must): `invoice_ingestion.tools.list_edi_documents`, `invoice_ingestion.tools.get_edi_document`
-
-Must not: `create_accrual`, period lock writes, AP matching tools, pay-run ops, `get_audit_ground_truth`. Do not remap filled Python-parsed fields.
 
 ## Kernel
 

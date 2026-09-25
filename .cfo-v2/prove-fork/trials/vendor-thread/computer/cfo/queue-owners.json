@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "comment": "Session 09. Kernel status HUMAN_REVIEW stays fail-closed. Owner is a Verifier Bot.",
+  "owners": {
+    "ap/APPROVE": { "owner": "ctl-pay", "profile": "review-match" },
+    "pay/RELEASE": { "owner": "ctl-pay", "profile": "review-pay" },
+    "collect/WRITE_OFF": { "owner": "ctl-pay", "profile": "review-pay" },
+    "apply/HUMAN_REVIEW": { "owner": "ctl-cash", "profile": "review-apply" },
+    "cash/HUMAN_REVIEW": { "owner": "ctl-cash", "profile": "review-rec" },
+    "close/TREATMENT": { "owner": "ctl-books", "profile": "review-treatment" },
+    "close/LOCK": { "owner": "ctl-books", "profile": "lock" }
+  }
+}

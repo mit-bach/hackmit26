@@ -1,0 +1,19 @@
+{
+  "id": "h_0916dcce-1524-46c9-a088-9ea8493ba646",
+  "from": "operator",
+  "to": "bot_stripe",
+  "toSlug": "stripe",
+  "prompt": "Operator check for stripe",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_stripe"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:49.221Z",
+  "updatedAt": "2026-09-24T23:35:52.142Z",
+  "result": "Stripe bot here — ready. I own processor payouts, fees, refunds, and chargebacks.\n\nCurrent step pattern: **unpack** one payout (load kernel waterfall, copy fees/refunds/deposit; `invoice_candidates` stays 0; DONE emits cash line or HOLD).\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 117
+}

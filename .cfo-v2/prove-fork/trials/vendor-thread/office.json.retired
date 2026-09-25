@@ -1,0 +1,11 @@
+{
+  "currentId": "live",
+  "instances": [
+    {
+      "id": "live",
+      "name": "vendor-thread",
+      "computerRel": "computer",
+      "createdAt": "2026-09-24T18:10:00Z"
+    }
+  ]
+}

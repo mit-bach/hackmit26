@@ -1,0 +1,22 @@
+{
+  "op": "accrual.tools.create_accrual",
+  "args": {
+    "vendor": "Aether Compute",
+    "period": "2026-09",
+    "method": "usage_run_rate",
+    "confidence": 0.95,
+    "evidence": [
+      "usage 142000 gb_hours x 0.08345",
+      "ctl-books CONCUR h_50c51ee6-c022-4d26-933d-1dcd5cc5afb2"
+    ],
+    "reasoning_summary": "usage_run_rate 11849.90; ctl-books CONCUR on h_50c51ee6-c022-4d26-933d-1dcd5cc5afb2",
+    "handleId": "h_50c51ee6-c022-4d26-933d-1dcd5cc5afb2"
+  },
+  "fromSlug": "close",
+  "fromProfile": "accrue",
+  "verifier": "ctl-books",
+  "verifierProfile": "review-treatment",
+  "idempotencyKey": "h_50c51ee6-c022-4d26-933d-1dcd5cc5afb2",
+  "createdAt": "2026-09-24T21:18:56.746Z",
+  "humanQueue": false
+}

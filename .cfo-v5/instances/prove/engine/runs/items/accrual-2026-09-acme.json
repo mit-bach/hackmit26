@@ -1,0 +1,36 @@
+{
+  "id": "accrual:2026-09-acme",
+  "workflow": "month_end",
+  "step": "accrue",
+  "owner": "close",
+  "facts": {
+    "vendor": "Acme Supplies",
+    "period": "2026-09"
+  },
+  "pendingWrite": {
+    "op": "accrual.tools.create_accrual",
+    "args": {
+      "vendor": "Acme Supplies",
+      "period": "2026-09",
+      "method": "trailing_average",
+      "confidence": 0.8,
+      "evidence": [
+        "usage"
+      ],
+      "reasoning_summary": "missing invoice"
+    },
+    "idempotencyKey": "accrual-k",
+    "verifierHandle": "h_84b97194-e4a3-458b-93ae-5477e7528c60"
+  },
+  "history": [
+    {
+      "step": "review-treatment",
+      "by": "ctl-books",
+      "result": {
+        "decision": "CONCUR",
+        "reason": "estimate matches the kernel"
+      },
+      "t": "2026-09-25T01:32:51Z"
+    }
+  ]
+}

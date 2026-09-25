@@ -1,0 +1,21 @@
+{
+  "source_id": "NS-4410",
+  "classification": "invoice",
+  "system": "NetSuite",
+  "document_type": "vendorBill",
+  "python_parse_won": true,
+  "vendor_name": "Acme Supplies",
+  "vendor_id": "VEND-001",
+  "invoice_number": "ACM-2026-4410",
+  "invoice_date": "2026-09-08",
+  "due_date": "2026-09-22",
+  "currency": "USD",
+  "subtotal": 12450,
+  "tax": 0,
+  "total": 12450,
+  "po_number": "PO-101",
+  "description": "Standing desks and monitors — same economic event as INV-001",
+  "period": "2026-09",
+  "handoff": "ap/prepare",
+  "notes": "Landed NetSuite vendorBill. Not matched. Period not closed."
+}

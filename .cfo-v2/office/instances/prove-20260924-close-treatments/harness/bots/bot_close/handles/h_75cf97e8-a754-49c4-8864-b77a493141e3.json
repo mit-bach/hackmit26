@@ -1,0 +1,19 @@
+{
+  "id": "h_75cf97e8-a754-49c4-8864-b77a493141e3",
+  "from": "operator",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "profile: prepaid\nSeptember 2026. Review prepaid balances and say which treatment applies. Do not book an accrual on this turn. Do not mark the month closed. Do not clear the unexplained $12.40.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_close"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:22:44.009Z",
+  "updatedAt": "2026-09-24T21:24:16.293Z",
+  "result": "## September 2026 prepaid review (Profile `prepaid`)\n\nFive active prepaids. Treatments from Kernel candidates/schedules only. **No accruals booked. Period not closed. $12.40 not cleared.**  \n`ctl-books` / `review-treatment`: **CONCUR** all five.\n\n| Prepaid | Vendor | Selected method | Sep 2026 amount | Why |\n|---------|--------|-----------------|-----------------|-----|\n| **PRE-SFT-001** | Orbit Analytics | `straight_line_monthly` | **$2,000.00** | Full months 2025-10-01→2026-09-30; SLM $2,000/mo (INV-020, DOC-SFT-2025). Final month of term. |\n| **PRE-INS-001** | Hartford Insurance | `straight_line_monthly` | **$1,000.00** | Annual policy 2026-09-01→2027-08-31; full calendar months; first month $1,000 (INV-019, DOC-INS-2026). |\n| **PRE-SFT-002** | Orbit Insights Corp | `daily_prorate` | **$4,927.01** | Partial first/last month (2025-01-06→2028-01-06). Kernel prefers daily over SLM $4,864.86; Sep = 30 days (INV-OIC-2025-01, CTR-OIC-001). |\n| **PRE-INS-RIDER** | Hartford Brokerage Partners | `straight_line_monthly` (historical) | **none** | Service ended **2026-03-31**. Schedule only Jan–Mar @ $6,200. **Do not amortize after end.** |\n| **PRE-CAM-Q3** | Cambridge Properties | `straight_line_monthly` | **$16,000.00** | Q3 Jul–Sep full months; final month $16,000. Source `INV-CAM-RENT-2026-07` present (`evidence_refs` empty but source id exists). |\n\n### Not selected\n- `immediate_expense` — not applicable on any item (all multi-month).\n- `daily_prorate` for PRE-SFT-001 / PRE-INS-001 / PRE-CAM-Q3 — full month boundaries; equal monthly is better.\n\n### Pack\n`workspace/close/packets/2026-09-prepaid-decisions.json`\n\nKernel still owns posting the schedule lines; this profile only chose methods and cited Kernel amounts.",
+  "resultPaths": [],
+  "seq": 128
+}

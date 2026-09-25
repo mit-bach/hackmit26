@@ -1,0 +1,158 @@
+{
+  "period": "2026-09",
+  "profile": "bs",
+  "output_type": "ReconDecision",
+  "lock_status": "OPEN",
+  "notes": [
+    "Do not force a match",
+    "Do not mark CLOSED",
+    "Unexplained $12.40 not cleared or relabeled as timing",
+    "Findings copied from Kernel get_reconciliation_packet"
+  ],
+  "decisions": [
+    {
+      "account_id": "Cash",
+      "account_name": "Cash",
+      "ledger_balance": 14925593.06,
+      "evidence_balance": 14925500.94,
+      "difference": 92.12,
+      "finding": "HUMAN_REVIEW",
+      "status": "OPEN",
+      "sign_off_allowed": false,
+      "escalate": true,
+      "explanation": "Ledger exceeds evidence by 92.12. Kernel lists three open unexplained_difference items that sum to the break: REC-211 $12.40, REC-212 $31.10, REC-213 $48.62. Fee/FX/rounding/partial-pay evidence all rejected on each. calculations.unexplained_difference=92.12; human_review_count=15; period_status OPEN. Do not relabel $12.40 (or any of these) as timing. Do not force MATCHED.",
+      "reconciling_items": [
+        {
+          "item_id": "REC-211",
+          "amount": 12.4,
+          "classification": "unexplained_difference",
+          "status": "open"
+        },
+        {
+          "item_id": "REC-212",
+          "amount": 31.1,
+          "classification": "unexplained_difference",
+          "status": "open"
+        },
+        {
+          "item_id": "REC-213",
+          "amount": 48.62,
+          "classification": "unexplained_difference",
+          "status": "open"
+        }
+      ],
+      "packet_flags": {
+        "stale_evidence": false,
+        "duplicate_support": false,
+        "missing_evidence": false,
+        "outstanding_timing": 2100,
+        "unexplained_difference": 92.12
+      }
+    },
+    {
+      "account_id": "Accounts Receivable",
+      "account_name": "Accounts Receivable",
+      "ledger_balance": 34811818,
+      "evidence_balance": 34811818,
+      "difference": 0,
+      "finding": "MATCHED",
+      "status": "TIED",
+      "sign_off_allowed": true,
+      "escalate": false,
+      "explanation": "AR control equals subledger outstanding 34811818. No open reconciling items. Note calculations.unapplied_cash=85312.40 is disclosed inside control math; packet difference is zero.",
+      "reconciling_items": []
+    },
+    {
+      "account_id": "Accounts Payable",
+      "account_name": "Accounts Payable",
+      "ledger_balance": 18114192.84,
+      "evidence_balance": 18114192.84,
+      "difference": 0,
+      "finding": "MATCHED",
+      "status": "TIED",
+      "sign_off_allowed": true,
+      "escalate": false,
+      "explanation": "AP ledger equals unpaid inbox evidence 18114192.84. No open items.",
+      "reconciling_items": []
+    },
+    {
+      "account_id": "Accrued Expenses",
+      "account_name": "Accrued Expenses",
+      "ledger_balance": 0,
+      "evidence_balance": 0,
+      "difference": 0,
+      "finding": "MATCHED",
+      "status": "TIED",
+      "sign_off_allowed": true,
+      "escalate": false,
+      "explanation": "Ledger and evidence both 0; open_accrual_count 0. Packet is arithmetically matched. Context only: prior accrue decisions were CONCURred but Kernel posts may still be blocked on Client handleId wiring — this packet does not invent open accruals.",
+      "reconciling_items": [],
+      "calculations": {
+        "open_accrual_count": 0,
+        "open_accrual_total": 0
+      }
+    },
+    {
+      "account_id": "Prepaid Expenses",
+      "account_name": "Prepaid Expenses",
+      "ledger_balance": 282600,
+      "evidence_balance": 234600,
+      "difference": 48000,
+      "finding": "BLOCKED",
+      "status": "OPEN",
+      "sign_off_allowed": false,
+      "escalate": true,
+      "explanation": "missing_evidence true. PRE-MISSING $48,000 on PRE-CAM-Q3 (Q3 occupancy). Packet description says missing insurance policy evidence but evidence_refs point to PRE-CAM-Q3; classification is missing_evidence either way. Do not sign off. Do not force match of the 48000 gap.",
+      "reconciling_items": [
+        {
+          "item_id": "PRE-MISSING",
+          "amount": 48000,
+          "classification": "missing_evidence",
+          "status": "open",
+          "evidence_refs": ["PRE-CAM-Q3"]
+        }
+      ],
+      "packet_flags": {
+        "missing_evidence": true,
+        "missing_amount": 48000
+      }
+    },
+    {
+      "account_id": "Fixed Assets",
+      "account_name": "Fixed Assets",
+      "ledger_balance": 580720.8,
+      "evidence_balance": 580720.8,
+      "difference": 0,
+      "finding": "MATCHED",
+      "status": "TIED",
+      "sign_off_allowed": true,
+      "escalate": false,
+      "explanation": "Register cost equals GL cost 580720.8 (FA-DELL-001 + FA-OIC-IMPL + FA-LEN-ROLL-26). No reconciling items. Note calculations show posted_depreciation_lines=0 and accum dep 0 on this cost packet — cost tie only.",
+      "reconciling_items": []
+    },
+    {
+      "account_id": "Accumulated Depreciation",
+      "account_name": "Accumulated Depreciation",
+      "ledger_balance": 0,
+      "evidence_balance": 0,
+      "difference": 0,
+      "finding": "MATCHED",
+      "status": "TIED",
+      "sign_off_allowed": true,
+      "escalate": false,
+      "explanation": "Packet calculations.tied=true with beginning/current/ending all 0. Arithmetically matched on posted books. Context: asset profile scheduled Sep dep 15964.47 not yet reflected as posted lines in this packet.",
+      "reconciling_items": [],
+      "calculations": {
+        "tied": true,
+        "current_depreciation": 0
+      }
+    }
+  ],
+  "summary": {
+    "matched": ["Accounts Receivable", "Accounts Payable", "Accrued Expenses", "Fixed Assets", "Accumulated Depreciation"],
+    "human_review": ["Cash"],
+    "blocked_missing_evidence": ["Prepaid Expenses"],
+    "force_match": false,
+    "cleared_12_40": false
+  }
+}

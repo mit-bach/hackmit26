@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-010
+PO Number: PO-OPEN-010
+Vendor: Hartford Insurance
+Goods received in full on 2026-09-11
+Packing list attached: PL-GR-OPEN-010
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 181,371.80 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

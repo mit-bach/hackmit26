@@ -1,0 +1,19 @@
+{
+  "id": "h_7283da40-e983-4ac8-ac66-5fe6d7717594",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nAcme Supplies, Northwind Labs, and the bank just wrote the finance inbox. Classify those three new notes. Do not use the older seeded candidate list in their place. A vendor bill goes to ap. A customer payment note goes to apply. A bank notice is not a bill. Do not match, pay, or close the month.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:56:26.988Z",
+  "updatedAt": "2026-09-24T21:00:47.759Z",
+  "result": "## Inbox triage (3 new threads only)\n\nDid **not** use the seeded candidate list. No match, pay, or close.\n\n### 1. Acme Supplies — `msg-acme-acm-2026-4410-confirm-001`\n- **What it is:** Vendor confirm of **ACM-2026-4410** ($12,450, PO 101, goods received) — invoice language, body-only.\n- **Dispatch:** `REQUEST_MISSING_INFORMATION` (missing `invoice_date` on that message alone).\n- **Outbound:** asked Acme for invoice date → World replied **`2026-09-08`** (`msg-acme-acm-2026-4410-invoice-date-001`).\n- **→ ap:** handoff packet `workspace/email/packets/acm-2026-4410-thread-ap-handoff.md`.\n- **AP result:** **HOLD** — `get_invoice(ACM-2026-4410)` not found; AP cannot register. Kernel create still fails closed because dispatch/extract on the confirm message do not pick up the date from the reply. No second id minted.\n\n### 2. Northwind Labs — `msg-northwind-inv-ar-001-pay-note-001`\n- **What it is:** Customer **payment commitment** for **INV-AR-001** $12,000 ACH on **2026-10-14** — body says *not* remittance of cash already sent.\n- **Dispatch:** routed as customer remittance notice.\n- **→ apply:** `workspace/email/packets/northwind-inv-ar-001-pay-note-handoff.md`.\n- **Apply result:** **not applied** — no live payment/clearing; await bank. No ctl-cash.\n\n### 3. First National — `msg-fnb-stmt-2026-09-operating-001`\n- **What it is:** **Bank statement availability** for **BANK-OPERATING** / 2026-09 — **not a bill**.\n- **Dispatch:** `IGNORE`.\n- **Handoff:** none. $12.40 unexplained stays with cash/bank-rec; email does not match lines.\n\n**Summary packet:** `workspace/email/packets/inbox-triage-three-notes-2026-09-24.md`",
+  "resultPaths": [],
+  "seq": 48
+}

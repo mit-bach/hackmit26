@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-079
+PO Number: PO-OPEN-079
+Vendor: Northwood Partners
+Goods received in full on 2026-09-26
+Packing list attached: PL-GR-OPEN-079
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 190,837.22 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

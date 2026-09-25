@@ -1,0 +1,22 @@
+{
+  "op": "accrual.tools.create_accrual",
+  "args": {
+    "vendor": "Clearing Solutions LLC",
+    "period": "2026-09",
+    "method": "recent_average",
+    "confidence": 0.75,
+    "evidence": [
+      "9-month monthly cadence",
+      "last 3 invoices mean 11326.21",
+      "no contract/usage/GR"
+    ],
+    "reasoning_summary": "Recurring monthly vendor; book Kernel recent_average. ctl-books CONCUR."
+  },
+  "fromSlug": "close",
+  "fromProfile": "accrue",
+  "verifier": "ctl-books",
+  "verifierProfile": "review-treatment",
+  "idempotencyKey": "accrual-2026-09-clearing",
+  "createdAt": "2026-09-24T21:34:14.619Z",
+  "humanQueue": false
+}

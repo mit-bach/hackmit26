@@ -1,0 +1,17 @@
+{
+  "message_id": "MSG-INBOX-005",
+  "thread_id": "THR-purchase-order",
+  "classification": "PURCHASE_ORDER",
+  "selected_action": "ROUTE_TO_EXISTING_WORKFLOW",
+  "dispatch_status": "ROUTED",
+  "po_number": "PO-108",
+  "counterparty_name": "Slack Technologies",
+  "invoice_id": null,
+  "ready_for_payment": false,
+  "mutation": false,
+  "reason_codes": [
+    "ROUTED_PURCHASE_ORDER",
+    "PURCHASE_ORDER_NOT_INVOICE"
+  ],
+  "note": "Purchase order, not a vendor invoice. Not placed in pay pool. No AP bill created."
+}

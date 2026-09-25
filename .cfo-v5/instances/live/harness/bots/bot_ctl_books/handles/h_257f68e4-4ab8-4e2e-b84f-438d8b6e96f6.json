@@ -1,0 +1,23 @@
+{
+  "id": "h_257f68e4-4ab8-4e2e-b84f-438d8b6e96f6",
+  "from": "harness",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "[harness wake]\nkind: item_step\nitem: close:2026-09-accrue\nstep: review-treatment\npacket: runs/items/close-2026-09-accrue.json",
+  "paths": [
+    "runs/items/close-2026-09-accrue.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "failed",
+  "createdAt": "2026-09-24T23:29:02.578Z",
+  "updatedAt": "2026-09-25T01:39:57.900Z",
+  "result": "## Decision: **REFUSE**\n\n**Item:** `close:2026-09-accrue` · **step:** `review-treatment`\n\n| Check | Finding |\n|--------|---------|\n| `pendingWrite` | **null** — nothing to CONCUR |\n| close history | `PROPOSE`, reason `invoice missing`, **`evidence_used: []`** |\n| Kernel amount/method | **None** to copy |\n\n**Reason:** insufficient_evidence — cannot CONCUR an empty propose.\n\n**Peers:** `close` acknowledged (NONE / withdraw empty PROPOSE). `ask_bot harness` still **unknown bot**. `complete_step` **EPERM** on item json write — verdict is on the close thread and in memory.",
+  "resultPaths": [],
+  "seq": 174,
+  "error": "did not call ask_bot to reply; assistant text is not the pair thread"
+}

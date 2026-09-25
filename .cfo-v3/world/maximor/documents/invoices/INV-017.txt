@@ -1,0 +1,42 @@
+Helios Hardware, Inc.
+900 Concord Avenue
+Cambridge, MA 02138
+Phone +1 617-555-6200   billing@helioshardware.example
+Tax ID 04-7733102
+
+INVOICE
+
+Invoice Number: HEL-WIRE-10000
+Invoice Date: 2026-09-08
+Due Date: 2026-09-18
+PO Number: PO-205
+Payment Terms: net 10
+Currency: USD
+Vendor: Helios Hardware
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Lab motion controllers, 24V                   4.00      2,500.00     10,000.00
+
+Subtotal                                                             10,000.00
+Tax                                                                       0.00
+Amount Due                                                           10,000.00
+
+Remit to:
+USD wire HSBC routing 021001088  account ****7291
+Bank: HSBC  ****7291
+Please include invoice HEL-WIRE-10000 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@helioshardware.example
+
+International USD wire. Beneficiary Helios Hardware, Inc.
+Correspondent bank may deduct a wire fee from the settlement amount.

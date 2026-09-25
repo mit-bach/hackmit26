@@ -1,0 +1,30 @@
+{
+  "period": "2026-09",
+  "from": "stripe",
+  "ticks": [
+    {
+      "bank_deposit_id": "BANK-po_1MaximorFees",
+      "payout_id": "po_1MaximorFees",
+      "amount": 12610.0,
+      "waterfall": "MATCH",
+      "cash_packet": "workspace/cash/packets/BANK-po_1MaximorFees.json"
+    },
+    {
+      "bank_deposit_id": "BANK-po_1MaximorRefunds",
+      "payout_id": "po_1MaximorRefunds",
+      "amount": 3380.0,
+      "waterfall": "MATCH",
+      "cash_packet": "workspace/cash/packets/BANK-po_1MaximorRefunds.json"
+    },
+    {
+      "bank_deposit_id": "BANK-po_1MaximorDisputes",
+      "payout_id": "po_1MaximorDisputes",
+      "amount": 5070.0,
+      "waterfall": "MATCH",
+      "cash_packet": "workspace/cash/packets/BANK-po_1MaximorDisputes.json"
+    }
+  ],
+  "invoice_candidates_total": 0,
+  "never_ap_invoice": true,
+  "next_cash_action": "hold deposit ticks as trusted processor bank lines for period pack; no AP mint; charges remain apply-owned"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_apply:bot_email",
+  "threadId": "pair:bot_apply:bot_email",
+  "name": "Apply ↔ Email",
+  "memberIds": [
+    "bot_apply",
+    "bot_email"
+  ],
+  "createdAt": 1790271465942,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2",
+      "handleId": "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: apply\nEmail routed customer remittance MSG-INBOX-019 (Northwind Labs). payment_identity.message_id=MSG-INBOX-019; body cites INV-AR-001 and amount 8500.00 USD. Packet: runs/inbox/packets/MSG-INBOX-019.json (copy runs/ar/packets/MSG-INBOX-019-remittance.json). Do not dun. Email did not apply cash and did not treat this as a vendor bill. Acknowledge the payment identity and prepare only if Kernel candidates exist; do not invent applications.",
+      "at": 1790271465942,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2",
+      "handleId": "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2",
+      "role": "bot",
+      "kind": "text",
+      "text": "Acknowledged MSG-INBOX-019 / payment_identity.message_id=MSG-INBOX-019 (Northwind Labs / CUST-001, INV-AR-001, 8500.00 USD). Remittance packet kept at runs/ar/packets/MSG-INBOX-019-remittance.json. Status: runs/ar/packets/MSG-INBOX-019-apply-status.json.\n\nKernel get_cash_application_facts(MSG-INBOX-019) returned Unknown payment — no candidates. No CashApplicationProposal invented; nothing posted. Not a vendor bill. No dun. Apply is idle on this identity until a Kernel payment row with candidates exists (e.g. bank/stripe deposit linked).",
+      "at": 1790271488560,
+      "from": {
+        "botId": "bot_apply",
+        "name": "Apply",
+        "color": "coral"
+      }
+    }
+  ]
+}

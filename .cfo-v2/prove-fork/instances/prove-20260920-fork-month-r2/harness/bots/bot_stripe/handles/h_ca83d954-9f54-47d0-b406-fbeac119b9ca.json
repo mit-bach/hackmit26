@@ -1,0 +1,19 @@
+{
+  "id": "h_ca83d954-9f54-47d0-b406-fbeac119b9ca",
+  "from": "operator",
+  "to": "bot_stripe",
+  "toSlug": "stripe",
+  "prompt": "profile: payout\nUnpack the simulated processor payouts. Charges go toward apply. The deposit goes toward cash. Do not produce an invoice candidate. Do not post a payout as an AP bill. Do not ask_user. One Profile this turn: payout.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_stripe"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:47:34.580Z",
+  "updatedAt": "2026-09-24T17:51:49.039Z",
+  "result": "## Stripe payout unpack — done\n\n**Profile:** `payout` only. No `InvoiceCandidate`. No AP bill. No `ask_user`.\n\n### Kernel (all `MATCH`, `invoice_candidates: 0`)\n\n| Payout | Deposit | Amount | Charges / other |\n| --- | --- | --- | --- |\n| `po_1MaximorFees` | `BANK-po_1MaximorFees` | 12,610 USD (1,261,000 minor) | ORD-2101, ORD-2102; fee-fees −390 |\n| `po_1MaximorRefunds` | `BANK-po_1MaximorRefunds` | 3,380 USD | ORD-2201; refund re_2201 −500; fee-ref −120 |\n| `po_1MaximorDisputes` | `BANK-po_1MaximorDisputes` | 5,070 USD | ORD-2301; chargeback dp_2301 −750; fee-dp −180 |\n\n### Computer paths\n\n- `workspace/sources/stripe/po_1Maximor{Fees,Refunds,Disputes}.json`\n- `workspace/stripe/deposits/…` → cash\n- `workspace/stripe/charges/…` → apply\n\n### Handoffs (completed)\n\n- **cash** / match — deposit ticks; wrote `workspace/cash/packets/BANK-po_*.json`; no AP invoice\n- **apply** / apply — charge facts received; no AR apply yet (Kernel has no payment candidates on ORD-*)\n\nIntegration state seeded under `runs/integrations/state.json` so list/waterfall ops resolve on this Computer.",
+  "resultPaths": [],
+  "seq": 139
+}

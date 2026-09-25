@@ -1,0 +1,74 @@
+{
+  "messages": [
+    {
+      "message_id": "msg-collect-INV-AR-005-final-20260930",
+      "thread_id": "thread-collect-INV-AR-005-20260930",
+      "in_reply_to": null,
+      "sender_name": "Maximor Demo Corp Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@quietharbor.example"
+      ],
+      "subject": "Final notice: INV-AR-005 outstanding $45,000.00 \u2014 due May 1, 2026",
+      "body_text": "Dear Quiet Harbor Holdings Accounts Payable,\n\nThis is a final notice from Maximor Demo Corp Collections regarding invoice INV-AR-005.\n\nInvoice: INV-AR-005\nOriginal amount: $45,000.00\nCurrent outstanding balance: $45,000.00\nDue date: May 1, 2026\nDays past due as of September 30, 2026: 152\n\nWe have previously contacted you about this balance (last contact September 1, 2026; three reminders on file). The full $45,000.00 remains unpaid. There is no open dispute on our books and no payment promise on file.\n\nPlease remit $45,000.00 immediately, or reply with a firm payment date and method. If you believe this invoice is already paid or is in dispute, reply with remittance advice, payment reference, or dispute detail so we can investigate \u2014 do not assume we have applied unapplied cash without confirmation from cash application.\n\nWire/ACH and check instructions remain as previously provided on the invoice. Reference INV-AR-005 on your remittance.\n\nIf we do not receive payment or a substantive response promptly, we may escalate internally for reserve or write-off review and further collection steps.\n\nRegards,\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example\n",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:00:00",
+      "received_at": "2026-09-24T21:05:21Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-collect-INV-AR-005-final-20260930",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Quiet Harbor Holdings AP"
+      }
+    },
+    {
+      "message_id": "msg-world-INV-AR-005-reply-20260930",
+      "thread_id": "thread-collect-INV-AR-005-20260930",
+      "in_reply_to": "msg-collect-INV-AR-005-final-20260930",
+      "sender_name": "Quiet Harbor Holdings AP",
+      "sender_address": "ap@quietharbor.example",
+      "recipient_addresses": [
+        "collections@hackmit-cfo.example"
+      ],
+      "subject": "Re: Final notice: INV-AR-005 outstanding $45,000.00 \u2014 due May 1, 2026",
+      "body_text": "Dear Maximor Demo Corp Collections,\n\nWe received your final notice on INV-AR-005 for $45,000.00.\n\nWe are not disputing this invoice. Our AP review confirms the balance is valid and still open on our side; we have no remittance already in flight that would clear it.\n\nCash timing has been tight on our end, which delayed this past the original May 1, 2026 due date. We will remit the full $45,000.00 by ACH on Friday, October 10, 2026, referencing INV-AR-005 on the payment. Please hold further escalation until that date so we can complete the transfer.\n\nIf your wire/ACH instructions have changed from those on the original invoice, reply with the current details and we will use them.\n\nRegards,\nAccounts Payable\nQuiet Harbor Holdings\nap@quietharbor.example\n",
+      "body_html": null,
+      "sent_at": "2026-09-30T16:00:00",
+      "received_at": "2026-09-24T21:05:21Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-collect-INV-AR-005-final-20260930",
+      "metadata": {
+        "reply": true
+      }
+    },
+    {
+      "message_id": "msg-collect-INV-AR-005-ack-promise-20260930",
+      "thread_id": "thread-collect-INV-AR-005-20260930",
+      "in_reply_to": "msg-world-INV-AR-005-reply-20260930",
+      "sender_name": "Maximor Demo Corp Collections",
+      "sender_address": "collections@hackmit-cfo.example",
+      "recipient_addresses": [
+        "ap@quietharbor.example"
+      ],
+      "subject": "Re: Final notice: INV-AR-005 \u2014 still unpaid $45,000.00; promise noted for 2026-10-10",
+      "body_text": "Dear Quiet Harbor Holdings Accounts Payable,\n\nThank you for your reply confirming INV-AR-005 is valid and not in dispute.\n\nStatus on our books as of September 30, 2026:\n- Invoice: INV-AR-005\n- Still unpaid / current outstanding: $45,000.00 (full original balance; nothing applied)\n- Due date: May 1, 2026\n- Days past due: 152\n\nWe have noted your firm promise to pay the full $45,000.00 by ACH on Friday, October 10, 2026, reference INV-AR-005. Until that remittance is received and applied by cash application, the invoice remains open and past due on our aging. We are not applying any cash from this correspondence.\n\nWe will hold further collection escalation on this invoice through October 10, 2026 based on that promise. If payment is not received by then, or if the amount applied is less than $45,000.00, we will resume contact and may escalate for internal reserve/write-off review.\n\nPlease send remittance advice when the ACH is initiated. Existing invoice payment instructions continue to apply unless we send an update.\n\nRegards,\nCollections\nMaximor Demo Corp\ncollections@hackmit-cfo.example\n",
+      "body_html": null,
+      "sent_at": "2026-09-30T17:00:00",
+      "received_at": "2026-09-24T21:06:11Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-collect-INV-AR-005-ack-promise-20260930",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Quiet Harbor Holdings AP"
+      }
+    }
+  ],
+  "outcomes": {},
+  "invoice_ids": [],
+  "canonicals": [],
+  "notices": [],
+  "traces": []
+}

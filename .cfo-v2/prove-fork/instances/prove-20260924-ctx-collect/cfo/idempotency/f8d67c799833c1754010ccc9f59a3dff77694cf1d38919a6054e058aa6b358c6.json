@@ -1,0 +1,19 @@
+{
+  "key": "col-send-inv-ar-018",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "4b5189fe5c11df7793e19e8f06243e6275ccd3d66ad29865b7bd1e7ef9ee81b8",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-msg-inv-ar-018",
+      "thread_id": "col-inv-ar-018",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_24a84d112058"
+  }
+}

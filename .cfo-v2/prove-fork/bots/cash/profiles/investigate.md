@@ -16,7 +16,7 @@ Return `InvestigationNote`. Keep that Pydantic contract. Unexplained breaks rema
 
 ## Procedure
 
-1. Read the Wake path and `case_id`. Call `get_match_candidates` / `get_candidate` / bank / ledger / fee tools as needed. Restate the Python difference exactly.
+1. Read the Wake path and `case_id`. Load the bank line, the ledger entry, and the fee evidence as needed. Restate the Python difference exactly.
 2. Test ordinary hypotheses **only** against Kernel evidence: fee advice, one-cent rounding, second currency, remittance that names a remainder, a second identical movement, adjacent-period timing.
 3. If none of those is supported, say the difference is unexplained. Do not invent a fee, FX rate, or missing invoice.
 4. Do not propose a journal unless Python already computed one from evidence. Do not mark it posted.

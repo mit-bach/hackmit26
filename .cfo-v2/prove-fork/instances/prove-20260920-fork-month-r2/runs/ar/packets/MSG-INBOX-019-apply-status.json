@@ -1,0 +1,34 @@
+{
+  "payment_identity": {
+    "source": "inbox_remittance",
+    "message_id": "MSG-INBOX-019",
+    "thread_id": "THR-remittance",
+    "customer_name": "Northwind Labs",
+    "customer_id_hint": "CUST-001",
+    "invoice_reference": "INV-AR-001",
+    "amount": 8500.0,
+    "currency": "USD",
+    "remittance_text": "Please apply this payment to INV-AR-001."
+  },
+  "kernel": {
+    "payment_id_queried": "MSG-INBOX-019",
+    "get_cash_application_facts": {
+      "error": "Unknown payment MSG-INBOX-019"
+    },
+    "candidates": [],
+    "trace_id": "k_f802fa1487b1"
+  },
+  "customer_facts": {
+    "customer_id": "CUST-001",
+    "customer_name": "Northwind Labs",
+    "typical_remittance": "invoice_number",
+    "payment_behavior": "on_time"
+  },
+  "precedents": [],
+  "decision": "NO_KERNEL_CANDIDATES",
+  "proposal": null,
+  "posted": false,
+  "note": "Acknowledged remittance identity only. Kernel has no payment row/candidates for MSG-INBOX-019. Apply does not invent applications. Not treated as vendor bill. No dun.",
+  "from_bot": "apply",
+  "routed_from": "email"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "h_321a287c-7212-4f31-8b01-d2373107686a",
+  "status": "accepted",
+  "done": false,
+  "op": "accrual.tools.create_accrual",
+  "toSlug": "ctl-books",
+  "profile": "review-treatment",
+  "fromSlug": "close",
+  "packetPath": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/workspace/verifier/ctl-books/accrual-2026-09-harbor-electric.json",
+  "handleStore": "harness",
+  "handlePath": "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/office/instances/prove-20260924-close-treatments/harness/bots/bot_ctl_books/handles/h_321a287c-7212-4f31-8b01-d2373107686a.json",
+  "humanQueue": false,
+  "createdAt": "2026-09-24T21:34:14.635Z"
+}

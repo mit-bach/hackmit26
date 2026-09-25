@@ -1,0 +1,18 @@
+{
+  "contract": "ReviewerDecision",
+  "invoice_id": "INV-001",
+  "profile": "review-match",
+  "bot": "ctl-pay",
+  "decision": "CONCUR",
+  "proposed_action": "APPROVE",
+  "packet_path": "runs/ap/packets/INV-001.json",
+  "reason": "Kernel get_case_evidence confirms clean three-way match: INV-001 amount 12450 equals PO-101 authorized_amount and GR-101 amount_received; vendor Acme Supplies exact; PO approved; receipt full 15/15; duplicate_detected false; exception_types []; invoice_dated_before_po false. Policy P-001 may_approve. No must_hold. Past due (days_until_due -2) is not a match hold. Prior CASE-001 alias precedent not required (exact vendor). Packet complete with preparer APPROVE and kernel_evidence.",
+  "policies_applied": ["P-001", "P-011", "P-012"],
+  "kernel_traces": ["k_cc7d905d4005", "k_444da07cad4b", "k_fa981323883f", "k_7920c6d467b5"],
+  "must_hold": false,
+  "exception_types": [],
+  "next": {
+    "owner": "ap",
+    "note": "Advance Kernel-allowed APPROVE into approved pool per grain. ctl-pay does not pay. pay-run release is a separate review-pay wake."
+  }
+}

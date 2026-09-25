@@ -1,0 +1,39 @@
+Office Depot, LLC
+6600 North Military Trail
+Boca Raton, FL 33496
+Phone +1 800-463-3768   ap@officedepot.example
+Tax ID 59-2663954
+
+INVOICE
+
+Invoice Number: OPEN-0004
+Invoice Date: 2026-09-05
+Due Date: 2026-10-05
+PO Number: PO-OPEN-004
+Payment Terms: 2/10 net 30
+Currency: USD
+Vendor: Office Depot
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    180,548.72    180,548.72
+
+Subtotal                                                            180,548.72
+Tax                                                                       0.00
+Amount Due                                                          180,548.72
+
+Remit to:
+ACH Bank of America routing 011000138  account ****1040
+Bank: Bank of America  ****1040
+Please include invoice OPEN-0004 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: ap@officedepot.example

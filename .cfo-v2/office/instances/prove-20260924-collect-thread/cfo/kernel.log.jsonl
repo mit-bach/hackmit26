@@ -1,0 +1,17 @@
+{"botId": "kernel-host", "error": null, "handleId": "", "ok": true, "op": "kernel.health", "profile": "sidecar", "slug": "_host", "traceId": "k_0a69eccdf594", "ts": "2026-09-24T21:02:50Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_candidates", "profile": "chase", "slug": "collect", "traceId": "k_ee09b31935d4", "ts": "2026-09-24T21:02:59Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_invoice_facts", "profile": "chase", "slug": "collect", "traceId": "k_bdc47822414f", "ts": "2026-09-24T21:03:05Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_invoice_facts", "profile": "chase", "slug": "collect", "traceId": "k_33bb30ad0995", "ts": "2026-09-24T21:03:08Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_c10e7bdf5d3c", "ts": "2026-09-24T21:03:08Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_2fb99dcda09a", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_d83ed8f9aec6", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_21dca55cbd12", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_539c93949f7a", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_candidates", "profile": "chase", "slug": "collect", "traceId": "k_bac834d8e2a3", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_645a5b1641ab", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_149e689354dd", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_customer", "profile": "chase", "slug": "collect", "traceId": "k_fc3ac5c51e10", "ts": "2026-09-24T21:03:12Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_invoice_facts", "profile": "chase", "slug": "collect", "traceId": "k_b852785ddd5a", "ts": "2026-09-24T21:03:16Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_invoice_facts", "profile": "chase", "slug": "collect", "traceId": "k_c572cb106a34", "ts": "2026-09-24T21:03:16Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_ar_precedents", "profile": "chase", "slug": "collect", "traceId": "k_bec49f0129d6", "ts": "2026-09-24T21:03:16Z"}
+{"botId": "bot_collect", "error": null, "handleId": "", "ok": true, "op": "ar.tools.get_collection_invoice_facts", "profile": "chase", "slug": "collect", "traceId": "k_f3f9f2eb152c", "ts": "2026-09-24T21:03:16Z"}

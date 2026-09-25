@@ -1,0 +1,48 @@
+{
+  "invoice_id": "ING-005",
+  "profile": "prepare",
+  "source": {
+    "message_id": "MSG-INBOX-002",
+    "vendor_invoice_number": "FIG-INBOX-2002",
+    "thread_id": "THR-body-invoice",
+    "forwarded_by": "email",
+    "source_kind": "body_text_no_attachment"
+  },
+  "kernel_evidence": {
+    "invoice_amount": 2448,
+    "po_id_on_invoice": "PO-107",
+    "purchase_order": null,
+    "po_authorized_amount": null,
+    "receipt_id": null,
+    "amount_received": null,
+    "amount_difference": null,
+    "percent_difference": null,
+    "amount_matches": false,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": false,
+    "vendors_are_similar": false,
+    "po_exists": false,
+    "po_approved": false,
+    "receipt_status": "missing",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": ["missing_po", "goods_not_received"],
+    "days_until_due": 24
+  },
+  "PreparerRecommendation": {
+    "action": "HOLD",
+    "exception_types": ["missing_po", "goods_not_received"],
+    "evidence_used": [
+      "ING-005",
+      "tools.get_invoice",
+      "tools.get_case_evidence",
+      "tools.find_duplicate_invoices",
+      "runs/inbox/packets/MSG-INBOX-002.json"
+    ],
+    "reason": "ING-005 found. Figma FIG-INBOX-2002 bills USD 2448.00; invoice cites PO-107 but Kernel purchase_order null, po_exists false, po_approved false. receipt_status missing; goods_not_received. No duplicates. Body-only source; Email did not match. Prepare complete; not three-way matched; not APPROVE; not pay. HOLD."
+  },
+  "proposed": "HOLD",
+  "approve_shaped": false,
+  "ctl_pay_handoff": null,
+  "packet_path": "runs/ap/packets/ING-005.json"
+}

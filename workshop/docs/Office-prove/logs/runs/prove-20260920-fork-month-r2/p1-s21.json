@@ -1,0 +1,42 @@
+[
+  {
+    "step": "P1-S21-employee",
+    "slug": "email",
+    "handleId": "h_923d127e-018e-4dc3-83fb-fa8e53bc7943",
+    "status": "completed",
+    "result": "### Employee submissions (profile: `employee`)\n\n| Step | Result |\n| --- | --- |\n| **`list_employee_submissions`** | `found: true` \u00b7 **count: 0** \u00b7 `submissions: []` |\n| **Period filter `2026-09`** | Still **0** |\n| **Seed file** | `data/ingestion/employee_submissions.json` is an empty list |\n\n**No submission to get.** Did not invent a bill, match, or call `ask_user`.",
+    "t": "2026-09-24T17:53:15Z"
+  },
+  {
+    "step": "P1-S21-portal",
+    "slug": "email",
+    "handleId": "h_5bda92af-43d3-4d16-8d5e-7113fce5b74d",
+    "status": "completed",
+    "result": "### Vendor portal documents (profile: `portal`)\n\n| Step | Result |\n| --- | --- |\n| **`list_vendor_portal_documents`** | `found: true` \u00b7 **count: 0** \u00b7 `documents: []` |\n| **Seed file** | `data/ingestion/vendor_portals.json` is an empty list |\n\n**No document to get.** Did not invent a bill, match, or call `ask_user`.",
+    "t": "2026-09-24T17:53:40Z"
+  },
+  {
+    "step": "P1-S21-document",
+    "slug": "email",
+    "handleId": "h_58880bd8-9cd6-4b7b-95aa-e0162e4935c7",
+    "status": "completed",
+    "result": "### Mail documents (profile: `document`)\n\n**List** \u2014 count **2**\n\n| document_id | filename | origin |\n| --- | --- | --- |\n| DOC-SCAN-QUOTE | quote-q8891.pdf | mailroom_scan |\n| DOC-SCAN-INV-001 | acm-2026-4410.pdf | mailroom_scan |\n\n**Get one:** `DOC-SCAN-INV-001`\n\n| Field | Value |\n| --- | --- |\n| Period | 2026-09 |\n| Origin | mailroom_scan |\n| Filename | acm-2026-4410.pdf |\n| Received | 2026-09-08 |\n| Hash | `cbda5aac\u20262d6e` |\n| Text | Acme Supplies **INVOICE** ACM-2026-4410 \u00b7 2026-09-08 \u00b7 due 2026-09-22 \u00b7 PO-101 \u00b7 **USD 12,450.00** \u00b7 2/10 net 30 |\n\nList + get only. No bill invented, no match",
+    "t": "2026-09-24T17:54:04Z"
+  },
+  {
+    "step": "P1-S21-edi",
+    "slug": "books",
+    "handleId": "h_423a8bc0-0bb6-4c58-9948-164b331b7958",
+    "status": "completed",
+    "result": "**EDI list (profile `edi`):** honest empty result.\n\n- `list_edi_documents` \u2192 `found: true`, **count: 0**, `documents: []`\n- No `get_edi_document` (nothing to fetch)\n- No invented EDI, no land path, no AP handoff, no period lock",
+    "t": "2026-09-24T17:54:16Z"
+  },
+  {
+    "step": "P1-S21-procurement",
+    "slug": "books",
+    "handleId": "h_652ee41e-5f51-45ff-885e-23e7061b8c67",
+    "status": "completed",
+    "result": "**Procurement list (profile `procurement`):** count **2**\n\n| record_id | system | document_type | vendor |\n| --- | --- | --- | --- |\n| `COUPA-INV-013` | Coupa | invoice | Office Depot |\n| `ZIP-PO-ONLY` | Zip | purchase_request | Office Depot |\n\n**Get one:** `COUPA-INV-013` (invoice)\n\n- vendor: Office Depot (`VEND-004`)\n- invoice_number: `OD-DISC-2100`\n- dates: 2026-09-14 / due 2026-10-14\n- USD subtotal/total **2100**, tax 0\n- po_number: `PO-104`\n- period: 2026-09\n- note: same economic event as INV-013\n\nNo match, no period lock, no invent.",
+    "t": "2026-09-24T17:54:28Z"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "id": "h_8d407ece-9bf9-41ad-9e29-37f781db66e0",
+  "from": "operator",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "Operator check for ctl-pay",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ctl_pay"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:51.177Z",
+  "updatedAt": "2026-09-24T23:38:32.184Z",
+  "result": "ctl-pay here. Ready for review-match or review-pay. Send a bill packet or payment-run draft when you want a CONCUR/REFUSE decision.",
+  "resultPaths": [],
+  "seq": 143
+}

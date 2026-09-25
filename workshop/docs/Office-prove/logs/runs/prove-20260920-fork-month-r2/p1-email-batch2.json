@@ -1,0 +1,97 @@
+[
+  {
+    "step": "P1-S12",
+    "message_id": "MSG-INBOX-016",
+    "handleId": "h_1ee003cf-861d-4db7-a73f-a57cc3941c47",
+    "status": "completed",
+    "result": "### MSG-INBOX-016 done\n\n| Step | Result |\n| --- | --- |\n| **Message** | Acme Supplies \u00b7 \u201cCredit memo CM-INBOX-100\u201d \u00b7 body: credit note $200 returned goods \u00b7 **\u201cThis is not an invoice.\u201d** |\n| **Classify** | **`CREDIT_MEMO`** \u2192 `ROUTE_TO_EXISTING_WORKFLOW` (conf 0.9) |\n| **Reason** | `CREDIT_MEMO_PATH_UNAVAILABLE` \u2014 not a vendor invoice |\n| **Dispatch** | **`UNSUPPORTED`** \u00b7 `invoice_id` null \u00b7 **`ready_for_payment: false`** \u00b7 **no mutation** |\n| **Pay-run** | Not queued |\n| **AP handoff** | None (not a bill) |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-016.json` |",
+    "ap": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_1b8778d1-8d37-44db-9833-6e0a246ae509.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply": [],
+    "t": "2026-09-24T17:36:34Z"
+  },
+  {
+    "step": "P1-S13",
+    "message_id": "MSG-INBOX-018",
+    "handleId": "h_e24ba9f2-2956-4c10-809f-9d854d75de78",
+    "status": "completed",
+    "result": "### MSG-INBOX-018 done (fail closed)\n\n| Step | Result |\n| --- | --- |\n| **Message** | Unknown Sender \u00b7 \u201cInvoice attached\u201d \u00b7 body \u201cSee the binary payload.\u201d \u00b7 att `payload.bin` (octet-stream, **content null**) |\n| **Classify** | **`UNSUPPORTED_OR_UNRESOLVED`** \u2192 `REQUEST_MISSING_INFORMATION` (conf 0.3) |\n| **Reasons** | `UNSUPPORTED_ATTACHMENT` \u00b7 `PARSE_FAILURE` \u00b7 `MISSING_FIELDS` (invoice_number, amount, invoice_date, currency) |\n| **Dispatch** | **`PARSE_FAILURE`** \u00b7 `invoice_id` **null** \u00b7 **no mutation** \u00b7 `ready_for_payment: false` \u00b7 clarification null |\n| **Invented invoice** | None |\n| **AP / pay handoff** | None |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-018.json` |",
+    "ap": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_1b8778d1-8d37-44db-9833-6e0a246ae509.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply": [],
+    "t": "2026-09-24T17:37:04Z"
+  },
+  {
+    "step": "P1-S14",
+    "message_id": "MSG-INBOX-019",
+    "handleId": "h_29e7e1dc-9bf6-4034-9483-3a91e9602aa7",
+    "status": "completed",
+    "result": "### MSG-INBOX-019 done\n\n| Step | Result |\n| --- | --- |\n| **Message** | Northwind Labs \u00b7 \u201cRemittance advice\u201d \u00b7 apply to **INV-AR-001** \u00b7 **8500.00** |\n| **Classify** | **`CUSTOMER_REMITTANCE`** \u2192 `RECORD_CUSTOMER_REMITTANCE` (conf 0.9) |\n| **Dispatch** | **`ROUTED`** \u00b7 `ROUTED_REMITTANCE` \u00b7 **no AP invoice** \u00b7 no mutation |\n| **Payment identity** | `message_id=MSG-INBOX-019` (customer Northwind Labs / CUST-001 hint; INV-AR-001; 8500.00 USD) |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-019.json` |\n| **Handle \u2192 apply / apply** | ACK identity; Kernel has **no payment row/candidates** for MSG-INBOX-019 \u2192 nothing posted; status `runs/ar/packets/MSG-INBOX-019-apply-status.json` |\n| **Not done** | Cash apply \u00b7 dun \u00b7 AP vendor-bill handoff |",
+    "ap": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_1b8778d1-8d37-44db-9833-6e0a246ae509.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json"
+    ],
+    "apply": [
+      "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2.json"
+    ],
+    "t": "2026-09-24T17:38:19Z"
+  },
+  {
+    "step": "P1-S15",
+    "message_id": "MSG-INBOX-002",
+    "handleId": "h_70627919-307e-40ca-a83c-9e9c2af8b047",
+    "status": "completed",
+    "result": "### MSG-INBOX-002 done\n\n| Step | Result |\n| --- | --- |\n| **Message** | Figma \u00b7 body-only bill (no attachment) \u00b7 **FIG-INBOX-2002** \u00b7 PO-107 \u00b7 **USD 2,448.00** |\n| **Classify** | **`VENDOR_INVOICE`** \u2192 `CREATE_AP_INVOICE` (conf 0.9) \u00b7 fields complete |\n| **Dispatch** | **CREATED** \u00b7 Kernel id **`ING-005`** \u00b7 match `EXCEPTION` (`missing_po`, `goods_not_received`) |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-002.json` |\n| **Handle \u2192 ap / prepare** | ACK `ING-005`; prepare `runs/ap/packets/ING-005.json`; HOLD; **not matched** |",
+    "ap": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_1b8778d1-8d37-44db-9833-6e0a246ae509.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json",
+      "h_28d4cb35-3699-4932-9196-41acc1505c9f.json"
+    ],
+    "apply": [
+      "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2.json"
+    ],
+    "t": "2026-09-24T17:39:05Z"
+  },
+  {
+    "step": "P1-S22a",
+    "message_id": "MSG-INBOX-005",
+    "handleId": "h_636e6537-ba09-43a3-b43b-ce971c37397a",
+    "status": "completed",
+    "result": "### MSG-INBOX-005 done\n\n| Step | Result |\n| --- | --- |\n| **Classify** | **`PURCHASE_ORDER`** \u2192 `ROUTE_TO_EXISTING_WORKFLOW` (conf 0.9) |\n| **Doc** | **PO-108** \u00b7 Slack Technologies |\n| **Dispatch** | **`ROUTED`** \u00b7 `ROUTED_PURCHASE_ORDER` / `PURCHASE_ORDER_NOT_INVOICE` |\n| **Invoice / pay pool** | **None** \u00b7 `invoice_id` null \u00b7 `ready_for_payment: false` \u00b7 no mutation |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-005.json` |",
+    "ap": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_1b8778d1-8d37-44db-9833-6e0a246ae509.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json",
+      "h_28d4cb35-3699-4932-9196-41acc1505c9f.json"
+    ],
+    "apply": [
+      "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2.json"
+    ],
+    "t": "2026-09-24T17:39:35Z"
+  },
+  {
+    "step": "P1-S22b",
+    "message_id": "MSG-INBOX-006",
+    "handleId": "h_2af54f42-1cfe-468c-80b2-e0481e7f1755",
+    "status": "completed",
+    "result": "### MSG-INBOX-006 done\n\n| Step | Result |\n| --- | --- |\n| **Classify** | **`GOODS_RECEIPT`** \u2192 `RECORD_GOODS_RECEIPT` (conf 0.9) |\n| **Doc** | PO-108 \u00b7 Warehouse \u00b7 not a request for payment |\n| **Dispatch** | **`ROUTED`** \u00b7 `ROUTED_GOODS_RECEIPT` |\n| **Invoice / pay pool** | **None** \u00b7 `invoice_id` null \u00b7 `ready_for_payment: false` \u00b7 no mutation |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-006.json` |",
+    "ap": [
+      "h_fc97e5d1-3bab-4b6e-a8f2-d1d792c24814.json",
+      "h_1b8778d1-8d37-44db-9833-6e0a246ae509.json",
+      "h_5e862b97-50b2-449f-8ed0-878811cb2071.json",
+      "h_28d4cb35-3699-4932-9196-41acc1505c9f.json"
+    ],
+    "apply": [
+      "h_46dfddfa-5d2a-4bcc-9e9e-2bfd83f3d7a2.json"
+    ],
+    "t": "2026-09-24T17:39:50Z"
+  }
+]

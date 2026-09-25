@@ -1,0 +1,26 @@
+[
+  {
+    "step": "P1-S17",
+    "slug": "books",
+    "handleId": "h_f6e32882-9a07-4371-90d5-ce4fe6a8feee",
+    "status": "completed",
+    "result": "**ERP list (erp-invoice):** 1 record \u2014 `NS-4410` (NetSuite, Acme Supplies, `ACM-2026-4410`).\n\n**Landed:** `workspace/books/erp-invoice/NS-4410.json`  \n`SourceAgentOutput` \u2014 vendorBill mapped as-is (USD 12,450, PO-101, due 2026-09-22). No match, no period lock.\n\n**AP prepare (existing Kernel bill only):** same event as **INV-001** / ING-001 \u2014 no new bill.  \n- Outcome: **APPROVE-shaped** (clean 3-way: PO-101, GR-101, no exceptions)  \n- Packet: `runs/ap/packets/INV-001.json`  \n- AP did not pay; ctl-pay `review-match` is the next step on their side.",
+    "t": "2026-09-24T17:45:19Z"
+  },
+  {
+    "step": "P1-S19",
+    "slug": "bank",
+    "handleId": "h_18123e87-eee2-472c-9e85-945c73f2d0d0",
+    "status": "completed",
+    "result": "## Bank / card turn (profile: `card`)\n\n### Kernel card feed\n- `list_bank_transactions` \u2192 **count 0** (`data/ingestion/bank_transactions.json` empty).\n- `get_bank_transaction` / `find_related_invoice` for `TXN-2026-09-015` \u2192 **not found** (do not invent).\n\n### Operating pack landed\n- Source: `data/cash_recon/bank_statement.json` (operating account, 2026-09: **219** lines).\n- Index: `workspace/bank/2026-09-operating-index.json`\n- Lines: `workspace/bank/lines/<txn_id>.json`\n- Packets: `workspace/bank/packets/`\n\n### Unmatched / exception ids handed to **cash** (`profile: match`)\n| Id | Note |\n|---|---|\n| **TXN-2026-09-015** | NORTHSTAR credit **12,412.40** \u2014 residual **12.40** vs GL-AR-NS; **not cleared** |\n| TXN-2026-09-011 | FEE_NETTED |\n| TXN-2026-09-012B | POSSIBLE_DUPLICATE_REFUND |\n| TXN-2026-09-025 | UNMATCHED_BANK |\n| TXN-2026-09-020H, 020R, 028, 021 | open pack exceptions |\n| BNK-AP-012, BNK-UNX-001 | open pack exceptions |\n\n### Cash reply on **TXN-2026-09-015**\n- Paths read; cash",
+    "t": "2026-09-24T17:47:34Z"
+  },
+  {
+    "step": "P1-S20",
+    "slug": "stripe",
+    "handleId": "h_ca83d954-9f54-47d0-b406-fbeac119b9ca",
+    "status": "completed",
+    "result": "## Stripe payout unpack \u2014 done\n\n**Profile:** `payout` only. No `InvoiceCandidate`. No AP bill. No `ask_user`.\n\n### Kernel (all `MATCH`, `invoice_candidates: 0`)\n\n| Payout | Deposit | Amount | Charges / other |\n| --- | --- | --- | --- |\n| `po_1MaximorFees` | `BANK-po_1MaximorFees` | 12,610 USD (1,261,000 minor) | ORD-2101, ORD-2102; fee-fees \u2212390 |\n| `po_1MaximorRefunds` | `BANK-po_1MaximorRefunds` | 3,380 USD | ORD-2201; refund re_2201 \u2212500; fee-ref \u2212120 |\n| `po_1MaximorDisputes` | `BANK-po_1MaximorDisputes` | 5,070 USD | ORD-2301; chargeback dp_2301 \u2212750; fee-dp \u2212180 |\n\n### Computer paths\n\n- `workspace/sources/stripe/po_1Maximor{Fees,Refunds,Disputes}.json`\n- `workspace/stripe/deposits/\u2026` \u2192 cash\n- `workspace/stripe/charges/\u2026` \u2192 apply\n\n### Handoffs (completed)\n\n- **cash** / match \u2014 deposit ticks; wrote `workspace/cash/packets/BANK-po_*.json`; no AP invoice\n- **apply** / apply \u2014 charge facts received; no AR apply yet (Kernel has no payment candidates on ORD-*)\n\nIntegration state seeded ",
+    "t": "2026-09-24T17:51:49Z"
+  }
+]

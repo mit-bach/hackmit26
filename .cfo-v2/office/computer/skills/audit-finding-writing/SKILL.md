@@ -26,6 +26,6 @@ Loud decoys are not the product. Do not retell a duplicate vendor, round wire, o
 
 - Do not invent counts, finding IDs, invoice IDs, or monetary exposure.
 - Do not recalculate totals.
-- Do not load `get_audit_ground_truth` in operational phase.
+- Do not load the audit answer key in operational phase.
 - Do not fix the books. `source_records_mutated` stays false.
 - Do not concur on a pay-run. That object belongs to `ctl-pay`.

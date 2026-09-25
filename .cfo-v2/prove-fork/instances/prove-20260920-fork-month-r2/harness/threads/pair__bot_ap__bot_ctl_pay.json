@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_ctl_pay",
+  "threadId": "pair:bot_ap:bot_ctl_pay",
+  "name": "AP ↔ ctl-pay",
+  "memberIds": [
+    "bot_ap",
+    "bot_ctl_pay"
+  ],
+  "createdAt": 1790272610250,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_63228d66-a4e3-4805-8200-2bad3065cd5c",
+      "handleId": "h_63228d66-a4e3-4805-8200-2bad3065cd5c",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-match\n\nAP prepare proposes APPROVE on open bill INV-001 (Acme Supplies ACM-2026-4410, USD 12450, PO-101, GR-101).\n\nPacket path: runs/ap/packets/INV-001.json\n\nKernel facts: amount_matches (diff 0), vendor_exact_match, po_exists+po_approved, receipt_status full, exception_types [], no duplicates. days_until_due -2.\n\nap does not pay and does not concur. You own concurrence for AP match. Review-match this packet; return allow/deny and any must_hold outcome. Terminal reply required.",
+      "at": 1790272610250,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "pair-result-h_63228d66-a4e3-4805-8200-2bad3065cd5c",
+      "handleId": "h_63228d66-a4e3-4805-8200-2bad3065cd5c",
+      "role": "bot",
+      "kind": "text",
+      "text": "Review-match INV-001: ALLOW / CONCUR APPROVE.\n\nDecision path: runs/ap/decisions/INV-001-review-match.json\n\nmust_hold: []\noutcome: allow\naction: APPROVE\n\nKernel re-check via tools.get_case_evidence: amount_matches (diff 0), vendor_exact_match, po_exists+po_approved PO-101, receipt_status full GR-101, duplicate_detected false, exception_types []. Packet complete with PreparerRecommendation APPROVE. Policies P-001 (exact three-way match may_approve), P-011, P-012. days_until_due -2 is past-due timing for pay-run, not a match refuse. No must_hold. Prior cases not required (exact vendor).\n\nctl-pay does not pay. ap owns the open bill post-concurrence path.",
+      "at": 1790272641996,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    }
+  ]
+}

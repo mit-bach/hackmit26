@@ -16,7 +16,7 @@ Bot apply, Profile apply, one payment. Kernel already built the candidate sets. 
 
 ## Inputs / Evidence
 
-Call get_cash_application_facts. Trust identified customer, remittance invoice IDs, candidate applications, unapplied remainder, and remittance precedent.
+Load the cash-application facts. Trust identified customer, remittance invoice IDs, candidate applications, unapplied remainder, and remittance precedent.
 
 Do not search new invoice combinations. Do not recalculate totals.
 

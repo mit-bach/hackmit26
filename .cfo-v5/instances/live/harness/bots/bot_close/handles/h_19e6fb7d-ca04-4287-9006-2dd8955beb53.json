@@ -1,0 +1,19 @@
+{
+  "id": "h_19e6fb7d-ca04-4287-9006-2dd8955beb53",
+  "from": "bot_ctl_books",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "ctl-books review-treatment on accrual:2026-09-acme: REFUSE create_accrual. Method trailing_average does not fit evidence [usage]; usage_run_rate is required. No kernel estimated_amount in packet to copy.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ctl_books",
+    "toId": "bot_close"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:39:22.877Z",
+  "updatedAt": "2026-09-25T01:38:40.684Z",
+  "result": "Acknowledged REFUSE on accrual:2026-09-acme / create_accrual.\n\nCorrection:\n- Method trailing_average does not fit evidence [usage]; usage_run_rate is required.\n- I will not re-propose create_accrual with trailing_average.\n- On rework I will load kernel get_estimate_candidates, select only an applicable usage_run_rate candidate, and copy estimated_amount exactly from that candidate (no invented amount). If usage_run_rate is not applicable or estimated_amount is missing, decision is NONE / insufficient_evidence — no PROPOSE.\n\nNo create_accrual write in this turn. Treatment stance updated to match your refuse.",
+  "seq": 157
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_c014f9bd-d5b1-40fb-8da6-4414c97b96f2",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: bank\nYou are the bank. Send a September statement notice for the operating account. It is not a vendor bill. Stay until email classifies it. Do not mark any line matched. Leave the $12.40 difference unexplained.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:54:50.753Z",
+  "updatedAt": "2026-09-24T20:56:15.640Z",
+  "result": "**Done.** Spoke as First National through email triage. No bank lines were matched; the **$12.40** gap was left unexplained.\n\n### Delivered\n- **From:** First National Operating `<notices@firstnational.example>`\n- **message_id:** `msg-fnb-stmt-2026-09-operating-001`\n- **thread_id:** `thr-fnb-stmt-2026-09-operating`\n- **Account:** BANK-OPERATING  \n- **Period:** 2026-09-01 → 2026-09-30  \n- Explicitly **not** a vendor bill  \n- Notes sample activity including Northstar credit **12,412.40** (TXN-2026-09-015) and states any **$12.40** book variance is for internal recon only  \n\n### Packets\n- World: `workspace/world/packets/fnb-stmt-2026-09-operating.md`\n- Email: `workspace/email/packets/fnb-stmt-2026-09-operating-triage.md`\n\n### Email triage\n- **Classification:** `not_invoice` / `bank_statement_notice` (`BANK_NOTICE`)\n- **Action:** `NONE`",
+  "resultPaths": [],
+  "seq": 28
+}

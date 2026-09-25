@@ -1,0 +1,19 @@
+{
+  "id": "h_fc457b39-1ab8-4bed-9a3d-1e41e3861a9d",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Profile: review-bs. September 2026 ReconDecision pack at workspace/close/packets/2026-09-bs-recon-decisions.json.\n\nClassifications from Kernel packets (do not override arithmetic):\n\nESCALATE / fail-closed:\n1. Cash — HUMAN_REVIEW. Diff 92.12 = REC-211 $12.40 + REC-212 $31.10 + REC-213 $48.62, all unexplained_difference. Do NOT clear $12.40. Do NOT relabel timing. sign_off_allowed=false.\n2. Prepaid Expenses — BLOCKED missing_evidence. PRE-MISSING $48,000 (PRE-CAM-Q3). sign_off_allowed=false.\n\nMATCHED (diff 0, no open unexplained items):\n3. Accounts Receivable 34811818\n4. Accounts Payable 18114192.84\n5. Accrued Expenses 0/0\n6. Fixed Assets 580720.8\n7. Accumulated Depreciation 0/0 tied=true\n\nNo force-match. No period lock. Return first-line CONCUR if review agrees with fail-closed cash/prepaid and matched others.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:26:45.319Z",
+  "updatedAt": "2026-09-24T21:26:55.915Z",
+  "result": "CONCUR\n\nReconReview — 2026-09 ReconDecision pack (workspace/close/packets/2026-09-bs-recon-decisions.json).\n\nNote: review-bs wake; Catalog still prepaid-only (get_reconciliation_packet forbidden). Review against pack + balance-sheet-reconciliation skill; arithmetic of stated items checked only.\n\nFail-closed (agree — sign_off_allowed=false):\n1. Cash — CONCUR finding=HUMAN_REVIEW / OPEN / escalate\n   Diff 92.12. Open unexplained: REC-211 12.40 + REC-212 31.10 + REC-213 48.62 = 92.12. Do NOT clear $12.40. Do NOT relabel timing. Do NOT force MATCHED.\n\n2. Prepaid Expenses — CONCUR finding=BLOCKED / missing_evidence\n   Diff 48000; PRE-MISSING on PRE-CAM-Q3. sign_off_allowed=false. Do not force-match the gap.\n\nMatched (diff 0, no open unexplained; sign_off_allowed=true on packet):\n3. Accounts Receivable 34811818 — CONCUR MATCHED/TIED\n4. Accounts Payable 18114192.84 — CONCUR MATCHED/TIED\n5. Accrued Expenses 0/0 — CONCUR MATCHED/TIED (open_accrual_count 0 on packet)\n6. Fixed Assets 580720.8 — CONCUR MATCHED/TIED (cost tie)\n7. Accumulated Depreciation 0/0 tied=true — CONCUR MATCHED/TIED\n\nforce_match=false; cleared_12_40=false; lock not approved.\n\nVerdict: CONCUR entire pack classifications as stated.",
+  "seq": 145
+}

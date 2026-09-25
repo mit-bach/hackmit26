@@ -1,0 +1,86 @@
+[
+  {
+    "charge_id": "ch_mpr_2025-10",
+    "gross": 3288036.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2025-10"
+  },
+  {
+    "charge_id": "ch_mpr_2025-11",
+    "gross": 3376044.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2025-11"
+  },
+  {
+    "charge_id": "ch_mpr_2025-12",
+    "gross": 3444080.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2025-12"
+  },
+  {
+    "charge_id": "ch_mpr_2026-01",
+    "gross": 3528036.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-01"
+  },
+  {
+    "charge_id": "ch_mpr_2026-02",
+    "gross": 3576088.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-02"
+  },
+  {
+    "charge_id": "ch_mpr_2026-03",
+    "gross": 3624036.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-03"
+  },
+  {
+    "charge_id": "ch_mpr_2026-04",
+    "gross": 3688044.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-04"
+  },
+  {
+    "charge_id": "ch_mpr_2026-05",
+    "gross": 3736036.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-05"
+  },
+  {
+    "charge_id": "ch_mpr_2026-06",
+    "gross": 3764080.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-06"
+  },
+  {
+    "charge_id": "ch_mpr_2026-07",
+    "gross": 3824036.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-07"
+  },
+  {
+    "charge_id": "ch_mpr_2026-08",
+    "gross": 3442240.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-08"
+  },
+  {
+    "charge_id": "ch_mpr_2026-09",
+    "gross": 3641280.0,
+    "fee_booked_rate": 0.0341,
+    "fee_contract_rate": 0.029,
+    "period": "2026-09"
+  }
+]

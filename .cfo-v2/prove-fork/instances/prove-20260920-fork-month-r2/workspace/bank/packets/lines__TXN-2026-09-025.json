@@ -1,0 +1,28 @@
+{
+  "transaction_id": "TXN-2026-09-025",
+  "date": "2026-09-25",
+  "amount": -180.0,
+  "currency": "USD",
+  "description": "ACH OUT UNKNOWN COUNTERPARTY",
+  "counterparty": "",
+  "transaction_type": "ach_debit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "",
+  "raw_metadata": {},
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "UNMATCHED_BANK",
+  "gt_label": {
+    "match_type": "UNMATCHED_BANK",
+    "disposition": "HUMAN_REVIEW",
+    "ledger_ids": []
+  },
+  "path": "workspace/bank/lines/TXN-2026-09-025.json"
+}

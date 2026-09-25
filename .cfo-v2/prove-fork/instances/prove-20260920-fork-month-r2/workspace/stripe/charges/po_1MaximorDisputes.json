@@ -1,0 +1,35 @@
+{
+  "object": "processor_charges",
+  "payout_id": "po_1MaximorDisputes",
+  "provider": "stripe",
+  "charge_ids": [
+    "ORD-2301"
+  ],
+  "charges": [
+    {
+      "source_object_id": "ORD-2301",
+      "amount_minor": 600000,
+      "line_type": "charge",
+      "category": "gross"
+    }
+  ],
+  "refunds": [],
+  "chargebacks": [
+    {
+      "source_object_id": "dp_2301",
+      "amount_minor": -75000,
+      "line_type": "dispute",
+      "category": "chargeback"
+    }
+  ],
+  "fees": [
+    {
+      "source_object_id": "fee-dp",
+      "amount_minor": -18000,
+      "line_type": "stripe_fee"
+    }
+  ],
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "source_packet": "workspace/sources/stripe/po_1MaximorDisputes.json"
+}

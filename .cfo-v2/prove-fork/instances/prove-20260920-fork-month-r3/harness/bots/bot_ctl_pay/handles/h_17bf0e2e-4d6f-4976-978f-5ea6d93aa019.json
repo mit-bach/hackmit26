@@ -1,0 +1,19 @@
+{
+  "id": "h_17bf0e2e-4d6f-4976-978f-5ea6d93aa019",
+  "from": "bot_pay",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "PaymentPlan plan_2026-09-19_d1e2549ae6c2 written. pay_this_week: INV-001. ctl-pay CONCUR. cash expected outflows executed=false.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "pay"
+  },
+  "kind": "group_post",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:06:38.684Z",
+  "updatedAt": "2026-09-24T18:07:07.547Z",
+  "result": "**Room pay wake:** No new review needed.\n\n- CONCUR already on file: `runs/pay/concurrence/plan_2026-09-19_d1e2549ae6c2.json`\n- `pay_this_week`: INV-001 · `reserve_ok` · `executed=false` (Verifier does not ACH/wire)\n- `room_post` hit host lock twice — ack not written; state unchanged",
+  "resultPaths": [],
+  "seq": 32
+}

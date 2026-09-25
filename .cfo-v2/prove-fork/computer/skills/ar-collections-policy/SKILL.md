@@ -16,7 +16,7 @@ Bot collect, Profile chase, one overdue invoice after apply has drained new depo
 
 ## Inputs / Evidence
 
-Call get_collection_candidates or get_collection_invoice_facts. Trust Kernel fields: outstanding_amount, days_past_due, dispute_status, promised_pay_date, cooldown_active, reminder_count, on_time_rate, payment_behavior, blocked_actions, and collection_contact precedent.
+Load the collection candidates or the invoice facts. Trust Kernel fields: outstanding_amount, days_past_due, dispute_status, promised_pay_date, cooldown_active, reminder_count, on_time_rate, payment_behavior, blocked_actions, and collection_contact precedent.
 
 Do not recalculate aging or remaining balance. Do not override a hard block.
 

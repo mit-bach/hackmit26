@@ -1,0 +1,21 @@
+{
+  "system": "cfo-agentic-system",
+  "extraExtensions": ["./cfo/extensions/index.ts"],
+  "clientSkills": true,
+  "spawnPolicy": "lazy",
+  "autoRoutines": false,
+  "provider": "xai",
+  "model": "grok-4.5",
+  "thinkingLevel": "low",
+  "evalPhase": "operational",
+  "features": {
+    "showToolCalls": true,
+    "transcriptVerbosity": "full"
+  },
+  "sidecar": {
+    "command": "./cfo/bin/sidecar.sh",
+    "args": [],
+    "portFile": "cfo/kernel.port",
+    "readyTimeoutMs": 20000
+  }
+}

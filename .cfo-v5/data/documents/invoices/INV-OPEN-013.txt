@@ -1,0 +1,39 @@
+Dell Marketing L.P.
+One Dell Way
+Round Rock, TX 78682
+Phone +1 800-289-3355   billing@dell.example
+Tax ID 74-2616805
+
+INVOICE
+
+Invoice Number: OPEN-0013
+Invoice Date: 2026-09-14
+Due Date: 2026-10-14
+PO Number: PO-OPEN-013
+Payment Terms: net 30
+Currency: USD
+Vendor: Dell Technologies
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    181,783.34    181,783.34
+
+Subtotal                                                            181,783.34
+Tax                                                                       0.00
+Amount Due                                                          181,783.34
+
+Remit to:
+ACH Bank of America routing 111000012  account ****R760
+Bank: Bank of America  ****R760
+Please include invoice OPEN-0013 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@dell.example

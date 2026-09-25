@@ -1,0 +1,19 @@
+{
+  "id": "h_29e7e1dc-9bf6-4034-9483-3a91e9602aa7",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-019. It may be a customer remittance. If it is, Handle apply / apply with the payment identity. Do not apply cash. Do not dun. Do not Handle ap as a vendor bill. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:37:04.541Z",
+  "updatedAt": "2026-09-24T17:38:12.800Z",
+  "result": "### MSG-INBOX-019 done\n\n| Step | Result |\n| --- | --- |\n| **Message** | Northwind Labs · “Remittance advice” · apply to **INV-AR-001** · **8500.00** |\n| **Classify** | **`CUSTOMER_REMITTANCE`** → `RECORD_CUSTOMER_REMITTANCE` (conf 0.9) |\n| **Dispatch** | **`ROUTED`** · `ROUTED_REMITTANCE` · **no AP invoice** · no mutation |\n| **Payment identity** | `message_id=MSG-INBOX-019` (customer Northwind Labs / CUST-001 hint; INV-AR-001; 8500.00 USD) |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-019.json` |\n| **Handle → apply / apply** | ACK identity; Kernel has **no payment row/candidates** for MSG-INBOX-019 → nothing posted; status `runs/ar/packets/MSG-INBOX-019-apply-status.json` |\n| **Not done** | Cash apply · dun · AP vendor-bill handoff |",
+  "resultPaths": [],
+  "seq": 77
+}

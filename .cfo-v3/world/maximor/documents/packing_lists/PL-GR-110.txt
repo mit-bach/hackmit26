@@ -1,0 +1,11 @@
+Office Depot
+Packing list
+Ship date: 
+PO Number: PO-110
+Ship to: Maximor Demo Corp, Dock B, 245 Main Street, Cambridge, MA 02142
+Carrier: Freightline Logistics  PRO 110-
+
+Contents:
+  - Line GR-110 — qty 0
+
+This packing list is not an invoice.

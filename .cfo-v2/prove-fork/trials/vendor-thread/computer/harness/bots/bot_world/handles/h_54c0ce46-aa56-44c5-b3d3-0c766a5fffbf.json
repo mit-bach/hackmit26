@@ -1,0 +1,19 @@
+{
+  "id": "h_54c0ce46-aa56-44c5-b3d3-0c766a5fffbf",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: vendor\nYou are Acme Supplies. The office has your September invoice for twelve thousand four hundred fifty dollars on purchase order 101. Stay on that invoice with email until they have confirmed the number, the amount, and whether the goods were received. Do not pay anything. Do not close the month.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:11:22.403Z",
+  "updatedAt": "2026-09-24T18:12:44.883Z",
+  "result": "Acme Supplies inbound is on the mailbox as **MSG-ACME-SEP-101** / **THR-ACME-SEP-101**: invoice **INV-SEP-101**, **PO 101**, **12450.00 USD**, September.\n\nEmail classified it as **VENDOR_INVOICE**. They did not mint an AP bill this turn (inbox tools not granted to them), did not pay, and did not close the month.\n\nStill open: confirm invoice number, amount, and whether goods were received. I will stay on that thread as Acme.",
+  "resultPaths": [],
+  "seq": 8
+}

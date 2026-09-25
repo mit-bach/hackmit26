@@ -1,0 +1,39 @@
+Harbor Partners
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@harborpartners.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: OPEN-0069
+Invoice Date: 2026-09-16
+Due Date: 2026-10-16
+PO Number: PO-OPEN-069
+Payment Terms: net 30
+Currency: USD
+Vendor: Harbor Partners
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    189,465.42    189,465.42
+
+Subtotal                                                            189,465.42
+Tax                                                                       0.00
+Amount Due                                                          189,465.42
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice OPEN-0069 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@harborpartners.example

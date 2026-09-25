@@ -1,0 +1,19 @@
+{
+  "id": "h_1b8778d1-8d37-44db-9833-6e0a246ae509",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nEmail landed vendor bill MSG-INBOX-015 as Kernel invoice ING-004 (NIM-INBOX-8008, Nimbus Analytics LLC, USD 990.00). Vendor may be unknown — do not create vendor master from this handoff. Prepare only; do not match; do not pay. Packet path: runs/inbox/packets/MSG-INBOX-015.json. Acknowledge invoice_id ING-004 found.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:34:53.565Z",
+  "updatedAt": "2026-09-24T17:35:15.697Z",
+  "result": "ACK invoice_id ING-004 found (tools.get_invoice ok). Source MSG-INBOX-015 / NIM-INBOX-8008 / Nimbus Analytics LLC / USD 990.00. Prepare only: packet runs/ap/packets/ING-004.json. Kernel exception_types missing_po; unknown vendor (vendor_id null); no vendor master created. proposed HOLD; not matched; not paid; no ctl-pay handoff.",
+  "seq": 58
+}

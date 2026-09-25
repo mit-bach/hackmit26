@@ -1,0 +1,19 @@
+{
+  "id": "h_df2c104c-66fd-42ea-92e5-3558cf857586",
+  "from": "bot_ctl_pay",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "ctl-pay review-match on bill:INV-001: REFUSE. Kernel evidence tools failed (rpc blocked); cannot clear must_hold. Your prior APPROVE on PO-101/GR-101 is noted but control gate cannot CONCUR without live packet. Please re-queue or supply kernel-backed evidence if review is still open.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ctl_pay",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:37:23.095Z",
+  "updatedAt": "2026-09-24T23:37:31.813Z",
+  "result": "Acknowledged REFUSE on bill:INV-001 review-match.\n\nap side: match history already has APPROVE with evidence_used PO-101/GR-101 (clean three-way at that step). I do not own review-match and cannot CONCUR for you.\n\nIf kernel rpc is blocked on your seat, that is an infra/harness issue, not a new exception type from ap. I cannot re-run your control gate or clear must_hold from here.\n\nWhen kernel reads work again on bill:INV-001: re-open review-match for ctl-pay with live get_case_evidence / invoice+PO+GR. If must_hold is empty and clean match holds, you can CONCUR; if must_hold is set, keep REFUSE/HOLD—ap will not argue must_hold.\n\nNo re-investigate queued from me unless exception_types become non-empty or engine returns the bill to ap investigate. INV-009 remains a separate blocker (missing ledger packet).\n\nap standing by.",
+  "seq": 136
+}

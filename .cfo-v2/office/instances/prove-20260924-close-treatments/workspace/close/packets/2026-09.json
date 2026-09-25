@@ -1,0 +1,105 @@
+{
+  "period": "2026-09",
+  "profile": "accrue",
+  "status": "accruals_decided_pending_kernel_post",
+  "lock_status": "OPEN",
+  "notes": [
+    "Do not mark CLOSED",
+    "Unexplained $12.40 not cleared or relabeled",
+    "Kernel create_accrual posts blocked: Client call_connected_tool passes handleId=null; ctl-books CONCUR stamps are on file"
+  ],
+  "accrual_decisions": [
+    {
+      "vendor": "Aether Compute",
+      "status": "accrual_required",
+      "estimation_method": "usage_run_rate",
+      "estimated_amount": 11849.9,
+      "expense_account": "Cloud Infrastructure Expense",
+      "confidence": 0.95,
+      "ctl_books": "CONCUR",
+      "reasoning": "142000 gb_hours × 0.08345; monthly cadence; no 2026-09 invoice. Amount copied from Kernel."
+    },
+    {
+      "vendor": "CleanSpace Facilities",
+      "status": "accrual_required",
+      "estimation_method": "contract_commitment",
+      "estimated_amount": 2400.0,
+      "expense_account": "Facilities Expense",
+      "confidence": 0.98,
+      "ctl_books": "CONCUR",
+      "reasoning": "CTR-CS-001 monthly $2400; stable history; no September bill."
+    },
+    {
+      "vendor": "Clearing Solutions LLC",
+      "status": "accrual_required",
+      "estimation_method": "simple_average",
+      "estimated_amount": 9632.44,
+      "expense_account": "Operating Expense",
+      "confidence": 0.75,
+      "ctl_books": "CONCUR",
+      "reasoning": "Monthly cadence; no contract/usage/GR; August 17014.22 outlier so simple_average over recent_average/last_invoice."
+    },
+    {
+      "vendor": "Harbor Electric",
+      "status": "accrual_required",
+      "estimation_method": "seasonal_prior_year",
+      "estimated_amount": 4650.0,
+      "expense_account": "Utilities Expense",
+      "confidence": 0.9,
+      "ctl_books": "CONCUR",
+      "reasoning": "naive_recent_average_is_misleading true; HI-HE-2025-09 $4650; do not copy summer peak."
+    },
+    {
+      "vendor": "Lindholm & Ruiz LLP",
+      "status": "accrual_required",
+      "estimation_method": "contract_commitment",
+      "estimated_amount": 8500.0,
+      "expense_account": "Legal Expense",
+      "confidence": 0.98,
+      "ctl_books": "CONCUR",
+      "reasoning": "CTR-LR-001 monthly retainer $8500; five priors at 8500; no September bill."
+    },
+    {
+      "vendor": "Pulse Recruiting",
+      "status": "accrual_required",
+      "estimation_method": "contract_commitment",
+      "estimated_amount": 15000.0,
+      "expense_account": "Recruiting Expense",
+      "confidence": 0.95,
+      "ctl_books": "CONCUR",
+      "reasoning": "CTR-PR-001 quarterly $15000 due at Q3 end; no September bill."
+    },
+    {
+      "vendor": "NewForge Consulting",
+      "status": "insufficient_evidence",
+      "estimation_method": null,
+      "estimated_amount": null,
+      "expense_account": "Professional Services Expense",
+      "confidence": 0.2,
+      "ctl_books": "acknowledged_no_accrual",
+      "reasoning": "As-needed T&M CTR-NF-001; no applicable Kernel candidates; last invoice 2026-01 only."
+    }
+  ],
+  "vendors_no_accrual_needed": [
+    "Acme Supplies",
+    "Amazon Web Services",
+    "Brightline Studio LLC",
+    "Cambridge Properties",
+    "Cambridge Property Services",
+    "Freightline Expedite",
+    "Freightline Logistics",
+    "Google Cloud",
+    "Halyard Facilities LLC",
+    "Harbor Electric Services",
+    "Helios Hardware",
+    "Kestrel Industrial Supply LLC",
+    "Lenovo",
+    "Misc Supplies",
+    "NLF Industrial Components",
+    "North Line Fab Inc",
+    "Orbit Analytics",
+    "Orbit Insights Corp"
+  ],
+  "open_accruals_count_after_attempt": 0,
+  "platform_blocker": "call_connected_tool hardcodes handleId null; completedHandleAllowsOp never sees CONCUR handle on retry"
+}

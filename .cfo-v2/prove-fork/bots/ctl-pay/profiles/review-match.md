@@ -12,10 +12,10 @@ Handle from `ap` with an approve-shaped packet path. Default Profile on this Bot
 
 ## Procedure
 
-1. Read the Wake path. Call `tools.get_case_evidence` for that `invoice_id`.
+1. Read the Wake path. Load the case evidence for that `invoice_id`.
 2. Call policy ops only as needed to cite published policy IDs. Do not invent policy.
-3. First Wake may call `tools.get_prior_cases`. Prior cases cannot override `must_hold`.
-4. If the Wake header is `audit: true`, do not call `tools.get_prior_cases`.
+3. The first review may read prior cases. Prior cases cannot override `must_hold`.
+4. If the Wake header is `audit: true`, do not read prior cases.
 5. Look for reasons to refuse. Missing evidence is refuse.
 6. CONCUR only if Kernel `must_hold` is empty and the packet contains evidence, preparer output, and a Kernel-allowed `APPROVE` proposal.
 7. If Kernel HOLD / `must_hold`, you cannot concur. Write REFUSE. Handle back to `ap` with the defect path.

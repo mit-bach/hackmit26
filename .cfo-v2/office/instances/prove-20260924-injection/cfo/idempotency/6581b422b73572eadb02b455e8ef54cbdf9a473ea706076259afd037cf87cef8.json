@@ -1,0 +1,19 @@
+{
+  "key": "world-send-slack-slk-2026-0930-v1",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "5eda596624dad74ca7a6c22bb29bd135450b45f0681bdbaa8d3c04a61b8f8bd7",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-world-slack-slk-2026-0930",
+      "thread_id": "thr-world-slack-slk-2026-0930",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_c153e156979c"
+  }
+}

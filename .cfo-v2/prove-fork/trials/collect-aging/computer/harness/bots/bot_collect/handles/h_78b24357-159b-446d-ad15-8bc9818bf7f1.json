@@ -1,0 +1,19 @@
+{
+  "id": "h_78b24357-159b-446d-ad15-8bc9818bf7f1",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "profile: chase\nMaximor Demo Corp, September 2026. Customer invoices are still open. You own collections. Work the aging. Do not apply their cash. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:11:22.229Z",
+  "updatedAt": "2026-09-24T18:14:21.614Z",
+  "result": "Collections record as of 2026-09-30: 10 Kernel-eligible past-due invoices, `blocked_actions` empty, no apply on this path.\n\nSent from `collections@hackmit-cfo.example` (delivered):\n- Gentle: INV-AR-002 Acme $8,500 (20 DPD), INV-AR-018 Copperline $9,600 (11), INV-AR-024 Atlas $8,900 (3)\n- Overdue: INV-AR-003 Helios $24,000 (41), INV-AR-019 Summit $7,200 (47), INV-AR-020 Redwood $15,800 (82), INV-AR-HE-4412 Helios $91,200 (16)\n- Final: INV-AR-004 Brightline $31,000 (77), INV-AR-025 Brightline $27,500 (121), INV-AR-005 Quiet Harbor $45,000 (152, reminder_count 3)\n\nWorld customer AP replies (promises, no remittance):\n- Atlas 10-03, Redwood 10-04, Copperline 10-07, Acme 10-08, Brightline both 10-12, Summit 10-16, Quiet Harbor 10-18, Helios both 10-24\n\nStill open until cash hits apply. No write-off packet. Month not closed.",
+  "resultPaths": [],
+  "seq": 8
+}

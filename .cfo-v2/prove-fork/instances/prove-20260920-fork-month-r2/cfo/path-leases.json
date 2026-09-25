@@ -2,7 +2,101 @@
   "version": "1",
   "bots": {
     "audit": {
-      "writePrefixes": ["workspace/audit/", "runs/audit/"]
+      "writePrefixes": [
+        "workspace/audit/",
+        "runs/audit/",
+        "harness/bots/bot_audit/memory/"
+      ]
+    },
+    "email": {
+      "writePrefixes": [
+        "workspace/email/",
+        "harness/bots/bot_email/memory/"
+      ]
+    },
+    "stripe": {
+      "writePrefixes": [
+        "workspace/stripe/",
+        "harness/bots/bot_stripe/memory/"
+      ]
+    },
+    "bank": {
+      "writePrefixes": [
+        "workspace/bank/",
+        "harness/bots/bot_bank/memory/"
+      ]
+    },
+    "books": {
+      "writePrefixes": [
+        "workspace/books/",
+        "harness/bots/bot_books/memory/"
+      ]
+    },
+    "world": {
+      "writePrefixes": [
+        "workspace/world/",
+        "harness/bots/bot_world/memory/"
+      ]
+    },
+    "ap": {
+      "writePrefixes": [
+        "workspace/ap/",
+        "harness/bots/bot_ap/memory/"
+      ]
+    },
+    "pay": {
+      "writePrefixes": [
+        "workspace/pay/",
+        "harness/bots/bot_pay/memory/"
+      ]
+    },
+    "apply": {
+      "writePrefixes": [
+        "workspace/apply/",
+        "harness/bots/bot_apply/memory/"
+      ]
+    },
+    "collect": {
+      "writePrefixes": [
+        "workspace/collect/",
+        "harness/bots/bot_collect/memory/"
+      ]
+    },
+    "cash": {
+      "writePrefixes": [
+        "workspace/cash/",
+        "harness/bots/bot_cash/memory/"
+      ]
+    },
+    "close": {
+      "writePrefixes": [
+        "workspace/close/",
+        "harness/bots/bot_close/memory/"
+      ]
+    },
+    "story": {
+      "writePrefixes": [
+        "workspace/story/",
+        "harness/bots/bot_story/memory/"
+      ]
+    },
+    "ctl-pay": {
+      "writePrefixes": [
+        "workspace/ctl-pay/",
+        "harness/bots/bot_ctl_pay/memory/"
+      ]
+    },
+    "ctl-cash": {
+      "writePrefixes": [
+        "workspace/ctl-cash/",
+        "harness/bots/bot_ctl_cash/memory/"
+      ]
+    },
+    "ctl-books": {
+      "writePrefixes": [
+        "workspace/ctl-books/",
+        "harness/bots/bot_ctl_books/memory/"
+      ]
     }
   }
 }

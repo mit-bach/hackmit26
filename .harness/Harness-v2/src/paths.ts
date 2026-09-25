@@ -1,5 +1,7 @@
 import { join, resolve } from "node:path";
 
+import { sandboxesEnabled, slugForBotId } from "./seatbelt.ts";
+
 export function harnessRoot(computerRoot: string): string {
   return join(resolve(computerRoot), "harness");
 }
@@ -45,7 +47,11 @@ export function transcriptPath(computerRoot: string, botId: string): string {
 }
 
 export function memoryDir(computerRoot: string, botId: string): string {
-  return join(botDir(computerRoot, botId), "memory");
+  const root = resolve(computerRoot);
+  if (sandboxesEnabled(root)) {
+    return join(root, "sandboxes", slugForBotId(botId), "memory");
+  }
+  return join(botDir(root, botId), "memory");
 }
 
 export function memoryFile(computerRoot: string, botId: string): string {

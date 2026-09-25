@@ -1,0 +1,14 @@
+{
+  "object": "processor_deposit",
+  "payout_id": "po_1MaximorRefunds",
+  "bank_deposit_id": "BANK-po_1MaximorRefunds",
+  "amount": 3380.0,
+  "currency": "USD",
+  "arrival_date": "2026-09-22",
+  "expected_payout_minor": 338000,
+  "actual_payout_minor": 338000,
+  "waterfall_status": "MATCH",
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "source_packet": "workspace/sources/stripe/po_1MaximorRefunds.json"
+}

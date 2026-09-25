@@ -5,7 +5,7 @@ and not Runner.run_sync. Verifier Handles go to ctl-books with one Profile
 per treatment so Grants are never unioned.
 
 When HARNESS_COMPUTER is set, Kernel state lands under Computer runs/month_end
-and the period pack under workspace/close/<period>/. That is the office path.
+and the period pack under workspace/close/packets/<period>.json. That is the office path.
 .close/runs is not the office demo destination.
 """
 
@@ -126,8 +126,10 @@ def run_close_host(
         reset=reset,
         allow_close=False,
     )
-    prefix = f"workspace/close/{period}"
-    pack_rel = f"{prefix}/pack.json"
+    desk = "workspace/close"
+    pack_rel = f"{desk}/packets/{period}.json"
+    html_rel = f"{desk}/packets/{period}.html"
+    gates_rel = f"runs/month_end/{period}-gates.json"
     gates = evaluate_close_gates(state)
     blocked = _blocked_on(state, gates)
     pack = {
@@ -146,7 +148,17 @@ def run_close_host(
         "runs_dir": str(runs_dir),
     }
     _write_json(root / pack_rel, pack)
-    _write_json(root / f"{prefix}/gates.json", gates.model_dump(mode="json"))
+    html_path = root / html_rel
+    html_path.parent.mkdir(parents=True, exist_ok=True)
+    html_path.write_text(
+        "<!DOCTYPE html><html><head><meta charset=\"utf-8\">"
+        f"<title>{period} close</title></head><body>"
+        f"<h1>{period}</h1>"
+        f"<p>Status {state.period.status}. Gate passed: {gates.passed}.</p>"
+        f"<p>Blocked on: {blocked}. The month stays open while an unexplained difference remains.</p>"
+        "</body></html>\n"
+    )
+    _write_json(root / gates_rel, gates.model_dump(mode="json"))
 
     wakes: list[dict] = []
     handles: list[dict] = []
@@ -154,13 +166,13 @@ def run_close_host(
         "profile": "coordinate",
         "slug": "close",
         "period": period,
-        "path": f"{prefix}/wakes/000-coordinate.json",
+        "path": f"{desk}/handles/{period}-coordinate.json",
         "ops": list(PROFILE_OPS["coordinate"]),
         "mutatingOps": list(mutating_ops("coordinate")),
         "mark_closed": False,
         "office_live_catalog_caller": False,
     }
-    _write_json(root / f"{prefix}/wakes/000-coordinate.json", coordinate_wake)
+    _write_json(root / f"{desk}/handles/{period}-coordinate.json", coordinate_wake)
     wakes.append(coordinate_wake)
 
     for index, task in enumerate(state.tasks, start=1):
@@ -179,7 +191,7 @@ def run_close_host(
             }
             if profile != "accrue":
                 assert CREATE_ACCRUAL not in ops
-            wake_rel = f"{prefix}/wakes/{index:03d}-close-{profile}.json"
+            wake_rel = f"{desk}/handles/{period}-{index:03d}-{profile}.json"
             _write_json(root / wake_rel, wake)
             wakes.append(wake)
         dest = TASK_HANDLE.get(task.task_id)
@@ -191,7 +203,7 @@ def run_close_host(
                 "Never ask a human. Peer Handle is not approval."
             )
             handle = _handle_payload(to_slug, handle_profile, [pack_rel], prompt)
-            handle_rel = f"{prefix}/handles/{to_slug}-{task.task_id}.json"
+            handle_rel = f"{desk}/handles/{period}-{to_slug}-{task.task_id}.json"
             _write_json(root / handle_rel, handle)
             write_peer_handle(
                 root,
@@ -206,7 +218,7 @@ def run_close_host(
 
     lock_prompt = (
         f"profile: lock\n"
-        f"Read evaluate_close_gates for {period} at {prefix}/gates.json. "
+        f"Read the finance gate for {period} at {gates_rel}. "
         f"Pack is {pack_rel}. gate_passed={gates.passed}. "
         "Do not mark CLOSED. Kernel close.month_end is the only lock door. "
         "Never ask a human."
@@ -214,7 +226,7 @@ def run_close_host(
     lock = _handle_payload(
         "ctl-books",
         "lock",
-        [pack_rel, f"{prefix}/gates.json"],
+        [pack_rel, gates_rel],
         lock_prompt,
         extra={
             "gate_passed": gates.passed,
@@ -222,13 +234,13 @@ def run_close_host(
             "can_mark_closed": False,
         },
     )
-    _write_json(root / f"{prefix}/handles/ctl-books-lock.json", lock)
+    _write_json(root / f"{desk}/handles/{period}-ctl-books-lock.json", lock)
     write_peer_handle(
         root,
         from_slug="close",
         to_slug="ctl-books",
         profile="lock",
-        paths=[pack_rel, f"{prefix}/gates.json"],
+        paths=[pack_rel, gates_rel],
         prompt=lock_prompt,
         extra={
             "humanQueue": False,
@@ -248,7 +260,7 @@ def run_close_host(
         "Do not start a forecast from unreconciled GL cash. Never ask a human."
     )
     story = _handle_payload("story", "flux", [pack_rel], story_prompt, extra={"lock_status": lock_status})
-    _write_json(root / f"{prefix}/handles/story-pack.json", story)
+    _write_json(root / f"{desk}/handles/{period}-story-pack.json", story)
     write_peer_handle(
         root,
         from_slug="close",
@@ -266,7 +278,7 @@ def run_close_host(
         "Do not load get_audit_ground_truth. Do not fix the books. Never ask a human."
     )
     audit = _handle_payload("audit", "interpret", [pack_rel], audit_prompt)
-    _write_json(root / f"{prefix}/handles/audit-pack.json", audit)
+    _write_json(root / f"{desk}/handles/{period}-audit-pack.json", audit)
     write_peer_handle(
         root,
         from_slug="close",
@@ -296,5 +308,5 @@ def run_close_host(
         "computer_root": str(root),
         "harness_computer": os.environ.get("HARNESS_COMPUTER") or "",
     }
-    _write_json(root / f"{prefix}/host-run.json", host_run)
+    _write_json(root / f"runs/month_end/{period}-host-run.json", host_run)
     return CloseHostResult(host_run)

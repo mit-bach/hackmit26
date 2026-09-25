@@ -1,0 +1,8 @@
+openai-agents
+pydantic
+python-dotenv
+pytest
+fastapi
+uvicorn
+httpx
+stripe

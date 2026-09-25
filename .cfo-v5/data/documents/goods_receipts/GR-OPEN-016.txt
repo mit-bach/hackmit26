@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-016
+PO Number: PO-OPEN-016
+Vendor: Lenovo
+Goods received in full on 2026-09-17
+Packing list attached: PL-GR-OPEN-016
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 182,194.88 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

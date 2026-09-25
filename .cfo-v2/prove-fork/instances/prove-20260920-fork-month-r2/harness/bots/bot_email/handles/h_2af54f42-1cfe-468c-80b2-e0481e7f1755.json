@@ -1,0 +1,19 @@
+{
+  "id": "h_2af54f42-1cfe-468c-80b2-e0481e7f1755",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-006. It may be a goods receipt, not a bill to pay. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. Do not put a goods receipt in the pay pool. Do not ask_user. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:39:35.414Z",
+  "updatedAt": "2026-09-24T17:39:48.582Z",
+  "result": "### MSG-INBOX-006 done\n\n| Step | Result |\n| --- | --- |\n| **Classify** | **`GOODS_RECEIPT`** → `RECORD_GOODS_RECEIPT` (conf 0.9) |\n| **Doc** | PO-108 · Warehouse · not a request for payment |\n| **Dispatch** | **`ROUTED`** · `ROUTED_GOODS_RECEIPT` |\n| **Invoice / pay pool** | **None** · `invoice_id` null · `ready_for_payment: false` · no mutation |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-006.json` |",
+  "resultPaths": [],
+  "seq": 94
+}

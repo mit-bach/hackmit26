@@ -1,0 +1,19 @@
+{
+  "id": "h_8276a1ec-ab2e-4930-a16d-95e301f10b74",
+  "from": "bot_pay",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "PaymentPlan plan_2026-09-19_d1e2549ae6c2 written. pay_this_week: INV-001. ctl-pay CONCUR. cash expected outflows executed=false.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "pay"
+  },
+  "kind": "group_post",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:05:12.615Z",
+  "updatedAt": "2026-09-24T18:05:38.512Z",
+  "result": "**AP — no open work on this plan**\n\n`plan_2026-09-19_d1e2549ae6c2` lists **INV-001** only. That bill is already three-way matched and **ctl-pay CONCUR** on `review-match` (`runs/ap/packets/INV-001.json`, `runs/ap/concurrence/INV-001.json`). It sits in the approved pool.\n\nAP does not own release, ACH, or cash expected outflows (`executed=false`). Those stay with **pay** / **cash**. No new match, hold, or investigate turn from this room post.",
+  "resultPaths": [],
+  "seq": 26
+}

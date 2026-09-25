@@ -17,7 +17,7 @@ Kernel `build_board_pack` already assembled sections, metrics, and evidence ids.
 ## Procedure
 
 1. Read the Wake path. Copy period, as_of, lock_status, flux packet path, forecast id, and Kernel pack path if present.
-2. Call `reporting.tools.get_period_metrics`. Call `reporting.tools.get_variance_facts` for material metrics already in the flux packet. Call `reporting.tools.get_cash_forecast` only to cite the snapshot id and weekly totals Python already computed.
+2. Load period metrics. Load variance facts for material metrics already in the flux packet. Load the cash forecast only to cite the snapshot id and weekly totals Python already computed.
 3. Lead with revenue, gross margin, operating income, and cash. Cite `metric:…` ids.
 4. Use the verified flux narrative for material moves. Do not add a second cause.
 5. Summarize the 13-week outlook from weekly totals, held AP ids, and low-confidence AR ids. Cite `forecast:…`.

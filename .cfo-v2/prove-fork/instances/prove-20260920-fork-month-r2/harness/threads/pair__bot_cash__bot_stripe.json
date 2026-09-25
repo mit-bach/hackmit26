@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_cash:bot_stripe",
+  "threadId": "pair:bot_cash:bot_stripe",
+  "name": "Cash ↔ Stripe",
+  "memberIds": [
+    "bot_cash",
+    "bot_stripe"
+  ],
+  "createdAt": 1790272260446,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_4fcfd10e-ff2c-4078-8700-24cd7f247869",
+      "handleId": "h_4fcfd10e-ff2c-4078-8700-24cd7f247869",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: match\nProcessor deposits for Stripe payouts. Kernel waterfall MATCH on all three. invoice_candidates=0. never_ap_invoice. Tick bank deposits only. Do not mint AP invoices.\n\nPaths:\n- workspace/sources/stripe/po_1MaximorFees.json\n- workspace/sources/stripe/po_1MaximorRefunds.json\n- workspace/sources/stripe/po_1MaximorDisputes.json\n- workspace/stripe/deposits/po_1MaximorFees.json (BANK-po_1MaximorFees, 12610.00 USD, 2026-09-19)\n- workspace/stripe/deposits/po_1MaximorRefunds.json (BANK-po_1MaximorRefunds, 3380.00 USD, 2026-09-22)\n- workspace/stripe/deposits/po_1MaximorDisputes.json (BANK-po_1MaximorDisputes, 5070.00 USD, 2026-09-26)\n\nConfirm you have the deposit packets and next cash action.",
+      "at": 1790272260446,
+      "from": {
+        "botId": "bot_stripe",
+        "name": "Stripe",
+        "color": "blue"
+      }
+    },
+    {
+      "id": "pair-result-h_4fcfd10e-ff2c-4078-8700-24cd7f247869",
+      "handleId": "h_4fcfd10e-ff2c-4078-8700-24cd7f247869",
+      "role": "bot",
+      "kind": "text",
+      "text": "Cash confirms all three Stripe processor deposit packets and source payouts.\n\nHeld:\n- workspace/stripe/deposits/po_1MaximorFees.json + workspace/sources/stripe/po_1MaximorFees.json → BANK-po_1MaximorFees 12610.00 USD 2026-09-19 waterfall MATCH expected=actual minor 1261000 diff 0 invoice_candidates=0 never_ap_invoice\n- workspace/stripe/deposits/po_1MaximorRefunds.json + source → BANK-po_1MaximorRefunds 3380.00 USD 2026-09-22 MATCH minor 338000 diff 0\n- workspace/stripe/deposits/po_1MaximorDisputes.json + source → BANK-po_1MaximorDisputes 5070.00 USD 2026-09-26 MATCH minor 507000 diff 0\n\nCash action: tick bank deposits only. Wrote workspace/cash/packets/BANK-po_1MaximorFees.json, BANK-po_1MaximorRefunds.json, BANK-po_1MaximorDisputes.json and workspace/cash/status/2026-09-stripe-deposits.json. Status MATCHED_PROCESSOR_DEPOSIT on each. No AP invoice minted. No charge re-ownership (charges stay apply). Kernel card bank rows for BANK-po_* still unknown in cash_recon get_bank_transaction — deposit tick trusts Stripe waterfall MATCH arithmetic, does not invent bank statement rows.\n\nNext cash: fold these three matched processor deposits into 2026-09 trusted-cash pack when ctl-cash review-rec runs; residual exceptions on operating lines (e.g. TXN-2026-09-015) remain separate and do not block deposit ticks.",
+      "at": 1790272287360,
+      "from": {
+        "botId": "bot_cash",
+        "name": "Cash",
+        "color": "red"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-WBT-2026-08
+PO Number: PO-WBT-2026-08
+Issued: 2026-08-12
+Vendor: Westbrook Tooling
+Vendor legal name: Westbrook Tooling LLC
+Vendor tax ID: 04-6621180
+Authorized amount: 23,940.00
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Tooling lot August
+
+This purchase order is not an invoice. The vendor must bill against PO-WBT-2026-08.
+Payment terms follow the vendor master unless this order states otherwise.

@@ -1,0 +1,24 @@
+{
+  "transaction_id": "BNK-UNX-001",
+  "date": "2026-09-24",
+  "amount": -800.0,
+  "currency": "USD",
+  "description": "MONTHLY ACCOUNT ANALYSIS FEE",
+  "counterparty": "FIRST NATIONAL",
+  "transaction_type": "bank_fee",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "",
+  "raw_metadata": {},
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "unmatched_open",
+  "gt_label": null,
+  "path": "workspace/bank/lines/BNK-UNX-001.json"
+}

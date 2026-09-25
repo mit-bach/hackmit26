@@ -1,0 +1,19 @@
+{
+  "key": "col-inv-ar-024-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "5add77e2e36555ac27a69a00c45523ca197f9a44bc6166cc2b60e8c9cdafc599",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-inv-ar-024-20260930",
+      "thread_id": "col-atlas-inv-ar-024",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_319e6887ab8e"
+  }
+}

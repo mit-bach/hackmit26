@@ -1,0 +1,19 @@
+{
+  "id": "h_3e8434f0-b8f5-4180-add1-8854d9ddcc54",
+  "from": "bot_email",
+  "to": "bot_apply",
+  "toSlug": "apply",
+  "prompt": "Customer payment note from finance inbox for apply ownership.\n\nPath: workspace/email/packets/northwind-inv-ar-001-pay-note-handoff.md\nmessage_id: msg-northwind-inv-ar-001-pay-note-001\ncustomer: Northwind Labs (CUST-001)\ninvoice: INV-AR-001\namount: $12,000.00 USD\nmethod: ACH scheduled 2026-10-14\n\nBody: payment commitment only — not cash already sent; apply once bank clears. Routed RECORD_CUSTOMER_REMITTANCE / ROUTED_REMITTANCE. Email candidate null. Do not match AP, pay, or close.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_apply"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:57:49.032Z",
+  "updatedAt": "2026-09-24T20:58:03.382Z",
+  "result": "Acknowledged handoff workspace/email/packets/northwind-inv-ar-001-pay-note-handoff.md (msg-northwind-inv-ar-001-pay-note-001).\n\nDisposition: NOT applied. Body is payment commitment only (ACH scheduled 2026-10-14 for INV-AR-001 / CUST-001 Northwind Labs, $12,000.00 USD) — cash has not cleared. Kernel get_cash_application_facts for that message_id returned Unknown payment; no candidate set to choose.\n\nApply ownership noted for when bank/stripe identifies the deposit or remittance posts. Will AUTO_APPLY or route only against live payment_id + Kernel candidates then. Will not match AP/pay/close. No ctl-cash packet (nothing to post or fail-closed). Email may close its remittance route for this message as commitment-recorded / await-clearing.",
+  "seq": 37
+}

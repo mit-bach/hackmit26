@@ -1,0 +1,19 @@
+{
+  "id": "h_6b0239b0-d129-4874-be3d-4558aa5c1a44",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Operator check for ap",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:50.477Z",
+  "updatedAt": "2026-09-24T23:35:53.339Z",
+  "result": "**ap check — OK / blocked on missing item**\n\n- Seat: idle, no peer thread open  \n- Outstanding: `bill:INV-009` investigate never completed  \n- Cause: no ledger file `runs/items/bill-INV-009.json` → all kernel ops + `complete_step` return `unknown item bill:INV-009`  \n- Local memory only: Acme Supplies ACM- precedent  \n- Action needed outside ap: seed that item (or drop the wake), then re-wake investigate",
+  "resultPaths": [],
+  "seq": 119
+}

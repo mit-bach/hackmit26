@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-031
+PO Number: PO-OPEN-031
+Vendor: ADP
+Goods received in full on 2026-09-05
+Packing list attached: PL-GR-OPEN-031
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 184,252.58 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

@@ -1,0 +1,19 @@
+{
+  "id": "h_28f70d3f-c264-42a7-a8af-008b9370ac52",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Operator check for email",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:52.970Z",
+  "updatedAt": "2026-09-24T23:33:33.901Z",
+  "result": "Email bot here — ready. I own inbound messages and attachments (vendor invoices, customer remittances) and triage them on the `triage` step.\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 53
+}

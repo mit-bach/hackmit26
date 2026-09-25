@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-OPEN-001
+PO Number: PO-OPEN-001
+Issued: 2026-09-02
+Vendor: Acme Supply Co.
+Vendor legal name: Acme Supplies, Inc. d/b/a Acme Supply Co.
+Vendor tax ID: 04-2218891
+Authorized amount: 180,137.18
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Open operating payable
+
+This purchase order is not an invoice. The vendor must bill against PO-OPEN-001.
+Payment terms follow the vendor master unless this order states otherwise.

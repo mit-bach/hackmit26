@@ -22,4 +22,4 @@ Choose the next Wake among Kernel-ready rows. Harbor-class vendor habit lives in
 
 ## Must not (this Profile)
 
-Do not call `create_accrual`. Do not mark CLOSED. Do not force-close failed recs. Do not wear `accrue` on this turn.
+Do not book an accrual. Do not mark CLOSED. Do not force-close failed recs. Do not wear `accrue` on this turn.

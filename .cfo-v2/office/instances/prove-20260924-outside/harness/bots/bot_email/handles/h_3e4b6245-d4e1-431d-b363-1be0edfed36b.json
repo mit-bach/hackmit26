@@ -1,0 +1,19 @@
+{
+  "id": "h_3e4b6245-d4e1-431d-b363-1be0edfed36b",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nNew mail came from Acme Supplies, from Northwind Labs, and from the bank. Classify each one. A vendor bill goes to ap. A customer payment note goes to apply. A bank notice is not a bill. Do not match, pay, or close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:48:25.121Z",
+  "updatedAt": "2026-09-24T20:48:51.111Z",
+  "result": "## Classification summary (already triaged; no match / pay / close)\n\n### 1. Acme Supplies — **vendor bill → AP**\n| | |\n| --- | --- |\n| **Ids** | World `msg-acme-acm-2026-4410` → catalog `MSG-E-INV-001` / `ATT-E-001` |\n| **Class** | `invoice` / CREATE_AP_INVOICE |\n| **Fields** | Acme Supplies · **ACM-2026-4410** · 2026-09-08 · due 2026-09-22 · **$12,450.00 USD** · PO-101 |\n| **Packet** | `workspace/email/packets/MSG-E-INV-001.json` |\n| **Handoff** | **ap** (prepare). ERP identity via books: **NS-4410** |\n\n### 2. Northwind Labs — **not apply cash**\n| | |\n| --- | --- |\n| **Ids** | `msg-northwind-pay-intent-inv-ar-007` / INV-AR-007 |\n| **Class** | `customer_payment_intent` (promise-to-pay), **not** remittance / payment_confirmation |\n| **Why not apply** | Future ACH on **2026-09-30** for **$12,000**; money has not moved; no remittance tying bank cash to invoices. World also said do not apply cash from this note. |\n| **Packet** | `workspace/email/packets/msg-northwind-pay-intent-inv-ar-007.json` |\n| **Handoff** | **collect** (awareness / hold dunning). **apply** not used — would only take a real remittance or confirmed receipt. |\n\n### 3. First National Operating — **bank notice, not a bill**\n| | |\n| --- | --- |\n| **Ids** | `msg-fno-stmt-2026-09` / STMT-OP-2026-09 |\n| **Class** | `bank_notice` (statement **availability** for 2026-09-01…2026-09-30) |\n| **Candidate** | `null` |\n| **Packet** | `workspace/email/packets/msg-fno-stmt-2026-09.json` |\n| **Handoff** | none (TRACE_ONLY). No bank-line match, no recon story. |\n\n---\n\n**Routing vs your shorthand:** vendor bill → **ap** ✓ · bank notice ≠ bill ✓ · customer note → **apply** only when it is remittance/payment confirmation with cash to stick; this Northwind mail is a **payment plan**, so **collect**, not apply.",
+  "resultPaths": [],
+  "seq": 58
+}

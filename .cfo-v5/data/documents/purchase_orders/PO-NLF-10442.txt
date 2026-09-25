@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-NLF-10442
+PO Number: PO-NLF-10442
+Issued: 2026-03-18
+Vendor: North Line Fab Inc
+Vendor legal name: North Line Fab Inc
+Vendor tax ID: 04-7712091
+Authorized amount: 18,424.62
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Fab lot NLF-10442
+
+This purchase order is not an invoice. The vendor must bill against PO-NLF-10442.
+Payment terms follow the vendor master unless this order states otherwise.

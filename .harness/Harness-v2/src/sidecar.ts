@@ -1,6 +1,6 @@
 import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 
 import type { ClientRuntime, ClientSidecarSpec } from "./client-runtime.ts";
 import { resolveClientPath } from "./client-runtime.ts";
@@ -64,12 +64,25 @@ async function waitForPort(
   throw new Error(`sidecar did not publish a healthy port at ${spec.portFile}${extra}`);
 }
 
-function findCfoKernel(start: string): string | undefined {
-  let dir = resolve(start);
+function isRejectedKernel(dir: string): boolean {
+  return basename(resolve(dir)) === ".cfo";
+}
+
+/** Computer kernel when it contains cfo_kernel. Never a directory named .cfo. */
+export function resolveCfoKernel(computerRoot: string, env: NodeJS.ProcessEnv = process.env): string | undefined {
+  const local = join(resolve(computerRoot), "kernel");
+  if (existsSync(join(local, "cfo_kernel"))) {
+    return local;
+  }
+  const pinned = env.CFO_KERNEL?.trim();
+  if (pinned && !isRejectedKernel(pinned)) {
+    return resolve(pinned);
+  }
+  let dir = resolve(computerRoot);
   for (;;) {
-    const candidate = join(dir, ".cfo");
-    if (existsSync(join(candidate, "cfo_kernel")) || existsSync(join(candidate, ".venv"))) {
-      return candidate;
+    const v3 = join(dir, ".cfo-v3", "kernel");
+    if (existsSync(join(v3, "cfo_kernel"))) {
+      return v3;
     }
     const parent = dirname(dir);
     if (parent === dir) {
@@ -79,14 +92,29 @@ function findCfoKernel(start: string): string | undefined {
   }
 }
 
+export function applyServeComputerEnv(computerRoot: string, env: NodeJS.ProcessEnv = process.env): void {
+  const root = resolve(computerRoot);
+  env.HARNESS_COMPUTER = root;
+  const kernel = resolveCfoKernel(root, env);
+  if (kernel) {
+    env.CFO_KERNEL = kernel;
+    return;
+  }
+  if (env.CFO_KERNEL && isRejectedKernel(env.CFO_KERNEL)) {
+    delete env.CFO_KERNEL;
+  }
+}
+
 function sidecarEnv(computerRoot: string, runtime: ClientRuntime, spec: ClientSidecarSpec): NodeJS.ProcessEnv {
   const env: NodeJS.ProcessEnv = { ...process.env };
   delete env.HARNESS_BOT;
   env.HARNESS_COMPUTER = computerRoot;
   env.SIDECAR_PORT_FILE = resolveClientPath(computerRoot, spec.portFile);
-  const kernel = findCfoKernel(computerRoot);
+  const kernel = resolveCfoKernel(computerRoot, env);
   if (kernel) {
     env.CFO_KERNEL = kernel;
+  } else if (env.CFO_KERNEL && isRejectedKernel(env.CFO_KERNEL)) {
+    delete env.CFO_KERNEL;
   }
   if (runtime.evalPhase) {
     env.CFO_EVAL_PHASE = runtime.evalPhase;

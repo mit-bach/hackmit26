@@ -1,0 +1,18 @@
+▶ Verifier concurrence parse
+  ✔ prose that mentions CONCUR is not CONCUR (0.373166ms)
+  ✔ accepts only a structured decision (0.136041ms)
+  ✔ a completed Handle whose result says 'I do not concur' does not unlock (44.136292ms)
+✔ Verifier concurrence parse (45.503458ms)
+▶ call_connected_tool through the Pi registration path
+  ✔ unlocks a consequential op after CONCUR when the model retries with the same idempotency_key (177.101917ms)
+  ✔ honors an explicit handle_id the model passes (125.841959ms)
+✔ call_connected_tool through the Pi registration path (303.158333ms)
+ℹ tests 5
+ℹ suites 2
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 544.064583
+exit 0

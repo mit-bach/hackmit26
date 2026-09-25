@@ -1,0 +1,39 @@
+Shadow Vendor LLC
+410 Market Street
+Wilmington, DE 19801
+Phone +1 302-555-0190   billing@shadowvendor.example
+Tax ID 51-7782104
+
+INVOICE
+
+Invoice Number: SV-999001
+Invoice Date: 2026-09-16
+Due Date: 2026-10-16
+PO Number: PO-118
+Payment Terms: net 30
+Currency: USD
+Vendor: Shadow Vendor LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Shadow consulting — September sprint          1.00      8,750.00      8,750.00
+
+Subtotal                                                              8,750.00
+Tax                                                                       0.00
+Amount Due                                                            8,750.00
+
+Remit to:
+ACH Wilmington Trust routing 031100209  account ****9990
+Bank: Wilmington Trust  ****9990
+Please include invoice SV-999001 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@shadowvendor.example

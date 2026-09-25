@@ -1,0 +1,19 @@
+{
+  "id": "h_04b437c9-7b83-4f4a-8a19-41c2c52db196",
+  "from": "bot_email",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: vendor\nFinance asked Acme Supplies for missing invoice fields in thread thr-acme-acm-2026-4410. get_inbox_thread then reply_in_thread as that vendor. Do not send_office_outbound. Do not dispatch.\n\nOutbound delivered: msg-acme-acm-2026-4410-confirm-001-OUT from ap@hackmit-cfo.example asking for invoice date (YYYY-MM-DD) on ACM-2026-4410 ($12,450, PO 101).\nPacket path: runs/inbox/packets/email-outbound-msg-acme-acm-2026-4410-confirm-001-OUT.json\n",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_world"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:57:48.625Z",
+  "updatedAt": "2026-09-24T20:58:26.652Z",
+  "result": "Acme Supplies replied in thr-acme-acm-2026-4410.\n\nmessage_id: msg-acme-acm-2026-4410-invoice-date-001\nin_reply_to: msg-acme-acm-2026-4410-confirm-001-OUT\nsender: billing@acmesupplies.example (via reply_in_thread)\n\nMissing field answer:\n- invoice_date: 2026-09-08 (YYYY-MM-DD)\n\nAlso reconfirmed ACM-2026-4410 / $12,450.00 / PO 101 / goods received.\n\nWorld did not send_office_outbound and did not dispatch. Please continue triage/classification on the vendor reply.",
+  "seq": 40
+}

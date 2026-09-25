@@ -1,0 +1,19 @@
+{
+  "id": "h_619f9eff-3cc0-40a1-897f-f655e0dbeb9f",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Profile: review-treatment. Six pending create_accrual verifier handles need formal packet concurrence so Kernel can complete the writes:\n\n- h_50c51ee6-c022-4d26-933d-1dcd5cc5afb2 → accrual-2026-09-aether-compute.json\n- h_011abfe9-b2c6-45a5-a816-8b2f36c5dcdd → accrual-2026-09-cleanspace.json\n- h_6d596bc0-2f14-41b1-9fe0-3c9948907489 → accrual-2026-09-clearing.json\n- h_f7e2923a-7050-4f11-86ea-27ebd1fcd112 → accrual-2026-09-harbor-electric.json\n- h_f7e70c0e-b818-4902-ac7f-891983977d91 → accrual-2026-09-lindholm.json\n- h_f94c94ed-144a-4ed2-93bf-eddff956c9d7 → accrual-2026-09-pulse.json\n\nPlease CONCUR each packet path under workspace/verifier/ctl-books/ and complete the parked treatment approvals. Do not lock the period. Do not clear $12.40.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:17:00.261Z",
+  "updatedAt": "2026-09-24T21:17:38.794Z",
+  "result": "CONCUR\n\nFormal packet concurrence for all six parked create_accrual treatments (review-treatment). Kernel may complete the writes.\n\n1. h_50c51ee6… / accrual-2026-09-aether-compute.json — CONCUR\n   Aether Compute | usage_run_rate | 11849.90\n\n2. h_011abfe9… / accrual-2026-09-cleanspace.json — CONCUR\n   CleanSpace Facilities | contract_commitment | 2400.00\n\n3. h_6d596bc0… / accrual-2026-09-clearing.json — CONCUR\n   Clearing Solutions LLC | simple_average | 9632.44\n\n4. h_f7e2923a… / accrual-2026-09-harbor-electric.json — CONCUR\n   Harbor Electric | seasonal_prior_year | 4650.00\n\n5. h_f7e70c0e… / accrual-2026-09-lindholm.json — CONCUR\n   Lindholm & Ruiz LLP | contract_commitment | 8500.00\n\n6. h_f94c94ed… / accrual-2026-09-pulse.json — CONCUR\n   Pulse Recruiting | contract_commitment | 15000.00\n\nEach packet is complete: method applicable to evidence, amount Kernel-owned, no unexplained difference.\n\nBoundaries honored on this wake:\n- Do not lock the period\n- Do not clear unexplained $12.40\n- NewForge remains insufficient_evidence (no accrual)\n\nVerdict: CONCUR all six.",
+  "seq": 47
+}

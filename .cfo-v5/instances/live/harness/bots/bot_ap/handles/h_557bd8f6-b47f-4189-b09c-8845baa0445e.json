@@ -1,0 +1,19 @@
+{
+  "id": "h_557bd8f6-b47f-4189-b09c-8845baa0445e",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "Operator check for ap",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:12.870Z",
+  "updatedAt": "2026-09-24T23:35:36.824Z",
+  "result": "**ap — operator check**\n\n| Field | Status |\n|--------|--------|\n| Bot | `ap` (open bills: match / investigate) |\n| Queue | No live item I can finish |\n| Last work | `bill:INV-009` · `investigate` |\n| Blocker | `unknown item bill:INV-009` — packet missing under `runs/items/` |\n| Tools | Case evidence, policies, `complete_step` all fail without that ledger row |\n| Write path | Cannot create `runs/items/bill-INV-009.json` from sandbox (EPERM) |\n| Memory | Acme Supplies ACM- layout only |\n| Peer waits | None |\n\n**Need from engine/operator:** seed `bill:INV-009` and re-wake `investigate`, or cancel that wake. Ready once the item exists.",
+  "resultPaths": [],
+  "seq": 84
+}

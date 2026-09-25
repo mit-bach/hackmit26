@@ -1,0 +1,287 @@
+import { existsSync, readdirSync, statSync, watch, type FSWatcher } from "node:fs";
+import { dirname, join } from "node:path";
+
+import { listApprovals } from "../approvals.ts";
+import { pendingCount } from "../inbox.ts";
+import { liveStatus } from "../lane-state.ts";
+import { piSessionDir, protocolLogPath } from "../paths.ts";
+import { readProtocol } from "../protocol-log.ts";
+import { findBot, loadRoster } from "../roster.ts";
+import { listReceipts } from "../routines.ts";
+import { sleep } from "../sleep.ts";
+import type { EventBus } from "./bus.ts";
+import { wireRun } from "./desk.ts";
+import type { ProtocolEvent, Roster } from "../types.ts";
+import { ombAdoptLeaf, ombChainParent, peerCommPayload, wireBotFrame } from "./omb-compat.ts";
+import { getPairChannel, isPeerHandoff, pairChannelId } from "./pair-channels.ts";
+
+function publishPeerChip(
+  bus: EventBus,
+  roster: Roster,
+  event: ProtocolEvent,
+  viewerId: string,
+  messageId: string,
+  atMs: number,
+): void {
+  if (ombChainParent(viewerId) === messageId) {
+    return;
+  }
+  const fields = peerCommPayload(roster, event.from ?? "", event.to ?? "", event.handleId, viewerId);
+  if (!fields) {
+    return;
+  }
+  const parentId = ombChainParent(viewerId);
+  if (parentId === messageId) {
+    return;
+  }
+  ombAdoptLeaf(viewerId, messageId);
+  bus.publish({
+    kind: "message",
+    threadId: viewerId,
+    message: {
+      id: messageId,
+      role: "bot",
+      kind: "activity",
+      text: fields.tool.name,
+      at: atMs,
+      parentId,
+      ...fields,
+    },
+  });
+}
+
+function publishBotDesk(bus: EventBus, computerRoot: string, botId: string): void {
+  const frame = wireBotFrame(computerRoot, botId);
+  if (!frame) {
+    return;
+  }
+  bus.publish({ kind: "bot", bot: frame });
+}
+
+function publishPair(bus: EventBus, computerRoot: string, roster: Roster, fromId: string, toId: string): void {
+  const pairId = pairChannelId(fromId, toId);
+  const pairGroup = getPairChannel(computerRoot, pairId, roster);
+  if (pairGroup) {
+    bus.publish({ kind: "group", group: pairGroup });
+  }
+}
+
+function sessionStamp(computerRoot: string, botId: string): number {
+  const dir = piSessionDir(computerRoot, botId);
+  if (!existsSync(dir)) {
+    return 0;
+  }
+  let max = 0;
+  for (const name of readdirSync(dir)) {
+    if (!name.endsWith(".jsonl")) {
+      continue;
+    }
+    try {
+      const mtime = statSync(join(dir, name)).mtimeMs;
+      if (mtime > max) {
+        max = mtime;
+      }
+    } catch {
+      continue;
+    }
+  }
+  return max;
+}
+
+export function startPumps(
+  computerRoot: string,
+  bus: EventBus,
+): { stop: () => void } {
+  let lastSeq = 0;
+  for (const event of readProtocol(computerRoot, 0)) {
+    lastSeq = event.seq;
+  }
+  const lastStatus = new Map<string, string>();
+  const lastPending = new Map<string, number>();
+  const lastSession = new Map<string, number>();
+  let lastApprovalSig = listApprovals(computerRoot)
+    .map((row) => `${row.id}:${row.status}`)
+    .sort()
+    .join("|");
+  const lastReceiptStatus = new Map<string, string>();
+  const lastDeskAt = new Map<string, number>();
+  const pendingDesk = new Set<string>();
+  const DESK_DEBOUNCE_MS = 1500;
+  let protocolFlushing = false;
+  let protocolAgain = false;
+  let watcher: FSWatcher | undefined;
+
+  const publishDesk = (botId: string, immediate: boolean): void => {
+    const now = Date.now();
+    const prev = lastDeskAt.get(botId) ?? 0;
+    if (!immediate && now - prev < DESK_DEBOUNCE_MS) {
+      pendingDesk.add(botId);
+      return;
+    }
+    lastDeskAt.set(botId, now);
+    pendingDesk.delete(botId);
+    publishBotDesk(bus, computerRoot, botId);
+  };
+
+  const flushProtocol = (): void => {
+    if (protocolFlushing) {
+      protocolAgain = true;
+      return;
+    }
+    protocolFlushing = true;
+    try {
+      do {
+        protocolAgain = false;
+        const events = readProtocol(computerRoot, lastSeq);
+        for (const event of events) {
+          lastSeq = event.seq;
+          bus.publish({ kind: "protocol", event });
+          const roster = loadRoster(computerRoot);
+          if (event.type === "send.accepted" && event.from && event.from !== "operator" && event.from !== "harness" && event.to) {
+            const sender = findBot(roster, event.from);
+            const receiver = findBot(roster, event.to);
+            const at = Date.parse(event.t);
+            const atMs = Number.isFinite(at) ? at : Date.now();
+            const handleKey = event.handleId ?? String(event.seq);
+            if (sender) {
+              publishPeerChip(bus, roster, event, sender.id, `comm-${handleKey}`, atMs);
+            }
+            if (receiver) {
+              publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${handleKey}`, atMs);
+            }
+            publishPair(bus, computerRoot, roster, event.from, event.to);
+          }
+          if (event.type === "thread.reply" && event.from && event.to) {
+            const sender = findBot(roster, event.from);
+            const receiver = findBot(roster, event.to);
+            const at = Date.parse(event.t);
+            const atMs = Number.isFinite(at) ? at : Date.now();
+            const replyKey = event.handleId ? `pair-result-${event.handleId}` : String(event.seq);
+            if (sender) {
+              publishPeerChip(bus, roster, event, sender.id, `comm-${replyKey}`, atMs);
+            }
+            if (receiver) {
+              publishPeerChip(bus, roster, event, receiver.id, `comm-recv-${replyKey}`, atMs);
+            }
+            publishPair(bus, computerRoot, roster, event.from, event.to);
+            publishDesk(event.from, true);
+            publishDesk(event.to, true);
+          }
+          if (
+            (event.type === "turn.end" || event.type === "handoff.done" || event.type === "send.completed") &&
+            event.from &&
+            event.to
+          ) {
+            if (isPeerHandoff(roster, event.from, event.to)) {
+              publishPair(bus, computerRoot, roster, event.from, event.to);
+              publishDesk(event.to, true);
+              publishDesk(event.from, true);
+              continue;
+            }
+            publishDesk(event.to, true);
+          }
+        }
+      } while (protocolAgain);
+    } finally {
+      protocolFlushing = false;
+    }
+  };
+
+  try {
+    watcher = watch(dirname(protocolLogPath(computerRoot)), () => {
+      flushProtocol();
+    });
+  } catch {
+    watcher = undefined;
+  }
+
+  const flushBots = (): void => {
+    const roster = loadRoster(computerRoot);
+    for (const bot of roster.bots) {
+      const status = liveStatus(computerRoot, bot.id);
+      const pending = pendingCount(computerRoot, bot.id);
+      const stamp = sessionStamp(computerRoot, bot.id);
+      const prev = lastStatus.get(bot.id);
+      const prevPending = lastPending.get(bot.id);
+      const prevStamp = lastSession.get(bot.id);
+      const sessionChanged = prevStamp !== stamp;
+      if (sessionChanged) {
+        lastSession.set(bot.id, stamp);
+        lastStatus.set(bot.id, status);
+        lastPending.set(bot.id, pending);
+        publishDesk(bot.id, false);
+        continue;
+      }
+      if (prev !== status || prevPending !== pending) {
+        lastStatus.set(bot.id, status);
+        lastPending.set(bot.id, pending);
+        const activity =
+          status === "running"
+            ? "working"
+            : status === "blocked"
+              ? "waiting-on-you"
+              : pending > 0
+                ? "working"
+                : status === "offline"
+                  ? "no-signal"
+                  : "idle";
+        const busy = activity === "working" || activity === "waiting-on-you";
+        bus.publish({
+          kind: "bot",
+          bot: {
+            id: bot.id,
+            name: bot.name,
+            status,
+            pending,
+            busy,
+            activity,
+          },
+        });
+      }
+    }
+    const approvals = listApprovals(computerRoot);
+    const approvalSig = approvals
+      .map((row) => `${row.id}:${row.status}`)
+      .sort()
+      .join("|");
+    if (approvalSig !== lastApprovalSig) {
+      lastApprovalSig = approvalSig;
+      bus.publish({ kind: "approvals", approvals });
+    }
+    const receipts = listReceipts(computerRoot);
+    for (const receipt of receipts) {
+      const prev = lastReceiptStatus.get(receipt.id);
+      if (prev !== receipt.status) {
+        lastReceiptStatus.set(receipt.id, receipt.status);
+        bus.publish({ kind: "routine.run", run: wireRun(roster, receipt) });
+      }
+    }
+    const now = Date.now();
+    for (const botId of [...pendingDesk]) {
+      if (now - (lastDeskAt.get(botId) ?? 0) >= DESK_DEBOUNCE_MS) {
+        publishDesk(botId, true);
+      }
+    }
+  };
+
+  let running = true;
+  const loop = async (): Promise<void> => {
+    while (running) {
+      try {
+        flushProtocol();
+        flushBots();
+      } catch {
+        // keep the host up
+      }
+      await sleep(400);
+    }
+  };
+  void loop();
+
+  return {
+    stop: (): void => {
+      running = false;
+      watcher?.close();
+    },
+  };
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_731c3c44-b18b-4747-a343-8a3671607bac",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Operator check for email",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:49.135Z",
+  "updatedAt": "2026-09-24T23:35:52.247Z",
+  "result": "Email bot here — online and ready.\n\nI own inbound messages and attachments (vendor invoices, customer remittances, etc.). On triage I classify with kernel tools, then `ROUTE` or `REJECT`; I don’t invent invoice fields or follow untrusted body/attachment instructions.\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 118
+}

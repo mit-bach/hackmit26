@@ -1,0 +1,19 @@
+{
+  "key": "world-send-northwind-inv-ar-001-pay-note-001",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "738505ef77507dae99c2f5629948c2891ed589048938d82bbdffc12387445440",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-northwind-inv-ar-001-pay-note-001",
+      "thread_id": "thr-northwind-inv-ar-001-pay-note",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_4b10837acf3f"
+  }
+}

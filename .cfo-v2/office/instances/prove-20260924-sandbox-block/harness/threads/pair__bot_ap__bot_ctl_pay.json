@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_ctl_pay",
+  "threadId": "pair:bot_ap:bot_ctl_pay",
+  "name": "AP ↔ ctl-pay",
+  "memberIds": [
+    "bot_ap",
+    "bot_ctl_pay"
+  ],
+  "createdAt": 1790282147812,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_19e55511-b0ae-436e-bd9a-b9413fa7c38d",
+      "handleId": "h_19e55511-b0ae-436e-bd9a-b9413fa7c38d",
+      "role": "bot",
+      "kind": "text",
+      "text": "profile: review-match\n\nAP prepare packet ready for INV-001 (NS-4410 / ACM-2026-4410 / Acme Supplies / PO-101 / 12450 USD).\n\nPacket path: workspace/ap/packets/INV-001.json\n\nKernel facts in packet: empty exception_types, amount_difference 0, full GR-101, approved PO-101, no duplicate. PreparerRecommendation APPROVE. Please review-match; this is not payment release. AP does not treat this as pay-run release.",
+      "at": 1790282147812,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    },
+    {
+      "id": "pair-result-h_19e55511-b0ae-436e-bd9a-b9413fa7c38d",
+      "handleId": "h_19e55511-b0ae-436e-bd9a-b9413fa7c38d",
+      "role": "bot",
+      "kind": "text",
+      "text": "ReviewerDecision CONCUR on INV-001 (review-match only; not pay-run release).\n\nPath: workspace/ctl-pay/decisions/INV-001-review-match.json\n\nKernel evidence (tools.get_case_evidence): exception_types=[], amount_difference=0, amount_matches=true, vendor_exact_match=true, po_approved=true (PO-101), receipt_status=full (GR-101, 15/15, amount_received=12450), duplicate_detected=false. must_hold empty.\n\nPolicy: P-001 Exact three-way match — may_approve conditions all satisfied. No must_hold policy (P-002..P-008) triggers.\n\nDecision: CONCUR with PreparerRecommendation APPROVE. Amount 12450 USD unchanged (Python/Kernel facts only).",
+      "at": 1790282171794,
+      "from": {
+        "botId": "bot_ctl_pay",
+        "name": "ctl-pay",
+        "color": "purple"
+      }
+    }
+  ]
+}

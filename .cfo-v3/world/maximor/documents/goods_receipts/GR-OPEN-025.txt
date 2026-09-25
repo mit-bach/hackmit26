@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-025
+PO Number: PO-OPEN-025
+Vendor: Cloudflare
+Goods received in full on 2026-09-26
+Packing list attached: PL-GR-OPEN-025
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 183,429.50 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

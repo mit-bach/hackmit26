@@ -1,0 +1,19 @@
+{
+  "id": "h_58880bd8-9cd6-4b7b-95aa-e0162e4935c7",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: document\nList mail documents and get one if any exist. Do not invent a bill. Do not match. Do not ask_user. One Profile: document.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:53:40.016Z",
+  "updatedAt": "2026-09-24T17:53:53.372Z",
+  "result": "### Mail documents (profile: `document`)\n\n**List** — count **2**\n\n| document_id | filename | origin |\n| --- | --- | --- |\n| DOC-SCAN-QUOTE | quote-q8891.pdf | mailroom_scan |\n| DOC-SCAN-INV-001 | acm-2026-4410.pdf | mailroom_scan |\n\n**Get one:** `DOC-SCAN-INV-001`\n\n| Field | Value |\n| --- | --- |\n| Period | 2026-09 |\n| Origin | mailroom_scan |\n| Filename | acm-2026-4410.pdf |\n| Received | 2026-09-08 |\n| Hash | `cbda5aac…2d6e` |\n| Text | Acme Supplies **INVOICE** ACM-2026-4410 · 2026-09-08 · due 2026-09-22 · PO-101 · **USD 12,450.00** · 2/10 net 30 |\n\nList + get only. No bill invented, no match, no `ask_user`.",
+  "resultPaths": [],
+  "seq": 151
+}

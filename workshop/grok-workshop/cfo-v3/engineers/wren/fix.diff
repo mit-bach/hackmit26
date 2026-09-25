@@ -1,0 +1,215 @@
+--- workshop/grok-workshop/cfo-v3/engineers/wren/old/index.ts	2026-09-24 17:45:03
++++ .cfo-v3/cfo/extensions/index.ts	2026-09-24 17:45:52
+@@ -15,10 +15,11 @@
+ import {Type} from "typebox";
+ 
+ import {callConnectedTool} from "./call.ts";
++import {resolvePendingHandleId} from "./intercept.ts";
+ import {isRecord, loadClientFiles} from "./load.ts";
+ import type {PiExtensionApi, PiToolResult} from "./pi-api.ts";
+ import {bindBot, parseProfileFromWake, replaceProfile} from "./profile.ts";
+-import {searchConnectedTools} from "./search.ts";
++import {resolveOp, searchConnectedTools} from "./search.ts";
+ import {sendPeerHandle} from "./send.ts";
+ import {intersectSkillNames, kernelSkillsRoot, skillDirectoryPaths} from "./skills.ts";
+ import type {BoundProfile, EvalPhase} from "./types.ts";
+@@ -180,24 +181,34 @@
+     promptSnippet: "Call a granted Kernel Connector",
+     promptGuidelines: [
+       "call_connected_tool is the only Kernel door. Do not invent amounts. Python returns candidates. Consequential ops go to ctl-* Verifiers, never ask_user.",
++      "After a Verifier Handle completes with CONCUR, call again with the same idempotency_key. handle_id is optional.",
+     ],
+     parameters: Type.Object({
+       name: Type.String({description: "Catalog id or exportName"}),
+       args: Type.Optional(Type.Any()),
+       idempotency_key: Type.Optional(Type.String()),
++      handle_id: Type.Optional(
++        Type.String({description: "Verifier Handle id from verifier_required; looked up by idempotency_key when omitted"}),
++      ),
+     }),
+     execute: async (_id, params) => {
++      const name = readString(params, "name");
+       const key = readString(params, "idempotency_key");
++      const idempotencyKey = key.length > 0 ? key : undefined;
++      const passed = readString(params, "handle_id");
++      const op = resolveOp(files.catalog, name);
++      const handleId =
++        passed.length > 0 ? passed : op === undefined ? null : resolvePendingHandleId(bind, op, idempotencyKey);
+       const result = await callConnectedTool(
+         bind,
+         files.catalog,
+         {
+-          name: readString(params, "name"),
++          name,
+           args: readArgs(params),
+-          idempotencyKey: key.length > 0 ? key : undefined,
++          idempotencyKey,
+         },
+         undefined,
+-        null,
++        handleId,
+         async (input: {readonly to: string; readonly prompt: string; readonly paths: readonly string[]}): Promise<string | null> =>
+           sendPeerHandle({
+             computerRoot,
+--- workshop/grok-workshop/cfo-v3/engineers/wren/old/intercept.ts	2026-09-24 17:45:03
++++ .cfo-v3/cfo/extensions/intercept.ts	2026-09-24 17:45:39
+@@ -5,7 +5,7 @@
+  */
+ 
+ import {existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync} from "node:fs";
+-import {dirname, join} from "node:path";
++import {basename, dirname, join} from "node:path";
+ 
+ import {isRecord} from "./load.ts";
+ import {botIdForSlug} from "./profile.ts";
+@@ -59,27 +59,28 @@
+   return undefined;
+ }
+ 
++function asDecision(value: unknown): HandleConcurrence {
++  return value === "CONCUR" || value === "REFUSE" ? value : "none";
++}
++
++/**
++ * Structured decisions only: a first line exactly `CONCUR` or `REFUSE`, or a
++ * JSON object with `decision`. Prose such as "I do not concur" is "none".
++ */
+ export function handleConcurrence(result: string): HandleConcurrence {
+   const trimmed = result.trim();
+   if (trimmed.length === 0) {
+     return "none";
+   }
+-  const firstLine = trimmed.split("\n", 1)[0]?.trim().toUpperCase() ?? "";
+-  if (firstLine === "CONCUR" || firstLine.startsWith("CONCUR")) {
+-    return "CONCUR";
++  if (trimmed.startsWith("{")) {
++    try {
++      const raw: unknown = JSON.parse(trimmed);
++      return isRecord(raw) ? asDecision(raw.decision) : "none";
++    } catch {
++      return "none";
++    }
+   }
+-  if (firstLine === "REFUSE" || firstLine.startsWith("REFUSE")) {
+-    return "REFUSE";
+-  }
+-  const hasConcur = /\bCONCUR\b/i.test(trimmed);
+-  const hasRefuse = /\bREFUSE\b/i.test(trimmed);
+-  if (hasConcur && !hasRefuse) {
+-    return "CONCUR";
+-  }
+-  if (hasRefuse && !hasConcur) {
+-    return "REFUSE";
+-  }
+-  return "none";
++  return asDecision(trimmed.split("\n", 1)[0]?.trim());
+ }
+ 
+ function pendingOpMatches(computerRoot: string, handleId: string, opId: string): boolean {
+@@ -149,6 +150,71 @@
+   return {kind: "intercept", route};
+ }
+ 
++function pendingKeyOf(raw: Record<string, unknown>): string | undefined {
++  if (typeof raw.idempotencyKey === "string" || raw.idempotencyKey === null) {
++    return raw.idempotencyKey ?? undefined;
++  }
++  // Index rows written before idempotencyKey was recorded name the packet `<key>.json`.
++  return typeof raw.packetPath === "string" ? basename(raw.packetPath, ".json") : undefined;
++}
++
++/**
++ * Pending Verifier Handle ids this Bot opened for one op and idempotency key,
++ * newest first.
++ */
++export function pendingHandleIdsForKey(
++  computerRoot: string,
++  query: {readonly fromSlug: string; readonly op: string; readonly idempotencyKey: string},
++): string[] {
++  const dir = join(computerRoot, "workspace", "verifier", "pending");
++  if (!existsSync(dir)) {
++    return [];
++  }
++  const rows: {readonly id: string; readonly createdAt: string}[] = [];
++  for (const ent of readdirSync(dir, {withFileTypes: true})) {
++    if (!ent.isFile() || !ent.name.endsWith(".json")) {
++      continue;
++    }
++    try {
++      const raw: unknown = JSON.parse(readFileSync(join(dir, ent.name), "utf8"));
++      if (
++        !isRecord(raw) ||
++        typeof raw.id !== "string" ||
++        raw.fromSlug !== query.fromSlug ||
++        raw.op !== query.op ||
++        pendingKeyOf(raw) !== query.idempotencyKey
++      ) {
++        continue;
++      }
++      rows.push({id: raw.id, createdAt: typeof raw.createdAt === "string" ? raw.createdAt : ""});
++    } catch {
++      continue;
++    }
++  }
++  rows.sort((a, b) => (a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0));
++  return rows.map((row) => row.id);
++}
++
++/**
++ * The Verifier Handle to present for a retried call: the newest pending Handle
++ * that already allows the op, else the newest pending Handle, else null.
++ */
++export function resolvePendingHandleId(
++  bind: BoundProfile,
++  op: CatalogOp,
++  idempotencyKey: string | undefined,
++): string | null {
++  if (!idempotencyKey) {
++    return null;
++  }
++  const ids = pendingHandleIdsForKey(bind.computerRoot, {
++    fromSlug: bind.slug,
++    op: op.id,
++    idempotencyKey,
++  });
++  return ids.find((id) => completedHandleAllowsOp(bind.computerRoot, id, op)) ?? ids[0] ?? null;
++}
++
+ export function persistPendingHandle(input: {
+   readonly computerRoot: string;
+   readonly handleId: string;
+@@ -156,6 +222,7 @@
+   readonly route: VerifierRoute;
+   readonly fromSlug: string;
+   readonly packetPath: string;
++  readonly idempotencyKey: string | null;
+   readonly createdAt: string;
+ }): void {
+   const botId = botIdForSlug(input.route.slug);
+@@ -168,6 +235,7 @@
+     profile: input.route.profile,
+     fromSlug: input.fromSlug,
+     packetPath: input.packetPath,
++    idempotencyKey: input.idempotencyKey,
+     handleStore: "harness",
+     handlePath: harnessHandlePath(input.computerRoot, botId, input.handleId),
+     humanQueue: false,
+--- workshop/grok-workshop/cfo-v3/engineers/wren/old/call.ts	2026-09-24 17:45:03
++++ .cfo-v3/cfo/extensions/call.ts	2026-09-24 17:45:45
+@@ -105,6 +105,7 @@
+     route,
+     fromSlug: bind.slug,
+     packetPath,
++    idempotencyKey: request.idempotencyKey ?? null,
+     createdAt: nowIso,
+   });
+   const intercept: VerifierIntercept = {
+@@ -114,7 +115,7 @@
+     reason: route.reason,
+     packetPath,
+     handleId: pendingId,
+-    instruction: `bot_send_prompt to ${route.slug} with profile ${route.profile}; await the Handle. Never ask_user.`,
++    instruction: `bot_send_prompt to ${route.slug} with profile ${route.profile}; await the Handle. After CONCUR, call again with the same idempotency_key. Never ask_user.`,
+   };
+   return {ok: false, error: "verifier_required", result: intercept, traceId: null};
+ }

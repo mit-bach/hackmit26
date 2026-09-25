@@ -1,0 +1,27 @@
+{
+  "stripe_event_id": "evt_po_1MaximorRefunds_recon",
+  "event_type": "payout.reconciliation_completed",
+  "payout_id": "po_1MaximorRefunds",
+  "balance_transaction_ids": [
+    "txn_ORD-2201",
+    "txn_re_2201",
+    "txn_fee-ref"
+  ],
+  "categories": [
+    "gross",
+    "refund",
+    "fee"
+  ],
+  "expected_payout": 3380.0,
+  "expected_payout_minor": 338000,
+  "actual_payout": 3380.0,
+  "bank_deposit_id": "BANK-po_1MaximorRefunds",
+  "bank_deposit_amount": 3380.0,
+  "difference": 0.0,
+  "reconciliation_status": "MATCH",
+  "exceptions": [],
+  "duplicate": false,
+  "replay": true,
+  "received_at": "2026-09-24T17:50:09.126025+00:00",
+  "provider_created_at": "2026-09-22T00:00:00+00:00"
+}

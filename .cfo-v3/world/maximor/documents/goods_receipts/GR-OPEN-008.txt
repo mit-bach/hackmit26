@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-008
+PO Number: PO-OPEN-008
+Vendor: Figma
+Goods received in full on 2026-09-09
+Packing list attached: PL-GR-OPEN-008
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 181,097.44 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

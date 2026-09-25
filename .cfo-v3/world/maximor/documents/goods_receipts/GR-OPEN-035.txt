@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-035
+PO Number: PO-OPEN-035
+Vendor: CleanRoom Janitorial
+Goods received in full on 2026-09-09
+Packing list attached: PL-GR-OPEN-035
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 184,801.30 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

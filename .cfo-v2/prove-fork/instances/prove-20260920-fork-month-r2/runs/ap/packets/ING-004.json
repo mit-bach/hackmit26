@@ -1,0 +1,52 @@
+{
+  "invoice_id": "ING-004",
+  "profile": "prepare",
+  "source": {
+    "message_id": "MSG-INBOX-015",
+    "vendor_invoice_number": "NIM-INBOX-8008",
+    "thread_id": "THR-unknown-vendor",
+    "forwarded_by": "email"
+  },
+  "kernel_evidence": {
+    "invoice_amount": 990,
+    "po_id": null,
+    "po_authorized_amount": null,
+    "receipt_id": null,
+    "amount_received": null,
+    "amount_difference": null,
+    "percent_difference": null,
+    "amount_matches": false,
+    "within_amount_tolerance": false,
+    "vendor_exact_match": false,
+    "vendors_are_similar": false,
+    "po_exists": false,
+    "po_approved": false,
+    "receipt_status": "not_applicable",
+    "duplicate_detected": false,
+    "duplicate_invoice_ids": [],
+    "exception_types": ["missing_po"],
+    "days_until_due": 24
+  },
+  "validation_notes": {
+    "vendor_id": null,
+    "vendor_name": "Nimbus Analytics LLC",
+    "unknown_vendor": true,
+    "vendor_master_created": false
+  },
+  "PreparerRecommendation": {
+    "action": "HOLD",
+    "exception_types": ["missing_po"],
+    "evidence_used": [
+      "ING-004",
+      "tools.get_invoice",
+      "tools.get_case_evidence",
+      "tools.find_duplicate_invoices",
+      "runs/inbox/packets/MSG-INBOX-015.json"
+    ],
+    "reason": "ING-004 found. Nimbus Analytics LLC NIM-INBOX-8008 bills USD 990.00. Kernel: po_exists false, vendor_exact_match false, no duplicates, receipt not_applicable, exception_types missing_po. Email packet flags unknown_vendor; vendor_id null; vendor master not created from this handoff. Prepare complete; no three-way match; not APPROVE; not pay. HOLD."
+  },
+  "proposed": "HOLD",
+  "approve_shaped": false,
+  "ctl_pay_handoff": null,
+  "packet_path": "runs/ap/packets/ING-004.json"
+}

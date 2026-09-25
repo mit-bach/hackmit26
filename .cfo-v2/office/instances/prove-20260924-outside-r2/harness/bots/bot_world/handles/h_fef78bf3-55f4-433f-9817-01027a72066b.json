@@ -1,0 +1,19 @@
+{
+  "id": "h_fef78bf3-55f4-433f-9817-01027a72066b",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: customer\nYou are Northwind Labs. Tell the office what you will pay on your open invoice and when. Stay until email classifies that note. Do not apply cash.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:53:14.457Z",
+  "updatedAt": "2026-09-24T20:54:38.809Z",
+  "result": "**Done.** Spoke as Northwind Labs (on-time) through email triage. Cash was **not** applied.\n\n### Commitment sent\n- **From:** Northwind Labs `<ap@northwindlabs.example>`\n- **message_id:** `msg-northwind-inv-ar-001-pay-note-001`\n- **thread_id:** `thr-northwind-inv-ar-001-pay-note`\n- **Invoice:** INV-AR-001  \n- **Amount:** full **$12,000.00** outstanding  \n- **When:** **2026-10-14** ACH (due 2026-10-15)  \n- Stated as a **schedule only**, not funds already sent\n\n### Packets\n- World: `workspace/world/packets/northwind-inv-ar-001-pay-note.md`\n- Email: `workspace/email/packets/northwind-inv-ar-001-pay-note-triage.md`\n\n### Email triage\n- **Classification:** `not_invoice` / `customer_payment_commitment`\n- **Action:** `NONE` (not a remittance → no apply handoff)",
+  "resultPaths": [],
+  "seq": 18
+}

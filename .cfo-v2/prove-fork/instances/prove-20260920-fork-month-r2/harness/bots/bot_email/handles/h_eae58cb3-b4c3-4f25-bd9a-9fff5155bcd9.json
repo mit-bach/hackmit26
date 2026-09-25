@@ -1,0 +1,19 @@
+{
+  "id": "h_eae58cb3-b4c3-4f25-bd9a-9fff5155bcd9",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: inbox\nClassify message MSG-INBOX-015. Vendor may be unknown. If it is still a bill, extract fields and Handle ap / prepare with the Kernel invoice id. Do not create a vendor master. Do not match. Do not ask_user. Call inbox.tools.classify_inbox_message and inbox.tools.dispatch_inbox_action. One Profile this turn: inbox.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:32:49.137Z",
+  "updatedAt": "2026-09-24T17:35:21.629Z",
+  "result": "### MSG-INBOX-015 done\n\n| Step | Result |\n| --- | --- |\n| **Classify** | `VENDOR_INVOICE` → `CREATE_AP_INVOICE` |\n| **Vendor** | Nimbus Analytics LLC (`vendor_id` null) — `UNKNOWN_VENDOR` |\n| **Invoice** | `NIM-INBOX-8008` · 2026-09-18 · due 2026-10-18 · **USD 990.00** |\n| **Dispatch** | Created Kernel id **`ING-004`** · `NON_PO` · warnings: unknown vendor, missing PO |\n| **Vendor master** | Not created |\n| **Packet** | `runs/inbox/packets/MSG-INBOX-015.json` |\n| **Handle → ap / prepare** | ACK: `ING-004` found; prepare packet `runs/ap/packets/ING-004.json`; HOLD proposed; not matched / not paid |\n\nNote: Kernel mailbox was empty after sidecar restart; restored from `runs/inbox/state.json` so classify/dispatch could run.",
+  "resultPaths": [],
+  "seq": 60
+}

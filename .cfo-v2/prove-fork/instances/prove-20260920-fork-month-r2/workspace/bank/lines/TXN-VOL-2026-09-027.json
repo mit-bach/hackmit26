@@ -1,0 +1,34 @@
+{
+  "transaction_id": "TXN-VOL-2026-09-027",
+  "date": "2026-09-28",
+  "amount": -1004.59,
+  "currency": "USD",
+  "description": "ACH OUT OKTA",
+  "counterparty": "OKTA",
+  "transaction_type": "ach_debit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "ACH-0027",
+  "raw_metadata": {
+    "volume": true,
+    "difficulty": "exact",
+    "vendor_id": "VEND-025"
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "matched_in_gt",
+  "gt_label": {
+    "match_type": "EXACT_MATCH",
+    "disposition": "MATCHED",
+    "ledger_ids": [
+      "GL-VOL-2026-09-027"
+    ]
+  },
+  "path": "workspace/bank/lines/TXN-VOL-2026-09-027.json"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_76a526d0-520e-49a0-8780-04d60efb62b9",
+  "from": "operator",
+  "to": "bot_audit",
+  "toSlug": "audit",
+  "prompt": "Operator check for audit",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_audit"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:39:29.074Z",
+  "updatedAt": "2026-09-25T01:38:52.039Z",
+  "result": "**Audit bot status (Operator check)**\n\n- **Identity:** `audit` — after-the-fact sampling, re-performance, finding draft. Does **not** record pay/cash/books decisions.\n- **Wake:** Operator DM (`h_76a526d0-520e-49a0-8780-04d60efb62b9`). No active item/step (`item: null`, `step: null`).\n- **Catalog:** Nine read ops visible (`get_audit_period`, payments, journals, approvals, vendors, invoices, operational_decisions, planted_reconciliations, policy).\n- **Kernel:** Every `call_connected_tool` returned **`kernel rpc failed`** (with and without empty args). No period population loaded; no sample/control/reperformance facts available.\n- **Memory:** `sandboxes/audit/memory/MEMORY.md` present (precedents stub only). No transcript stored.\n- **Decision:** Cannot run **interpret** → `FINDING`/`NONE` or **report** → `DRAFT` without kernel facts. Per procedure: do not invent findings to fill a sample.\n\n**Blocked on:** kernel RPC for audit catalog reads. Once the kernel is up, a normal interpret pass can load the period and complete_step.\n\nIf you want a different check (roster ping, memory-only, retry after kernel fix), say which.",
+  "resultPaths": [],
+  "seq": 159
+}

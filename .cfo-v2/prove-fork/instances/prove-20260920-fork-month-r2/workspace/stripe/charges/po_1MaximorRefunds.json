@@ -1,0 +1,34 @@
+{
+  "object": "processor_charges",
+  "payout_id": "po_1MaximorRefunds",
+  "provider": "stripe",
+  "charge_ids": [
+    "ORD-2201"
+  ],
+  "charges": [
+    {
+      "source_object_id": "ORD-2201",
+      "amount_minor": 400000,
+      "line_type": "charge",
+      "category": "gross"
+    }
+  ],
+  "refunds": [
+    {
+      "source_object_id": "re_2201",
+      "amount_minor": -50000,
+      "line_type": "refund"
+    }
+  ],
+  "chargebacks": [],
+  "fees": [
+    {
+      "source_object_id": "fee-ref",
+      "amount_minor": -12000,
+      "line_type": "stripe_fee"
+    }
+  ],
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "source_packet": "workspace/sources/stripe/po_1MaximorRefunds.json"
+}

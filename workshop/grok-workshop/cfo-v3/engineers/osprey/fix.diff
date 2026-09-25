@@ -1,0 +1,217 @@
+--- ../../workshop/grok-workshop/cfo-v3/engineers/osprey/old/intercept.ts	2026-09-24 17:49:21
++++ extensions/intercept.ts	2026-09-24 17:50:35
+@@ -4,6 +4,7 @@
+  * Unlock reads the same Handle file completeTurn writes.
+  */
+ 
++import {createHash} from "node:crypto";
+ import {existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync} from "node:fs";
+ import {basename, dirname, join} from "node:path";
+ 
+@@ -83,28 +84,49 @@
+   return asDecision(trimmed.split("\n", 1)[0]?.trim());
+ }
+ 
+-function pendingOpMatches(computerRoot: string, handleId: string, opId: string): boolean {
++function canonicalJson(value: unknown): string {
++  if (Array.isArray(value)) {
++    return `[${value.map(canonicalJson).join(",")}]`;
++  }
++  if (isRecord(value)) {
++    const keys = Object.keys(value)
++      .filter((key) => value[key] !== undefined)
++      .sort();
++    return `{${keys.map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(",")}}`;
++  }
++  return JSON.stringify(value) ?? "null";
++}
++
++/** sha256 over the call's arguments as JSON with object keys sorted at every depth. */
++export function argsHash(args: unknown): string {
++  return createHash("sha256").update(canonicalJson(args)).digest("hex");
++}
++
++/**
++ * The pending record must exist, name the op, and carry the same argument
++ * hash. Records written before `argsHash` was stored never match.
++ */
++function pendingRecordMatches(computerRoot: string, handleId: string, opId: string, hash: string): boolean {
+   const path = pendingIndexPath(computerRoot, handleId);
+   if (!existsSync(path)) {
+-    return true;
++    return false;
+   }
+   try {
+     const raw: unknown = JSON.parse(readFileSync(path, "utf8"));
+-    if (!isRecord(raw) || typeof raw.op !== "string") {
+-      return true;
+-    }
+-    return raw.op === opId;
++    return isRecord(raw) && raw.op === opId && typeof raw.argsHash === "string" && raw.argsHash === hash;
+   } catch {
+-    return true;
++    return false;
+   }
+ }
+ 
++/** `args` absent means the call has no arguments to bind, so no Handle allows it. */
+ export function completedHandleAllowsOp(
+   computerRoot: string,
+   handleId: string | null,
+   op: CatalogOp,
++  args?: unknown,
+ ): boolean {
+-  if (!handleId) {
++  if (!handleId || args === undefined) {
+     return false;
+   }
+   const path = findHarnessHandlePath(computerRoot, handleId);
+@@ -123,7 +145,7 @@
+     if (typeof raw.op === "string" && raw.op !== op.id) {
+       return false;
+     }
+-    return pendingOpMatches(computerRoot, handleId, op.id);
++    return pendingRecordMatches(computerRoot, handleId, op.id, argsHash(args));
+   } catch {
+     return false;
+   }
+@@ -133,6 +155,7 @@
+   bind: BoundProfile,
+   op: CatalogOp,
+   handleId: string | null,
++  args: unknown,
+ ): ConsequentialGate {
+   if (!isConsequentialKernelOp(op)) {
+     return {kind: "proceed"};
+@@ -140,7 +163,7 @@
+   if (VERIFIER_SLUGS.has(bind.slug)) {
+     return {kind: "forbidden"};
+   }
+-  if (completedHandleAllowsOp(bind.computerRoot, handleId, op)) {
++  if (completedHandleAllowsOp(bind.computerRoot, handleId, op, args)) {
+     return {kind: "proceed"};
+   }
+   const route = routeVerifier(op);
+@@ -197,12 +220,14 @@
+ 
+ /**
+  * The Verifier Handle to present for a retried call: the newest pending Handle
+- * that already allows the op, else the newest pending Handle, else null.
++ * that already allows the op with these args, else the newest pending Handle,
++ * else null.
+  */
+ export function resolvePendingHandleId(
+   bind: BoundProfile,
+   op: CatalogOp,
+   idempotencyKey: string | undefined,
++  args: unknown,
+ ): string | null {
+   if (!idempotencyKey) {
+     return null;
+@@ -212,7 +237,7 @@
+     op: op.id,
+     idempotencyKey,
+   });
+-  return ids.find((id) => completedHandleAllowsOp(bind.computerRoot, id, op)) ?? ids[0] ?? null;
++  return ids.find((id) => completedHandleAllowsOp(bind.computerRoot, id, op, args)) ?? ids[0] ?? null;
+ }
+ 
+ export function persistPendingHandle(input: {
+@@ -223,6 +248,7 @@
+   readonly fromSlug: string;
+   readonly packetPath: string;
+   readonly idempotencyKey: string | null;
++  readonly argsHash: string;
+   readonly createdAt: string;
+ }): void {
+   const botId = botIdForSlug(input.route.slug);
+@@ -236,6 +262,7 @@
+     fromSlug: input.fromSlug,
+     packetPath: input.packetPath,
+     idempotencyKey: input.idempotencyKey,
++    argsHash: input.argsHash,
+     handleStore: "harness",
+     handlePath: harnessHandlePath(input.computerRoot, botId, input.handleId),
+     humanQueue: false,
+--- ../../workshop/grok-workshop/cfo-v3/engineers/osprey/old/call.ts	2026-09-24 17:49:21
++++ extensions/call.ts	2026-09-24 17:50:58
+@@ -2,6 +2,7 @@
+ import {dirname, join} from "node:path";
+ 
+ import {
++  argsHash,
+   gateConsequentialCall,
+   persistPendingHandle,
+ } from "./intercept.ts";
+@@ -77,10 +78,14 @@
+     return fail("verifier_unmapped");
+   }
+   const key = request.idempotencyKey ?? `pending-${nowIso.replace(/[:.]/g, "")}`;
+-  const packetPath = join(bind.computerRoot, "workspace", "verifier", route.slug, `${key}.json`);
++  const hash = argsHash(request.args);
++  // One packet per key and args: a later call with other args must not rewrite
++  // the packet a Verifier is still reading for an earlier Handle.
++  const packetPath = join(bind.computerRoot, "workspace", "verifier", route.slug, `${key}.${hash.slice(0, 16)}.json`);
+   writeJsonAtomic(packetPath, {
+     op: op.id,
+     args: request.args,
++    argsHash: hash,
+     fromSlug: bind.slug,
+     fromProfile: bind.profile,
+     verifier: route.slug,
+@@ -106,6 +111,7 @@
+     fromSlug: bind.slug,
+     packetPath,
+     idempotencyKey: request.idempotencyKey ?? null,
++    argsHash: hash,
+     createdAt: nowIso,
+   });
+   const intercept: VerifierIntercept = {
+@@ -115,7 +121,7 @@
+     reason: route.reason,
+     packetPath,
+     handleId: pendingId,
+-    instruction: `bot_send_prompt to ${route.slug} with profile ${route.profile}; await the Handle. After CONCUR, call again with the same idempotency_key. Never ask_user.`,
++    instruction: `bot_send_prompt to ${route.slug} with profile ${route.profile}; await the Handle. After CONCUR, call again with the same idempotency_key and the same args. Never ask_user.`,
+   };
+   return {ok: false, error: "verifier_required", result: intercept, traceId: null};
+ }
+@@ -139,7 +145,7 @@
+   if (op.mutability !== "read" && (request.idempotencyKey === undefined || request.idempotencyKey.length === 0)) {
+     return fail("idempotency_required");
+   }
+-  const gate = gateConsequentialCall(bind, op, handleId);
++  const gate = gateConsequentialCall(bind, op, handleId, request.args);
+   if (gate.kind === "forbidden") {
+     return FORBIDDEN;
+   }
+--- ../../workshop/grok-workshop/cfo-v3/engineers/osprey/old/index.ts	2026-09-24 17:49:21
++++ extensions/index.ts	2026-09-24 17:50:57
+@@ -181,7 +181,7 @@
+     promptSnippet: "Call a granted Kernel Connector",
+     promptGuidelines: [
+       "call_connected_tool is the only Kernel door. Do not invent amounts. Python returns candidates. Consequential ops go to ctl-* Verifiers, never ask_user.",
+-      "After a Verifier Handle completes with CONCUR, call again with the same idempotency_key. handle_id is optional.",
++      "After a Verifier Handle completes with CONCUR, call again with the same idempotency_key and the same args. Changed args need a new Verifier Handle. handle_id is optional.",
+     ],
+     parameters: Type.Object({
+       name: Type.String({description: "Catalog id or exportName"}),
+@@ -196,15 +196,16 @@
+       const key = readString(params, "idempotency_key");
+       const idempotencyKey = key.length > 0 ? key : undefined;
+       const passed = readString(params, "handle_id");
++      const args = readArgs(params);
+       const op = resolveOp(files.catalog, name);
+       const handleId =
+-        passed.length > 0 ? passed : op === undefined ? null : resolvePendingHandleId(bind, op, idempotencyKey);
++        passed.length > 0 ? passed : op === undefined ? null : resolvePendingHandleId(bind, op, idempotencyKey, args);
+       const result = await callConnectedTool(
+         bind,
+         files.catalog,
+         {
+           name,
+-          args: readArgs(params),
++          args,
+           idempotencyKey,
+         },
+         undefined,

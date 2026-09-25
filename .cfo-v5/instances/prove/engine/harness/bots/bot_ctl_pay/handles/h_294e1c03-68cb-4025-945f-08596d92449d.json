@@ -1,0 +1,19 @@
+{
+  "id": "h_294e1c03-68cb-4025-945f-08596d92449d",
+  "from": "harness",
+  "to": "bot_ctl_pay",
+  "toSlug": "ctl-pay",
+  "prompt": "[harness wake]\nkind: item_step\nitem: bill:INV-001\nstep: review-match\npacket: runs/items/bill-INV-001.json",
+  "paths": [
+    "runs/items/bill-INV-001.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_ctl_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "createdAt": "2026-09-25T01:32:46.128Z",
+  "updatedAt": "2026-09-25T01:32:46.128Z"
+}

@@ -1,0 +1,60 @@
+{
+  "system": "protocol-floor",
+  "version": "1",
+  "description": "Example Client system for proving the protocol. Swap this file for a real engagement. The Harness does not know the domain.",
+  "computer": ".",
+  "bots": [
+    {
+      "id": "bot_alpha",
+      "name": "Alpha",
+      "slug": "alpha",
+      "purpose": "owns handoff tests and writes shared files",
+      "instructions": "Write context as files. Hand off with bot_send_prompt. Await done.",
+      "skills": [
+        "briefing"
+      ],
+      "connectors": [],
+      "approvalLevel": "ask"
+    },
+    {
+      "id": "bot_beta",
+      "name": "Beta",
+      "slug": "beta",
+      "purpose": "receives handoffs and returns a short result",
+      "instructions": "Read the named path. Write a result path. Stop.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    },
+    {
+      "id": "bot_gamma",
+      "name": "Gamma",
+      "slug": "gamma",
+      "purpose": "third member for Room Host order",
+      "instructions": "Answer in two lines when the Host wakes you.",
+      "skills": [],
+      "connectors": [],
+      "approvalLevel": "ask"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "floor",
+      "title": "Floor",
+      "members": [
+        "alpha",
+        "beta",
+        "gamma"
+      ]
+    }
+  ],
+  "routines": [
+    {
+      "name": "morning-brief",
+      "bot": "beta",
+      "cadence": "daily",
+      "prompt": "Write a two-line status into workspace/brief.md",
+      "conversation": "operator_dm"
+    }
+  ]
+}

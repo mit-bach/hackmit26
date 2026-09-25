@@ -16,7 +16,7 @@ Bot `pay` Profile `schedule` only. Do not wear this on `ctl-pay`. Payment Audit 
 
 ## Inputs / Evidence
 
-`get_payment_candidates`, `get_approved_pool`, `get_cash_position`, `get_treasury_policies`. Trust `pay_amount_if_this_week`, `vendor_priority`, `unnecessary_if_paid_early`, and spendable cash. Do not recalculate them.
+the approved pool, the cash position, the payment candidates, and the treasury policies. Trust `pay_amount_if_this_week`, `vendor_priority`, `unnecessary_if_paid_early`, and spendable cash. Do not recalculate them.
 
 ## Procedure
 

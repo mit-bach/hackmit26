@@ -1,0 +1,32 @@
+{
+  "transaction_id": "TXN-STRIPE-RESERVE-REL",
+  "date": "2026-09-27",
+  "amount": 22400.0,
+  "currency": "USD",
+  "description": "ACH IN STRIPE RESERVE RELEASE",
+  "counterparty": "STRIPE RESERVE RELEASE",
+  "transaction_type": "ach_credit",
+  "source": "operating_account",
+  "period": "2026-09",
+  "reference": "TXN-STRIPE-RESERVE-REL",
+  "raw_metadata": {
+    "plant": true
+  },
+  "landed_by": "bank",
+  "profile": "card",
+  "kernel_invoice_ingestion": {
+    "list_bank_transactions_count": 0,
+    "note": "data/ingestion/bank_transactions.json empty; card feed has no rows. Operating pack used: data/cash_recon/bank_statement.json"
+  },
+  "charge_is_not_bill": true,
+  "invoice_status": null,
+  "cash_status": "matched_in_gt",
+  "gt_label": {
+    "match_type": "EXACT_MATCH",
+    "disposition": "MATCHED",
+    "ledger_ids": [
+      "GL-TXN-STRIPE-RESERVE-REL"
+    ]
+  },
+  "path": "workspace/bank/lines/TXN-STRIPE-RESERVE-REL.json"
+}

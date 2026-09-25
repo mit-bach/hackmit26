@@ -1,0 +1,39 @@
+Gusto Payroll
+1 Vendor Row
+Boston, MA 02110
+Phone +1 617-555-0000   billing@gustopayroll.example
+Tax ID 00-0000000
+
+INVOICE
+
+Invoice Number: OPEN-0044
+Invoice Date: 2026-09-18
+Due Date: 2026-10-18
+PO Number: PO-OPEN-044
+Payment Terms: net 30
+Currency: USD
+Vendor: Gusto Payroll
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Open operating payable. SKU                   1.00    186,035.92    186,035.92
+
+Subtotal                                                            186,035.92
+Tax                                                                       0.00
+Amount Due                                                          186,035.92
+
+Remit to:
+ACH routing 011000390  account ****0000
+Bank: First National Bank  ****0000
+Please include invoice OPEN-0044 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@gustopayroll.example

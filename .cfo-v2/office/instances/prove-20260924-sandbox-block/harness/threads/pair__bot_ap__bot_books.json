@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_books",
+  "threadId": "pair:bot_ap:bot_books",
+  "name": "AP ↔ Books",
+  "memberIds": [
+    "bot_ap",
+    "bot_books"
+  ],
+  "createdAt": 1790282092964,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_ee6b3825-f069-422e-add6-0af74ee42667",
+      "handleId": "h_ee6b3825-f069-422e-add6-0af74ee42667",
+      "role": "bot",
+      "kind": "text",
+      "text": "prepare: NetSuite vendorBill NS-4410 landed by books (erp-invoice). Read SourceAgentOutput at workspace/books/packets/NS-4410.source.json (also seed copy workspace/books/packets/NS-4410.netsuite-vendorBill.json, note workspace/books/notes/NS-4410.landing.md). Vendor Acme Supplies VEND-001, invoice ACM-2026-4410, total 12450 USD, PO-101, period 2026-09. Books did not match, did not pay, did not close. Take AP prepare only; do not treat this message as approval.",
+      "at": 1790282092964,
+      "from": {
+        "botId": "bot_books",
+        "name": "Books",
+        "color": "pink"
+      }
+    },
+    {
+      "id": "pair-result-h_ee6b3825-f069-422e-add6-0af74ee42667",
+      "handleId": "h_ee6b3825-f069-422e-add6-0af74ee42667",
+      "role": "bot",
+      "kind": "text",
+      "text": "AP prepare done for NS-4410 landing.\n\nCanonical invoice_id: INV-001 (vendor_invoice_number ACM-2026-4410, Acme Supplies / VEND-001, PO-101, 12450 USD, period 2026-09).\n\nKernel three-way: clean. exception_types [], amount_difference 0, vendor_exact_match, approved PO-101, full GR-101, no duplicate. PreparerRecommendation: APPROVE.\n\nMatch packet: workspace/ap/packets/INV-001.json\n\nHandoff: ctl-pay profile review-match with that path (awaiting concurrence). AP did not pay, did not close, did not treat your message as approval. Books desk paths were named but not readable from AP desk; Kernel INV-001 was used as the open bill.",
+      "at": 1790282141310,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_d15520e9-e62f-4a88-9cc5-ae5ee3d6ce1b",
+  "from": "bot_ctl_books",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "ctl-books review-treatment on accrual:2026-09-acme: REFUSE. Method trailing_average misaligned with evidence usage (should be usage_run_rate). No kernel amount in packet.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ctl_books",
+    "toId": "bot_close"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:21.201Z",
+  "updatedAt": "2026-09-24T23:35:37.415Z",
+  "result": "Acknowledged REFUSE on accrual:2026-09-acme.\n\nCorrection accepted:\n- Prior method trailing_average was misaligned with usage evidence.\n- Correct estimation_method: usage_run_rate (usage × contracted rate), not trailing_average.\n- Packet must carry the kernel estimated_amount copied exactly from get_estimate_candidates / compute_accrual_estimate for usage_run_rate — no invented amount.\n\nThis wake: every accrual.* and memory.tools kernel RPC returned \"kernel rpc failed\", so I cannot reload candidates or re-PROPOSE with a kernel amount right now. I am not re-submitting a packet without a kernel amount.\n\nWhen kernel is up I will: (1) get_current_period_invoices, (2) get_vendor_usage + contract, (3) get_estimate_candidates, (4) select usage_run_rate if applicable, (5) copy estimated_amount and expense_account exactly, (6) resubmit treatment for your CONCUR.\n\nPlease hold accrual:2026-09-acme as refused / pending re-propose until then. No disagreement with your finding.",
+  "seq": 85
+}

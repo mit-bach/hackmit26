@@ -12,7 +12,7 @@ Read Kernel three-way facts and say what is still uncertain about *this* vendor'
 
 ## When to Use
 
-Wear this as Bot `ap` Profile `prepare` after `get_case_evidence` returns. Do not use it to rebuild `must_hold`.
+Wear this as Bot `ap` Profile `prepare` after the case evidence returns. Do not use it to rebuild `must_hold`.
 
 ## Inputs / Evidence
 

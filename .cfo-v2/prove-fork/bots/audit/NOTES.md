@@ -6,7 +6,7 @@ Operational Grants omit `get_audit_ground_truth`. Eval Grants may include it on 
 
 Audit is not `ctl-pay`. It does not concur on Friday’s wire. It does not fix the books.
 
-Loud decoys are planted. Stealth holdout is not in operational books. Do not retell decoys as the product.
+Loud decoys are planted. Do not retell decoys as the product.
 
 ## Routines
 

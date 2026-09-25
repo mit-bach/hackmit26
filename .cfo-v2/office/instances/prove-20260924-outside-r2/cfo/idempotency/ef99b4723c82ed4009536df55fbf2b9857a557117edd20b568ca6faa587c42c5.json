@@ -1,0 +1,19 @@
+{
+  "key": "email:outbound:msg-acme-acm-2026-4410-confirm-001-OUT",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "e0bd8bc66a4f429b07bb30cd3b6aaabb058d6f92483ee54460c7187333f8f9d8",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-acme-acm-2026-4410-confirm-001-OUT",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_387786047a31"
+  }
+}

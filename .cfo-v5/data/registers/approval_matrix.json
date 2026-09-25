@@ -1,0 +1,34 @@
+[
+  {
+    "role": "AP preparer",
+    "limit": 25000.0,
+    "objects": [
+      "invoice"
+    ]
+  },
+  {
+    "role": "AP reviewer",
+    "limit": 100000.0,
+    "objects": [
+      "invoice",
+      "payment"
+    ]
+  },
+  {
+    "role": "Controller",
+    "limit": 250000.0,
+    "objects": [
+      "invoice",
+      "payment",
+      "journal"
+    ]
+  },
+  {
+    "role": "CFO",
+    "limit": null,
+    "objects": [
+      "journal",
+      "close"
+    ]
+  }
+]

@@ -1,0 +1,159 @@
+{
+  "messages": [
+    {
+      "message_id": "msg-acme-acm-2026-4410-confirm-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "in_reply_to": null,
+      "sender_name": "Acme Supplies",
+      "sender_address": "billing@acmesupplies.example",
+      "recipient_addresses": [
+        "ap@hackmit-cfo.example"
+      ],
+      "subject": "Re: Invoice ACM-2026-4410 / PO 101",
+      "body_text": "Hello AP team,\n\nConfirming invoice ACM-2026-4410 for $12,450.00 against purchase order 101.\n\nInvoice number: ACM-2026-4410\nAmount due: $12,450.00\nPO: 101\n\nGoods on this order were delivered and received. Please process when ready.\n\nRegards,\nAcme Supplies Billing\nbilling@acmesupplies.example",
+      "body_html": null,
+      "sent_at": "2026-09-24T16:55:00Z",
+      "received_at": "2026-09-24T16:55:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "ACM-2026-4410",
+      "metadata": {}
+    },
+    {
+      "message_id": "msg-northwind-inv-ar-001-pay-note-001",
+      "thread_id": "thr-northwind-inv-ar-001-pay-note",
+      "in_reply_to": null,
+      "sender_name": "Northwind Labs",
+      "sender_address": "ap@northwindlabs.example",
+      "recipient_addresses": [
+        "ar@hackmit-cfo.example"
+      ],
+      "subject": "Payment schedule \u2014 INV-AR-001",
+      "body_text": "Hello Collections / AR,\n\nThis is Northwind Labs AP regarding our open invoice INV-AR-001.\n\nWe will pay the full outstanding balance of $12,000.00 on INV-AR-001.\nScheduled payment date: 2026-10-14 (one business day before the 2026-10-15 due date).\nMethod: ACH from our operating account on our normal AP run.\n\nPlease note this is our payment commitment only \u2014 not a remittance advice for cash already sent. Apply the payment once it clears your bank.\n\nRegards,\nNorthwind Labs Accounts Payable\nap@northwindlabs.example\nCUST-001",
+      "body_html": null,
+      "sent_at": "2026-09-24T17:10:00Z",
+      "received_at": "2026-09-24T17:10:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "INV-AR-001",
+      "metadata": {}
+    },
+    {
+      "message_id": "msg-fnb-stmt-2026-09-operating-001",
+      "thread_id": "thr-fnb-stmt-2026-09-operating",
+      "in_reply_to": null,
+      "sender_name": "First National Operating",
+      "sender_address": "notices@firstnational.example",
+      "recipient_addresses": [
+        "ap@hackmit-cfo.example"
+      ],
+      "subject": "September 2026 statement available \u2014 Operating Account BANK-OPERATING",
+      "body_text": "Maximor Demo Corp\nTreasury / Finance\n\nRe: Monthly account statement notice\nAccount: Operating Demand Deposit BANK-OPERATING\nInstitution: First National Bank\nStatement period: 2026-09-01 through 2026-09-30\nCurrency: USD\n\nYour September 2026 e-statement for the operating account is now available in Online Banking and via the secure statement channel. This message is a bank statement availability notice only. It is not an invoice, vendor bill, or request for payment.\n\nPeriod summary (operating account):\n- Opening ledger/bank basis (as posted on our books as of period start): 14,857,217.18\n- Statement period: September 2026\n- As-of date on balances file: 2026-09-30\n\nSample activity reflected on the September statement includes, among other items:\n- 2026-09-08 ACH debit Northline Fabrication 18,500.00 (TXN-2026-09-008)\n- 2026-09-11 wire debit Helios Hardware 10,025.00 ref 729103 (TXN-2026-09-011)\n- 2026-09-15 credit Northstar LLC 12,412.40 (TXN-2026-09-015)\n- 2026-09-18 ACH debit Acme Supplies 12,450.00 ref 8391 (TXN-2026-09-018A)\n\nFirst National does not match your general-ledger lines. We do not explain customer-side differences between bank credits and your AR postings. Any variance you observe against your books \u2014 including a $12.40 difference \u2014 is for your internal reconciliation; this notice leaves that amount unexplained.\n\nNo lines are marked matched by the bank. Retrieve the full statement PDF in Online Banking under Statements > Operating > 2026-09.\n\nQuestions on bank postings: notices@firstnational.example\n\nFirst National Bank \u2014 Commercial Deposit Operations",
+      "body_html": null,
+      "sent_at": "2026-10-01T08:00:00Z",
+      "received_at": "2026-10-01T08:00:05Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "BANK-STMT-2026-09-OPERATING",
+      "metadata": {}
+    },
+    {
+      "message_id": "msg-acme-acm-2026-4410-confirm-001-OUT",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "in_reply_to": "msg-acme-acm-2026-4410-confirm-001",
+      "sender_name": "HackMIT AP",
+      "sender_address": "ap@hackmit-cfo.example",
+      "recipient_addresses": [
+        "billing@acmesupplies.example"
+      ],
+      "subject": "Re: Re: Invoice ACM-2026-4410 / PO 101",
+      "body_text": "What is the invoice date (YYYY-MM-DD)?",
+      "body_html": null,
+      "sent_at": "2026-09-24T16:55:00Z",
+      "received_at": "2026-09-24T16:55:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-acme-acm-2026-4410-confirm-001-OUT",
+      "metadata": {
+        "office_outbound": true,
+        "to_name": "Acme Supplies"
+      }
+    },
+    {
+      "message_id": "msg-acme-acm-2026-4410-invoice-date-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "in_reply_to": "msg-acme-acm-2026-4410-confirm-001-OUT",
+      "sender_name": "Acme Supplies",
+      "sender_address": "billing@acmesupplies.example",
+      "recipient_addresses": [
+        "ap@hackmit-cfo.example"
+      ],
+      "subject": "Re: Invoice ACM-2026-4410 / PO 101",
+      "body_text": "Hello AP,\n\nInvoice date for ACM-2026-4410 is 2026-09-08.\n\nConfirming again: invoice ACM-2026-4410, amount $12,450.00, PO 101, goods received.\n\nRegards,\nAcme Supplies Billing\nbilling@acmesupplies.example",
+      "body_html": null,
+      "sent_at": "2026-09-24T16:55:00Z",
+      "received_at": "2026-09-24T16:55:02Z",
+      "attachments": [],
+      "source": "inbox",
+      "correlation_id": "msg-acme-acm-2026-4410-confirm-001-OUT",
+      "metadata": {
+        "reply": true
+      }
+    }
+  ],
+  "outcomes": {},
+  "invoice_ids": [],
+  "canonicals": [],
+  "notices": [
+    {
+      "kind": "clarification",
+      "message_id": "msg-acme-acm-2026-4410-confirm-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "missing_fields": [
+        "invoice_date"
+      ],
+      "questions": [
+        "What is the invoice date (YYYY-MM-DD)?"
+      ]
+    },
+    {
+      "kind": "remittance",
+      "message_id": "msg-northwind-inv-ar-001-pay-note-001",
+      "thread_id": "thr-northwind-inv-ar-001-pay-note",
+      "classification": "CUSTOMER_REMITTANCE",
+      "counterparty": "Northwind Labs",
+      "invoice_number": null,
+      "po_number": null,
+      "amount_cents": null,
+      "amount": null
+    },
+    {
+      "kind": "ignored",
+      "message_id": "msg-fnb-stmt-2026-09-operating-001",
+      "classification": "VENDOR_STATEMENT"
+    },
+    {
+      "kind": "goods_receipt",
+      "message_id": "msg-acme-acm-2026-4410-invoice-date-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "classification": "GOODS_RECEIPT",
+      "counterparty": "Acme Supplies",
+      "invoice_number": null,
+      "po_number": null,
+      "amount_cents": null,
+      "amount": null
+    },
+    {
+      "kind": "clarification",
+      "message_id": "msg-acme-acm-2026-4410-confirm-001",
+      "thread_id": "thr-acme-acm-2026-4410",
+      "missing_fields": [
+        "invoice_date"
+      ],
+      "questions": [
+        "What is the invoice date (YYYY-MM-DD)?"
+      ]
+    }
+  ],
+  "traces": []
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_3ee89de7-5f87-4d66-9f90-c0140677f68e",
+  "from": "operator",
+  "to": "bot_books",
+  "toSlug": "books",
+  "prompt": "Operator check for books",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.064Z",
+  "updatedAt": "2026-09-24T23:33:30.273Z",
+  "result": "Books bot here — ready. I own GL, subledgers, vendor/customer master, POs, and period-lock state. Capture step is available when you have an ERP/procurement/EDI event.\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 50
+}

@@ -17,4 +17,4 @@ Handle from `close` for a prepaid treatment packet.
 
 ## Must not
 
-Do not call `create_accrual`. Do not union FA or BS constructor tools onto a prepaid Wake.
+Do not book an accrual. Do not union fixed-asset or balance-sheet tools onto a prepaid Wake.

@@ -1,0 +1,19 @@
+{
+  "id": "h_28d4cb35-3699-4932-9196-41acc1505c9f",
+  "from": "bot_email",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nEmail landed body-only vendor bill MSG-INBOX-002 as Kernel invoice ING-005 (FIG-INBOX-2002, Figma, PO-107, USD 2448.00). Packet: runs/inbox/packets/MSG-INBOX-002.json. Prepare only; do not match; do not pay. Acknowledge invoice_id ING-005 found.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_email",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:38:36.727Z",
+  "updatedAt": "2026-09-24T17:38:51.570Z",
+  "result": "ACK invoice_id ING-005 found (tools.get_invoice ok). Source MSG-INBOX-002 / FIG-INBOX-2002 / Figma / PO-107 cited / USD 2448.00 (body-only). Prepare only: packet runs/ap/packets/ING-005.json. Kernel exception_types missing_po + goods_not_received (po_exists false despite PO-107 on invoice; receipt_status missing). No duplicates. proposed HOLD; not matched; not paid; no ctl-pay handoff.",
+  "seq": 84
+}

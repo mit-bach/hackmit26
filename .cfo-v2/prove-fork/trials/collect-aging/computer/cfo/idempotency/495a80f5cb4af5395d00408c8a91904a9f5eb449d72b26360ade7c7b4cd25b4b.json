@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-summit-inv-ar-019",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "63c6d2da13f756f9451e3e03135e8e9515b839e7168aa8a26c29bef54575782e",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-summit-inv-ar-019-reply",
+      "thread_id": "col-summit-inv-ar-019",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_edf4990700cd"
+  }
+}

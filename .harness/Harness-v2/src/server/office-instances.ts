@@ -17,6 +17,7 @@ import {
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
 
 import { initComputer } from "../computer.ts";
+import { instanceGroup } from "../sandbox.ts";
 import { readJsonIfExists, writeJsonAtomic } from "../fs.ts";
 import { nowIso, shortNonce } from "../ids.ts";
 import { wipeRuntime } from "../wipe.ts";
@@ -63,14 +64,44 @@ export function officeJsonPath(officeParent: string): string {
   return join(officeParent, "office.json");
 }
 
+function officeListsComputer(officeParent: string, computerRoot: string): boolean {
+  const state = readOffice(officeParent);
+  if (!state) {
+    return false;
+  }
+  const resolved = resolve(computerRoot);
+  return state.instances.some((row) => resolve(officeParent, row.computerRel) === resolved);
+}
+
+function findListingOffice(computerRoot: string): string | undefined {
+  const resolved = resolve(computerRoot);
+  let dir = dirname(resolved);
+  for (let hop = 0; hop < 8; hop += 1) {
+    if (existsSync(join(dir, "office.json")) && officeListsComputer(dir, resolved)) {
+      return dir;
+    }
+    const parent = dirname(dir);
+    if (parent === dir) {
+      break;
+    }
+    dir = parent;
+  }
+  return undefined;
+}
+
 /**
  * Office metadata sits beside computer/ when the live tree uses that name.
  * Instance roots under instances/<id> still resolve to the same parent.
+ * This Computer keeps one registry. A parent .cfo-v2/office is not that registry.
  * Any other Computer (tests, odd --computer paths) uses a .office folder
  * inside that tree so office.json does not leak into /tmp.
  */
 export function resolveOfficeParent(computerRoot: string): string {
   const resolved = resolve(computerRoot);
+  const listed = findListingOffice(resolved);
+  if (listed) {
+    return listed;
+  }
   const parent = dirname(resolved);
   if (basename(resolved) === "computer" || resolve(parent, "computer") === resolved) {
     return parent;
@@ -199,13 +230,22 @@ export function listOfficeState(computerRoot: string): OfficeState {
 /** Public office payload for GET /api/bots and SSE switch frames. */
 export function officePublicState(computerRoot: string): {
   readonly currentId: string;
-  readonly instances: readonly OfficeInstanceRecord[];
+  readonly group: string;
+  readonly instances: readonly (OfficeInstanceRecord & { readonly group: string })[];
+  readonly groups: readonly string[];
   readonly computerRoot: string;
 } {
   const office = listOfficeState(computerRoot);
+  const instances = office.instances.map((row) => ({
+    ...row,
+    group: instanceGroup(row.id),
+  }));
+  const groups = [...new Set(instances.map((row) => row.group))];
   return {
     currentId: office.currentId,
-    instances: office.instances,
+    group: instanceGroup(office.currentId),
+    instances,
+    groups,
     computerRoot: resolve(computerRoot),
   };
 }
@@ -226,6 +266,26 @@ export function bindRunningComputer(computerRoot: string): OfficeState {
 
 export function instanceComputerRoot(officeParent: string, instance: OfficeInstanceRecord): string {
   return resolve(officeParent, instance.computerRel);
+}
+
+/** One office root. Walk up from the process cwd until office.json. --computer still wins. */
+export function resolveOfficeLaunch(start: string): string {
+  const flagged = resolve(start);
+  if (existsSync(join(flagged, "harness", "roster.json"))) {
+    return resolveServeComputer(flagged);
+  }
+  let dir = flagged;
+  for (let hop = 0; hop < 8; hop += 1) {
+    if (existsSync(join(dir, "office.json"))) {
+      return resolveServeComputer(join(dir, "computer"));
+    }
+    const parent = dirname(dir);
+    if (parent === dir) {
+      break;
+    }
+    dir = parent;
+  }
+  return resolveServeComputer(flagged);
 }
 
 /** Honor office.json currentId so a restart keeps the selected desk. */

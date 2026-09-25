@@ -30,7 +30,6 @@ import {
   type BoundLane,
 } from "../src/lane.ts";
 import { readMemoryFile, writeMemoryFile } from "../src/memory.ts";
-import { identityBlock, memorySection, recentWorkSection } from "../src/prompt.ts";
 import { persistProtocolCard, PROTOCOL_CARD } from "../src/protocol-card.ts";
 import { appendProtocol, searchProtocol } from "../src/protocol-log.ts";
 import { fireRoutine } from "../src/routines.ts";
@@ -40,6 +39,9 @@ import { searchAgents } from "../src/search.ts";
 import { sendPrompt } from "../src/send.ts";
 import { liveStatus, touchLane } from "../src/lane-state.ts";
 import { transcriptTail } from "../src/transcript-tail.ts";
+import { assembleContext } from "../src/context.ts";
+import { sandboxesEnabled } from "../src/seatbelt.ts";
+import { sandboxAllows, sandboxAllowsBash } from "../src/sandbox.ts";
 import { acquireLease, releaseLease } from "../src/leases.ts";
 import { harnessPackageRoot } from "../src/pkg.ts";
 import {
@@ -190,6 +192,9 @@ export default function harnessExtension(pi: ExtensionAPI): void {
 
   pi.on("resources_discover", () => {
     const skillPaths = [`${harnessPackageRoot()}/skills`];
+    if (sandboxesEnabled(bind.computerRoot)) {
+      return { skillPaths };
+    }
     const computerSkills = join(bind.computerRoot, "skills");
     if (process.env.HARNESS_CLIENT_SKILLS === "1") {
       for (const name of bind.bot.skills) {
@@ -253,15 +258,16 @@ export default function harnessExtension(pi: ExtensionAPI): void {
   });
 
   pi.on("before_agent_start", (event) => {
-    const extra = [
-      identityBlock(bind.bot, bind.roster),
-      PROTOCOL_CARD,
-      memorySection(bind.computerRoot, bind.bot.id),
-      recentWorkSection(bind.computerRoot, bind.bot.id),
-    ]
-      .filter((block) => block.length > 0)
-      .join("\n\n");
-    return { systemPrompt: `${event.systemPrompt}\n\n${extra}` };
+    try {
+      const wake = lane.currentInbox ? formatWake(lane.currentInbox, bind.roster, bind.bot.slug) : "";
+      const assembled = assembleContext(bind.computerRoot, bind.bot, bind.roster, wake);
+      if (sandboxesEnabled(bind.computerRoot)) {
+        return { systemPrompt: assembled.systemSuffix };
+      }
+      return { systemPrompt: `${event.systemPrompt}\n\n${assembled.systemSuffix}` };
+    } catch {
+      return { systemPrompt: `${event.systemPrompt}\n\n${PROTOCOL_CARD}` };
+    }
   });
 
   pi.on("agent_end", (event) => {
@@ -312,8 +318,38 @@ export default function harnessExtension(pi: ExtensionAPI): void {
 
   pi.on("tool_call", async (event, ctx) => {
     const input: unknown = event.input;
+    const slug = bind.bot.slug;
+    const arg = (key: string): string => {
+      if (input !== null && typeof input === "object" && key in input) {
+        const value = (input as Record<string, unknown>)[key];
+        if (typeof value === "string") {
+          return value;
+        }
+      }
+      return "";
+    };
+    if (isToolCallEventType("bash", event)) {
+      const decision = sandboxAllowsBash(slug, bind.computerRoot, arg("command"));
+      if (!decision.allowed) {
+        return { block: true, reason: decision.reason };
+      }
+    }
+    if (
+      isToolCallEventType("read", event) ||
+      isToolCallEventType("write", event) ||
+      isToolCallEventType("edit", event)
+    ) {
+      const path = arg("path");
+      if (path.length > 0) {
+        const kind = isToolCallEventType("read", event) ? "read" : "write";
+        const decision = sandboxAllows(slug, kind, bind.computerRoot, path);
+        if (!decision.allowed) {
+          return { block: true, reason: decision.reason };
+        }
+      }
+    }
     if (isToolCallEventType("write", event) || isToolCallEventType("edit", event)) {
-      const path = typeof event.input.path === "string" ? event.input.path : "";
+      const path = arg("path");
       if (path.length > 0 && !acquireLease(bind.computerRoot, path, bind.bot.id)) {
         return { block: true, reason: "another Bot holds a lease on this path" };
       }

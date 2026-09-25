@@ -1,0 +1,19 @@
+{
+  "id": "h_ebdf5bf0-03b9-44d7-95a9-0270891e390f",
+  "from": "operator",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\nOpen bill INV-001. Load the invoice, the PO, the goods receipt, duplicates, case evidence, and policies.\nPropose APPROVE or HOLD. You do not pay. You do not concur.\nIf the packet is APPROVE-shaped, Handle ctl-pay / review-match and wait until that Handle is terminal.\nIf HOLD, do not enter the pay pool.\nWrite the pair-thread reply as a paragraph that names INV-001, what you found, and what ctl-pay must do next.\nDo not ask_user.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_ap"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:59:44.774Z",
+  "updatedAt": "2026-09-24T18:01:00.819Z",
+  "result": "**INV-001 — prepare complete**\n\nOpen bill **INV-001** (Acme Supplies, ACM-2026-4410, **12450** on **PO-101** / **GR-101**) is a clean three-way match: amount exact vs authorized and received, vendor exact, PO approved, goods full 15/15, no duplicates, `exception_types` empty. Packet at `runs/ap/packets/INV-001.json`. Proposal **APPROVE** (not pay).\n\n**ctl-pay** / `review-match` **CONCUR** — `runs/ap/concurrence/INV-001.json`. ctl-pay does not pay; bill may enter the approved pool per grain. Payment-run release is a separate **pay** / **review-pay** path. AP does not release cash.",
+  "resultPaths": [],
+  "seq": 8
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_344b1541-48aa-4289-ad7c-066e00cc56a9",
+  "from": "bot_ctl_books",
+  "to": "bot_close",
+  "toSlug": "close",
+  "prompt": "ctl-books review-treatment on close:2026-09-accrue: REFUSE. Your PROPOSE (invoice missing, evidence_used []) has no pendingWrite and no kernel estimated amount/method for me to copy. insufficient_evidence — I will not CONCUR.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_ctl_books",
+    "toId": "bot_close"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-25T01:39:46.801Z",
+  "updatedAt": "2026-09-25T01:39:50.612Z",
+  "result": "Acknowledged REFUSE on close:2026-09-accrue.\n\nAgreed: PROPOSE with invoice missing and evidence_used [] had no pendingWrite and no kernel estimated_amount/method to copy. That is insufficient_evidence — not a bookable accrual.\n\nCorrected stance:\n- decision NONE (insufficient_evidence), not PROPOSE\n- no create_accrual / no pendingWrite without an applicable kernel candidate and exact estimated_amount copy\n- for acme / usage evidence, only usage_run_rate when kernel marks it applicable\n\nNo CONCUR requested. Withdrawing the empty PROPOSE.",
+  "seq": 172
+}

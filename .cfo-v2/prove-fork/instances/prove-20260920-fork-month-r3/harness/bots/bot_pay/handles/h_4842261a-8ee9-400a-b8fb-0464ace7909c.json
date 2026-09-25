@@ -1,0 +1,19 @@
+{
+  "id": "h_4842261a-8ee9-400a-b8fb-0464ace7909c",
+  "from": "harness",
+  "to": "bot_pay",
+  "toSlug": "pay",
+  "prompt": "profile: schedule\nRun this week's payment-run draft.\nLoad pool and cash with Catalog ops. Choose among Kernel candidates only.\nStop after you return PaymentPlan invoice IDs. Kernel apply_cash_and_policy_net binds amounts.\nWrite the netted plan path. bot_send_prompt to ctl-pay with profile: review-pay. Await the Handle.\nAfter ctl-pay concurs, identified outflows Handle cash with executed false.\nDo not ask a human. Do not execute ACH. Do not breach the reserve.",
+  "paths": [],
+  "conversation": {
+    "kind": "room",
+    "roomId": "pay"
+  },
+  "kind": "routine",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:03:09.098Z",
+  "updatedAt": "2026-09-24T18:07:19.021Z",
+  "result": "**Weekly payment-run draft complete**\n\n| Item | Detail |\n|------|--------|\n| **Plan** | `workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json` |\n| **pay_this_week** | **INV-001** (Acme Supplies) |\n| **Kernel net** | total_payout **12450.00**, cash_after **6,462,475.74**, **reserve_ok: true** |\n| **Rationale** | Only approved-pool candidate; due 2026-09-22 within 7-day horizon; 2/10 closed (no early discount); spendable 6,374,925.74 covers it without reserve breach |\n| **ctl-pay** | **CONCUR / RELEASE** (`h_1c49dc30`) → `runs/pay/concurrence/plan_2026-09-19_d1e2549ae6c2.json` |\n| **cash** | Expected outflows `workspace/cash/expected-outflows/plan_2026-09-19_d1e2549ae6c2.json`, **executed: false** (acknowledged `h_2a981c58`) |\n\nNo ACH/wire. No human ask. Amounts follow Catalog + `apply_cash_and_policy_net` arithmetic; only Kernel candidate IDs proposed.",
+  "resultPaths": [],
+  "seq": 33
+}

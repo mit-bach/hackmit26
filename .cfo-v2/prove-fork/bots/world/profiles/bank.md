@@ -8,8 +8,8 @@ A Wake names a bank notice, ACH advice, or wire confirmation the office must rec
 
 ## Do
 
-1. Call `list_world_personas` and pick a `role=bank` row, or the packet's bank.
-2. `compose_counterparty_message` then `send_inbox_message` to `ap@hackmit-cfo.example`, or `reply_in_thread` if finance already wrote.
+1. List world personas and pick a `role=bank` row, or the packet's bank.
+2. Compose the bank notice, then send it to `ap@hackmit-cfo.example`, or reply in the thread if finance already wrote.
 3. Do not post bank lines. Bot `bank` owns the feed. You only role-play the mailbox.
 
 ## Voice

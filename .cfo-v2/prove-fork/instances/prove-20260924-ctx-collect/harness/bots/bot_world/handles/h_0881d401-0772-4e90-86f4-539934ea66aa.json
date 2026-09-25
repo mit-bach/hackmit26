@@ -1,0 +1,19 @@
+{
+  "id": "h_0881d401-0772-4e90-86f4-539934ea66aa",
+  "from": "bot_collect",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "Profile customer. Reply as each billed customer to Maximor collections notices dated 2026-09-30 from collections@hackmit-cfo.example. Threads: col-inv-ar-002 Acme INV-AR-002 $8500; col-inv-ar-003 Helios INV-AR-003 $24000; col-inv-ar-004 Brightline INV-AR-004 $31000; col-inv-ar-005 Quiet Harbor INV-AR-005 $45000; col-inv-ar-018 Copperline INV-AR-018 $9600; col-inv-ar-019 Summit Civic INV-AR-019 $7200; col-inv-ar-020 Redwood INV-AR-020 $15800; col-inv-ar-024 Atlas INV-AR-024 $8900; col-inv-ar-025 Brightline INV-AR-025 $27500; col-inv-ar-he-4412 Helios INV-AR-HE-4412 $91200. Use send_inbox_message or reply_in_thread so finance sees customer answers. Do not write AP. Do not ask a human.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_collect",
+    "toId": "bot_world"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:19:29.132Z",
+  "updatedAt": "2026-09-24T18:20:26.914Z",
+  "result": "World/customer replied on all 10 dunning threads via reply_in_thread (wrote_ap false). Promised pays: INV-AR-002 Acme $8500 on 2026-10-08; INV-AR-003 Helios $24000 on 2026-10-24; INV-AR-004 Brightline $31000 on 2026-10-12; INV-AR-005 Quiet Harbor $45000 on 2026-10-18; INV-AR-018 Copperline $9600 on 2026-10-07; INV-AR-019 Summit Civic $7200 on 2026-10-16; INV-AR-020 Redwood $15800 on 2026-10-04; INV-AR-024 Atlas $8900 on 2026-10-03; INV-AR-025 Brightline $27500 on 2026-10-12; INV-AR-HE-4412 Helios $91200 on 2026-10-24. Message ids cust-reply-inv-ar-*. Email triage queued.",
+  "seq": 5
+}

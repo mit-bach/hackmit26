@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-379
+PO Number: PO-379
+Vendor: Teak Systems
+Goods received in full on 2026-09-26
+Packing list attached: PL-GR-379
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 97.43 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

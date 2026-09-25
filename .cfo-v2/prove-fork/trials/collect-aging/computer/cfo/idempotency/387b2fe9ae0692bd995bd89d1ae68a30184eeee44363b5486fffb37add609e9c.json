@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-atlas-inv-ar-024",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "380422bc05fdd10cae951d32e207a457767e69cd1e18de2d91884e499e2fa445",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-atlas-inv-ar-024-reply",
+      "thread_id": "col-atlas-inv-ar-024",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_af8f9db40e39"
+  }
+}

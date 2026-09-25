@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-077
+PO Number: PO-OPEN-077
+Vendor: Ginkgo Supply
+Goods received in full on 2026-09-24
+Packing list attached: PL-GR-OPEN-077
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 190,562.86 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

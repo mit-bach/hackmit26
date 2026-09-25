@@ -1,0 +1,19 @@
+{
+  "id": "h_aac03658-4576-4704-acb1-4c26610477f7",
+  "from": "harness",
+  "to": "bot_ctl_cash",
+  "toSlug": "ctl-cash",
+  "prompt": "[harness wake]\nkind: item_step\nitem: cash:line-1\nstep: review-rec\npacket: runs/items/cash-line-1.json",
+  "paths": [
+    "runs/items/cash-line-1.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_ctl_cash"
+  },
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "createdAt": "2026-09-25T01:32:51.390Z",
+  "updatedAt": "2026-09-25T01:32:51.390Z"
+}

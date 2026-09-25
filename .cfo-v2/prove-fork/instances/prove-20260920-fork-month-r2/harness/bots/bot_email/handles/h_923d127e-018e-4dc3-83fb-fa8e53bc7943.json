@@ -1,0 +1,19 @@
+{
+  "id": "h_923d127e-018e-4dc3-83fb-fa8e53bc7943",
+  "from": "operator",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "profile: employee\nList employee submissions and get one if any exist. Do not invent a bill. Do not match. Do not ask_user. One Profile: employee.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_email"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:52:51.605Z",
+  "updatedAt": "2026-09-24T17:53:08.243Z",
+  "result": "### Employee submissions (profile: `employee`)\n\n| Step | Result |\n| --- | --- |\n| **`list_employee_submissions`** | `found: true` · **count: 0** · `submissions: []` |\n| **Period filter `2026-09`** | Still **0** |\n| **Seed file** | `data/ingestion/employee_submissions.json` is an empty list |\n\n**No submission to get.** Did not invent a bill, match, or call `ask_user`.",
+  "resultPaths": [],
+  "seq": 143
+}

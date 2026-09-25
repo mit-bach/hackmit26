@@ -1,0 +1,28 @@
+{
+  "bot": "cash",
+  "profile": "match",
+  "period": "2026-09",
+  "object": "processor_deposit_tick",
+  "payout_id": "po_1MaximorFees",
+  "bank_deposit_id": "BANK-po_1MaximorFees",
+  "amount": 12610.0,
+  "currency": "USD",
+  "arrival_date": "2026-09-19",
+  "stripe_deposit_path": "workspace/stripe/deposits/po_1MaximorFees.json",
+  "stripe_source_path": "workspace/sources/stripe/po_1MaximorFees.json",
+  "waterfall_status": "MATCH",
+  "expected_payout_minor": 1261000,
+  "actual_payout_minor": 1261000,
+  "difference": 0,
+  "invoice_candidates": 0,
+  "never_ap_invoice": true,
+  "kernel": {
+    "get_bank_transaction": "unknown bank transaction BANK-po_1MaximorFees",
+    "note": "Stripe already ran integrations.cash.reconcile_payout; cash ticks deposit only. No AP invoice mint."
+  },
+  "decision": {
+    "status": "MATCHED_PROCESSOR_DEPOSIT",
+    "action": "tick_bank_deposit_only",
+    "mint_ap_invoice": false
+  }
+}

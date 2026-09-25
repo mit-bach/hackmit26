@@ -1,0 +1,16 @@
+{
+  "comment": "Grain Verifiers. default is not the human Operator. collect write-off is ctl-pay, not ctl-cash.",
+  "default": {
+    "kind": "bot",
+    "bot": "ctl-pay"
+  },
+  "bots": {
+    "ap": { "kind": "bot", "bot": "ctl-pay" },
+    "pay": { "kind": "bot", "bot": "ctl-pay" },
+    "collect": { "kind": "bot", "bot": "ctl-pay" },
+    "apply": { "kind": "bot", "bot": "ctl-cash" },
+    "cash": { "kind": "bot", "bot": "ctl-cash" },
+    "stripe": { "kind": "bot", "bot": "ctl-cash" },
+    "close": { "kind": "bot", "bot": "ctl-books" }
+  }
+}

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-358
+PO Number: PO-358
+Vendor: Juniper Labs
+Goods received in full on 2026-09-05
+Packing list attached: PL-GR-358
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 1,100.91 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

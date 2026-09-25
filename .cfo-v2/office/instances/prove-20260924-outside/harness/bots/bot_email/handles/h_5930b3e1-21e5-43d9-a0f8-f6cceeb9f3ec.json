@@ -1,0 +1,19 @@
+{
+  "id": "h_5930b3e1-21e5-43d9-a0f8-f6cceeb9f3ec",
+  "from": "bot_world",
+  "to": "bot_email",
+  "toSlug": "email",
+  "prompt": "Inbound counterparty mail delivered for triage (profile triage).\n\nCustomer: Northwind Labs <ap@northwind.example> (CUST-001)\nTo: ar@hackmit-cfo.example\nSubject: Payment plan — INV-AR-007\nmessage_id: msg-northwind-pay-intent-inv-ar-007\nthread_id: thr-northwind-inv-ar-007\ncase_id: INV-AR-007\n\nCustomer payment-intent note (not a bank confirmation): will pay full $12,000.00 on INV-AR-007 by ACH on 2026-09-30. No dispute. Mentions other open INV-AR-001 and INV-AR-022 remain on their due dates.\n\ndelivered=true via send_inbox_message. Please classify. World stays on thr-northwind-inv-ar-007 until classification completes and will answer any follow-up on that thread. Do not apply cash from world.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_world",
+    "toId": "bot_email"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:45:36.392Z",
+  "updatedAt": "2026-09-24T20:46:28.771Z",
+  "result": "Classification complete for msg-northwind-pay-intent-inv-ar-007 / thr-northwind-inv-ar-007 / case INV-AR-007.\n\nResult:\n- classification: customer_payment_intent (payment plan / promise-to-pay note)\n- selected_action: ROUTE_COLLECT_NOTE\n- candidate: null (not a vendor invoice; not CREATE_AP_INVOICE)\n- not payment_confirmation: money has not moved yet\n- not customer_remittance: no remittance advice tying received cash to invoices\n- cash application: NOT performed (per instruction; no bank line to apply)\n- extracted: customer Northwind Labs CUST-001; INV-AR-007 full 12000.00 USD by ACH on 2026-09-30; no dispute; INV-AR-001 and INV-AR-022 stay on due dates\n- packet: workspace/email/packets/msg-northwind-pay-intent-inv-ar-007.json\n- notified: collect (collections awareness only)\n\nWorld may close triage wait on this thread. Follow-ups on thr-northwind-inv-ar-007 still welcome; email will not invent a payment or apply cash from this note.",
+  "seq": 33
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h_ca8cad9b-7b44-41c7-94e6-5138308e1c9b",
+  "from": "operator",
+  "to": "bot_books",
+  "toSlug": "books",
+  "prompt": "Operator check for books",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_books"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:49.409Z",
+  "updatedAt": "2026-09-24T23:35:53.880Z",
+  "result": "Books bot here — online and ready. I own GL, subledgers, vendor/customer master, POs, and period-lock state.\n\nWhat do you need?",
+  "resultPaths": [],
+  "seq": 121
+}

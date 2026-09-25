@@ -1,0 +1,23 @@
+{
+  "op": "accrual.tools.create_accrual",
+  "args": {
+    "vendor": "Harbor Electric",
+    "period": "2026-09",
+    "method": "seasonal_prior_year",
+    "confidence": 0.9,
+    "evidence": [
+      "naive_recent_average_is_misleading true",
+      "HI-HE-2025-09 $4650",
+      "13-month cadence",
+      "no 2026-09 invoice"
+    ],
+    "reasoning_summary": "Seasonal utility; prior-year same month. ctl-books CONCUR."
+  },
+  "fromSlug": "close",
+  "fromProfile": "accrue",
+  "verifier": "ctl-books",
+  "verifierProfile": "review-treatment",
+  "idempotencyKey": "accrual-2026-09-harbor-electric",
+  "createdAt": "2026-09-24T21:34:14.635Z",
+  "humanQueue": false
+}

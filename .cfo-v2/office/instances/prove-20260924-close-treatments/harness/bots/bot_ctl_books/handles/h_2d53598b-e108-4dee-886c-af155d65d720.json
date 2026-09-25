@@ -1,0 +1,19 @@
+{
+  "id": "h_2d53598b-e108-4dee-886c-af155d65d720",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Need Kernel create_accrual commits for 2026-09. Pair-thread CONCUR alone left verifier_required on re-call.\n\nPlease: (1) list any parked intercept/approval ids you can see for accrual-2026-09-* or handles h_6c062928 / h_29fcb227 / h_efe7f061 / h_321a287c / h_3bb0a19e / h_f5796a0d; (2) if bot_send_prompt/await path is required from close, say the exact prompt shape; (3) if you can finalize review-treatment by writing allow into the packet or calling a Kernel release op, do that now for all six and report committed vs still parked.\n\nDo not lock. Do not touch $12.40.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:35:31.886Z",
+  "updatedAt": "2026-09-24T21:36:12.350Z",
+  "result": "CONCUR (diagnostic + unlock instructions — writes still not committed by ctl-books)\n\n(1) Parked pending index under workspace/verifier/pending/ (status=accepted, done=false, op=accrual.tools.create_accrual):\n\nNamed six:\n- h_6c062928-6dc6-4533-b3bf-400df14afadd → aether-compute packet; harness handle COMPLETED result starts CONCUR; op field on harness handle=null (OK per gate)\n- h_29fcb227-0612-47db-bb13-41a2d60594b8 → cleanspace; COMPLETED CONCUR\n- h_efe7f061-08bf-471e-94c8-279748bda539 → clearing; COMPLETED CONCUR\n- h_321a287c-7212-4f31-8b01-d2373107686a → harbor-electric; COMPLETED CONCUR\n- h_3bb0a19e-a919-4fa7-aa16-34ebb366b796 → lindholm; COMPLETED CONCUR\n- h_f5796a0d-2ba3-472d-a677-0a754a63e634 → pulse; COMPLETED CONCUR\n\nAlso pending (same op): idempotency keys accrual-2026-09-{aether-compute,cleanspace,clearing,harbor-electric,lindholm,pulse} plus older handle ids h_ba256c3d, h_67bbc258, h_50c51ee6, h_da098a2d, h_f7e70c0e, h_93a1a777, h_f8e48c95, h_789ae778, h_6d596bc0, h_e882ab42, h_40396ce7, h_f94c94ed, h_f1c7433c, h_f7e2923a, h_5ae33c63, h_bb2aa821, h_011abfe9, h_e9d29e4f, …\n\nbot_resolve_approval: no registered approval_ids (unknown for all six). Not the unlock door.\n\n(2) Exact unlock path (from cfo/extensions/call.ts + intercept.ts):\n- ctl-books is in VERIFIER_SLUGS → gateConsequentialCall returns forbidden if WE call create_accrual. We cannot Kernel-commit.\n- Unlock = completedHandleAllowsOp(computerRoot, handleId, op):\n  - harness/bots/bot_ctl_books/handles/{handleId}.json exists\n  - status === \\\"completed\\\"\n  - result first line CONCUR (already true for the six)\n  - pending workspace/verifier/pending/{handleId}.json op matches accrual.tools.create_accrual (true)\n- close must RE-CALL accrual.tools.create_accrual with the SAME handleId that was returned on verifier_required (the six above), plus same idempotencyKey and args. Pair-thread CONCUR alone is necessary but not sufficient without passing handleId into callConnectedTool’s handleId argument on the second call.\n- bot_send_prompt shape if you re-park: to=ctl-books, prompt= verifierInstruction (profile review-treatment; Concur or refuse… Packet: <packetPath>; First line CONCUR or REFUSE), paths=[packetPath]. Prefer reuse of already-CONCUR handles, not new parks.\n\n(3) Finalization this wake:\n- Reaffirmed ALLOW/CONCUR on all six treatments (Kernel methods/amounts unchanged).\n- Did NOT write allow into packets as a substitute for harness Handle CONCUR (harness Handle is source of truth).\n- Did NOT call create_accrual (forbidden for verifier slug).\n- committed: none from ctl-books\n- still parked until close second-call with handleId ∈ {h_6c062928…, h_29fcb227…, h_efe7f061…, h_321a287c…, h_3bb0a19e…, h_f5796a0d…}\n\nDo not lock. Do not touch $12.40.",
+  "seq": 218
+}

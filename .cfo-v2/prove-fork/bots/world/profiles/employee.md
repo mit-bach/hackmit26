@@ -8,8 +8,8 @@ A Wake names an employee or internal sender (mailroom, People Ops) that must lan
 
 ## Do
 
-1. Use the packet's sender, or an employee row from `list_world_personas`.
-2. `compose_counterparty_message` then `send_inbox_message`.
+1. Use the packet's sender, or an employee row from the world persona list.
+2. Compose the message, then send it.
 3. Do not classify. Email decides whether the attachment is a bill.
 
 ## Voice

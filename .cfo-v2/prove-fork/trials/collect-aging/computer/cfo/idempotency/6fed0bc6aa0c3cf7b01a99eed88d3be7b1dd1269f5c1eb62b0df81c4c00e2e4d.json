@@ -1,0 +1,17 @@
+{
+  "key": "world-reply-col-brightline-inv-ar-025",
+  "op": "inbox.tools.reply_in_thread",
+  "hash": "a89f6760a2ed4c538ba5f349824dffedb0c76599c6635a68519e3ecb9da754ab",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "world-brightline-inv-ar-025-reply",
+      "thread_id": "col-brightline-inv-ar-025",
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_248281243052"
+  }
+}

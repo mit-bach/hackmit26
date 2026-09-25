@@ -1,0 +1,26 @@
+[
+  {
+    "account_id": "BANK-OPERATING",
+    "name": "First National operating",
+    "gl_account": "1000-Cash",
+    "currency": "USD",
+    "routing": "011000390",
+    "last4": "9107"
+  },
+  {
+    "account_id": "BANK-PAYROLL",
+    "name": "First National payroll",
+    "gl_account": "1010-Payroll-Imprest",
+    "currency": "USD",
+    "routing": "011000390",
+    "last4": "2281"
+  },
+  {
+    "account_id": "BANK-RESERVE",
+    "name": "Cambridge Trust reserve",
+    "gl_account": "1020-Reserve-Cash",
+    "currency": "USD",
+    "routing": "011300135",
+    "last4": "4402"
+  }
+]

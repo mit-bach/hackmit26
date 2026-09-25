@@ -1,0 +1,21 @@
+{
+  "message_id": "MSG-INBOX-011R",
+  "thread_id": "THR-incomplete",
+  "in_reply_to": "MSG-INBOX-011-OUT",
+  "prior_message_id": "MSG-INBOX-011",
+  "classification": "VENDOR_INVOICE",
+  "selected_action": "CREATE_AP_INVOICE",
+  "dispatch_status": "CREATED",
+  "invoice_id": "ING-006",
+  "canonical_id": "ING-006",
+  "vendor_name": "Acme Supplies",
+  "invoice_number": "ACM-INBOX-5005",
+  "amount_cents": 124500,
+  "currency": "USD",
+  "invoice_date": "2026-09-18",
+  "reason_codes": [
+    "AP_INVOICE_CREATED"
+  ],
+  "match_status": "NON_PO",
+  "note": "Vendor reply supplied missing invoice_number and amount. Original incomplete MSG-INBOX-011 superseded by 011R for intake."
+}

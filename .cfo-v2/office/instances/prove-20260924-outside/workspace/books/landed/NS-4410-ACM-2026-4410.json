@@ -1,0 +1,43 @@
+{
+  "schema": "SourceAgentOutput",
+  "profile": "erp-invoice",
+  "status": "landed",
+  "source": {
+    "channel": "email",
+    "message_id": "MSG-E-INV-001",
+    "attachment_id": "ATT-E-001",
+    "filename": "ACM-2026-4410.pdf",
+    "document_hash": "cbda5aacfb5c6a9d64688cf40f74ce2996da81975779298c4b20788813552d6e",
+    "packet_path": "workspace/email/packets/MSG-E-INV-001.json"
+  },
+  "classification": "invoice",
+  "erp": {
+    "system": "NetSuite",
+    "record_id": "NS-4410",
+    "found": true
+  },
+  "candidate": {
+    "vendor_name": "Acme Supplies",
+    "vendor_id": "VEND-001",
+    "invoice_number": "ACM-2026-4410",
+    "invoice_date": "2026-09-08",
+    "due_date": "2026-09-22",
+    "currency": "USD",
+    "subtotal": 12450.00,
+    "tax": 0,
+    "amount_due": 12450.00,
+    "total": 12450.00,
+    "po_number": "PO-101",
+    "description": "Standing desks and monitors — same economic event as INV-001"
+  },
+  "identity": {
+    "canonical_invoice_number": "ACM-2026-4410",
+    "erp_record_id": "NS-4410",
+    "note": "AP get_invoice(ACM-2026-4410) may miss; use erp record_id NS-4410 via books get_erp_invoice"
+  },
+  "handoff": {
+    "to": "ap",
+    "intent": "prepare",
+    "reason": "Vendor AP invoice identity confirmed in NetSuite; ready for three-way match against PO-101 / GR-101"
+  }
+}

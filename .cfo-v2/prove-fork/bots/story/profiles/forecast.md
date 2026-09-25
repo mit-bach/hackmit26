@@ -15,9 +15,9 @@ Return `ForecastAgentResult`. Keep that Pydantic contract. Fields: `judgments`, 
 ## Procedure
 
 1. Read the Wake path. Copy `as_of`, `forecast_id` if present, and `lock_status`.
-2. Call `reporting.tools.get_trusted_cash_status`. If `forecast_may_start` is false, write `REFUSED`. Do not start thirteen weeks from unreconciled GL cash.
-3. If `forecast_id` is set, call `reporting.tools.get_forecast_snapshot`. Else call `reporting.tools.get_cash_forecast` only after trusted cash exists.
-4. Call `reporting.tools.get_forecast_checks` on the snapshot id. If `errors` is non-empty, write `INSUFFICIENT`. Stop.
+2. Read whether cash is trusted. If `forecast_may_start` is false, write `REFUSED`. Do not start thirteen weeks from unreconciled GL cash.
+3. If `forecast_id` is set, load the stored forecast snapshot. Otherwise build the cash forecast only after trusted cash exists.
+4. Run the forecast checks on the snapshot id. If `errors` is non-empty, write `INSUFFICIENT`. Stop.
 5. Interpret timing risk, held AP, and low-confidence AR from the snapshot. Cite `forecast_id` and source ids.
 6. Treat held AP as uncommitted. Do not speak as if those invoices will be paid.
 7. Keep low-confidence AR on the forecast. Label it uncertain. Do not invent inflows.

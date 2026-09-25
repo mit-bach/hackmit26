@@ -1,0 +1,46 @@
+{
+  "version": "1",
+  "desk": "sandboxes",
+  "deskDirs": [
+    "memory",
+    "packets",
+    "notes"
+  ],
+  "runDomains": [
+    "items",
+    "inbox",
+    "ap",
+    "ar",
+    "bank",
+    "cash_recon",
+    "pay",
+    "audit",
+    "month_end",
+    "accruals",
+    "bs_recon",
+    "integrations",
+    "reporting",
+    "ingestion"
+  ],
+  "memory": "sandboxes/{slug}/memory",
+  "jail": {
+    "template": "sandbox/seatbelt.sb"
+  },
+  "clone": [
+    "cfo",
+    "office",
+    "skills",
+    "sandbox",
+    "kernel@",
+    "data@"
+  ],
+  "wipe": [
+    "cfo/kernel.log.jsonl",
+    "cfo/idempotency",
+    "cfo/kernel.port"
+  ],
+  "answerKeyNames": [],
+  "protocolFiles": false,
+  "prompt": "layers",
+  "registerSkillDirs": false
+}

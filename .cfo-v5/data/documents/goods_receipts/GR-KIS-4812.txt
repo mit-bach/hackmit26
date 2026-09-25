@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-KIS-4812
+PO Number: PO-KIS-4812
+Vendor: Kestrel Industrial Supply LLC
+Goods received in full on 2026-08-11
+Packing list attached: PL-GR-KIS-4812
+Quantity ordered: 28
+Quantity received: 28
+Amount received: 19,406.50 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

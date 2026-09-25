@@ -1,0 +1,260 @@
+{
+  "reconciliation_id": "REC-031",
+  "period": "2026-09",
+  "match_type": "EXACT_MATCH",
+  "status": "MATCHED",
+  "bank_transactions": [
+    {
+      "transaction_id": "TXN-VOL-2026-09-013",
+      "date": "2026-09-14",
+      "amount": -1002.21,
+      "currency": "USD",
+      "description": "ACH OUT PAGAYA COFFEE SERVICE",
+      "reference": "ACH-0013",
+      "counterparty": "PAGAYA COFFEE SERVICE",
+      "transaction_type": "ach_debit",
+      "source": "operating_account",
+      "provider": null,
+      "period": "2026-09",
+      "amount_minor": -100221,
+      "raw_metadata": {
+        "volume": true,
+        "difficulty": "exact",
+        "vendor_id": "VEND-038"
+      }
+    }
+  ],
+  "ledger_entries": [
+    {
+      "entry_id": "GL-VOL-2026-09-013",
+      "date": "2026-09-14",
+      "amount": -1002.21,
+      "currency": "USD",
+      "account": "1000-Cash",
+      "counterparty": "Pagaya Coffee Service",
+      "reference": "ACH-0013",
+      "description": "Books Pagaya Coffee Service 2026-09-14",
+      "entry_type": "ap_payment",
+      "period": "2026-09",
+      "source": "gl",
+      "amount_minor": -100221,
+      "raw_metadata": {
+        "volume": true,
+        "bank_id": "TXN-VOL-2026-09-013"
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "EXACT_MATCH:TXN-VOL-2026-09-013:GL-VOL-2026-09-013",
+      "match_type": "EXACT_MATCH",
+      "bank_transaction_ids": [
+        "TXN-VOL-2026-09-013"
+      ],
+      "ledger_entry_ids": [
+        "GL-VOL-2026-09-013"
+      ],
+      "bank_amount": -1002.21,
+      "ledger_amount": -1002.21,
+      "difference": 0.0,
+      "bank_amount_minor": -100221,
+      "ledger_amount_minor": -100221,
+      "difference_minor": 0,
+      "confidence": 1.0,
+      "score": 2.35,
+      "evidence": [
+        "amount:-100221",
+        "bank_date:2026-09-14",
+        "ledger_date:2026-09-14",
+        "counterparty_overlap:0.50",
+        "bank_reference:ACH-0013",
+        "ledger_reference:ACH-0013"
+      ],
+      "ambiguities": [],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-VOL-2026-09-013:GL-VOL-2026-09-181",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-VOL-2026-09-013"
+      ],
+      "ledger_entry_ids": [
+        "GL-VOL-2026-09-181"
+      ],
+      "bank_amount": -1002.21,
+      "ledger_amount": -1030.77,
+      "difference": 28.56,
+      "bank_amount_minor": -100221,
+      "ledger_amount_minor": -103077,
+      "difference_minor": 2856,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:-100221",
+        "ledger_amount:-103077",
+        "difference:2856",
+        "rounding_rejected:difference_not_one_cent",
+        "fee_rejected:no_fee_evidence",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    },
+    {
+      "candidate_id": "UNEXPLAINED_DIFFERENCE:TXN-VOL-2026-09-181:GL-VOL-2026-09-013",
+      "match_type": "UNEXPLAINED_DIFFERENCE",
+      "bank_transaction_ids": [
+        "TXN-VOL-2026-09-181"
+      ],
+      "ledger_entry_ids": [
+        "GL-VOL-2026-09-013"
+      ],
+      "bank_amount": -1030.77,
+      "ledger_amount": -1002.21,
+      "difference": -28.56,
+      "bank_amount_minor": -103077,
+      "ledger_amount_minor": -100221,
+      "difference_minor": -2856,
+      "confidence": 0.2,
+      "score": 0.4,
+      "evidence": [
+        "bank_amount:-103077",
+        "ledger_amount:-100221",
+        "difference:-2856",
+        "rounding_rejected:difference_not_one_cent",
+        "fee_rejected:no_fee_evidence",
+        "no_fx_evidence",
+        "no_partial_payment_remittance"
+      ],
+      "ambiguities": [
+        "foreign_exchange",
+        "partial_payment",
+        "duplicate_or_missing",
+        "timing_difference"
+      ],
+      "fee_evidence_ids": [],
+      "provider": null,
+      "provider_payout_id": null,
+      "provider_status": null,
+      "proposed_adjusting_entries": []
+    }
+  ],
+  "calculations": {
+    "bank_amount_minor": -100221,
+    "ledger_amount_minor": -100221,
+    "difference_minor": 0,
+    "group_sum_equals_bank": null
+  },
+  "preparer": {
+    "case_id": "EXACT_MATCH:TXN-VOL-2026-09-013:GL-VOL-2026-09-013",
+    "selected_candidate_id": "EXACT_MATCH:TXN-VOL-2026-09-013:GL-VOL-2026-09-013",
+    "disposition": "MATCHED",
+    "confidence": 1.0,
+    "reasons": [
+      "Bank TXN-VOL-2026-09-013 equals ledger GL-VOL-2026-09-013 at -$1,002.21."
+    ],
+    "evidence_used": [
+      "amount:-100221",
+      "bank_date:2026-09-14",
+      "ledger_date:2026-09-14",
+      "counterparty_overlap:0.50",
+      "bank_reference:ACH-0013",
+      "ledger_reference:ACH-0013"
+    ],
+    "review_question": null
+  },
+  "investigation": null,
+  "validation": {
+    "passed": true,
+    "errors": [],
+    "human_review_required": false,
+    "reasons": []
+  },
+  "reviewer": {
+    "case_id": "EXACT_MATCH:TXN-VOL-2026-09-013:GL-VOL-2026-09-013",
+    "reviewer_status": "CONFIRMED",
+    "disposition": "MATCHED",
+    "agree_with_preparer": true,
+    "confidence": 1.0,
+    "reasons": [
+      "Python validation passed"
+    ],
+    "arithmetic_ok": true,
+    "human_review": false
+  },
+  "final": {
+    "reconciliation_id": "REC-031",
+    "period": "2026-09",
+    "match_key": "5a8171264fbdd1ae",
+    "bank_transaction_ids": [
+      "TXN-VOL-2026-09-013"
+    ],
+    "ledger_entry_ids": [
+      "GL-VOL-2026-09-013"
+    ],
+    "match_type": "EXACT_MATCH",
+    "bank_amount": -1002.21,
+    "ledger_amount": -1002.21,
+    "difference": 0.0,
+    "bank_amount_minor": -100221,
+    "ledger_amount_minor": -100221,
+    "difference_minor": 0,
+    "confidence": 1.0,
+    "status": "MATCHED",
+    "explanation": "Bank TXN-VOL-2026-09-013 equals ledger GL-VOL-2026-09-013 at -$1,002.21.",
+    "evidence": [
+      "amount:-100221",
+      "bank_date:2026-09-14",
+      "ledger_date:2026-09-14",
+      "counterparty_overlap:0.50",
+      "bank_reference:ACH-0013",
+      "ledger_reference:ACH-0013"
+    ],
+    "control_findings": [],
+    "proposed_adjusting_entries": [],
+    "reviewer_status": "CONFIRMED",
+    "human_review": false,
+    "candidate_id": "EXACT_MATCH:TXN-VOL-2026-09-013:GL-VOL-2026-09-013",
+    "provider": null,
+    "provider_payout_id": null,
+    "provider_status": null,
+    "calculations": {
+      "bank_amount_minor": -100221,
+      "ledger_amount_minor": -100221,
+      "difference_minor": 0,
+      "group_sum_equals_bank": null
+    }
+  },
+  "proposed_journal_entries": [],
+  "human_review": false,
+  "evidence": [
+    "amount:-100221",
+    "bank_date:2026-09-14",
+    "ledger_date:2026-09-14",
+    "counterparty_overlap:0.50",
+    "bank_reference:ACH-0013",
+    "ledger_reference:ACH-0013"
+  ],
+  "control_findings": [],
+  "agents": [],
+  "used_agent": false,
+  "replay": false,
+  "memory_lookup": null,
+  "written_memory_id": null,
+  "trace_path": null
+}

@@ -1,0 +1,14 @@
+MAXIMOR DEMO CORP  ·  Cambridge warehouse
+Receiving report
+
+Goods Receipt GR-OPEN-048
+PO Number: PO-OPEN-048
+Vendor: Quince Labs
+Goods received in full on 2026-09-22
+Packing list attached: PL-GR-OPEN-048
+Quantity ordered: 1
+Quantity received: 1
+Amount received: 186,584.64 USD
+Received by: Maya Ortiz, Dock B
+Condition: undamaged, count agrees with the packing list.
+This receiving report is not an invoice.

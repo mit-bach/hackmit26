@@ -1,0 +1,19 @@
+{
+  "id": "h_c2079b47-3a39-4e2d-aeac-68c98579c6ac",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "profile: vendor\nYou are Acme Supplies. Reply about invoice ACM-2026-4410 for $12,450 on purchase order 101. Confirm the number, the amount, and that the goods were received. Stay until email classifies that reply. Do not pay.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T20:50:50.221Z",
+  "updatedAt": "2026-09-24T20:53:03.732Z",
+  "result": "**Done.** Acted as Acme Supplies and stayed through email triage.\n\n### Delivered\n- **From:** Acme Supplies `<billing@acmesupplies.example>`\n- **To:** `ap@hackmit-cfo.example`\n- **message_id:** `msg-acme-acm-2026-4410-confirm-001`\n- **thread_id:** `thr-acme-acm-2026-4410`\n- Confirmed **ACM-2026-4410**, **$12,450.00**, **PO 101**, goods received\n\n### Packet\n`workspace/world/packets/acm-2026-4410-confirm.md`\n\n### Email triage\n- **Classification:** `not_invoice` / `vendor_invoice_confirmation`\n- **Action:** `NONE` (no new AP bill, no pay)\n- Packet: `workspace/email/packets/acm-2026-4410-confirm-triage.md`\n\nNo payment was initiated.",
+  "resultPaths": [],
+  "seq": 8
+}

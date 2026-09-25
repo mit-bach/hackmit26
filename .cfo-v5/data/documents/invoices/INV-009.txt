@@ -1,0 +1,39 @@
+Northwind Phantom LLC
+1 Liberty Place, Suite 12
+Philadelphia, PA 19103
+Phone +1 215-555-5000   billing@nwphantom.example
+Tax ID 23-9911004
+
+INVOICE
+
+Invoice Number: NWP-50000
+Invoice Date: 2026-09-19
+Due Date: 2026-09-20
+PO Number: PO-109
+Payment Terms: due on receipt
+Currency: USD
+Vendor: Northwind Phantom LLC
+
+Bill To:
+Maximor Demo Corp
+Accounts Payable
+245 Main Street, Floor 4
+Cambridge, MA 02142
+United States
+ap@maximor.example
+EIN 04-3829107
+
+Description                                    Qty          Unit        Amount
+------------------------------------------------------------------------------
+Manual new-vendor engagement retainer         1.00     50,000.00     50,000.00
+
+Subtotal                                                             50,000.00
+Tax                                                                       0.00
+Amount Due                                                           50,000.00
+
+Remit to:
+Wire Metro Community routing 031000037  account ****5000
+Bank: Metro Community Bank  ****5000
+Please include invoice NWP-50000 on the payment advice.
+Late payments may accrue a 1.5% monthly finance charge after the due date.
+Questions: billing@nwphantom.example

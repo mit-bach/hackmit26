@@ -1,0 +1,23 @@
+{
+  "id": "h_c61d6252-e1a6-4cf2-bd63-e565506e5bec",
+  "from": "harness",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "[harness wake]\nkind: item_step\nitem: accrual:2026-09-acme\nstep: review-treatment\npacket: runs/items/accrual-2026-09-acme.json",
+  "paths": [
+    "runs/items/accrual-2026-09-acme.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "failed",
+  "createdAt": "2026-09-24T23:29:02.560Z",
+  "updatedAt": "2026-09-25T01:39:36.240Z",
+  "result": "## Decision: **REFUSE**\n\n**Item:** `accrual:2026-09-acme` · **step:** `review-treatment`\n\n**pendingWrite:** `accrual.tools.create_accrual` with `method: trailing_average`, `evidence: [\"usage\"]`, `reasoning_summary: missing invoice`.\n\n**Why refuse**\n1. Evidence is **usage** → estimation method should be **`usage_run_rate`**, not `trailing_average`.\n2. Packet has **no kernel `estimated_amount`** to copy (instruction: copy kernel amount; do not recompute).\n3. “Missing invoice” alone does not justify trailing_average under usage evidence.\n\n**Peer:** `close` acknowledged — will not resubmit trailing_average; on rework will use usage_run_rate and copy kernel amount only.\n\n**Blocked:** `complete_step` returns `caller ctl-books is not the owner close of accrual:2026-09-acme`. `ask_bot`/`bot_ask` to `harness` → `unknown bot`. Verdict is on the close pair thread and in `sandboxes/ctl-books/memory/MEMORY.md`.",
+  "resultPaths": [],
+  "seq": 166,
+  "error": "did not call ask_bot to reply; assistant text is not the pair thread"
+}

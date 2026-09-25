@@ -1,0 +1,41 @@
+{
+  "version": "1",
+  "ops": {
+    "accrual.tools.create_accrual": {
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "ownerPrefixes": [
+        "runs/accrual/"
+      ]
+    },
+    "accrual.tools.reconcile_accrual_with_invoice": {
+      "mutability": "write-local",
+      "sodClass": "accrual-write",
+      "ownerPrefixes": [
+        "runs/accrual/"
+      ]
+    },
+    "audit.tools.get_audit_ground_truth": {
+      "evalOnly": true,
+      "sodClass": "audit-eval"
+    }
+  },
+  "grantDenylist": {
+    "Payment Audit": [
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool"
+    ],
+    "Month-End Close Reviewer": [
+      "accrual.tools.create_accrual"
+    ]
+  },
+  "profileDenylist": {
+    "ctl-pay/review-pay": [
+      "scheduling.tools.get_payment_candidates",
+      "scheduling.tools.get_approved_pool"
+    ],
+    "ctl-books/lock": [
+      "accrual.tools.create_accrual"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "currentId": "live",
+  "instances": [
+    {
+      "id": "live",
+      "name": "Live",
+      "computerRel": "..",
+      "createdAt": "2026-09-24T23:31:38.827Z"
+    }
+  ]
+}

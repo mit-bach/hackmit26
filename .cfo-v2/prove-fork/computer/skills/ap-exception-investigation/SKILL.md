@@ -16,7 +16,7 @@ Bot `ap` Profile `investigate` only. Same Bot as prepare. Replace the Grant set.
 
 ## Inputs / Evidence
 
-Kernel `get_case_evidence`, published policies, operational AP memory, `get_prior_cases` as a seed not as the happy path. Current evidence wins.
+Kernel case evidence, published policies, and operational AP memory. Prior cases are a seed, not the happy path. Current evidence wins.
 
 ## Procedure
 

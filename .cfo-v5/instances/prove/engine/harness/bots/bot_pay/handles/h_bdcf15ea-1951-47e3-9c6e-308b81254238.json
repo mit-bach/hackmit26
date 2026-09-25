@@ -1,0 +1,19 @@
+{
+  "id": "h_bdcf15ea-1951-47e3-9c6e-308b81254238",
+  "from": "harness",
+  "to": "bot_pay",
+  "toSlug": "pay",
+  "prompt": "[harness wake]\nkind: item_step\nitem: pay:INV-001\nstep: schedule\npacket: runs/items/pay-INV-001.json",
+  "paths": [
+    "runs/items/pay-INV-001.json"
+  ],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "harness",
+    "toId": "bot_pay"
+  },
+  "kind": "a2a_handoff",
+  "status": "accepted",
+  "createdAt": "2026-09-25T01:32:51.340Z",
+  "updatedAt": "2026-09-25T01:32:51.340Z"
+}

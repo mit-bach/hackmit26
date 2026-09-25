@@ -1,0 +1,19 @@
+{
+  "key": "world-send-fnb-stmt-2026-09-operating-001",
+  "op": "inbox.tools.send_inbox_message",
+  "hash": "42eac2e9e6ac28a1fbe113f9c510794b778a07a90f09e6c7547d1e55327ce448",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-fnb-stmt-2026-09-operating-001",
+      "thread_id": "thr-fnb-stmt-2026-09-operating",
+      "delivered": true,
+      "attachment_hashes": [],
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_3f33c3fdcee7"
+  }
+}

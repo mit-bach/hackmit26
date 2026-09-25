@@ -1,0 +1,19 @@
+{
+  "key": "col-inv-ar-003-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "9a183807913d7937972dff14bdae2c11d2e44cfda990a66b54c9e4e50c88d48d",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-inv-ar-003-20260930",
+      "thread_id": "col-helios-inv-ar-003",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_51ec74e0334e"
+  }
+}

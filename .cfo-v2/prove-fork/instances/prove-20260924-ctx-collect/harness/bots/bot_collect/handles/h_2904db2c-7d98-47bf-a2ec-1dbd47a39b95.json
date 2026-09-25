@@ -1,0 +1,19 @@
+{
+  "id": "h_2904db2c-7d98-47bf-a2ec-1dbd47a39b95",
+  "from": "operator",
+  "to": "bot_collect",
+  "toSlug": "collect",
+  "prompt": "profile: chase\nMaximor Demo Corp, September 2026. Customer invoices are still open. You own collections. Work the aging. Do not apply their cash. Do not close the month. Do not ask a person.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_collect"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T18:18:16.075Z",
+  "updatedAt": "2026-09-24T18:21:00.705Z",
+  "result": "Worked post-apply aging as of **2026-09-30**. Ten open invoices, none blocked. Did not apply cash. Did not close.\n\n| Invoice | Customer | Outstanding | DPD | Action | Customer reply |\n|---|---|---:|---:|---|---|\n| INV-AR-024 | Atlas Robotics | $8,900 | 3 | SEND_GENTLE_REMINDER | Pay **2026-10-03** |\n| INV-AR-018 | Copperline Logistics | $9,600 | 11 | SEND_GENTLE_REMINDER | Pay **2026-10-07** |\n| INV-AR-HE-4412 | Helios Analytics | $91,200 | 16 | SEND_GENTLE_REMINDER | Pay **2026-10-24** |\n| INV-AR-002 | Acme Industrial | $8,500 | 20 | SEND_GENTLE_REMINDER | Pay **2026-10-08** |\n| INV-AR-003 | Helios Analytics | $24,000 | 41 | SEND_OVERDUE_REMINDER | Pay **2026-10-24** |\n| INV-AR-019 | Summit Civic | $7,200 | 47 | SEND_OVERDUE_REMINDER | Pay **2026-10-16** |\n| INV-AR-004 | Brightline Media | $31,000 | 77 | SEND_FINAL_NOTICE | Pay **2026-10-12** |\n| INV-AR-020 | Redwood Clinics | $15,800 | 82 | SEND_FINAL_NOTICE | Pay **2026-10-04** |\n| INV-AR-025 | Brightline Media | $27,500 | 121 | SEND_FINAL_NOTICE | Pay **2026-10-12** |\n| INV-AR-005 | Quiet Harbor | $45,000 | 152 | SEND_FINAL_NOTICE (3 prior reminders) | Pay **2026-10-18** |\n\nMail went from `collections@hackmit-cfo.example` (`delivered: true`). World/customer answered on all ten threads (`cust-reply-inv-ar-*`). Still fully open until apply sees those remittances. No `ctl-pay` write-off this run; Quiet Harbor stays live against the 10/18 promise.",
+  "resultPaths": [],
+  "seq": 8
+}

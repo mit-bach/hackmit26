@@ -1,0 +1,19 @@
+{
+  "id": "h_597b49ff-f16c-4fb1-8f44-a59c83d61546",
+  "from": "bot_books",
+  "to": "bot_ap",
+  "toSlug": "ap",
+  "prompt": "profile: prepare\n\nERP Invoice Agent (books) landed NetSuite vendorBill NS-4410.\n\nPath on Computer: workspace/books/erp-invoice/NS-4410.json\n\nFacts:\n- system: NetSuite\n- record_id: NS-4410\n- vendor: Acme Supplies (VEND-001)\n- vendor_invoice_number: ACM-2026-4410\n- invoice_date: 2026-09-08\n- due_date: 2026-09-22\n- currency: USD\n- amount/subtotal: 12450 / tax 0\n- po_id: PO-101\n- period: 2026-09\n- description notes same economic event as INV-001\n\nKernel already has AP invoice INV-001 for ACM-2026-4410 (ING-001 already_present_in_ap). Prepare that existing bill only — do not open a duplicate. Books did not three-way match and did not lock the period. Return prepare outcome and path you wrote.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_books",
+    "toId": "bot_ap"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:44:28.557Z",
+  "updatedAt": "2026-09-24T17:45:00.195Z",
+  "result": "ACK INV-001 found (tools.get_invoice ok). NS-4410 = same economic event as INV-001 / ACM-2026-4410 / ING-001 — no duplicate opened.\n\nPrepare outcome: APPROVE-shaped. Kernel three-way clean — PO-101 approved 12450, GR-101 full 15/15, amount_matches, vendor_exact_match, exception_types [], no duplicates. days_until_due -2.\n\nPacket path: runs/ap/packets/INV-001.json\nap did not pay; period not locked by ap. ctl-pay review-match handoff intended (packet ready).",
+  "seq": 114
+}

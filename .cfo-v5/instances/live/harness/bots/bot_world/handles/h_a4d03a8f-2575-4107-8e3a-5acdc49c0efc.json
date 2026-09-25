@@ -1,0 +1,19 @@
+{
+  "id": "h_a4d03a8f-2575-4107-8e3a-5acdc49c0efc",
+  "from": "operator",
+  "to": "bot_world",
+  "toSlug": "world",
+  "prompt": "Operator check for world",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_world"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:32:53.095Z",
+  "updatedAt": "2026-09-24T23:33:30.058Z",
+  "result": "World bot here — ready. I own simulated counterparty messages (vendor, customer, bank, employee personas) and reply in-thread on the `reply` step with SENT or HOLD.",
+  "resultPaths": [],
+  "seq": 49
+}

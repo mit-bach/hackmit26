@@ -1,0 +1,21 @@
+MAXIMOR DEMO CORP
+Procurement  ·  245 Main Street, Cambridge, MA 02142
+
+PURCHASE ORDER
+
+Purchase Order PO-NLF-03-2026-05
+PO Number: PO-NLF-03-2026-05
+Issued: 2026-05-17
+Vendor: NLF Industrial Components
+Vendor legal name: NLF Industrial Components
+Vendor tax ID: 04-7712288
+Authorized amount: 4,880.18
+Currency: USD
+Approver: Priya Nair
+Ship to: 245 Main Street, Receiving Dock B, Cambridge, MA 02142
+
+Description
+Dock 4 components
+
+This purchase order is not an invoice. The vendor must bill against PO-NLF-03-2026-05.
+Payment terms follow the vendor master unless this order states otherwise.

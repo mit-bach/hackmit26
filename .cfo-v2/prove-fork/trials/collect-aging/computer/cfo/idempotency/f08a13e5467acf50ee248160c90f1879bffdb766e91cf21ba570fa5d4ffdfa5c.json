@@ -1,0 +1,19 @@
+{
+  "key": "col-inv-ar-018-20260930",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "ada05645f94253a2f5e1bceaac5ac0b8f84c48891458a516bc2497bf4a011852",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "col-inv-ar-018-20260930",
+      "thread_id": "col-copperline-inv-ar-018",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_423a0fe7d032"
+  }
+}

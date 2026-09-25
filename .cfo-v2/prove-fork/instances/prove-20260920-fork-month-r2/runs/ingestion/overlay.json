@@ -52,15 +52,78 @@
       "vendor_invoice_number": "DD-INBOX-4004",
       "description": "Datadog DD-INBOX-4004",
       "payment_terms": "net 30",
-      "early_payment_discount_percent": 0,
+      "early_payment_discount_percent": 0.0,
       "early_payment_discount_deadline": null,
-      "late_fee_percent": 0,
+      "late_fee_percent": 0.0,
       "vendor_priority": "normal",
       "source_message_id": "MSG-INBOX-004",
       "source_thread_id": "THR-no-po",
       "source_trace_id": "INBOX-MSG-INBOX-004",
       "source_attachment_hashes": [
         "7884e52c5f2a4d4d2f6647460ff515ba8ac8b82ab8cdd2803e3904ba8d973588"
+      ]
+    },
+    {
+      "invoice_id": "ING-004",
+      "vendor": "Nimbus Analytics LLC",
+      "po_id": null,
+      "amount": 990.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "NIM-INBOX-8008",
+      "description": "Nimbus Analytics LLC NIM-INBOX-8008",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-015",
+      "source_thread_id": "THR-unknown-vendor",
+      "source_trace_id": "INBOX-MSG-INBOX-015",
+      "source_attachment_hashes": [
+        "bbc7819e3b924e48cdc80a2229754edc3f15e4a3feccd57dda306126a297e630"
+      ]
+    },
+    {
+      "invoice_id": "ING-005",
+      "vendor": "Figma",
+      "po_id": "PO-107",
+      "amount": 2448.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-10-18",
+      "vendor_invoice_number": "FIG-INBOX-2002",
+      "description": "Figma FIG-INBOX-2002",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0.0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0.0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-002",
+      "source_thread_id": "THR-body-invoice",
+      "source_trace_id": "INBOX-MSG-INBOX-002",
+      "source_attachment_hashes": [
+        "99f47875dc66458e755efa584eb857c1a46d135061a580cb5fb6efc8df77d220"
+      ]
+    },
+    {
+      "invoice_id": "ING-006",
+      "vendor": "Acme Supplies",
+      "po_id": null,
+      "amount": 1245.0,
+      "invoice_date": "2026-09-18",
+      "due_date": "2026-09-18",
+      "vendor_invoice_number": "ACM-INBOX-5005",
+      "description": "Acme Supplies ACM-INBOX-5005",
+      "payment_terms": "net 30",
+      "early_payment_discount_percent": 0,
+      "early_payment_discount_deadline": null,
+      "late_fee_percent": 0,
+      "vendor_priority": "normal",
+      "source_message_id": "MSG-INBOX-011R",
+      "source_thread_id": "THR-incomplete",
+      "source_trace_id": "INBOX-MSG-INBOX-011R",
+      "source_attachment_hashes": [
+        "3e7c58fe254ee2461f04b28a1d76f59ac88045223d8e2204deabb490a19eaafe"
       ]
     }
   ]

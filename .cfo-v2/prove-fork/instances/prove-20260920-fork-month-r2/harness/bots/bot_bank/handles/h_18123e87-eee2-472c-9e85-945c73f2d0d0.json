@@ -1,0 +1,19 @@
+{
+  "id": "h_18123e87-eee2-472c-9e85-945c73f2d0d0",
+  "from": "operator",
+  "to": "bot_bank",
+  "toSlug": "bank",
+  "prompt": "profile: card\nList bank transactions on the operating account. A charge is not a bill. Handle cash / match for unmatched lines, including TXN-2026-09-015 if it is in the pack. Do not invent invoices. Do not clear the 12.40 difference. Do not ask_user. One Profile this turn: card.\n",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_bank"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T17:45:19.452Z",
+  "updatedAt": "2026-09-24T17:47:23.130Z",
+  "result": "## Bank / card turn (profile: `card`)\n\n### Kernel card feed\n- `list_bank_transactions` → **count 0** (`data/ingestion/bank_transactions.json` empty).\n- `get_bank_transaction` / `find_related_invoice` for `TXN-2026-09-015` → **not found** (do not invent).\n\n### Operating pack landed\n- Source: `data/cash_recon/bank_statement.json` (operating account, 2026-09: **219** lines).\n- Index: `workspace/bank/2026-09-operating-index.json`\n- Lines: `workspace/bank/lines/<txn_id>.json`\n- Packets: `workspace/bank/packets/`\n\n### Unmatched / exception ids handed to **cash** (`profile: match`)\n| Id | Note |\n|---|---|\n| **TXN-2026-09-015** | NORTHSTAR credit **12,412.40** — residual **12.40** vs GL-AR-NS; **not cleared** |\n| TXN-2026-09-011 | FEE_NETTED |\n| TXN-2026-09-012B | POSSIBLE_DUPLICATE_REFUND |\n| TXN-2026-09-025 | UNMATCHED_BANK |\n| TXN-2026-09-020H, 020R, 028, 021 | open pack exceptions |\n| BNK-AP-012, BNK-UNX-001 | open pack exceptions |\n\n### Cash reply on **TXN-2026-09-015**\n- Paths read; cash packet: `workspace/cash/packets/TXN-2026-09-015.json`\n- Fail-closed **HUMAN_REVIEW** / **UNEXPLAINED_DIFFERENCE**; **12.40** kept\n- No invented invoice or forced match\n- Queue: **ctl-cash** / review-rec; period cannot RECONCILE with residual open\n\nNo invoices invented. No `ask_user`.",
+  "resultPaths": [],
+  "seq": 124
+}

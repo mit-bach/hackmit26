@@ -1,0 +1,20 @@
+{
+  "contract": "PaymentAuditResult",
+  "plan_id": "plan_2026-09-19_d1e2549ae6c2",
+  "profile": "review-pay",
+  "bot": "ctl-pay",
+  "decision": "CONCUR",
+  "proposed_action": "RELEASE",
+  "packet_path": "workspace/pay/plans/plan_2026-09-19_d1e2549ae6c2.json",
+  "reason": "Kernel get_cash_position matches draft cash and spendable_cash 6374925.74. plan.reserve_ok true; metrics.reserve_violation false; total_payout 12450.0 leaves cash_after_payments 6462475.74 above minimum_cash_reserve 100000. pay_this_week is Kernel candidate INV-001 only (approval_source ctl_pay, due_within_horizon true, discount_open false, unnecessary_if_paid_early false). No HOLD lines. executed false; self_approved false. Treasury P-012–P-016 satisfied from packet facts without rebuilding candidates.",
+  "policies_applied": ["P-012", "P-013", "P-014", "P-015", "P-016"],
+  "kernel_traces": ["k_a6f8ad53a1aa", "k_c94d0b0eeafc"],
+  "reserve_ok": true,
+  "proposed_ids": ["INV-001"],
+  "total_payout": 12450.0,
+  "must_hold": false,
+  "next": {
+    "owner": "pay",
+    "note": "ctl-pay CONCUR on draft only. pay may proceed Kernel-allowed release path. ctl-pay does not execute ACH or wire."
+  }
+}

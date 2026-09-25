@@ -1,0 +1,19 @@
+{
+  "id": "h_4fdc57c1-82b7-4860-bba7-20649c433091",
+  "from": "operator",
+  "to": "bot_apply",
+  "toSlug": "apply",
+  "prompt": "Operator check for apply",
+  "paths": [],
+  "conversation": {
+    "kind": "operator_dm",
+    "botId": "bot_apply"
+  },
+  "kind": "user_dm",
+  "status": "completed",
+  "createdAt": "2026-09-24T23:35:50.670Z",
+  "updatedAt": "2026-09-24T23:35:54.453Z",
+  "result": "Apply bot online. I own unapplied cash and stick kernel-valid remittances to invoices.\n\nFor a normal apply step I load cash-application facts via connected tools, propose only kernel-accepted applications (no invented invoices/amounts), and `complete_step` with `PROPOSE` or `HOLD`.\n\nWhat do you want checked—status, memory precedents, catalog tools, or a specific payment?",
+  "resultPaths": [],
+  "seq": 125
+}

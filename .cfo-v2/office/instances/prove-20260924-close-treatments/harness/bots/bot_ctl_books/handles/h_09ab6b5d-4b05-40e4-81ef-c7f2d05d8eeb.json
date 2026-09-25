@@ -1,0 +1,19 @@
+{
+  "id": "h_09ab6b5d-4b05-40e4-81ef-c7f2d05d8eeb",
+  "from": "bot_close",
+  "to": "bot_ctl_books",
+  "toSlug": "ctl-books",
+  "prompt": "Profile: review-treatment. Please review and concur or reject these September 2026 accrual treatment packets (Kernel amounts only; do not lock period; do not clear $12.40):\n\n1. workspace/verifier/ctl-books/accrual-2026-09-aether-compute.json — Aether Compute usage_run_rate 11849.90\n2. workspace/verifier/ctl-books/accrual-2026-09-cleanspace.json — CleanSpace Facilities contract_commitment 2400.00\n3. workspace/verifier/ctl-books/accrual-2026-09-clearing.json — Clearing Solutions LLC recent_average 11326.21\n4. workspace/verifier/ctl-books/accrual-2026-09-harbor-electric.json — Harbor Electric seasonal_prior_year 4650.00\n5. workspace/verifier/ctl-books/accrual-2026-09-lindholm.json — Lindholm & Ruiz LLP contract_commitment 8500.00\n6. workspace/verifier/ctl-books/accrual-2026-09-pulse.json — Pulse Recruiting contract_commitment 15000.00\n\nHandle ids / idempotency: accrual-2026-09-aether-compute, cleanspace, clearing, harbor-electric, lindholm, pulse. Reply with concurrence status per packet.",
+  "paths": [],
+  "conversation": {
+    "kind": "peer_dm",
+    "fromId": "bot_close",
+    "toId": "bot_ctl_books"
+  },
+  "kind": "a2a_handoff",
+  "status": "completed",
+  "createdAt": "2026-09-24T21:32:13.485Z",
+  "updatedAt": "2026-09-24T21:32:56.566Z",
+  "result": "REFUSE (all six)\n\nPrepaidReview batch 2026-09 accruals — profile review-treatment.\n\nKernel grants this wake: prepaid list/get/schedule/candidates + decision memories only. No accrual read/write ops. Verifier packet paths under workspace/verifier/ctl-books/ are not readable on ctl-books desk. list_prepaids has no Aether, CleanSpace, Clearing, Harbor Electric, Lindholm, or Pulse prepaid_ids. get_decision_memories(accrual, 2026-09) returned no precedents. Cannot validate Kernel amounts or methods without applicable Python candidates.\n\nPer packet:\n1. accrual-2026-09-aether-compute (11849.90 usage_run_rate) — REFUSE; defect: no prepaid/accrual Kernel evidence; wrong object class for prepaid-only grants\n2. accrual-2026-09-cleanspace (2400.00 contract_commitment) — REFUSE; same defect\n3. accrual-2026-09-clearing (11326.21 recent_average) — REFUSE; same defect\n4. accrual-2026-09-harbor-electric (4650.00 seasonal_prior_year) — REFUSE; same defect; no Harbor prior-period memory to reuse\n5. accrual-2026-09-lindholm (8500.00 contract_commitment) — REFUSE; same defect\n6. accrual-2026-09-pulse (15000.00 contract_commitment) — REFUSE; same defect\n\nDid not lock period. Did not clear $12.40. Did not invent amounts. Did not book accruals. Re-route with accrual validators / complete packets on a profile that can read them, or supply prepaid_ids if these are mislabeled prepaid treatments.",
+  "seq": 163
+}

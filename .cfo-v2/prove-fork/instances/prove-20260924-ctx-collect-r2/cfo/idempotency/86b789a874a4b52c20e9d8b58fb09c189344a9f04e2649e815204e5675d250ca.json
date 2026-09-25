@@ -1,0 +1,19 @@
+{
+  "key": "collect-send-INV-AR-025-2026-09-30",
+  "op": "inbox.tools.send_office_outbound",
+  "hash": "2891d6985693d39346b8181a11b3e2e0f2800acbc24964a70172cc1d2e351806",
+  "status": "complete",
+  "response": {
+    "ok": true,
+    "result": {
+      "found": true,
+      "message_id": "msg-collect-INV-AR-025-1",
+      "thread_id": "thr-collect-INV-AR-025",
+      "delivered": true,
+      "office_outbound": true,
+      "wrote_ap": false
+    },
+    "error": null,
+    "traceId": "k_ad62dc9ab4aa"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "pair:bot_ap:bot_email",
+  "threadId": "pair:bot_ap:bot_email",
+  "name": "AP ↔ Email",
+  "memberIds": [
+    "bot_ap",
+    "bot_email"
+  ],
+  "createdAt": 1790282661070,
+  "dm": true,
+  "messages": [
+    {
+      "id": "h_c7cc9da4-fb7c-4cd8-a3dd-03e42f9f6555",
+      "handleId": "h_c7cc9da4-fb7c-4cd8-a3dd-03e42f9f6555",
+      "role": "bot",
+      "kind": "text",
+      "text": "Vendor invoice packet ready for AP prepare.\n\nPath: workspace/email/packets/MSG-E-INV-001.json\n\nClassification: invoice / CREATE_AP_INVOICE\nVendor: Acme Supplies\nInvoice: ACM-2026-4410\nInvoice date: 2026-09-08\nDue date: 2026-09-22\nAmount due: 12450.00 USD\nPO: PO-101\nSource: MSG-E-INV-001 / ATT-E-001 (ACM-2026-4410.pdf)\ndocument_hash: cbda5aacfb5c6a9d64688cf40f74ce2996da81975779298c4b20788813552d6e\nWorld case: ACM-2026-4410 / msg-acme-acm-2026-4410 / thr-acme-acm-2026-4410\n\nPlease run Kernel identity / register and three-way match prepare. Goods receipt GR-101 / packing list PL-101 referenced on document.",
+      "at": 1790282661070,
+      "from": {
+        "botId": "bot_email",
+        "name": "Email",
+        "color": "teal"
+      }
+    },
+    {
+      "id": "pair-result-h_c7cc9da4-fb7c-4cd8-a3dd-03e42f9f6555",
+      "handleId": "h_c7cc9da4-fb7c-4cd8-a3dd-03e42f9f6555",
+      "role": "bot",
+      "kind": "text",
+      "text": "AP prepare complete for ACM-2026-4410 (MSG-E-INV-001).\n\nResult: HOLD — invoice identity not in Kernel.\n\nFacts collected:\n- get_invoice(ACM-2026-4410): found=false (also tried INV-ACM-2026-4410, MSG-E-INV-001)\n- get_purchase_order(PO-101): found, Acme Supplies, authorized_amount 12450, approved\n- get_goods_receipt(PO-101): GR-101 full receipt, amount_received 12450, qty 15/15\n- find_duplicate_invoices: N/A (invoice not registered)\n- get_case_evidence: found=false\n- ap/prepare grants are read-only (no register_invoice)\n\nPO/GR side is clean three-way at 12450 for Acme, but without a Kernel-registered AP invoice row I cannot run case evidence / must_hold or send APPROVE to ctl-pay.\n\nMatch packet path: workspace/ap/packets/ACM-2026-4410.json\n\nAction needed from email/books: Kernel-register CREATE_AP_INVOICE for ACM-2026-4410 from MSG-E-INV-001 / ATT-E-001 (hash cbda5aac…), then re-wake ap prepare with invoice_id.",
+      "at": 1790282708900,
+      "from": {
+        "botId": "bot_ap",
+        "name": "AP",
+        "color": "cyan"
+      }
+    }
+  ]
+}

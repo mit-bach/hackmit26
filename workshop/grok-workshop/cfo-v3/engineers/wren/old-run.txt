@@ -1,0 +1,122 @@
+▶ Verifier concurrence parse
+  ✖ prose that mentions CONCUR is not CONCUR (1.048042ms)
+  ✖ accepts only a structured decision (0.365291ms)
+  ✖ a completed Handle whose result says 'I do not concur' does not unlock (25.09525ms)
+✖ Verifier concurrence parse (27.2155ms)
+▶ call_connected_tool through the Pi registration path
+  ✖ unlocks a consequential op after CONCUR when the model retries with the same idempotency_key (145.937458ms)
+  ✖ honors an explicit handle_id the model passes (45.368083ms)
+✖ call_connected_tool through the Pi registration path (191.55225ms)
+ℹ tests 5
+ℹ suites 2
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 374.445083
+
+✖ failing tests:
+
+test at extensions/verifier-wiring.test.ts:177:3
+✖ prose that mentions CONCUR is not CONCUR (1.048042ms)
+  AssertionError [ERR_ASSERTION]: I do not concur
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-wiring.test.ts:187:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'CONCUR',
+    expected: 'CONCUR',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at extensions/verifier-wiring.test.ts:191:3
+✖ accepts only a structured decision (0.365291ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'CONCUR' !== 'none'
+  
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-wiring.test.ts:197:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'CONCUR',
+    expected: 'none',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at extensions/verifier-wiring.test.ts:202:3
+✖ a completed Handle whose result says 'I do not concur' does not unlock (25.09525ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-wiring.test.ts:208:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at extensions/verifier-wiring.test.ts:218:3
+✖ unlocks a consequential op after CONCUR when the model retries with the same idempotency_key (145.937458ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be strictly unequal to:
+  
+  'verifier_required'
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-wiring.test.ts:236:14)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'verifier_required',
+    expected: 'verifier_required',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at extensions/verifier-wiring.test.ts:253:3
+✖ honors an explicit handle_id the model passes (45.368083ms)
+  AssertionError [ERR_ASSERTION]: call_connected_tool must declare handle_id
+      at TestContext.<anonymous> (file:///Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v3/cfo/extensions/verifier-wiring.test.ts:258:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

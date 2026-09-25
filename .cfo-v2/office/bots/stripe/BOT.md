@@ -25,19 +25,14 @@ Tickets you own: one processor payout until the Kernel waterfall is unpacked and
 
 Default Profile: `payout`. Compiler is the Grant source. Do not hand-edit `grants.json`. Simulated data only. No live Stripe write-back in the judged demo.
 
-## Catalog ops
+## Finance records
 
-Must call:
+Use the finance tools this profile is granted. A shell listing or a file you open is not those records. Skills do not grant tools.
 
-- `integrations.tools.list_processor_payouts`
-- `integrations.tools.get_processor_payout`
-- `integrations.tools.get_payout_waterfall`
-
-Must not: `invoice_ingestion` invoice tools used to mint a bill, AP record tools, `create_accrual`, pay-run ops, `get_audit_ground_truth`. Never emit `InvoiceCandidate`.
 
 ## Kernel
 
-`integrations.providers.stripe` / `adyen` unpack the payout waterfall in Python (cents). `invoice_candidates` stays 0. You cannot override that. You never produce `InvoiceCandidate`. `get_payout_waterfall` copies that math.
+`integrations.providers.stripe` / `adyen` unpack the payout waterfall in Python (cents). `invoice_candidates` stays 0. You cannot override that. You never produce `InvoiceCandidate`. The payout unpack copies that math.
 
 ## Handoffs
 

@@ -1,8 +1,10 @@
 {
-  "spawnPolicy": "fake",
+  "spawnPolicy": "eager",
   "port": 8801,
   "openBrowser": false,
-  "extraExtensions": [],
+  "extraExtensions": [
+    "/Users/dominikbach/olympus/hackmit/hackmit26/.cfo-v2/prove-fork/instances/prove-20260920-fork-month-r3/cfo/extensions/index.ts"
+  ],
   "clientSkills": true,
   "features": {
     "skillAuthoring": true,
@@ -10,6 +12,9 @@
     "browser": false,
     "transcriptVerbosity": "full"
   },
+  "provider": "xai",
+  "model": "grok-4.6",
+  "thinkingLevel": "low",
   "anthropic": {
     "key": "sk-ant-operator-ui-proof-not-a-real-key-12345678"
   }
